@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xiaobo Chen — Semiconductor Industry Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Password Gate */
+#gate{position:fixed;inset:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:#f8f7f4;transition:opacity .5s}
+#gate.hide{opacity:0;pointer-events:none}
+#gate-box{text-align:center;padding:3rem;background:#fff;border:1px solid #e0ddd6;border-radius:12px;max-width:400px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+#gate-box h2{font-family:'Playfair Display',serif;font-weight:600;color:#1a1a1a;font-size:1.15rem;margin-bottom:.3rem}
+#gate-box p{color:#888;font-size:.82rem;margin-bottom:1.5rem}
+#gate-input{width:100%;padding:11px 14px;border:1px solid #d6d3cc;border-radius:8px;background:#fafaf8;color:#1a1a1a;font-size:.92rem;text-align:center;outline:none;font-family:inherit;transition:border .3s}
+#gate-input:focus{border-color:#0068b5}
+#gate-btn{margin-top:1rem;width:100%;padding:11px;border:none;border-radius:8px;background:#0068b5;color:#fff;font-size:.88rem;font-weight:500;cursor:pointer;font-family:inherit;transition:background .3s}
+#gate-btn:hover{background:#00549a}
+#gate-err{color:#d94040;font-size:.78rem;margin-top:.6rem;min-height:1.2em}
+#gate-lang{position:absolute;top:12px;right:12px;display:flex;gap:4px}
+#gate-lang button{padding:3px 10px;border:1px solid #d6d3cc;border-radius:4px;background:#fafaf8;color:#666;font-size:.72rem;cursor:pointer;font-family:inherit}
+#gate-lang button:hover{background:#eee}
+
+:root{--ink:#1a1a1a;--paper:#f8f7f4;--card:#ffffff;--accent:#0068b5;--accent-light:#e8f1fa;--muted:#6b7280;--border:#e0ddd6;--serif:'Playfair Display',Georgia,serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+body.lang-zh .en{display:none!important}body.lang-en .zh{display:none!important}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(248,247,244,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ink)}
+.nav-links{display:flex;gap:1.8rem;align-items:center}
+.nav-links a{color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.02em;transition:color .2s}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.nav-lang{display:flex;gap:2px;background:#eee;border-radius:4px;overflow:hidden}
+.nav-lang button{padding:4px 10px;border:none;background:transparent;color:var(--muted);font-size:.72rem;cursor:pointer;font-family:inherit;font-weight:500}
+.nav-lang button.active{background:var(--accent);color:#fff}
+
+/* Hero */
+.hero{min-height:92vh;display:flex;align-items:center;justify-content:center;padding:80px 2rem 4rem}
+.hero-inner{max-width:760px;text-align:center}
+.hero-label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:4px 14px;border-radius:100px;margin-bottom:2rem}
+.hero-name{font-family:var(--serif);font-size:clamp(2.4rem,6vw,3.8rem);font-weight:700;line-height:1.15;margin-bottom:1rem;color:var(--ink)}
+.hero-name span{color:var(--accent)}
+.hero-subtitle{font-size:1.1rem;color:var(--muted);font-weight:300;line-height:1.7;max-width:600px;margin:0 auto 2rem}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:2.5rem}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--ink)}
+.hero-stat .label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.hero-cta a{display:inline-block;padding:11px 28px;border-radius:8px;font-size:.85rem;font-weight:500;transition:all .2s}
+.cta-primary{background:var(--accent);color:#fff}.cta-primary:hover{background:#00549a;text-decoration:none;color:#fff}
+.cta-secondary{border:1px solid var(--border);color:var(--ink);background:#fff}.cta-secondary:hover{border-color:var(--accent);text-decoration:none}
+
+/* Sections */
+section{padding:5rem 2rem}
+.container{max-width:920px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+.section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:1.5rem;color:var(--ink)}
+
+/* Cards */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:2rem}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.6rem;transition:all .25s}
+.feature-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.06);border-color:var(--accent)}
+.feature-icon{font-size:1.4rem;margin-bottom:.6rem;display:block}
+.feature-card h3{font-size:.92rem;font-weight:600;margin-bottom:.4rem}
+.feature-card p{font-size:.82rem;color:var(--muted);line-height:1.7}
+
+/* Timeline */
+.timeline{position:relative;padding-left:2rem;margin-top:2rem}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:2rem;padding-left:1.2rem}
+.tl-item::before{content:'';position:absolute;left:-2rem;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:3px solid var(--paper);z-index:1}
+.tl-item:last-child::before{background:var(--accent)}
+.tl-date{font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.2rem}
+.tl-item h3{font-size:.95rem;font-weight:600;margin-bottom:.2rem}
+.tl-item p{font-size:.82rem;color:var(--muted);line-height:1.7}
+
+/* Education */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;border-left:4px solid var(--accent)}
+.edu-card h3{font-size:.9rem;font-weight:600;margin-bottom:.1rem}
+.edu-card .edu-school{font-size:.78rem;color:var(--accent);font-weight:500}
+.edu-card .edu-year{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+
+/* Global */
+.global-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.8rem;margin-top:2rem}
+.global-item{text-align:center;padding:1.2rem .6rem;background:var(--card);border:1px solid var(--border);border-radius:10px;transition:all .2s}
+.global-item:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.05)}
+.global-flag{font-size:1.6rem;margin-bottom:.3rem;display:block}
+.global-city{font-size:.85rem;font-weight:600}
+.global-role{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+
+/* Contact */
+.contact-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2.5rem;text-align:center;margin-top:2rem}
+.contact-box p{font-size:.9rem;color:var(--muted);max-width:460px;margin:0 auto 1.5rem;line-height:1.7}
+
+/* Process Nodes */
+.nodes-bar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem;justify-content:center}
+.node-tag{padding:4px 10px;border-radius:4px;font-size:.72rem;font-family:'Inter',monospace;font-weight:500;border:1px solid var(--border);color:var(--muted);background:#fff}
+.node-tag.highlight{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+
+/* Footer */
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:.72rem;border-top:1px solid var(--border)}
+footer a{color:var(--muted)}footer a:hover{color:var(--accent)}
+
+/* Responsive */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-stats{gap:1.5rem}
+  .hero-name{font-size:2rem}
+  section{padding:3rem 1rem}
+  .feature-grid,.edu-grid{grid-template-columns:1fr}
+  .global-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body class="lang-en">
+
+<!-- Password Gate -->
+<div id="gate">
+  <div id="gate-box">
+    <div id="gate-lang">
+      <button onclick="setGateLang('en')">EN</button>
+      <button onclick="setGateLang('zh')">中文</button>
+    </div>
+    <h2><span class="en">Welcome</span><span class="zh">欢迎访问</span></h2>
+    <p><span class="en">Enter password to continue</span><span class="zh">请输入密码继续</span></p>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <button id="gate-btn" onclick="checkGate()"><span class="en">Enter</span><span class="zh">确认</span></button>
+    <div id="gate-err"></div>
+  </div>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">XB</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#global">Global</a>
+    <a href="#contact">Contact</a>
+    <div class="nav-lang">
+      <button id="nav-zh" onclick="setLang('zh')">中文</button>
+      <button id="nav-en" class="active" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+<div class="hero-inner">
+  <div class="hero-label"><span class="en">Open to Opportunities</span><span class="zh">开放合作</span></div>
+  <h1 class="hero-name"><span class="en">Hi, I'm</span><span class="zh">你好，我是</span><br><span>Xiaobo Chen</span></h1>
+  <p class="hero-subtitle"><span class="en">Semiconductor industry leader with 20+ years of global experience spanning R&D and high-volume manufacturing — from 0.25&mu;m to 18&Aring; process nodes.</span><span class="zh">半导体行业资深管理者，20余年全球经验，覆盖研发与高量产制造——从0.25&mu;m到18&Aring;工艺节点。</span></p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">20+</div><div class="label"><span class="en">Years</span><span class="zh">年经验</span></div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label"><span class="en">Countries</span><span class="zh">国家</span></div></div>
+    <div class="hero-stat"><div class="num">18&Aring;</div><div class="label"><span class="en">Latest Node</span><span class="zh">最新节点</span></div></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#contact" class="cta-primary"><span class="en">Get in Touch</span><span class="zh">联系我</span></a>
+    <a href="/semiai/" class="cta-secondary"><span class="en">AI Solutions for Semiconductor Equipment</span><span class="zh">半导体设备AI解决方案</span></a>
+  </div>
+</div>
+</section>
+
+<!-- About -->
+<section id="about">
+<div class="container">
+  <div class="section-label"><span class="en">About</span><span class="zh">关于</span></div>
+  <h2 class="section-title"><span class="en">Bridging Innovation & Execution</span><span class="zh">连接创新与执行</span></h2>
+  <p style="font-size:.92rem;color:var(--muted);max-width:640px;line-height:1.8"><span class="en">From Nanjing to Portland, my journey bridges East and West, R&D and production, technology and business leadership. I bring an inclusive leadership style and proven crisis management expertise to every challenge.</span><span class="zh">从南京到波特兰，我的职业生涯连接了东西方、研发与生产、技术与商业领导力。我以包容的领导风格和丰富的危机管理经验面对每一个挑战。</span></p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F52C;</span>
+      <h3><span class="en">R&D Excellence</span><span class="zh">研发卓越</span></h3>
+      <p><span class="en">Deep technical expertise in semiconductor process development, from mature to cutting-edge nodes.</span><span class="zh">从成熟到前沿节点的半导体工艺开发深厚技术专长。</span></p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F3ED;</span>
+      <h3><span class="en">Manufacturing Leadership</span><span class="zh">制造领导力</span></h3>
+      <p><span class="en">Proven track record in high-volume manufacturing with world-class yield and quality standards.</span><span class="zh">在高量产制造中实现世界级良率和质量标准的成功记录。</span></p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F91D;</span>
+      <h3><span class="en">Client Partnership</span><span class="zh">客户伙伴关系</span></h3>
+      <p><span class="en">Core team business leader managing relationships with top-tier global semiconductor clients.</span><span class="zh">核心团队业务负责人，管理全球顶级半导体客户关系。</span></p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F9E0;</span>
+      <h3><span class="en">AI & Machine Learning</span><span class="zh">AI与机器学习</span></h3>
+      <p><span class="en">Cornell-trained in ML/AI, applying data-driven approaches to semiconductor manufacturing challenges.</span><span class="zh">康奈尔大学ML/AI训练，将数据驱动方法应用于半导体制造挑战。</span></p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F310;</span>
+      <h3><span class="en">Global Operations</span><span class="zh">全球运营</span></h3>
+      <p><span class="en">International experience across US, Germany, Singapore, and China with cross-cultural fluency.</span><span class="zh">美国、德国、新加坡、中国的国际经验，跨文化沟通能力。</span></p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">&#x1F6E1;</span>
+      <h3><span class="en">Crisis Management</span><span class="zh">危机管理</span></h3>
+      <p><span class="en">Expert in navigating high-pressure situations with inclusive leadership and strategic decision-making.</span><span class="zh">以包容的领导力和战略决策能力驾驭高压环境的专家。</span></p>
+    </div>
+  </div>
+
+  <div class="nodes-bar">
+    <span class="node-tag">0.25&mu;m</span>
+    <span class="node-tag">0.18&mu;m</span>
+    <span class="node-tag">90nm</span>
+    <span class="node-tag">65nm</span>
+    <span class="node-tag">45nm</span>
+    <span class="node-tag">28nm</span>
+    <span class="node-tag">14nm</span>
+    <span class="node-tag">7nm</span>
+    <span class="node-tag">5nm</span>
+    <span class="node-tag">3nm</span>
+    <span class="node-tag highlight">18&Aring;</span>
+  </div>
+</div>
+</section>
+
+<!-- Experience -->
+<section id="experience" style="background:#fff">
+<div class="container">
+  <div class="section-label"><span class="en">Career</span><span class="zh">职业</span></div>
+  <h2 class="section-title"><span class="en">Professional Journey</span><span class="zh">职业历程</span></h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date"><span class="en">Present</span><span class="zh">目前</span></div>
+      <h3><span class="en">Senior Business & Technology Leader</span><span class="zh">高级业务与技术负责人</span></h3>
+      <p><span class="en">Portland, Oregon, USA. Core team business leader managing top-tier client relationships. Driving advanced node development and production ramp at cutting-edge 18&Aring; technology.</span><span class="zh">美国俄勒冈州波特兰。核心团队业务负责人，管理顶级客户关系，推动18&Aring;前沿技术的开发与量产爬坡。</span></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date"><span class="en">International</span><span class="zh">国际</span></div>
+      <h3><span class="en">Global Semiconductor Operations</span><span class="zh">全球半导体运营</span></h3>
+      <p><span class="en">Germany, Singapore, China. Led cross-functional teams across multiple international fabs, bridging R&D innovation with high-volume manufacturing excellence.</span><span class="zh">德国、新加坡、中国。领导多个国际晶圆厂的跨职能团队，连接研发创新与高量产卓越制造。</span></p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date"><span class="en">Foundation</span><span class="zh">起步</span></div>
+      <h3><span class="en">R&D Engineer to Process Leader</span><span class="zh">从研发工程师到工艺负责人</span></h3>
+      <p><span class="en">Started from 0.25&mu;m technology, building deep expertise in process integration, yield enhancement, and technology transfer across multiple nodes.</span><span class="zh">从0.25&mu;m技术起步，在工艺集成、良率提升和技术转移方面积累深厚经验。</span></p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Education -->
+<section id="education">
+<div class="container">
+  <div class="section-label"><span class="en">Education</span><span class="zh">教育</span></div>
+  <h2 class="section-title"><span class="en">Academic Excellence</span><span class="zh">学术背景</span></h2>
+
+  <div class="edu-grid">
+    <div class="edu-card">
+      <h3><span class="en">Executive MBA</span><span class="zh">高级工商管理硕士</span></h3>
+      <div class="edu-school">Cornell University</div>
+      <div class="edu-year">2021 — 2023</div>
+    </div>
+    <div class="edu-card">
+      <h3>MBA CORe — High Honor</h3>
+      <div class="edu-school">Harvard Business School</div>
+      <div class="edu-year">2020 — 2021</div>
+    </div>
+    <div class="edu-card">
+      <h3><span class="en">Machine Learning & AI</span><span class="zh">机器学习与人工智能</span></h3>
+      <div class="edu-school">Cornell University</div>
+      <div class="edu-year">2022 — 2023</div>
+    </div>
+    <div class="edu-card">
+      <h3><span class="en">B.S. Physics</span><span class="zh">物理学学士</span></h3>
+      <div class="edu-school"><span class="en">Nanjing University</span><span class="zh">南京大学</span></div>
+      <div class="edu-year">2000 — 2004</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Global -->
+<section id="global" style="background:#fff">
+<div class="container">
+  <div class="section-label"><span class="en">Global Footprint</span><span class="zh">全球足迹</span></div>
+  <h2 class="section-title"><span class="en">Working Across Borders</span><span class="zh">跨文化工作</span></h2>
+
+  <div class="global-grid">
+    <div class="global-item"><span class="global-flag">&#x1F1FA;&#x1F1F8;</span><div class="global-city">Portland</div><div class="global-role"><span class="en">R&D & Design</span><span class="zh">研发与设计</span></div></div>
+    <div class="global-item"><span class="global-flag">&#x1F1FA;&#x1F1F8;</span><div class="global-city">New York</div><div class="global-role"><span class="en">R&D & Manufacturing</span><span class="zh">研发与制造</span></div></div>
+    <div class="global-item"><span class="global-flag">&#x1F1E9;&#x1F1EA;</span><div class="global-city">Germany</div><div class="global-role"><span class="en">Semiconductor R&D</span><span class="zh">半导体研发</span></div></div>
+    <div class="global-item"><span class="global-flag">&#x1F1F8;&#x1F1EC;</span><div class="global-city">Singapore</div><div class="global-role"><span class="en">Semiconductor R&D</span><span class="zh">半导体研发</span></div></div>
+    <div class="global-item"><span class="global-flag">&#x1F1E8;&#x1F1F3;</span><div class="global-city">Shanghai</div><div class="global-role"><span class="en">Semiconductor R&D</span><span class="zh">半导体研发</span></div></div>
+    <div class="global-item"><span class="global-flag">&#x1F1E8;&#x1F1F3;</span><div class="global-city">Nanjing</div><div class="global-role"><span class="en">Hometown</span><span class="zh">故乡</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+<div class="container">
+  <div class="section-label"><span class="en">Contact</span><span class="zh">联系</span></div>
+  <h2 class="section-title"><span class="en">Let's Connect</span><span class="zh">保持联系</span></h2>
+  <div class="contact-box">
+    <p><span class="en">Whether it's about semiconductor technology, business strategy, or collaboration opportunities — I'd love to hear from you.</span><span class="zh">无论是半导体技术、商业策略还是合作机会——期待与您交流。</span></p>
+    <a href="mailto:xiaobo.chen@cornell.edu" class="cta-primary" style="display:inline-block;padding:12px 32px;border-radius:8px;font-size:.88rem;font-weight:500;color:#fff;text-decoration:none">
+      <span class="en">Send Email</span><span class="zh">发送邮件</span>
+    </a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Xiaobo Chen. <span class="en">All rights reserved.</span><span class="zh">保留所有权利。</span></p>
+</footer>
+
+<script>
+// Language
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('nav-zh').className=l==='zh'?'active':'';
+  document.getElementById('nav-en').className=l==='en'?'active':'';
+  try{localStorage.setItem('tm-lang',l)}catch(e){}
+}
+try{var s=localStorage.getItem('tm-lang');if(s)setLang(s);else setLang('en')}catch(e){}
+
+// Password
+(function(){
+  const PASS_HASH='18d77a13c81e8a427cb57b6ab14960927accfb970c1a069e405a15b20d51db13';
+  if(sessionStorage.getItem('gate-ok')==='1'){document.getElementById('gate').style.display='none';return}
+  window.checkGate=async function(){
+    const v=document.getElementById('gate-input').value;
+    const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
+    const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(h===PASS_HASH){sessionStorage.setItem('gate-ok','1');const g=document.getElementById('gate');g.classList.add('hide');setTimeout(()=>g.style.display='none',500)}
+    else{document.getElementById('gate-err').textContent=document.body.classList.contains('lang-zh')?'密码错误':'Wrong password';document.getElementById('gate-input').value='';document.getElementById('gate-input').focus()}
+  };
+  document.getElementById('gate-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate()});
+  document.getElementById('gate-input').focus();
+  window.setGateLang=function(l){document.body.className='lang-'+l};
+})();
+</script>
+</body>
+</html>

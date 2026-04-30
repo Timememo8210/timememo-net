@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星原驰竞品分析 | AtomicStar Competitive Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0f1a;--paper:#f5f3ee;--card:#fff;--accent:#0068b5;--accent2:#00a3e0;--green:#1a8754;--red:#d94040;--orange:#e87722;--purple:#6b4fa0;--muted:#6b7280;--border:#d6d3cc;--shadow:0 2px 16px rgba(0,0,0,.06);--gradient:linear-gradient(135deg,#0068b5,#00a3e0)}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+body.lang-zh .en{display:none!important}body.lang-en .zh{display:none!important}
+.back-link{position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(10,15,26,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:100px;color:rgba(255,255,255,.7);font-size:.8rem;transition:all .3s;z-index:100}.back-link:hover{background:rgba(0,104,181,.9);color:#fff;text-decoration:none}
+.lang-toggle{position:fixed;top:16px;right:16px;z-index:100;display:flex;background:rgba(10,15,26,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:100px;overflow:hidden}
+.lang-toggle button{padding:6px 14px;border:none;background:transparent;color:rgba(255,255,255,.5);font-size:.78rem;cursor:pointer;transition:all .25s;font-family:inherit}.lang-toggle button.active{background:var(--accent);color:#fff}
+.hero{position:relative;min-height:35vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%,rgba(0,104,181,.2),transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(232,119,34,.1),transparent 50%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem;max-width:860px}
+.hero h1{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(1.6rem,4vw,2.6rem);color:#fff;line-height:1.2;margin-bottom:.8rem}.hero h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:rgba(255,255,255,.55);font-size:.95rem;font-weight:300;max-width:600px;margin:0 auto}
+.main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 3rem}
+.section-head{display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--ink)}.section-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);background:rgba(0,104,181,.08);padding:3px 8px;border-radius:4px;letter-spacing:.1em}.section-head h2{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1.3rem;flex:1}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;margin-bottom:.8rem;transition:all .3s;position:relative;overflow:hidden;box-shadow:var(--shadow)}.card h3{font-family:'Noto Serif SC',serif;font-weight:700;font-size:.98rem;margin-bottom:.4rem;line-height:1.5}.card p,.card li{color:#4a4a4a;font-size:.85rem;line-height:1.75}.card ul{padding-left:1.1rem}
+.tw{overflow-x:auto;margin:.6rem 0;border-radius:10px;border:1px solid var(--border);background:var(--card)}table{width:100%;border-collapse:collapse;font-size:.8rem}thead{background:rgba(0,104,181,.06)}th{text-align:left;padding:8px 10px;font-weight:600;border-bottom:2px solid var(--border);white-space:nowrap;font-size:.78rem}td{padding:7px 10px;border-bottom:1px solid var(--border);color:#4a4a4a;font-size:.78rem}tr:last-child td{border-bottom:none}tr:hover td{background:rgba(0,104,181,.03)}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:1rem 0}.sc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.8rem;text-align:center;box-shadow:var(--shadow)}.sn{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.sl{font-size:.72rem;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:.68rem;font-weight:600}.bg{background:rgba(26,135,84,.12);color:var(--green)}.br{background:rgba(217,64,64,.12);color:var(--red)}.bo{background:rgba(232,119,34,.12);color:var(--orange)}.bbl{background:rgba(0,104,181,.12);color:var(--accent)}
+.highlight{background:linear-gradient(135deg,rgba(0,104,181,.04),rgba(0,163,224,.02));border:2px solid rgba(0,104,181,.1);border-radius:10px;padding:1.2rem;margin:1rem 0}
+footer{text-align:center;padding:1.5rem 1rem;color:var(--muted);font-size:.75rem;border-top:1px solid var(--border);margin-top:2rem}
+@media(max-width:768px){.hero h1{font-size:1.3rem}.section-head h2{font-size:1.1rem}table{font-size:.72rem}}
+@media(max-width:480px){table{font-size:.68rem}th,td{padding:5px 6px}}
+</style>
+</head>
+<body class="lang-zh">
+<a href="index.html" class="back-link">← <span class="zh">返回方案主页</span><span class="en">Back</span></a>
+<div class="lang-toggle"><button id="btn-zh" class="active" onclick="setLang('zh')">中文</button><button id="btn-en" onclick="setLang('en')">EN</button></div>
+
+<section class="hero"><div class="hero-content">
+<h1><span class="zh">星原驰（AtomicStar）</span><span class="en">AtomicStar (XYC)</span> <span><span class="zh">竞品分析</span><span class="en">Competitive Analysis</span></span></h1>
+<p class="hero-sub"><span class="zh">CVD/ALD/EPI/PVD薄膜沉积设备 · 国内外竞争对手产品线对比 · 优劣势分析</span><span class="en">CVD/ALD/EPI/PVD thin-film deposition equipment · Domestic & global competitor comparison · Strengths & weaknesses</span></p>
+</div></section>
+
+<div class="main">
+
+<!-- 01 星原驰概况 -->
+<div class="section-head"><span class="section-num">01</span><h2><span class="zh">星原驰概况</span><span class="en">AtomicStar Overview</span></h2></div>
+
+<div class="card">
+<div class="sg">
+<div class="sc"><div class="sn">2021</div><div class="sl"><span class="zh">成立年份</span><span class="en">Founded</span></div></div>
+<div class="sc"><div class="sn">6+</div><div class="sl"><span class="zh">产品型号</span><span class="en">Products</span></div></div>
+<div class="sc"><div class="sn">300mm</div><div class="sl"><span class="zh">晶圆尺寸</span><span class="en">Wafer Size</span></div></div>
+<div class="sc"><div class="sn">12000m²</div><div class="sl"><span class="zh">厂房面积</span><span class="en">Facility</span></div></div>
+</div>
+<ul>
+<li><span class="zh"><strong>定位</strong>：先进半导体薄膜沉积设备（ALD/CVD/EPI/PVD）研发与制造</span><span class="en"><strong>Positioning</strong>: Advanced semiconductor thin-film deposition equipment (ALD/CVD/EPI/PVD) R&D and manufacturing</span></li>
+<li><span class="zh"><strong>团队</strong>：来自ASM、Applied Materials、三星、格罗方德、苹果、英特尔等国际大厂</span><span class="en"><strong>Team</strong>: From ASM, Applied Materials, Samsung, GlobalFoundries, Apple, Intel</span></li>
+<li><span class="zh"><strong>韩国子公司</strong>（2023）：海外工程师+供应链整合</span><span class="en"><strong>Korea subsidiary</strong> (2023): Overseas engineers + supply chain integration</span></li>
+<li><span class="zh"><strong>目标市场</strong>：3D DRAM、3D NAND、先进逻辑（FinFET/GAA）、HBM、先进封装</span><span class="en"><strong>Target markets</strong>: 3D DRAM, 3D NAND, advanced logic (FinFET/GAA), HBM, advanced packaging</span></li>
+</ul>
+</div>
+
+<!-- 02 产品线 -->
+<div class="section-head"><span class="section-num">02</span><h2><span class="zh">星原驰产品线一览</span><span class="en">AtomicStar Product Lineup</span></h2></div>
+
+<div class="card"><div class="tw"><table>
+<thead><tr><th><span class="zh">型号</span><span class="en">Model</span></th><th><span class="zh">类型</span><span class="en">Type</span></th><th><span class="zh">工艺</span><span class="en">Process</span></th><th><span class="zh">关键性能</span><span class="en">Key Performance</span></th><th><span class="zh">目标应用</span><span class="en">Application</span></th></tr></thead>
+<tbody>
+<tr><td><strong>C100</strong></td><td><span class="zh">团簇式单晶圆</span><span class="en">Cluster SW</span></td><td>PEALD/PECVD</td><td><span class="zh">Particle≤20, Uniformity≤0.5-1.5%, Step≥95%</span></td><td>3D DRAM/NAND, SADP/SAQP, HM, ARC</td></tr>
+<tr><td><strong>C600</strong></td><td><span class="zh">团簇式单晶圆</span><span class="en">Cluster SW</span></td><td>EPI/CVD<span class="zh">+原位COR</span><span class="en">+in-situ COR</span></td><td><span class="zh">Particle≤20-30, Uniformity≤1.0-3.0%</span></td><td><span class="zh">3D DRAM通道EPI, SiGe外延</span><span class="en">3D DRAM channel EPI, SiGe</span></td></tr>
+<tr><td><strong>P100</strong></td><td><span class="zh">团簇式单晶圆</span><span class="en">Cluster SW</span></td><td><span class="zh">高场PVD</span><span class="en">High-field PVD</span></td><td><span class="zh">TSV Step≥85%, Particle≤30</span></td><td>HBM TSV, Cu Seed, RDL</td></tr>
+<tr><td><strong>B300</strong></td><td><span class="zh">立式炉</span><span class="en">Furnace</span></td><td>LPCVD</td><td><span class="zh">100片批量, Uniformity≤2.0%</span></td><td><span class="zh">Poly Si沉积</span><span class="en">Poly Si deposition</span></td></tr>
+<tr><td><strong>B600</strong></td><td><span class="zh">立式炉</span><span class="en">Furnace</span></td><td><span class="zh">小型批量+原位COR</span><span class="en">Mini-batch+COR</span></td><td><span class="zh">开发中</span><span class="en">In development</span></td><td>-</td></tr>
+<tr><td><strong>B700</strong></td><td><span class="zh">立式炉</span><span class="en">Furnace</span></td><td><span class="zh">高k氧化物ALD</span><span class="en">High-k oxide ALD</span></td><td><span class="zh">开发中</span><span class="en">In development</span></td><td>-</td></tr>
+<tr><td><strong>C700</strong></td><td><span class="zh">团簇式单晶圆</span><span class="en">Cluster SW</span></td><td>PEALD/TALD/PVD</td><td><span class="zh">6"/8", 开发中</span><span class="en">6"/8", In dev</span></td><td>-</td></tr>
+</tbody></table></div>
+<p style="font-size:.72rem;color:var(--muted)"><span class="zh">数据来源：星原驰AtomicStar公司介绍PDF（2026.03版）</span><span class="en">Source: AtomicStar company presentation PDF (Mar 2026)</span></p>
+</div>
+
+<!-- 03 国际竞品 -->
+<div class="section-head"><span class="section-num">03</span><h2><span class="zh">国际竞争对手对比</span><span class="en">Global Competitor Comparison</span></h2></div>
+
+<div class="card"><div class="tw"><table>
+<thead><tr><th><span class="zh">维度</span><span class="en">Dimension</span></th><th><strong><span class="zh">星原驰 XYC</span><span class="en">AtomicStar</span></strong></th><th>ASM International</th><th>Applied Materials</th><th>Lam Research</th><th>TEL (<span class="zh">东京电子</span><span class="en">Tokyo Electron</span>)</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">成立年份</span><span class="en">Founded</span></td><td>2021</td><td>1968</td><td>1967</td><td>1980</td><td>1963</td></tr>
+<tr><td><span class="zh">总部</span><span class="en">HQ</span></td><td><span class="zh">杭州/韩国</span><span class="en">Hangzhou/Korea</span></td><td><span class="zh">荷兰</span><span class="en">Netherlands</span></td><td><span class="zh">美国</span><span class="en">USA</span></td><td><span class="zh">美国</span><span class="en">USA</span></td><td><span class="zh">日本</span><span class="en">Japan</span></td></tr>
+<tr><td><span class="zh">年营收</span><span class="en">Revenue</span></td><td><span class="zh">未公开（初创）</span><span class="en">N/A (startup)</span></td><td>~€30B</td><td>~$26B</td><td>~$16B</td><td>~¥2T</td></tr>
+<tr><td>ALD</td><td><span class="badge bg">PEALD ✓</span></td><td><span class="badge bg">龙头</span></td><td><span class="badge bg">强</span></td><td><span class="badge bo">有</span></td><td><span class="badge bg">强</span></td></tr>
+<tr><td>CVD/PECVD</td><td><span class="badge bg">PECVD ✓</span></td><td><span class="badge bg">强</span></td><td><span class="badge bg">龙头</span></td><td><span class="badge bg">强</span></td><td><span class="badge bg">强</span></td></tr>
+<tr><td>EPI</td><td><span class="badge bg">EPI ✓</span></td><td><span class="badge bg">龙头</span></td><td><span class="badge bg">强</span></td><td><span class="badge br">弱</span></td><td><span class="badge bg">强</span></td></tr>
+<tr><td>PVD</td><td><span class="badge bg">高场PVD ✓</span></td><td><span class="badge br">无</span></td><td><span class="badge bg">龙头</span></td><td><span class="badge br">弱</span></td><td><span class="badge bo">有</span></td></tr>
+<tr><td><span class="zh">立式炉</span><span class="en">Furnace</span></td><td><span class="badge bg">LPCVD ✓</span></td><td><span class="badge bg">强</span></td><td><span class="badge bg">强</span></td><td><span class="badge br">弱</span></td><td><span class="badge bg">龙头</span></td></tr>
+<tr><td><span class="zh">300mm量产经验</span><span class="en">300mm HVM</span></td><td><span class="badge bo"><span class="zh">开发中</span><span class="en">In dev</span></span></td><td><span class="badge bg"><span class="zh">20年+</span><span class="en">20+ yrs</span></span></td><td><span class="badge bg"><span class="zh">20年+</span><span class="en">20+ yrs</span></span></td><td><span class="badge bg"><span class="zh">20年+</span><span class="en">20+ yrs</span></span></td><td><span class="badge bg"><span class="zh">20年+</span><span class="en">20+ yrs</span></span></td></tr>
+<tr><td><span class="zh">AI/软件平台</span><span class="en">AI/Software</span></td><td><span class="badge br"><span class="zh">无</span><span class="en">None</span></span></td><td><span class="badge bo"><span class="zh">有</span><span class="en">Yes</span></span></td><td><span class="badge bg">AIx™</span></td><td><span class="badge bg">Fabtex™</span></td><td><span class="badge bo"><span class="zh">有</span><span class="en">Yes</span></span></td></tr>
+<tr><td><span class="zh">客户基础</span><span class="en">Customer Base</span></td><td><span class="badge br"><span class="zh">起步</span><span class="en">Early</span></span></td><td><span class="badge bg"><span class="zh">全球顶级</span><span class="en">Global top</span></span></td><td><span class="badge bg"><span class="zh">全球顶级</span><span class="en">Global top</span></span></td><td><span class="badge bg"><span class="zh">全球顶级</span><span class="en">Global top</span></span></td><td><span class="badge bg"><span class="zh">全球顶级</span><span class="en">Global top</span></span></td></tr>
+</tbody></table></div>
+<p style="font-size:.72rem;color:var(--muted)"><span class="zh">营收数据为各公司FY2025近似值。调研时间：2026.04.30</span></p>
+</div>
+
+<!-- 04 国内竞品 -->
+<div class="section-head"><span class="section-num">04</span><h2><span class="zh">国内竞争对手对比</span><span class="en">Domestic Competitor Comparison</span></h2></div>
+
+<div class="card"><div class="tw"><table>
+<thead><tr><th><span class="zh">维度</span><span class="en">Dimension</span></th><th><strong><span class="zh">星原驰 XYC</span><span class="en">AtomicStar</span></strong></th><th><span class="zh">拓荆科技</span><span class="en">Piotech</span></th><th><span class="zh">北方华创</span><span class="en">Naura</span></th><th><span class="zh">中微公司</span><span class="en">AMEC</span></th><th><span class="zh">微导纳米</span><span class="en">Leadmicro</span></th></tr></thead>
+<tbody>
+<tr><td><span class="zh">成立</span><span class="en">Founded</span></td><td>2021</td><td>2010</td><td>2001</td><td>2004</td><td>2015</td></tr>
+<tr><td><span class="zh">已上市</span><span class="en">Listed</span></td><td><span class="badge br"><span class="zh">未上市</span><span class="en">No</span></span></td><td><span class="badge bg">688072</span></td><td><span class="badge bg">002371</span></td><td><span class="badge bg">688012</span></td><td><span class="badge bg">688147</span></td></tr>
+<tr><td>ALD</td><td><span class="badge bg">PEALD ✓</span></td><td><span class="badge bg">ALD ✓</span></td><td><span class="badge bo"><span class="zh">部分</span><span class="en">Partial</span></span></td><td><span class="badge bg">ALD ✓</span></td><td><span class="badge bg"><span class="zh">ALD龙头</span><span class="en">ALD leader</span></span></td></tr>
+<tr><td>CVD/PECVD</td><td><span class="badge bg">PECVD ✓</span></td><td><span class="badge bg"><span class="zh">PECVD/SACVD/HDPCVD</span></span></td><td><span class="badge bg">PECVD ✓</span></td><td><span class="badge bg">LPCVD ✓</span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td></tr>
+<tr><td>EPI</td><td><span class="badge bg">EPI ✓</span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td></tr>
+<tr><td>PVD</td><td><span class="badge bg">PVD ✓</span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge bg">PVD ✓</span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td></tr>
+<tr><td><span class="zh">立式炉</span><span class="en">Furnace</span></td><td><span class="badge bg">LPCVD ✓</span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge bg"><span class="zh">立式炉 ✓</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td></tr>
+<tr><td><span class="zh">产品线覆盖</span><span class="en">Coverage</span></td><td><strong>ALD+CVD+EPI+PVD+Furnace</strong></td><td>CVD+ALD</td><td><span class="zh">全品类（平台型）</span><span class="en">Full range (platform)</span></td><td><span class="zh">刻蚀+CVD+ALD</span><span class="en">Etch+CVD+ALD</span></td><td>ALD</td></tr>
+<tr><td><span class="zh">团簇式平台</span><span class="en">Cluster Platform</span></td><td><span class="badge bg"><span class="zh">✓ 多腔体</span><span class="en">✓ Multi-chamber</span></span></td><td><span class="badge bo"><span class="zh">部分</span><span class="en">Partial</span></span></td><td><span class="badge bg"><span class="zh">✓</span></span></td><td><span class="badge bg"><span class="zh">✓</span></span></td><td><span class="badge bo"><span class="zh">部分</span><span class="en">Partial</span></span></td></tr>
+<tr><td><span class="zh">原位COR</span><span class="en">In-situ COR</span></td><td><span class="badge bg"><span class="zh">✓（C600/B600）</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge bo"><span class="zh">部分</span><span class="en">Partial</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td><td><span class="badge br"><span class="zh">无</span><span class="en">No</span></span></td></tr>
+<tr><td><span class="zh">量产验证</span><span class="en">HVM Proven</span></td><td><span class="badge bo"><span class="zh">进行中</span><span class="en">In progress</span></span></td><td><span class="badge bg"><span class="zh">已量产</span><span class="en">HVM proven</span></span></td><td><span class="badge bg"><span class="zh">已量产</span><span class="en">HVM proven</span></span></td><td><span class="badge bg"><span class="zh">已量产</span><span class="en">HVM proven</span></span></td><td><span class="badge bg"><span class="zh">已量产</span><span class="en">HVM proven</span></span></td></tr>
+</tbody></table></div>
+</div>
+
+<!-- 05 优劣势 -->
+<div class="section-head"><span class="section-num">05</span><h2><span class="zh">星原驰优势与劣势分析</span><span class="en">AtomicStar SWOT Analysis</span></h2></div>
+
+<div class="card" style="border-left:4px solid var(--green)">
+<h3>✅ <span class="zh">核心优势</span><span class="en">Key Strengths</span></h3>
+<ul>
+<li><span class="zh"><strong>产品线最全的国内新锐</strong>：唯一同时覆盖ALD+CVD+EPI+PVD+Furnace的国内非上市企业，接近ASM的产品矩阵</span><span class="en"><strong>Broadest product line among domestic startups</strong>: Only unlisted Chinese company covering ALD+CVD+EPI+PVD+Furnace, close to ASM's matrix</span></li>
+<li><span class="zh"><strong>原位COR技术</strong>（C600/B600）：不破真空连续完成清洁+处理+沉积，对标ASM高端平台，国内罕见</span><span class="en"><strong>In-situ COR</strong> (C600/B600): Continuous clean+process+deposit without vacuum break, benchmarking ASM high-end platforms, rare in China</span></li>
+<li><span class="zh"><strong>国际化团队</strong>：核心来自ASM/AMAT/三星/Intel，带来成熟的工程方法论和know-how</span><span class="en"><strong>International team</strong>: Core from ASM/AMAT/Samsung/Intel, bringing mature engineering methodology and know-how</span></li>
+<li><span class="zh"><strong>团簇式架构</strong>（C100/C600/P100）：多腔体并行处理，高吞吐量，面向量产设计</span><span class="en"><strong>Cluster architecture</strong> (C100/C600/P100): Multi-chamber parallel processing, high throughput, designed for HVM</span></li>
+<li><span class="zh"><strong>性能指标</strong>：Particle≤20（≥45nm），均匀性≤0.5-1.5%，台阶覆盖≥95%，接近国际一线水平</span><span class="en"><strong>Performance specs</strong>: Particle≤20 (≥45nm), uniformity≤0.5-1.5%, step coverage≥95%, close to global top-tier</span></li>
+<li><span class="zh"><strong>3D DRAM/先进封装定位</strong>：瞄准增量市场而非存量竞争</span><span class="en"><strong>3D DRAM/Adv. packaging focus</strong>: Targeting incremental markets vs competing for existing share</span></li>
+</ul>
+</div>
+
+<div class="card" style="border-left:4px solid var(--red)">
+<h3>⚠️ <span class="zh">主要劣势</span><span class="en">Key Weaknesses</span></h3>
+<ul>
+<li><span class="zh"><strong>量产验证不足</strong>：2021年成立，产品尚在客户验证阶段，缺乏大规模量产Track Record</span><span class="en"><strong>Limited HVM validation</strong>: Founded 2021, products still in customer qualification, lack of high-volume manufacturing track record</span></li>
+<li><span class="zh"><strong>无AI/软件平台</strong>：无类似AMAT AIx™或Lam Fabtex™的智能优化软件——这正是我们AI方案的价值切入点</span><span class="en"><strong>No AI/software platform</strong>: No intelligent optimization software like AMAT AIx™ or Lam Fabtex™ — this is exactly where our AI proposal adds value</span></li>
+<li><span class="zh"><strong>品牌认知度低</strong>：相比拓荆/华创/中微，行业知名度有限</span><span class="en"><strong>Low brand awareness</strong>: Limited industry visibility vs Piotech/Naura/AMEC</span></li>
+<li><span class="zh"><strong>资金规模有限</strong>：未上市，融资规模远小于已上市竞品</span><span class="en"><strong>Limited capital</strong>: Not listed, funding far less than publicly traded competitors</span></li>
+<li><span class="zh"><strong>供应链整合中</strong>：关键零部件（MFC/密封件/RF电源）仍依赖进口</span><span class="en"><strong>Supply chain building</strong>: Key components (MFC/seals/RF power) still import-dependent</span></li>
+<li><span class="zh"><strong>客户基础薄弱</strong>：尚未建立与头部晶圆厂的长期合作关系</span><span class="en"><strong>Thin customer base</strong>: Haven't built long-term relationships with top-tier fabs yet</span></li>
+</ul>
+</div>
+
+<div class="card" style="border-left:4px solid var(--accent)">
+<h3>🎯 <span class="zh">AI赋能的差异化机会</span><span class="en">AI Differentiation Opportunities</span></h3>
+<ul>
+<li><span class="zh"><strong>最大机会</strong>：星原驰目前无AI软件平台 → 我们帮助构建AI能力 = 差异化竞争武器</span><span class="en"><strong>Biggest opportunity</strong>: AtomicStar has no AI platform → We help build AI capability = competitive differentiator</span></li>
+<li><span class="zh"><strong>后发优势</strong>：可跳过传统优化路径，直接采用AI-first方法（对标Lam Fabtex/AMAT AIx）</span><span class="en"><strong>Latecomer advantage</strong>: Can skip traditional optimization, adopt AI-first approach directly (benchmark Lam/AMAT)</span></li>
+<li><span class="zh"><strong>团簇式架构天然适合AI</strong>：多腔体并行 = 更多数据采集点 = AI有更丰富的输入</span><span class="en"><strong>Cluster architecture suits AI</strong>: Multi-chamber parallel = more data collection points = richer AI inputs</span></li>
+<li><span class="zh"><strong>C600原位COR+AI</strong>：闭环控制的最理想场景——AI实时分析COR效果并自适应调整沉积参数</span><span class="en"><strong>C600 in-situ COR + AI</strong>: Ideal for closed-loop control — AI analyzes COR effectiveness in real-time and adaptively adjusts deposition parameters</span></li>
+<li><span class="zh"><strong>帮助缩短量产爬坡</strong>：用AI加速从客户验证到HVM的过程，弥补Track Record不足</span><span class="en"><strong>Accelerate HVM ramp</strong>: Use AI to speed up customer qualification → HVM transition, compensating for limited track record</span></li>
+</ul>
+</div>
+
+<!-- 06 逐产品对比 -->
+<div class="section-head"><span class="section-num">06</span><h2><span class="zh">逐产品线国际对标</span><span class="en">Product-by-Product Global Benchmarking</span></h2></div>
+
+<div class="card">
+<h3>C100 PEALD/PECVD <span class="zh">对标</span><span class="en">vs</span> ASM A412 / TEL NT1330</h3>
+<div class="tw"><table>
+<thead><tr><th><span class="zh">参数</span><span class="en">Parameter</span></th><th><strong>XYC C100</strong></th><th>ASM A412</th><th>TEL NT1330</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">平台架构</span><span class="en">Platform</span></td><td><span class="zh">4站点QCM/DCM</span><span class="en">4-station QCM/DCM</span></td><td><span class="zh">多站点</span><span class="en">Multi-station</span></td><td><span class="zh">多站点</span><span class="en">Multi-station</span></td></tr>
+<tr><td><span class="zh">Particle (≥45nm)</span></td><td>≤20</td><td>≤10-15</td><td>≤10-15</td></tr>
+<tr><td><span class="zh">均匀性</span><span class="en">Uniformity</span></td><td>≤0.5-1.5%</td><td>≤0.3-1.0%</td><td>≤0.5-1.0%</td></tr>
+<tr><td><span class="zh">台阶覆盖</span><span class="en">Step Coverage</span></td><td>≥95%</td><td>≥95%</td><td>≥95%</td></tr>
+<tr><td><span class="zh">量产验证</span><span class="en">HVM Proven</span></td><td><span class="badge bo"><span class="zh">进行中</span><span class="en">In progress</span></span></td><td><span class="badge bg"><span class="zh">成熟</span><span class="en">Mature</span></span></td><td><span class="badge bg"><span class="zh">成熟</span><span class="en">Mature</span></span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="card">
+<h3>C600 EPI/CVD <span class="zh">对标</span><span class="en">vs</span> ASM Epsilon / AMAT Centura</h3>
+<div class="tw"><table>
+<thead><tr><th><span class="zh">参数</span><span class="en">Parameter</span></th><th><strong>XYC C600</strong></th><th>ASM Epsilon</th><th>AMAT Centura</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">原位COR</span><span class="en">In-situ COR</span></td><td><span class="badge bg"><span class="zh">✓ 不破真空</span><span class="en">✓ No vacuum break</span></span></td><td><span class="badge bg"><span class="zh">✓</span></span></td><td><span class="badge bg"><span class="zh">✓</span></span></td></tr>
+<tr><td><span class="zh">Particle (≥45nm)</span></td><td>≤20-30</td><td>≤10-15</td><td>≤10-20</td></tr>
+<tr><td><span class="zh">均匀性</span><span class="en">Uniformity</span></td><td>≤1.0-3.0%</td><td>≤0.5-1.5%</td><td>≤0.5-2.0%</td></tr>
+<tr><td><span class="zh">SiGe外延</span><span class="en">SiGe EPI</span></td><td><span class="badge bg"><span class="zh">✓</span></span></td><td><span class="badge bg"><span class="zh">✓ 成熟</span><span class="en">✓ Mature</span></span></td><td><span class="badge bg"><span class="zh">✓</span></span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="card">
+<h3>P100 PVD <span class="zh">对标</span><span class="en">vs</span> AMAT Endura</h3>
+<div class="tw"><table>
+<thead><tr><th><span class="zh">参数</span><span class="en">Parameter</span></th><th><strong>XYC P100</strong></th><th>AMAT Endura</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">TSV台阶覆盖</span><span class="en">TSV Step Coverage</span></td><td>≥85%</td><td>≥90%</td></tr>
+<tr><td><span class="zh">Particle (≥90nm)</span></td><td>≤30</td><td>≤15-20</td></tr>
+<tr><td><span class="zh">沉积温度</span><span class="en">Deposit Temp</span></td><td>≤-50℃</td><td><span class="zh">类似低温</span><span class="en">Similar cryo</span></td></tr>
+<tr><td><span class="zh">HBM/TSV量产</span><span class="en">HBM/TSV HVM</span></td><td><span class="badge bo"><span class="zh">验证中</span><span class="en">Qualifying</span></span></td><td><span class="badge bg"><span class="zh">业界标准</span><span class="en">Industry standard</span></span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="highlight">
+<p style="font-size:.85rem"><strong><span class="zh">📊 结论：星原驰的产品性能指标已接近国际一线80-90%水平，差距主要在particle控制和量产稳定性——这正是AI赋能最能发力的方向。</span><span class="en">📊 Conclusion: AtomicStar's performance specs have reached 80-90% of global top-tier levels. The gap is mainly in particle control and HVM stability — exactly where AI empowerment can have the most impact.</span></strong></p>
+</div>
+
+</div>
+
+<footer>
+<p><span class="zh">星原驰竞品分析 · 数据调研时间：2026.04.30</span><span class="en">AtomicStar Competitive Analysis · Researched: 2026.04.30</span></p>
+<p><span class="zh">数据来源：星原驰公司介绍PDF(2026.03)、各公司官网/年报、SEMI、行业研报</span><span class="en">Sources: AtomicStar presentation (Mar 2026), company websites/reports, SEMI, industry reports</span></p>
+<p><a href="index.html">← <span class="zh">返回方案主页</span><span class="en">Back to Proposal</span></a></p>
+</footer>
+
+<script>
+function setLang(l){document.body.className='lang-'+l;document.getElementById('btn-zh').className=l==='zh'?'active':'';document.getElementById('btn-en').className=l==='en'?'active':'';try{localStorage.setItem('tm-lang',l)}catch(e){}}
+try{var s=localStorage.getItem('tm-lang');if(s)setLang(s)}catch(e){}
+</script>
+</body>
+</html>

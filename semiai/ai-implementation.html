@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI实现方案与数据安全 | AI Implementation & Data Security</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0f1a;--paper:#f5f3ee;--card:#fff;--accent:#0068b5;--accent2:#00a3e0;--green:#1a8754;--red:#d94040;--orange:#e87722;--purple:#6b4fa0;--muted:#6b7280;--border:#d6d3cc;--shadow:0 2px 16px rgba(0,0,0,.06);--gradient:linear-gradient(135deg,#0068b5,#00a3e0)}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+body.lang-zh .en{display:none!important}body.lang-en .zh{display:none!important}
+.back-link{position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(10,15,26,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:100px;color:rgba(255,255,255,.7);font-size:.8rem;transition:all .3s}.back-link:hover{background:rgba(0,104,181,.9);color:#fff;text-decoration:none}
+.lang-toggle{position:fixed;top:16px;right:16px;z-index:9999;display:flex;background:rgba(10,15,26,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:100px;overflow:hidden}
+.lang-toggle button{padding:6px 14px;border:none;background:transparent;color:rgba(255,255,255,.5);font-size:.78rem;cursor:pointer;transition:all .25s;font-family:inherit}.lang-toggle button.active{background:var(--accent);color:#fff}
+.hero{position:relative;min-height:40vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(217,64,64,.15),transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(0,104,181,.12),transparent 50%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:3rem 2rem;max-width:860px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(217,64,64,.2);border:1px solid rgba(217,64,64,.3);padding:6px 18px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#ff8a8a;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem}
+.hero h1{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(1.8rem,5vw,3rem);color:#fff;line-height:1.2;margin-bottom:1rem}.hero h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:rgba(255,255,255,.55);font-size:1rem;font-weight:300;max-width:640px;margin:0 auto}
+.main{max-width:1080px;margin:0 auto;padding:2.5rem 1.5rem 3rem}
+.section-head{display:flex;align-items:center;gap:1rem;margin:3rem 0 1.5rem;padding-bottom:.7rem;border-bottom:2px solid var(--ink)}.section-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);background:rgba(0,104,181,.08);padding:4px 10px;border-radius:4px;letter-spacing:.1em}.section-head h2{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1.4rem;flex:1}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1rem;transition:all .3s;position:relative;overflow:hidden;box-shadow:var(--shadow)}.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gradient);opacity:0;transition:opacity .3s}.card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.1);border-color:var(--accent)}.card:hover::before{opacity:1}.card h3{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1.02rem;margin-bottom:.5rem;line-height:1.5}.card p,.card li{color:#4a4a4a;font-size:.88rem;line-height:1.8}.card ul{padding-left:1.2rem}
+.card-hl{background:linear-gradient(135deg,#0a1628,#0d1f3c);color:#fff;border-color:rgba(0,104,181,.3)}.card-hl::before{opacity:1}.card-hl h3{color:#fff}.card-hl p,.card-hl li{color:rgba(255,255,255,.75)}
+.tw{overflow-x:auto;margin:.8rem 0;border-radius:10px;border:1px solid var(--border);background:var(--card)}table{width:100%;border-collapse:collapse;font-size:.82rem}thead{background:rgba(0,104,181,.06)}th{text-align:left;padding:10px 12px;font-weight:600;border-bottom:2px solid var(--border);white-space:nowrap}td{padding:9px 12px;border-bottom:1px solid var(--border);color:#4a4a4a}tr:last-child td{border-bottom:none}tr:hover td{background:rgba(0,104,181,.03)}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin:1.2rem 0}.sc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;box-shadow:var(--shadow)}.sn{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.sl{font-size:.78rem;color:var(--muted);margin-top:3px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0;justify-content:center}.fs{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;text-align:center;min-width:100px;box-shadow:var(--shadow)}.fs .fi{font-size:1.3rem;margin-bottom:3px}.fs .fl{font-size:.75rem;font-weight:600}.fs .fd{font-size:.68rem;color:var(--muted);margin-top:2px}.fa{font-size:1.1rem;color:var(--accent);flex-shrink:0}
+.badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.7rem;font-weight:600}.bg{background:rgba(26,135,84,.12);color:var(--green)}.br{background:rgba(217,64,64,.12);color:var(--red)}.bo{background:rgba(232,119,34,.12);color:var(--orange)}
+.rec{background:linear-gradient(135deg,rgba(26,135,84,.06),rgba(0,163,224,.04));border:2px solid rgba(26,135,84,.2);border-radius:12px;padding:1.8rem;margin:1.5rem 0}.rec h3{font-family:'Noto Serif SC',serif;font-size:1.15rem;margin-bottom:.8rem;color:var(--green)}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1rem 0}.vs-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;box-shadow:var(--shadow)}.vs-card h4{font-size:.88rem;margin-bottom:.5rem;display:flex;align-items:center;gap:6px}.vs-card ul{font-size:.8rem;color:#4a4a4a;padding-left:1rem;line-height:1.7}
+footer{text-align:center;padding:1.8rem 1rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border);margin-top:2rem}
+@media(max-width:768px){.flow{flex-direction:column}.fa{transform:rotate(90deg)}.hero h1{font-size:1.5rem}.vs-grid{grid-template-columns:1fr}}
+@media(max-width:480px){table{font-size:.72rem}th,td{padding:7px 8px}}
+</style>
+</head>
+<body class="lang-zh">
+<a href="index.html" class="back-link">← <span class="zh">返回主页</span><span class="en">Back</span></a>
+<div class="lang-toggle"><button id="btn-zh" class="active" onclick="setLang('zh')">中文</button><button id="btn-en" onclick="setLang('en')">EN</button></div>
+
+<section class="hero"><div class="hero-content">
+<div class="hero-badge">🔒 DATA SECURITY · 2026.04</div>
+<h1><span class="zh">AI实现方案</span><span class="en">AI Implementation</span> <span><span class="zh">与数据安全</span><span class="en">& Data Security</span></span></h1>
+<p class="hero-sub"><span class="zh">NVIDIA NIM vs 智谱GLM-5.1 vs DeepSeek 私有化部署对比 · 半导体CVD工艺AI化的安全基石</span><span class="en">NVIDIA NIM vs Zhipu GLM-5.1 vs DeepSeek private deployment comparison · Security foundation for AI-powered CVD optimization</span></p>
+</div></section>
+
+<div class="main">
+
+<!-- 01 核心问题 -->
+<div class="section-head"><span class="section-num">01</span><h2><span class="zh">数据安全：半导体AI化的首要挑战</span><span class="en">Data Security: #1 Challenge for Semiconductor AI</span></h2></div>
+
+<div class="card" style="border-left:4px solid var(--red)">
+<h3><span class="zh">🔴 CVD工艺数据涉及最高级别商业机密</span><span class="en">🔴 CVD Process Data Involves Highest-Level Trade Secrets</span></h3>
+<ul>
+<li><span class="zh"><strong>FDC时序数据</strong>（设备参数）→ 暴露工艺配方和设备性能</span><span class="en"><strong>FDC time-series data</strong> (equipment params) → Exposes recipes and equipment performance</span></li>
+<li><span class="zh"><strong>量测数据</strong>（厚度/均匀性/particle）→ 核心良率IP</span><span class="en"><strong>Metrology data</strong> (thickness/uniformity/particle) → Core yield IP</span></li>
+<li><span class="zh"><strong>缺陷模式</strong> → 可推断竞争对手工艺路线和技术水平</span><span class="en"><strong>Defect patterns</strong> → Can infer competitor process routes and tech level</span></li>
+<li><span class="zh"><strong>上下游数据共享</strong>（靶材/特气/零部件）→ 跨企业数据合规难题</span><span class="en"><strong>Supply chain data sharing</strong> (targets/gas/parts) → Cross-enterprise compliance challenge</span></li>
+</ul>
+</div>
+
+<div class="sg">
+<div class="sc"><div class="sn" style="background:var(--red);-webkit-text-fill-color:#fff;background-clip:text;-webkit-background-clip:text">⚠️</div><div class="sl"><span class="zh">云端API=数据出境</span><span class="en">Cloud API = Data leaves</span></div></div>
+<div class="sc"><div class="sn">0</div><div class="sl"><span class="zh">数据外泄容忍度</span><span class="en">Data leak tolerance</span></div></div>
+<div class="sc"><div class="sn">3+</div><div class="sl"><span class="zh">涉及企业方</span><span class="en">Parties involved</span></div></div>
+</div>
+
+<!-- 02 方案对比 -->
+<div class="section-head"><span class="section-num">02</span><h2><span class="zh">AI部署方案全景对比</span><span class="en">AI Deployment Solutions Comparison</span></h2></div>
+
+<div class="card">
+<div class="tw"><table>
+<thead><tr><th><span class="zh">维度</span><span class="en">Dimension</span></th><th>🏆 <span class="zh">智谱GLM-5.1本地</span><span class="en">GLM-5.1 Local</span></th><th>NVIDIA NIM</th><th>DeepSeek <span class="zh">本地</span><span class="en">Local</span></th><th>OpenAI API</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">数据位置</span><span class="en">Data Location</span></td><td><span class="badge bg">✓ <span class="zh">完全本地</span><span class="en">Fully local</span></span></td><td><span class="badge bg">✓ <span class="zh">本地/私有云</span><span class="en">Local/private</span></span></td><td><span class="badge bg">✓ <span class="zh">完全本地</span><span class="en">Fully local</span></span></td><td><span class="badge br">✗ <span class="zh">美国云端</span><span class="en">US cloud</span></span></td></tr>
+<tr><td><span class="zh">安全等级</span><span class="en">Security</span></td><td>★★★★★</td><td>★★★★★</td><td>★★★★★</td><td>★★★☆☆</td></tr>
+<tr><td><span class="zh">GPU要求</span><span class="en">GPU</span></td><td><span class="zh">国产/进口均可</span><span class="en">Domestic/import OK</span></td><td><span class="zh">仅NVIDIA</span><span class="en">NVIDIA only</span></td><td><span class="zh">国产/进口均可</span><span class="en">Domestic/import OK</span></td><td><span class="zh">无需</span><span class="en">None</span></td></tr>
+<tr><td><span class="zh">最低硬件</span><span class="en">Min Hardware</span></td><td>1×<span class="zh">昇腾310P或RTX4090</span><span class="en">Ascend310P or RTX4090</span></td><td>1×A100 80G</td><td>1×RTX 4090 (24G)</td><td>N/A</td></tr>
+<tr><td><span class="zh">部署费用</span><span class="en">Deploy Cost</span></td><td><strong>¥3-50万</strong></td><td>¥20-80万</td><td>¥5-20万</td><td><span class="zh">按量</span><span class="en">Per-use</span></td></tr>
+<tr><td><span class="zh">年许可</span><span class="en">License</span></td><td><span class="zh">企业版按需</span><span class="en">Enterprise on-demand</span></td><td>~$4500/GPU/<span class="zh">年</span><span class="en">yr</span></td><td><span class="badge bg"><span class="zh">开源免费</span><span class="en">Open source</span></span></td><td><span class="zh">按token</span><span class="en">Per-token</span></td></tr>
+<tr><td><span class="zh">禁运风险</span><span class="en">Ban Risk</span></td><td><span class="badge bg"><span class="zh">无</span><span class="en">None</span></span></td><td><span class="badge br"><span class="zh">高</span><span class="en">High</span></span></td><td><span class="badge bg"><span class="zh">无</span><span class="en">None</span></span></td><td><span class="badge br"><span class="zh">高</span><span class="en">High</span></span></td></tr>
+<tr><td><span class="zh">中文能力</span><span class="en">Chinese</span></td><td>★★★★★</td><td>★★★☆☆</td><td>★★★★★</td><td>★★★★☆</td></tr>
+<tr><td><span class="zh">技术支持</span><span class="en">Support</span></td><td><span class="zh">智谱原厂</span><span class="en">Zhipu direct</span></td><td>NVIDIA</td><td><span class="zh">社区为主</span><span class="en">Community</span></td><td>OpenAI</td></tr>
+</tbody></table></div>
+<p style="font-size:.78rem;color:var(--muted);margin-top:.4rem"><span class="zh">数据来源：NVIDIA官网(2025.06)、智谱BigModel.cn定价页(2026.04)、DeepSeek API(2026.04)。调研时间：2026.04.30</span><span class="en">Sources: NVIDIA.com (Jun 2025), Zhipu BigModel.cn pricing (Apr 2026), DeepSeek API (Apr 2026). Researched: 2026.04.30</span></p>
+</div>
+
+<!-- 03 推荐 -->
+<div class="section-head"><span class="section-num">03</span><h2><span class="zh">推荐方案</span><span class="en">Recommended Solution</span></h2></div>
+
+<div class="rec">
+<h3>🏆 <span class="zh">首选：智谱GLM-5.1 本地私有化部署</span><span class="en">Top Pick: Zhipu GLM-5.1 Local Private Deployment</span></h3>
+<ol style="padding-left:1.2rem;font-size:.88rem;line-height:2">
+<li><span class="zh"><strong>数据零外泄</strong>：所有计算在企业内网完成，数据不出边界</span><span class="en"><strong>Zero data leakage</strong>: All computation within enterprise intranet, data never leaves</span></li>
+<li><span class="zh"><strong>支持国产GPU</strong>（华为昇腾910B/310P）→ 不受美国出口管制影响</span><span class="en"><strong>Domestic GPU support</strong> (Huawei Ascend 910B/310P) → Not affected by US export controls</span></li>
+<li><span class="zh">GLM-5-7B量化版 → 1×消费级GPU即可运行 → <strong>Phase 0仅¥3-5万</strong>启动</span><span class="en">GLM-5-7B quantized → 1×consumer GPU → <strong>Phase 0 only ¥30-50K</strong> to start</span></li>
+<li><span class="zh">智谱85%收入来自本地化部署（2025H1财报）→ 成熟的私有化交付能力</span><span class="en">Zhipu 85% revenue from local deployment (2025H1) → Mature private deployment capability</span></li>
+<li><span class="zh">GLM-5 MoE架构(744B/40B激活) → 性能接近GPT-4级，中文能力强</span><span class="en">GLM-5 MoE (744B/40B active) → Near GPT-4 level performance, strong Chinese</span></li>
+<li><span class="zh">无禁运断供风险，国产自主可控</span><span class="en">No ban/disruption risk, domestically controllable</span></li>
+</ol>
+</div>
+
+<div class="vs-grid">
+<div class="vs-card" style="border-top:3px solid var(--green)">
+<h4>💰 <span class="zh">预算估算（2026.04）</span><span class="en">Budget Estimate (2026.04)</span></h4>
+<ul>
+<li><span class="zh"><strong>Phase 0</strong>：1×RTX4090 + GLM-5-7B → ¥3-5万</span><span class="en"><strong>Phase 0</strong>: 1×RTX4090 + GLM-5-7B → ¥30-50K</span></li>
+<li><span class="zh"><strong>Phase 1</strong>：1×昇腾910B + GLM-5-40B → ¥15-30万</span><span class="en"><strong>Phase 1</strong>: 1×Ascend910B + GLM-5-40B → ¥150-300K</span></li>
+<li><span class="zh"><strong>Phase 2</strong>：+许可+部署服务 → +¥10-20万</span><span class="en"><strong>Phase 2</strong>: +License+deployment → +¥100-200K</span></li>
+</ul>
+</div>
+<div class="vs-card" style="border-top:3px solid var(--orange)">
+<h4>🔄 <span class="zh">备选：DeepSeek本地</span><span class="en">Alt: DeepSeek Local</span></h4>
+<ul>
+<li><span class="zh">完全开源免费，零许可成本</span><span class="en">Fully open source, zero license cost</span></li>
+<li><span class="zh">R1-32B量化后1×RTX4090可运行</span><span class="en">R1-32B quantized runs on 1×RTX4090</span></li>
+<li><span class="zh">适合"先用起来"快速验证</span><span class="en">Good for "start now" quick validation</span></li>
+<li><span class="zh">局限：推理能力略低于GLM-5，技术支持不成熟</span><span class="en">Limit: Reasoning slightly below GLM-5, less mature support</span></li>
+</ul>
+</div>
+<div class="vs-card" style="border-top:3px solid var(--accent)">
+<h4>⚡ <span class="zh">NVIDIA NIM</span><span class="en">NVIDIA NIM</span></h4>
+<ul>
+<li><span class="zh">企业级安全、稳定性最佳</span><span class="en">Best enterprise security & stability</span></li>
+<li><span class="zh">但需NVIDIA GPU，存在禁运风险</span><span class="en">Requires NVIDIA GPU, ban risk exists</span></li>
+<li><span class="zh">年许可费较高（~$4500/GPU/年）</span><span class="en">Higher annual license (~$4500/GPU/yr)</span></li>
+<li><span class="zh">适合预算充足+GPU不受限场景</span><span class="en">For well-funded + GPU-unrestricted scenarios</span></li>
+</ul>
+</div>
+</div>
+
+<!-- 04 安全架构 -->
+<div class="section-head"><span class="section-num">04</span><h2><span class="zh">数据安全架构</span><span class="en">Data Security Architecture</span></h2></div>
+
+<div class="card">
+<div class="flow">
+<div class="fs"><div class="fi">📡</div><div class="fl"><span class="zh">传感器/FDC</span><span class="en">Sensors/FDC</span></div></div><div class="fa">→</div>
+<div class="fs"><div class="fi">🔐</div><div class="fl"><span class="zh">边缘网关(加密)</span><span class="en">Edge Gateway</span></div></div><div class="fa">→</div>
+<div class="fs"><div class="fi">💾</div><div class="fl"><span class="zh">本地数据湖</span><span class="en">Local Data Lake</span></div></div><div class="fa">→</div>
+<div class="fs"><div class="fi">🧠</div><div class="fl"><span class="zh">本地AI(GLM-5)</span><span class="en">Local AI(GLM-5)</span></div></div><div class="fa">→</div>
+<div class="fs"><div class="fi">📊</div><div class="fl"><span class="zh">结果Dashboard</span><span class="en">Dashboard</span></div></div>
+</div>
+<div style="text-align:center;margin:1rem 0;font-size:.85rem;color:var(--muted)">↕ <span class="zh">联邦学习/安全多方计算（数据不出本地）</span><span class="en">Federated Learning / SMPC (data stays local)</span> ↕</div>
+<div class="flow">
+<div class="fs"><div class="fi">🔬</div><div class="fl"><span class="zh">靶材供应商</span><span class="en">Target Vendor</span></div></div>
+<div class="fs"><div class="fi">💨</div><div class="fl"><span class="zh">特气供应商</span><span class="en">Gas Vendor</span></div></div>
+<div class="fs"><div class="fi">🔧</div><div class="fl"><span class="zh">零部件供应商</span><span class="en">Parts Vendor</span></div></div>
+</div>
+</div>
+
+<!-- 05 联邦学习 -->
+<div class="section-head"><span class="section-num">05</span><h2><span class="zh">联邦学习：解决上下游数据共享难题</span><span class="en">Federated Learning: Solving Cross-Enterprise Data Sharing</span></h2></div>
+
+<div class="card">
+<h3><span class="zh">什么是联邦学习？</span><span class="en">What is Federated Learning?</span></h3>
+<p><span class="zh">各方<strong>数据不出本地</strong>，只交换模型梯度（数学参数）。在不泄露工艺细节的前提下实现联合优化。类似于多位专家各自研究后分享"结论"而非"原始数据"。</span><span class="en">Each party's <strong>data stays local</strong>, only model gradients (math parameters) are exchanged. Joint optimization without exposing process details. Like experts sharing "conclusions" rather than "raw data".</span></p>
+</div>
+
+<div class="card">
+<h3><span class="zh">联邦学习方案详情</span><span class="en">Federated Learning Details</span></h3>
+<div class="tw"><table>
+<thead><tr><th><span class="zh">项目</span><span class="en">Item</span></th><th><span class="zh">详情</span><span class="en">Details</span></th></tr></thead>
+<tbody>
+<tr><td><span class="zh">技术框架</span><span class="en">Framework</span></td><td>FATE<span class="zh">（微众银行开源）</span><span class="en"> (WeBank open-source)</span> / <span class="zh">SecretFlow</span><span class="en">Ant Group SecretFlow</span></td></tr>
+<tr><td><span class="zh">成熟度</span><span class="en">Maturity</span></td><td><span class="zh">2025-2026已有工业级方案，金融/医疗行业已大规模应用</span><span class="en">Industrial-grade since 2025-2026, widely deployed in finance/healthcare</span></td></tr>
+<tr><td><span class="zh">部署成本</span><span class="en">Cost</span></td><td><strong>¥10-30万</strong><span class="zh">（联邦学习平台+安全网关）</span><span class="en"> (federated learning platform + security gateway)</span></td></tr>
+<tr><td><span class="zh">适用场景</span><span class="en">Use Case</span></td><td><span class="zh">靶材-CVD联合优化、特气-缺陷关联分析、跨fab良率benchmark</span><span class="en">Target-CVD joint optimization, gas-defect correlation, cross-fab yield benchmark</span></td></tr>
+<tr><td><span class="zh">安全保障</span><span class="en">Security</span></td><td><span class="zh">差分隐私+同态加密+安全聚合，三方审计</span><span class="en">Differential privacy + homomorphic encryption + secure aggregation, third-party audit</span></td></tr>
+</tbody></table></div>
+</div>
+
+<!-- 06 合规建议 -->
+<div class="section-head"><span class="section-num">06</span><h2><span class="zh">安全合规建议</span><span class="en">Security & Compliance Recommendations</span></h2></div>
+
+<div class="card">
+<ol style="padding-left:1.2rem;font-size:.88rem;line-height:2.2">
+<li><span class="zh"><strong>数据分级</strong>：将CVD工艺数据按敏感度分级（公开→内部→机密→绝密），AI系统仅访问必需层级</span><span class="en"><strong>Data Classification</strong>: Classify CVD data by sensitivity (public→internal→confidential→top-secret), AI only accesses necessary levels</span></li>
+<li><span class="zh"><strong>访问控制</strong>：RBAC角色权限+完整审计日志，所有AI操作可追溯</span><span class="en"><strong>Access Control</strong>: RBAC + full audit logs, all AI operations traceable</span></li>
+<li><span class="zh"><strong>数据脱敏</strong>：模型训练前对设备序列号、配方参数脱敏处理</span><span class="en"><strong>Data Anonymization</strong>: Anonymize device serial numbers and recipe params before training</span></li>
+<li><span class="zh"><strong>合规框架</strong>：遵循《数据安全法》《个人信息保护法》，半导体数据纳入关键信息基础设施管理</span><span class="en"><strong>Compliance</strong>: Follow Data Security Law & PIPL, semiconductor data managed as critical information infrastructure</span></li>
+<li><span class="zh"><strong>供应商协议</strong>：NDA + 数据安全协议 + 审计权利 + 违约赔偿条款</span><span class="en"><strong>Vendor Agreements</strong>: NDA + data security protocol + audit rights + breach compensation clauses</span></li>
+<li><span class="zh"><strong>定期安全审计</strong>：每季度对AI系统进行安全评估，包括数据流追踪和权限审查</span><span class="en"><strong>Regular Audits</strong>: Quarterly security assessment of AI systems, including data flow tracing and permission review</span></li>
+</ol>
+</div>
+
+</div>
+
+<footer>
+<p><span class="zh"> · AI实现方案与数据安全 · 数据调研时间：2026.04.30</span><span class="en"> · AI Implementation & Data Security · Data researched: 2026.04.30</span></p>
+<p><span class="zh">参考：NVIDIA NIM官网(2025.06)、智谱BigModel.cn(2026.04)、DeepSeek API(2026.04)、OFweek智谱分析(2026.03)、七牛云GLM-5部署指南(2026.02)</span><span class="en">Refs: NVIDIA NIM (Jun 2025), Zhipu BigModel.cn (Apr 2026), DeepSeek API (Apr 2026), OFweek Zhipu analysis (Mar 2026), Qiniu GLM-5 deploy guide (Feb 2026)</span></p>
+<p><a href="index.html">← <span class="zh">返回CVD优化主页</span><span class="en">Back to CVD Optimization</span></a></p>
+</footer>
+
+<script>
+function setLang(l){document.body.className='lang-'+l;document.getElementById('btn-zh').className=l==='zh'?'active':'';document.getElementById('btn-en').className=l==='en'?'active':'';try{localStorage.setItem('tm-lang',l)}catch(e){}}
+try{var s=localStorage.getItem('tm-lang');if(s)setLang(s)}catch(e){}
+</script>
+</body>
+</html>

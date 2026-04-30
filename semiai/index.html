@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI赋能半导体设备优化 | AI-Powered Semiconductor Equipment Optimization</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ── Password Gate ── */
+#gate{position:fixed;inset:0;z-index:999999;display:flex;align-items:center;justify-content:center;background:var(--ink);transition:opacity .5s}
+#gate.hide{opacity:0;pointer-events:none}
+#gate-box{text-align:center;padding:2.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;backdrop-filter:blur(16px);max-width:380px;width:90%}
+#gate-box h2{font-family:'Noto Serif SC',serif;font-weight:700;color:#fff;font-size:1.2rem;margin-bottom:.4rem}
+#gate-box p{color:rgba(255,255,255,.45);font-size:.82rem;margin-bottom:1.4rem}
+#gate-input{width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,.15);border-radius:8px;background:rgba(255,255,255,.06);color:#fff;font-size:.95rem;text-align:center;outline:none;font-family:inherit;transition:border .3s}
+#gate-input:focus{border-color:var(--accent)}
+#gate-btn{margin-top:1rem;width:100%;padding:10px;border:none;border-radius:8px;background:var(--gradient);color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .3s}
+#gate-btn:hover{opacity:.85}
+#gate-err{color:var(--red);font-size:.78rem;margin-top:.6rem;min-height:1.2em}
+:root{--ink:#0a0f1a;--paper:#f5f3ee;--card:#fff;--accent:#0068b5;--accent2:#00a3e0;--green:#1a8754;--red:#d94040;--orange:#e87722;--purple:#6b4fa0;--muted:#6b7280;--border:#d6d3cc;--sidebar-w:240px;--shadow:0 2px 16px rgba(0,0,0,.06);--gradient:linear-gradient(135deg,#0068b5,#00a3e0)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+body.lang-zh .en{display:none!important}body.lang-en .zh{display:none!important}
+
+/* ── Language Toggle ── */
+.lang-toggle{position:fixed;top:16px;right:16px;z-index:10000;display:flex;background:rgba(10,15,26,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:100px;overflow:hidden}
+.lang-toggle button{padding:6px 14px;border:none;background:transparent;color:rgba(255,255,255,.5);font-size:.78rem;cursor:pointer;transition:all .25s;font-family:inherit}.lang-toggle button.active{background:var(--accent);color:#fff}
+
+/* ── Hero ── */
+.hero{position:relative;min-height:46vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,104,181,.2),transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(0,163,224,.12),transparent 50%);animation:gp 8s ease-in-out infinite alternate}
+@keyframes gp{0%{opacity:.6}100%{opacity:1}}
+.hero-content{position:relative;z-index:2;text-align:center;padding:3rem 2rem;max-width:880px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,104,181,.2);border:1px solid rgba(0,163,224,.3);padding:6px 18px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;animation:fsu .8s ease-out}
+.hero-badge .dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:bl 2s infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(1.6rem,4.5vw,2.8rem);color:#fff;line-height:1.25;margin-bottom:.8rem;animation:fsu 1s ease-out .15s both}
+.hero h1 span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:rgba(255,255,255,.55);font-size:.95rem;font-weight:300;max-width:660px;margin:0 auto;animation:fsu 1s ease-out .3s both}
+.hero-tag{margin-top:1rem;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:4px 14px;border-radius:100px;font-size:.75rem;color:rgba(255,255,255,.4)}
+@keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Layout: Sidebar + Main ── */
+.layout{display:flex;min-height:calc(100vh - 46vh)}
+
+/* ── Sidebar ── */
+.sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);position:sticky;top:0;height:100vh;background:var(--ink);border-right:1px solid rgba(255,255,255,.06);overflow-y:auto;z-index:100;padding:1.2rem 0;transition:transform .3s ease}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+.sb-logo{padding:.6rem 1.2rem .8rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.6rem}
+.sb-logo small{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase}
+.sb-logo h3{font-family:'Noto Serif SC',serif;font-size:.85rem;color:rgba(255,255,255,.85);margin-top:3px}
+.sb-section{padding:.5rem 1.2rem .2rem;font-size:.65rem;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.1em;font-family:'JetBrains Mono',monospace;margin-top:.6rem}
+.sb-section:first-of-type{margin-top:0}
+.sb-link{display:flex;align-items:center;gap:8px;padding:.45rem 1.2rem;color:rgba(255,255,255,.5);font-size:.8rem;text-decoration:none;transition:all .2s;border-left:3px solid transparent;cursor:pointer}
+.sb-link:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.03);text-decoration:none}
+.sb-link.active{color:#fff;background:rgba(0,104,181,.12);border-left-color:var(--accent)}
+.sb-link .sb-icon{font-size:.9rem;width:20px;text-align:center;flex-shrink:0}
+
+/* ── Hamburger ── */
+.hamburger{display:none;position:fixed;top:14px;left:14px;z-index:10001;width:40px;height:40px;border-radius:8px;background:rgba(10,15,26,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);cursor:pointer;align-items:center;justify-content:center}
+.hamburger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px;transition:all .3s;position:relative}
+.hamburger span::before,.hamburger span::after{content:'';position:absolute;width:100%;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger span::before{top:-6px}.hamburger span::after{top:6px}
+.hamburger.open span{background:transparent}.hamburger.open span::before{top:0;transform:rotate(45deg)}.hamburger.open span::after{top:0;transform:rotate(-45deg)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99}
+
+/* ── Main Content ── */
+.main-content{flex:1;padding:2.5rem 2.5rem 3rem;max-width:960px;min-width:0}
+
+/* ── Cards & Sections ── */
+.section-head{display:flex;align-items:center;gap:.8rem;margin:2.5rem 0 1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--ink)}
+.section-head:first-child{margin-top:0}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);background:rgba(0,104,181,.08);padding:3px 9px;border-radius:4px;letter-spacing:.1em}
+.section-head h2{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1.3rem;flex:1}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin:1.5rem 0}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;box-shadow:var(--shadow);transition:transform .2s}
+.stat-card:hover{transform:translateY(-2px)}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:1.7rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:2px}
+.stat-src{font-size:.65rem;color:rgba(107,114,128,.6);margin-top:2px;font-style:italic}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.4rem;margin-bottom:.8rem;transition:all .3s;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gradient);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.08);border-color:var(--accent)}
+.card:hover::before{opacity:1}
+.card h3{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1rem;margin-bottom:.4rem;line-height:1.5}
+.card p,.card li{color:#4a4a4a;font-size:.85rem;line-height:1.75}
+.card ul{padding-left:1.1rem}
+.card-dark{background:linear-gradient(135deg,#0a1628,#0d1f3c);color:#fff;border-color:rgba(0,104,181,.3)}
+.card-dark::before{opacity:1}
+.card-dark h3{color:#fff}.card-dark p,.card-dark li{color:rgba(255,255,255,.75)}
+
+.exec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem;margin:1.2rem 0}
+.exec-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;box-shadow:var(--shadow);border-top:4px solid var(--accent);transition:transform .2s}
+.exec-card:hover{transform:translateY(-2px)}
+.exec-card.green{border-top-color:var(--green)}.exec-card.orange{border-top-color:var(--orange)}.exec-card.purple{border-top-color:var(--purple)}.exec-card.red{border-top-color:var(--red)}
+.exec-card .ec-icon{font-size:1.5rem;margin-bottom:.4rem}
+.exec-card h4{font-size:.88rem;margin-bottom:.3rem}.exec-card p{font-size:.8rem;color:var(--muted);line-height:1.7}
+.exec-card strong{color:var(--ink)}
+
+.tw{overflow-x:auto;margin:.6rem 0;border-radius:8px;border:1px solid var(--border);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+thead{background:rgba(0,104,181,.06)}
+th{text-align:left;padding:8px 10px;font-weight:600;border-bottom:2px solid var(--border);white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid var(--border);color:#4a4a4a}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(0,104,181,.03)}
+
+.benchmark-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin:1rem 0}
+.bm-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;box-shadow:var(--shadow);border-top:3px solid var(--accent)}
+.bm-card h4{font-size:.92rem;margin-bottom:.5rem;display:flex;align-items:center;gap:6px}
+.bm-card ul{font-size:.8rem;color:#4a4a4a;padding-left:1rem;line-height:1.7}
+.bm-card.lam{border-top-color:var(--accent)}.bm-card.amat{border-top-color:var(--green)}.bm-card.ours{border-top-color:var(--orange)}
+
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin:1rem 0;justify-content:center}
+.flow-step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;text-align:center;min-width:95px;box-shadow:var(--shadow)}
+.flow-step .fi{font-size:1.2rem;margin-bottom:2px}
+.flow-step .fl{font-size:.73rem;font-weight:600}
+.flow-step .fd{font-size:.65rem;color:var(--muted);margin-top:2px}
+.flow-arrow{font-size:1rem;color:var(--accent);flex-shrink:0}
+
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin:1rem 0}
+.problem-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;box-shadow:var(--shadow);border-left:4px solid var(--red)}
+.problem-card.p2{border-left-color:var(--orange)}.problem-card.p3{border-left-color:var(--purple)}
+.problem-card h4{font-size:.9rem;margin-bottom:.3rem}.problem-card p{font-size:.8rem;color:#4a4a4a;line-height:1.7}
+.problem-card .product-tag{display:inline-block;margin-top:.5rem;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:600;background:rgba(0,104,181,.1);color:var(--accent)}
+
+.solution-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin:1rem 0}
+.sol-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;box-shadow:var(--shadow)}
+.sol-card h4{font-size:.9rem;margin-bottom:.3rem;color:var(--accent)}
+.sol-card p,.sol-card li{font-size:.8rem;color:#4a4a4a;line-height:1.7}
+.sol-card ul{padding-left:1rem}
+.sol-card .product-refs{margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted)}
+
+.security-arch{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin:1rem 0;justify-content:center}
+.sec-box{background:linear-gradient(135deg,#0a1628,#0d1f3c);color:#fff;border:1px solid rgba(0,104,181,.3);border-radius:10px;padding:.7rem 1rem;text-align:center;min-width:120px}
+.sec-box .si{font-size:1.2rem;margin-bottom:2px}.sec-box .sl{font-size:.72rem;font-weight:600}.sec-box .sd{font-size:.62rem;color:rgba(255,255,255,.5);margin-top:2px}
+.sec-arrow{font-size:1rem;color:var(--accent);flex-shrink:0}
+
+.tl{position:relative;padding-left:1.6rem;margin:1rem 0}
+.tl::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--gradient)}
+.ti{position:relative;margin-bottom:1rem;padding-left:.8rem}
+.ti::before{content:'';position:absolute;left:-1.6rem;top:5px;width:11px;height:11px;border-radius:50%;background:var(--accent);border:3px solid var(--paper);z-index:1}
+.ti.done::before{background:var(--green)}
+.ti h4{font-size:.83rem;margin-bottom:2px}.ti p{font-size:.76rem;color:var(--muted)}
+
+.badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.68rem;font-weight:600}
+.bg{background:rgba(26,135,84,.12);color:var(--green)}.br{background:rgba(217,64,64,.12);color:var(--red)}.bo{background:rgba(232,119,34,.12);color:var(--orange)}.bbl{background:rgba(0,104,181,.12);color:var(--accent)}
+
+.callout{background:linear-gradient(135deg,rgba(0,104,181,.06),rgba(0,163,224,.04));border:2px solid rgba(0,104,181,.15);border-radius:10px;padding:1.4rem;margin:1.2rem 0}
+.callout h3{font-family:'Noto Serif SC',serif;font-size:1.05rem;margin-bottom:.6rem}
+.callout strong{color:var(--accent)}
+
+.mini-table{background:var(--card);border:2px solid var(--accent);border-radius:10px;overflow:hidden;margin:1rem 0}
+
+footer{text-align:center;padding:1.6rem 1rem;color:var(--muted);font-size:.75rem;border-top:1px solid var(--border);margin-top:2rem}
+
+/* ── Responsive ── */
+@media(max-width:860px){
+  .hamburger{display:flex}
+  .sidebar{position:fixed;left:0;top:0;transform:translateX(-100%);z-index:10000}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay.show{display:block}
+  .main-content{padding:1.5rem 1rem 2rem}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .benchmark-grid,.solution-grid,.problem-grid{grid-template-columns:1fr}
+  .flow{flex-direction:column}.flow-arrow{transform:rotate(90deg)}
+  .exec-grid{grid-template-columns:1fr 1fr}
+  .section-head h2{font-size:1.1rem}
+}
+@media(max-width:480px){
+  .stat-grid{grid-template-columns:1fr}
+  .exec-grid{grid-template-columns:1fr}
+  table{font-size:.72rem}th,td{padding:6px 7px}
+}
+</style>
+</head>
+<body class="lang-en">
+<div id="gate">
+  <div id="gate-box">
+    <div style="position:absolute;top:12px;right:12px;display:flex;gap:4px">
+      <button onclick="setGateLang('en')" style="padding:2px 8px;border:1px solid rgba(255,255,255,.2);border-radius:4px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);font-size:.7rem;cursor:pointer;font-family:inherit">EN</button>
+      <button onclick="setGateLang('zh')" style="padding:2px 8px;border:1px solid rgba(255,255,255,.2);border-radius:4px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);font-size:.7rem;cursor:pointer;font-family:inherit">中文</button>
+    </div>
+    <h2>🔒 <span class="zh">访问验证</span><span class="en">Access Verification</span></h2>
+    <p><span class="zh">请输入密码查看内容</span><span class="en">Enter password to view content</span></p>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off">
+    <button id="gate-btn" onclick="checkGate()"><span class="zh">确认</span><span class="en">Confirm</span></button>
+    <div id="gate-err" class="en"></div>
+    <div id="gate-err-zh" class="zh" style="color:var(--red);font-size:.78rem;margin-top:.6rem;min-height:1.2em"></div>
+  </div>
+</div>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button id="btn-zh" onclick="setLang('zh')">中文</button>
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- Hamburger -->
+<div class="hamburger" id="hamburger" onclick="toggleSidebar()">
+  <span></span>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- Hero -->
+<section class="hero">
+<div class="hero-content">
+  <div class="hero-badge"><span class="dot"></span> STRATEGIC PROPOSAL · 2026.04</div>
+  <h1><span class="zh">AI赋能</span><span class="en">AI-Empowered</span> <span><span class="zh">半导体设备优化</span><span class="en">Semiconductor Equipment Optimization</span></span></h1>
+  <p class="hero-sub"><span class="zh">AI驱动的半导体制造设备工艺优化方案 · 缩小与国际厂商的差距，加速国产替代</span><span class="en">AI-driven semiconductor equipment process optimization · Closing the gap with global leaders, accelerating domestic substitution</span></p>
+  <div class="hero-tag">AtomicStar · C100 · C600 · P100 · B300</div>
+</div>
+</section>
+
+<!-- Layout -->
+<div class="layout">
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <small>ATOMICSTAR / XYC</small>
+    <h3><span class="zh">AI赋能方案</span><span class="en">AI Proposal</span></h3>
+  </div>
+  <div class="sb-section"><span class="zh">概览</span><span class="en">Overview</span></div>
+  <a class="sb-link active" data-target="sec-overview">
+    <span class="sb-icon">📋</span><span class="zh">方案概览</span><span class="en">Overview</span>
+  </a>
+  <div class="sb-section"><span class="zh">分析</span><span class="en">Analysis</span></div>
+  <a class="sb-link" data-target="sec-benchmark">
+    <span class="sb-icon">🔵</span><span class="zh">行业标杆</span><span class="en">Benchmarks</span>
+  </a>
+  <a class="sb-link" data-target="sec-diagnosis">
+    <span class="sb-icon">🔴</span><span class="zh">问题诊断</span><span class="en">Diagnosis</span>
+  </a>
+  <div class="sb-section"><span class="zh">方案</span><span class="en">Solutions</span></div>
+  <a class="sb-link" data-target="sec-ai">
+    <span class="sb-icon">🧠</span><span class="zh">AI解决方案</span><span class="en">AI Solutions</span>
+  </a>
+  <a class="sb-link" data-target="sec-security">
+    <span class="sb-icon">🔒</span><span class="zh">数据安全</span><span class="en">Data Security</span>
+  </a>
+  <a class="sb-link" data-target="sec-supply">
+    <span class="sb-icon">🔗</span><span class="zh">供应链协同</span><span class="en">Supply Chain</span>
+  </a>
+  <div class="sb-section"><span class="zh">行动</span><span class="en">Action</span></div>
+  <a class="sb-link" data-target="sec-plan">
+    <span class="sb-icon">📅</span><span class="zh">实施计划</span><span class="en">Implementation</span>
+  </a>
+  <a class="sb-link" data-target="sec-mvp">
+    <span class="sb-icon">🚀</span><span class="zh">最小启动方案</span><span class="en">Quick Start</span>
+  </a>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 1: 方案概览                          -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-overview">
+<div class="section-head"><span class="section-num">01</span><h2><span class="zh">方案概览</span><span class="en">Proposal Overview</span></h2></div>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-num">$792B</div>
+    <div class="stat-label"><span class="zh">2025全球半导体市场</span><span class="en">2025 Global Semi Market</span></div>
+    <div class="stat-src">WSTS, 2025.06</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">&gt;99%</div>
+    <div class="stat-label"><span class="zh">AI缺陷检测准确率</span><span class="en">AI Defect Detection Accuracy</span></div>
+    <div class="stat-src">IEEE, 2024.12</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">50-70%</div>
+    <div class="stat-label"><span class="zh">VM可替代物理量测</span><span class="en">VM Replaces Physical Metrology</span></div>
+    <div class="stat-src">Lam Research, 2025</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">+30%</div>
+    <div class="stat-label"><span class="zh">fab整体效率提升</span><span class="en">Fab Efficiency Improvement</span></div>
+    <div class="stat-src">AMAT AIx™, 2026.02</div>
+  </div>
+</div>
+
+<div class="exec-grid">
+  <div class="exec-card red"><div class="ec-icon">🔴</div><h4><span class="zh">核心问题</span><span class="en">Core Problem</span></h4><p><span class="zh">国产CVD/ALD设备在<strong>variation / yield / particle</strong>方面落后国际水平，反馈回路慢，无法定位根因</span><span class="en">Domestic CVD/ALD tools lag in <strong>variation / yield / particle</strong> vs international standards, slow feedback loops, cannot pinpoint root causes</span></p></div>
+  <div class="exec-card green"><div class="ec-icon">💡</div><h4><span class="zh">关键洞察</span><span class="en">Key Insight</span></h4><p><span class="zh">AI可发现<strong>Hidden Factors</strong>，VM替代50-70%物理量测。Lam Fabtex™ / AMAT AIx™已验证路径。国产替代窗口加速开启</span><span class="en">AI discovers <strong>Hidden Factors</strong>, VM replaces 50-70% physical metrology. Proven by Lam Fabtex™ / AMAT AIx™. Domestic substitution window accelerating</span></p></div>
+  <div class="exec-card orange"><div class="ec-icon">🏗️</div><h4><span class="zh">我们的方案</span><span class="en">Our Approach</span></h4><p><span class="zh"><strong>4步走</strong>：①全参数AI分析 ②VM+实时闭环 ③缺陷知识库 ④配方优化。对标Lam Fabtex / AMAT AIx</span><span class="en"><strong>4 steps</strong>: ①Full AI analysis ②VM+feedback loop ③Defect KB ④Recipe optimization. Benchmarked against Lam/AMAT</span></p></div>
+  <div class="exec-card purple"><div class="ec-icon">🚀</div><h4><span class="zh">启动资源</span><span class="en">Launch Resources</span></h4><p><span class="zh"><strong>最小启动</strong>：3人 + ¥3-5万（GLM-5本地）· <strong>全周期</strong>：¥85-200万 / 6-8月 · <strong>关键瓶颈</strong>：数据接口打通</span><span class="en"><strong>Min start</strong>: 3 people + ¥30-50K (GLM-5 local) · <strong>Full</strong>: ¥850K-2M / 6-8mo · <strong>Key bottleneck</strong>: Data integration</span></p></div>
+</div>
+
+<div class="callout">
+  <strong><span class="zh">⚡ 立即可做：1台设备（如C100）+ 3月FDC数据 + GLM-5本地部署（¥3-5万）→ 3天发现第一个Hidden Factor → 数据零外泄风险</span><span class="en">⚡ Start now: 1 tool (e.g. C100) + 3mo FDC data + GLM-5 local (¥30-50K) → discover first Hidden Factor in 3 days → zero data leakage risk</span></strong>
+</div>
+
+<div class="card">
+  <h3><span class="zh">关于星原驰半导体（AtomicStar / XYC）</span><span class="en">About AtomicStar (XYC)</span></h3>
+  <p><span class="zh"><strong>杭州星原驰半导体</strong>，2021.12成立，12000m²厂房，韩国水原子公司（2023年）。核心团队来自ASM、AMAT、三星、格罗方德、苹果、英特尔。目标市场：3D DRAM、3D NAND、先进逻辑、HBM、先进封装。</span><span class="en"><strong>Hangzhou AtomicStar Semiconductor</strong>, founded Dec 2021, 12,000m² facility, Korean subsidiary (2023). Core team from ASM, AMAT, Samsung, GLOBALFOUNDRIES, Apple, Intel. Target markets: 3D DRAM, 3D NAND, advanced logic, HBM, advanced packaging.</span></p>
+  <div class="tw" style="margin-top:.6rem">
+    <table>
+      <thead><tr><th><span class="zh">产品</span><span class="en">Product</span></th><th><span class="zh">类型</span><span class="en">Type</span></th><th><span class="zh">关键参数</span><span class="en">Key Specs</span></th></tr></thead>
+      <tbody>
+        <tr><td><strong>C100</strong></td><td><span class="zh">团簇式PEALD/PECVD</span><span class="en">Cluster PEALD/PECVD</span></td><td>300mm, <span class="zh">4站点</span><span class="en">4 stations</span>, particle≤20, <span class="zh">均匀性</span><span class="en">uniformity</span>≤0.5-1.5%, <span class="zh">台阶覆盖</span><span class="en">step coverage</span>≥95%</td></tr>
+        <tr><td><strong>C600</strong></td><td><span class="zh">团簇式EPI/CVD</span><span class="en">Cluster EPI/CVD</span></td><td><span class="zh">原位COR（不破真空连续COR+PHT+沉积）</span><span class="en">In-situ COR (continuous COR+PHT+deposition without vacuum break)</span></td></tr>
+        <tr><td><strong>P100</strong></td><td><span class="zh">高场PVD</span><span class="en">High-field PVD</span></td><td><span class="zh">TSV台阶覆盖</span><span class="en">TSV step coverage</span>≥85%</td></tr>
+        <tr><td><strong>B300</strong></td><td><span class="zh">LPCVD立式炉</span><span class="en">LPCVD Vertical Furnace</span></td><td><span class="zh">100片批量</span><span class="en">100-wafer batch</span>, <span class="zh">均匀性</span><span class="en">uniformity</span>≤2.0%</td></tr>
+        <tr><td><strong>B600/B700/C700</strong></td><td colspan="2"><span class="zh">在研发中</span><span class="en">In development</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:.4rem;font-size:.78rem;color:var(--muted)"><span class="zh">本方案针对<strong>半导体制造设备</strong>（CVD/ALD/EPI/PVD等），以星原驰产品线为参考，方法论同样适用于其他国产设备厂商。</span><span class="en">This proposal targets <strong>semiconductor manufacturing equipment</strong> (CVD/ALD/EPI/PVD etc.), referenced to AtomicStar's product lines. Methodology applies to other domestic equipment vendors as well.</span></p>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 2: 行业标杆案例                       -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-benchmark">
+<div class="section-head"><span class="section-num">02</span><h2><span class="zh">行业标杆案例</span><span class="en">Industry Benchmarks</span></h2></div>
+
+<div class="benchmark-grid">
+  <!-- Lam -->
+  <div class="bm-card lam">
+    <h4>🔵 Lam Research Fabtex™</h4>
+    <ul>
+      <li><strong>Fabtex™ Yield Optimizer</strong> (SEMICON West 2025.10)</li>
+      <li><span class="zh"><strong>怎么做</strong>：SEMulator3D®构建虚拟硅数字孪生 → 采集inline量测数据 → AI/ML训练虚拟模型 → 推荐新量测target → 全flow变异性传播</span><span class="en"><strong>How</strong>: SEMulator3D® virtual silicon twins → inline metrology → AI/ML virtual model → recommend metrology targets → full-flow variability propagation</span></li>
+      <li><span class="zh"><strong>效果</strong>：NPI阶段提前发现系统缺陷，避免wafer到end-of-line才被e-test发现，<strong>节省数月时间</strong></span><span class="en"><strong>Impact</strong>: Caught systematic defects at NPI, avoiding end-of-line e-test, <strong>saving months</strong></span></li>
+      <li><span class="zh"><strong>对星原驰启发</strong>：C100/C600的cluster架构天然适合多站点变异性追踪；可先建单站数字孪生再扩展到全cluster</span><span class="en"><strong>AtomicStar takeaway</strong>: C100/C600 cluster architecture suits multi-station variability tracking; start with single-station digital twin then expand</span></li>
+    </ul>
+  </div>
+  <!-- AMAT -->
+  <div class="bm-card amat">
+    <h4>🟢 Applied Materials AIx™</h4>
+    <ul>
+      <li><strong>AIx™</strong> (Actionable Insight Accelerator) — <span class="zh">实时工艺可视化</span><span class="en">Real-time process visualization</span></li>
+      <li><span class="zh"><strong>怎么做</strong>：采集百万级测量数据 → 实时可视化数千个工艺变量 → 工程师看到process drift → 快速定位异常根因 → 闭环优化</span><span class="en"><strong>How</strong>: Millions of measurements → real-time visualization of thousands of variables → engineers see process drift → root cause analysis → closed-loop</span></li>
+      <li><span class="zh"><strong>效果</strong>：fab效率<strong>+30%</strong>（2026.02）；Endura Volta Selective CVD+TSMC 2nm铜电阻<strong>-30%+</strong></span><span class="en"><strong>Impact</strong>: Fab efficiency <strong>+30%</strong> (Feb 2026); Endura Volta + TSMC 2nm Cu resistance <strong>-30%+</strong></span></li>
+      <li><span class="zh"><strong>对星原驰启发</strong>：P100高场PVD的TSV覆盖≥85%可通过AIx模式实时监控过程参数漂移；B300批量炉100片均匀性需FDC级实时分析</span><span class="en"><strong>AtomicStar takeaway</strong>: P100 TSV coverage≥85% benefits from real-time drift monitoring; B300 100-wafer batch uniformity needs FDC-level analysis</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">方法论对比</span><span class="en">Methodology Comparison</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">维度</span><span class="en">Dimension</span></th><th>Lam Fabtex™</th><th>AMAT AIx™</th><th><span class="zh">本方案</span><span class="en">Our Proposal</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="zh">核心方法</span><span class="en">Core Method</span></td><td><span class="zh">虚拟硅+物理建模+ML</span><span class="en">Virtual Si+Physics+ML</span></td><td><span class="zh">实时可视化+大数据</span><span class="en">Real-time Viz+Big Data</span></td><td><span class="zh">AI全参数+VM+知识库+配方优化</span><span class="en">Full AI+VM+KB+Recipe</span></td></tr>
+        <tr><td><span class="zh">数据依赖</span><span class="en">Data Dependency</span></td><td><span class="zh">高（需SEMulator3D）</span><span class="en">High (SEMulator3D)</span></td><td><span class="zh">高（AMAT生态）</span><span class="en">High (AMAT ecosystem)</span></td><td><span class="zh">中（开源+本地AI）</span><span class="en">Medium (open-source+local AI)</span></td></tr>
+        <tr><td><span class="zh">部署模式</span><span class="en">Deployment</span></td><td><span class="zh">云端/授权</span><span class="en">Cloud/Licensed</span></td><td><span class="zh">AMAT平台绑定</span><span class="en">AMAT platform-tied</span></td><td><span class="zh">本地私有化</span><span class="en">Local private</span></td></tr>
+        <tr><td><span class="zh">数据安全</span><span class="en">Data Security</span></td><td><span class="zh">依赖第三方</span><span class="en">Third-party dependent</span></td><td><span class="zh">依赖AMAT</span><span class="en">AMAT dependent</span></td><td><span class="zh">数据不出企业</span><span class="en">Data stays in-house</span></td></tr>
+        <tr><td><span class="zh">成本</span><span class="en">Cost</span></td><td><span class="zh">高（百万级授权费）</span><span class="en">High (M$+ license)</span></td><td><span class="zh">高（平台绑定）</span><span class="en">High (platform lock-in)</span></td><td><span class="zh">低（¥3-200万）</span><span class="en">Low (¥30K-2M)</span></td></tr>
+        <tr><td><span class="zh">适用阶段</span><span class="en">Applicable Stage</span></td><td><span class="zh">NPI/HVM</span><span class="en">NPI/HVM</span></td><td><span class="zh">HVM</span><span class="en">HVM</span></td><td><span class="zh">R&D→HVM全流程</span><span class="en">R&D→HVM full flow</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:.4rem;font-size:.75rem;color:var(--muted)"><span class="zh">来源：Lam Research官网 (2025.10) / AMAT官网+LinkedIn (2026.02-03) / AMAT+NVIDIA合作公告 (2026.03)</span><span class="en">Sources: Lam Research (Oct 2025) / AMAT website+LinkedIn (Feb-Mar 2026) / AMAT+NVIDIA announcement (Mar 2026)</span></p>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 3: 问题诊断                          -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-diagnosis">
+<div class="section-head"><span class="section-num">03</span><h2><span class="zh">问题诊断</span><span class="en">Problem Diagnosis</span></h2></div>
+
+<div class="problem-grid">
+  <div class="problem-card">
+    <h4><span class="zh">❶ 反馈回路太慢</span><span class="en">❶ Slow Feedback Loop</span></h4>
+    <p><span class="zh">问题→调整以<strong>天/周</strong>计。数据散落在FDC、量测、检测等独立系统，无法实时关联。发现异常时可能已生产数十批。</span><span class="en">Detection→adjustment takes <strong>days/weeks</strong>. Data scattered across FDC, metrology, inspection — cannot correlate in real-time. By the time an anomaly is caught, dozens of lots may be affected.</span></p>
+    <div><span class="product-tag">C100: particle控制需分钟级响应</span></div>
+    <div><span class="product-tag">C600: EPI variation跨站点追踪</span></div>
+  </div>
+  <div class="problem-card p2">
+    <h4><span class="zh">❷ 隐藏参数未捕获</span><span class="en">❷ Hidden Parameters Uncaptured</span></h4>
+    <p><span class="zh">常规参数（温度/压力/流量）在spec范围内，但particle仍偏高、均匀性波动。可能存在<strong>未采集的隐藏变量</strong>：腔体历史、维护状态、耗材老化等。</span><span class="en">Standard params (temp/pressure/flow) within spec, yet particle remains high, uniformity fluctuates. <strong>Hidden variables</strong> may exist: chamber history, maintenance state, consumable aging, etc.</span></p>
+    <div><span class="product-tag">C100: particle≤20目标下隐藏因子影响大</span></div>
+    <div><span class="product-tag">B300: 100片批量均匀性≤2.0%的隐变量</span></div>
+  </div>
+  <div class="problem-card p3">
+    <h4><span class="zh">❸ 缺乏缺陷模式知识库</span><span class="en">❸ No Defect Pattern Knowledge Base</span></h4>
+    <p><span class="zh">设备"个性"未数字化。经验仅存在老工程师脑中，人员流失=知识流失。同类缺陷反复出现，每次都重新排查。</span><span class="en">Tool "personality" not digitized. Expertise exists only in senior engineers' heads — turnover = knowledge loss. Same defects recur, re-investigated each time.</span></p>
+    <div><span class="product-tag">P100: TSV台阶覆盖≥85%的缺陷模式</span></div>
+    <div><span class="product-tag">C600: COR+PHT+沉积连续工艺异常模式</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">国产设备厂商的历史性机遇</span><span class="en">Historic Opportunity for Domestic Equipment Vendors</span></h3>
+  <p><span class="zh">地缘政治加速国产替代进程，国内晶圆厂必须加速国产设备导入。不能只靠"可用"，必须做到<strong>"好用"</strong>→AI赋能是关键差异化，从"追赶者"变为"新范式定义者"。</span><span class="en">Geopolitics accelerates domestic substitution. Fabs must adopt domestic equipment. Must go beyond "usable" to <strong>"competitive"</strong> — AI empowerment is the key differentiator, transforming from "follower" to "new paradigm definer".</span></p>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 4: AI解决方案                        -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-ai">
+<div class="section-head"><span class="section-num">04</span><h2><span class="zh">AI解决方案</span><span class="en">AI Solutions</span></h2></div>
+
+<div class="card">
+  <h3><span class="zh">数据驱动的AI优化闭环</span><span class="en">Data-Driven AI Optimization Loop</span></h3>
+  <div class="flow">
+    <div class="flow-step"><div class="fi">📡</div><div class="fl"><span class="zh">采集</span><span class="en">Collect</span></div><div class="fd">FDC/Sensor/SECS-GEM</div></div><div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="fi">🔗</div><div class="fl"><span class="zh">打通</span><span class="en">Integrate</span></div><div class="fd"><span class="zh">跨系统数据融合</span><span class="en">Cross-system Fusion</span></div></div><div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="fi">🧠</div><div class="fl"><span class="zh">分析</span><span class="en">Analyze</span></div><div class="fd">ML/XGBoost/SHAP</div></div><div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="fi">⚡</div><div class="fl"><span class="zh">执行</span><span class="en">Execute</span></div><div class="fd"><span class="zh">自动调参/APC</span><span class="en">Auto-tune/APC</span></div></div><div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="fi">📊</div><div class="fl"><span class="zh">沉淀</span><span class="en">Knowledge</span></div><div class="fd"><span class="zh">模式知识库</span><span class="en">Pattern KB</span></div></div>
+  </div>
+</div>
+
+<div class="solution-grid">
+  <div class="sol-card">
+    <h4><span class="zh">① 全参数AI分析 → 发现Hidden Factors</span><span class="en">① Full-parameter AI → Discover Hidden Factors</span></h4>
+    <ul>
+      <li><span class="zh">XGBoost + SHAP自动识别Top-N关键参数</span><span class="en">XGBoost + SHAP auto-identify Top-N key parameters</span></li>
+      <li><span class="zh">搜索数百变量的交互效应（非单变量逐一排查）</span><span class="en">Search interaction effects across hundreds of variables</span></li>
+      <li><span class="zh">因果推断区分相关性与因果性</span><span class="en">Causal inference separates correlation from causation</span></li>
+    </ul>
+    <div class="product-refs"><span class="zh">▸ 适用：C100 particle控制 / B300批量均匀性 / C600 variation管理</span><span class="en">▸ Applies to: C100 particle control / B300 batch uniformity / C600 variation management</span></div>
+  </div>
+  <div class="sol-card">
+    <h4><span class="zh">② VM + 实时闭环 → 天/周 → 小时/分钟</span><span class="en">② VM + Real-time Loop → Days/Weeks → Hours/Minutes</span></h4>
+    <ul>
+      <li><span class="zh">VM即时预测薄膜参数，<strong>减少50-70%物理量测</strong></span><span class="en">VM instantly predicts film params, <strong>reduces 50-70% physical metrology</strong></span></li>
+      <li><span class="zh">FDC秒级检测漂移 → APC闭环自动补偿</span><span class="en">FDC detects drift in seconds → APC auto-compensation</span></li>
+      <li><span class="zh">虚拟量测+数字孪生（对标Fabtex）</span><span class="en">Virtual metrology + digital twin (benchmark Fabtex)</span></li>
+    </ul>
+    <div class="product-refs"><span class="zh">▸ 适用：C100 ALD/CVD膜厚预测 / P100 PVD TSV覆盖 / C600 EPI厚度</span><span class="en">▸ Applies to: C100 ALD/CVD thickness prediction / P100 PVD TSV coverage / C600 EPI thickness</span></div>
+  </div>
+  <div class="sol-card">
+    <h4><span class="zh">③ 机台级缺陷识别 + 企业知识库</span><span class="en">③ Tool-level Defect Recognition + Enterprise KB</span></h4>
+    <ul>
+      <li><span class="zh">AI聚类识别每台设备的"指纹"缺陷模式</span><span class="en">AI clustering identifies each tool's "fingerprint" defect patterns</span></li>
+      <li><span class="zh">建立"缺陷→根因→修正措施"映射知识库</span><span class="en">Build "defect→root cause→fix" mapping knowledge base</span></li>
+      <li><span class="zh">经验数字化，不依赖个别工程师</span><span class="en">Digitize expertise, independent of individual engineers</span></li>
+    </ul>
+    <div class="product-refs"><span class="zh">▸ 适用：P100 TSV缺陷模式 / C100 particle源识别 / B300批次异常聚类</span><span class="en">▸ Applies to: P100 TSV defect patterns / C100 particle source ID / B300 batch anomaly clustering</span></div>
+  </div>
+  <div class="sol-card">
+    <h4><span class="zh">④ 工艺配方优化（对标Fabtex）</span><span class="en">④ Recipe Optimization (Benchmark Fabtex)</span></h4>
+    <ul>
+      <li><span class="zh">代理模型 + 贝叶斯优化/强化学习搜索最优工艺窗口</span><span class="en">Surrogate model + Bayesian optimization/RL for optimal process window</span></li>
+      <li><span class="zh">多目标优化：均匀性×台阶覆盖×沉积速率</span><span class="en">Multi-objective: uniformity × step coverage × deposition rate</span></li>
+      <li><span class="zh">新工艺开发加速：从数月→数周</span><span class="en">New process development acceleration: months → weeks</span></li>
+    </ul>
+    <div class="product-refs"><span class="zh">▸ 适用：C100新膜系开发 / C600 COR+PHT+沉积联合优化 / B600/B700/C700研发阶段</span><span class="en">▸ Applies to: C100 new film development / C600 COR+PHT+deposition joint optimization / B600/B700/C700 R&D phase</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 5: 数据安全                          -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-security">
+<div class="section-head"><span class="section-num">05</span><h2><span class="zh">数据安全</span><span class="en">Data Security</span></h2></div>
+
+<div class="card">
+  <h3><span class="zh">推荐：智谱GLM-5.1本地私有化部署</span><span class="en">Recommended: Zhipu GLM-5.1 Local Private Deployment</span></h3>
+  <p><span class="zh"><strong>核心理由</strong>：①数据不出企业边界 ②支持国产GPU（昇腾/寒武纪）③中文语义理解能力强 ④成本可控（¥3-5万起）⑤半导体工艺数据高度敏感，不可经外部API传输。来源：智谱AI官方 (2026.04)</span><span class="en"><strong>Key reasons</strong>: ①Data never leaves premises ②Supports domestic GPUs (Ascend/Cambricon) ③Strong Chinese NLP ④Controllable cost (from ¥30-50K) ⑤Semiconductor process data is highly sensitive — cannot use external APIs. Source: Zhipu AI official (Apr 2026)</span></p>
+</div>
+
+<div class="card">
+  <h3><span class="zh">方案对比</span><span class="en">Solution Comparison</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">方案</span><span class="en">Solution</span></th><th><span class="zh">部署方式</span><span class="en">Deployment</span></th><th><span class="zh">数据安全</span><span class="en">Data Security</span></th><th><span class="zh">GPU支持</span><span class="en">GPU Support</span></th><th><span class="zh">起步成本</span><span class="en">Starting Cost</span></th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(26,135,84,.06)"><td><strong><span class="zh">智谱GLM-5.1本地</span><span class="en">Zhipu GLM-5.1 Local</span></strong></td><td><span class="zh">本地私有化</span><span class="en">Local private</span></td><td><span class="badge bg">✓ <span class="zh">最高</span><span class="en">Highest</span></span></td><td><span class="zh">昇腾/寒武纪/NVIDIA</span><span class="en">Ascend/Cambricon/NVIDIA</span></td><td>¥3-5万</td></tr>
+        <tr><td>NVIDIA NIM</td><td><span class="zh">本地/边缘</span><span class="en">Local/edge</span></td><td><span class="badge bg">✓ <span class="zh">高</span><span class="en">High</span></span></td><td>NVIDIA</td><td>¥10-30万</td></tr>
+        <tr><td>DeepSeek</td><td><span class="zh">开源可本地</span><span class="en">Open-source, local OK</span></td><td><span class="badge bg">✓ <span class="zh">高</span><span class="en">High</span></span></td><td><span class="zh">通用</span><span class="en">General</span></td><td>¥2-5万</td></tr>
+        <tr><td>OpenAI API</td><td><span class="zh">云端</span><span class="en">Cloud</span></td><td><span class="badge br">✗ <span class="zh">数据出境</span><span class="en">Data leaves</span></span></td><td>N/A</td><td>¥1-3万/月</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card card-dark">
+  <h3><span class="zh">安全架构</span><span class="en">Security Architecture</span></h3>
+  <div class="security-arch">
+    <div class="sec-box"><div class="si">🔐</div><div class="sl"><span class="zh">边缘加密</span><span class="en">Edge Encryption</span></div><div class="sd"><span class="zh">设备端数据脱敏</span><span class="en">Tool-side data masking</span></div></div><div class="sec-arrow">→</div>
+    <div class="sec-box"><div class="si">🗄️</div><div class="sl"><span class="zh">本地数据湖</span><span class="en">Local Data Lake</span></div><div class="sd"><span class="zh">InfluxDB/MinIO</span><span class="en">InfluxDB/MinIO</span></div></div><div class="sec-arrow">→</div>
+    <div class="sec-box"><div class="si">🧠</div><div class="sl"><span class="zh">本地AI</span><span class="en">Local AI</span></div><div class="sd">GLM-5.1 <span class="zh">私有化</span><span class="en">private</span></div></div><div class="sec-arrow">→</div>
+    <div class="sec-box"><div class="si">🤝</div><div class="sl"><span class="zh">联邦学习</span><span class="en">Federated Learning</span></div><div class="sd"><span class="zh">安全多方共享</span><span class="en">Secure multi-party</span></div></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">上下游数据协同</span><span class="en">Upstream-Downstream Data Collaboration</span></h3>
+  <p><span class="zh">半导体设备的性能不仅取决于设备本身，还与上游<strong>靶材、特气、石英件、密封件</strong>等耗材质量密切相关。需要收集上下游数据，通过<strong>联邦学习</strong>实现安全共享：各参与方数据不出本地，只交换模型梯度，既保护各方数据隐私，又实现跨供应链的联合优化。</span><span class="en">Semiconductor equipment performance depends not only on the tool but also on upstream <strong>targets, specialty gases, quartzware, seals</strong> and other consumables. Need to collect upstream-downstream data and enable secure sharing via <strong>federated learning</strong>: each party's data stays local, only model gradients are exchanged — protecting privacy while enabling cross-supply-chain joint optimization.</span></p>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 6: 供应链协同                        -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-supply">
+<div class="section-head"><span class="section-num">06</span><h2><span class="zh">供应链协同</span><span class="en">Supply Chain Collaboration</span></h2></div>
+
+<div class="card">
+  <h3><span class="zh">CVD/ALD/EPI/PVD设备关键耗材</span><span class="en">Critical Consumables for CVD/ALD/EPI/PVD</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">耗材类别</span><span class="en">Category</span></th><th><span class="zh">应用场景</span><span class="en">Application</span></th><th><span class="zh">国产化率</span><span class="en">Localization</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="zh">溅射靶材</span><span class="en">Sputtering Targets</span></td><td><span class="zh">PVD（P100等）</span><span class="en">PVD (P100 etc)</span></td><td><span class="zh">~30%</span><span class="en">~30%</span></td></tr>
+        <tr><td><span class="zh">前驱体/特气</span><span class="en">Precursors/Specialty Gas</span></td><td><span class="zh">ALD/CVD（C100/C600）</span><span class="en">ALD/CVD (C100/C600)</span></td><td><span class="zh">~20%</span><span class="en">~20%</span></td></tr>
+        <tr><td><span class="zh">石英件</span><span class="en">Quartzware</span></td><td><span class="zh">炉管/腔体（B300/C100）</span><span class="en">Furnace/chamber (B300/C100)</span></td><td><span class="zh">~40%</span><span class="en">~40%</span></td></tr>
+        <tr><td><span class="zh">密封件</span><span class="en">Seals/O-rings</span></td><td><span class="zh">真空密封（全系列）</span><span class="en">Vacuum sealing (all)</span></td><td><span class="zh">~25%</span><span class="en">~25%</span></td></tr>
+        <tr><td><span class="zh">质量流量计（MFC）</span><span class="en">Mass Flow Controllers</span></td><td><span class="zh">气体控制（全系列）</span><span class="en">Gas control (all)</span></td><td><span class="zh">~15%</span><span class="en">~15%</span></td></tr>
+        <tr><td><span class="zh">RF电源</span><span class="en">RF Power Supplies</span></td><td><span class="zh">PECVD/PVD（C100/P100）</span><span class="en">PECVD/PVD (C100/P100)</span></td><td><span class="zh">~10%</span><span class="en">~10%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:.3rem;font-size:.72rem;color:var(--muted)"><span class="zh">来源：智研咨询 (2025.11) / SEMI (2025.09)。国产化率为估计值，各细分市场有差异。</span><span class="en">Sources: Zhiyan Consulting (Nov 2025) / SEMI (Sep 2025). Localization rates are estimates and vary by segment.</span></p>
+</div>
+
+<div class="card">
+  <h3><span class="zh">AI赋能供应链的5个场景</span><span class="en">5 AI-Enabled Supply Chain Scenarios</span></h3>
+  <ul>
+    <li><span class="zh"><strong>① 耗材质量预测</strong>：靶材纯度/特气批次差异 → 薄膜性能关联建模，提前预判质量波动</span><span class="en"><strong>① Consumable Quality Prediction</strong>: Target purity/gas batch variation → film performance correlation modeling, early quality fluctuation warning</span></li>
+    <li><span class="zh"><strong>② 预测性采购</strong>：AI预测耗材寿命和更换时间，减少紧急采购和库存积压</span><span class="en"><strong>② Predictive Procurement</strong>: AI predicts consumable lifetime and replacement timing, reducing emergency purchases and excess inventory</span></li>
+    <li><span class="zh"><strong>³ 供应商质量追踪</strong>：不同供应商批次→设备表现关联，量化供应商质量差异</span><span class="en"><strong>③ Supplier Quality Tracking</strong>: Different supplier batches → tool performance correlation, quantifying supplier quality differences</span></li>
+    <li><span class="zh"><strong>④ 工艺-耗材联合优化</strong>：靶材+工艺参数协同调优（联邦学习保护各方数据）</span><span class="en"><strong>④ Process-Consumable Joint Optimization</strong>: Target + process parameter co-optimization (federated learning protects each party's data)</span></li>
+    <li><span class="zh"><strong>⑤ 国产替代评估</strong>：AI加速国产耗材认证：对比测试→性能差异→工艺补偿方案</span><span class="en"><strong>⑤ Domestic Substitution Assessment</strong>: AI accelerates domestic consumable certification: comparative testing → performance gap → process compensation</span></li>
+  </ul>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 7: 实施计划                          -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-plan">
+<div class="section-head"><span class="section-num">07</span><h2><span class="zh">实施计划</span><span class="en">Implementation Plan</span></h2></div>
+
+<div class="card">
+  <h3><span class="zh">时间线</span><span class="en">Timeline</span></h3>
+  <div class="tl">
+    <div class="ti done"><h4><span class="zh">Phase 0 · 调研验证（2-4周）</span><span class="en">Phase 0 · Research & Validation (2-4wk)</span></h4><p><span class="zh">数据现状梳理 · 场景确定（选1台C100或B300）· 团队组建 · GLM-5本地部署</span><span class="en">Data audit · Scenario selection (1 C100 or B300) · Team formation · GLM-5 local deployment</span></p></div>
+    <div class="ti"><h4><span class="zh">Phase 1 · 数据打通（1-3月）</span><span class="en">Phase 1 · Data Integration (1-3mo)</span></h4><p><span class="zh">FDC标准化 → 数据湖 → 量测接口 → 历史数据导入</span><span class="en">FDC standardization → data lake → metrology API → history import</span></p></div>
+    <div class="ti"><h4><span class="zh">Phase 2 · AI开发（2-5月）</span><span class="en">Phase 2 · AI Development (2-5mo)</span></h4><p><span class="zh">Hidden因子发现 → VM模型 → FDC异常检测 → 缺陷聚类</span><span class="en">Hidden factor discovery → VM model → FDC anomaly detection → defect clustering</span></p></div>
+    <div class="ti"><h4><span class="zh">Phase 3 · 集成上线（4-7月）</span><span class="en">Phase 3 · Integration & Go-live (4-7mo)</span></h4><p><span class="zh">实时推理引擎 → Dashboard → 报警系统 → APC闭环试点</span><span class="en">Real-time inference → Dashboard → alerting → APC closed-loop pilot</span></p></div>
+    <div class="ti"><h4><span class="zh">Phase 4 · 持续优化（6月+）</span><span class="en">Phase 4 · Continuous Optimization (6mo+)</span></h4><p><span class="zh">知识库完善 → 配方优化 → 预测性维护 → 新工艺加速（B600/C700等）</span><span class="en">KB refinement → recipe optimization → predictive maintenance → new process acceleration (B600/C700 etc)</span></p></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">预算</span><span class="en">Budget</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">阶段</span><span class="en">Phase</span></th><th><span class="zh">内容</span><span class="en">Content</span></th><th><span class="zh">人力</span><span class="en">Team</span></th><th><span class="zh">资金</span><span class="en">Budget</span></th></tr></thead>
+      <tbody>
+        <tr><td>Phase 0</td><td><span class="zh">调研验证</span><span class="en">Research</span></td><td>2-3<span class="zh">人</span><span class="en">ppl</span></td><td>¥3-5万</td></tr>
+        <tr><td>Phase 1</td><td><span class="zh">数据打通</span><span class="en">Integration</span></td><td>3-4<span class="zh">人</span><span class="en">ppl</span></td><td>¥30-80万</td></tr>
+        <tr><td>Phase 2</td><td><span class="zh">AI开发</span><span class="en">AI Dev</span></td><td>2-3<span class="zh">人</span><span class="en">ppl</span></td><td>¥20-50万</td></tr>
+        <tr><td>Phase 3</td><td><span class="zh">集成上线</span><span class="en">Deployment</span></td><td>3-4<span class="zh">人</span><span class="en">ppl</span></td><td>¥30-60万</td></tr>
+        <tr style="background:rgba(0,104,181,.04)"><td colspan="3"><strong><span class="zh">总计 6-8个月</span><span class="en">Total 6-8 months</span></strong></td><td><strong>¥85-200万</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">技术栈</span><span class="en">Tech Stack</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">层级</span><span class="en">Layer</span></th><th><span class="zh">选型</span><span class="en">Choice</span></th><th><span class="zh">说明</span><span class="en">Notes</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="zh">数据采集</span><span class="en">Collection</span></td><td>SECS/GEM + OPC UA</td><td><span class="zh">半导体设备标准协议</span><span class="en">Standard semi equipment protocol</span></td></tr>
+        <tr><td><span class="zh">时序存储</span><span class="en">Time-series DB</span></td><td>InfluxDB / TimescaleDB</td><td><span class="zh">高吞吐传感器数据</span><span class="en">High-throughput sensor data</span></td></tr>
+        <tr><td><span class="zh">数据管道</span><span class="en">Data Pipeline</span></td><td>Apache Kafka / EMQX</td><td><span class="zh">实时流处理</span><span class="en">Real-time stream processing</span></td></tr>
+        <tr><td><span class="zh">ML平台</span><span class="en">ML Platform</span></td><td>MLflow + XGBoost / PyTorch</td><td><span class="zh">模型训练与版本管理</span><span class="en">Model training & versioning</span></td></tr>
+        <tr><td><span class="zh">AI推理</span><span class="en">AI Inference</span></td><td>智谱GLM-5.1 <span class="zh">本地</span><span class="en">local</span></td><td><span class="zh">国产GPU支持</span><span class="en">Domestic GPU supported</span></td></tr>
+        <tr><td><span class="zh">可视化</span><span class="en">Visualization</span></td><td>Grafana + <span class="zh">自研Dashboard</span><span class="en">Custom Dashboard</span></td><td><span class="zh">工艺工程师友好</span><span class="en">Process engineer friendly</span></td></tr>
+        <tr><td><span class="zh">边缘推理</span><span class="en">Edge Inference</span></td><td>ONNX Runtime / TensorRT</td><td><span class="zh">设备端低延迟</span><span class="en">Low-latency at tool</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- Section 8: 最小启动方案                       -->
+<!-- ════════════════════════════════════════════ -->
+<section id="sec-mvp">
+<div class="section-head"><span class="section-num">08</span><h2><span class="zh">最小启动方案</span><span class="en">Minimum Viable Launch</span></h2></div>
+
+<div class="callout">
+  <h3><span class="zh">给决策者的一页摘要</span><span class="en">One-Page Summary for Decision Makers</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">项目</span><span class="en">Item</span></th><th><span class="zh">Phase 0 快速验证</span><span class="en">Phase 0 Quick Validation</span></th><th><span class="zh">Phase 1-2 核心建设</span><span class="en">Phase 1-2 Core Build</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="zh">时间</span><span class="en">Timeline</span></td><td><span class="zh">2-4周</span><span class="en">2-4 weeks</span></td><td><span class="zh">4-6个月</span><span class="en">4-6 months</span></td></tr>
+        <tr><td><span class="zh">人力</span><span class="en">Team</span></td><td><span class="zh">2-3人（兼职）</span><span class="en">2-3 people (part-time)</span></td><td><span class="zh">3-4人（专职）</span><span class="en">3-4 people (full-time)</span></td></tr>
+        <tr><td><span class="zh">AI部署</span><span class="en">AI Deployment</span></td><td>GLM-5 <span class="zh">本地</span><span class="en">local</span> + 1×<span class="zh">消费级GPU</span><span class="en">consumer GPU</span></td><td>GLM-5 <span class="zh">本地</span><span class="en">local</span> + 1×A100/<span class="zh">昇腾</span><span class="en">Ascend</span></td></tr>
+        <tr><td><span class="zh">资金</span><span class="en">Budget</span></td><td><strong>¥3-5万</strong></td><td><strong>¥30-80万</strong></td></tr>
+        <tr><td><span class="zh">数据安全</span><span class="en">Data Security</span></td><td><span class="badge bg">✓ <span class="zh">全部本地</span><span class="en">Fully local</span></span></td><td><span class="badge bg">✓ <span class="zh">本地+联邦学习</span><span class="en">Local+federated</span></span></td></tr>
+        <tr><td><span class="zh">预期产出</span><span class="en">Expected Output</span></td><td><span class="zh">发现1-3个Hidden Factor</span><span class="en">Discover 1-3 Hidden Factors</span></td><td><span class="zh">VM上线/缺陷检测/良率提升</span><span class="en">VM live/defect detection/yield boost</span></td></tr>
+        <tr><td>ROI</td><td><span class="zh">概念验证 → 内部立项</span><span class="en">PoC → internal approval</span></td><td><span class="zh">良率+2-5% = 数百万/年节省</span><span class="en">Yield +2-5% = millions/year savings</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">预期ROI</span><span class="en">Expected ROI</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th><span class="zh">指标</span><span class="en">Metric</span></th><th><span class="zh">改善幅度</span><span class="en">Improvement</span></th><th><span class="zh">来源/依据</span><span class="en">Source/Basis</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="zh">缺陷检测率</span><span class="en">Defect Detection</span></td><td>+30%</td><td><span class="zh">AI图像识别</span><span class="en">AI image recognition</span></td></tr>
+        <tr><td><span class="zh">物理量测减少</span><span class="en">Physical Metrology Reduction</span></td><td>50-70%</td><td>Lam Research Fabtex™ (2025)</td></tr>
+        <tr><td><span class="zh">良率爬坡加速</span><span class="en">Yield Ramp Acceleration</span></td><td>+20-30%</td><td>AMAT AIx™ (2026.02)</td></tr>
+        <tr><td><span class="zh">问题定位时间</span><span class="en">Problem Detection Time</span></td><td><span class="zh">天→分钟</span><span class="en">Days → Minutes</span></td><td><span class="zh">实时FDC+VM</span><span class="en">Real-time FDC+VM</span></td></tr>
+        <tr><td><span class="zh">新工艺开发</span><span class="en">New Process Development</span></td><td><span class="zh">数月→数周</span><span class="en">Months → Weeks</span></td><td><span class="zh">AI配方优化</span><span class="en">AI recipe optimization</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="zh">关键合作方</span><span class="en">Key Partners</span></h3>
+  <ul>
+    <li><span class="zh"><strong>智谱AI</strong>：GLM-5.1部署 + 技术支持（本地私有化）</span><span class="en"><strong>Zhipu AI</strong>: GLM-5.1 deployment + technical support (local private)</span></li>
+    <li><span class="zh"><strong>晶圆厂客户</strong>：数据 + FDC接口 + 工艺验证场景</span><span class="en"><strong>Fab customers</strong>: Data + FDC interface + process validation scenarios</span></li>
+    <li><span class="zh"><strong>设备工艺专家</strong>：CVD/ALD/EPI/PVD领域知识（ASM/AMAT背景）</span><span class="en"><strong>Equipment process experts</strong>: CVD/ALD/EPI/PVD domain knowledge (ASM/AMAT background)</span></li>
+    <li><span class="zh"><strong>耗材供应商</strong>：靶材/特气/零部件协同优化（联邦学习）</span><span class="en"><strong>Consumable suppliers</strong>: Target/gas/components co-optimization (federated learning)</span></li>
+  </ul>
+</div>
+</section>
+
+<!-- References -->
+<section id="sec-refs">
+<div class="section-head"><span class="section-num">※</span><h2><span class="zh">参考来源</span><span class="en">References</span></h2></div>
+<div class="card">
+  <ul style="font-size:.78rem;color:var(--muted">
+    <li>WSTS — 2025 Global Semiconductor Market $792B (2025.06)</li>
+    <li>Lam Research Fabtex™ Yield Optimizer — <a href="https://www.lamresearch.com/product/fabtex-yield-optimizer/">lamresearch.com</a> (2025.10)</li>
+    <li>Applied Materials AIx™ — <a href="https://www.appliedmaterials.com/us/en/semiconductor/solutions-and-software/ai-x.html">appliedmaterials.com</a></li>
+    <li>AMAT + NVIDIA Materials Simulation — appliedmaterials.com (2026.03)</li>
+    <li>AMAT AIx +30% Efficiency — LinkedIn (2026.02)</li>
+
+    <li><span class="zh">智谱AI GLM-5.1 — 智谱AI官方 (2026.04)</span><span class="en">Zhipu AI GLM-5.1 — Zhipu AI official (Apr 2026)</span></li>
+    <li><span class="zh">国内CVD厂商/国产化率 — 智研咨询 (2025.11) / SEMI (2025.09)</span><span class="en">Domestic CVD/localization — Zhiyan Consulting (Nov 2025) / SEMI (Sep 2025)</span></li>
+    <li>AI in CVD/ALD — IEEE/ResearchGate (2024.12)</li>
+    <li>McKinsey Semiconductor Market Forecast — McKinsey Insights</li>
+  </ul>
+  <p style="margin-top:.5rem;font-size:.72rem;color:var(--muted)"><span class="zh">数据调研时间：2026.04.30</span><span class="en">Data researched: 2026.04.30</span></p>
+</div>
+</section>
+
+</div><!-- /main-content -->
+</div><!-- /layout -->
+
+<footer>
+  <p>AI-Empowered Thin Film Deposition Optimization · <span class="zh">数据调研时间</span><span class="en">Data researched</span>：2026.04.30</p>
+  <p><span class="zh">面向半导体制造设备优化 · AI驱动的工艺改进方案</span><span class="en">For semiconductor equipment optimization · AI-driven process improvement proposal</span></p>
+</footer>
+
+<script>
+// ── Language Switch ──
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('gate-err').textContent='';
+  if(document.getElementById('gate-err-zh'))document.getElementById('gate-err-zh').textContent='';
+  document.getElementById('btn-zh').className=l==='zh'?'active':'';
+  document.getElementById('btn-en').className=l==='en'?'active':'';
+  try{localStorage.setItem('tm-lang',l)}catch(e){}
+}
+try{var s=localStorage.getItem('tm-lang');if(s)setLang(s);else setLang('en')}catch(e){}
+
+// ── Sidebar smooth scroll ──
+document.querySelectorAll('.sb-link').forEach(function(link){
+  link.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.getElementById(this.dataset.target);
+    if(target){
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+      // Close mobile sidebar
+      if(window.innerWidth<=860){
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('show');
+        document.getElementById('hamburger').classList.remove('open');
+      }
+    }
+  });
+});
+
+// ── IntersectionObserver for active sidebar ──
+var sections=document.querySelectorAll('section[id]');
+var sbLinks=document.querySelectorAll('.sb-link');
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      sbLinks.forEach(function(l){l.classList.remove('active')});
+      var active=document.querySelector('.sb-link[data-target="'+entry.target.id+'"]');
+      if(active)active.classList.add('active');
+    }
+  });
+},{rootMargin:'-10% 0px -80% 0px',threshold:0});
+sections.forEach(function(sec){observer.observe(sec)});
+
+// ── Hamburger toggle ──
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+</script>
+<script>
+(function(){
+  // Password gate - SHA-256 of 'xiaobo'
+  const PASS_HASH='18d77a13c81e8a427cb57b6ab14960927accfb970c1a069e405a15b20d51db13';
+  if(sessionStorage.getItem('gate-ok')==='1'){document.getElementById('gate').style.display='none';return}
+  window.checkGate=async function(){
+    const v=document.getElementById('gate-input').value;
+    const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
+    const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(h===PASS_HASH){sessionStorage.setItem('gate-ok','1');const g=document.getElementById('gate');g.classList.add('hide');setTimeout(()=>g.style.display='none',500)}
+    else{document.getElementById('gate-err').textContent='Wrong password';if(document.getElementById('gate-err-zh'))document.getElementById('gate-err-zh').textContent='密码错误';document.getElementById('gate-input').value='';document.getElementById('gate-input').focus()}
+  };
+  document.getElementById('gate-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate()});
+  document.getElementById('gate-input').focus();
+  window.setGateLang=function(l){document.body.className='lang-'+l;document.getElementById('gate-input').focus()};
+})();
+</script>
+</body>
+</html>
