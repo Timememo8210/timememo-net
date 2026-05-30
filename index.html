@@ -1,426 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="robots" content="noindex, nofollow, noarchive">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xiaobo Chen | Semiconductor Leader & Cornell MBA</title>
-<meta name="description" content="Xiaobo Chen - 20+ years semiconductor industry leader, Cornell Executive MBA, global business strategist based in Portland, Oregon.">
-<meta property="og:title" content="Xiaobo Chen | Semiconductor Leader">
-<meta property="og:description" content="Global semiconductor executive with 20+ years experience spanning R&D and production, from 0.25μm to 18Å.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<title>Private Site</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a26;--accent:#6366f1;--accent2:#818cf8;
---accent-glow:rgba(99,102,241,.15);--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
---border:#1e1e2e;--grad1:#6366f1;--grad2:#a855f7;--grad3:#ec4899;
---radius:16px;--transition:.3s cubic-bezier(.4,0,.2,1);
+  --bg:#0a0a0f;
+  --panel:#12121a;
+  --panel2:#1a1a26;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --line:#252538;
+  --accent:#6366f1;
+  --accent2:#818cf8;
+  --danger:#fb7185;
 }
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-::selection{background:var(--accent);color:#fff}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
-
-/* Language Toggle */
-.lang-toggle{position:fixed;top:20px;right:20px;z-index:1000;display:flex;gap:4px;background:var(--surface2);border:1px solid var(--border);border-radius:24px;padding:4px;backdrop-filter:blur(12px)}
-.lang-btn{padding:6px 14px;border:none;border-radius:20px;cursor:pointer;font-size:.8rem;font-weight:600;background:transparent;color:var(--text3);transition:var(--transition)}
-.lang-btn.active{background:var(--accent);color:#fff}
-
-/* Nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:16px 0;transition:var(--transition)}
-nav.scrolled{background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,var(--grad1),var(--grad2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{color:var(--text2);text-decoration:none;font-size:.85rem;font-weight:500;transition:var(--transition);position:relative}
-.nav-links a:hover{color:var(--text)}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:var(--transition)}
-.nav-links a:hover::after{width:100%}
-.menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
-
-/* Hero */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;right:-30%;width:800px;height:800px;background:radial-gradient(circle,rgba(99,102,241,.08),transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-30%;left:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(168,85,247,.06),transparent 70%);pointer-events:none}
-.hero-inner{max-width:1200px;margin:0 auto;padding:120px 24px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
-.hero-text .tag{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--accent-glow);border:1px solid rgba(99,102,241,.3);border-radius:24px;font-size:.8rem;color:var(--accent2);margin-bottom:24px;font-weight:500}
-.hero-text .tag .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero-text h1{font-size:3.5rem;font-weight:800;line-height:1.1;margin-bottom:16px}
-.hero-text h1 .gradient{background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradShift 4s ease infinite}
-@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero-text .subtitle{font-size:1.15rem;color:var(--text2);margin-bottom:32px;max-width:480px;font-weight:300}
-.hero-stats{display:flex;gap:32px;margin-bottom:36px}
-.stat{text-align:left}.stat .num{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--grad1),var(--grad2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat .label{font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:12px 28px;border-radius:12px;font-size:.9rem;font-weight:600;text-decoration:none;transition:var(--transition);cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px}
-.btn-primary{background:linear-gradient(135deg,var(--grad1),var(--grad2));color:#fff;box-shadow:0 4px 24px rgba(99,102,241,.3)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,.4)}
-.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-outline:hover{border-color:var(--accent);background:var(--accent-glow)}
-
-/* Avatar area */
-.hero-visual{display:flex;justify-content:center;align-items:center}
-.avatar-container{position:relative;width:380px;height:380px}
-.avatar-ring{position:absolute;inset:-12px;border-radius:50%;border:2px solid transparent;background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.avatar-placeholder{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--surface2),var(--surface));display:flex;align-items:center;justify-content:center;font-size:6rem;font-weight:800;background:linear-gradient(135deg,var(--grad1),var(--grad2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.float-badge{position:absolute;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;font-size:.8rem;font-weight:500;backdrop-filter:blur(8px);white-space:nowrap;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.badge-1{top:20px;right:-20px;animation-delay:0s}.badge-2{bottom:40px;left:-30px;animation-delay:1s}.badge-3{top:50%;right:-40px;animation-delay:2s}
-.float-badge .icon{margin-right:6px}
-
-/* Sections */
-section{padding:100px 24px}
-.section-inner{max-width:1200px;margin:0 auto}
-.section-label{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);font-weight:600;margin-bottom:12px}
-.section-title{font-size:2.5rem;font-weight:800;margin-bottom:16px}
-.section-desc{color:var(--text2);max-width:600px;margin-bottom:48px;font-size:1.05rem}
-
-/* Timeline */
-.timeline{position:relative;padding-left:40px}
-.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--grad2),transparent)}
-.tl-item{position:relative;margin-bottom:40px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:var(--transition)}
-.tl-item:hover{border-color:var(--accent);transform:translateX(4px)}
-.tl-item::before{content:'';position:absolute;left:-33px;top:28px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
-.tl-year{font-size:.75rem;color:var(--accent2);font-weight:600;text-transform:uppercase;letter-spacing:1px}
-.tl-title{font-size:1.15rem;font-weight:700;margin:4px 0}
-.tl-org{color:var(--text2);font-size:.9rem}
-.tl-desc{color:var(--text3);font-size:.85rem;margin-top:8px}
-
-/* Skills Grid */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.skill-card{padding:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:var(--transition);position:relative;overflow:hidden}
-.skill-card:hover{border-color:var(--accent);transform:translateY(-4px)}
-.skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--grad1),var(--grad2));opacity:0;transition:var(--transition)}
-.skill-card:hover::before{opacity:1}
-.skill-icon{font-size:2rem;margin-bottom:16px}
-.skill-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.skill-card p{color:var(--text3);font-size:.85rem;line-height:1.6}
-
-/* Globe / Map */
-.globe-section{text-align:center}
-.locations{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:40px}
-.loc{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:var(--transition);min-width:160px}
-.loc:hover{border-color:var(--accent);transform:translateY(-4px)}
-.loc .flag{font-size:2.5rem}
-.loc .city{font-weight:600;font-size:1rem}
-.loc .role{color:var(--text3);font-size:.8rem}
-
-/* Education */
-.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.edu-card{padding:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:var(--transition);text-align:center}
-.edu-card:hover{border-color:var(--accent);transform:translateY(-4px)}
-.edu-card .crest{font-size:2.5rem;margin-bottom:12px}
-.edu-card h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
-.edu-card .degree{color:var(--accent2);font-size:.85rem;font-weight:500}
-.edu-card .year{color:var(--text3);font-size:.8rem;margin-top:6px}
-
-/* Family */
-.family-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.family-card{padding:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;transition:var(--transition)}
-.family-card:hover{border-color:var(--accent);transform:translateY(-4px)}
-.family-card .emoji{font-size:3rem;margin-bottom:12px}
-.family-card h3{font-size:1rem;font-weight:700;margin-bottom:4px}
-.family-card p{color:var(--text3);font-size:.85rem}
-
-/* Contact */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px}
-.contact-item{display:flex;align-items:center;gap:12px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:var(--transition)}
-.contact-item:hover{border-color:var(--accent);transform:translateY(-2px)}
-.contact-item .ci-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.contact-item .ci-label{font-size:.75rem;color:var(--text3)}.contact-item .ci-value{font-size:.9rem;font-weight:500}
-
-/* Footer */
-footer{padding:40px 24px;border-top:1px solid var(--border);text-align:center}
-footer p{color:var(--text3);font-size:.8rem}
-
-/* Responsive */
-@media(max-width:768px){
-.hero-inner{grid-template-columns:1fr;text-align:center;padding-top:100px}
-.hero-text h1{font-size:2.2rem}
-.hero-text .subtitle{margin:0 auto 24px}
-.hero-stats{justify-content:center}
-.hero-cta{justify-content:center}
-.hero-visual{order:-1}
-.avatar-container{width:240px;height:240px}
-.avatar-placeholder{font-size:4rem}
-.float-badge{display:none}
-.nav-links{display:none}
-.menu-btn{display:block}
-.section-title{font-size:1.8rem}
-.locations{gap:16px}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 20% 10%,rgba(99,102,241,.16),transparent 34%),
+    radial-gradient(circle at 80% 82%,rgba(14,165,233,.10),transparent 32%),
+    var(--bg);
+  display:grid;
+  place-items:center;
+  padding:24px;
 }
-
-/* cn text */
-[lang="zh"] .hero-text h1{font-size:3rem}
-.hidden{display:none!important}
-
-/* Chip process node */
-.process-bar{display:flex;align-items:center;gap:8px;margin-top:20px;flex-wrap:wrap}
-.chip{padding:6px 14px;border-radius:20px;font-size:.75rem;font-weight:600;border:1px solid var(--border);color:var(--text2);background:var(--surface);transition:var(--transition)}
-.chip:hover{border-color:var(--accent);color:var(--accent2)}
+.gate{
+  width:min(420px,100%);
+  background:rgba(18,18,26,.92);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:28px;
+  box-shadow:0 24px 80px rgba(0,0,0,.32);
+}
+.mark{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--accent),#a855f7);
+  font-weight:800;
+  margin-bottom:18px;
+}
+h1{font-size:1.35rem;margin:0 0 8px}
+p{margin:0 0 22px;color:var(--muted);line-height:1.55;font-size:.95rem}
+label{display:block;margin-bottom:8px;color:var(--muted);font-size:.82rem;font-weight:600}
+.row{display:flex;gap:10px}
+input{
+  min-width:0;
+  flex:1;
+  height:44px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:0 12px;
+  font:inherit;
+}
+input:focus{outline:2px solid rgba(99,102,241,.35);border-color:var(--accent)}
+button{
+  height:44px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),#a855f7);
+  color:#fff;
+  font:inherit;
+  font-weight:700;
+  padding:0 18px;
+  cursor:pointer;
+}
+.error{min-height:20px;margin-top:12px;color:var(--danger);font-size:.84rem}
+.hint{margin-top:20px;color:#64748b;font-size:.78rem}
+@media(max-width:520px){
+  .gate{padding:22px}
+  .row{flex-direction:column}
+  button{width:100%}
+}
 </style>
 </head>
 <body>
-
-<!-- Language Toggle -->
-<div class="lang-toggle">
-<button class="lang-btn active" onclick="setLang('en')">EN</button>
-<button class="lang-btn" onclick="setLang('zh')">中文</button>
-</div>
-
-<!-- Nav -->
-<nav id="nav">
-<div class="nav-inner">
-<a href="#" class="nav-logo">XB</a>
-<ul class="nav-links">
-<li><a href="#about" data-en="About" data-zh="关于">About</a></li>
-<li><a href="#experience" data-en="Experience" data-zh="经历">Experience</a></li>
-<li><a href="#education" data-en="Education" data-zh="教育">Education</a></li>
-<li><a href="#global" data-en="Global" data-zh="全球">Global</a></li>
-<li><a href="#contact" data-en="Contact" data-zh="联系">Contact</a></li>
-</ul>
-<button class="menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')">☰</button>
-</div>
-</nav>
-
-<!-- Hero -->
-<section class="hero" id="hero">
-<div class="hero-inner">
-<div class="hero-text">
-<div class="tag"><span class="dot"></span> <span data-en="Open to Opportunities" data-zh="开放合作机会">Open to Opportunities</span></div>
-<h1>
-<span data-en="Hi, I'm" data-zh="你好，我是">Hi, I'm</span><br>
-<span class="gradient" data-en="Xiaobo Chen" data-zh="陈晓波">Xiaobo Chen</span>
-</h1>
-<p class="subtitle" data-en="Semiconductor industry leader with 20+ years of global experience spanning R&D and high-volume manufacturing — from 0.25μm to 18Å process nodes." data-zh="半导体行业领袖，拥有20余年全球研发与量产经验——从0.25微米到18埃制程节点，横跨四大洲。">Semiconductor industry leader with 20+ years of global experience spanning R&D and high-volume manufacturing — from 0.25μm to 18Å process nodes.</p>
-<div class="hero-stats">
-<div class="stat"><div class="num">20+</div><div class="label" data-en="Years" data-zh="年经验">Years</div></div>
-<div class="stat"><div class="num">4</div><div class="label" data-en="Countries" data-zh="个国家">Countries</div></div>
-<div class="stat"><div class="num">18Å</div><div class="label" data-en="Latest Node" data-zh="最新制程">Latest Node</div></div>
-</div>
-<div class="hero-cta">
-<a href="#contact" class="btn btn-primary" data-en="Get in Touch" data-zh="联系我">Get in Touch</a>
-<a href="/semiai/" class="btn btn-outline" data-en="AI for Semiconductor Equipment" data-zh="半导体设备AI方案">AI for Semiconductor Equipment</a>
-</div>
-</div>
-<div class="hero-visual">
-<div class="avatar-container">
-<div class="avatar-ring"></div>
-<img src="avatar.jpg" alt="Xiaobo Chen" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top">
-<div class="float-badge badge-1"><span class="icon">🎓</span> Cornell MBA</div>
-<div class="float-badge badge-2"><span class="icon">⚛️</span> NJU Physics</div>
-<div class="float-badge badge-3"><span class="icon">🏭</span> Semiconductor</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- About -->
-<section id="about">
-<div class="section-inner">
-<div class="section-label">✦ <span data-en="ABOUT ME" data-zh="关于我">ABOUT ME</span></div>
-<h2 class="section-title" data-en="Bridging Innovation & Execution" data-zh="连接创新与执行">Bridging Innovation & Execution</h2>
-<p class="section-desc" data-en="From Nanjing to Portland, my journey bridges East and West, R&D and production, technology and business leadership. I bring an inclusive leadership style and proven crisis management expertise to every challenge." data-zh="从南京到波特兰，我的旅程连接东西方、研发与生产、技术与商业领导力。我以包容性领导风格和经过验证的危机管理能力面对每一个挑战。">From Nanjing to Portland, my journey bridges East and West, R&D and production, technology and business leadership. I bring an inclusive leadership style and proven crisis management expertise to every challenge.</p>
-<div class="skills-grid">
-<div class="skill-card">
-<div class="skill-icon">🔬</div>
-<h3 data-en="R&D Excellence" data-zh="研发卓越">R&D Excellence</h3>
-<p data-en="Deep technical expertise in semiconductor process development, from mature to cutting-edge nodes." data-zh="半导体工艺开发的深厚技术专长，从成熟到前沿制程节点。">Deep technical expertise in semiconductor process development, from mature to cutting-edge nodes.</p>
-</div>
-<div class="skill-card">
-<div class="skill-icon">🏭</div>
-<h3 data-en="Manufacturing Leadership" data-zh="制造领导力">Manufacturing Leadership</h3>
-<p data-en="Proven track record in high-volume manufacturing with world-class yield and quality standards." data-zh="在大批量制造方面拥有世界级良率和质量标准的成功记录。">Proven track record in high-volume manufacturing with world-class yield and quality standards.</p>
-</div>
-<div class="skill-card">
-<div class="skill-icon">🤝</div>
-<h3 data-en="Client Partnership" data-zh="客户合作">Client Partnership</h3>
-<p data-en="Core team business leader managing relationships with top-tier global semiconductor clients." data-zh="核心团队业务领导者，管理与全球顶级半导体客户的合作关系。">Core team business leader managing relationships with top-tier global semiconductor clients.</p>
-</div>
-<div class="skill-card">
-<div class="skill-icon">🧠</div>
-<h3 data-en="AI & Machine Learning" data-zh="AI与机器学习">AI & Machine Learning</h3>
-<p data-en="Cornell-trained in ML/AI, applying data-driven approaches to semiconductor manufacturing challenges." data-zh="在康奈尔大学接受ML/AI培训，将数据驱动方法应用于半导体制造挑战。">Cornell-trained in ML/AI, applying data-driven approaches to semiconductor manufacturing challenges.</p>
-</div>
-<div class="skill-card">
-<div class="skill-icon">🌐</div>
-<h3 data-en="Global Operations" data-zh="全球运营">Global Operations</h3>
-<p data-en="International experience across US, Germany, Singapore, and China with cross-cultural fluency." data-zh="在美国、德国、新加坡和中国的国际经验，跨文化沟通流畅。">International experience across US, Germany, Singapore, and China with cross-cultural fluency.</p>
-</div>
-<div class="skill-card">
-<div class="skill-icon">🛡️</div>
-<h3 data-en="Crisis Management" data-zh="危机管理">Crisis Management</h3>
-<p data-en="Expert in navigating high-pressure situations with inclusive leadership and strategic decision-making." data-zh="擅长以包容性领导和战略决策应对高压情境。">Expert in navigating high-pressure situations with inclusive leadership and strategic decision-making.</p>
-</div>
-</div>
-<div class="process-bar" style="margin-top:32px">
-<span style="color:var(--text3);font-size:.8rem;font-weight:600" data-en="Process Nodes:" data-zh="制程节点：">Process Nodes:</span>
-<span class="chip">0.25μm</span><span class="chip">0.18μm</span><span class="chip">90nm</span><span class="chip">65nm</span><span class="chip">45nm</span><span class="chip">28nm</span><span class="chip">14nm</span><span class="chip">7nm</span><span class="chip">5nm</span><span class="chip">3nm</span><span class="chip" style="border-color:var(--accent);color:var(--accent2)">18Å</span>
-</div>
-</div>
-</section>
-
-<!-- Experience -->
-<section id="experience" style="background:var(--surface)">
-<div class="section-inner">
-<div class="section-label">✦ <span data-en="CAREER" data-zh="职业生涯">CAREER</span></div>
-<h2 class="section-title" data-en="Professional Journey" data-zh="职业历程">Professional Journey</h2>
-<p class="section-desc" data-en="Two decades of semiconductor excellence, spanning continents and technology generations." data-zh="二十年半导体卓越历程，跨越大洲和技术世代。">Two decades of semiconductor excellence, spanning continents and technology generations.</p>
-<div class="timeline">
-<div class="tl-item">
-<div class="tl-year" data-en="PRESENT" data-zh="至今">PRESENT</div>
-<div class="tl-title" data-en="Senior Business & Technology Leader" data-zh="资深商业与技术领导者">Senior Business & Technology Leader</div>
-<div class="tl-org" data-en="Portland, Oregon, USA" data-zh="美国俄勒冈州波特兰">Portland, Oregon, USA</div>
-<div class="tl-desc" data-en="Core team business leader managing top-tier client relationships. Driving advanced node development and production ramp at cutting-edge 18Å technology." data-zh="核心团队业务领导者，管理顶级客户关系。推动前沿18埃技术的先进制程开发和量产。">Core team business leader managing top-tier client relationships. Driving advanced node development and production ramp at cutting-edge 18Å technology.</div>
-</div>
-<div class="tl-item">
-<div class="tl-year" data-en="INTERNATIONAL" data-zh="国际经历">INTERNATIONAL</div>
-<div class="tl-title" data-en="Global Semiconductor Operations" data-zh="全球半导体运营">Global Semiconductor Operations</div>
-<div class="tl-org" data-en="Germany · Singapore · China" data-zh="德国 · 新加坡 · 中国">Germany · Singapore · China</div>
-<div class="tl-desc" data-en="Led cross-functional teams across multiple international fabs, bridging R&D innovation with high-volume manufacturing excellence." data-zh="在多个国际晶圆厂领导跨职能团队，将研发创新与高效量产紧密结合。">Led cross-functional teams across multiple international fabs, bridging R&D innovation with high-volume manufacturing excellence.</div>
-</div>
-<div class="tl-item">
-<div class="tl-year" data-en="FOUNDATION" data-zh="起步">FOUNDATION</div>
-<div class="tl-title" data-en="R&D Engineer → Process Leader" data-zh="研发工程师 → 工艺领导">R&D Engineer → Process Leader</div>
-<div class="tl-org" data-en="Semiconductor Industry" data-zh="半导体行业">Semiconductor Industry</div>
-<div class="tl-desc" data-en="Started from 0.25μm technology, building deep expertise in process integration, yield enhancement, and technology transfer across multiple nodes." data-zh="从0.25微米技术起步，在工艺集成、良率提升和多节点技术转移方面积累了深厚的专业知识。">Started from 0.25μm technology, building deep expertise in process integration, yield enhancement, and technology transfer across multiple nodes.</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Education -->
-<section id="education">
-<div class="section-inner">
-<div class="section-label">✦ <span data-en="EDUCATION" data-zh="教育背景">EDUCATION</span></div>
-<h2 class="section-title" data-en="Academic Excellence" data-zh="学术成就">Academic Excellence</h2>
-<p class="section-desc" data-en="World-class education combining business acumen with technical depth." data-zh="世界级教育，将商业智慧与技术深度完美结合。">World-class education combining business acumen with technical depth.</p>
-<div class="edu-grid">
-<div class="edu-card">
-<div class="crest"><img src="cornell.png" alt="Cornell" style="height:60px;width:60px;object-fit:contain"></div>
-<h3>Cornell University</h3>
-<div class="degree" data-en="Executive MBA" data-zh="高级工商管理硕士">Executive MBA</div>
-<div class="year">2021 — 2023</div>
-</div>
-<div class="edu-card">
-<div class="crest"><img src="harvard.png" alt="Harvard" style="height:60px;width:60px;object-fit:contain"></div>
-<h3>Harvard Business School</h3>
-<div class="degree" data-en="MBA CORe — High Honor" data-zh="MBA CORe — 高等荣誉">MBA CORe — High Honor</div>
-<div class="year">2020 — 2021</div>
-</div>
-<div class="edu-card">
-<div class="crest"><img src="cornell.png" alt="Cornell" style="height:60px;width:60px;object-fit:contain"></div>
-<h3>Cornell University</h3>
-<div class="degree" data-en="Machine Learning & AI" data-zh="机器学习与人工智能">Machine Learning & AI</div>
-<div class="year">2022 — 2023</div>
-</div>
-<div class="edu-card">
-<div class="crest"><img src="nju.png" alt="Nanjing University" style="height:60px;object-fit:contain"></div>
-<h3 data-en="Nanjing University" data-zh="南京大学">Nanjing University</h3>
-<div class="degree" data-en="B.S. Physics" data-zh="物理学学士">B.S. Physics</div>
-<div class="year">2000 — 2004</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Global -->
-<section id="global" class="globe-section" style="background:var(--surface)">
-<div class="section-inner">
-<div class="section-label">✦ <span data-en="GLOBAL FOOTPRINT" data-zh="全球足迹">GLOBAL FOOTPRINT</span></div>
-<h2 class="section-title" data-en="Working Across Borders" data-zh="跨越国界工作">Working Across Borders</h2>
-<p class="section-desc" style="margin:0 auto 48px" data-en="Building bridges across cultures, technologies, and continents." data-zh="在文化、技术和大洲之间搭建桥梁。">Building bridges across cultures, technologies, and continents.</p>
-<div class="locations">
-<div class="loc">
-<div class="flag">🇺🇸</div>
-<div class="city" data-en="Portland" data-zh="波特兰">Portland</div>
-<div class="role" data-en="Semiconductor R&D & Design" data-zh="半导体研发与设计">Semiconductor R&D & Design</div>
-</div>
-<div class="loc">
-<div class="flag">🇺🇸</div>
-<div class="city" data-en="New York" data-zh="纽约">New York</div>
-<div class="role" data-en="Semiconductor R&D & Manufacturing" data-zh="半导体研发及制造">Semiconductor R&D & Manufacturing</div>
-</div>
-<div class="loc">
-<div class="flag">🇩🇪</div>
-<div class="city" data-en="Germany" data-zh="德国">Germany</div>
-<div class="role" data-en="Semiconductor R&D" data-zh="半导体研发">Semiconductor R&D</div>
-</div>
-<div class="loc">
-<div class="flag">🇸🇬</div>
-<div class="city" data-en="Singapore" data-zh="新加坡">Singapore</div>
-<div class="role" data-en="Semiconductor R&D" data-zh="半导体研发">Semiconductor R&D</div>
-</div>
-<div class="loc">
-<div class="flag">🇨🇳</div>
-<div class="city" data-en="Shanghai" data-zh="上海">Shanghai</div>
-<div class="role" data-en="Semiconductor R&D" data-zh="半导体研发">Semiconductor R&D</div>
-</div>
-<div class="loc">
-<div class="flag">🇨🇳</div>
-<div class="city" data-en="Nanjing" data-zh="南京">Nanjing</div>
-<div class="role" data-en="Hometown" data-zh="故乡">Hometown</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Contact -->
-<section id="contact" style="background:var(--surface)">
-<div class="section-inner">
-<div class="section-label">✦ <span data-en="GET IN TOUCH" data-zh="联系方式">GET IN TOUCH</span></div>
-<h2 class="section-title" data-en="Let's Connect" data-zh="保持联系">Let's Connect</h2>
-<p class="section-desc" data-en="Whether it's about semiconductor technology, business strategy, or collaboration opportunities — I'd love to hear from you." data-zh="无论是关于半导体技术、商业战略还是合作机会——期待与您交流。">Whether it's about semiconductor technology, business strategy, or collaboration opportunities — I'd love to hear from you.</p>
-<div class="contact-grid">
-<a href="mailto:chenxiaobo8210@gmail.com" class="contact-item">
-<div class="ci-icon">✉️</div>
-<div><div class="ci-label">Email</div><div class="ci-value">chenxiaobo8210@gmail.com</div></div>
-</a>
-<a href="https://www.linkedin.com/in/xiaobo-chen-11a97a61" class="contact-item" target="_blank">
-<div class="ci-icon">💼</div>
-<div><div class="ci-label">LinkedIn</div><div class="ci-value">Xiaobo Chen</div></div>
-</a>
-<a href="#" class="contact-item">
-<div class="ci-icon">📍</div>
-<div><div class="ci-label" data-en="Location" data-zh="所在地">Location</div><div class="ci-value" data-en="Portland, OR" data-zh="波特兰，俄勒冈">Portland, OR</div></div>
-</a>
-</div>
-</div>
-</section>
-
-<footer>
-<p>© 2026 Xiaobo Chen</p>
-</footer>
-
+<main class="gate" aria-labelledby="title">
+  <div class="mark">T</div>
+  <h1 id="title">Private site</h1>
+  <p>This page is not indexed. Enter the password to continue.</p>
+  <form id="gateForm" autocomplete="off">
+    <label for="password">Password</label>
+    <div class="row">
+      <input id="password" name="password" type="password" autocomplete="current-password" autofocus>
+      <button type="submit">Enter</button>
+    </div>
+    <div class="error" id="error" role="alert"></div>
+  </form>
+  <div class="hint">Shared research links may be opened directly if you have the URL.</div>
+</main>
 <script>
-// Nav scroll
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50)});
+const HOME_PATH = '/home/883d65ant1/';
+const PASSWORD_HASH = '2c1e8649b4978db30bbd7ba018674d65b8e195e524d541f170539103fc78e963';
 
-// Language switcher
-let currentLang='en';
-function setLang(lang){
-currentLang=lang;
-document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim()===lang.toUpperCase()||b.textContent.trim()==='中文'&&lang==='zh'));
-document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-const val=el.getAttribute('data-'+lang);
-if(val)el.textContent=val;
-});
-document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+async function sha256Hex(value) {
+  const data = new TextEncoder().encode(value);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Intersection Observer for fade-in
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
-},{threshold:0.1});
-document.querySelectorAll('.skill-card,.tl-item,.edu-card,.loc,.contact-item').forEach(el=>{
-el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease, transform .6s ease';
-observer.observe(el);
+if (sessionStorage.getItem('tmHomeAuth') === '1') {
+  location.replace(HOME_PATH);
+}
+
+document.getElementById('gateForm').addEventListener('submit', async event => {
+  event.preventDefault();
+  const input = document.getElementById('password');
+  const error = document.getElementById('error');
+  error.textContent = '';
+  const hash = await sha256Hex(input.value);
+  if (hash === PASSWORD_HASH) {
+    sessionStorage.setItem('tmHomeAuth', '1');
+    location.assign(HOME_PATH);
+  } else {
+    input.value = '';
+    error.textContent = 'Incorrect password.';
+    input.focus();
+  }
 });
 </script>
 </body>
