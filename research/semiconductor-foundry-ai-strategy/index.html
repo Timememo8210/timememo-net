@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="referrer" content="no-referrer">
+  <title>半导体代工 AI 策略 | timememo.net</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17201d;
+      --muted: #66736d;
+      --paper: #f7faf6;
+      --surface: #ffffff;
+      --surface-soft: #eef7f2;
+      --line: #d6e0dc;
+      --line-strong: #17201d;
+      --teal: #1d8b7a;
+      --blue: #2867c8;
+      --lime: #c9f25d;
+      --aqua: #aeece4;
+      --coral: #ff866f;
+      --yellow: #ffe58a;
+      --violet: #7666ff;
+      --shadow: 0 18px 60px rgba(33, 54, 48, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(201, 242, 93, 0.22), transparent 32rem),
+        linear-gradient(225deg, rgba(174, 236, 228, 0.34), transparent 30rem),
+        linear-gradient(90deg, rgba(23, 32, 29, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(23, 32, 29, 0.04) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, auto, 32px 32px, 32px 32px, auto;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Source Sans 3", sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    li,
+    a,
+    td,
+    th,
+    .nav-link,
+    .meta-text {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .shell {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 0;
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(33, 54, 48, 0.08);
+    }
+
+    .meta-text {
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .language-switch {
+      display: inline-flex;
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(33, 54, 48, 0.08);
+    }
+
+    .language-switch button {
+      min-width: 58px;
+      min-height: 32px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .language-switch button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--surface);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.66fr);
+      gap: 24px;
+      align-items: stretch;
+      padding: 34px 0 26px;
+    }
+
+    .hero-copy {
+      min-width: 0;
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: 24px 0;
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: var(--lime);
+      padding: 7px 12px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(42px, 6.1vw, 78px);
+      line-height: 0.98;
+      font-weight: 700;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 820px;
+      color: #34413c;
+      font-size: 19px;
+      line-height: 1.68;
+    }
+
+    .quick-read {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .metric {
+      min-width: 0;
+      min-height: 112px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 92%, var(--aqua));
+      padding: 15px;
+      box-shadow: 0 10px 28px rgba(33, 54, 48, 0.08);
+    }
+
+    .metric strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .fab-card {
+      position: relative;
+      min-width: 0;
+      min-height: 430px;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 72% 42%, rgba(255, 229, 138, 0.82), transparent 0 12%, transparent 20%),
+        linear-gradient(145deg, rgba(174, 236, 228, 0.75), rgba(255, 255, 255, 0.94) 48%, rgba(201, 242, 93, 0.36)),
+        var(--surface);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .fab-visual {
+      position: absolute;
+      right: -72px;
+      bottom: -62px;
+      width: min(480px, 88vw);
+      aspect-ratio: 1;
+      border: 1px solid rgba(23, 32, 29, 0.38);
+      border-radius: 50%;
+      background:
+        linear-gradient(90deg, rgba(23, 32, 29, 0.09) 1px, transparent 1px),
+        linear-gradient(rgba(23, 32, 29, 0.09) 1px, transparent 1px),
+        repeating-radial-gradient(circle, rgba(40, 103, 200, 0.12) 0 2px, transparent 2px 21px),
+        #fafff8;
+      background-size: 30px 30px, 30px 30px, auto, auto;
+      transform: rotate(-12deg);
+    }
+
+    .fab-visual::before,
+    .fab-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .fab-visual::before {
+      inset: 18%;
+      border: 2px dashed rgba(29, 139, 122, 0.52);
+    }
+
+    .fab-visual::after {
+      inset: 39%;
+      border: 1px solid rgba(255, 134, 111, 0.72);
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .fab-node {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 0 6px rgba(255, 134, 111, 0.18);
+    }
+
+    .fab-node:nth-child(1) {
+      left: 28%;
+      top: 27%;
+    }
+
+    .fab-node:nth-child(2) {
+      left: 57%;
+      top: 21%;
+      background: var(--lime);
+      box-shadow: 0 0 0 6px rgba(201, 242, 93, 0.22);
+    }
+
+    .fab-node:nth-child(3) {
+      left: 68%;
+      top: 62%;
+      background: var(--aqua);
+      box-shadow: 0 0 0 6px rgba(174, 236, 228, 0.3);
+    }
+
+    .fab-node:nth-child(4) {
+      left: 43%;
+      top: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 0 6px rgba(255, 229, 138, 0.22);
+    }
+
+    .fab-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 310px;
+    }
+
+    .fab-copy h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.08;
+    }
+
+    .fab-copy p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .chip-tags {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip-tags span,
+    .pill {
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 6px 9px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .side-nav {
+      position: sticky;
+      top: 72px;
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .nav-panel,
+    .section {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 14px 40px rgba(33, 54, 48, 0.08);
+    }
+
+    .nav-panel {
+      padding: 12px;
+    }
+
+    .nav-label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 4px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      min-height: 36px;
+      border-radius: 6px;
+      color: #4d5d56;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 9px;
+      text-decoration: none;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      background: var(--surface-soft);
+      color: var(--ink);
+    }
+
+    .nav-foot {
+      padding: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .content {
+      display: grid;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    section {
+      scroll-margin-top: 84px;
+    }
+
+    .section {
+      min-width: 0;
+      padding: 22px;
+    }
+
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: clamp(26px, 3.5vw, 38px);
+      line-height: 1.08;
+    }
+
+    .section h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .take,
+    .company,
+    .watch,
+    .event,
+    .matrix-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .take {
+      padding: 16px;
+    }
+
+    .take strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .take p,
+    .company li,
+    .event p,
+    .watch p,
+    .note {
+      margin: 0;
+      color: #35443f;
+      line-height: 1.6;
+    }
+
+    .matrix {
+      display: grid;
+      gap: 12px;
+    }
+
+    .matrix-head {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 0 6px;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .matrix-card {
+      padding: 14px;
+      line-height: 1.55;
+    }
+
+    .stage {
+      border-color: color-mix(in srgb, var(--teal) 55%, var(--line));
+      background: linear-gradient(135deg, var(--surface-soft), #ffffff);
+      font-weight: 700;
+    }
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .company {
+      padding: 18px;
+      border-top: 6px solid var(--teal);
+    }
+
+    .company.samsung {
+      border-top-color: var(--blue);
+    }
+
+    .bullets {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .bullets li + li {
+      margin-top: 8px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr);
+      gap: 14px;
+      padding: 14px;
+      border-left: 5px solid var(--coral);
+    }
+
+    .event time {
+      color: var(--blue);
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+    }
+
+    .watch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .watch {
+      padding: 16px;
+      min-height: 152px;
+    }
+
+    .watch span {
+      display: inline-block;
+      margin-bottom: 9px;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--ink);
+      padding: 4px 9px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .sources {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .sources a {
+      color: var(--blue);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .page-grid,
+      .summary-grid,
+      .company-grid,
+      .watch-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 22px;
+      }
+
+      .side-nav {
+        position: static;
+      }
+
+      .nav-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .matrix-head {
+        display: none;
+      }
+
+      .matrix-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 10px;
+      }
+
+      .matrix-card {
+        border: 0;
+        background: transparent;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 22px, 1280px);
+        padding-top: 0;
+      }
+
+      .topbar {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 9px;
+        align-items: stretch;
+      }
+
+      .meta-text {
+        text-align: left;
+      }
+
+      .language-switch {
+        width: 100%;
+      }
+
+      .language-switch button {
+        flex: 1;
+      }
+
+      h1 {
+        font-size: 36px;
+        line-height: 1.05;
+      }
+
+      .lead {
+        font-size: 17px;
+        line-height: 1.65;
+      }
+
+      .quick-read,
+      .nav-list,
+      .event {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .fab-card {
+        min-height: 440px;
+        padding: 18px;
+      }
+
+      .fab-visual {
+        right: -165px;
+        bottom: -55px;
+      }
+
+      .chip-tags {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .section {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="back" href="/" data-i18n="back">返回 timememo.net</a>
+      <div class="meta-text" data-i18n="meta">资料更新：2026-06-05 · 来源优先级：官方披露 > 大厂新闻稿 > 行业调查</div>
+      <div class="language-switch" aria-label="Language">
+        <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Overview">
+      <div class="hero-copy">
+        <span class="kicker" data-i18n="kicker">Foundry AI Strategy</span>
+        <h1 data-i18n="title">半导体代工 AI 策略</h1>
+        <p class="lead" data-i18n="lead"></p>
+        <div class="quick-read" id="metrics"></div>
+      </div>
+      <div class="fab-card" aria-label="Fab AI loop">
+        <div class="fab-visual">
+          <span class="fab-node"></span>
+          <span class="fab-node"></span>
+          <span class="fab-node"></span>
+          <span class="fab-node"></span>
+        </div>
+        <div class="fab-copy">
+          <h2 data-i18n="fabTitle"></h2>
+          <p data-i18n="fabText"></p>
+        </div>
+        <div class="chip-tags">
+          <span>APC</span>
+          <span>OPC</span>
+          <span>Defect AI</span>
+          <span>Yield</span>
+          <span>Digital Twin</span>
+          <span>AMHS</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-grid">
+      <aside class="side-nav" aria-label="Report navigation">
+        <div class="nav-panel">
+          <span class="nav-label" data-i18n="navLabel"></span>
+          <nav class="nav-list" id="navList"></nav>
+        </div>
+        <div class="nav-panel nav-foot" data-i18n="navFoot"></div>
+      </aside>
+
+      <div class="content">
+        <section class="section" id="summary">
+          <h2 data-i18n="summaryTitle"></h2>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+
+        <section class="section" id="matrix">
+          <h2 data-i18n="matrixTitle"></h2>
+          <div class="matrix" id="matrixGrid"></div>
+        </section>
+
+        <section class="section" id="tsmc">
+          <h2 data-i18n="tsmcTitle"></h2>
+          <div class="company-grid" id="tsmcGrid"></div>
+        </section>
+
+        <section class="section" id="samsung">
+          <h2 data-i18n="samsungTitle"></h2>
+          <div class="company-grid" id="samsungGrid"></div>
+        </section>
+
+        <section class="section" id="timeline">
+          <h2 data-i18n="timelineTitle"></h2>
+          <div class="timeline" id="timelineList"></div>
+        </section>
+
+        <section class="section" id="watch">
+          <h2 data-i18n="watchTitle"></h2>
+          <div class="watch-grid" id="watchGrid"></div>
+          <p class="note" data-i18n="watchNote"></p>
+        </section>
+
+        <section class="section" id="sources">
+          <h2 data-i18n="sourcesTitle"></h2>
+          <ul class="sources" id="sourcesList"></ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const report = {
+      zh: {
+        titleTag: "半导体代工 AI 策略 | timememo.net",
+        back: "返回 timememo.net",
+        meta: "资料更新：2026-06-05 · 来源优先级：官方披露 > 大厂新闻稿 > 行业调查",
+        kicker: "Foundry AI Strategy",
+        title: "半导体代工 AI 策略",
+        lead: "台积电和三星都在把 AI 从办公助手推进到晶圆厂核心控制层：光刻计算、制程模拟、过程控制、设备诊断、良率分析、缺陷检测、调度、物流和数字孪生。差别是，台积电更像把 AI 嵌进已经领先的制造系统；三星更像用 AI Factory 重构并追赶先进制程与良率竞争力。",
+        fabTitle: "Fab AI 闭环",
+        fabText: "传感器、量测、影像、MES 和设备日志进入模型；模型输出调度、诊断、预测、纠偏和仿真结果；工程师负责验证、规则和例外处理。",
+        navLabel: "目录",
+        navFoot: "本页为 timememo.net 研究页草稿。推送公开发布前需要最后确认。",
+        summaryTitle: "核心结论",
+        matrixTitle: "制造环节矩阵",
+        tsmcTitle: "台积电：把 AI 嵌进领先制造系统",
+        samsungTitle: "三星：用 AI Factory 重塑追赶路径",
+        timelineTitle: "最新新闻线",
+        watchTitle: "下一步观察",
+        watchNote: "判断口径：官方新闻里的性能数字通常代表特定工作负载，不等于整座 fab 的总效率提升；良率改善也需要区分研发、试产和高量产阶段。",
+        sourcesTitle: "来源",
+        matrixHeaders: ["制造环节", "台积电", "三星"],
+        nav: [
+          ["summary", "核心结论"],
+          ["matrix", "制造环节矩阵"],
+          ["tsmc", "台积电策略"],
+          ["samsung", "三星策略"],
+          ["timeline", "最新新闻线"],
+          ["watch", "下一步观察"],
+          ["sources", "来源"]
+        ],
+        metrics: [
+          ["2026-05", "最新台积电官方相关消息：与 NVIDIA 把加速计算和 AI 引入 fab。"],
+          ["50K+", "三星计划部署超过 50,000 个 NVIDIA GPU 扩展 AI Factory。"],
+          ["2030", "三星目标：全球制造体系转为 AI-driven factories。"]
+        ],
+        summary: [
+          ["1. AI 正在进入 fab 的控制平面。", "两家公司都不只是用生成式 AI 写文档，而是在处理半导体制造最贵的环节：计算光刻、缺陷检测、过程控制、调度、设备诊断、数字孪生和良率分析。"],
+          ["2. 台积电偏制造系统增强。", "台积电公开信息显示，它把机器学习、神经网络、计算机视觉和生成式 AI 放进既有智能制造体系，目标是降低制程变异、提升良率、提升设备产出和全球 fab 一致性。"],
+          ["3. 三星偏 AI Factory 战略重塑。", "三星把 AI Factory 作为公司级口径公开推进，重点是 Agentic AI、NVIDIA GPU、Omniverse 数字孪生、机器人和从设计到生产的端到端优化。"],
+          ["4. 胜负关键仍是可验证的良率与客户订单。", "AI 能缩短分析和纠偏周期，但先进制程竞争最后还是看 2nm/3nm/4nm 的稳定良率、产能、交期、功耗性能和客户信任。"]
+        ],
+        matrix: [
+          ["计算光刻 / OPC", "采用 GPU 加速计算光刻，NVIDIA 公开称 cuLitho 可在成本效益或周期时间上带来 20%-50% 改善。目标是缩短 mask 和光刻计算周转。", "AI Megafactory 把 cuLitho/CUDA-X 用于 OPC，三星公开称计算光刻性能提升 20 倍，用于更快预测并修正图形偏差。"],
+          ["材料 / 晶体管 / 制程模拟", "使用 NVIDIA cuEST 做电子结构和化学模拟，官方披露平均可加速约 50 倍，服务材料设计和先进制程模拟。", "通过 NVIDIA GPU、Synopsys 等 EDA 伙伴推进 TCAD、EDA、验证和制造分析加速；目标是把设计、工程和生产反馈打通。"],
+          ["过程控制 / 虚拟量测", "2025 年报披露在良率分析、过程控制、设备故障检测、虚拟量测、晶圆缺陷检测中使用 ML、神经网络和计算机视觉；cuML 用于海量制程参数分析，减少制程变异。", "Agentic AI 接入 MES 后，面向设备操作、过程控制和良率管理做实时异常根因识别、即时缺陷检测、纠正动作建议和诊断动作推荐。"],
+          ["设备诊断 / 维护", "年报明确覆盖设备故障检测，并把智能侦测、智能诊断和自学习纳入过程控制系统。", "数字孪生和统一控制体系用于设备异常侦测、故障预测、实时分析和自动校正，目标是减少停机和异常扩散。"],
+          ["调度 / AMHS / 物流", "智能派工系统导入 AI 架构和并行计算；H200 GPU 加速调度计算，用于处理复杂约束、优化生产路径和提升 fab productivity。", "现有 Foundry Fab Automation 已包括自动排程、OHT 物流、自动恢复和重路由；2030 战略把生产、物流、入料和出货都纳入 AI agents。"],
+          ["缺陷检测 / 良率分析", "使用 Metropolis 与 TAO Toolkit 做视觉 AI 缺陷分类，目标是纳米级缺陷检测并减少重复标注和重训；先进封装中已有 ADC、自动良率预测和优化。", "Agentic AI 对晶圆级图形数据、设备数据和检查数据做实时分析；Samsung SDS Nexplant 也展示了机器学习分类失效图形、根因分析和深度学习缺陷分类能力。"],
+          ["数字孪生 / Fab 规划", "正在探索 NVIDIA Omniverse 构建 FabTwin，用虚拟 fab 评估工艺设备布局和仿真流程，在实体建设和资本投入前发现约束。", "已展示基于 Omniverse 的平泽 fab 数字孪生，并与 MES 连接，用于实时监控、预测风险、生产场景验证、设备异常和排程优化。"],
+          ["先进封装", "Intelligent Packaging Fab 把 AI、HITL、ML、大数据、edge computing、die-level MES、APC 和 ADC 组合起来，覆盖调度、缺陷拦截、分类、良率预测和优化。", "AI Factory 覆盖 memory、logic、foundry 和 advanced packaging；HBM4 通过 memory + foundry 协同，4nm logic base die 和封装能力成为 AI 基础设施竞争点。"],
+          ["工程师效率 / 工作流", "生成式 AI 结合制造专家知识，加速先进制程变异检测和工程分析；低代码、可视化和自助分析用于把经验转成标准化流程。", "Agentic AI 不只给建议，而是面向质量、生产、物流和工程任务规划、执行、优化；机器人用于线体、设施、物流、装配和 EHS 场景。"]
+        ],
+        tsmc: [
+          ["战略定位", ["台积电的公开表述更克制：不是喊 AI 工厂口号，而是把 AI/ML 作为制造卓越和全球一致性的底层能力。", "2025 年报把智能侦测、智能诊断、自学习、AI/ML、神经网络、计算机视觉和生成式 AI 放在质量、良率、过程控制和生产效率章节里。", "与 NVIDIA 的 2026-05-31 新闻把重点扩展到加速计算：光刻、晶体管与制程模拟、APC、fab 调度、缺陷检测、FabTwin。"]],
+          ["制造含义", ["台积电拥有更大规模的先进制程量产数据，AI 模型更容易在真实生产中持续学习和验证。", "AI 调度和过程控制的价值在于提升瓶颈设备利用率、降低制程变异、缩短异常定位时间，而不是单点替代工程师。", "FabTwin 更像资本开支和新 fab 规划工具：在实体建设前评估设备布局、流程约束和产能路径。"]]
+        ],
+        samsung: [
+          ["战略定位", ["三星的口径更外显、更体系化：AI Megafactory、Agentic AI、Digital Twin、机器人和 2030 AI-driven factories。", "它把 AI 覆盖范围定义为从入料物流、生产、质量检查到最终出货的制造价值链，并把安全与 EHS 也纳入 AI 自主体系。", "对 Foundry 来说，这既是效率项目，也是重建先进制程可信度的战略工程，尤其对应 2nm、4nm HBM base die、AI/HPC 客户和 Taylor 海外 fab。"]],
+          ["制造含义", ["Agentic AI 的重点是跨环节协同：设计 agent、layout agent、制造数据反馈、质量 agent、生产 agent、物流 agent。", "数字孪生连接 MES 后，能把实时监控、风险预测、故障预测、排程优化和场景预验证放在同一个虚拟环境。", "三星披露的 20 倍光刻/制程模拟加速和约 50% 设计周转缩短，说明 AI 先在计算密集环节产生确定价值。"]]
+        ],
+        timeline: [
+          ["2026-05-31", "NVIDIA 发布 TSMC 采用加速计算和 AI 进入 fab 的新闻，覆盖 CUDA-X、cuLitho、cuEST、cuML、H200 调度、Metropolis/TAO 缺陷检测和 Omniverse FabTwin。"],
+          ["2026-03-17", "三星在 NVIDIA GTC 2026 展示 Agentic AI 半导体工程策略，披露从设计、工程到生产的端到端优化，以及平泽 fab 数字孪生。"],
+          ["2026-03-01", "三星宣布到 2030 年把全球制造体系转为 AI-driven factories，覆盖入料、生产、质量检查、出货、EHS、机器人和 AI agents。"],
+          ["2026-Q1", "三星 1Q26 投资者材料显示 Foundry 正启动 2nm Gen 2 mobile ramp、4nm memory products 和 AI/HPC LPU 量产爬坡，并称先进节点线满载。"],
+          ["2025-10-31", "三星与 NVIDIA 宣布 AI Megafactory，计划部署超过 50,000 个 NVIDIA GPU，把 AI 嵌入半导体、移动设备和机器人制造流程。"],
+          ["2025-2026", "台积电 2025 年报披露智能制造系统扩展到前后段和全球 fabs，并强调生成式 AI 与半导体制造专家知识结合，提升变异检测和工程分析。"]
+        ],
+        watch: [
+          ["TSMC", "FabTwin 会停留在布局规划，还是逐步接入实时运营优化？如果进入实时层，价值会从 CapEx 规划扩展到日常派工和维护。"],
+          ["Samsung", "AI Factory 是否真正转化为 2nm、4nm base die 和 HBM 相关良率改善。这里需要看客户设计导入、量产节奏和利润率恢复。"],
+          ["Industry", "先进 fab 的 AI 化会带来新的平台依赖：NVIDIA GPU/库、EDA 伙伴、数据治理、模型验证、安全边界和工程师责任划分。"]
+        ],
+        sources: [
+          ["NVIDIA Newsroom: NVIDIA and TSMC Bring AI Into Fabs to Advance Semiconductor Design and Manufacturing, 2026-05-31", "https://nvidianews.nvidia.com/news/nvidia-and-tsmc-bring-ai-into-fabs-to-advance-semiconductor-design-and-manufacturing"],
+          ["TSMC 2025 Annual Report, Chapter 5", "https://investor.tsmc.com/static/annualReports/2025/english/pdf/2025_tsmc_ar_e_ch5.pdf"],
+          ["TSMC: Intelligent Packaging Fab", "https://www.tsmc.com/chinese/dedicatedFoundry/services/apm_intelligent_packaging_fab"],
+          ["Samsung Global Newsroom: AI Megafactory with NVIDIA, 2025-10-31", "https://news.samsung.com/global/samsung-teams-with-nvidia-to-lead-the-transformation-of-global-intelligent-manufacturing-through-new-ai-megafactory"],
+          ["Samsung Semiconductor: Agentic AI-Driven Semiconductor Engineering Innovation at NVIDIA GTC 2026", "https://semiconductor.samsung.com/news-events/tech-blog/samsung-showcases-agentic-ai-driven-semiconductor-engineering-innovation-at-nvidia-gtc-2026/"],
+          ["Samsung Global Newsroom: AI-Driven Factories by 2030, 2026-03-01", "https://news.samsung.com/global/samsung-electronics-announces-strategy-to-transition-global-manufacturing-into-ai-driven-factories-by-2030"],
+          ["Samsung Electronics 1Q 2026 Earnings Presentation", "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_conference_eng.pdf"],
+          ["Samsung Foundry: Fab Automation", "https://semiconductor.samsung.com/foundry/manufacturing/fab-automation/"],
+          ["Samsung SDS: Nexplant Analytics", "https://www.samsungsds.com/en/man/nexplant_analytics.html"],
+          ["TrendForce: 4Q25 Global Foundry Revenue and AI Demand, 2026-03-12", "https://www.trendforce.com/presscenter/news/20260312-12965.html"]
+        ]
+      },
+      en: {
+        titleTag: "AI Strategy in Semiconductor Foundries | timememo.net",
+        back: "Back to timememo.net",
+        meta: "Updated: 2026-06-05 · Source priority: official disclosures > major company newsrooms > industry research",
+        kicker: "Foundry AI Strategy",
+        title: "AI Strategy in Semiconductor Foundries",
+        lead: "TSMC and Samsung are moving AI from office productivity into the fab control layer: computational lithography, process simulation, process control, equipment diagnosis, yield analytics, defect inspection, scheduling, logistics and digital twins. TSMC is embedding AI into an already-leading manufacturing system; Samsung is using AI Factory to rebuild competitiveness in advanced nodes and yield.",
+        fabTitle: "Fab AI Loop",
+        fabText: "Sensors, metrology, images, MES data and equipment logs feed models. Models return scheduling, diagnosis, prediction, correction and simulation outputs. Engineers validate decisions, rules and exceptions.",
+        navLabel: "Contents",
+        navFoot: "This is a timememo.net research-page draft. Public push still needs final confirmation.",
+        summaryTitle: "Key Takeaways",
+        matrixTitle: "Manufacturing Matrix",
+        tsmcTitle: "TSMC: Embedding AI Into Manufacturing Leadership",
+        samsungTitle: "Samsung: Rebuilding Around AI Factory",
+        timelineTitle: "Latest News Timeline",
+        watchTitle: "What To Watch",
+        watchNote: "Interpretation note: performance numbers in official releases usually apply to specific workloads, not total fab-level efficiency. Yield improvement also differs across R&D, pilot production and high-volume manufacturing.",
+        sourcesTitle: "Sources",
+        matrixHeaders: ["Manufacturing Stage", "TSMC", "Samsung"],
+        nav: [
+          ["summary", "Key Takeaways"],
+          ["matrix", "Manufacturing Matrix"],
+          ["tsmc", "TSMC Strategy"],
+          ["samsung", "Samsung Strategy"],
+          ["timeline", "News Timeline"],
+          ["watch", "What To Watch"],
+          ["sources", "Sources"]
+        ],
+        metrics: [
+          ["2026-05", "Latest TSMC-related official update: NVIDIA AI and accelerated computing are being brought into fabs."],
+          ["50K+", "Samsung plans to deploy more than 50,000 NVIDIA GPUs to scale its AI Factory."],
+          ["2030", "Samsung target: transition global manufacturing into AI-driven factories."]
+        ],
+        summary: [
+          ["1. AI is entering the fab control plane.", "Both companies are moving beyond generative AI for documents and into the most expensive parts of chip manufacturing: computational lithography, defect inspection, process control, scheduling, equipment diagnosis, digital twins and yield analytics."],
+          ["2. TSMC is enhancing a proven manufacturing system.", "Public disclosures show TSMC placing machine learning, neural networks, computer vision and generative AI inside its intelligent manufacturing stack to reduce process variation, improve yield, raise equipment output and keep global fab quality consistent."],
+          ["3. Samsung is using AI Factory as a strategic reset.", "Samsung is publicly pushing AI Factory at company level, centered on Agentic AI, NVIDIA GPUs, Omniverse digital twins, robotics and end-to-end optimization from design to production."],
+          ["4. The deciding proof remains yield and customer traction.", "AI can shorten analysis and correction loops, but advanced foundry competition still comes down to stable 2nm/3nm/4nm yield, capacity, delivery, power-performance and customer trust."]
+        ],
+        matrix: [
+          ["Computational lithography / OPC", "TSMC is using GPU-accelerated computational lithography. NVIDIA says cuLitho can improve cost effectiveness or cycle time by 20%-50%, aimed at reducing mask and lithography turnaround.", "Samsung applies cuLitho/CUDA-X to OPC inside AI Megafactory. Samsung says computational lithography performance improved 20x, enabling faster prediction and correction of pattern variations."],
+          ["Materials / transistor / process simulation", "TSMC uses NVIDIA cuEST for electronic-structure and chemistry simulation. NVIDIA discloses roughly 50x average acceleration for semiconductor material design.", "Samsung is using NVIDIA GPUs and EDA partners such as Synopsys to accelerate TCAD, EDA, verification and manufacturing analysis, tying design, engineering and production feedback together."],
+          ["Process control / virtual metrology", "TSMC's 2025 annual report cites ML, neural networks and computer vision in yield analysis, process control, equipment failure detection, virtual metrology and wafer defect inspection. cuML is used to analyze massive process parameters and reduce variation.", "After Agentic AI is integrated with MES, Samsung targets real-time root-cause analysis, instant defect detection, corrective action recommendations and diagnostic guidance across equipment, process control and yield management."],
+          ["Equipment diagnosis / maintenance", "TSMC explicitly covers equipment failure detection and embeds intelligent detection, smart diagnosis and self-learning in its process control system.", "Samsung uses digital twins and unified controls for equipment anomaly detection, failure prediction, real-time analysis and automatic correction to limit downtime and anomaly spread."],
+          ["Scheduling / AMHS / logistics", "TSMC integrates AI architecture into intelligent dispatching. H200 GPU-accelerated scheduling handles complex constraints, optimizes production paths and improves fab productivity.", "Samsung's existing Foundry Fab Automation includes scheduling, OHT logistics, auto recovery and rerouting. Its 2030 strategy brings production, logistics, inbound material and shipment into AI agents."],
+          ["Defect inspection / yield analytics", "TSMC uses Metropolis and TAO Toolkit for vision-AI defect classification, targeting nanometer-scale detection while reducing repeated labeling and retraining. Advanced packaging already uses ADC and automated yield prediction.", "Samsung's Agentic AI analyzes wafer pattern, equipment and inspection data in real time. Samsung SDS Nexplant also shows ML-based failure-pattern classification, root-cause analytics and deep-learning defect classification."],
+          ["Digital twin / fab planning", "TSMC is exploring NVIDIA Omniverse to build FabTwin, a virtual fab environment for evaluating process-tool layouts and simulation workflows before physical buildout and capital commitment.", "Samsung has shown a Pyeongtaek fab digital twin built on Omniverse and connected to MES for real-time monitoring, predictive risk assessment, production scenario validation, anomaly detection and scheduling optimization."],
+          ["Advanced packaging", "TSMC's Intelligent Packaging Fab combines AI, HITL, ML, big data, edge computing, die-level MES, APC and ADC across dispatching, defect interception, classification, yield prediction and optimization.", "Samsung's AI Factory spans memory, logic, foundry and advanced packaging. HBM4 uses memory-foundry co-optimization, a 4nm logic base die and packaging capability as key AI infrastructure assets."],
+          ["Engineer productivity / workflow", "Generative AI plus manufacturing expertise accelerates advanced process variation detection and engineering analysis. Low-code, visualization and self-service analytics convert domain experience into standardized workflows.", "Agentic AI is aimed at planning, executing and optimizing quality, production, logistics and engineering work. Robots are targeted at line operations, facilities, logistics, assembly and EHS."]
+        ],
+        tsmc: [
+          ["Strategic posture", ["TSMC's public framing is restrained: less about an AI-factory slogan and more about using AI/ML as a foundation for manufacturing excellence and global consistency.", "The 2025 annual report places intelligent detection, smart diagnosis, self-learning, AI/ML, neural networks, computer vision and generative AI in quality, yield, process control and production efficiency sections.", "The 2026-05-31 NVIDIA announcement extends the focus to accelerated computing: lithography, transistor and process simulation, APC, fab scheduling, defect inspection and FabTwin."]],
+          ["Manufacturing implications", ["TSMC has much larger advanced-node high-volume manufacturing data, making AI models easier to train, validate and continuously improve in production.", "AI scheduling and process control are valuable because they improve bottleneck tool utilization, reduce process variation and shorten anomaly localization, not because they replace engineers one by one.", "FabTwin looks like a capital planning and new-fab tool: evaluating layout, workflow constraints and capacity paths before physical implementation."]]
+        ],
+        samsung: [
+          ["Strategic posture", ["Samsung's messaging is more explicit and system-level: AI Megafactory, Agentic AI, Digital Twin, robotics and AI-driven factories by 2030.", "It defines AI coverage across the manufacturing value chain, from inbound logistics and production to quality inspection and final shipment, while also bringing EHS into autonomous AI systems.", "For Foundry, this is both an efficiency program and a credibility rebuild for advanced process technology, especially around 2nm, 4nm HBM base dies, AI/HPC customers and the Taylor fab."]],
+          ["Manufacturing implications", ["Agentic AI emphasizes cross-stage coordination: design agents, layout agents, manufacturing-data feedback, quality agents, production agents and logistics agents.", "Once digital twins are connected with MES, real-time monitoring, risk prediction, failure prediction, scheduling optimization and scenario pre-validation can sit in one virtual environment.", "Samsung's disclosed 20x lithography/process-simulation acceleration and roughly 50% design turnaround reduction show that AI first creates clearer value in compute-intensive workflows."]]
+        ],
+        timeline: [
+          ["2026-05-31", "NVIDIA announces that TSMC is using accelerated computing and AI in fabs, covering CUDA-X, cuLitho, cuEST, cuML, H200 scheduling, Metropolis/TAO defect inspection and Omniverse FabTwin."],
+          ["2026-03-17", "Samsung presents its Agentic AI semiconductor engineering strategy at NVIDIA GTC 2026, covering end-to-end optimization from design and engineering to production plus a Pyeongtaek fab digital twin."],
+          ["2026-03-01", "Samsung announces a plan to transition global manufacturing into AI-driven factories by 2030, covering inbound material, production, quality inspection, shipment, EHS, robots and AI agents."],
+          ["2026-Q1", "Samsung's 1Q26 investor materials show Foundry initiating 2nm Gen 2 mobile ramp, 4nm memory products and AI/HPC LPU ramp, with advanced-node lines running at full utilization."],
+          ["2025-10-31", "Samsung and NVIDIA announce AI Megafactory, with more than 50,000 NVIDIA GPUs planned to embed AI into semiconductor, mobile device and robotics manufacturing."],
+          ["2025-2026", "TSMC's 2025 annual report says intelligent manufacturing is expanding from front-end to back-end fabs and across global fabs, while generative AI plus semiconductor expertise improves variation detection and engineering analysis."]
+        ],
+        watch: [
+          ["TSMC", "Will FabTwin remain a planning tool, or expand into real-time operations optimization? If it reaches real-time operations, its value moves from CapEx planning into daily dispatching and maintenance."],
+          ["Samsung", "Will AI Factory convert into stable yield gains for 2nm, 4nm base dies and HBM-related manufacturing? The key signals are customer tape-ins, ramp timing and profitability recovery."],
+          ["Industry", "AI-enabled advanced fabs create new dependencies: NVIDIA GPUs and libraries, EDA partners, data governance, model validation, safety boundaries and engineering responsibility."]
+        ],
+        sources: [
+          ["NVIDIA Newsroom: NVIDIA and TSMC Bring AI Into Fabs to Advance Semiconductor Design and Manufacturing, 2026-05-31", "https://nvidianews.nvidia.com/news/nvidia-and-tsmc-bring-ai-into-fabs-to-advance-semiconductor-design-and-manufacturing"],
+          ["TSMC 2025 Annual Report, Chapter 5", "https://investor.tsmc.com/static/annualReports/2025/english/pdf/2025_tsmc_ar_e_ch5.pdf"],
+          ["TSMC: Intelligent Packaging Fab", "https://www.tsmc.com/chinese/dedicatedFoundry/services/apm_intelligent_packaging_fab"],
+          ["Samsung Global Newsroom: AI Megafactory with NVIDIA, 2025-10-31", "https://news.samsung.com/global/samsung-teams-with-nvidia-to-lead-the-transformation-of-global-intelligent-manufacturing-through-new-ai-megafactory"],
+          ["Samsung Semiconductor: Agentic AI-Driven Semiconductor Engineering Innovation at NVIDIA GTC 2026", "https://semiconductor.samsung.com/news-events/tech-blog/samsung-showcases-agentic-ai-driven-semiconductor-engineering-innovation-at-nvidia-gtc-2026/"],
+          ["Samsung Global Newsroom: AI-Driven Factories by 2030, 2026-03-01", "https://news.samsung.com/global/samsung-electronics-announces-strategy-to-transition-global-manufacturing-into-ai-driven-factories-by-2030"],
+          ["Samsung Electronics 1Q 2026 Earnings Presentation", "https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_conference_eng.pdf"],
+          ["Samsung Foundry: Fab Automation", "https://semiconductor.samsung.com/foundry/manufacturing/fab-automation/"],
+          ["Samsung SDS: Nexplant Analytics", "https://www.samsungsds.com/en/man/nexplant_analytics.html"],
+          ["TrendForce: 4Q25 Global Foundry Revenue and AI Demand, 2026-03-12", "https://www.trendforce.com/presscenter/news/20260312-12965.html"]
+        ]
+      }
+    };
+
+    const textKeys = [
+      "back",
+      "meta",
+      "kicker",
+      "title",
+      "lead",
+      "fabTitle",
+      "fabText",
+      "navLabel",
+      "navFoot",
+      "summaryTitle",
+      "matrixTitle",
+      "tsmcTitle",
+      "samsungTitle",
+      "timelineTitle",
+      "watchTitle",
+      "watchNote",
+      "sourcesTitle"
+    ];
+
+    const byId = (id) => document.getElementById(id);
+    const escapeHtml = (value) => String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+
+    function renderCards(items) {
+      return items.map(([heading, body]) => `
+        <article class="take">
+          <strong>${escapeHtml(heading)}</strong>
+          <p>${escapeHtml(body)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderCompany(items, type) {
+      return items.map(([heading, bullets]) => `
+        <article class="company ${type}">
+          <h3>${escapeHtml(heading)}</h3>
+          <ul class="bullets">
+            ${bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+        </article>
+      `).join("");
+    }
+
+    function renderLanguage(lang) {
+      const data = report[lang];
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.title = data.titleTag;
+
+      textKeys.forEach((key) => {
+        document.querySelectorAll(`[data-i18n="${key}"]`).forEach((node) => {
+          node.textContent = data[key];
+        });
+      });
+
+      byId("metrics").innerHTML = data.metrics.map(([value, label]) => `
+        <div class="metric">
+          <strong>${escapeHtml(value)}</strong>
+          <span>${escapeHtml(label)}</span>
+        </div>
+      `).join("");
+
+      byId("navList").innerHTML = data.nav.map(([id, label]) => `
+        <a class="nav-link" href="#${id}">${escapeHtml(label)}</a>
+      `).join("");
+
+      byId("summaryGrid").innerHTML = renderCards(data.summary);
+
+      byId("matrixGrid").innerHTML = `
+        <div class="matrix-head">
+          ${data.matrixHeaders.map((item) => `<div>${escapeHtml(item)}</div>`).join("")}
+        </div>
+        ${data.matrix.map((row) => `
+          <div class="matrix-row">
+            <div class="matrix-card stage">${escapeHtml(row[0])}</div>
+            <div class="matrix-card">${escapeHtml(row[1])}</div>
+            <div class="matrix-card">${escapeHtml(row[2])}</div>
+          </div>
+        `).join("")}
+      `;
+
+      byId("tsmcGrid").innerHTML = renderCompany(data.tsmc, "tsmc");
+      byId("samsungGrid").innerHTML = renderCompany(data.samsung, "samsung");
+
+      byId("timelineList").innerHTML = data.timeline.map(([date, body]) => `
+        <article class="event">
+          <time>${escapeHtml(date)}</time>
+          <p>${escapeHtml(body)}</p>
+        </article>
+      `).join("");
+
+      byId("watchGrid").innerHTML = data.watch.map(([label, body]) => `
+        <article class="watch">
+          <span>${escapeHtml(label)}</span>
+          <p>${escapeHtml(body)}</p>
+        </article>
+      `).join("");
+
+      byId("sourcesList").innerHTML = data.sources.map(([label, url]) => `
+        <li><a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a></li>
+      `).join("");
+
+      document.querySelectorAll("[data-lang]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
+      });
+
+      localStorage.setItem("foundry-ai-lang", lang);
+    }
+
+    document.querySelectorAll("[data-lang]").forEach((button) => {
+      button.addEventListener("click", () => renderLanguage(button.dataset.lang));
+    });
+
+    renderLanguage(localStorage.getItem("foundry-ai-lang") || "zh");
+  </script>
+</body>
+</html>
