@@ -1,0 +1,1690 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Amy Summer Project | MindSpark Boxes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,700;6..72,900&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #18201f;
+      --muted: #68706c;
+      --paper: #f8f3e8;
+      --paper-strong: #fffaf0;
+      --line: #d9ccba;
+      --teal: #1f8a83;
+      --teal-dark: #12615d;
+      --coral: #e85d4f;
+      --sun: #f3bc45;
+      --blue: #316fbd;
+      --violet: #7f57b5;
+      --green: #4b8f49;
+      --shadow: 0 22px 60px rgba(33, 38, 34, 0.12);
+      --radius: 8px;
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(24, 32, 31, 0.045) 1px, transparent 1px) 0 0 / 26px 26px,
+        linear-gradient(rgba(24, 32, 31, 0.035) 1px, transparent 1px) 0 0 / 26px 26px,
+        linear-gradient(135deg, rgba(31, 138, 131, 0.13), transparent 34%),
+        linear-gradient(225deg, rgba(232, 93, 79, 0.11), transparent 35%),
+        var(--paper);
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-color: rgba(31, 138, 131, 0.5);
+      text-underline-offset: 0.2em;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(24, 32, 31, 0.12);
+      background: rgba(248, 243, 232, 0.91);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      background: var(--sun);
+      box-shadow: 4px 4px 0 var(--ink);
+      flex: 0 0 auto;
+    }
+
+    .brand span:last-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav a {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      border: 1px solid rgba(24, 32, 31, 0.18);
+      background: rgba(255, 250, 240, 0.72);
+      padding: 0 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      color: #27302e;
+    }
+
+    .nav a:hover {
+      border-color: var(--ink);
+      background: var(--paper-strong);
+    }
+
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: 34px;
+      align-items: center;
+      padding: 38px 0 28px;
+    }
+
+    .hero > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--teal-dark);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(48px, 8vw, 94px);
+      line-height: 0.88;
+      font-weight: 900;
+      max-width: min(780px, 100%);
+      overflow-wrap: anywhere;
+    }
+
+    h1 .accent {
+      color: var(--coral);
+      font-style: italic;
+    }
+
+    h1 .title-line {
+      display: block;
+    }
+
+    .lead {
+      margin: 24px 0 0;
+      max-width: 690px;
+      font-size: clamp(18px, 2.3vw, 25px);
+      line-height: 1.35;
+    }
+
+    .lead strong {
+      color: var(--teal-dark);
+    }
+
+    .mission-strip {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .mission-strip span {
+      border: 1px solid rgba(24, 32, 31, 0.18);
+      background: var(--paper-strong);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .hero-note {
+      margin-top: 26px;
+      border-left: 5px solid var(--coral);
+      background: rgba(255, 250, 240, 0.84);
+      padding: 15px 17px;
+      max-width: 650px;
+      box-shadow: 0 10px 30px rgba(33, 38, 34, 0.08);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .studio-board {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      min-height: 560px;
+      padding: 22px;
+      border: 2px solid var(--ink);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0)),
+        #f4dfba;
+      box-shadow: 10px 10px 0 var(--ink), var(--shadow);
+      overflow: hidden;
+    }
+
+    .studio-board::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px dashed rgba(24, 32, 31, 0.28);
+      pointer-events: none;
+    }
+
+    .board-label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 2px solid var(--ink);
+      background: var(--paper-strong);
+      font-weight: 700;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .box-stack {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+      z-index: 1;
+    }
+
+    .kit-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      border: 2px solid var(--ink);
+      background: var(--paper-strong);
+      padding: 14px;
+      box-shadow: 6px 6px 0 rgba(24, 32, 31, 0.94);
+      animation: rise 620ms ease both;
+      min-width: 0;
+    }
+
+    .kit-card:nth-child(2) {
+      animation-delay: 90ms;
+      transform: translateX(18px);
+    }
+
+    .kit-card:nth-child(3) {
+      animation-delay: 180ms;
+      transform: translateX(-8px);
+    }
+
+    .kit-card:nth-child(4) {
+      animation-delay: 270ms;
+      transform: translateX(24px);
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        translate: 0 18px;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    .kit-visual {
+      height: 78px;
+      border: 2px solid var(--ink);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 45%),
+        var(--teal);
+      box-shadow: 4px 4px 0 var(--ink);
+      display: grid;
+      place-items: center;
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 900;
+      font-size: 34px;
+      color: var(--paper-strong);
+    }
+
+    .kit-card:nth-child(3) .kit-visual {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 45%),
+        var(--coral);
+    }
+
+    .kit-card:nth-child(4) .kit-visual {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 45%),
+        var(--violet);
+    }
+
+    .kit-card h3 {
+      font-size: 18px;
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+    }
+
+    .kit-card p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .scoreboard {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .score {
+      border: 1px solid rgba(24, 32, 31, 0.25);
+      background: rgba(255, 250, 240, 0.78);
+      padding: 11px;
+      min-height: 86px;
+    }
+
+    .score b {
+      display: block;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .score span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    section {
+      padding: 66px 0;
+      border-top: 1px solid rgba(24, 32, 31, 0.12);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.28fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-head > * {
+      min-width: 0;
+    }
+
+    h2 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.95;
+      font-weight: 900;
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .panel {
+      border: 1px solid rgba(24, 32, 31, 0.16);
+      background: rgba(255, 250, 240, 0.86);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(33, 38, 34, 0.08);
+      min-width: 0;
+    }
+
+    .panel.dark {
+      background: var(--ink);
+      color: var(--paper-strong);
+      border-color: var(--ink);
+    }
+
+    .panel.dark p,
+    .panel.dark li,
+    .panel.dark .tag {
+      color: rgba(255, 250, 240, 0.78);
+    }
+
+    .span-3 {
+      grid-column: span 3;
+    }
+
+    .span-4 {
+      grid-column: span 4;
+    }
+
+    .span-5 {
+      grid-column: span 5;
+    }
+
+    .span-6 {
+      grid-column: span 6;
+    }
+
+    .span-7 {
+      grid-column: span 7;
+    }
+
+    .span-8 {
+      grid-column: span 8;
+    }
+
+    .span-12 {
+      grid-column: span 12;
+    }
+
+    .panel h3 {
+      font-size: 19px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .panel p,
+    .panel li {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    .panel p {
+      margin: 0;
+    }
+
+    .panel ul,
+    .panel ol {
+      margin: 12px 0 0;
+      padding-left: 1.1rem;
+    }
+
+    .panel li + li {
+      margin-top: 8px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      border: 1px solid rgba(24, 32, 31, 0.16);
+      background: rgba(248, 243, 232, 0.72);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .number {
+      height: 54px;
+      border: 2px solid var(--ink);
+      background: var(--sun);
+      display: grid;
+      place-items: center;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 29px;
+      font-weight: 900;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .product-line {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: 6px solid var(--teal);
+    }
+
+    .product-line:nth-child(2) {
+      border-top-color: var(--coral);
+    }
+
+    .product-line:nth-child(3) {
+      border-top-color: var(--violet);
+    }
+
+    .product-line .mini-title {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .product-line h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 32px;
+      line-height: 0.95;
+    }
+
+    .prototype {
+      margin-top: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .prototype div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-top: 1px solid rgba(24, 32, 31, 0.13);
+      font-size: 14px;
+    }
+
+    .prototype strong {
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .time-block {
+      border-left: 5px solid var(--teal);
+      background: rgba(255, 250, 240, 0.84);
+      padding: 17px 15px;
+      min-height: 220px;
+      box-shadow: 0 10px 30px rgba(33, 38, 34, 0.08);
+    }
+
+    .time-block:nth-child(2) {
+      border-left-color: var(--sun);
+    }
+
+    .time-block:nth-child(3) {
+      border-left-color: var(--coral);
+    }
+
+    .time-block:nth-child(4) {
+      border-left-color: var(--blue);
+    }
+
+    .time-block:nth-child(5) {
+      border-left-color: var(--violet);
+    }
+
+    .time-block h3 {
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .time-block ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .time-block li {
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .time-block li + li {
+      margin-top: 7px;
+    }
+
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .source {
+      border: 1px solid rgba(24, 32, 31, 0.14);
+      background: rgba(248, 243, 232, 0.56);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .source b {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .source p {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .course-card {
+      position: relative;
+      min-height: 100%;
+      border-top: 6px solid var(--blue);
+    }
+
+    .course-card.bias {
+      border-top-color: var(--teal);
+    }
+
+    .course-card.behavior {
+      border-top-color: var(--sun);
+    }
+
+    .course-card.blindspot {
+      border-top-color: var(--coral);
+    }
+
+    .course-card.change {
+      border-top-color: var(--violet);
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    .course-meta span {
+      border: 1px solid rgba(24, 32, 31, 0.16);
+      background: rgba(248, 243, 232, 0.72);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .course-card .use {
+      margin-top: 14px;
+      border-left: 4px solid currentColor;
+      padding-left: 12px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .course-card .guardrail {
+      margin-top: 12px;
+      color: #7a4f2b;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .prompt-block {
+      border: 2px solid var(--ink);
+      background: var(--paper-strong);
+      box-shadow: 7px 7px 0 var(--ink);
+      padding: 20px;
+    }
+
+    .prompt-block p {
+      color: var(--ink);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .callout {
+      border: 2px solid var(--ink);
+      background: var(--sun);
+      box-shadow: 7px 7px 0 var(--ink);
+      padding: 20px;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1.45;
+      font-size: clamp(18px, 2.5vw, 26px);
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .studio-board {
+        min-height: 0;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .span-3,
+      .span-4,
+      .span-5,
+      .span-6,
+      .span-7,
+      .span-8 {
+        grid-column: span 12;
+      }
+
+      .timeline,
+      .source-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .topbar-inner {
+        display: block;
+        padding: 10px 0 6px;
+      }
+
+      .brand {
+        margin-bottom: 4px;
+      }
+
+      .nav {
+        padding: 6px 0;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      h1 {
+        font-size: clamp(40px, 13vw, 54px);
+      }
+
+      h1 .accent {
+        font-size: 0.94em;
+      }
+
+      .lead {
+        font-size: 18px;
+      }
+
+      .studio-board {
+        padding: 14px;
+        box-shadow: 6px 6px 0 var(--ink), var(--shadow);
+      }
+
+      .kit-card {
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 12px;
+        padding: 11px;
+        transform: none !important;
+      }
+
+      .kit-card > div {
+        min-width: 0;
+      }
+
+      .kit-visual {
+        height: 66px;
+        font-size: 27px;
+      }
+
+      .kit-card h3 {
+        font-size: 16px;
+      }
+
+      .kit-card p {
+        font-size: 13px;
+      }
+
+      .scoreboard {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 48px 0;
+      }
+
+      .panel {
+        padding: 17px;
+      }
+
+      .principle {
+        grid-template-columns: 1fr;
+      }
+
+      .number {
+        width: 54px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">A</span>
+        <span>Amy Summer Project</span>
+      </div>
+      <nav class="nav" aria-label="Project sections">
+        <a href="#idea">Idea</a>
+        <a href="#boxes">Boxes</a>
+        <a href="#learning">Learning</a>
+        <a href="#course-menu">Course Menu</a>
+        <a href="#chinese-brief">中文蓝图</a>
+        <a href="#partners">Partners</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#sources">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell hero">
+      <div>
+        <p class="eyebrow">Private draft · Summer before 8th grade</p>
+        <h1><span class="title-line">Amy’s</span><span class="title-line accent">MindSpark</span><span class="title-line">Box Lab</span></h1>
+        <p class="lead">
+          把三个很爱的东西，<strong>logic</strong>、<strong>psychology</strong>、<strong>art / design</strong>，
+          做成可以帮助孩子从低落里动起来的小盒子。
+        </p>
+        <div class="mission-strip" aria-label="Core idea">
+          <span>从想法到行动</span>
+          <span>从自己有用到帮助别人</span>
+          <span>从一盒样品到一个 youth-led project</span>
+        </div>
+        <div class="hero-note">
+          定位先写清楚：这不是治疗，也不替代医生、therapist 或药物。它是一个由孩子视角设计的支持性活动盒，核心是用小而具体的任务、创作和连接，给孩子一点点可完成、可表达、可分享的力量。
+        </div>
+      </div>
+
+      <aside class="studio-board" aria-label="Project visual board">
+        <div class="board-label">Prototype bench</div>
+        <div class="box-stack">
+          <article class="kit-card">
+            <div class="kit-visual">L</div>
+            <div>
+              <h3>Logic Kit</h3>
+              <p>谜题、推理、mini experiment。给大脑一个可以赢的小挑战。</p>
+            </div>
+          </article>
+          <article class="kit-card">
+            <div class="kit-visual">P</div>
+            <div>
+              <h3>Psychology Kit</h3>
+              <p>情绪卡、行为激活、why people do things。把感受变成可以观察的东西。</p>
+            </div>
+          </article>
+          <article class="kit-card">
+            <div class="kit-visual">A</div>
+            <div>
+              <h3>Art Kit</h3>
+              <p>故事、颜色、sketch、box design。让表达不一定要靠讲话。</p>
+            </div>
+          </article>
+        </div>
+        <div class="scoreboard">
+          <div class="score">
+            <b>3</b>
+            <span>兴趣方向合成一个项目</span>
+          </div>
+          <div class="score">
+            <b>3</b>
+            <span>第一批 experimental boxes</span>
+          </div>
+          <div class="score">
+            <b>90</b>
+            <span>天内做出可测试 pilot</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="idea">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">What this is</p>
+            <h2>把今天的想法先固定下来。</h2>
+          </div>
+          <p class="section-kicker">
+            这页不是最终答案，是 project memory。先把散开的语音想法变成同一个地方，之后每次有新想法都往这里加，再慢慢变成作品、课程计划、合作邮件和项目申请材料。
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="panel dark span-5">
+            <h3>一句话版本</h3>
+            <p>
+              Amy wants to build creative activity boxes that use logic, psychology and art to help kids feel a little more capable, connected and understood.
+            </p>
+          </article>
+          <article class="panel span-7">
+            <h3>为什么这个项目值得做</h3>
+            <ul>
+              <li>Amy 自己经历过低落和恢复，所以不是从外面“研究别人”，而是从真实体验出发。</li>
+              <li>很多大人设计给孩子的心理健康材料太像说明书；孩子做给孩子，可能更真、更容易被打开。</li>
+              <li>逻辑、心理学、美术三个方向不是分散爱好，可以组合成一个能展示、能测试、能扩大的 summer project。</li>
+            </ul>
+          </article>
+          <article class="panel span-4">
+            <div class="principle">
+              <div class="number">1</div>
+              <div>
+                <h3>先帮助自己</h3>
+                <p>用这个项目整理：什么活动真的让我动起来、变平静、变有成就感。</p>
+              </div>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <div class="principle">
+              <div class="number">2</div>
+              <div>
+                <h3>再帮助别人</h3>
+                <p>把有效的方法做成别人也能打开、理解、完成的小盒子。</p>
+              </div>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <div class="principle">
+              <div class="number">3</div>
+              <div>
+                <h3>最后变成组织</h3>
+                <p>如果 pilot 有效果，再考虑 school club、hospital partnership 或 nonprofit。</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="boxes">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">First product map</p>
+            <h2>三种 experimental boxes。</h2>
+          </div>
+          <p class="section-kicker">
+            名字先用 draft。每盒都应该小、干净、安全、容易完成，避免任何会被医院拒收的材料。所有临床相关措辞都让专业人员审过再使用。
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="panel product-line span-4">
+            <div>
+              <p class="mini-title">Box 01 · 一个人也能做</p>
+              <h3>Solo Mastery</h3>
+              <p>给低能量状态里的孩子一个小胜利。不是“振作起来”，而是一个 5-15 分钟能完成的具体动作。</p>
+              <div class="tag-row">
+                <span class="tag">logic puzzles</span>
+                <span class="tag">tiny wins</span>
+                <span class="tag">behavior activation</span>
+              </div>
+            </div>
+            <div class="prototype">
+              <div><strong>放什么</strong><span>推理卡、进度贴纸、低门槛手工</span></div>
+              <div><strong>帮什么</strong><span>打破“什么都不想做”的循环</span></div>
+              <div><strong>测试指标</strong><span>孩子是否愿意完成第一个任务</span></div>
+            </div>
+          </article>
+
+          <article class="panel product-line span-4">
+            <div>
+              <p class="mini-title">Box 02 · 不一定要硬聊</p>
+              <h3>Connection Lab</h3>
+              <p>帮助孩子和父母、朋友、counselor 或 group 有一点点更容易开始的连接。</p>
+              <div class="tag-row">
+                <span class="tag">question cards</span>
+                <span class="tag">shared task</span>
+                <span class="tag">low pressure</span>
+              </div>
+            </div>
+            <div class="prototype">
+              <div><strong>放什么</strong><span>问题卡、合作小游戏、感谢卡</span></div>
+              <div><strong>帮什么</strong><span>从沉默到一个可以说出口的点</span></div>
+              <div><strong>测试指标</strong><span>是否让一次对话更容易开始</span></div>
+            </div>
+          </article>
+
+          <article class="panel product-line span-4">
+            <div>
+              <p class="mini-title">Box 03 · 表达不只靠说话</p>
+              <h3>Story & Art</h3>
+              <p>让孩子用颜色、角色、故事和图像表达自己，不要求一开始就讲清楚。</p>
+              <div class="tag-row">
+                <span class="tag">sketchbook</span>
+                <span class="tag">story prompts</span>
+                <span class="tag">identity design</span>
+              </div>
+            </div>
+            <div class="prototype">
+              <div><strong>放什么</strong><span>spiral-free journal、画笔、故事模板</span></div>
+              <div><strong>帮什么</strong><span>把乱的感觉变成能看的作品</span></div>
+              <div><strong>测试指标</strong><span>作品完成后心情是否更可描述</span></div>
+            </div>
+          </article>
+
+          <article class="panel span-7">
+            <h3>第一批盒子的设计原则</h3>
+            <ul>
+              <li>每一盒只解决一个小问题：开始行动、开始表达、开始连接。</li>
+              <li>每个任务都要有完成感，不要像作业，不要需要很强的解释能力。</li>
+              <li>材料必须干净、全新、无尖锐风险、无医疗承诺，符合医院 donation guideline。</li>
+              <li>不直接收集孩子隐私；反馈只收匿名、简单、可选的信息。</li>
+            </ul>
+          </article>
+
+          <article class="panel span-5">
+            <h3>要避免的坑</h3>
+            <ul>
+              <li>不要写“治疗 depression”或“治愈焦虑”。</li>
+              <li>不要把 Amy 的个人经历公开化，除非 Amy 明确愿意并知道后果。</li>
+              <li>不要直接进入医院和病人互动，先走 Child Life / counselor / parent approval。</li>
+              <li>不要一开始就做太复杂的 subscription business；先证明一个盒子真的有人愿意打开。</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Learning stack</p>
+            <h2>这个夏天要学什么。</h2>
+          </div>
+          <p class="section-kicker">
+            课程优先选权威、可远程、可按自己的速度学的。付费 tutor 可以作为补充，但第一步先用高质量公开课程建立框架。
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="panel span-6">
+            <h3>Psychology questions Amy wants to explore</h3>
+            <ul>
+              <li>People：人为什么做他们做的事？为什么有人喜欢可爱风格，有人喜欢运动，有人喜欢安静？</li>
+              <li>Mind reading：别人说出来的话和心里想的一样吗？微表情、身体语言能不能帮助理解？</li>
+              <li>Kids：小孩的 sadness、depression、happiness 是怎么发生的？什么活动能让人从低落里出来一点？</li>
+              <li>Design：怎样把心理学做成孩子愿意玩的东西，而不是大人写的 worksheet？</li>
+            </ul>
+          </article>
+          <article class="panel span-6">
+            <h3>Suggested course path</h3>
+            <ol>
+              <li>Yale / Coursera: The Science of Well-Being for Teens 或成人版，理解 happiness habits。</li>
+              <li>Yale / Coursera 或 Open Yale: Introduction to Psychology，建立 psychology 大图谱。</li>
+              <li>选 1 门 live teen class 或 tutor：专攻 child psychology、emotion、microexpression 或 product design。</li>
+              <li>每周把学到的一个概念变成一个盒子里的 activity card。</li>
+            </ol>
+          </article>
+          <article class="panel span-4">
+            <h3>Logic track</h3>
+            <p>目标不是刷题，而是设计“能让人有成就感”的小挑战。可以从谜题、pattern、game theory、decision-making 开始。</p>
+          </article>
+          <article class="panel span-4">
+            <h3>Art / design track</h3>
+            <p>学习 packaging、color psychology、illustration、story prompts。盒子本身要像一个 invitation，不像一个病历表。</p>
+          </article>
+          <article class="panel span-4">
+            <h3>STEM box model</h3>
+            <p>Mark Rober / CrunchLabs 的价值是“把复杂知识变成孩子愿意打开的盒子”。可以学习它的 engagement，不必照抄它的内容。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="course-menu">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Summer launch menu</p>
+            <h2>Official courses + Wyzant mentor tracks.</h2>
+          </div>
+          <p class="section-kicker">
+            先用 Coursera / Brilliant 立刻开始，再用 Wyzant 找 tutor 把 Harvard-level topics 拆成适合 8 年级的 syllabus。重点不是“神秘读心”，而是注意偏差、行为奖励、盲点判断、逻辑结构和动机设计。
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="panel dark span-12">
+            <h3>Official University Platforms Amy can start now</h3>
+            <p>
+              These are the broad, on-demand foundations. They are useful for learning and portfolio evidence, but the project should describe them accurately as online courses or guided platforms, not as direct enrollment in the universities.
+            </p>
+          </article>
+
+          <article class="panel course-card blindspot span-4">
+            <div class="course-meta">
+              <span>Yale</span>
+              <span>Coursera</span>
+              <span>Paul Bloom</span>
+              <span>psych foundation</span>
+            </div>
+            <h3>Introduction to Psychology</h3>
+            <p>
+              Search: “Introduction to Psychology Yale.” Broad overview of behavior, memory, development, emotion, social psychology, clinical psychology, and happiness.
+            </p>
+            <p class="use">
+              Project use: gives Amy the vocabulary to explain why logic, habit, feeling, and social connection belong in the same box project.
+            </p>
+          </article>
+
+          <article class="panel course-card bias span-4">
+            <div class="course-meta">
+              <span>Duke</span>
+              <span>Coursera</span>
+              <span>Think Again</span>
+              <span>informal logic</span>
+            </div>
+            <h3>Think Again: How to Reason and Argue</h3>
+            <p>
+              Search: “Think Again Duke.” This is the Coursera / Duke logic and critical-thinking sequence: claims, reasons, assumptions, validity, and fallacies.
+            </p>
+            <p class="use">
+              Project use: helps convert “craft instructions” into clear if/then steps and helps Amy spot when a workbook prompt is confusing or logically overloaded.
+            </p>
+          </article>
+
+          <article class="panel course-card change span-4">
+            <div class="course-meta">
+              <span>Brilliant</span>
+              <span>Logic</span>
+              <span>CS pathways</span>
+              <span>interactive</span>
+            </div>
+            <h3>Logic & Computational Thinking Pathways</h3>
+            <p>
+              Search inside Brilliant for “Logic” and “Computer Science.” Use visual puzzles, algorithms, conditionals, and structured problem solving as daily practice.
+            </p>
+            <p class="use">
+              Project use: trains the “20 x 20 x 20” kit rule: 20 minutes, 20 pieces or fewer, first step understandable in 20 seconds.
+            </p>
+          </article>
+
+          <article class="panel course-card bias span-6">
+            <div class="course-meta">
+              <span>Coursera</span>
+              <span>Madecraft</span>
+              <span>4 hours</span>
+              <span>bias toolkit</span>
+            </div>
+            <h3>Overcoming Cognitive Bias</h3>
+            <p>
+              学 confirmation bias、hindsight bias、attribution bias、availability bias、inattentional blindness、anchoring 和 blind spot bias。它适合快速建立“脑子会怎样自动走偏”的 vocabulary。
+            </p>
+            <p class="use">
+              Box use: 给 Logic Kit 做“what did I miss?” 小卡片，让孩子练习把注意力从单一负面线索移开，去找事实、例外和下一步。
+            </p>
+            <p class="guardrail">
+              Guardrail: 不能说 depression “本质上就是” inattentional blindness。更准确：低落状态可能伴随注意偏差和负面过滤，但 depression 是多因素问题。
+            </p>
+          </article>
+
+          <article class="panel course-card behavior span-6">
+            <div class="course-meta">
+              <span>Yale</span>
+              <span>Coursera</span>
+              <span>Alan Kazdin</span>
+              <span>behavior shaping</span>
+            </div>
+            <h3>Everyday Parenting: The ABCs of Child Rearing</h3>
+            <p>
+              表面是 parenting，核心是行为改变工具：antecedents、positive reinforcement、tone、phrasing、practice、shaping，以及什么时候需要专业帮助。
+            </p>
+            <p class="use">
+              Box use: 设计 instruction booklet，让第一个动作非常小、非常清楚，并且完成后马上有可见 reward，不靠大人说教。
+            </p>
+            <p class="guardrail">
+              Guardrail: 这不是让 Amy “治疗别人”或当 ABA practitioner；它是学习如何把说明、反馈和环境设计得更友善。
+            </p>
+          </article>
+
+          <article class="panel course-card blindspot span-6">
+            <div class="course-meta">
+              <span>Harvard Online</span>
+              <span>Mahzarin Banaji</span>
+              <span>leaders / teams</span>
+              <span>hidden bias</span>
+            </div>
+            <h3>Make Better Decisions: The Psychology of Blind Spots</h3>
+            <p>
+              这门课研究 hidden bias 和 intuitive decision-making：我们怎样在不自觉中形成判断，怎样误读他人，怎样让 decision process 减少盲点。
+            </p>
+            <p class="use">
+              Box use: 给 Connection Lab 做 parent/teen “assumption check” 卡片：我以为你在想什么？证据是什么？还有没有另一个解释？
+            </p>
+            <p class="guardrail">
+              Guardrail: 它更偏成人 leadership training，可能贵；对 Amy 来说可以让 tutor 提炼核心概念，不一定要马上上完整课。
+            </p>
+          </article>
+
+          <article class="panel course-card change span-6">
+            <div class="course-meta">
+              <span>Wesleyan</span>
+              <span>Coursera</span>
+              <span>Alexis May</span>
+              <span>motivation loops</span>
+            </div>
+            <h3>Creating Behavioral Change</h3>
+            <p>
+              覆盖 classical / operant conditioning、motivational interviewing、CBT 基础、behavioral activation、SMART goals 和 relapse prevention。它最贴近“怎样从卡住到开始动”。
+            </p>
+            <p class="use">
+              Box use: 给 Solo Mastery 做 20 x 20 x 20 craft constraints：20 分钟内、20 个以内零件、20 秒内看懂第一步，让行动门槛低到可以开始。
+            </p>
+            <p class="guardrail">
+              Guardrail: Coursera 页面明确说这门课不会训练你给别人实施心理干预；项目只能做 supportive design，不能做 therapy claim。
+            </p>
+          </article>
+
+          <article class="panel dark span-5">
+            <h3>Best starting order</h3>
+            <ol>
+              <li>Wesleyan Creating Behavioral Change：先学 action loop 和 behavioral activation。</li>
+              <li>Yale Everyday Parenting：再学 reward、phrasing、step design。</li>
+              <li>Overcoming Cognitive Bias：补齐 attention / judgment vocabulary。</li>
+              <li>Harvard Blind Spots：作为 advanced framework，让 tutor 帮忙拆概念。</li>
+            </ol>
+          </article>
+
+          <article class="prompt-block span-7">
+            <h3>Wyzant message draft</h3>
+            <p>
+              I want to study cognitive bias, blind spots, behavioral modification, motivation, and behavioral activation in a research-safe way. My goal is not to practice therapy. I want to design supportive craft/activity kits for teens that encourage tiny actions, reflection, and connection. Can you help me turn ideas from Harvard's Psychology of Blind Spots, Yale's Everyday Parenting, Wesleyan's Creating Behavioral Change, and cognitive-bias frameworks into age-appropriate activity-card experiments?
+            </p>
+          </article>
+
+          <article class="panel dark span-12">
+            <h3>Wyzant mentor tracks using Harvard course names as syllabus targets</h3>
+            <p>
+              Harvard Secondary School Program courses are college-level and have age / grade eligibility rules. For 8th grade, use these course names as a search and tutoring map, with a parent managing the Wyzant account and sitting close to the process.
+            </p>
+          </article>
+
+          <article class="panel course-card behavior span-4">
+            <div class="course-meta">
+              <span>Track 1</span>
+              <span>Neuroscience</span>
+              <span>Clinical psychology</span>
+              <span>social connection</span>
+            </div>
+            <h3>Mind & Social Environment Specialist</h3>
+            <p>
+              Wyzant search terms: “Neuroscience,” “Clinical Psychology,” “Adolescent Psychology,” “Social Psychology.” Harvard target topics: PSYC S-1609 Neuroscience of Learning and youth social-connection frameworks.
+            </p>
+            <p class="use">
+              Safe message: “Hi, I am an 8th grader building a student-led supportive art/activity kit project around teen well-being. I am not practicing therapy or conducting clinical research. Can you teach me neuroplasticity, learning science, and adolescent social connection in a way I can turn into safe reflection/activity cards?”
+            </p>
+          </article>
+
+          <article class="panel course-card bias span-4">
+            <div class="course-meta">
+              <span>Track 2</span>
+              <span>Symbolic logic</span>
+              <span>Formal logic</span>
+              <span>systems design</span>
+            </div>
+            <h3>Logic & Systems Specialist</h3>
+            <p>
+              Wyzant search terms: “Symbolic Logic,” “Formal Logic,” “Mathematical Logic,” “Philosophy.” Harvard target topic: PHIL S-12 Deductive Logic.
+            </p>
+            <p class="use">
+              Safe message: “Hi, I want help turning real-world craft instructions, like ribbon folding or box assembly, into clear logical algorithms and error-proof checklists for activity kits. Can you teach me deductive logic and structured proof-style thinking at a middle-school-friendly pace?”
+            </p>
+          </article>
+
+          <article class="panel course-card blindspot span-4">
+            <div class="course-meta">
+              <span>Track 3</span>
+              <span>Behavioral economics</span>
+              <span>Statistics</span>
+              <span>survey design</span>
+            </div>
+            <h3>Choice & Data Specialist</h3>
+            <p>
+              Wyzant search terms: “Behavioral Economics,” “Statistics,” “Survey Design,” “Neuroeconomics.” Harvard target topic: ECON S-1915 Neuroscience and Economic Decision-Making.
+            </p>
+            <p class="use">
+              Safe message: “Hi, I want to learn cognitive biases like present bias and design a simple anonymous QR-code feedback form for a summer activity-kit prototype. I am not collecting clinical data; I only need product feedback such as clarity, energy, and willingness to continue.”
+            </p>
+          </article>
+
+          <article class="callout span-12">
+            <p>
+              Tutor filter: pick someone who can teach advanced ideas to a middle-school student, will stay within educational coaching, and is comfortable with parent involvement. Do not ask a tutor to diagnose, treat, supervise therapy, or run a medical study.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="chinese-brief">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Mandarin project blueprint</p>
+            <h2>行为激活设计实验。</h2>
+          </div>
+          <p class="section-kicker">
+            这是给中文沟通、制造打样、导师协作和国际展示使用的专业版表述。项目可以借鉴心理学、逻辑学和行为选择理论，但必须写清楚：这是非临床、学生主导的支持性活动礼盒设计探索，不是治疗方案、医疗研究或临床试验。
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="panel dark span-5">
+            <h3>项目名称</h3>
+            <p>
+              行为激活设计实验<br>
+              The Behavioral Activation Design Experiment
+            </p>
+            <div class="tag-row">
+              <span class="tag">supportive activity kits</span>
+              <span class="tag">logic structure</span>
+              <span class="tag">tactile art</span>
+              <span class="tag">anonymous feedback</span>
+            </div>
+          </article>
+
+          <article class="panel span-7">
+            <h3>核心使命</h3>
+            <p>
+              将行为激活的基本思想——通过小而清楚、有结构、有完成感的活动，帮助人从低能量和反复消极思绪中迈出一步——转化为高质感、可打样、可反馈的个人手作支持礼盒。
+            </p>
+            <p class="guardrail">
+              安全边界：页面和对外材料不应声称“治疗青少年抑郁症”。更准确的说法是：支持青少年情绪健康、提升行动感、表达感和连接感。
+            </p>
+          </article>
+
+          <article class="panel span-4">
+            <h3>心理学框架</h3>
+            <p>
+              参考行为激活、青少年社会连接、学习科学和注意偏差。核心问题是：什么样的小活动更容易让孩子开始行动、继续完成，并愿意表达自己的感受？
+            </p>
+          </article>
+
+          <article class="panel span-4">
+            <h3>逻辑学框架</h3>
+            <p>
+              参考 Harvard PHIL S-12 一类的演绎逻辑和结构化推理，把手作步骤设计成清楚、可验证、低错误率的算法。
+            </p>
+          </article>
+
+          <article class="panel span-4">
+            <h3>选择与设计框架</h3>
+            <p>
+              参考 behavioral economics、choice architecture 和 cognitive bias，研究材料、顺序、反馈和社交环境如何影响孩子是否愿意继续。
+            </p>
+          </article>
+
+          <article class="callout span-12">
+            <p>
+              20 x 20 x 20 规则：20 分钟内能完成一个阶段；20 个以内核心零件；20 秒内看懂第一步。目标不是强迫进入“心流”，而是降低开始门槛，让完成感自然出现。
+            </p>
+          </article>
+
+          <article class="panel product-line span-4">
+            <div>
+              <p class="mini-title">礼盒 1 · 安全地带</p>
+              <h3>独立掌控礼盒</h3>
+              <p>以真丝丝带玫瑰、植物花艺和精细折叠为主，适合孩子在安静、熟悉、可控的空间里独立完成。</p>
+            </div>
+            <div class="prototype">
+              <div><strong>设计目标</strong><span>安全感、掌控感、完成感</span></div>
+              <div><strong>适用情境</strong><span>低能量、想独处、需要安静任务</span></div>
+              <div><strong>反馈问题</strong><span>第一步是否容易开始？完成后是否更平静？</span></div>
+            </div>
+          </article>
+
+          <article class="panel product-line span-4">
+            <div>
+              <p class="mini-title">礼盒 2 · 家庭之桥</p>
+              <h3>互动指尖解压礼盒</h3>
+              <p>以磁吸木质结构、几何拼图或链环结构为主，设计成低压力双人协作模型。</p>
+            </div>
+            <div class="prototype">
+              <div><strong>设计目标</strong><span>共同专注、低压力对话、关系修复</span></div>
+              <div><strong>适用情境</strong><span>亲子沟通卡住，但仍愿意一起做事</span></div>
+              <div><strong>反馈问题</strong><span>合作是否降低尴尬？对话卡是否自然？</span></div>
+            </div>
+          </article>
+
+          <article class="panel product-line span-4">
+            <div>
+              <p class="mini-title">礼盒 3 · 社交网络破局</p>
+              <h3>协作网格礼盒</h3>
+              <p>以模块化 3D 几何马赛克或纸艺瓷砖为主，每个人独立完成一块，再在学校、club 或经批准的社区活动中拼成集体作品。</p>
+            </div>
+            <div class="prototype">
+              <div><strong>设计目标</strong><span>独立贡献、社区连接、可见归属感</span></div>
+              <div><strong>适用情境</strong><span>想参与集体，但不想被迫社交</span></div>
+              <div><strong>反馈问题</strong><span>是否更愿意带作品加入集体墙？</span></div>
+            </div>
+          </article>
+
+          <article class="panel span-6">
+            <h3>反馈系统：设计验证，不是临床试验</h3>
+            <ul>
+              <li>每个礼盒附一张高质感反馈卡，用二维码进入 1-2 分钟匿名问卷。</li>
+              <li>测量自我报告的即时感受变化，例如更清楚、更平静、更愿意继续，而不是生物指标或医疗结果。</li>
+              <li>记录哪种环境更匹配：独立完成、亲子协作、社区拼接。</li>
+              <li>不收姓名、诊断、病史或敏感健康信息；未成年人反馈需要 parent / school / partner approval。</li>
+            </ul>
+          </article>
+
+          <article class="panel span-6">
+            <h3>给 Wyzant 导师的中文版本</h3>
+            <p>
+              我正在做一个面向青少年情绪健康的学生主导支持性活动礼盒项目，不是临床治疗或医疗研究。我希望学习哈佛水平的神经科学、逻辑学和行为选择理论，把它们转化成安全、适龄、可执行的手作说明书、对话卡和匿名反馈问卷。您能否帮助我把高级概念拆成适合 8 年级学生理解和设计的课程计划？
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="partners">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Partner map</p>
+            <h2>先从安全、可信的合作开始。</h2>
+          </div>
+          <p class="section-kicker">
+            医院是最终方向之一，但第一个 pilot 更适合从家庭、school counselor、老师或小型 youth group 开始。医院 donation 需要严格遵守物品、隐私、感染控制和访问规则。
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="panel span-4">
+            <h3>School route</h3>
+            <ul>
+              <li>找 counselor / Ben 先聊项目定位。</li>
+              <li>可做成 wellness club、student showcase 或 advisory activity。</li>
+              <li>优点：反馈快，风险低，Amy 不需要一开始公开太多私人经历。</li>
+            </ul>
+          </article>
+          <article class="panel span-4">
+            <h3>Hospital route</h3>
+            <ul>
+              <li>先联系 Child Life / donation office，不直接联系病人。</li>
+              <li>只送全新、可清洁、符合 wish list 的活动材料。</li>
+              <li>如果未来要带活动，需要医院 staff 审核和现场安排。</li>
+            </ul>
+          </article>
+          <article class="panel span-4">
+            <h3>Nonprofit route</h3>
+            <ul>
+              <li>短期可以先做 family project 或 fiscal sponsor，不急着注册。</li>
+              <li>如果注册 nonprofit，Oregon Secretary of State、Oregon DOJ、IRS EIN / 501(c)(3) 都要处理。</li>
+              <li>未成年人和银行、税务、签字责任相关问题，需要父母或专业人士确认。</li>
+            </ul>
+          </article>
+          <article class="callout span-12">
+            <p>
+              最聪明的起点：先做 3 个 prototype，找 3-5 个可信的人试用，拿到反馈，再决定是走 school、hospital donation，还是 nonprofit。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">From scattered idea to real project</p>
+            <h2>三天、三个月、一年。</h2>
+          </div>
+          <p class="section-kicker">
+            Amy 说想 quick，因为快回中国了。这里把节奏切成能立刻开始的动作。
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="time-block">
+            <h3>今晚</h3>
+            <ul>
+              <li>把想法整理到这个页面。</li>
+              <li>定 project working name。</li>
+              <li>列出三盒 prototype。</li>
+            </ul>
+          </article>
+          <article class="time-block">
+            <h3>接下来 3 天</h3>
+            <ul>
+              <li>注册 Coursera，试听 Yale Intro Psych 和 Duke Think Again。</li>
+              <li>和 parent 一起建 Wyzant 搜索清单，发 3 条安全版 tutor message。</li>
+              <li>列第一批材料清单和预算。</li>
+            </ul>
+          </article>
+          <article class="time-block">
+            <h3>夏天 3 个月</h3>
+            <ul>
+              <li>每两周做一轮盒子版本。</li>
+              <li>每周学一个 psychology concept。</li>
+              <li>完成 10-20 个 sample boxes。</li>
+            </ul>
+          </article>
+          <article class="time-block">
+            <h3>8 年级</h3>
+            <ul>
+              <li>学校展示或小型 club。</li>
+              <li>收集匿名 feedback。</li>
+              <li>建立小 team，而不是一个人扛全部。</li>
+            </ul>
+          </article>
+          <article class="time-block">
+            <h3>高中前</h3>
+            <ul>
+              <li>申请 summer program。</li>
+              <li>决定是否注册 nonprofit。</li>
+              <li>把项目做成 portfolio 和真实 impact story。</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Current references</p>
+            <h2>可以马上看的资源。</h2>
+          </div>
+          <p class="section-kicker">
+            这些不是最终背书，只是第一轮可靠入口。课程、捐赠和非营利要求会变化，行动前再查一次。
+          </p>
+        </div>
+
+        <div class="source-list">
+          <article class="source">
+            <b><a href="https://online.yale.edu/courses/science-well-being">Yale Online · The Science of Well-Being</a></b>
+            <p>Yale 公开课入口，适合从 happiness habits 和心理学实验开始。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.coursera.org/learn/introduction-psychology">Coursera · Introduction to Psychology</a></b>
+            <p>Paul Bloom 的心理学入门课，覆盖 perception、memory、decision-making、social behavior 等。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.coursera.org/specializations/logic-critical-thinking-duke">Duke / Coursera · Think Again</a></b>
+            <p>Coursera 上的 Duke logic and critical-thinking sequence，适合练 informal logic 和 argument analysis。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://brilliant.org/courses/logic-deduction/">Brilliant · Logic</a></b>
+            <p>交互式逻辑练习，可作为 daily puzzle habit，不等同大学证书。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://brilliant.org/cs/">Brilliant · Computer Science</a></b>
+            <p>Brilliant 的 CS pathway 覆盖 algorithms、data structures 和 logic-oriented problem solving。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://oyc.yale.edu/psychology/psyc-110/lecture-1">Open Yale Courses · PSYC 110</a></b>
+            <p>免费 lecture 版本，适合先试听，看 Amy 是否喜欢这个老师和课程节奏。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.coursera.org/learn/overcoming-cognitive-bias">Coursera · Overcoming Cognitive Bias</a></b>
+            <p>Madecraft 课程，适合快速学习常见 cognitive biases 和 everyday decision tools。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.coursera.org/learn/everyday-parenting">Yale / Coursera · Everyday Parenting</a></b>
+            <p>Alan Kazdin 的行为改变工具课，可借鉴 reinforcement、phrasing 和 step design。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.harvardonline.harvard.edu/course/make-better-decisions-leaders-teams">Harvard Online · Psychology of Blind Spots</a></b>
+            <p>Mahzarin Banaji 课程，聚焦 hidden bias 和 intuitive decision-making。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.coursera.org/learn/behavioral-change">Wesleyan / Coursera · Creating Behavioral Change</a></b>
+            <p>覆盖 motivational interviewing、behavioral activation 和 SMART goals；页面提示不能替代临床训练。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://coursebrowser.dce.harvard.edu/course/neuroscience-of-learning-an-introduction-to-mind-brain-health-and-education/">Harvard DCE · PSYC S-1609</a></b>
+            <p>Neuroscience of Learning course page；适合作为 Wyzant tutor syllabus target，不是 8 年级 on-demand 课。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://coursebrowser.dce.harvard.edu/course/deductive-logic/">Harvard DCE · PHIL S-12</a></b>
+            <p>Deductive Logic course page；可借鉴 argument structure、symbolic logic 和 formal deduction。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://coursebrowser.dce.harvard.edu/course/neuroscience-and-economic-decision-making/">Harvard DCE · ECON S-1915</a></b>
+            <p>Neuroscience and Economic Decision-Making course page；2026 listing shows on-campus format and prerequisites.</p>
+          </article>
+          <article class="source">
+            <b><a href="https://summer.harvard.edu/high-school-programs/secondary-school-program">Harvard SSP · Eligibility</a></b>
+            <p>Harvard Secondary School Program eligibility page；use to avoid assuming middle-school direct enrollment.</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.gse.harvard.edu/ideas/edcast/24/10/boys-and-crisis-connection">Harvard EdCast · Crisis of Connection</a></b>
+            <p>Research discussion / interview source for adolescent social connection, not a course enrollment page.</p>
+          </article>
+          <article class="source">
+            <b><a href="https://support.wyzant.com/students-parents/find-a-tutor/how-do-i-find-a-tutor/">Wyzant · Find a Tutor</a></b>
+            <p>Wyzant support page for searching/requesting tutors; parent involvement is the right default for a minor.</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.nimh.nih.gov/health/publications/depression">NIMH · Depression</a></b>
+            <p>严肃理解 depression 的基础资料，提醒项目不要替代专业治疗。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.kidsmentalhealthfoundation.org/mental-health-resources/depression/behavioral-activation">Kids Mental Health Foundation · Behavioral Activation</a></b>
+            <p>支持“小而有价值的活动”这个方向，但具体内容仍需专业审核。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.ohsu.edu/doernbecher/wish-list">OHSU Doernbecher · Wish List</a></b>
+            <p>Portland 本地儿童医院 donation guideline：通常要求全新、未使用物品。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.doj.state.or.us/charitable-activities/starting-or-closing-a-charity/">Oregon DOJ · Starting a Charity</a></b>
+            <p>如果未来走 charity / nonprofit 路线，这里是 Oregon charitable registration 的官方入口。</p>
+          </article>
+          <article class="source">
+            <b><a href="https://www.irs.gov/businesses/small-businesses-self-employed/responsible-parties-and-nominees">IRS · Responsible Parties and EIN</a></b>
+            <p>EIN 需要 responsible party；涉及未成年人时不要自己乱填，先让父母或专业人士确认。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      Drafted from the June 2026 Amy Project conversation. Private local page. Public sharing requires Amy and parent approval.
+    </div>
+  </footer>
+</body>
+</html>
