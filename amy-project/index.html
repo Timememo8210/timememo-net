@@ -76,6 +76,13 @@
       gap: 16px;
     }
 
+    .top-actions {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .brand {
       display: flex;
       align-items: center;
@@ -131,6 +138,35 @@
     .nav a:hover {
       border-color: var(--ink);
       background: var(--paper-strong);
+    }
+
+    .lang-switch {
+      flex: 0 0 auto;
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid rgba(24, 32, 31, 0.2);
+      background: rgba(255, 250, 240, 0.88);
+      border-radius: 999px;
+      box-shadow: 3px 3px 0 rgba(24, 32, 31, 0.16);
+    }
+
+    .lang-switch button {
+      height: 30px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 11px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .lang-switch button.active {
+      background: var(--ink);
+      color: var(--paper-strong);
     }
 
     .hero {
@@ -785,6 +821,15 @@
         padding: 6px 0;
       }
 
+      .top-actions {
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .lang-switch {
+        margin-top: 6px;
+      }
+
       .hero {
         padding-top: 28px;
       }
@@ -852,23 +897,29 @@
     }
   </style>
 </head>
-<body>
+<body class="lang-zh">
   <header class="topbar">
     <div class="shell topbar-inner">
       <div class="brand">
         <span class="brand-mark">A</span>
         <span>Amy Summer Project</span>
       </div>
-      <nav class="nav" aria-label="Project sections">
-        <a href="#idea">Idea</a>
-        <a href="#boxes">Boxes</a>
-        <a href="#learning">Learning</a>
-        <a href="#course-menu">Course Menu</a>
-        <a href="#chinese-brief">中文蓝图</a>
-        <a href="#partners">Partners</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#sources">Sources</a>
-      </nav>
+      <div class="top-actions">
+        <nav class="nav" aria-label="Project sections">
+          <a href="#idea">Idea</a>
+          <a href="#boxes">Boxes</a>
+          <a href="#learning">Learning</a>
+          <a href="#course-menu">Course Menu</a>
+          <a href="#chinese-brief">中文蓝图</a>
+          <a href="#partners">Partners</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#sources">Sources</a>
+        </nav>
+        <div class="lang-switch" aria-label="Language switch">
+          <button type="button" data-lang-btn="zh" onclick="setProjectLang('zh')">中文</button>
+          <button type="button" data-lang-btn="en" onclick="setProjectLang('en')">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -1686,5 +1737,333 @@
       Drafted from the June 2026 Amy Project conversation. Private local page. Public sharing requires Amy and parent approval.
     </div>
   </footer>
+  <script>
+    (() => {
+      const translations = new Map([
+        [`Amy Summer Project`, { zh: `Amy 夏天项目`, en: `Amy Summer Project` }],
+        [`Idea`, { zh: `想法`, en: `Idea` }],
+        [`Boxes`, { zh: `礼盒`, en: `Boxes` }],
+        [`Learning`, { zh: `学习`, en: `Learning` }],
+        [`Course Menu`, { zh: `课程菜单`, en: `Course Menu` }],
+        [`中文蓝图`, { zh: `中文蓝图`, en: `Mandarin Blueprint` }],
+        [`Partners`, { zh: `合作`, en: `Partners` }],
+        [`Roadmap`, { zh: `路线图`, en: `Roadmap` }],
+        [`Sources`, { zh: `来源`, en: `Sources` }],
+        [`Private draft · Summer before 8th grade`, { zh: `私人草稿 · 升八年级前的夏天`, en: `Private draft · Summer before 8th grade` }],
+        [`Amy’s`, { zh: `Amy 的`, en: `Amy’s` }],
+        [`MindSpark`, { zh: `心智火花`, en: `MindSpark` }],
+        [`Box Lab`, { zh: `礼盒实验室`, en: `Box Lab` }],
+        [`logic`, { zh: `逻辑`, en: `logic` }],
+        [`、`, { zh: `、`, en: `, ` }],
+        [`psychology`, { zh: `心理学`, en: `psychology` }],
+        [`art / design`, { zh: `美术 / 设计`, en: `art / design` }],
+        [`把三个很爱的东西，`, { en: `Turn three favorite things: ` }],
+        [`， 做成可以帮助孩子从低落里动起来的小盒子。`, { en: ` into small boxes that help kids start moving when they feel low.` }],
+        [`从想法到行动`, { en: `From idea to action` }],
+        [`从自己有用到帮助别人`, { en: `From helping yourself to helping others` }],
+        [`从一盒样品到一个 youth-led project`, { en: `From one prototype box to a youth-led project` }],
+        [`定位先写清楚：这不是治疗，也不替代医生、therapist 或药物。它是一个由孩子视角设计的支持性活动盒，核心是用小而具体的任务、创作和连接，给孩子一点点可完成、可表达、可分享的力量。`, { en: `Positioning first: this is not treatment and it does not replace doctors, therapists, or medication. It is a supportive activity box designed from a kid's point of view, using small concrete tasks, making, and connection to give kids a little more power to complete, express, and share.` }],
+        [`Prototype bench`, { zh: `原型工作台`, en: `Prototype bench` }],
+        [`Logic Kit`, { zh: `逻辑盒`, en: `Logic Kit` }],
+        [`Psychology Kit`, { zh: `心理学盒`, en: `Psychology Kit` }],
+        [`Art Kit`, { zh: `美术盒`, en: `Art Kit` }],
+        [`谜题、推理、mini experiment。给大脑一个可以赢的小挑战。`, { en: `Puzzles, reasoning, and mini experiments: small challenges the brain can win.` }],
+        [`情绪卡、行为激活、why people do things。把感受变成可以观察的东西。`, { en: `Emotion cards, behavioral activation, and why people do what they do: turning feelings into something observable.` }],
+        [`故事、颜色、sketch、box design。让表达不一定要靠讲话。`, { en: `Stories, colors, sketches, and box design: expression does not always have to depend on talking.` }],
+        [`兴趣方向合成一个项目`, { en: `interests combined into one project` }],
+        [`第一批 experimental boxes`, { en: `first experimental boxes` }],
+        [`天内做出可测试 pilot`, { en: `days to build a testable pilot` }],
+        [`What this is`, { zh: `这是什么`, en: `What this is` }],
+        [`把今天的想法先固定下来。`, { en: `Capture today's ideas first.` }],
+        [`这页不是最终答案，是 project memory。先把散开的语音想法变成同一个地方，之后每次有新想法都往这里加，再慢慢变成作品、课程计划、合作邮件和项目申请材料。`, { en: `This page is not the final answer. It is project memory. First, it turns scattered spoken ideas into one place. Later, every new idea can be added here and gradually become prototypes, course plans, partner emails, and project application material.` }],
+        [`一句话版本`, { en: `One-sentence version` }],
+        [`Amy wants to build creative activity boxes that use logic, psychology and art to help kids feel a little more capable, connected and understood.`, { zh: `Amy 想做一种创意活动礼盒，把逻辑、心理学和美术结合起来，让孩子感觉更有能力、更有连接、更被理解。`, en: `Amy wants to build creative activity boxes that use logic, psychology and art to help kids feel a little more capable, connected and understood.` }],
+        [`为什么这个项目值得做`, { en: `Why this project is worth doing` }],
+        [`Amy 自己经历过低落和恢复，所以不是从外面“研究别人”，而是从真实体验出发。`, { en: `Amy has personally experienced low periods and recovery, so this is not studying other people from the outside. It starts from real experience.` }],
+        [`很多大人设计给孩子的心理健康材料太像说明书；孩子做给孩子，可能更真、更容易被打开。`, { en: `A lot of mental-health material made by adults for kids feels too much like instructions. A kid designing for other kids may feel more real and easier to open.` }],
+        [`逻辑、心理学、美术三个方向不是分散爱好，可以组合成一个能展示、能测试、能扩大的 summer project。`, { en: `Logic, psychology, and art are not separate hobbies here. They can become a summer project that can be shown, tested, and expanded.` }],
+        [`先帮助自己`, { en: `Help yourself first` }],
+        [`用这个项目整理：什么活动真的让我动起来、变平静、变有成就感。`, { en: `Use this project to sort out which activities actually help me move, calm down, and feel a sense of completion.` }],
+        [`再帮助别人`, { en: `Then help others` }],
+        [`把有效的方法做成别人也能打开、理解、完成的小盒子。`, { en: `Turn useful methods into small boxes that other people can open, understand, and complete.` }],
+        [`最后变成组织`, { en: `Finally grow into an organization` }],
+        [`如果 pilot 有效果，再考虑 school club、hospital partnership 或 nonprofit。`, { en: `If the pilot works, then consider a school club, hospital partnership, or nonprofit.` }],
+        [`First product map`, { zh: `第一版产品地图`, en: `First product map` }],
+        [`三种 experimental boxes。`, { en: `Three experimental boxes.` }],
+        [`名字先用 draft。每盒都应该小、干净、安全、容易完成，避免任何会被医院拒收的材料。所有临床相关措辞都让专业人员审过再使用。`, { en: `The names are drafts for now. Each box should be small, clean, safe, and easy to finish, avoiding any material a hospital would reject. Any clinical language should be reviewed by professionals before use.` }],
+        [`Box 01 · 一个人也能做`, { en: `Box 01 · Can be done alone` }],
+        [`Solo Mastery`, { zh: `独立掌控`, en: `Solo Mastery` }],
+        [`给低能量状态里的孩子一个小胜利。不是“振作起来”，而是一个 5-15 分钟能完成的具体动作。`, { en: `Give a low-energy kid a small win. It is not "cheer up"; it is a concrete action that can be completed in 5-15 minutes.` }],
+        [`放什么`, { en: `What goes inside` }],
+        [`推理卡、进度贴纸、低门槛手工`, { en: `reasoning cards, progress stickers, low-barrier crafts` }],
+        [`帮什么`, { en: `What it helps` }],
+        [`打破“什么都不想做”的循环`, { en: `breaking the "I don't want to do anything" loop` }],
+        [`测试指标`, { en: `Test signal` }],
+        [`孩子是否愿意完成第一个任务`, { en: `whether a kid is willing to finish the first task` }],
+        [`Box 02 · 不一定要硬聊`, { en: `Box 02 · No forced talking` }],
+        [`Connection Lab`, { zh: `连接实验室`, en: `Connection Lab` }],
+        [`帮助孩子和父母、朋友、counselor 或 group 有一点点更容易开始的连接。`, { en: `Help kids start a slightly easier connection with a parent, friend, counselor, or group.` }],
+        [`问题卡、合作小游戏、感谢卡`, { en: `question cards, cooperative mini-games, gratitude cards` }],
+        [`从沉默到一个可以说出口的点`, { en: `from silence to one thing that can be said` }],
+        [`是否让一次对话更容易开始`, { en: `whether it makes one conversation easier to start` }],
+        [`Box 03 · 表达不只靠说话`, { en: `Box 03 · Expression beyond talking` }],
+        [`Story & Art`, { zh: `故事与美术`, en: `Story & Art` }],
+        [`让孩子用颜色、角色、故事和图像表达自己，不要求一开始就讲清楚。`, { en: `Let kids express themselves through colors, characters, stories, and images, without requiring them to explain everything at the beginning.` }],
+        [`spiral-free journal、画笔、故事模板`, { en: `spiral-free journal, drawing tools, story templates` }],
+        [`把乱的感觉变成能看的作品`, { en: `turning messy feelings into something visible` }],
+        [`作品完成后心情是否更可描述`, { en: `whether feelings are easier to describe after finishing the piece` }],
+        [`第一批盒子的设计原则`, { en: `Design principles for the first boxes` }],
+        [`每一盒只解决一个小问题：开始行动、开始表达、开始连接。`, { en: `Each box solves one small problem: starting action, starting expression, or starting connection.` }],
+        [`每个任务都要有完成感，不要像作业，不要需要很强的解释能力。`, { en: `Every task should feel finishable. It should not feel like homework or require strong verbal explanation skills.` }],
+        [`材料必须干净、全新、无尖锐风险、无医疗承诺，符合医院 donation guideline。`, { en: `Materials must be clean, new, free of sharp risks, and without medical promises, matching hospital donation guidelines.` }],
+        [`不直接收集孩子隐私；反馈只收匿名、简单、可选的信息。`, { en: `Do not collect children's private information directly. Feedback should be anonymous, simple, and optional.` }],
+        [`要避免的坑`, { en: `Mistakes to avoid` }],
+        [`不要写“治疗 depression”或“治愈焦虑”。`, { en: `Do not write "treats depression" or "cures anxiety."` }],
+        [`不要把 Amy 的个人经历公开化，除非 Amy 明确愿意并知道后果。`, { en: `Do not make Amy's personal experience public unless Amy clearly wants that and understands the consequences.` }],
+        [`不要直接进入医院和病人互动，先走 Child Life / counselor / parent approval。`, { en: `Do not directly enter hospital patient interaction. Start with Child Life, counselors, and parent approval.` }],
+        [`不要一开始就做太复杂的 subscription business；先证明一个盒子真的有人愿意打开。`, { en: `Do not start with an overly complex subscription business. First prove that someone truly wants to open one box.` }],
+        [`Learning stack`, { zh: `学习结构`, en: `Learning stack` }],
+        [`这个夏天要学什么。`, { en: `What to learn this summer.` }],
+        [`课程优先选权威、可远程、可按自己的速度学的。付费 tutor 可以作为补充，但第一步先用高质量公开课程建立框架。`, { en: `Prioritize courses that are credible, remote-friendly, and self-paced. Paid tutors can supplement, but the first step is building a framework through high-quality public courses.` }],
+        [`Psychology questions Amy wants to explore`, { zh: `Amy 想探索的心理学问题`, en: `Psychology questions Amy wants to explore` }],
+        [`People：人为什么做他们做的事？为什么有人喜欢可爱风格，有人喜欢运动，有人喜欢安静？`, { en: `People: why do people do what they do? Why do some people like cute styles, some like sports, and some like quiet things?` }],
+        [`Mind reading：别人说出来的话和心里想的一样吗？微表情、身体语言能不能帮助理解？`, { en: `Mind reading: are people's spoken words the same as what they think? Can microexpressions and body language help us understand?` }],
+        [`Kids：小孩的 sadness、depression、happiness 是怎么发生的？什么活动能让人从低落里出来一点？`, { en: `Kids: how do sadness, depression, and happiness happen in children? What activities can help someone move a little out of a low state?` }],
+        [`Design：怎样把心理学做成孩子愿意玩的东西，而不是大人写的 worksheet？`, { en: `Design: how can psychology become something kids want to play with, rather than an adult-written worksheet?` }],
+        [`Suggested course path`, { zh: `建议课程路径`, en: `Suggested course path` }],
+        [`Yale / Coursera: The Science of Well-Being for Teens 或成人版，理解 happiness habits。`, { en: `Yale / Coursera: The Science of Well-Being for Teens, or the adult version, to understand happiness habits.` }],
+        [`Yale / Coursera 或 Open Yale: Introduction to Psychology，建立 psychology 大图谱。`, { en: `Yale / Coursera or Open Yale: Introduction to Psychology, to build the big map of psychology.` }],
+        [`选 1 门 live teen class 或 tutor：专攻 child psychology、emotion、microexpression 或 product design。`, { en: `Choose one live teen class or tutor focused on child psychology, emotion, microexpressions, or product design.` }],
+        [`每周把学到的一个概念变成一个盒子里的 activity card。`, { en: `Each week, turn one concept learned into an activity card inside a box.` }],
+        [`Logic track`, { zh: `逻辑路线`, en: `Logic track` }],
+        [`目标不是刷题，而是设计“能让人有成就感”的小挑战。可以从谜题、pattern、game theory、decision-making 开始。`, { en: `The goal is not grinding problems. It is designing small challenges that create a sense of achievement. Start with puzzles, patterns, game theory, and decision-making.` }],
+        [`Art / design track`, { zh: `美术 / 设计路线`, en: `Art / design track` }],
+        [`学习 packaging、color psychology、illustration、story prompts。盒子本身要像一个 invitation，不像一个病历表。`, { en: `Study packaging, color psychology, illustration, and story prompts. The box should feel like an invitation, not a medical form.` }],
+        [`STEM box model`, { zh: `STEM 礼盒模型`, en: `STEM box model` }],
+        [`Mark Rober / CrunchLabs 的价值是“把复杂知识变成孩子愿意打开的盒子”。可以学习它的 engagement，不必照抄它的内容。`, { en: `The value of Mark Rober / CrunchLabs is turning complex knowledge into boxes kids want to open. Learn its engagement model without copying its content.` }],
+        [`Summer launch menu`, { zh: `夏天启动菜单`, en: `Summer launch menu` }],
+        [`Official courses + Wyzant mentor tracks.`, { zh: `官方课程 + Wyzant 导师路线。`, en: `Official courses + Wyzant mentor tracks.` }],
+        [`先用 Coursera / Brilliant 立刻开始，再用 Wyzant 找 tutor 把 Harvard-level topics 拆成适合 8 年级的 syllabus。重点不是“神秘读心”，而是注意偏差、行为奖励、盲点判断、逻辑结构和动机设计。`, { en: `Start immediately with Coursera / Brilliant, then use Wyzant tutors to break Harvard-level topics into an 8th-grade-friendly syllabus. The focus is not mysterious mind reading; it is attention bias, behavioral rewards, blind-spot judgment, logical structure, and motivation design.` }],
+        [`Official University Platforms Amy can start now`, { zh: `Amy 现在可以开始的官方学习平台`, en: `Official University Platforms Amy can start now` }],
+        [`These are the broad, on-demand foundations. They are useful for learning and portfolio evidence, but the project should describe them accurately as online courses or guided platforms, not as direct enrollment in the universities.`, { zh: `这些是广泛、按需学习的基础课程。它们对学习和作品集证明有用，但项目里要准确表述为在线课程或引导式平台，不要说成直接注册进入这些大学。`, en: `These are the broad, on-demand foundations. They are useful for learning and portfolio evidence, but the project should describe them accurately as online courses or guided platforms, not as direct enrollment in the universities.` }],
+        [`psych foundation`, { zh: `心理学基础`, en: `psych foundation` }],
+        [`Introduction to Psychology`, { zh: `心理学导论`, en: `Introduction to Psychology` }],
+        [`Search: “Introduction to Psychology Yale.” Broad overview of behavior, memory, development, emotion, social psychology, clinical psychology, and happiness.`, { zh: `搜索：“Introduction to Psychology Yale”。广泛理解行为、记忆、发展、情绪、社会心理学、临床心理学和幸福感。`, en: `Search: “Introduction to Psychology Yale.” Broad overview of behavior, memory, development, emotion, social psychology, clinical psychology, and happiness.` }],
+        [`Project use: gives Amy the vocabulary to explain why logic, habit, feeling, and social connection belong in the same box project.`, { zh: `项目用途：给 Amy 一套词汇，解释为什么逻辑、习惯、感受和社交连接可以放进同一个礼盒项目。`, en: `Project use: gives Amy the vocabulary to explain why logic, habit, feeling, and social connection belong in the same box project.` }],
+        [`informal logic`, { zh: `非形式逻辑`, en: `informal logic` }],
+        [`Think Again: How to Reason and Argue`, { zh: `重新思考：如何推理与辩论`, en: `Think Again: How to Reason and Argue` }],
+        [`Search: “Think Again Duke.” This is the Coursera / Duke logic and critical-thinking sequence: claims, reasons, assumptions, validity, and fallacies.`, { zh: `搜索：“Think Again Duke”。这是 Coursera / Duke 的逻辑与批判性思维系列，覆盖主张、理由、假设、有效性和谬误。`, en: `Search: “Think Again Duke.” This is the Coursera / Duke logic and critical-thinking sequence: claims, reasons, assumptions, validity, and fallacies.` }],
+        [`Project use: helps convert “craft instructions” into clear if/then steps and helps Amy spot when a workbook prompt is confusing or logically overloaded.`, { zh: `项目用途：帮助把“手工说明”变成清楚的 if/then 步骤，也帮助 Amy 发现哪些 workbook prompt 太混乱或逻辑负担太重。`, en: `Project use: helps convert “craft instructions” into clear if/then steps and helps Amy spot when a workbook prompt is confusing or logically overloaded.` }],
+        [`CS pathways`, { zh: `计算机科学路径`, en: `CS pathways` }],
+        [`interactive`, { zh: `互动式`, en: `interactive` }],
+        [`Logic & Computational Thinking Pathways`, { zh: `逻辑与计算思维路径`, en: `Logic & Computational Thinking Pathways` }],
+        [`Search inside Brilliant for “Logic” and “Computer Science.” Use visual puzzles, algorithms, conditionals, and structured problem solving as daily practice.`, { zh: `在 Brilliant 里搜索 “Logic” 和 “Computer Science”。用视觉谜题、算法、条件语句和结构化解题做日常练习。`, en: `Search inside Brilliant for “Logic” and “Computer Science.” Use visual puzzles, algorithms, conditionals, and structured problem solving as daily practice.` }],
+        [`Project use: trains the “20 x 20 x 20” kit rule: 20 minutes, 20 pieces or fewer, first step understandable in 20 seconds.`, { zh: `项目用途：训练“20 x 20 x 20”礼盒规则：20 分钟、20 个以内零件、第一步 20 秒内看懂。`, en: `Project use: trains the “20 x 20 x 20” kit rule: 20 minutes, 20 pieces or fewer, first step understandable in 20 seconds.` }],
+        [`bias toolkit`, { zh: `偏差工具包`, en: `bias toolkit` }],
+        [`Overcoming Cognitive Bias`, { zh: `克服认知偏差`, en: `Overcoming Cognitive Bias` }],
+        [`学 confirmation bias、hindsight bias、attribution bias、availability bias、inattentional blindness、anchoring 和 blind spot bias。它适合快速建立“脑子会怎样自动走偏”的 vocabulary。`, { en: `Learn confirmation bias, hindsight bias, attribution bias, availability bias, inattentional blindness, anchoring, and blind spot bias. It is useful for quickly building vocabulary around how the brain can automatically drift off course.` }],
+        [`Box use: 给 Logic Kit 做“what did I miss?” 小卡片，让孩子练习把注意力从单一负面线索移开，去找事实、例外和下一步。`, { en: `Box use: create "what did I miss?" cards for the Logic Kit so kids can practice moving attention away from one negative signal and toward facts, exceptions, and next steps.` }],
+        [`Guardrail: 不能说 depression “本质上就是” inattentional blindness。更准确：低落状态可能伴随注意偏差和负面过滤，但 depression 是多因素问题。`, { en: `Guardrail: do not say depression is "essentially" inattentional blindness. More accurate: low mood can involve attention bias and negative filtering, but depression is a multifactorial issue.` }],
+        [`behavior shaping`, { zh: `行为塑造`, en: `behavior shaping` }],
+        [`Everyday Parenting: The ABCs of Child Rearing`, { zh: `日常养育：儿童行为的 ABC`, en: `Everyday Parenting: The ABCs of Child Rearing` }],
+        [`表面是 parenting，核心是行为改变工具：antecedents、positive reinforcement、tone、phrasing、practice、shaping，以及什么时候需要专业帮助。`, { en: `The title is parenting, but the core is behavior-change tools: antecedents, positive reinforcement, tone, phrasing, practice, shaping, and when professional help is needed.` }],
+        [`Box use: 设计 instruction booklet，让第一个动作非常小、非常清楚，并且完成后马上有可见 reward，不靠大人说教。`, { en: `Box use: design the instruction booklet so the first action is very small and clear, with an immediate visible reward after completion, not adult lecturing.` }],
+        [`Guardrail: 这不是让 Amy “治疗别人”或当 ABA practitioner；它是学习如何把说明、反馈和环境设计得更友善。`, { en: `Guardrail: this is not training Amy to "treat others" or become an ABA practitioner. It is learning how to make instructions, feedback, and environments friendlier.` }],
+        [`leaders / teams`, { zh: `领导者 / 团队`, en: `leaders / teams` }],
+        [`hidden bias`, { zh: `隐藏偏差`, en: `hidden bias` }],
+        [`Make Better Decisions: The Psychology of Blind Spots`, { zh: `做更好的决定：盲点心理学`, en: `Make Better Decisions: The Psychology of Blind Spots` }],
+        [`这门课研究 hidden bias 和 intuitive decision-making：我们怎样在不自觉中形成判断，怎样误读他人，怎样让 decision process 减少盲点。`, { en: `This course studies hidden bias and intuitive decision-making: how we form judgments without noticing, how we misread others, and how decision processes can reduce blind spots.` }],
+        [`Box use: 给 Connection Lab 做 parent/teen “assumption check” 卡片：我以为你在想什么？证据是什么？还有没有另一个解释？`, { en: `Box use: create parent/teen "assumption check" cards for Connection Lab: What do I think you are thinking? What is the evidence? Is there another explanation?` }],
+        [`Guardrail: 它更偏成人 leadership training，可能贵；对 Amy 来说可以让 tutor 提炼核心概念，不一定要马上上完整课。`, { en: `Guardrail: it is more like adult leadership training and may be expensive. For Amy, a tutor can extract the core concepts; she does not need to take the full course immediately.` }],
+        [`motivation loops`, { zh: `动机循环`, en: `motivation loops` }],
+        [`Creating Behavioral Change`, { zh: `创造行为改变`, en: `Creating Behavioral Change` }],
+        [`覆盖 classical / operant conditioning、motivational interviewing、CBT 基础、behavioral activation、SMART goals 和 relapse prevention。它最贴近“怎样从卡住到开始动”。`, { en: `Covers classical and operant conditioning, motivational interviewing, CBT basics, behavioral activation, SMART goals, and relapse prevention. It is closest to "how to move from stuck to started."` }],
+        [`Box use: 给 Solo Mastery 做 20 x 20 x 20 craft constraints：20 分钟内、20 个以内零件、20 秒内看懂第一步，让行动门槛低到可以开始。`, { en: `Box use: design Solo Mastery with 20 x 20 x 20 craft constraints: within 20 minutes, 20 pieces or fewer, and the first step understandable in 20 seconds, so the action barrier is low enough to start.` }],
+        [`Guardrail: Coursera 页面明确说这门课不会训练你给别人实施心理干预；项目只能做 supportive design，不能做 therapy claim。`, { en: `Guardrail: the Coursera page says clearly that the course does not train you to deliver psychological interventions. The project can only make supportive design claims, not therapy claims.` }],
+        [`Best starting order`, { zh: `最佳开始顺序`, en: `Best starting order` }],
+        [`Wesleyan Creating Behavioral Change：先学 action loop 和 behavioral activation。`, { en: `Wesleyan Creating Behavioral Change: learn action loops and behavioral activation first.` }],
+        [`Yale Everyday Parenting：再学 reward、phrasing、step design。`, { en: `Yale Everyday Parenting: then learn rewards, phrasing, and step design.` }],
+        [`Overcoming Cognitive Bias：补齐 attention / judgment vocabulary。`, { en: `Overcoming Cognitive Bias: add attention and judgment vocabulary.` }],
+        [`Harvard Blind Spots：作为 advanced framework，让 tutor 帮忙拆概念。`, { en: `Harvard Blind Spots: use it as an advanced framework and have a tutor break down the concepts.` }],
+        [`Wyzant message draft`, { zh: `Wyzant 消息草稿`, en: `Wyzant message draft` }],
+        [`I want to study cognitive bias, blind spots, behavioral modification, motivation, and behavioral activation in a research-safe way. My goal is not to practice therapy. I want to design supportive craft/activity kits for teens that encourage tiny actions, reflection, and connection. Can you help me turn ideas from Harvard's Psychology of Blind Spots, Yale's Everyday Parenting, Wesleyan's Creating Behavioral Change, and cognitive-bias frameworks into age-appropriate activity-card experiments?`, { zh: `我想以安全、适合研究边界的方式学习认知偏差、盲点、行为改变、动机和行为激活。我的目标不是练习治疗。我想设计支持青少年的手工 / 活动礼盒，鼓励小行动、反思和连接。您能否帮助我把 Harvard Psychology of Blind Spots、Yale Everyday Parenting、Wesleyan Creating Behavioral Change 和认知偏差框架里的想法，转化成适龄的活动卡实验？`, en: `I want to study cognitive bias, blind spots, behavioral modification, motivation, and behavioral activation in a research-safe way. My goal is not to practice therapy. I want to design supportive craft/activity kits for teens that encourage tiny actions, reflection, and connection. Can you help me turn ideas from Harvard's Psychology of Blind Spots, Yale's Everyday Parenting, Wesleyan's Creating Behavioral Change, and cognitive-bias frameworks into age-appropriate activity-card experiments?` }],
+        [`Wyzant mentor tracks using Harvard course names as syllabus targets`, { zh: `用哈佛课程名作为 syllabus target 的 Wyzant 导师路线`, en: `Wyzant mentor tracks using Harvard course names as syllabus targets` }],
+        [`Harvard Secondary School Program courses are college-level and have age / grade eligibility rules. For 8th grade, use these course names as a search and tutoring map, with a parent managing the Wyzant account and sitting close to the process.`, { zh: `Harvard Secondary School Program 的课程是大学水平，并且有年龄 / 年级资格要求。对 8 年级来说，这些课程名更适合作为搜索和辅导地图，由家长管理 Wyzant 账号并参与过程。`, en: `Harvard Secondary School Program courses are college-level and have age / grade eligibility rules. For 8th grade, use these course names as a search and tutoring map, with a parent managing the Wyzant account and sitting close to the process.` }],
+        [`Track 1`, { zh: `路线 1`, en: `Track 1` }],
+        [`Neuroscience`, { zh: `神经科学`, en: `Neuroscience` }],
+        [`Clinical psychology`, { zh: `临床心理学`, en: `Clinical psychology` }],
+        [`social connection`, { zh: `社会连接`, en: `social connection` }],
+        [`Mind & Social Environment Specialist`, { zh: `心智与社会环境导师`, en: `Mind & Social Environment Specialist` }],
+        [`Wyzant search terms: “Neuroscience,” “Clinical Psychology,” “Adolescent Psychology,” “Social Psychology.” Harvard target topics: PSYC S-1609 Neuroscience of Learning and youth social-connection frameworks.`, { zh: `Wyzant 搜索词：“Neuroscience,” “Clinical Psychology,” “Adolescent Psychology,” “Social Psychology”。哈佛目标主题：PSYC S-1609 Neuroscience of Learning 和青少年社会连接框架。`, en: `Wyzant search terms: “Neuroscience,” “Clinical Psychology,” “Adolescent Psychology,” “Social Psychology.” Harvard target topics: PSYC S-1609 Neuroscience of Learning and youth social-connection frameworks.` }],
+        [`Safe message: “Hi, I am an 8th grader building a student-led supportive art/activity kit project around teen well-being. I am not practicing therapy or conducting clinical research. Can you teach me neuroplasticity, learning science, and adolescent social connection in a way I can turn into safe reflection/activity cards?”`, { zh: `安全消息：“Hi，我是 8 年级学生，正在做一个围绕青少年健康感的学生主导支持性美术 / 活动礼盒项目。我不是在练习治疗，也不是在做临床研究。您能否教我 neuroplasticity、learning science 和 adolescent social connection，并帮助我把它们转化成安全的 reflection / activity cards？”`, en: `Safe message: “Hi, I am an 8th grader building a student-led supportive art/activity kit project around teen well-being. I am not practicing therapy or conducting clinical research. Can you teach me neuroplasticity, learning science, and adolescent social connection in a way I can turn into safe reflection/activity cards?”` }],
+        [`Track 2`, { zh: `路线 2`, en: `Track 2` }],
+        [`Symbolic logic`, { zh: `符号逻辑`, en: `Symbolic logic` }],
+        [`Formal logic`, { zh: `形式逻辑`, en: `Formal logic` }],
+        [`systems design`, { zh: `系统设计`, en: `systems design` }],
+        [`Logic & Systems Specialist`, { zh: `逻辑与系统导师`, en: `Logic & Systems Specialist` }],
+        [`Wyzant search terms: “Symbolic Logic,” “Formal Logic,” “Mathematical Logic,” “Philosophy.” Harvard target topic: PHIL S-12 Deductive Logic.`, { zh: `Wyzant 搜索词：“Symbolic Logic,” “Formal Logic,” “Mathematical Logic,” “Philosophy”。哈佛目标主题：PHIL S-12 Deductive Logic。`, en: `Wyzant search terms: “Symbolic Logic,” “Formal Logic,” “Mathematical Logic,” “Philosophy.” Harvard target topic: PHIL S-12 Deductive Logic.` }],
+        [`Safe message: “Hi, I want help turning real-world craft instructions, like ribbon folding or box assembly, into clear logical algorithms and error-proof checklists for activity kits. Can you teach me deductive logic and structured proof-style thinking at a middle-school-friendly pace?”`, { zh: `安全消息：“Hi，我想把真实手工说明，比如丝带折叠或礼盒组装，转化成清楚的逻辑算法和不容易出错的 activity kit checklist。您能否用适合初中生的节奏教我 deductive logic 和 structured proof-style thinking？”`, en: `Safe message: “Hi, I want help turning real-world craft instructions, like ribbon folding or box assembly, into clear logical algorithms and error-proof checklists for activity kits. Can you teach me deductive logic and structured proof-style thinking at a middle-school-friendly pace?”` }],
+        [`Track 3`, { zh: `路线 3`, en: `Track 3` }],
+        [`Behavioral economics`, { zh: `行为经济学`, en: `Behavioral economics` }],
+        [`Statistics`, { zh: `统计学`, en: `Statistics` }],
+        [`survey design`, { zh: `问卷设计`, en: `survey design` }],
+        [`Choice & Data Specialist`, { zh: `选择与数据导师`, en: `Choice & Data Specialist` }],
+        [`Wyzant search terms: “Behavioral Economics,” “Statistics,” “Survey Design,” “Neuroeconomics.” Harvard target topic: ECON S-1915 Neuroscience and Economic Decision-Making.`, { zh: `Wyzant 搜索词：“Behavioral Economics,” “Statistics,” “Survey Design,” “Neuroeconomics”。哈佛目标主题：ECON S-1915 Neuroscience and Economic Decision-Making。`, en: `Wyzant search terms: “Behavioral Economics,” “Statistics,” “Survey Design,” “Neuroeconomics.” Harvard target topic: ECON S-1915 Neuroscience and Economic Decision-Making.` }],
+        [`Safe message: “Hi, I want to learn cognitive biases like present bias and design a simple anonymous QR-code feedback form for a summer activity-kit prototype. I am not collecting clinical data; I only need product feedback such as clarity, energy, and willingness to continue.”`, { zh: `安全消息：“Hi，我想学习 present bias 等 cognitive biases，并为暑期 activity-kit prototype 设计一个简单匿名 QR-code feedback form。我不收集临床数据，只需要 clarity、energy、willingness to continue 这类产品反馈。”`, en: `Safe message: “Hi, I want to learn cognitive biases like present bias and design a simple anonymous QR-code feedback form for a summer activity-kit prototype. I am not collecting clinical data; I only need product feedback such as clarity, energy, and willingness to continue.”` }],
+        [`Tutor filter: pick someone who can teach advanced ideas to a middle-school student, will stay within educational coaching, and is comfortable with parent involvement. Do not ask a tutor to diagnose, treat, supervise therapy, or run a medical study.`, { zh: `导师筛选：选择能把高级概念教给初中生、愿意保持在教育辅导范围内、并且接受家长参与的人。不要要求导师诊断、治疗、监督治疗或运行医疗研究。`, en: `Tutor filter: pick someone who can teach advanced ideas to a middle-school student, will stay within educational coaching, and is comfortable with parent involvement. Do not ask a tutor to diagnose, treat, supervise therapy, or run a medical study.` }],
+        [`Mandarin project blueprint`, { zh: `中文项目蓝图`, en: `Mandarin project blueprint` }],
+        [`行为激活设计实验。`, { en: `The Behavioral Activation Design Experiment.` }],
+        [`这是给中文沟通、制造打样、导师协作和国际展示使用的专业版表述。项目可以借鉴心理学、逻辑学和行为选择理论，但必须写清楚：这是非临床、学生主导的支持性活动礼盒设计探索，不是治疗方案、医疗研究或临床试验。`, { en: `This is the professional version for Mandarin communication, manufacturing prototypes, mentor collaboration, and international presentation. The project can draw from psychology, logic, and behavioral choice theory, but it must state clearly: this is a non-clinical, student-led supportive activity-kit design exploration, not treatment, medical research, or a clinical trial.` }],
+        [`项目名称`, { en: `Project name` }],
+        [`行为激活设计实验`, { en: `The Behavioral Activation Design Experiment` }],
+        [`核心使命`, { en: `Core mission` }],
+        [`将行为激活的基本思想——通过小而清楚、有结构、有完成感的活动，帮助人从低能量和反复消极思绪中迈出一步——转化为高质感、可打样、可反馈的个人手作支持礼盒。`, { en: `Translate the basic idea of behavioral activation - small, clear, structured, finishable activities that help people take one step out of low energy and repetitive negative thoughts - into high-quality personal craft support boxes that can be prototyped and tested.` }],
+        [`安全边界：页面和对外材料不应声称“治疗青少年抑郁症”。更准确的说法是：支持青少年情绪健康、提升行动感、表达感和连接感。`, { en: `Safety boundary: the page and external materials should not claim to "treat teen depression." A more accurate statement is supporting teen emotional well-being and increasing a sense of action, expression, and connection.` }],
+        [`心理学框架`, { en: `Psychology framework` }],
+        [`参考行为激活、青少年社会连接、学习科学和注意偏差。核心问题是：什么样的小活动更容易让孩子开始行动、继续完成，并愿意表达自己的感受？`, { en: `Draw from behavioral activation, adolescent social connection, learning science, and attention bias. Core question: what kinds of small activities make it easier for kids to start, continue, finish, and express how they feel?` }],
+        [`逻辑学框架`, { en: `Logic framework` }],
+        [`参考 Harvard PHIL S-12 一类的演绎逻辑和结构化推理，把手作步骤设计成清楚、可验证、低错误率的算法。`, { en: `Draw from deductive logic and structured reasoning like Harvard PHIL S-12, designing craft steps as clear, verifiable, low-error algorithms.` }],
+        [`选择与设计框架`, { en: `Choice and design framework` }],
+        [`参考 behavioral economics、choice architecture 和 cognitive bias，研究材料、顺序、反馈和社交环境如何影响孩子是否愿意继续。`, { en: `Draw from behavioral economics, choice architecture, and cognitive bias to study how materials, order, feedback, and social environment affect whether kids want to continue.` }],
+        [`20 x 20 x 20 规则：20 分钟内能完成一个阶段；20 个以内核心零件；20 秒内看懂第一步。目标不是强迫进入“心流”，而是降低开始门槛，让完成感自然出现。`, { en: `20 x 20 x 20 rule: one stage can be completed within 20 minutes; 20 core pieces or fewer; the first step can be understood in 20 seconds. The goal is not to force "flow," but to lower the start barrier so completion can emerge naturally.` }],
+        [`礼盒 1 · 安全地带`, { en: `Box 1 · Safety Zone` }],
+        [`独立掌控礼盒`, { en: `Solo Mastery Box` }],
+        [`以真丝丝带玫瑰、植物花艺和精细折叠为主，适合孩子在安静、熟悉、可控的空间里独立完成。`, { en: `Centered on silk ribbon roses, botanical craft, and fine folding, designed for kids to complete independently in a quiet, familiar, controllable space.` }],
+        [`设计目标`, { en: `Design goal` }],
+        [`安全感、掌控感、完成感`, { en: `safety, control, completion` }],
+        [`适用情境`, { en: `Best-fit situation` }],
+        [`低能量、想独处、需要安静任务`, { en: `low energy, wanting to be alone, needing a quiet task` }],
+        [`反馈问题`, { en: `Feedback question` }],
+        [`第一步是否容易开始？完成后是否更平静？`, { en: `Is the first step easy to start? Does the user feel calmer after finishing?` }],
+        [`礼盒 2 · 家庭之桥`, { en: `Box 2 · Family Bridge` }],
+        [`互动指尖解压礼盒`, { en: `Interactive Fidget Box` }],
+        [`以磁吸木质结构、几何拼图或链环结构为主，设计成低压力双人协作模型。`, { en: `Centered on magnetic wood structures, geometric puzzles, or chain-ring structures, designed as a low-pressure two-person collaboration model.` }],
+        [`共同专注、低压力对话、关系修复`, { en: `shared focus, low-pressure conversation, relationship repair` }],
+        [`亲子沟通卡住，但仍愿意一起做事`, { en: `parent-teen communication is stuck, but both are still willing to do something together` }],
+        [`合作是否降低尴尬？对话卡是否自然？`, { en: `Does collaboration reduce awkwardness? Do the conversation cards feel natural?` }],
+        [`礼盒 3 · 社交网络破局`, { en: `Box 3 · Social Network Hack` }],
+        [`协作网格礼盒`, { en: `Collaborative Grid Box` }],
+        [`以模块化 3D 几何马赛克或纸艺瓷砖为主，每个人独立完成一块，再在学校、club 或经批准的社区活动中拼成集体作品。`, { en: `Centered on modular 3D geometric mosaics or paper-art tiles. Each person completes one piece independently, then adds it to a collective artwork at school, a club, or an approved community activity.` }],
+        [`独立贡献、社区连接、可见归属感`, { en: `independent contribution, community connection, visible belonging` }],
+        [`想参与集体，但不想被迫社交`, { en: `wanting to join a group without being forced to socialize` }],
+        [`是否更愿意带作品加入集体墙？`, { en: `Is the user more willing to bring their work to join the collective wall?` }],
+        [`反馈系统：设计验证，不是临床试验`, { en: `Feedback system: design validation, not a clinical trial` }],
+        [`每个礼盒附一张高质感反馈卡，用二维码进入 1-2 分钟匿名问卷。`, { en: `Each box includes a high-quality feedback card with a QR code leading to a 1-2 minute anonymous survey.` }],
+        [`测量自我报告的即时感受变化，例如更清楚、更平静、更愿意继续，而不是生物指标或医疗结果。`, { en: `Measure self-reported immediate changes such as feeling clearer, calmer, or more willing to continue, not biological indicators or medical outcomes.` }],
+        [`记录哪种环境更匹配：独立完成、亲子协作、社区拼接。`, { en: `Track which environment fits best: independent completion, parent-teen collaboration, or community assembly.` }],
+        [`不收姓名、诊断、病史或敏感健康信息；未成年人反馈需要 parent / school / partner approval。`, { en: `Do not collect names, diagnoses, medical history, or sensitive health information; feedback from minors needs parent, school, or partner approval.` }],
+        [`给 Wyzant 导师的中文版本`, { en: `Mandarin version for Wyzant tutors` }],
+        [`我正在做一个面向青少年情绪健康的学生主导支持性活动礼盒项目，不是临床治疗或医疗研究。我希望学习哈佛水平的神经科学、逻辑学和行为选择理论，把它们转化成安全、适龄、可执行的手作说明书、对话卡和匿名反馈问卷。您能否帮助我把高级概念拆成适合 8 年级学生理解和设计的课程计划？`, { en: `I am building a student-led supportive activity-kit project for teen emotional well-being. It is not clinical treatment or medical research. I want to learn Harvard-level neuroscience, logic, and behavioral choice theory and turn them into safe, age-appropriate, actionable craft instructions, conversation cards, and anonymous feedback surveys. Can you help me break advanced concepts into a course plan suitable for an 8th-grade student to understand and design from?` }],
+        [`Partner map`, { zh: `合作地图`, en: `Partner map` }],
+        [`先从安全、可信的合作开始。`, { en: `Start with safe, trustworthy partnerships.` }],
+        [`医院是最终方向之一，但第一个 pilot 更适合从家庭、school counselor、老师或小型 youth group 开始。医院 donation 需要严格遵守物品、隐私、感染控制和访问规则。`, { en: `Hospitals can be one eventual direction, but the first pilot is better suited to family, a school counselor, teachers, or a small youth group. Hospital donations must strictly follow material, privacy, infection-control, and visit rules.` }],
+        [`School route`, { zh: `学校路线`, en: `School route` }],
+        [`找 counselor / Ben 先聊项目定位。`, { en: `Talk to a counselor / Ben first about project positioning.` }],
+        [`可做成 wellness club、student showcase 或 advisory activity。`, { en: `It could become a wellness club, student showcase, or advisory activity.` }],
+        [`优点：反馈快，风险低，Amy 不需要一开始公开太多私人经历。`, { en: `Advantages: fast feedback, lower risk, and Amy does not need to share too much personal experience at the beginning.` }],
+        [`Hospital route`, { zh: `医院路线`, en: `Hospital route` }],
+        [`先联系 Child Life / donation office，不直接联系病人。`, { en: `Contact Child Life / the donation office first; do not contact patients directly.` }],
+        [`只送全新、可清洁、符合 wish list 的活动材料。`, { en: `Donate only new, cleanable activity materials that match the wish list.` }],
+        [`如果未来要带活动，需要医院 staff 审核和现场安排。`, { en: `If leading an activity in the future, hospital staff review and on-site arrangements are required.` }],
+        [`Nonprofit route`, { zh: `非营利路线`, en: `Nonprofit route` }],
+        [`短期可以先做 family project 或 fiscal sponsor，不急着注册。`, { en: `Short-term, this can start as a family project or use a fiscal sponsor; registration does not need to happen immediately.` }],
+        [`如果注册 nonprofit，Oregon Secretary of State、Oregon DOJ、IRS EIN / 501(c)(3) 都要处理。`, { en: `If registering a nonprofit, Oregon Secretary of State, Oregon DOJ, IRS EIN, and 501(c)(3) issues all need to be handled.` }],
+        [`未成年人和银行、税务、签字责任相关问题，需要父母或专业人士确认。`, { en: `Minor-related banking, tax, and signing-responsibility issues need confirmation from parents or professionals.` }],
+        [`最聪明的起点：先做 3 个 prototype，找 3-5 个可信的人试用，拿到反馈，再决定是走 school、hospital donation，还是 nonprofit。`, { en: `Smartest starting point: make 3 prototypes, find 3-5 trusted people to try them, get feedback, then decide whether to pursue school, hospital donation, or nonprofit paths.` }],
+        [`From scattered idea to real project`, { zh: `从散开的想法到真实项目`, en: `From scattered idea to real project` }],
+        [`三天、三个月、一年。`, { en: `Three days, three months, one year.` }],
+        [`Amy 说想 quick，因为快回中国了。这里把节奏切成能立刻开始的动作。`, { en: `Amy said she wants to move quickly because she will soon go back to China. This breaks the rhythm into actions that can start immediately.` }],
+        [`今晚`, { en: `Tonight` }],
+        [`把想法整理到这个页面。`, { en: `Organize the ideas into this page.` }],
+        [`定 project working name。`, { en: `Choose a project working name.` }],
+        [`列出三盒 prototype。`, { en: `List the three box prototypes.` }],
+        [`接下来 3 天`, { en: `Next 3 days` }],
+        [`注册 Coursera，试听 Yale Intro Psych 和 Duke Think Again。`, { en: `Create a Coursera account and preview Yale Intro Psych and Duke Think Again.` }],
+        [`和 parent 一起建 Wyzant 搜索清单，发 3 条安全版 tutor message。`, { en: `With a parent, build a Wyzant search list and send 3 safe tutor messages.` }],
+        [`列第一批材料清单和预算。`, { en: `List the first material checklist and budget.` }],
+        [`夏天 3 个月`, { en: `3 summer months` }],
+        [`每两周做一轮盒子版本。`, { en: `Make one box iteration every two weeks.` }],
+        [`每周学一个 psychology concept。`, { en: `Learn one psychology concept each week.` }],
+        [`完成 10-20 个 sample boxes。`, { en: `Finish 10-20 sample boxes.` }],
+        [`8 年级`, { en: `8th grade` }],
+        [`学校展示或小型 club。`, { en: `School showcase or small club.` }],
+        [`收集匿名 feedback。`, { en: `Collect anonymous feedback.` }],
+        [`建立小 team，而不是一个人扛全部。`, { en: `Build a small team instead of carrying everything alone.` }],
+        [`高中前`, { en: `Before high school` }],
+        [`申请 summer program。`, { en: `Apply for summer programs.` }],
+        [`决定是否注册 nonprofit。`, { en: `Decide whether to register a nonprofit.` }],
+        [`把项目做成 portfolio 和真实 impact story。`, { en: `Turn the project into a portfolio and real impact story.` }],
+        [`Current references`, { zh: `当前参考资料`, en: `Current references` }],
+        [`可以马上看的资源。`, { en: `Resources to view now.` }],
+        [`这些不是最终背书，只是第一轮可靠入口。课程、捐赠和非营利要求会变化，行动前再查一次。`, { en: `These are not final endorsements, only reliable first-pass entry points. Course, donation, and nonprofit requirements can change, so check again before taking action.` }],
+        [`Yale 公开课入口，适合从 happiness habits 和心理学实验开始。`, { en: `Yale public-course entry point, useful for starting with happiness habits and psychology experiments.` }],
+        [`Paul Bloom 的心理学入门课，覆盖 perception、memory、decision-making、social behavior 等。`, { en: `Paul Bloom's introduction to psychology, covering perception, memory, decision-making, social behavior, and more.` }],
+        [`Coursera 上的 Duke logic and critical-thinking sequence，适合练 informal logic 和 argument analysis。`, { en: `Duke's logic and critical-thinking sequence on Coursera, useful for informal logic and argument analysis.` }],
+        [`交互式逻辑练习，可作为 daily puzzle habit，不等同大学证书。`, { en: `Interactive logic practice that can become a daily puzzle habit; it is not the same as a university certificate.` }],
+        [`Brilliant 的 CS pathway 覆盖 algorithms、data structures 和 logic-oriented problem solving。`, { en: `Brilliant's CS pathway covers algorithms, data structures, and logic-oriented problem solving.` }],
+        [`免费 lecture 版本，适合先试听，看 Amy 是否喜欢这个老师和课程节奏。`, { en: `Free lecture version, good for previewing whether Amy likes the teacher and course rhythm.` }],
+        [`Madecraft 课程，适合快速学习常见 cognitive biases 和 everyday decision tools。`, { en: `Madecraft course, useful for quickly learning common cognitive biases and everyday decision tools.` }],
+        [`Alan Kazdin 的行为改变工具课，可借鉴 reinforcement、phrasing 和 step design。`, { en: `Alan Kazdin's behavior-change tools course; useful for reinforcement, phrasing, and step design.` }],
+        [`Mahzarin Banaji 课程，聚焦 hidden bias 和 intuitive decision-making。`, { en: `Mahzarin Banaji's course focused on hidden bias and intuitive decision-making.` }],
+        [`覆盖 motivational interviewing、behavioral activation 和 SMART goals；页面提示不能替代临床训练。`, { en: `Covers motivational interviewing, behavioral activation, and SMART goals; the page notes it does not replace clinical training.` }],
+        [`Neuroscience of Learning course page；适合作为 Wyzant tutor syllabus target，不是 8 年级 on-demand 课。`, { en: `Neuroscience of Learning course page; useful as a Wyzant tutor syllabus target, not as an 8th-grade on-demand course.` }],
+        [`Deductive Logic course page；可借鉴 argument structure、symbolic logic 和 formal deduction。`, { en: `Deductive Logic course page; useful for argument structure, symbolic logic, and formal deduction.` }],
+        [`Neuroscience and Economic Decision-Making course page；2026 listing shows on-campus format and prerequisites.`, { zh: `Neuroscience and Economic Decision-Making 课程页；2026 年列表显示为线下课程并有先修要求。`, en: `Neuroscience and Economic Decision-Making course page；2026 listing shows on-campus format and prerequisites.` }],
+        [`Harvard Secondary School Program eligibility page；use to avoid assuming middle-school direct enrollment.`, { zh: `Harvard Secondary School Program 资格页面；用于避免误以为初中生可以直接报名所有课程。`, en: `Harvard Secondary School Program eligibility page；use to avoid assuming middle-school direct enrollment.` }],
+        [`Research discussion / interview source for adolescent social connection, not a course enrollment page.`, { zh: `关于青少年社会连接的研究讨论 / 访谈来源，不是课程报名页面。`, en: `Research discussion / interview source for adolescent social connection, not a course enrollment page.` }],
+        [`Wyzant support page for searching/requesting tutors; parent involvement is the right default for a minor.`, { zh: `Wyzant 关于搜索 / 请求导师的支持页面；对未成年人来说，家长参与是正确默认做法。`, en: `Wyzant support page for searching/requesting tutors; parent involvement is the right default for a minor.` }],
+        [`严肃理解 depression 的基础资料，提醒项目不要替代专业治疗。`, { en: `Foundational material for seriously understanding depression; it reminds the project not to replace professional treatment.` }],
+        [`支持“小而有价值的活动”这个方向，但具体内容仍需专业审核。`, { en: `Supports the direction of small, valuable activities, while specific content still needs professional review.` }],
+        [`Portland 本地儿童医院 donation guideline：通常要求全新、未使用物品。`, { en: `Portland local children's hospital donation guideline: usually requires new, unused items.` }],
+        [`如果未来走 charity / nonprofit 路线，这里是 Oregon charitable registration 的官方入口。`, { en: `If the future path is charity / nonprofit, this is the official Oregon charitable registration entry point.` }],
+        [`EIN 需要 responsible party；涉及未成年人时不要自己乱填，先让父母或专业人士确认。`, { en: `An EIN requires a responsible party; when minors are involved, do not fill it out casually. Confirm with parents or professionals first.` }],
+        [`Drafted from the June 2026 Amy Project conversation. Private local page. Public sharing requires Amy and parent approval.`, { zh: `根据 2026 年 6 月 Amy Project 对话整理。页面已保留 noindex；公开分享前仍应确认 Amy 和家长同意。`, en: `Drafted from the June 2026 Amy Project conversation. Private local page. Public sharing requires Amy and parent approval.` }]
+      ]);
+
+      const normalize = value => value.replace(/\s+/g, ` `).trim();
+      const textNodes = [];
+
+      function collectTextNodes() {
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            if (!normalize(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement && node.parentElement.closest(`script, style`)) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          const key = normalize(node.nodeValue);
+          if (!translations.has(key)) continue;
+          const leading = node.nodeValue.match(/^\s*/)[0];
+          const trailing = node.nodeValue.match(/\s*$/)[0];
+          textNodes.push({ node, key, leading, trailing });
+        }
+      }
+
+      window.setProjectLang = function setProjectLang(lang) {
+        const target = lang === `en` ? `en` : `zh`;
+        document.documentElement.lang = target === `zh` ? `zh-CN` : `en`;
+        document.body.classList.toggle(`lang-zh`, target === `zh`);
+        document.body.classList.toggle(`lang-en`, target === `en`);
+        document.title = target === `zh` ? `Amy 夏天项目 | 心智火花礼盒` : `Amy Summer Project | MindSpark Boxes`;
+
+        textNodes.forEach(item => {
+          const entry = translations.get(item.key);
+          const value = entry && entry[target] ? entry[target] : item.key;
+          item.node.nodeValue = item.leading + value + item.trailing;
+        });
+
+        document.querySelectorAll(`[data-lang-btn]`).forEach(button => {
+          button.classList.toggle(`active`, button.dataset.langBtn === target);
+        });
+        localStorage.setItem(`amy-project-lang`, target);
+      };
+
+      collectTextNodes();
+      window.setProjectLang(localStorage.getItem(`amy-project-lang`) || `zh`);
+    })();
+  </script>
 </body>
 </html>
