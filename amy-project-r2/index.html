@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amy Project R2 | MindSpark Box Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3f5f1;
+  --paper: #fffefa;
+  --ink: #151918;
+  --muted: #66716d;
+  --line: #d9ded6;
+  --line-strong: #202724;
+  --green: #0d6b57;
+  --green-soft: #dceee8;
+  --blue: #1e5aa8;
+  --blue-soft: #dde8f8;
+  --amber: #b5651d;
+  --amber-soft: #f4e3cf;
+  --red: #b83b2e;
+  --red-soft: #f5ded9;
+  --violet: #5d4c93;
+  --violet-soft: #e6e1f2;
+  --shadow: 0 24px 80px rgba(20, 28, 26, 0.12);
+  --font: "Noto Sans SC", "IBM Plex Sans", sans-serif;
+  --font-latin: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+  --side-width: 254px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(21,25,24,0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(21,25,24,0.035) 1px, transparent 1px),
+    radial-gradient(circle at 16% 10%, rgba(13,107,87,0.13), transparent 28%),
+    radial-gradient(circle at 90% 30%, rgba(30,90,168,0.12), transparent 32%),
+    linear-gradient(180deg, #f7f8f4 0%, var(--bg) 100%);
+  background-size: 38px 38px, 38px 38px, auto, auto, auto;
+  line-height: 1.65;
+}
+
+a { color: inherit; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px clamp(16px, 4vw, 56px);
+  background: rgba(255,254,250,0.88);
+  border-bottom: 1px solid rgba(32,39,36,0.12);
+  backdrop-filter: blur(16px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-latin);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  font-size: 0.8rem;
+}
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.menu-toggle {
+  display: none;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(255,254,250,0.82);
+  color: var(--ink);
+  font: 900 1rem var(--font-latin);
+  cursor: pointer;
+}
+.lang-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255,254,250,0.82);
+}
+.lang-switch button {
+  min-width: 58px;
+  min-height: 32px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 800 0.72rem var(--font-latin);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.lang-switch button + button { border-left: 1px solid var(--line-strong); }
+body.lang-zh .lang-switch button[data-lang="zh"],
+body.lang-en .lang-switch button[data-lang="en"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+body.lang-zh .en-content,
+body.lang-zh .en-inline,
+body.lang-en .zh-content,
+body.lang-en .zh-inline {
+  display: none !important;
+}
+.chip-link,
+.print-btn {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: rgba(255,254,250,0.72);
+  color: var(--ink);
+  text-decoration: none;
+  font: 700 0.74rem var(--font-latin);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+.print-btn:hover,
+.chip-link:hover { background: var(--ink); color: var(--paper); }
+.side-nav {
+  position: fixed;
+  top: 59px;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+  width: var(--side-width);
+  padding: 18px 16px 28px;
+  border-right: 1px solid rgba(32,39,36,0.14);
+  background: rgba(255,254,250,0.91);
+  backdrop-filter: blur(18px);
+  overflow-y: auto;
+}
+.side-kicker {
+  margin: 2px 0 14px;
+  color: var(--green);
+  font: 900 0.68rem var(--font-latin);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.side-nav nav {
+  display: grid;
+  gap: 7px;
+}
+.side-nav a {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+.side-nav a:hover,
+.side-nav a.active {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 700;
+}
+.side-nav a.primary {
+  color: var(--ink);
+  font-weight: 900;
+}
+.nav-overlay { display: none; }
+
+.hero {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  padding: clamp(42px, 8vw, 92px) clamp(18px, 5vw, 72px);
+}
+.hero,
+.report,
+footer {
+  margin-left: var(--side-width);
+}
+.hero-main { max-width: 900px; }
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  color: var(--green);
+  font: 700 0.78rem var(--font-latin);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.kicker::before {
+  content: "";
+  width: 38px;
+  height: 2px;
+  background: var(--green);
+}
+h1 {
+  margin: 0;
+  max-width: 880px;
+  font-size: clamp(2.6rem, 8vw, 6.7rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+.hero.en-content h1 {
+  max-width: 800px;
+  font-size: clamp(2.6rem, 5.8vw, 5.35rem);
+}
+.subtitle {
+  max-width: 730px;
+  margin: 26px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+}
+.hero-card {
+  border: 1px solid var(--line-strong);
+  background: rgba(255,254,250,0.9);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.hero-card h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+.position-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.position-list li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.num {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--green);
+  font: 700 0.75rem var(--font-latin);
+  background: var(--green-soft);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: rgba(255,254,250,0.76);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.report {
+  max-width: 1180px;
+  margin-right: auto;
+  padding: 0 clamp(16px, 4vw, 48px) 80px;
+}
+.toc {
+  position: sticky;
+  top: 62px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0 18px;
+  margin-bottom: 8px;
+  scrollbar-width: none;
+}
+.toc::-webkit-scrollbar { display: none; }
+.toc a {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: rgba(255,254,250,0.9);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+.toc a:hover { border-color: var(--line-strong); color: var(--ink); }
+
+.slide {
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: clamp(18px, 4vw, 48px);
+  align-items: start;
+  margin: 0 0 30px;
+  padding: clamp(24px, 5vw, 56px);
+  border: 1px solid rgba(32,39,36,0.18);
+  background: rgba(255,254,250,0.9);
+  box-shadow: 0 18px 60px rgba(20,28,26,0.08);
+  scroll-margin-top: 132px;
+}
+.slide-number {
+  position: sticky;
+  top: 140px;
+  font: 900 clamp(2.2rem, 6vw, 5rem) var(--font-latin);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--line-strong);
+}
+.slide-content { min-width: 0; }
+.eyebrow {
+  margin-bottom: 14px;
+  color: var(--green);
+  font: 700 0.78rem var(--font-latin);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.slide h2 {
+  margin: 0;
+  max-width: 850px;
+  font-size: clamp(1.8rem, 4vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+.lead {
+  max-width: 850px;
+  margin: 22px 0 28px;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+}
+.callout {
+  max-width: 900px;
+  border-left: 5px solid var(--green);
+  background: var(--green-soft);
+  padding: 18px 20px;
+  margin: 22px 0;
+  font-size: clamp(1.08rem, 1.7vw, 1.3rem);
+  font-weight: 800;
+  line-height: 1.45;
+}
+.exec-grid,
+.foundation-grid,
+.roi-hero,
+.status-board {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 18px;
+  margin: 24px 0;
+}
+.exec-punch,
+.scorebox,
+.roi-big {
+  border: 1px solid var(--line-strong);
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(22px, 4vw, 36px);
+}
+.exec-punch b,
+.scorebox .big,
+.roi-big b {
+  display: block;
+  font: 900 clamp(2.2rem, 6vw, 4.8rem) var(--font-latin);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+.exec-punch span,
+.scorebox p,
+.roi-big span {
+  display: block;
+  margin-top: 16px;
+  color: rgba(255,254,250,0.78);
+  font-size: clamp(1rem, 1.7vw, 1.18rem);
+}
+.exec-stack,
+.status-list,
+.priority-stack,
+.scenario-stack,
+.workflow-list,
+.roadmap {
+  display: grid;
+  gap: 12px;
+}
+.exec-line,
+.metric,
+.roi-kpi,
+.source-card {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.7);
+  padding: 15px;
+}
+.exec-line b,
+.metric b,
+.roi-kpi b,
+.source-card b {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.05rem;
+}
+.exec-line span,
+.metric span,
+.roi-kpi span,
+.source-card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.takeaway {
+  margin-top: 22px;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(135deg, rgba(13,107,87,0.15), rgba(181,101,29,0.13));
+  border-left: 7px solid var(--amber);
+  padding: clamp(20px, 3.3vw, 32px);
+  font-size: clamp(1.32rem, 2.8vw, 2.08rem);
+  line-height: 1.18;
+  font-weight: 900;
+}
+.agent-map,
+.grid-3,
+.evidence-grid,
+.metric-strip,
+.math-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.grid-2,
+.thesis-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+.agent-tile,
+.panel,
+.evidence-card,
+.math-card,
+.foundation-card,
+.thesis-card,
+.timebox {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 18px;
+  min-width: 0;
+}
+.agent-tile small,
+.evidence-card small,
+.math-card small,
+.thesis-card small {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green);
+  font: 900 0.7rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.agent-tile h3,
+.panel h3,
+.evidence-card h3,
+.math-card h3,
+.foundation-card h3,
+.thesis-card h3,
+.timebox h3 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+}
+.agent-tile p,
+.panel p,
+.evidence-card p,
+.math-card p,
+.foundation-card p,
+.thesis-card p,
+.timebox p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.panel ul,
+.foundation-card ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+.panel li,
+.foundation-card li { margin: 7px 0; }
+.green { border-top: 5px solid var(--green); }
+.blue { border-top: 5px solid var(--blue); }
+.amber { border-top: 5px solid var(--amber); }
+.red { border-top: 5px solid var(--red); }
+.violet { border-top: 5px solid var(--violet); }
+
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 28px;
+}
+.step {
+  position: relative;
+  min-height: 205px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+}
+.step::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 42px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+  background: #fff;
+  transform: rotate(45deg);
+  z-index: 2;
+}
+.step:last-child::after { display: none; }
+.step small {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font: 700 0.7rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.step h3 {
+  margin: 0 0 8px;
+  font-size: 1.12rem;
+}
+.step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.step.current { background: var(--blue-soft); border-color: var(--blue); }
+.step.next { background: var(--amber-soft); border-color: var(--amber); }
+.step.future { background: var(--violet-soft); border-color: var(--violet); }
+
+.roadmap-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+.phase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 800;
+  text-align: center;
+}
+.target,
+.proof {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.58);
+  padding: 18px;
+}
+.target h3,
+.proof h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.target p,
+.proof p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.scenario-card {
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  padding: 20px;
+}
+.scenario-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.scenario-head h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.scenario-head span {
+  color: var(--green);
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+.timegrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.scenario-summary {
+  margin-top: 14px;
+  padding: 16px 18px;
+  background: var(--green-soft);
+  border-left: 4px solid var(--green);
+  font-weight: 900;
+  font-size: clamp(1.08rem, 1.8vw, 1.38rem);
+  line-height: 1.32;
+}
+.agent-card {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr) 230px;
+  gap: 18px;
+  align-items: stretch;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  padding: 18px;
+}
+.agent-rank {
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  font: 900 2rem var(--font-latin);
+}
+.agent-main h3 {
+  margin: 0 0 8px;
+  font-size: 1.28rem;
+}
+.agent-main p {
+  margin: 0;
+  color: var(--muted);
+}
+.agent-guard {
+  border-left: 4px solid var(--green);
+  background: var(--green-soft);
+  padding: 12px 14px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.workflow-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.8fr;
+  gap: 8px;
+  align-items: stretch;
+}
+.workflow-row.header > div {
+  background: var(--ink);
+  color: var(--paper);
+  font: 800 0.78rem var(--font-latin);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.workflow-row > div {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 12px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.workflow-row > div:first-child {
+  color: var(--ink);
+  font-weight: 800;
+}
+footer {
+  padding: 24px clamp(18px, 5vw, 72px) 44px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+@media (max-width: 1180px) {
+  .agent-map,
+  .grid-3,
+  .evidence-grid,
+  .metric-strip,
+  .math-grid,
+  .ladder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step::after { display: none; }
+  .agent-card { grid-template-columns: 72px minmax(0, 1fr); }
+  .agent-guard { grid-column: 2; }
+}
+@media (max-width: 980px) {
+  :root { --side-width: 0px; }
+  .menu-toggle { display: grid; }
+  .side-nav {
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    top: 58px;
+    width: min(310px, 86vw);
+  }
+  body.nav-open .side-nav { transform: translateX(0); }
+  .nav-overlay {
+    position: fixed;
+    inset: 58px 0 0;
+    z-index: 40;
+    background: rgba(21,25,24,0.28);
+  }
+  body.nav-open .nav-overlay { display: block; }
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .slide {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+  .slide-number {
+    position: static;
+    font-size: 3rem;
+  }
+  .exec-grid,
+  .foundation-grid,
+  .roi-hero,
+  .status-board,
+  .grid-2,
+  .thesis-pair,
+  .roadmap-row {
+    grid-template-columns: 1fr;
+  }
+  .phase { justify-content: flex-start; }
+}
+@media (max-width: 680px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+  .brand { min-width: 0; font-size: 0.74rem; }
+  .top-actions { justify-content: end; }
+  .chip-link,
+  .print-btn { display: none; }
+  .lang-switch button { min-width: 50px; }
+  .hero { padding: 36px 14px; }
+  h1,
+  .hero.en-content h1 { font-size: clamp(2.35rem, 13vw, 4.2rem); }
+  .report { padding: 0 10px 54px; }
+  .slide { padding: 20px 14px; }
+  .toc { top: 56px; }
+  .agent-map,
+  .grid-3,
+  .evidence-grid,
+  .metric-strip,
+  .math-grid,
+  .ladder,
+  .timegrid { grid-template-columns: 1fr; }
+  .agent-card { grid-template-columns: 1fr; }
+  .agent-guard { grid-column: auto; }
+  .workflow-row,
+  .workflow-row.header { grid-template-columns: 1fr; }
+}
+@media print {
+  .topbar,
+  .side-nav,
+  .nav-overlay,
+  .toc { display: none !important; }
+  .hero,
+  .report,
+  footer { margin-left: 0; }
+  body { background: #fff; }
+  .slide { min-height: auto; break-inside: avoid; box-shadow: none; }
+}
+</style>
+</head>
+<body class="lang-zh">
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-mark">S</span><span>Sky Portal</span></a>
+  <div class="top-actions">
+    <button class="menu-toggle" type="button" onclick="toggleMenu()" aria-label="Open navigation">☰</button>
+    <div class="lang-switch" aria-label="Language">
+      <button type="button" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="chip-link" id="original-page-link" href="amy-project.html"><span class="zh-inline">原版页面</span><span class="en-inline">Original Page</span></a>
+    <button class="print-btn" onclick="window.print()"><span class="zh-inline">打印 / PDF</span><span class="en-inline">Print / PDF</span></button>
+  </div>
+</header>
+
+<div class="nav-overlay" onclick="toggleMenu(false)"></div>
+<aside class="side-nav" aria-label="Amy Project R2 navigation">
+  <div class="zh-content">
+    <p class="side-kicker">素材池导航</p>
+    <nav>
+      <a class="primary" href="#top">摘要</a>
+      <a href="#executive-summary">00 执行摘要</a>
+      <a href="#why">01 为什么做</a>
+      <a href="#box-system">02 三盒系统</a>
+      <a href="#learning-stack">03 学习路线</a>
+      <a href="#mentor-map">04 导师地图</a>
+      <a href="#feedback-system">05 反馈系统</a>
+      <a href="#safety-partners">06 安全合作</a>
+      <a href="#roadmap-r2">07 90 天路线图</a>
+      <a href="#prototype-plan">08 打样计划</a>
+      <a href="#narrative">09 对外讲法</a>
+      <a href="#sources">10 来源与下一步</a>
+    </nav>
+  </div>
+  <div class="en-content">
+    <p class="side-kicker">Source Navigation</p>
+    <nav>
+      <a class="primary" href="#top-en">Summary</a>
+      <a href="#executive-summary-en">00 Executive Summary</a>
+      <a href="#why-en">01 Why This</a>
+      <a href="#box-system-en">02 Three Boxes</a>
+      <a href="#learning-stack-en">03 Learning Path</a>
+      <a href="#mentor-map-en">04 Mentor Map</a>
+      <a href="#feedback-system-en">05 Feedback System</a>
+      <a href="#safety-partners-en">06 Safety Partners</a>
+      <a href="#roadmap-r2-en">07 90-Day Roadmap</a>
+      <a href="#prototype-plan-en">08 Prototype Plan</a>
+      <a href="#narrative-en">09 Public Narrative</a>
+      <a href="#sources-en">10 Sources & Next</a>
+    </nav>
+  </div>
+</aside>
+
+<section class="hero zh-content" id="top">
+  <div class="hero-main">
+    <div class="kicker">R2 草稿 · 双语报告页</div>
+    <h1>Amy Project<br>行为激活<br>设计实验</h1>
+    <p class="subtitle">把逻辑、心理学和高质感触觉艺术，组织成一个学生主导的支持性活动礼盒项目：先做三个原型，再用安全、匿名、低风险的反馈验证它是否真的让孩子更容易开始行动、表达和连接。</p>
+    <div class="hero-meta">
+      <span class="meta-pill">版本：R2 展示稿</span>
+      <span class="meta-pill">定位：非临床支持性活动设计</span>
+      <span class="meta-pill">更新时间：2026-06-08</span>
+    </div>
+  </div>
+  <aside class="hero-card">
+    <h2>核心判断</h2>
+    <ul class="position-list">
+      <li><span class="num">1</span><span>先做小：一个孩子愿意打开、愿意完成的一盒。</span></li>
+      <li><span class="num">2</span><span>再做准：用匿名反馈判断哪个活动、哪个环境更有效。</span></li>
+      <li><span class="num">3</span><span>最后做大：学校、医院 donation 或 nonprofit 都要建立在安全试点之后。</span></li>
+      <li><span class="num">4</span><span>底线清楚：不是治疗，不收敏感医疗数据，不绕过家长和专业人员。</span></li>
+    </ul>
+  </aside>
+</section>
+
+<section class="hero en-content" id="top-en">
+  <div class="hero-main">
+    <div class="kicker">R2 draft · bilingual report page</div>
+    <h1>Amy Project<br>Behavioral<br>Activation Design</h1>
+    <p class="subtitle">A student-led supportive activity-kit project that combines logic, psychology, and high-quality tactile art. The first goal is to build three prototypes, then use safe, anonymous, low-risk feedback to see whether the boxes help teens start small actions, express themselves, and connect.</p>
+    <div class="hero-meta">
+      <span class="meta-pill">Version: R2 presentation draft</span>
+      <span class="meta-pill">Positioning: non-clinical supportive design</span>
+      <span class="meta-pill">Updated: 2026-06-08</span>
+    </div>
+  </div>
+  <aside class="hero-card">
+    <h2>Core thesis</h2>
+    <ul class="position-list">
+      <li><span class="num">1</span><span>Start small: one box a teen actually wants to open and finish.</span></li>
+      <li><span class="num">2</span><span>Then get precise: use anonymous feedback to learn which activity and setting work best.</span></li>
+      <li><span class="num">3</span><span>Then scale: school, hospital donation, or nonprofit paths should follow a safe pilot.</span></li>
+      <li><span class="num">4</span><span>Keep the boundary: not therapy, no sensitive medical data, no bypassing parents or professionals.</span></li>
+    </ul>
+  </aside>
+</section>
+
+<main class="report zh-content">
+  <nav class="toc" aria-label="Report sections">
+    <a href="#executive-summary">00 摘要</a>
+    <a href="#why">01 为什么</a>
+    <a href="#box-system">02 三盒</a>
+    <a href="#learning-stack">03 学习</a>
+    <a href="#mentor-map">04 导师</a>
+    <a href="#feedback-system">05 反馈</a>
+    <a href="#safety-partners">06 合作</a>
+    <a href="#roadmap-r2">07 路线</a>
+    <a href="#prototype-plan">08 打样</a>
+    <a href="#narrative">09 讲法</a>
+    <a href="#sources">10 来源</a>
+  </nav>
+
+  <section class="slide" id="executive-summary">
+    <div class="slide-number">00</div>
+    <div class="slide-content">
+      <div class="eyebrow">执行摘要</div>
+      <h2>先把低落里的“第一步”设计出来。</h2>
+      <p class="lead">Amy Project R2 不是把旧页重写成商业计划，而是把想法升级成一个可展示、可试点、可被家长和导师理解的项目框架。核心产品是三款活动礼盒；核心研究问题是不同活动和社交环境怎样影响青少年的开始行动、表达和连接。</p>
+      <div class="exec-grid">
+        <div class="exec-punch"><b>3 Boxes</b><span>独立完成、亲子协作、社区拼接，分别测试三种支持环境。</span></div>
+        <div class="exec-stack">
+          <div class="exec-line"><b>学习线</b><span>心理学、逻辑、行为改变、设计和反馈问卷。</span></div>
+          <div class="exec-line"><b>产品线</b><span>从手作原型到高质感礼盒，再到小规模 pilot。</span></div>
+          <div class="exec-line"><b>合作线</b><span>先家庭和学校，再考虑医院 donation 和 nonprofit。</span></div>
+        </div>
+      </div>
+      <div class="agent-map">
+        <article class="agent-tile"><small>Logic</small><h3>结构清楚</h3><p>把手作步骤做成低错误率算法，让孩子不用猜下一步。</p></article>
+        <article class="agent-tile"><small>Psychology</small><h3>门槛很低</h3><p>把行为激活变成一个 5-20 分钟能完成的小行动。</p></article>
+        <article class="agent-tile"><small>Art</small><h3>表达安全</h3><p>用颜色、触感、形状和故事表达，而不是强迫讲话。</p></article>
+      </div>
+      <div class="takeaway">一句话：先做一个孩子真的愿意打开的盒子，再用安全反馈判断它是否值得扩大。</div>
+    </div>
+  </section>
+
+  <section class="slide" id="why">
+    <div class="slide-number">01</div>
+    <div class="slide-content">
+      <div class="eyebrow">为什么做</div>
+      <h2>很多孩子不是不想变好，是第一步太重。</h2>
+      <p class="lead">低落状态里的困难常常不是“不懂道理”，而是缺少足够小、足够安全、足够可完成的行动入口。Amy 的优势是从孩子视角理解这种入口应该长什么样。</p>
+      <div class="thesis-pair">
+        <article class="thesis-card"><small>痛点 1</small><h3>传统材料太像作业</h3><p>很多心理健康 worksheet 对孩子来说像任务和审查，打开之前已经有压力。</p></article>
+        <article class="thesis-card"><small>痛点 2</small><h3>表达不总能靠语言</h3><p>孩子可能愿意做、愿意画、愿意拼，但不一定愿意马上解释自己的感受。</p></article>
+      </div>
+      <div class="grid-3">
+        <article class="panel green"><h3>行为激活</h3><p>先做小行动，让行动带回一点能量和完成感。</p></article>
+        <article class="panel blue"><h3>触觉艺术</h3><p>用丝带、木质、磁吸、纸艺等材料降低进入门槛。</p></article>
+        <article class="panel amber"><h3>逻辑结构</h3><p>每一步清楚、可验证、可完成，减少焦虑和放弃。</p></article>
+      </div>
+      <p class="callout">项目的价值不是宣称“治好抑郁”，而是设计一个更容易开始、更容易完成、更容易被理解的支持性活动入口。</p>
+    </div>
+  </section>
+
+  <section class="slide" id="box-system">
+    <div class="slide-number">02</div>
+    <div class="slide-content">
+      <div class="eyebrow">三盒系统</div>
+      <h2>同一个目标，三种社交环境。</h2>
+      <p class="lead">三款礼盒不是随机产品，而是三个变量：一个人做、两个人做、很多人各自完成后拼接。这样才能看出“环境”本身对开始行动和情绪支持的影响。</p>
+      <div class="grid-3">
+        <article class="panel green"><h3>01 独立掌控礼盒</h3><p>真丝丝带玫瑰、植物花艺、低压力折叠。目标：安全感、掌控感、完成感。</p></article>
+        <article class="panel blue"><h3>02 家庭之桥礼盒</h3><p>磁吸结构、几何拼图、双人协作和低压力对话卡。目标：共同专注和自然连接。</p></article>
+        <article class="panel violet"><h3>03 协作网格礼盒</h3><p>每个人独立完成一个模块，再加入集体墙。目标：低压力归属感和社区连接。</p></article>
+      </div>
+      <div class="scenario-stack">
+        <article class="scenario-card">
+          <div class="scenario-head"><h3>20 x 20 x 20 规则</h3><span>R2 设计约束</span></div>
+          <div class="timegrid">
+            <div class="timebox"><h3>20 分钟</h3><p>一个阶段可以在 20 分钟内完成，不拖成大工程。</p></div>
+            <div class="timebox"><h3>20 个零件</h3><p>核心零件尽量少，避免打开后就被复杂度压倒。</p></div>
+            <div class="timebox"><h3>20 秒第一步</h3><p>第一步必须一眼看懂，先开始，再慢慢深入。</p></div>
+          </div>
+          <div class="scenario-summary">规则不是为了限制创意，而是为了让低能量状态下的孩子也有机会开始。</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="learning-stack">
+    <div class="slide-number">03</div>
+    <div class="slide-content">
+      <div class="eyebrow">学习路线</div>
+      <h2>课程不是装饰，是每张活动卡背后的设计依据。</h2>
+      <p class="lead">R2 把夏天学习拆成四条线：心理学大图谱、逻辑结构、行为改变、设计反馈。每周至少把一个概念转化成一张 activity card。</p>
+      <div class="ladder">
+        <article class="step current"><small>Week 1</small><h3>心理学入门</h3><p>Yale Intro Psychology，建立行为、记忆、情绪和社交的基础词汇。</p></article>
+        <article class="step current"><small>Week 2</small><h3>逻辑推理</h3><p>Duke Think Again 和 Brilliant Logic，把说明书写成清楚步骤。</p></article>
+        <article class="step next"><small>Week 3</small><h3>行为改变</h3><p>Wesleyan Behavioral Change，学习 action loop、动机和 behavioral activation。</p></article>
+        <article class="step next"><small>Week 4</small><h3>认知偏差</h3><p>Blind spots、attention bias、attribution bias，做 assumption check 卡片。</p></article>
+        <article class="step future"><small>Ongoing</small><h3>设计迭代</h3><p>每学一个概念，转化成一个盒子任务、说明页或问卷问题。</p></article>
+      </div>
+      <div class="takeaway">学习目标不是拿一堆证书，而是让每个盒子的每一步都有理由。</div>
+    </div>
+  </section>
+
+  <section class="slide" id="mentor-map">
+    <div class="slide-number">04</div>
+    <div class="slide-content">
+      <div class="eyebrow">导师地图</div>
+      <h2>Wyzant 导师要找三类，不是一类。</h2>
+      <p class="lead">R2 里的导师不是“替 Amy 做项目”，而是把高级概念拆成适合 8 年级理解、可以转化成设计的课程。</p>
+      <div class="priority-stack">
+        <article class="agent-card"><div class="agent-rank">1</div><div class="agent-main"><h3>心理学 / 神经科学导师</h3><p>教 neuroplasticity、学习科学、青少年社交连接和情绪支持。</p></div><div class="agent-guard">边界：教育辅导，不做诊断或治疗。</div></article>
+        <article class="agent-card"><div class="agent-rank">2</div><div class="agent-main"><h3>逻辑 / 系统导师</h3><p>把手工步骤转成 deductive logic、checklist 和 error-proof algorithm。</p></div><div class="agent-guard">输出：清楚说明书和结构化任务卡。</div></article>
+        <article class="agent-card"><div class="agent-rank">3</div><div class="agent-main"><h3>统计 / 行为经济导师</h3><p>教 present bias、choice architecture 和匿名 QR 反馈问卷设计。</p></div><div class="agent-guard">只收产品反馈，不收临床数据。</div></article>
+      </div>
+      <p class="callout">给导师的标准说明：这是 student-led supportive activity-kit design，不是 therapy practice，也不是 medical study。</p>
+    </div>
+  </section>
+
+  <section class="slide" id="feedback-system">
+    <div class="slide-number">05</div>
+    <div class="slide-content">
+      <div class="eyebrow">反馈系统</div>
+      <h2>测设计体验，不测医疗结果。</h2>
+      <p class="lead">R2 把“问卷调查系统”改成安全的产品反馈系统。它帮助判断盒子有没有被打开、说明是否清楚、完成后孩子是否更愿意继续，而不是判断病情。</p>
+      <div class="workflow-list">
+        <div class="workflow-row header"><div>问题</div><div>可问</div><div>不要问</div><div>用途</div></div>
+        <div class="workflow-row"><div>开始门槛</div><div>第一步是否容易看懂？</div><div>你是否有抑郁诊断？</div><div>改说明书</div></div>
+        <div class="workflow-row"><div>即时感受</div><div>完成后是否更平静 / 更清楚？</div><div>病情有没有改善？</div><div>改任务难度</div></div>
+        <div class="workflow-row"><div>环境匹配</div><div>更喜欢独自、双人还是集体？</div><div>家庭冲突细节是什么？</div><div>选择下一盒</div></div>
+        <div class="workflow-row"><div>继续意愿</div><div>愿不愿意做第二张卡？</div><div>治疗效果几分？</div><div>判断产品吸引力</div></div>
+      </div>
+      <div class="metric-strip">
+        <div class="metric"><b>1-2 min</b><span>问卷必须极短。</span></div>
+        <div class="metric"><b>匿名</b><span>不收姓名、诊断、病史。</span></div>
+        <div class="metric"><b>可选</b><span>孩子可以不填。</span></div>
+        <div class="metric"><b>家长 / 学校</b><span>未成年人反馈需要批准。</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="safety-partners">
+    <div class="slide-number">06</div>
+    <div class="slide-content">
+      <div class="eyebrow">安全合作</div>
+      <h2>先让可信成年人看懂，再让项目走出去。</h2>
+      <p class="lead">R2 的合作顺序是：家庭小试点、学校 counselor / teacher review、合规 donation、再考虑 nonprofit。不要一开始直接进入医院互动或公开 Amy 的个人经历。</p>
+      <div class="foundation-grid">
+        <article class="foundation-card"><h3>学校路线</h3><ul><li>先让 counselor 或 trusted teacher 看项目定位。</li><li>可做 advisory activity、student showcase 或 wellness club。</li><li>优点是反馈快、风险低、可以保护隐私。</li></ul></article>
+        <article class="foundation-card"><h3>医院路线</h3><ul><li>先找 Child Life / donation office，不直接联系病人。</li><li>只送全新、可清洁、符合 wish list 的材料。</li><li>任何现场活动都需要医院 staff 审核。</li></ul></article>
+      </div>
+      <div class="grid-3">
+        <article class="panel green"><h3>隐私</h3><p>不公开个人经历，除非 Amy 明确愿意且知道后果。</p></article>
+        <article class="panel amber"><h3>安全</h3><p>材料无尖锐、无污染、无医疗承诺。</p></article>
+        <article class="panel red"><h3>边界</h3><p>不治疗、不诊断、不做临床研究。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="roadmap-r2">
+    <div class="slide-number">07</div>
+    <div class="slide-content">
+      <div class="eyebrow">90 天路线图</div>
+      <h2>三天能开始，三个月要有可展示 pilot。</h2>
+      <p class="lead">R2 把项目拆成可以执行的节奏：先整理、再打样、再试用、再总结。每一阶段都有交付物。</p>
+      <div class="roadmap">
+        <div class="roadmap-row"><div class="phase">0-3 天</div><div class="target"><h3>目标</h3><p>确定 R2 页面、三盒定义、第一批课程和导师搜索词。</p></div><div class="proof"><h3>交付</h3><p>项目页、Wyzant 消息、材料清单 v1。</p></div></div>
+        <div class="roadmap-row"><div class="phase">1-2 周</div><div class="target"><h3>目标</h3><p>做出每盒一个纸面 / 材料 prototype。</p></div><div class="proof"><h3>交付</h3><p>3 个 box mockup，3 张 activity card，1 份反馈表。</p></div></div>
+        <div class="roadmap-row"><div class="phase">3-6 周</div><div class="target"><h3>目标</h3><p>让 3-5 个可信试用者体验，记录匿名产品反馈。</p></div><div class="proof"><h3>交付</h3><p>问题清单、改版方向、照片记录和版本日志。</p></div></div>
+        <div class="roadmap-row"><div class="phase">7-12 周</div><div class="target"><h3>目标</h3><p>做 10-20 个 sample boxes，准备 school / mentor review。</p></div><div class="proof"><h3>交付</h3><p>展示页、1 页 summary、下一步合作邮件。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="prototype-plan">
+    <div class="slide-number">08</div>
+    <div class="slide-content">
+      <div class="eyebrow">打样计划</div>
+      <h2>先做高质感小批量，不急着做公司。</h2>
+      <p class="lead">在中国打样的优势是材料和手工供应链丰富，但第一批不要追求复杂包装。最重要的是安全、清楚、可重复和可反馈。</p>
+      <div class="roi-hero">
+        <div class="roi-big"><b>10-20</b><span>第一批 sample boxes。数量够看出问题，又不会把预算压到太重。</span></div>
+        <div class="exec-stack">
+          <div class="exec-line"><b>材料</b><span>丝带、纸艺、磁吸木件、无尖锐工具、独立包装。</span></div>
+          <div class="exec-line"><b>说明</b><span>一张 start card、一张 step card、一张 reflection card。</span></div>
+          <div class="exec-line"><b>质量</b><span>每盒检查缺件、尖锐边缘、说明是否能独立看懂。</span></div>
+        </div>
+      </div>
+      <div class="math-grid">
+        <article class="math-card"><small>Box 01</small><b>低成本优先</b><p>纸艺和丝带适合快速测试说明清晰度。</p></article>
+        <article class="math-card"><small>Box 02</small><b>结构风险最高</b><p>磁吸和双人协作要重点测试安全与耐用。</p></article>
+        <article class="math-card"><small>Box 03</small><b>展示效果最好</b><p>模块墙适合学校展示和社区 pilot。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="narrative">
+    <div class="slide-number">09</div>
+    <div class="slide-content">
+      <div class="eyebrow">对外讲法</div>
+      <h2>讲成一个清楚的学生项目，不讲成医疗承诺。</h2>
+      <p class="lead">R2 的对外叙事要成熟，但不能夸大。最好的说法是：Amy 用自己的兴趣和学习，设计一套支持青少年情绪健康的活动礼盒，并用安全反馈改进。</p>
+      <div class="scenario-stack">
+        <article class="scenario-card">
+          <div class="scenario-head"><h3>30 秒 pitch</h3><span>中文</span></div>
+          <p>Amy Project 是一个学生主导的支持性活动礼盒项目，把逻辑、心理学和高质感手作结合起来，帮助青少年从一个很小、很具体、可完成的行动开始。它不是治疗，也不收集医疗数据；第一阶段只做产品体验和安全反馈。</p>
+        </article>
+        <article class="scenario-card">
+          <div class="scenario-head"><h3>不要这样说</h3><span>风险表达</span></div>
+          <div class="grid-3">
+            <div class="timebox"><h3>不要</h3><p>治疗青少年抑郁症。</p></div>
+            <div class="timebox"><h3>不要</h3><p>临床试验、医疗研究、疗效证明。</p></div>
+            <div class="timebox"><h3>不要</h3><p>让孩子提供诊断、病史或私人危机细节。</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="sources">
+    <div class="slide-number">10</div>
+    <div class="slide-content">
+      <div class="eyebrow">来源与下一步</div>
+      <h2>资料够用，下一步是做出来。</h2>
+      <p class="lead">R2 不是把所有资料都堆进来，而是保留行动需要的来源：课程、心理健康边界、行为激活、医院 donation、非营利要求。</p>
+      <div class="evidence-grid">
+        <article class="source-card"><b>Yale / Coursera</b><p>Introduction to Psychology、Everyday Parenting、Science of Well-Being 作为心理学和行为设计基础。</p></article>
+        <article class="source-card"><b>Duke / Brilliant</b><p>Think Again、Logic、Computer Science 作为逻辑和结构化说明训练。</p></article>
+        <article class="source-card"><b>Wesleyan / Harvard Online</b><p>Creating Behavioral Change 和 Psychology of Blind Spots 作为行为改变和盲点判断框架。</p></article>
+        <article class="source-card"><b>NIMH / Kids Mental Health Foundation</b><p>用于严肃理解 depression 和 behavioral activation，提醒项目不能替代治疗。</p></article>
+        <article class="source-card"><b>OHSU / donation office</b><p>医院路线必须遵守全新、清洁、安全、合规的 donation rule。</p></article>
+        <article class="source-card"><b>Oregon DOJ / IRS</b><p>如果未来做 nonprofit，需要父母和专业人士一起处理法律税务边界。</p></article>
+      </div>
+      <div class="takeaway">下一步：三盒 prototype、三张 activity card、一个匿名反馈表、一个 Wyzant 导师 shortlist。</div>
+    </div>
+  </section>
+</main>
+
+<main class="report en-content">
+  <nav class="toc" aria-label="Report sections">
+    <a href="#executive-summary-en">00 Summary</a>
+    <a href="#why-en">01 Why</a>
+    <a href="#box-system-en">02 Boxes</a>
+    <a href="#learning-stack-en">03 Learning</a>
+    <a href="#mentor-map-en">04 Mentors</a>
+    <a href="#feedback-system-en">05 Feedback</a>
+    <a href="#safety-partners-en">06 Partners</a>
+    <a href="#roadmap-r2-en">07 Roadmap</a>
+    <a href="#prototype-plan-en">08 Prototype</a>
+    <a href="#narrative-en">09 Narrative</a>
+    <a href="#sources-en">10 Sources</a>
+  </nav>
+
+  <section class="slide" id="executive-summary-en">
+    <div class="slide-number">00</div>
+    <div class="slide-content">
+      <div class="eyebrow">Executive summary</div>
+      <h2>Design the first step out of feeling stuck.</h2>
+      <p class="lead">Amy Project R2 does not turn the original page into a business plan. It upgrades the idea into a report-style project framework that parents, mentors, and school partners can understand. The product is three activity boxes; the research-safe question is how activity type and social setting affect teens' willingness to start, express, and connect.</p>
+      <div class="exec-grid">
+        <div class="exec-punch"><b>3 Boxes</b><span>Solo, parent/teen, and community-grid settings test three different support environments.</span></div>
+        <div class="exec-stack">
+          <div class="exec-line"><b>Learning track</b><span>Psychology, logic, behavior change, design, and feedback surveys.</span></div>
+          <div class="exec-line"><b>Product track</b><span>From craft prototypes to premium boxes and small-scale pilots.</span></div>
+          <div class="exec-line"><b>Partnership track</b><span>Start with family and school, then consider hospital donation and nonprofit routes.</span></div>
+        </div>
+      </div>
+      <div class="agent-map">
+        <article class="agent-tile"><small>Logic</small><h3>Clear structure</h3><p>Craft steps become low-error algorithms so teens do not have to guess the next step.</p></article>
+        <article class="agent-tile"><small>Psychology</small><h3>Low barrier</h3><p>Behavioral activation becomes a small action that can be finished in 5-20 minutes.</p></article>
+        <article class="agent-tile"><small>Art</small><h3>Safe expression</h3><p>Color, texture, shape, and story allow expression without forcing speech.</p></article>
+      </div>
+      <div class="takeaway">One line: build a box teens actually want to open, then use safe feedback to decide whether it deserves to scale.</div>
+    </div>
+  </section>
+
+  <section class="slide" id="why-en">
+    <div class="slide-number">01</div>
+    <div class="slide-content">
+      <div class="eyebrow">Why this</div>
+      <h2>Many teens do not lack insight. The first step is just too heavy.</h2>
+      <p class="lead">When someone feels low, the problem is often not a lack of advice. It is the absence of a small, safe, finishable entry point. Amy's advantage is understanding what that entry point might feel like from a kid's perspective.</p>
+      <div class="thesis-pair">
+        <article class="thesis-card"><small>Pain point 1</small><h3>Materials can feel like homework</h3><p>Many mental-health worksheets feel like assignments or evaluation before a teen even starts.</p></article>
+        <article class="thesis-card"><small>Pain point 2</small><h3>Expression is not always verbal</h3><p>A teen may be willing to make, draw, or assemble before being ready to explain feelings.</p></article>
+      </div>
+      <div class="grid-3">
+        <article class="panel green"><h3>Behavioral activation</h3><p>Start with a small action so action can bring back some energy and completion.</p></article>
+        <article class="panel blue"><h3>Tactile art</h3><p>Use ribbon, wood, magnets, paper craft, and texture to lower the barrier.</p></article>
+        <article class="panel amber"><h3>Logical structure</h3><p>Every step should be clear, verifiable, and finishable to reduce anxiety and quitting.</p></article>
+      </div>
+      <p class="callout">The value is not claiming to cure depression. The value is designing a more startable, finishable, understandable support activity.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="box-system-en">
+    <div class="slide-number">02</div>
+    <div class="slide-content">
+      <div class="eyebrow">Three-box system</div>
+      <h2>One goal, three social settings.</h2>
+      <p class="lead">The boxes are not random products. They test three variables: alone, two-person collaboration, and individual modules joined into a group wall.</p>
+      <div class="grid-3">
+        <article class="panel green"><h3>01 Solo Mastery Box</h3><p>Silk ribbon roses, botanical craft, and low-pressure folding. Goal: safety, control, completion.</p></article>
+        <article class="panel blue"><h3>02 Family Bridge Box</h3><p>Magnetic structures, geometric puzzles, two-person collaboration, and low-pressure conversation cards. Goal: shared focus and easier connection.</p></article>
+        <article class="panel violet"><h3>03 Collaborative Grid Box</h3><p>Each person completes one module, then adds it to a collective wall. Goal: low-pressure belonging and community connection.</p></article>
+      </div>
+      <div class="scenario-stack">
+        <article class="scenario-card">
+          <div class="scenario-head"><h3>20 x 20 x 20 rule</h3><span>R2 design constraint</span></div>
+          <div class="timegrid">
+            <div class="timebox"><h3>20 minutes</h3><p>One stage can be completed within 20 minutes.</p></div>
+            <div class="timebox"><h3>20 pieces</h3><p>Keep core pieces limited so complexity does not overwhelm the start.</p></div>
+            <div class="timebox"><h3>20-second first step</h3><p>The first step must be understandable immediately.</p></div>
+          </div>
+          <div class="scenario-summary">The rule does not limit creativity. It makes starting possible when energy is low.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="learning-stack-en">
+    <div class="slide-number">03</div>
+    <div class="slide-content">
+      <div class="eyebrow">Learning path</div>
+      <h2>Courses are not decoration. They justify the activity cards.</h2>
+      <p class="lead">R2 turns the summer into four learning tracks: psychology overview, logical structure, behavior change, and design feedback. Every week, at least one concept should become an activity card.</p>
+      <div class="ladder">
+        <article class="step current"><small>Week 1</small><h3>Psychology foundation</h3><p>Yale Intro Psychology builds vocabulary for behavior, memory, emotion, and social connection.</p></article>
+        <article class="step current"><small>Week 2</small><h3>Logic reasoning</h3><p>Duke Think Again and Brilliant Logic help turn instructions into clear steps.</p></article>
+        <article class="step next"><small>Week 3</small><h3>Behavior change</h3><p>Wesleyan Behavioral Change teaches action loops, motivation, and behavioral activation.</p></article>
+        <article class="step next"><small>Week 4</small><h3>Cognitive bias</h3><p>Blind spots, attention bias, and attribution bias become assumption-check cards.</p></article>
+        <article class="step future"><small>Ongoing</small><h3>Design iteration</h3><p>Each concept becomes a box task, instruction page, or survey question.</p></article>
+      </div>
+      <div class="takeaway">The goal is not collecting certificates. The goal is giving every box step a reason.</div>
+    </div>
+  </section>
+
+  <section class="slide" id="mentor-map-en">
+    <div class="slide-number">04</div>
+    <div class="slide-content">
+      <div class="eyebrow">Mentor map</div>
+      <h2>Use Wyzant for three mentor types, not one.</h2>
+      <p class="lead">Mentors do not build the project for Amy. They translate advanced ideas into middle-school-friendly lessons and design decisions.</p>
+      <div class="priority-stack">
+        <article class="agent-card"><div class="agent-rank">1</div><div class="agent-main"><h3>Psychology / neuroscience mentor</h3><p>Teach neuroplasticity, learning science, adolescent social connection, and emotional support.</p></div><div class="agent-guard">Boundary: educational coaching, not diagnosis or treatment.</div></article>
+        <article class="agent-card"><div class="agent-rank">2</div><div class="agent-main"><h3>Logic / systems mentor</h3><p>Turn craft steps into deductive logic, checklists, and error-proof algorithms.</p></div><div class="agent-guard">Output: clear instructions and structured task cards.</div></article>
+        <article class="agent-card"><div class="agent-rank">3</div><div class="agent-main"><h3>Statistics / behavioral economics mentor</h3><p>Teach present bias, choice architecture, and anonymous QR feedback design.</p></div><div class="agent-guard">Collect product feedback only, not clinical data.</div></article>
+      </div>
+      <p class="callout">Standard tutor language: this is student-led supportive activity-kit design, not therapy practice or a medical study.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="feedback-system-en">
+    <div class="slide-number">05</div>
+    <div class="slide-content">
+      <div class="eyebrow">Feedback system</div>
+      <h2>Measure design experience, not medical outcomes.</h2>
+      <p class="lead">R2 reframes the survey as a safe product-feedback system. It helps determine whether the box is opened, whether instructions are clear, and whether the teen is willing to continue.</p>
+      <div class="workflow-list">
+        <div class="workflow-row header"><div>Question</div><div>Ask</div><div>Do not ask</div><div>Use</div></div>
+        <div class="workflow-row"><div>Start barrier</div><div>Was the first step easy to understand?</div><div>Do you have a depression diagnosis?</div><div>Improve instructions</div></div>
+        <div class="workflow-row"><div>Immediate feeling</div><div>Do you feel calmer or clearer?</div><div>Did your condition improve?</div><div>Adjust difficulty</div></div>
+        <div class="workflow-row"><div>Setting fit</div><div>Do you prefer solo, pair, or group?</div><div>What are your family conflict details?</div><div>Choose next box</div></div>
+        <div class="workflow-row"><div>Continuation</div><div>Would you do a second card?</div><div>How effective was treatment?</div><div>Judge product appeal</div></div>
+      </div>
+      <div class="metric-strip">
+        <div class="metric"><b>1-2 min</b><span>The survey must be very short.</span></div>
+        <div class="metric"><b>Anonymous</b><span>No names, diagnoses, or medical history.</span></div>
+        <div class="metric"><b>Optional</b><span>A teen can skip it.</span></div>
+        <div class="metric"><b>Parent / school</b><span>Minor feedback needs approval.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="safety-partners-en">
+    <div class="slide-number">06</div>
+    <div class="slide-content">
+      <div class="eyebrow">Safety partners</div>
+      <h2>Make trusted adults understand it before taking it outside.</h2>
+      <p class="lead">R2's sequence is family micro-pilot, school counselor / teacher review, compliant donation, then maybe nonprofit. Do not start with direct hospital interaction or public disclosure of Amy's personal experience.</p>
+      <div class="foundation-grid">
+        <article class="foundation-card"><h3>School route</h3><ul><li>Ask a counselor or trusted teacher to review positioning.</li><li>Possible forms: advisory activity, student showcase, wellness club.</li><li>Fast feedback and lower risk while protecting privacy.</li></ul></article>
+        <article class="foundation-card"><h3>Hospital route</h3><ul><li>Start with Child Life / donation office, not patients directly.</li><li>Donate only new, cleanable, wish-list-compatible materials.</li><li>Any on-site activity requires hospital staff review.</li></ul></article>
+      </div>
+      <div class="grid-3">
+        <article class="panel green"><h3>Privacy</h3><p>Do not publicize personal experience unless Amy clearly wants that and understands the consequences.</p></article>
+        <article class="panel amber"><h3>Safety</h3><p>Materials must avoid sharp edges, contamination, and medical promises.</p></article>
+        <article class="panel red"><h3>Boundary</h3><p>No treatment, diagnosis, or clinical research claims.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="roadmap-r2-en">
+    <div class="slide-number">07</div>
+    <div class="slide-content">
+      <div class="eyebrow">90-day roadmap</div>
+      <h2>Start in three days. Show a pilot in three months.</h2>
+      <p class="lead">R2 breaks the project into a practical rhythm: organize, prototype, test, summarize. Each phase has a deliverable.</p>
+      <div class="roadmap">
+        <div class="roadmap-row"><div class="phase">0-3 days</div><div class="target"><h3>Goal</h3><p>Finalize R2 page, three-box definitions, first courses, and tutor search terms.</p></div><div class="proof"><h3>Deliverable</h3><p>Project page, Wyzant message, materials list v1.</p></div></div>
+        <div class="roadmap-row"><div class="phase">1-2 weeks</div><div class="target"><h3>Goal</h3><p>Build one paper / material prototype for each box.</p></div><div class="proof"><h3>Deliverable</h3><p>3 box mockups, 3 activity cards, 1 feedback form.</p></div></div>
+        <div class="roadmap-row"><div class="phase">3-6 weeks</div><div class="target"><h3>Goal</h3><p>Let 3-5 trusted users try them and record anonymous product feedback.</p></div><div class="proof"><h3>Deliverable</h3><p>Issue list, revision direction, photo record, and version log.</p></div></div>
+        <div class="roadmap-row"><div class="phase">7-12 weeks</div><div class="target"><h3>Goal</h3><p>Make 10-20 sample boxes and prepare for school / mentor review.</p></div><div class="proof"><h3>Deliverable</h3><p>Showcase page, 1-page summary, next-step partner email.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="prototype-plan-en">
+    <div class="slide-number">08</div>
+    <div class="slide-content">
+      <div class="eyebrow">Prototype plan</div>
+      <h2>Make a high-quality small batch before building an organization.</h2>
+      <p class="lead">Manufacturing prototypes in China can help with materials and craft supply chains, but the first batch should not overfocus on packaging complexity. Safety, clarity, repeatability, and feedback matter more.</p>
+      <div class="roi-hero">
+        <div class="roi-big"><b>10-20</b><span>first sample boxes. Enough to see problems without making budget or logistics too heavy.</span></div>
+        <div class="exec-stack">
+          <div class="exec-line"><b>Materials</b><span>Ribbon, paper craft, magnetic wood pieces, no sharp tools, individual packaging.</span></div>
+          <div class="exec-line"><b>Instructions</b><span>One start card, one step card, one reflection card.</span></div>
+          <div class="exec-line"><b>Quality</b><span>Check missing pieces, sharp edges, and whether instructions make sense alone.</span></div>
+        </div>
+      </div>
+      <div class="math-grid">
+        <article class="math-card"><small>Box 01</small><b>Lowest cost first</b><p>Paper craft and ribbon are good for quickly testing instruction clarity.</p></article>
+        <article class="math-card"><small>Box 02</small><b>Highest structure risk</b><p>Magnetic parts and two-person collaboration need more safety and durability testing.</p></article>
+        <article class="math-card"><small>Box 03</small><b>Best showcase effect</b><p>The module wall is strong for school showcase and community pilots.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="narrative-en">
+    <div class="slide-number">09</div>
+    <div class="slide-content">
+      <div class="eyebrow">Public narrative</div>
+      <h2>Present it as a clear student project, not a medical promise.</h2>
+      <p class="lead">The R2 narrative should be mature without overclaiming: Amy is using her interests and learning to design supportive activity boxes for teen well-being, then improving them through safe feedback.</p>
+      <div class="scenario-stack">
+        <article class="scenario-card">
+          <div class="scenario-head"><h3>30-second pitch</h3><span>English</span></div>
+          <p>Amy Project is a student-led supportive activity-kit project combining logic, psychology, and high-quality craft. It helps teens begin with a very small, concrete, finishable action. It is not treatment and does not collect medical data; the first stage focuses only on product experience and safe feedback.</p>
+        </article>
+        <article class="scenario-card">
+          <div class="scenario-head"><h3>Do not say this</h3><span>Risk language</span></div>
+          <div class="grid-3">
+            <div class="timebox"><h3>Do not</h3><p>Treat teen depression.</p></div>
+            <div class="timebox"><h3>Do not</h3><p>Clinical trial, medical research, proven effect.</p></div>
+            <div class="timebox"><h3>Do not</h3><p>Ask minors for diagnosis, medical history, or private crisis details.</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="sources-en">
+    <div class="slide-number">10</div>
+    <div class="slide-content">
+      <div class="eyebrow">Sources & next steps</div>
+      <h2>The source stack is enough. Now build.</h2>
+      <p class="lead">R2 keeps only the sources needed for action: courses, mental-health boundaries, behavioral activation, hospital donation, and nonprofit requirements.</p>
+      <div class="evidence-grid">
+        <article class="source-card"><b>Yale / Coursera</b><p>Introduction to Psychology, Everyday Parenting, and Science of Well-Being as psychology and behavior-design foundations.</p></article>
+        <article class="source-card"><b>Duke / Brilliant</b><p>Think Again, Logic, and Computer Science as logic and structured-instruction training.</p></article>
+        <article class="source-card"><b>Wesleyan / Harvard Online</b><p>Creating Behavioral Change and Psychology of Blind Spots as behavior-change and blind-spot frameworks.</p></article>
+        <article class="source-card"><b>NIMH / Kids Mental Health Foundation</b><p>Use these to understand depression and behavioral activation seriously, and to keep the project from replacing treatment.</p></article>
+        <article class="source-card"><b>OHSU / donation office</b><p>The hospital route must follow new, clean, safe, compliant donation rules.</p></article>
+        <article class="source-card"><b>Oregon DOJ / IRS</b><p>If the project becomes a nonprofit, parents and professionals should help handle legal and tax boundaries.</p></article>
+      </div>
+      <div class="takeaway">Next: three box prototypes, three activity cards, one anonymous feedback form, and one Wyzant mentor shortlist.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="zh-inline">Amy Project R2 · 参考 AI Strategy R2 模板制作 · noindex 保留 · 非临床支持性活动设计页面。</span>
+  <span class="en-inline">Amy Project R2 · Built from the AI Strategy R2 template · noindex retained · Non-clinical supportive activity design page.</span>
+</footer>
+
+<script>
+function toggleMenu(force) {
+  var next = typeof force === 'boolean' ? force : !document.body.classList.contains('nav-open');
+  document.body.classList.toggle('nav-open', next);
+}
+
+function setLang(lang) {
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = lang === 'zh' ? 'Amy Project R2 | 行为激活设计实验' : 'Amy Project R2 | Behavioral Activation Design';
+  try { localStorage.setItem('amy-project-r2-lang', lang); } catch (e) {}
+}
+
+try {
+  var savedLang = localStorage.getItem('amy-project-r2-lang');
+  if (savedLang === 'en') setLang('en');
+  else setLang('zh');
+} catch (e) {
+  setLang('zh');
+}
+
+var originalPageLink = document.getElementById('original-page-link');
+if (originalPageLink && location.hostname.indexOf('timememo.net') !== -1) {
+  originalPageLink.href = '/amy-project/';
+}
+
+document.querySelectorAll('.side-nav a, .toc a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    toggleMenu(false);
+  });
+});
+
+var sections = Array.from(document.querySelectorAll('section[id]'));
+var navLinks = Array.from(document.querySelectorAll('.side-nav a'));
+if ('IntersectionObserver' in window) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach(function(link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    });
+  }, { rootMargin: '-42% 0px -52% 0px', threshold: 0.01 });
+  sections.forEach(function(section) { observer.observe(section); });
+}
+</script>
+</body>
+</html>
