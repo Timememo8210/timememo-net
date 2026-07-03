@@ -1,0 +1,33 @@
+name: Claude express publish
+on:
+  push:
+    branches:
+      - 'claude/publish-**'
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: claude-express
+  cancel-in-progress: false
+jobs:
+  merge-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Merge publish branch into main
+        run: |
+          git config user.name "claude-express[bot]"
+          git config user.email "claude-express@users.noreply.github.com"
+          git merge --no-edit "origin/${GITHUB_REF_NAME}"
+          git push origin main
+      - name: Request Pages rebuild (belt and braces)
+        run: |
+          curl -s -X POST \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true
+      - name: Delete merged branch
+        run: git push origin --delete "${GITHUB_REF_NAME}" || true
