@@ -55,6 +55,11 @@ async function unlock(pw){
   return new TextDecoder().decode(pt);
 }
 async function attempt(pw,silent){
+  if(!window.crypto||!crypto.subtle){
+    var er=document.getElementById("err");
+    er.textContent="THIS PAGE NEEDS HTTPS (OR LOCAL FILE) TO UNLOCK";
+    er.style.visibility="visible";return;
+  }
   try{
     var html=await unlock(pw);
     try{sessionStorage.setItem("summit_code",pw);}catch(e){}
