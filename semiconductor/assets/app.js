@@ -27,6 +27,7 @@
 
   function unlock() {
     body.classList.remove("locked");
+    requestAnimationFrame(() => body.classList.add("ready"));
     const field = document.querySelector("[data-password]");
     if (field) field.value = "";
   }
@@ -92,8 +93,48 @@
     update();
   }
 
+  function initBriefCopy() {
+    document.querySelectorAll("[data-copy-brief]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.querySelector(button.dataset.copyBrief || ".brief-list");
+        if (!target) return;
+        const text = Array.from(target.querySelectorAll("li"))
+          .filter((item) => getComputedStyle(item).display !== "none")
+          .map((item, index) => `${index + 1}. ${item.innerText.trim()}`)
+          .join("\n");
+        try {
+          await navigator.clipboard.writeText(text);
+          const original = button.innerHTML;
+          button.innerHTML = '<span class="lang-zh">已复制</span><span class="lang-en">Copied</span>';
+          setTimeout(() => { button.innerHTML = original; }, 1500);
+        } catch {
+          button.select?.();
+        }
+      });
+    });
+  }
+
+  function initReveal() {
+    const elements = document.querySelectorAll("[data-reveal]");
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    elements.forEach((element) => observer.observe(element));
+  }
+
   document.querySelectorAll("[data-print]").forEach((button) => button.addEventListener("click", () => window.print()));
   initLanguage();
   initGate();
   initCalculator();
+  initBriefCopy();
+  initReveal();
 })();
