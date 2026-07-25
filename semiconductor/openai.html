@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <title>OpenAI · 自研 AI 芯片与制造路线</title>
+  <link rel="stylesheet" href="assets/style.css?v=20260724">
+</head>
+<body class="locked" data-lang="zh">
+  <div class="access-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-card">
+      <div class="gate-mark">SI</div>
+      <h1 id="gate-title"><span class="lang-zh">受保护的研究页面</span><span class="lang-en">Protected research page</span></h1>
+      <p><span class="lang-zh">请输入半导体情报中心密码。</span><span class="lang-en">Enter the Semiconductor Intelligence password.</span></p>
+      <form data-gate-form><div class="gate-field"><input data-password type="password" autocomplete="current-password" inputmode="numeric" aria-label="Password" autofocus><button data-gate-submit type="submit"><span class="lang-zh">进入</span><span class="lang-en">Enter</span></button></div><p class="gate-error" data-gate-error aria-live="polite"></p></form>
+      <div class="gate-tools"><button class="text-button" data-show-password type="button"><span class="lang-zh">显示密码</span><span class="lang-en">Show password</span></button><button class="text-button" data-language type="button">EN</button></div>
+    </div>
+  </div>
+
+  <div class="site-shell">
+    <header class="topbar"><div class="topbar-inner">
+      <a class="brand" href="./"><span class="brand-dot">SI</span><span><span class="lang-zh">半导体情报</span><span class="lang-en">Semiconductor Intelligence</span></span></a>
+      <nav class="topnav" aria-label="Primary"><a href="./"><span class="lang-zh">总览</span><span class="lang-en">Overview</span></a><a href="phison.html">Phison</a><a class="active" href="openai.html">OpenAI</a><a href="anthropic.html">Anthropic</a></nav>
+      <div class="utility"><button data-print type="button">PDF</button><button data-language type="button">EN</button></div>
+    </div></header>
+
+    <main class="page">
+      <section class="hero">
+        <div class="eyebrow">REPORT 02 · CUSTOM AI SILICON</div>
+        <h1>OpenAI <small><span class="lang-zh">Jalapeño 推理芯片：从模型公司到系统级芯片共同设计者</span><span class="lang-en">Jalapeño: from model company to system-level silicon co-designer</span></small></h1>
+        <p class="hero-lede"><span class="lang-zh">2026 年 6 月，OpenAI 公布首款自研“Intelligence Processor” Jalapeño：由 OpenAI 定义和设计、Broadcom 完成硅实现与网络、Celestica 集成板卡和机架，台积电负责制造。工程样片已运行 GPT‑5.3‑Codex‑Spark，部署目标为 2026 年底。</span><span class="lang-en">In June 2026 OpenAI unveiled Jalapeño, its first custom “Intelligence Processor”: OpenAI defines and designs it, Broadcom implements the silicon and networking, Celestica integrates boards and racks, and TSMC manufactures it. Engineering samples are running GPT‑5.3‑Codex‑Spark, with deployment targeted by end-2026.</span></p>
+        <div class="hero-meta"><span><strong><span class="lang-zh">资料截点</span><span class="lang-en">As of</span></strong> · 2026-07-24</span><span><strong><span class="lang-zh">状态</span><span class="lang-en">Status</span></strong> · <span class="lang-zh">工程样片</span><span class="lang-en">Engineering samples</span></span><span><strong><span class="lang-zh">用途</span><span class="lang-en">Use</span></strong> · <span class="lang-zh">内部推理</span><span class="lang-en">Internal inference</span></span></div>
+      </section>
+
+      <div class="article-layout" style="margin-top:44px">
+        <aside class="toc">
+          <strong><span class="lang-zh">目录</span><span class="lang-en">Contents</span></strong>
+          <a href="#verdict"><span class="lang-zh">核心结论</span><span class="lang-en">Verdict</span></a>
+          <a href="#chip"><span class="lang-zh">Jalapeño 芯片</span><span class="lang-en">Jalapeño</span></a>
+          <a href="#chain"><span class="lang-zh">合作链条</span><span class="lang-en">Partner chain</span></a>
+          <a href="#roadmap"><span class="lang-zh">路线与规模</span><span class="lang-en">Roadmap & scale</span></a>
+          <a href="#requirements"><span class="lang-zh">制造难题</span><span class="lang-en">Manufacturing</span></a>
+          <a href="#alternatives"><span class="lang-zh">平台对比</span><span class="lang-en">Platform mix</span></a>
+          <a href="#process"><span class="lang-zh">制程比较</span><span class="lang-en">Process compare</span></a>
+          <a href="#news"><span class="lang-zh">最新新闻</span><span class="lang-en">News</span></a>
+          <a href="#sources"><span class="lang-zh">来源</span><span class="lang-en">Sources</span></a>
+        </aside>
+
+        <article class="article">
+          <section class="section" id="verdict">
+            <div class="verdict">
+              <div class="verdict-main">
+                <div class="section-kicker"><span class="lang-zh">核心结论</span><span class="lang-en">Bottom line</span></div>
+                <h2><span class="lang-zh">Jalapeño 已越过“计划”阶段，但尚未越过量产与规模部署验证。</span><span class="lang-en">Jalapeño has moved beyond “plan,” but not yet beyond volume-production and scaled-deployment proof.</span></h2>
+                <p><span class="lang-zh">OpenAI 已确认样片在目标频率与功耗下运行真实模型，并给出 2026 年底部署目标；但尚未披露芯片面积、晶体管数、HBM 数量、精度、吞吐、延迟、单芯片功耗、良率或总产量。公开资料只能确认方向和产业链，不能据此建立完整性能/成本模型。</span><span class="lang-en">OpenAI confirms that samples run real models at target frequency and power and targets deployment by end-2026. It has not disclosed die size, transistor count, HBM count, precision, throughput, latency, per-chip power, yield or total units. Public evidence establishes direction and partners, not a full performance/cost model.</span></p>
+              </div>
+              <div class="verdict-score">
+                <div class="score-card"><small><span class="lang-zh">芯片阶段</span><span class="lang-en">Chip stage</span></small><strong><span class="lang-zh">工程样片</span><span class="lang-en">Samples</span></strong><span class="pill confirmed"><span class="lang-zh">确认</span><span class="lang-en">Confirmed</span></span></div>
+                <div class="score-card"><small><span class="lang-zh">制造商</span><span class="lang-en">Manufacturer</span></small><strong>TSMC</strong><span class="pill reported">Reuters</span></div>
+                <div class="score-card"><small><span class="lang-zh">制程节点</span><span class="lang-en">Process node</span></small><strong>3nm</strong><span class="pill reported"><span class="lang-zh">报道，未官宣</span><span class="lang-en">Reported, not official</span></span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="chip">
+            <div class="section-kicker">Jalapeño</div>
+            <h2><span class="lang-zh">为 OpenAI 推理负载“从白纸开始”设计</span><span class="lang-en">Designed from a blank sheet for OpenAI inference workloads</span></h2>
+            <p class="lead"><span class="lang-zh">OpenAI 把它称为第一款“Intelligence Processor”，定位是大型语言模型推理，而不是对外销售的通用 GPU。设计重点是减少数据搬运，让计算、内存和网络在机架尺度更平衡。</span><span class="lang-en">OpenAI calls it its first “Intelligence Processor,” aimed at large-language-model inference rather than sale as a general-purpose GPU. The design prioritizes less data movement and a better rack-scale balance of compute, memory and networking.</span></p>
+            <div class="stat-grid">
+              <div class="stat"><small><span class="lang-zh">设计到流片</span><span class="lang-en">Design to tape-out</span></small><strong>9 <span class="lang-zh">个月</span><span class="lang-en">months</span></strong><span><span class="lang-zh">官方披露</span><span class="lang-en">Official disclosure</span></span></div>
+              <div class="stat"><small><span class="lang-zh">目标部署</span><span class="lang-en">Target deployment</span></small><strong>2026 EOY</strong><span><span class="lang-zh">OpenAI 内部系统</span><span class="lang-en">OpenAI internal systems</span></span></div>
+              <div class="stat"><small><span class="lang-zh">计划规模</span><span class="lang-en">Program scale</span></small><strong>10GW</strong><span><span class="lang-zh">多代加速器/系统</span><span class="lang-en">Multi-generation accelerators/systems</span></span></div>
+              <div class="stat"><small><span class="lang-zh">公开性能数字</span><span class="lang-en">Public performance numbers</span></small><strong><span class="lang-zh">未披露</span><span class="lang-en">None</span></strong><span><span class="lang-zh">只有定性效率声明</span><span class="lang-en">Qualitative efficiency claim only</span></span></div>
+            </div>
+            <div class="table-wrap" style="margin-top:18px">
+              <table>
+                <thead><tr><th><span class="lang-zh">项目</span><span class="lang-en">Item</span></th><th><span class="lang-zh">公开状态</span><span class="lang-en">Public status</span></th><th><span class="lang-zh">可信结论</span><span class="lang-en">Supported conclusion</span></th></tr></thead>
+                <tbody>
+                  <tr><td><span class="lang-zh">功能</span><span class="lang-en">Function</span></td><td><span class="pill confirmed"><span class="lang-zh">确认</span><span class="lang-en">Confirmed</span></span></td><td><span class="lang-zh">LLM 推理；OpenAI 自用；多代路线</span><span class="lang-en">LLM inference; OpenAI-only use; multi-generation roadmap</span></td></tr>
+                  <tr><td><span class="lang-zh">硅状态</span><span class="lang-en">Silicon status</span></td><td><span class="pill confirmed"><span class="lang-zh">确认</span><span class="lang-en">Confirmed</span></span></td><td><span class="lang-zh">工程样片在目标频率/功耗下运行 GPT‑5.3‑Codex‑Spark</span><span class="lang-en">Engineering samples run GPT‑5.3‑Codex‑Spark at target frequency/power</span></td></tr>
+                  <tr><td><span class="lang-zh">晶圆厂</span><span class="lang-en">Foundry</span></td><td><span class="pill reported">Reuters</span></td><td><span class="lang-zh">台积电制造；OpenAI 官宣没有点名晶圆厂</span><span class="lang-en">TSMC manufacturing; OpenAI’s announcement does not name the foundry</span></td></tr>
+                  <tr><td><span class="lang-zh">节点</span><span class="lang-en">Node</span></td><td><span class="pill reported"><span class="lang-zh">2025 报道</span><span class="lang-en">2025 report</span></span></td><td><span class="lang-zh">报道称 3nm；2026 正式发布时未重新确认具体变体</span><span class="lang-en">Reported as 3nm; the 2026 launch did not re-confirm a specific variant</span></td></tr>
+                  <tr><td>HBM</td><td><span class="pill reported">Reuters</span></td><td><span class="lang-zh">通过 Broadcom 供应链连接 Samsung / SK hynix；代际与堆栈数未披露</span><span class="lang-en">Samsung / SK hynix linked through Broadcom supply chain; generation and stack count undisclosed</span></td></tr>
+                  <tr><td><span class="lang-zh">性能 / 功耗</span><span class="lang-en">Performance / power</span></td><td><span class="pill unknown"><span class="lang-zh">未量化</span><span class="lang-en">Unquantified</span></span></td><td><span class="lang-zh">只宣称每瓦性能显著提高；无法与 GPU/TPU 数值对表</span><span class="lang-en">Only “substantially better performance per watt”; no numeric GPU/TPU comparison possible</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="section" id="chain">
+            <div class="section-kicker"><span class="lang-zh">合作链条</span><span class="lang-en">Partner chain</span></div>
+            <h2><span class="lang-zh">OpenAI 掌握工作负载与架构，合作伙伴完成物理实现和系统化</span><span class="lang-en">OpenAI owns workload and architecture; partners physicalize and systemize it</span></h2>
+            <div class="partner-map" style="margin-top:20px">
+              <div class="partner"><small><span class="lang-zh">架构 / 工作负载</span><span class="lang-en">Architecture / workload</span></small><strong>OpenAI</strong><p><span class="lang-zh">处理器定义、模型协同设计、系统需求与内部部署。</span><span class="lang-en">Processor definition, model co-design, system requirements and internal deployment.</span></p></div>
+              <div class="partner"><small><span class="lang-zh">硅实现 / 网络</span><span class="lang-en">Silicon / networking</span></small><strong>Broadcom</strong><p><span class="lang-zh">芯片实现、高速网络、机架设计与多代共同开发。</span><span class="lang-en">Chip implementation, high-speed networking, rack design and multi-generation co-development.</span></p></div>
+              <div class="partner"><small><span class="lang-zh">晶圆制造</span><span class="lang-en">Wafer fabrication</span></small><strong>TSMC</strong><p><span class="lang-zh">Reuters 确认；具体 3nm 变体与封装平台未正式披露。</span><span class="lang-en">Confirmed by Reuters; exact 3nm variant and packaging platform are not officially disclosed.</span></p></div>
+              <div class="partner"><small><span class="lang-zh">板卡 / 机架</span><span class="lang-en">Boards / racks</span></small><strong>Celestica</strong><p><span class="lang-zh">服务器板卡、机架集成和面向数据中心的制造交付。</span><span class="lang-en">Server boards, rack integration and data-center manufacturing delivery.</span></p></div>
+            </div>
+            <div class="notice" style="margin-top:16px"><strong><span class="lang-zh">核心组织能力：</span><span class="lang-en">Core organizational capability:</span></strong> <span class="lang-zh">OpenAI 的差异化在于掌握模型执行图、张量形状、通信模式和利用率数据；Broadcom 则补齐先进节点物理设计、SerDes、封装与供应链经验。9 个月流片速度说明复用了成熟 IP/流程，但不能据此推断全部 IP 归属。</span><span class="lang-en">OpenAI’s differentiation is access to execution graphs, tensor shapes, communication patterns and utilization data; Broadcom supplies advanced-node physical design, SerDes, packaging and supply-chain experience. A nine-month tape-out suggests mature IP and flows, but does not establish ownership of every IP block.</span> <span class="pill analysis"><span class="lang-zh">研究判断</span><span class="lang-en">Analysis</span></span></div>
+          </section>
+
+          <section class="section" id="roadmap">
+            <div class="section-kicker"><span class="lang-zh">路线与规模</span><span class="lang-en">Roadmap & scale</span></div>
+            <h2><span class="lang-zh">首代芯片的目标不是替代所有 GPU，而是控制最可预测的推理负载</span><span class="lang-en">The first chip is not about replacing every GPU—it targets the most predictable inference load</span></h2>
+            <div class="timeline">
+              <div class="timeline-row"><div class="timeline-year">2024–25</div><div class="timeline-content"><h3><span class="lang-zh">设计、流片与供应链锁定</span><span class="lang-en">Design, tape-out and supply-chain lock</span></h3><p><span class="lang-zh">Reuters 报道 3nm 与 Broadcom 合作；OpenAI 在 2025 年 10 月公布 10GW 多代系统计划。</span><span class="lang-en">Reuters reported 3nm and Broadcom collaboration; OpenAI announced a 10GW multi-generation systems program in October 2025.</span></p></div></div>
+              <div class="timeline-row"><div class="timeline-year">2026 H1</div><div class="timeline-content"><h3><span class="lang-zh">工程样片运行模型</span><span class="lang-en">Samples running models</span></h3><p><span class="lang-zh">样片达到目标频率/功耗；尚无公开量产良率、性能或成本。</span><span class="lang-en">Samples reach target frequency/power; no public volume yield, performance or cost.</span></p></div></div>
+              <div class="timeline-row"><div class="timeline-year">2026 H2</div><div class="timeline-content"><h3><span class="lang-zh">首批系统部署目标</span><span class="lang-en">Initial system deployment target</span></h3><p><span class="lang-zh">Broadcom 合作系统从 2026 年下半年开始部署；Jalapeño 目标年底进入 OpenAI 内部基础设施。</span><span class="lang-en">Broadcom systems begin deployment in 2H 2026; Jalapeño targets OpenAI infrastructure by year-end.</span></p></div></div>
+              <div class="timeline-row"><div class="timeline-year">2027–29</div><div class="timeline-content"><h3><span class="lang-zh">多代扩展至 10GW</span><span class="lang-en">Multi-generation scale toward 10GW</span></h3><p><span class="lang-zh">官方计划延伸至 2029 年底。后续节点、架构和 HBM 路线未披露。</span><span class="lang-en">The official program extends through end-2029. Follow-on nodes, architecture and HBM roadmap are undisclosed.</span></p></div></div>
+            </div>
+            <p><span class="lang-zh">10GW 是系统部署能力计划，不是芯片 TDP 相除就能得到的精确芯片数量。实际数量取决于加速器功耗、每机架配置、冗余、利用率、网络和数据中心基础设施。</span><span class="lang-en">10GW is a system-deployment capacity plan, not an exact chip count obtained by dividing by chip TDP. Units depend on accelerator power, rack configuration, redundancy, utilization, networking and data-center infrastructure.</span></p>
+          </section>
+
+          <section class="section" id="requirements">
+            <div class="section-kicker"><span class="lang-zh">制造难题</span><span class="lang-en">Manufacturing challenges</span></div>
+            <h2><span class="lang-zh">真正的瓶颈是“计算裸片 + HBM + 封装 + 网络 + 电力”的同步爬坡</span><span class="lang-en">The real bottleneck is synchronized ramp of compute die, HBM, package, network and power</span></h2>
+            <div class="grid grid-2">
+              <div class="card"><h3>1 · <span class="lang-zh">先进节点良率</span><span class="lang-en">Advanced-node yield</span></h3><p><span class="lang-zh">大面积 AI 裸片对随机缺陷敏感；冗余单元、版图分区、频率分档和 DFT 决定可售良率。OpenAI 未披露裸片大小，因此不能计算单片成本。</span><span class="lang-en">Large AI dies are sensitive to random defects; redundancy, floorplanning, binning and DFT determine sellable yield. OpenAI has not disclosed die size, so per-chip cost cannot be calculated.</span></p></div>
+              <div class="card"><h3>2 · HBM <span class="lang-zh">容量与带宽</span><span class="lang-en">capacity & bandwidth</span></h3><p><span class="lang-zh">推理的权重、KV cache 和批处理对容量/带宽提出不同要求。HBM 堆栈数、代际和已知良品裸片供应会影响封装良率与交付。</span><span class="lang-en">Weights, KV cache and batching place different demands on capacity and bandwidth. HBM stack count, generation and known-good-die supply affect package yield and delivery.</span></p></div>
+              <div class="card"><h3>3 · 2.5D/3D <span class="lang-zh">先进封装</span><span class="lang-en">advanced packaging</span></h3><p><span class="lang-zh">中介层/桥接、基板、热设计和封装测试必须与晶圆同步。即使计算裸片充足，封装产能也可能限制整机出货。</span><span class="lang-en">Interposers/bridges, substrates, thermals and package test must ramp with wafers. Packaging can cap system shipments even when compute dies are available.</span></p></div>
+              <div class="card"><h3>4 · <span class="lang-zh">网络与机架</span><span class="lang-en">Network & rack</span></h3><p><span class="lang-zh">推理系统需要高带宽 Ethernet/SerDes、交换芯片、光模块、供电和液冷。OpenAI/Broadcom 强调减少数据搬运，说明系统互连是架构核心。</span><span class="lang-en">Inference systems need high-bandwidth Ethernet/SerDes, switches, optics, power and liquid cooling. OpenAI/Broadcom’s focus on data movement makes interconnect architectural, not peripheral.</span></p></div>
+              <div class="card"><h3>5 · <span class="lang-zh">软件成熟度</span><span class="lang-en">Software maturity</span></h3><p><span class="lang-zh">编译器、算子、调度、容错和模型量化决定实际利用率。样片跑通一个模型与生产环境稳定支持模型组合之间仍有距离。</span><span class="lang-en">Compilers, kernels, scheduling, fault tolerance and quantization determine utilization. Running one model on samples is not the same as stable production support for a model fleet.</span></p></div>
+              <div class="card"><h3>6 · <span class="lang-zh">迭代节奏</span><span class="lang-en">Cadence</span></h3><p><span class="lang-zh">模型每几个月变化，而芯片从架构到量产通常跨年。可编程性、内存余量和多代兼容性决定自研芯片是否会过早固化。</span><span class="lang-en">Models evolve in months while chips take years from architecture to volume. Programmability, memory headroom and multi-generation compatibility determine obsolescence risk.</span></p></div>
+            </div>
+          </section>
+
+          <section class="section" id="alternatives">
+            <div class="section-kicker"><span class="lang-zh">计算平台组合</span><span class="lang-en">Compute platform mix</span></div>
+            <h2><span class="lang-zh">自研芯片是供应组合的一层，不是单一替代方案</span><span class="lang-en">Custom silicon is one layer of the supply mix, not a single replacement</span></h2>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th><span class="lang-zh">平台</span><span class="lang-en">Platform</span></th><th><span class="lang-zh">角色</span><span class="lang-en">Role</span></th><th><span class="lang-zh">优势</span><span class="lang-en">Advantage</span></th><th><span class="lang-zh">约束</span><span class="lang-en">Constraint</span></th><th><span class="lang-zh">公开计划</span><span class="lang-en">Public program</span></th></tr></thead>
+                <tbody>
+                  <tr class="highlight-row"><td><strong>Jalapeño</strong></td><td><span class="lang-zh">内部推理</span><span class="lang-en">Internal inference</span></td><td><span class="lang-zh">按 OpenAI 模型与机架共同优化</span><span class="lang-en">Co-optimized to OpenAI models/racks</span></td><td><span class="lang-zh">首代量产、软件和供应链风险</span><span class="lang-en">First-generation volume, software and supply-chain risk</span></td><td><span class="lang-zh">2026 年底部署；多代 10GW</span><span class="lang-en">Deploy by end-2026; multi-gen 10GW</span></td></tr>
+                  <tr><td><strong>NVIDIA GPU</strong></td><td><span class="lang-zh">训练与通用推理</span><span class="lang-en">Training & general inference</span></td><td>CUDA <span class="lang-zh">生态、灵活性、成熟集群</span><span class="lang-en">ecosystem, flexibility, mature clusters</span></td><td><span class="lang-zh">供给、成本、电力与供应商集中</span><span class="lang-en">Supply, cost, power and vendor concentration</span></td><td><span class="lang-zh">仍是基础设施主力之一</span><span class="lang-en">Remains a core infrastructure platform</span></td></tr>
+                  <tr><td><strong>AMD Instinct</strong></td><td><span class="lang-zh">训练与推理</span><span class="lang-en">Training & inference</span></td><td><span class="lang-zh">第二大商用 GPU 路线、ROCm 开放性</span><span class="lang-en">Second commercial GPU path, ROCm openness</span></td><td><span class="lang-zh">软件迁移与规模化验证</span><span class="lang-en">Software migration and scale validation</span></td><td>6GW; <span class="lang-zh">首批 1GW MI450 在 2026 H2</span><span class="lang-en">first 1GW MI450 in 2H 2026</span></td></tr>
+                  <tr><td><strong>Cloud custom ASIC</strong></td><td><span class="lang-zh">云内训练/推理</span><span class="lang-en">Cloud training/inference</span></td><td><span class="lang-zh">云商系统级成本和容量</span><span class="lang-en">Cloud-provider system economics and capacity</span></td><td><span class="lang-zh">平台锁定与软件差异</span><span class="lang-en">Platform lock-in and software differences</span></td><td><span class="lang-zh">通过云合作继续使用</span><span class="lang-en">Continued use through cloud partners</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="section" id="process">
+            <div class="section-kicker"><span class="lang-zh">先进制程比较</span><span class="lang-en">Advanced-process comparison</span></div>
+            <h2><span class="lang-zh">AI ASIC 需要把逻辑节点和 HBM 封装视为一个系统</span><span class="lang-en">AI ASICs require treating logic node and HBM packaging as one system</span></h2>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th><span class="lang-zh">平台</span><span class="lang-en">Platform</span></th><th><span class="lang-zh">晶体管 / 供电</span><span class="lang-en">Transistor / power</span></th><th><span class="lang-zh">厂商公开提升</span><span class="lang-en">Vendor-stated uplift</span></th><th><span class="lang-zh">成熟度</span><span class="lang-en">Maturity</span></th><th><span class="lang-zh">AI ASIC 评估重点</span><span class="lang-en">AI-ASIC evaluation focus</span></th></tr></thead>
+                <tbody>
+                  <tr><td><strong>TSMC N3P</strong></td><td>FinFET · <span class="lang-zh">正面供电</span><span class="lang-en">frontside power</span></td><td><span class="lang-zh">相对 N3E 的性能/功耗/密度改进</span><span class="lang-en">Performance/power/density improvement over N3E</span></td><td><span class="lang-zh">已量产，生态成熟</span><span class="lang-en">In production, mature ecosystem</span></td><td>HBM/CoWoS <span class="lang-zh">生态、IP、良率和排产</span><span class="lang-en">ecosystem, IP, yield and capacity</span></td></tr>
+                  <tr><td><strong>Intel 18A / 18A-P</strong></td><td>RibbonFET · PowerVia</td><td>18A vs Intel 3: +18% <span class="lang-zh">性能或 -38% 功耗；18A-P 再 +9% 或 -18%</span><span class="lang-en">performance or -38% power; 18A-P adds >9% or -18%</span></td><td><span class="lang-zh">18A 量产；18A-P 2026 风险生产</span><span class="lang-en">18A volume; 18A-P risk production in 2026</span></td><td>EDA/IP、HBM <span class="lang-zh">封装、SerDes、产品级良率与产能</span><span class="lang-en">package, SerDes, product yield and capacity</span></td></tr>
+                  <tr><td><strong>TSMC N2P / A16</strong></td><td>GAA · A16 <span class="lang-zh">背面供电</span><span class="lang-en">backside power</span></td><td>N2P vs N3E: +18% / -36%; A16 vs N2P: +8–10% / -15–20%</td><td><span class="lang-zh">计划 2026 H2 量产</span><span class="lang-en">Volume planned 2H 2026</span></td><td><span class="lang-zh">大裸片功率完整性、可用产能、封装协同</span><span class="lang-en">Large-die power integrity, available capacity, package co-design</span></td></tr>
+                  <tr><td><strong>Intel 14A</strong></td><td>RibbonFET 2 · PowerDirect · High-NA</td><td>vs 18A: +15–20% / -25–35%; <span class="lang-zh">最高 +30% 芯片密度</span><span class="lang-en">up to +30% chip density</span></td><td><span class="lang-zh">路线图 2027</span><span class="lang-en">Roadmap 2027</span></td><td><span class="lang-zh">PDK 稳定、设计迁移、High-NA 学习、良率和封装路线</span><span class="lang-en">PDK stability, design migration, High-NA learning, yield and packaging path</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-note"><span class="lang-zh">这些提升来自各厂对自家前代的比较，基线、设计和测量条件不同。不能把 Intel 18A 与 TSMC N2 简化为节点数字的一一对应。</span><span class="lang-en">These are vendor comparisons against each company’s own predecessor, with different baselines, designs and conditions. Intel 18A and TSMC N2 cannot be reduced to one-to-one node-label equivalence.</span></p>
+          </section>
+
+          <section class="section" id="news">
+            <div class="section-kicker"><span class="lang-zh">最新新闻</span><span class="lang-en">Latest news</span></div>
+            <h2><span class="lang-zh">自研芯片与外部算力同步扩张</span><span class="lang-en">Custom silicon and external compute expand in parallel</span></h2>
+            <div class="news-list">
+              <a class="news-item" href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip/" target="_blank" rel="noopener"><span class="news-date">2026-06-24</span><span class="news-company">Jalapeño</span><span class="news-title"><span class="lang-zh">OpenAI 首次公开自研推理芯片与工程样片状态</span><span class="lang-en">OpenAI publicly reveals its custom inference chip and sample status</span></span><span class="news-source">OpenAI ↗</span></a>
+              <a class="news-item" href="https://openai.com/index/mrc-supercomputer-networking/" target="_blank" rel="noopener"><span class="news-date">2026-05-05</span><span class="news-company">Network</span><span class="news-title"><span class="lang-zh">MRC 超级计算网络联合 AMD、Broadcom、Intel、Microsoft 与 NVIDIA</span><span class="lang-en">MRC supercomputer networking spans AMD, Broadcom, Intel, Microsoft and NVIDIA</span></span><span class="news-source">OpenAI ↗</span></a>
+              <a class="news-item" href="https://openai.com/index/building-the-compute-infrastructure-for-the-intelligence-age/" target="_blank" rel="noopener"><span class="news-date">2026-04-29</span><span class="news-company">Infrastructure</span><span class="news-title"><span class="lang-zh">更新 Stargate 基础设施与美国算力建设进度</span><span class="lang-en">Updated Stargate and U.S. compute-infrastructure progress</span></span><span class="news-source">OpenAI ↗</span></a>
+              <a class="news-item" href="https://openai.com/index/openai-amd-strategic-partnership/" target="_blank" rel="noopener"><span class="news-date">2025-10-06</span><span class="news-company">AMD</span><span class="news-title"><span class="lang-zh">6GW AMD 合作，首个 1GW MI450 计划在 2026 H2</span><span class="lang-en">6GW AMD program, with first 1GW MI450 planned for 2H 2026</span></span><span class="news-source">OpenAI ↗</span></a>
+            </div>
+          </section>
+
+          <section class="section" id="sources">
+            <div class="section-kicker"><span class="lang-zh">来源与方法</span><span class="lang-en">Sources & method</span></div>
+            <h2><span class="lang-zh">主要公开资料</span><span class="lang-en">Principal public sources</span></h2>
+            <ol class="source-list">
+              <li><a href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip/" target="_blank" rel="noopener">OpenAI — Introducing Jalapeño</a><small><span class="lang-zh">架构目标、合作分工、样片状态与部署时间</span><span class="lang-en">Architecture goals, partner roles, sample status and deployment timing</span></small></li>
+              <li><a href="https://www.investing.com/news/stock-market-news/openai-unveils-custom-chip-it-designed-with-broadcom-to-boost-its-ai-infrastructure-4758233" target="_blank" rel="noopener">Reuters — OpenAI unveils custom chip</a><small><span class="lang-zh">台积电制造、HBM 供应链与 OpenAI 自用</span><span class="lang-en">TSMC manufacturing, HBM supply chain and OpenAI-only use</span></small></li>
+              <li><a href="https://uk.finance.yahoo.com/news/exclusive-openai-set-finalize-first-110424252.html" target="_blank" rel="noopener">Reuters — first-chip design report (2025)</a><small><span class="lang-zh">3nm 节点报道；并非 2026 官宣确认</span><span class="lang-en">3nm node report; not re-confirmed in the 2026 announcement</span></small></li>
+              <li><a href="https://openai.com/fr-FR/index/openai-and-broadcom-announce-strategic-collaboration/" target="_blank" rel="noopener">OpenAI & Broadcom — 10GW strategic collaboration</a><small><span class="lang-zh">多代系统规模与 2026–2029 部署区间</span><span class="lang-en">Multi-generation scale and 2026–2029 deployment window</span></small></li>
+              <li><a href="https://openai.com/index/openai-amd-strategic-partnership/" target="_blank" rel="noopener">OpenAI & AMD — 6GW partnership</a><small><span class="lang-zh">外部 GPU 供应组合</span><span class="lang-en">External GPU supply mix</span></small></li>
+              <li><a href="https://openai.com/index/building-the-compute-infrastructure-for-the-intelligence-age/" target="_blank" rel="noopener">OpenAI — compute infrastructure</a><small><span class="lang-zh">Stargate 与整体基础设施规模</span><span class="lang-en">Stargate and overall infrastructure scale</span></small></li>
+              <li><a href="https://www.intel.com/content/www/us/en/foundry/process/18a.html" target="_blank" rel="noopener">Intel — 18A</a> · <a href="https://newsroom.intel.com/intel-foundry/intel-foundry-details-process-milestones-future-innovation-at-vlsi-symposium" target="_blank" rel="noopener">18A-P milestone</a><small><span class="lang-zh">晶体管、背面供电、代际数据与成熟度</span><span class="lang-en">Transistor, backside power, generational data and maturity</span></small></li>
+              <li><a href="https://www.tsmc.com/english/dedicatedFoundry/technology/platform_HPC_tech_advancedTech" target="_blank" rel="noopener">TSMC — HPC advanced technology</a><small><span class="lang-zh">N3P、N2P 与 A16 官方路线</span><span class="lang-en">Official N3P, N2P and A16 roadmap</span></small></li>
+            </ol>
+            <div class="notice"><strong><span class="lang-zh">信息边界：</span><span class="lang-en">Information boundary:</span></strong> <span class="lang-zh">报告没有从芯片照片估算裸片面积或 HBM 堆栈，没有用 10GW 反推芯片数，也没有把 Reuters 的 3nm 报道标成 OpenAI 官宣事实。</span><span class="lang-en">The report does not estimate die area or HBM stacks from imagery, derive chip count from 10GW, or present Reuters’ 3nm report as an official OpenAI disclosure.</span></div>
+          </section>
+        </article>
+      </div>
+
+      <footer class="footer"><div class="footer-inner"><div><strong>OpenAI · Custom Silicon</strong><br><span class="lang-zh">独立公开资料研究 · 截至 2026-07-24 · 不构成投资建议</span><span class="lang-en">Independent public-source research · Through 2026-07-24 · Not investment advice</span></div><div class="conf-legend"><span class="pill confirmed"><span class="lang-zh">确认</span><span class="lang-en">Confirmed</span></span><span class="pill reported"><span class="lang-zh">报道</span><span class="lang-en">Reported</span></span><span class="pill analysis"><span class="lang-zh">分析</span><span class="lang-en">Analysis</span></span></div></div></footer>
+    </main>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
