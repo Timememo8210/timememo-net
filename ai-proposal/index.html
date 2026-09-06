@@ -831,14 +831,8 @@ async function sha256(msg) {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-const CORRECT_HASH = '7b9f7e4f8e1a3c6d9e2b5a8f1c4d7e0a3b6c9e2f5a8d1e4b7c0a3f6d9e2b5a'; // placeholder, computed below
-
-// Pre-compute: xiaobo sha256
-// We'll compute on load and compare
-const EXPECTED = '6e8f4c2d7a3b9e1f5d4c8b2a6e9f1d3c7a5b8e2f6d4c9a1e7f3b5d8c2a6e4f'; // will be replaced
-
 (async () => {
-  const correctHash = await sha256('xiaobo');
+  const correctHash = '2926a2731f4b312c08982cacf8061eb14bf65c1a87cc5d70e864e079c6220731';
   
   const overlay = document.getElementById('loginOverlay');
   const pwInput = document.getElementById('loginPw');

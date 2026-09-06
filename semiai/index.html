@@ -717,14 +717,14 @@ function toggleSidebar(){
 </script>
 <script>
 (function(){
-  // Password gate - SHA-256 of 'xiaobo'
-  const PASS_HASH='18d77a13c81e8a427cb57b6ab14960927accfb970c1a069e405a15b20d51db13';
-  if(sessionStorage.getItem('gate-ok')==='1'){document.getElementById('gate').style.display='none';return}
+  // Password gate
+  const PASS_HASH='2926a2731f4b312c08982cacf8061eb14bf65c1a87cc5d70e864e079c6220731';
+  if(sessionStorage.getItem('semiaiAccessV2')===PASS_HASH){document.getElementById('gate').style.display='none';return}
   window.checkGate=async function(){
     const v=document.getElementById('gate-input').value;
     const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
     const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    if(h===PASS_HASH){sessionStorage.setItem('gate-ok','1');const g=document.getElementById('gate');g.classList.add('hide');setTimeout(()=>g.style.display='none',500)}
+    if(h===PASS_HASH){sessionStorage.setItem('semiaiAccessV2',PASS_HASH);const g=document.getElementById('gate');g.classList.add('hide');setTimeout(()=>g.style.display='none',500)}
     else{document.getElementById('gate-err').textContent='Wrong password';if(document.getElementById('gate-err-zh'))document.getElementById('gate-err-zh').textContent='密码错误';document.getElementById('gate-input').value='';document.getElementById('gate-input').focus()}
   };
   document.getElementById('gate-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate()});

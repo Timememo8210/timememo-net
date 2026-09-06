@@ -1,9 +1,9 @@
 (() => {
   "use strict";
 
-  const ACCESS_KEY = "semi_access_v1";
+  const ACCESS_KEY = "semi_access_v2";
   const LANGUAGE_KEY = "semi_language_v1";
-  const EXPECTED_HASH = "d931fe4a33ad82c1e1cd44f02c9474a2302d34aad57e5c1ba304d74e6040e3a5";
+  const EXPECTED_HASH = "2926a2731f4b312c08982cacf8061eb14bf65c1a87cc5d70e864e079c6220731";
   const body = document.body;
 
   function setLanguage(language) {

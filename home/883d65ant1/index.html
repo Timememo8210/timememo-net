@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <script>
-if (sessionStorage.getItem('tmHomeAuth') !== '1') {
+if (sessionStorage.getItem('tmHomeAuthV3') !== '1') {
   location.replace('/');
 }
 </script>
@@ -163,6 +163,21 @@ section{padding:100px 24px}
 .contact-item .ci-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 .contact-item .ci-label{font-size:.75rem;color:var(--text3)}.contact-item .ci-value{font-size:.9rem;font-weight:500}
 
+/* Research and project directory */
+#directory{scroll-margin-top:88px}
+.directory-group{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;padding:32px 0;border-top:1px solid var(--border)}
+.directory-group h3{font-size:1.1rem;line-height:1.5;font-weight:700;color:var(--accent2)}
+.directory-links{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding:0}
+.directory-links li{min-width:0}
+.directory-link{display:block;height:100%;padding:18px 20px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text);text-decoration:none;transition:border-color .2s,background .2s;overflow-wrap:anywhere}
+.directory-link:hover{border-color:var(--accent);background:var(--surface2)}
+.directory-link:focus-visible{outline:2px solid var(--accent2);outline-offset:4px}
+.directory-link-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:1rem;font-weight:600}
+.directory-link-title::after{content:'→';color:var(--accent2);flex-shrink:0}
+.directory-link p{margin-top:7px;color:var(--text2);font-size:.9rem;line-height:1.65}
+@media(max-width:900px){.directory-group{grid-template-columns:1fr;gap:18px}}
+@media(max-width:600px){.directory-links{grid-template-columns:1fr}.directory-link{padding:16px}}
+
 /* Footer */
 footer{padding:40px 24px;border-top:1px solid var(--border);text-align:center}
 footer p{color:var(--text3);font-size:.8rem}
@@ -227,6 +242,7 @@ footer p{color:var(--text3);font-size:.8rem}
 <a href="/ai-strategy/" data-en="AI Strategy R3" data-zh="AI 策略 R3">AI Strategy R3</a>
 <a href="/amy-project/" data-en="Amy Project" data-zh="Amy 项目">Amy Project</a>
 <a href="/amy-project-r2/" data-en="Amy Project R2" data-zh="Amy 项目 R2">Amy Project R2</a>
+<a href="#directory" data-en="All research & projects" data-zh="全部研究与项目">All research & projects</a>
 </div>
 </li>
 <li><a href="#contact" data-en="Contact" data-zh="联系">Contact</a></li>
@@ -482,6 +498,125 @@ footer p{color:var(--text3);font-size:.8rem}
 <div class="ci-icon">📍</div>
 <div><div class="ci-label" data-en="Location" data-zh="所在地">Location</div><div class="ci-value" data-en="Portland, OR" data-zh="波特兰，俄勒冈">Portland, OR</div></div>
 </a>
+</div>
+</div>
+</section>
+
+<!-- Research and project directory -->
+<section id="directory" aria-labelledby="directory-title">
+<div class="section-inner">
+<div class="section-label">✦ <span data-en="DIRECTORY" data-zh="页面导航">DIRECTORY</span></div>
+<h2 class="section-title" id="directory-title" data-en="Research &amp; Projects" data-zh="研究与项目">Research &amp; Projects</h2>
+<div class="directory-group" role="group" aria-labelledby="directory-group-1">
+<h3 id="directory-group-1" data-en="Semiconductor Research" data-zh="半导体研究">Semiconductor Research</h3>
+<ul class="directory-links">
+<li>
+<a class="directory-link" href="/semiconductor/">
+<div class="directory-link-title"><span data-en="Semiconductor Intelligence" data-zh="半导体情报中心">Semiconductor Intelligence</span></div>
+<p data-en="An overview of companies, products and manufacturing opportunities." data-zh="企业、产品与制造机会的研究总览。">An overview of companies, products and manufacturing opportunities.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/semiconductor/openai.html">
+<div class="directory-link-title"><span data-en="OpenAI Chip Research" data-zh="OpenAI 芯片专题">OpenAI Chip Research</span></div>
+<p data-en="Custom silicon, manufacturing fit and advanced packaging." data-zh="自研芯片、制造适配与先进封装研究。">Custom silicon, manufacturing fit and advanced packaging.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/semiconductor/anthropic.html">
+<div class="directory-link-title"><span data-en="Anthropic Compute Research" data-zh="Anthropic 算力专题">Anthropic Compute Research</span></div>
+<p data-en="Compute strategy and potential custom-silicon roadmaps." data-zh="算力布局与潜在芯片路线分析。">Compute strategy and potential custom-silicon roadmaps.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/semiconductor/phison.html">
+<div class="directory-link-title"><span data-en="Phison Research" data-zh="群联 Phison 专题">Phison Research</span></div>
+<p data-en="SSD controllers, process nodes and competitive analysis." data-zh="SSD 控制器、工艺节点与竞争分析。">SSD controllers, process nodes and competitive analysis.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/research/intel-tesla/">
+<div class="directory-link-title"><span data-en="Intel × Tesla Terafab" data-zh="Intel × Tesla Terafab">Intel × Tesla Terafab</span></div>
+<p data-en="Research on Terafab, partnerships and industry implications." data-zh="Terafab 项目、合作进展与产业影响调研。">Research on Terafab, partnerships and industry implications.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/research/semiconductor-foundry-ai-strategy/">
+<div class="directory-link-title"><span data-en="Foundry AI Strategy" data-zh="半导体代工 AI 策略">Foundry AI Strategy</span></div>
+<p data-en="AI adoption strategy for semiconductor foundry operations." data-zh="面向半导体代工业务的 AI 应用策略。">AI adoption strategy for semiconductor foundry operations.</p>
+</a>
+</li>
+</ul>
+</div>
+<div class="directory-group" role="group" aria-labelledby="directory-group-2">
+<h3 id="directory-group-2" data-en="AI &amp; Equipment Solutions" data-zh="AI 与设备方案">AI &amp; Equipment Solutions</h3>
+<ul class="directory-links">
+<li>
+<a class="directory-link" href="/semiai/">
+<div class="directory-link-title"><span data-en="AI for Semiconductor Equipment" data-zh="半导体设备 AI 方案">AI for Semiconductor Equipment</span></div>
+<p data-en="AI solutions for equipment, process improvement and data." data-zh="设备优化、工艺改善与数据应用方案。">AI solutions for equipment, process improvement and data.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/semiai/competitor.html">
+<div class="directory-link-title"><span data-en="AtomicStar Competitive Analysis" data-zh="星原驰竞品分析">AtomicStar Competitive Analysis</span></div>
+<p data-en="Product lines and domestic and international competitors." data-zh="产品线与国内外竞争对手对比。">Product lines and domestic and international competitors.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/semiai/supply-chain.html">
+<div class="directory-link-title"><span data-en="CVD Equipment Supply Chain" data-zh="CVD 设备供应链">CVD Equipment Supply Chain</span></div>
+<p data-en="Materials, components and the wider supply chain." data-zh="材料、零部件与供应链全景。">Materials, components and the wider supply chain.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/semiai/ai-implementation.html">
+<div class="directory-link-title"><span data-en="AI Implementation &amp; Data Security" data-zh="AI 实现与数据安全">AI Implementation &amp; Data Security</span></div>
+<p data-en="Deployment options, data protection and federated learning." data-zh="部署方案、数据保护与联邦学习。">Deployment options, data protection and federated learning.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/ai-proposal/">
+<div class="directory-link-title"><span data-en="AI Equipment Optimization Proposal" data-zh="AI 半导体设备优化提案">AI Equipment Optimization Proposal</span></div>
+<p data-en="Equipment-signal analysis, automated investigation and yield feedback." data-zh="设备信号分析、自动调查与良率反馈。">Equipment-signal analysis, automated investigation and yield feedback.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/ai-strategy/">
+<div class="directory-link-title"><span data-en="AI Transformation Strategy R3" data-zh="AI 转型策略 R3">AI Transformation Strategy R3</span></div>
+<p data-en="Enterprise AI adoption, knowledge management and execution." data-zh="企业 AI 应用、知识管理与执行路径。">Enterprise AI adoption, knowledge management and execution.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/summit/">
+<div class="directory-link-title"><span data-en="Project SUMMIT" data-zh="Project SUMMIT">Project SUMMIT</span></div>
+<p data-en="AI project roadmap, learning resources and updates." data-zh="AI 项目路线、培训入口与动态。">AI project roadmap, learning resources and updates.</p>
+</a>
+</li>
+</ul>
+</div>
+<div class="directory-group" role="group" aria-labelledby="directory-group-3">
+<h3 id="directory-group-3" data-en="Personal &amp; Creative Projects" data-zh="个人与创意项目">Personal &amp; Creative Projects</h3>
+<ul class="directory-links">
+<li>
+<a class="directory-link" href="/amy-project/">
+<div class="directory-link-title"><span data-en="Amy Summer Project" data-zh="Amy 暑期项目">Amy Summer Project</span></div>
+<p data-en="MindSpark Boxes ideas, courses and project planning." data-zh="MindSpark Boxes 创意、课程与项目规划。">MindSpark Boxes ideas, courses and project planning.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/amy-project-r2/">
+<div class="directory-link-title"><span data-en="Amy Project R2" data-zh="Amy 项目 R2">Amy Project R2</span></div>
+<p data-en="The revised behavioral-activation design experiment." data-zh="更新版行为激活设计实验方案。">The revised behavioral-activation design experiment.</p>
+</a>
+</li>
+<li>
+<a class="directory-link" href="/trefleur/">
+<div class="directory-link-title"><span data-en="TREFLEUR Brand Preview" data-zh="TREFLEUR 品牌预览">TREFLEUR Brand Preview</span></div>
+<p data-en="A luxury golf apparel brand and its first collection." data-zh="高端高尔夫运动服品牌与系列展示。">A luxury golf apparel brand and its first collection.</p>
+</a>
+</li>
+</ul>
 </div>
 </div>
 </section>
