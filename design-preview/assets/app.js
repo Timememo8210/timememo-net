@@ -1,8 +1,6 @@
 (()=>{
 'use strict';
-const HASH='2926a2731f4b312c08982cacf8061eb14bf65c1a87cc5d70e864e079c6220731';
-const SESSION='tmHomeAuthV3';
-const body=document.body,site=document.getElementById('site'),preview=document.getElementById('preview');
+const body=document.body,site=document.getElementById('site');
 const styles={editorial:{letter:'A',zh:'人物杂志',en:'Editorial',note:{zh:'大留白、衬线字体与黑白肖像；轻柔入场、照片悬停显色。',en:'Generous space, serif typography and monochrome portraiture; soft reveals and colour on hover.'}},swiss:{letter:'B',zh:'瑞士设计',en:'Swiss',note:{zh:'电光蓝、大字号与清晰网格；横向字带带来更鲜明的节奏。',en:'Electric blue, large typography and a clear grid; a running type line adds rhythm.'}},noir:{letter:'C',zh:'深色纪实',en:'Noir',note:{zh:'石墨黑、全幅肖像与暖色细节；镜头式缓慢推近、随滚动展开。',en:'Graphite, full-height portraiture and warm details; a slow cinematic push and scroll reveals.'}},studio:{letter:'D',zh:'现代工作室',en:'Studio',note:{zh:'森林绿、暖橙与不对称版式；项目入口优先，轻盈的悬停反馈。',en:'Forest green, warm orange and asymmetric composition; projects first, with light hover movement.'}}};
 const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let language='zh',style=new URLSearchParams(location.search).get('style')||'editorial',moving=!matchMedia('(prefers-reduced-motion: reduce)').matches,observer;
@@ -38,13 +36,8 @@ function render(){
  site.innerHTML=`<div class="direction-note"><b>${d.letter} / ${d[language]}</b><span>${d.note[language]}</span></div><div class="wrap"><nav class="site-nav" aria-label="${t('页面导航','Page navigation')}"><a href="#profile-name" class="wordmark">${style==='studio'?'XC.':'Xiaobo Chen'}</a><div class="nav-items"><a href="#about">${t('关于','Profile')}</a><a href="#career">${t('经历','Journey')}</a><a href="#projects">${t('项目','Projects')}</a><a href="#contact">${t('联系','Contact')}</a></div><span class="edition">PORTLAND / ${new Date().getFullYear()}</span></nav>${hero()}</div>${style==='studio'?projects()+about()+career():about()+career()+projects()}<div class="wrap"><section id="contact" class="contact"><div><p>${t('对话，从这里开始。','The next conversation starts here.')}</p><h2>${t('保持联系。','Let’s connect.')}</h2></div><div class="contact-links"><a href="mailto:chenxiaobo8210@gmail.com">${t('发送邮件','Email')} ↗</a><a href="https://www.linkedin.com/in/xiaobo-chen-11a97a61" target="_blank" rel="noopener">LinkedIn ↗</a></div></section><footer class="site-footer"><span>© ${new Date().getFullYear()} Xiaobo Chen · ${t('主页方案预览','Homepage concept preview')}</span><a href="#profile-name">${t('回到顶部','Back to top')} ↑</a></footer></div>`;
  if('IntersectionObserver' in window){body.classList.add('observe-motion');observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');observer.unobserve(e.target)}})},{threshold:.08});site.querySelectorAll('.reveal').forEach(e=>observer.observe(e));}
 }
-function unlock(){body.classList.remove('locked');preview.inert=false;render();}
 document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{style=b.dataset.choice;const u=new URL(location.href);u.searchParams.set('style',style);u.hash='';history.replaceState(null,'',u);render();window.scrollTo({top:0,behavior:'instant'});}));
 document.getElementById('language').addEventListener('click',()=>{language=language==='zh'?'en':'zh';render();});
 document.getElementById('motion').addEventListener('click',()=>{moving=!moving;body.dataset.motion=moving?'on':'off';document.getElementById('motion').textContent=moving?t('暂停动效','Pause motion'):t('开启动效','Play motion');document.getElementById('motion').setAttribute('aria-pressed',String(!moving));});
-document.getElementById('access-form').addEventListener('submit',async e=>{
- e.preventDefault();const field=document.getElementById('access-password'),error=document.getElementById('access-error'),button=e.currentTarget.querySelector('button');button.disabled=true;error.textContent='';
- try{const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(field.value));const value=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');if(value===HASH){sessionStorage.setItem(SESSION,'1');field.value='';unlock()}else{error.textContent='密码不正确，请重试。';field.value='';field.focus();}}catch{error.textContent='暂时无法验证，请刷新页面后重试。'}finally{button.disabled=false;}
-});
-if(sessionStorage.getItem(SESSION)==='1')unlock();
+render();
 })();
