@@ -72,6 +72,10 @@ nav.scrolled{background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bot
 .btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
 .btn-outline:hover{border-color:var(--accent);background:var(--accent-glow)}
 
+.design-preview-entry{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 18px;margin-bottom:25px;max-width:480px;border:1px solid #eea064;border-radius:10px;background:#35231b;color:#ffd5a5;font-size:.9rem;font-weight:500;text-decoration:none;line-height:1.6}.design-preview-entry:hover{background:#503021;color:#fff}.design-preview-entry small{display:block;color:#c9ab96;font-size:.75rem;font-weight:400}.design-preview-entry>span:last-child{font-size:1.5rem}
+
+.design-quick-access{position:fixed;left:18px;bottom:18px;z-index:1002;display:block;background:#efb874;color:#302314;border:1px solid #f6cf9d;border-radius:30px;padding:13px 19px;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 7px 30px #0004;line-height:1.5;max-width:calc(100% - 36px)}.design-quick-access:hover{background:#ffd49d}
+
 /* Avatar area */
 .hero-visual{display:flex;justify-content:center;align-items:center}
 .avatar-container{position:relative;width:380px;height:380px}
@@ -251,6 +255,7 @@ footer p{color:var(--text3);font-size:.8rem}
 <div class="hero-inner">
 <div class="hero-text">
 <div class="tag"><span class="dot"></span> <span data-en="Open to Opportunities" data-zh="开放合作机会">Open to Opportunities</span></div>
+<a class="design-preview-entry" href="/designs/"><span><b data-en="设计方案 / Design previews" data-zh="主页设计方案 · 最新原型">设计方案 / Design previews</b><small data-en="10 concepts · Includes the new Dennis & Patrick inspired prototypes" data-zh="10 套方案 · 新增 Dennis 与 Patrick 风格原型">10 concepts · Includes the new Dennis & Patrick inspired prototypes</small></span><span aria-hidden="true">↗</span></a>
 <h1>
 <span data-en="Hi, I'm" data-zh="你好，我是">Hi, I'm</span><br>
 <span class="gradient" data-en="Xiaobo Chen" data-zh="陈晓波">Xiaobo Chen</span>
@@ -646,5 +651,6 @@ el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='
 observer.observe(el);
 });
 </script>
+<a class="design-quick-access" href="/designs/">设计方案 · 10 套预览 ↗</a>
 </body>
 </html>
