@@ -6,11 +6,13 @@ window.PROTOTYPE_CONTENT = {
 };
 window.renderPrototypeNav = function(current) {
   const el = document.querySelector('.prototype-nav');
-  el.innerHTML = `<a class="all-designs" href="/designs/">← 全部 10 套方案</a><nav aria-label="本轮原型"><a href="/prototypes/person/" ${current==='person'?'aria-current="page"':''}>I · 人物叙事</a><a href="/prototypes/lab/" ${current==='lab'?'aria-current="page"':''}>J · 芯片实验室</a></nav><button id="motion-toggle" aria-pressed="false">暂停动效</button>`;
+  el.innerHTML = `<a class="all-designs" href="/designs/?v=motion2">← 全部 10 套方案</a><nav aria-label="本轮原型"><a href="/prototypes/person/?v=motion2" ${current==='person'?'aria-current="page"':''}>I · 人物叙事</a><a href="/prototypes/lab/?v=motion2" ${current==='lab'?'aria-current="page"':''}>J · 芯片实验室</a></nav><button id="motion-toggle" aria-pressed="false">暂停动效</button>`;
   const reduced = matchMedia('(prefers-reduced-motion:reduce)');
   document.body.dataset.motion = reduced.matches ? 'off' : 'on';
   const button = document.querySelector('#motion-toggle');
-  function update(){const paused=document.body.dataset.motion==='off';button.textContent=paused?'开启动效':'暂停动效';button.setAttribute('aria-pressed',String(paused));}
+  let userChoice = false;
+  function update(){const paused=document.body.dataset.motion==='off';document.documentElement.dataset.motion=document.body.dataset.motion;button.textContent=paused?'动效关闭 · 开启':'动效开启 · 暂停';button.setAttribute('aria-pressed',String(paused));}
   update();
-  button.addEventListener('click',()=>{document.body.dataset.motion=document.body.dataset.motion==='on'?'off':'on';update();window.dispatchEvent(new Event('motionchange'));});
+  button.addEventListener('click',()=>{userChoice=true;document.body.dataset.motion=document.body.dataset.motion==='on'?'off':'on';update();window.dispatchEvent(new Event('motionchange'));});
+  reduced.addEventListener('change',()=>{if(userChoice)return;document.body.dataset.motion=reduced.matches?'off':'on';update();window.dispatchEvent(new Event('motionchange'));});
 };
