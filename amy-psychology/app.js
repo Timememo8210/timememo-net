@@ -5,7 +5,10 @@
     const lang = ['zh', 'en', 'both'].includes(language) ? language : 'zh';
     document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
     document.documentElement.dataset.language = lang;
-    document.title = lang === 'en' ? 'Amy’s Psychology Course Guide · Time Memo' : 'Amy 的心理学选课指南 · Time Memo';
+    const referencePage = location.pathname.includes('/reference/');
+    document.title = referencePage
+      ? (lang === 'en' ? 'Course References · Amy · Time Memo' : '课程资料与报名细则 · Amy · Time Memo')
+      : (lang === 'en' ? 'University Course Comparison · Amy · Time Memo' : 'Amy 名校在线课程比较 · Time Memo');
     document.querySelectorAll('[data-zh][data-en]').forEach(element => {
       element.textContent = element.dataset[lang === 'both' ? 'zh' : lang];
       if (lang === 'both' && element.dataset.en !== element.dataset.zh) {
