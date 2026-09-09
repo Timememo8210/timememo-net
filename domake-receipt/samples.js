@@ -100,6 +100,7 @@ export function sampleRecord(key, locale = "en") {
   r.service = {
     date: s.date,
     category: s.category,
+    change_type: key === "hvac" ? "maintenance" : "replacement",
     summary: s.summary,
     location: s.location,
     completion_status: s.completion,

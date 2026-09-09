@@ -12,6 +12,14 @@ globalThis.confirm = () => true;
 dom.window.HTMLElement.prototype.scrollIntoView = function () {};
 dom.window.HTMLDialogElement.prototype.showModal = function () {
   this.open = true;
+  if (this.id === "discard-dialog")
+    queueMicrotask(() =>
+      document
+        .getElementById(
+          globalThis.confirm() ? "discard-replace" : "discard-keep",
+        )
+        .click(),
+    );
 };
 dom.window.HTMLDialogElement.prototype.close = function () {
   this.open = false;
@@ -26,7 +34,10 @@ await import("../app.js");
 function assertEnglishUI() {
   const clone = document.body.cloneNode(true);
   clone.querySelectorAll(".language-switch,script").forEach((n) => n.remove());
-  assert.deepEqual(clone.textContent.match(/[^\n]{0,20}\p{Script=Han}[^\n]{0,20}/gu) || [], []);
+  assert.deepEqual(
+    clone.textContent.match(/[^\n]{0,20}\p{Script=Han}[^\n]{0,20}/gu) || [],
+    [],
+  );
   for (const el of document.querySelectorAll("input,textarea,select"))
     for (const a of ["placeholder", "aria-label"])
       assert.doesNotMatch(el.getAttribute(a) || "", /\p{Script=Han}/u);
@@ -65,7 +76,7 @@ test("dynamic sample review, evidence, confirmation and history are English", as
 });
 test("validation and file errors are English; existing authored data is preserved", async () => {
   $("#tab-work").click();
-  $("#replace-file").click();
+  await $("#replace-file").onclick();
   await $("#file-input").onchange({
     target: { files: [new File(["x"], "photo.heic", { type: "image/heic" })] },
   });

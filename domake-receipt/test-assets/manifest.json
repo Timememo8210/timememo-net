@@ -1,0 +1,152 @@
+{
+  "fixture_set": "Domic Home Passport receipt intake v1",
+  "created_at": "2026-09-09",
+  "all_information_is_fictional": true,
+  "purpose": "Controlled input fixtures for real OCR upload and human-confirmation tests. These expected values are ground truth, not measured OCR results.",
+  "limitations": [
+    "Six synthetic inputs do not represent real-world extraction accuracy.",
+    "English text only; no Arabic OCR quality claim is supported by this fixture set.",
+    "OCR alone may return no text for both an unreadable receipt and an unrelated landscape. In that case the UI should state that no readable receipt details were found, rather than claiming to know the photo content.",
+    "No input should create a saved history entry before explicit user confirmation."
+  ],
+  "fixtures": [
+    {
+      "id": "clear_company",
+      "file": "01-clear-company.png",
+      "source": "Original fictional SVG document rendered to PNG by generate.mjs using sharp; source 01-clear-company.svg",
+      "expected_outcome": "review",
+      "ground_truth": {
+        "document_type": "receipt",
+        "document_number": "CHS-260901-07",
+        "issue_date": "2026-09-02",
+        "service_date": "2026-09-01",
+        "service_address": "Villa 18, Example Lane, Dubai",
+        "work_summary": "Replace kitchen faucet",
+        "work_type": "replacement",
+        "company": "Cedar Home Services",
+        "worker": "Omar Hassan",
+        "worker_role": "Technician",
+        "customer": "Lina Patel",
+        "total": 420,
+        "currency": "AED",
+        "payment_status": "paid",
+        "completion_status": "completed"
+      },
+      "must_not": [
+        "Use issue_date as service_date",
+        "Use customer Lina Patel as worker",
+        "Use subtotal 400 or VAT 20 as total",
+        "Auto-save"
+      ]
+    },
+    {
+      "id": "clear_individual",
+      "file": "02-clear-individual.png",
+      "source": "Original fictional narrow receipt SVG rendered to PNG by generate.mjs using sharp; source 02-clear-individual.svg",
+      "expected_outcome": "review",
+      "ground_truth": {
+        "document_type": "receipt",
+        "document_number": "SA-260828-02",
+        "issue_date": null,
+        "service_date": "2026-08-28",
+        "service_address": "Villa 7, Palm Court, Dubai",
+        "work_summary": "Repair bedroom door lock",
+        "work_type": "repair",
+        "company": null,
+        "worker": "Samir Ali",
+        "worker_role": "Contractor",
+        "customer": "Noura Mansour",
+        "total": 260,
+        "currency": "AED",
+        "payment_status": "paid",
+        "completion_status": "completed"
+      },
+      "must_not": [
+        "Invent a company for an individual contractor",
+        "Use customer Noura Mansour as worker",
+        "Auto-save"
+      ]
+    },
+    {
+      "id": "partial_missing_fields",
+      "file": "03-partial-missing-fields.png",
+      "source": "Original fictional partial-copy SVG rendered to PNG by generate.mjs using sharp; source 03-partial-missing-fields.svg",
+      "expected_outcome": "partial_review",
+      "ground_truth": {
+        "document_type": "receipt",
+        "document_number": "BPE-096",
+        "issue_date": null,
+        "service_date": null,
+        "service_address": "Apt 24, Cedar Court, Dubai",
+        "work_summary": "Repair living room light switch",
+        "work_type": "repair",
+        "company": "Blue Palm Electrical",
+        "worker": null,
+        "customer": "Farah Rahman",
+        "total": null,
+        "currency": null,
+        "payment_status": "unknown",
+        "completion_status": "completed"
+      },
+      "must_not": [
+        "Infer service date from the current date",
+        "Infer total as zero",
+        "Infer AED from the Dubai address",
+        "Use customer Farah Rahman as worker",
+        "Discard readable fields",
+        "Auto-save"
+      ]
+    },
+    {
+      "id": "unreadable_blur",
+      "file": "04-unreadable-blur.png",
+      "source": "Original SVG document using an SVG Gaussian blur filter (stdDeviation 20) and low contrast, then rendered to PNG; source 04-unreadable-blur.svg. This is a synthetic unreadable input, not a transformed user photo.",
+      "expected_outcome": "no_readable_details",
+      "ground_truth": null,
+      "must_not": [
+        "Recover hidden values from another fixture by filename or hash",
+        "Present preset receipt data",
+        "Pretend recognition succeeded",
+        "Auto-save"
+      ]
+    },
+    {
+      "id": "unrelated_restaurant",
+      "file": "05-unrelated-restaurant.png",
+      "source": "Original fictional restaurant receipt SVG rendered to PNG by generate.mjs using sharp; source 05-unrelated-restaurant.svg",
+      "expected_outcome": "outside_property_service_scope",
+      "ground_truth": {
+        "document_type": "receipt",
+        "merchant": "Sand & Spoon Restaurant",
+        "document_number": "SSP-4082",
+        "document_date": "2026-09-03",
+        "total": 124,
+        "currency": "AED",
+        "items": [
+          "Grilled fish",
+          "Garden salad",
+          "Mint tea x 2"
+        ],
+        "home_service_evidence": null
+      },
+      "must_not": [
+        "Describe a readable unrelated receipt as blurry",
+        "Treat restaurant address as a serviced property",
+        "Invent home repair work",
+        "Auto-save"
+      ]
+    },
+    {
+      "id": "unrelated_landscape",
+      "file": "06-unrelated-landscape.png",
+      "source": "Synthetic landscape photograph generated with the built-in image generation tool on 2026-09-09; see landscape-prompt.txt. Not a real location or user photograph.",
+      "expected_outcome": "no_readable_details",
+      "ground_truth": null,
+      "must_not": [
+        "Invent transaction or contractor details",
+        "Claim the image is blurry",
+        "Auto-save"
+      ]
+    }
+  ]
+}

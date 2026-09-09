@@ -21,7 +21,15 @@ for (const name of Object.keys(samples)) {
     JSON.stringify(r, null, 2) + "\n",
   );
 }
-for (const name of ["app.js", "core.js", "storage.js", "samples.js", "i18n.js"])
+for (const name of [
+  "app.js",
+  "core.js",
+  "storage.js",
+  "samples.js",
+  "i18n.js",
+  "ocr.js",
+  "extraction.js",
+])
   execFileSync(process.execPath, ["--check", resolve(root, name)]);
 for (const name of [
   "index.html",
@@ -41,7 +49,7 @@ const files = [];
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     if (
-      ["node_modules", ".git"].includes(entry.name) ||
+      ["node_modules", ".git", "vendor", "test-assets"].includes(entry.name) ||
       entry.name.endsWith(".zip")
     )
       continue;

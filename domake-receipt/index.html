@@ -24,7 +24,7 @@
         <a href="./" lang="en" aria-current="true">EN</a
         ><a href="zh.html" lang="zh-CN">中文</a>
       </div>
-      <span class="prototype">Prototype · 01</span>
+      <span class="prototype">Prototype · 02</span>
     </header>
     <main class="shell">
       <div class="intro">
@@ -41,11 +41,58 @@
       <div class="mode-note">
         <span class="status-dot"></span>
         <div>
-          <strong>Prototype</strong> · AI extraction will be connected in the
-          next phase. Try a sample, or preview a real file and enter its
-          details. Records are saved only in this browser.
+          <strong>Prototype · Local OCR experiment</strong> — Images can be read
+          in your browser (English text). Check every field before saving. PDF
+          is manual entry; Gemini and Arabic document recognition are not
+          connected. Records stay in this browser.
         </div>
       </div>
+      <details class="fixture-lab">
+        <summary>Test the reader with six fictional images</summary>
+        <p>
+          Each test reads an actual image locally. These are controlled
+          examples, not a measure of real-world accuracy.
+        </p>
+        <div class="button-row">
+          <button
+            class="button secondary"
+            data-ocr-fixture="01-clear-company.png"
+          >
+            Company receipt</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="02-clear-individual.png"
+          >
+            Individual contractor</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="03-partial-missing-fields.png"
+          >
+            Missing information</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="04-unreadable-blur.png"
+          >
+            Unreadable image</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="05-unrelated-restaurant.png"
+          >
+            Restaurant receipt</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="06-unrelated-landscape.png"
+          >
+            Landscape photo
+          </button>
+        </div>
+        <p>
+          <a href="test-assets/manifest.json"
+            >Test images and expected values</a
+          >
+          · <a href="project/#intake">How review and recovery work</a>
+        </p>
+      </details>
       <div class="workspace-tabs" role="tablist" aria-label="Workspace">
         <button
           role="tab"
@@ -97,6 +144,10 @@
                   capture="environment"
                 />
               </div>
+              <label class="ocr-opt"
+                ><input id="local-ocr-enabled" type="checkbox" checked />Try
+                experimental local OCR for images (English)</label
+              >
               <div class="demo-section">
                 <div class="section-caption">
                   No document handy? Try a sample
@@ -165,6 +216,23 @@
                 Cancel
               </button>
             </div>
+            <div id="ocr-outcome" class="ocr-outcome" role="status" hidden>
+              <h3 id="outcome-title"></h3>
+              <p id="outcome-description"></p>
+              <div class="button-row">
+                <button id="outcome-change" class="button secondary">
+                  Choose another file</button
+                ><button id="outcome-retry" class="button secondary">
+                  Retry reading</button
+                ><button id="outcome-manual" class="button primary">
+                  Enter manually
+                </button>
+              </div>
+              <details>
+                <summary>View text read from this image</summary>
+                <pre id="ocr-raw"></pre>
+              </details>
+            </div>
             <form id="receipt-form" hidden="">
               <div id="review-notice" class="notice"></div>
               <div id="form-fields"></div>
@@ -224,6 +292,42 @@
         ><a href="project/">Project brief, data format and handoff ↗</a>
       </footer>
     </main>
+    <dialog id="discard-dialog" aria-labelledby="discard-title">
+      <h2 id="discard-title">Replace unsaved work?</h2>
+      <p>
+        This replaces the current unsaved document and edits. Saved property
+        records remain available.
+      </p>
+      <div class="dialog-actions">
+        <button class="button secondary" id="discard-keep">Keep editing</button
+        ><button class="button primary" id="discard-replace">
+          Replace document
+        </button>
+      </div>
+    </dialog>
+    <dialog id="extraction-dialog" aria-labelledby="extraction-title">
+      <div class="dialog-header">
+        <h2 id="extraction-title"></h2>
+        <button
+          class="icon-button"
+          data-close="extraction-dialog"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+      <p id="extraction-description"></p>
+      <div id="extraction-summary"></div>
+      <p class="notice">
+        Not saved yet. The property must be chosen by you. You can edit every
+        field, then confirm and save.
+      </p>
+      <div class="dialog-actions">
+        <button class="button primary" data-close="extraction-dialog">
+          Review / edit details →
+        </button>
+      </div>
+    </dialog>
     <dialog id="confirm-dialog" aria-labelledby="confirm-title">
       <div class="dialog-header">
         <div>

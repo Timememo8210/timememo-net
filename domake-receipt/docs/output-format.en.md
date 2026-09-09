@@ -1,6 +1,6 @@
 [English](output-format.en.md) · [中文](output-format.md)
 
-# Domic Home Passport: Fixed Output Format v1
+# Domic Home Passport: Fixed Output Format v1.1
 
 Updated: 2026-09-09. This specification matches the prototype's `core.js`, `samples.js`, and exports. The authoritative machine-readable contract is [receipt.schema.json](receipt.schema.json). Extended structures in the research notes are future candidates, not a second v1 format.
 
@@ -12,7 +12,10 @@ Updated: 2026-09-09. This specification matches the prototype's `core.js`, `samp
 | Service date | `service.date` | Actual service date in YYYY-MM-DD format; null if unknown; do not substitute the document issue date |
 | Service description | `service.summary` | One sentence describing work performed or planned; the user must provide it before confirming the record |
 | Property system and location | `service.category`, `service.location` | HVAC, plumbing, roofing, etc., plus the specific room or location; use unknown for a missing category and null for a missing location |
-| Service provider | `provider.name` | Merchant or service-provider name as written in the document; do not invent it from general knowledge |
+| Provider display name | `provider.name` | Compatible display name; unknown organisation/person roles must not be guessed |
+| Service company | `provider.organization_name` | Company providing the service, null if absent |
+| Actual worker | `provider.person_name` | Person explicitly associated with doing the work; customer, preparer and signatory are not interchangeable |
+| Property change | `service.change_type` | repair / replacement / installation / improvement / maintenance / inspection / unknown |
 | Service address | `property.service_address` | Address where the work took place; keep it separate from the provider's business address in `provider.address` |
 | Total amount and currency | `amount.total`, `amount.currency` | Amount is a number or null; currency is a three-letter ISO code supported by the source document, with no default to USD |
 | Document type | `document.type` | receipt / invoice / estimate / warranty / other / unknown |
@@ -34,9 +37,9 @@ Optional details: `document.issue_date` for the issue date; `document.number` fo
 
 The future model should output only facts visible in the document and supporting evidence. It must not generate property IDs, confirmation status, save dates, or claims about increased property value. The application supplies `schema_version`, `id`, `source`, `review`, and timestamps.
 
-In this round, `source.mode` supports only `demo` and `manual`. Connecting real AI in the next round requires extending this enum and adding model/prompt version metadata; manual input must not be presented as AI extraction. `source.sha256` identifies identical files in the current browser; it does not prove that a document is authentic or that work occurred.
+`source.mode` is `demo`, `manual` or `local_ocr`. Optional `extraction` records the local OCR engine, text, diagnostic confidence, readability, relevance and route. These are suggestions, not confirmation or field-level truth probabilities. Gemini will require its own versioned adapter. `source.sha256` identifies identical files in the current browser; it does not prove that a document is authentic or that work occurred.
 
-`review.status` is draft / confirmed. `evidence[]` stores the field path, page number, and quoted source text; only the synthetic samples have evidence in this round. `review.edited_fields` identifies modified field paths and is not a complete audit log. Production should store original model results and versioned human-review revisions separately, preserving the original evidence.
+`review.status` is draft / confirmed. `evidence[]` stores the field path, page number, and quoted source text; local OCR also includes quoted text for extracted fields. Human edits retain the original evidence and are identified separately. `review.edited_fields` identifies modified field paths and is not a complete audit log. Production should store original model results and versioned human-review revisions separately, preserving the original evidence.
 
 This round treats one file as one logical document and one property activity. Split PDFs containing multiple invoices before using the prototype. If one invoice covers several services, a combined summary can be used for now. A production model should detect multiple documents and route them to splitting, never silently ignore pages. Later, several activities can link to one document_id, with the document total stored only once.
 
@@ -51,3 +54,7 @@ All names, addresses, and amounts in these examples are fictional. The sample ou
 ## Language update
 
 The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. Arabic receipt extraction has not been implemented or measured; the next-phase sample set should reflect the actual audience and countries, including Arabic text and regional currencies where needed.
+
+## Schema 1.1 compatibility
+
+Existing 1.0 records are normalized when opened/exported. New company/person fields remain null and change_type unknown; the old provider.name is preserved. No same-name identity merging is implemented. See [intake flow](intake-flow.en.md).

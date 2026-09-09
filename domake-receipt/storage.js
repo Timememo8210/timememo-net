@@ -20,12 +20,15 @@ export function db() {
   return dbPromise;
 }
 export async function all() {
+  const { normalizeRecord } = await import("./core.js");
   const database = await db();
   return new Promise((resolve, reject) => {
     const req = database.transaction("records").objectStore("records").getAll();
     req.onsuccess = () =>
       resolve(
-        req.result.sort((a, b) => b.updated_at.localeCompare(a.updated_at)),
+        req.result
+          .map(normalizeRecord)
+          .sort((a, b) => b.updated_at.localeCompare(a.updated_at)),
       );
     req.onerror = () => reject(req.error);
   });

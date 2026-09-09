@@ -1223,3 +1223,88 @@ dialog::backdrop {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.ocr-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 18px 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ocr-outcome {
+  margin: 20px;
+  padding: 20px;
+  background: #fff6e6;
+  border: 1px solid #edcf90;
+  border-radius: 12px;
+}
+.ocr-outcome h3 {
+  margin: 0 0 10px;
+}
+.ocr-outcome p {
+  line-height: 1.6;
+}
+.ocr-outcome pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 240px;
+  overflow: auto;
+  font-size: 12px;
+}
+#extraction-dialog {
+  max-height: 90vh;
+  overflow: auto;
+}
+.ocr-outcome .button-row {
+  flex-wrap: wrap;
+}
+
+.fixture-lab {
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid #dbe4e5;
+  border-radius: 12px;
+  margin: 16px 0;
+}
+.fixture-lab summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.fixture-lab p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #52656b;
+}
+.fixture-lab .button-row {
+  flex-wrap: wrap;
+}
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.7;
+}
+
+#extraction-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: min(820px, 90vh);
+}
+#extraction-summary {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+#extraction-dialog .dialog-header,
+#extraction-description,
+#extraction-dialog .notice,
+#extraction-dialog .dialog-actions {
+  flex-shrink: 0;
+}
+#extraction-dialog .dialog-header {
+  margin-bottom: 8px;
+}
+#extraction-dialog .dialog-actions {
+  margin-top: 12px;
+}

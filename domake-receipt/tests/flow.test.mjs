@@ -12,6 +12,14 @@ globalThis.confirm = () => true;
 dom.window.HTMLElement.prototype.scrollIntoView = function () {};
 dom.window.HTMLDialogElement.prototype.showModal = function () {
   this.open = true;
+  if (this.id === "discard-dialog")
+    queueMicrotask(() =>
+      document
+        .getElementById(
+          globalThis.confirm() ? "discard-replace" : "discard-keep",
+        )
+        .click(),
+    );
 };
 dom.window.HTMLDialogElement.prototype.close = function () {
   this.open = false;
@@ -57,7 +65,7 @@ test("sample → edit → confirm → persist → reopen → clear unknown → u
 });
 test("actual PDF produces empty manual fields and retains original; duplicate reopens same record", async () => {
   $("#tab-work").click();
-  $("#replace-file").click();
+  await $("#replace-file").onclick();
   const file = new File(
     ["%PDF-1.4\n% Synthetic test\n%%EOF"],
     "synthetic.pdf",
@@ -76,14 +84,14 @@ test("actual PDF produces empty manual fields and retains original; duplicate re
   assert.equal(manual.amount.total, null);
   assert.equal(await (await storage.file(manual.id)).text(), await file.text());
   $("#tab-work").click();
-  $("#replace-file").click();
+  await $("#replace-file").onclick();
   await $("#file-input").onchange({ target: { files: [file] } });
   assert.match($("#message").textContent, /已存在/);
   assert.equal((await storage.all()).length, 2);
   assert.equal(document.getElementById("property.id").value, "测试房屋");
 });
 test("quote verification prevents impossible paid and completed assertions", async () => {
-  $("#replace-file").click();
+  await $("#replace-file").onclick();
   await sample("roof");
   input("service.completion_status", "completed");
   $("#receipt-form").dispatchEvent(
@@ -118,7 +126,9 @@ test("save pending blocks changing files and opening another record", async () =
   $("#tab-work").click();
   const summary = document.getElementById("service.summary").value;
   const promise = $("#save-draft").onclick();
-  $("#replace-file").click();
+  assert.equal(document.getElementById("service.summary").disabled, true);
+  assert.equal($("#outcome-change").disabled, true);
+  await $("#replace-file").onclick();
   assert.match($("#message").textContent, /请稍候/);
   assert.equal(document.getElementById("service.summary").value, summary);
   await $("[data-open]").onclick();
@@ -128,7 +138,7 @@ test("save pending blocks changing files and opening another record", async () =
 });
 test("cancel and file errors leave recoverable upload screen", async () => {
   $("#tab-work").click();
-  $("#replace-file").click();
+  await $("#replace-file").onclick();
   $("[data-sample=hvac]").click();
   $("#cancel-process").click();
   assert.equal($("#upload-view").hidden, false);

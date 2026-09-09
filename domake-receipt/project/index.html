@@ -45,7 +45,8 @@
       </div>
       <div class="project-grid" style="margin-top: 32px">
         <aside class="project-nav" aria-label="On this page">
-          <a href="#history">01 Project history</a
+          <a href="#intake">Updated intake & tests</a
+          ><a href="#history">01 Project history</a
           ><a href="#scope">02 Current scope</a
           ><a href="#format">03 Output format</a
           ><a href="#models">04 Models and costs</a
@@ -171,8 +172,9 @@
                   </tr>
                   <tr>
                     <td>
-                      Preview your own file and enter details manually; try
-                      three fictional documents to explore the extraction flow.
+                      Experimental English image OCR, automatic review summary,
+                      recovery for unreadable/unrelated input, company and
+                      worker fields; PDF remains manual.
                     </td>
                     <td>
                       Live Gemini extraction, usage and billing, and quality and
@@ -209,9 +211,10 @@
               <strong
                 >your uploaded file is never replaced with sample
                 results</strong
-              >. Until AI is connected, fields remain blank for you to complete.
-              PDFs use the browser PDF viewer; the prototype does not
-              automatically extract their text or process only the first page.
+              >. Images now run local English OCR with conservative field
+              parsing; unknown values remain blank. PDFs use the browser PDF
+              viewer; the prototype does not automatically extract their text or
+              process only the first page.
             </p>
             <div class="decision">
               <strong>Local prototype limits</strong><br />Files and records are
@@ -226,6 +229,86 @@
               property activity. Split combined invoices before adding them.
               Property names are entered manually for now; production will use a
               property selector governed by access permissions.
+            </p>
+          </section>
+          <section id="intake">
+            <p class="eyebrow">UPDATED / RECEIPT INTAKE</p>
+            <h2>Review the work and who did it</h2>
+            <p>
+              For Pros and homeowners: the service company and actual worker are
+              separate fields. Record repairs, replacements, installations,
+              improvements, maintenance and inspections. Missing names stay
+              unknown; customers and invoice preparers are not automatically
+              workers. Same-name people or companies are never automatically
+              merged.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Input / outcome</th>
+                    <th>What happens</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Readable home-service receipt</td>
+                    <td>Open a summary → edit details → confirm and save.</td>
+                  </tr>
+                  <tr>
+                    <td>Missing or partly readable details</td>
+                    <td>
+                      Keep recovered fields, leave unknowns blank; confirm an
+                      incomplete record if needed.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>No usable receipt text</td>
+                    <td>
+                      Explain uncertainty; retake, replace or enter manually. No
+                      invented success.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Clearly unrelated service text</td>
+                    <td>
+                      Explain the relevance problem and offer replacement; no
+                      automatic history entry.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Uncertain relevance</td>
+                    <td>
+                      Uploader verifies whether it belongs to this property
+                      before manual review.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Failure / timeout / cancel</td>
+                    <td>
+                      45-second OCR deadline, cancel/retry; late results do not
+                      overwrite a new document.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Six synthetic image files were actually processed in browser
+              tests. Clear company/individual receipts, missing fields,
+              unreadable blur, a restaurant receipt and a landscape photo are
+              included. This is a bounded experiment, not an accuracy guarantee.
+              Gemini, Arabic document understanding, full PDF extraction and
+              physical-phone testing remain open.
+            </p>
+            <p>
+              <a href="../docs/intake-flow.en.md"
+                >Full interaction and identity rules</a
+              >
+              ·
+              <a href="../docs/test-results.en.md"
+                >Actual experiments and fixes</a
+              >
             </p>
           </section>
           <section id="format">
@@ -248,6 +331,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>Service company / actual worker</td>
+                    <td>
+                      <code>provider.organization_name / person_name</code>
+                    </td>
+                    <td>Separate fields; null if absent.</td>
+                  </tr>
+                  <tr>
+                    <td>Property change type</td>
+                    <td><code>service.change_type</code></td>
+                    <td>
+                      Repair, replacement, installation, improvement,
+                      maintenance, inspection or unknown.
+                    </td>
+                  </tr>
                   <tr>
                     <td>Property</td>
                     <td><code>property.id</code></td>
@@ -275,7 +373,7 @@
                     <td>unknown / null.</td>
                   </tr>
                   <tr>
-                    <td>Service provider</td>
+                    <td>Provider display name (legacy compatible)</td>
                     <td><code>provider.name</code></td>
                     <td>null.</td>
                   </tr>
@@ -326,7 +424,7 @@
             </div>
             <h3>A stable structure, with null for unknown values</h3>
             <pre><code>{
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "property": { "id": "user-confirmed-property", "service_address": null },
   "document": { "type": "invoice", "number": null, "issue_date": "2026-08-22" },
   "service": {

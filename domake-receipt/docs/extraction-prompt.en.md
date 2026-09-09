@@ -24,6 +24,10 @@ optional line items, equipment brand/model/serial, warranty wording and permit n
 Use null for missing scalar facts. Keep explicitly printed zero as zero.
 Use unknown for unknown enum values. Do not invent dates, addresses, amounts,
 currency, installed equipment, warranties, completion or payment.
+Record provider.organization_name and provider.person_name separately. A customer,
+payer, invoice preparer, salesperson or unqualified signature is not the person
+who performed the work. Preserve unclear roles as unknown. Never merge identities
+by name. Extract service.change_type and describe the actual property modification.
 Service date is not invoice date. Service address is not provider/billing address.
 A quote is not proof of payment or completion. Invoice title alone does not mean unpaid.
 Purchased materials are not proof of installation. In v1 describe purchase as such,

@@ -44,7 +44,8 @@
       </div>
       <div class="project-grid" style="margin-top: 32px">
         <aside class="project-nav" aria-label="文档目录">
-          <a href="#history">01　找回旧项目</a
+          <a href="#intake">本轮上传与测试</a
+          ><a href="#history">01　找回旧项目</a
           ><a href="#scope">02　本轮做到哪里</a
           ><a href="#format">03　固定输出格式</a
           ><a href="#models">04　模型与成本</a><a href="#flow">05　交互闭环</a
@@ -154,7 +155,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>实际文件预览与人工填写；3 份虚构票据体验识别过程。</td>
+                    <td>
+                      实验性英文图片
+                      OCR、自动弹出核对摘要、不可读／无关资料恢复、公司与施工者字段；PDF
+                      仍手工填写。
+                    </td>
                     <td>真实 Gemini 识别、用量计费、质量与速度测试。</td>
                   </tr>
                   <tr>
@@ -174,8 +179,8 @@
               </table>
             </div>
             <p>
-              交互演示与实际文件明确分开：<strong>实际上传的文件不会被偷偷替换成示例结果</strong>。未接
-              AI 时，字段保持空白，用户可以手工整理。PDF
+              交互演示与实际文件明确分开：<strong>实际上传的文件不会被偷偷替换成示例结果</strong>。图片使用本地英文
+              OCR 和保守规则整理，未知项留空，用户可修改。PDF
               预览交给浏览器阅读器，没有自动提取文本或只读取第一页。
             </p>
             <div class="decision">
@@ -188,9 +193,61 @@
               原型按一份文件、一张逻辑单据、一个房屋活动整理。混合多张发票请先拆分。当前房屋名称是手工输入；生产改成有权限的房屋选择器。
             </p>
           </section>
+          <section id="intake">
+            <p class="eyebrow">UPDATED / RECEIPT INTAKE</p>
+            <h2>核对做了什么、由谁完成</h2>
+            <p>
+              面向 Pro
+              工人和房主：服务公司与实际施工人员分别保存，记录维修、更换、安装、改造、保养和检查。缺失姓名保持未知，客户或制单人不会自动当成施工者，同名人或公司不会自动合并。
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>输入／结果</th>
+                    <th>处理方式</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>可读房屋服务单据</td>
+                    <td>弹出摘要 → 修改核对 → 确认保存。</td>
+                  </tr>
+                  <tr>
+                    <td>缺失或部分可读</td>
+                    <td>保留已读字段，缺项留空，可核对后确认不完整记录。</td>
+                  </tr>
+                  <tr>
+                    <td>没有可用票据文字</td>
+                    <td>说明不确定，重拍、更换或手工填写，不编造成功结果。</td>
+                  </tr>
+                  <tr>
+                    <td>明确无关服务文字</td>
+                    <td>说明相关性问题并更换文件，不自动加入房屋历史。</td>
+                  </tr>
+                  <tr>
+                    <td>相关性不确定</td>
+                    <td>上传人先核实是否属于房屋，再手工核对。</td>
+                  </tr>
+                  <tr>
+                    <td>失败／超时／取消</td>
+                    <td>45 秒识别上限，可取消／重试，旧结果不覆盖新单据。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              已在浏览器实际处理六张合成图片：公司收据、个人工人收据、缺字段、极度模糊、餐馆收据和风景照片。这是有限样本实验，不是准确率保证。Gemini、阿拉伯文、完整
+              PDF 提取和实体手机测试尚未完成。
+            </p>
+            <p>
+              <a href="../docs/intake-flow.zh.md">完整交互与身份规则</a> ·
+              <a href="../docs/test-results.zh.md">实际测试与修复记录</a>
+            </p>
+          </section>
           <section id="format">
             <p class="eyebrow">03 / DATA CONTRACT</p>
-            <h2>主界面只保留 9 组核心信息</h2>
+            <h2>房屋、服务公司与施工人员的核心信息</h2>
             <p>
               最有价值的记录能回答：<strong>哪套房、什么时候、谁、在哪个部位、做了什么、多少钱、处于什么状态</strong>。其他字段不强迫用户填写。
             </p>
@@ -204,6 +261,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>服务公司／实际施工者</td>
+                    <td>
+                      <code>provider.organization_name / person_name</code>
+                    </td>
+                    <td>分别保存，没有则 null。</td>
+                  </tr>
+                  <tr>
+                    <td>房屋变更类型</td>
+                    <td><code>service.change_type</code></td>
+                    <td>维修、更换、安装、改造、保养、检查或未知。</td>
+                  </tr>
                   <tr>
                     <td>归属房屋</td>
                     <td><code>property.id</code></td>
@@ -225,7 +294,7 @@
                     <td>unknown / null。</td>
                   </tr>
                   <tr>
-                    <td>服务商</td>
+                    <td>服务商显示名称（兼容旧记录）</td>
                     <td><code>provider.name</code></td>
                     <td>null。</td>
                   </tr>
@@ -267,7 +336,7 @@
             </div>
             <h3>稳定结构，未知保留 null</h3>
             <pre><code>{
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "property": { "id": "用户确认的房屋", "service_address": null },
   "document": { "type": "invoice", "number": null, "issue_date": "2026-08-22" },
   "service": {

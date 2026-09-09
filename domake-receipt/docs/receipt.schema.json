@@ -17,25 +17,38 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "const": "1.1"
     },
     "property": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "service_address"],
+      "required": [
+        "id",
+        "service_address"
+      ],
       "properties": {
         "id": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "service_address": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "document": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "number", "issue_date"],
+      "required": [
+        "type",
+        "number",
+        "issue_date"
+      ],
       "properties": {
         "type": {
           "type": "string",
@@ -49,10 +62,16 @@
           ]
         },
         "number": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "issue_date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date"
         }
       }
@@ -65,11 +84,15 @@
         "category",
         "summary",
         "location",
-        "completion_status"
+        "completion_status",
+        "change_type"
       ],
       "properties": {
         "date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date"
         },
         "category": {
@@ -89,49 +112,112 @@
           ]
         },
         "summary": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "location": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "completion_status": {
           "type": "string",
-          "enum": ["completed", "planned", "unknown"]
+          "enum": [
+            "completed",
+            "planned",
+            "unknown"
+          ]
+        },
+        "change_type": {
+          "enum": [
+            "repair",
+            "replacement",
+            "installation",
+            "improvement",
+            "maintenance",
+            "inspection",
+            "unknown"
+          ]
         }
       }
     },
     "provider": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "phone", "address"],
+      "required": [
+        "name",
+        "phone",
+        "address",
+        "organization_name",
+        "person_name"
+      ],
       "properties": {
         "name": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "phone": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "address": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "organization_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "person_name": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "amount": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["total", "currency", "payment_status"],
+      "required": [
+        "total",
+        "currency",
+        "payment_status"
+      ],
       "properties": {
         "total": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0
         },
         "currency": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^[A-Z]{3}$"
         },
         "payment_status": {
           "type": "string",
-          "enum": ["paid", "unpaid", "partial", "unknown"]
+          "enum": [
+            "paid",
+            "unpaid",
+            "partial",
+            "unknown"
+          ]
         }
       }
     },
@@ -140,13 +226,22 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["description", "amount"],
+        "required": [
+          "description",
+          "amount"
+        ],
         "properties": {
           "description": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "amount": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "minimum": 0
           }
         }
@@ -155,47 +250,89 @@
     "details": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["asset_model", "asset_serial", "warranty", "permit_number"],
+      "required": [
+        "asset_model",
+        "asset_serial",
+        "warranty",
+        "permit_number"
+      ],
       "properties": {
         "asset_model": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "asset_serial": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "warranty": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "permit_number": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "notes": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "mime_type", "sha256", "mode"],
+      "required": [
+        "name",
+        "mime_type",
+        "sha256",
+        "mode"
+      ],
       "properties": {
         "name": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "mime_type": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "sha256": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^[a-f0-9]{64}$"
         },
         "mode": {
           "type": "string",
-          "enum": ["manual", "demo"]
+          "enum": [
+            "manual",
+            "demo",
+            "local_ocr"
+          ]
         },
         "sample_id": {
           "type": "string",
-          "enum": ["plumbing", "hvac", "roof"]
+          "enum": [
+            "plumbing",
+            "hvac",
+            "roof"
+          ]
         }
       }
     },
@@ -204,7 +341,11 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["field", "page", "quote"],
+        "required": [
+          "field",
+          "page",
+          "quote"
+        ],
         "properties": {
           "field": {
             "type": "string"
@@ -222,11 +363,19 @@
     "review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "missing_fields", "warnings", "edited_fields"],
+      "required": [
+        "status",
+        "missing_fields",
+        "warnings",
+        "edited_fields"
+      ],
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["draft", "confirmed"]
+          "enum": [
+            "draft",
+            "confirmed"
+          ]
         },
         "missing_fields": {
           "type": "array",
@@ -249,19 +398,72 @@
       }
     },
     "id": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "created_at": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "updated_at": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "confirmed_at": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extraction": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "review",
+            "partial",
+            "no_text",
+            "unrelated",
+            "uncertain"
+          ]
+        },
+        "readability": {
+          "enum": [
+            "readable",
+            "partial",
+            "unknown"
+          ]
+        },
+        "relevance": {
+          "enum": [
+            "home_service",
+            "unrelated_service",
+            "unknown"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number"
+        }
+      }
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://timememo.net/domake-receipt/docs/receipt.schema.json",
-  "title": "Domic Home Passport Prototype v1 record"
+  "title": "Domic Home Passport v1.1 record"
 }

@@ -1,5 +1,5 @@
 import { toEnglish } from "./i18n.js";
-export const SCHEMA_VERSION = "1.0";
+export const SCHEMA_VERSION = "1.1";
 export const categories = {
   plumbing: "水暖 / Plumbing",
   electrical: "电气 / Electrical",
@@ -32,6 +32,24 @@ export const completions = {
   planned: "计划中",
   unknown: "未知",
 };
+export const changes = {
+  repair: "Repair",
+  replacement: "Replacement",
+  installation: "Installation",
+  improvement: "Improvement",
+  maintenance: "Maintenance",
+  inspection: "Inspection",
+  unknown: "Unknown",
+};
+export function normalizeRecord(record) {
+  const r = structuredClone(record);
+  r.schema_version = SCHEMA_VERSION;
+  r.provider.organization_name ??= null;
+  r.provider.person_name ??= null;
+  r.service.change_type ??= "unknown";
+  r.extraction ??= null;
+  return r;
+}
 export const nullable = (s) =>
   s === null || s === undefined || String(s).trim() === ""
     ? null
@@ -44,11 +62,18 @@ export function blankRecord() {
     service: {
       date: null,
       category: "unknown",
+      change_type: "unknown",
       summary: null,
       location: null,
       completion_status: "unknown",
     },
-    provider: { name: null, phone: null, address: null },
+    provider: {
+      name: null,
+      organization_name: null,
+      person_name: null,
+      phone: null,
+      address: null,
+    },
     amount: { total: null, currency: null, payment_status: "unknown" },
     items: [],
     details: {
@@ -59,6 +84,7 @@ export function blankRecord() {
     },
     notes: null,
     source: { name: null, mime_type: null, sha256: null, mode: "manual" },
+    extraction: null,
     evidence: [],
     review: {
       status: "draft",
@@ -83,6 +109,7 @@ export function validDate(s) {
   return !isNaN(d) && d.toISOString().slice(0, 10) === s;
 }
 export function inspect(r, { confirm = false } = {}) {
+  r = normalizeRecord(r);
   const errors = [],
     warnings = [],
     missing = [];
@@ -106,6 +133,7 @@ export function inspect(r, { confirm = false } = {}) {
     errors.push("币种请用三个大写字母，例如 USD、CNY、EUR。");
   for (const [key, values] of [
     ["service.category", categories],
+    ["service.change_type", changes],
     ["document.type", types],
     ["amount.payment_status", payments],
     ["service.completion_status", completions],
@@ -181,7 +209,7 @@ export function possibleDuplicate(a, b) {
   return a.source?.sha256 && a.source.sha256 === b.source?.sha256;
 }
 export function transition(r, status) {
-  const c = structuredClone(r),
+  const c = normalizeRecord(r),
     check = inspect(c, { confirm: status === "confirmed" });
   if (check.errors.length) throw Error(check.errors.join(" "));
   c.review = {
@@ -195,7 +223,9 @@ export function transition(r, status) {
 
 // Canonicalize application-generated warnings without translating authored data.
 export function exportRecordData(data) {
-  const result = structuredClone(data);
+  const result = data.records
+    ? { ...structuredClone(data), records: data.records.map(normalizeRecord) }
+    : normalizeRecord(data);
   const records = Array.isArray(result.records) ? result.records : [result];
   for (const record of records)
     if (Array.isArray(record.review?.warnings))

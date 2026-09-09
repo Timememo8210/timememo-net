@@ -24,7 +24,7 @@
         <a href="./" lang="en">EN</a
         ><a href="zh.html" lang="zh-CN" aria-current="true">中文</a>
       </div>
-      <span class="prototype">交互原型 · 01</span>
+      <span class="prototype">交互原型 · 02</span>
     </header>
     <main class="shell">
       <div class="intro">
@@ -38,10 +38,55 @@
       <div class="mode-note">
         <span class="status-dot"></span>
         <div>
-          <strong>原型体验</strong>　真实 AI
-          识别将在下一轮接入。示例用于体验识别；实际文件仅在此浏览器预览、填写和保存。
+          <strong>原型 · 本地文字识别实验</strong> —
+          图片可在浏览器中识别英文文字，请逐项核对后保存。PDF
+          仍需手工填写；尚未接入 Gemini
+          和阿拉伯文单据识别。记录只保存在当前浏览器。
         </div>
       </div>
+      <details class="fixture-lab">
+        <summary>用六张合成图片测试识别</summary>
+        <p>
+          每个测试都会在本地读取真实图片。这些是受控样本，不代表实际使用准确率。
+        </p>
+        <div class="button-row">
+          <button
+            class="button secondary"
+            data-ocr-fixture="01-clear-company.png"
+          >
+            公司维修收据</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="02-clear-individual.png"
+          >
+            个人工人收据</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="03-partial-missing-fields.png"
+          >
+            缺少信息</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="04-unreadable-blur.png"
+          >
+            无法阅读</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="05-unrelated-restaurant.png"
+          >
+            餐馆收据</button
+          ><button
+            class="button secondary"
+            data-ocr-fixture="06-unrelated-landscape.png"
+          >
+            风景照片
+          </button>
+        </div>
+        <p>
+          <a href="test-assets/manifest.json">测试图片与预期结果</a> ·
+          <a href="project/#intake">核对与恢复流程</a>
+        </p>
+      </details>
       <div class="workspace-tabs" role="tablist" aria-label="工作区域">
         <button
           role="tab"
@@ -92,6 +137,13 @@
                   capture="environment"
                 />
               </div>
+              <label class="ocr-opt"
+                ><input
+                  id="local-ocr-enabled"
+                  type="checkbox"
+                  checked
+                />图片使用实验性本地识别（英文）</label
+              >
               <div class="demo-section">
                 <div class="section-caption">还没有票据？从一份示例开始</div>
                 <button class="sample-card" data-sample="plumbing">
@@ -148,6 +200,23 @@
               <p>读取示例 → 整理字段 → 等待确认</p>
               <button class="button secondary" id="cancel-process">取消</button>
             </div>
+            <div id="ocr-outcome" class="ocr-outcome" role="status" hidden>
+              <h3 id="outcome-title"></h3>
+              <p id="outcome-description"></p>
+              <div class="button-row">
+                <button id="outcome-change" class="button secondary">
+                  更换文件</button
+                ><button id="outcome-retry" class="button secondary">
+                  重试识别</button
+                ><button id="outcome-manual" class="button primary">
+                  手工填写
+                </button>
+              </div>
+              <details>
+                <summary>查看识别文字</summary>
+                <pre id="ocr-raw"></pre>
+              </details>
+            </div>
             <form id="receipt-form" hidden="">
               <div id="review-notice" class="notice"></div>
               <div id="form-fields"></div>
@@ -202,6 +271,36 @@
         ><a href="project/zh.html">构思、数据格式与交接说明 ↗</a>
       </footer>
     </main>
+    <dialog id="discard-dialog" aria-labelledby="discard-title">
+      <h2 id="discard-title">更换尚未保存的内容？</h2>
+      <p>这会清除当前尚未保存的单据和修改。已保存的房屋记录仍会保留。</p>
+      <div class="dialog-actions">
+        <button class="button secondary" id="discard-keep">继续编辑</button
+        ><button class="button primary" id="discard-replace">更换单据</button>
+      </div>
+    </dialog>
+    <dialog id="extraction-dialog" aria-labelledby="extraction-title">
+      <div class="dialog-header">
+        <h2 id="extraction-title"></h2>
+        <button
+          class="icon-button"
+          data-close="extraction-dialog"
+          aria-label="关闭"
+        >
+          ×
+        </button>
+      </div>
+      <p id="extraction-description"></p>
+      <div id="extraction-summary"></div>
+      <p class="notice">
+        尚未保存。归属房屋由你指定，所有字段均可修改，核对后再确认保存。
+      </p>
+      <div class="dialog-actions">
+        <button class="button primary" data-close="extraction-dialog">
+          核对／修改信息 →
+        </button>
+      </div>
+    </dialog>
     <dialog id="confirm-dialog" aria-labelledby="confirm-title">
       <div class="dialog-header">
         <div>

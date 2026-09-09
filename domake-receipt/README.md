@@ -11,7 +11,7 @@ An interactive prototype and partner handoff for the receipt module of the exist
 - [Output schema](docs/receipt.schema.json) / [field rules](docs/output-format.en.md)
 - [Partner handoff](docs/implementation-plan.en.md)
 
-The user chose to defer real AI extraction. Actual files are previewed locally and entered manually; three fictional examples demonstrate the review workflow. Confirmed records and originals are stored in IndexedDB in this browser. There is no cloud database, login, model key or background model call.
+The user chose to defer Gemini. This iteration adds experimental English image OCR in the browser, conservative field extraction, recovery states and real-image test controls. PDF remains preview/manual entry; three preset examples remain explicitly labelled. Confirmed records and originals are stored in IndexedDB in this browser. There is no cloud database, login, model key or background model call.
 
 ## Run locally
 
@@ -24,25 +24,29 @@ npm run build
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080/`. Use localhost or HTTPS rather than opening file:// directly. The website does not need node_modules at runtime. Development dependencies support validation only; no third-party runtime scripts are loaded. Google Fonts falls back to system fonts if unavailable.
+Open `http://localhost:8080/`. Use localhost or HTTPS rather than opening file:// directly. The website does not need node_modules at runtime. Tesseract.js and English language data are self-hosted under vendor/ocr; no third-party OCR API is called. Google Fonts falls back to system fonts if unavailable.
 
 ## Review the prototype
 
 1. Choose the plumbing sample; service date and issue date are separate.
 2. Edit the total, review the confirmation dialog, tick the confirmation box and save.
 3. View, edit and export the saved record; delete only after confirmation.
-4. Choose a real photo/PDF: it must show the original and blank manual fields, never invented extraction results.
+4. Upload an English image or use the six image tests. Review the actual OCR output; failures must not appear as successful empty records. PDF opens in manual mode.
 5. Enter a property and work summary. Other unknown values remain null; drafts may omit core fields.
 6. Add the same actual file again to open its existing record. Unsupported, empty or oversized files are rejected.
 7. The HVAC sample has missing service information. The roof estimate cannot be marked as paid or completed.
 8. Switch between English and Chinese. Unsaved work prompts before navigation; saved records remain in the same browser database. User-authored content is not translated.
 
-Automated checks use non-browser DOM, business-rule and storage tests. Real mobile-camera testing and real model accuracy/latency measurements have not been performed. The language switch is page navigation; it does not translate source documents. The English interface does not imply Arabic OCR support.
+Automated checks cover parsing, business rules, DOM flows, migration, storage and controlled failures. Actual browser experiments are documented in [test-results.en.md](docs/test-results.en.md). Real mobile-camera testing and real model accuracy/latency measurements have not been performed. The language switch is page navigation; it does not translate source documents. The English interface does not imply Arabic OCR support.
 
 ## Source and compatibility
 
-This folder is independent of the rest of the existing TimeMemo static site. A partner can copy it to another repository. The source archive excludes dependencies, credentials and user files. Public GitHub access allows reading/downloading; editing the repository requires collaborator access.
+This folder is independent of the rest of the existing TimeMemo static site. A partner can copy it to another repository. The source archive excludes node_modules, credentials and user files; it includes the self-hosted OCR runtime and fictional test images. Public GitHub access allows reading/downloading; editing the repository requires collaborator access.
 
 The existing URL, schema $id and IndexedDB name are retained for compatibility. User-facing branding is Domic Home Passport. Downloads use the Domic Home Passport name; the older archive URL remains a compatibility alias.
 
-Research references were not copied into the runtime. See the English/Chinese research documents for sources, assumptions and limitations. Next.js, Supabase and private R2 are proposed next-phase components, not implemented services.
+Tesseract is now an explicit licensed runtime dependency; other research references are not deployed services. See the English/Chinese research documents for sources, assumptions and limitations. Next.js, Supabase and private R2 are proposed next-phase components, not implemented services.
+
+## Pro and homeowner records
+
+Schema 1.1 separates the service company, person who performed the work, and type of property change. Existing 1.0 records retain their display names without guessing company/person identity. See [intake and recovery](docs/intake-flow.en.md), [format](docs/output-format.en.md), and [actual test report](docs/test-results.en.md).

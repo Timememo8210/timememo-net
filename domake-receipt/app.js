@@ -1,6 +1,9 @@
+import { extractText } from "./extraction.js";
+import { startOCR } from "./ocr.js";
 import { t, html, locale } from "./i18n.js";
 import {
   blankRecord,
+  changes as rawchanges,
   exportRecordData,
   categories as rawcategories,
   types as rawtypes,
@@ -18,6 +21,20 @@ import {
 } from "./core.js";
 import * as storage from "./storage.js";
 import { samples, sampleRecord } from "./samples.js";
+const L = (en, zh) => (locale === "zh" ? zh : en);
+const changes =
+  locale === "zh"
+    ? {
+        repair: "维修",
+        replacement: "更换",
+        installation: "安装",
+        improvement: "改造",
+        maintenance: "保养",
+        inspection: "检查",
+        unknown: "未知",
+      }
+    : rawchanges;
+let activeOCR = null;
 const categories = translateOptions(rawcategories);
 const types = translateOptions(rawtypes);
 const payments = translateOptions(rawpayments);
@@ -71,7 +88,30 @@ const primaryFields = [
     true,
   ],
   ["service.date", t("实际服务日期"), "date", "", "", false],
-  ["provider.name", t("服务商"), "text", t("未提供"), "", ""],
+  [
+    "provider.name",
+    L("Provider display name", "服务商显示名称"),
+    "text",
+    t("未提供"),
+  ],
+  [
+    "provider.organization_name",
+    L("Service company", "服务公司"),
+    "text",
+    L("Only if stated on the document", "单据有写明才填写"),
+  ],
+  [
+    "provider.person_name",
+    L("Person who performed the work", "实际施工人员姓名"),
+    "text",
+    L("Not the customer or invoice preparer", "不是客户、付款人或制单人"),
+  ],
+  [
+    "service.change_type",
+    L("Type of work / change", "房屋工作／变更类型"),
+    "select",
+    changes,
+  ],
   [
     "property.service_address",
     t("服务地址"),
@@ -200,11 +240,18 @@ function renderForm() {
   $("#review-notice").className =
     "notice" + (current.source.mode === "demo" ? " green" : "");
   $("#review-notice").textContent =
-    current.source.mode === "demo"
-      ? t("示例演示：以下信息来自预设的虚构单据，未调用 AI。请体验修改与确认。")
-      : t(
-          "当前未接入 AI：此文件没有自动识别结果。请根据左侧原件填写，空白项保持未知。",
-        );
+    current.source.mode === "local_ocr"
+      ? L(
+          "Experimental local OCR. Check every value against the original. Company and worker are separate; missing names stay unknown.",
+          "实验性本地文字识别。请逐项核对原件；公司与施工人员分别记录，缺失姓名保持未知。",
+        )
+      : current.source.mode === "demo"
+        ? t(
+            "示例演示：以下信息来自预设的虚构单据，未调用 AI。请体验修改与确认。",
+          )
+        : t(
+            "当前未接入 AI：此文件没有自动识别结果。请根据左侧原件填写，空白项保持未知。",
+          );
   updateCheck();
 }
 function renderItems() {
@@ -335,6 +382,11 @@ function renderSource() {
 }
 function reset() {
   generation++;
+  activeOCR?.cancel();
+  activeOCR = null;
+  $("#ocr-outcome").hidden = true;
+  $("#extraction-dialog").close();
+  $("#confirm-dialog").close();
   clearTimeout(timer);
   current = null;
   currentFile = null;
@@ -357,17 +409,28 @@ function reset() {
   busy = false;
 }
 function canReplace() {
-  return (
-    !isDirty() ||
-    confirm(t("更换会清除尚未保存的修改。已保存的记录仍会保留。继续？"))
-  );
+  if (!isDirty()) return true;
+  return new Promise((resolve) => {
+    const dialog = $("#discard-dialog");
+    const finish = (answer) => {
+      dialog.close();
+      resolve(answer);
+    };
+    $("#discard-keep").onclick = () => finish(false);
+    $("#discard-replace").onclick = () => finish(true);
+    dialog.oncancel = (event) => {
+      event.preventDefault();
+      finish(false);
+    };
+    dialog.showModal();
+  });
 }
-$("#replace-file").onclick = () => {
+$("#replace-file").onclick = async () => {
   if (busy) {
     message(t("正在保存或检查文件，请稍候。"));
     return;
   }
-  if (canReplace()) reset();
+  if (!isDirty() || (await canReplace())) reset();
 };
 $$("[data-sample]").forEach(
   (b) =>
@@ -380,6 +443,14 @@ $$("[data-sample]").forEach(
       $("#empty-result").hidden = true;
       $("#processing").hidden = false;
       $("#result-badge").textContent = t("示例流程演示");
+      $("#processing h3").textContent = L(
+        "Demonstrating extraction",
+        "演示示例流程",
+      );
+      $("#processing p").textContent = L(
+        "Read sample → organize fields → review",
+        "读取示例 → 整理字段 → 核对",
+      );
       const token = ++generation;
       timer = setTimeout(() => {
         if (token !== generation) return;
@@ -390,7 +461,12 @@ $$("[data-sample]").forEach(
 );
 $("#cancel-process").onclick = () => {
   reset();
-  message(t("已取消示例流程，可以重新选择。"));
+  message(
+    L(
+      "Canceled. Nothing was saved; choose a document to try again.",
+      "已取消，未保存任何记录，可以重新选择。",
+    ),
+  );
 };
 async function handleFile(file) {
   if (!file || busy) return;
@@ -399,7 +475,7 @@ async function handleFile(file) {
     message(validation, true);
     return;
   }
-  if (!canReplace()) return;
+  if (isDirty() && !(await canReplace())) return;
   reset();
   busy = true;
   const token = ++generation;
@@ -418,8 +494,10 @@ async function handleFile(file) {
     }
     if (token !== generation) return;
     if (duplicate) {
-      await loadRecord(duplicate.id, { internal: true });
-      message(t("这份文件已存在，已打开原记录，避免重复保存。"));
+      const openedGeneration = generation + 1;
+      const opened = await loadRecord(duplicate.id, { internal: true });
+      if (generation === openedGeneration) busy = false;
+      if (opened) message(t("这份文件已存在，已打开原记录，避免重复保存。"));
       return;
     }
     current = blankRecord();
@@ -431,15 +509,164 @@ async function handleFile(file) {
       mode: "manual",
     };
     renderSource();
-    renderForm();
-    message(t("文件已在本地打开。真实 AI 尚未连接，请手动填写。"));
+    if (file.type === "application/pdf" || !$("#local-ocr-enabled").checked) {
+      renderForm();
+      message(
+        L(
+          "PDF / manual mode: preview and enter details. Automatic PDF extraction is not connected.",
+          "PDF／手工模式：预览并填写信息，尚未接入 PDF 自动识别。",
+        ),
+      );
+    } else await recognizeFile(token);
   } catch (err) {
+    if (token !== generation) return;
     reset();
     message(err.message || t("文件读取失败，请重试。"), true);
   } finally {
-    busy = false;
+    if (token === generation) busy = false;
   }
 }
+const outcomes = {
+  review: [
+    "Details found — please review",
+    "已找到信息，请核对",
+    "Nothing has been saved. Review the company, actual worker, work performed, date, address and amount.",
+    "尚未保存。请核对公司、实际施工者、工作内容、日期、地址和金额。",
+  ],
+  partial: [
+    "Some details need your help",
+    "部分信息需要补充",
+    "We kept the readable details. Missing values remain blank; correct or add information before confirming.",
+    "已保留可读信息。缺失项保持空白，请修改或补充后确认。",
+  ],
+  no_text: [
+    "No usable receipt text found",
+    "未找到可用的票据信息",
+    "This may be a photo, an unreadable document or an unsupported language. Retake the whole document in good light, choose another file, or enter details manually.",
+    "可能是普通照片、无法阅读的单据或不支持的语言。请在光线充足时重拍完整单据、更换文件，或手工填写。",
+  ],
+  unrelated: [
+    "This appears to be an unrelated service",
+    "这似乎不是房屋服务单据",
+    "Readable text points to a different kind of service. Check the original and choose a home-service document. Nothing was saved.",
+    "可读文字显示这是其他类型服务。请核对原件并选择房屋服务单据，尚未保存。",
+  ],
+  uncertain: [
+    "Is this a home-service document?",
+    "这是房屋服务单据吗？",
+    "Some text was read, but its relevance is uncertain. If this belongs to your property history, review and complete the details manually.",
+    "读到了部分文字，但不能确定是否与房屋有关。如果属于房屋历史，请核对并手工补充。",
+  ],
+  failed: [
+    "Could not read this image",
+    "无法读取这张图片",
+    "The image may be damaged, too large to process, or the reader could not load. Retry or choose another file; nothing was saved.",
+    "图片可能损坏、尺寸过大，或识别工具无法加载。请重试或更换文件，尚未保存。",
+  ],
+  timeout: [
+    "Reading took too long",
+    "读取超时",
+    "The 45-second limit was reached. Retry with a smaller, clearer image or enter details manually. Nothing was saved.",
+    "已超过 45 秒。请使用更小、更清楚的图片重试，或手工填写，尚未保存。",
+  ],
+};
+function showOutcome(status) {
+  const copy = outcomes[status] || outcomes.failed;
+  $("#processing").hidden = true;
+  $("#empty-result").hidden = true;
+  $("#ocr-outcome").hidden = false;
+  $("#ocr-outcome").dataset.status = status;
+  $("#outcome-title").textContent = L(copy[0], copy[1]);
+  $("#outcome-description").textContent = L(copy[2], copy[3]);
+  $("#result-badge").textContent = L(copy[0], copy[1]);
+  $("#ocr-raw").textContent =
+    current.extraction?.text || L("No readable text.", "没有可读文字。");
+  $("#outcome-manual").textContent =
+    status === "uncertain"
+      ? L("This is for my home — review details", "属于我的房屋，核对信息")
+      : L("Enter details manually", "手工填写");
+  if (["review", "partial"].includes(status)) {
+    renderForm();
+    summary();
+    $("#extraction-title").textContent = L(copy[0], copy[1]);
+    $("#extraction-description").textContent = L(copy[2], copy[3]);
+    $("#extraction-summary").innerHTML = $("#confirmation-summary").innerHTML;
+    $("#extraction-dialog").showModal();
+    $("#outcome-manual").hidden = true;
+  } else {
+    $("#receipt-form").hidden = true;
+    $("#outcome-manual").hidden = false;
+  }
+}
+async function recognizeFile(token) {
+  $("#ocr-outcome").hidden = true;
+  $("#receipt-form").hidden = true;
+  $("#empty-result").hidden = true;
+  $("#processing").hidden = false;
+  $("#processing h3").textContent = L(
+    "Reading this image locally",
+    "正在本地读取图片",
+  );
+  $("#processing p").textContent = L(
+    "Loading the English reader… First use may take longer.",
+    "正在加载英文识别工具，首次使用可能较慢…",
+  );
+  activeOCR = startOCR(currentFile, (event) => {
+    if (token !== generation) return;
+    if (event.status === "recognizing text")
+      $("#processing p").textContent =
+        L("Reading text", "读取文字") +
+        " · " +
+        Math.round(event.progress * 100) +
+        "%";
+  });
+  try {
+    const data = await activeOCR.promise;
+    if (token !== generation) return;
+    const source = current.source;
+    current = extractText(data.text, data.confidence);
+    current.source = { ...source, mode: "local_ocr" };
+    showOutcome(current.extraction.status);
+  } catch (error) {
+    if (token !== generation) return;
+    showOutcome(error.message === "timeout" ? "timeout" : "failed");
+  } finally {
+    if (token === generation) {
+      activeOCR = null;
+      busy = false;
+    }
+  }
+}
+$("#outcome-manual").onclick = () => {
+  if (busy || !current) return;
+  const result = current.extraction;
+  if (result?.status === "unrelated" || result?.status === "no_text") {
+    const source = current.source;
+    current = blankRecord();
+    current.source = source;
+    current.extraction = result;
+  }
+  current.source.mode = "manual";
+  renderForm();
+  $("#ocr-outcome").hidden = true;
+  $("#review-notice").textContent = L(
+    "Manual entry after review. Only record work that belongs to this home; unknown values stay blank.",
+    "核对后手工填写。仅记录与本房屋有关的工作，未知值留空。",
+  );
+};
+$("#outcome-retry").onclick = async () => {
+  if (busy || !currentFile) return;
+  if (isDirty() && !(await canReplace())) return;
+  const source = current.source;
+  current = blankRecord();
+  current.source = source;
+  busy = true;
+  await recognizeFile(++generation);
+};
+$("#outcome-change").onclick = async () => {
+  if (busy) return;
+  if (!isDirty() || (await canReplace())) reset();
+};
 $("#file-input").onchange = (e) => handleFile(e.target.files[0]);
 $("#camera-input").onchange = (e) => handleFile(e.target.files[0]);
 const zone = $("#drop-zone");
@@ -465,7 +692,12 @@ function summary() {
     [t("归属房屋"), current.property.id],
     [t("服务项目"), current.service.summary],
     [t("服务日期"), current.service.date],
-    [t("服务商"), current.provider.name],
+    ...(!current.provider.organization_name && !current.provider.person_name
+      ? [[t("服务商"), current.provider.name]]
+      : []),
+    [L("Service company", "服务公司"), current.provider.organization_name],
+    [L("Worker", "施工人员"), current.provider.person_name],
+    [L("Type of change", "变更类型"), changes[current.service.change_type]],
     [t("服务地址"), current.property.service_address],
     [t("房屋系统"), categories[current.service.category]],
     [t("总金额"), money(current.amount.total, current.amount.currency)],
@@ -513,6 +745,11 @@ async function persist(status) {
   busy = true;
   $("#confirm-save").disabled = true;
   $("#save-draft").disabled = true;
+  const locked = $$(
+    "#receipt-form input,#receipt-form textarea,#receipt-form select,#receipt-form button,#ocr-outcome button,#replace-file,[data-close='confirm-dialog']",
+  );
+  const previousDisabled = locked.map((el) => el.disabled);
+  locked.forEach((el) => (el.disabled = true));
   try {
     const now = new Date().toISOString();
     candidate.id = current.id || crypto.randomUUID();
@@ -537,6 +774,7 @@ async function persist(status) {
     message(err.message || t("保存失败，请重试。"), true);
     showBackup();
   } finally {
+    locked.forEach((el, i) => (el.disabled = previousDisabled[i]));
     busy = false;
     $("#confirm-save").disabled = !$("#confirm-check").checked;
     $("#save-draft").disabled = false;
@@ -564,7 +802,7 @@ $("#confirm-save").onclick = () => {
     message(t("请先勾选确认，或返回修改。"), true);
     return;
   }
-  persist("confirmed");
+  return persist("confirmed");
 };
 function renderHistory() {
   $("#record-count").textContent = records.length;
@@ -661,7 +899,7 @@ async function loadRecord(id, { internal = false } = {}) {
     message(t("正在保存或检查文件，请稍候。"));
     return;
   }
-  if (isDirty() && !canReplace()) return;
+  if (isDirty() && !(await canReplace())) return false;
   const token = ++generation;
   clearTimeout(timer);
   try {
@@ -672,10 +910,12 @@ async function loadRecord(id, { internal = false } = {}) {
     current = structuredClone(record);
     currentFile = loadedFile;
     baseline = snapshot(current);
+    $("#ocr-outcome").hidden = true;
     switchView("work");
     renderSource();
     renderForm();
     $("#receipt-form").scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
   } catch (e) {
     if (token === generation)
       message(t("无法读取此记录，请刷新后重试。"), true);
@@ -713,7 +953,7 @@ async function original(id) {
 $("#export-all").onclick = () =>
   download(
     {
-      schema_version: "1.0",
+      schema_version: "1.1",
       exported_at: new Date().toISOString(),
       storage_scope: "this_browser",
       records,
@@ -750,3 +990,31 @@ window.addEventListener("beforeunload", (e) => {
     e.returnValue = "";
   }
 });
+
+$$("[data-ocr-fixture]").forEach(
+  (button) =>
+    (button.onclick = async () => {
+      if (busy) return;
+      try {
+        const response = await fetch(
+          new URL(
+            "./test-assets/" + button.dataset.ocrFixture,
+            import.meta.url,
+          ),
+        );
+        if (!response.ok) throw Error("fixture_unavailable");
+        const blob = await response.blob();
+        await handleFile(
+          new File([blob], button.dataset.ocrFixture, { type: "image/png" }),
+        );
+      } catch {
+        message(
+          L(
+            "Could not load the test image. Please retry.",
+            "测试图片加载失败，请重试。",
+          ),
+          true,
+        );
+      }
+    }),
+);

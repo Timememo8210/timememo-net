@@ -34,9 +34,9 @@
 
 模型以后只输出文档可见事实及证据，不得创建物业 ID、确认状态、保存日期或「房产增值」推断。应用补充 `schema_version`、`id`、`source`、`review` 与时间戳。
 
-`source.mode` 本轮只有 `demo` 和 `manual`。真实 AI 下一轮接入时需升级此枚举并增加 model/prompt 版本元数据，不能伪装 manual 为 AI。`source.sha256` 用于当前浏览器同一文件去重，不能证明单据真实或施工发生。
+`source.mode` 支持 `demo`、`manual` 和 `local_ocr`。可选的 `extraction` 保存引擎、原始识别文字、诊断置信分数、可读性、相关性和处理分支；不是字段真实概率，也不代表用户确认。`source.sha256` 用于当前浏览器同一文件去重，不能证明单据真实或施工发生。
 
-`review.status` 为 draft / confirmed。`evidence[]` 保存字段路径、页码和原文；本轮只有合成示例有证据。`review.edited_fields` 标出被修改的字段路径，不是完整审计日志。生产另存原始模型结果及版本化的人审修订，不覆盖原始证据。
+`review.status` 为 draft / confirmed。`evidence[]` 保存字段路径、页码和原文；合成示例与本地 OCR 均保留证据。`review.edited_fields` 标出被修改的字段路径，不是完整审计日志。生产另存原始模型结果及版本化的人审修订，不覆盖原始证据。
 
 本轮一份文件按一个逻辑文档、一个房屋活动整理。多张发票合在一个 PDF 请先拆分；同一发票多个服务可以先写一个总摘要。生产模型应识别多单据并转入拆分，不静默忽略页面。之后可将多个活动关联到一个 document_id，文档金额只存一次。
 
@@ -51,3 +51,12 @@
 ## 本轮语言更新
 
 工作台和说明页默认英文，提供中文切换。名称统一 Domic Home Passport。用户填写的姓名、地址、备注和原文证据不自动翻译；两种界面的输出字段名与枚举一致，导出的系统提示统一英文。保留现有浏览器存储与访问地址。面向用户所述阿拉伯地区受众，下一轮需按首发国家验证阿拉伯文票据、日期格式和当地币种；本轮尚未实现或实测阿拉伯文识别。
+
+## Schema 1.1：施工与身份
+
+- `provider.organization_name`：服务公司，没有则 null。
+- `provider.person_name`：实际施工者；客户、付款人、制单人或仅有签名不能推定为施工者。
+- `provider.name`：兼容旧记录的显示名称。
+- `service.change_type`：repair / replacement / installation / improvement / maintenance / inspection / unknown。
+
+旧 1.0 记录打开和导出时保留原显示名称，新身份字段默认 null，不会按同名自动合并。识别证据保留原文，人工改动另记 edited_fields。[完整核对流程](intake-flow.zh.md)。

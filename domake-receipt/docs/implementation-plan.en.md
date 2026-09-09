@@ -20,7 +20,7 @@ Confirmed scope for this round (2026-09-09): the user chose to build a reviewabl
 | docs/project-history.en.md | Evidence from the earlier project and the limits of its existing implementation |
 | tests/ | Business-rule and workflow verification |
 
-The prototype uses TimeMemo's existing static GitHub Pages publishing setup. It makes no model requests and has no server uploads, cloud database, login, account permissions, or cross-device synchronization. IndexedDB is explicitly local prototype storage on the current device; it is not a connection to the Domic backend. The prototype has no third-party runtime scripts. Fonts load from Google Fonts, with system fonts as a fallback.
+The prototype uses TimeMemo's existing static GitHub Pages publishing setup. It makes no model requests and has no server uploads, cloud database, login, account permissions, or cross-device synchronization. IndexedDB is explicitly local prototype storage on the current device; it is not a connection to the Domic backend. Tesseract.js 7.0.0 and English language data are now self-hosted as an experimental local OCR runtime. Fonts load from Google Fonts, with system fonts as a fallback.
 
 Original files and structured records are stored in IndexedDB under this browser origin. Other application code on the same origin may access that local data, so this is not an isolation boundary for sensitive documents; use fictional samples for public reviews. Saved records can be restored after closing a tab, but private browsing, clearing site data, or browser storage eviction can remove them. JSON exports do not include the original binary files; download originals separately. JSON import is not implemented in this round.
 
@@ -98,3 +98,7 @@ Proposed targets, not measured results: for clear single-page documents, p50 bel
 ## Language update
 
 The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. Arabic receipt extraction has not been implemented or measured; the next-phase sample set should reflect the actual audience and countries, including Arabic text and regional currencies where needed.
+
+## Current intake update
+
+Images now use experimental English local OCR and a conservative label parser; PDF stays manual. The summary opens automatically for useful/partial results. Unreadable, unrelated and uncertain results have explicit recovery paths. Schema 1.1 adds company, actual worker and property change type. See [intake](intake-flow.en.md) and [measured browser experiments](test-results.en.md). Server API, Gemini, Arabic text, multi-page PDF understanding, identity verification and shared storage are still next phase.
