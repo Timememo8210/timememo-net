@@ -1,14 +1,16 @@
+import { t, html, locale } from "./i18n.js";
 import {
   blankRecord,
-  categories,
-  types,
-  payments,
-  completions,
+  exportRecordData,
+  categories as rawcategories,
+  types as rawtypes,
+  payments as rawpayments,
+  completions as rawcompletions,
   nullable,
   get,
   set,
   inspect,
-  money,
+  money as rawmoney,
   validateFile,
   fileHash,
   possibleDuplicate,
@@ -16,6 +18,16 @@ import {
 } from "./core.js";
 import * as storage from "./storage.js";
 import { samples, sampleRecord } from "./samples.js";
+const categories = translateOptions(rawcategories);
+const types = translateOptions(rawtypes);
+const payments = translateOptions(rawpayments);
+const completions = translateOptions(rawcompletions);
+const money = (...args) => t(rawmoney(...args));
+function translateOptions(values) {
+  return Object.fromEntries(
+    Object.entries(values).map(([key, value]) => [key, t(value)]),
+  );
+}
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
 const escape = (s) =>
@@ -42,46 +54,53 @@ function isDirty() {
   return current && snapshot(current) !== baseline;
 }
 const primaryFields = [
-  ["property.id", "归属房屋", "text", "例如：Oak Street 自住房", "full", true],
   [
-    "service.summary",
-    "服务项目",
-    "textarea",
-    "做了什么维修、保养或更换？",
+    "property.id",
+    t("归属房屋"),
+    "text",
+    t("例如：Oak Street 自住房"),
     "full",
     true,
   ],
-  ["service.date", "实际服务日期", "date", "", "", false],
-  ["provider.name", "服务商", "text", "未提供", "", ""],
+  [
+    "service.summary",
+    t("服务项目"),
+    "textarea",
+    t("做了什么维修、保养或更换？"),
+    "full",
+    true,
+  ],
+  ["service.date", t("实际服务日期"), "date", "", "", false],
+  ["provider.name", t("服务商"), "text", t("未提供"), "", ""],
   [
     "property.service_address",
-    "服务地址",
+    t("服务地址"),
     "text",
-    "施工或服务发生的地址，非商家地址",
+    t("施工或服务发生的地址，非商家地址"),
     "full",
   ],
-  ["service.category", "房屋系统", "select", categories],
-  ["service.location", "具体部位", "text", "例如：厨房、二楼浴室"],
-  ["amount.total", "单据总金额", "number", "未知请留空"],
-  ["amount.currency", "币种", "text", "例如 USD、CNY"],
-  ["document.type", "单据类型", "select", types],
-  ["amount.payment_status", "付款状态", "select", payments],
-  ["service.completion_status", "施工 / 服务状态", "select", completions],
+  ["service.category", t("房屋系统"), "select", categories],
+  ["service.location", t("具体部位"), "text", t("例如：厨房、二楼浴室")],
+  ["amount.total", t("单据总金额"), "number", t("未知请留空")],
+  ["amount.currency", t("币种"), "text", t("例如 USD、CNY")],
+  ["document.type", t("单据类型"), "select", types],
+  ["amount.payment_status", t("付款状态"), "select", payments],
+  ["service.completion_status", t("施工 / 服务状态"), "select", completions],
 ];
 const extras = [
-  ["document.issue_date", "开票日期", "date"],
-  ["document.number", "单据编号", "text"],
-  ["provider.phone", "服务商电话", "text"],
-  ["provider.address", "商家地址", "text"],
-  ["details.asset_model", "设备品牌 / 型号", "text"],
-  ["details.asset_serial", "设备序列号", "text"],
-  ["details.warranty", "保修说明", "textarea", "", "full"],
-  ["details.permit_number", "许可编号", "text"],
-  ["notes", "我的备注", "textarea", "", "full"],
+  ["document.issue_date", t("开票日期"), "date"],
+  ["document.number", t("单据编号"), "text"],
+  ["provider.phone", t("服务商电话"), "text"],
+  ["provider.address", t("商家地址"), "text"],
+  ["details.asset_model", t("设备品牌 / 型号"), "text"],
+  ["details.asset_serial", t("设备序列号"), "text"],
+  ["details.warranty", t("保修说明"), "textarea", "", "full"],
+  ["details.permit_number", t("许可编号"), "text"],
+  ["notes", t("我的备注"), "textarea", "", "full"],
 ];
 function message(text, error = false) {
   $("#message").hidden = false;
-  $("#message").textContent = text;
+  $("#message").textContent = t(text);
   $("#message").classList.toggle("error", error);
   clearTimeout(message.timeout);
   message.timeout = setTimeout(
@@ -137,7 +156,7 @@ function fields(defs) {
             control = `<textarea id="${path}" data-path="${path}" placeholder="${escape(placeholder)}" ${required ? "required" : ""} maxlength="4000">${escape(val)}</textarea>`;
           else
             control = `<input id="${path}" data-path="${path}" type="${type}" value="${escape(val)}" placeholder="${escape(placeholder)}" ${type === "number" ? 'step="0.01" min="0" inputmode="decimal"' : ""} ${type === "text" && path !== "amount.currency" ? 'maxlength="500"' : ""} ${path === "amount.currency" ? 'maxlength="3"' : ""} ${required ? "required" : ""}>`;
-          return `<div class="field ${cls}"><label for="${path}">${label}${required ? ' <span class="required">*</span>' : ""}</label>${control}${path === "service.date" ? "<small>未知留空；不会自动替换为开票日期。</small>" : ""}${path === "property.id" ? "<small>由你确认归属，示例名称可直接改成自己的房屋。</small>" : ""}</div>`;
+          return `<div class="field ${cls}"><label for="${path}">${label}${required ? ' <span class="required">*</span>' : ""}</label>${control}${path === "service.date" ? t("<small>未知留空；不会自动替换为开票日期。</small>") : ""}${path === "property.id" ? t("<small>由你确认归属，示例名称可直接改成自己的房屋。</small>") : ""}</div>`;
         },
       )
       .join("") +
@@ -149,7 +168,7 @@ function renderForm() {
   $("#processing").hidden = true;
   $("#receipt-form").hidden = false;
   $("#result-badge").textContent =
-    current.review.status === "confirmed" ? "已确认 · 可编辑" : "待核对";
+    current.review.status === "confirmed" ? t("已确认 · 可编辑") : t("待核对");
   $("#result-badge").className = "tag amber";
   $("#step-upload").className = "done";
   $("#step-review").className = "current";
@@ -157,15 +176,21 @@ function renderForm() {
   $("#form-fields").innerHTML = fields(primaryFields);
   $("#extra-fields").innerHTML =
     fields(extras) +
-    '<div class="line-items"><div class="section-caption">费用明细（可选，金额按原单据填写）</div><div id="items"></div><button type="button" class="text-link" id="add-item">＋ 添加明细</button></div><details><summary>查看字段原文证据</summary><div id="evidence"></div></details>';
+    t(
+      '<div class="line-items"><div class="section-caption">费用明细（可选，金额按原单据填写）</div><div id="items"></div><button type="button" class="text-link" id="add-item">＋ 添加明细</button></div><details><summary>查看字段原文证据</summary><div id="evidence"></div></details>',
+    );
   $("#evidence").innerHTML = current.evidence.length
     ? current.evidence
         .map(
           (e) =>
-            `<p class="doc-meta"><strong>${escape(e.field)}</strong> · 第 ${escape(e.page)} 页<br>“${escape(e.quote)}”</p>`,
+            html`<p class="doc-meta">
+              <strong>${escape(e.field)}</strong> · 第 ${escape(e.page)} 页<br />“${escape(
+                e.quote,
+              )}”
+            </p>`,
         )
         .join("")
-    : '<p class="doc-meta">手动录入不包含 AI 原文证据。</p>';
+    : t('<p class="doc-meta">手动录入不包含 AI 原文证据。</p>');
   $("#add-item").onclick = () => {
     collect();
     current.items.push({ description: null, amount: null });
@@ -176,15 +201,42 @@ function renderForm() {
     "notice" + (current.source.mode === "demo" ? " green" : "");
   $("#review-notice").textContent =
     current.source.mode === "demo"
-      ? "示例演示：以下信息来自预设的虚构单据，未调用 AI。请体验修改与确认。"
-      : "当前未接入 AI：此文件没有自动识别结果。请根据左侧原件填写，空白项保持未知。";
+      ? t("示例演示：以下信息来自预设的虚构单据，未调用 AI。请体验修改与确认。")
+      : t(
+          "当前未接入 AI：此文件没有自动识别结果。请根据左侧原件填写，空白项保持未知。",
+        );
   updateCheck();
 }
 function renderItems() {
   $("#items").innerHTML = current.items
     .map(
       (i, n) =>
-        `<div class="line-item"><input aria-label="明细 ${n + 1} 描述" data-item="${n}" data-key="description" value="${escape(i.description)}" placeholder="项目说明" maxlength="1000"><input aria-label="明细 ${n + 1} 金额" data-item="${n}" data-key="amount" type="number" step="0.01" min="0" value="${escape(i.amount)}" placeholder="未知"><button type="button" class="icon-button" data-remove-item="${n}" aria-label="删除明细 ${n + 1}">×</button></div>`,
+        html`<div class="line-item">
+          <input
+            aria-label="明细 ${n + 1} 描述"
+            data-item="${n}"
+            data-key="description"
+            value="${escape(i.description)}"
+            placeholder="项目说明"
+            maxlength="1000"
+          /><input
+            aria-label="明细 ${n + 1} 金额"
+            data-item="${n}"
+            data-key="amount"
+            type="number"
+            step="0.01"
+            min="0"
+            value="${escape(i.amount)}"
+            placeholder="未知"
+          /><button
+            type="button"
+            class="icon-button"
+            data-remove-item="${n}"
+            aria-label="删除明细 ${n + 1}"
+          >
+            ×
+          </button>
+        </div>`,
     )
     .join("");
   $$("[data-remove-item]").forEach(
@@ -224,7 +276,7 @@ function collect() {
 function updateCheck() {
   const info = inspect(current);
   $("#missing-note").textContent =
-    `${info.missing.length ? info.missing.length + " 项核心信息未提供，将保留为未知。" : "核心信息已填写。"} ${info.warnings.join(" ")}`;
+    `${info.missing.length ? info.missing.length + t(" 项核心信息未提供，将保留为未知。") : t("核心信息已填写。")} ${t(info.warnings.join(" "))}`;
 }
 $("#receipt-form").addEventListener("input", () => {
   collect();
@@ -247,7 +299,7 @@ function renderSource() {
   $("#document-view").hidden = false;
   $("#filename").textContent = current.source.name;
   $("#source-badge").textContent =
-    current.source.mode === "demo" ? "虚构示例" : "本地文件";
+    current.source.mode === "demo" ? t("虚构示例") : t("本地文件");
   $("#source-badge").className =
     "tag" + (current.source.mode === "demo" ? " amber" : "");
   if (current.source.mode === "demo") {
@@ -259,26 +311,27 @@ function renderSource() {
     if (currentFile.type === "application/pdf") {
       const iframe = document.createElement("iframe");
       iframe.src = objectUrl;
-      iframe.title = "PDF 原件预览";
+      iframe.title = t("PDF 原件预览");
       $("#source-preview").append(iframe);
       const link = document.createElement("a");
       link.href = objectUrl;
       link.target = "_blank";
       link.rel = "noopener";
-      link.textContent = "无法预览？打开原始 PDF ↗";
+      link.textContent = t("无法预览？打开原始 PDF ↗");
       link.className = "text-link";
       $("#source-preview").append(link);
     } else {
       const img = document.createElement("img");
       img.src = objectUrl;
-      img.alt = "上传的票据原件";
+      img.alt = t("上传的票据原件");
       img.onerror = () =>
-        message("图片无法解码，请更换文件。当前可手动填写。", true);
+        message(t("图片无法解码，请更换文件。当前可手动填写。"), true);
       $("#source-preview").append(img);
     }
   } else
-    $("#source-preview").textContent =
-      "此记录没有可用原件。可以继续查看或修改字段。";
+    $("#source-preview").textContent = t(
+      "此记录没有可用原件。可以继续查看或修改字段。",
+    );
 }
 function reset() {
   generation++;
@@ -292,9 +345,9 @@ function reset() {
   $("#receipt-form").hidden = true;
   $("#processing").hidden = true;
   $("#empty-result").hidden = false;
-  $("#source-badge").textContent = "等待添加";
+  $("#source-badge").textContent = t("等待添加");
   $("#source-badge").className = "tag";
-  $("#result-badge").textContent = "尚未识别";
+  $("#result-badge").textContent = t("尚未识别");
   $("#result-badge").className = "tag";
   $("#step-upload").className = "current";
   $("#step-review").className = "";
@@ -306,12 +359,12 @@ function reset() {
 function canReplace() {
   return (
     !isDirty() ||
-    confirm("更换会清除尚未保存的修改。已保存的记录仍会保留。继续？")
+    confirm(t("更换会清除尚未保存的修改。已保存的记录仍会保留。继续？"))
   );
 }
 $("#replace-file").onclick = () => {
   if (busy) {
-    message("正在保存或检查文件，请稍候。");
+    message(t("正在保存或检查文件，请稍候。"));
     return;
   }
   if (canReplace()) reset();
@@ -321,23 +374,23 @@ $$("[data-sample]").forEach(
     (b.onclick = () => {
       if (busy) return;
       reset();
-      current = sampleRecord(b.dataset.sample);
+      current = sampleRecord(b.dataset.sample, locale);
       baseline = null;
       renderSource();
       $("#empty-result").hidden = true;
       $("#processing").hidden = false;
-      $("#result-badge").textContent = "示例流程演示";
+      $("#result-badge").textContent = t("示例流程演示");
       const token = ++generation;
       timer = setTimeout(() => {
         if (token !== generation) return;
         renderForm();
-        message("示例字段已整理，请核对后确认。");
+        message(t("示例字段已整理，请核对后确认。"));
       }, 1100);
     }),
 );
 $("#cancel-process").onclick = () => {
   reset();
-  message("已取消示例流程，可以重新选择。");
+  message(t("已取消示例流程，可以重新选择。"));
 };
 async function handleFile(file) {
   if (!file || busy) return;
@@ -350,7 +403,7 @@ async function handleFile(file) {
   reset();
   busy = true;
   const token = ++generation;
-  $("#result-badge").textContent = "检查文件中";
+  $("#result-badge").textContent = t("检查文件中");
   try {
     const hash = await fileHash(file);
     if (token !== generation) return;
@@ -361,12 +414,12 @@ async function handleFile(file) {
         possibleDuplicate({ source: { sha256: hash } }, r),
       );
     } catch {
-      message("本地存储暂不可用，可继续填写并导出备份。", true);
+      message(t("本地存储暂不可用，可继续填写并导出备份。"), true);
     }
     if (token !== generation) return;
     if (duplicate) {
       await loadRecord(duplicate.id, { internal: true });
-      message("这份文件已存在，已打开原记录，避免重复保存。");
+      message(t("这份文件已存在，已打开原记录，避免重复保存。"));
       return;
     }
     current = blankRecord();
@@ -379,10 +432,10 @@ async function handleFile(file) {
     };
     renderSource();
     renderForm();
-    message("文件已在本地打开。真实 AI 尚未连接，请手动填写。");
+    message(t("文件已在本地打开。真实 AI 尚未连接，请手动填写。"));
   } catch (err) {
     reset();
-    message(err.message || "文件读取失败，请重试。", true);
+    message(err.message || t("文件读取失败，请重试。"), true);
   } finally {
     busy = false;
   }
@@ -402,32 +455,32 @@ for (const event of ["dragleave", "drop"])
   });
 zone.addEventListener("drop", (e) => {
   if (e.dataTransfer.files.length !== 1) {
-    message("每次请添加一份单据；同一份多页 PDF 可以整体添加。", true);
+    message(t("每次请添加一份单据；同一份多页 PDF 可以整体添加。"), true);
     return;
   }
   handleFile(e.dataTransfer.files[0]);
 });
 function summary() {
   const values = [
-    ["归属房屋", current.property.id],
-    ["服务项目", current.service.summary],
-    ["服务日期", current.service.date],
-    ["服务商", current.provider.name],
-    ["服务地址", current.property.service_address],
-    ["房屋系统", categories[current.service.category]],
-    ["总金额", money(current.amount.total, current.amount.currency)],
-    ["单据类型", types[current.document.type]],
-    ["付款状态", payments[current.amount.payment_status]],
-    ["施工状态", completions[current.service.completion_status]],
+    [t("归属房屋"), current.property.id],
+    [t("服务项目"), current.service.summary],
+    [t("服务日期"), current.service.date],
+    [t("服务商"), current.provider.name],
+    [t("服务地址"), current.property.service_address],
+    [t("房屋系统"), categories[current.service.category]],
+    [t("总金额"), money(current.amount.total, current.amount.currency)],
+    [t("单据类型"), types[current.document.type]],
+    [t("付款状态"), payments[current.amount.payment_status]],
+    [t("施工状态"), completions[current.service.completion_status]],
   ];
   $("#confirmation-summary").innerHTML =
     (current.source.mode === "demo"
-      ? '<div class="notice">虚构示例记录 · 保存后仍会保留示例标识。</div>'
+      ? t('<div class="notice">虚构示例记录 · 保存后仍会保留示例标识。</div>')
       : "") +
     values
       .map(
         ([k, v]) =>
-          `<div class="summary-row"><span>${k}</span><strong>${escape(v ?? "未知 / 未提供")}</strong></div>`,
+          `<div class="summary-row"><span>${k}</span><strong>${escape(v ?? t("未知 / 未提供"))}</strong></div>`,
       )
       .join("");
 }
@@ -476,12 +529,12 @@ async function persist(status) {
     switchView("history");
     message(
       status === "confirmed"
-        ? "已确认并保存在当前浏览器。可查看、修改或导出。"
-        : "草稿已保存在当前浏览器，可稍后继续。",
+        ? t("已确认并保存在当前浏览器。可查看、修改或导出。")
+        : t("草稿已保存在当前浏览器，可稍后继续。"),
     );
   } catch (err) {
     $("#confirm-dialog").close();
-    message(err.message || "保存失败，请重试。", true);
+    message(err.message || t("保存失败，请重试。"), true);
     showBackup();
   } finally {
     busy = false;
@@ -495,10 +548,10 @@ function showBackup() {
   b.type = "button";
   b.id = "emergency-export";
   b.className = "button secondary";
-  b.textContent = "导出当前草稿备份";
+  b.textContent = t("导出当前草稿备份");
   b.onclick = () => {
     collect();
-    download(current, "domake-unsaved-draft.json");
+    download(current, "domic-home-passport-unsaved-draft.json");
   };
   $(".review-actions").append(b);
 }
@@ -508,7 +561,7 @@ $("#confirm-check").onchange = () => {
 $("#save-draft").onclick = () => persist("draft");
 $("#confirm-save").onclick = () => {
   if (!$("#confirm-check").checked) {
-    message("请先勾选确认，或返回修改。", true);
+    message(t("请先勾选确认，或返回修改。"), true);
     return;
   }
   persist("confirmed");
@@ -520,10 +573,66 @@ function renderHistory() {
     ? records
         .map(
           (r) =>
-            `<article class="record-card"><div class="record-date">${escape(r.service.date || "服务日期未知")}<br><small>${r.document.issue_date ? "开票 " + escape(r.document.issue_date) : ""}</small></div><div class="record-main"><span class="tag ${r.review.status === "confirmed" ? "green" : "amber"}">${r.review.status === "confirmed" ? "已确认" : "草稿"}</span> <span class="tag">${escape(types[r.document.type])}</span> ${r.source.mode === "demo" ? '<span class="tag amber">虚构示例</span>' : ""}<h3>${escape(r.service.summary || "待填写服务项目")}</h3><p>${escape(r.property.id || "尚未选择房屋")} · ${escape(r.provider.name || "服务商未知")}</p><p>${r.review.missing_fields.length ? "有 " + r.review.missing_fields.length + " 项核心信息待补全" : "核心信息完整"} · ${escape(completions[r.service.completion_status])}</p><div class="record-actions"><button class="text-link" data-open="${r.id}">查看 / 修改</button><button class="text-link" data-export="${r.id}">导出 JSON</button><button class="text-link" data-original="${r.id}">原始单据</button><button class="text-link delete" data-delete="${r.id}">删除</button></div></div><div class="record-money">${escape(money(r.amount.total, r.amount.currency))}<br><span class="tag">${r.document.type === "estimate" ? "预估费用" : escape(payments[r.amount.payment_status])}</span></div></article>`,
+            html`<article class="record-card">
+              <div class="record-date">
+                ${escape(r.service.date || t("服务日期未知"))}<br /><small
+                  >${r.document.issue_date
+                    ? t("开票 ") + escape(r.document.issue_date)
+                    : ""}</small
+                >
+              </div>
+              <div class="record-main">
+                <span
+                  class="tag ${r.review.status === "confirmed"
+                    ? "green"
+                    : "amber"}"
+                  >${r.review.status === "confirmed"
+                    ? t("已确认")
+                    : t("草稿")}</span
+                >
+                <span class="tag">${escape(types[r.document.type])}</span> ${r
+                  .source.mode === "demo"
+                  ? t('<span class="tag amber">虚构示例</span>')
+                  : ""}
+                <h3>${escape(r.service.summary || t("待填写服务项目"))}</h3>
+                <p>
+                  ${escape(r.property.id || t("尚未选择房屋"))} ·
+                  ${escape(r.provider.name || t("服务商未知"))}
+                </p>
+                <p>
+                  ${r.review.missing_fields.length
+                    ? t("有 ") +
+                      r.review.missing_fields.length +
+                      t(" 项核心信息待补全")
+                    : t("核心信息完整")}
+                  · ${escape(completions[r.service.completion_status])}
+                </p>
+                <div class="record-actions">
+                  <button class="text-link" data-open="${r.id}">
+                    查看 / 修改</button
+                  ><button class="text-link" data-export="${r.id}">
+                    导出 JSON</button
+                  ><button class="text-link" data-original="${r.id}">
+                    原始单据</button
+                  ><button class="text-link delete" data-delete="${r.id}">
+                    删除
+                  </button>
+                </div>
+              </div>
+              <div class="record-money">
+                ${escape(money(r.amount.total, r.amount.currency))}<br /><span
+                  class="tag"
+                  >${r.document.type === "estimate"
+                    ? t("预估费用")
+                    : escape(payments[r.amount.payment_status])}</span
+                >
+              </div>
+            </article>`,
         )
         .join("")
-    : '<div class="history-empty"><h3>房屋的下一段历史，从第一张票据开始。</h3><p>你确认的记录和未完成草稿会显示在这里。</p><button class="button primary" id="back-upload">添加第一份单据</button></div>';
+    : t(
+        '<div class="history-empty"><h3>房屋的下一段历史，从第一张票据开始。</h3><p>你确认的记录和未完成草稿会显示在这里。</p><button class="button primary" id="back-upload">添加第一份单据</button></div>',
+      );
   if ($("#back-upload")) $("#back-upload").onclick = () => switchView("work");
   $$("[data-open]").forEach(
     (b) => (b.onclick = () => loadRecord(b.dataset.open)),
@@ -533,7 +642,7 @@ function renderHistory() {
       (b.onclick = () =>
         download(
           records.find((r) => r.id === b.dataset.export),
-          "domake-record.json",
+          "domic-home-passport-record.json",
         )),
   );
   $$("[data-original]").forEach(
@@ -549,7 +658,7 @@ function renderHistory() {
 }
 async function loadRecord(id, { internal = false } = {}) {
   if (busy && !internal) {
-    message("正在保存或检查文件，请稍候。");
+    message(t("正在保存或检查文件，请稍候。"));
     return;
   }
   if (isDirty() && !canReplace()) return;
@@ -568,11 +677,12 @@ async function loadRecord(id, { internal = false } = {}) {
     renderForm();
     $("#receipt-form").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (e) {
-    if (token === generation) message("无法读取此记录，请刷新后重试。", true);
+    if (token === generation)
+      message(t("无法读取此记录，请刷新后重试。"), true);
   }
 }
 function download(data, name) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], {
+  const blob = new Blob([JSON.stringify(exportRecordData(data), null, 2)], {
     type: "application/json",
   });
   downloadBlob(blob, name);
@@ -590,14 +700,14 @@ async function original(id) {
   try {
     if (r.source.mode === "demo") {
       await loadRecord(id);
-      message("原始单据为虚构的页面示例。");
+      message(t("原始单据为虚构的页面示例。"));
       return;
     }
     const blob = await storage.file(id);
     if (!blob) throw Error();
     downloadBlob(blob, r.source.name || "receipt");
   } catch {
-    message("原始文件不可用。结构化记录仍可导出。", true);
+    message(t("原始文件不可用。结构化记录仍可导出。"), true);
   }
 }
 $("#export-all").onclick = () =>
@@ -608,7 +718,7 @@ $("#export-all").onclick = () =>
       storage_scope: "this_browser",
       records,
     },
-    "domake-receipts.json",
+    "domic-home-passport-records.json",
   );
 $("#confirm-delete").onclick = async () => {
   if (busy || !deleting) return;
@@ -620,7 +730,7 @@ $("#confirm-delete").onclick = async () => {
     records = records.filter((r) => r.id !== deleting);
     renderHistory();
     $("#delete-dialog").close();
-    message("记录和对应原件已从此浏览器删除。");
+    message(t("记录和对应原件已从此浏览器删除。"));
   } catch (e) {
     message(e.message, true);
   } finally {

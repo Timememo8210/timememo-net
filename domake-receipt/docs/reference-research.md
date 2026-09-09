@@ -1,8 +1,10 @@
+[English](reference-research.en.md) · [中文](reference-research.md)
+
 > 此文件是研究备忘录，包含更完整的生产方案候选。本轮唯一已实现的导出契约为 [receipt.schema.json](receipt.schema.json)，以 [output-format.md](output-format.md) 为准。候选字段名、定点金额、日期区间、退款/材料购买状态等未全部在原型实现；后续版本再迁移。
 
-# Domake Receipt：字段、审核闭环与可复用资源研究
+# Domic Home Passport：字段、审核闭环与可复用资源研究
 
-研究日期：2026-09-09。用途：供 Domake 房屋历史票据录入原型与伙伴交接使用。以下字段与产品行为是针对本项目的设计建议；仓库功能及许可证已通过一手 GitHub 页面、LICENSE 文件和 GitHub API 核对。本次只做资料研究，没有安装外部 skill，没有复制外部代码，也没有对这些仓库进行运行测试。
+研究日期：2026-09-09。用途：供 Domic Home Passport 房屋历史票据录入原型与伙伴交接使用。以下字段与产品行为是针对本项目的设计建议；仓库功能及许可证已通过一手 GitHub 页面、LICENSE 文件和 GitHub API 核对。本次只做资料研究，没有安装外部 skill，没有复制外部代码，也没有对这些仓库进行运行测试。
 
 ## 1. 建议的产品定义
 
@@ -192,7 +194,7 @@
 
 Python 工具支持 PDF 文本／OCR 后端、YAML／JSON 正则模板、CSV／JSON／XML 输出，当前仓库也说明存在可选 AI fallback。MIT。适合频繁重复且格式固定的服务商发票；针对千奇百怪的用户照片，维护大量模板的收益需要先验证。[仓库](https://github.com/invoice-x/invoice2data) · [MIT 许可证](https://github.com/invoice-x/invoice2data/blob/master/LICENSE.md)
 
-**采用建议：**首版不把模板引擎设为必经步骤。以后若某供应商占上传量很大，可增加模板快捷处理并用同一个 Domake 结构输出；失败仍走多模态提取。
+**采用建议：**首版不把模板引擎设为必经步骤。以后若某供应商占上传量很大，可增加模板快捷处理并用同一个 Domic Home Passport 结构输出；失败仍走多模态提取。
 
 ### C. Docling — 可选的复杂 PDF 预处理组件
 

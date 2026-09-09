@@ -1,10 +1,12 @@
-# Domake / Domic / Home Passport 历史恢复
+[English](project-history.en.md) · [中文](project-history.md)
+
+# Domic Home Passport 历史恢复
 
 核对日期：2026-09-09。只读检查 Sky Portal 本地 Git checkout、公开页面和既有测试成果；未修改旧站点，未复制凭证。
 
 ## 核心结论
 
-用户此次口述的 **Domake**，与 Sky Portal 旧记录中 **Domic / Home Passport** 高度吻合。旧材料没有出现 Domake 品牌拼写；Domic 才是 2026 年 5—6 月战略和 Git 提交使用的名称。可以用 Domake Receipt 作为本轮原型工作名，但最终与伙伴对接时应确认产品名和独立域名。
+当前统一名称由用户确认为 **Domic Home Passport**。这是既有房屋护照项目的票据整理模块。以下历史材料和 Git 提交中的 Domic / Home Passport 名称按原始记录保留。
 
 合作方明确为 **Daniel Zhu（瑜杰）**。产品不是通用报销 OCR：原定位是持续积累某一房产的维修、升级、设备和保修历史，最终用于维护与出售/出租交接。ProLynk 是服务撮合端；Domic 是业主房产档案端。
 
@@ -105,10 +107,10 @@ Daniel Codex 工作台、Live Lab 和 JSON 结果均存在：
 
 ## 尚未找到 / 尚未验证
 
-- 独立 Domake / Domic 正式域名及当前产品界面。
+- 独立 Domic Home Passport 正式域名及当前产品界面。
 - Daniel 当前可用的后端 API 契约、数据库表、统一账号实现和生产部署。
 - 6 月工作台提及的完整 Next.js 原项目源码及 `.env.local`；不能把静态展示页当作完整产品仓库。
 - 可访问公开 GitHub 用户仓库列表只匹配到 sky-portal，没有独立 receipt/domake/domic/prolynk 名称的公开仓库；这不证明不存在私有仓库。
 - 最近 50 个 Codex / ChatGPT 任务摘要没有历史相关任务（当前重构任务除外）；不宣称已穷尽所有归档。
 
-建议与 Daniel 下一轮讨论：确认名字与域名；现有登录/物业模型和记录写入接口；一期以单文件多页票据还是批量票据为准；默认市场与币种；是否需要服务日期必填；实际月量和延迟预算。即使这些尚待确认，本轮原型仍可先用固定导出 schema 和明确本地演示存储完成上传→抽取→核对→保存→查阅闭环。
+建议与 Daniel 下一轮讨论：确认生产域名；现有登录/物业模型和记录写入接口；一期以单文件多页票据还是批量票据为准；默认市场与币种；是否需要服务日期必填；实际月量和延迟预算。即使这些尚待确认，本轮原型仍可先用固定导出 schema 和明确本地演示存储完成上传→抽取→核对→保存→查阅闭环。

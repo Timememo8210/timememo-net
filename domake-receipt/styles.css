@@ -93,7 +93,7 @@ button:disabled {
 .brand-sub {
   display: block;
   font-size: 10px;
-  letter-spacing: 3px;
+  letter-spacing: 1.3px;
   margin-top: 5px;
 }
 .header nav {
@@ -1163,5 +1163,63 @@ dialog::backdrop {
   * {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+.language-switch {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.language-switch a {
+  padding: 4px 9px;
+  border-radius: 5px;
+}
+.language-switch a[aria-current] {
+  color: #fff;
+  background: var(--brand);
+}
+.brand {
+  flex-shrink: 0;
+}
+@media (max-width: 680px) {
+  .header {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 14px 18px 0;
+    gap: 12px;
+  }
+  .header .language-switch {
+    margin-left: auto;
+  }
+  .header nav {
+    order: 3;
+    width: 100%;
+    height: 42px;
+    margin: 0;
+    gap: 24px;
+    font-size: 14px;
+  }
+  .header nav a[aria-current] {
+    height: 100%;
+  }
+  .intro h1 {
+    font-size: 27px;
+    line-height: 1.25;
+  }
+  .field label {
+    font-size: 14px;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 16px;
+  }
+  .fields-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

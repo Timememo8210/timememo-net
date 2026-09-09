@@ -104,3 +104,22 @@ test("confirmation creates a new record value without mutating extraction", () =
   assert.equal(r.review.status, "draft");
   assert.equal(next.review.status, "confirmed");
 });
+
+test("exports use English system warnings while preserving user-authored text", async () => {
+  const { exportRecordData } = await import("../core.js");
+  const r = sampleRecord("hvac", "zh");
+  r.notes = "服务日期未知；这是用户自己写的原文";
+  r.review.warnings = ["服务日期未知；不会用开票日期或上传日期代替。"];
+  const out = exportRecordData({ records: [r] });
+  assert.doesNotMatch(
+    out.records[0].review.warnings.join(" "),
+    /\p{Script=Han}/u,
+  );
+  assert.equal(out.records[0].notes, r.notes);
+  assert.equal(out.records[0].service.summary, r.service.summary);
+  assert.match(r.review.warnings[0], /服务日期/);
+  assert.doesNotMatch(
+    transition(r, "draft").review.warnings.join(" "),
+    /\p{Script=Han}/u,
+  );
+});

@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import assert from "node:assert/strict";
 import * as storage from "../storage.js";
-const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+const html = await readFile(new URL("../zh.html", import.meta.url), "utf8");
 const dom = new JSDOM(html, { url: "https://example.test/domake-receipt/" });
 globalThis.window = dom.window;
 globalThis.document = dom.window.document;

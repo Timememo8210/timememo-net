@@ -1,4 +1,6 @@
-# Domake Receipt：固定输出格式 v1
+[English](output-format.en.md) · [中文](output-format.md)
+
+# Domic Home Passport：固定输出格式 v1
 
 更新时间：2026-09-09。与原型 `core.js`、`samples.js` 和导出保持一致。机器可读权威格式见 [receipt.schema.json](receipt.schema.json)。研究报告中的扩展结构是未来候选，不是另一个 v1。
 
@@ -45,3 +47,7 @@
 - [屋顶报价](../samples/roof.json)：planned，付款 unknown，报价总额不等于实际支出。
 
 示例中的姓名、地址、金额全部虚构。样本输出是待确认草稿，不代表模型评测结果。
+
+## 本轮语言更新
+
+工作台和说明页默认英文，提供中文切换。名称统一 Domic Home Passport。用户填写的姓名、地址、备注和原文证据不自动翻译；两种界面的输出字段名与枚举一致，导出的系统提示统一英文。保留现有浏览器存储与访问地址。面向用户所述阿拉伯地区受众，下一轮需按首发国家验证阿拉伯文票据、日期格式和当地币种；本轮尚未实现或实测阿拉伯文识别。

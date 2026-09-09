@@ -86,10 +86,16 @@ export const samples = {
     ],
   },
 };
-export function sampleRecord(key) {
+export function sampleRecord(key, locale = "en") {
   const s = samples[key],
     r = blankRecord();
-  r.property = { id: "示例房屋 · Example Lane", service_address: s.address };
+  r.property = {
+    id:
+      locale === "zh"
+        ? "示例房屋 · Example Lane"
+        : "Sample property · Example Lane",
+    service_address: s.address,
+  };
   r.document = { type: s.type, number: s.number, issue_date: s.issue };
   r.service = {
     date: s.date,
@@ -114,5 +120,19 @@ export function sampleRecord(key) {
     sample_id: key,
   };
   r.evidence = structuredClone(s.evidence);
+  if (locale !== "zh") {
+    const english = {
+      plumbing: {
+        summary: "Replace the kitchen sink P-trap, including labor and parts.",
+        location: "Kitchen · under the sink",
+      },
+      hvac: { summary: "Annual HVAC maintenance.", location: null },
+      roof: {
+        summary: "Proposed roof replacement; this document is an estimate.",
+        location: "Roof",
+      },
+    };
+    Object.assign(r.service, english[key]);
+  }
   return r;
 }

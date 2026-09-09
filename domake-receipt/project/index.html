@@ -1,312 +1,385 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Domake Receipt 项目重构方案、模型比较、固定数据格式、交互闭环和伙伴交接。"
+      content="Domic Home Passport: project reconstruction, model comparisons, a consistent data format, the complete user flow, and partner handoff materials."
     />
-    <title>项目说明 · Domake Receipt</title>
+    <title>About the Project · Domic Home Passport</title>
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
     <header class="header">
-      <a class="brand" href="../"
+      <a class="brand" href="../" aria-label="Domic Home Passport"
         ><span class="brand-icon">D</span
-        ><span>domake<span class="brand-sub">RECEIPT</span></span></a
+        ><span>Domic<span class="brand-sub">HOME PASSPORT</span></span></a
       >
-      <nav aria-label="主导航">
-        <a href="../">票据工作台</a
-        ><a href="./" aria-current="page">项目说明</a>
+      <nav aria-label="Main navigation">
+        <a href="../">Receipt workspace</a
+        ><a href="./" aria-current="page">About this project</a>
       </nav>
-      <span class="prototype">项目备忘 · 2026.09.09</span>
+      <div class="language-switch" aria-label="Language">
+        <a href="./" lang="en" aria-current="true">EN</a
+        ><a href="zh.html" lang="zh-CN">中文</a>
+      </div>
+      <span class="prototype">Project brief · 9 Sep 2026</span>
     </header>
     <main class="shell project-shell">
       <div class="intro">
         <div>
           <p class="eyebrow">PRODUCT BRIEF / PARTNER HANDOFF</p>
-          <h1>让票据成为可追溯的房屋历史。</h1>
-          <p>Domake Receipt · 第一轮重构、研究依据与下一步实施</p>
+          <h1>Turn receipts into your home's history.</h1>
+          <p>Domic Home Passport · First iteration, research, and next steps</p>
         </div>
-        <a class="button primary" href="../">体验原型 →</a>
+        <a class="button primary" href="../">Try the prototype →</a>
       </div>
       <div class="mode-note">
         <span class="status-dot"></span>
         <div>
-          本轮已确认：先交付原型与方案；真实 AI
-          识别、云端数据库和正式系统对接留到下一轮。
+          Agreed scope: deliver the prototype and plan first. Live AI
+          extraction, a cloud database, and production integration are planned
+          for the next iteration.
         </div>
       </div>
       <div class="project-grid" style="margin-top: 32px">
-        <aside class="project-nav" aria-label="文档目录">
-          <a href="#history">01　找回旧项目</a
-          ><a href="#scope">02　本轮做到哪里</a
-          ><a href="#format">03　固定输出格式</a
-          ><a href="#models">04　模型与成本</a><a href="#flow">05　交互闭环</a
-          ><a href="#architecture">06　系统与接口</a
-          ><a href="#references">07　GitHub 参考</a
-          ><a href="#next">08　下一轮与讨论</a
-          ><a href="#handoff">09　交接资料</a>
+        <aside class="project-nav" aria-label="On this page">
+          <a href="#history">01 Project history</a
+          ><a href="#scope">02 Current scope</a
+          ><a href="#format">03 Output format</a
+          ><a href="#models">04 Models and costs</a
+          ><a href="#flow">05 User flow</a
+          ><a href="#architecture">06 System and APIs</a
+          ><a href="#references">07 GitHub references</a
+          ><a href="#next">08 Next steps</a
+          ><a href="#handoff">09 Handoff materials</a>
         </aside>
         <article class="article">
           <section id="history">
             <p class="eyebrow">01 / CONTEXT</p>
-            <h2>原来的名字是 Domic / Home Passport</h2>
+            <h2>Domic Home Passport: from receipts to property history</h2>
             <p>
-              Sky Portal 旧记录中的合作方是 <strong>Daniel Zhu</strong>。Domic
-              面向业主，积累维修、升级、设备和保修档案；ProLynk
-              面向服务撮合，已完成的服务文件可回流到房屋履历。本轮暂用用户提出的
-              <strong>Domake Receipt</strong>
-              作工作名，最终品牌拼写与生产域名需要和伙伴确认。
+              The confirmed product name is
+              <strong>Domic Home Passport</strong>. This is the receipt module
+              of the original Home Passport project. The partner is
+              <strong>Daniel Zhu</strong>. The aim is to build a lasting record
+              of repairs, improvements, equipment, and warranties, with service
+              documents from ProLynk.
             </p>
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>历史节点</th>
-                    <th>找回的内容</th>
-                    <th>这轮的继承方式</th>
+                    <th>Milestone</th>
+                    <th>Recovered context</th>
+                    <th>How it informs this iteration</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>2026 年 5 月</td>
+                    <td>May 2026</td>
                     <td>
-                      数字房产护照；接收 ProLynk 文件、邮件和手动
-                      PDF；房屋时间线。
+                      A digital property passport accepting ProLynk documents,
+                      emails, and manually uploaded PDFs, organized in a
+                      property timeline.
                     </td>
-                    <td>以房屋关联和服务历史为核心，避免做成泛用报销工具。</td>
+                    <td>
+                      Keep property association and service history at the
+                      center of the product.
+                    </td>
                   </tr>
                   <tr>
-                    <td>2026 年 6 月</td>
+                    <td>June 2026</td>
                     <td>
-                      Gemini 2.5 Flash；模型测试、人工确认、Next.js / Supabase /
-                      R2 方案。
+                      Gemini 2.5 Flash, model tests, human confirmation, and a
+                      proposed Next.js / Supabase / R2 stack.
                     </td>
-                    <td>模型层可替换，保留独立输出契约和后端接口边界。</td>
+                    <td>
+                      Keep the model replaceable, with an independent output
+                      contract and clearly defined backend interfaces.
+                    </td>
                   </tr>
                   <tr>
-                    <td>旧 Receipt Scanner</td>
+                    <td>Original Receipt Scanner</td>
                     <td>
-                      上传 → 编辑 → 预览 → 保存；实际只有浏览器 localStorage。
+                      Upload → edit → preview → save. Records were stored only
+                      in browser localStorage.
                     </td>
                     <td>
-                      新原型明确写本地保存，同时保留原件；真实数据库下一轮接。
+                      The new prototype clearly identifies local storage and
+                      retains original files. A real database comes next.
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p>
-              旧测试有 <strong>13 份 PDF 最终生成可读结果</strong>：12
-              份直接读取 PDF，1 份因 503 改用文本层。多数是空白模板，仅 3
-              份有较完整金额，因此不能用它证明真实票据准确率。新格式移除“未知金额
-              = 0”、默认 USD 和缺乏证据的房产增值推断。
+              The historical tests eventually produced
+              <strong>readable results for 13 PDFs</strong>: 12 were read
+              directly as PDFs; one used its text layer after a 503 error. Most
+              were blank templates, and only three had relatively complete
+              amounts. This does not establish accuracy on real receipts. The
+              new format removes zero values for unknown amounts, automatic USD
+              defaults, and unsupported claims about increased property value.
             </p>
             <p class="doc-meta">
-              依据：<a
-                href="https://timememo8210.github.io/sky-portal/prolynk.html"
-                >ProLynk / Domic 历史</a
+              Sources:
+              <a href="https://timememo8210.github.io/sky-portal/prolynk.html"
+                >ProLynk / Domic history</a
               >
               ·
               <a
                 href="https://timememo8210.github.io/sky-portal/projects/danielproject__codex.html"
-                >Daniel 工作台</a
+                >Daniel's workbench</a
               >
               ·
               <a
                 href="https://timememo8210.github.io/sky-portal/projects/danielproject__codex_live.html"
-                >旧模型测试</a
+                >Historical model tests</a
               >
               ·
               <a
                 href="https://timememo8210.github.io/sky-portal/projects/home-passport-receipts.html"
-                >旧原型</a
-              >。独立 Domic 线上界面及 Daniel 现行生产接口尚未找回。
+                >Original prototype</a
+              >. A standalone live Domic Home Passport interface and Daniel's
+              current production APIs have not yet been located.
             </p>
           </section>
           <section id="scope">
             <p class="eyebrow">02 / FIRST ITERATION</p>
-            <h2>这轮是可以操作的原型</h2>
+            <h2>A working prototype for this iteration</h2>
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>现在可以做</th>
-                    <th>留给下一轮</th>
+                    <th>Available now</th>
+                    <th>Planned next</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      拖入或选择 PDF、JPG、PNG、WebP；手机浏览器拍照入口；单文件
-                      15 MB。
+                      Drag in or select a PDF, JPG, PNG, or WebP; access the
+                      camera through a mobile browser; one file up to 15 MB.
                     </td>
                     <td>
-                      服务端上传、HEIC 转换、PDF 页数/加密检测、多单据拆分。
+                      Server uploads, HEIC conversion, PDF page-count and
+                      encryption checks, and splitting files containing multiple
+                      documents.
                     </td>
                   </tr>
                   <tr>
-                    <td>实际文件预览与人工填写；3 份虚构票据体验识别过程。</td>
-                    <td>真实 Gemini 识别、用量计费、质量与速度测试。</td>
+                    <td>
+                      Preview your own file and enter details manually; try
+                      three fictional documents to explore the extraction flow.
+                    </td>
+                    <td>
+                      Live Gemini extraction, usage and billing, and quality and
+                      speed testing.
+                    </td>
                   </tr>
                   <tr>
                     <td>
-                      固定字段、空值提示、草稿、修改、勾选确认、记录列表。
+                      Fixed fields, missing-value prompts, drafts, editing,
+                      confirmation, and a record list.
                     </td>
-                    <td>用户登录、多房屋权限、多人共同审核、完整审计。</td>
+                    <td>
+                      Sign-in, access control across properties, collaborative
+                      review, and a full audit trail.
+                    </td>
                   </tr>
                   <tr>
                     <td>
-                      同浏览器同文件去重；本地保存原件与字段；JSON
-                      导出、原件下载、确认删除。
+                      Duplicate detection for the same file in this browser;
+                      local storage of originals and fields; JSON export,
+                      original-file download, and confirmed deletion.
                     </td>
-                    <td>云数据库、私有原件存储、跨设备同步、批量导入。</td>
+                    <td>
+                      A cloud database, private storage for originals,
+                      synchronization across devices, and batch imports.
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p>
-              交互演示与实际文件明确分开：<strong>实际上传的文件不会被偷偷替换成示例结果</strong>。未接
-              AI 时，字段保持空白，用户可以手工整理。PDF
-              预览交给浏览器阅读器，没有自动提取文本或只读取第一页。
+              Sample demonstrations and your own documents are handled
+              separately:
+              <strong
+                >your uploaded file is never replaced with sample
+                results</strong
+              >. Until AI is connected, fields remain blank for you to complete.
+              PDFs use the browser PDF viewer; the prototype does not
+              automatically extract their text or process only the first page.
             </p>
             <div class="decision">
-              <strong>本地原型边界</strong
-              ><br />文件与记录保存在当前浏览器。清理站点数据、无痕模式或存储被逐出可能导致丢失。JSON
-              不含二进制原件，应另下载原件。尚未连接 Domic
-              系统；确认成功不会宣称云端已保存。
+              <strong>Local prototype limits</strong><br />Files and records are
+              stored in this browser. Clearing site data, using private
+              browsing, or browser storage eviction may cause data loss. JSON
+              exports do not include the original binary files; download those
+              separately. The prototype is not connected to the Domic Home
+              Passport backend, and save confirmations refer to local storage.
             </div>
             <p>
-              原型按一份文件、一张逻辑单据、一个房屋活动整理。混合多张发票请先拆分。当前房屋名称是手工输入；生产改成有权限的房屋选择器。
+              The prototype treats each file as one logical document and one
+              property activity. Split combined invoices before adding them.
+              Property names are entered manually for now; production will use a
+              property selector governed by access permissions.
             </p>
           </section>
           <section id="format">
             <p class="eyebrow">03 / DATA CONTRACT</p>
-            <h2>主界面只保留 9 组核心信息</h2>
+            <h2>Nine core groups of information</h2>
             <p>
-              最有价值的记录能回答：<strong>哪套房、什么时候、谁、在哪个部位、做了什么、多少钱、处于什么状态</strong>。其他字段不强迫用户填写。
+              A useful record answers:
+              <strong
+                >which property, when, who, where in the home, what work, how
+                much, and what status</strong
+              >. Other fields are optional.
             </p>
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>信息</th>
-                    <th>输出位置</th>
-                    <th>没有时</th>
+                    <th>Information</th>
+                    <th>Output field</th>
+                    <th>When missing</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>归属房屋</td>
+                    <td>Property</td>
                     <td><code>property.id</code></td>
-                    <td>草稿可空，确认前由用户填写；模型不得编造。</td>
+                    <td>
+                      May be empty in a draft. The user supplies it before
+                      confirmation; the model must not invent it.
+                    </td>
                   </tr>
                   <tr>
-                    <td>实际服务日期</td>
+                    <td>Service date</td>
                     <td><code>service.date</code></td>
-                    <td>null；开票日期单独保留。</td>
+                    <td>null; the invoice date is stored separately.</td>
                   </tr>
                   <tr>
-                    <td>服务项目摘要</td>
+                    <td>Work summary</td>
                     <td><code>service.summary</code></td>
-                    <td>确认前用户补充，说明实际或计划工作。</td>
+                    <td>
+                      The user completes it before confirmation, describing
+                      actual or planned work.
+                    </td>
                   </tr>
                   <tr>
-                    <td>房屋系统 / 部位</td>
+                    <td>Home system / location</td>
                     <td><code>service.category / location</code></td>
-                    <td>unknown / null。</td>
+                    <td>unknown / null.</td>
                   </tr>
                   <tr>
-                    <td>服务商</td>
+                    <td>Service provider</td>
                     <td><code>provider.name</code></td>
-                    <td>null。</td>
+                    <td>null.</td>
                   </tr>
                   <tr>
-                    <td>服务地址</td>
+                    <td>Service address</td>
                     <td><code>property.service_address</code></td>
-                    <td>null；不能拿商家地址填空。</td>
+                    <td>null; do not substitute the provider's address.</td>
                   </tr>
                   <tr>
-                    <td>总金额 + 币种</td>
+                    <td>Total + currency</td>
                     <td><code>amount.total / currency</code></td>
-                    <td>null，不默认为零或美元。</td>
+                    <td>null; never default to zero or USD.</td>
                   </tr>
                   <tr>
-                    <td>单据类型</td>
+                    <td>Document type</td>
                     <td><code>document.type</code></td>
-                    <td>unknown；区分收据、账单、报价与保修文件。</td>
+                    <td>
+                      unknown; distinguish receipts, invoices, quotes, and
+                      warranty documents.
+                    </td>
                   </tr>
                   <tr>
-                    <td>付款 + 施工状态</td>
+                    <td>Payment + work status</td>
                     <td>
                       <code
                         >amount.payment_status / service.completion_status</code
                       >
                     </td>
-                    <td>unknown；付款和完工分开。</td>
+                    <td>unknown; payment and completion are separate.</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <h3>设备与保修值得保留，但不必展开</h3>
+            <h3>Keep equipment and warranty details optional</h3>
             <p>
-              更多信息包括开票日期、单号、服务商电话/地址、费用明细、设备品牌型号与序列号、保修原文、施工许可编号及用户备注。将来可增添服务日期区间、税/折扣、维护周期、退款与材料购入状态。
+              Additional details include the invoice date, document number,
+              provider phone and address, line items, equipment brand, model and
+              serial number, original warranty wording, permit number, and user
+              notes. Future extensions can cover service date ranges, tax and
+              discounts, maintenance intervals, refunds, and material purchases.
             </p>
             <div class="decision">
-              <strong>三条语义规则</strong><br />服务日期 ≠ 开票日期；服务地址 ≠
-              商家地址；已付款 ≠
-              已完工。报价可以保存为房屋资料，但不能当成已发生支出或已完成施工。
+              <strong>Three rules for interpreting a document</strong
+              ><br />Service date ≠ invoice date. Service address ≠ provider
+              address. Paid ≠ completed. Quotes can be retained as property
+              documents, but must not count as incurred expenses or completed
+              work.
             </div>
-            <h3>稳定结构，未知保留 null</h3>
+            <h3>A stable structure, with null for unknown values</h3>
             <pre><code>{
   "schema_version": "1.0",
-  "property": { "id": "用户确认的房屋", "service_address": null },
+  "property": { "id": "user-confirmed-property", "service_address": null },
   "document": { "type": "invoice", "number": null, "issue_date": "2026-08-22" },
   "service": {
-    "date": null, "category": "hvac", "summary": "空调年度保养。",
+    "date": null, "category": "hvac", "summary": "Annual air-conditioning service.",
     "location": null, "completion_status": "unknown"
   },
   "provider": { "name": "Northline Heating · Fictional", "phone": null, "address": null },
   "amount": { "total": 189, "currency": "USD", "payment_status": "unknown" }
 }</code></pre>
             <p class="doc-meta">
-              以上为核心字段节选，不是完整导出。完整记录还包含
-              items、details、source、evidence、review
-              与应用生成的时间信息。下载
-              <a href="../docs/receipt.schema.json">完整 JSON Schema</a>、<a
-                href="../samples/hvac.json"
-                >完整缺失字段示例</a
+              This is an excerpt of the core fields, not a complete export. Full
+              records also contain items, details, source, evidence, review, and
+              timestamps generated by the application. Download the
+              <a href="../docs/receipt.schema.json">complete JSON Schema</a>,
+              <a href="../samples/hvac.json"
+                >full example with missing fields</a
               >
-              和 <a href="../docs/output-format.md">字段与空值规范</a>。
+              and
+              <a href="../docs/output-format.en.md"
+                >field and missing-value specification</a
+              >.
             </p>
             <p>
-              确认保存只强制房屋归属与工作摘要，其余允许未知并标记“待补全”。首次
-              AI
-              输出先成为草稿。错误、不可读文件与正常缺字段应分开；下一轮为缺失加入“未提供
-              / 看不清 / 歧义”原因。本轮金额用 JSON
-              number，生产写入数据库时转换为定点金额。
+              Only the property and work summary are required to confirm a
+              record. Other values can remain unknown and be marked as
+              incomplete. Initial AI output becomes a draft. Errors, unreadable
+              files, and ordinary missing fields need distinct handling; the
+              next iteration will add missing-value reasons such as not
+              provided, illegible, and ambiguous. Amounts are JSON numbers in
+              this prototype and should be converted to fixed-point values for
+              production database storage.
             </p>
           </section>
           <section id="models">
             <p class="eyebrow">04 / MODEL DECISION</p>
-            <h2>先选低成本基线，再用真实票据决定</h2>
+            <h2>Start with a low-cost baseline, then test real receipts</h2>
             <p>
-              建议先比较
+              First compare
               <strong
-                >Gemini 2.5 Flash-Lite、3.1 Flash-Lite 和 3.5 Flash-Lite</strong
-              >。2.5 Flash 与 3 Flash Preview
-              留作复杂样本对照。模型适配层独立，避免以后更换模型时重写上传与审核流程。
+                >Gemini 2.5 Flash-Lite, 3.1 Flash-Lite, and 3.5
+                Flash-Lite</strong
+              >. Use 2.5 Flash and 3 Flash Preview as comparisons for difficult
+              samples. An independent model adapter allows models to change
+              without rewriting upload and review flows.
             </p>
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>模型</th>
-                    <th>每百万输入 / 输出</th>
-                    <th>每万张预算*</th>
-                    <th>角色</th>
+                    <th>Model</th>
+                    <th>Per 1M input / output tokens</th>
+                    <th>Budget per 10,000 documents*</th>
+                    <th>Role</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -314,181 +387,240 @@
                     <td>2.5 Flash-Lite</td>
                     <td>$0.10 / $0.40</td>
                     <td><strong>$4.90</strong></td>
-                    <td>最低价基线</td>
+                    <td>Lowest-cost baseline</td>
                   </tr>
                   <tr>
                     <td>2.5 Flash</td>
                     <td>$0.30 / $2.50</td>
                     <td>$22.50</td>
-                    <td>旧方案对照</td>
+                    <td>Comparison with the original choice</td>
                   </tr>
                   <tr>
                     <td>3 Flash Preview</td>
                     <td>$0.50 / $3.00</td>
                     <td>$30.50</td>
-                    <td>复杂样本对照；Preview</td>
+                    <td>Difficult-sample comparison; Preview</td>
                   </tr>
                   <tr>
                     <td>3.1 Flash-Lite</td>
                     <td>$0.25 / $1.50</td>
                     <td>$15.25</td>
-                    <td>新一代低价候选</td>
+                    <td>Newer low-cost candidate</td>
                   </tr>
                   <tr>
                     <td>3.5 Flash-Lite</td>
                     <td>$0.30 / $2.50</td>
                     <td>$22.50</td>
-                    <td>质量对照候选</td>
+                    <td>Quality comparison candidate</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p class="doc-meta">
-              *2026-09-09 核对官方美元标准实时 API 价格。假设每张 2,500 输入 +
-              600 计费输出 token，一次成功，无额外 thinking / 重试 / 税 /
-              存储费。这是预算模型，未做实际模型调用。依据：<a
-                href="https://ai.google.dev/gemini-api/docs/pricing"
-                >Google 官方定价</a
-              >。
+              *Official standard real-time API prices in USD, checked on 9
+              September 2026. Assumes 2,500 input tokens and 600 billed output
+              tokens per document, one successful attempt, and no additional
+              thinking, retry, tax, or storage costs. This is a budget estimate;
+              no live model calls were made in this round. Source:
+              <a href="https://ai.google.dev/gemini-api/docs/pricing"
+                >Google pricing</a
+              >.
             </p>
             <p>
-              用户提到的“3.0 Flash”，这里对应的准确 ID 是
-              <code>gemini-3-flash-preview</code>。目前官方仍标 Preview；<a
+              The model referred to as “3.0 Flash” corresponds here to the exact
+              ID
+              <code>gemini-3-flash-preview</code>. It is still officially marked
+              Preview. Recheck the
+              <a
                 href="https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview"
-                >模型页</a
-              >与<a href="https://ai.google.dev/gemini-api/docs/deprecations"
-                >生命周期</a
-              >在正式部署前应再核对。Lite
-              候选均支持相关多模态/结构化输出，但文档能力不等于实际提取准确率。
+                >model page</a
+              >
+              and
+              <a href="https://ai.google.dev/gemini-api/docs/deprecations"
+                >lifecycle information</a
+              >
+              before production deployment. The Lite candidates support the
+              relevant multimodal and structured-output capabilities, but
+              documented capabilities do not establish real extraction accuracy.
             </p>
-            <h3>把“免费功能”与“免费 API”分开考虑</h3>
+            <h3>A free user feature still needs an API budget</h3>
             <p>
-              面向真实票据建议使用关联结算账户的付费 API
-              条件：不要以免费层额度为长期产品容量或数据处理保证。Google
-              免费与付费服务的数据使用条款不同，地区也有例外；正式使用前按服务地区核对。<a
-                href="https://ai.google.dev/gemini-api/terms"
-                >Google API 条款</a
-              >。
+              For real receipts, use the paid API terms associated with a
+              billing account. Free-tier quotas should not be treated as a
+              long-term capacity or data-processing guarantee. Google's free and
+              paid services have different data-use terms, with regional
+              exceptions; review the terms for the service region before
+              production use.
+              <a href="https://ai.google.dev/gemini-api/terms"
+                >Google API terms</a
+              >.
             </p>
             <p>
-              单页实际等待时间需要测量，不承诺“2 秒识别”。建议测
-              p50/p95、人工改动率、关键字段编造率、重试率及每条确认记录总成本。后台历史批量导入可考虑
-              Batch；不能拿 Batch 折扣与最长周转时间做在线即时体验的承诺。<a
-                href="https://ai.google.dev/gemini-api/docs/batch-api"
+              Measure actual waiting time per page before making a speed
+              promise. Track p50/p95 latency, the rate of manual corrections,
+              fabricated critical fields, retries, and total cost per confirmed
+              record. Batch processing may suit background imports of historical
+              documents; its discounts and turnaround window should not be used
+              to promise an instant online experience.
+              <a href="https://ai.google.dev/gemini-api/docs/batch-api"
                 >Batch API</a
-              >。
+              >.
             </p>
             <p>
-              <a href="../docs/model-research.md"
-                >完整模型调研、成本计算与非 Gemini 对照 →</a
+              <a href="../docs/model-research.en.md"
+                >Full model research, cost calculations, and alternatives to
+                Gemini →</a
               >
             </p>
           </section>
           <section id="flow">
             <p class="eyebrow">05 / END-TO-END FLOW</p>
-            <h2>成功要以用户确认和实际保存为准</h2>
+            <h2>
+              Success means the user has confirmed and the record is saved
+            </h2>
             <div class="flow">
-              <span>添加文件</span
-              >→<span>检查与预览</span>→<span>提取草稿</span>→<span
-                >核对 / 修改</span
-              >→<span>确认保存</span>→<span>房屋记录</span>
+              <span>Add a file</span>→<span>Check and preview</span>→<span
+                >Extract a draft</span
+              >→<span>Review / edit</span>→<span>Confirm and save</span>→<span
+                >Property records</span
+              >
             </div>
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>情况</th>
-                    <th>用户应看到什么</th>
+                    <th>Situation</th>
+                    <th>What the user should see</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>格式不支持 / 文件太大</td>
-                    <td>说明允许格式和限制，保留已有工作；HEIC 提示转换。</td>
-                  </tr>
-                  <tr>
-                    <td>真实 AI 尚未接入</td>
-                    <td>明确说明未识别，允许手工填；不会制造“识别成功”。</td>
-                  </tr>
-                  <tr>
-                    <td>未知日期 / 地址 / 金额</td>
-                    <td>空值和待补全提示；可核对后保存不完整记录。</td>
-                  </tr>
-                  <tr>
-                    <td>识别慢 / 429 / 503 / 超时</td>
+                    <td>Unsupported format / file too large</td>
                     <td>
-                      未来真实任务显示阶段、可取消、有限重试；不生成假进度，也不自动保存空结果。
+                      Explain accepted formats and limits while preserving
+                      existing work. Ask for HEIC conversion where needed.
                     </td>
                   </tr>
                   <tr>
-                    <td>同一文件再次添加</td>
+                    <td>Live AI is not connected</td>
                     <td>
-                      本地 hash
-                      匹配后打开已有记录；跨设备与相似票据去重下一轮实现。
+                      State that extraction has not run and allow manual entry.
+                      Do not show a false extraction-success message.
                     </td>
                   </tr>
                   <tr>
-                    <td>保存失败</td>
-                    <td>不显示成功；保留表单，允许重试或导出草稿。</td>
+                    <td>Unknown date / address / amount</td>
+                    <td>
+                      Show missing values and completion prompts. Allow an
+                      incomplete record to be reviewed and saved.
+                    </td>
                   </tr>
                   <tr>
-                    <td>修改 / 退出 / 删除</td>
+                    <td>Slow extraction / 429 / 503 / timeout</td>
                     <td>
-                      未保存修改离开时提醒；修改更新原记录；删除需确认并删除对应原件。
+                      Future live tasks should show their current stage, support
+                      cancellation, and limit retries. Do not fabricate progress
+                      or automatically save empty results.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>The same file is added again</td>
+                    <td>
+                      Open the existing record when the local file hash matches.
+                      Cross-device and similar-document duplicate detection are
+                      planned next.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Save failed</td>
+                    <td>
+                      Keep the form without showing success. Allow a retry or
+                      draft export.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Edit / leave / delete</td>
+                    <td>
+                      Warn before leaving with unsaved changes. Edits update the
+                      existing record. Deletion requires confirmation and
+                      removes the associated original file.
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p>
-              原型含完整收据、缺日期发票、施工前报价三个案例，分别展示“信息齐全”“需要补充”“不能误判已完成”。验证涵盖字段规则、原型流程、持久化与失败恢复；尚未做真实模型评测或手机相机实机验收。
+              The prototype includes three cases: a complete receipt, an invoice
+              with a missing date, and a quote issued before work begins. They
+              show complete information, missing information, and work that must
+              not be marked completed. Verification covers field rules,
+              prototype flows, persistence, and failure recovery. Live model
+              evaluation and testing with a physical phone camera have not yet
+              been completed.
             </p>
           </section>
           <section id="architecture">
             <p class="eyebrow">06 / IMPLEMENTATION</p>
-            <h2>把识别、确认和保存分开</h2>
+            <h2>Separate extraction, confirmation, and storage</h2>
             <p>
-              未来可以延续旧方案
-              <strong>Next.js + Supabase + 私有 R2</strong>，也可以接 Daniel
-              现有系统。当前为 TimeMemo
-              静态子页面，前端模块已经分开，输出结构不依赖某家模型。
+              Production could follow the original
+              <strong>Next.js + Supabase + private R2</strong> proposal or
+              integrate with Daniel's existing system. The current prototype is
+              a static TimeMemo subpage with separate frontend modules and a
+              model-independent output structure.
             </p>
             <div class="flow">
-              <span>网页 / 手机</span
-              >→<span>上传与鉴权</span>→<span>模型适配器</span>→<span>结构校验</span>→<span>人工审核</span>→<span
-                >数据库 + 原件</span
-              >
+              <span>Web / mobile</span>→<span>Upload and authentication</span
+              >→<span>Model adapter</span>→<span>Schema validation</span>→<span
+                >Human review</span
+              >→<span>Database + original files</span>
             </div>
             <p>
-              生产保留
-              properties、documents、activities、activity_documents、extraction_jobs、extractions、review_revisions。原件私有保存、短时授权访问。多个活动关联同一单据时，总金额只放单据一次，不能重复计入每项活动。
+              Production data objects include properties, documents, activities,
+              activity_documents, extraction_jobs, extractions, and
+              review_revisions. Originals remain private with short-lived
+              authorized access. When several activities link to the same
+              document, store the total once on the document; do not count it
+              again for every activity.
             </p>
             <p>
-              建议 API
-              按上传、创建识别任务、查询状态、保存草稿、确认、查看历史和删除拆开。确认请求带版本号与幂等键，服务端检查物业权限后事务保存，避免重试重复创建、并发覆盖或“成功但没入库”。
+              Use separate API operations for upload, extraction-job creation,
+              status checks, draft saving, confirmation, history, and deletion.
+              Confirmation requests should include a version and an idempotency
+              key. The server checks property permissions and saves in a
+              transaction to prevent duplicate records on retry, concurrent
+              overwrites, or success responses without a saved record.
             </p>
             <p>
-              每张票据不需要运行多个自主 Agent；一个多模态提取服务、明确
-              schema、确定性校验与人审即可。多 Agent
-              本轮用于历史检索、模型研究和代码复核。
+              Each receipt can be handled by one multimodal extraction service,
+              a clear schema, deterministic validation, and human review.
+              Multiple agents were used in this iteration for historical
+              research, model research, and code review; they are not required
+              for every receipt.
             </p>
             <p>
-              <a href="../docs/implementation-plan.md"
-                >完整架构、接口草案、状态表与实施计划 →</a
+              <a href="../docs/implementation-plan.en.md"
+                >Full architecture, draft APIs, state tables, and implementation
+                plan →</a
               >
-              · <a href="../docs/extraction-prompt.md">提取提示词草案 →</a>
+              ·
+              <a href="../docs/extraction-prompt.en.md"
+                >Draft extraction prompt →</a
+              >
             </p>
           </section>
           <section id="references">
             <p class="eyebrow">07 / REFERENCE PROJECTS</p>
-            <h2>借鉴成熟部分，自行实现领域逻辑</h2>
+            <h2>
+              Learn from existing tools; build the property-specific logic
+            </h2>
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
-                    <th>资源</th>
-                    <th>借鉴点</th>
-                    <th>采用边界</th>
+                    <th>Resource</th>
+                    <th>Useful ideas</th>
+                    <th>Adoption limits</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -499,10 +631,14 @@
                         >bookkeeping-skills</a
                       ><br /><span class="doc-meta">MIT</span>
                     </td>
-                    <td>receipt-processing 技能、固定输出、异常和审核文档。</td>
                     <td>
-                      参考组织方式；商业 Receiptor 服务不等于免费 OCR
-                      引擎，房屋字段需要自定义。
+                      The receipt-processing skill, consistent output, and
+                      exception and review documentation.
+                    </td>
+                    <td>
+                      Use its organization as a reference. The commercial
+                      Receiptor service is not a free OCR engine, and property
+                      fields still need customization.
                     </td>
                   </tr>
                   <tr>
@@ -511,17 +647,27 @@
                         >invoice2data</a
                       ><br /><span class="doc-meta">MIT</span>
                     </td>
-                    <td>已知格式的 PDF / OCR 与模板提取。</td>
-                    <td>未来针对高频固定供应商；首版不建立大量模板。</td>
+                    <td>
+                      PDF / OCR processing and template extraction for known
+                      formats.
+                    </td>
+                    <td>
+                      Potentially useful for recurring providers with consistent
+                      formats. The first version does not build a large template
+                      library.
+                    </td>
                   </tr>
                   <tr>
                     <td>
                       <a href="https://github.com/docling-project/docling"
                         >Docling</a
-                      ><br /><span class="doc-meta">主代码 MIT</span>
+                      ><br /><span class="doc-meta">Core code: MIT</span>
                     </td>
-                    <td>复杂 PDF、布局、表格与 OCR。</td>
-                    <td>未来预处理备选；各模型许可另核对。</td>
+                    <td>Complex PDFs, document layout, tables, and OCR.</td>
+                    <td>
+                      A future preprocessing option. Check each model license
+                      separately.
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -529,100 +675,145 @@
                         >Instructor</a
                       ><br /><span class="doc-meta">MIT</span>
                     </td>
-                    <td>Python 结构化输出、校验与重试。</td>
                     <td>
-                      若后端用 Python 可引入；TypeScript 可用原生 JSON + schema
-                      验证。
+                      Structured output, validation, and retries in Python.
+                    </td>
+                    <td>
+                      An option for a Python backend. TypeScript can use native
+                      JSON and schema validation.
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <a href="https://github.com/AkashaPrasad/receipt-parser"
                         >receipt-parser</a
-                      ><br /><span class="doc-meta">未见许可证</span>
+                      ><br /><span class="doc-meta">No license found</span>
                     </td>
-                    <td>上传 → Gemini → 双栏人审 → 保存，交互最接近。</td>
-                    <td>只参考公开交互说明，本轮没有复制其代码。</td>
+                    <td>
+                      Upload → Gemini → two-column human review → save. The
+                      closest reference for the user flow.
+                    </td>
+                    <td>
+                      Only the public description of its flow was referenced. No
+                      code was copied in this iteration.
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p>
-              本轮原型自行实现，没有把上述仓库作为运行依赖，也没有安装记账技能。采用代码前必须锁定版本、保留对应许可并验证依赖。完整研究保留了核对提交和来源：<a
-                href="../docs/reference-research.md"
-                >参考研究备忘录</a
-              >。
+              This prototype was implemented independently. None of these
+              repositories is a runtime dependency, and no bookkeeping skill was
+              installed. Before adopting code, pin its version, retain the
+              relevant license, and validate dependencies. The research retains
+              checked commits and sources:
+              <a href="../docs/reference-research.en.md"
+                >reference research notes</a
+              >.
             </p>
           </section>
           <section id="next">
             <p class="eyebrow">08 / NEXT ITERATION</p>
-            <h2>下周和伙伴先确定这些事情</h2>
+            <h2>What to agree with your partner next week</h2>
             <ol>
               <li>
-                <strong>产品与接口：</strong>Domic / Domake
-                命名、已有后端仓库、物业 ID、用户鉴权、Daniel 接受的字段格式。
+                <strong>System and APIs: </strong>the existing backend
+                repository, property IDs, authentication, and Daniel's accepted
+                field format.
               </li>
               <li>
-                <strong>服务范围：</strong>爱尔兰 / 英国 /
-                美国、语言和币种；是否同时收录材料购置、保修、检查与退款。
+                <strong>Service scope: </strong>the current intended audience is
+                in the Arab region, with English as the default interface and a
+                Chinese option. Confirm the initial launch countries and
+                currencies with the partner; do not assume a currency or tax
+                treatment. The earlier Ireland / UK / US sequence is historical
+                context. Also agree whether to include material purchases,
+                warranties, inspections, and refunds.
               </li>
               <li>
-                <strong>样本评测：</strong>约 100
-                份经授权或合成票据，覆盖照片/PDF/多页/缺失/模糊/报价，人工建立答案；不要只跑空白模板。
+                <strong>Sample evaluation: </strong>around 100 authorized or
+                synthetic documents covering photos, PDFs, multiple pages,
+                missing values, blur, and quotes, with human-labeled answers.
+                Include real document variety rather than relying on blank
+                templates.
               </li>
               <li>
-                <strong>模型与额度：</strong>用同一批样本对照 Lite
-                模型；根据人工修改率、耗时和总成本定默认模型与免费配额。
+                <strong>Models and quotas: </strong>compare the Lite models on
+                the same samples. Choose the default model and free user
+                allowance based on manual correction rates, latency, and total
+                cost.
               </li>
               <li>
-                <strong>真实闭环：</strong
-                >接服务端模型、私有文件、物业权限和事务保存，再做小范围真实用户试用。
+                <strong>Production flow: </strong>connect server-side
+                extraction, private file storage, property permissions, and
+                transactional saving, then run a small pilot with real users.
               </li>
             </ol>
             <p>
-              后续再决定手机 App、邮件入口、ProLynk
-              自动传入、多人共享、房屋交接报告与维护提醒。这些都能沿用同一文档和活动结构，首轮先把上传到确认做好。
+              Later decisions include a mobile app, email intake, automatic
+              ProLynk imports, sharing, property handover reports, and
+              maintenance reminders. These can reuse the same document and
+              activity structure. The first iteration focuses on the flow from
+              adding a document through confirmation.
             </p>
           </section>
           <section id="handoff">
             <p class="eyebrow">09 / HANDOFF PACK</p>
-            <h2>可分享、可继续开发的资料</h2>
+            <h2>Materials to share and build on</h2>
             <div class="link-cards">
               <a href="../"
-                >交互原型<small>添加单据 → 核对 → 保存 → 导出</small></a
+                >Interactive prototype<small
+                  >Add a document → review → save → export</small
+                ></a
               ><a
                 href="https://github.com/Timememo8210/timememo-net/tree/main/domake-receipt"
-                >GitHub 项目目录<small
-                  >原型源文件、规范、样本、研究与测试</small
+                >GitHub project directory<small
+                  >Prototype source, specifications, samples, research, and
+                  tests</small
                 ></a
-              ><a href="../domake-receipt-source.zip" download
-                >下载独立源码包<small
-                  >只包含本项目，便于伙伴导入自己的仓库</small
+              ><a href="../domic-home-passport-source.zip" download=""
+                >Download the source package<small
+                  >Contains only this project, ready to import into a partner's
+                  repository</small
                 ></a
               ><a href="../docs/receipt.schema.json"
-                >固定 JSON Schema<small>本轮唯一导出契约</small></a
-              ><a href="../docs/output-format.md"
-                >字段规范<small>核心字段、空值、枚举与扩展边界</small></a
-              ><a href="../docs/implementation-plan.md"
-                >开发交接说明<small
-                  >接口草案、数据对象、异常处理与待讨论项</small
+                >JSON Schema<small
+                  >The export contract for this iteration</small
                 ></a
-              ><a href="../docs/model-research.md"
-                >完整模型研究<small>官方来源、价格假设与评测方案</small></a
-              ><a href="../docs/project-history.md"
-                >历史恢复档案<small>旧项目定位、样本结果与已知缺口</small></a
+              ><a href="../docs/output-format.en.md"
+                >Field specification<small
+                  >Core fields, missing values, enums, and extension
+                  limits</small
+                ></a
+              ><a href="../docs/implementation-plan.en.md"
+                >Developer handoff<small
+                  >Draft APIs, data objects, error handling, and open
+                  decisions</small
+                ></a
+              ><a href="../docs/model-research.en.md"
+                >Full model research<small
+                  >Official sources, pricing assumptions, and evaluation
+                  plan</small
+                ></a
+              ><a href="../docs/project-history.en.md"
+                >Project history<small
+                  >Original purpose, sample results, and known gaps</small
+                ></a
               >
             </div>
             <p class="doc-meta">
-              这个公开 GitHub
-              目录可供伙伴查看和下载；共同提交代码需要仓库协作权限。本轮没有邀请任何人或发送消息。资料里的生产架构、接口与模型选择是待验证方案，不是已部署功能。
+              The public GitHub directory is available for partners to view and
+              download. Contributing code requires repository collaborator
+              access. No invitations or messages were sent in this iteration.
+              The production architecture, APIs, and model choices described
+              here are proposals to validate, not deployed features.
             </p>
           </section>
         </article>
       </div>
       <footer>
-        Domake Receipt<span>项目记录 · 2026.09.09</span
-        ><a href="../">返回票据工作台 ↗</a>
+        Domic Home Passport<span>Project record · 9 Sep 2026</span
+        ><a href="../">Back to the receipt workspace ↗</a>
       </footer>
     </main>
   </body>

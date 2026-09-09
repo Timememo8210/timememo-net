@@ -1,3 +1,4 @@
+import { toEnglish } from "./i18n.js";
 export const SCHEMA_VERSION = "1.0";
 export const categories = {
   plumbing: "水暖 / Plumbing",
@@ -187,7 +188,17 @@ export function transition(r, status) {
     ...c.review,
     status,
     missing_fields: check.missing,
-    warnings: check.warnings,
+    warnings: check.warnings.map(toEnglish),
   };
   return c;
+}
+
+// Canonicalize application-generated warnings without translating authored data.
+export function exportRecordData(data) {
+  const result = structuredClone(data);
+  const records = Array.isArray(result.records) ? result.records : [result];
+  for (const record of records)
+    if (Array.isArray(record.review?.warnings))
+      record.review.warnings = record.review.warnings.map(toEnglish);
+  return result;
 }

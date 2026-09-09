@@ -1,4 +1,6 @@
-# Domake Receipt：票据提取模型与成本决策
+[English](model-research.en.md) · [中文](model-research.md)
+
+# Domic Home Passport：票据提取模型与成本决策
 
 核对日期：2026-09-09。范围是照片／PDF → 房屋历史记录所需结构化数据；价格为美元 API 标价，未含税。本轮只核对官方文档，没有调用收费模型，没有做真实票据准确率或延迟测试。文中的选择、配额、门槛和路由是工程建议，不能当作已验证结论。
 
@@ -65,7 +67,7 @@
 | 方案 | 官方能力 / 费用 | 本项目定位 |
 |---|---|---|
 | Mistral OCR 4.1 | 当前稳定 OCR，模型 ID `mistral-ocr-4-1`；$4 / 千页 OCR、$5 / 千页 annotated；1万单页分别约 $40 / $50 | 如果需要正文、版面证据、框选校对，一起测其 document annotation；暂不额外搭完整 OCR 管线。 |
-| Amazon Textract AnalyzeExpense | 专门抽取发票和 receipt，提供 summary fields、line items 等；Oregon 首百万页示例 $0.01 / 页，即万单页约 $100 | 已有 AWS 平台或希望成熟费用字段体系时作参照；仍需映射成 Domake 房屋历史字段。 |
+| Amazon Textract AnalyzeExpense | 专门抽取发票和 receipt，提供 summary fields、line items 等；Oregon 首百万页示例 $0.01 / 页，即万单页约 $100 | 已有 AWS 平台或希望成熟费用字段体系时作参照；仍需映射成 Domic Home Passport 房屋历史字段。 |
 
 来源：[Mistral OCR 4.1](https://docs.mistral.ai/models/ocr-4-1)、[Mistral 自定义 JSON annotation](https://docs.mistral.ai/studio/document-processing/annotations)、[AWS 收据和发票分析](https://docs.aws.amazon.com/textract/latest/dg/analyzing-document-expense.html)、[AWS 定价](https://aws.amazon.com/textract/pricing/)。两者未做任务实测；AWS 价格具地区和用量条件，Mistral 字段语义与保留条件在选入生产前另做验证。
 

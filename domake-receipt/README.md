@@ -1,17 +1,21 @@
-# Domake Receipt / Domic Home Passport
+[English](README.md) · [中文](README.zh.md)
 
-第一轮可操作原型与伙伴交接，2026-09-09。
+# Domic Home Passport
 
-- 原型：https://timememo.net/domake-receipt/
-- 项目说明：https://timememo.net/domake-receipt/project/
-- 数据契约：[docs/receipt.schema.json](docs/receipt.schema.json)
-- 交接：[docs/implementation-plan.md](docs/implementation-plan.md)
+An interactive prototype and partner handoff for the receipt module of the existing home-passport project. Updated September 9, 2026. The workspace and project brief default to English, with a Chinese language switch.
 
-用户已选择本轮不接真实识别。真实文件只在浏览器预览与人工填写；识别演示使用3份虚构单据。确认后的记录和原件存 IndexedDB，仅在此浏览器可用。没有云端数据库、用户登录、模型密钥或后台调用。
+- [Prototype](https://timememo.net/domake-receipt/)
+- [Project brief](https://timememo.net/domake-receipt/project/)
+- [中文原型](https://timememo.net/domake-receipt/zh.html)
+- [中文项目说明](https://timememo.net/domake-receipt/project/zh.html)
+- [Output schema](docs/receipt.schema.json) / [field rules](docs/output-format.en.md)
+- [Partner handoff](docs/implementation-plan.en.md)
 
-## 本地使用
+The user chose to defer real AI extraction. Actual files are previewed locally and entered manually; three fictional examples demonstrate the review workflow. Confirmed records and originals are stored in IndexedDB in this browser. There is no cloud database, login, model key or background model call.
 
-要求 Node.js 22+（开发验证）与任意静态 Web 服务器。
+## Run locally
+
+Node.js 22+ for development validation, plus a static web server:
 
 ```sh
 npm ci
@@ -20,22 +24,25 @@ npm run build
 python3 -m http.server 8080
 ```
 
-打开 `http://localhost:8080/`。需通过 localhost / HTTPS 访问，不能直接 file:// 双击模块脚本。运行网页不需要 node_modules。测试依赖仅用于开发；没有外部运行时脚本。字体失败会使用系统字体。
+Open `http://localhost:8080/`. Use localhost or HTTPS rather than opening file:// directly. The website does not need node_modules at runtime. Development dependencies support validation only; no third-party runtime scripts are loaded. Google Fonts falls back to system fonts if unavailable.
 
-## 快速验收
+## Review the prototype
 
-1. 点「厨房水管维修」示例，检查服务日期和开票日期分开。
-2. 修改金额，检查并勾选确认，保存到房屋记录。
-3. 刷新后查看、修改、导出 JSON，再删除；原件是明确标记的虚构页面示例。
-4. 选择自己的图片/PDF，看到原件和空表单，不能出现虚构自动识别结果。
-5. 填房屋和服务摘要，其他空白留 null；草稿允许未填核心项。
-6. 再次选择相同实际文件，打开已有记录；超限、不支持、空文件拒绝。
-7. 「空调年度保养」服务日期、地址缺失；「屋顶报价」不能标已完工或已付款。
+1. Choose the plumbing sample; service date and issue date are separate.
+2. Edit the total, review the confirmation dialog, tick the confirmation box and save.
+3. View, edit and export the saved record; delete only after confirmation.
+4. Choose a real photo/PDF: it must show the original and blank manual fields, never invented extraction results.
+5. Enter a property and work summary. Other unknown values remain null; drafts may omit core fields.
+6. Add the same actual file again to open its existing record. Unsupported, empty or oversized files are rejected.
+7. The HVAC sample has missing service information. The roof estimate cannot be marked as paid or completed.
+8. Switch between English and Chinese. Unsaved work prompts before navigation; saved records remain in the same browser database. User-authored content is not translated.
 
-自动化验证是非浏览器 DOM/业务/存储测试；没有做截图、真实手机相机或真实模型精度/速度测试。更多限制和下一轮方案见项目说明。
+Automated checks use non-browser DOM, business-rule and storage tests. Real mobile-camera testing and real model accuracy/latency measurements have not been performed. The language switch is page navigation; it does not translate source documents. The English interface does not imply Arabic OCR support.
 
-## 源码与共享
+## Source and compatibility
 
-这是现有 `Timememo8210/timememo-net` 的独立子目录，可单独复制到新仓库，不依赖该站其他页面。源码包不含 node_modules、凭证或用户上传文件。公开仓库可查看/下载；协同写代码须仓库所有者添加协作者，不能把只读可见当成编辑授权。
+This folder is independent of the rest of the existing TimeMemo static site. A partner can copy it to another repository. The source archive excludes dependencies, credentials and user files. Public GitHub access allows reading/downloading; editing the repository requires collaborator access.
 
-第三方研究资源记录在 docs/reference-research.md，本轮未复制这些仓库的实现；测试依赖许可随各 npm 包保留。正式 AI 接入前按 docs/extraction-prompt.md 与当前官方 SDK/API 文档重新核对并实测。
+The existing URL, schema $id and IndexedDB name are retained for compatibility. User-facing branding is Domic Home Passport. Downloads use the Domic Home Passport name; the older archive URL remains a compatibility alias.
+
+Research references were not copied into the runtime. See the English/Chinese research documents for sources, assumptions and limitations. Next.js, Supabase and private R2 are proposed next-phase components, not implemented services.

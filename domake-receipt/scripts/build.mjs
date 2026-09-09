@@ -21,11 +21,16 @@ for (const name of Object.keys(samples)) {
     JSON.stringify(r, null, 2) + "\n",
   );
 }
-for (const name of ["app.js", "core.js", "storage.js", "samples.js"])
+for (const name of ["app.js", "core.js", "storage.js", "samples.js", "i18n.js"])
   execFileSync(process.execPath, ["--check", resolve(root, name)]);
-for (const name of ["index.html", "project/index.html"]) {
+for (const name of [
+  "index.html",
+  "zh.html",
+  "project/index.html",
+  "project/zh.html",
+]) {
   const html = await readFile(resolve(root, name), "utf8");
-  if (!html.includes('lang="zh-CN"') || !html.includes("viewport"))
+  if (!/lang="(?:zh-CN|en)"/.test(html) || !html.includes("viewport"))
     throw Error("Missing responsive document metadata");
   for (const [, url] of html.matchAll(/(?:href|src)="([^"#]+)(?:#[^"]*)?"/g)) {
     if (/^(https?:|data:|blob:)/.test(url) || url.endsWith(".zip")) continue;

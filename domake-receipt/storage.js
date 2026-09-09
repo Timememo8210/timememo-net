@@ -1,3 +1,4 @@
+// Retain the existing database name so a branding/language update preserves local records.
 const NAME = "domake-receipt-prototype-v1";
 let dbPromise;
 export function db() {
