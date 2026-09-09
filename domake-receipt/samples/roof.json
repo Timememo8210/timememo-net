@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "property": {
+    "id": "示例房屋 · Example Lane",
+    "service_address": "123 Example Lane, Sample City, WA 00000"
+  },
+  "document": {
+    "type": "estimate",
+    "number": "DEMO-Q306",
+    "issue_date": "2026-09-01"
+  },
+  "service": {
+    "date": null,
+    "category": "roofing",
+    "summary": "计划更换屋顶，当前为预估报价。",
+    "location": "屋顶",
+    "completion_status": "planned"
+  },
+  "provider": {
+    "name": "Summit Roofing · Fictional",
+    "phone": null,
+    "address": null
+  },
+  "amount": {
+    "total": 12800,
+    "currency": "USD",
+    "payment_status": "unknown"
+  },
+  "items": [
+    {
+      "description": "Roof replacement — estimated price",
+      "amount": 12800
+    }
+  ],
+  "details": {
+    "asset_model": null,
+    "asset_serial": null,
+    "warranty": "Proposed: 10-year workmanship warranty; starts after completed installation.",
+    "permit_number": null
+  },
+  "notes": null,
+  "source": {
+    "name": "roof-demo.pdf",
+    "mime_type": "application/pdf",
+    "sha256": null,
+    "mode": "demo",
+    "sample_id": "roof"
+  },
+  "evidence": [
+    {
+      "field": "document.type",
+      "page": 1,
+      "quote": "ESTIMATE — not a receipt"
+    },
+    {
+      "field": "amount.total",
+      "page": 1,
+      "quote": "Estimated total: USD 12,800.00"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "missing_fields": [
+      "service.date"
+    ],
+    "warnings": [
+      "报价不代表实际支出或施工完成。",
+      "服务日期未知；不会用开票日期或上传日期代替。"
+    ],
+    "edited_fields": []
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "property",
+    "document",
+    "service",
+    "provider",
+    "amount",
+    "items",
+    "details",
+    "notes",
+    "source",
+    "evidence",
+    "review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "property": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "service_address"],
+      "properties": {
+        "id": {
+          "type": ["string", "null"]
+        },
+        "service_address": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "number", "issue_date"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "receipt",
+            "invoice",
+            "estimate",
+            "warranty",
+            "other",
+            "unknown"
+          ]
+        },
+        "number": {
+          "type": ["string", "null"]
+        },
+        "issue_date": {
+          "type": ["string", "null"],
+          "format": "date"
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "category",
+        "summary",
+        "location",
+        "completion_status"
+      ],
+      "properties": {
+        "date": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "plumbing",
+            "electrical",
+            "hvac",
+            "roofing",
+            "landscaping",
+            "appliance",
+            "renovation",
+            "cleaning",
+            "general",
+            "other",
+            "unknown"
+          ]
+        },
+        "summary": {
+          "type": ["string", "null"]
+        },
+        "location": {
+          "type": ["string", "null"]
+        },
+        "completion_status": {
+          "type": "string",
+          "enum": ["completed", "planned", "unknown"]
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "phone", "address"],
+      "properties": {
+        "name": {
+          "type": ["string", "null"]
+        },
+        "phone": {
+          "type": ["string", "null"]
+        },
+        "address": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "amount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "currency", "payment_status"],
+      "properties": {
+        "total": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "currency": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z]{3}$"
+        },
+        "payment_status": {
+          "type": "string",
+          "enum": ["paid", "unpaid", "partial", "unknown"]
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["description", "amount"],
+        "properties": {
+          "description": {
+            "type": ["string", "null"]
+          },
+          "amount": {
+            "type": ["number", "null"],
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_model", "asset_serial", "warranty", "permit_number"],
+      "properties": {
+        "asset_model": {
+          "type": ["string", "null"]
+        },
+        "asset_serial": {
+          "type": ["string", "null"]
+        },
+        "warranty": {
+          "type": ["string", "null"]
+        },
+        "permit_number": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "mime_type", "sha256", "mode"],
+      "properties": {
+        "name": {
+          "type": ["string", "null"]
+        },
+        "mime_type": {
+          "type": ["string", "null"]
+        },
+        "sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["manual", "demo"]
+        },
+        "sample_id": {
+          "type": "string",
+          "enum": ["plumbing", "hvac", "roof"]
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "page", "quote"],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "quote": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "missing_fields", "warnings", "edited_fields"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["draft", "confirmed"]
+        },
+        "missing_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "edited_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "id": {
+      "type": ["string", "null"]
+    },
+    "created_at": {
+      "type": ["string", "null"]
+    },
+    "updated_at": {
+      "type": ["string", "null"]
+    },
+    "confirmed_at": {
+      "type": ["string", "null"]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://timememo.net/domake-receipt/docs/receipt.schema.json",
+  "title": "Domake Receipt Prototype v1 record"
+}

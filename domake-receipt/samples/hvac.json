@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "property": {
+    "id": "示例房屋 · Example Lane",
+    "service_address": null
+  },
+  "document": {
+    "type": "invoice",
+    "number": "DEMO-2088",
+    "issue_date": "2026-08-22"
+  },
+  "service": {
+    "date": null,
+    "category": "hvac",
+    "summary": "空调年度保养。",
+    "location": null,
+    "completion_status": "unknown"
+  },
+  "provider": {
+    "name": "Northline Heating · Fictional",
+    "phone": null,
+    "address": null
+  },
+  "amount": {
+    "total": 189,
+    "currency": "USD",
+    "payment_status": "unknown"
+  },
+  "items": [
+    {
+      "description": "Annual HVAC tune-up",
+      "amount": 189
+    }
+  ],
+  "details": {
+    "asset_model": null,
+    "asset_serial": null,
+    "warranty": null,
+    "permit_number": null
+  },
+  "notes": null,
+  "source": {
+    "name": "hvac-demo.pdf",
+    "mime_type": "application/pdf",
+    "sha256": null,
+    "mode": "demo",
+    "sample_id": "hvac"
+  },
+  "evidence": [
+    {
+      "field": "document.issue_date",
+      "page": 1,
+      "quote": "Issue date: 2026-08-22"
+    },
+    {
+      "field": "amount.total",
+      "page": 1,
+      "quote": "Amount due: USD 189.00"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "missing_fields": [
+      "service.date",
+      "property.service_address"
+    ],
+    "warnings": [
+      "服务日期未知；不会用开票日期或上传日期代替。",
+      "未提供服务地址；归属房屋由你确认。"
+    ],
+    "edited_fields": []
+  }
+}
