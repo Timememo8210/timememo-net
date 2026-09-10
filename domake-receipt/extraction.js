@@ -23,9 +23,11 @@ export function extractText(text, confidence = 0) {
       value === "" ||
       value === undefined ||
       (typeof value === "string" &&
-        /^(unknown|not (?:provided|stated|shown)|n\/a|none|-)$/i.test(value))
+        (/^(unknown|not (?:provided|stated|shown)|n\/a|none|-)$/i.test(value) ||
+          /[<=>~|_]{3,}/.test(value)))
     )
       return;
+    // Keep noisy OCR lines in the raw text, but do not guess a cleaned field.
     set(record, field, value);
     record.evidence.push({ field, page: 1, quote });
   };

@@ -2,9 +2,10 @@
 
 # Domic Home Passport
 
-An interactive prototype and partner handoff for the receipt module of the existing home-passport project. Updated September 9, 2026. The workspace and project brief default to English, with a Chinese language switch.
+An interactive prototype and partner handoff for the receipt module of the existing home-passport project. Updated September 9, 2026. The workspace and project brief default to English, with a Chinese language switch. The confirmed primary audience is UK customers who use English.
 
 - [Prototype](https://timememo.net/domake-receipt/)
+- [Samples and review guide](https://timememo.net/domake-receipt/walkthrough/) / [Chinese](https://timememo.net/domake-receipt/walkthrough/zh.html)
 - [Project brief](https://timememo.net/domake-receipt/project/)
 - [中文原型](https://timememo.net/domake-receipt/zh.html)
 - [中文项目说明](https://timememo.net/domake-receipt/project/zh.html)
@@ -50,3 +51,7 @@ Tesseract is now an explicit licensed runtime dependency; other research referen
 ## Pro and homeowner records
 
 Schema 1.1 separates the service company, person who performed the work, and type of property change. Existing 1.0 records retain their display names without guessing company/person identity. See [intake and recovery](docs/intake-flow.en.md), [format](docs/output-format.en.md), and [actual test report](docs/test-results.en.md).
+
+## New sample pack and parser recheck
+
+Eight fictional PDF/image inputs and a Chinese PDF guide are available on the [bilingual review page](walkthrough/). Three new images were tested through Node OCR and the real parser; see [the evidence](walkthrough/engine-tests/report.en.md). The noisy work-summary field observed in the blurred photo is now rejected, with raw OCR preserved. 35 automated checks pass. The new browser screenshot round remains blocked by Mac lock; input images are not UI screenshots.

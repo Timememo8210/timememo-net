@@ -45,4 +45,4 @@ Never assign a property ID, record ID, review approval, access permission or sav
 
 Suggested adapter envelope: `{status: "needs_review", extraction: {...}, warnings: []}` or `{status: "failed", error: {code, message, retryable}}`. This wrapper is separate from the current v1 record export. Use a schema union/envelope or a detection-then-extraction flow supported by the chosen model. Do not put operational errors inside factual fields.
 
-The prototype UI is English-first with a Chinese alternative. That is not a claim of Arabic receipt recognition. Test Arabic documents, mixed languages, date formats, addresses and local currencies with authorized samples before selecting a production model.
+The prototype UI is English-first with a Chinese alternative, primarily for UK English customers. Evaluate representative UK service documents, pound-symbol amounts, date formats and unfamiliar provider layouts before selecting a production model. Additional source languages require separate evaluation.

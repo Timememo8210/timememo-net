@@ -12,6 +12,20 @@ import { readFile } from "node:fs/promises";
 import Ajv from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 const base = `SERVICE RECEIPT\nCompany: Cedar Home Services\nTechnician: Omar Hassan\nCustomer: Lina Patel\nService date: 2026-09-01\nIssue date: 2026-09-02\nService address: Villa 18, Example Lane, Dubai\nWork: Replace kitchen faucet\nTotal: AED 420.00\nPayment status: Paid\nStatus: Completed`;
+test("observed photo OCR symbol noise stays in raw text, never a proposed work field", () => {
+  const raw = "SERVICE RECEIPT\nWork: Replace kitchen faucet <==... SS\nTotal: AED 420.00 :";
+  const r = extractText(raw, 62);
+  assert.equal(r.service.summary, null);
+  assert.equal(r.service.change_type, "unknown");
+  assert.equal(r.service.category, "unknown");
+  assert.equal(r.amount.total, null);
+  assert.equal(r.extraction.text, raw);
+  assert.equal(r.extraction.status, "partial");
+  assert.ok(!r.evidence.some((e) => e.field === "service.summary"));
+  const clean = extractText(base.replace("Replace kitchen faucet", "Replace kitchen mixer tap (supply & install)"), 94);
+  assert.equal(clean.service.summary, "Replace kitchen mixer tap (supply & install)");
+  assert.equal(clean.amount.total, 420);
+});
 test("company, actual worker and work changes are separate evidence-backed fields", () => {
   const r = extractText(base, 96);
   assert.equal(r.extraction.status, "review");

@@ -1,5 +1,5 @@
 import { readFile, writeFile, access, readdir } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { dirname, resolve, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import Ajv from "ajv/dist/2020.js";
@@ -36,6 +36,8 @@ for (const name of [
   "zh.html",
   "project/index.html",
   "project/zh.html",
+  "walkthrough/index.html",
+  "walkthrough/zh.html",
 ]) {
   const html = await readFile(resolve(root, name), "utf8");
   if (!/lang="(?:zh-CN|en)"/.test(html) || !html.includes("viewport"))
@@ -55,7 +57,7 @@ async function walk(dir) {
       continue;
     const path = resolve(dir, entry.name);
     if (entry.isDirectory()) await walk(path);
-    else files.push(path);
+    else if (!/\.(png|jpe?g|webp|pdf)$/i.test(extname(path))) files.push(path);
   }
 }
 await walk(root);

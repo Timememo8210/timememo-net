@@ -1,0 +1,156 @@
+[
+  {
+    "sample": "10-clear-uk-receipt",
+    "input": "../files/10-clear-uk-receipt.png",
+    "input_sha256": "0e1cdef10da2931035fb69a1486587096bb352207a5150deb9d583c585c69c78",
+    "input_bytes": 145886,
+    "dimensions": {
+      "width": 1132,
+      "height": 1600
+    },
+    "started_at": "2026-09-10T00:57:48.555Z",
+    "finished_at": "2026-09-10T00:57:49.034Z",
+    "outcome": "completed",
+    "timing_ms": {
+      "worker_initialization": 90.775,
+      "recognition": 385.732,
+      "parsing": 2.444,
+      "engine_and_parser_total": 478.951
+    },
+    "raw_confidence": 94,
+    "extraction_status": "review",
+    "readability": "readable",
+    "relevance": "home_service",
+    "actual_key_fields": {
+      "provider_name": "Cedar Home Services",
+      "organization_name": "Cedar Home Services",
+      "person_name": "James Turner",
+      "service_date": "2026-09-01",
+      "issue_date": "2026-09-02",
+      "document_number": "UK-260901-018",
+      "document_type": "receipt",
+      "service_address": "14 Example Mews, Bristol, BS1 2AB",
+      "summary": "Replace kitchen mixer tap",
+      "category": "unknown",
+      "change_type": "replacement",
+      "completion_status": "completed",
+      "total": 240,
+      "currency": "GBP",
+      "payment_status": "paid"
+    },
+    "inspect_result": {
+      "errors": [],
+      "warnings": [],
+      "missing": []
+    }
+  },
+  {
+    "sample": "09-handheld-uk",
+    "input": "../files/09-handheld-uk.png",
+    "input_sha256": "097b175aa9729746298ef8f094ceaf01166f9a20629027ba1cf8ef9e74e21637",
+    "input_bytes": 2399438,
+    "dimensions": {
+      "width": 1185,
+      "height": 1327
+    },
+    "started_at": "2026-09-10T00:57:49.036Z",
+    "finished_at": "2026-09-10T00:57:49.831Z",
+    "outcome": "completed",
+    "timing_ms": {
+      "worker_initialization": 99.149,
+      "recognition": 693.049,
+      "parsing": 2.547,
+      "engine_and_parser_total": 794.745
+    },
+    "raw_confidence": 67,
+    "extraction_status": "partial",
+    "readability": "partial",
+    "relevance": "home_service",
+    "actual_key_fields": {
+      "provider_name": null,
+      "organization_name": null,
+      "person_name": null,
+      "service_date": null,
+      "issue_date": null,
+      "document_number": "CHS-UK-260901-09",
+      "document_type": "receipt",
+      "service_address": null,
+      "summary": null,
+      "category": "unknown",
+      "change_type": "unknown",
+      "completion_status": "unknown",
+      "total": null,
+      "currency": null,
+      "payment_status": "unknown"
+    },
+    "inspect_result": {
+      "errors": [],
+      "warnings": [
+        "服务日期未知；不会用开票日期或上传日期代替。",
+        "未提供服务地址；归属房屋由你确认。"
+      ],
+      "missing": [
+        "service.date",
+        "service.summary",
+        "provider.name",
+        "property.service_address",
+        "amount.total",
+        "amount.currency"
+      ]
+    }
+  },
+  {
+    "sample": "08-handheld-partial",
+    "input": "../files/08-handheld-partial.png",
+    "input_sha256": "e4bff07c1830f5a0839e3dfe924dfe5e67afdbfd3f7793ed503ee1f727b84695",
+    "input_bytes": 1803826,
+    "dimensions": {
+      "width": 1185,
+      "height": 1327
+    },
+    "started_at": "2026-09-10T00:57:49.832Z",
+    "finished_at": "2026-09-10T00:57:50.352Z",
+    "outcome": "completed",
+    "timing_ms": {
+      "worker_initialization": 88.287,
+      "recognition": 430.893,
+      "parsing": 0.521,
+      "engine_and_parser_total": 519.701
+    },
+    "raw_confidence": 62,
+    "extraction_status": "partial",
+    "readability": "partial",
+    "relevance": "home_service",
+    "actual_key_fields": {
+      "provider_name": null,
+      "organization_name": null,
+      "person_name": null,
+      "service_date": null,
+      "issue_date": null,
+      "document_number": null,
+      "document_type": "receipt",
+      "service_address": null,
+      "summary": "Replace kitchen faucet <==... SS",
+      "category": "plumbing",
+      "change_type": "replacement",
+      "completion_status": "unknown",
+      "total": null,
+      "currency": null,
+      "payment_status": "unknown"
+    },
+    "inspect_result": {
+      "errors": [],
+      "warnings": [
+        "服务日期未知；不会用开票日期或上传日期代替。",
+        "未提供服务地址；归属房屋由你确认。"
+      ],
+      "missing": [
+        "service.date",
+        "provider.name",
+        "property.service_address",
+        "amount.total",
+        "amount.currency"
+      ]
+    }
+  }
+]

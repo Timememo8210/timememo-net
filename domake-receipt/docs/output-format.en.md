@@ -53,7 +53,7 @@ All names, addresses, and amounts in these examples are fictional. The sample ou
 
 ## Language update
 
-The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. Arabic receipt extraction has not been implemented or measured; the next-phase sample set should reflect the actual audience and countries, including Arabic text and regional currencies where needed.
+The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. The primary audience is UK customers who use English. Prioritise UK English receipts, GBP / £ amounts, UK dates and typical repair descriptions in the next evaluation. The current experimental parser supports explicit GBP codes and ISO dates; pound-symbol amounts and day/month/year dates are not yet parsed. Other source languages remain later extensions; the Chinese interface does not translate documents.
 
 ## Schema 1.1 compatibility
 

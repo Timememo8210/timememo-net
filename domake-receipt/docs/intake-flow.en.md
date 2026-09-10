@@ -6,7 +6,7 @@ Updated September 9, 2026. This document describes the current prototype and its
 
 ## Current implementation
 
-Domic Home Passport reads printed English images locally using self-hosted Tesseract.js 7.0.0. A limited label parser turns recovered text into draft fields. The file is not sent to an external recognition service. Processing can be cancelled or retried and has a 45-second deadline. PDFs currently support preview and manual entry. Gemini, Arabic recognition and general layout understanding remain next-phase work.
+Domic Home Passport reads printed English images locally using self-hosted Tesseract.js 7.0.0. A limited label parser turns recovered text into draft fields. The file is not sent to an external recognition service. Processing can be cancelled or retried and has a 45-second deadline. PDFs currently support preview and manual entry. Gemini and general layout understanding remain next-phase work. UK English documents are the priority; the current parser does not yet parse pound-symbol amounts or day/month/year dates.
 
 This reader cannot reliably distinguish a sharp ordinary photograph from a blurred document when neither produces usable text. It also cannot establish relevance from missing keywords. OCR confidence is an engine diagnostic, not the probability that an extracted field is true.
 
@@ -40,7 +40,7 @@ Records and originals live in this browser’s IndexedDB. This is not a shared d
 
 Company and actual worker are different identities. Customer, preparer, salesperson and a signature alone do not establish who performed work. Future entity linking must keep observed names and evidence; identical names never automatically merge businesses or people.
 
-The backend should verify accounts, authorize each property independently for owners and Pros, retain extraction/review revisions and audit access, and use idempotent saves. Company/person matching and contact connections require an authorized, reviewable decision. Keep property addresses private; receipt submission must not publish addresses or automatically contact named people. Add representative Arabic/mixed-language samples, authenticated storage and server-side model validation before production use.
+The backend should verify accounts, authorize each property independently for owners and Pros, retain extraction/review revisions and audit access, and use idempotent saves. Company/person matching and contact connections require an authorized, reviewable decision. Keep property addresses private; receipt submission must not publish addresses or automatically contact named people. Add representative UK English documents, authenticated storage and server-side model validation before production use. Additional source languages are future extensions.
 
 ## Acceptance plan — outcomes recorded separately
 
@@ -51,7 +51,7 @@ The backend should verify accounts, authorize each property independently for ow
 | 09–12 | Unfamiliar layout; customer/preparer/technician separation; company without worker; quotation. |
 | 13–16 | Ambiguous date/currency; one multi-page invoice; multiple invoices/page limits; corrupt/protected file. |
 | 17–20 | Empty/oversized/unsupported file; failure/timeout/cancellation; duplicate/double save; edited-value confirmation. |
-| 21–24 | Required versus optional gaps; storage failure; Arabic/mixed script; unsaved edits during replacement/language switch. |
+| 21–24 | Required versus optional gaps; storage failure; UK dates and pound-symbol amounts; unsaved edits during replacement/language switch. |
 
 Measure actual fixture outcomes, missing or incorrect critical fields, identity errors, recovery and latency. Synthetic examples do not establish real-world accuracy.
 

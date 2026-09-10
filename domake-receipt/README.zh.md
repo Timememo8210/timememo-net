@@ -45,3 +45,11 @@ python3 -m http.server 8080
 ## Pro 与房主
 
 Schema 1.1 分别保存服务公司、实际施工者、房屋变更类型。旧 1.0 记录保持显示名称，不猜测组织或个人身份。见[核对与失败恢复](docs/intake-flow.zh.md)、[字段规则](docs/output-format.md)与[实测报告](docs/test-results.zh.md)。第三方 OCR 运行文件与合成测试图片包含在源码包中。
+
+## 英国受众更新
+
+主要面向英国英文客户；软件默认英文，说明提供中文。下一轮优先验证英国服务单据、£ 金额和英国日期。新样本见[下载与核对指南](walkthrough/zh.html)。旧 AED 样本保留为历史实验，不能视为英国格式已经验收。
+
+## 新样本包与解析复核
+
+八份虚构 PDF／图片及中文 PDF 说明已放在[双语核对页](walkthrough/zh.html)。三张新图片通过 Node OCR 和真实解析器读取，见[实测证据](walkthrough/engine-tests/report.zh.md)。已拒绝模糊图中受符号乱码污染的服务描述，并保留 OCR 原文。35 项自动化检查通过。新的浏览器截图轮次仍因 Mac 锁屏而未完成；输入图片不是界面截图。

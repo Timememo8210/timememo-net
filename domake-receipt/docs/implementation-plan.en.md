@@ -64,7 +64,7 @@ This is a proposed integration contract. It does not imply that Daniel's existin
 | Select a file | PDF/JPG/PNG/WebP; 15 MB limit in this round; ask users to convert HEIC; reject empty files and basic type/signature mismatches | Basic type, signature, and size checks implemented; not a security scan or a full PDF parser |
 | Preview | Keep the original accessible; open it separately if a PDF cannot be embedded; the browser PDF viewer handles page navigation | Implemented; encrypted or damaged PDFs require the user to export a usable copy; page counts are not parsed automatically |
 | Upload | Show actual transfer progress; retain the job or draft after a connection failure; allow retry | No server upload in this round; planned for the next round |
-| Extract | Show stages and allow cancellation; proposed behavior: explain delays after 15 seconds, time out and recover after 45 seconds, and retry a 429/503 at most once with jittered backoff | Only a simulated sample delay and cancellation are implemented; real jobs come next round |
+| Extract | Show stages and allow cancellation; proposed behavior: explain delays after 15 seconds, time out and recover after 45 seconds, and retry a 429/503 at most once with jittered backoff | Local English image OCR has progress, cancellation and a 45-second timeout; preset examples remain separately labelled. Server/model jobs and 429/503 handling come next round |
 | Multiple documents | Detect multiple invoices and route them to splitting and review; disclose page counts and failed pages in long PDFs; do not read only the first page | Manual splitting in this round; automatic detection next round |
 | Review | Explain unknown or ambiguous fields; separate service and issue dates; require the user to confirm property assignment if addresses differ | Manual property assignment in this round; matching against authorized property candidates next round |
 | Confirm | Confirmation dialog and review checkbox; allow missing information, but require a property and summary | Implemented |
@@ -88,7 +88,7 @@ Proposed targets, not measured results: for clear single-page documents, p50 bel
 ## Open decisions
 
 - What production domain and existing repository should the implementation use?
-- Should the first release support Ireland (EUR), the UK (GBP), or the US (USD)? The prototype does not assume a currency.
+- UK customers are the confirmed primary audience. Validate pound-symbol amounts, UK date formats and unfamiliar provider layouts before a UK pilot; do not infer currency only from the market.
 - Which documents belong in property history: repairs, purchases, estimates, warranties, or inspection reports? Buying materials must remain distinct from installing them.
 - How should multiple properties per person, co-owner and tenant permissions, and sale or rental handover access work?
 - What are the free allowance, monthly/account quotas, site-wide budget, original-file retention period, and account-deletion policy?
@@ -97,8 +97,8 @@ Proposed targets, not measured results: for clear single-page documents, p50 bel
 
 ## Language update
 
-The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. Arabic receipt extraction has not been implemented or measured; the next-phase sample set should reflect the actual audience and countries, including Arabic text and regional currencies where needed.
+The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. The primary audience is UK customers who use English. Prioritise UK English receipts, GBP / £ amounts, UK dates and typical repair descriptions in the next evaluation. The current experimental parser supports explicit GBP codes and ISO dates; pound-symbol amounts and day/month/year dates are not yet parsed. Other source languages remain later extensions; the Chinese interface does not translate documents.
 
 ## Current intake update
 
-Images now use experimental English local OCR and a conservative label parser; PDF stays manual. The summary opens automatically for useful/partial results. Unreadable, unrelated and uncertain results have explicit recovery paths. Schema 1.1 adds company, actual worker and property change type. See [intake](intake-flow.en.md) and [measured browser experiments](test-results.en.md). Server API, Gemini, Arabic text, multi-page PDF understanding, identity verification and shared storage are still next phase.
+Images now use experimental English local OCR and a conservative label parser; PDF stays manual. The summary opens automatically for useful/partial results. Unreadable, unrelated and uncertain results have explicit recovery paths. Schema 1.1 adds company, actual worker and property change type. See [intake](intake-flow.en.md) and [measured browser experiments](test-results.en.md). Server API, Gemini, broader UK format support, multi-page PDF understanding, identity verification and shared storage are still next phase.

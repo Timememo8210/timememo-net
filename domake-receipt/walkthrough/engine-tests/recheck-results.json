@@ -1,0 +1,229 @@
+{
+  "scope": "Parser-only recheck in Node using exactly the previously saved raw OCR text and confidence. No new OCR, image preprocessing, browser upload, browser screenshot, or mobile-camera test.",
+  "started_at": "2026-09-10T01:00:35.837Z",
+  "node_version": "v22.23.1",
+  "original_run_configuration": "run-configuration.json",
+  "parser_path": "../../extraction.js",
+  "parser_sha256": "bc8e0faf3d44d88f517b71ea4363bab8934a479185a232a0e887d1f0cc226023",
+  "samples": [
+    {
+      "sample": "10-clear-uk-receipt",
+      "raw_ocr_file": "./10-clear-uk-receipt.ocr.json",
+      "raw_ocr_sha256": "826c6843c42bc20e23beb0eddeb2452e3eb9bc385ff74d40338d0cd28ef91500",
+      "baseline_parser_output_file": "./10-clear-uk-receipt.parsed.json",
+      "baseline_parser_output_sha256": "29d8d89f3d2a89d0273b4e1b79a4d0a53f34a4de3d5a6934414a8a1fc735cbd0",
+      "raw_confidence": 94,
+      "raw_work_lines": [
+        "Work: Replace kitchen mixer tap",
+        "Work area: Kitchen",
+        "No further work is listed on this test receipt."
+      ],
+      "parsing_ms": 1.806,
+      "before": {
+        "organization_name": "Cedar Home Services",
+        "person_name": "James Turner",
+        "provider_name": "Cedar Home Services",
+        "service_date": "2026-09-01",
+        "issue_date": "2026-09-02",
+        "document_number": "UK-260901-018",
+        "document_type": "receipt",
+        "service_address": "14 Example Mews, Bristol, BS1 2AB",
+        "summary": "Replace kitchen mixer tap",
+        "category": "unknown",
+        "change_type": "replacement",
+        "total": 240,
+        "currency": "GBP",
+        "completion_status": "completed",
+        "payment_status": "paid",
+        "extraction_status": "review",
+        "readability": "readable",
+        "relevance": "home_service"
+      },
+      "after": {
+        "organization_name": "Cedar Home Services",
+        "person_name": "James Turner",
+        "provider_name": "Cedar Home Services",
+        "service_date": "2026-09-01",
+        "issue_date": "2026-09-02",
+        "document_number": "UK-260901-018",
+        "document_type": "receipt",
+        "service_address": "14 Example Mews, Bristol, BS1 2AB",
+        "summary": "Replace kitchen mixer tap",
+        "category": "unknown",
+        "change_type": "replacement",
+        "total": 240,
+        "currency": "GBP",
+        "completion_status": "completed",
+        "payment_status": "paid",
+        "extraction_status": "review",
+        "readability": "readable",
+        "relevance": "home_service"
+      },
+      "key_field_changes": {},
+      "inspect_result": {
+        "errors": [],
+        "warnings": [],
+        "missing": []
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_parser_output_unchanged": true
+    },
+    {
+      "sample": "09-handheld-uk",
+      "raw_ocr_file": "./09-handheld-uk.ocr.json",
+      "raw_ocr_sha256": "247d5a0cf03b936c51f64b67c60280601bc2ebda7f8420eaa18f99800e7fe714",
+      "baseline_parser_output_file": "./09-handheld-uk.parsed.json",
+      "baseline_parser_output_sha256": "ec260c5b08d4fe2e579d94ab785a8e144492ade4af591c07198e399c013efdf4",
+      "raw_confidence": 67,
+      "raw_work_lines": [
+        "SSS Work: Replace kitchen mixer tap SS",
+        "SS Work type: Replacement SS"
+      ],
+      "parsing_ms": 0.823,
+      "before": {
+        "organization_name": null,
+        "person_name": null,
+        "provider_name": null,
+        "service_date": null,
+        "issue_date": null,
+        "document_number": "CHS-UK-260901-09",
+        "document_type": "receipt",
+        "service_address": null,
+        "summary": null,
+        "category": "unknown",
+        "change_type": "unknown",
+        "total": null,
+        "currency": null,
+        "completion_status": "unknown",
+        "payment_status": "unknown",
+        "extraction_status": "partial",
+        "readability": "partial",
+        "relevance": "home_service"
+      },
+      "after": {
+        "organization_name": null,
+        "person_name": null,
+        "provider_name": null,
+        "service_date": null,
+        "issue_date": null,
+        "document_number": "CHS-UK-260901-09",
+        "document_type": "receipt",
+        "service_address": null,
+        "summary": null,
+        "category": "unknown",
+        "change_type": "unknown",
+        "total": null,
+        "currency": null,
+        "completion_status": "unknown",
+        "payment_status": "unknown",
+        "extraction_status": "partial",
+        "readability": "partial",
+        "relevance": "home_service"
+      },
+      "key_field_changes": {},
+      "inspect_result": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_parser_output_unchanged": true
+    },
+    {
+      "sample": "08-handheld-partial",
+      "raw_ocr_file": "./08-handheld-partial.ocr.json",
+      "raw_ocr_sha256": "40bb37b3ae23984ab1f6b4421b7ea755ea7a4e2e5f152dd1cd9a570118e7062f",
+      "baseline_parser_output_file": "./08-handheld-partial.parsed.json",
+      "baseline_parser_output_sha256": "cba7912d470ae59c94be5f772e4deb5ad3dd64a07b749be9528571fa78353a84",
+      "raw_confidence": 62,
+      "raw_work_lines": [
+        "Work: Replace kitchen faucet <==... SS"
+      ],
+      "parsing_ms": 0.306,
+      "before": {
+        "organization_name": null,
+        "person_name": null,
+        "provider_name": null,
+        "service_date": null,
+        "issue_date": null,
+        "document_number": null,
+        "document_type": "receipt",
+        "service_address": null,
+        "summary": "Replace kitchen faucet <==... SS",
+        "category": "plumbing",
+        "change_type": "replacement",
+        "total": null,
+        "currency": null,
+        "completion_status": "unknown",
+        "payment_status": "unknown",
+        "extraction_status": "partial",
+        "readability": "partial",
+        "relevance": "home_service"
+      },
+      "after": {
+        "organization_name": null,
+        "person_name": null,
+        "provider_name": null,
+        "service_date": null,
+        "issue_date": null,
+        "document_number": null,
+        "document_type": "receipt",
+        "service_address": null,
+        "summary": null,
+        "category": "unknown",
+        "change_type": "unknown",
+        "total": null,
+        "currency": null,
+        "completion_status": "unknown",
+        "payment_status": "unknown",
+        "extraction_status": "partial",
+        "readability": "partial",
+        "relevance": "home_service"
+      },
+      "key_field_changes": {
+        "summary": {
+          "before": "Replace kitchen faucet <==... SS",
+          "after": null
+        },
+        "category": {
+          "before": "plumbing",
+          "after": "unknown"
+        },
+        "change_type": {
+          "before": "replacement",
+          "after": "unknown"
+        }
+      },
+      "inspect_result": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_parser_output_unchanged": true
+    }
+  ],
+  "finished_at": "2026-09-10T01:00:35.843Z",
+  "parser_sha256_after_tests": "bc8e0faf3d44d88f517b71ea4363bab8934a479185a232a0e887d1f0cc226023",
+  "parser_unchanged_during_recheck": true
+}

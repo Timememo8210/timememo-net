@@ -20,7 +20,7 @@ const translations = {
   单据总金额: "Document total",
   未知请留空: "Leave blank if unknown",
   币种: "Currency",
-  "例如 USD、CNY": "e.g. USD, AED, SAR",
+  "例如 USD、CNY": "e.g. GBP, EUR, USD",
   单据类型: "Document type",
   付款状态: "Payment status",
   "施工 / 服务状态": "Work status",
@@ -154,7 +154,7 @@ const translations = {
   "总金额必须是有效的非负数；未知请留空。":
     "The total must be a valid non-negative number. Leave it blank if unknown.",
   "币种请用三个大写字母，例如 USD、CNY、EUR。":
-    "Use a three-letter uppercase currency code, such as USD, AED or SAR.",
+    "Use a three-letter uppercase currency code, such as GBP, EUR or USD.",
   "存在不支持的分类值。": "One of the selected categories is unsupported.",
   "明细金额必须是非负数；未知请留空。":
     "Line-item amounts must be non-negative. Leave unknown amounts blank.",

@@ -1,0 +1,124 @@
+{
+  "created_at": "2026-09-09",
+  "project": "Domic Home Passport",
+  "primary_market": "United Kingdom",
+  "language": "English",
+  "method": "Built-in image_gen editing followed by visual inspection by Codex of the returned image. No OCR was run by this asset-generation task.",
+  "data_notice": "All three photographs are AI-generated synthetic test images. Names, addresses and services are fictional test data. They are not photographs of real client receipts.",
+  "images": [
+    {
+      "file": "07-handheld-readable.png",
+      "role": "Supplementary international AED example",
+      "edit_reference": "01-clear-company.png",
+      "visible_conditions": [
+        "Wooden tabletop",
+        "Oblique perspective",
+        "Paper creases",
+        "Natural-looking shadows",
+        "Whole receipt in frame"
+      ],
+      "visually_readable_fields": {
+        "company": "Cedar Home Services",
+        "receipt_number": "CHS-260901-07",
+        "issue_date": "2026-09-02",
+        "technician": "Omar Hassan",
+        "customer": "Lina Patel",
+        "service_date": "2026-09-01",
+        "service_address": "Villa 18, Example Lane, Dubai",
+        "work": "Replace kitchen faucet",
+        "work_type": "Replacement",
+        "status": "Completed",
+        "line_item": "Kitchen faucet and installation",
+        "line_item_amount": "AED 400.00",
+        "vat": "AED 20.00",
+        "total": "AED 420.00",
+        "payment_status": "Paid",
+        "footer": "FICTIONAL TEST DATA - NOT A VALID RECEIPT"
+      },
+      "ocr_status": "Not measured by this task"
+    },
+    {
+      "file": "08-handheld-partial.png",
+      "role": "Supplementary degraded international AED example",
+      "edit_reference": "07-handheld-readable.png",
+      "visible_conditions": [
+        "Wooden tabletop",
+        "Oblique perspective",
+        "Paper creases",
+        "Motion blur",
+        "Bright glare over service date and address region",
+        "Whole receipt in frame"
+      ],
+      "visually_readable_fields": {
+        "company": "Cedar Home Services",
+        "work": "Replace kitchen faucet",
+        "work_type": "Replacement",
+        "status": "Completed",
+        "line_item_amount": "AED 400.00",
+        "vat": "AED 20.00",
+        "total": "AED 420.00",
+        "payment_status": "Paid",
+        "footer": "FICTIONAL TEST DATA - NOT A VALID RECEIPT"
+      },
+      "visually_uncertain_fields": [
+        {
+          "field": "technician",
+          "observation": "Appears to read Omar Hassan, but the line is blurred."
+        },
+        {
+          "field": "customer",
+          "observation": "Appears to read Lina Patel, but the line is blurred."
+        },
+        {
+          "field": "receipt_number",
+          "observation": "The number is softened by motion blur; exact characters should be checked against this image, not copied from the clean reference."
+        },
+        {
+          "field": "issue_date",
+          "observation": "Date characters remain visible but softened. Exact transcription requires checking."
+        },
+        {
+          "field": "service_date",
+          "observation": "Date region is affected by blur and glare. Do not populate it from the clean reference."
+        },
+        {
+          "field": "service_address",
+          "observation": "Address is partly visible through blur and glare. Do not assume every character survived generation."
+        }
+      ],
+      "ocr_status": "Not measured by this task; the appearance does not guarantee the OCR engine will miss any specific field."
+    },
+    {
+      "file": "09-handheld-uk.png",
+      "role": "Primary UK demonstration image",
+      "edit_reference": "07-handheld-readable.png",
+      "visible_conditions": [
+        "Wooden tabletop",
+        "Mild perspective and tilt",
+        "Paper creases",
+        "Natural-looking shadows",
+        "Mostly readable text",
+        "Whole receipt in frame"
+      ],
+      "visually_readable_fields": {
+        "company": "Cedar Home Services",
+        "receipt_number": "CHS-UK-260901-09",
+        "issue_date": "2026-09-02",
+        "technician": "James Turner",
+        "customer": "Emma Wright",
+        "service_date": "2026-09-01",
+        "service_address": "14 Example Mews, Bristol, BS1 2AB",
+        "work": "Replace kitchen mixer tap",
+        "work_type": "Replacement",
+        "status": "Completed",
+        "line_item": "Kitchen mixer tap and installation",
+        "line_item_amount": "GBP 200.00",
+        "vat": "GBP 40.00",
+        "total": "GBP 240.00",
+        "payment_status": "Paid",
+        "footer": "FICTIONAL TEST DATA - NOT A VALID RECEIPT"
+      },
+      "ocr_status": "Not measured by this task"
+    }
+  ]
+}
