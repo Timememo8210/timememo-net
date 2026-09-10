@@ -1,0 +1,188 @@
+{
+  "case_id": "uk-05",
+  "title_en": "Annual boiler service thermal receipt with UK date",
+  "title_zh": "锅炉年度保养：英式数字日期与英镑",
+  "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/05_boiler_annual_service_uk_date.png",
+  "raw_ocr_file": "05_boiler_annual_service_uk_date.ocr.json",
+  "raw_text_file": "05_boiler_annual_service_uk_date.ocr.txt",
+  "baseline_parsed_file": "05_boiler_annual_service_uk_date.baseline.parsed.json",
+  "run_file": "05_boiler_annual_service_uk_date.run.json",
+  "engine_outcome": "completed",
+  "confidence": 88,
+  "locale": "en-GB",
+  "extraction_status": "partial",
+  "comparisons": [
+    {
+      "ground_truth_key": "company_name",
+      "record_field": "provider.organization_name",
+      "expected": "Emberwick Heating (Test)",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "worker_name",
+      "record_field": "provider.person_name",
+      "expected": "Nia Fenwick",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "property_address",
+      "record_field": "property.service_address",
+      "expected": "8 Pretend Hawthorn Row, Ember Example, ZZ5 6FF",
+      "actual": "8 Pretend Hawthorn Row",
+      "result": "incorrect_or_incomplete_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "work_date",
+      "record_field": "service.date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_date",
+      "record_field": "document.issue_date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "description",
+      "record_field": "service.summary",
+      "expected": "Annual boiler service: cleaned burner and trap; operation checks passed.",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "total",
+      "record_field": "amount.total",
+      "expected": 96,
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "currency",
+      "record_field": "amount.currency",
+      "expected": "GBP",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_type",
+      "record_field": "document.type",
+      "expected": "receipt",
+      "actual": "receipt",
+      "result": "correct_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "payment_status",
+      "record_field": "amount.payment_status",
+      "expected": "paid",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "work_status",
+      "record_field": "service.completion_status",
+      "expected": "completed",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "expected_route.classification",
+      "record_field": "extraction.relevance",
+      "expected": "home_service",
+      "actual": "home_service",
+      "result": "correct_value",
+      "comparison": "home-vs-unrelated normalization"
+    }
+  ],
+  "unsupported_ground_truth": [
+    {
+      "ground_truth_key": "trade",
+      "expected": "boiler_heating",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "customer_name",
+      "expected": "Oliver Fern",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "date_raw",
+      "expected": "10/09/2026",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "date_locale",
+      "expected": "en-GB",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "asset",
+      "expected": "ExampleHeat 24i boiler",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "next_service_due",
+      "expected": "2027-09-10",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "subtotal",
+      "expected": 80,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_rate",
+      "expected": 0.2,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_amount",
+      "expected": 16,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_paid",
+      "expected": 96,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_due",
+      "expected": 0,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    }
+  ],
+  "safety_checks": {
+    "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+    "no_wrong_nonempty_service_date": true,
+    "no_wrong_nonempty_currency": true,
+    "no_wrong_nonempty_total": true,
+    "not_auto_confirmed": true,
+    "uk_locale_was_passed": true
+  }
+}

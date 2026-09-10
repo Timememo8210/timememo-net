@@ -1,0 +1,1767 @@
+{
+  "scope_en": "Actual OCR of ten new fictional PNG fixtures followed by the loaded site parser. No ground truth was provided to OCR or parser. No browser/mobile-camera test.",
+  "scope_zh": "十张新虚构PNG素材均真实读取并执行OCR，再调用加载的站点解析器；没有将标准答案提供给OCR或解析器；未测试浏览器/手机相机流程。",
+  "run_configuration": "run-configuration.json",
+  "parser_sha256": "7c71334c18b585582f59d710e7eb719a820344b676c1afde694e8bdcd70d595f",
+  "parser_unchanged_during_run": true,
+  "explicit_locale": "en-GB",
+  "all_locale_assertions_passed": true,
+  "actual_image_count": 10,
+  "engine_completed": 10,
+  "engine_failed": 0,
+  "confidence_min": 87,
+  "confidence_max": 94,
+  "extraction_status_counts": {
+    "partial": 5,
+    "uncertain": 5
+  },
+  "home_fixture_primary_field_metrics": {
+    "cases": 9,
+    "fields_per_case": 8,
+    "total_comparisons": 72,
+    "counts": {
+      "missing_present_value": 61,
+      "correct_blank": 10,
+      "incorrect_or_incomplete_value": 1
+    },
+    "per_field": {
+      "company_name": {
+        "missing_present_value": 8,
+        "correct_blank": 1
+      },
+      "worker_name": {
+        "missing_present_value": 7,
+        "correct_blank": 2
+      },
+      "property_address": {
+        "missing_present_value": 8,
+        "incorrect_or_incomplete_value": 1
+      },
+      "work_date": {
+        "missing_present_value": 7,
+        "correct_blank": 2
+      },
+      "document_date": {
+        "missing_present_value": 7,
+        "correct_blank": 2
+      },
+      "description": {
+        "missing_present_value": 9
+      },
+      "total": {
+        "missing_present_value": 7,
+        "correct_blank": 2
+      },
+      "currency": {
+        "missing_present_value": 8,
+        "correct_blank": 1
+      }
+    },
+    "method": "Primary company, worker, service address, service date, issue date, full description, literal invoice total and currency. Null expected values counted separately; no overall accuracy percent. Restaurant content excluded from home-field score. Description requires normalized-whitespace exact match; all actual descriptions are null."
+  },
+  "timing_ms": {
+    "engine_and_parser_total_sum": 3127.73,
+    "per_image_min": 230.464,
+    "per_image_max": 446.035
+  },
+  "critical_findings_en": [
+    "No company, actual worker, service date, work summary, total or currency was extracted from any of the ten images.",
+    "The UK locale was explicitly passed and retained in all ten records. No image reached a supported date/amount label, so this run does not demonstrate successful UK value extraction.",
+    "Case 05 produced an incomplete nonempty service address: first street line only, omitting locality and postcode.",
+    "Restaurant case 10 remained uncertain because raw OCR has Restaurant but no receipt/invoice keyword; explicit unrelated routing failed.",
+    "All worker fields stayed blank: no customer/preparer/server/proposed-worker substitution, but no actual worker recovered.",
+    "Nine home fixtures: 0 complete review outcomes. Quotation 04 stays planned and payment unknown.",
+    "OCR also loses brand headers and damages some amounts/postcodes: 08 has E75 00, 09 has £1 80 00. Those financial strings must not be silently repaired."
+  ],
+  "critical_findings_zh": [
+    "十张图片均没有提取公司、实际施工人、服务日期、工作摘要、总额或币种。",
+    "十条记录都实际传入并保留en-GB；图片中的日期/金额标签均未走到可识别分支，因此不能把本轮称为英国规则已识别成功。",
+    "05给出不完整的非空服务地址：只有街道行，遗漏地区与邮编。",
+    "10餐厅素材因OCR没有receipt/invoice字样而仍为uncertain，明确无关路由未通过。",
+    "worker全空，未出现客户/制单人/服务员/计划施工人冒充实际施工人，但也没识别出任何实际施工人。",
+    "九张家居素材没有完整review结果；04报价仍保持planned且付款unknown。",
+    "OCR本身还漏掉公司大字标题并损坏部分金额/邮编；08变成E75 00，09变成£1 80 00，不能静默修补财务字符串。"
+  ],
+  "cases": [
+    {
+      "case_id": "uk-01",
+      "title_en": "Paid plumbing invoice: company and attending technician",
+      "title_zh": "水管维修：公司与实际技师分离",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/01_plumbing_company_technician_paid_iso.png",
+      "raw_ocr_file": "01_plumbing_company_technician_paid_iso.ocr.json",
+      "raw_text_file": "01_plumbing_company_technician_paid_iso.ocr.txt",
+      "baseline_parsed_file": "01_plumbing_company_technician_paid_iso.baseline.parsed.json",
+      "run_file": "01_plumbing_company_technician_paid_iso.run.json",
+      "engine_outcome": "completed",
+      "confidence": 93,
+      "locale": "en-GB",
+      "extraction_status": "partial",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Brambleford Plumbing Test Ltd",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Toby Wren",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "22 Fictional Orchard Close, Exampleford, ZZ1 2BB",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Replace leaking kitchen mixer tap cartridge; fit cartridge and seal kit; leak test passed.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 264,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "invoice",
+          "actual": "invoice",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "paid",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "home_service",
+          "result": "correct_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "plumbing",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Harriet Moss",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "subtotal",
+          "expected": 220,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_rate",
+          "expected": 0.2,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_amount",
+          "expected": 44,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 264,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-02",
+      "title_en": "Individual joiner receipt with no company",
+      "title_zh": "独立木工：只有个人姓名",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/02_individual_joiner_no_company.png",
+      "raw_ocr_file": "02_individual_joiner_no_company.ocr.json",
+      "raw_text_file": "02_individual_joiner_no_company.ocr.txt",
+      "baseline_parsed_file": "02_individual_joiner_no_company.baseline.parsed.json",
+      "run_file": "02_individual_joiner_no_company.run.json",
+      "engine_outcome": "completed",
+      "confidence": 91,
+      "locale": "en-GB",
+      "extraction_status": "uncertain",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Elliot Vale",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "7 Imaginary Willow Walk, Samplemere, ZZ2 3CC",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Rehang dining-room door, plane lower edge and fit two new hinges.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 185,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "receipt",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "paid",
+          "actual": "paid",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "joinery",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "provider_type",
+          "expected": "individual",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Rowan Piper",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 185,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_amount",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-03",
+      "title_en": "Electrical job slip missing date, price and worker",
+      "title_zh": "电工单：故意缺日期、总额、施工人",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/03_electrical_missing_date_total_worker.png",
+      "raw_ocr_file": "03_electrical_missing_date_total_worker.ocr.json",
+      "raw_text_file": "03_electrical_missing_date_total_worker.ocr.txt",
+      "baseline_parsed_file": "03_electrical_missing_date_total_worker.baseline.parsed.json",
+      "run_file": "03_electrical_missing_date_total_worker.run.json",
+      "engine_outcome": "completed",
+      "confidence": 93,
+      "locale": "en-GB",
+      "extraction_status": "uncertain",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Southmere Spark Test Services",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "41 Makebelieve Crescent, South Exampleton, ZZ3 4DD",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Replaced damaged double socket in upstairs study; tested socket operation and earth continuity.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "unknown",
+          "actual": "unknown",
+          "result": "correct_blank",
+          "comparison": "enum_normalization",
+          "note": "job_slip is not supported by schema; unknown is safe, not successful job-slip recognition."
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "unknown",
+          "actual": "unknown",
+          "result": "correct_blank",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "electrical",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Florence Ash",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "subtotal",
+          "expected": null,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": null,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": null,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-04",
+      "title_en": "Roofing quotation for future work, no payment",
+      "title_zh": "屋顶报价：计划项目、未付款",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/04_roofing_quote_planned_unpaid.png",
+      "raw_ocr_file": "04_roofing_quote_planned_unpaid.ocr.json",
+      "raw_text_file": "04_roofing_quote_planned_unpaid.ocr.txt",
+      "baseline_parsed_file": "04_roofing_quote_planned_unpaid.baseline.parsed.json",
+      "run_file": "04_roofing_quote_planned_unpaid.run.json",
+      "engine_outcome": "completed",
+      "confidence": 93,
+      "locale": "en-GB",
+      "extraction_status": "partial",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Cedarhaven Test Roofworks",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "19 Imaginary Ridge Avenue, Cedar Example, ZZ4 5EE",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Proposed replacement of six cracked roof tiles, renewal of short ridge mortar section and gutter debris clearance.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal",
+          "note": "Compare literal invoice total (null). Quoted total 1440 has no separate field in schema; if retained in amount.total it must remain visibly an estimate and is not proof of payment."
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "estimate",
+          "actual": "estimate",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "unknown",
+          "actual": "unknown",
+          "result": "correct_blank",
+          "comparison": "enum_normalization",
+          "note": "Schema forbids inferring quote payment; not_paid is normalized to unknown under current contract."
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "planned",
+          "actual": "planned",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "home_service",
+          "result": "correct_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "roofing",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "proposed_worker_name",
+          "expected": "Felix Hart",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Miles Cedar",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "proposed_work_date",
+          "expected": "2026-10-02",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "quote_valid_until",
+          "expected": "2026-09-24",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "quote_subtotal",
+          "expected": 1200,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "quote_vat_amount",
+          "expected": 240,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "quote_total",
+          "expected": 1440,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": null,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true,
+        "quote_not_marked_completed_or_paid": true
+      }
+    },
+    {
+      "case_id": "uk-05",
+      "title_en": "Annual boiler service thermal receipt with UK date",
+      "title_zh": "锅炉年度保养：英式数字日期与英镑",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/05_boiler_annual_service_uk_date.png",
+      "raw_ocr_file": "05_boiler_annual_service_uk_date.ocr.json",
+      "raw_text_file": "05_boiler_annual_service_uk_date.ocr.txt",
+      "baseline_parsed_file": "05_boiler_annual_service_uk_date.baseline.parsed.json",
+      "run_file": "05_boiler_annual_service_uk_date.run.json",
+      "engine_outcome": "completed",
+      "confidence": 88,
+      "locale": "en-GB",
+      "extraction_status": "partial",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Emberwick Heating (Test)",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Nia Fenwick",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "8 Pretend Hawthorn Row, Ember Example, ZZ5 6FF",
+          "actual": "8 Pretend Hawthorn Row",
+          "result": "incorrect_or_incomplete_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Annual boiler service: cleaned burner and trap; operation checks passed.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 96,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "receipt",
+          "actual": "receipt",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "paid",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "home_service",
+          "result": "correct_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "boiler_heating",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Oliver Fern",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "date_raw",
+          "expected": "10/09/2026",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "date_locale",
+          "expected": "en-GB",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "asset",
+          "expected": "ExampleHeat 24i boiler",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "next_service_due",
+          "expected": "2027-09-10",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "subtotal",
+          "expected": 80,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_rate",
+          "expected": 0.2,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_amount",
+          "expected": 16,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 96,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-06",
+      "title_en": "Window replacement VAT invoice with different balance",
+      "title_zh": "窗户更换：小计、税、总额、已付与应付不同",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/06_windows_vat_total_deposit_balance.png",
+      "raw_ocr_file": "06_windows_vat_total_deposit_balance.ocr.json",
+      "raw_text_file": "06_windows_vat_total_deposit_balance.ocr.txt",
+      "baseline_parsed_file": "06_windows_vat_total_deposit_balance.baseline.parsed.json",
+      "run_file": "06_windows_vat_total_deposit_balance.run.json",
+      "engine_outcome": "completed",
+      "confidence": 94,
+      "locale": "en-GB",
+      "extraction_status": "partial",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Northvale Glazing Test Ltd",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Leo Arden",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "63 Fictional Bay Street, North Example, ZZ6 7GG",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Supply and fit two front-bedroom uPVC double-glazed windows; remove frames, install units and seal perimeter.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 1620,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "invoice",
+          "actual": "invoice",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "partial",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "home_service",
+          "result": "correct_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "windows_glazing",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Sophie Linden",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "payment_due_date",
+          "expected": "2026-09-24",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "subtotal",
+          "expected": 1350,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_rate",
+          "expected": 0.2,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_amount",
+          "expected": 270,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 500,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 1120,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-07",
+      "title_en": "Decorator invoice: work completed but unpaid",
+      "title_zh": "粉刷工账单：完工不等于已付款",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/07_decorator_completed_unpaid.png",
+      "raw_ocr_file": "07_decorator_completed_unpaid.ocr.json",
+      "raw_text_file": "07_decorator_completed_unpaid.ocr.txt",
+      "baseline_parsed_file": "07_decorator_completed_unpaid.baseline.parsed.json",
+      "run_file": "07_decorator_completed_unpaid.run.json",
+      "engine_outcome": "completed",
+      "confidence": 89,
+      "locale": "en-GB",
+      "extraction_status": "partial",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Inkwell Decorating Test Co.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Ruby Vale",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "5 Pretend Rose Square, Inkwell Example, ZZ7 8HH",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-09",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Prepare and repaint hallway walls and ceiling with two coats of emulsion; materials included.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 420,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "invoice",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "unpaid",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "home_service",
+          "result": "correct_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "painting_decorating",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Theo Briar",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "payment_due_date",
+          "expected": "2026-09-24",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 420,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-08",
+      "title_en": "Gardening receipt separating worker, customer and preparer",
+      "title_zh": "园艺票据：施工人、客户、制表人分开",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/08_gardening_worker_customer_preparer.png",
+      "raw_ocr_file": "08_gardening_worker_customer_preparer.ocr.json",
+      "raw_text_file": "08_gardening_worker_customer_preparer.ocr.txt",
+      "baseline_parsed_file": "08_gardening_worker_customer_preparer.baseline.parsed.json",
+      "run_file": "08_gardening_worker_customer_preparer.run.json",
+      "engine_outcome": "completed",
+      "confidence": 94,
+      "locale": "en-GB",
+      "extraction_status": "uncertain",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Greenhollow Garden Care (Test)",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Mila Brook",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "12 Invented Meadow Gardens, Green Example, ZZ8 9JJ",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Mow rear lawn, trim front hedge, remove weeds from paved path and remove green waste.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 75,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "receipt",
+          "actual": "receipt",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "paid",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "gardening",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Lydia Kent",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "prepared_by",
+          "expected": "Owen Reed",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "prepared_by_role",
+          "expected": "office administrator; did not attend",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 75,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-09",
+      "title_en": "Appliance repair with long wrapped property address and work lines",
+      "title_zh": "家电维修：长地址及多行描述",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/09_appliance_repair_long_wrapped_text.png",
+      "raw_ocr_file": "09_appliance_repair_long_wrapped_text.ocr.json",
+      "raw_text_file": "09_appliance_repair_long_wrapped_text.ocr.txt",
+      "baseline_parsed_file": "09_appliance_repair_long_wrapped_text.baseline.parsed.json",
+      "run_file": "09_appliance_repair_long_wrapped_text.run.json",
+      "engine_outcome": "completed",
+      "confidence": 94,
+      "locale": "en-GB",
+      "extraction_status": "uncertain",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "Arcwell Appliance Repair Test Workshop",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": "Imogen Quill",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": "Flat 4B, The Fictional Mews, 128 Willow-by-the-Water Lane, North Exampleton, Greater Examplefordshire, ZZ9 1KK, United Kingdom",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Investigate intermittent final-rinse drain failure, clear fabric obstruction from drain-pump housing, replace worn pump impeller assembly, reassemble panels, run rinse-and-spin programme, check hose connections for leaks and demonstrate filter access.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 180,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "invoice",
+          "actual": "invoice",
+          "result": "correct_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "paid",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "completed",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "home_service",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": "appliance_repair",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": "Beatrice Rowan",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "asset",
+          "expected": "ExampleWash QuietCare 900 washing machine",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "line_amounts",
+          "expected": [
+            145,
+            35
+          ],
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 180,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "vat_amount",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true
+      }
+    },
+    {
+      "case_id": "uk-10",
+      "title_en": "Unrelated restaurant receipt for rejection",
+      "title_zh": "无关餐厅小票：应拒绝家居记录导入",
+      "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/10_restaurant_unrelated_reject.png",
+      "raw_ocr_file": "10_restaurant_unrelated_reject.ocr.json",
+      "raw_text_file": "10_restaurant_unrelated_reject.ocr.txt",
+      "baseline_parsed_file": "10_restaurant_unrelated_reject.baseline.parsed.json",
+      "run_file": "10_restaurant_unrelated_reject.run.json",
+      "engine_outcome": "completed",
+      "confidence": 87,
+      "locale": "en-GB",
+      "extraction_status": "uncertain",
+      "comparisons": [
+        {
+          "ground_truth_key": "company_name",
+          "record_field": "provider.organization_name",
+          "expected": "The Fictional Fox & Spoon Restaurant (Test)",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "worker_name",
+          "record_field": "provider.person_name",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "property_address",
+          "record_field": "property.service_address",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "work_date",
+          "record_field": "service.date",
+          "expected": null,
+          "actual": null,
+          "result": "correct_blank",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_date",
+          "record_field": "document.issue_date",
+          "expected": "2026-09-10",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "description",
+          "record_field": "service.summary",
+          "expected": "Restaurant meal: two garden burgers, chips and sparkling waters.",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "total",
+          "record_field": "amount.total",
+          "expected": 43.45,
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "currency",
+          "record_field": "amount.currency",
+          "expected": "GBP",
+          "actual": null,
+          "result": "missing_present_value",
+          "comparison": "literal"
+        },
+        {
+          "ground_truth_key": "document_type",
+          "record_field": "document.type",
+          "expected": "receipt",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "payment_status",
+          "record_field": "amount.payment_status",
+          "expected": "paid",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "work_status",
+          "record_field": "service.completion_status",
+          "expected": "unknown",
+          "actual": "unknown",
+          "result": "correct_blank",
+          "comparison": "enum_normalization"
+        },
+        {
+          "ground_truth_key": "expected_route.classification",
+          "record_field": "extraction.relevance",
+          "expected": "unrelated_service",
+          "actual": "unknown",
+          "result": "missing_present_value",
+          "comparison": "home-vs-unrelated normalization"
+        }
+      ],
+      "unsupported_ground_truth": [
+        {
+          "ground_truth_key": "trade",
+          "expected": null,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "server_name",
+          "expected": "Isla Finch",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "customer_name",
+          "expected": null,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "merchant_address",
+          "expected": "3 Pretend Market Lane, Dine Example, ZZ0 2LL",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "time_raw",
+          "expected": "19:42",
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "food_and_drink_subtotal",
+          "expected": 39.5,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "service_charge_rate",
+          "expected": 0.1,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "service_charge",
+          "expected": 3.95,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_paid",
+          "expected": 43.45,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        },
+        {
+          "ground_truth_key": "amount_due",
+          "expected": 0,
+          "result": "not_supported_by_schema_or_extractor",
+          "note": "Excluded from scored fields; no claim that blank means success."
+        }
+      ],
+      "safety_checks": {
+        "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+        "no_wrong_nonempty_service_date": true,
+        "no_wrong_nonempty_currency": true,
+        "no_wrong_nonempty_total": true,
+        "not_auto_confirmed": true,
+        "uk_locale_was_passed": true,
+        "restaurant_explicitly_rejected": false,
+        "restaurant_not_claimed_home_service": true,
+        "restaurant_address_not_used_as_property": true
+      }
+    }
+  ]
+}

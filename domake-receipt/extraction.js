@@ -1,6 +1,7 @@
 // Conservative English OCR experiment. Text is evidence, never an instruction.
 import { blankRecord, set, inspect, validDate } from "./core.js";
-export function extractText(text, confidence = 0) {
+export function extractText(text, confidence = 0, { locale = null } = {}) {
+  confidence = Number.isFinite(confidence) ? Math.max(0, Math.min(100, confidence)) : 0;
   const record = blankRecord();
   record.source.mode = "local_ocr";
   const lines = String(text || "")
@@ -10,6 +11,7 @@ export function extractText(text, confidence = 0) {
   const usable = lines.join("\n");
   const result = {
     engine: "tesseract-7.0.0-eng",
+    locale: locale === "en-GB" ? "en-GB" : null,
     status: "uncertain",
     readability: "unknown",
     relevance: "unknown",
@@ -24,7 +26,7 @@ export function extractText(text, confidence = 0) {
       value === undefined ||
       (typeof value === "string" &&
         (/^(unknown|not (?:provided|stated|shown)|n\/a|none|-)$/i.test(value) ||
-          /[<=>~|_]{3,}/.test(value)))
+          (/[<=>~|_]{3,}/.test(value) || /[=<>~|_]\s*S{1,3}\b/.test(value))))
     )
       return;
     // Keep noisy OCR lines in the raw text, but do not guess a cleaned field.
@@ -37,15 +39,27 @@ export function extractText(text, confidence = 0) {
     return record;
   }
   result.readability = confidence >= 75 ? "readable" : "partial";
-  const matchLabel = (labels) => {
-    const re = new RegExp("^(?:" + labels + ")\\s*[:#|]\\s*(.+)$", "i");
+  const boundary = /^(?:company|service company|business|attending repair technician|attending technician|engineer|installer|technician|performed by|work performed by|worker|contractor|customer|prepared by|signed by|bill to|ship to|total|grand total|subtotal|vat|tax|amount due|balance due|payment|status|service date|work date|issue date|invoice date|receipt date|service address|job address|work address|work area|location|work type|receipt number|invoice number|receipt no|invoice no|description|work|warranty|phone|provider phone|company phone|company address|business address|fictional|not a valid|terms)\b/i;
+  const matchLabel = (labels, multiline = false) => {
+    const re = new RegExp("^(?:" + labels + ")\\s*[:#|]\\s*(.*)$", "i");
     for (let i = 0; i < lines.length; i++) {
-      const line = lines[i],
-        m = line.match(re);
-      if (m) return [m[1].trim(), line];
-      const bare = new RegExp("^(?:" + labels + ")\\s*[:#|]\\s*$", "i");
-      if (bare.test(line) && lines[i + 1] && !lines[i + 1].includes(":"))
-        return [lines[i + 1], line + "\n" + lines[i + 1]];
+      const line = lines[i];
+      if (/\b(?:proposed|planned|not)\s+(?:attending |repair )?(?:technician|engineer|installer|worker)\s*[:#|]/i.test(line)) continue;
+      const inline = new RegExp("(?:^|\\s)(?:" + labels + ")\\s*[:#|]\\s*(.+)$", "i");
+      const m = line.match(re) || line.match(inline);
+      if (!m) continue;
+      let value = m[1].trim(), quote = line, end = i;
+      if (!value && lines[i+1] && !boundary.test(lines[i+1])) {
+        value = lines[i+1]; quote += "\n"+value; end++;
+      }
+      // Only unmistakable prose continuations; stop before any other field.
+      if (multiline && value) {
+        while (lines[end+1] && end-i < 3 && !boundary.test(lines[end+1]) && /^(?:and |including |with |to |of |for |remove |replace |repair |install |check |test )/i.test(lines[end+1])) {
+          value += " " + lines[++end]; quote += "\n" + lines[end];
+        }
+      }
+      if (value && /\b(?:customer|prepared by|signed by|bill to|ship to|technician|engineer|installer|worker)\s*[:#|]/i.test(value)) continue;
+      if (value) return [value, quote];
     }
     return [null, null];
   };
@@ -53,7 +67,7 @@ export function extractText(text, confidence = 0) {
     ["provider.organization_name", "Company|Service company|Business"],
     [
       "provider.person_name",
-      "Technician|Performed by|Work performed by|Worker",
+      "Attending repair technician|Attending technician|Technician|Performed by|Work performed by|Work carried out by|Engineer|Installer|Worker",
     ],
     ["provider.phone", "Provider phone|Company phone|Contractor phone"],
     ["provider.address", "Company address|Business address"],
@@ -71,7 +85,7 @@ export function extractText(text, confidence = 0) {
       "Invoice number|Receipt number|Invoice no\\.?|Receipt no\\.?",
     ],
   ]) {
-    const [value, quote] = matchLabel(labels);
+    const [value, quote] = matchLabel(labels, field === "service.summary");
     put(field, value, quote);
   }
   const [contractor, contractorQuote] = matchLabel("Contractor");
@@ -84,7 +98,7 @@ export function extractText(text, confidence = 0) {
       if (!record.provider.organization_name)
         put("provider.organization_name", contractor, contractorQuote);
     } else if (
-      /\bindependent\b/i.test(usable) &&
+      /^independent (?:property|home) (?:repair|maintenance|contractor)/im.test(usable) &&
       /^[A-Za-z'-]+(?: [A-Za-z'-]+){1,3}$/.test(contractor) &&
       !record.provider.person_name
     )
@@ -103,27 +117,34 @@ export function extractText(text, confidence = 0) {
     put("provider.name", provider, evidence.quote);
   } else if (contractor) put("provider.name", contractor, contractorQuote);
   for (const [field, labels] of [
-    ["service.date", "Service date|Work date|Date of service"],
+    ["service.date", "Service date|Work date|Date of service|Work completed"],
     ["document.issue_date", "Issue date|Invoice date|Receipt date"],
   ]) {
     const [value, quote] = matchLabel(labels);
     // Ambiguous day/month dates stay blank; no substitution of invoice date.
-    if (value && /^\d{4}-\d{2}-\d{2}$/.test(value) && validDate(value))
-      put(field, value, quote);
-  }
-  for (const line of [...lines].sort(
-    (a, b) => Number(/^Grand total/i.test(b)) - Number(/^Grand total/i.test(a)),
-  )) {
-    const m = line.match(
-      /^(?:Grand total|Total)\s*[:|]?\s*(?:(AED|SAR|USD|EUR|GBP|CNY|QAR|KWD|BHD|OMR)\s*)?([0-9]+(?:,[0-9]{3})*(?:\.[0-9]{2})?)\s*(AED|SAR|USD|EUR|GBP|CNY|QAR|KWD|BHD|OMR)?$/i,
-    );
-    if (m && m[1] && m[3] && m[1].toUpperCase() !== m[3].toUpperCase())
-      continue;
-    if (m) {
-      put("amount.total", Number(m[2].replaceAll(",", "")), line);
-      put("amount.currency", (m[1] || m[3] || "").toUpperCase(), line);
-      break;
+    let date = value;
+    if (locale === "en-GB" && value && /^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+      const [d,m,y] = value.split("/"); date = `${y}-${m}-${d}`;
     }
+    if (date && /^\d{4}-\d{2}-\d{2}$/.test(date) && validDate(date)) put(field, date, quote);
+  }
+  const amountCandidates = lines.map((line, i) => {
+    if (/^(?:quote total|grand total|invoice total)$/i.test(line) && lines[i+1] && /^(?:£|GBP)\s*\d/.test(lines[i+1])) return line + " " + lines[i+1];
+    return line;
+  });
+  const fullyPaid = !/\b(?:unpaid|not paid|partially paid)\b/i.test(usable) && !/(?:balance(?: due)?|amount due)\s*:?\s*(?:£|GBP)?\s*[1-9][0-9,.]*/i.test(usable) && /(?:^|\n)(?:[A-Z &-]+ )?PAID INVOICE\b|\bpayment received in full\b|(?:^|\n)paid in full[.!]?$|(?:balance|amount due)\s*:?\s*(?:£|GBP)?\s*0\.00\b/im.test(usable);
+  const totalLines = amountCandidates.filter(line => /^(?:Grand total|Invoice total|Quote total|Total)\b/i.test(line) && (!/^Total paid\b/i.test(line) || fullyPaid));
+  const highest = totalLines.some(line => /^Grand total\b/i.test(line)) ? totalLines.filter(line => /^Grand total\b/i.test(line)) : totalLines;
+  const candidates = highest.map(line => {
+    const normalized = locale === "en-GB" ? line.replace(/£\s*/, "GBP ") : line;
+    const m = normalized.match(/^(?:Grand total|Invoice total(?: \(including VAT\))?|Quote total|Total(?: paid(?: \(VAT not charged\))?)?)\s*[:|]?\s*(?:(AED|SAR|USD|EUR|GBP|CNY|QAR|KWD|BHD|OMR)\s*)?((?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)(?:\.[0-9]{2})?)\s*(AED|SAR|USD|EUR|GBP|CNY|QAR|KWD|BHD|OMR)?$/i);
+    if (!m || (m[1] && m[3] && m[1].toUpperCase() !== m[3].toUpperCase())) return null;
+    const amount = Number(m[2].replaceAll(",", ""));
+    return Number.isFinite(amount) ? { amount, currency: (m[1] || m[3] || "").toUpperCase(), quote: line } : null;
+  });
+  if (candidates.length && candidates.every(Boolean) && new Set(candidates.map(x => `${x.amount}|${x.currency}`)).size === 1) {
+    put("amount.total", candidates[0].amount, candidates[0].quote);
+    put("amount.currency", candidates[0].currency, candidates[0].quote);
   }
   if (!record.document.number) {
     const line = lines.find((x) =>
@@ -144,17 +165,18 @@ export function extractText(text, confidence = 0) {
           : "warranty";
     put("document.type", type, documentLine);
   }
-  const home =
-    /\b(plumb(?:ing|er)?|faucet|p[- ]?trap|hvac|air condition(?:er|ing)|roof(?:ing)?|electrical|electrician|kitchen|bathroom|bedroom|door lock|light switch|renovation|home repair|landscaping|water heater|ceiling|drywall|carpentry)\b/i.test(
+  let home =
+    /\b(plumb(?:ing|er)?|faucet|p[- ]?trap|hvac|air condition(?:er|ing)|roof(?:ing)?|electrical|electrician|kitchen|bathroom|bedroom|door lock|light switch|renovation|home repair|landscaping|water heater|ceiling|drywall|carpentry|boiler|gutter|window replacement|decorating|gardening|appliance repair)\b/i.test(
       usable,
     );
   const unrelated =
     /\b(restaurant|cafe|dine[- ]?in|takeaway|boarding pass|flight ticket|taxi fare|hair salon|haircut)\b/i.test(
       usable,
     );
+  if (unrelated && !/\b(repair|replace|replacement|install|plumb|maintain|service|inspect|clean)\w*\b/i.test(record.service.summary || "")) home = false;
   result.relevance = home
     ? "home_service"
-    : unrelated && documentLine
+    : unrelated && (documentLine || /total paid|card payment|amount|£/i.test(usable))
       ? "unrelated_service"
       : "unknown";
   if (result.relevance === "unrelated_service") {
@@ -180,8 +202,8 @@ export function extractText(text, confidence = 0) {
       }
     }
     for (const [category, re] of [
-      ["plumbing", /faucet|plumb|pipe|p[- ]?trap|water heater/i],
-      ["hvac", /hvac|air condition/i],
+      ["plumbing", /faucet|plumb|pipe|p[- ]?trap|water heater|mixer tap|kitchen tap|basin tap/i],
+      ["hvac", /hvac|air condition|boiler/i],
       ["electrical", /electric|wiring/i],
       ["roofing", /roof/i],
       ["renovation", /renovat|remodel/i],
@@ -202,12 +224,15 @@ export function extractText(text, confidence = 0) {
     record.service.completion_status = "planned";
   else {
     if (paid) put("amount.payment_status", "paid", paid);
+    else { const payment = matchLabel("Payment status");
+      if (payment[0] && /^(unpaid|partially paid)$/i.test(payment[0])) put("amount.payment_status", payment[0].toLowerCase() === "unpaid" ? "unpaid" : "partial", payment[1]);
+    }
     if (completed) put("service.completion_status", "completed", completed);
   }
   result.status =
     result.relevance !== "home_service"
       ? "uncertain"
-      : inspect(record).missing.length || result.readability === "partial"
+      : inspect(record).missing.length || inspect(record).errors.length || result.readability === "partial"
         ? "partial"
         : "review";
   return record;

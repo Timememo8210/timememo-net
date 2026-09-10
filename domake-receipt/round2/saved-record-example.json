@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.2",
+  "property": {
+    "id": "22 Fictional Orchard Close",
+    "uid": "round2-uk-01",
+    "service_address": "22 Fictional Orchard Close, Exampleford, ZZ1 2BB"
+  },
+  "account": {
+    "id": "demo-alice",
+    "display_name": "Alice Morgan",
+    "role": "homeowner",
+    "is_demo": true
+  },
+  "document": {
+    "type": "invoice",
+    "number": null,
+    "issue_date": "2026-09-10"
+  },
+  "service": {
+    "date": "2026-09-10",
+    "category": "unknown",
+    "change_type": "unknown",
+    "summary": "Replace leaking kitchen mixer tap cartridge; fit cartridge and seal kit; leak test passed.",
+    "location": null,
+    "completion_status": "completed"
+  },
+  "provider": {
+    "name": "Brambleford Plumbing Test Ltd",
+    "organization_name": "Brambleford Plumbing Test Ltd",
+    "person_name": "Toby Wren",
+    "phone": null,
+    "address": null
+  },
+  "amount": {
+    "total": 264,
+    "currency": "GBP",
+    "payment_status": "paid"
+  },
+  "items": [],
+  "details": {
+    "asset_model": null,
+    "asset_serial": null,
+    "warranty": null,
+    "permit_number": null
+  },
+  "notes": "Reviewed manually in browser test uk-01. Missing OCR fields were completed from the fictional original.",
+  "source": {
+    "name": "uk-01.png",
+    "mime_type": "image/png",
+    "sha256": "e837899f51ae556b6d5ef773459486334980e58f69cc0490235f990346d1e454",
+    "mode": "local_ocr"
+  },
+  "extraction": {
+    "engine": "tesseract-7.0.0-eng",
+    "locale": "en-GB",
+    "status": "partial",
+    "readability": "readable",
+    "relevance": "home_service",
+    "text": "FICTIONAL TEST DATA\nBRAMBLEFORD PAID INVOICE\nPLUMBING TEST LTD Invoice BF-TEST-2610\n14 Sample Trade Yard, Exampleford, ZZ1 1AA\nhello@brambleford.example | GBP (£)\nBILL TO / SERVICE PROPERTY SERVICE RECORD\nCustomer: Harriet Moss Invoice date: 2026-09-10\n22 Fictional Orchard Close Work completed: 2026-09-10\nExampleford, ZZ1 2BB Attending technician: Toby Wren\nDESCRIPTION GBP\nReplace leaking kitchen mixer tap cartridge - labour £180.00\nReplacement cartridge and seal kit £40.00\nSubtotal £220.00\nVAT 20% £44.00\nTOTAL PAID £264.00\nPayment received in full by card on 2026-09-10.\nAmount due: £0.00\nWork status: Completed. Leak test passed.\nFICTIONAL TEST DATA - NOT A REAL TRANSACTION\nAll people, businesses, addresses and amounts are invented.",
+    "confidence": 93
+  },
+  "evidence": [
+    {
+      "field": "provider.person_name",
+      "page": 1,
+      "quote": "Exampleford, ZZ1 2BB Attending technician: Toby Wren"
+    },
+    {
+      "field": "provider.name",
+      "page": 1,
+      "quote": "Exampleford, ZZ1 2BB Attending technician: Toby Wren"
+    },
+    {
+      "field": "service.date",
+      "page": 1,
+      "quote": "22 Fictional Orchard Close Work completed: 2026-09-10"
+    },
+    {
+      "field": "document.issue_date",
+      "page": 1,
+      "quote": "Customer: Harriet Moss Invoice date: 2026-09-10"
+    },
+    {
+      "field": "amount.total",
+      "page": 1,
+      "quote": "TOTAL PAID £264.00"
+    },
+    {
+      "field": "amount.currency",
+      "page": 1,
+      "quote": "TOTAL PAID £264.00"
+    },
+    {
+      "field": "document.type",
+      "page": 1,
+      "quote": "BRAMBLEFORD PAID INVOICE"
+    }
+  ],
+  "review": {
+    "status": "confirmed",
+    "missing_fields": [],
+    "warnings": [],
+    "edited_fields": [
+      "service.summary",
+      "provider.name",
+      "provider.organization_name",
+      "property.service_address",
+      "amount.payment_status",
+      "service.completion_status",
+      "notes"
+    ]
+  },
+  "id": "80693e98-f5ae-400d-bb02-970332d8e7d1",
+  "created_at": "2026-09-10T15:34:30.081Z",
+  "updated_at": "2026-09-10T15:34:30.081Z",
+  "confirmed_at": "2026-09-10T15:34:30.081Z"
+}

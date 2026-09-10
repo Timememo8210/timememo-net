@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: explicit UK context interprets slash dates and pounds while preserving original evidence
+ok 1 - explicit UK context interprets slash dates and pounds while preserving original evidence
+  ---
+  duration_ms: 4.519417
+  type: 'test'
+  ...
+# Subtest: UK-looking addresses and English text cannot silently select UK parsing
+ok 2 - UK-looking addresses and English text cannot silently select UK parsing
+  ---
+  duration_ms: 1.223209
+  type: 'test'
+  ...
+# Subtest: UK dates reject impossible dates without borrowing invoice or future-service dates
+ok 3 - UK dates reject impossible dates without borrowing invoice or future-service dates
+  ---
+  duration_ms: 0.733208
+  type: 'test'
+  ...
+# Subtest: amount parsing preserves zero and rejects corrupted OCR, currency conflicts and infinity
+ok 4 - amount parsing preserves zero and rejects corrupted OCR, currency conflicts and infinity
+  ---
+  duration_ms: 0.379791
+  type: 'test'
+  ...
+# Subtest: conflicting totals remain unresolved while repeated identical totals and explicit grand totals are usable
+ok 5 - conflicting totals remain unresolved while repeated identical totals and explicit grand totals are usable
+  ---
+  duration_ms: 0.282959
+  type: 'test'
+  ...
+# Subtest: invoice cost stays distinct from VAT, deposit and balance
+ok 6 - invoice cost stays distinct from VAT, deposit and balance
+  ---
+  duration_ms: 0.187792
+  type: 'test'
+  ...
+# Subtest: total paid becomes invoice cost only with unambiguous full-payment evidence
+ok 7 - total paid becomes invoice cost only with unambiguous full-payment evidence
+  ---
+  duration_ms: 0.143334
+  type: 'test'
+  ...
+# Subtest: negated and partial payment evidence cannot promote paid amount to invoice total
+ok 8 - negated and partial payment evidence cannot promote paid amount to invoice total
+  ---
+  duration_ms: 0.193791
+  type: 'test'
+  ...
+# Subtest: quoted cost is retained as an estimate and proposed workers remain unconfirmed
+ok 9 - quoted cost is retained as an estimate and proposed workers remain unconfirmed
+  ---
+  duration_ms: 0.263208
+  type: 'test'
+  ...
+# Subtest: explicit attending-worker labels retain company/worker/customer separation
+ok 10 - explicit attending-worker labels retain company/worker/customer separation
+  ---
+  duration_ms: 0.438083
+  type: 'test'
+  ...
+# Subtest: an explicit worker at the end of a combined OCR row can be recovered without choosing the customer
+ok 11 - an explicit worker at the end of a combined OCR row can be recovered without choosing the customer
+  ---
+  duration_ms: 0.098042
+  type: 'test'
+  ...
+# Subtest: empty worker labels do not consume the next customer or engineer label as a name
+ok 12 - empty worker labels do not consume the next customer or engineer label as a name
+  ---
+  duration_ms: 0.364833
+  type: 'test'
+  ...
+# Subtest: proposed and negated worker roles are not attending-worker evidence across supported separators
+ok 13 - proposed and negated worker roles are not attending-worker evidence across supported separators
+  ---
+  duration_ms: 0.142875
+  type: 'test'
+  ...
+# Subtest: combined worker/customer rows never store the second field inside a person name
+ok 14 - combined worker/customer rows never store the second field inside a person name
+  ---
+  duration_ms: 0.059708
+  type: 'test'
+  ...
+# Subtest: a customer company name cannot establish that an ambiguous contractor is an individual
+ok 15 - a customer company name cannot establish that an ambiguous contractor is an individual
+  ---
+  duration_ms: 0.155708
+  type: 'test'
+  ...
+# Subtest: clear continuation text belongs to work while customer and financial rows do not
+ok 16 - clear continuation text belongs to work while customer and financial rows do not
+  ---
+  duration_ms: 0.064542
+  type: 'test'
+  ...
+# Subtest: observed OCR pollution is retained as raw evidence but not assigned to identity or work
+ok 17 - observed OCR pollution is retained as raw evidence but not assigned to identity or work
+  ---
+  duration_ms: 0.049334
+  type: 'test'
+  ...
+# Subtest: invalid confidence cannot be converted into a low displayed score while extracting confident fields
+ok 18 - invalid confidence cannot be converted into a low displayed score while extracting confident fields
+  ---
+  duration_ms: 0.031375
+  type: 'test'
+  ...
+# Subtest: restaurant payment text without a receipt heading is unrelated, while plumbing work at a restaurant is retained
+ok 19 - restaurant payment text without a receipt heading is unrelated, while plumbing work at a restaurant is retained
+  ---
+  duration_ms: 0.156875
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 67.28775

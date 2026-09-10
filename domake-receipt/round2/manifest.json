@@ -1,0 +1,738 @@
+{
+  "dataset": "Domic Home Passport UK fictional documents - round 2",
+  "created_date": "2026-09-10",
+  "locale": "en-GB",
+  "base_case_count": 10,
+  "purpose": "Upload test fixtures with expected behaviour, not observed application test results.",
+  "ground_truth_policy": "All names, companies, locations, prices and work details are invented. Null means not stated or not applicable; do not infer missing values.",
+  "cases": [
+    {
+      "id": "uk-01",
+      "files": {
+        "pdf": "files/uk-01.pdf",
+        "png": "files/uk-01.png"
+      },
+      "title_en": "Paid plumbing invoice: company and attending technician",
+      "title_zh": "水管维修：公司与实际技师分离",
+      "ground_truth": {
+        "document_type": "invoice",
+        "trade": "plumbing",
+        "company_name": "Brambleford Plumbing Test Ltd",
+        "worker_name": "Toby Wren",
+        "customer_name": "Harriet Moss",
+        "property_address": "22 Fictional Orchard Close, Exampleford, ZZ1 2BB",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "description": "Replace leaking kitchen mixer tap cartridge; fit cartridge and seal kit; leak test passed.",
+        "currency": "GBP",
+        "subtotal": 220,
+        "vat_rate": 0.2,
+        "vat_amount": 44,
+        "total": 264,
+        "amount_paid": 264,
+        "amount_due": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Keep company Brambleford Plumbing Test Ltd separate from attending technician Toby Wren."
+        ],
+        "must_not": [
+          "Use customer Harriet Moss as worker."
+        ]
+      },
+      "deliberately_missing": [],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "69ffb183bef267d8a0d19312c1d96fb95d629db90221ffed063ea241cba9f67a",
+          "png": "e837899f51ae556b6d5ef773459486334980e58f69cc0490235f990346d1e454"
+        }
+      }
+    },
+    {
+      "id": "uk-02",
+      "files": {
+        "pdf": "files/uk-02.pdf",
+        "png": "files/uk-02.png"
+      },
+      "title_en": "Individual joiner receipt with no company",
+      "title_zh": "独立木工：只有个人姓名",
+      "ground_truth": {
+        "document_type": "receipt",
+        "trade": "joinery",
+        "company_name": null,
+        "worker_name": "Elliot Vale",
+        "provider_type": "individual",
+        "customer_name": "Rowan Piper",
+        "property_address": "7 Imaginary Willow Walk, Samplemere, ZZ2 3CC",
+        "document_date": null,
+        "work_date": "2026-09-10",
+        "description": "Rehang dining-room door, plane lower edge and fit two new hinges.",
+        "currency": "GBP",
+        "total": 185,
+        "amount_paid": 185,
+        "amount_due": 0,
+        "vat_amount": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Represent Elliot Vale as individual provider and worker; no business name is present.",
+          "Use stated completion date 10 September 2026 as work date; issue date is not separately stated."
+        ],
+        "must_not": [
+          "Invent a company name.",
+          "Use customer Rowan Piper as worker."
+        ]
+      },
+      "deliberately_missing": [
+        "company_name (not applicable: individual provider)",
+        "document_date (only completed date appears)"
+      ],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "8788ce78a67ace80b5eb2eb60373020e54e196f0ae7dccc224548d9215fe95ae",
+          "png": "1f5a021ceed0e053bc5ee0b6198b050457179d77fa78fff0d3c925a885579ed9"
+        }
+      }
+    },
+    {
+      "id": "uk-03",
+      "files": {
+        "pdf": "files/uk-03.pdf",
+        "png": "files/uk-03.png"
+      },
+      "title_en": "Electrical job slip missing date, price and worker",
+      "title_zh": "电工单：故意缺日期、总额、施工人",
+      "ground_truth": {
+        "document_type": "job_slip",
+        "trade": "electrical",
+        "company_name": "Southmere Spark Test Services",
+        "worker_name": null,
+        "customer_name": "Florence Ash",
+        "property_address": "41 Makebelieve Crescent, South Exampleton, ZZ3 4DD",
+        "document_date": null,
+        "work_date": null,
+        "description": "Replaced damaged double socket in upstairs study; tested socket operation and earth continuity.",
+        "currency": null,
+        "subtotal": null,
+        "total": null,
+        "amount_paid": null,
+        "amount_due": null,
+        "work_status": "completed",
+        "payment_status": "unknown"
+      },
+      "expected_route": {
+        "classification": "home_service_incomplete",
+        "destination": "review_required",
+        "review_requirements": [
+          "Leave missing date, worker and amount fields blank/unknown.",
+          "Request or allow user completion of missing required fields."
+        ],
+        "must_not": [
+          "Use upload date as service date.",
+          "Invent a price or worker.",
+          "Claim payment was made."
+        ]
+      },
+      "deliberately_missing": [
+        "document_date",
+        "work_date",
+        "worker_name",
+        "currency",
+        "subtotal",
+        "total",
+        "amount_paid",
+        "amount_due",
+        "payment_status"
+      ],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "57b84134e55a5741609a4cd027697827eb5345c7c0af7702824fe7820a116ea8",
+          "png": "42101833b6b889ad78e5ed764f1000d85780f17100bf088c09ce0ad5767cb14f"
+        }
+      }
+    },
+    {
+      "id": "uk-04",
+      "files": {
+        "pdf": "files/uk-04.pdf",
+        "png": "files/uk-04.png"
+      },
+      "title_en": "Roofing quotation for future work, no payment",
+      "title_zh": "屋顶报价：计划项目、未付款",
+      "ground_truth": {
+        "document_type": "quotation",
+        "trade": "roofing",
+        "company_name": "Cedarhaven Test Roofworks",
+        "worker_name": null,
+        "proposed_worker_name": "Felix Hart",
+        "customer_name": "Miles Cedar",
+        "property_address": "19 Imaginary Ridge Avenue, Cedar Example, ZZ4 5EE",
+        "document_date": "2026-09-10",
+        "work_date": null,
+        "proposed_work_date": "2026-10-02",
+        "quote_valid_until": "2026-09-24",
+        "description": "Proposed replacement of six cracked roof tiles, renewal of short ridge mortar section and gutter debris clearance.",
+        "currency": "GBP",
+        "quote_subtotal": 1200,
+        "quote_vat_amount": 240,
+        "quote_total": 1440,
+        "total": null,
+        "amount_paid": 0,
+        "amount_due": null,
+        "work_status": "planned_not_booked",
+        "payment_status": "not_paid"
+      },
+      "expected_route": {
+        "classification": "home_service_quote",
+        "destination": "planned_work_or_quote_review",
+        "review_requirements": [
+          "Label all values as quoted/estimated.",
+          "Preserve proposed date and proposed roofer as proposed."
+        ],
+        "must_not": [
+          "Save as completed or paid repair.",
+          "Treat quotation total as amount paid.",
+          "Treat Felix Hart as confirmed attending worker."
+        ]
+      },
+      "deliberately_missing": [
+        "actual_work_date",
+        "confirmed_attending_worker",
+        "invoice_total",
+        "invoice_amount_due"
+      ],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "9ad5abc950f0d3f15a237423f5bdc6b401edb30fa13c545e015e3cfb145c89f5",
+          "png": "4cedfcadf45c06c59e385acae99775dc23d9037ed39b337bca9e21054fad20b3"
+        }
+      }
+    },
+    {
+      "id": "uk-05",
+      "files": {
+        "pdf": "files/uk-05.pdf",
+        "png": "files/uk-05.png"
+      },
+      "title_en": "Annual boiler service thermal receipt with UK date",
+      "title_zh": "锅炉年度保养：英式数字日期与英镑",
+      "ground_truth": {
+        "document_type": "receipt",
+        "trade": "boiler_heating",
+        "company_name": "Emberwick Heating (Test)",
+        "worker_name": "Nia Fenwick",
+        "customer_name": "Oliver Fern",
+        "property_address": "8 Pretend Hawthorn Row, Ember Example, ZZ5 6FF",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "date_raw": "10/09/2026",
+        "date_locale": "en-GB",
+        "description": "Annual boiler service: cleaned burner and trap; operation checks passed.",
+        "asset": "ExampleHeat 24i boiler",
+        "next_service_due": "2027-09-10",
+        "currency": "GBP",
+        "subtotal": 80,
+        "vat_rate": 0.2,
+        "vat_amount": 16,
+        "total": 96,
+        "amount_paid": 96,
+        "amount_due": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Interpret 10/09/2026 as 10 September 2026.",
+          "Keep next service due date 10 September 2027 separate from completed date."
+        ],
+        "must_not": [
+          "Interpret numeric date as 9 October.",
+          "Use boiler brand as company or worker."
+        ]
+      },
+      "deliberately_missing": [],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "d271c531be6bd0cfc326e20031cd0599ac695c6b71e2f61717e849f2b4c1c269",
+          "png": "5c176d66e2a811c5594708b14a2d188ecfa4c5cdee429efe32d67dc42c04eedd"
+        }
+      }
+    },
+    {
+      "id": "uk-06",
+      "files": {
+        "pdf": "files/uk-06.pdf",
+        "png": "files/uk-06.png"
+      },
+      "title_en": "Window replacement VAT invoice with different balance",
+      "title_zh": "窗户更换：小计、税、总额、已付与应付不同",
+      "ground_truth": {
+        "document_type": "invoice",
+        "trade": "windows_glazing",
+        "company_name": "Northvale Glazing Test Ltd",
+        "worker_name": "Leo Arden",
+        "customer_name": "Sophie Linden",
+        "property_address": "63 Fictional Bay Street, North Example, ZZ6 7GG",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "payment_due_date": "2026-09-24",
+        "description": "Supply and fit two front-bedroom uPVC double-glazed windows; remove frames, install units and seal perimeter.",
+        "currency": "GBP",
+        "subtotal": 1350,
+        "vat_rate": 0.2,
+        "vat_amount": 270,
+        "total": 1620,
+        "amount_paid": 500,
+        "amount_due": 1120,
+        "work_status": "completed",
+        "payment_status": "partially_paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record_with_balance",
+        "review_requirements": [
+          "Use £1,620.00 as full invoice cost.",
+          "Keep subtotal £1,350.00, VAT £270.00, deposit £500.00 and balance £1,120.00 distinct."
+        ],
+        "must_not": [
+          "Use amount due as invoice total.",
+          "Mark invoice fully paid."
+        ]
+      },
+      "deliberately_missing": [],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "a675754e6b9477c4ef2366986b4d15d180e7ef1808f64beed2912a7168881126",
+          "png": "d88b632a987aa76b3933356882d247b9d655065abb7d70e8df34403f41fce55a"
+        }
+      }
+    },
+    {
+      "id": "uk-07",
+      "files": {
+        "pdf": "files/uk-07.pdf",
+        "png": "files/uk-07.png"
+      },
+      "title_en": "Decorator invoice: work completed but unpaid",
+      "title_zh": "粉刷工账单：完工不等于已付款",
+      "ground_truth": {
+        "document_type": "invoice",
+        "trade": "painting_decorating",
+        "company_name": "Inkwell Decorating Test Co.",
+        "worker_name": "Ruby Vale",
+        "customer_name": "Theo Briar",
+        "property_address": "5 Pretend Rose Square, Inkwell Example, ZZ7 8HH",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-09",
+        "payment_due_date": "2026-09-24",
+        "description": "Prepare and repaint hallway walls and ceiling with two coats of emulsion; materials included.",
+        "currency": "GBP",
+        "total": 420,
+        "amount_paid": 0,
+        "amount_due": 420,
+        "work_status": "completed",
+        "payment_status": "unpaid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record_with_unpaid_status",
+        "review_requirements": [
+          "Record completed work date as 9 September, invoice date as 10 September.",
+          "Keep payment status unpaid."
+        ],
+        "must_not": [
+          "Infer payment from work completion."
+        ]
+      },
+      "deliberately_missing": [
+        "vat_amount",
+        "subtotal"
+      ],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "10c6edb1ecefe3f2bd7610d7ba4bbe70055d628c676f2147a7f61ad343637012",
+          "png": "dc42b4276c7962a38ef1e2543f74807b3db0d8d7f9e0cce88412d4f67b15e063"
+        }
+      }
+    },
+    {
+      "id": "uk-08",
+      "files": {
+        "pdf": "files/uk-08.pdf",
+        "png": "files/uk-08.png"
+      },
+      "title_en": "Gardening receipt separating worker, customer and preparer",
+      "title_zh": "园艺票据：施工人、客户、制表人分开",
+      "ground_truth": {
+        "document_type": "visit_report_and_receipt",
+        "trade": "gardening",
+        "company_name": "Greenhollow Garden Care (Test)",
+        "worker_name": "Mila Brook",
+        "customer_name": "Lydia Kent",
+        "prepared_by": "Owen Reed",
+        "prepared_by_role": "office administrator; did not attend",
+        "property_address": "12 Invented Meadow Gardens, Green Example, ZZ8 9JJ",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "description": "Mow rear lawn, trim front hedge, remove weeds from paved path and remove green waste.",
+        "currency": "GBP",
+        "total": 75,
+        "amount_paid": 75,
+        "amount_due": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Use Mila Brook as the actual gardener.",
+          "Preserve Owen Reed only as office preparer if that field exists."
+        ],
+        "must_not": [
+          "Use customer Lydia Kent or preparer Owen Reed as worker."
+        ]
+      },
+      "deliberately_missing": [
+        "vat_amount",
+        "subtotal"
+      ],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "0b9aa6a188570ba34991424502fba549ca13f67cd32293e8e8d804cdfff5b3e6",
+          "png": "8a8aa41e9415bcf06ac397c1fffa8da931905a5d1118582c63a4a7ca9ac09d00"
+        }
+      }
+    },
+    {
+      "id": "uk-09",
+      "files": {
+        "pdf": "files/uk-09.pdf",
+        "png": "files/uk-09.png"
+      },
+      "title_en": "Appliance repair with long wrapped property address and work lines",
+      "title_zh": "家电维修：长地址及多行描述",
+      "ground_truth": {
+        "document_type": "invoice",
+        "trade": "appliance_repair",
+        "company_name": "Arcwell Appliance Repair Test Workshop",
+        "worker_name": "Imogen Quill",
+        "customer_name": "Beatrice Rowan",
+        "property_address": "Flat 4B, The Fictional Mews, 128 Willow-by-the-Water Lane, North Exampleton, Greater Examplefordshire, ZZ9 1KK, United Kingdom",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "description": "Investigate intermittent final-rinse drain failure, clear fabric obstruction from drain-pump housing, replace worn pump impeller assembly, reassemble panels, run rinse-and-spin programme, check hose connections for leaks and demonstrate filter access.",
+        "asset": "ExampleWash QuietCare 900 washing machine",
+        "currency": "GBP",
+        "line_amounts": [
+          145,
+          35
+        ],
+        "total": 180,
+        "amount_paid": 180,
+        "amount_due": 0,
+        "vat_amount": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Join all wrapped address lines into one address without dropping locality or postcode.",
+          "Preserve the full multi-line work description."
+        ],
+        "must_not": [
+          "Use appliance brand as company or worker.",
+          "Truncate service address at first line break."
+        ]
+      },
+      "deliberately_missing": [],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "11e88978adc9b6279c353fb44e594936f4b7fe807d3564d947c982dff0756584",
+          "png": "0fdeec3558c80f3ed74df6df1dff93eaa80eca38208bc12f2789b0bd2347c88f"
+        }
+      }
+    },
+    {
+      "id": "uk-10",
+      "files": {
+        "pdf": "files/uk-10.pdf",
+        "png": "files/uk-10.png"
+      },
+      "title_en": "Unrelated restaurant receipt for rejection",
+      "title_zh": "无关餐厅小票：应拒绝家居记录导入",
+      "ground_truth": {
+        "document_type": "restaurant_receipt",
+        "trade": null,
+        "company_name": "The Fictional Fox & Spoon Restaurant (Test)",
+        "worker_name": null,
+        "server_name": "Isla Finch",
+        "customer_name": null,
+        "property_address": null,
+        "merchant_address": "3 Pretend Market Lane, Dine Example, ZZ0 2LL",
+        "document_date": "2026-09-10",
+        "time_raw": "19:42",
+        "work_date": null,
+        "description": "Restaurant meal: two garden burgers, chips and sparkling waters.",
+        "currency": "GBP",
+        "food_and_drink_subtotal": 39.5,
+        "service_charge_rate": 0.1,
+        "service_charge": 3.95,
+        "total": 43.45,
+        "amount_paid": 43.45,
+        "amount_due": 0,
+        "work_status": null,
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "unrelated_document",
+        "destination": "reject_or_explain_unsupported_document",
+        "review_requirements": [
+          "Clearly identify restaurant dining as unrelated to property maintenance."
+        ],
+        "must_not": [
+          "Create a home repair or maintenance record.",
+          "Treat restaurant server as home service worker.",
+          "Use restaurant address as user property address."
+        ]
+      },
+      "deliberately_missing": [
+        "home_service_worker (not applicable)",
+        "service_property_address (not applicable)",
+        "home_work_date (not applicable)"
+      ],
+      "provenance": {
+        "kind": "original_synthetic_fixture",
+        "authoring": "ReportLab PDF, rendered to PNG with Poppler pdftoppm",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "external_source": null,
+        "notes": [],
+        "sha256": {
+          "pdf": "4e3cbdeb6420b563d293081ab5d06245cb9c15c35471744f93670975a7b4baeb",
+          "png": "e4b1aab6c018f171cb50a020fb3b03da90ad988fee8df9c1a79e3afe25cffd59"
+        }
+      }
+    }
+  ],
+  "supplemental_cases": [
+    {
+      "id": "uk-11-supplemental",
+      "files": {
+        "png": "11_plumbing_simulated_phone_photo.png"
+      },
+      "title_en": "Simulated angled phone photo of plumbing invoice",
+      "title_zh": "水管维修账单模拟手机斜拍",
+      "ground_truth": {
+        "document_type": "invoice",
+        "trade": "plumbing",
+        "company_name": "Brambleford Plumbing Test Ltd",
+        "worker_name": "Toby Wren",
+        "customer_name": "Harriet Moss",
+        "property_address": "22 Fictional Orchard Close, Exampleford, ZZ1 2BB",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "description": "Replace leaking kitchen mixer tap cartridge; fit cartridge and seal kit; leak test passed.",
+        "currency": "GBP",
+        "subtotal": 220,
+        "vat_rate": 0.2,
+        "vat_amount": 44,
+        "total": 264,
+        "amount_paid": 264,
+        "amount_due": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Keep company Brambleford Plumbing Test Ltd separate from attending technician Toby Wren."
+        ],
+        "must_not": [
+          "Use customer Harriet Moss as worker."
+        ]
+      },
+      "deliberately_missing": [],
+      "provenance": {
+        "kind": "ai_generated_supplemental_fixture",
+        "authoring": "Built-in image_gen photo simulation of original synthetic PNG",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "source_case_id": "uk-01",
+        "source_png": "01_plumbing_company_technician_paid_iso.png",
+        "prompts_file": "imagegen_prompts.json",
+        "visual_qa": "inspected",
+        "not_a_real_photograph": true,
+        "notes": [
+          "Supplemental robustness fixture, outside the 10 base PDF/PNG pairs.",
+          "Company, technician, customer, property, dates and monetary fields visually checked against base case; preserved."
+        ],
+        "sha256": {
+          "png": "36ca6bda01cde7b1fa125e6f8289f5dc7802de131bf5b4149ab1c22ae384d2ad"
+        }
+      }
+    },
+    {
+      "id": "uk-12-supplemental",
+      "files": {
+        "png": "12_boiler_simulated_soft_phone_photo.png"
+      },
+      "title_en": "Simulated soft phone photo of boiler receipt",
+      "title_zh": "锅炉保养小票模拟手机轻微模糊照片",
+      "ground_truth": {
+        "document_type": "receipt",
+        "trade": "boiler_heating",
+        "company_name": "Emberwick Heating (Test)",
+        "worker_name": "Nia Fenwick",
+        "customer_name": "Oliver Fern",
+        "property_address": "8 Pretend Hawthorn Row, Ember Example, Z25 6FF",
+        "document_date": "2026-09-10",
+        "work_date": "2026-09-10",
+        "date_raw": "10/09/2026",
+        "date_locale": "en-GB",
+        "description": "Annual boiler service: cleaned burner and trap; operation checks passed.",
+        "asset": "ExampleHeat 24i boiler",
+        "next_service_due": "2027-09-10",
+        "currency": "GBP",
+        "subtotal": 80,
+        "vat_rate": 0.2,
+        "vat_amount": 16,
+        "total": 96,
+        "amount_paid": 96,
+        "amount_due": 0,
+        "work_status": "completed",
+        "payment_status": "paid"
+      },
+      "expected_route": {
+        "classification": "home_service",
+        "destination": "completed_home_record",
+        "review_requirements": [
+          "Interpret 10/09/2026 as 10 September 2026.",
+          "Keep next service due date 10 September 2027 separate from completed date.",
+          "This generated photo visibly says Z25 6FF; use that postcode for image-specific extraction checks. Do not compare its postcode to base uk-05 as if they were identical."
+        ],
+        "must_not": [
+          "Interpret numeric date as 9 October.",
+          "Use boiler brand as company or worker."
+        ]
+      },
+      "deliberately_missing": [],
+      "provenance": {
+        "kind": "ai_generated_supplemental_fixture",
+        "authoring": "Built-in image_gen photo simulation of original synthetic PNG",
+        "created_date": "2026-09-10",
+        "language": "en-GB",
+        "all_data_fictional": true,
+        "visible_marker": "FICTIONAL TEST DATA",
+        "source_case_id": "uk-05",
+        "source_png": "05_boiler_annual_service_uk_date.png",
+        "prompts_file": "imagegen_prompts.json",
+        "visual_qa": "inspected",
+        "not_a_real_photograph": true,
+        "notes": [
+          "Supplemental robustness fixture, outside the 10 base PDF/PNG pairs.",
+          "Image generator changed fictional postcode from base ZZ5 6FF to visibly printed Z25 6FF. One targeted correction attempt also retained Z25; this supplemental case uses the visible Z25 as ground truth. This is source-image drift, not an application OCR failure."
+        ],
+        "known_source_differences": {
+          "property_address_postcode": {
+            "base": "ZZ5 6FF",
+            "generated_visible": "Z25 6FF"
+          }
+        },
+        "sha256": {
+          "png": "fd42a844a0cf88c46fe2b3fdcb85a44da6486ca680f1d16ff95cccd0576f2844"
+        }
+      }
+    }
+  ],
+  "supplemental_case_count": 2
+}

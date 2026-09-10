@@ -1,0 +1,164 @@
+{
+  "case_id": "uk-01",
+  "title_en": "Paid plumbing invoice: company and attending technician",
+  "title_zh": "水管维修：公司与实际技师分离",
+  "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/01_plumbing_company_technician_paid_iso.png",
+  "raw_ocr_file": "01_plumbing_company_technician_paid_iso.ocr.json",
+  "raw_text_file": "01_plumbing_company_technician_paid_iso.ocr.txt",
+  "baseline_parsed_file": "01_plumbing_company_technician_paid_iso.baseline.parsed.json",
+  "run_file": "01_plumbing_company_technician_paid_iso.run.json",
+  "engine_outcome": "completed",
+  "confidence": 93,
+  "locale": "en-GB",
+  "extraction_status": "partial",
+  "comparisons": [
+    {
+      "ground_truth_key": "company_name",
+      "record_field": "provider.organization_name",
+      "expected": "Brambleford Plumbing Test Ltd",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "worker_name",
+      "record_field": "provider.person_name",
+      "expected": "Toby Wren",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "property_address",
+      "record_field": "property.service_address",
+      "expected": "22 Fictional Orchard Close, Exampleford, ZZ1 2BB",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "work_date",
+      "record_field": "service.date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_date",
+      "record_field": "document.issue_date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "description",
+      "record_field": "service.summary",
+      "expected": "Replace leaking kitchen mixer tap cartridge; fit cartridge and seal kit; leak test passed.",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "total",
+      "record_field": "amount.total",
+      "expected": 264,
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "currency",
+      "record_field": "amount.currency",
+      "expected": "GBP",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_type",
+      "record_field": "document.type",
+      "expected": "invoice",
+      "actual": "invoice",
+      "result": "correct_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "payment_status",
+      "record_field": "amount.payment_status",
+      "expected": "paid",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "work_status",
+      "record_field": "service.completion_status",
+      "expected": "completed",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "expected_route.classification",
+      "record_field": "extraction.relevance",
+      "expected": "home_service",
+      "actual": "home_service",
+      "result": "correct_value",
+      "comparison": "home-vs-unrelated normalization"
+    }
+  ],
+  "unsupported_ground_truth": [
+    {
+      "ground_truth_key": "trade",
+      "expected": "plumbing",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "customer_name",
+      "expected": "Harriet Moss",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "subtotal",
+      "expected": 220,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_rate",
+      "expected": 0.2,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_amount",
+      "expected": 44,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_paid",
+      "expected": 264,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_due",
+      "expected": 0,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    }
+  ],
+  "safety_checks": {
+    "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+    "no_wrong_nonempty_service_date": true,
+    "no_wrong_nonempty_currency": true,
+    "no_wrong_nonempty_total": true,
+    "not_auto_confirmed": true,
+    "uk_locale_was_passed": true
+  }
+}

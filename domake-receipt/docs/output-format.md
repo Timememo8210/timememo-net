@@ -1,8 +1,8 @@
 [English](output-format.en.md) · [中文](output-format.md)
 
-# Domic Home Passport：固定输出格式 v1
+# Domic Home Passport：固定输出格式 v1.2
 
-更新时间：2026-09-09。与原型 `core.js`、`samples.js` 和导出保持一致。机器可读权威格式见 [receipt.schema.json](receipt.schema.json)。研究报告中的扩展结构是未来候选，不是另一个 v1。
+更新时间：2026-09-10。与原型 `core.js`、`samples.js` 和导出保持一致。机器可读权威格式见 [receipt.schema.json](receipt.schema.json)。研究报告中的扩展结构是未来候选，不是另一个 v1。
 
 ## 核心信息
 
@@ -50,7 +50,7 @@
 
 ## 本轮语言更新
 
-工作台和说明页默认英文，提供中文切换。名称统一 Domic Home Passport。用户填写的姓名、地址、备注和原文证据不自动翻译；两种界面的输出字段名与枚举一致，导出的系统提示统一英文。保留现有浏览器存储与访问地址。按用户最新说明，主要客户在英国并使用英文。下一轮优先验证英国英文票据、GBP／£ 金额、英国日期格式和常见维修描述；当前实验性解析器支持明确的 GBP 代码和 ISO 日期，尚不解析 £ 金额或日／月／年日期。其他语言作为后续扩展，中文界面不代表会翻译原件。
+工作台和说明页默认英文，提供中文切换。名称统一 Domic Home Passport。用户填写的姓名、地址、备注和原文证据不自动翻译；两种界面的输出字段名与枚举一致，导出的系统提示统一英文。保留现有浏览器存储与访问地址。按用户最新说明，主要客户在英国并使用英文。下一轮优先验证英国英文票据、GBP／£ 金额、英国日期格式和常见维修描述；当前解析器在用户明确选择 UK 格式时支持 £ 金额及 DD/MM/YYYY 日期，保留严格的总额、日期与角色检查；跨栏版式仍需人工复核。其他语言作为后续扩展，中文界面不代表会翻译原件。
 
 ## Schema 1.1：施工与身份
 
@@ -60,3 +60,12 @@
 - `service.change_type`：repair / replacement / installation / improvement / maintenance / inspection / unknown。
 
 旧 1.0 记录打开和导出时保留原显示名称，新身份字段默认 null，不会按同名自动合并。识别证据保留原文，人工改动另记 edited_fields。[完整核对流程](intake-flow.zh.md)。
+
+## Schema 1.2：上传人与明确房屋关联
+
+- `account`: `{id, display_name, role, is_demo}` 或 null。原型是可选的测试身份，不是登录，也不是权限验证。旧记录保持 null。
+- `property.id`：房屋显示名；`property.uid`：显式选择的房屋稳定 ID 或 null。两者分开；修改显示名会清除已有关联，需重新选择。
+- 管理端按 `property.uid` 展示历史。没有 UID 的记录分别显示为未关联，不根据同名或相似地址合并。
+- `extraction.locale`: en-GB 或 null，是用户选择的日期格式上下文，不代表自动语言识别。
+
+[已通过 UI 保存并读回的真实测试 JSON](../round2/saved-record-example.json) · [9 条记录总表 CSV](../round2/saved-records.csv) · [逐字段及确认界面说明](../round2/zh.html#format)。CSV 是便于查看的 20 列投影，完整记录以 JSON 为准，原件独立保存。

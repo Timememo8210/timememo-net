@@ -1,0 +1,187 @@
+{
+  "case_id": "uk-02",
+  "title_en": "Individual joiner receipt with no company",
+  "title_zh": "独立木工：只有个人姓名",
+  "before_status": "uncertain",
+  "after_status": "uncertain",
+  "before_file": "02_individual_joiner_no_company.baseline.parsed.json",
+  "after_file": "02_individual_joiner_no_company.after.parsed.json",
+  "comparisons": [
+    {
+      "ground_truth_key": "company_name",
+      "record_field": "provider.organization_name",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "correct_blank"
+    },
+    {
+      "ground_truth_key": "worker_name",
+      "record_field": "provider.person_name",
+      "expected": "Elliot Vale",
+      "actual": "Elliot Vale",
+      "result": "correct_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "property_address",
+      "record_field": "property.service_address",
+      "expected": "7 Imaginary Willow Walk, Samplemere, ZZ2 3CC",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "work_date",
+      "record_field": "service.date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "document_date",
+      "record_field": "document.issue_date",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "correct_blank"
+    },
+    {
+      "ground_truth_key": "description",
+      "record_field": "service.summary",
+      "expected": "Rehang dining-room door, plane lower edge and fit two new hinges.",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "total",
+      "record_field": "amount.total",
+      "expected": 185,
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "currency",
+      "record_field": "amount.currency",
+      "expected": "GBP",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "document_type",
+      "record_field": "document.type",
+      "expected": "receipt",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization",
+      "before": "unknown",
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "payment_status",
+      "record_field": "amount.payment_status",
+      "expected": "paid",
+      "actual": "paid",
+      "result": "correct_value",
+      "comparison": "enum_normalization",
+      "before": "paid",
+      "before_result": "correct_value"
+    },
+    {
+      "ground_truth_key": "work_status",
+      "record_field": "service.completion_status",
+      "expected": "completed",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization",
+      "before": "unknown",
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "expected_route.classification",
+      "record_field": "extraction.relevance",
+      "expected": "home_service",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "home-vs-unrelated normalization",
+      "before": "unknown",
+      "before_result": "missing_present_value"
+    }
+  ],
+  "safety_checks": {
+    "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+    "no_wrong_nonempty_service_date": true,
+    "no_wrong_nonempty_currency": true,
+    "no_wrong_nonempty_total_under_document_type_semantics": true,
+    "not_auto_confirmed": true,
+    "uk_locale_was_passed": true
+  },
+  "manual_review_fields": [
+    "property.service_address",
+    "service.date",
+    "service.summary",
+    "amount.total",
+    "amount.currency",
+    "document.type",
+    "service.completion_status",
+    "extraction.relevance"
+  ],
+  "unsupported_ground_truth": [
+    {
+      "ground_truth_key": "trade",
+      "expected": "joinery",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "provider_type",
+      "expected": "individual",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "customer_name",
+      "expected": "Rowan Piper",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_paid",
+      "expected": 185,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_due",
+      "expected": 0,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_amount",
+      "expected": 0,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    }
+  ]
+}

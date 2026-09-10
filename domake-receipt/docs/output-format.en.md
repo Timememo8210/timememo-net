@@ -1,8 +1,8 @@
 [English](output-format.en.md) · [中文](output-format.md)
 
-# Domic Home Passport: Fixed Output Format v1.1
+# Domic Home Passport: Fixed Output Format v1.2
 
-Updated: 2026-09-09. This specification matches the prototype's `core.js`, `samples.js`, and exports. The authoritative machine-readable contract is [receipt.schema.json](receipt.schema.json). Extended structures in the research notes are future candidates, not a second v1 format.
+Updated: 2026-09-10. This specification matches the prototype's `core.js`, `samples.js`, and exports. The authoritative machine-readable contract is [receipt.schema.json](receipt.schema.json). Extended structures in the research notes are future candidates, not a second v1 format.
 
 ## Core information
 
@@ -53,8 +53,14 @@ All names, addresses, and amounts in these examples are fictional. The sample ou
 
 ## Language update
 
-The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. The primary audience is UK customers who use English. Prioritise UK English receipts, GBP / £ amounts, UK dates and typical repair descriptions in the next evaluation. The current experimental parser supports explicit GBP codes and ISO dates; pound-symbol amounts and day/month/year dates are not yet parsed. Other source languages remain later extensions; the Chinese interface does not translate documents.
+The public workspace and brief default to English and offer a Chinese switch. User-authored names, addresses, notes and source quotes are preserved as entered. Record keys and enum values are identical across both interfaces; application-generated exported warnings use English. This update retains the existing browser database and URLs. The primary audience is UK customers who use English. Prioritise UK English receipts, GBP / £ amounts, UK dates and typical repair descriptions in the next evaluation. With explicit UK format selected, the parser supports £ amounts and DD/MM/YYYY dates conservatively; unfamiliar layouts still need review. Other source languages remain later extensions; the Chinese interface does not translate documents.
 
 ## Schema 1.1 compatibility
 
 Existing 1.0 records are normalized when opened/exported. New company/person fields remain null and change_type unknown; the old provider.name is preserved. No same-name identity merging is implemented. See [intake flow](intake-flow.en.md).
+
+## Schema 1.2: uploader and explicit property identity
+
+`account` is `{id, display_name, role, is_demo}` or null. It is a prototype identity choice, not authentication. `property.id` remains a display name; nullable `property.uid` is the explicitly selected stable property key. Changing the display name clears the old link. Old records remain unassigned; equal names or similar addresses do not merge histories. Optional `extraction.locale` records the explicit en-GB date context. UK context now enables conservative £ and DD/MM/YYYY parsing.
+
+[UI-read saved JSON](../round2/saved-record-example.json) · [Nine-record CSV](../round2/saved-records.csv) · [Full field and confirmation guide](../round2/#format). CSV is a 20-column projection; JSON contains the full data. Original files are separate.

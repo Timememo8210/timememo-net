@@ -29,6 +29,8 @@ for (const name of [
   "i18n.js",
   "ocr.js",
   "extraction.js",
+  "workspace-context.js",
+  "admin/admin.js",
 ])
   execFileSync(process.execPath, ["--check", resolve(root, name)]);
 for (const name of [
@@ -38,6 +40,10 @@ for (const name of [
   "project/zh.html",
   "walkthrough/index.html",
   "walkthrough/zh.html",
+  "admin/index.html",
+  "admin/zh.html",
+  "round2/index.html",
+  "round2/zh.html",
 ]) {
   const html = await readFile(resolve(root, name), "utf8");
   if (!/lang="(?:zh-CN|en)"/.test(html) || !html.includes("viewport"))
@@ -46,6 +52,9 @@ for (const name of [
     if (/^(https?:|data:|blob:)/.test(url) || url.endsWith(".zip")) continue;
     await access(resolve(dirname(resolve(root, name)), url));
   }
+}
+for (const r of JSON.parse(await readFile(resolve(root,"admin/examples.json"))).records) {
+  if (!validate(r)) throw Error(JSON.stringify(validate.errors));
 }
 const files = [];
 async function walk(dir) {

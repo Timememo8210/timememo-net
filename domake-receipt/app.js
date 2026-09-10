@@ -1,3 +1,4 @@
+import { users, properties, contextFor, applyContext } from "./workspace-context.js";
 import { extractText } from "./extraction.js";
 import { startOCR } from "./ocr.js";
 import { t, html, locale } from "./i18n.js";
@@ -35,6 +36,7 @@ const changes =
       }
     : rawchanges;
 let activeOCR = null;
+let intakeLocale = "en-GB";
 const categories = translateOptions(rawcategories);
 const types = translateOptions(rawtypes);
 const payments = translateOptions(rawpayments);
@@ -70,6 +72,17 @@ function snapshot(r) {
 function isDirty() {
   return current && snapshot(current) !== baseline;
 }
+// The test context is chosen explicitly; it is never read from receipt text.
+function selectedContext() {
+  return contextFor($("#demo-user")?.value, $("#demo-property")?.value);
+}
+const contextHost = document.createElement("div");
+contextHost.className = "context-bar";
+contextHost.innerHTML = `<div><strong>${L("Local prototype workspace", "本地原型工作区")}</strong><small>${L("Choose a test identity and property. This is not sign-in; records stay in this browser.", "选择测试身份和房屋；这不是账号登录，资料保留在此浏览器。")}</small></div><label>${L("Uploading as", "上传身份")}<select id="demo-user">${users.map(u => `<option value="${u.id}">${escape(u.display_name)}${u.is_demo ? " · Demo" : ""}</option>`).join("")}</select></label><label>${L("Link new document to", "新单据归属房屋")}<select id="demo-property"><option value="">${L("Choose in the review form", "在核对表中填写")}</option>${properties.map(p=>`<option value="${p.uid}">${escape(p.name)} · ${escape(p.owner)}</option>`).join("")}</select></label><label>${L("Receipt format", "单据日期／币种格式")}<select id="receipt-locale"><option value="en-GB">UK · DD/MM/YYYY · £</option><option value="">ISO dates · explicit currency</option></select></label><a href="${L("admin/", "admin/zh.html")}">${L("Management console", "管理控制台")} ↗</a>`;
+$(".mode-note").after(contextHost);
+for (const id of ["demo-user", "demo-property"]) $("#"+id).onchange = () => {
+  if (current) message(L("This choice applies to the next document. Current record details are unchanged.", "此选择用于下一张单据，当前记录信息未改动。"));
+};
 const primaryFields = [
   [
     "property.id",
@@ -213,7 +226,14 @@ function renderForm() {
   $("#step-upload").className = "done";
   $("#step-review").className = "current";
   $("#step-save").className = "";
-  $("#form-fields").innerHTML = fields(primaryFields);
+  $("#form-fields").innerHTML = `<div class="field full"><label for="review-property">${L("Link to a property", "关联到房屋")}</label><select id="review-property"><option value="">${L("Unlinked / enter property below", "尚未关联／在下方填写房屋")}</option>${properties.map(p=>`<option value="${p.uid}" ${current.property.uid === p.uid ? "selected" : ""}>${escape(p.name)} · ${escape(p.owner)}</option>`).join("")}</select></div>` + fields(primaryFields);
+  $("#review-property").onchange = () => {
+    collect(); const p = properties.find(p => p.uid === $("#review-property").value);
+    current.property.uid = p?.uid || null;
+    if (p) current.property.id = p.name;
+    for (const key of ["property.uid", "property.id"]) if (!current.review.edited_fields.includes(key)) current.review.edited_fields.push(key);
+    renderForm();
+  };
   $("#extra-fields").innerHTML =
     fields(extras) +
     t(
@@ -309,6 +329,11 @@ function collect() {
       !current.review.edited_fields.includes(el.dataset.path)
     )
       current.review.edited_fields.push(el.dataset.path);
+    if (el.dataset.path === "property.id" && value !== current.property.id) {
+      current.property.uid = null;
+      if ($("#review-property")) $("#review-property").value = "";
+      if (!current.review.edited_fields.includes("property.uid")) current.review.edited_fields.push("property.uid");
+    }
     set(current, el.dataset.path, value);
   });
   $$("[data-item]").forEach((el) => {
@@ -366,7 +391,10 @@ function renderSource() {
       link.rel = "noopener";
       link.textContent = t("无法预览？打开原始 PDF ↗");
       link.className = "text-link";
-      $("#source-preview").append(link);
+      const note = document.createElement("p");
+      note.className = "muted";
+      note.textContent = L("PDF preview depends on your browser. If the panel is blank, open the original file.", "PDF 预览取决于浏览器；若面板为空白，请打开原始文件。");
+      $("#source-preview").prepend(note, link);
     } else {
       const img = document.createElement("img");
       img.src = objectUrl;
@@ -381,6 +409,9 @@ function renderSource() {
     );
 }
 function reset() {
+  clearTimeout(message.timeout);
+  $("#message").hidden = true;
+  $("#message").textContent = "";
   generation++;
   activeOCR?.cancel();
   activeOCR = null;
@@ -437,7 +468,7 @@ $$("[data-sample]").forEach(
     (b.onclick = () => {
       if (busy) return;
       reset();
-      current = sampleRecord(b.dataset.sample, locale);
+      current = applyContext(sampleRecord(b.dataset.sample, locale), selectedContext());
       baseline = null;
       renderSource();
       $("#empty-result").hidden = true;
@@ -500,8 +531,9 @@ async function handleFile(file) {
       if (opened) message(t("这份文件已存在，已打开原记录，避免重复保存。"));
       return;
     }
-    current = blankRecord();
+    current = applyContext(blankRecord(), selectedContext());
     currentFile = file;
+    intakeLocale = $("#receipt-locale").value || null;
     current.source = {
       name: file.name,
       mime_type: file.type,
@@ -623,9 +655,12 @@ async function recognizeFile(token) {
   try {
     const data = await activeOCR.promise;
     if (token !== generation) return;
-    const source = current.source;
-    current = extractText(data.text, data.confidence);
-    current.source = { ...source, mode: "local_ocr" };
+    const previous = current;
+    current = extractText(data.text, data.confidence, { locale: current.extraction?.locale ?? intakeLocale });
+    current.source = { ...previous.source, mode: "local_ocr" };
+    current.account = previous.account;
+    current.property.id = previous.property.id;
+    current.property.uid = previous.property.uid;
     showOutcome(current.extraction.status);
   } catch (error) {
     if (token !== generation) return;
@@ -641,9 +676,12 @@ $("#outcome-manual").onclick = () => {
   if (busy || !current) return;
   const result = current.extraction;
   if (result?.status === "unrelated" || result?.status === "no_text") {
-    const source = current.source;
+    const previous = current;
     current = blankRecord();
-    current.source = source;
+    current.source = previous.source;
+    current.account = previous.account;
+    current.property.id = previous.property.id;
+    current.property.uid = previous.property.uid;
     current.extraction = result;
   }
   current.source.mode = "manual";
@@ -657,9 +695,12 @@ $("#outcome-manual").onclick = () => {
 $("#outcome-retry").onclick = async () => {
   if (busy || !currentFile) return;
   if (isDirty() && !(await canReplace())) return;
-  const source = current.source;
+  const previous = current;
   current = blankRecord();
-  current.source = source;
+  current.source = previous.source;
+  current.account = previous.account;
+  current.property.id = previous.property.id;
+  current.property.uid = previous.property.uid;
   busy = true;
   await recognizeFile(++generation);
 };
@@ -689,6 +730,7 @@ zone.addEventListener("drop", (e) => {
 });
 function summary() {
   const values = [
+    [L("Uploaded by", "上传人"), current.account?.display_name || L("Not recorded", "未记录")],
     [t("归属房屋"), current.property.id],
     [t("服务项目"), current.service.summary],
     [t("服务日期"), current.service.date],
@@ -704,6 +746,10 @@ function summary() {
     [t("单据类型"), types[current.document.type]],
     [t("付款状态"), payments[current.amount.payment_status]],
     [t("施工状态"), completions[current.service.completion_status]],
+    [t("开票日期"), current.document.issue_date],
+    [t("单据编号"), current.document.number],
+    ...extras.filter(([p]) => !["document.issue_date", "document.number"].includes(p) && get(current, p)).map(([p,l]) => [l,get(current,p)]),
+    ...current.items.map((i,n)=>[L("Line item ", "明细 ")+(n+1), (i.description || "")+" · "+money(i.amount,current.amount.currency)]),
   ];
   $("#confirmation-summary").innerHTML =
     (current.source.mode === "demo"
@@ -953,7 +999,7 @@ async function original(id) {
 $("#export-all").onclick = () =>
   download(
     {
-      schema_version: "1.1",
+      schema_version: "1.2",
       exported_at: new Date().toISOString(),
       storage_scope: "this_browser",
       records,
@@ -981,6 +1027,8 @@ $("#confirm-delete").onclick = async () => {
 try {
   records = await storage.all();
   renderHistory();
+  const editId = new URL(window.location.href).searchParams.get("record");
+  if (editId) await loadRecord(editId);
 } catch (e) {
   message(e.message, true);
 }
@@ -998,14 +1046,14 @@ $$("[data-ocr-fixture]").forEach(
       try {
         const response = await fetch(
           new URL(
-            "./test-assets/" + button.dataset.ocrFixture,
+            button.dataset.fixtureUrl || ("./test-assets/" + button.dataset.ocrFixture),
             import.meta.url,
           ),
         );
         if (!response.ok) throw Error("fixture_unavailable");
         const blob = await response.blob();
         await handleFile(
-          new File([blob], button.dataset.ocrFixture, { type: "image/png" }),
+          new File([blob], button.dataset.ocrFixture, { type: button.dataset.ocrFixture.endsWith(".pdf") ? "application/pdf" : "image/png" }),
         );
       } catch {
         message(

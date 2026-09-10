@@ -1,0 +1,199 @@
+{
+  "case_id": "uk-09",
+  "title_en": "Appliance repair with long wrapped property address and work lines",
+  "title_zh": "家电维修：长地址及多行描述",
+  "before_status": "uncertain",
+  "after_status": "uncertain",
+  "before_file": "09_appliance_repair_long_wrapped_text.baseline.parsed.json",
+  "after_file": "09_appliance_repair_long_wrapped_text.after.parsed.json",
+  "comparisons": [
+    {
+      "ground_truth_key": "company_name",
+      "record_field": "provider.organization_name",
+      "expected": "Arcwell Appliance Repair Test Workshop",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "worker_name",
+      "record_field": "provider.person_name",
+      "expected": "Imogen Quill",
+      "actual": "Imogen Quill",
+      "result": "correct_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "property_address",
+      "record_field": "property.service_address",
+      "expected": "Flat 4B, The Fictional Mews, 128 Willow-by-the-Water Lane, North Exampleton, Greater Examplefordshire, ZZ9 1KK, United Kingdom",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "work_date",
+      "record_field": "service.date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "document_date",
+      "record_field": "document.issue_date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "description",
+      "record_field": "service.summary",
+      "expected": "Investigate intermittent final-rinse drain failure, clear fabric obstruction from drain-pump housing, replace worn pump impeller assembly, reassemble panels, run rinse-and-spin programme, check hose connections for leaks and demonstrate filter access.",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "total",
+      "record_field": "amount.total",
+      "expected": 180,
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value",
+      "manual_note": "Raw OCR total is £1 80 00; do not silently convert it to 180."
+    },
+    {
+      "ground_truth_key": "currency",
+      "record_field": "amount.currency",
+      "expected": "GBP",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal",
+      "before": null,
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "document_type",
+      "record_field": "document.type",
+      "expected": "invoice",
+      "actual": "invoice",
+      "result": "correct_value",
+      "comparison": "enum_normalization",
+      "before": "invoice",
+      "before_result": "correct_value"
+    },
+    {
+      "ground_truth_key": "payment_status",
+      "record_field": "amount.payment_status",
+      "expected": "paid",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization",
+      "before": "unknown",
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "work_status",
+      "record_field": "service.completion_status",
+      "expected": "completed",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization",
+      "before": "unknown",
+      "before_result": "missing_present_value"
+    },
+    {
+      "ground_truth_key": "expected_route.classification",
+      "record_field": "extraction.relevance",
+      "expected": "home_service",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "home-vs-unrelated normalization",
+      "before": "unknown",
+      "before_result": "missing_present_value"
+    }
+  ],
+  "safety_checks": {
+    "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+    "no_wrong_nonempty_service_date": true,
+    "no_wrong_nonempty_currency": true,
+    "no_wrong_nonempty_total_under_document_type_semantics": true,
+    "not_auto_confirmed": true,
+    "uk_locale_was_passed": true
+  },
+  "manual_review_fields": [
+    "provider.organization_name",
+    "property.service_address",
+    "service.date",
+    "document.issue_date",
+    "service.summary",
+    "amount.total",
+    "amount.currency",
+    "amount.payment_status",
+    "service.completion_status",
+    "extraction.relevance"
+  ],
+  "unsupported_ground_truth": [
+    {
+      "ground_truth_key": "trade",
+      "expected": "appliance_repair",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "customer_name",
+      "expected": "Beatrice Rowan",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "asset",
+      "expected": "ExampleWash QuietCare 900 washing machine",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "line_amounts",
+      "expected": [
+        145,
+        35
+      ],
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_paid",
+      "expected": 180,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_due",
+      "expected": 0,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_amount",
+      "expected": 0,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    }
+  ]
+}

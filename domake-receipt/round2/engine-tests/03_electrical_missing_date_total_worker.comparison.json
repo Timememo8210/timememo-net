@@ -1,0 +1,153 @@
+{
+  "case_id": "uk-03",
+  "title_en": "Electrical job slip missing date, price and worker",
+  "title_zh": "电工单：故意缺日期、总额、施工人",
+  "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/03_electrical_missing_date_total_worker.png",
+  "raw_ocr_file": "03_electrical_missing_date_total_worker.ocr.json",
+  "raw_text_file": "03_electrical_missing_date_total_worker.ocr.txt",
+  "baseline_parsed_file": "03_electrical_missing_date_total_worker.baseline.parsed.json",
+  "run_file": "03_electrical_missing_date_total_worker.run.json",
+  "engine_outcome": "completed",
+  "confidence": 93,
+  "locale": "en-GB",
+  "extraction_status": "uncertain",
+  "comparisons": [
+    {
+      "ground_truth_key": "company_name",
+      "record_field": "provider.organization_name",
+      "expected": "Southmere Spark Test Services",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "worker_name",
+      "record_field": "provider.person_name",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "property_address",
+      "record_field": "property.service_address",
+      "expected": "41 Makebelieve Crescent, South Exampleton, ZZ3 4DD",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "work_date",
+      "record_field": "service.date",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_date",
+      "record_field": "document.issue_date",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "description",
+      "record_field": "service.summary",
+      "expected": "Replaced damaged double socket in upstairs study; tested socket operation and earth continuity.",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "total",
+      "record_field": "amount.total",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "currency",
+      "record_field": "amount.currency",
+      "expected": null,
+      "actual": null,
+      "result": "correct_blank",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_type",
+      "record_field": "document.type",
+      "expected": "unknown",
+      "actual": "unknown",
+      "result": "correct_blank",
+      "comparison": "enum_normalization",
+      "note": "job_slip is not supported by schema; unknown is safe, not successful job-slip recognition."
+    },
+    {
+      "ground_truth_key": "payment_status",
+      "record_field": "amount.payment_status",
+      "expected": "unknown",
+      "actual": "unknown",
+      "result": "correct_blank",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "work_status",
+      "record_field": "service.completion_status",
+      "expected": "completed",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "expected_route.classification",
+      "record_field": "extraction.relevance",
+      "expected": "home_service",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "home-vs-unrelated normalization"
+    }
+  ],
+  "unsupported_ground_truth": [
+    {
+      "ground_truth_key": "trade",
+      "expected": "electrical",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "customer_name",
+      "expected": "Florence Ash",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "subtotal",
+      "expected": null,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_paid",
+      "expected": null,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_due",
+      "expected": null,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    }
+  ],
+  "safety_checks": {
+    "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+    "no_wrong_nonempty_service_date": true,
+    "no_wrong_nonempty_currency": true,
+    "no_wrong_nonempty_total": true,
+    "not_auto_confirmed": true,
+    "uk_locale_was_passed": true
+  }
+}

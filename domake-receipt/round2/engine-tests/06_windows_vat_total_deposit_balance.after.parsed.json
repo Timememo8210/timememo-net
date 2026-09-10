@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.2",
+  "property": {
+    "id": null,
+    "uid": null,
+    "service_address": null
+  },
+  "account": null,
+  "document": {
+    "type": "invoice",
+    "number": null,
+    "issue_date": null
+  },
+  "service": {
+    "date": null,
+    "category": "unknown",
+    "change_type": "unknown",
+    "summary": null,
+    "location": null,
+    "completion_status": "unknown"
+  },
+  "provider": {
+    "name": "Leo Arden",
+    "organization_name": null,
+    "person_name": "Leo Arden",
+    "phone": null,
+    "address": null
+  },
+  "amount": {
+    "total": 1620,
+    "currency": "GBP",
+    "payment_status": "unknown"
+  },
+  "items": [],
+  "details": {
+    "asset_model": null,
+    "asset_serial": null,
+    "warranty": null,
+    "permit_number": null
+  },
+  "notes": null,
+  "source": {
+    "name": null,
+    "mime_type": null,
+    "sha256": null,
+    "mode": "local_ocr"
+  },
+  "extraction": {
+    "engine": "tesseract-7.0.0-eng",
+    "locale": "en-GB",
+    "status": "partial",
+    "readability": "readable",
+    "relevance": "home_service",
+    "text": "FICTIONAL TEST DATA\nNorthvale Glazing Test Ltd\nINVOICE NG-TEST-606 10 September 2026\nCUSTOMER / PROPERTY INSTALLATION\nSophie Linden Completed: 10 September 2026\n63 Fictional Bay Street Installer: Leo Arden\nNorth Example, ZZ6 7GG Status: Installation complete\nSUPPLY AND FIT\nReplace two front-bedroom uPVC double-glazed windows.\nRemove existing frames, install new units and seal perimeter.\nNet subtotal (excluding VAT) £1,350.00\nVAT at 20% £270.00\nINVOICE TOTAL (including VAT) £1,620.00\nDeposit already paid £500.00\nAMOUNT DUE\n£1,120.00\nBalance payable by 24 September 2026. Payment status: Partially paid.\nFICTIONAL TEST DATA - NOT A REAL TRANSACTION\nAll people, businesses, addresses and amounts are invented.",
+    "confidence": 94
+  },
+  "evidence": [
+    {
+      "field": "provider.person_name",
+      "page": 1,
+      "quote": "63 Fictional Bay Street Installer: Leo Arden"
+    },
+    {
+      "field": "provider.name",
+      "page": 1,
+      "quote": "63 Fictional Bay Street Installer: Leo Arden"
+    },
+    {
+      "field": "amount.total",
+      "page": 1,
+      "quote": "INVOICE TOTAL (including VAT) £1,620.00"
+    },
+    {
+      "field": "amount.currency",
+      "page": 1,
+      "quote": "INVOICE TOTAL (including VAT) £1,620.00"
+    },
+    {
+      "field": "document.type",
+      "page": 1,
+      "quote": "INVOICE NG-TEST-606 10 September 2026"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "missing_fields": [],
+    "warnings": [],
+    "edited_fields": []
+  }
+}

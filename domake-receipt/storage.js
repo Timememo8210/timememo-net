@@ -66,3 +66,12 @@ export async function file(id) {
     req.onerror = () => reject(req.error);
   });
 }
+
+export async function fileIds() {
+  const database = await db();
+  return new Promise((resolve, reject) => {
+    const req = database.transaction("files").objectStore("files").getAllKeys();
+    req.onsuccess = () => resolve(new Set(req.result));
+    req.onerror = () => reject(req.error);
+  });
+}

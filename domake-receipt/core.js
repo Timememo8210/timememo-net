@@ -1,5 +1,5 @@
 import { toEnglish } from "./i18n.js";
-export const SCHEMA_VERSION = "1.1";
+export const SCHEMA_VERSION = "1.2";
 export const categories = {
   plumbing: "水暖 / Plumbing",
   electrical: "电气 / Electrical",
@@ -48,6 +48,8 @@ export function normalizeRecord(record) {
   r.provider.person_name ??= null;
   r.service.change_type ??= "unknown";
   r.extraction ??= null;
+  r.account ??= null;
+  r.property.uid ??= null;
   return r;
 }
 export const nullable = (s) =>
@@ -57,7 +59,8 @@ export const nullable = (s) =>
 export function blankRecord() {
   return {
     schema_version: SCHEMA_VERSION,
-    property: { id: null, service_address: null },
+    property: { id: null, uid: null, service_address: null },
+    account: null,
     document: { type: "unknown", number: null, issue_date: null },
     service: {
       date: null,

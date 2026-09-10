@@ -1,0 +1,383 @@
+{
+  "scope": "Parser-only recheck of exactly ten saved raw OCR results and their confidence. No new image OCR; no ground truth is given to extraction.",
+  "started_at": "2026-09-10T15:35:15.585Z",
+  "node_version": "v22.23.1",
+  "baseline_parser_sha256": "7c71334c18b585582f59d710e7eb719a820344b676c1afde694e8bdcd70d595f",
+  "after_parser_sha256": "3fce0d53c450aa6edf56349418d2e04837c767b6f56cd935371a0627bccc5b68",
+  "locale": "en-GB",
+  "parser_invocation": "extractText(raw.text, raw.confidence, {locale:\"en-GB\"})",
+  "finished_at": "2026-09-10T15:35:15.598Z",
+  "after_parser_sha256_after_run": "3fce0d53c450aa6edf56349418d2e04837c767b6f56cd935371a0627bccc5b68",
+  "parser_unchanged_during_recheck": true,
+  "samples": [
+    {
+      "case_id": "uk-01",
+      "sample": "01_plumbing_company_technician_paid_iso",
+      "raw_ocr_sha256": "8e27dcf79a9140117cc107f72a2e0aa6a1f032a2fefc37f0771d7ae65c3bfac1",
+      "raw_text_sha256": "4fadb5a9f1e921b7b7d1c8fc8fd27cb379bbdd05ddcf47e7d99df0a44b185d5d",
+      "baseline_parsed_sha256": "6380dc6682dfe0454edd0a45c0d0b4761f8d58e2c8e707464980be0997cec437",
+      "after_parsed_sha256": "ae88e32b2d601eaf52c6e40cfe07a136ca52c6639b3cd2b004b315519fca1f26",
+      "confidence": 93,
+      "locale": "en-GB",
+      "parsing_ms": 3.232,
+      "changes": {
+        "provider.name": {
+          "before": null,
+          "after": "Toby Wren"
+        },
+        "provider.person_name": {
+          "before": null,
+          "after": "Toby Wren"
+        },
+        "service.date": {
+          "before": null,
+          "after": "2026-09-10"
+        },
+        "document.issue_date": {
+          "before": null,
+          "after": "2026-09-10"
+        },
+        "amount.total": {
+          "before": null,
+          "after": 264
+        },
+        "amount.currency": {
+          "before": null,
+          "after": "GBP"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.summary",
+          "property.service_address"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-02",
+      "sample": "02_individual_joiner_no_company",
+      "raw_ocr_sha256": "f1d109cdba1b845279156deebfa76ee85df6a8aa9f0c549c6e885356db33f427",
+      "raw_text_sha256": "47683a4a54cd549cb5ff663abecd04dc43b46f9dc29cec3c30985a84cc05e160",
+      "baseline_parsed_sha256": "4ee666a72d76d739c6839c05d721abbcfb1805d3f6f9496affb60d50487ecf74",
+      "after_parsed_sha256": "2219b710cabce89eab1b3fcc6db64a441a139dbd716ad3f661b6beccd77e3a5a",
+      "confidence": 91,
+      "locale": "en-GB",
+      "parsing_ms": 0.587,
+      "changes": {
+        "provider.name": {
+          "before": null,
+          "after": "Elliot Vale"
+        },
+        "provider.person_name": {
+          "before": null,
+          "after": "Elliot Vale"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-03",
+      "sample": "03_electrical_missing_date_total_worker",
+      "raw_ocr_sha256": "9cd0df2a7318ccad6012f1414cdf3fd0089f2b98138cac238f2ad07af435a07a",
+      "raw_text_sha256": "5feb672c0b7e3ca5d94f50fc27b9e6e7e2d107bf2c482e4e0bccb2f994cbe2cf",
+      "baseline_parsed_sha256": "4f90b737f406393611472964fe70c4af3142f31d234f6afc45679e6a01137f18",
+      "after_parsed_sha256": "4f90b737f406393611472964fe70c4af3142f31d234f6afc45679e6a01137f18",
+      "confidence": 93,
+      "locale": "en-GB",
+      "parsing_ms": 0.092,
+      "changes": {},
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-04",
+      "sample": "04_roofing_quote_planned_unpaid",
+      "raw_ocr_sha256": "707b6abd8fe3d57621404b3ad5393828da440b16c1b1e33f1a0d41cb9a0f7a08",
+      "raw_text_sha256": "795ac2fa03a1cb08de11a3cc15ff6dc8079c561b5f92e3472e07d71c8d0ea898",
+      "baseline_parsed_sha256": "ad993f2ae96356538de10200a973a3ce92e900fcbc35dd0630d4cf3f692e73a4",
+      "after_parsed_sha256": "c296498f7324c1270c7d3f9fa616bd0b8f43b9206cfeb6d61eaa65ffede65018",
+      "confidence": 93,
+      "locale": "en-GB",
+      "parsing_ms": 0.301,
+      "changes": {
+        "amount.total": {
+          "before": null,
+          "after": 1440
+        },
+        "amount.currency": {
+          "before": null,
+          "after": "GBP"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "报价不代表实际支出或施工完成。",
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-05",
+      "sample": "05_boiler_annual_service_uk_date",
+      "raw_ocr_sha256": "b95a23b6d5084d6cbf075292f8440a59b381b6da412d4706834e9642328d7b0c",
+      "raw_text_sha256": "7ed363be9ab882929124ea19ff3ea0b076003b370b21d7e8e9a2287bfe283a43",
+      "baseline_parsed_sha256": "6e17bb3d78a2f38b5eb1d08ae41a296db1dc8e1daf02e9675e395ed665bbebfc",
+      "after_parsed_sha256": "899d747115ec903ce91a52604faedfa733cff764e88fcfbd4a35e8987ce67ef6",
+      "confidence": 88,
+      "locale": "en-GB",
+      "parsing_ms": 0.589,
+      "changes": {
+        "provider.name": {
+          "before": null,
+          "after": "Nia Fenwick"
+        },
+        "provider.person_name": {
+          "before": null,
+          "after": "Nia Fenwick"
+        },
+        "amount.total": {
+          "before": null,
+          "after": 96
+        },
+        "amount.currency": {
+          "before": null,
+          "after": "GBP"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-06",
+      "sample": "06_windows_vat_total_deposit_balance",
+      "raw_ocr_sha256": "36d577121dede1896a9cc84a7ac8425b0951203fa8e3444769bed3cbcc7560c6",
+      "raw_text_sha256": "28de2018c8d908605279b87117b77a0ffcb1770d19d7e648d74f312fd20b86df",
+      "baseline_parsed_sha256": "d816be8cf45e24bce9cddceba21036a8b59d2eb53f398bd49c7e9f7420dbdc11",
+      "after_parsed_sha256": "a1aa05c4a13b19af3fa12555c860a63f23b07afd68aaf176ebe4401fdc159587",
+      "confidence": 94,
+      "locale": "en-GB",
+      "parsing_ms": 0.141,
+      "changes": {
+        "provider.name": {
+          "before": null,
+          "after": "Leo Arden"
+        },
+        "provider.person_name": {
+          "before": null,
+          "after": "Leo Arden"
+        },
+        "amount.total": {
+          "before": null,
+          "after": 1620
+        },
+        "amount.currency": {
+          "before": null,
+          "after": "GBP"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "property.service_address"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-07",
+      "sample": "07_decorator_completed_unpaid",
+      "raw_ocr_sha256": "95ca3ed65f24b804312f7839e18046aae0bac8b4e4496ed1b299119337daf216",
+      "raw_text_sha256": "a013bd5b661d97edc7ffd90da34f952d13832e4ec018aea7664f0c4205aa5224",
+      "baseline_parsed_sha256": "601e2b3b447738226e4c7a6e30a6281189b38d5c65b12525e85566fd3bdf1fb7",
+      "after_parsed_sha256": "601e2b3b447738226e4c7a6e30a6281189b38d5c65b12525e85566fd3bdf1fb7",
+      "confidence": 89,
+      "locale": "en-GB",
+      "parsing_ms": 0.106,
+      "changes": {},
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-08",
+      "sample": "08_gardening_worker_customer_preparer",
+      "raw_ocr_sha256": "176e6e10a71672afa86883b2c50609d9a282a2027afae28367dca631eb4cd8ca",
+      "raw_text_sha256": "5fd2eeea52776c8ccb9cfcb09e8f6827620cc92f3e56daf9ab2029f2aa650b9d",
+      "baseline_parsed_sha256": "eb919b2addb14620f5fac6fad668b734fc07b6d5494506f9a2023b1fe0372e6c",
+      "after_parsed_sha256": "eb919b2addb14620f5fac6fad668b734fc07b6d5494506f9a2023b1fe0372e6c",
+      "confidence": 94,
+      "locale": "en-GB",
+      "parsing_ms": 0.104,
+      "changes": {},
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-09",
+      "sample": "09_appliance_repair_long_wrapped_text",
+      "raw_ocr_sha256": "834f1bca74392d3f399c4bbf57e1c3e947030f2030886f7b079670d6515018df",
+      "raw_text_sha256": "f70ddabe62c78bb65ff8a6cf4c6db3801d0b009a8a69ef6bfff93c809765ebda",
+      "baseline_parsed_sha256": "a2f7a7fcc69f7aa7f0bf27b06ab22aeaa4590bd0c4f5d7fe5858de0b11c9b945",
+      "after_parsed_sha256": "4ee0bb69274afccf4959a140b167f757df7f43015e546d2cf0ab8b14ee89ed2d",
+      "confidence": 94,
+      "locale": "en-GB",
+      "parsing_ms": 0.123,
+      "changes": {
+        "provider.name": {
+          "before": null,
+          "after": "Imogen Quill"
+        },
+        "provider.person_name": {
+          "before": null,
+          "after": "Imogen Quill"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    },
+    {
+      "case_id": "uk-10",
+      "sample": "10_restaurant_unrelated_reject",
+      "raw_ocr_sha256": "94a2ca5ff6b87ef7293c8f59c1477fe403bed4c13cf3b096009cb273d702d7f6",
+      "raw_text_sha256": "4a084a40786bc262c579619205278f548f6ed931e355e55906c2803182e947a9",
+      "baseline_parsed_sha256": "58df9bf0748531f2da70b6caf05778f44c64c2c25eefdea70f2512170a22a46c",
+      "after_parsed_sha256": "7bf6c7d03083f068efc21db6a2913ddef72a05d5fa3dc85f518cfc11a9256abe",
+      "confidence": 87,
+      "locale": "en-GB",
+      "parsing_ms": 1.255,
+      "changes": {
+        "extraction.status": {
+          "before": "uncertain",
+          "after": "unrelated"
+        },
+        "extraction.relevance": {
+          "before": "unknown",
+          "after": "unrelated_service"
+        }
+      },
+      "inspect": {
+        "errors": [],
+        "warnings": [
+          "服务日期未知；不会用开票日期或上传日期代替。",
+          "未提供服务地址；归属房屋由你确认。"
+        ],
+        "missing": [
+          "service.date",
+          "service.summary",
+          "provider.name",
+          "property.service_address",
+          "amount.total",
+          "amount.currency"
+        ]
+      },
+      "raw_ocr_unchanged": true,
+      "baseline_unchanged": true
+    }
+  ]
+}

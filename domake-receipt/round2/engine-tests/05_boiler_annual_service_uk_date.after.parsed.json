@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.2",
+  "property": {
+    "id": null,
+    "uid": null,
+    "service_address": "8 Pretend Hawthorn Row"
+  },
+  "account": null,
+  "document": {
+    "type": "receipt",
+    "number": null,
+    "issue_date": null
+  },
+  "service": {
+    "date": null,
+    "category": "unknown",
+    "change_type": "unknown",
+    "summary": null,
+    "location": null,
+    "completion_status": "unknown"
+  },
+  "provider": {
+    "name": "Nia Fenwick",
+    "organization_name": null,
+    "person_name": "Nia Fenwick",
+    "phone": null,
+    "address": null
+  },
+  "amount": {
+    "total": 96,
+    "currency": "GBP",
+    "payment_status": "unknown"
+  },
+  "items": [],
+  "details": {
+    "asset_model": null,
+    "asset_serial": null,
+    "warranty": null,
+    "permit_number": null
+  },
+  "notes": null,
+  "source": {
+    "name": null,
+    "mime_type": null,
+    "sha256": null,
+    "mode": "local_ocr"
+  },
+  "extraction": {
+    "engine": "tesseract-7.0.0-eng",
+    "locale": "en-GB",
+    "status": "partial",
+    "readability": "readable",
+    "relevance": "home_service",
+    "text": "FICTIONAL TEST DATA\nHEATING (TEST)\nANNUAL BOILER SERVICE\nRECEIPT EH-TEST-0510\nDate: 10/09/2026\nCustomer: Oliver Fern\nService at:\n8 Pretend Hawthorn Row\nEmber Example, 225 6FF\nEngineer: Nia Fenwick\nBoiler: ExampleHeat 24i\nAnnual service completed.\nCleaned burner and trap.\nOperation checks passed.\nService charge £80.00\nVAT 20% £16.00\nTOTAL PAID £96.00\nPaid by card. Balance £0.00\nNEXT ANNUAL SERVICE DUE\n10/09/2027\nFICTIONAL TEST DATA - NOT A REAL TRANSACTION\nAt people, busesies, akesses and amounts are invented",
+    "confidence": 88
+  },
+  "evidence": [
+    {
+      "field": "provider.person_name",
+      "page": 1,
+      "quote": "Engineer: Nia Fenwick"
+    },
+    {
+      "field": "property.service_address",
+      "page": 1,
+      "quote": "Service at:\n8 Pretend Hawthorn Row"
+    },
+    {
+      "field": "provider.name",
+      "page": 1,
+      "quote": "Engineer: Nia Fenwick"
+    },
+    {
+      "field": "amount.total",
+      "page": 1,
+      "quote": "TOTAL PAID £96.00"
+    },
+    {
+      "field": "amount.currency",
+      "page": 1,
+      "quote": "TOTAL PAID £96.00"
+    },
+    {
+      "field": "document.type",
+      "page": 1,
+      "quote": "RECEIPT EH-TEST-0510"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "missing_fields": [],
+    "warnings": [],
+    "edited_fields": []
+  }
+}

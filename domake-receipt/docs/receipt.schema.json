@@ -17,7 +17,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.1"
+      "const": "1.2"
     },
     "property": {
       "type": "object",
@@ -34,6 +34,12 @@
           ]
         },
         "service_address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "uid": {
           "type": [
             "string",
             "null"
@@ -459,11 +465,48 @@
         },
         "confidence": {
           "type": "number"
+        },
+        "locale": {
+          "enum": [
+            "en-GB",
+            null
+          ]
+        }
+      }
+    },
+    "account": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "role",
+        "is_demo"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "homeowner",
+            "pro",
+            "local_reviewer"
+          ]
+        },
+        "is_demo": {
+          "type": "boolean"
         }
       }
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://timememo.net/domake-receipt/docs/receipt.schema.json",
-  "title": "Domic Home Passport v1.1 record"
+  "title": "Domic Home Passport v1.2 record"
 }

@@ -1,0 +1,170 @@
+{
+  "case_id": "uk-06",
+  "title_en": "Window replacement VAT invoice with different balance",
+  "title_zh": "窗户更换：小计、税、总额、已付与应付不同",
+  "image": "/Users/m5pro/Codex_m5pro/domake-research/round2-assets/png/06_windows_vat_total_deposit_balance.png",
+  "raw_ocr_file": "06_windows_vat_total_deposit_balance.ocr.json",
+  "raw_text_file": "06_windows_vat_total_deposit_balance.ocr.txt",
+  "baseline_parsed_file": "06_windows_vat_total_deposit_balance.baseline.parsed.json",
+  "run_file": "06_windows_vat_total_deposit_balance.run.json",
+  "engine_outcome": "completed",
+  "confidence": 94,
+  "locale": "en-GB",
+  "extraction_status": "partial",
+  "comparisons": [
+    {
+      "ground_truth_key": "company_name",
+      "record_field": "provider.organization_name",
+      "expected": "Northvale Glazing Test Ltd",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "worker_name",
+      "record_field": "provider.person_name",
+      "expected": "Leo Arden",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "property_address",
+      "record_field": "property.service_address",
+      "expected": "63 Fictional Bay Street, North Example, ZZ6 7GG",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "work_date",
+      "record_field": "service.date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_date",
+      "record_field": "document.issue_date",
+      "expected": "2026-09-10",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "description",
+      "record_field": "service.summary",
+      "expected": "Supply and fit two front-bedroom uPVC double-glazed windows; remove frames, install units and seal perimeter.",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "total",
+      "record_field": "amount.total",
+      "expected": 1620,
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "currency",
+      "record_field": "amount.currency",
+      "expected": "GBP",
+      "actual": null,
+      "result": "missing_present_value",
+      "comparison": "literal"
+    },
+    {
+      "ground_truth_key": "document_type",
+      "record_field": "document.type",
+      "expected": "invoice",
+      "actual": "invoice",
+      "result": "correct_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "payment_status",
+      "record_field": "amount.payment_status",
+      "expected": "partial",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "work_status",
+      "record_field": "service.completion_status",
+      "expected": "completed",
+      "actual": "unknown",
+      "result": "missing_present_value",
+      "comparison": "enum_normalization"
+    },
+    {
+      "ground_truth_key": "expected_route.classification",
+      "record_field": "extraction.relevance",
+      "expected": "home_service",
+      "actual": "home_service",
+      "result": "correct_value",
+      "comparison": "home-vs-unrelated normalization"
+    }
+  ],
+  "unsupported_ground_truth": [
+    {
+      "ground_truth_key": "trade",
+      "expected": "windows_glazing",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "customer_name",
+      "expected": "Sophie Linden",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "payment_due_date",
+      "expected": "2026-09-24",
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "subtotal",
+      "expected": 1350,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_rate",
+      "expected": 0.2,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "vat_amount",
+      "expected": 270,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_paid",
+      "expected": 500,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    },
+    {
+      "ground_truth_key": "amount_due",
+      "expected": 1120,
+      "result": "not_supported_by_schema_or_extractor",
+      "note": "Excluded from scored fields; no claim that blank means success."
+    }
+  ],
+  "safety_checks": {
+    "worker_not_substituted_from_customer_preparer_server_or_proposed_worker": true,
+    "no_wrong_nonempty_service_date": true,
+    "no_wrong_nonempty_currency": true,
+    "no_wrong_nonempty_total": true,
+    "not_auto_confirmed": true,
+    "uk_locale_was_passed": true
+  }
+}
