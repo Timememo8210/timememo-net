@@ -63,3 +63,9 @@ Eight fictional PDF/image inputs and a Chinese PDF guide are available on the [b
 Schema 1.2 adds an optional uploader account and explicit property UID without guessing old relationships. Management offers records, people, property histories, originals and edit/reconfirmation. It reads this browser only; the fictional portfolio is separate. Nine home-service documents were manually reviewed and saved through the real English UI; the restaurant document was rejected from automatic intake. This validates the review workflow, not unattended recognition. All ten PNGs were tested independently: 5 partial, 4 uncertain, 1 unrelated; none fully extracted. PDF stays manual. The browser CSV download attempt was not verified; the actual selectable CSV preview was read and all 180 cells matched the saved records.
 
 Reproduce the additional 11 relationship/storage checks with `node scripts/verify-context.mjs`. The report records PDF preview and browser-download compatibility limits.
+
+## Four detailed interaction cases · 10 September 2026
+
+[中文逐步截图](interaction-guide/zh.html) · [English overview](interaction-guide/) · [39-page Chinese PDF](interaction-guide/domic-four-cases.zh.pdf).
+
+Four fresh real-browser journeys capture 32 steps: unreadable input and replacement, partial extraction and completion, correcting a truncated address before confirmation, and correcting a deliberately simulated human amount typo after saving. The last journey updates the same record from GBP158 to GBP185 without creating a duplicate. The guide distinguishes inline outcomes, dialogs and navigation; every step states its save status. Independent evidence checks: 45/45. The application itself is unchanged from tested build 2f827f5.

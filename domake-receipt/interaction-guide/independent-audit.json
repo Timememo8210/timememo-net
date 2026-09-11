@@ -1,0 +1,202 @@
+{
+  "scope": "Independent read-only audit of root-recorded UI trace and saved JSON readbacks. No additional browser actions or screenshot visual review performed by this auditor.",
+  "passed": 45,
+  "total": 45,
+  "checks": [
+    {
+      "name": "32 documented steps",
+      "pass": true
+    },
+    {
+      "name": "All screenshots exist",
+      "pass": true
+    },
+    {
+      "name": "Distinct four cases have 7/6/7/12 steps",
+      "pass": true
+    },
+    {
+      "name": "A unreadable outcome is inline",
+      "pass": true
+    },
+    {
+      "name": "A retry opens unsaved-work dialog",
+      "pass": true
+    },
+    {
+      "name": "A retry yields same unreadable result",
+      "pass": true
+    },
+    {
+      "name": "A file replacement opens unsaved-work dialog",
+      "pass": true
+    },
+    {
+      "name": "A cancelling replacement retains source/result",
+      "pass": true
+    },
+    {
+      "name": "A never creates a saved record",
+      "pass": true
+    },
+    {
+      "name": "A reset returns to empty uploader state",
+      "pass": true
+    },
+    {
+      "name": "B partial result opens extraction modal",
+      "pass": true
+    },
+    {
+      "name": "B auto-result contains worker/date/amount",
+      "pass": true
+    },
+    {
+      "name": "B auto-result lacks company/address/summary",
+      "pass": true
+    },
+    {
+      "name": "B edit closes modal and retains values",
+      "pass": true
+    },
+    {
+      "name": "B fills three missing fields",
+      "pass": true
+    },
+    {
+      "name": "B final confirm unchecked and disabled",
+      "pass": true
+    },
+    {
+      "name": "B checking enables confirm",
+      "pass": true
+    },
+    {
+      "name": "B saves only after final action",
+      "pass": true
+    },
+    {
+      "name": "C actual extracted address is truncated",
+      "pass": true
+    },
+    {
+      "name": "C first confirmation preserves truncated address",
+      "pass": true
+    },
+    {
+      "name": "C Back to edit preserves all values",
+      "pass": true
+    },
+    {
+      "name": "C manual correction supplies complete address",
+      "pass": true
+    },
+    {
+      "name": "C service date remains blank",
+      "pass": true
+    },
+    {
+      "name": "C new confirmation displays corrected address",
+      "pass": true
+    },
+    {
+      "name": "C new confirmation starts unchecked/disabled",
+      "pass": true
+    },
+    {
+      "name": "C checking enables confirmation",
+      "pass": true
+    },
+    {
+      "name": "C saving creates exactly second record",
+      "pass": true
+    },
+    {
+      "name": "C persisted address/date match",
+      "pass": true
+    },
+    {
+      "name": "D starts with inline relevance question",
+      "pass": true
+    },
+    {
+      "name": "D typo explicitly labelled manual simulation",
+      "pass": true
+    },
+    {
+      "name": "D initial confirmation displays 158",
+      "pass": true
+    },
+    {
+      "name": "D initial confirmation requires check",
+      "pass": true
+    },
+    {
+      "name": "D initially saves third record",
+      "pass": true
+    },
+    {
+      "name": "D admin detail/readback confirms saved 158",
+      "pass": true
+    },
+    {
+      "name": "D edit navigates to same record",
+      "pass": true
+    },
+    {
+      "name": "D reconfirmation shows 185",
+      "pass": true
+    },
+    {
+      "name": "D reconfirmation requires a new check",
+      "pass": true
+    },
+    {
+      "name": "D update leaves count at three",
+      "pass": true
+    },
+    {
+      "name": "D reopened detail shows corrected 185",
+      "pass": true
+    },
+    {
+      "name": "D ID/created time/source unchanged",
+      "pass": true
+    },
+    {
+      "name": "D update/confirmation timestamps changed",
+      "pass": true
+    },
+    {
+      "name": "D only amount and two timestamps changed",
+      "pass": true
+    },
+    {
+      "name": "D complete final readback matches after export",
+      "pass": true
+    },
+    {
+      "name": "Three distinct confirmed records saved",
+      "pass": true
+    },
+    {
+      "name": "Original SHA-256 matches each uploaded fixture",
+      "pass": true
+    }
+  ],
+  "D_changed_paths": [
+    "amount.total",
+    "confirmed_at",
+    "updated_at"
+  ],
+  "caption_notes": [
+    {
+      "step": "A07",
+      "note": "Hidden source DOM retains old filename; describe visible preview reset rather than every metadata string being erased."
+    },
+    {
+      "step": "C04/C06",
+      "note": "Describe service date as left unfilled in this run; source has a generic Date label, which is not automatically mapped to service date."
+    }
+  ]
+}

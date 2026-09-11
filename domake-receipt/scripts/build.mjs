@@ -44,6 +44,8 @@ for (const name of [
   "admin/zh.html",
   "round2/index.html",
   "round2/zh.html",
+  "interaction-guide/index.html",
+  "interaction-guide/zh.html",
 ]) {
   const html = await readFile(resolve(root, name), "utf8");
   if (!/lang="(?:zh-CN|en)"/.test(html) || !html.includes("viewport"))
