@@ -58,6 +58,43 @@ test("a complete evidence-backed proposal separates worker/company and service/o
   assert.deepEqual(inspect(r).errors, []);
 });
 
+test("supported company or worker resolves only the display-name missing-evidence warning", () => {
+  const nameWarning = "AI value for provider.name was left unknown because supporting text was missing.";
+  for (const identity of ["organization_name", "person_name"]) {
+    const p = complete();
+    const other = identity === "organization_name" ? "person_name" : "organization_name";
+    p.provider.name = p.provider[identity]; // No direct provider.name evidence.
+    p.provider[other] = null;
+    p.evidence = p.evidence.filter((e) => e.field !== `provider.${other}`);
+    const r = normalizeAIExtraction(p);
+    assert.equal(r.provider.name, p.provider[identity]);
+    assert.deepEqual(r.evidence.find((e) => e.field === "provider.name"), {
+      ...p.evidence.find((e) => e.field === `provider.${identity}`), field: "provider.name",
+    });
+    assert.ok(!r.review.warnings.includes(nameWarning));
+    assert.equal(r.extraction.status, "review");
+
+    const missingAmount = structuredClone(p);
+    missingAmount.evidence = missingAmount.evidence.filter((e) => e.field !== "amount.total");
+    const partial = normalizeAIExtraction(missingAmount);
+    assert.equal(partial.amount.total, null);
+    assert.ok(partial.review.warnings.includes("AI value for amount.total was left unknown because supporting text was missing."));
+    assert.ok(!partial.review.warnings.includes(nameWarning));
+    assert.equal(partial.extraction.status, "partial");
+
+    const unsupported = structuredClone(p);
+    unsupported.evidence = unsupported.evidence.filter((e) => e.field !== `provider.${identity}`);
+    const unresolved = normalizeAIExtraction(unsupported);
+    assert.equal(unresolved.provider.name, null);
+    assert.ok(unresolved.review.warnings.includes(nameWarning));
+
+    const invalidName = structuredClone(p);
+    invalidName.provider.name = {};
+    assert.ok(normalizeAIExtraction(invalidName).review.warnings.includes(
+      "AI value for provider.name was invalid or ambiguous and was left unknown."));
+  }
+});
+
 test("unreadable/unrelated payloads cannot smuggle apparently usable extracted fields", () => {
   for (const [status, expected] of [["unreadable", "no_text"], ["unrelated", "unrelated"]]) {
     const r = normalizeAIExtraction({ ...complete(), status });

@@ -1,3 +1,5 @@
+Current cloud workspace: https://timememo.net/domake-receipt/cloud/ . The cloud management console stores originals and property histories on the server. This README below describes the earlier browser-only pilot. The new server implementation is downloadable at docs/cloud-ai-service-source.zip, including its API contract and database schema.
+
 [English](README.md) · [中文](README.zh.md)
 
 # Domic Home Passport

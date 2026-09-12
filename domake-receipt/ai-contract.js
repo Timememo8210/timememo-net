@@ -193,6 +193,9 @@ export function normalizeAIExtraction(payload, { model = null, engine = "openrou
     record.provider.name = get(record, identityField);
     record.evidence = record.evidence.filter((entry) => entry.field !== "provider.name");
     record.evidence.push({ ...evidence.get(identityField), field: "provider.name" });
+    // The supported identity resolves only this display-name evidence warning.
+    const resolvedWarning = warnings.indexOf("AI value for provider.name was left unknown because supporting text was missing.");
+    if (resolvedWarning !== -1) warnings.splice(resolvedWarning, 1);
   }
   const checked = inspect(record);
   record.review.missing_fields = checked.missing;
