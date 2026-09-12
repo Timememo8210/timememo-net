@@ -54,8 +54,10 @@ for (const name of [
   if (!/lang="(?:zh-CN|en)"/.test(html) || !html.includes("viewport"))
     throw Error("Missing responsive document metadata");
   for (const [, url] of html.matchAll(/(?:href|src)="([^"#]+)(?:#[^"]*)?"/g)) {
-    if (/^(https?:|data:|blob:)/.test(url) || url.endsWith(".zip")) continue;
-    await access(resolve(dirname(resolve(root, name)), url));
+    if (/^(https?:|data:|blob:)/.test(url)) continue;
+    const localPath = url.split(/[?#]/)[0];
+    if (!localPath || localPath.endsWith(".zip")) continue;
+    await access(resolve(dirname(resolve(root, name)), localPath));
   }
 }
 for (const r of JSON.parse(await readFile(resolve(root,"admin/examples.json"))).records) {

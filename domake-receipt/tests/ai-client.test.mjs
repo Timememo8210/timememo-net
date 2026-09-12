@@ -118,7 +118,7 @@ test("controlled AI browser flow: access error, malformed response, partial revi
     // Only configuration is replaced for this controlled transport test; the production
     // client, app, normalizer and storage implementation all run unchanged.
     let source = await readFile(new URL("../app.js", import.meta.url), "utf8");
-    source = source.replace('import { AI_ENDPOINT, AI_TIMEOUT_MS, AI_MAX_FILE_BYTES } from "./ai-config.js";', 'const AI_ENDPOINT = "https://ai.example.test"; const AI_TIMEOUT_MS = 45000; const AI_MAX_FILE_BYTES = 6 * 1024 * 1024;');
+    source = source.replace(/import \{ AI_ENDPOINT, AI_TIMEOUT_MS, AI_MAX_FILE_BYTES \} from "\.\/ai-config\.js(?:\?[^"\s]*)?";/, 'const AI_ENDPOINT = "https://ai.example.test"; const AI_TIMEOUT_MS = 45000; const AI_MAX_FILE_BYTES = 6 * 1024 * 1024;');
     source = source.replace(/from "\.\/([^\"]+)"/g, (_, path) => `from ${JSON.stringify(new URL("../" + path, import.meta.url).href)}`);
     await import("data:text/javascript;base64," + Buffer.from(source).toString("base64"));
     assert.equal($("#reading-mode").value, "cloud");

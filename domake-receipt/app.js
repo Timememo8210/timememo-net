@@ -1,9 +1,9 @@
 import { users, properties, contextFor, applyContext } from "./workspace-context.js";
 import { extractText } from "./extraction.js";
 import { startOCR } from "./ocr.js";
-import { AI_ENDPOINT, AI_TIMEOUT_MS, AI_MAX_FILE_BYTES } from "./ai-config.js";
+import { AI_ENDPOINT, AI_TIMEOUT_MS, AI_MAX_FILE_BYTES } from "./ai-config.js?v=20260912-ai2";
 import { createAIClient, AIError } from "./ai-client.js";
-import { normalizeAIExtraction } from "./ai-contract.js";
+import { normalizeAIExtraction } from "./ai-contract.js?v=20260912-ai2";
 import { t, html, locale } from "./i18n.js";
 import {
   blankRecord,
