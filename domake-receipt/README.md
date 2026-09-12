@@ -2,6 +2,8 @@
 
 # Domic Home Passport
 
+Live cloud-service implementation and tests: [source handoff archive](docs/cloud-ai-service-source.zip). Hosting registration metadata and secrets are intentionally excluded.
+
 An interactive prototype and partner handoff for the receipt module of the existing home-passport project. Updated September 10, 2026. The workspace and project brief default to English, with a Chinese language switch. The confirmed primary audience is UK customers who use English.
 
 - [Prototype](https://timememo.net/domake-receipt/)
@@ -12,9 +14,9 @@ An interactive prototype and partner handoff for the receipt module of the exist
 - [Output schema](docs/receipt.schema.json) / [field rules](docs/output-format.en.md)
 - [Partner handoff](docs/implementation-plan.en.md)
 
-The current public version uses experimental English image OCR in the browser, conservative field extraction, recovery states and real-image test controls. PDF remains preview/manual entry until cloud AI is connected; three preset examples remain explicitly labelled. Confirmed records and originals are stored in IndexedDB in this browser. There is no shared cloud database or customer login.
+The current public version uses experimental English image OCR in the browser, conservative field extraction, recovery states and real-image test controls. PDF can be read with cloud AI or entered manually; three preset examples remain explicitly labelled. Confirmed records and originals are stored in IndexedDB in this browser. There is no shared cloud database or customer login.
 
-**12 September update:** the user has authorized live AI integration. The cloud extraction service, fixed schema, bilingual client, access-code flow and same-record re-extraction are implemented and pass controlled tests. OpenRouter login and key creation are still pending; `AI_ENDPOINT` is deliberately blank and no real Gemini calls have been made. See [the setup and model comparison record (Chinese)](docs/cloud-ai.zh.md). Existing screenshot reports describe the earlier OCR/manual workflow and are not cloud-model benchmarks.
+**12 September update:** real cloud AI is connected through OpenRouter using `google/gemini-3.1-flash-lite`. The API key is a server secret; the browser uses a separate pilot access code. Images and PDFs now follow the same review/confirmation workflow. Frontend 85 and service 12 controlled checks pass; actual model comparisons and cloud requests are documented in the [live AI report](ai-pilot/) / [中文](ai-pilot/zh.html). Existing older screenshot reports remain OCR/manual evidence. Records and original files still stay in this browser; there is no shared customer database.
 
 ## Run locally
 

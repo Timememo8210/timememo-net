@@ -18,13 +18,13 @@
       >
       <nav aria-label="Main navigation">
         <a href="../">Receipt workspace</a
-        ><a href="./" aria-current="page">About this project</a>
+        ><a href="./" aria-current="page">About this project</a><a href="../ai-pilot/">AI test report ↗</a>
       </nav>
       <div class="language-switch" aria-label="Language">
         <a href="./" lang="en" aria-current="true">EN</a
         ><a href="zh.html" lang="zh-CN">中文</a>
       </div>
-      <span class="prototype">Project brief · 9 Sep 2026</span>
+      <span class="prototype">Project brief · 12 Sep 2026</span>
     </header>
     <main class="shell project-shell">
       <div class="intro">
@@ -38,14 +38,16 @@
       <div class="mode-note">
         <span class="status-dot"></span>
         <div>
-          Agreed scope: deliver the prototype and plan first. Live AI
-          extraction, a cloud database, and production integration are planned
-          for the next iteration.
+          Live AI reading is now connected through OpenRouter, using Gemini
+          3.1 Flash Lite by default. Image and PDF reading have been tested,
+          including a PDF in the deployed website. Review and confirmation are
+          still required; records stay in this browser. Shared accounts, a
+          shared property database and production integration remain next steps.
         </div>
       </div>
       <div class="project-grid" style="margin-top: 32px">
         <aside class="project-nav" aria-label="On this page">
-          <a href="#intake">Updated intake & tests</a
+          <a href="../ai-pilot/">Live AI results & screenshots ↗</a><a href="#intake">Updated intake & tests</a
           ><a href="#history">01 Project history</a
           ><a href="#scope">02 Current scope</a
           ><a href="#format">03 Output format</a
@@ -162,23 +164,25 @@
                   <tr>
                     <td>
                       Drag in or select a PDF, JPG, PNG, or WebP; access the
-                      camera through a mobile browser; one file up to 15 MB.
+                      camera through a mobile browser; up to 6 MB for cloud AI
+                      or 15 MB for local/manual intake.
                     </td>
                     <td>
-                      Server uploads, HEIC conversion, PDF page-count and
+                      HEIC conversion, PDF page-count and
                       encryption checks, and splitting files containing multiple
                       documents.
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      Experimental English image OCR, automatic review summary,
-                      recovery for unreadable/unrelated input, company and
-                      worker fields; PDF remains manual.
+                      Cloud AI for images and PDFs, with a pilot access code;
+                      local English OCR and manual alternatives; review summary,
+                      recovery for unreadable/unrelated input, and separate
+                      company and worker fields.
                     </td>
                     <td>
-                      Live Gemini extraction, usage and billing, and quality and
-                      speed testing.
+                      Broader accuracy and latency evaluation, per-user quotas,
+                      and production usage and billing controls.
                     </td>
                   </tr>
                   <tr>
@@ -211,24 +215,27 @@
               <strong
                 >your uploaded file is never replaced with sample
                 results</strong
-              >. Images now run local English OCR with conservative field
-              parsing; unknown values remain blank. PDFs use the browser PDF
-              viewer; the prototype does not automatically extract their text or
-              process only the first page.
+              >. The selected cloud reader sends the original image or PDF to
+              the AI service and returns a draft in the fixed field format.
+              Unknown values remain blank. Local OCR still reads English images;
+              manual entry remains available. PDF preview depends on the browser
+              and is separate from cloud extraction.
             </p>
             <div class="decision">
               <strong>Local prototype limits</strong><br />Files and records are
               stored in this browser. Clearing site data, using private
               browsing, or browser storage eviction may cause data loss. JSON
               exports do not include the original binary files; download those
-              separately. The prototype is not connected to the Domic Home
-              Passport backend, and save confirmations refer to local storage.
+              separately. The cloud extraction service is connected, but shared
+              customer accounts and the Domic Home Passport property database
+              are not. Save confirmations refer to local storage.
             </div>
             <p>
               The prototype treats each file as one logical document and one
               property activity. Split combined invoices before adding them.
-              Property names are entered manually for now; production will use a
-              property selector governed by access permissions.
+              The current property selector uses prototype identities and
+              properties; a property name can also be entered manually.
+              Production needs authenticated property access permissions.
             </p>
           </section>
           <section id="intake">
@@ -298,8 +305,10 @@
               tests. Clear company/individual receipts, missing fields,
               unreadable blur, a restaurant receipt and a landscape photo are
               included. This is a bounded experiment, not an accuracy guarantee.
-              Gemini, Arabic document understanding, full PDF extraction and
-              physical-phone testing remain open.
+              Those earlier tests used local OCR. The subsequent
+              <a href="../ai-pilot/">live Gemini image/PDF tests and deployed
+              website screenshots</a> are recorded separately. Broad accuracy,
+              Arabic document understanding and physical-phone testing remain open.
             </p>
             <p>
               <a href="../docs/intake-flow.en.md"
@@ -460,15 +469,14 @@
           </section>
           <section id="models">
             <p class="eyebrow">04 / MODEL DECISION</p>
-            <h2>Start with a low-cost baseline, then test real receipts</h2>
+            <h2>Current pilot: Gemini 3.1 Flash Lite</h2>
             <p>
-              First compare
-              <strong
-                >Gemini 2.5 Flash-Lite, 3.1 Flash-Lite, and 3.5
-                Flash-Lite</strong
-              >. Use 2.5 Flash and 3 Flash Preview as comparisons for difficult
-              samples. An independent model adapter allows models to change
-              without rewriting upload and review flows.
+              The deployed pilot uses <strong>Gemini 3.1 Flash Lite through
+              OpenRouter</strong>, following small-sample comparisons with 2.5
+              and 3.5 Flash Lite. See the <a href="../ai-pilot/">actual measured
+              costs, timings and remaining errors</a>. The table below records
+              earlier planning estimates, not measured bills. An independent
+              adapter allows the model to change without rewriting the review flow.
             </p>
             <div class="table-wrap">
               <table>
@@ -600,10 +608,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Live AI is not connected</td>
+                    <td>Access code missing / AI service unavailable</td>
                     <td>
-                      State that extraction has not run and allow manual entry.
-                      Do not show a false extraction-success message.
+                      Explain the access or service problem, retain the original,
+                      and offer retry or manual entry. Failed requests do not
+                      become successful empty records.
                     </td>
                   </tr>
                   <tr>
@@ -616,9 +625,9 @@
                   <tr>
                     <td>Slow extraction / 429 / 503 / timeout</td>
                     <td>
-                      Future live tasks should show their current stage, support
-                      cancellation, and limit retries. Do not fabricate progress
-                      or automatically save empty results.
+                      The AI reader shows the reading stage, supports cancellation,
+                      and provides explicit error recovery. No automatic retry or
+                      empty-result saving is performed.
                     </td>
                   </tr>
                   <tr>
@@ -653,8 +662,9 @@
               show complete information, missing information, and work that must
               not be marked completed. Verification covers field rules,
               prototype flows, persistence, and failure recovery. Live model
-              evaluation and testing with a physical phone camera have not yet
-              been completed.
+              evaluation and the deployed PDF flow are now documented in the
+              <a href="../ai-pilot/">AI pilot report</a>. Physical-phone camera
+              acceptance testing remains to be completed.
             </p>
           </section>
           <section id="architecture">
@@ -664,8 +674,11 @@
               Production could follow the original
               <strong>Next.js + Supabase + private R2</strong> proposal or
               integrate with Daniel's existing system. The current prototype is
-              a static TimeMemo subpage with separate frontend modules and a
-              model-independent output structure.
+              a static TimeMemo subpage with a deployed cloud extraction service,
+              separate frontend modules and a model-independent output structure.
+              The pilot access code gates AI requests; it is not customer sign-in.
+              The diagram below describes the intended production architecture;
+              storage currently remains in this browser.
             </p>
             <div class="flow">
               <span>Web / mobile</span>→<span>Upload and authentication</span
@@ -843,8 +856,8 @@
                 cost.
               </li>
               <li>
-                <strong>Production flow: </strong>connect server-side
-                extraction, private file storage, property permissions, and
+                <strong>Production flow: </strong>extend the deployed extraction
+                service with private file storage, property permissions, and
                 transactional saving, then run a small pilot with real users.
               </li>
             </ol>
@@ -904,14 +917,15 @@
               The public GitHub directory is available for partners to view and
               download. Contributing code requires repository collaborator
               access. No invitations or messages were sent in this iteration.
-              The production architecture, APIs, and model choices described
-              here are proposals to validate, not deployed features.
+              Cloud AI extraction is deployed. Shared accounts, property
+              permissions and database-backed storage described here remain
+              proposals to implement and validate.
             </p>
           </section>
         </article>
       </div>
       <footer>
-        Domic Home Passport<span>Project record · 9 Sep 2026</span
+        Domic Home Passport<span>Project record · 12 Sep 2026</span
         ><a href="../">Back to the receipt workspace ↗</a>
       </footer>
     </main>

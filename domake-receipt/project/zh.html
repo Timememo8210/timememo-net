@@ -18,13 +18,13 @@
       >
       <nav aria-label="主导航">
         <a href="../zh.html">票据工作台</a
-        ><a href="zh.html" aria-current="page">项目说明</a>
+        ><a href="zh.html" aria-current="page">项目说明</a><a href="../ai-pilot/zh.html">AI 实测报告 ↗</a>
       </nav>
       <div class="language-switch" aria-label="语言">
         <a href="./" lang="en">EN</a
         ><a href="zh.html" lang="zh-CN" aria-current="true">中文</a>
       </div>
-      <span class="prototype">项目备忘 · 2026.09.09</span>
+      <span class="prototype">项目备忘 · 2026.09.12</span>
     </header>
     <main class="shell project-shell">
       <div class="intro">
@@ -38,13 +38,14 @@
       <div class="mode-note">
         <span class="status-dot"></span>
         <div>
-          本轮已确认：先交付原型与方案；真实 AI
-          识别、云端数据库和正式系统对接留到下一轮。
+          已通过 OpenRouter 接通真实 AI，默认使用 Gemini 3.1 Flash Lite；
+          已测试图片与 PDF，并在已部署网站完成 PDF 识别。
+          仍需人工核对确认，记录保留在当前浏览器；共享账户、房屋数据库和正式系统对接留待下一步。
         </div>
       </div>
       <div class="project-grid" style="margin-top: 32px">
         <aside class="project-nav" aria-label="文档目录">
-          <a href="#intake">本轮上传与测试</a
+          <a href="../ai-pilot/zh.html">真实 AI 结果与截图 ↗</a><a href="#intake">本轮上传与测试</a
           ><a href="#history">01　找回旧项目</a
           ><a href="#scope">02　本轮做到哪里</a
           ><a href="#format">03　固定输出格式</a
@@ -148,19 +149,18 @@
                   <tr>
                     <td>
                       拖入或选择 PDF、JPG、PNG、WebP；手机浏览器拍照入口；单文件
-                      15 MB。
+                      云端 AI 最大 6 MB，本地／手工模式最大 15 MB。
                     </td>
                     <td>
-                      服务端上传、HEIC 转换、PDF 页数/加密检测、多单据拆分。
+                      HEIC 转换、PDF 页数/加密检测、多单据拆分。
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      实验性英文图片
-                      OCR、自动弹出核对摘要、不可读／无关资料恢复、公司与施工者字段；PDF
-                      仍手工填写。
+                      通过试用访问码使用云端 AI 读取图片与 PDF；
+                      可选择本地英文文字识别或手工填写；核对摘要、不可读／无关资料恢复，以及独立的公司与施工者字段。
                     </td>
-                    <td>真实 Gemini 识别、用量计费、质量与速度测试。</td>
+                    <td>扩大准确率与速度评测、按用户配额，以及生产用量和计费控制。</td>
                   </tr>
                   <tr>
                     <td>
@@ -179,18 +179,19 @@
               </table>
             </div>
             <p>
-              交互演示与实际文件明确分开：<strong>实际上传的文件不会被偷偷替换成示例结果</strong>。图片使用本地英文
-              OCR 和保守规则整理，未知项留空，用户可修改。PDF
-              预览交给浏览器阅读器，没有自动提取文本或只读取第一页。
+              交互演示与实际文件明确分开：<strong>实际上传的文件不会被偷偷替换成示例结果</strong>。
+              选择云端 AI 后，原始图片或 PDF 会发送至识别服务，并整理为固定字段草稿，未知值留空。
+              本地文字识别仍支持英文图片，也可手工填写。PDF 页面预览由浏览器提供，与云端识别是独立步骤。
             </p>
             <div class="decision">
               <strong>本地原型边界</strong
               ><br />文件与记录保存在当前浏览器。清理站点数据、无痕模式或存储被逐出可能导致丢失。JSON
-              不含二进制原件，应另下载原件。尚未连接 Domic Home Passport
-              系统；确认成功不会宣称云端已保存。
+              不含二进制原件，应另下载原件。云端识别服务已连接；共享客户账户与 Domic Home Passport
+              房屋数据库尚未接入，保存确认仍指本地保存。
             </div>
             <p>
-              原型按一份文件、一张逻辑单据、一个房屋活动整理。混合多张发票请先拆分。当前房屋名称是手工输入；生产改成有权限的房屋选择器。
+              原型按一份文件、一张逻辑单据、一个房屋活动整理。混合多张发票请先拆分。
+              当前房屋选择器使用测试身份与房屋，也可手工输入房屋名称；生产版还需真实登录与物业访问权限。
             </p>
           </section>
           <section id="intake">
@@ -237,8 +238,9 @@
               </table>
             </div>
             <p>
-              已在浏览器实际处理六张合成图片：公司收据、个人工人收据、缺字段、极度模糊、餐馆收据和风景照片。这是有限样本实验，不是准确率保证。Gemini、阿拉伯文、完整
-              PDF 提取和实体手机测试尚未完成。
+              早期本地文字识别实验在浏览器处理了六张合成图片：公司收据、个人工人收据、缺字段、极度模糊、餐馆收据和风景照片。
+              后续的<a href="../ai-pilot/zh.html">真实 Gemini 图片／PDF 评测与已部署网站截图</a>已单独记录。
+              这些都是有限样本实验；大规模准确率、阿拉伯文理解与实体手机验收仍待验证。
             </p>
             <p>
               <a href="../docs/intake-flow.zh.md">完整交互与身份规则</a> ·
@@ -366,13 +368,11 @@
           </section>
           <section id="models">
             <p class="eyebrow">04 / MODEL DECISION</p>
-            <h2>先选低成本基线，再用真实票据决定</h2>
+            <h2>当前试用版：Gemini 3.1 Flash Lite</h2>
             <p>
-              建议先比较
-              <strong
-                >Gemini 2.5 Flash-Lite、3.1 Flash-Lite 和 3.5 Flash-Lite</strong
-              >。2.5 Flash 与 3 Flash Preview
-              留作复杂样本对照。模型适配层独立，避免以后更换模型时重写上传与审核流程。
+              已部署试用版通过 <strong>OpenRouter 使用 Gemini 3.1 Flash Lite</strong>，
+              依据是与 2.5、3.5 Flash Lite 的小样本对照。请查看<a href="../ai-pilot/zh.html">实际费用、耗时和仍存在的错误</a>。
+              下表保留早期规划算例，不代表实测账单；模型适配层独立，以便后续调整模型。
             </p>
             <div class="table-wrap">
               <table>
@@ -482,8 +482,8 @@
                     <td>说明允许格式和限制，保留已有工作；HEIC 提示转换。</td>
                   </tr>
                   <tr>
-                    <td>真实 AI 尚未接入</td>
-                    <td>明确说明未识别，允许手工填；不会制造“识别成功”。</td>
+                    <td>缺少访问码／AI 服务不可用</td>
+                    <td>说明访问或服务问题，保留原件，可重试或手工填写；失败请求不会变成“成功但为空”的记录。</td>
                   </tr>
                   <tr>
                     <td>未知日期 / 地址 / 金额</td>
@@ -492,7 +492,7 @@
                   <tr>
                     <td>识别慢 / 429 / 503 / 超时</td>
                     <td>
-                      未来真实任务显示阶段、可取消、有限重试；不生成假进度，也不自动保存空结果。
+                      AI 识别显示读取阶段，可取消并提供明确恢复操作；不会自动重试，也不会自动保存空结果。
                     </td>
                   </tr>
                   <tr>
@@ -516,7 +516,8 @@
               </table>
             </div>
             <p>
-              原型含完整收据、缺日期发票、施工前报价三个案例，分别展示“信息齐全”“需要补充”“不能误判已完成”。验证涵盖字段规则、原型流程、持久化与失败恢复；尚未做真实模型评测或手机相机实机验收。
+              原型含完整收据、缺日期发票、施工前报价三个案例，分别展示“信息齐全”“需要补充”“不能误判已完成”。
+              验证涵盖字段规则、原型流程、持久化与失败恢复；真实模型评测和已部署网站 PDF 流程已记录在<a href="../ai-pilot/zh.html">AI 实测报告</a>，手机相机实机验收仍待完成。
             </p>
           </section>
           <section id="architecture">
@@ -526,7 +527,8 @@
               未来可以延续旧方案
               <strong>Next.js + Supabase + 私有 R2</strong>，也可以接 Daniel
               现有系统。当前为 TimeMemo
-              静态子页面，前端模块已经分开，输出结构不依赖某家模型。
+              静态子页面，已连接部署的云端识别服务；前端模块已经分开，输出结构不依赖某家模型。
+              试用访问码用于限制 AI 请求，不等于客户账号登录。下图是目标生产架构，当前数据保存仍在浏览器内。
             </p>
             <div class="flow">
               <span>网页 / 手机</span
@@ -651,7 +653,7 @@
               </li>
               <li>
                 <strong>真实闭环：</strong
-                >接服务端模型、私有文件、物业权限和事务保存，再做小范围真实用户试用。
+                >在已部署的识别服务基础上，接入私有文件存储、物业权限和事务保存，再做小范围真实用户试用。
               </li>
             </ol>
             <p>
@@ -690,13 +692,14 @@
             </div>
             <p class="doc-meta">
               这个公开 GitHub
-              目录可供伙伴查看和下载；共同提交代码需要仓库协作权限。本轮没有邀请任何人或发送消息。资料里的生产架构、接口与模型选择是待验证方案，不是已部署功能。
+              目录可供伙伴查看和下载；共同提交代码需要仓库协作权限。本轮没有邀请任何人或发送消息。
+              云端 AI 识别已部署；资料中的共享账户、物业权限和数据库保存仍是待实现与验证的生产方案。
             </p>
           </section>
         </article>
       </div>
       <footer>
-        Domic Home Passport<span>项目记录 · 2026.09.09</span
+        Domic Home Passport<span>项目记录 · 2026.09.12</span
         ><a href="../zh.html">返回票据工作台 ↗</a>
       </footer>
     </main>

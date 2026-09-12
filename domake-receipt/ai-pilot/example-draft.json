@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.2",
+  "property": {
+    "id": null,
+    "uid": null,
+    "service_address": "22 Fictional Orchard Close, Exampleford, ZZ1 2BB"
+  },
+  "account": null,
+  "document": {
+    "type": "invoice",
+    "number": "BF-TEST-2610",
+    "issue_date": "2026-09-10"
+  },
+  "service": {
+    "date": "2026-09-10",
+    "category": "plumbing",
+    "change_type": "replacement",
+    "summary": "Replace leaking kitchen mixer tap cartridge",
+    "location": "kitchen",
+    "completion_status": "completed"
+  },
+  "provider": {
+    "name": "BRAMBLEFORD PLUMBING TEST LTD",
+    "organization_name": "BRAMBLEFORD PLUMBING TEST LTD",
+    "person_name": "Toby Wren",
+    "phone": null,
+    "address": "14 Sample Trade Yard, Exampleford, ZZ1 1AA"
+  },
+  "amount": {
+    "total": 264,
+    "currency": "GBP",
+    "payment_status": "paid"
+  },
+  "items": [
+    {
+      "description": "Replace leaking kitchen mixer tap cartridge - labour",
+      "amount": 180
+    },
+    {
+      "description": "Replacement cartridge and seal kit",
+      "amount": 40
+    }
+  ],
+  "details": {
+    "asset_model": null,
+    "asset_serial": null,
+    "warranty": null,
+    "permit_number": null
+  },
+  "notes": "Work status: Completed. Leak test passed.",
+  "source": {
+    "name": null,
+    "mime_type": null,
+    "sha256": null,
+    "mode": "cloud_ai"
+  },
+  "extraction": {
+    "engine": "openrouter",
+    "model": "google/gemini-3.1-flash-lite",
+    "request_id": "gen-1789245678-VgP5Tusol3UERAVXneET",
+    "usage": {
+      "prompt_tokens": 1620,
+      "completion_tokens": 1298,
+      "total_tokens": 2918,
+      "reasoning_tokens": 0,
+      "cost": 0.002352
+    },
+    "status": "review",
+    "readability": "readable",
+    "relevance": "home_service",
+    "text": "[Page 1] 22 Fictional Orchard Close\nExampleford, ZZ1 2BB\n[Page 1] PAID INVOICE\n[Page 1] Invoice BF-TEST-2610\n[Page 1] Invoice date: 2026-09-10\n[Page 1] Work completed: 2026-09-10\n[Page 1] BRAMBLEFORD\nPLUMBING TEST LTD\n[Page 1] Replace leaking kitchen mixer tap cartridge\n[Page 1] kitchen\n[Page 1] Work status: Completed\n[Page 1] Attending technician: Toby Wren\n[Page 1] 14 Sample Trade Yard, Exampleford, ZZ1 1AA\n[Page 1] TOTAL PAID £264.00\n[Page 1] GBP (£)\n[Page 1] Payment received in full by card\n[Page 1] Work status: Completed. Leak test passed.\n[Page 1] Replace leaking kitchen mixer tap cartridge - labour\n[Page 1] £180.00\n[Page 1] Replacement cartridge and seal kit\n[Page 1] £40.00",
+    "locale": null
+  },
+  "evidence": [
+    {
+      "field": "property.service_address",
+      "page": 1,
+      "quote": "22 Fictional Orchard Close\nExampleford, ZZ1 2BB"
+    },
+    {
+      "field": "document.type",
+      "page": 1,
+      "quote": "PAID INVOICE"
+    },
+    {
+      "field": "document.number",
+      "page": 1,
+      "quote": "Invoice BF-TEST-2610"
+    },
+    {
+      "field": "document.issue_date",
+      "page": 1,
+      "quote": "Invoice date: 2026-09-10"
+    },
+    {
+      "field": "service.date",
+      "page": 1,
+      "quote": "Work completed: 2026-09-10"
+    },
+    {
+      "field": "service.category",
+      "page": 1,
+      "quote": "BRAMBLEFORD\nPLUMBING TEST LTD"
+    },
+    {
+      "field": "service.change_type",
+      "page": 1,
+      "quote": "Replace leaking kitchen mixer tap cartridge"
+    },
+    {
+      "field": "service.summary",
+      "page": 1,
+      "quote": "Replace leaking kitchen mixer tap cartridge"
+    },
+    {
+      "field": "service.location",
+      "page": 1,
+      "quote": "kitchen"
+    },
+    {
+      "field": "service.completion_status",
+      "page": 1,
+      "quote": "Work status: Completed"
+    },
+    {
+      "field": "provider.organization_name",
+      "page": 1,
+      "quote": "BRAMBLEFORD\nPLUMBING TEST LTD"
+    },
+    {
+      "field": "provider.person_name",
+      "page": 1,
+      "quote": "Attending technician: Toby Wren"
+    },
+    {
+      "field": "provider.address",
+      "page": 1,
+      "quote": "14 Sample Trade Yard, Exampleford, ZZ1 1AA"
+    },
+    {
+      "field": "amount.total",
+      "page": 1,
+      "quote": "TOTAL PAID £264.00"
+    },
+    {
+      "field": "amount.currency",
+      "page": 1,
+      "quote": "GBP (£)"
+    },
+    {
+      "field": "amount.payment_status",
+      "page": 1,
+      "quote": "Payment received in full by card"
+    },
+    {
+      "field": "notes",
+      "page": 1,
+      "quote": "Work status: Completed. Leak test passed."
+    },
+    {
+      "field": "items.0.description",
+      "page": 1,
+      "quote": "Replace leaking kitchen mixer tap cartridge - labour"
+    },
+    {
+      "field": "items.0.amount",
+      "page": 1,
+      "quote": "£180.00"
+    },
+    {
+      "field": "items.1.description",
+      "page": 1,
+      "quote": "Replacement cartridge and seal kit"
+    },
+    {
+      "field": "items.1.amount",
+      "page": 1,
+      "quote": "£40.00"
+    },
+    {
+      "field": "provider.name",
+      "page": 1,
+      "quote": "BRAMBLEFORD\nPLUMBING TEST LTD"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "missing_fields": [],
+    "warnings": [],
+    "edited_fields": []
+  }
+}
