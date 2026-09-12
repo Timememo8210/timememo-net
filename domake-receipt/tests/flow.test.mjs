@@ -9,6 +9,10 @@ const dom = new JSDOM(html, { url: "https://example.test/domake-receipt/" });
 globalThis.window = dom.window;
 globalThis.document = dom.window.document;
 globalThis.confirm = () => true;
+globalThis.fetch = async (url) => {
+  assert.ok(String(url).endsWith("/api/health"), "This UI regression must not send a live model request.");
+  return new Response(JSON.stringify({ configured: true, default_model: "controlled-test-model" }));
+};
 dom.window.HTMLElement.prototype.scrollIntoView = function () {};
 dom.window.HTMLDialogElement.prototype.showModal = function () {
   this.open = true;
@@ -66,6 +70,8 @@ test("sample → edit → confirm → persist → reopen → clear unknown → u
 test("actual PDF produces empty manual fields and retains original; duplicate reopens same record", async () => {
   $("#tab-work").click();
   await $("#replace-file").onclick();
+  $("#reading-mode").value = "local";
+  $("#reading-mode").dispatchEvent(new dom.window.Event("change"));
   const file = new File(
     ["%PDF-1.4\n% Synthetic test\n%%EOF"],
     "synthetic.pdf",

@@ -111,7 +111,7 @@ function updateReaderNotice() {
 }
 $("#reading-mode").onchange = () => {
   updateReaderNotice();
-  if (current) message(L("This choice is used for the next upload or Retry reading. Current fields are unchanged.", "此选择用于下一次上传或重试读取，当前字段未改动。"));
+  if (current) message(L("This choice is used for the next upload or Read original again. Current fields are unchanged.", "此选择用于下一次上传或点击「重新读取原件」，当前字段未改动。"));
 };
 $("#ai-connection").textContent = AI_ENDPOINT ? L("Checking AI service…", "正在检查 AI 服务…") : L("AI service not connected", "尚未接入 AI 服务");
 if (AI_ENDPOINT) {
@@ -131,7 +131,7 @@ $("#ai-access-form").onsubmit = async event => {
     await aiClient.unlock($("#ai-access-code").value);
     $("#ai-access-code").value = "";
     $("#ai-lock").hidden = false;
-    $("#ai-access-message").textContent = L("AI reading is enabled for this tab. Choose a file, or Retry reading for the open document.", "当前标签页已启用 AI。请选择文件，或对已打开的单据点击重试读取。");
+    $("#ai-access-message").textContent = L("AI reading is enabled for this tab. Choose a file, or choose Read original again for the open document.", "当前标签页已启用 AI。请选择文件，或对已打开的单据点击「重新读取原件」。");
   } catch (error) {
     $("#ai-access-message").textContent = aiErrorCopy(error)[1];
   } finally { $("#ai-unlock").disabled = false; }

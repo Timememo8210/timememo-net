@@ -137,6 +137,82 @@ test("an estimate cannot claim completed work, payment or an actual service date
   assert.deepEqual(inspect(r).errors, []);
 });
 
+test("an estimate removes a proposed worker while preserving the full company name and supported quote total", () => {
+  const p = proposal();
+  put(p, "document.type", "estimate", "QUOTATION");
+  put(p, "provider.organization_name", "Harbor Property Care Ltd", "HARBOR\nProperty Care Ltd");
+  put(p, "provider.person_name", "Casey Morgan", "Proposed roofer: Casey Morgan");
+  put(p, "provider.name", "Casey Morgan", "Proposed roofer: Casey Morgan");
+  put(p, "amount.total", 840, "Quoted total GBP 840.00");
+  put(p, "amount.currency", "GBP", "Quoted total GBP 840.00");
+  const r = normalizeAIExtraction(p);
+  assert.equal(r.provider.person_name, null);
+  assert.equal(r.provider.organization_name, "Harbor Property Care Ltd");
+  assert.equal(r.provider.name, "Harbor Property Care Ltd");
+  assert.equal(r.evidence.find((e) => e.field === "provider.name").quote, "HARBOR\nProperty Care Ltd");
+  assert.equal(r.amount.total, 840);
+  assert.ok(!r.evidence.some((e) => e.field === "provider.person_name"));
+});
+
+test("an estimate cannot retain the proposed person's matching display name even when worker evidence is absent", () => {
+  for (const withWorkerEvidence of [true, false]) {
+    const p = proposal();
+    put(p, "document.type", "estimate", "ESTIMATE");
+    put(p, "provider.person_name", "Jordan Reed", "Proposed installer: Jordan Reed");
+    put(p, "provider.name", "JORDAN   REED", "Proposed installer: Jordan Reed");
+    if (!withWorkerEvidence) p.evidence = p.evidence.filter((e) => e.field !== "provider.person_name");
+    const r = normalizeAIExtraction(p);
+    assert.equal(r.provider.person_name, null);
+    assert.equal(r.provider.name, null);
+    assert.ok(!r.evidence.some((e) => ["provider.person_name", "provider.name"].includes(e.field)));
+  }
+});
+
+test("a raw estimate with missing classification evidence cannot become actual expenditure or work", () => {
+  const p = complete();
+  p.document.type = "estimate";
+  p.evidence = p.evidence.filter((e) => e.field !== "document.type");
+  put(p, "amount.payment_status", "paid", "Paid");
+  put(p, "service.completion_status", "completed", "Completed");
+  p.items = [{ description: "Proposed materials", amount: 100 }];
+  p.evidence.push({ field: "items.0.description", page: 1, quote: "Proposed materials GBP 100" }, { field: "items.0.amount", page: 1, quote: "Proposed materials GBP 100" });
+  const r = normalizeAIExtraction(p);
+  assert.equal(r.document.type, "unknown");
+  assert.equal(r.service.date, null);
+  assert.equal(r.provider.person_name, null);
+  assert.equal(r.provider.organization_name, p.provider.organization_name);
+  assert.equal(r.provider.name, p.provider.organization_name);
+  assert.equal(r.amount.total, null);
+  assert.equal(r.amount.payment_status, "unknown");
+  assert.equal(r.service.completion_status, "unknown");
+  assert.deepEqual(r.items, [{ description: "Proposed materials", amount: null }]);
+  assert.ok(!r.evidence.some((e) => ["amount.total", "items.0.amount", "service.date", "provider.person_name"].includes(e.field)));
+  assert.ok(r.review.warnings.some((s) => s.includes("estimate classification lacked supporting text")));
+  assert.deepEqual(inspect(r).errors, []);
+});
+
+test("one visible quote can support several explicit evidence field entries", () => {
+  const p = proposal();
+  const totalQuote = "Invoice total GBP 140.00";
+  put(p, "amount.total", 140, totalQuote);
+  put(p, "amount.currency", "GBP", totalQuote);
+  const workQuote = "Work: replace leaking water pipe";
+  put(p, "service.summary", "Replace leaking water pipe", workQuote);
+  put(p, "service.category", "plumbing", workQuote);
+  put(p, "service.change_type", "replacement", workQuote);
+  put(p, "document.type", "invoice", "INVOICE");
+  put(p, "notes", "Access through rear gate", "Access through rear gate");
+  const r = normalizeAIExtraction(p);
+  assert.equal(r.amount.currency, "GBP");
+  assert.equal(r.document.type, "invoice");
+  assert.equal(r.service.category, "plumbing");
+  assert.equal(r.service.change_type, "replacement");
+  assert.equal(r.notes, "Access through rear gate");
+  assert.equal(r.evidence.filter((e) => e.quote === totalQuote).length, 2);
+  assert.equal(r.evidence.filter((e) => e.quote === workQuote).length, 3);
+  assert.ok(!r.review.warnings.some((s) => s.includes("supporting text was missing")));
+});
+
 test("line items preserve evidence page and remap indexes after unsupported items are removed", () => {
   const p = proposal();
   p.items = [{ description: "unsupported", amount: 999 }, { description: "Mixer tap", amount: 264 }, { description: null, amount: -4 }];

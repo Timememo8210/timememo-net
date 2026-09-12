@@ -9,6 +9,10 @@ const dom = new JSDOM(html, { url: "https://example.test/domake-receipt/" });
 globalThis.window = dom.window;
 globalThis.document = dom.window.document;
 globalThis.confirm = () => true;
+globalThis.fetch = async (url) => {
+  assert.ok(String(url).endsWith("/api/health"), "This UI regression must not send a live model request.");
+  return new Response(JSON.stringify({ configured: true, default_model: "controlled-test-model" }));
+};
 dom.window.HTMLElement.prototype.scrollIntoView = function () {};
 dom.window.HTMLDialogElement.prototype.showModal = function () {
   this.open = true;
@@ -44,6 +48,7 @@ function assertEnglishUI() {
 }
 test("English is default, Domic branding and Chinese switch are present", () => {
   assert.equal(document.documentElement.lang, "en");
+  assert.equal($("#reading-mode").value, "cloud");
   assert.match(document.title, /Domic Home Passport/);
   assert.equal(
     $('.language-switch a[lang="zh-CN"]').getAttribute("href"),
@@ -85,8 +90,10 @@ test("validation and file errors are English; existing authored data is preserve
   const file = new File(["%PDF-1.4\n%%EOF"], "invoice.pdf", {
     type: "application/pdf",
   });
+  $("#reading-mode").value = "manual";
+  $("#reading-mode").dispatchEvent(new dom.window.Event("change"));
   await $("#file-input").onchange({ target: { files: [file] } });
-  assert.match($("#review-notice").textContent, /not connected/);
+  assert.match($("#review-notice").textContent, /Manual entry/);
   input("property.id", "我的房屋");
   input("service.summary", "服务项目 原文保留");
   await $("#save-draft").onclick();
