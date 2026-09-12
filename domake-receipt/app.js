@@ -1,6 +1,9 @@
 import { users, properties, contextFor, applyContext } from "./workspace-context.js";
 import { extractText } from "./extraction.js";
 import { startOCR } from "./ocr.js";
+import { AI_ENDPOINT, AI_TIMEOUT_MS, AI_MAX_FILE_BYTES } from "./ai-config.js";
+import { createAIClient, AIError } from "./ai-client.js";
+import { normalizeAIExtraction } from "./ai-contract.js";
 import { t, html, locale } from "./i18n.js";
 import {
   blankRecord,
@@ -36,6 +39,7 @@ const changes =
       }
     : rawchanges;
 let activeOCR = null;
+let activeAI = null;
 let intakeLocale = "en-GB";
 const categories = translateOptions(rawcategories);
 const types = translateOptions(rawtypes);
@@ -76,10 +80,68 @@ function isDirty() {
 function selectedContext() {
   return contextFor($("#demo-user")?.value, $("#demo-property")?.value);
 }
+function carryDocument(target, previous, mode = previous.source.mode) {
+  target.source = { ...previous.source, mode };
+  target.account = structuredClone(previous.account);
+  target.property.id = previous.property.id;
+  target.property.uid = previous.property.uid;
+  for (const key of ["id", "created_at", "updated_at"])
+    if (previous[key] !== undefined) target[key] = previous[key];
+  return target;
+}
 const contextHost = document.createElement("div");
 contextHost.className = "context-bar";
 contextHost.innerHTML = `<div><strong>${L("Local prototype workspace", "本地原型工作区")}</strong><small>${L("Choose a test identity and property. This is not sign-in; records stay in this browser.", "选择测试身份和房屋；这不是账号登录，资料保留在此浏览器。")}</small></div><label>${L("Uploading as", "上传身份")}<select id="demo-user">${users.map(u => `<option value="${u.id}">${escape(u.display_name)}${u.is_demo ? " · Demo" : ""}</option>`).join("")}</select></label><label>${L("Link new document to", "新单据归属房屋")}<select id="demo-property"><option value="">${L("Choose in the review form", "在核对表中填写")}</option>${properties.map(p=>`<option value="${p.uid}">${escape(p.name)} · ${escape(p.owner)}</option>`).join("")}</select></label><label>${L("Receipt format", "单据日期／币种格式")}<select id="receipt-locale"><option value="en-GB">UK · DD/MM/YYYY · £</option><option value="">ISO dates · explicit currency</option></select></label><a href="${L("admin/", "admin/zh.html")}">${L("Management console", "管理控制台")} ↗</a>`;
 $(".mode-note").after(contextHost);
+let sessionStore;
+try { sessionStore = window.sessionStorage; } catch { /* Some browser privacy modes disable storage. */ }
+const aiClient = createAIClient({ endpoint: AI_ENDPOINT, timeoutMs: AI_TIMEOUT_MS, sessionStore });
+const readerHost = document.createElement("section");
+readerHost.className = "reader-settings";
+readerHost.setAttribute("aria-label", L("Document reading settings", "单据读取设置"));
+readerHost.innerHTML = `<div class="reader-heading"><label for="reading-mode">${L("Read this document with", "单据读取方式")}</label><select id="reading-mode"><option value="cloud" ${AI_ENDPOINT ? "selected" : "disabled"}>${L("AI · images and PDFs", "AI · 图片与 PDF")}</option><option value="local" ${AI_ENDPOINT ? "" : "selected"}>${L("Local OCR · English images", "本地文字识别 · 英文图片")}</option><option value="manual">${L("Manual entry", "手工填写")}</option></select><span id="ai-connection" class="tag" role="status"></span></div><p id="reader-privacy" class="doc-meta"></p><form id="ai-access-form" ${AI_ENDPOINT ? "" : "hidden"}><label for="ai-access-code">${L("Pilot access code", "试用访问码")}</label><div class="ai-access-controls"><input id="ai-access-code" type="password" autocomplete="off" maxlength="256" placeholder="${L("Enter your pilot code", "输入试用访问码")}" /><button class="button secondary" id="ai-unlock" type="submit">${L("Enable AI reading", "启用 AI 识别")}</button><button class="text-link" id="ai-lock" type="button" ${aiClient.hasAccess ? "" : "hidden"}>${L("Forget access code", "清除访问码")}</button></div><small>${L("Use the pilot code provided by the site owner. It is kept only for this browser tab. Do not enter an OpenRouter API key.", "请使用网站负责人提供的试用访问码；只在当前标签页会话中保留，请勿输入 OpenRouter API 密钥。")}</small><p id="ai-access-message" role="status"></p></form>`;
+contextHost.after(readerHost);
+function updateReaderNotice() {
+  const cloud = $("#reading-mode").value === "cloud";
+  $("#receipt-locale").disabled = cloud;
+  $("#reader-privacy").textContent = cloud
+    ? L("AI reading sends the selected image or PDF to our service and its cloud AI provider. Review every extracted field before saving. Files and confirmed records are still saved only in this browser. AI limit: 6 MB per document.", "AI 识别会将所选图片或 PDF 发送至本站服务及云端 AI 提供商。保存前请核对每个字段；原件和已确认记录仍只保存在此浏览器。AI 每份单据最大 6 MB。")
+    : L("Local OCR reads English images in this browser. PDF and manual entry stay available without cloud AI. Saved records remain in this browser; export a backup.", "本地文字识别在浏览器中读取英文图片；PDF 和手工填写无需云端 AI。记录保存在此浏览器，请导出备份。");
+  $("#ai-access-form").hidden = !AI_ENDPOINT || !cloud;
+}
+$("#reading-mode").onchange = () => {
+  updateReaderNotice();
+  if (current) message(L("This choice is used for the next upload or Retry reading. Current fields are unchanged.", "此选择用于下一次上传或重试读取，当前字段未改动。"));
+};
+$("#ai-connection").textContent = AI_ENDPOINT ? L("Checking AI service…", "正在检查 AI 服务…") : L("AI service not connected", "尚未接入 AI 服务");
+if (AI_ENDPOINT) {
+  $(".mode-note div").textContent = L("AI pilot · Read an image or PDF, review the details, then confirm. Reading uses a cloud service; records are saved in this browser. The management console is still a local prototype.", "AI 试用版 · 读取图片或 PDF、核对字段，再确认保存。识别使用云端服务，记录保存在此浏览器；管理控制台仍为本地原型。");
+  aiClient.health().then(data => {
+    $("#ai-connection").textContent = data.configured
+      ? L("AI service available", "AI 服务可用")
+      : L("AI service not configured", "AI 服务尚未配置");
+  }).catch(() => { $("#ai-connection").textContent = L("AI service unavailable", "AI 服务暂不可用"); });
+}
+updateReaderNotice();
+$("#ai-access-form").onsubmit = async event => {
+  event.preventDefault();
+  $("#ai-unlock").disabled = true;
+  $("#ai-access-message").textContent = L("Checking access…", "正在验证访问权限…");
+  try {
+    await aiClient.unlock($("#ai-access-code").value);
+    $("#ai-access-code").value = "";
+    $("#ai-lock").hidden = false;
+    $("#ai-access-message").textContent = L("AI reading is enabled for this tab. Choose a file, or Retry reading for the open document.", "当前标签页已启用 AI。请选择文件，或对已打开的单据点击重试读取。");
+  } catch (error) {
+    $("#ai-access-message").textContent = aiErrorCopy(error)[1];
+  } finally { $("#ai-unlock").disabled = false; }
+};
+$("#ai-lock").onclick = () => {
+  aiClient.clearAccess();
+  $("#ai-access-code").value = "";
+  $("#ai-lock").hidden = true;
+  $("#ai-access-message").textContent = L("Access code forgotten. Saved records are unchanged.", "访问码已清除，已保存的记录未改动。");
+};
 for (const id of ["demo-user", "demo-property"]) $("#"+id).onchange = () => {
   if (current) message(L("This choice applies to the next document. Current record details are unchanged.", "此选择用于下一张单据，当前记录信息未改动。"));
 };
@@ -250,7 +312,7 @@ function renderForm() {
             </p>`,
         )
         .join("")
-    : t('<p class="doc-meta">手动录入不包含 AI 原文证据。</p>');
+    : `<p class="doc-meta">${L("No supporting source quotes are available for this record.", "此记录没有可用的原文证据片段。")}</p>`;
   $("#add-item").onclick = () => {
     collect();
     current.items.push({ description: null, amount: null });
@@ -260,7 +322,12 @@ function renderForm() {
   $("#review-notice").className =
     "notice" + (current.source.mode === "demo" ? " green" : "");
   $("#review-notice").textContent =
-    current.source.mode === "local_ocr"
+    current.source.mode === "cloud_ai"
+      ? L(
+          `AI reading${current.extraction?.model ? " · " + current.extraction.model : ""}. Check the original: the AI can miss or misread details. Nothing is saved until you choose to save.`,
+          `AI 识别${current.extraction?.model ? " · " + current.extraction.model : ""}。AI 可能遗漏或读错，请核对原件；只有你主动保存才会录入。`,
+        )
+      : current.source.mode === "local_ocr"
       ? L(
           "Experimental local OCR. Check every value against the original. Company and worker are separate; missing names stay unknown.",
           "实验性本地文字识别。请逐项核对原件；公司与施工人员分别记录，缺失姓名保持未知。",
@@ -269,7 +336,7 @@ function renderForm() {
         ? t(
             "示例演示：以下信息来自预设的虚构单据，未调用 AI。请体验修改与确认。",
           )
-        : t(
+        : AI_ENDPOINT ? L("Manual entry: this file has no automatic extraction results. Use the original document and leave unknown values blank.", "手工录入：此文件没有自动识别结果，请对照原件填写，未知值留空。") : t(
             "当前未接入 AI：此文件没有自动识别结果。请根据左侧原件填写，空白项保持未知。",
           );
   updateCheck();
@@ -370,8 +437,9 @@ function renderSource() {
   $("#upload-view").hidden = true;
   $("#document-view").hidden = false;
   $("#filename").textContent = current.source.name;
+  $("#reread-original").hidden = !currentFile || current.source.mode === "demo";
   $("#source-badge").textContent =
-    current.source.mode === "demo" ? t("虚构示例") : t("本地文件");
+    current.source.mode === "demo" ? t("虚构示例") : current.source.mode === "cloud_ai" ? L("AI · original file", "AI · 原始文件") : t("本地文件");
   $("#source-badge").className =
     "tag" + (current.source.mode === "demo" ? " amber" : "");
   if (current.source.mode === "demo") {
@@ -415,6 +483,8 @@ function reset() {
   generation++;
   activeOCR?.cancel();
   activeOCR = null;
+  activeAI?.abort();
+  activeAI = null;
   $("#ocr-outcome").hidden = true;
   $("#extraction-dialog").close();
   $("#confirm-dialog").close();
@@ -540,16 +610,7 @@ async function handleFile(file) {
       sha256: hash,
       mode: "manual",
     };
-    renderSource();
-    if (file.type === "application/pdf" || !$("#local-ocr-enabled").checked) {
-      renderForm();
-      message(
-        L(
-          "PDF / manual mode: preview and enter details. Automatic PDF extraction is not connected.",
-          "PDF／手工模式：预览并填写信息，尚未接入 PDF 自动识别。",
-        ),
-      );
-    } else await recognizeFile(token);
+    await readCurrentFile(token);
   } catch (err) {
     if (token !== generation) return;
     reset();
@@ -602,6 +663,86 @@ const outcomes = {
     "已超过 45 秒。请使用更小、更清楚的图片重试，或手工填写，尚未保存。",
   ],
 };
+function aiErrorCopy(error) {
+  const code = error?.code || "malformed_output";
+  const copies = {
+    access_required: [L("Pilot access code required", "需要试用访问码"), L("Enter your pilot access code in the reading settings above, then choose Retry reading. Nothing was sent to the AI or saved.", "请在上方读取设置中输入试用访问码，然后点击重试读取。尚未发送至 AI 或保存。")],
+    invalid_access: [L("Access code was not accepted", "访问码未通过验证"), L("Check the pilot access code above, enable AI reading, then retry. Nothing was saved.", "请在上方核对试用访问码，启用 AI 后重试；尚未保存。")],
+    api_key_not_allowed: [L("Use a pilot access code", "请使用试用访问码"), L("An OpenRouter API key must be configured on the server. Enter the separate pilot access code here.", "OpenRouter API 密钥应配置在服务器，请在此输入独立的试用访问码。")],
+    not_configured: [L("AI service is not ready", "AI 服务尚未就绪"), L("The site owner needs to finish the AI service setup. You can choose Local OCR or enter details manually. Nothing was saved.", "网站负责人需要完成 AI 服务配置。你可以选择本地文字识别或手工填写；尚未保存。")],
+    insufficient_credits: [L("AI reading is temporarily unavailable", "AI 识别暂不可用"), L("The AI account has insufficient credits. Contact the site owner, or enter details manually. Nothing was saved.", "AI 账户额度不足，请联系网站负责人或手工填写；尚未保存。")],
+    rate_limited: [L("Too many reading requests", "识别请求过多"), L("Please wait briefly, then retry. Your file is still here and nothing was saved.", "请稍候再重试，文件仍保留在页面中，尚未保存。")],
+    timeout: [L("AI reading took too long", "AI 识别超时"), L("The service did not finish in time. Retry with a smaller document or enter details manually. Nothing was saved.", "AI 服务未能及时完成，请使用更小的文件重试或手工填写；尚未保存。")],
+    malformed_output: [L("AI returned an unusable result", "AI 返回的结果无法使用"), L("The response could not be safely arranged into the review form. Retry or enter details manually. No extracted values were accepted or saved.", "返回内容无法整理为可核对的字段，请重试或手工填写。没有接受或保存任何识别字段。")],
+    file_too_large: [L("This document exceeds the AI limit", "此单据超过 AI 大小限制"), L("AI reading accepts files up to 6 MB. Choose a smaller file, select Local OCR for an image, or enter details manually. Nothing was saved.", "AI 识别支持最大 6 MB 的文件。请换用更小文件、对图片选择本地文字识别，或手工填写；尚未保存。")],
+    network_error: [L("Could not reach the AI service", "无法连接 AI 服务"), L("Check your connection and retry. You can also enter details manually. Nothing was saved.", "请检查网络后重试，也可以手工填写；尚未保存。")],
+    upstream_failure: [L("AI reading could not finish", "AI 识别未能完成"), L("The cloud service could not complete this request. Retry or enter details manually. Nothing was saved.", "云端服务未能完成此请求，请重试或手工填写；尚未保存。")],
+  };
+  const aliases = { unauthorized: "invalid_access", invalid_code: "invalid_access", forbidden: "invalid_access", service_auth_failed: "not_configured", model_unavailable: "not_configured", service_not_configured: "not_configured", provider_credits: "insufficient_credits", insufficient_quota: "insufficient_credits", throttled: "rate_limited", upstream_error: "upstream_failure", upstream_failed: "upstream_failure", invalid_response: "malformed_output", invalid_output: "malformed_output", model_output_invalid: "malformed_output" };
+  return copies[code] || copies[aliases[code]] || copies.upstream_failure;
+}
+function showAIError(error) {
+  const copy = aiErrorCopy(error);
+  $("#processing").hidden = true;
+  $("#empty-result").hidden = true;
+  $("#receipt-form").hidden = true;
+  $("#ocr-outcome").hidden = false;
+  $("#ocr-outcome").dataset.status = "ai_error";
+  $("#outcome-title").textContent = copy[0];
+  $("#outcome-description").textContent = copy[1];
+  $("#result-badge").textContent = L("AI reading needs attention", "AI 识别需要处理");
+  $("#outcome-manual").hidden = false;
+  $("#outcome-manual").textContent = L("Enter details manually", "手工填写");
+  $("#ocr-raw").textContent = L("No extraction result was accepted.", "未接受任何识别结果。");
+  if (["invalid_access", "unauthorized", "invalid_code", "forbidden"].includes(error.code)) {
+    aiClient.clearAccess();
+    $("#ai-lock").hidden = true;
+  }
+}
+async function readCurrentFile(token) {
+  const lastReader = $("#reading-mode").value;
+  current.source.mode = "manual";
+  renderSource();
+  if (lastReader === "cloud") return recognizeAI(token);
+  if (lastReader === "local" && currentFile.type !== "application/pdf") return recognizeFile(token);
+  renderForm();
+  message(lastReader === "local" ? L("Local OCR supports images. For this PDF, enter details manually or choose AI reading and Retry reading.", "本地文字识别支持图片。此 PDF 请手工填写，或选择 AI 识别后重试读取。") : L("Manual entry selected. Review the original and fill in what is known.", "已选择手工填写，请对照原件填写已知信息。"));
+  if (currentFile.type === "application/pdf") {
+    $("#ocr-outcome").hidden = false;
+    $("#outcome-title").textContent = L("PDF ready for review", "PDF 已可核对");
+    $("#outcome-description").textContent = AI_ENDPOINT ? L("To read this PDF with AI, select AI reading above and choose Retry reading.", "如需 AI 读取此 PDF，请在上方选择 AI 识别，再点击重试读取。") : L("AI reading is not connected. Enter the details from the original PDF.", "尚未接入 AI 识别，请对照原始 PDF 填写。");
+    $("#outcome-manual").hidden = true;
+    $("#ocr-raw").textContent = L("No automatic extraction was requested.", "未请求自动识别。");
+  }
+  busy = false;
+}
+async function recognizeAI(token) {
+  $("#ocr-outcome").hidden = true;
+  $("#receipt-form").hidden = true;
+  $("#empty-result").hidden = true;
+  $("#processing").hidden = false;
+  $("#processing h3").textContent = L("Reading this document with AI", "正在使用 AI 读取单据");
+  $("#processing p").textContent = L("Sending the document to the cloud reader, then arranging fields for your review. Nothing is saved yet.", "正在将单据发送至云端识别，并整理字段供你核对；尚未保存。");
+  activeAI = new AbortController();
+  try {
+    if (currentFile.size > AI_MAX_FILE_BYTES) throw new AIError("file_too_large");
+    const data = await aiClient.extract(currentFile, { locale: intakeLocale, signal: activeAI.signal });
+    if (token !== generation) return;
+    let next;
+    try { next = normalizeAIExtraction(data.extraction, { model: data.model, engine: "openrouter", requestId: data.request_id, usage: data.usage }); }
+    catch { throw new AIError("malformed_output"); }
+    carryDocument(next, current, "cloud_ai");
+    next.extraction.locale = "en-GB";
+    current = next;
+    renderSource();
+    showOutcome(current.extraction.status);
+  } catch (error) {
+    if (token !== generation || error.code === "cancelled") return;
+    showAIError(error);
+  } finally {
+    if (token === generation) { activeAI = null; busy = false; }
+  }
+}
 function showOutcome(status) {
   const copy = outcomes[status] || outcomes.failed;
   $("#processing").hidden = true;
@@ -613,6 +754,9 @@ function showOutcome(status) {
   $("#result-badge").textContent = L(copy[0], copy[1]);
   $("#ocr-raw").textContent =
     current.extraction?.text || L("No readable text.", "没有可读文字。");
+  $("#ocr-outcome details summary").textContent = current.source.mode === "cloud_ai"
+    ? L("View AI supporting quotes", "查看 AI 提供的原文证据片段")
+    : L("View text read from this image", "查看图片识别文字");
   $("#outcome-manual").textContent =
     status === "uncertain"
       ? L("This is for my home — review details", "属于我的房屋，核对信息")
@@ -657,10 +801,8 @@ async function recognizeFile(token) {
     if (token !== generation) return;
     const previous = current;
     current = extractText(data.text, data.confidence, { locale: current.extraction?.locale ?? intakeLocale });
-    current.source = { ...previous.source, mode: "local_ocr" };
-    current.account = previous.account;
-    current.property.id = previous.property.id;
-    current.property.uid = previous.property.uid;
+    carryDocument(current, previous, "local_ocr");
+    renderSource();
     showOutcome(current.extraction.status);
   } catch (error) {
     if (token !== generation) return;
@@ -678,13 +820,10 @@ $("#outcome-manual").onclick = () => {
   if (result?.status === "unrelated" || result?.status === "no_text") {
     const previous = current;
     current = blankRecord();
-    current.source = previous.source;
-    current.account = previous.account;
-    current.property.id = previous.property.id;
-    current.property.uid = previous.property.uid;
+    carryDocument(current, previous);
     current.extraction = result;
   }
-  current.source.mode = "manual";
+  if (!["review", "partial", "uncertain"].includes(result?.status)) current.source.mode = "manual";
   renderForm();
   $("#ocr-outcome").hidden = true;
   $("#review-notice").textContent = L(
@@ -692,18 +831,16 @@ $("#outcome-manual").onclick = () => {
     "核对后手工填写。仅记录与本房屋有关的工作，未知值留空。",
   );
 };
-$("#outcome-retry").onclick = async () => {
+async function rereadCurrent() {
   if (busy || !currentFile) return;
   if (isDirty() && !(await canReplace())) return;
   const previous = current;
-  current = blankRecord();
-  current.source = previous.source;
-  current.account = previous.account;
-  current.property.id = previous.property.id;
-  current.property.uid = previous.property.uid;
+  current = carryDocument(blankRecord(), previous);
   busy = true;
-  await recognizeFile(++generation);
-};
+  await readCurrentFile(++generation);
+}
+$("#outcome-retry").onclick = rereadCurrent;
+$("#reread-original").onclick = rereadCurrent;
 $("#outcome-change").onclick = async () => {
   if (busy) return;
   if (!isDirty() || (await canReplace())) reset();
@@ -730,6 +867,8 @@ zone.addEventListener("drop", (e) => {
 });
 function summary() {
   const values = [
+    [L("Reading method", "读取方式"), current.source.mode === "cloud_ai" ? L("Cloud AI", "云端 AI") : current.source.mode === "local_ocr" ? L("Local OCR", "本地文字识别") : current.source.mode === "demo" ? L("Fictional sample", "虚构示例") : L("Manual entry", "手工填写")],
+    ...(current.source.mode === "cloud_ai" && current.extraction?.model ? [[L("AI model", "AI 模型"), current.extraction.model]] : []),
     [L("Uploaded by", "上传人"), current.account?.display_name || L("Not recorded", "未记录")],
     [t("归属房屋"), current.property.id],
     [t("服务项目"), current.service.summary],
@@ -792,7 +931,7 @@ async function persist(status) {
   $("#confirm-save").disabled = true;
   $("#save-draft").disabled = true;
   const locked = $$(
-    "#receipt-form input,#receipt-form textarea,#receipt-form select,#receipt-form button,#ocr-outcome button,#replace-file,[data-close='confirm-dialog']",
+    "#receipt-form input,#receipt-form textarea,#receipt-form select,#receipt-form button,#ocr-outcome button,#replace-file,#reread-original,[data-close='confirm-dialog']",
   );
   const previousDisabled = locked.map((el) => el.disabled);
   locked.forEach((el) => (el.disabled = true));

@@ -29,6 +29,9 @@ for (const name of [
   "i18n.js",
   "ocr.js",
   "extraction.js",
+  "ai-client.js",
+  "ai-config.js",
+  "ai-contract.js",
   "workspace-context.js",
   "admin/admin.js",
 ])

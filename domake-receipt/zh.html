@@ -24,7 +24,7 @@
         <a href="./" lang="en">EN</a
         ><a href="zh.html" lang="zh-CN" aria-current="true">中文</a>
       </div>
-      <span class="prototype">交互原型 · 02</span>
+      <span class="prototype">交互原型 · AI 试用</span>
     </header>
     <main class="shell">
       <div class="intro">
@@ -40,14 +40,14 @@
         <div>
           <strong>原型 · 本地文字识别实验</strong> —
           图片可在浏览器中识别英文文字，请逐项核对后保存。PDF
-          仍需手工填写；Gemini 留待下一轮接入。
+          仍需手工填写；云端 AI 接口尚未接通。
           记录只保存在当前浏览器。
         </div>
       </div>
-      <details class="fixture-lab"><summary>10 份新英国票据 · 实际文件测试</summary><p>按钮读取真实图片文件，走与上传相同的流程，不加载预期答案。PDF 使用手工填写。</p><div class="button-row"><button class="button secondary" data-ocr-fixture="uk-01.png" data-fixture-url="./round2/files/uk-01.png">uk-01</button><button class="button secondary" data-ocr-fixture="uk-02.png" data-fixture-url="./round2/files/uk-02.png">uk-02</button><button class="button secondary" data-ocr-fixture="uk-03.png" data-fixture-url="./round2/files/uk-03.png">uk-03</button><button class="button secondary" data-ocr-fixture="uk-04.png" data-fixture-url="./round2/files/uk-04.png">uk-04</button><button class="button secondary" data-ocr-fixture="uk-05.png" data-fixture-url="./round2/files/uk-05.png">uk-05</button><button class="button secondary" data-ocr-fixture="uk-06.png" data-fixture-url="./round2/files/uk-06.png">uk-06</button><button class="button secondary" data-ocr-fixture="uk-07.png" data-fixture-url="./round2/files/uk-07.png">uk-07</button><button class="button secondary" data-ocr-fixture="uk-08.png" data-fixture-url="./round2/files/uk-08.png">uk-08</button><button class="button secondary" data-ocr-fixture="uk-09.png" data-fixture-url="./round2/files/uk-09.png">uk-09</button><button class="button secondary" data-ocr-fixture="uk-10.png" data-fixture-url="./round2/files/uk-10.png">uk-10</button></div><p><a href="round2/zh.html">测试报告与下载</a> · <a href="admin/zh.html">管理控制台</a></p></details><details class="fixture-lab">
+      <details class="fixture-lab"><summary>10 份新英国票据 · 实际文件测试</summary><p>按钮读取真实图片文件，走与上传相同的流程，不加载预期答案。使用上方选定的读取方式。</p><div class="button-row"><button class="button secondary" data-ocr-fixture="uk-01.png" data-fixture-url="./round2/files/uk-01.png">uk-01</button><button class="button secondary" data-ocr-fixture="uk-02.png" data-fixture-url="./round2/files/uk-02.png">uk-02</button><button class="button secondary" data-ocr-fixture="uk-03.png" data-fixture-url="./round2/files/uk-03.png">uk-03</button><button class="button secondary" data-ocr-fixture="uk-04.png" data-fixture-url="./round2/files/uk-04.png">uk-04</button><button class="button secondary" data-ocr-fixture="uk-05.png" data-fixture-url="./round2/files/uk-05.png">uk-05</button><button class="button secondary" data-ocr-fixture="uk-06.png" data-fixture-url="./round2/files/uk-06.png">uk-06</button><button class="button secondary" data-ocr-fixture="uk-07.png" data-fixture-url="./round2/files/uk-07.png">uk-07</button><button class="button secondary" data-ocr-fixture="uk-08.png" data-fixture-url="./round2/files/uk-08.png">uk-08</button><button class="button secondary" data-ocr-fixture="uk-09.png" data-fixture-url="./round2/files/uk-09.png">uk-09</button><button class="button secondary" data-ocr-fixture="uk-10.png" data-fixture-url="./round2/files/uk-10.png">uk-10</button></div><p><a href="round2/zh.html">测试报告与下载</a> · <a href="admin/zh.html">管理控制台</a></p></details><details class="fixture-lab">
         <summary>用六张合成图片测试识别</summary>
         <p>
-          每个测试都会在本地读取真实图片。这些是受控样本，不代表实际使用准确率。
+          每个测试都会按所选方式读取真实图片。这些是受控样本，不代表实际使用准确率。
         </p>
         <div class="button-row">
           <button
@@ -137,13 +137,7 @@
                   capture="environment"
                 />
               </div>
-              <label class="ocr-opt"
-                ><input
-                  id="local-ocr-enabled"
-                  type="checkbox"
-                  checked
-                />图片使用实验性本地识别（英文）</label
-              >
+              <p class="ocr-opt">请在上方读取设置中选择 AI、本地文字识别或手工填写。</p>
               <div class="demo-section">
                 <div class="section-caption">还没有票据？从一份示例开始</div>
                 <button class="sample-card" data-sample="plumbing">
@@ -170,12 +164,12 @@
             <div id="document-view" hidden="">
               <div class="source-toolbar">
                 <span id="filename"></span
-                ><button class="text-link" id="replace-file">更换单据</button>
+                ><button class="text-link" id="reread-original" title="使用所选方式重新提取字段，保存前需要核对。">重新读取原件</button><button class="text-link" id="replace-file">更换单据</button>
               </div>
               <div id="source-preview"></div>
             </div>
             <div class="source-foot">
-              每份文件按一张单据、一项房屋活动整理；混合多张票据请先拆分。文件与记录保存在当前浏览器，清理浏览器数据后可能丢失；请导出备份。
+              每份文件按一张单据、一项房屋活动整理；混合多张票据请先拆分。已保存的文件与记录保存在当前浏览器，清理浏览器数据后可能丢失；AI 识别会将所选单据发送至云端服务，请导出备份。
             </div>
           </section>
           <section class="result-panel" aria-labelledby="result-title">

@@ -24,7 +24,7 @@
         <a href="./" lang="en" aria-current="true">EN</a
         ><a href="zh.html" lang="zh-CN">中文</a>
       </div>
-      <span class="prototype">Prototype · 02</span>
+      <span class="prototype">Prototype · AI pilot</span>
     </header>
     <main class="shell">
       <div class="intro">
@@ -43,14 +43,14 @@
         <div>
           <strong>Prototype · Local OCR experiment</strong> — Images can be read
           in your browser (English text). Check every field before saving. PDF
-          requires manual entry. Gemini is planned for the next iteration.
+          requires manual entry until cloud AI is connected.
           Records stay in this browser.
         </div>
       </div>
-      <details class="fixture-lab"><summary>10 new UK receipts · test actual files</summary><p>These controls read the image bytes through the same intake path as upload. They do not load expected answers. PDF uses manual entry.</p><div class="button-row"><button class="button secondary" data-ocr-fixture="uk-01.png" data-fixture-url="./round2/files/uk-01.png">uk-01</button><button class="button secondary" data-ocr-fixture="uk-02.png" data-fixture-url="./round2/files/uk-02.png">uk-02</button><button class="button secondary" data-ocr-fixture="uk-03.png" data-fixture-url="./round2/files/uk-03.png">uk-03</button><button class="button secondary" data-ocr-fixture="uk-04.png" data-fixture-url="./round2/files/uk-04.png">uk-04</button><button class="button secondary" data-ocr-fixture="uk-05.png" data-fixture-url="./round2/files/uk-05.png">uk-05</button><button class="button secondary" data-ocr-fixture="uk-06.png" data-fixture-url="./round2/files/uk-06.png">uk-06</button><button class="button secondary" data-ocr-fixture="uk-07.png" data-fixture-url="./round2/files/uk-07.png">uk-07</button><button class="button secondary" data-ocr-fixture="uk-08.png" data-fixture-url="./round2/files/uk-08.png">uk-08</button><button class="button secondary" data-ocr-fixture="uk-09.png" data-fixture-url="./round2/files/uk-09.png">uk-09</button><button class="button secondary" data-ocr-fixture="uk-10.png" data-fixture-url="./round2/files/uk-10.png">uk-10</button></div><p><a href="round2/">Test report and downloads</a> · <a href="admin/">Management console</a></p></details><details class="fixture-lab">
+      <details class="fixture-lab"><summary>10 new UK receipts · test actual files</summary><p>These controls read the image bytes through the same intake path as upload. They do not load expected answers. Your selected reading method is used.</p><div class="button-row"><button class="button secondary" data-ocr-fixture="uk-01.png" data-fixture-url="./round2/files/uk-01.png">uk-01</button><button class="button secondary" data-ocr-fixture="uk-02.png" data-fixture-url="./round2/files/uk-02.png">uk-02</button><button class="button secondary" data-ocr-fixture="uk-03.png" data-fixture-url="./round2/files/uk-03.png">uk-03</button><button class="button secondary" data-ocr-fixture="uk-04.png" data-fixture-url="./round2/files/uk-04.png">uk-04</button><button class="button secondary" data-ocr-fixture="uk-05.png" data-fixture-url="./round2/files/uk-05.png">uk-05</button><button class="button secondary" data-ocr-fixture="uk-06.png" data-fixture-url="./round2/files/uk-06.png">uk-06</button><button class="button secondary" data-ocr-fixture="uk-07.png" data-fixture-url="./round2/files/uk-07.png">uk-07</button><button class="button secondary" data-ocr-fixture="uk-08.png" data-fixture-url="./round2/files/uk-08.png">uk-08</button><button class="button secondary" data-ocr-fixture="uk-09.png" data-fixture-url="./round2/files/uk-09.png">uk-09</button><button class="button secondary" data-ocr-fixture="uk-10.png" data-fixture-url="./round2/files/uk-10.png">uk-10</button></div><p><a href="round2/">Test report and downloads</a> · <a href="admin/">Management console</a></p></details><details class="fixture-lab">
         <summary>Test the reader with six fictional images</summary>
         <p>
-          Each test reads an actual image locally. These are controlled
+          Each test reads an actual image using the selected reader. These are controlled
           examples, not a measure of real-world accuracy.
         </p>
         <div class="button-row">
@@ -144,10 +144,7 @@
                   capture="environment"
                 />
               </div>
-              <label class="ocr-opt"
-                ><input id="local-ocr-enabled" type="checkbox" checked />Try
-                experimental local OCR for images (English)</label
-              >
+              <p class="ocr-opt">Choose AI, local OCR or manual entry in the reading settings above.</p>
               <div class="demo-section">
                 <div class="section-caption">
                   No document handy? Try a sample
@@ -176,7 +173,7 @@
             <div id="document-view" hidden="">
               <div class="source-toolbar">
                 <span id="filename"></span
-                ><button class="text-link" id="replace-file">
+                ><button class="text-link" id="reread-original" title="Creates a fresh proposal using the selected reader. Review before saving.">Read original again</button><button class="text-link" id="replace-file">
                   Change document
                 </button>
               </div>
@@ -184,9 +181,8 @@
             </div>
             <div class="source-foot">
               Each file represents one document and one property activity. Split
-              files that contain separate invoices. Files and records stay in
-              this browser and may be lost if browser data is cleared. Export a
-              backup.
+              files that contain separate invoices. Saved files and records stay in
+              this browser and may be lost if browser data is cleared. AI reading sends the selected document to a cloud service. Export a backup.
             </div>
           </section>
           <section class="result-panel" aria-labelledby="result-title">

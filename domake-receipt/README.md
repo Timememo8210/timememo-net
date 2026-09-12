@@ -12,7 +12,9 @@ An interactive prototype and partner handoff for the receipt module of the exist
 - [Output schema](docs/receipt.schema.json) / [field rules](docs/output-format.en.md)
 - [Partner handoff](docs/implementation-plan.en.md)
 
-The user chose to defer Gemini. This iteration adds experimental English image OCR in the browser, conservative field extraction, recovery states and real-image test controls. PDF remains preview/manual entry; three preset examples remain explicitly labelled. Confirmed records and originals are stored in IndexedDB in this browser. There is no cloud database, login, model key or background model call.
+The current public version uses experimental English image OCR in the browser, conservative field extraction, recovery states and real-image test controls. PDF remains preview/manual entry until cloud AI is connected; three preset examples remain explicitly labelled. Confirmed records and originals are stored in IndexedDB in this browser. There is no shared cloud database or customer login.
+
+**12 September update:** the user has authorized live AI integration. The cloud extraction service, fixed schema, bilingual client, access-code flow and same-record re-extraction are implemented and pass controlled tests. OpenRouter login and key creation are still pending; `AI_ENDPOINT` is deliberately blank and no real Gemini calls have been made. See [the setup and model comparison record (Chinese)](docs/cloud-ai.zh.md). Existing screenshot reports describe the earlier OCR/manual workflow and are not cloud-model benchmarks.
 
 ## Run locally
 

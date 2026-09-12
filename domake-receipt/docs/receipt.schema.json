@@ -329,7 +329,8 @@
           "enum": [
             "manual",
             "demo",
-            "local_ocr"
+            "local_ocr",
+            "cloud_ai"
           ]
         },
         "sample_id": {
@@ -471,6 +472,47 @@
             "en-GB",
             null
           ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "request_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "usage": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "prompt_tokens": {
+              "type": "number",
+              "minimum": 0
+            },
+            "completion_tokens": {
+              "type": "number",
+              "minimum": 0
+            },
+            "total_tokens": {
+              "type": "number",
+              "minimum": 0
+            },
+            "reasoning_tokens": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cost": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
         }
       }
     },
