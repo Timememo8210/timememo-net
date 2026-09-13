@@ -1,4 +1,4 @@
-Current cloud workspace: https://timememo.net/domake-receipt/cloud/ . The cloud management console stores originals and property histories on the server. This README below describes the earlier browser-only pilot. The new server implementation is downloadable at docs/cloud-ai-service-source.zip, including its API contract and database schema.
+Current cloud workspace: https://timememo.net/domake-receipt/cloud/ . The cloud management console stores originals and property histories on the server. This README below describes the earlier browser-only pilot. 云端源码改为私有共享，仓库创建尚待所有者确认；请参阅[源码访问说明](docs/README.md)。
 
 [English](README.md) · [中文](README.zh.md)
 

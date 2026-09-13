@@ -1,10 +1,10 @@
-Current cloud workspace: https://timememo.net/domake-receipt/cloud/ . The cloud management console stores originals and property histories on the server. This README below describes the earlier browser-only pilot. The new server implementation is downloadable at docs/cloud-ai-service-source.zip, including its API contract and database schema.
+Current cloud workspace: https://timememo.net/domake-receipt/cloud/ . The cloud management console stores originals and property histories on the server. This README below describes the earlier browser-only pilot. Cloud source sharing is moving to a private repository; see [source access information](docs/README.md).
 
 [English](README.md) · [中文](README.zh.md)
 
 # Domic Home Passport
 
-Live cloud-service implementation and tests: [source handoff archive](docs/cloud-ai-service-source.zip). Hosting registration metadata and secrets are intentionally excluded.
+Cloud-service source and tests will be shared privately with authorised collaborators; repository creation is awaiting owner approval. See [source access information](docs/README.md).
 
 An interactive prototype and partner handoff for the receipt module of the existing home-passport project. Updated September 10, 2026. The workspace and project brief default to English, with a Chinese language switch. The confirmed primary audience is UK customers who use English.
 
