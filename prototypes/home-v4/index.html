@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>TimeMemo · 新主页预览</title>
+  <meta name="description" content="TimeMemo 新主页预览：公开内容、个人项目与私人 Sky Portal 的统一入口。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/base.css?v=4">
+  <link rel="stylesheet" href="style.css?v=4">
+  <script defer src="app.js?v=4"></script>
+</head>
+<body>
+  <a class="skip-link" href="#selected-work">跳到精选内容</a>
+
+  <header class="site-nav">
+    <a class="site-mark" href="#top" data-go="0" aria-label="回到主页开头">
+      <strong>TimeMemo</strong><span>by Xiaobo Chen</span>
+    </a>
+    <nav aria-label="主页导航">
+      <button type="button" data-go="1"><span class="lang lang-zh">关于</span><span class="lang lang-en">About</span></button>
+      <button type="button" data-go="2"><span class="lang lang-zh">精选</span><span class="lang lang-en">Selected</span></button>
+      <button type="button" data-go="3">Portal</button>
+      <button type="button" data-go="4"><span class="lang lang-zh">联系</span><span class="lang lang-en">Contact</span></button>
+    </nav>
+    <div class="nav-actions">
+      <a class="portal-shortcut" href="/sky-portal/">Sky Portal <span aria-hidden="true">↗</span></a>
+      <div class="language-toggle" role="group" aria-label="语言 / Language">
+        <button type="button" data-language="zh" aria-pressed="true">中文</button>
+        <button type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="motion-toggle" type="button" aria-pressed="false"><span class="lang lang-zh">暂停动效</span><span class="lang lang-en">Pause motion</span></button>
+    </div>
+  </header>
+
+  <main class="home-stage" id="top">
+    <div class="home-sticky">
+      <canvas id="memo-field" aria-hidden="true"></canvas>
+
+      <div class="home-panels">
+        <section class="home-panel hero-panel" aria-labelledby="home-title">
+          <div class="hero-name">
+            <p class="kicker">PERSONAL KNOWLEDGE · PROJECTS · IDEAS</p>
+            <h1 id="home-title"><span>Time</span><span>Memo</span></h1>
+            <p class="hero-byline"><span class="lang lang-zh">陈晓波的个人主页与知识入口</span><span class="lang lang-en">Xiaobo Chen's home and knowledge hub</span><br><span>Portland, Oregon</span></p>
+          </div>
+          <div class="hero-note">
+            <p class="lang lang-zh">把研究、项目与生活，<br>整理成可以持续生长的系统。</p>
+            <p class="lang lang-en">Turn research, projects and life<br>into a system built to grow.</p>
+            <span class="lang lang-zh">公开内容保持简洁，完整资料进入私人 Portal。</span>
+            <span class="lang lang-en">A simple public home, with the full archive inside a private portal.</span>
+          </div>
+          <div class="field-controls" aria-label="切换背景图形">
+            <span>INTERACTIVE FIELD</span>
+            <div role="group" aria-label="切换图形">
+              <button type="button" data-field="0" aria-pressed="true"><span class="lang lang-zh">晶圆</span><span class="lang lang-en">Wafer</span></button>
+              <button type="button" data-field="1" aria-pressed="false"><span class="lang lang-zh">芯粒</span><span class="lang lang-en">Die</span></button>
+              <button type="button" data-field="2" aria-pressed="false"><span class="lang lang-zh">互连</span><span class="lang lang-en">Connect</span></button>
+            </div>
+            <p><span class="lang lang-zh">移动鼠标探索，向下滚动进入主页。</span><span class="lang lang-en">Move to explore. Scroll down to enter.</span></p>
+          </div>
+        </section>
+
+        <section class="home-panel overview-panel" aria-labelledby="overview-title">
+          <div class="panel-heading">
+            <p class="eyebrow">01 / ONE HOME, ONE SYSTEM</p>
+            <h2 id="overview-title"><span class="lang lang-zh">一个主页，<br>三个清晰入口。</span><span class="lang lang-en">One home.<br>Three clear paths.</span></h2>
+            <p><span class="lang lang-zh">主页只负责介绍与导航。公开作品进入精选，完整资料进入 Sky Portal，旧设计永久归档。</span><span class="lang lang-en">The homepage introduces and guides. Public work stays selected, full records live in Sky Portal, and earlier designs remain archived.</span></p>
+          </div>
+          <div class="route-grid">
+            <article>
+              <span>01</span>
+              <h3>Public</h3>
+              <p><span class="lang lang-zh">个人介绍、公开项目与学习内容。</span><span class="lang lang-en">Profile, public projects and learning.</span></p>
+              <button type="button" data-go="2"><span class="lang lang-zh">查看精选</span><span class="lang lang-en">View selected</span> <b>↗</b></button>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Private</h3>
+              <p><span class="lang lang-zh">研究档案与敏感资料不在首页展开。</span><span class="lang lang-en">Research records and sensitive material stay off the homepage.</span></p>
+              <button type="button" data-go="3"><span class="lang lang-zh">进入 Portal</span><span class="lang lang-en">Enter Portal</span> <b>↗</b></button>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Archive</h3>
+              <p><span class="lang lang-zh">旧主页和全部设计方案继续保留。</span><span class="lang lang-en">Earlier homepages and design concepts remain available.</span></p>
+              <a href="/designs/"><span class="lang lang-zh">打开归档</span><span class="lang lang-en">Open archive</span> <b>↗</b></a>
+            </article>
+          </div>
+        </section>
+
+        <section class="home-panel work-panel" id="selected-work" aria-labelledby="work-title">
+          <div class="panel-heading work-heading">
+            <p class="eyebrow">02 / SELECTED PUBLIC WORK</p>
+            <h2 id="work-title"><span class="lang lang-zh">少而清楚，<br>只展示适合公开的内容。</span><span class="lang lang-en">Fewer, clearer,<br>and right for public view.</span></h2>
+            <p><span class="lang lang-zh">商业敏感资料不在主页展开；相关内容统一收进私人 Portal。</span><span class="lang lang-en">Business-sensitive material stays off the homepage and inside the private Portal.</span></p>
+          </div>
+          <div class="public-list" aria-label="公开项目列表"></div>
+        </section>
+
+        <section class="home-panel portal-panel" aria-labelledby="portal-title">
+          <div class="portal-copy">
+            <p class="eyebrow">03 / PRIVATE KNOWLEDGE PORTAL</p>
+            <h2 id="portal-title">Sky<br>Portal</h2>
+            <p><span class="lang lang-zh">研究、市场、科技、项目与历史资料的私人入口。主页不再逐项暴露敏感标题，但每一份内容仍有自己的位置。</span><span class="lang lang-en">A private home for research, markets, technology, projects and history. Sensitive titles stay off the homepage while every item retains a clear place.</span></p>
+            <div class="portal-actions">
+              <a class="primary-action" href="/sky-portal/"><span class="lang lang-zh">打开私人 Portal</span><span class="lang lang-en">Open private Portal</span> <span>↗</span></a>
+              <a href="/prototypes/home-v3/"><span class="lang lang-zh">查看旧主页 3.0</span><span class="lang lang-en">View homepage 3.0</span> <span>↗</span></a>
+            </div>
+            <small><span class="lang lang-zh">正式切换前，将继续加强真正的服务器端访问保护。</span><span class="lang lang-en">Before launch, the portal will receive stronger server-side access protection.</span></small>
+          </div>
+          <div class="portal-map" aria-label="内容去向示意">
+            <div class="map-core"><span>ONE</span><strong>CONTENT<br>SYSTEM</strong></div>
+            <div class="map-node map-public"><span>PUBLIC</span><b><span class="lang lang-zh">精选内容</span><span class="lang lang-en">Selected</span></b></div>
+            <div class="map-node map-private"><span>PRIVATE</span><b><span class="lang lang-zh">完整档案</span><span class="lang lang-en">Full archive</span></b></div>
+            <div class="map-node map-archive"><span>ARCHIVE</span><b><span class="lang lang-zh">历史版本</span><span class="lang lang-en">Past versions</span></b></div>
+          </div>
+        </section>
+
+        <section class="home-panel about-panel" aria-labelledby="about-title">
+          <div class="about-photo">
+            <img src="/avatar.jpg" width="500" height="477" alt="陈晓波的原色肖像">
+            <p>XIAOBO CHEN<br>PORTLAND, OREGON</p>
+          </div>
+          <div class="about-copy">
+            <p class="eyebrow">04 / ABOUT & CONTACT</p>
+            <h2 id="about-title"><span class="lang lang-zh">在技术的深处，<br>保持宽阔的视野。</span><span class="lang lang-en">Deep in technology.<br>Broad in perspective.</span></h2>
+            <p class="bio"><span class="lang lang-zh">二十余年半导体研发、制造与商业经历，持续探索 AI 如何帮助人、团队与真实工作更好地连接。</span><span class="lang lang-en">More than two decades across semiconductor R&amp;D, manufacturing and business—now exploring how AI can better connect people, teams and real work.</span></p>
+            <div class="education">
+              <p><b>Cornell University</b><span>Executive MBA · Machine Learning & AI</span></p>
+              <p><b>Harvard Business School</b><span>CORe — High Honor</span></p>
+              <p><b><span class="lang lang-zh">南京大学</span><span class="lang lang-en">Nanjing University</span></b><span><span class="lang lang-zh">物理学学士</span><span class="lang lang-en">B.S. Physics</span></span></p>
+            </div>
+            <div class="about-actions">
+              <a href="mailto:chenxiaobo8210@gmail.com">Email <span>↗</span></a>
+              <a href="https://www.linkedin.com/in/xiaobo-chen-11a97a61" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
+              <a href="/designs/"><span class="lang lang-zh">全部旧设计</span><span class="lang lang-en">Design archive</span> <span>↗</span></a>
+            </div>
+            <p class="version-note">NEW HOMEPAGE PREVIEW · V4 / 2026</p>
+          </div>
+        </section>
+      </div>
+
+      <nav class="chapter-nav" aria-label="章节导航">
+        <div class="chapter-links">
+          <button type="button" data-go="0">Home</button><span>·</span>
+          <button type="button" data-go="2">Explore</button><span>·</span>
+          <button type="button" data-go="3">Portal</button>
+        </div>
+        <span class="chapter-counter" aria-live="polite">01 / 05</span>
+        <div class="chapter-arrows">
+          <button type="button" data-step="-1" aria-label="上一章">←</button>
+          <button type="button" data-step="1" aria-label="下一章">→</button>
+        </div>
+      </nav>
+      <div class="page-progress" aria-hidden="true"><span></span></div>
+    </div>
+  </main>
+
+  <noscript><p class="noscript">此预览需要 JavaScript。<a href="/prototypes/home-v3/">打开旧主页 3.0</a></p></noscript>
+</body>
+</html>
