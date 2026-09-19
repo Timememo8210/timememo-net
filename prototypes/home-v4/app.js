@@ -62,8 +62,18 @@
   const languageButtons = [...document.querySelectorAll('[data-language]')];
   const motionToggle = document.querySelector('.motion-toggle');
 
+  function pinScrollPosition(top, frames = 3) {
+    const previousBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, top);
+    html.style.scrollBehavior = previousBehavior;
+    if (frames > 0) requestAnimationFrame(() => pinScrollPosition(top, frames - 1));
+  }
+
   function setLanguage(language) {
     const next = language === 'en' ? 'en' : 'zh';
+    const keepChapter = Math.max(current, 0);
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     body.dataset.language = next;
     html.lang = next === 'en' ? 'en' : 'zh-CN';
     languageButtons.forEach(button => {
@@ -72,10 +82,31 @@
     document.title = next === 'en' ? 'TimeMemo · New Homepage Preview' : 'TimeMemo · 新主页预览';
     try { localStorage.setItem('timememo-home-language', next); } catch (_) {}
     updateMotionLabel();
-    requestAnimationFrame(() => resize());
+
+    const restoreChapter = () => {
+      target = keepChapter;
+      position = keepChapter;
+      const destination = mobile
+        ? chapterStarts[keepChapter] - navHeight
+        : stageTop + keepChapter * height;
+      pinScrollPosition(destination, 4);
+      render();
+    };
+
+    if (matchMedia('(max-width: 760px)').matches) {
+      requestAnimationFrame(() => {
+        resize();
+        restoreChapter();
+        setTimeout(restoreChapter, 180);
+      });
+    } else {
+      requestAnimationFrame(restoreChapter);
+      setTimeout(restoreChapter, 180);
+    }
   }
 
   languageButtons.forEach(button => {
+    button.addEventListener('mousedown', event => event.preventDefault());
     button.addEventListener('click', () => setLanguage(button.dataset.language));
   });
 
@@ -100,8 +131,6 @@
     updateMotionLabel();
     motionChanged();
   });
-
-  setLanguage(savedLanguage);
 
   const stage = document.querySelector('.home-stage');
   const sticky = document.querySelector('.home-sticky');
@@ -395,7 +424,8 @@
   window.addEventListener('scroll', readScroll, { passive: true });
   window.addEventListener('resize', resize);
   document.addEventListener('visibilitychange', motionChanged);
-  document.fonts.ready.then(resize);
   resize();
+  setLanguage(savedLanguage);
+  document.fonts.ready.then(resize);
   motionChanged();
 })();
