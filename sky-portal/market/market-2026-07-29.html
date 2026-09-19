@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-29</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #1a1a1f;
+  --card-border: #2a2a30;
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --red: #f87171;
+  --green: #4ade80;
+  --orange: #fb923c;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; padding: 20px 16px;
+}
+body.lang-zh .en { display: none !important; }
+body.lang-en .zh { display: none !important; }
+.wrap { max-width: 900px; margin: 0 auto; }
+h1 { text-align: center; color: var(--accent); font-size: 1.8em; margin-bottom: 4px; }
+.subtitle { text-align: center; color: var(--text-dim); font-size: 0.9em; margin-bottom: 28px; }
+h2 { color: var(--accent); font-size: 1.3em; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--card-border); }
+.card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+.card h4 { color: #fff; font-size: 1.05em; margin-bottom: 8px; }
+.card p { margin-bottom: 6px; font-size: 0.92em; }
+.card .src { color: var(--text-dim); font-size: 0.8em; margin-top: 6px; }
+
+/* Poster Grid */
+.poster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
+.poster-card { border-radius: 12px; padding: 20px 24px; color: #fff; }
+.poster-icon { font-size: 2em; margin-bottom: 8px; }
+.poster-data { margin-top: 10px; font-size: 0.9em; opacity: 0.9; line-height: 1.6; }
+
+/* Stock Grid */
+.stock-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0; }
+.stock-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 10px; padding: 14px 10px; text-align: center; }
+.stock-ticker { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); font-size: 0.95em; }
+.stock-price { color: #fff; font-size: 1.1em; font-weight: 600; margin: 6px 0 4px; }
+.stock-change { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.82em; padding: 3px 10px; border-radius: 5px; display: inline-block; }
+.up { background: rgba(74,222,128,0.15); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+.down { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+.flat { background: rgba(255,255,255,0.08); color: var(--text-dim); border: 1px solid rgba(255,255,255,0.12); }
+
+/* Lang Toggle */
+.lang-toggle { text-align: right; margin-bottom: 8px; }
+.lang-toggle button { padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; border: 1px solid #555; }
+button#btn-zh { background: #333; color: #fff; }
+button#btn-en { background: #222; color: #aaa; }
+
+/* Forecast Box */
+.forecast-box { background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.02)); border: 1px solid rgba(74,222,128,0.2); border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+.forecast-box h4 { color: var(--accent); font-size: 1.1em; margin-bottom: 10px; }
+
+.footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--card-border); color: var(--text-dim); font-size: 0.85em; }
+.footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .stock-grid { grid-template-columns: repeat(2, 1fr); }
+  .poster-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="lang-toggle">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- Poster Grid -->
+<div class="poster-grid">
+  <div class="poster-card" style="background: linear-gradient(135deg, #dc2626, #991b1b)">
+    <div class="poster-icon">📉</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">美股暴跌</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Plunge</div>
+    <div class="zh poster-data">• 道指 -1,153点（-2.19%）<br>• 纳指距高点跌超10%<br>• 2025年4月以来最差表现</div>
+    <div class="en poster-data" style="display:none">• Dow -1,153 pts (-2.19%)<br>• Nasdaq >10% off highs<br>• Worst day since April 2025</div>
+  </div>
+  <div class="poster-card" style="background: linear-gradient(135deg, #1e40af, #1e3a5f)">
+    <div class="poster-icon">🏦</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">鹰派美联储</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Hawkish Fed</div>
+    <div class="zh poster-data">• 3名委员投反对票<br>• 30年国债收益率飙至5.2%+<br>• 2007年以来最高</div>
+    <div class="en poster-data" style="display:none">• 3 dissenting votes<br>• 30Y yield surges past 5.2%<br>• Highest since 2007</div>
+  </div>
+  <div class="poster-card" style="background: linear-gradient(135deg, #854d0e, #713f12)">
+    <div class="poster-icon">🚀</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">中东局势升级</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Mideast Escalation</div>
+    <div class="zh poster-data">• 伊朗向美军发射弹道导弹<br>• Trump称将"狠狠打击"伊朗<br>• 油价跳涨，避险情绪升温</div>
+    <div class="en poster-data" style="display:none">• Iran fires missiles at US forces<br>• Trump vows to "beat" Iran<br>• Oil spikes, risk-off sentiment</div>
+  </div>
+  <div class="poster-card" style="background: linear-gradient(135deg, #065f46, #064e3b)">
+    <div class="poster-icon">📊</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">财报冰火两重天</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Earnings Divergence</div>
+    <div class="zh poster-data">• Microsoft +8%（Azure强劲）<br>• Meta -7%（指引疲软）<br>• Arm 营收$12.9亿（+22%）</div>
+    <div class="en poster-data" style="display:none">• Microsoft +8% (Azure strong)<br>• Meta -7% (weak guidance)<br>• Arm $1.29B rev (+22% YoY)</div>
+  </div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-07-29 <span class="zh">· Sky Portal ·</span><span class="en" style="display:none"> · Sky Portal ·</span> <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- US Markets -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">DJI</div>
+    <div class="stock-price">51,594</div>
+    <div class="stock-change down">-2.19%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">S&P 500</div>
+    <div class="stock-price">~7,316</div>
+    <div class="stock-change down">-1.52%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">NASDAQ</div>
+    <div class="stock-price">~25,576</div>
+    <div class="stock-change down">-1.74%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">SOX</div>
+    <div class="stock-price">10,447</div>
+    <div class="stock-change down">-5.33%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">30Y Yield</div>
+    <div class="stock-price">5.2%+</div>
+    <div class="stock-change down">+10bp</div>
+  </div>
+</div>
+
+<!-- Key Drivers -->
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+  <h4><span class="zh">1. 美联储鹰派决议 — 3票反对震动市场</span><span class="en" style="display:none">1. Hawkish Fed Decision — 3 Dissenting Votes</span></h4>
+  <p><span class="zh">美联储7月会议维持利率不变，但有3名FOMC委员投了反对票，这是近年来罕见的高反对票数。市场解读为美联储内部鹰派力量增强，降息预期大幅推迟。30年期国债收益率飙升10个基点至5.2%以上，创下2007年以来新高。高利率环境持续压制成长股估值。</span><span class="en" style="display:none">The Fed held rates at the July meeting, but 3 FOMC members dissented — an unusually high count. Markets interpreted this as strengthening hawkish internal dynamics, pushing rate cut expectations further out. The 30-year Treasury yield surged 10bp to 5.2%+, the highest since 2007. Persistent high rates continue to pressure growth stock valuations.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / WSJ</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">2. 中东冲突升级 — 伊朗袭击美军</span><span class="en" style="display:none">2. Mideast Escalation — Iran Attacks US Forces</span></h4>
+  <p><span class="zh">伊朗革命卫队向驻中东美军发射弹道导弹，Trump对Fox News表示伊朗"将遭到痛击"。地缘政治风险飙升，油价跳涨，避险资产（美元、黄金）走强。中东冲突若进一步升级，可能推动油价突破$120，加剧通胀压力，进一步推迟美联储降息。</span><span class="en" style="display:none">Iran's Revolutionary Guard fired ballistic missiles at US forces in the Middle East. Trump told Fox News Iran "is going to get a beating." Geopolitical risk surged, oil prices jumped, and safe-haven assets (USD, gold) strengthened. Further escalation could push oil past $120, worsening inflation and further delaying Fed rate cuts.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Fox News</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">3. 科技巨头财报分化 — AI投资回报悬殊</span><span class="en" style="display:none">3. Big Tech Earnings Diverge — AI ROI Gap Widens</span></h4>
+  <p><span class="zh">Microsoft盘后大涨8%，Azure业务增长强劲，CFO宣布将增加2027财年资本支出。Meta盘后跌7%，营收指引令人失望，AI投资侵蚀利润。Arm Q1 FYE27营收$12.9亿（+22% YoY），超预期，Q2指引$13.8亿。这反映了AI投资回报的严重分化。</span><span class="en" style="display:none">Microsoft surged 8% after-hours on strong Azure growth; CFO announced increased FY2027 capex. Meta dropped 7% on disappointing revenue guidance as AI investment erodes margins. Arm beat expectations with Q1 FYE27 revenue of $1.29B (+22% YoY), guiding Q2 to $1.38B. This reflects a widening AI investment return gap.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Arm IR</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">4. 半导体板块重挫 — SOX单日跌5.33%</span><span class="en" style="display:none">4. Semiconductor Rout — SOX Plunges 5.33%</span></h4>
+  <p><span class="zh">费城半导体指数暴跌5.33%，AI芯片股集体回调。高利率环境对高估值半导体股形成持续压力，叠加中东避险情绪和Fed鹰派信号，半导体板块成为重灾区。SOX从6月高点已下跌超过20%，正式进入技术性熊市。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index plunged 5.33% as AI chip stocks collectively retreated. High rates continue pressuring high-valuation semi stocks, compounded by geopolitical risk-off and hawkish Fed signals. SOX has fallen >20% from June highs, entering technical bear territory.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>Google Finance / MarketWatch</p>
+</div>
+
+<!-- Asia Markets -->
+<h2>🌏 <span class="zh">亚太市场</span><span class="en" style="display:none">Asia-Pacific Markets</span></h2>
+
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">上证综指</div>
+    <div class="stock-price">3,821</div>
+    <div class="stock-change down">-0.20%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">恒生指数</div>
+    <div class="stock-price">25,808</div>
+    <div class="stock-change flat">≈0%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">日经225</div>
+    <div class="stock-price">61,434</div>
+    <div class="stock-change down">-0.25%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">KOSPI</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+0.89%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">Samsung</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+1.6%</div>
+  </div>
+</div>
+
+<div class="card">
+  <h4><span class="zh">亚太市场摘要</span><span class="en" style="display:none">Asia-Pacific Summary</span></h4>
+  <p><span class="zh">A股小幅收跌，上证综指微跌0.20%至3,821点。港股恒指基本持平于25,808。日经225下跌0.25%。韩国KOSPI先跌后反弹收涨0.89%。三星电子Q2营业利润同比暴增1,814%，营收增长130%，盘后涨1.6%。中际旭创港股上市首日跌5%。</span><span class="en" style="display:none">A-shares closed slightly lower, with the Shanghai Composite down 0.20% at 3,821. Hang Seng was flat at 25,808. Nikkei 225 fell 0.25%. KOSPI rebounded to close +0.89%. Samsung Q2 operating profit surged 1,814% YoY with revenue up 130%, shares rose 1.6%. Zhongji Innolight fell 5% on HK debut.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Trading Economics</p>
+</div>
+
+<!-- Outlook -->
+<h2>🔮 <span class="zh">短期展望</span><span class="en" style="display:none">Short-Term Outlook</span></h2>
+
+<div class="forecast-box">
+  <h4><span class="zh">⚠️ 偏空 — 三重压力叠加</span><span class="en" style="display:none">⚠️ Bearish Bias — Triple Pressure</span></h4>
+  <p><span class="zh">
+    <b>风险因素：</b><br>
+    • Fed鹰派立场短期内难以逆转，降息预期推迟至9月甚至更晚<br>
+    • 中东冲突若升级将推高油价，加剧通胀压力<br>
+    • 30年期国债收益率5.2%+持续压制成长股估值<br>
+    • SOX已进入技术性熊市，半导体板块短期承压<br><br>
+    <b>关注事件（周四）：</b><br>
+    • PCE通胀数据（预期3.7%），若超预期将进一步打击降息预期<br>
+    • Q2 GDP初值<br>
+    • Apple、Amazon盘后财报<br>
+    • Microsoft盘后大涨8%可能带动明日科技股部分反弹<br>
+    • Arm财报超预期是半导体板块的潜在亮点
+  </span><span class="en" style="display:none">
+    <b>Risk Factors:</b><br>
+    • Hawkish Fed stance unlikely to reverse soon; rate cut expectations pushed to September or later<br>
+    • Mideast escalation could push oil higher, worsening inflation<br>
+    • 30Y yield at 5.2%+ continues pressuring growth stock valuations<br>
+    • SOX in technical bear market; semi stocks under pressure<br><br>
+    <b>Key Events (Thursday):</b><br>
+    • PCE inflation data (est. 3.7%) — upside surprise would further delay rate cut hopes<br>
+    • Q2 GDP initial estimate<br>
+    • Apple & Amazon after-hours earnings<br>
+    • Microsoft's +8% after-hours may spark partial tech rebound<br>
+    • Arm earnings beat is a potential bright spot for semis
+  </span></p>
+</div>
+
+<div class="footer">
+  <span class="zh">由 Sky ☁️ 自动生成 · <a href="index.html">所有行情</a> · <a href="../index.html">返回首页</a></span>
+  <span class="en" style="display:none">Auto-generated by Sky ☁️ · <a href="index.html">All Reports</a> · <a href="../index.html">Home</a></span>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#333' : '#222';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#333' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+</body>
+</html>

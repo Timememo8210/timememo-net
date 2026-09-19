@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Monocle Style</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+:root {
+  --paper: #F8F5F0; --paper-warm: #F3EFE8; --ink: #1A1A18;
+  --ink-light: #3D3B37; --secondary: #8A857D; --tertiary: #B5AFA6;
+  --rule: #D4CFC6; --rule-light: #E8E4DB;
+  --accent-red: #C4421A; --accent-blue: #2B5C8A; --accent-green: #3A6B4F;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --ease: cubic-bezier(0.16,1,0.3,1); --gutter: 32px; --max-w: 1100px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--accent-red);color:#fff}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+body.lang-en .zh{display:none!important}
+body.lang-zh .en{display:none!important}
+a{color:inherit;text-decoration:none}
+.reveal{opacity:0;transform:translateY(8px);transition:opacity 500ms var(--ease),transform 500ms var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+.masthead{border-bottom:2px solid var(--ink);padding:14px var(--gutter);background:var(--paper);position:sticky;top:0;z-index:100}
+.masthead-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.masthead-brand{display:flex;align-items:baseline;gap:8px}
+.masthead-brand .logo{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:-0.03em}
+.logo-dot{width:7px;height:7px;background:var(--accent-red);border-radius:50%;display:inline-block;vertical-align:super;margin-left:1px}
+.masthead-tagline{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--secondary);margin-left:12px}
+.masthead-right{display:flex;align-items:center}
+.masthead-nav{display:flex;align-items:center}
+.masthead-nav a{font-family:var(--sans);font-size:0.68rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-light);padding:8px 12px;transition:color 200ms,background 200ms;border-left:1px solid var(--rule-light)}
+.masthead-nav a:first-child{border-left:none}
+.masthead-nav a:hover{color:var(--accent-red);background:rgba(0,0,0,0.02)}
+.lang-toggle{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.08em;color:var(--secondary);background:0 0;border:1px solid var(--rule);padding:4px 10px;cursor:pointer;margin-left:10px;transition:all 200ms}
+.lang-toggle:hover{border-color:var(--ink);color:var(--ink)}
+
+.ticker{border-bottom:1px solid var(--rule);padding:5px var(--gutter);background:var(--paper-warm)}
+.ticker-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.04em;color:var(--secondary)}
+.ticker-label{font-weight:600;color:var(--accent-red);text-transform:uppercase;letter-spacing:0.12em}
+
+.hero{max-width:var(--max-w);margin:0 auto;padding:56px var(--gutter) 64px;display:grid;grid-template-columns:7fr 4fr;gap:48px;align-items:end;border-bottom:2px solid var(--ink)}
+.hero-eyebrow{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-red);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent-red)}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:400;letter-spacing:-0.03em;line-height:1.05;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--secondary)}
+.hero-lede{font-size:0.9rem;line-height:1.75;color:var(--ink-light);max-width:48ch}
+.hero-sidebar{border-top:1px solid var(--rule)}
+.hero-stat{padding:13px 0;border-bottom:1px solid var(--rule-light);display:flex;justify-content:space-between;align-items:baseline}
+.hero-stat-num{font-family:var(--serif);font-size:1.8rem;font-weight:600;letter-spacing:-0.03em}
+.hero-stat-label{font-family:var(--mono);font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--secondary)}
+
+.section{max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter)}
+.section-header{display:flex;align-items:baseline;gap:14px;padding:28px 0 16px;border-bottom:2px solid var(--ink)}
+.section-num{font-family:var(--serif);font-size:0.78rem;font-style:italic;color:var(--secondary)}
+.section-title{font-family:var(--sans);font-size:0.68rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase}
+.section-desc{font-family:var(--sans);font-size:0.72rem;color:var(--secondary);margin-left:auto;font-style:italic}
+
+.editorial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:2px solid var(--ink)}
+.ed-card{padding:24px 22px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:8px;transition:background 400ms var(--ease);cursor:pointer}
+.ed-card:nth-child(3n){border-right:none}
+.ed-card:hover{background:var(--paper-warm)}
+.ed-card.featured{grid-column:span 2;padding:32px 28px}
+.ed-tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--secondary)}
+.ed-tag::before{content:'';width:6px;height:6px;border-radius:50%}
+.ed-tag.red::before{background:var(--accent-red)}
+.ed-tag.blue::before{background:var(--accent-blue)}
+.ed-tag.green::before{background:var(--accent-green)}
+.ed-tag.grey::before{background:var(--tertiary)}
+.ed-title{font-family:var(--serif);font-size:1.15rem;letter-spacing:-0.02em;line-height:1.25}
+.ed-card.featured .ed-title{font-size:1.4rem}
+.ed-desc{font-size:0.78rem;line-height:1.6;color:var(--ink-light)}
+.ed-meta{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.08em;color:var(--tertiary);margin-top:auto;text-transform:uppercase}
+
+.contents-list{border-bottom:2px solid var(--ink)}
+.contents-item{display:grid;grid-template-columns:56px 1fr auto auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule-light);transition:padding-left 300ms,background 200ms;cursor:pointer}
+.contents-item:last-child{border-bottom:none}
+.contents-item:hover{padding-left:8px;background:var(--paper-warm)}
+.contents-num{font-family:var(--serif);font-size:0.85rem;font-style:italic;color:var(--tertiary)}
+.contents-tag{font-family:var(--mono);font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--secondary);background:var(--tag-bg,#EDE9E2);padding:2px 8px;border-radius:3px}
+.contents-title{font-family:var(--serif);font-size:0.95rem;letter-spacing:-0.01em}
+.contents-arrow{font-size:1rem;color:var(--rule);transition:color 200ms,transform 200ms}
+.contents-item:hover .contents-arrow{color:var(--accent-red);transform:translateX(3px)}
+
+.pull-quote{max-width:var(--max-w);margin:0 auto;padding:56px var(--gutter);border-bottom:2px solid var(--ink);text-align:center}
+.pull-quote-text{font-family:var(--serif);font-size:clamp(1.3rem,2.8vw,2rem);font-weight:400;font-style:italic;line-height:1.45;max-width:26ch;margin:0 auto 18px}
+.pull-quote-attr{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--secondary)}
+
+.footer{max-width:var(--max-w);margin:0 auto;padding:28px var(--gutter) 44px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;padding-top:20px;border-top:2px solid var(--ink)}
+.footer-col-title{font-family:var(--sans);font-size:0.58rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--rule-light)}
+.footer-col a,.footer-col span{display:block;font-family:var(--sans);font-size:0.75rem;color:var(--secondary);padding:3px 0;transition:color 200ms}
+.footer-col a:hover{color:var(--accent-red)}
+.footer-brand{font-family:var(--serif);font-size:1.1rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+.footer-note{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.04em;color:var(--tertiary);line-height:1.8;margin-top:28px;padding-top:14px;border-top:1px solid var(--rule-light)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:40px var(--gutter) 48px}
+  .editorial-grid{grid-template-columns:1fr}
+  .ed-card{border-right:none!important;border-bottom:1px solid var(--rule-light)}
+  .ed-card:last-child{border-bottom:none}
+  .ed-card.featured{grid-column:span 1}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .contents-item{grid-template-columns:40px 1fr auto auto}
+  .masthead-inner{flex-wrap:wrap;gap:6px}
+  .masthead-nav{flex-wrap:wrap}
+  .masthead-nav a{border-left:none;padding:4px 8px;font-size:0.62rem}
+}
+@media(max-width:600px){
+  :root{--gutter:18px}
+  .masthead-brand .logo{font-size:1.15rem}
+  .masthead-tagline{display:none}
+  .hero h1{font-size:1.9rem}
+  .footer-grid{grid-template-columns:1fr}
+  .contents-item{grid-template-columns:1fr auto}
+  .contents-num,.contents-tag{display:none}
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-brand">
+      <span class="logo">Sky Portal<span class="logo-dot"></span></span>
+      <span class="masthead-tagline"><span class="zh">技术 · 研究 · 生活</span><span class="en">Technology · Research · Life</span></span>
+    </div>
+    <div class="masthead-right">
+      <nav class="masthead-nav">
+        <a href="#daily"><span class="zh">每日</span><span class="en">Daily</span></a>
+        <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+        <a href="#ai">AI</a>
+        <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+        <a href="#projects"><span class="zh">项目</span><span class="en">Projects</span></a>
+      </nav>
+      <button class="lang-toggle" onclick="toggleLang()">中 / EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="ticker"><div class="ticker-inner">
+  <span class="ticker-label"><span class="zh">更新</span><span class="en">Update</span></span>
+  <span id="ticker-date"></span>
+  <span style="color:var(--tertiary)">|</span>
+  <span><span class="zh">半导体 · AI · 投资 · 生活</span><span class="en">Semiconductor · AI · Investment · Life</span></span>
+</div></div>
+
+<section class="hero reveal">
+  <div>
+    <div class="hero-eyebrow"><span class="zh">个人数字空间</span><span class="en">Personal Digital Space</span></div>
+    <h1><span class="zh">一个工程师的<br><em>数字花园</em></span><span class="en">An Engineer's<br><em>Digital Garden</em></span></h1>
+    <p class="hero-lede"><span class="zh">半导体研究、AI 探索、投资分析、生活记录——用技术记录思考，用好奇心连接世界。</span><span class="en">Semiconductor research, AI exploration, investment analysis, and life notes.</span></p>
+  </div>
+  <div class="hero-sidebar">
+    <div class="hero-stat"><span class="hero-stat-num">11</span><span class="hero-stat-label"><span class="zh">已发布</span><span class="en">Published</span></span></div>
+    <div class="hero-stat"><span class="hero-stat-num">5</span><span class="hero-stat-label"><span class="zh">进行中</span><span class="en">Active</span></span></div>
+    <div class="hero-stat"><span class="hero-stat-num" id="day-count">—</span><span class="hero-stat-label"><span class="zh">天 · 2/15 起</span><span class="en">Days · since 2/15</span></span></div>
+  </div>
+</section>
+
+<section class="section" id="daily">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <span class="section-title"><span class="zh">每日更新</span><span class="en">Daily Updates</span></span>
+    <span class="section-desc"><span class="zh">自动生成 · 每日刷新</span><span class="en">Auto-generated</span></span>
+  </div>
+</section>
+<div class="section"><div class="editorial-grid reveal">
+  <a class="ed-card featured" href="research/index.html">
+    <span class="ed-tag blue"><span class="zh">研报</span><span class="en">Briefing</span></span>
+    <span class="ed-title"><span class="zh">每日研报</span><span class="en">Daily Briefing</span></span>
+    <span class="ed-desc"><span class="zh">半导体 · AI · 市场 · 科技趋势 — 每日自动生成</span><span class="en">Semiconductor · AI · Market · Tech</span></span>
+    <span class="ed-meta">auto-generated</span>
+  </a>
+  <a class="ed-card" href="tech/index.html">
+    <span class="ed-tag green"><span class="zh">科技</span><span class="en">Tech</span></span>
+    <span class="ed-title"><span class="zh">科技动态</span><span class="en">Tech Feed</span></span>
+    <span class="ed-desc"><span class="zh">前沿科技新闻追踪</span><span class="en">Cutting-edge tech news</span></span>
+    <span class="ed-meta">daily</span>
+  </a>
+  <a class="ed-card" href="market/index.html">
+    <span class="ed-tag red"><span class="zh">行情</span><span class="en">Market</span></span>
+    <span class="ed-title"><span class="zh">市场行情</span><span class="en">Market Watch</span></span>
+    <span class="ed-desc"><span class="zh">全球市场与投资追踪</span><span class="en">Global markets & investments</span></span>
+    <span class="ed-meta">daily</span>
+  </a>
+  <a class="ed-card" href="science/index.html">
+    <span class="ed-tag grey"><span class="zh">科学</span><span class="en">Science</span></span>
+    <span class="ed-title"><span class="zh">科学前沿</span><span class="en">Science Digest</span></span>
+    <span class="ed-desc"><span class="zh">Nature · Science · Cell — 每周三精选</span><span class="en">Nature · Science · Cell — Wed</span></span>
+    <span class="ed-meta">weekly</span>
+  </a>
+  <a class="ed-card featured" href="prompts/index.html">
+    <span class="ed-tag green"><span class="zh">提示词</span><span class="en">Prompts</span></span>
+    <span class="ed-title"><span class="zh">提示词库</span><span class="en">Prompt Library</span></span>
+    <span class="ed-desc"><span class="zh">AI 提示词收藏与管理</span><span class="en">AI prompt collection</span></span>
+    <span class="ed-meta">collection</span>
+  </a>
+</div></div>
+
+<section class="section" id="research">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <span class="section-title"><span class="zh">研究</span><span class="en">Research</span></span>
+    <span class="section-desc"><span class="zh">半导体 · 芯片 · 工艺</span><span class="en">Semiconductor</span></span>
+  </div>
+</section>
+<div class="section"><div class="editorial-grid reveal">
+  <a class="ed-card" href="ai-cvd-optimization.html">
+    <span class="ed-tag blue">CVD</span>
+    <span class="ed-title"><span class="zh">AI CVD 工艺优化</span><span class="en">AI CVD Optimization</span></span>
+    <span class="ed-desc"><span class="zh">AI驱动的CVD工艺参数优化</span><span class="en">AI-driven CVD optimization</span></span>
+    <span class="ed-meta">research</span>
+  </a>
+  <a class="ed-card" href="semiconductor-equipment-ai.html">
+    <span class="ed-tag blue"><span class="zh">设备</span><span class="en">Equipment</span></span>
+    <span class="ed-title"><span class="zh">半导体设备 AI</span><span class="en">Equipment AI</span></span>
+    <span class="ed-desc"><span class="zh">设备智能化与AI应用</span><span class="en">Equipment intelligence</span></span>
+    <span class="ed-meta">research</span>
+  </a>
+  <a class="ed-card" href="nvidia-report.html">
+    <span class="ed-tag green">NVIDIA</span>
+    <span class="ed-title"><span class="zh">NVIDIA 深度报告</span><span class="en">NVIDIA Deep Dive</span></span>
+    <span class="ed-desc"><span class="zh">GPU · 数据中心 · AI芯片</span><span class="en">GPU · Data center · AI</span></span>
+    <span class="ed-meta">report</span>
+  </a>
+  <a class="ed-card featured" href="intel-news-2026.html">
+    <span class="ed-tag red">INTEL</span>
+    <span class="ed-title"><span class="zh">Intel 新闻追踪</span><span class="en">Intel News Tracker</span></span>
+    <span class="ed-desc"><span class="zh">Intel 18A · 代工 · 战略转型</span><span class="en">Intel 18A · Foundry</span></span>
+    <span class="ed-meta">tracking</span>
+  </a>
+  <a class="ed-card" href="fpga-report.html">
+    <span class="ed-tag blue">FPGA</span>
+    <span class="ed-title"><span class="zh">FPGA 报告</span><span class="en">FPGA Report</span></span>
+    <span class="ed-desc"><span class="zh">FPGA技术与市场分析</span><span class="en">FPGA tech & market</span></span>
+    <span class="ed-meta">report</span>
+  </a>
+  <a class="ed-card" href="hbm-report.html">
+    <span class="ed-tag red">HBM</span>
+    <span class="ed-title"><span class="zh">HBM 深度报告</span><span class="en">HBM Deep Dive</span></span>
+    <span class="ed-desc"><span class="zh">高带宽内存技术与市场</span><span class="en">High-bandwidth memory</span></span>
+    <span class="ed-meta">report</span>
+  </a>
+</div></div>
+
+<div class="pull-quote reveal">
+  <p class="pull-quote-text"><span class="zh">用技术记录思考，<br>用好奇心连接世界</span><span class="en">Recording thoughts through technology,<br>connecting the world through curiosity</span></p>
+  <span class="pull-quote-attr">Sky Portal · 2026</span>
+</div>
+
+<section class="section" id="ai">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <span class="section-title"><span class="zh">AI 专区</span><span class="en">AI Lab</span></span>
+    <span class="section-desc"><span class="zh">模型 · 工具</span><span class="en">Models · Tools</span></span>
+  </div>
+</section>
+<div class="section"><div class="editorial-grid reveal">
+  <a class="ed-card featured" href="ai/index.html">
+    <span class="ed-tag blue">AI</span>
+    <span class="ed-title"><span class="zh">AI 研究中心</span><span class="en">AI Research Hub</span></span>
+    <span class="ed-desc"><span class="zh">AI 技术研究、模型对比、应用探索</span><span class="en">Research, models, applications</span></span>
+    <span class="ed-meta">hub</span>
+  </a>
+  <a class="ed-card" href="ai-life.html">
+    <span class="ed-tag green"><span class="zh">生活</span><span class="en">Life</span></span>
+    <span class="ed-title"><span class="zh">AI 与生活</span><span class="en">AI & Life</span></span>
+    <span class="ed-desc"><span class="zh">AI如何改变我们的日常</span><span class="en">How AI shapes daily life</span></span>
+    <span class="ed-meta">essay</span>
+  </a>
+  <a class="ed-card" href="claude-code-leak.html">
+    <span class="ed-tag red"><span class="zh">分析</span><span class="en">Analysis</span></span>
+    <span class="ed-title"><span class="zh">Claude Code 泄露分析</span><span class="en">Claude Code Leak</span></span>
+    <span class="ed-desc"><span class="zh">系统提示词深度解读</span><span class="en">System prompt deep dive</span></span>
+    <span class="ed-meta">analysis</span>
+  </a>
+  <a class="ed-card" href="skills.html">
+    <span class="ed-tag grey"><span class="zh">技能</span><span class="en">Skills</span></span>
+    <span class="ed-title"><span class="zh">AI 技能库</span><span class="en">AI Skill Library</span></span>
+    <span class="ed-desc"><span class="zh">Claude Code 技能管理</span><span class="en">Skill management</span></span>
+    <span class="ed-meta">tools</span>
+  </a>
+  <a class="ed-card featured" href="https://github.com/Timememo8210/claude-app-memory" target="_blank">
+    <span class="ed-tag green">GITHUB</span>
+    <span class="ed-title">Claude App Memory</span>
+    <span class="ed-desc"><span class="zh">AI 应用记忆管理系统 — 开源</span><span class="en">AI memory management — open source</span></span>
+    <span class="ed-meta">open source</span>
+  </a>
+</div></div>
+
+<section class="section" id="life">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <span class="section-title"><span class="zh">生活</span><span class="en">Life</span></span>
+    <span class="section-desc"><span class="zh">旅行 · 足球 · 投资</span><span class="en">Travel · Sports · Finance</span></span>
+  </div>
+</section>
+<div class="section"><div class="contents-list reveal">
+  <a class="contents-item" href="my-garden/">
+    <span class="contents-num">i</span>
+    <span class="contents-title"><span class="zh">我的花园</span><span class="en">My Garden</span></span>
+    <span class="contents-tag"><span class="zh">花园</span><span class="en">Garden</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="coach/index.html">
+    <span class="contents-num">ii</span>
+    <span class="contents-title"><span class="zh">教练专区</span><span class="en">Coach Zone</span></span>
+    <span class="contents-tag"><span class="zh">足球</span><span class="en">Soccer</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="investment.html">
+    <span class="contents-num">iii</span>
+    <span class="contents-title"><span class="zh">投资分析</span><span class="en">Investment Analysis</span></span>
+    <span class="contents-tag"><span class="zh">投资</span><span class="en">Finance</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank">
+    <span class="contents-num">iv</span>
+    <span class="contents-title"><span class="zh">2026 旅行计划</span><span class="en">2026 Travel Plan</span></span>
+    <span class="contents-tag"><span class="zh">旅行</span><span class="en">Travel</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="naturalization.html">
+    <span class="contents-num">v</span>
+    <span class="contents-title"><span class="zh">入籍准备</span><span class="en">Naturalization Prep</span></span>
+    <span class="contents-tag"><span class="zh">个人</span><span class="en">Personal</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="worldcup-2026.html">
+    <span class="contents-num">vi</span>
+    <span class="contents-title"><span class="zh">2026 世界杯</span><span class="en">2026 World Cup</span></span>
+    <span class="contents-tag"><span class="zh">体育</span><span class="en">Sports</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="https://timememo8210.github.io/health-report/" target="_blank">
+    <span class="contents-num">vii</span>
+    <span class="contents-title"><span class="zh">健康报告</span><span class="en">Health Report</span></span>
+    <span class="contents-tag"><span class="zh">健康</span><span class="en">Health</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+</div></div>
+
+<section class="section" id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <span class="section-title"><span class="zh">项目 & 工具</span><span class="en">Projects & Tools</span></span>
+  </div>
+</section>
+<div class="section"><div class="contents-list reveal">
+  <a class="contents-item" href="https://timememo8210.github.io/polyclaw/" target="_blank">
+    <span class="contents-num">01</span>
+    <span class="contents-title">PolyClaw</span>
+    <span class="contents-tag"><span class="zh">投资分析</span><span class="en">Investment</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="https://timememo8210.github.io/moji-journal/" target="_blank">
+    <span class="contents-num">02</span>
+    <span class="contents-title">Moji Journal</span>
+    <span class="contents-tag"><span class="zh">日记</span><span class="en">Diary</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="https://timememo8210.github.io/travelsnap/" target="_blank">
+    <span class="contents-num">03</span>
+    <span class="contents-title">TravelSnap</span>
+    <span class="contents-tag"><span class="zh">相册</span><span class="en">Album</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="https://timememo8210.github.io/家人-War-Game/" target="_blank">
+    <span class="contents-num">04</span>
+    <span class="contents-title"><span class="zh">家人 War Game</span><span class="en">Family War Game</span></span>
+    <span class="contents-tag"><span class="zh">游戏</span><span class="en">Game</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="prolynk.html">
+    <span class="contents-num">05</span>
+    <span class="contents-title">ProLynk</span>
+    <span class="contents-tag"><span class="zh">测试报告</span><span class="en">QA Report</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+  <a class="contents-item" href="https://timememo8210.github.io/app-ideas/" target="_blank">
+    <span class="contents-num">06</span>
+    <span class="contents-title"><span class="zh">App 创意</span><span class="en">App Ideas</span></span>
+    <span class="contents-tag"><span class="zh">想法</span><span class="en">Ideas</span></span>
+    <span class="contents-arrow">→</span>
+  </a>
+</div></div>
+
+<footer class="footer">
+  <div class="footer-grid reveal">
+    <div class="footer-col">
+      <div class="footer-brand">Sky Portal<span class="logo-dot"></span></div>
+      <span><span class="zh">用技术记录思考，用好奇心连接世界</span><span class="en">Recording thoughts, connecting worlds</span></span>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title"><span class="zh">内容</span><span class="en">Content</span></div>
+      <a href="#daily"><span class="zh">每日更新</span><span class="en">Daily</span></a>
+      <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+      <a href="#ai">AI Lab</a>
+      <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title"><span class="zh">项目</span><span class="en">Projects</span></div>
+      <a href="https://github.com/Timememo8210" target="_blank">GitHub</a>
+      <a href="/sky-portal/" target="_blank">Portal</a>
+      <a href="https://timememo8210.github.io/polyclaw/" target="_blank">PolyClaw</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title"><span class="zh">关于</span><span class="en">About</span></div>
+      <span><span class="zh">编辑风格：Monocle Editorial</span><span class="en">Style: Monocle Editorial</span></span>
+      <span>© 2026</span>
+    </div>
+  </div>
+  <div class="footer-note">
+    Sky Portal — Monocle Editorial Style · Built with curiosity · 2026
+  </div>
+</footer>
+
+<script>
+(function(){
+  var s=new Date(2025,1,15),n=new Date();
+  document.getElementById('day-count').textContent=Math.floor((n-s)/864e5);
+  var d=new Date();
+  var opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};
+  document.getElementById('ticker-date').textContent=d.toLocaleDateString('zh-CN',opts)+' / '+d.toLocaleDateString('en-US',opts);
+})();
+function toggleLang(){document.body.classList.toggle('lang-zh');document.body.classList.toggle('lang-en')}
+var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

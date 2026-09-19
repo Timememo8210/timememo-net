@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-04-25</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date-tag{color:#888;font-size:0.82em;float:right}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}.card .date-tag{float:none;display:block;margin-top:4px}}
+.back-nav{position:sticky;top:0;z-index:10;background:rgba(15,15,15,0.95);padding:10px 0;margin-bottom:16px;border-bottom:1px solid #2a2a2a;display:flex;align-items:center;gap:12px}.back-nav a{color:#f0a040;text-decoration:none;font-size:0.9em;display:inline-flex;align-items:center;gap:4px}.back-nav a:hover{text-decoration:underline}</style>
+</head>
+<body>
+<div class="container"><div class="back-nav"><a href="index.html">← 返回每日科技</a><span style="flex:1"></span><a href="../index.html">☁️ Sky Portal</a></div>
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-04-25 · 星期六 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>CXL（Compute Express Link）是什么？为什么数据中心需要它？</h3>
+<p>想象一个大家庭：CPU是爸爸，GPU是妈妈，DRAM是冰箱，SSD是仓库。传统架构里每个人只能用自己旁边的冰箱——CPU的冰箱满了，GPU那边可能还空着，就是没法共享。</p>
+<p><strong>CXL就是打通所有冰箱的共享通道。</strong>它建立在PCIe物理层之上，让CPU、GPU、加速器、内存池之间能以<strong>缓存一致性</strong>（Cache Coherent）的方式共享内存。意思是：谁改了数据，其他人立刻知道，不用来回拷贝。</p>
+<p>为什么重要？AI训练时，模型参数可能有几百GB，一块GPU的HBM装不下。用CXL把多块GPU的内存连成一个大池子，就像把几个小冰箱合成一个超大冷库，省去数据搬来搬去的开销。Intel、AMD、ARM都支持CXL，TSMC的先进封装也在为CXL互联腾空间。CXL 3.0已支持多级交换，未来数据中心的内存架构会从"各管各的"变成"全局共享"。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>🔬 中国实现晶圆级2D芯片1000倍加速生长</h3>
+<p>中国研究人员成功将晶圆级二维（2D）半导体材料的生长速度提升了1000倍，尤其在p型半导体方面取得重大突破。这意味着未来AI硬件可能运行温度更低、能效更高。2D材料被视为后硅时代的关键候选，此次突破大幅缩短了从实验室到晶圆厂的距离。</p>
+<p>🔗 <a href="https://www.intelligentliving.co/china-1000x-faster-wafer-scale-2d/" target="_blank">Intelligent Living</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-24</span>
+<h3>🔬 NEO Semiconductor 3D X-DRAM概念验证成功</h3>
+<p>NEO Semiconductor宣布其3D X-DRAM技术成功完成概念验证（POC），并获得了战略投资以推进AI存储器开发。3D X-DRAM通过垂直堆叠DRAM单元实现容量大幅提升，被视为突破传统DRAM扩展瓶颈的重要路径。</p>
+<p>🔗 <a href="https://www.prnewswire.com/news-releases/neo-semiconductor-demonstrates-3d-x-dram-proof-of-concept-secures-strategic-investment-to-advance-ai-memory-302751895.html" target="_blank">PR Newswire</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>🔬 NVIDIA Ising：开源AI模型稳定脆弱量子比特</h3>
+<p>NVIDIA发布名为Ising的开源AI模型，通过自动化校准和纠错来稳定脆弱的量子比特，加速混合量子-经典计算的发展。该模型有望解决量子计算机中最大的工程挑战之一——退相干。</p>
+<p>🔗 <a href="https://www.intelligentliving.co/nvidia-ising-ai-quantum-computers/" target="_blank">Intelligent Living</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>🔬 固态光子芯片突破50% Bell态测量极限</h3>
+<p>一种新型固态芯片在Bell态测量中实现了57%的后选择成功率，突破了传统线性光学50%的理论极限。这对光量子计算至关重要——更高的Bell态测量成功率意味着更强的量子纠缠能力和更可靠的量子门操作。</p>
+<p>🔗 <a href="https://quantumzeitgeist.com/photonic-chip-bell-state-measurements/" target="_blank">Quantum Zeitgeist</a></p>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>📊 英伟达市值重返5万亿美元，英特尔暴涨23%创1987年来最佳</h3>
+<p>4月24日美股收盘，AI硬件股集体爆发：英伟达收涨超4%，市值时隔近6个月再次突破5万亿美元；英特尔Q1财报大超预期，股价暴涨23%至$82.54，创1987年10月以来最佳单日表现，18A工艺突破成核心催化。AMD涨近14%，闪迪年内累涨超320%，费城半导体指数录得18连阳。</p>
+<p>🔗 <a href="https://finance.sina.com.cn/stock/bxjj/2026-04-25/doc-inhvsuvi0848703.shtml" target="_blank">新浪财经</a> · <a href="https://sherwood.news/markets/intel-massive-stock-move-after-earnings/" target="_blank">Sherwood News</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>📊 NVIDIA Feynman GPU将采用Intel Foundry部分组件</h3>
+<p>据DigiTimes报道，NVIDIA计划在2028年发布的Feynman架构GPU中，部分组件将采用Intel Foundry制造，并使用Intel的EMIB先进封装技术。这标志着Intel代工业务获得关键大客户背书，也是NVIDIA供应链多元化的重要信号。</p>
+<p>🔗 <a href="https://www.notebookcheck.net/Nvidia-Feynman-GPUs-to-use-Intel-Foundry-for-some-components.1282858.0.html" target="_blank">Notebookcheck</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>📊 台积电官宣TGV路线2027年量产，玻璃基板成AI封装标配</h3>
+<p>台积电宣布TGV（Through Glass Via，玻璃通孔）技术路线计划2027年量产，采用CoPoS+玻璃中介层方案。TGV被视为AI高密度封装的下一代标准技术，将取代传统有机基板解决信号完整性和热管理瓶颈。</p>
+<p>🔗 <a href="https://www.eet-china.com/mp/a490267.html" target="_blank">电子工程专辑</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>📊 台积电熊本效应：熊本县税收增幅全日本第一</h3>
+<p>台积电熊本厂的产业链集群效应正在加速扩散——熊本县以8.6%的税收增幅位居全日本第一，半导体上下游企业聚集带动了就业、地产和地方经济全面增长，成为"半导体改变一座城"的经典案例。</p>
+<p>🔗 <a href="https://www.enanyang.my/news/20260425/Finance/1232391" target="_blank">e南洋</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-24</span>
+<h3>📊 AI推理推动CPU需求暴增，Intel已将产能从消费级转向Xeon</h3>
+<p>Intel表示AI工作负载中CPU与GPU的部署比已从1:8收紧至1:4，未来可能达到1:1。推理阶段对CPU的依赖远超预期，导致服务器CPU严重短缺和价格上涨。Intel已开始将产能从消费级芯片转向Xeon服务器芯片。</p>
+<p>🔗 <a href="https://www.tomshardware.com/pc-components/cpus/shifting-need-for-cpus-in-ai-workloads-drives-intensifying-shortages-price-hikes" target="_blank">Tom's Hardware</a></p>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>⚛️ 量子计算机破解15-bit ECC密钥，赢得1 BTC悬赏</h3>
+<p>独立研究员Giancarlo Lelli用量子硬件成功破解了15-bit椭圆曲线加密（ECC）密钥，赢得1 BTC悬赏。虽然15-bit远低于比特币实际使用的256-bit密钥，但这是迄今为止规模最大的量子攻击ECC实验，引发了对"量子威胁比特币"的广泛讨论。业界呼吁加速向后量子密码学迁移。</p>
+<p>🔗 <a href="https://blockonomi.com/quantum-computing-breakthrough-shatters-bitcoin-encryption-what-it-means-for-crypto/" target="_blank">Blockonomi</a> · <a href="https://intellectia.ai/blog/bitcoin-quantum-threat-2026" target="_blank">Intellectia AI</a></p>
+</div>
+
+<div class="card">
+<span class="date-tag">2026-04-25</span>
+<h3>⚛️ 光子量子计算克服关键纠错瓶颈</h3>
+<p>光子量子计算领域取得重要进展——研究者解决了光子编译器中长期存在的"光子丢失"问题，该问题此前严重阻碍了稳定纠缠态的生成。这一突破使光子量子计算机在可靠计算方面迈出了关键一步。</p>
+<p>🔗 <a href="https://quantumzeitgeist.com/photonic-quantum-error-correction/" target="_blank">Quantum Zeitgeist</a></p>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+</div>
+</div>
+</body>
+</html>

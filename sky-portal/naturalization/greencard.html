@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🟢 绿卡信息 — 入籍 N-400</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --green: #4ade80;
+    --orange: #fb923c;
+    --red: #f87171;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back-nav {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 6px 16px;
+    backdrop-filter: blur(12px);
+    color: var(--text-dim); font-size: 0.85rem;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .back-nav:hover { background: rgba(255,255,255,0.12); color: var(--text); text-decoration: none; }
+
+  .hero { text-align: center; padding: 60px 20px 30px; }
+  .hero h1 { font-size: 2em; font-weight: 700; }
+  .hero .subtitle { color: var(--text-dim); font-size: 0.95em; margin-top: 8px; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; }
+
+  .card {
+    margin-top: 28px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .card h2 {
+    font-size: 1.15em; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .info-grid {
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 8px 16px; font-size: 0.92em;
+  }
+  .info-grid .label { color: var(--text-dim); font-weight: 500; }
+  .info-grid .value { color: var(--text); font-weight: 600; }
+  .info-grid .value-dim { color: var(--text-dim); font-weight: 400; font-family: monospace; font-size: 0.88em; }
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .mrz-box {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'SF Mono', 'Courier New', monospace;
+    font-size: 0.82em;
+    line-height: 1.8;
+    color: var(--text-dim);
+    word-break: break-all;
+    margin-top: 12px;
+  }
+
+  .tip-box {
+    background: rgba(108,138,255,0.08);
+    border: 1px solid rgba(108,138,255,0.25);
+    border-radius: 12px; padding: 14px 18px;
+    margin: 12px 0; font-size: 0.88em; line-height: 1.6;
+  }
+
+  .warning-box {
+    background: rgba(251,146,60,0.08);
+    border: 1px solid rgba(251,146,60,0.25);
+    border-radius: 12px; padding: 14px 18px;
+    margin: 12px 0; font-size: 0.88em; line-height: 1.6;
+  }
+
+  .footer {
+    text-align: center; padding: 40px 20px;
+    color: var(--text-dim); font-size: 0.85em;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<a href="../naturalization.html" class="back-nav">← 🇺🇸 入籍规划</a>
+
+<div class="hero">
+  <h1>🟢 绿卡信息</h1>
+  <div class="subtitle">Permanent Resident Card · I-551</div>
+</div>
+
+<div class="container">
+
+<!-- 正面信息 -->
+<div class="card">
+  <h2>📋 卡片正面 (Front)</h2>
+  <div class="info-grid">
+    <div class="label">卡片类型</div>
+    <div class="value">UNITED STATES OF AMERICA — PERMANENT RESIDENT</div>
+
+    <div class="label">Surname（姓）</div>
+    <div class="value">CHEN</div>
+
+    <div class="label">Given Name（名）</div>
+    <div class="value">（已隐藏）</div>
+
+    <div class="label">USCIS #</div>
+    <div class="value" style="color:var(--accent);">（已隐藏）</div>
+
+    <div class="label">A-Number</div>
+    <div class="value" style="color:var(--accent);">（已隐藏）</div>
+
+    <div class="label">Category（类别）</div>
+    <div class="value">E26（职业移民 EB-2）</div>
+
+    <div class="label">Country of Birth</div>
+    <div class="value">China, People's Republic</div>
+
+    <div class="label">Date of Birth</div>
+    <div class="value">19 OCT 1982</div>
+
+    <div class="label">Sex</div>
+    <div class="value">M</div>
+
+    <div class="label">Card Expires</div>
+    <div class="value" style="color:var(--orange);">08/10/2030</div>
+
+    <div class="label">Resident Since</div>
+    <div class="value" style="color:var(--green);">08/14/2020</div>
+  </div>
+</div>
+
+<!-- 背面信息 -->
+<div class="card">
+  <h2>📋 卡片背面 (Back)</h2>
+  <div class="info-grid">
+    <div class="label">Form</div>
+    <div class="value-dim">I-551</div>
+
+    <div class="label">Revision</div>
+    <div class="value-dim">(02-2016)</div>
+
+    <div class="label">条形码编号</div>
+    <div class="value-dim">6345 1063</div>
+
+    <div class="label">邮寄说明</div>
+    <div class="value-dim">If found, drop in any US Mailbox. Mail to USCIS, 7 Product Way, Lees Summit, MO 64002</div>
+  </div>
+
+  <p style="margin-top:16px;font-size:0.9em;font-weight:600;color:var(--text-dim);">机读区 (MRZ)：</p>
+  <div class="mrz-box">
+    （已隐藏）&lt;&lt;<br>
+    8210195M3008100CHN&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;9
+  </div>
+</div>
+
+<!-- N-400 相关 -->
+<div class="card">
+  <h2>🎯 N-400 申请关键日期</h2>
+  <div class="info-grid">
+    <div class="label">绿卡获得日</div>
+    <div class="value" style="color:var(--green);">2020年8月14日</div>
+
+    <div class="label">满足5年居住</div>
+    <div class="value" style="color:var(--green);">2025年8月14日 ✅ 已满足</div>
+
+    <div class="label">绿卡过期日</div>
+    <div class="value" style="color:var(--orange);">2030年8月10日</div>
+
+    <div class="label">移民类别</div>
+    <div class="value">EB-2（职业移民第二优先）</div>
+
+    <div class="label">A-Number</div>
+    <div class="value">209065204</div>
+  </div>
+
+  <div class="tip-box" style="margin-top:16px;">
+    💡 <strong>关于绿卡延期：</strong>递交 N-400 后，USCIS 会发送 I-797C 收据通知，绿卡自动延长 <strong>24个月</strong>（2023年新规）。你的绿卡 2030 年才过期，在入籍完成前完全不用担心续卡问题。
+  </div>
+</div>
+
+<div class="card">
+  <h2>⚠️ 注意事项</h2>
+  <div class="warning-box">
+    <strong>隐私提醒：</strong>此页面包含敏感个人信息（A-Number、生日、绿卡号），已设置 noindex/nofollow 阻止搜索引擎收录。请勿在公共场所打开此页面。
+  </div>
+</div>
+
+<div class="card" style="background:transparent;border:none;padding:0;">
+  <p style="font-size:0.8em;color:var(--text-dim);line-height:1.6;">
+    📄 数据来源：手动读取绿卡正反面信息（2026-05-04 Discord #入籍频道）<br>
+    最后更新：2026-05-04 · Sky Portal
+  </p>
+</div>
+
+</div>
+
+<div class="footer">
+  <a href="../naturalization.html">← 返回入籍规划</a> · · ☁️ Sky Portal
+</div>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-21</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#555;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#4ade80">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股全线反弹</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Bounces Back</div>
+<div class="zh poster-data">• 道指+0.74%报52225点<br>• 标普+0.89%报7509点<br>• 纳指+1.29%报25837点</div>
+<div class="en poster-data" style="display:none">• Dow +0.74% to 52225<br>• S&P 500 +0.89% to 7509<br>• Nasdaq +1.29% to 25837</div>
+</div>
+<div class="poster-card" style="background:#f87171">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体暴涨5.2%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SOX Surges +5.2%</div>
+<div class="zh poster-data">• 费城半导体+5.21%<br>• AMD涨近7%<br>• TSMC涨约2.7%</div>
+<div class="en poster-data" style="display:none">• Philadelphia SOX +5.21%<br>• AMD gains ~7%<br>• TSMC gains ~2.7%</div>
+</div>
+<div class="poster-card" style="background:#f97316">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股科技大反攻</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Share Tech Counterattack</div>
+<div class="zh poster-data">• 科创50暴涨+10.73%<br>• 创业板+7.05%<br>• 深成指+4.81%</div>
+<div class="en poster-data" style="display:none">• STAR 50 surges +10.73%<br>• ChiNext +7.05%<br>• Shenzhen Comp +4.81%</div>
+</div>
+<div class="poster-card" style="background:#60a5fa">
+<div class="poster-icon">🕊️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中东缓和信号</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Middle East De-escalation</div>
+<div class="zh poster-data">• 伊朗发出对话信号<br>• 避险情绪降温<br>• 黄金原油回落</div>
+<div class="en poster-data" style="display:none">• Iran signals dialogue<br>• Risk-off eases<br>• Gold & oil retreat</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-21 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股市场分析</span><span class="en" style="display:none">US Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 美股三大指数集体收涨，芯片股强力反弹领涨全场</span><span class="en" style="display:none">1. US Indices Rally, Chip Stocks Lead Broad Recovery</span></h4>
+<p><span class="zh">道琼斯工业平均指数上涨0.74%（+385点）报52,224点，标普500指数上涨0.89%（+65.9点）报7,509点，纳斯达克综合指数上涨1.29%（+329点）报25,837点。此前连续三天下跌后，市场迎来强劲反弹，芯片股成为最大推动力。</span><span class="en" style="display:none">Dow Jones up 0.74% (+385 pts) to 52,224; S&P 500 up 0.89% (+65.9 pts) to 7,509; Nasdaq up 1.29% (+329 pts) to 25,837. After three consecutive days of decline, the market staged a strong rebound with chip stocks as the primary driver.</span></p>
+<p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>Wall Street Journal / CNN Markets / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 费城半导体指数暴涨5.2%，AMD领涨+6.8%</span><span class="en" style="display:none">2. SOX Surges 5.2%, AMD Leads with +6.8%</span></h4>
+<p><span class="zh">费城半导体指数（SOX）单日大涨5.21%至12,356点，收复部分近期失地。此前SOX较6月高点回撤近20%进入技术性熊市，今日超跌反弹特征明显。AMD大涨近7%，分析师上调目标价至$165，认为公司有能力缩小与Nvidia的差距。TSMC收于$418.74，上涨约2.7%，市场等待本周科技巨头财报季。</span><span class="en" style="display:none">Philadelphia Semiconductor Index (SOX) surged 5.21% to 12,356, recovering some recent losses. SOX had fallen ~20% from June highs into bear territory — today's bounce shows classic oversold characteristics. AMD gained ~7% as analyst raised price target to $165, citing potential to close the gap with Nvidia. TSMC closed at $418.74, up ~2.7%, as market awaits big tech earnings this week.</span></p>
+<p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>Yahoo Finance / WCCFtech / WSJ</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中东局势出现缓和迹象，避险情绪明显降温</span><span class="en" style="display:none">3. Middle East De-escalation Signals, Risk-Off Eases</span></h4>
+<p><span class="zh">伊朗通过阿拉伯中间人向美国和以色列发出对话信号，寻求结束当前敌对状态。此前美伊冲突已持续多日并互相实施打击，推高油价和避险资产价格。今日黄金和原油价格均出现回落，市场风险偏好回升。不过分析师提醒，中东局势仍存在较大不确定性，停火谈判进展将是本周市场最大变数。</span><span class="en" style="display:none">Iran sent signals through Arab intermediaries to the US and Israel seeking to end the current hostilities. The US-Iran conflict had persisted for days with mutual strikes, pushing up oil and safe-haven prices. Both gold and oil retreated today as risk appetite returned. Analysts caution that Middle East uncertainty remains high, and ceasefire negotiations will be the biggest market variable this week.</span></p>
+<p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>华盛通 / 华尔街见闻</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股市场分析</span><span class="en" style="display:none">A-Share Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. A股科技股大反攻，科创50暴涨超10%</span><span class="en" style="display:none">1. A-Share Tech Counterattack, STAR 50 Surges Past 10%</span></h4>
+<p><span class="zh">A股三大指数高开高走集体大涨：上证指数涨1.79%，深证成指涨4.81%，创业板指大涨7.05%，科创50飙升10.73%，科创综指涨8.75%突破2000点。科技板块迎来报复性反弹，此前连续调整后资金集中涌入半导体、AI、科技板块。早盘即走出探底回升行情，午后进一步放大涨幅。</span><span class="en" style="display:none">A-share indices opened higher and rallied throughout the day: Shanghai Composite +1.79%, Shenzhen Component +4.81%, ChiNext +7.05%, STAR 50 surged +10.73%, STAR Composite +8.75% breaking through 2000 points. Tech sector staged a fierce comeback, with capital flooding into semiconductors, AI, and tech after consecutive down days. The market bottomed early then accelerated gains in the afternoon.</span></p>
+<p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>东方财富 / 经济观察网 / 央广网</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股市场分析</span><span class="en" style="display:none">Hong Kong Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 港股小幅收涨，恒生科技涨1.32%</span><span class="en" style="display:none">1. HK Market Modestly Higher, Tech +1.32%</span></h4>
+<p><span class="zh">恒生指数上涨0.68%报24,994点，恒生科技指数上涨1.32%报4,815点。港股在昨日大涨2.36%后今日涨幅收窄，但仍保持正收益。汽车、制药、黄金等板块表现较好。南向资金持续净流入，为市场提供支撑。夜期报25,099点，低水44点，显示市场对明日走势保持谨慎。</span><span class="en" style="display:none">Hang Seng Index up 0.68% to 24,994; Hang Seng Tech Index up 1.32% to 4,815. After yesterday's 2.36% surge, HK gains narrowed but stayed positive. Autos, pharma, and gold sectors performed well. Southbound capital continued net inflows. Night futures at 25,099, 44 pts discount, indicating cautious sentiment for tomorrow.</span></p>
+<p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>每经AI / 网易 / Investing.com</p>
+</div>
+
+<h2>📊 <span class="zh">股票行情（7月21日收盘）</span><span class="en" style="display:none">Stock Quotes (Jul 21 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,224</div><div class="stock-change up">+0.74%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPX</div><div class="stock-price">7,509</div><div class="stock-change up">+0.89%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">25,837</div><div class="stock-change up">+1.29%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,356</div><div class="stock-change up">+5.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24,994</div><div class="stock-change up">+0.68%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSTECH</div><div class="stock-price">4,815</div><div class="stock-change up">+1.32%</div></div>
+<div class="stock-item"><div class="stock-ticker">SSE</div><div class="stock-price">—</div><div class="stock-change up">+1.79%</div></div>
+<div class="stock-item"><div class="stock-ticker">SZSE</div><div class="stock-price">—</div><div class="stock-change up">+4.81%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change up">+6.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$418.74</div><div class="stock-change up">+2.7%</div></div>
+</div>
+
+<h2>💡 <span class="zh">市场展望与投资策略</span><span class="en" style="display:none">Market Outlook & Strategy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期市场预判</span><span class="en" style="display:none">1. Short-term Outlook</span></h4>
+<p><span class="zh">美股方面，芯片股超跌反弹的可持续性有待观察。本周是科技巨头财报密集期，TSMC等已发布财报，市场关注财报指引能否支撑当前估值。中东局势仍是最大变数，若停火谈判取得进展将进一步提振风险偏好。A股单日涨幅过大，短期有获利回吐压力，但科技主线方向明确。</span><span class="en" style="display:none">For US markets, the sustainability of the chip bounce remains uncertain. This is a heavy tech earnings week — TSMC has reported, and guidance will be key for valuations. Middle East remains the biggest wild card; ceasefire progress would further boost risk appetite. A-shares saw excessive single-day gains, inviting short-term profit-taking, but the tech theme direction is clear.</span></p>
+<p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>综合分析</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 关键关注点</span><span class="en" style="display:none">2. Key Watch Points</span></h4>
+<p><span class="zh">• AMD财报预期及分析师观点变化<br>• 中东停火谈判进展<br>• 美联储利率路径与通胀数据<br>• A股科技反弹持续性<br>• TSMC产能扩张及涨价计划（据报道计划涨价10%）</span><span class="en" style="display:none">• AMD earnings expectations and analyst revisions<br>• Middle East ceasefire negotiations<br>• Fed rate path and inflation data<br>• A-share tech rally sustainability<br>• TSMC capacity expansion and pricing (reported 10% price hike plan)</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 风险提示</span><span class="en" style="display:none">3. Risk Warnings</span></h4>
+<p><span class="zh">• 中东局势可能反复，地缘政治风险仍高<br>• 半导体板块从熊市反弹，波动性将加大<br>• A股报复性反弹后可能面临二次探底<br>• 科技巨头财报若不及预期可能引发新一轮抛售</span><span class="en" style="display:none">• Middle East situation may fluctuate, geopolitical risks remain elevated<br>• Semiconductor sector bouncing from bear territory, volatility expected<br>• A-shares may face second bottom after v-shaped recovery<br>• Tech earnings miss could trigger new round of selling</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: WSJ, CNN Markets, MarketWatch, Yahoo Finance, 东方财富, 经济观察网, 华盛通, Investing.com, 每经AI</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-05-07</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.card .date{color:#666;font-size:0.82em;margin-top:4px}
+.lesson{background:rgba(240,160,64,0.06);border:1px solid rgba(240,160,64,0.25);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;line-height:1.8}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}body{padding:10px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-05-07 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 CXL（Compute Express Link）？为什么数据中心需要它？</h3>
+<p>数据中心里，CPU、GPU、加速器越来越多，但它们各自的内存是"各管各的"——GPU 有自己的显存，CPU 有自己的 DDR，数据来回搬就得走 PCIe 通道，延迟高、带宽浪费。<br><br>
+<strong>CXL</strong>（Compute Express Link）就是让不同芯片共享同一池内存的协议。它跑在 PCIe 物理层之上，但增加了"缓存一致性"——CPU 改了某个数据，GPU 瞬间就能看到最新版本，不需要手动同步。<br><br>
+打比方：传统架构像每个部门各有各的文件柜，要借文件得打电话走审批（PCIe 搬数据）；CXL 则是所有部门共享一个大文件库，谁改了什么实时可见。CXL 3.0 还支持内存池化——你可以把 10 台服务器的内存合成一个"大池子"按需分配，GPU 要用多少就取多少，不用每台机器都插满内存条。对 AI 训练这种"显存永远不够用"的场景，CXL 是刚需。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>🚀 SpaceX × Anthropic × NVIDIA：全球最大AI超算集群落地孟菲斯</h3>
+<p>SpaceX 与 Anthropic 宣布达成算力合作协议，Anthropic 将获得 SpaceX 位于田纳西州孟菲斯的 Colossus 1 数据中心全部算力使用权。该设施部署超过 <strong>22万块 NVIDIA AI芯片</strong>，总功率超过300兆瓦。更引人注目的是，双方还在探讨开发多吉瓦级的<strong>太空轨道AI计算平台</strong>，首批卫星将搭载 NVIDIA Space-1 Vera Rubin 太空认证 GPU。</p>
+<p><a href="https://www.aljazeera.com/economy/2026/5/6/spacex-backs-anthropic-with-data-centre-deal-amidst-musks-openai-lawsuit" target="_blank">Al Jazeera</a> | <a href="https://finance.yahoo.com/sectors/technology/articles/anthropic-signs-deal-spacex-ai-165342823.html" target="_blank">Yahoo Finance</a></p>
+<p class="date">2026-05-06</p>
+</div>
+
+<div class="card">
+<h3>🇬🇧 英国芯片初创公司 Fractile：AI推理速度25倍、成本1/10</h3>
+<p>英国AI芯片初创公司 Fractile 声称其处理器能以 NVIDIA 十分之一的成本实现25倍的AI推理速度。Anthropic 已与 Fractile 展开初步采购谈判，如果属实，这将是对 NVIDIA 数据中心GPU垄断地位的直接挑战。Fractile 的核心技术在于绕过传统内存带宽瓶颈，将大语言模型的推理效率推向新高度。</p>
+<p><a href="https://orbitaltoday.com/2026/05/06/anthropic-is-in-talks-to-buy-ai-chips-from-a-british-start-up-claiming-to-beat-nvidia-on-cost/" target="_blank">Orbital Today</a></p>
+<p class="date">2026-05-06</p>
+</div>
+
+<div class="card">
+<h3>⚛️ IBM Nighthawk 处理器：120量子比特冲刺"可验证量子优势"</h3>
+<p>IBM 宣布其新一代 <strong>Nighthawk 120量子比特处理器</strong>已进入测试阶段，目标是在2026年底前展示"可验证量子优势"——即在特定实际问题上的表现超越最强经典超级计算机。IBM CEO Arvind Krishna 今年1月在达沃斯公开宣称"2026年是量子计算击败经典计算的一年"。Nighthawk 采用了 IBM 最新的错误缓解技术，配合云平台向全球研究人员开放。</p>
+<p><a href="https://www.programming-helper.com/tech/quantum-computing-race-2026-ibm-google-microsoft-breakthroughs-advantage" target="_blank">Programming Helper</a> | <a href="https://www.ibm.com/roadmaps/quantum/2026/" target="_blank">IBM Quantum Atlas</a></p>
+<p class="date">2026-05</p>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>📈 AMD Q1财报超预期，AI芯片需求推动股价飙升18%</h3>
+<p>AMD 发布2026年Q1财报，收入预测大幅超出华尔街预期，受AI芯片持续强劲需求驱动。财报发布后AMD股价在盘前交易中暴涨近<strong>18%</strong>，市值突破5000亿美元创历史新高。AMD 的 MI400 系列AI加速器成为新的增长引擎，同时 Meta 向 AMD 下达了公司历史上最大的芯片订单，被视为打破 NVIDIA AI算力垄断的标志性事件。</p>
+<p><a href="https://www.reuters.com/business/amd-forecasts-quarterly-revenue-above-expectations-ai-chip-demand-stays-strong-2026-05-05/" target="_blank">Reuters</a> | <a href="https://www.investing.com/analysis/amd-breaks-nvidias-ai-monopoly-5-chip-stocks-to-own-200675586" target="_blank">Investing.com</a></p>
+<p class="date">2026-05-06</p>
+</div>
+
+<div class="card">
+<h3>🇨🇳 A股节后开门红：科创50涨5.47%创新高，半导体板块全线爆发</h3>
+<p>5月6日A股五一节后首个交易日迎来大爆发，科创50指数暴涨<strong>5.47%</strong>创历史新高，两市成交额达3.23万亿元，北向资金净流入127亿元。半导体赛道成为最强主线，长盛科创芯片ETF等硬核产品表现亮眼。背后逻辑包括：全球半导体涨价潮持续、国内先进制程扩产加速、AI算力需求持续爆发。</p>
+<p><a href="https://finance.sina.com.cn/jjxw/2026-05-07/doc-inhwzrtp2924648.shtml" target="_blank">新浪财经</a> | <a href="https://finance.sina.com.cn/jjxw/2026-05-06/doc-inhwxnuk8410414.shtml" target="_blank">新浪财经 (WFE)</a></p>
+<p class="date">2026-05-06 / 2026-05-07</p>
+</div>
+
+<div class="card">
+<h3>🍎 Apple 继续评估 Samsung/Intel 代工，降低对 TSMC 单一依赖</h3>
+<p>Apple 正在与 Intel 和 Samsung 进行早期阶段的代工评估，包括考察 Samsung 在德州的新先进制程工厂。Apple CEO Tim Cook 此前确认芯片供应不足正在影响 iPhone 和 Mac 产品线的增长。虽然短期内 Apple 核心芯片仍将主要依赖 TSMC，但多元化的代工策略正在加速推进。</p>
+<p><a href="https://9to5mac.com/2026/05/04/report-apple-considers-intel-and-samsung-to-diversify-chip-manufacturing-away-from-tsmc/" target="_blank">9to5Mac</a> | <a href="https://whbl.com/2026/04/29/samsung-electronics-expects-to-win-more-customers-for-advanced-logic-chips/" target="_blank">WHBL</a></p>
+<p class="date">2026-05-04</p>
+</div>
+
+<div class="card">
+<h3>📊 2026全球半导体市场冲刺万亿美元，WFE设备市场超1400亿美元</h3>
+<p>招商证券研报指出，2026年全球半导体市场预计同比增长<strong>26%</strong>，冲刺万亿美元大关。晶圆制造设备（WFE）市场规模预计超1400亿美元，2027年同比增速有望进一步提升。科磊（KLA）FY26Q3财报显示半导体质量控制业务收入同比增长12.6%，反映先进制程扩产对检测设备的强劲需求。</p>
+<p><a href="https://finance.sina.com.cn/jjxw/2026-05-06/doc-inhwxnuk8410414.shtml" target="_blank">新浪财经</a> | <a href="https://m.thepaper.cn/newsDetail_forward_32867446" target="_blank">澎湃新闻</a></p>
+<p class="date">2026-05-06</p>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>🏆 2026量子竞赛白热化：IBM / Google / Microsoft 三强争锋</h3>
+<p>2026年量子计算进入关键转型期，三大巨头各有杀手锏：<strong>IBM</strong> 凭借 Nighthawk 120量子比特处理器冲刺可验证量子优势；<strong>Google</strong> Willow 芯片的"量子回声"算法被认为是迄今最令人信服的量子优势证明；<strong>Microsoft</strong> 的 Majorana 1 芯片则开辟了拓扑量子比特的新路线，宣称量子计算"只需几年而非几十年"。行业共识正在形成：2026年是从"实验量子"迈向"工业量子"的分水岭。</p>
+<p><a href="https://www.programming-helper.com/tech/quantum-computing-race-2026-ibm-google-microsoft-breakthroughs-advantage" target="_blank">Programming Helper</a> | <a href="https://www.nbclosangeles.com/news/business/money-report/google-microsoft-and-ibm-are-bullish-on-quantum-computing-are-the-chips-of-the-future-for-real/3671476/" target="_blank">CNBC via NBCLA</a></p>
+<p class="date">2026-05</p>
+</div>
+
+<div class="card">
+<h3>🔬 中性原子量子比特突破：逻辑比特需求从1000降至5</h3>
+<p>加州理工学院与 Oratomic 联合开发了一种基于中性原子阵列的新型量子纠错架构。传统方法需约1000个物理量子比特构建1个逻辑比特，新方案利用光学镊子实现长距离直接纠缠，仅需<strong>5个物理比特</strong>即可构建1个逻辑比特。这意味着实用量子计算机可能只需1-2万个量子比特即可运行，大幅降低了硬件门槛。</p>
+<p><a href="https://interestingengineering.com/innovation/quantum-computing-fewer-qubits-breakthrough" target="_blank">Interesting Engineering</a></p>
+<p class="date">2026-04</p>
+</div>
+
+<div class="card">
+<h3>🧑‍💻 IBM / Microsoft / Google 加速争夺量子人才</h3>
+<p>随着量子计算从实验室走向产业化，三大科技公司正在全球范围内展开量子人才争夺战。IBM 通过云平台扩大量子教育覆盖面，Microsoft 与多所大学合作设立量子计算学位项目，Google 则以高薪吸引顶尖量子算法研究员。人才缺口被认为是量子计算产业化最大的瓶颈之一。</p>
+<p><a href="https://www.sdxcentral.com/analysis/ibm-microsoft-and-google-race-to-close-quantum-skills-gap/" target="_blank">SDxCentral</a></p>
+<p class="date">2026-05</p>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p style="margin-top:6px;color:#555">— GLM 5.1</p>
+</div>
+</div>
+</body>
+</html>

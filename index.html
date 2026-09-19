@@ -35,7 +35,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:16px 0;transition:va
 nav.scrolled{background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,var(--grad1),var(--grad2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;gap:28px;list-style:none}
+.sky-portal-button{margin-left:22px;padding:8px 14px;border:1px solid rgba(129,140,248,.42);border-radius:999px;background:var(--accent-glow);color:#c7d2fe;text-decoration:none;font-size:.8rem;font-weight:700;white-space:nowrap;transition:var(--transition)}
+.sky-portal-button:hover{border-color:var(--accent2);background:rgba(99,102,241,.24);color:#fff;transform:translateY(-1px)}
+.nav-links{display:flex;gap:28px;list-style:none;margin-left:auto}
 .nav-links a{color:var(--text2);text-decoration:none;font-size:.85rem;font-weight:500;transition:var(--transition);position:relative}
 .nav-links a:hover{color:var(--text)}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:var(--transition)}
@@ -194,6 +196,7 @@ footer p{color:var(--text3);font-size:.8rem}
 .float-badge{display:none}
 .nav-links{display:none}
 .nav-links.show{display:flex;position:absolute;top:58px;right:24px;left:24px;flex-direction:column;gap:16px;padding:18px;background:rgba(18,18,26,.98);border:1px solid var(--border);border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.sky-portal-button{margin-left:auto;margin-right:12px;padding:8px 12px;font-size:.74rem}
 .nav-dropdown{width:100%}
 .nav-dropbtn{width:100%;justify-content:space-between}
 .nav-menu{position:static;opacity:1;transform:none;pointer-events:auto;margin-top:8px;box-shadow:none}
@@ -226,6 +229,7 @@ footer p{color:var(--text3);font-size:.8rem}
 <nav id="nav">
 <div class="nav-inner">
 <a href="#" class="nav-logo">XB</a>
+<a href="/sky-portal/" class="sky-portal-button" data-en="Sky Portal" data-zh="Sky Portal">Sky Portal</a>
 <ul class="nav-links">
 <li><a href="#about" data-en="About" data-zh="关于">About</a></li>
 <li><a href="#rd-focus" data-en="R&D Focus" data-zh="研发重点">R&D Focus</a></li>

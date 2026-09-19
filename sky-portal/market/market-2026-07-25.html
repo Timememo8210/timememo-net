@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 Daily Market — 2026-07-25</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+  --up: #4ade80;
+  --down: #f87171;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; padding: 20px 16px;
+}
+body.lang-en .zh { display:none !important; }
+body.lang-zh .en { display:none !important; }
+.wrap { max-width:900px; margin:0 auto; }
+
+.lang-toggle {
+  display:flex; background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12); border-radius:100px;
+  overflow:hidden; margin-bottom:24px; width:fit-content; margin-left:auto;
+}
+.lang-toggle button {
+  padding:4px 12px; border:none; background:transparent;
+  color:var(--text-dim); font-size:0.8em; cursor:pointer;
+  transition:all 0.25s; font-family:inherit;
+}
+.lang-toggle button.active { background:var(--accent); color:#000; }
+
+h1 { text-align:center; color:var(--accent); font-size:1.8em; margin-bottom:4px; }
+.subtitle { text-align:center; color:#888; font-size:0.9em; margin-bottom:28px; }
+.subtitle a { color:var(--accent); text-decoration:none; }
+
+.poster-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px; }
+.poster-card { border-radius:12px; padding:20px 24px; color:#fff; }
+.poster-icon { font-size:2em; margin-bottom:8px; }
+.poster-title { font-size:1.3em; font-weight:700; }
+.poster-data { margin-top:10px; font-size:0.88em; opacity:0.92; line-height:1.7; }
+
+h2 { color:var(--accent); font-size:1.3em; margin:32px 0 16px; padding-bottom:8px; border-bottom:1px solid #2a2a2a; }
+h3 { color:var(--accent); margin:20px 0 12px; font-size:1.1em; }
+
+.card {
+  background:#1a1a1a; border:1px solid #2a2a2a;
+  border-radius:12px; padding:18px 20px; margin-bottom:14px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: rgba(74,222,128,0.3); }
+.card h4 { color:#fff; font-size:1.05em; margin-bottom:8px; }
+.card p { margin-bottom:6px; font-size:0.92em; }
+.card .src { color:#888; font-size:0.8em; margin-top:6px; }
+
+.stock-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:16px 0; }
+.stock-item {
+  background:#1a1a1a; border:1px solid #2a2a2a;
+  border-radius:10px; padding:14px 10px; text-align:center;
+  transition: border-color 0.2s;
+}
+.stock-item:hover { border-color: rgba(74,222,128,0.3); }
+.stock-ticker { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); font-size:0.95em; }
+.stock-price { color:#fff; font-size:1.05em; font-weight:600; margin:6px 0 4px; }
+.stock-change {
+  font-family:'JetBrains Mono',monospace; font-weight:600;
+  font-size:0.82em; padding:3px 10px; border-radius:5px; display:inline-block;
+}
+.up { background:rgba(34,197,94,0.15); color:var(--up); border:1px solid rgba(34,197,94,0.3); }
+.down { background:rgba(239,68,68,0.15); color:var(--down); border:1px solid rgba(239,68,68,0.3); }
+.flat { background:rgba(255,255,255,0.06); color:#aaa; border:1px solid rgba(255,255,255,0.1); }
+
+.forecast-box {
+  background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.02));
+  border:1px solid rgba(74,222,128,0.2); border-radius:12px;
+  padding:20px 24px; margin:16px 0;
+}
+.forecast-box h4 { color:var(--accent); font-size:1.1em; margin-bottom:10px; }
+
+.alert-box {
+  background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));
+  border:1px solid rgba(239,68,68,0.2); border-radius:12px;
+  padding:20px 24px; margin:16px 0;
+}
+.alert-box h4 { color:var(--down); font-size:1.1em; margin-bottom:10px; }
+
+.footer {
+  text-align:center; margin-top:40px; padding-top:20px;
+  border-top:1px solid #2a2a2a; color:#666; font-size:0.85em;
+}
+.footer a { color:var(--accent); text-decoration:none; }
+
+@media(max-width:768px) {
+  .stock-grid { grid-template-columns:repeat(2,1fr); }
+  .poster-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-toggle">
+  <button class="active" onclick="document.body.className='lang-zh'">中文</button>
+  <button onclick="document.body.className='lang-en'">EN</button>
+</div>
+
+<!-- Poster Grid -->
+<div class="poster-grid">
+  <div class="poster-card" style="background:linear-gradient(135deg,#8b1a1a,#2d0a0a)">
+    <div class="poster-icon">💥</div>
+    <div class="poster-title">
+      <span class="zh">半导体惨案</span>
+      <span class="en">Semiconductor Massacre</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">SOX 单日暴跌 -4.25% 至 11,819<br>SK海力士-5% · 美光-4%+ · Intel-2%+<br>存储芯片全线遭抛售</span>
+      <span class="en">SOX crashes -4.25% to 11,819<br>SK Hynix -5% · Micron -4%+ · Intel -2%+<br>Memory chips dumped across the board</span>
+    </div>
+  </div>
+  <div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f,#0d1b2a)">
+    <div class="poster-icon">📉</div>
+    <div class="poster-title">
+      <span class="zh">特斯拉崩盘</span>
+      <span class="en">Tesla Crashes</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">TSLA 收于 $313 · 周跌 ~20%<br>2022年以来最大单周跌幅<br>Google+Tesla 蒸发半万亿美元</span>
+      <span class="en">TSLA at $313 · Weekly drop ~20%<br>Worst week since 2022<br>Google+Tesla lost $500B combined</span>
+    </div>
+  </div>
+  <div class="poster-card" style="background:linear-gradient(135deg,#5a2a0a,#2d1505)">
+    <div class="poster-icon">⛽</div>
+    <div class="poster-title">
+      <span class="zh">伊朗战争升级</span>
+      <span class="en">Iran War Escalation</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">Trump终止对伊停火<br>Brent较战前飙涨55% 曾触$120<br>地缘政治风险持续扩散</span>
+      <span class="en">Trump ends Iran ceasefire<br>Brent up 55% since war began, hit $120<br>Geopolitical risk spreading</span>
+    </div>
+  </div>
+  <div class="poster-card" style="background:linear-gradient(135deg,#3a1a5f,#1a0a2d)">
+    <div class="poster-icon">⚠️</div>
+    <div class="poster-title">
+      <span class="zh">AI估值警讯</span>
+      <span class="en">AI Valuation Warning</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">DeepSeek暂停融资 · Burry警告1999重演<br>空头持仓$2万亿（2010年来最高）<br>黄仁勋首发X帖警告AI行业</span>
+      <span class="en">DeepSeek funding pause · Burry warns 1999 replay<br>Short interest $2T (highest since 2010)<br>Jensen Huang's first X post warns AI</span>
+    </div>
+  </div>
+</div>
+
+<h1>📊 <span class="zh">每日行情 · 周末分析</span><span class="en">Daily Market · Weekend Analysis</span></h1>
+<p class="subtitle">2026-07-25 (Sat) · <a href="index.html"><span class="zh">所有行情</span><span class="en">All Reports</span></a></p>
+
+<!-- Weekend Note -->
+<div class="card" style="border-color:rgba(168,85,247,0.3); background:rgba(168,85,247,0.05)">
+<h4>🗓️ <span class="zh">周末特刊 — 美股休市</span><span class="en">Weekend Edition — US Markets Closed</span></h4>
+<p><span class="zh">今天是周六，美股休市。本期为周五（7/24）收盘总结 + 本周回顾 + 周末新闻分析 + 下周市场展望。</span><span class="en">Today is Saturday, US markets closed. This edition covers Friday (7/24) close recap, weekly review, weekend news analysis, and next week outlook.</span></p>
+</div>
+
+<!-- US Stocks Friday Close -->
+<h2>🇺🇸 <span class="zh">美股收盘（7月24日周五）</span><span class="en">US Market Close (Fri Jul 24)</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">DOW</div>
+    <div class="stock-price">51,947</div>
+    <div class="stock-change up">+0.46%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">S&P 500</div>
+    <div class="stock-price">7,412</div>
+    <div class="stock-change up">+0.1%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">NASDAQ</div>
+    <div class="stock-price">24,976</div>
+    <div class="stock-change down">-0.6%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">SOX</div>
+    <div class="stock-price">11,819</div>
+    <div class="stock-change down">-4.25%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">BRENT</div>
+    <div class="stock-price">$96.78</div>
+    <div class="stock-change down">-3.9%</div>
+  </div>
+</div>
+
+<h3><span class="zh">📊 本周表现</span><span class="en">Weekly Performance</span></h3>
+<div class="card">
+<p><span class="zh">
+<strong>本周涨跌：</strong>道指 <strong style="color:var(--down)">-0.4%</strong> · 标普500 <strong style="color:var(--down)">-0.6%</strong> · 纳斯达克 <strong style="color:var(--down)">-2.1%</strong> · 费城半导体 <strong style="color:var(--down)">-6.8%</strong><br>
+<strong>年初至今：</strong>标普500 <strong style="color:var(--up)">+8.3%</strong> · 道指 <strong style="color:var(--up)">+8.1%</strong> · 纳指 <strong style="color:var(--up)">+7.5%</strong><br>
+<strong>市场情绪：</strong>恐慌贪婪指数处于"恐惧"区间，VIX波动率上升
+</span><span class="en">
+<strong>Weekly:</strong> Dow <strong style="color:var(--down)">-0.4%</strong> · S&P 500 <strong style="color:var(--down)">-0.6%</strong> · Nasdaq <strong style="color:var(--down)">-2.1%</strong> · SOX <strong style="color:var(--down)">-6.8%</strong><br>
+<strong>YTD:</strong> S&P 500 <strong style="color:var(--up)">+8.3%</strong> · Dow <strong style="color:var(--up)">+8.1%</strong> · Nasdaq <strong style="color:var(--up)">+7.5%</strong><br>
+<strong>Sentiment:</strong> Fear & Greed Index in "Fear" territory, VIX elevated
+</span></p>
+</div>
+
+<!-- China Stocks -->
+<h2>🇨🇳 <span class="zh">A股收盘（7月24日）</span><span class="en">China A-Shares Close (Jul 24)</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">上证指数</div>
+    <div class="stock-price">3,814.20</div>
+    <div class="stock-change down">-1.61%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">深证成指</div>
+    <div class="stock-price">13,775</div>
+    <div class="stock-change down">-2.47%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">创业板指</div>
+    <div class="stock-price">3,481</div>
+    <div class="stock-change down">-2.65%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">本周上证</div>
+    <div class="stock-price">-5.81%</div>
+    <div class="stock-change down">🔴</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">本周深成</div>
+    <div class="stock-price">-8.8%+</div>
+    <div class="stock-change down">🔴</div>
+  </div>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股收盘（7月24日）</span><span class="en">Hong Kong Close (Jul 24)</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">恒生指数</div>
+    <div class="stock-price">24,963</div>
+    <div class="stock-change down">-0.98%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">恒生科技</div>
+    <div class="stock-price">4,630</div>
+    <div class="stock-change down">-1.47%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">国企指数</div>
+    <div class="stock-price">8,271</div>
+    <div class="stock-change down">-0.98%</div>
+  </div>
+</div>
+
+<!-- Key Semiconductor Stocks -->
+<h2>🔬 <span class="zh">半导体个股（周五收盘）</span><span class="en">Semiconductor Stocks (Fri Close)</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">NVDA</div>
+    <div class="stock-price">$206.84</div>
+    <div class="stock-change down">-0.92%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">TSM</div>
+    <div class="stock-price">$403.41</div>
+    <div class="stock-change down">本周跌</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">AMD</div>
+    <div class="stock-price">$521.95</div>
+    <div class="stock-change down">承压</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">MU</div>
+    <div class="stock-price">$920.95</div>
+    <div class="stock-change down">-6.9% ⚠️</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">TSLA</div>
+    <div class="stock-price">$313.03</div>
+    <div class="stock-change down">周跌~20%</div>
+  </div>
+</div>
+
+<!-- Key Drivers -->
+<h2>🔥 <span class="zh">本周核心驱动因素</span><span class="en">Key Weekly Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 半导体惨案 — SOX单日暴跌4.25%，存储芯片首当其冲</span><span class="en">1. Semiconductor Massacre — SOX Crashes 4.25%, Memory Chips Hit Hardest</span></h4>
+<p><span class="zh">费城半导体指数（SOX）周五暴跌4.25%至11,819点，已较6月历史高点下跌超20%，正式确认技术性熊市。SK海力士跌超5%，美光科技跌4%+（跌破50日均线，技术面转空），闪迪跌4%+，Intel跌2%+。本周早些时候芯片股曾短暂反弹（7月22日美光暴涨12%），但随后连续三天遭抛售。投资者对AI芯片支出可持续性产生严重疑虑，存储芯片供过于求的担忧重新浮现。</span><span class="en">The Philadelphia Semiconductor Index (SOX) crashed 4.25% to 11,819 on Friday, down 20%+ from June records — confirming a technical bear market. SK Hynix -5%+, Micron -4%+ (broke below 50-day MA), SanDisk -4%+, Intel -2%+. Chips briefly rebounded on July 22 (MU +12%) before three consecutive days of selling. Investors seriously question AI chip spending sustainability; memory oversupply fears resurfaced.</span></p>
+<p class="src">Source: Yahoo Finance / Investopedia / 财联社 / NBD</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 特斯拉崩盘 — 2022年以来最大单周跌幅</span><span class="en">2. Tesla Crash — Worst Weekly Drop Since 2022</span></h4>
+<p><span class="zh">特斯拉（TSLA）周五收于$313.03，本周从约$392暴跌至$313，周跌幅约20%，创下2022年以来最大单周跌幅。Q2财报令人失望是直接催化剂——尽管交付量超预期（48万辆），但利润率持续下滑，AI/FSD叙事未能支撑估值。Google和Tesla本周合计蒸发约5000亿美元市值。TSLA目前204倍远期市盈率，市场开始质疑AI溢价是否合理。</span><span class="en">Tesla (TSLA) closed Friday at $313.03, plunging ~20% this week from ~$392 — the worst weekly decline since 2022. Disappointing Q2 earnings were the catalyst: deliveries beat (480K) but margins continued declining, and the AI/FSD narrative couldn't sustain valuations. Google and Tesla combined lost ~$500B in market cap this week. TSLA at 204x forward P/E, market questions whether AI premium is justified.</span></p>
+<p class="src">Source: Yahoo Finance / Forbes / Investopedia / 163.com</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 伊朗战争升级 — Trump终止停火，油价持续高位</span><span class="en">3. Iran War Escalation — Trump Ends Ceasefire, Oil Stays High</span></h4>
+<p><span class="zh">Trump总统宣布终止与伊朗的停火协议，中东紧张局势再度升级。Brent原油自战争爆发以来已上涨55%，曾触及$120/桶峰值，周五回落至$96.78。油价高企正传导至通胀预期，可能迫使Fed推迟降息。然而，全球能源需求下降的信号令策略师困惑——油价市场"比以往任何时候都紧张"，但价格却未进一步飙升。霍尔木兹海峡通航仍在继续，但风险溢价持续存在。</span><span class="en">President Trump announced the end of the ceasefire with Iran, reigniting Middle East tensions. Brent crude has surged 55% since the war began, peaking at $120/barrel before retreating to $96.78 on Friday. Elevated oil prices are feeding into inflation expectations, potentially forcing the Fed to delay rate cuts. However, puzzling drops in global energy demand are keeping prices rangebound despite tight supply. Hormuz transit continues but risk premium persists.</span></p>
+<p class="src">Source: NPR / CNBC / Morgan Stanley / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. AI估值警讯 — DeepSeek暂停融资，Burry警告1999重演</span><span class="en">4. AI Valuation Warning — DeepSeek Funding Pause, Burry's 1999 Echo</span></h4>
+<p><span class="zh">多重信号暗示AI估值泡沫风险正在上升：① DeepSeek告知投资人暂停融资，引发市场对中国AI公司前景的担忧；② Michael Burry警告当前市场犹如1999年末崩盘前夜；③ 纽交所空头持仓飙升至$2万亿，创2010年来最高水平；④ 黄仁勋首次发X帖警告AI行业——但同时也为中国开源AI模型辩护，称DeepSeek等模型"优秀且应该被使用"。SpaceX股票也在行业抛售中被腰斩。Oracle大跌4%，Cramer称其为"最值得关注的股票"。</span><span class="en">Multiple signals suggest AI valuation bubble risk is rising: ① DeepSeek told backers of a funding pause, raising concerns about Chinese AI companies; ② Michael Burry warns markets echo late 1999 before the crash; ③ NYSE short interest surged to $2T, highest since 2010; ④ Jensen Huang's first X post warns the AI industry — but he also defended Chinese open-source AI models like DeepSeek as "excellent." SpaceX stock was halved in the industry sell-off. Oracle dropped 4%; Cramer calls it "the stock to watch."</span></p>
+<p class="src">Source: Bloomberg / Fortune / Yahoo Finance / Moneywise</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">5. A股本周暴跌 — 上证累跌5.81%，关税冲击叠加获利回吐</span><span class="en">5. A-Share Plunge — SSE -5.81% Weekly, Tariff Shock + Profit-Taking</span></h4>
+<p><span class="zh">A股本周大幅回调，上证指数累跌5.81%，深证成指跌超8.8%。周五上证收于3,814点（-1.61%），创业板失守3,500点。Trump对60国征收新关税（包括中国）是主要外部冲击，叠加前期科技股暴涨后的获利回吐压力。7月21日创业板曾暴涨7%，但随后连续回调。成交额萎缩至1.94万亿，创三个多月新低，显示市场观望情绪浓厚。不过机构普遍认为"科技牛"逻辑未变，急跌可能是布局机会。</span><span class="en">A-shares retreated sharply this week: SSE -5.81%, SZSE -8.8%+. Friday's SSE close at 3,814 (-1.61%), ChiNext broke below 3,500. Trump's new 60-country tariffs (including China) were the main external shock, compounded by profit-taking after the prior tech surge. ChiNext soared 7% on July 21 before pulling back for three straight days. Volume shrank to 1.94T yuan, a 3-month low, showing cautious sentiment. Institutions still believe the "tech bull" thesis is intact.</span></p>
+<p class="src">Source: Trading Economics / 新浪财经 / AASTOCKS</p>
+</div>
+
+<!-- Weekend News -->
+<h2>📰 <span class="zh">周末新闻</span><span class="en">Weekend News</span></h2>
+
+<div class="card">
+<h4><span class="zh">🌟 中国商务部：上半年高技术产业吸引外资增长33.2%，创历史新高</span><span class="en">🌟 China Commerce Ministry: High-Tech FDI Up 33.2% H1, Record High</span></h4>
+<p><span class="zh">7月23日国新办新闻发布会，商务部介绍上半年商务工作情况。高技术产业吸引外资增长33.2%，占比达42.4%，创历史新高。这是中国科技产业吸引力的积极信号，可能在下周为A股科技板块提供支撑。</span><span class="en">At the July 23 State Council press conference, the Commerce Ministry reported high-tech FDI grew 33.2% in H1, reaching a record 42.4% share. A positive signal for China's tech sector attractiveness, potentially supporting A-share tech stocks next week.</span></p>
+<p class="src">Source: 新浪财经 / 国新办</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 美股空头持仓超$2万亿 — 2010年来最高</span><span class="en">📊 US Short Interest Exceeds $2T — Highest Since 2010</span></h4>
+<p><span class="zh">2026年7月，美股市场上演历史罕见的多空博弈。标普500指数自3月底以来累计上涨18%，但纽交所上市股票的空头占比已飙升至流通股的9%，创下2010年以来最高水平。空头持仓总额超过$2万亿。这意味着任何利好消息都可能触发大规模逼空反弹，但也反映出机构投资者对当前估值水平的深度担忧。</span><span class="en">July 2026 sees a historically rare long-short battle in US markets. The S&P 500 is up 18% since late March, but NYSE short interest has surged to 9% of float — the highest since 2010. Total short positions exceed $2T. Any positive news could trigger a massive short squeeze, but it also reflects deep institutional concern about current valuations.</span></p>
+<p class="src">Source: 雪球 / Xueqiu</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🤖 黄仁勋首次发X帖 — 警告AI行业但力挺中国开源模型</span><span class="en">🤖 Jensen Huang's First X Post — Warns AI Industry, Defends Chinese Open-Source</span></h4>
+<p><span class="zh">Nvidia CEO黄仁勋首次在X平台发文，警告AI行业面临挑战。但令人意外的是，他同时为中国开源AI模型辩护，称DeepSeek等中国模型"优秀且应该被使用"。这一表态在当前中美科技竞争背景下意味深长，也暗示Nvidia不希望失去中国市场。DeepSeek同时传出暂停融资消息，可能与其战略调整有关。</span><span class="en">Nvidia CEO Jensen Huang posted on X for the first time, warning the AI industry of challenges ahead. Surprisingly, he defended Chinese open-source AI models, calling DeepSeek and others "excellent" and saying they "should be used." The statement is significant amid US-China tech competition, suggesting Nvidia doesn't want to lose the Chinese market. DeepSeek's funding pause news may relate to strategic adjustments.</span></p>
+<p class="src">Source: Fortune / Yahoo Finance / Bloomberg</p>
+</div>
+
+<!-- Forecast -->
+<h2>🔮 <span class="zh">下周市场预判</span><span class="en">Next Week Outlook</span></h2>
+<div class="forecast-box">
+<h4><span class="zh">📊 后市展望</span><span class="en">Weekly Outlook</span></h4>
+<p><span class="zh">
+<strong>🇺🇸 美股：</strong>本周纳指跌2.1%、SOX跌6.8%，短期严重超卖。空头持仓$2万亿意味着任何利好都可能触发逼空反弹。但半导体熊市确认+AI估值质疑+油价高企三重压力下，反弹力度可能有限。下周关注：<br>
+• SOX能否守住11,500关键支撑<br>
+• 科技巨头财报（如有）能否扭转情绪<br>
+• 油价走势对通胀预期的影响<br>
+• Tesla $300心理关口能否守住<br><br>
+<strong>🔬 半导体：</strong>SOX已进入技术性熊市，短期承压。但暴跌后存在技术反弹需求，关注11,500-12,000区间。美光跌破50日均线是短期警讯，但HBM需求长期逻辑不变。下周可能呈现"超跌反弹→震荡筑底"格局。<br><br>
+<strong>🇨🇳 A股：</strong>本周暴跌后或迎技术性反弹。上证3,800点是关键支撑，成交萎缩至新低通常是短期筑底信号。但Trump新关税冲击需要时间消化，反弹力度取决于量能配合。"科技牛"核心逻辑（AI+半导体+国产替代）未变，急跌可能是中期布局窗口。<br><br>
+<strong>🇭🇰 港股：</strong>恒指25,000点是关键心理支撑。关税影响下港股可能承压，但估值优势仍在。恒生科技指数4,600点附近或有支撑。<br><br>
+<strong>⛽ 油价：</strong>Brent在$95-100区间震荡。若伊朗局势进一步升级，可能再探$100+；若出现缓和信号，可能回落至$90以下。油价高企持续传导通胀压力，Fed降息预期可能推迟。<br><br>
+<strong>⚠️ 风险提示：</strong>① 伊朗战争进一步升级 ② AI估值泡沫加速破裂 ③ 关税战引发全球衰退 ④ 空头大规模回补引发剧烈波动
+</span><span class="en">
+<strong>🇺🇸 US Markets:</strong> Nasdaq -2.1%, SOX -6.8% this week — severely oversold short-term. $2T short interest means any positive news could trigger a squeeze. But three pressures (semi bear market + AI valuation doubts + high oil) may limit rebound. Watch:<br>
+• SOX 11,500 support<br>
+• Big Tech earnings for sentiment shift<br>
+• Oil price impact on inflation expectations<br>
+• Tesla $300 psychological level<br><br>
+<strong>🔬 Semiconductors:</strong> SOX in technical bear market, short-term pressure. But post-crash technical bounce possible; watch 11,500-12,000 range. MU below 50-day MA is a warning, but HBM demand thesis intact long-term. Likely "oversold bounce → consolidation" pattern.<br><br>
+<strong>🇨🇳 A-Shares:</strong> Technical bounce likely after this week's plunge. SSE 3,800 is key support; volume at multi-month low often signals bottoming. But tariff shock needs time to digest. "Tech bull" thesis intact — sharp drops may be mid-term entry windows.<br><br>
+<strong>🇭🇰 Hong Kong:</strong> HSI 25,000 is key psychological support. Tariff impact may weigh, but valuation advantage remains. HSTECH around 4,600 may find support.<br><br>
+<strong>⛽ Oil:</strong> Brent oscillating $95-100. Further Iran escalation could push $100+; de-escalation could pull below $90. Persistent high oil delays Fed rate cut expectations.<br><br>
+<strong>⚠️ Risks:</strong> ① Iran war escalation ② AI valuation bubble acceleration ③ Tariff war triggering global recession ④ Large-scale short covering causing volatility
+</span></p>
+</div>
+
+<div class="alert-box">
+<h4>⚠️ <span class="zh">重点关注信号</span><span class="en">Key Signals to Watch</span></h4>
+<p><span class="zh">
+• <strong>SOX 11,500</strong> — 半导体指数关键支撑，跌破可能引发进一步抛售<br>
+• <strong>TSLA $300</strong> — Tesla心理关口，跌破可能加速下行<br>
+• <strong>Brent $100</strong> — 油价若重回$100+，通胀预期升温<br>
+• <strong>上证 3,800</strong> — A股关键支撑，跌破可能引发恐慌性抛售<br>
+• <strong>空头持仓$2万亿</strong> — 关注空头回补信号，可能引发逼空行情
+</span><span class="en">
+• <strong>SOX 11,500</strong> — Key semi support; break could trigger further selling<br>
+• <strong>TSLA $300</strong> — Tesla psychological level; break could accelerate downside<br>
+• <strong>Brent $100</strong> — Oil back above $100+ would heat inflation expectations<br>
+• <strong>SSE 3,800</strong> — A-share key support; break could cause panic selling<br>
+• <strong>$2T Short Interest</strong> — Watch for short covering signals that could trigger squeezes
+</span></p>
+</div>
+
+<div class="footer">
+<p><span class="zh">📊 每日行情 · 由 Sky ☁️ 自动生成 · 数据来源：Yahoo Finance / Investopedia / Reuters / 财联社 / Trading Economics / Bloomberg</span><span class="en">📊 Daily Market · Auto-generated by Sky ☁️ · Sources: Yahoo Finance / Investopedia / Reuters / CLS / Trading Economics / Bloomberg</span></p>
+<p style="margin-top:8px;"><a href="index.html">← <span class="zh">返回行情列表</span><span class="en">Back to Index</span></a> · <a href="../index.html"><span class="zh">Sky Portal</span><span class="en">Sky Portal</span></a></p>
+</div>
+
+</div>
+<script>
+(function(){
+  var l=localStorage.getItem('lang');
+  if(l==='en') document.body.className='lang-en';
+})();
+</script>
+</body>
+</html>

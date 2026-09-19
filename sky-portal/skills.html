@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Skills ☁️</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --accent-glow: rgba(108,138,255,0.15);
+    --green: #4ade80;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+    --purple: #a78bfa;
+    --red: #f87171;
+    --yellow: #facc15;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(108,138,255,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(162,89,255,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(34,211,238,0.04) 0%, transparent 60%);
+    z-index: -1;
+    animation: bgShift 20s ease-in-out infinite;
+  }
+  @keyframes bgShift { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Top bar */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: flex;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .lang-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+  .lang-btn:hover:not(.active) {
+    color: var(--text);
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 0.8s ease-out;
+  }
+  .header h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6c8aff 0%, #a78bfa 50%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .header .subtitle { font-size: 1.1em; color: var(--text-dim); }
+  .header .stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .stat-badge {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 0.9em;
+    color: var(--text-dim);
+  }
+  .stat-badge span { color: var(--accent); font-weight: 600; }
+
+  /* Category */
+  .category { margin-bottom: 50px; animation: fadeInUp 0.6s ease-out both; }
+  .category:nth-child(2){animation-delay:.1s} .category:nth-child(3){animation-delay:.2s}
+  .category:nth-child(4){animation-delay:.3s} .category:nth-child(5){animation-delay:.4s}
+  .category:nth-child(6){animation-delay:.5s} .category:nth-child(7){animation-delay:.6s}
+  .category:nth-child(8){animation-delay:.7s} .category:nth-child(9){animation-delay:.8s}
+
+  .cat-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cat-icon {
+    font-size: 2em; width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 16px; background: var(--card-bg); border: 1px solid var(--border);
+  }
+  .cat-header h2 { font-size: 1.4em; font-weight: 600; }
+  .cat-header .cat-desc { font-size: 0.85em; color: var(--text-dim); }
+
+  /* Skill grid */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card:hover {
+    background: var(--card-hover);
+    border-color: rgba(108,138,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(108,138,255,0.1);
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height: 3px;
+    border-radius: 16px 16px 0 0; opacity: 0; transition: opacity 0.3s;
+  }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-card.blue::before{background:linear-gradient(90deg,#6c8aff,#a78bfa)}
+  .skill-card.green::before{background:linear-gradient(90deg,#4ade80,#22d3ee)}
+  .skill-card.orange::before{background:linear-gradient(90deg,#fb923c,#facc15)}
+  .skill-card.pink::before{background:linear-gradient(90deg,#f472b6,#a78bfa)}
+  .skill-card.cyan::before{background:linear-gradient(90deg,#22d3ee,#6c8aff)}
+  .skill-card.purple::before{background:linear-gradient(90deg,#a78bfa,#f472b6)}
+  .skill-card.red::before{background:linear-gradient(90deg,#f87171,#fb923c)}
+  .skill-card.yellow::before{background:linear-gradient(90deg,#facc15,#4ade80)}
+
+  .skill-icon { font-size: 2em; margin-bottom: 10px; display: block; }
+  .skill-name { font-size: 1.05em; font-weight: 600; margin-bottom: 6px; }
+  .skill-desc { font-size: 0.85em; color: var(--text-dim); line-height: 1.5; }
+  .skill-tag {
+    display: inline-block; font-size: 0.7em;
+    padding: 2px 8px; border-radius: 8px; margin-top: 10px; font-weight: 500;
+  }
+  .tag-active{background:rgba(74,222,128,0.15);color:var(--green)}
+  .tag-new{background:rgba(108,138,255,0.15);color:var(--accent)}
+  .tag-auto{background:rgba(162,89,255,0.15);color:var(--purple)}
+  .tag-pending{background:rgba(251,146,60,0.15);color:var(--orange)}
+
+  .footer {
+    text-align: center; padding: 40px 0 20px;
+    color: var(--text-dim); font-size: 0.85em;
+    border-top: 1px solid var(--border); margin-top: 40px;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:640px){
+    .header h1{font-size:2em}
+    .skill-grid{grid-template-columns:1fr}
+    .container{padding:20px 16px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="top-bar">
+  <a href="index.html" class="back-link">← <span data-zh="返回 Sky Portal" data-en="Back to Sky Portal">返回 Sky Portal</span></a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div class="header">
+  <h1>☁️ <span data-zh="Sky 技能全家福" data-en="Sky Skills Showcase">Sky 技能全家福</span></h1>
+  <p class="subtitle" data-zh="Sky 的全部能力一览 — 持续进化中" data-en="A complete overview of Sky's capabilities — continuously evolving">Sky 的全部能力一览 — 持续进化中</p>
+  <div class="stats">
+    <div class="stat-badge">🧩 <span data-zh="技能总数" data-en="Total Skills">技能总数</span> <span>30+</span></div>
+    <div class="stat-badge">📡 <span data-zh="在线频道" data-en="Channels">在线频道</span> <span>3</span></div>
+    <div class="stat-badge">⏰ <span data-zh="定时任务" data-en="Cron Jobs">定时任务</span> <span>5+</span></div>
+    <div class="stat-badge">🧠 <span data-zh="记忆文件" data-en="Memory Files">记忆文件</span> <span>50+</span></div>
+  </div>
+</div>
+
+<!-- ====== 沟通能力 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">🗣️</div>
+    <div>
+      <h2 data-zh="沟通能力" data-en="Communication">沟通能力</h2>
+      <div class="cat-desc" data-zh="多平台、多模态，随时随地找到我" data-en="Multi-platform, multi-modal — reach me anywhere, anytime">多平台、多模态，随时随地找到我</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card blue">
+      <span class="skill-icon">💬</span>
+      <div class="skill-name" data-zh="Discord 全频道" data-en="Discord Full Server">Discord 全频道</div>
+      <div class="skill-desc" data-zh="17个专属频道：随便聊、半导体、体育、家庭、投资、音乐、三人行…… 每个频道都有独立上下文" data-en="17 dedicated channels: General, Semiconductor, Sports, Family, Investment, Music, TripleChat... each with independent context">17个专属频道：随便聊、半导体、体育、家庭、投资、音乐、三人行…… 每个频道都有独立上下文</div>
+      <span class="skill-tag tag-active">● <span data-zh="在线" data-en="Online">在线</span></span>
+    </div>
+    <div class="skill-card blue">
+      <span class="skill-icon">📱</span>
+      <div class="skill-name" data-zh="Telegram Bot" data-en="Telegram Bot">Telegram Bot</div>
+      <div class="skill-desc" data-zh="支持流式回复、贴纸、表情反应，手机上也能随时聊" data-en="Streaming replies, stickers, emoji reactions — chat anytime on mobile">支持流式回复、贴纸、表情反应，手机上也能随时聊</div>
+      <span class="skill-tag tag-active">● <span data-zh="在线" data-en="Online">在线</span></span>
+    </div>
+    <div class="skill-card blue">
+      <span class="skill-icon">💬</span>
+      <div class="skill-name">iMessage</div>
+      <div class="skill-desc" data-zh="通过Mac mini原生Messages.app收发iMessage，独立Apple ID" data-en="Send/receive iMessage via native Messages.app on Mac mini with dedicated Apple ID">通过Mac mini原生Messages.app收发iMessage，独立Apple ID</div>
+      <span class="skill-tag tag-active">● <span data-zh="在线" data-en="Online">在线</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🎤</span>
+      <div class="skill-name" data-zh="语音识别 (Whisper)" data-en="Speech-to-Text (Whisper)">语音识别 (Whisper)</div>
+      <div class="skill-desc" data-zh="本地运行OpenAI Whisper模型，语音消息自动转文字，中英文双语" data-en="Local OpenAI Whisper model, auto-transcribe voice messages in Chinese & English">本地运行OpenAI Whisper模型，语音消息自动转文字，中英文双语</div>
+      <span class="skill-tag tag-active">● <span data-zh="本地" data-en="Local">本地</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🔊</span>
+      <div class="skill-name" data-zh="语音合成 (TTS)" data-en="Text-to-Speech (TTS)">语音合成 (TTS)</div>
+      <div class="skill-desc" data-zh="Edge TTS 云希声音，支持窦文涛风格配音，讲故事超有范" data-en="Edge TTS with Yunxi voice, plus Dou Wentao-style voiceover for storytelling">Edge TTS 云希声音，支持窦文涛风格配音，讲故事超有范</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card purple">
+      <span class="skill-icon">🎭</span>
+      <div class="skill-name" data-zh="三人行 / 双AI对话" data-en="TripleChat / Dual AI">三人行 / 双AI对话</div>
+      <div class="skill-desc" data-zh="Sky扮窦文涛 + Kimi扮高晓松，三人互动讨论，AI脱口秀" data-en="Sky as Dou Wentao + Kimi as Gao Xiaosong — interactive AI talk show">Sky扮窦文涛 + Kimi扮高晓松，三人互动讨论，AI脱口秀</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 电脑操控 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">💻</div>
+    <div>
+      <h2 data-zh="电脑操控" data-en="System Control">电脑操控</h2>
+      <div class="cat-desc" data-zh="完全掌控 Mac mini，从文件到硬件" data-en="Full control of Mac mini — from files to hardware">完全掌控 Mac mini，从文件到硬件</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card cyan">
+      <span class="skill-icon">⌨️</span>
+      <div class="skill-name" data-zh="Shell 命令执行" data-en="Shell Command Execution">Shell 命令执行</div>
+      <div class="skill-desc" data-zh="任意Shell命令，安装软件、管理系统、后台任务，就像你坐在电脑前" data-en="Run any shell command — install software, manage system, background tasks">任意Shell命令，安装软件、管理系统、后台任务，就像你坐在电脑前</div>
+      <span class="skill-tag tag-active">● <span data-zh="核心" data-en="Core">核心</span></span>
+    </div>
+    <div class="skill-card cyan">
+      <span class="skill-icon">🌐</span>
+      <div class="skill-name" data-zh="浏览器控制" data-en="Browser Automation">浏览器控制</div>
+      <div class="skill-desc" data-zh="自动打开网页、填表、截图、操作Web界面" data-en="Auto open pages, fill forms, take screenshots, interact with web UIs">自动打开网页、填表、截图、操作Web界面</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card cyan">
+      <span class="skill-icon">🖨️</span>
+      <div class="skill-name" data-zh="打印机控制" data-en="Printer Control">打印机控制</div>
+      <div class="skill-desc" data-zh="EPSON ET-2850 直接发打印任务，彩色/双面/多份，远程操作" data-en="Send print jobs to EPSON ET-2850 — color, duplex, multiple copies, remotely">EPSON ET-2850 直接发打印任务，彩色/双面/多份，远程操作</div>
+      <span class="skill-tag tag-active">● <span data-zh="已连接" data-en="Connected">已连接</span></span>
+    </div>
+    <div class="skill-card cyan">
+      <span class="skill-icon">📁</span>
+      <div class="skill-name" data-zh="文件系统管理" data-en="File Management">文件系统管理</div>
+      <div class="skill-desc" data-zh="读写创建编辑文件，Excel/PDF/HTML全格式支持" data-en="Read, write, create, edit files — Excel, PDF, HTML and more">读写创建编辑文件，Excel/PDF/HTML全格式支持</div>
+      <span class="skill-tag tag-active">● <span data-zh="核心" data-en="Core">核心</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🔄</span>
+      <div class="skill-name" data-zh="自动恢复" data-en="Auto Recovery">自动恢复</div>
+      <div class="skill-desc" data-zh="Mac mini重启/断电后自动登录 + OpenClaw自动启动，全链路无人值守" data-en="Auto-login + auto-start after reboot/power loss — fully unattended">Mac mini重启/断电后自动登录 + OpenClaw自动启动，全链路无人值守</div>
+      <span class="skill-tag tag-auto">⚡ <span data-zh="自动" data-en="Auto">自动</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 邮件与通讯 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">📧</div>
+    <div>
+      <h2 data-zh="邮件与通讯" data-en="Email & Messaging">邮件与通讯</h2>
+      <div class="cat-desc" data-zh="Gmail + Hotmail，收发查都行" data-en="Gmail + Hotmail — send, receive, search, organize">Gmail + Hotmail，收发查都行</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card orange">
+      <span class="skill-icon">📬</span>
+      <div class="skill-name" data-zh="Gmail (gog)" data-en="Gmail (gog)">Gmail (gog)</div>
+      <div class="skill-desc" data-zh="收发邮件、Google Calendar日历、Drive文件、Contacts联系人" data-en="Send/receive email, Google Calendar, Drive, Contacts — full Google Workspace">收发邮件、Google Calendar日历、Drive文件、Contacts联系人</div>
+      <span class="skill-tag tag-active">● <span data-zh="已授权" data-en="Authorized">已授权</span></span>
+    </div>
+    <div class="skill-card orange">
+      <span class="skill-icon">📥</span>
+      <div class="skill-name" data-zh="Hotmail 智能分类" data-en="Hotmail Smart Sorting">Hotmail 智能分类</div>
+      <div class="skill-desc" data-zh="Microsoft Graph API读邮件，VIP自动星标，促销/Newsletter自动归档" data-en="Microsoft Graph API, VIP auto-star, auto-archive promos & newsletters">Microsoft Graph API读邮件，VIP自动星标，促销/Newsletter自动归档</div>
+      <span class="skill-tag tag-auto">⚡ <span data-zh="自动" data-en="Auto">自动</span></span>
+    </div>
+    <div class="skill-card orange">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-name" data-zh="投诉邮件监控" data-en="Complaint Email Monitor">投诉邮件监控</div>
+      <div class="skill-desc" data-zh="每4小时自动检查FCC/Oregon AG/BBB/Xfinity回复邮件" data-en="Auto-check FCC/Oregon AG/BBB/Xfinity replies every 4 hours">每4小时自动检查FCC/Oregon AG/BBB/Xfinity回复邮件</div>
+      <span class="skill-tag tag-auto">⚡ Cron</span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 信息获取 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">🔍</div>
+    <div>
+      <h2 data-zh="信息获取" data-en="Information & Search">信息获取</h2>
+      <div class="cat-desc" data-zh="联网搜索、新闻推送、实时追踪" data-en="Web search, news alerts, real-time tracking">联网搜索、新闻推送、实时追踪</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card pink">
+      <span class="skill-icon">🌐</span>
+      <div class="skill-name" data-zh="Google 搜索" data-en="Google Search">Google 搜索</div>
+      <div class="skill-desc" data-zh="Serper API + web_search，实时搜索全网信息，带引用来源" data-en="Serper API + web_search — real-time web search with cited sources">Serper API + web_search，实时搜索全网信息，带引用来源</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card pink">
+      <span class="skill-icon">📰</span>
+      <div class="skill-name" data-zh="每日新闻推送" data-en="Daily News Briefing">每日新闻推送</div>
+      <div class="skill-desc" data-zh="半导体 · 股市 · 足球 · 波特兰 · OpenClaw · M365 — 每天9点自动送达" data-en="Semiconductor · Markets · Football · Portland · OpenClaw · M365 — daily 9am push">半导体 · 股市 · 足球 · 波特兰 · OpenClaw · M365 — 每天9点自动送达</div>
+      <span class="skill-tag tag-auto">⚡ Cron</span>
+    </div>
+    <div class="skill-card pink">
+      <span class="skill-icon">🌸</span>
+      <div class="skill-name" data-zh="樱花追踪" data-en="Cherry Blossom Tracker">樱花追踪</div>
+      <div class="skill-desc" data-zh="Portland Japanese Garden 花期每日追踪，盛开前提醒" data-en="Daily Portland Japanese Garden bloom tracking with peak-bloom alerts">Portland Japanese Garden 花期每日追踪，盛开前提醒</div>
+      <span class="skill-tag tag-auto">⚡ <span data-zh="季节性" data-en="Seasonal">季节性</span></span>
+    </div>
+    <div class="skill-card pink">
+      <span class="skill-icon">🌤️</span>
+      <div class="skill-name" data-zh="天气查询" data-en="Weather">天气查询</div>
+      <div class="skill-desc" data-zh="全球任意地点天气和预报，无需API Key" data-en="Weather & forecast for any location worldwide, no API key needed">全球任意地点天气和预报，无需API Key</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card pink">
+      <span class="skill-icon">📋</span>
+      <div class="skill-name" data-zh="网页摘要" data-en="Content Summarizer">网页摘要</div>
+      <div class="skill-desc" data-zh="给URL/视频/播客链接，自动提取文字并总结重点" data-en="Give a URL, video, or podcast link — auto-extract and summarize key points">给URL/视频/播客链接，自动提取文字并总结重点</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 创作能力 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">🎨</div>
+    <div>
+      <h2 data-zh="创作能力" data-en="Creative Suite">创作能力</h2>
+      <div class="cat-desc" data-zh="图片、文档、网页、文案，全能创作" data-en="Images, documents, websites, copywriting — full creative suite">图片、文档、网页、文案，全能创作</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card purple">
+      <span class="skill-icon">🖼️</span>
+      <div class="skill-name" data-zh="AI 图片生成" data-en="AI Image Generation">AI 图片生成</div>
+      <div class="skill-desc" data-zh="Gemini 3 Pro Image 生成/编辑图片" data-en="Generate & edit images with Gemini 3 Pro Image">Gemini 3 Pro Image 生成/编辑图片</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card purple">
+      <span class="skill-icon">📊</span>
+      <div class="skill-name" data-zh="Excel 报告" data-en="Excel Reports">Excel 报告</div>
+      <div class="skill-desc" data-zh="创建带图表的Excel报表，数据分析可视化" data-en="Create Excel reports with charts and data visualizations">创建带图表的Excel报表，数据分析可视化</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card purple">
+      <span class="skill-icon">📄</span>
+      <div class="skill-name" data-zh="PDF 编辑" data-en="PDF Editor">PDF 编辑</div>
+      <div class="skill-desc" data-zh="填表、合并、修改PDF，自然语言指令驱动" data-en="Fill forms, merge, edit PDFs with natural language instructions">填表、合并、修改PDF，自然语言指令驱动</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card purple">
+      <span class="skill-icon">🌐</span>
+      <div class="skill-name" data-zh="网页制作" data-en="Web Development">网页制作</div>
+      <div class="skill-desc" data-zh="HTML/CSS/JS 全栈，GitHub Pages 一键发布" data-en="Full-stack HTML/CSS/JS, one-click deploy to GitHub Pages">HTML/CSS/JS 全栈，GitHub Pages 一键发布</div>
+      <span class="skill-tag tag-active">● <span data-zh="就绪" data-en="Ready">就绪</span></span>
+    </div>
+    <div class="skill-card purple">
+      <span class="skill-icon">✍️</span>
+      <div class="skill-name" data-zh="文案写作" data-en="Copywriting">文案写作</div>
+      <div class="skill-desc" data-zh="邮件、投诉信、小红书文案、法律文书、论文润色" data-en="Emails, complaint letters, social media posts, legal documents, paper editing">邮件、投诉信、小红书文案、法律文书、论文润色</div>
+      <span class="skill-tag tag-active">● <span data-zh="核心" data-en="Core">核心</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 自动化 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">⏰</div>
+    <div>
+      <h2 data-zh="自动化" data-en="Automation">自动化</h2>
+      <div class="cat-desc" data-zh="定时任务、心跳巡检、云端备份" data-en="Scheduled jobs, heartbeat monitoring, cloud backup">定时任务、心跳巡检、云端备份</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card yellow">
+      <span class="skill-icon">🔔</span>
+      <div class="skill-name" data-zh="Cron 定时任务" data-en="Cron Scheduler">Cron 定时任务</div>
+      <div class="skill-desc" data-zh="精确定时：提醒、检查、推送、备份，支持一次性和周期性" data-en="Precise scheduling: reminders, checks, pushes, backups — one-shot or recurring">精确定时：提醒、检查、推送、备份，支持一次性和周期性</div>
+      <span class="skill-tag tag-auto">⚡ <span data-zh="自动" data-en="Auto">自动</span></span>
+    </div>
+    <div class="skill-card yellow">
+      <span class="skill-icon">💓</span>
+      <div class="skill-name" data-zh="心跳巡检" data-en="Heartbeat Monitor">心跳巡检</div>
+      <div class="skill-desc" data-zh="每3小时自动检查系统状态、邮件、日历，主动汇报异常" data-en="Auto-check system status, email, calendar every 3h — proactive alerts">每3小时自动检查系统状态、邮件、日历，主动汇报异常</div>
+      <span class="skill-tag tag-auto">⚡ 3h</span>
+    </div>
+    <div class="skill-card yellow">
+      <span class="skill-icon">☁️</span>
+      <div class="skill-name" data-zh="GitHub 云端备份" data-en="GitHub Cloud Backup">GitHub 云端备份</div>
+      <div class="skill-desc" data-zh="每晚11点自动备份到 sky-backup 私有仓库，记忆永不丢失" data-en="Nightly 11pm auto-backup to private sky-backup repo — memories never lost">每晚11点自动备份到 sky-backup 私有仓库，记忆永不丢失</div>
+      <span class="skill-tag tag-auto">⚡ <span data-zh="每晚" data-en="Nightly">每晚</span></span>
+    </div>
+    <div class="skill-card yellow">
+      <span class="skill-icon">🔒</span>
+      <div class="skill-name">Time Machine</div>
+      <div class="skill-desc" data-zh="本地完整磁盘备份（待Crucial X9 2TB SSD到货配置）" data-en="Full local disk backup (pending Crucial X9 2TB SSD arrival)">本地完整磁盘备份（待Crucial X9 2TB SSD到货配置）</div>
+      <span class="skill-tag tag-pending">⏳ <span data-zh="待配置" data-en="Pending">待配置</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 社交媒体 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">📱</div>
+    <div>
+      <h2 data-zh="社交媒体" data-en="Social & Code">社交媒体</h2>
+      <div class="cat-desc" data-zh="小红书发帖、GitHub 项目管理" data-en="Xiaohongshu publishing, GitHub project management">小红书发帖、GitHub 项目管理</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card red">
+      <span class="skill-icon">📕</span>
+      <div class="skill-name" data-zh="小红书 MCP" data-en="Xiaohongshu (RedNote) MCP">小红书 MCP</div>
+      <div class="skill-desc" data-zh="通过MCP直接发布小红书帖子（标题+正文+图片），搜索热门内容" data-en="Publish Xiaohongshu posts directly via MCP (title + body + images), search trending">通过MCP直接发布小红书帖子（标题+正文+图片），搜索热门内容</div>
+      <span class="skill-tag tag-active">● <span data-zh="已登录" data-en="Logged in">已登录</span></span>
+    </div>
+    <div class="skill-card red">
+      <span class="skill-icon">🐙</span>
+      <div class="skill-name" data-zh="GitHub 全功能" data-en="GitHub Full Suite">GitHub 全功能</div>
+      <div class="skill-desc" data-zh="建仓库、提交代码、管理Issue/PR、GitHub Pages发布" data-en="Create repos, commit code, manage Issues/PRs, deploy to GitHub Pages">建仓库、提交代码、管理Issue/PR、GitHub Pages发布</div>
+      <span class="skill-tag tag-active">● <span data-zh="已授权" data-en="Authorized">已授权</span></span>
+    </div>
+    <div class="skill-card red">
+      <span class="skill-icon">🏠</span>
+      <div class="skill-name">Sky Portal</div>
+      <div class="skill-desc" data-zh="个人项目主页，自动追踪更新，GitHub Pages托管" data-en="Personal project dashboard, auto-tracked updates, hosted on GitHub Pages">个人项目主页，自动追踪更新，GitHub Pages托管</div>
+      <span class="skill-tag tag-active">● <span data-zh="在线" data-en="Live">在线</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 智能进化 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">🧠</div>
+    <div>
+      <h2 data-zh="智能进化" data-en="Intelligence & Evolution">智能进化</h2>
+      <div class="cat-desc" data-zh="记忆系统 + 自我学习 + 主动思考" data-en="Memory system + self-learning + proactive thinking">记忆系统 + 自我学习 + 主动思考</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card blue">
+      <span class="skill-icon">📝</span>
+      <div class="skill-name" data-zh="长期记忆" data-en="Long-term Memory">长期记忆</div>
+      <div class="skill-desc" data-zh="MEMORY.md 存储关于用户和家人的信息、偏好、决策记录" data-en="MEMORY.md stores info about 用户, family, preferences, and decision history">MEMORY.md 存储关于用户和家人的信息、偏好、决策记录</div>
+      <span class="skill-tag tag-active">● <span data-zh="核心" data-en="Core">核心</span></span>
+    </div>
+    <div class="skill-card blue">
+      <span class="skill-icon">📅</span>
+      <div class="skill-name" data-zh="每日记忆" data-en="Daily Memory">每日记忆</div>
+      <div class="skill-desc" data-zh="memory/YYYY-MM-DD.md 记录每天发生的事，跨Session保持连续性" data-en="memory/YYYY-MM-DD.md logs daily events, maintaining continuity across sessions">memory/YYYY-MM-DD.md 记录每天发生的事，跨Session保持连续性</div>
+      <span class="skill-tag tag-auto">⚡ <span data-zh="自动" data-en="Auto">自动</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🧬</span>
+      <div class="skill-name" data-zh="自我进化" data-en="Self-Improving Agent">自我进化</div>
+      <div class="skill-desc" data-zh="自动记录错误和纠正，建立"错题本"，同样的错不犯第二次" data-en="Auto-log errors & corrections — build a mistake journal, never repeat the same error">自动记录错误和纠正，建立"错题本"，同样的错不犯第二次</div>
+      <span class="skill-tag tag-new">🆕 <span data-zh="新装" data-en="New">新装</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🚀</span>
+      <div class="skill-name" data-zh="主动代理" data-en="Proactive Agent">主动代理</div>
+      <div class="skill-desc" data-zh="预判需求、反向提问、自我修复，从被动应答变为主动伙伴" data-en="Anticipate needs, reverse-prompt, self-heal — from reactive to proactive partner">预判需求、反向提问、自我修复，从被动应答变为主动伙伴</div>
+      <span class="skill-tag tag-new">🆕 <span data-zh="新装" data-en="New">新装</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-name" data-zh="技能发现" data-en="Skill Finder">技能发现</div>
+      <div class="skill-desc" data-zh="智能搜索ClawHub技能市场，需要什么能力就去找" data-en="Smart search ClawHub marketplace — find any capability you need">智能搜索ClawHub技能市场，需要什么能力就去找</div>
+      <span class="skill-tag tag-new">🆕 <span data-zh="新装" data-en="New">新装</span></span>
+    </div>
+    <div class="skill-card green">
+      <span class="skill-icon">🔒</span>
+      <div class="skill-name" data-zh="安全审查" data-en="Security Vetter">安全审查</div>
+      <div class="skill-desc" data-zh="装新技能前自动安全扫描，检查恶意代码和可疑行为" data-en="Auto security scan before installing skills — check for malicious code & suspicious patterns">装新技能前自动安全扫描，检查恶意代码和可疑行为</div>
+      <span class="skill-tag tag-new">🆕 <span data-zh="新装" data-en="New">新装</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 进行中的项目 ====== -->
+<div class="category">
+  <div class="cat-header">
+    <div class="cat-icon">⚡</div>
+    <div>
+      <h2 data-zh="进行中的项目" data-en="Active Projects">进行中的项目</h2>
+      <div class="cat-desc" data-zh="Sky 正在帮用户做的事" data-en="What Sky is currently working on for 用户">Sky 正在帮用户做的事</div>
+    </div>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-card red">
+      <span class="skill-icon">⚖️</span>
+      <div class="skill-name" data-zh="Xfinity 小额法庭" data-en="Xfinity Small Claims">Xfinity 小额法庭</div>
+      <div class="skill-desc" data-zh="完整起诉材料（37页证据+表格+指南），索赔$2,500" data-en="Complete filing package (37-page evidence + forms + guide), claiming $2,500">完整起诉材料（37页证据+表格+指南），索赔$2,500</div>
+      <span class="skill-tag tag-active">● <span data-zh="进行中" data-en="Active">进行中</span></span>
+    </div>
+    <div class="skill-card orange">
+      <span class="skill-icon">✈️</span>
+      <div class="skill-name" data-zh="巴黎家庭旅行" data-en="Paris Family Trip">巴黎家庭旅行</div>
+      <div class="skill-desc" data-zh="2026年8月，一家四口巴黎行程 + 家人生日庆祝" data-en="Aug 2026, family of 4 Paris itinerary + 家人's birthday celebration">2026年8月，一家四口巴黎行程 + 家人生日庆祝</div>
+      <span class="skill-tag tag-pending">📋 <span data-zh="规划中" data-en="Planning">规划中</span></span>
+    </div>
+    <div class="skill-card purple">
+      <span class="skill-icon">📈</span>
+      <div class="skill-name">PolyClaw</div>
+      <div class="skill-desc" data-zh="Polymarket预测市场信息差交易系统，$10K模拟资金" data-en="Polymarket prediction market info-edge trading system, $10K simulated">Polymarket预测市场信息差交易系统，$10K模拟资金</div>
+      <span class="skill-tag tag-active">● <span data-zh="运行中" data-en="Running">运行中</span></span>
+    </div>
+    <div class="skill-card cyan">
+      <span class="skill-icon">📔</span>
+      <div class="skill-name" data-zh="墨记 (Moji)" data-en="Moji Journal">墨记 (Moji)</div>
+      <div class="skill-desc" data-zh="个人日记App，Next.js + Tailwind，已上线Vercel" data-en="Personal journal app, Next.js + Tailwind, live on Vercel">个人日记App，Next.js + Tailwind，已上线Vercel</div>
+      <span class="skill-tag tag-active">● MVP</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>☁️ Sky — <span data-zh="用户的数字搭档 · 持续进化中" data-en="用户's Digital Partner · Continuously Evolving">用户的数字搭档 · 持续进化中</span></p>
+  <p style="margin-top:4px;">
+    <a href="index.html">Sky Portal</a> ·
+    <span data-zh="最后更新：2026-03-09" data-en="Last updated: 2026-03-09">最后更新：2026-03-09</span>
+  </p>
+</div>
+
+</div>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelectorAll('[data-zh][data-en]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`);
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  localStorage.setItem('sky-lang', lang);
+}
+// Restore saved language
+const saved = localStorage.getItem('sky-lang');
+if (saved) setLang(saved);
+</script>
+</body>
+</html>

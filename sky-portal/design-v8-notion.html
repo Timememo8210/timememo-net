@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Sky Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --warm-white: #f6f5f4;
+  --warm-light: #f1f1ef;
+  --warm-border: rgba(0, 0, 0, 0.1);
+  --warm-black: #31302e;
+  --warm-gray: #615d59;
+  --warm-gray-light: #9b9a97;
+  --text: rgba(0, 0, 0, 0.95);
+  --text-secondary: rgba(0, 0, 0, 0.65);
+  --text-tertiary: rgba(0, 0, 0, 0.45);
+  --blue: #0075de;
+  --blue-light: rgba(0, 117, 222, 0.08);
+  --blue-border: rgba(0, 117, 222, 0.2);
+  --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.03), 0px 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.03), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0px 4px 8px rgba(0, 0, 0, 0.03), 0px 8px 16px rgba(0, 0, 0, 0.02), 0px 2px 24px rgba(0, 0, 0, 0.02);
+  --radius: 6px;
+  --space: 8px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  border-bottom: 1px solid var(--warm-border);
+}
+
+.nav-logo {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--warm-black);
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-logo-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--warm-black);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-links a:hover {
+  background: var(--warm-light);
+  color: var(--text);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-btn {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lang-btn:hover {
+  background: var(--warm-light);
+  color: var(--text);
+}
+
+/* Page Content */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* Page Header */
+.page-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--warm-black);
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.page-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.page-counter {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-counter .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--warm-border);
+  margin: 32px 0;
+}
+
+/* Section Headers - Notion Style */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+.section-icon {
+  font-size: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--warm-black);
+  letter-spacing: -0.8px;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+}
+
+/* Cards - Database View */
+.db-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  margin-bottom: 4px;
+}
+
+.db-tabs {
+  display: flex;
+  gap: 0;
+}
+
+.db-tab {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.db-tab.active {
+  color: var(--text);
+  border-bottom-color: var(--warm-black);
+}
+
+.db-tab:hover {
+  color: var(--text);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--warm-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.card-cover {
+  width: 100%;
+  height: 120px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.card-cover.ai { background: linear-gradient(135deg, #e8f4fd, #d4ecfc); }
+.card-cover.research { background: linear-gradient(135deg, #f3e8ff, #ede4fb); }
+.card-cover.invest { background: linear-gradient(135deg, #fef3e2, #fde9cc); }
+.card-cover.coach { background: linear-gradient(135deg, #fee2e2, #fdd); }
+.card-cover.garden { background: linear-gradient(135deg, #dcfce7, #d1fae0); }
+.card-cover.life { background: linear-gradient(135deg, #e0f2fe, #d6ecfa); }
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--warm-black);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.card-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tag-blue {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+.tag-gray {
+  background: var(--warm-light);
+  color: var(--warm-gray);
+}
+
+.tag-green {
+  background: rgba(0, 135, 90, 0.08);
+  color: #00875a;
+}
+
+.tag-orange {
+  background: rgba(217, 115, 13, 0.08);
+  color: #d9730d;
+}
+
+.tag-purple {
+  background: rgba(103, 36, 222, 0.08);
+  color: #6724de;
+}
+
+/* List View */
+.list-view {
+  border: 1px solid var(--warm-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--warm-border);
+  transition: background 0.1s;
+  cursor: pointer;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:hover {
+  background: var(--warm-white);
+}
+
+.list-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+.list-content {
+  flex: 1;
+}
+
+.list-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--warm-black);
+}
+
+.list-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.list-tag {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+/* Callout */
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--warm-white);
+  border: 1px solid var(--warm-border);
+  margin: 24px 0;
+}
+
+.callout-icon {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.callout-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.callout-text strong {
+  color: var(--text);
+}
+
+/* Toggle */
+.toggle {
+  margin: 16px 0;
+}
+
+.toggle-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.1s;
+  user-select: none;
+}
+
+.toggle-header:hover {
+  background: var(--warm-light);
+}
+
+.toggle-arrow {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  transition: transform 0.15s;
+}
+
+.toggle-header.open .toggle-arrow {
+  transform: rotate(90deg);
+}
+
+.toggle-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--warm-black);
+}
+
+.toggle-content {
+  padding: 8px 12px 8px 32px;
+  display: none;
+}
+
+.toggle-content.open {
+  display: block;
+}
+
+/* Footer */
+footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  border-top: 1px solid var(--warm-border);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 10px 16px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .page {
+    padding: 32px 16px 60px;
+  }
+  .page-title {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">S</div>
+    Sky Portal
+  </div>
+  <ul class="nav-links">
+    <li><a href="#ai">AI研究</a></li>
+    <li><a href="#invest">投资分析</a></li>
+    <li><a href="#intel">Intel新闻</a></li>
+    <li><a href="#coach">教练专区</a></li>
+    <li><a href="#garden">我的花园</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn" onclick="toggleLang()">EN / 中</button>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<main class="page">
+  <!-- Page Header -->
+  <div class="page-icon">🌌</div>
+  <h1 class="page-title">Sky Portal</h1>
+  <p class="page-desc">Sky Portal的私人数字空间 — 整合 AI 研究、投资分析与生活探索</p>
+  <div class="page-counter">
+    持续探索
+    <span class="badge" id="dayBadge">0 天</span>
+    自 2026年2月15日起
+  </div>
+
+  <hr class="divider">
+
+  <!-- AI Section -->
+  <div class="section-header" id="ai">
+    <span class="section-icon">🤖</span>
+    <h2 class="section-title">AI 专区</h2>
+  </div>
+  <p class="section-desc">用人工智能重新定义生活方式与工作效率</p>
+
+  <div class="db-header">
+    <div class="db-tabs">
+      <div class="db-tab active">Gallery</div>
+      <div class="db-tab">List</div>
+      <div class="db-tab">Timeline</div>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-cover ai">🧠</div>
+      <h3 class="card-title">AI 生活</h3>
+      <p class="card-text">将 AI 融入日常——智能家居、个人助理、效率工具</p>
+      <div class="card-tags">
+        <span class="tag tag-blue">AI</span>
+        <span class="tag tag-green">进行中</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-cover ai">⚡</div>
+      <h3 class="card-title">CVD 优化</h3>
+      <p class="card-text">基于机器学习的化学气相沉积工艺参数优化</p>
+      <div class="card-tags">
+        <span class="tag tag-blue">AI</span>
+        <span class="tag tag-purple">研究</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Research Section -->
+  <div class="section-header" id="intel">
+    <span class="section-icon">🔬</span>
+    <h2 class="section-title">Intel 新闻 & 研究</h2>
+  </div>
+  <p class="section-desc">半导体行业前沿洞察与深度分析</p>
+
+  <div class="list-view">
+    <div class="list-item">
+      <span class="list-icon">📄</span>
+      <div class="list-content">
+        <div class="list-title">Intel × Tesla Terafab 报告</div>
+        <div class="list-meta">超级工厂合作模式与技术路线分析</div>
+      </div>
+      <span class="list-tag">报告</span>
+    </div>
+    <div class="list-item">
+      <span class="list-icon">📰</span>
+      <div class="list-content">
+        <div class="list-title">Intel 2026 动态追踪</div>
+        <div class="list-meta">战略转型 · 产品路线图 · 市场格局</div>
+      </div>
+      <span class="list-tag">新闻</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Investment Section -->
+  <div class="section-header" id="invest">
+    <span class="section-icon">📊</span>
+    <h2 class="section-title">投资分析</h2>
+  </div>
+  <p class="section-desc">数据驱动的投资研究与决策支持</p>
+
+  <div class="callout">
+    <span class="callout-icon">💡</span>
+    <div class="callout-text">
+      <strong>核心方向：</strong>半导体产业链投资机会追踪，包含估值模型、风险评估与市场趋势分析
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-cover invest">📈</div>
+      <h3 class="card-title">市场研究</h3>
+      <p class="card-text">全球半导体市场趋势与投资机会</p>
+      <div class="card-tags">
+        <span class="tag tag-orange">投资</span>
+        <span class="tag tag-green">活跃</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Coach Section -->
+  <div class="section-header" id="coach">
+    <span class="section-icon">📚</span>
+    <h2 class="section-title">教练专区</h2>
+  </div>
+  <p class="section-desc">终身学习，构建多元思维模型</p>
+
+  <div class="toggle">
+    <div class="toggle-header open" onclick="toggleSection(this)">
+      <span class="toggle-arrow">▶</span>
+      <span class="toggle-title">芒格课程</span>
+    </div>
+    <div class="toggle-content open">
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:8px;">查理·芒格的多元思维模型与投资哲学系统性学习</p>
+      <div class="card-tags">
+        <span class="tag tag-purple">学习</span>
+        <span class="tag tag-green">进行中</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Garden Section -->
+  <div class="section-header" id="garden">
+    <span class="section-icon">🌱</span>
+    <h2 class="section-title">我的花园</h2>
+  </div>
+  <p class="section-desc">在数字世界之外，培育真实的生活</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-cover garden">🌿</div>
+      <h3 class="card-title">花园日志</h3>
+      <p class="card-text">Portland 后院花园的四季变化记录</p>
+      <div class="card-tags">
+        <span class="tag tag-green">生活</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-cover life">🇺🇸</div>
+      <h3 class="card-title">入籍之路</h3>
+      <p class="card-text">美国公民入籍准备与进度追踪</p>
+      <div class="card-tags">
+        <span class="tag tag-blue">里程碑</span>
+        <span class="tag tag-orange">进行中</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="#ai">AI研究</a>
+      <a href="#invest">投资分析</a>
+      <a href="#intel">Intel新闻</a>
+      <a href="#coach">教练专区</a>
+      <a href="#garden">我的花园</a>
+    </div>
+    <p class="footer-copy">© 2026 Sky Portal · Built by Sky Portal</p>
+  </div>
+</footer>
+
+<script>
+// Day counter
+function updateDays() {
+  const start = new Date(2026, 1, 15);
+  const now = new Date();
+  const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  document.getElementById('dayBadge').textContent = diff + ' 天';
+}
+updateDays();
+
+// Toggle sections
+function toggleSection(header) {
+  header.classList.toggle('open');
+  const content = header.nextElementSibling;
+  content.classList.toggle('open');
+}
+
+// Language toggle
+let isEn = false;
+function toggleLang() {
+  isEn = !isEn;
+  document.querySelector('.lang-btn').textContent = isEn ? '中 / EN' : 'EN / 中';
+}
+</script>
+</body>
+</html>

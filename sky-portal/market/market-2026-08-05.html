@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-08-05 | Daily Market</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e8;font-family:-apple-system,'Helvetica Neue','PingFang SC','Noto Sans SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#6b6b80;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08)}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#6b6b80;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono','JetBrains Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.insight-card{border-left:3px solid #4ade80;padding-left:16px;margin:16px 0;background:rgba(74,222,128,0.05);border-radius:0 8px 8px 0}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);color:#6b6b80;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:6px 16px;border-radius:6px;cursor:pointer;font-size:0.85em;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:#e0e0e8;transition:all 0.2s}
+button#btn-zh:hover,button#btn-en:hover{background:rgba(255,255,255,0.12)}
+body.lang-en .zh{display:none!important}
+body.lang-en .en{display:block!important}
+.en{display:none}
+body.lang-zh .en{display:none!important}
+body.lang-zh .zh{display:block!important}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(74,222,128,0.3),transparent);margin:32px 0}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a7f37,#2d5a3d)">
+<div class="poster-icon">🏆</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">道指标普齐创新高</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">Dow & S&P 500 Hit New Records</div>
+<div class="zh poster-data">道指 54,085 ▲ +1.71%<br>标普500 7,736 ▲ +1.79%<br>纳指 26,584 ▲ +2.59%</div>
+<div class="en poster-data" style="display:none">Dow 54,085 ▲ +1.71%<br>S&P 500 7,736 ▲ +1.79%<br>Nasdaq 26,584 ▲ +2.59%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626,#991b1b)">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体逆势下跌</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">Semis Buck the Trend, Drop</div>
+<div class="zh poster-data">SOX 12,008 ▼ -1.40%<br>ARM ▼ -4%+<br>AI资本开支可持续性受疑</div>
+<div class="en poster-data" style="display:none">SOX 12,008 ▼ -1.40%<br>ARM ▼ -4%+<br>AI capex sustainability questioned</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e40af,#312e81)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股放量反攻</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">China A-Shares Rally on Volume</div>
+<div class="zh poster-data">上证 3,878 ▲ +1.47%<br>深成指 14,144 ▲ +1.86%<br>成交额增4000亿+</div>
+<div class="en poster-data" style="display:none">SSE 3,878 ▲ +1.47%<br>SZSE 14,144 ▲ +1.86%<br>Volume surge ¥400B+</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706,#92400e)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SpaceX首份财报震动市场</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">SpaceX 1st Earnings Shakes Market</div>
+<div class="zh poster-data">收入$78亿 同比+92%<br>但AI支出远超预期<br>股价暴跌约9%</div>
+<div class="en poster-data" style="display:none">Revenue $7.8B YoY +92%<br>But AI spend far exceeded<br>Stock dropped ~9%</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en">Daily Market</span></h1>
+<p class="subtitle"><span class="zh">2026-08-05（周三） · Sky Portal · </span><span class="en" style="display:none">2026-08-05 (Wed) · Sky Portal · </span><a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJIA</div><div class="stock-price">54,085.88</div><div class="stock-change up">+1.71%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,736.52</div><div class="stock-change up">+1.79%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,584.99</div><div class="stock-change up">+2.59%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,008.88</div><div class="stock-change down">-1.40%</div></div>
+<div class="stock-item"><div class="stock-ticker">OIL WTI</div><div class="stock-price">▼ -6.47%</div><div class="stock-change down">暴跌</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">1. 道指标普齐创新高，美伊协议前景驱动市场情绪</span><span class="en" style="display:none">1. Dow & S&P 500 Hit Record Highs, Iran Deal Hopes Drive Sentiment</span></h4>
+<p><span class="zh">道琼斯指数大涨907点（+1.71%），收盘54,085.88点，再创历史新高。标普500指数涨1.79%，同样刷新纪录。特朗普再度转向外交途径解决伊朗问题，地缘政治紧张情绪大幅缓解，推动市场风险偏好全面上升。道指连续创新高，短期内动能强劲。</span><span class="en" style="display:none">The Dow surged 907 points (+1.71%) to close at 54,085.88, a new all-time high. S&P 500 gained 1.79%, also a fresh record. Trump pivoted back to diplomacy on Iran, easing geopolitical tensions and lifting risk appetite across markets.</span></p>
+<p class="src"><span class="zh">来源：CLS · 新浪财经</span><span class="en" style="display:none">Source: CLS · Sina Finance</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 纳指大涨2.59%，光通信/存储板块领涨</span><span class="en" style="display:none">2. Nasdaq +2.59%, Optical Networking & Storage Lead Gains</span></h4>
+<p><span class="zh">纳斯达克综合指数大涨671点，涨幅2.59%。光通信和存储芯片板块表现尤为亮眼，受AI数据中心基础设施建设需求持续拉动。AI基础设施投资主题延续，但内部出现明显分化。</span><span class="en" style="display:none">Nasdaq jumped 671 points (+2.59%). Optical networking and storage chips outperformed, driven by sustained AI data center infrastructure demand. AI investment theme continued but with notable internal divergence.</span></p>
+<p class="src"><span class="zh">来源：东方财富 · 财联社</span><span class="en" style="display:none">Source: Eastmoney · CLS</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. SOX半导体指数逆势下跌1.40%，ARM跌超4%</span><span class="en" style="display:none">3. SOX Semiconductor Index Dropped -1.40%, ARM Down 4%+</span></h4>
+<p><span class="zh">费城半导体指数（SOX）收12,008.88点，下跌170点（-1.40%），是大盘唯一下跌的主要板块。ARM跌超4%，盘中半导体板块一度全面翻绿。市场开始质疑AI资本开支的可持续性，半导体与大盘出现明显分化。这种"指数涨、芯片跌"的背离值得关注。</span><span class="en" style="display:none">PHLX Semiconductor Index (SOX) closed at 12,008.88, down 170 pts (-1.40%), the only major sector in the red. ARM fell 4%+, semis briefly all turned green-to-red intraday. Market questioning AI capex sustainability. The "index up, chips down" divergence is noteworthy.</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance · 同花顺</span><span class="en" style="display:none">Source: Yahoo Finance · 10jqka</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. SpaceX首份财报：收入$78亿同比+92%，但AI支出吓跑投资者</span><span class="en" style="display:none">4. SpaceX 1st Earnings: $7.8B Revenue (+92% YoY), AI Spending Scares Investors</span></h4>
+<p><span class="zh">SpaceX上市后首份财报引发市场震动。二季度收入78亿美元，同比增长92%，Starlink和AI业务收入快速增长。然而，公司在财报电话会上透露AI相关支出远超市场预期，投资回报周期拉长，引发投资者对高估值科技股的担忧。SpaceX股价盘后暴跌约9%，可能对科技板块情绪产生连锁影响。</span><span class="en" style="display:none">SpaceX's first earnings as a public company shook the market. Q2 revenue $7.8B, +92% YoY, with strong Starlink and AI revenue growth. However, AI-related spending far exceeded expectations with longer ROI timelines, raising concerns about high-valuation tech stocks. Shares dropped ~9%, potentially dragging broader tech sentiment.</span></p>
+<p class="src"><span class="zh">来源：Reuters · BBC · Barron's</span><span class="en" style="display:none">Source: Reuters · BBC · Barron's</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">5. 国际油价暴跌6.47%，美伊协议缓解供应担忧</span><span class="en" style="display:none">5. Oil Plunges 6.47% on Iran Deal Hopes</span></h4>
+<p><span class="zh">WTI原油主力合约大跌6.47%，受美伊协议前景乐观影响。地缘政治缓和降低了对中东石油供应中断的担忧，油价大幅回落。低油价利好消费端和制造业成本，但不利能源板块。</span><span class="en" style="display:none">WTI crude plunged 6.47% on optimistic Iran deal prospects. Geopolitical easing reduced fears of Mideast supply disruption. Lower oil benefits consumers and manufacturing costs but hurts energy sector.</span></p>
+<p class="src"><span class="zh">来源：东方财富</span><span class="en" style="display:none">Source: Eastmoney</span></p>
+</div>
+
+<div class="section-divider"></div>
+
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en" style="display:none">China A-Shares Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">3,878.43</div><div class="stock-change up">+1.47%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">14,144.20</div><div class="stock-change up">+1.86%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,535.14</div><div class="stock-change up">大幅上涨</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">—</div><div class="stock-change up">+4.09%</div></div>
+<div class="stock-item"><div class="stock-ticker">北证50</div><div class="stock-price">—</div><div class="stock-change up">+1.62%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股放量反攻，成交额增超4000亿</span><span class="en" style="display:none">A-Shares Rally on Surging Volume, Turnover Up ¥400B+</span></h4>
+<p><span class="zh">A股市场8月5日放量反攻，主要股指集体收涨。成交额单日增长超4000亿元，市场量价齐升。工业富联涨停，万亿巨头带动市场人气。科技板块表现强劲，科创50涨4.09%，创业板指大涨。光通信/光模块板块受AI数据中心需求带动持续活跃。</span><span class="en" style="display:none">China A-shares rallied on surging volume August 5, all major indices closed higher. Daily turnover increased by over ¥400B, with price-volume confirmation. Foxconn hit limit-up, lifting sentiment. Tech outperformed: STAR 50 +4.09%, ChiNext surged. Optical networking active on AI datacenter demand.</span></p>
+<p class="src"><span class="zh">来源：东方财富 · 同花顺</span><span class="en" style="display:none">Source: Eastmoney · 10jqka</span></p>
+</div>
+
+<div class="section-divider"></div>
+
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">25,915.82</div><div class="stock-change up">+0.24%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,933.07</div><div class="stock-change up">+0.97%</div></div>
+<div class="stock-item"><div class="stock-ticker">洛阳钼业</div><div class="stock-price">—</div><div class="stock-change up">领涨</div></div>
+<div class="stock-item"><div class="stock-ticker">创科实业</div><div class="stock-price">—</div><div class="stock-change up">领涨</div></div>
+<div class="stock-item"><div class="stock-ticker">光模块</div><div class="stock-price">—</div><div class="stock-change up">焦点</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股小幅收涨，恒生科技表现优于大盘</span><span class="en" style="display:none">HK Stocks Edge Higher, Tech Outperforms</span></h4>
+<p><span class="zh">恒生指数收报25,915.82点，涨62.9点（+0.24%）。恒生科技指数涨0.97%至4,933.07点，表现明显优于大盘。光模块板块成为市场焦点，科技股整体走强。港股在25,900点附近企稳，估值修复延续。</span><span class="en" style="display:none">HSI closed at 25,915.82, up 62.9 pts (+0.24%). Hang Seng Tech +0.97% to 4,933.07, outperforming the broader market. Optical modules were in focus, tech overall strong. HK stocks stabilizing around 25,900 with continued valuation repair.</span></p>
+<p class="src"><span class="zh">来源：东方财富 · Investing.com</span><span class="en" style="display:none">Source: Eastmoney · Investing.com</span></p>
+</div>
+
+<div class="section-divider"></div>
+
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="insight-card">
+<h4><span class="zh">短期：动能强劲，但警惕分化</span><span class="en" style="display:none">Short-term: Strong Momentum, Watch Divergence</span></h4>
+<p><span class="zh">道指标普连续创新高，短期多头动能强劲。但半导体与大盘的分化是重要信号——如果AI资本开支预期下修，可能拖累科技成长股。SpaceX暴跌的连锁反应需持续观察。</span><span class="en" style="display:none">Dow & S&P at consecutive ATHs, strong short-term bullish momentum. But semiconductor divergence is a key signal — if AI capex expectations are revised down, growth tech could be dragged down. SpaceX fallout needs monitoring.</span></p>
+</div>
+
+<div class="insight-card">
+<h4><span class="zh">中港市场：情绪偏正面</span><span class="en" style="display:none">China & HK: Positive Sentiment</span></h4>
+<p><span class="zh">A股放量上攻、港股企稳，中港市场情绪正面。关注政策面配合以及光通信/AI基础设施产业链的持续机会。</span><span class="en" style="display:none">A-shares surging on volume, HK stabilizing — positive sentiment. Watch for policy support and optical networking/AI infra chain opportunities.</span></p>
+</div>
+
+<div class="insight-card">
+<h4><span class="zh">关键风险点</span><span class="en" style="display:none">Key Risks</span></h4>
+<p><span class="zh">• AI资本开支可持续性质疑可能蔓延<br>• SpaceX效应是否拖累高估值科技股<br>• 美伊协议变数（特朗普外交反复无常）<br>• 油价暴跌对能源板块的冲击</span><span class="en" style="display:none">• AI capex sustainability concerns may spread<br>• SpaceX effect potentially dragging high-valuation tech<br>• Iran deal uncertainty (Trump's diplomatic unpredictability)<br>• Oil crash impact on energy sector</span></p>
+</div>
+
+<div class="footer">
+<p><span class="zh">由 Sky ☁️ 自动生成 · </span><span class="en" style="display:none">Auto-generated by Sky ☁️ · </span><a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a> · <a href="../index.html"><span class="zh">首页</span><span class="en" style="display:none">Home</span></a></p>
+<p><span class="zh">数据来源：CLS · 东方财富 · Yahoo Finance · Reuters · BBC</span><span class="en" style="display:none">Sources: CLS · Eastmoney · Yahoo Finance · Reuters · BBC</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang){
+  document.body.className='lang-'+lang;
+  localStorage.setItem('lang',lang);
+  var bzh=document.getElementById('btn-zh'),ben=document.getElementById('btn-en');
+  if(lang==='zh'){bzh.style.background='rgba(74,222,128,0.2)';bzh.style.color='#4ade80';ben.style.background='rgba(255,255,255,0.06)';ben.style.color='#e0e0e8';}
+  else{ben.style.background='rgba(74,222,128,0.2)';ben.style.color='#4ade80';bzh.style.background='rgba(255,255,255,0.06)';bzh.style.color='#e0e0e8';}
+}
+(function(){var l=localStorage.getItem('lang');if(l)switchLang(l);})();
+</script>
+</body>
+</html>

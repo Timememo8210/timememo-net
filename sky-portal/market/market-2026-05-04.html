@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-04 — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e8;font-family:'Noto Sans SC',-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+
+/* Lang toggle */
+.lang-btns{text-align:right;margin-bottom:8px}
+.lang-btns button{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid rgba(74,222,128,0.3);background:#1a1a2e;color:#aaa;font-family:inherit}
+.lang-btns button.active{background:#4ade80;color:#000;border-color:#4ade80}
+
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+
+/* Cards */
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;margin-bottom:14px;transition:background 0.2s}
+.card:hover{background:rgba(255,255,255,0.07)}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#666;font-size:0.8em;margin-top:6px}
+
+/* Poster grid */
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-title{font-size:1.3em;font-weight:700}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+
+/* Stock grid */
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+
+/* Kline */
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+
+/* News items */
+.news-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.news-item:last-child{border-bottom:none}
+
+/* Highlight box */
+.highlight-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:16px 20px;margin:16px 0}
+
+/* Footer */
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+
+/* Responsive */
+@media(max-width:768px){
+  .stock-grid{grid-template-columns:repeat(2,1fr)}
+  .kline-grid{grid-template-columns:1fr}
+  .poster-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-btns">
+<button class="active" onclick="switchLang('zh')">中文</button>
+<button onclick="switchLang('en')">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🔴</div>
+<div class="zh poster-title">美股全线收跌</div>
+<div class="en poster-title" style="display:none">US Stocks Sell Off</div>
+<div class="zh poster-data">
+道指 -1.13%（-557点）<br>
+标普 -0.41% · 纳指 -0.19%<br>
+伊朗袭击UAE，油价飙升6%
+</div>
+<div class="en poster-data" style="display:none">
+Dow -1.13% (-557 pts)<br>
+S&P -0.41% · Nasdaq -0.19%<br>
+Iran strikes UAE, oil surges 6%
+</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#059669 0%,#047857 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh poster-title">油价飙升</div>
+<div class="en poster-title" style="display:none">Oil Surges</div>
+<div class="zh poster-data">
+WTI $106.42（+4.39%）<br>
+Brent $114.44（+5.8%）<br>
+能源板块唯一上涨（+0.6%）
+</div>
+<div class="en poster-data" style="display:none">
+WTI $106.42 (+4.39%)<br>
+Brent $114.44 (+5.8%)<br>
+Energy only green sector (+0.6%)
+</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)">
+<div class="poster-icon">🤖</div>
+<div class="zh poster-title">AI财报季持续亮眼</div>
+<div class="en poster-title" style="display:none">AI Earnings Shine</div>
+<div class="zh poster-data">
+Alphabet、Amazon创新高<br>
+Micron、NXP创历史新高<br>
+Palantir/AMD本周登场
+</div>
+<div class="en poster-data" style="display:none">
+Alphabet, Amazon new highs<br>
+Micron, NXP all-time highs<br>
+Palantir/AMD this week
+</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#0891b2 0%,#0e7490 100%)">
+<div class="poster-icon">🇭🇰</div>
+<div class="zh poster-title">港股节后开门红</div>
+<div class="en poster-title" style="display:none">HK Stocks Rebound</div>
+<div class="zh poster-data">
+恒指 +1.24%（26,095）<br>
+恒生科技 +2.16%<br>
+A股劳动节休市至5/5
+</div>
+<div class="en poster-data" style="display:none">
+HSI +1.24% (26,095)<br>
+Hang Seng Tech +2.16%<br>
+A-shares closed for Labor Day
+</div>
+</div>
+
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-04 · Sky Portal Daily Market · <a href="index.html" style="color:#4ade80"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- ════════════════ US Markets ════════════════ -->
+<h2>🇺🇸 <span class="zh">美股行情</span><span class="en" style="display:none">US Markets</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker">DJI</div>
+  <div class="stock-price">48,941</div>
+  <div class="stock-change down">-1.13%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">S&P 500</div>
+  <div class="stock-price">7,200</div>
+  <div class="stock-change down">-0.41%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">NASDAQ</div>
+  <div class="stock-price">25,067</div>
+  <div class="stock-change down">-0.19%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">SOX</div>
+  <div class="stock-price">10,534</div>
+  <div class="stock-change down">-0.57%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">WTI Oil</div>
+  <div class="stock-price">$106.42</div>
+  <div class="stock-change up">+4.39%</div>
+</div>
+</div>
+
+<h3><span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h3>
+
+<div class="card">
+<h4>🔥 <span class="zh">伊朗袭击阿联酋，中东局势再度升级</span><span class="en" style="display:none">🔥 Iran Strikes UAE, Middle East Escalates Again</span></h4>
+<p><span class="zh">阿联酋宣布拦截多枚从伊朗发射的导弹，为美伊停火以来UAE导弹警报系统首次激活。此前伊朗海军宣称在霍尔木兹海峡阻截"美以军舰"，Fars通讯社报道称两枚导弹击中Jask岛附近美军舰船（CENTCOM否认，称"无美海军舰船被击中"）。伊朗媒体还报道一艘商船在霍尔木兹海峡被拒绝通行。</span><span class="en" style="display:none">The UAE intercepted multiple missiles fired from Iran, the first time its missile alert system was activated since the US-Iran ceasefire. Iran's Navy claimed to have blocked "American-Zionist" warships from the Strait of Hormuz. Fars News reported two missiles hit a US warship near Jask island (CENTCOM denied: "no US Navy ships have been struck"). Iranian media also reported a commercial ship was turned back at Hormuz.</span></p>
+<p class="src">来源：CNBC / Reuters / CENTCOM</p>
+</div>
+
+<div class="card">
+<h4>🛢️ <span class="zh">油价飙升，能源板块逆势走强</span><span class="en" style="display:none">🛢️ Oil Surges, Energy Stocks Buck Trend</span></h4>
+<p><span class="zh">WTI原油收涨4.39%至$106.42/桶，Brent原油涨5.8%至$114.44/桶，创近期新高。能源板块成为S&P 500中11个行业板块里唯一上涨的板块（+0.6%）。Apache（APA）涨近4%，Diamondback（FANG）涨近3%，Marathon Petroleum（MPC）涨近2%。SLB逆势跌超2%拖累板块。</span><span class="en" style="display:none">WTI crude settled up 4.39% at $106.42/bbl, Brent up 5.8% at $114.44/bbl. Energy was the only S&P 500 sector in the green (+0.6%). APA led gains at nearly +4%, Diamondback +3%, Marathon Petroleum +2%. SLB capped gains, falling over 2%.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>🚢 <span class="zh">Trump宣布"Project Freedom"护送霍尔木兹被困商船</span><span class="en" style="display:none">🚢 Trump Announces "Project Freedom" for Hormuz Ships</span></h4>
+<p><span class="zh">Trump在Truth Social宣布"Project Freedom"计划，由美军护送在霍尔木兹海峡被困的非参战国商船安全离开。计划于周一开始执行。但帖子未提供具体执行方案。此前伊朗已于周日接收了美方对最新和平提议的回应，但Trump表示对伊朗的方案"不满意"，称其"只是因为军事力量耗尽才来谈判"。</span><span class="en" style="display:none">Trump announced "Project Freedom" on Truth Social, directing the US military to escort non-combatant cargo ships trapped at the Strait of Hormuz. The initiative started Monday with no operational details. Iran received a US response to its latest peace proposal on Sunday, but Trump said he was "not satisfied" with Tehran's offer, claiming they're only negotiating because "they have no military left."</span></p>
+<p class="src">来源：CNBC / Truth Social</p>
+</div>
+
+<div class="card">
+<h4>📦 <span class="zh">Amazon开放物流网络，物流股崩盘</span><span class="en" style="display:none">📦 Amazon Opens Logistics Network, Shipping Stocks Crash</span></h4>
+<p><span class="zh">Amazon宣布向第三方企业开放其货运、配送、仓储和包裹配送网络。消息一出物流板块暴跌：GXO Logistics -18%，UPS -10%，FedEx -9%。这意味着Amazon从自用物流正式转型为第三方物流服务提供商，直接威胁传统物流巨头的市场份额。</span><span class="en" style="display:none">Amazon announced it is opening its freight, distribution, fulfillment and parcel shipping network to third-party businesses. Shipping stocks plunged: GXO Logistics -18%, UPS -10%, FedEx -9%. Amazon is transitioning from internal logistics to a 3PL provider, directly threatening traditional logistics giants.</span></p>
+<p class="src">来源：CNBC / Reuters</p>
+</div>
+
+<!-- ════════════════ Earnings ════════════════ -->
+<h2>💰 <span class="zh">财报季亮点</span><span class="en" style="display:none">Earnings Highlights</span></h2>
+
+<div class="card">
+<h4><span class="zh">Big Tech "AI审判日"结果向好</span><span class="en" style="display:none">Big Tech "AI Judgment Day" Results Positive</span></h4>
+<p><span class="zh">CNBC评价本季度财报为"AI审判日"——AI投资花得好的公司被市场大幅奖励，25只S&P 500成分股创52周新高，包括Alphabet（历史新高，回溯至2004年IPO）、Amazon（历史新高，回溯至1997年IPO）、Micron（历史新高）、NXP（历史新高）、Vertiv（历史新高）、Cisco（历史新高，回溯至1990年IPO）。半导体板块虽当日微跌，但4月整体经历"历史性"月度涨幅。</span><span class="en" style="display:none">CNBC called this quarter an "AI Judgment Day" — companies that spent well on AI were rewarded by the market. 25 S&P 500 stocks hit 52-week highs, including Alphabet (ATH back to 2004 IPO), Amazon (ATH back to 1997 IPO), Micron (ATH), NXP (ATH), Vertiv (ATH), Cisco (ATH back to 1990 IPO). Semis dipped on the day but posted a "historic" monthly rally in April.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance</p>
+</div>
+
+<div class="highlight-box">
+<p><span class="zh">📅 <b>本周重点关注：</b>Palantir（5/5盘前）、AMD（5/6）、高通等AI核心公司将发布财报，可能成为下一轮AI行情催化剂。</span><span class="en" style="display:none">📅 <b>This Week's Focus:</b> Palantir (May 5 pre-market), AMD (May 6), Qualcomm and other core AI companies reporting earnings — could be the next catalyst for AI momentum.</span></p>
+</div>
+
+<!-- ════════════════ HK & China ════════════════ -->
+<h2>🇭🇰🇨🇳 <span class="zh">港股 & A股</span><span class="en" style="display:none">Hong Kong & China</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker">HSI</div>
+  <div class="stock-price">26,095</div>
+  <div class="stock-change up">+1.24%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">HS Tech</div>
+  <div class="stock-price">4,976</div>
+  <div class="stock-change up">+2.16%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">HSCEI</div>
+  <div class="stock-price">8,774</div>
+  <div class="stock-change up">+1.07%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">SSE</div>
+  <div class="stock-price">—</div>
+  <div class="stock-change down"><span class="zh">休市</span><span class="en" style="display:none">Closed</span></div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">SZSE</div>
+  <div class="stock-price">—</div>
+  <div class="stock-change down"><span class="zh">休市</span><span class="en" style="display:none">Closed</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股劳动节后开门红</span><span class="en" style="display:none">HK Stocks Rally After Labor Day</span></h4>
+<p><span class="zh">港股在劳动节假期后首个交易日全面上涨。恒生指数收涨1.24%至26,095点，恒生科技指数涨2.16%至4,976点，国企指数涨1.07%至8,774点。受美股上周五创新高、AI芯片板块持续强势、以及中东局势下避险资金流入港股的多重因素推动。恒指近一个月已累计上涨3.9%。</span><span class="en" style="display:none">Hong Kong stocks rallied in the first trading session after the Labor Day holiday. HSI gained 1.24% to 26,095, Hang Seng Tech jumped 2.16% to 4,976, and HSCEI rose 1.07% to 8,774. Driven by US record highs last Friday, sustained AI chip momentum, and safe-haven flows amid Middle East tensions. HSI has gained 3.9% over the past month.</span></p>
+<p class="src">来源：Yahoo Finance / Hang Seng Indexes</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股劳动节休市（5/1-5/5）</span><span class="en" style="display:none">A-Shares Closed for Labor Day (May 1-5)</span></h4>
+<p><span class="zh">A股因劳动节假期继续休市，5月6日（周三）恢复交易。节前最后一个交易日（4/30），上证指数报约4,112点，月度表现稳健。市场关注节后A股能否跟随港股补涨，尤其是科技和半导体板块。</span><span class="en" style="display:none">A-shares remain closed for the Labor Day holiday, resuming trading May 6 (Wednesday). Before the break, the Shanghai Composite was around 4,112 with solid monthly performance. Market watchers are watching for a catch-up rally post-holiday, especially in tech and semiconductor sectors.</span></p>
+<p class="src">来源：Shanghai Stock Exchange / Trading Economics</p>
+</div>
+
+<!-- ════════════════ Outlook ════════════════ -->
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期：地缘风险压制 vs AI基本面托底</span><span class="en" style="display:none">Near-term: Geopolitical Risk vs AI Fundamentals</span></h4>
+<p><span class="zh"><b>看空因素：</b></span><span class="en" style="display:none"><b>Bearish Factors:</b></span></p>
+<div class="news-item">🔻 <span class="zh">伊朗局势短期内难以缓解，Infrastructure Capital Advisors CEO Jay Hatfield表示"不预期战争会快速解决"，伊朗不太可能主动放弃核能力</span><span class="en" style="display:none">Iran situation unlikely to resolve quickly. Infrastructure Capital's Hatfield: "We don't anticipate the war being resolved quickly — Iran won't give up nukes voluntarily"</span></div>
+<div class="news-item">🔻 <span class="zh">Trivariate Research警告：4月S&P创2020年11月以来最佳月度表现（+10%），是1167个月中第25好的月份，短期回调概率"大于50%"</span><span class="en" style="display:none">Trivariate Research warns: April was S&P's best month since Nov 2020 (+10%), 25th best out of 1,167 months. A near-term pullback is "more likely than not"</span></div>
+<div class="news-item">🔻 <span class="zh">油价持续高位将推高通胀预期，可能延缓美联储降息节奏</span><span class="en" style="display:none">Sustained high oil prices may push up inflation expectations, delaying Fed rate cuts</span></div>
+<p style="margin-top:10px"><span class="zh"><b>看多因素：</b></span><span class="en" style="display:none"><b>Bullish Factors:</b></span></p>
+<div class="news-item">✅ <span class="zh">Q1财报季盈利增长强劲（+27.8%），AI支出回报率正在被验证</span><span class="en" style="display:none">Q1 earnings growth strong (+27.8%), AI spending ROI being validated</span></div>
+<div class="news-item">✅ <span class="zh">科技/AI板块在周一回调中表现相对抗跌（纳指仅-0.19%），基本面托底效应明显</span><span class="en" style="display:none">Tech/AI sectors relatively resilient on Monday (Nasdaq only -0.19%), fundamental support evident</span></div>
+<div class="news-item">✅ <span class="zh">Hatfield维持S&P年底8,000目标（较当前+11%）</span><span class="en" style="display:none">Hatfield maintains S&P 8,000 year-end target (+11% from current)</span></div>
+</div>
+
+<div class="highlight-box">
+<p><span class="zh">💡 <b>本周关键催化剂：</b></span><span class="en" style="display:none">💡 <b>This Week's Key Catalysts:</b></span></p>
+<div class="news-item">📌 <span class="zh"><b>5/5 周二：</b>Palantir（PLTR）盘前财报 — AI软件龙头，关注政府合同增速</span><span class="en" style="display:none"><b>May 5 Tue:</b> Palantir (PLTR) pre-market earnings — AI software leader, watch government contract growth</span></div>
+<div class="news-item">📌 <span class="zh"><b>5/6 周三：</b>AMD财报 — AI GPU挑战者，关注MI400系列出货量和数据中心收入</span><span class="en" style="display:none"><b>May 6 Wed:</b> AMD earnings — AI GPU challenger, watch MI400 shipments and data center revenue</span></div>
+<div class="news-item">📌 <span class="zh"><b>持续关注：</b>霍尔木兹海峡通行状况、伊朗和谈进展、Trump "Project Freedom"执行效果</span><span class="en" style="display:none"><b>Ongoing:</b> Strait of Hormuz access, Iran peace talks progress, Trump's "Project Freedom" execution</span></div>
+</div>
+
+<!-- ════════════════ Semiconductor Focus ════════════════ -->
+<h2>🔬 <span class="zh">半导体/AI 重点关注</span><span class="en" style="display:none">Semiconductor / AI Focus</span></h2>
+
+<div class="card">
+<h4><span class="zh">芯片板块4月"历史性"月度涨幅后暂歇</span><span class="en" style="display:none">Chip Stocks Pause After "Historic" April Rally</span></h4>
+<p><span class="zh">费城半导体指数（SOX）4月累计涨幅达38%，创下历史性纪录。周一微跌0.57%属正常获利回吐。多个半导体个股仍创52周新高：Micron（MU）、NXP（NXPI）、Microchip（MCHP）、ON Semiconductor。CNBC称芯片板块经历了自2023年初AI热潮以来最强劲的月度表现，TSMC Q1利润暴增58%、Samsung利润增长8倍等基本面数据为板块提供坚实支撑。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) surged 38% in April, a historic record. Monday's -0.57% dip was normal profit-taking. Multiple semi stocks still hit 52-week highs: Micron (MU), NXP (NXPI), Microchip (MCHP), ON Semiconductor. CNBC called it the strongest monthly performance since the 2023 AI boom, supported by TSMC's 58% profit jump and Samsung's 8x profit growth.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">AI芯片供应链持续紧张</span><span class="en" style="display:none">AI Chip Supply Chain Remains Tight</span></h4>
+<p><span class="zh">TSMC的CoWoS先进封装产能持续满载，月产能计划从7.5万片扩至年底12-13万片，但仍无法满足所有客户需求。Nvidia包下大部分产能，AMD等客户面临排期紧张。Samsung Q1利润暴增8倍，AI存储芯片需求持续旺盛。Intel正与Google、Amazon洽谈封装合作，代工业务迎来拐点。整个AI芯片产业链从制造到封装到存储都处于高景气周期。</span><span class="en" style="display:none">TSMC's CoWoS packaging capacity remains fully loaded, expanding from 75k to 120-130k wafers/month by year-end — still insufficient for demand. Nvidia booked the majority of capacity, squeezing AMD and others. Samsung's Q1 profit surged 8x on AI memory demand. Intel in packaging talks with Google and Amazon, foundry at inflection point. The entire AI chip supply chain from fab to packaging to memory is in a high-growth cycle.</span></p>
+<p class="src">来源：CNBC / Reuters / Nikkei Asia</p>
+</div>
+
+<!-- ════════════════ K-line Charts ════════════════ -->
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">NASDAQ — Composite</div><div id="tv-comp"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — PHLX Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">AMZN — Amazon</div><div id="tv-amzn"></div></div>
+<div class="kline-item"><div class="kline-label">^HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：CNBC, Reuters, Yahoo Finance, MarketWatch, Hang Seng Indexes, Trading Economics, CENTCOM</span><span class="en" style="display:none">Data sources: CNBC, Reuters, Yahoo Finance, MarketWatch, Hang Seng Indexes, Trading Economics, CENTCOM</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  if (lang === 'zh') {
+    document.body.className = 'lang-zh';
+    document.querySelectorAll('.lang-btns button')[0].classList.add('active');
+    document.querySelectorAll('.lang-btns button')[1].classList.remove('active');
+  } else {
+    document.body.className = 'lang-en';
+    document.querySelectorAll('.lang-btns button')[0].classList.remove('active');
+    document.querySelectorAll('.lang-btns button')[1].classList.add('active');
+  }
+  localStorage.setItem('lang', lang);
+}
+(function(){
+  var l = localStorage.getItem('lang');
+  if (l === 'en') switchLang('en');
+})();
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-comp', sym:'NASDAQ:COMP'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-amzn', sym:'NASDAQ:AMZN'},
+  {id:'tv-hsi', sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(15,15,25,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

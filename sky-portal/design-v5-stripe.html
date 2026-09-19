@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Sky Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --navy: #061b31;
+  --violet: #533afd;
+  --ruby: #ea2261;
+  --magenta: #f96bee;
+  --text: #425466;
+  --text-light: #6b7c93;
+  --border: #e3e8ee;
+  --bg-subtle: #f6f9fc;
+  --shadow: 0 13px 27px -5px rgba(50,50,93,0.25), 0 8px 16px -8px rgba(0,0,0,0.3);
+  --shadow-sm: 0 6px 12px -2px rgba(50,50,93,0.25), 0 3px 7px -3px rgba(0,0,0,0.3);
+  --radius: 6px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.nav-logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+  background: linear-gradient(135deg, var(--violet), var(--magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--violet);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lang-btn {
+  font-size: 13px;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Source Code Pro', monospace;
+  transition: color 0.2s;
+}
+
+.lang-btn:hover {
+  color: var(--violet);
+}
+
+/* Hero */
+.hero {
+  padding: 180px 48px 120px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -200px;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(ellipse at center, rgba(83,58,253,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 13px;
+  color: var(--violet);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 76px);
+  font-weight: 300;
+  color: var(--navy);
+  letter-spacing: -2.5px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.hero-desc {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.hero-counter {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 40px;
+}
+
+.hero-counter span {
+  color: var(--violet);
+  font-weight: 600;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--violet);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--violet);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(83, 58, 253, 0.04);
+}
+
+/* Gradient Accent Bar */
+.gradient-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--ruby), var(--magenta), var(--violet));
+  border-radius: 2px;
+  margin: 0 48px;
+}
+
+/* Sections */
+.section {
+  padding: 100px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 56px;
+}
+
+.section-eyebrow {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 12px;
+  color: var(--violet);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.section-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 300;
+  color: var(--navy);
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 17px;
+  color: var(--text);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ruby), var(--magenta));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-tag {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--violet);
+  background: rgba(83, 58, 253, 0.06);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.card-text {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--violet);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+
+.card-link:hover {
+  gap: 8px;
+}
+
+/* Alt Section */
+.section-alt {
+  background: var(--bg-subtle);
+  max-width: 100%;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.section-alt .section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Footer */
+footer {
+  padding: 64px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand {
+  font-size: 15px;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+.footer-col-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--violet);
+}
+
+.footer-bottom {
+  font-size: 13px;
+  color: var(--text-light);
+  font-family: 'Source Code Pro', monospace;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 16px 20px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .hero {
+    padding: 140px 20px 80px;
+  }
+  .section {
+    padding: 64px 20px;
+  }
+  .section-alt {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  footer {
+    padding: 48px 20px;
+  }
+}
+
+/* Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-logo">Sky <span>Portal</span></div>
+  <ul class="nav-links">
+    <li><a href="#ai">AI研究</a></li>
+    <li><a href="#investment">投资分析</a></li>
+    <li><a href="#intel">Intel新闻</a></li>
+    <li><a href="#coach">教练专区</a></li>
+    <li><a href="#garden">我的花园</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="lang-btn" onclick="toggleLang()">EN/中</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <p class="hero-eyebrow reveal">Personal Digital Space</p>
+  <h1 class="reveal">Sky Portal的<br>数字空间</h1>
+  <p class="hero-desc reveal">一个整合 AI 研究、投资分析与生活探索的私人知识门户</p>
+  <p class="hero-counter reveal">已持续探索 <span id="dayCount">0</span> 天</p>
+  <div class="hero-actions reveal">
+    <a href="#ai" class="btn-primary">
+      开始探索
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#about" class="btn-secondary">查看文档 →</a>
+  </div>
+</section>
+
+<div class="gradient-bar"></div>
+
+<!-- AI Section -->
+<section class="section" id="ai">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Artificial Intelligence</p>
+    <h2 class="section-title">AI 专区</h2>
+    <p class="section-desc">将前沿 AI 技术应用于工业优化与日常生活</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <span class="card-tag">lifestyle</span>
+      <h3 class="card-title">AI 生活</h3>
+      <p class="card-text">探索 AI 融入日常生活的无限可能——从智能家居自动化到个人生产力工具链</p>
+      <a href="#" class="card-link">了解更多 →</a>
+    </div>
+    <div class="card reveal">
+      <span class="card-tag">industry</span>
+      <h3 class="card-title">CVD 优化</h3>
+      <p class="card-text">基于机器学习的化学气相沉积工艺优化，实现参数预测与良率提升</p>
+      <a href="#" class="card-link">查看研究 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Research Section -->
+<div class="section-alt">
+  <section class="section section-inner" id="intel">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Deep Research</p>
+      <h2 class="section-title">Intel 新闻 & 研究</h2>
+      <p class="section-desc">半导体行业最前沿的分析洞察</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <span class="card-tag">report</span>
+        <h3 class="card-title">Intel × Tesla Terafab</h3>
+        <p class="card-text">超级工厂协同制造模式的可行性分析，技术路线与商业模式深度拆解</p>
+        <a href="#" class="card-link">阅读报告 →</a>
+      </div>
+      <div class="card reveal">
+        <span class="card-tag">news</span>
+        <h3 class="card-title">Intel 动态追踪</h3>
+        <p class="card-text">Intel 战略转型、产品路线图与市场竞争格局实时跟踪</p>
+        <a href="#" class="card-link">最新动态 →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Investment Section -->
+<section class="section" id="investment">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Investment Analysis</p>
+    <h2 class="section-title">投资分析</h2>
+    <p class="section-desc">数据驱动的投资研究与决策支持</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <span class="card-tag">portfolio</span>
+      <h3 class="card-title">市场研究</h3>
+      <p class="card-text">全球半导体产业链投资机会追踪，包含估值模型与风险评估</p>
+      <a href="#" class="card-link">查看分析 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Coach Section -->
+<div class="section-alt">
+  <section class="section section-inner" id="coach">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Personal Growth</p>
+      <h2 class="section-title">教练专区</h2>
+      <p class="section-desc">构建多元思维模型，终身学习</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <span class="card-tag">course</span>
+        <h3 class="card-title">芒格课程</h3>
+        <p class="card-text">查理·芒格的思维模型、投资哲学与人生智慧系统性学习路径</p>
+        <a href="#" class="card-link">开始学习 →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Garden Section -->
+<section class="section" id="garden">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Life & Beyond</p>
+    <h2 class="section-title">我的花园</h2>
+    <p class="section-desc">在代码之外，培育真实世界的美好</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <span class="card-tag">garden</span>
+      <h3 class="card-title">花园日志</h3>
+      <p class="card-text">Portland 后院花园的四季记录，从播种到收获</p>
+      <a href="#" class="card-link">查看日志 →</a>
+    </div>
+    <div class="card reveal">
+      <span class="card-tag">milestone</span>
+      <h3 class="card-title">入籍之路</h3>
+      <p class="card-text">美国公民入籍申请进度追踪与准备记录</p>
+      <a href="#" class="card-link">查看进度 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:12px">Sky <span style="background:linear-gradient(135deg,#533afd,#f96bee);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Portal</span></div>
+      <p>Sky Portal的私人数字空间<br>整合知识、追踪成长、记录生活</p>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-col-title">研究</h4>
+      <a href="#ai">AI研究</a>
+      <a href="#intel">Intel新闻</a>
+      <a href="#investment">投资分析</a>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-col-title">成长</h4>
+      <a href="#coach">教练专区</a>
+      <a href="#">芒格课程</a>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-col-title">生活</h4>
+      <a href="#garden">我的花园</a>
+      <a href="#">入籍进度</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Sky Portal · Built by Sky Portal · <span id="footerDays"></span> days of exploration
+  </div>
+</footer>
+
+<script>
+// Day counter
+function updateDays() {
+  const start = new Date(2026, 1, 15);
+  const now = new Date();
+  const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  document.getElementById('dayCount').textContent = diff;
+  document.getElementById('footerDays').textContent = diff;
+}
+updateDays();
+
+// Nav scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Language toggle
+let isEn = false;
+function toggleLang() {
+  isEn = !isEn;
+  document.querySelector('.lang-btn').textContent = isEn ? '中/EN' : 'EN/中';
+}
+</script>
+</body>
+</html>

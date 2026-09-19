@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-08-03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+  --red: #f87171;
+  --green: #4ade80;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; padding: 20px 16px;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+.wrap { max-width:900px; margin:0 auto; }
+h1 { text-align:center; color:var(--accent); font-size:1.8em; margin-bottom:4px; }
+.subtitle { text-align:center; color:var(--text-dim); font-size:0.9em; margin-bottom:28px; }
+h2 { color:var(--accent); font-size:1.3em; margin:32px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+h3 { color:var(--accent); margin:16px 0 10px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
+.card h4 { color:#fff; font-size:1.05em; margin-bottom:8px; }
+.card p { margin-bottom:6px; font-size:0.92em; }
+.card .src { color:var(--text-dim); font-size:0.8em; margin-top:6px; }
+.stock-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:16px 0; }
+.stock-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 10px; text-align:center; }
+.stock-ticker { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); font-size:0.95em; }
+.stock-price { color:#fff; font-size:1.1em; font-weight:600; margin:6px 0 4px; }
+.stock-change { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:0.82em; padding:3px 10px; border-radius:5px; display:inline-block; }
+.up { background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.3); }
+.down { background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); }
+.poster-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.poster-card { border-radius:12px; padding:20px 24px; color:#fff; }
+.poster-icon { font-size:2em; margin-bottom:8px; }
+.poster-data { margin-top:10px; font-size:0.9em; opacity:0.9; line-height:1.6; }
+.footer { text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-dim); font-size:0.85em; }
+.footer a { color:var(--accent); text-decoration:none; }
+button#btn-zh,button#btn-en { padding:4px 12px; border-radius:4px; cursor:pointer; font-size:0.85em; border:1px solid #555; }
+button#btn-zh { background:#333; color:#fff; }
+button#btn-en { background:#222; color:#aaa; }
+.highlight { background:var(--accent-glow); border-left:3px solid var(--accent); padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; }
+.driver-list { padding-left:0; list-style:none; }
+.driver-list li { padding:8px 0; border-bottom:1px solid var(--border); }
+.driver-list li:last-child { border-bottom:none; }
+.driver-list .num { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); margin-right:8px; }
+@media(max-width:768px){ .stock-grid{grid-template-columns:repeat(2,1fr)} .poster-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#10b981">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股大涨 道指创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Rally, Dow Hits ATH</div>
+<div class="zh poster-data">• 道指创历史新高 🎉<br>• 标普 +1.48% / 纳指 +2.13%<br>• Amazon市值首破$3万亿</div>
+<div class="en poster-data" style="display:none">• Dow at all-time high 🎉<br>• S&P +1.48% / Nasdaq +2.13%<br>• Amazon first $3T market cap</div>
+</div>
+<div class="poster-card" style="background:#2563eb">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">油价暴跌5.1%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Crashes 5.1%</div>
+<div class="zh poster-data">• WTI收$80.34/桶<br>• 特朗普取消对伊朗打击<br>• 称"达成协议框架"</div>
+<div class="en poster-data" style="display:none">• WTI settles at $80.34/bbl<br>• Trump cancels Iran strike<br>• Says "deal framework agreed"</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体 & AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors & AI</div>
+<div class="zh poster-data">• Nvidia +2.93% 市值$5万亿<br>• AMD明日盘后财报<br>• Keybanc目标价$330</div>
+<div class="en poster-data" style="display:none">• NVDA +2.93%, $5T market cap<br>• AMD earnings after bell tomorrow<br>• Keybanc PT raised to $330</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#ef4444,#dc2626)">
+<div class="poster-icon">🌏</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">地缘政治</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Geopolitics</div>
+<div class="zh poster-data">• 美伊"协议框架"达成<br>• 特朗普引用1930关税法对付加拿大<br>• 美日罕见联合干预日元</div>
+<div class="en poster-data" style="display:none">• US-Iran "deal framework"<br>• Trump invokes 1930 tariff law vs Canada<br>• Rare US-Japan yen intervention</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-08-03 · <span class="zh">周一</span><span class="en" style="display:none">Monday</span> · Sky Portal · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘 — 三大指数全线大涨</span><span class="en" style="display:none">US Market Close — Major Indices Rally</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">道指 DJI</div>
+<div class="stock-price" style="color:var(--green)">创新高 🎉</div>
+<div class="stock-change up">ATH</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">标普500</div>
+<div class="stock-price">7,600.50</div>
+<div class="stock-change up">+1.48%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">纳斯达克</div>
+<div class="stock-price">25,913.90</div>
+<div class="stock-change up">+2.13%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">Russell 2000</div>
+<div class="stock-price">2,981.91</div>
+<div class="stock-change up">+1.73%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">VIX</div>
+<div class="stock-price">15.86</div>
+<div class="stock-change up">-0.81%</div>
+</div>
+</div>
+
+<div class="highlight">
+<span class="zh">💡 "Animal spirits are buoyant to begin the month" — 8月初市场情绪高涨，科技股在前期深度回调后估值变得更具吸引力。</span>
+<span class="en" style="display:none">💡 "Animal spirits are buoyant to begin the month" — Early August sentiment surges as tech valuations become more attractive after deep pullback.</span>
+</div>
+
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Market Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 油价暴跌5.1%，地缘风险降温</span><span class="en" style="display:none">1. Oil Crashes 5.1%, Geopolitical De-escalation</span></h4>
+<p><span class="zh">WTI原油收$80.34/桶，暴跌5.1%。特朗普取消了原定对伊朗的军事打击，称已与伊朗及其邻国达成"协议框架"。地缘紧张缓解为全市场注入信心，降低通胀压力。</span><span class="en" style="display:none">WTI crude plunged 5.1% to $80.34/bbl. Trump cancelled planned strikes on Iran, saying a "deal framework" was agreed upon with Iran and regional neighbors. De-escalation boosted market confidence and eased inflation concerns.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 科技巨头集体爆发，Amazon首破$3万亿</span><span class="en" style="display:none">2. Big Tech Surge, Amazon Breaks $3T</span></h4>
+<p><span class="zh">Amazon市值历史上首次突破$3万亿美元大关。Nvidia +2.93%收$206.64，市值$5万亿。Meta、Alphabet、Microsoft均大幅走高。科技板块前期深度调整后估值修复强劲。</span><span class="en" style="display:none">Amazon's market cap surpassed $3 trillion for the first time in history. NVDA +2.93% at $206.64, $5T market cap. Meta, Alphabet, Microsoft all rallied sharply. Strong valuation recovery after deep tech selloff.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 制造业/服务业数据积极</span><span class="en" style="display:none">3. Positive Manufacturing & Services Data</span></h4>
+<p><span class="zh">最新制造业和服务业PMI数据提振市场信心。Interactive Brokers高级经济学家指出，近期财报电话会议增强了资本回报前景的预期。</span><span class="en" style="display:none">Latest manufacturing and services PMI data boosted confidence. Interactive Brokers senior economist noted recent earnings calls enhanced capital return expectations.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体 & AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">NVDA</div>
+<div class="stock-price">$206.64</div>
+<div class="stock-change up">+2.93%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">META</div>
+<div class="stock-price"><span class="zh">大涨</span><span class="en" style="display:none">Surged</span></div>
+<div class="stock-change up">+</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">GOOGL</div>
+<div class="stock-price"><span class="zh">走高</span><span class="en" style="display:none">Higher</span></div>
+<div class="stock-change up">+</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">MSFT</div>
+<div class="stock-price"><span class="zh">走高</span><span class="en" style="display:none">Higher</span></div>
+<div class="stock-change up">+</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">AMD</div>
+<div class="stock-price"><span class="zh">明日财报</span><span class="en" style="display:none">Earnings tmrw</span></div>
+<div class="stock-change up"><span class="zh">重点关注</span><span class="en" style="display:none">Key Watch</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4><span class="zh">Nvidia领涨 · Keybanc上调目标价</span><span class="en" style="display:none">NVDA Leads · Keybanc Raises PT</span></h4>
+<p><span class="zh">Nvidia股价+2.93%收$206.64，市值$5万亿。Keybanc维持超配评级，上调目标价从$310至$330。分析师平均目标价$302.83，远高于当前价格。</span><span class="en" style="display:none">NVDA +2.93% at $206.64, $5T market cap. Keybanc maintains Overweight, raises PT from $310 to $330. Analyst consensus $302.83, well above current price.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">AMD明日盘后财报 — 半导体风向标</span><span class="en" style="display:none">AMD Earnings After Bell Tomorrow — Semi Bellwether</span></h4>
+<p><span class="zh">AMD将于周二盘后发布财报，是本周半导体板块最重要的催化剂。投资者将关注AI芯片（MI300系列）出货量以及对下半年需求展望。</span><span class="en" style="display:none">AMD reports after the bell Tuesday — the most important semiconductor catalyst this week. Investors will focus on AI chip (MI300 series) shipments and H2 demand outlook.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 🇭🇰 港股</span><span class="en" style="display:none">China A-Shares & HK</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">上证综指</div>
+<div class="stock-price">3,815.59</div>
+<div class="stock-change up">+0.16%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">深证成指</div>
+<div class="stock-price">13,448.29</div>
+<div class="stock-change up">0.00%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">恒生指数</div>
+<div class="stock-price">25,910.72</div>
+<div class="stock-change down">-0.38%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">恒生科技</div>
+<div class="stock-price"><span class="zh">分化</span><span class="en" style="display:none">Mixed</span></div>
+<div class="stock-change down"><span class="zh">小幅走低</span><span class="en" style="display:none">Slightly lower</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">CSI 300</div>
+<div class="stock-price"><span class="zh">+0.5%</span><span class="en" style="display:none">+0.5%</span></div>
+<div class="stock-change up">+0.5%</div>
+</div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股平稳，港股小幅回调</span><span class="en" style="display:none">A-Shares Flat, HK Slight Pullback</span></h4>
+<p><span class="zh">上证综指微涨0.16%报3815.59，深成指持平。恒指小幅下跌0.38%。高盛建议关注港股互联网/AI软件公司，认为外卖补贴战降温叠加AI变现能力提升，基本面正在改善。</span><span class="en" style="display:none">SSE Composite edged up 0.16% to 3815.59, Shenzhen flat. HSI slipped 0.38%. Goldman recommends HK internet/AI software names, noting improving fundamentals as food-delivery subsidy wars ease and AI monetization picks up.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC / Yahoo Finance</p>
+</div>
+
+<h2>🌏 <span class="zh">全球市场</span><span class="en" style="display:none">Global Markets</span></h2>
+
+<div class="card">
+<h4><span class="zh">美日罕见联合干预日元汇率</span><span class="en" style="display:none">Rare US-Japan Joint Yen Intervention</span></h4>
+<p><span class="zh">日本财务省确认周五与美国财政部进行了协调性日元买入操作，这是两国盟友之间罕见的联合行动。日元走强至157.39/美元。分析师认为华盛顿的参与反映了对日本恢复汇率稳定承诺的信心增强。</span><span class="en" style="display:none">Japan's Finance Ministry confirmed Friday's coordinated yen-buying operation with the US Treasury — a rare joint move by the two allies. Yen strengthened to 157.39/dollar. Analysts say US participation reflects growing confidence in Japan's commitment to restoring FX stability.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">特朗普引用1930年关税法对付加拿大</span><span class="en" style="display:none">Trump Invokes 1930 Tariff Law Against Canada</span></h4>
+<p><span class="zh">特朗普引用了1930年《斯姆特-霍利关税法》中一项前所未有的条款，对加拿大加征关税。此前从未有总统使用过该条款。同时，习近平警告世界正在"崩溃瓦解"，称美国封锁"危险"。</span><span class="en" style="display:none">Trump invoked an unprecedented provision of the 1930 Smoot-Hawley tariff law — no president has ever used it before — to impose tariffs on Canada. Meanwhile, Xi Jinping warned the world is "crumbling into disarray," calling US blockade "dangerous."</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: Yahoo Finance / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">亚太周二早盘：韩国领涨</span><span class="en" style="display:none">Asia-Pacific Tuesday Morning: Korea Leads</span></h4>
+<p><span class="zh">亚太市场周二早盘走高。韩国KOSPI +1.46%，KOSDAQ +3%。日经225 +0.7%。澳大利亚S&P/ASX 200 +0.15%。</span><span class="en" style="display:none">Asia-Pacific markets opened higher on Tuesday. KOSPI +1.46%, KOSDAQ +3%. Nikkei 225 +0.7%. Australia S&P/ASX 200 +0.15%.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC</p>
+</div>
+
+<h2>🔮 <span class="zh">走向预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="highlight">
+<p><span class="zh"><strong>短期偏乐观</strong>：油价回落降低通胀压力，地缘风险降温提振情绪，科技股强势反弹带动市场。三大指数期货周二盘后小幅走高。<br><br><strong>风险因素</strong>：中东局势仍存不确定性（伊朗否认直接谈判），VIX 15.86偏低暗示市场可能对风险定价不足。特朗普新关税政策（加拿大）可能引发贸易摩擦升级。<br><br><strong>关注重点</strong>：AMD盘后财报是本周半导体最大催化剂。若超预期，半导体板块有望继续领涨。关注工厂订单和贸易数据对经济前景的影响。</span></p>
+<p class="en" style="display:none"><strong>Short-term bullish</strong>: Oil decline eases inflation pressure, de-escalation boosts sentiment, tech rally drives market. Futures modestly higher Tuesday evening.<br><br><strong>Risks</strong>: Middle East uncertainty persists (Iran denies direct talks). Low VIX at 15.86 suggests potential underpricing of risk. New Trump tariffs on Canada could escalate trade friction.<br><br><strong>Key watch</strong>: AMD after-hours earnings is the biggest semiconductor catalyst this week. A beat could extend the chip rally. Watch factory orders and trade data for economic outlook signals.</span></p>
+</div>
+
+<div class="footer">
+<span class="zh">由 Sky ☁️ 自动生成 · 数据来源：CNBC, Yahoo Finance · </span><span class="en" style="display:none">Auto-generated by Sky ☁️ · Sources: CNBC, Yahoo Finance · </span>
+<a href="index.html"><span class="zh">返回行情首页</span><span class="en" style="display:none">Back to Market Index</span></a> · <a href="../index.html"><span class="zh">Sky Portal</span><span class="en" style="display:none">Sky Portal</span></a>
+</div>
+
+</div>
+<script>
+function switchLang(lang){
+  document.body.className = lang==='zh' ? 'lang-zh' : 'lang-en';
+  document.getElementById('btn-zh').style.background = lang==='zh' ? '#333' : '#222';
+  document.getElementById('btn-zh').style.color = lang==='zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang==='en' ? '#333' : '#222';
+  document.getElementById('btn-en').style.color = lang==='en' ? '#fff' : '#aaa';
+  localStorage.setItem('lang', lang);
+}
+(function(){ var l=localStorage.getItem('lang'); if(l==='en') switchLang('en'); })();
+</script>
+</body>
+</html>

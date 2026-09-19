@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intel 2026 新闻速览 | Intel 2026 News Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0f1a; --paper: #f0ede6; --accent: #0071c5; --accent2: #00c7fd;
+    --warn: #e5a200; --red: #d94040; --green: #2ea44f; --muted: #6b7280;
+    --border: #d1cdc4; --card: #faf8f4;
+    --gradient: linear-gradient(135deg, #0071c5 0%, #00c7fd 50%, #0071c5 100%);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans SC', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  /* === LANGUAGE === */
+  body.lang-zh .en { display:none !important; }
+  body.lang-en .zh { display:none !important; }
+
+  .lang-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display: flex; background: rgba(10,15,26,0.85); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; overflow: hidden;
+  }
+  .lang-toggle button {
+    padding: 6px 14px; border: none; background: transparent;
+    color: rgba(255,255,255,0.5); font-size: 0.78rem; cursor: pointer;
+    transition: all 0.25s; font-family: inherit;
+  }
+  .lang-toggle button.active { background: var(--accent); color: #fff; }
+
+  /* === BACK LINK === */
+  .back-link {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; background: rgba(10,15,26,0.85); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 100px;
+    color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem;
+    transition: all 0.3s;
+  }
+  .back-link:hover { background: rgba(0,113,197,0.9); color: #fff; }
+
+  /* === HERO === */
+  .hero { position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--ink); }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,113,197,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(0,199,253,0.15) 0%, transparent 50%),
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.02) 59px, rgba(255,255,255,0.02) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.02) 59px, rgba(255,255,255,0.02) 60px);
+    animation: gridPulse 8s ease-in-out infinite alternate;
+  }
+  @keyframes gridPulse { 0%{opacity:.6} 100%{opacity:1} }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 3rem 2rem; max-width: 900px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,113,197,0.2); border: 1px solid rgba(0,199,253,0.3);
+    padding: 6px 18px; border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    color: var(--accent2); letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 2rem; animation: fadeSlideUp 0.8s ease-out;
+  }
+  .hero-badge .dot { width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(2.5rem, 6vw, 4.5rem); color: #fff; line-height: 1.15;
+    margin-bottom: 1.2rem; animation: fadeSlideUp 1s ease-out 0.15s both;
+  }
+  .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { color: rgba(255,255,255,0.55); font-size: 1.05rem; font-weight: 300; max-width: 600px; margin: 0 auto; animation: fadeSlideUp 1s ease-out 0.3s both; }
+  @keyframes fadeSlideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* === TICKER === */
+  .ticker-wrap { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); overflow: hidden; padding: 12px 0; }
+  .ticker { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; gap: 3rem; }
+  .ticker span { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+  .ticker .up { color: var(--green); }
+  .ticker .tag { color: var(--accent2); }
+  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* === MAIN === */
+  .main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+
+  .section-head { display: flex; align-items: center; gap: 1rem; margin: 3.5rem 0 1.8rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-head:first-child { margin-top: 0; }
+  .section-num { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); background: rgba(0,113,197,0.08); padding: 4px 10px; border-radius: 4px; letter-spacing: 0.1em; }
+  .section-head h2 { font-family: 'Noto Serif SC', serif; font-weight: 700; font-size: 1.6rem; flex: 1; }
+
+  .news-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.6rem 1.8rem; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .card::before { content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gradient);opacity:0;transition:opacity 0.3s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); border-color: var(--accent); }
+  .card:hover::before { opacity: 1; }
+
+  .card-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+  .card-date { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  .card-tag { font-size: 0.68rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; letter-spacing: 0.04em; }
+  .tag-foundry { background: rgba(0,113,197,0.1); color: var(--accent); }
+  .tag-product { background: rgba(46,164,79,0.1); color: var(--green); }
+  .tag-finance { background: rgba(229,162,0,0.1); color: #b88600; }
+  .tag-leadership { background: rgba(217,64,64,0.1); color: var(--red); }
+  .tag-strategy { background: rgba(139,92,246,0.1); color: #7c3aed; }
+  .tag-ai { background: rgba(0,199,253,0.1); color: #0091b5; }
+
+  .card h3 { font-family: 'Noto Serif SC', serif; font-weight: 700; font-size: 1.12rem; margin-bottom: 0.5rem; line-height: 1.5; }
+  .card p { color: #4a4a4a; font-size: 0.92rem; line-height: 1.75; }
+
+  .card-highlight { background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%); color: #fff; border-color: rgba(0,113,197,0.3); }
+  .card-highlight::before { opacity: 1; }
+  .card-highlight h3 { color: #fff; }
+  .card-highlight p { color: rgba(255,255,255,0.7); }
+  .card-highlight .card-date { color: rgba(255,255,255,0.4); }
+  .card-highlight:hover { box-shadow: 0 8px 40px rgba(0,113,197,0.2); }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; text-align: center; transition: transform 0.3s; }
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+  .timeline { position: relative; padding-left: 2rem; margin: 1.5rem 0; }
+  .timeline::before { content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2));border-radius:1px; }
+  .tl-item { position: relative; padding: 0 0 1.5rem 1.2rem; }
+  .tl-item::before { content:'';position:absolute;left:-2rem;top:6px;width:12px;height:12px;background:var(--accent);border:3px solid var(--paper);border-radius:50%;z-index:1; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent); margin-bottom: 2px; }
+  .tl-text { font-size: 0.9rem; color: #4a4a4a; line-height: 1.6; }
+  .tl-text strong { color: var(--ink); }
+
+  /* Deep Analysis Section */
+  .analysis-card { background: linear-gradient(135deg, #f8f4e8 0%, #f0ede6 100%); border: 1px solid var(--border); border-radius: 10px; padding: 1.8rem 2rem; margin-bottom: 1.2rem; position: relative; overflow: hidden; }
+  .analysis-card::before { content:'📚';position:absolute;top:-10px;right:-10px;font-size:5rem;opacity:0.06; }
+  .analysis-card h3 { font-family: 'Noto Serif SC', serif; font-weight: 700; font-size: 1.12rem; margin-bottom: 0.6rem; color: var(--ink); }
+  .analysis-card .source { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); margin-bottom: 0.6rem; }
+  .analysis-card p { color: #4a4a4a; font-size: 0.9rem; line-height: 1.75; }
+
+  /* Investment Analysis */
+  .invest-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.6rem 1.8rem; margin-bottom: 1rem; border-left: 4px solid var(--accent); }
+  .invest-card h3 { font-family: 'Noto Serif SC', serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .invest-card .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+  .invest-card .metric-row:last-child { border-bottom: none; }
+  .invest-card .metric-label { font-size: 0.85rem; color: var(--muted); }
+  .invest-card .metric-val { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; }
+  .invest-card .pos { color: var(--green); }
+  .invest-card .neg { color: var(--red); }
+  .invest-card .warn { color: #b88600; }
+
+  footer { text-align: center; padding: 2.5rem 1rem; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .hero { min-height: 50vh; }
+    .main { padding: 2rem 1rem 3rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .section-head h2 { font-size: 1.3rem; }
+  }
+
+  .reveal { opacity:0;transform:translateY(20px);animation:fadeSlideUp 0.6s ease-out forwards; }
+  .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}.d5{animation-delay:.25s}
+</style>
+</head>
+<body class="lang-zh">
+
+<a class="back-link" href="/sky-portal/">☁️ Sky Portal</a>
+
+<div class="lang-toggle">
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span>Q2 UPDATE · 2026.06.28</div>
+    <h1>Intel <span>2026</span> <span class="zh">新闻速览</span><span class="en">News Briefing</span></h1>
+    <p class="hero-sub">
+      <span class="zh">代工复兴元年 · Apple历史性合作 · 股价突破$140创新高 — 一文纵览Intel全年关键转折点</span>
+      <span class="en">Foundry Revival Year · Historic Apple Deal · Stock Hits $140 ATH — Intel's Pivotal Moment in One Page</span>
+    </p>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>INTC <span class="up">$128.32 ▲450% YTD</span></span>
+    <span class="tag">Apple×Intel</span>
+    <span><span class="zh">Trump宣布Apple-Intel芯片合作</span><span class="en">Trump Announces Apple-Intel Chip Deal</span></span>
+    <span class="tag">Google TPU</span>
+    <span><span class="zh">Google订购300万颗TPU</span><span class="en">Google Orders 3M TPUs</span></span>
+    <span class="tag">18A-P</span>
+    <span><span class="zh">18A-P进入风险量产</span><span class="en">18A-P Enters Risk Production</span></span>
+    <span class="tag">$645B</span>
+    <span><span class="zh">市值突破6450亿 创历史新高</span><span class="en">Market Cap Hits $645B ATH</span></span>
+    <span class="tag">Q1 Beat</span>
+    <span><span class="zh">Q1 EPS $0.29 远超预期</span><span class="en">Q1 EPS $0.29 Massive Beat</span></span>
+    <span>INTC <span class="up">$128.32 ▲450% YTD</span></span>
+    <span class="tag">Apple×Intel</span>
+    <span><span class="zh">Trump宣布Apple-Intel芯片合作</span><span class="en">Trump Announces Apple-Intel Chip Deal</span></span>
+    <span class="tag">Google TPU</span>
+    <span><span class="zh">Google订购300万颗TPU</span><span class="en">Google Orders 3M TPUs</span></span>
+    <span class="tag">18A-P</span>
+    <span><span class="zh">18A-P进入风险量产</span><span class="en">18A-P Enters Risk Production</span></span>
+    <span class="tag">$645B</span>
+    <span><span class="zh">市值突破6450亿 创历史新高</span><span class="en">Market Cap Hits $645B ATH</span></span>
+    <span class="tag">Q1 Beat</span>
+    <span><span class="zh">Q1 EPS $0.29 远超预期</span><span class="en">Q1 EPS $0.29 Massive Beat</span></span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- KEY METRICS -->
+  <div class="stats">
+    <div class="stat-card reveal d1"><div class="stat-val">$128.32</div><div class="stat-label"><span class="zh">股价 (6/27) ▲450% YTD</span><span class="en">Price (6/27) ▲450% YTD</span></div></div>
+    <div class="stat-card reveal d2"><div class="stat-val">~$645B</div><div class="stat-label"><span class="zh">市值 历史最高</span><span class="en">Market Cap All-Time High</span></div></div>
+    <div class="stat-card reveal d3"><div class="stat-val">$13.6B</div><div class="stat-label"><span class="zh">Q1营收 (+7% YoY)</span><span class="en">Q1 Revenue (+7% YoY)</span></div></div>
+    <div class="stat-card reveal d4"><div class="stat-val">$0.29</div><div class="stat-label"><span class="zh">Q1 EPS (预期$0.01)</span><span class="en">Q1 EPS (Est. $0.01)</span></div></div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section-head reveal d1">
+    <span class="section-num">01</span>
+    <h2><span class="zh">制造与代工 · 18A/18A-P量产攻坚</span><span class="en">Manufacturing & Foundry · 18A/18A-P Ramp</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="card card-highlight reveal d2">
+      <div class="card-meta">
+        <span class="card-date">2025.10 — <span class="zh">持续至今</span><span class="en">ongoing</span></span>
+        <span class="card-tag tag-foundry">Foundry</span>
+      </div>
+      <h3><span class="zh">18A正式进入量产阶段，Fab 52完成首批晶圆制造</span><span class="en">18A Enters High-Volume Manufacturing; Fab 52 Completes First Wafer Lot</span></h3>
+      <p><span class="zh">Intel 18A于2025年10月进入高量产(HVM)，亚利桑那州Fab 52已完成首批晶圆"run the lot"。该节点集成RibbonFET全环栅晶体管与业界首创PowerVia背面供电技术，较Intel 3提升约15%性能/瓦、30%芯片密度。目前良率每月约提升7%，目标年底前达到商业化可行水平。</span><span class="en">Intel 18A entered HVM in October 2025. Fab 52 in Arizona has completed its first "run the lot." The node integrates RibbonFET GAA transistors and industry-first PowerVia backside power delivery, offering ~15% perf/watt and 30% density improvement over Intel 3. Yields are improving ~7% monthly, targeting commercially viable levels by year-end.</span></p>
+    </div>
+    <div class="card reveal d3">
+      <div class="card-meta">
+        <span class="card-date">2026.04.01</span>
+        <span class="card-tag tag-finance"><span class="zh">财务</span><span class="en">Finance</span></span>
+      </div>
+      <h3><span class="zh">$142亿回购爱尔兰Fab 34合资企业49%股权</span><span class="en">$14.2B Buyback of 49% Stake in Ireland Fab 34 JV</span></h3>
+      <p><span class="zh">Intel与Apollo达成协议，以$142亿回购2024年出让的爱尔兰Fab 34的49%股权。资金来源包括现金储备及约$65亿新债。管理层表示此举反映"CPU在AI时代日益增长的战略重要性"，交易预计在2027年后对EPS产生增益效应。</span><span class="en">Intel and Apollo agreed to a $14.2B buyback of the 49% Fab 34 stake sold in 2024. Funded by cash on hand and ~$6.5B in new debt. Management cited the "growing strategic importance of CPUs in the age of AI." Expected to be EPS-accretive from 2027 onward.</span></p>
+    </div>
+    <div class="card card-highlight reveal d4">
+      <div class="card-meta">
+        <span class="card-date">2026.06.16</span>
+        <span class="card-tag tag-foundry">Foundry</span>
+      </div>
+      <h3><span class="zh">18A-P节点正式进入风险量产，向Apple代工交易再迈进一步</span><span class="en">18A-P Node Enters Risk Production, Moving Closer to Apple Foundry Deal</span></h3>
+      <p><span class="zh">Intel于6月16日宣布18A-P（18A性能增强版）进入风险量产(risk production)。18A-P在原18A基础上提供更高性能和改进的热特性，且与18A设计规则完全兼容，降低了客户迁移门槛。这一进展是Intel争取Apple代工合同的关键里程碑——Apple的M7 MacBook芯片有望采用18A-P制程。CEO Lip-Bu Tan对2026下半年获得多个代工客户承诺表示乐观。</span><span class="en">On June 16, Intel announced that 18A-P (performance-enhanced 18A) has entered risk production. 18A-P offers higher performance and improved thermal characteristics while maintaining full design rule compatibility with 18A, easing customer migration. This milestone is critical for Intel's Apple foundry pursuit — Apple's M7 MacBook chips are expected on 18A-P. CEO Lip-Bu Tan expressed optimism about securing multiple foundry commitments in H2 2026.</span></p>
+    </div>
+    <div class="card reveal d5">
+      <div class="card-meta">
+        <span class="card-date"><span class="zh">2026 H2–2027 H1 预期</span><span class="en">H2 2026 – H1 2027 Expected</span></span>
+        <span class="card-tag tag-foundry">Foundry</span>
+      </div>
+      <h3><span class="zh">14A节点：率先引入High-NA EUV，14A投资将基于客户确认承诺</span><span class="en">14A Node: First to Deploy High-NA EUV; Capex Tied to Customer Commitments</span></h3>
+      <p><span class="zh">14A是Intel下一代节点，较18A提升15-20%性能/瓦、25-35%功耗降低、1.3x密度。Intel是全球首家部署High-NA EUV光刻的芯片制造商。CEO Lip-Bu Tan明确表示："14A的每一笔投资都将基于确认的客户承诺，不再开空头支票。"早期PDK已分发给领先客户，预计2026下半年至2027上半年两个潜在外部客户将做出绑定承诺。</span><span class="en">14A is Intel's next-gen node: 15-20% perf/watt uplift, 25-35% power reduction, 1.3x density vs 18A. Intel is the first chipmaker to deploy High-NA EUV lithography. CEO Tan stated clearly: "Every investment in 14A will be based on confirmed customer commitments — no more blank checks." Early PDKs distributed to lead customers; two prospective external customers expected to commit in H2 2026 – H1 2027.</span></p>
+    </div>
+    <div class="card reveal d2">
+      <div class="card-meta">
+        <span class="card-date"><span class="zh">进行中</span><span class="en">Ongoing</span></span>
+        <span class="card-tag tag-strategy"><span class="zh">战略</span><span class="en">Strategy</span></span>
+      </div>
+      <h3><span class="zh">俄亥俄工厂地下工程完成，全球产能持续扩张</span><span class="en">Ohio Fab Underground Work Complete; Global Capacity Expanding</span></h3>
+      <p><span class="zh">Intel的$200亿俄亥俄项目已完成主要地下施工，不再预期额外延迟。马来西亚先进封装工厂预计2026年投入运营。同时CPU供应紧张推动价格上涨10%-15%，Intel和AMD均已通知客户涨价计划。</span><span class="en">Intel's $20B Ohio project has completed major underground work with no further delays expected. Malaysia advanced packaging facility on track for 2026. Meanwhile, tight CPU supply is driving 10-15% price hikes; both Intel and AMD have notified customers of upcoming increases.</span></p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-head reveal d1">
+    <span class="section-num">02</span>
+    <h2><span class="zh">产品线 · AI PC与数据中心双线推进</span><span class="en">Products · AI PC & Data Center Dual Push</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="card reveal d2">
+      <div class="card-meta">
+        <span class="card-date">2026.01 CES</span>
+        <span class="card-tag tag-product"><span class="zh">产品</span><span class="en">Product</span></span>
+      </div>
+      <h3><span class="zh">Core Ultra Series 3 (Panther Lake) — 首款18A消费级处理器</span><span class="en">Core Ultra Series 3 (Panther Lake) — First 18A Consumer Processor</span></h3>
+      <p><span class="zh">CES 2026上正式发布，这是首个基于Intel 18A制程的AI PC平台。新增Core Ultra X9/X7高端系列，搭载最强集成Arc显卡。支持200+笔记本设计，1月27日起全球发售。新增X9/X7产品线专为游戏、创作和移动办公场景打造。</span><span class="en">Launched at CES 2026 as the first AI PC platform on Intel 18A. New Core Ultra X9/X7 tier with the most powerful integrated Arc graphics. Over 200 laptop designs, available globally from Jan 27. The X9/X7 line targets gaming, creation, and mobile productivity.</span></p>
+    </div>
+    <div class="card card-highlight reveal d3">
+      <div class="card-meta">
+        <span class="card-date">2026.06.01 Computex</span>
+        <span class="card-tag tag-product"><span class="zh">产品·里程碑</span><span class="en">Product·Milestone</span></span>
+      </div>
+      <h3><span class="zh">Xeon 6+ (Clearwater Forest) 正式发布 — 首款18A服务器处理器在Computex亮相</span><span class="en">Xeon 6+ (Clearwater Forest) Officially Launched at Computex — First 18A Server Processor</span></h3>
+      <p><span class="zh">在Computex 2026上，Intel正式发布Xeon 6+ "Clearwater Forest"，这是首款基于18A制程的服务器处理器。最多288个Darkmont E核，IPC较上代提升17%，L3缓存高达576MB。专为超大规模数据中心和云服务商设计。同时，Intel还预告了下一代Diamond Rapids Xeon 7（最多192 P核，放弃SMT，2027年发布），展示了完整的服务器CPU路线图。</span><span class="en">At Computex 2026, Intel officially launched Xeon 6+ "Clearwater Forest" — the first server processor on 18A. Up to 288 Darkmont E-cores, 17% IPC uplift, and up to 576MB L3 cache. Designed for hyperscale data centers and cloud providers. Intel also previewed next-gen Diamond Rapids Xeon 7 (up to 192 P-cores, SMT dropped, 2027 launch), showcasing a complete server CPU roadmap.</span></p>
+    </div>
+    <div class="card reveal d4">
+      <div class="card-meta">
+        <span class="card-date"><span class="zh">2026 H2 预期</span><span class="en">2026 H2 Expected</span></span>
+        <span class="card-tag tag-product"><span class="zh">产品</span><span class="en">Product</span></span>
+      </div>
+      <h3><span class="zh">Nova Lake桌面CPU — 大部分产能仍依赖TSMC N2</span><span class="en">Nova Lake Desktop CPU — 90%+ Volume on TSMC N2</span></h3>
+      <p><span class="zh">Nova Lake将接替问题较多的Arrow Lake桌面系列。但值得注意的是，超过90%的Nova Lake CPU将由TSMC N2节点制造。CFO Zinsner坦言"我们会永远在TSMC上放产品"，这是务实选择，但也凸显Intel自身代工产能尚未完全满足内部需求。</span><span class="en">Nova Lake will succeed the troubled Arrow Lake desktop line. Notably, 90%+ of Nova Lake CPUs will be manufactured on TSMC's N2 node. CFO Zinsner acknowledged "we will be putting products on TSMC forever" — a pragmatic choice that highlights Intel Foundry's current capacity limitations.</span></p>
+    </div>
+    <div class="card reveal d5">
+      <div class="card-meta">
+        <span class="card-date"><span class="zh">2026 H2 样片</span><span class="en">2026 H2 Sampling</span></span>
+        <span class="card-tag tag-ai">AI</span>
+      </div>
+      <h3><span class="zh">AI加速器路线调整：放弃Falcon Shores，转向推理市场</span><span class="en">AI Accelerator Pivot: Dropping Falcon Shores, Targeting Inference</span></h3>
+      <p><span class="zh">Intel取消了Falcon Shores的商业发售计划，仅供内部使用。转而推出Crescent Island (160GB LPDDR5X，面向空气冷却企业服务器推理场景)，并规划搭载HBM4和硅光互连的Jaguar Shores。策略从与NVIDIA正面竞争大规模训练，转向以能效和成本取胜的推理细分市场。</span><span class="en">Intel cancelled Falcon Shores for commercial sale (internal only). Pivoting to Crescent Island (160GB LPDDR5X, air-cooled enterprise inference) and planning Jaguar Shores with HBM4 and silicon photonics. Strategy shifts from competing with NVIDIA on large-scale training to winning on power efficiency and cost in the inference segment.</span></p>
+    </div>
+    <div class="card reveal d2">
+      <div class="card-meta">
+        <span class="card-date">2026.04.16</span>
+        <span class="card-tag tag-product"><span class="zh">产品</span><span class="en">Product</span></span>
+      </div>
+      <h3><span class="zh">Core Series 3 "Wildcat Lake" 移动处理器发布，主攻主流笔记本市场</span><span class="en">Core Series 3 "Wildcat Lake" Mobile Processors Launch, Targeting Mainstream Laptops</span></h3>
+      <p><span class="zh">Intel发布6款Wildcat Lake移动处理器，面向"性价比买家"。单线程性能提升最高47%，全天电池续航，起售价极具竞争力。Acer、HP、Honor、MSI等品牌已开始出货相关笔记本。这是Intel 18A技术向主流市场渗透的关键一步。</span><span class="en">Intel launched 6 Wildcat Lake mobile processors targeting "value-oriented buyers." Up to 47% faster single-thread performance, all-day battery life, and aggressive pricing. Laptops from Acer, HP, Honor, MSI now available. A critical step in bringing Intel 18A technology to the mainstream.</span></p>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-head reveal d1">
+    <span class="section-num">03</span>
+    <h2><span class="zh">领导层与公司治理</span><span class="en">Leadership & Governance</span></h2>
+  </div>
+  <div class="timeline reveal d2">
+    <div class="tl-item">
+      <div class="tl-date">2026.06.18</div>
+      <div class="tl-text"><span class="zh"><strong>Seok-Hee Lee</strong> 被任命为Intel Foundry EVP，负责先进封装、系统集成与后端制造。此前曾任SK hynix CEO和SK On总裁。同日，Navid Shahriari宣布退休。此举直接向CEO Lip-Bu Tan汇报，加速代工制造能力建设。</span><span class="en"><strong>Seok-Hee Lee</strong> appointed EVP of Intel Foundry, leading advanced packaging, system integration, and back-end manufacturing. Previously CEO of SK hynix and President of SK On. Reporting directly to CEO Lip-Bu Tan to accelerate foundry manufacturing capabilities. Navid Shahriari announced retirement the same day.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2026.06.18</div>
+      <div class="tl-text"><span class="zh">Trump总统正式宣布<strong>Apple与Intel</strong>在美国芯片设计和制造方面的合作伙伴关系，称其为"历史性协议"。Intel股价当日跳涨约9%。</span><span class="en">President Trump officially announced the <strong>Apple-Intel</strong> partnership on U.S. chip design and manufacturing, calling it a "historic deal." INTC jumped ~9% on the day.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2026.06.03</div>
+      <div class="tl-text"><span class="zh">Fortune报道CEO <strong>Lip-Bu Tan</strong>在上任13个月内将管理层级砍半，获得NVIDIA $50亿战略投资和美国政府约10%股权注资，开始扭转Intel困境。</span><span class="en">Fortune reported CEO <strong>Lip-Bu Tan</strong> cut management layers in half within 13 months, secured NVIDIA's $5B strategic investment and ~10% government equity stake, beginning to turn Intel around.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2026.04.02</div>
+      <div class="tl-text"><span class="zh"><strong>Aparna Bawa</strong> 被任命为EVP、首席法务与人力官，来自Zoom COO岗位，5月到任。</span><span class="en"><strong>Aparna Bawa</strong> appointed EVP & Chief Legal & People Officer, joining from Zoom COO role in May.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2026.03.03</div>
+      <div class="tl-text"><span class="zh">董事会主席 <strong>Frank D. Yeary</strong> 退休；<strong>Dr. Craig H. Barratt</strong> 当选新主席。</span><span class="en">Board Chair <strong>Frank D. Yeary</strong> retiring; <strong>Dr. Craig H. Barratt</strong> elected as new Chair.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2026.01</div>
+      <div class="tl-text"><span class="zh">CEO <strong>Lip-Bu Tan</strong> 在白宫会议后，Intel被授予"国家冠军(national champion)"半导体制造商称号。</span><span class="en">After a White House meeting, CEO <strong>Lip-Bu Tan</strong> secured Intel's designation as a "national champion" in semiconductor manufacturing.</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section-head reveal d1">
+    <span class="section-num">04</span>
+    <h2><span class="zh">股价与财务表现</span><span class="en">Stock Price & Financials</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="card card-highlight reveal d2">
+      <div class="card-meta">
+        <span class="card-date">2026.04.23</span>
+        <span class="card-tag tag-finance"><span class="zh">财报·里程碑</span><span class="en">Earnings·Milestone</span></span>
+      </div>
+      <h3><span class="zh">Q1 2026财报大超预期：EPS $0.29 vs 预期$0.01，营收$136亿，股价单日暴涨26%</span><span class="en">Q1 2026 Massive Earnings Beat: EPS $0.29 vs $0.01 Est, Revenue $13.6B, Stock Surges 26%</span></h3>
+      <p><span class="zh">Intel 4月23日盘后发布Q1财报，全面碾压华尔街预期：营收$136亿（+7% YoY），大幅超出$123.6亿预期；非GAAP EPS $0.29，而分析师仅预期$0.01（差异超28倍）；非GAAP毛利率41%。数据中心营收飙升22%，AI相关需求成为核心驱动力。Q2指引同样超预期：预计营收$138-$148亿，EPS $0.08。财报发布后股价盘后暴涨20-26%，突破互联网泡沫时代高点。CEO Tan称"我们交出了强劲的Q1成绩单"。</span><span class="en">Intel reported Q1 after close on April 23, crushing estimates: Revenue $13.6B (+7% YoY) vs $12.36B expected; Non-GAAP EPS $0.29 vs $0.01 consensus — a 28x surprise; Non-GAAP gross margin 41%. Data center revenue soared 22%, with AI demand as the core driver. Q2 guidance also beat: Revenue $13.8-$14.8B, EPS $0.08. Stock surged 20-26% after hours, surpassing dot-com era highs. CEO Tan said "we delivered robust Q1 results."</span></p>
+    </div>
+    <div class="card card-highlight reveal d3">
+      <div class="card-meta">
+        <span class="card-date"><span class="zh">2026年4-6月</span><span class="en">Apr-Jun 2026</span></span>
+        <span class="card-tag tag-finance"><span class="zh">股价</span><span class="en">Stock</span></span>
+      </div>
+      <h3><span class="zh">INTC 2026年上半年史诗级暴涨：从$43飙至$141，年内涨幅超450%，市值突破$6450亿</span><span class="en">INTC Epic H1 2026 Rally: From $43 to $141, Up 450%+ YTD, Market Cap Tops $645B</span></h3>
+      <p><span class="zh">Intel股价在2026年上半年演绎了半导体历史上最壮观的复苏行情之一。从年初的~$43一路飙升至6月22日的历史收盘最高$140.94（盘中最高$141.45），市值从约$2000亿膨胀至$6450亿。关键催化节点：4/7加入Terafab项目(+12%)→4/23 Q1财报暴击(+26%)→5/8 Apple代工消息(+14%)→6/8 Google 300万TPU订单(+11%)→6/16 18A-P量产(+7%)→6/18 Trump-Apple官方宣布(+9%)。Goldman Sachs给出$150目标价，Deutsche Bank将目标价从$63上调至$100。但前瞻PE约147x，估值已极度乐观。</span><span class="en">Intel staged one of the most spectacular semiconductor recoveries in history during H1 2026. From ~$43 at year start to all-time closing high $140.94 on June 22 (intraday $141.45), market cap swelled from ~$200B to $645B. Key catalysts: 4/7 Terafab project (+12%) → 4/23 Q1 earnings crush (+26%) → 5/8 Apple foundry news (+14%) → 6/8 Google 3M TPU order (+11%) → 6/16 18A-P production (+7%) → 6/18 Trump-Apple official (+9%). Goldman Sachs set $150 PT; Deutsche Bank raised PT from $63 to $100. But at ~147x forward PE, valuation is extremely optimistic.</span></p>
+    </div>
+    <div class="card reveal d4">
+      <div class="card-meta">
+        <span class="card-date">2026.04.07–04.13</span>
+        <span class="card-tag tag-finance"><span class="zh">股价</span><span class="en">Stock</span></span>
+      </div>
+      <h3><span class="zh">INTC Q1财报前9连涨，单周暴涨51%，加入Terafab与Google合作推动</span><span class="en">INTC 9-Day Win Streak Pre-Earnings, +51% in a Week on Terafab & Google Deals</span></h3>
+      <p><span class="zh">Intel股价从4月7日的$51.90一路飙升至4月13日的$65.18，9个交易日累计涨幅58%。由加入Elon Musk的Terafab AI芯片项目、与Google扩大AI基础设施合作、以及地缘政治推动本土代工需求三重利好驱动。</span><span class="en">INTC surged from $51.90 on April 7 to $65.18 on April 13, posting 9-day winning streak with 58% cumulative gains. Driven by joining Terafab, expanding Google partnership, and geopolitical tailwinds for domestic foundry.</span></p>
+    </div>
+    <div class="card reveal d5">
+      <div class="card-meta">
+        <span class="card-date">2026.06.22</span>
+        <span class="card-tag tag-finance"><span class="zh">里程碑</span><span class="en">Milestone</span></span>
+      </div>
+      <h3><span class="zh">INTC创历史新高$141.45，超越2000年互联网泡沫巅峰</span><span class="en">INTC Hits All-Time High $141.45, Surpassing Dot-Com Era Peak</span></h3>
+      <p><span class="zh">6月22日盘中触及$141.45，收盘$139.12，正式超越2000年1月互联网泡沫时期的历史高点。这是Intel 54年公司史上的最高股价。市值约$6450亿，成为全球市值最高的半导体公司之一。52周最低价仅$18.97（2025年7月），一年内涨幅超过600%。</span><span class="en">On June 22, INTC hit $141.45 intraday and closed at $139.12, officially surpassing the dot-com era peak from January 2000. This is the highest stock price in Intel's 54-year history. Market cap ~$645B, making it one of the world's most valuable semiconductor companies. 52-week low was just $18.97 (July 2025) — a 600%+ gain in one year.</span></p>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section-head reveal d1">
+    <span class="section-num">05</span>
+    <h2><span class="zh">生态与合作伙伴</span><span class="en">Ecosystem & Partnerships</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="card card-highlight reveal d2">
+      <div class="card-meta">
+        <span class="card-date">2026.06.18</span>
+        <span class="card-tag tag-strategy"><span class="zh">战略·历史性</span><span class="en">Strategy·Historic</span></span>
+      </div>
+      <h3><span class="zh">Trump总统宣布Apple-Intel美国芯片设计与制造合作伙伴关系</span><span class="en">President Trump Announces Apple-Intel U.S. Chip Design & Manufacturing Partnership</span></h3>
+      <p><span class="zh">6月18日，Trump总统正式宣布Apple与Intel达成美国芯片设计和制造合作。WSJ在5月8日率先报道双方达成初步协议，Apple的M系列芯片有望采用Intel 18A-P制程（2027年量产），iPhone芯片则可能采用14A节点。这一合作是Intel Foundry史上最重要的外部客户突破，标志着Apple开始实质性分散对TSMC的依赖。Intel股价当日跳涨~9%至$131.81。</span><span class="en">On June 18, President Trump officially announced the Apple-Intel partnership on U.S. chip design and manufacturing. WSJ first reported the preliminary agreement on May 8. Apple's M-series chips are expected on Intel 18A-P (2027 production), with iPhone chips potentially on 14A. This is the most significant external customer win in Intel Foundry history, marking Apple's real move to diversify from TSMC. INTC jumped ~9% to $131.81 on the day.</span></p>
+    </div>
+    <div class="card card-highlight reveal d3">
+      <div class="card-meta">
+        <span class="card-date">2026.06.08</span>
+        <span class="card-tag tag-ai"><span class="zh">AI·代工</span><span class="en">AI·Foundry</span></span>
+      </div>
+      <h3><span class="zh">Google向Intel订购300万颗TPU AI芯片，2028年交付 — 代工业务里程碑订单</span><span class="en">Google Orders 3M TPU AI Chips from Intel for 2028 — Foundry Milestone Order</span></h3>
+      <p><span class="zh">据The Information 6月8日报道，Alphabet/Google已向Intel下单制造超过300万颗TPU（张量处理单元），计划2028年生产。Google在数月测试Intel技术后做出决定，选择Intel作为TSMC先进制程产能受限时的替代方案。同日，NVIDIA也在评估Intel 18A用于多芯片GPU设计。Intel股价当日大涨11%。这笔订单被视为Intel Foundry获得顶级AI芯片客户的决定性证据。</span><span class="en">Per The Information (June 8), Alphabet/Google ordered 3M+ TPUs from Intel for 2028 production. Google made the decision after months of testing Intel's technology, selecting Intel as an alternative to strained TSMC advanced node capacity. On the same day, NVIDIA was reported evaluating Intel 18A for multi-die GPU designs. INTC surged 11%. This order is seen as definitive proof that Intel Foundry has won top-tier AI chip customers.</span></p>
+    </div>
+    <div class="card reveal d4">
+      <div class="card-meta">
+        <span class="card-date">2026.06.01</span>
+        <span class="card-tag tag-ai"><span class="zh">AI·合作</span><span class="en">AI·Partner</span></span>
+      </div>
+      <h3><span class="zh">与Google深化AI基础设施合作：从芯片到机架级全栈方案</span><span class="en">Intel & Google Deepen AI Infrastructure Collaboration: Chip-to-Rackscale Solutions</span></h3>
+      <p><span class="zh">6月1日，Intel与Google宣布深化AI基础设施合作，涵盖多代Xeon CPU、定制IPU以及从芯片到机架级的全栈AI解决方案。Google承诺在未来多代产品中使用Intel技术驱动其AI数据中心。</span><span class="en">On June 1, Intel and Google announced deepened AI infrastructure collaboration spanning multiple generations of Xeon CPUs, custom IPUs, and chip-to-rackscale AI solutions. Google committed to using Intel technologies across future product generations for its AI data centers.</span></p>
+    </div>
+    <div class="card reveal d5">
+      <div class="card-meta">
+        <span class="card-date">2026.04.07</span>
+        <span class="card-tag tag-strategy"><span class="zh">战略</span><span class="en">Strategy</span></span>
+      </div>
+      <h3><span class="zh">Intel加入Elon Musk的Terafab项目，与Tesla/SpaceX/xAI合作制造AI芯片</span><span class="en">Intel Joins Elon Musk's Terafab Project with Tesla, SpaceX & xAI to Build AI Chips</span></h3>
+      <p><span class="zh">Intel宣布加入Elon Musk的Terafab超级AI芯片制造项目，与Tesla、SpaceX和xAI建立制造合作伙伴关系。Terafab计划投资$250亿打造AI芯片超级工厂，Intel将提供先进制程代工能力。消息公布后Intel单日大涨12%。该芯片将为人形机器人和数据中心提供算力支持。</span><span class="en">Intel announced it has joined Elon Musk's Terafab mega AI chip manufacturing project, partnering with Tesla, SpaceX, and xAI. Terafab plans a $25B investment in AI chip super-factories, with Intel providing advanced foundry capabilities. INTC jumped 12% on the news. The chips will power humanoid robots and data centers.</span></p>
+    </div>
+    <div class="card reveal d2">
+      <div class="card-meta">
+        <span class="card-date">2026.03.25</span>
+        <span class="card-tag tag-ai"><span class="zh">AI·安全</span><span class="en">AI·Security</span></span>
+      </div>
+      <h3><span class="zh">与CrowdStrike深化合作，AI PC设备端安全加固</span><span class="en">Expanded CrowdStrike Partnership for On-Device AI PC Security</span></h3>
+      <p><span class="zh">CrowdStrike Falcon平台将与Intel AI PC架构深度整合，实现实时威胁检测和增强数据保护，且不影响系统性能。这是Intel在商用PC安全领域的重要差异化策略。</span><span class="en">CrowdStrike Falcon platform integrating deeply with Intel AI PC architecture for real-time threat detection and enhanced data protection without performance impact. A key differentiator for Intel in commercial PC security.</span></p>
+    </div>
+    <div class="card reveal d3">
+      <div class="card-meta">
+        <span class="card-date">2026.03.23</span>
+        <span class="card-tag tag-product"><span class="zh">子公司</span><span class="en">Subsidiary</span></span>
+      </div>
+      <h3><span class="zh">Mobileye获美国主要车厂DMS量产合同</span><span class="en">Mobileye Secures Major U.S. Automaker DMS Production Contract</span></h3>
+      <p><span class="zh">Intel子公司Mobileye与一家美国大型汽车制造商签署驾驶员监控系统(DMS)量产合同，预计2027年投产，可能覆盖数百万辆车型。</span><span class="en">Intel subsidiary Mobileye signed a DMS production contract with a major U.S. automaker. Production slated for 2027, potentially covering millions of vehicles.</span></p>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section-head reveal d1">
+    <span class="section-num">06</span>
+    <h2><span class="zh">关键风险与挑战</span><span class="en">Key Risks & Challenges</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="card reveal d2" style="border-left: 4px solid var(--warn);">
+      <h3 style="color: #b88600;">⚠ <span class="zh">值得关注的挑战</span><span class="en">Challenges to Watch</span></h3>
+      <p>
+        <span class="zh"><strong>估值泡沫风险：</strong>前瞻PE约147x（Yahoo Finance 6/26数据），市值$645B已price-in大量乐观预期。Seeking Alpha维持Hold评级，警告"牛市故事仍缺乏硬证据"。任何执行不力都可能引发剧烈回调。</span>
+        <span class="en"><strong>Valuation Bubble Risk:</strong> Forward PE ~147x (Yahoo Finance 6/26), $645B market cap prices in massive optimism. Seeking Alpha maintains Hold, warning "the bullish story still lacks hard proof." Any execution misstep could trigger a sharp pullback.</span>
+        <br><br>
+        <span class="zh"><strong>Apple量产时间线长：</strong>分析师指出Apple-Intel合作从协议到量产仍需数年（最早2027），短期内无法贡献实质营收。</span>
+        <span class="en"><strong>Long Apple Production Timeline:</strong> Analysts note the Apple-Intel deal still needs years (2027 earliest) before volume production contributes meaningful revenue.</span>
+        <br><br>
+        <span class="zh"><strong>TSMC依赖：</strong>Nova Lake 90%+产能外包给TSMC N2，说明Intel Foundry尚无法承接全部内部订单。</span>
+        <span class="en"><strong>TSMC Dependency:</strong> 90%+ of Nova Lake outsourced to TSMC N2, showing Intel Foundry can't yet handle all internal volume.</span>
+        <br><br>
+        <span class="zh"><strong>DRAM涨价冲击：</strong>内存芯片短缺推动PC价格上涨10-30%，可能抑制需求并影响AI PC普及节奏。</span>
+        <span class="en"><strong>DRAM Price Shock:</strong> Memory shortage driving 10-30% PC price hikes, potentially dampening demand and slowing AI PC adoption.</span>
+        <br><br>
+        <span class="zh"><strong>Q2财报考验：</strong>Q2财报预计7/23发布，市场预期EPS $0.21。Q1的爆发式增长能否持续是巨大问号。Intel历史上常在财报后回调。</span>
+        <span class="en"><strong>Q2 Earnings Test:</strong> Q2 earnings expected July 23, consensus EPS $0.21. Whether Q1's explosive growth can be sustained is a huge question. Intel has historically sold off post-earnings.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 7: DEEP ANALYSIS -->
+  <div class="section-head reveal d1">
+    <span class="section-num">07</span>
+    <h2><span class="zh">📚 深度解读</span><span class="en">📚 Deep Analysis</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="analysis-card reveal d2">
+      <div class="source">YouTube · <span class="zh">推荐视频</span><span class="en">Recommended Video</span></div>
+      <h3><span class="zh">Tech Corner: INTC Rallies on AI Turnaround, Valuation in Question</span><span class="en">Tech Corner: INTC Rallies on AI Turnaround, Valuation in Question</span></h3>
+      <p><span class="zh">深入分析Intel作为AI基础设施、代工服务和先进芯片制造玩家的三重转型。核心问题：当前估值是否已充分反映 turnaround 预期？AI推理市场和代工客户能否同时兑现？<a href="https://www.youtube.com/watch?v=3vp_EDuTiCU" target="_blank">▶ 观看</a></span><span class="en">Deep analysis of Intel's triple transformation into AI infrastructure, foundry services, and advanced chip manufacturing. Key question: does current valuation fully reflect turnaround expectations? Can both AI inference and foundry customer wins materialize? <a href="https://www.youtube.com/watch?v=3vp_EDuTiCU" target="_blank">▶ Watch</a></span></p>
+    </div>
+    <div class="analysis-card reveal d3">
+      <div class="source">Bloomberg Technology · <span class="zh">CEO访谈</span><span class="en">CEO Interview</span></div>
+      <h3><span class="zh">Intel Delivers Strong AI-Fueled Outlook — Lip-Bu Tan专访</span><span class="en">Intel Delivers Strong AI-Fueled Outlook — Lip-Bu Tan Interview</span></h3>
+      <p><span class="zh">Bloomberg在Q1财报发布后对CEO Tan的深度访谈。Tan详细阐述了AI驱动的增长前景、18A代工路线图、以及如何将Intel从"困境中的老牌芯片商"重新定位为"AI时代的核心玩家"。<a href="https://www.youtube.com/watch?v=DtCNGpeEZxM" target="_blank">▶ 观看</a></span><span class="en">Bloomberg's in-depth interview with CEO Tan after Q1 earnings. Tan details AI-driven growth prospects, the 18A foundry roadmap, and how he's repositioning Intel from "troubled legacy chipmaker" to "core AI era player." <a href="https://www.youtube.com/watch?v=DtCNGpeEZxM" target="_blank">▶ Watch</a></span></p>
+    </div>
+    <div class="analysis-card reveal d4">
+      <div class="source">Fortune · <span class="zh">深度报道</span><span class="en">Feature</span></div>
+      <h3><span class="zh">Intel新CEO的管理革命：13个月将管理层级砍半</span><span class="en">Intel's New CEO's Management Revolution: Halving Layers in 13 Months</span></h3>
+      <p><span class="zh">Fortune 6月3日深度报道，聚焦Lip-Bu Tan如何在13个月内重塑Intel文化：将管理层级从多层砍至扁平结构、吸引NVIDIA $50亿投资、获得政府10%股权背书、剥离非核心业务。文章认为Tan的"硬核工程师文化"正在取代旧Intel的"官僚主义"。<a href="https://fortune.com/2026/06/03/intel-ceo-lip-bu-tan-ai-semiconductors-innovation/" target="_blank"><span class="zh">阅读全文</span><span class="en">Read article</span></a></span><span class="en">Fortune's June 3 deep dive on how Lip-Bu Tan reshaped Intel's culture in 13 months: flattening multi-layer management, attracting NVIDIA's $5B investment, securing 10% government equity, divesting non-core businesses. The piece argues Tan's "hardcore engineer culture" is replacing old Intel's "bureaucracy." <a href="https://fortune.com/2026/06/03/intel-ceo-lip-bu-tan-ai-semiconductors-innovation/" target="_blank">Read article</a></span></p>
+    </div>
+    <div class="analysis-card reveal d5">
+      <div class="source">TIKR · <span class="zh">投资分析</span><span class="en">Investment Analysis</span></div>
+      <h3><span class="zh">Intel Stock Up 450% in 2026: What Investors Need to Know</span><span class="en">Intel Stock Up 450% in 2026: What Investors Need to Know</span></h3>
+      <p><span class="zh">全面梳理Intel 2026年暴涨逻辑：分析师平均目标价$89（区间$45-$150），TIKR模型中位预测$237（12月）。文章指出核心驱动力为代工客户突破（Apple+Google）、AI数据中心需求、以及美国半导体政策红利。但当前PE极高，投资者需权衡增长前景与估值风险。<a href="https://www.tikr.com/blog/intel-stock-up-450-in-2026-heres-what-investors-need-to-know" target="_blank"><span class="zh">阅读全文</span><span class="en">Read article</span></a></span><span class="en">Comprehensive analysis of Intel's 2026 surge: analyst mean target $89 (range $45-$150), TIKR model mid-case $237 by December. Core drivers: foundry customer breakthroughs (Apple+Google), AI data center demand, and U.S. semiconductor policy tailwinds. However, PE is extremely elevated — investors must weigh growth prospects against valuation risk. <a href="https://www.tikr.com/blog/intel-stock-up-450-in-2026-heres-what-investors-need-to-know" target="_blank">Read article</a></span></p>
+    </div>
+    <div class="analysis-card reveal d2">
+      <div class="source">YouTube · <span class="zh">Computex 2026全面解读</span><span class="en">Computex 2026 Full Coverage</span></div>
+      <h3><span class="zh">Computex 2026: Intel Xeon 6+, Diamond Rapids & More!</span><span class="en">Computex 2026: Intel Xeon 6+, Diamond Rapids & More!</span></h3>
+      <p><span class="zh">Computex 2026 Taipei全程解读：Xeon 6+ Clearwater Forest正式发布（288核18A），Diamond Rapids预告（192核，2027年），以及Intel从芯片到系统级的完整AI战略布局。CEO Tan的主题演讲展示了"智能时代"愿景。<a href="https://www.youtube.com/watch?v=oWiH6irNN3o" target="_blank">▶ 观看</a></span><span class="en">Full Computex 2026 Taipei coverage: Xeon 6+ Clearwater Forest launch (288-core 18A), Diamond Rapids preview (192-core, 2027), and Intel's complete chip-to-systems AI strategy. CEO Tan's keynote showcased the "Intelligence Era" vision. <a href="https://www.youtube.com/watch?v=oWiH6irNN3o" target="_blank">▶ Watch</a></span></p>
+    </div>
+  </div>
+
+  <!-- SECTION 8: INVESTMENT ANALYSIS -->
+  <div class="section-head reveal d1">
+    <span class="section-num">08</span>
+    <h2><span class="zh">📈 Q2 季度投资分析</span><span class="en">📈 Q2 Investment Analysis</span></h2>
+  </div>
+  <div class="news-grid">
+    <div class="invest-card reveal d2">
+      <h3><span class="zh">关键财务指标 (Q1 2026实际 / Q2 2026预期)</span><span class="en">Key Financial Metrics (Q1 2026 Actual / Q2 2026 Est.)</span></h3>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Q1营收</span><span class="en">Q1 Revenue</span></span><span class="metric-val pos">$13.6B (+7% YoY)</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Q1 EPS (Non-GAAP)</span><span class="en">Q1 EPS (Non-GAAP)</span></span><span class="metric-val pos">$0.29 (est. $0.01)</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Q1毛利率 (Non-GAAP)</span><span class="en">Q1 Gross Margin (Non-GAAP)</span></span><span class="metric-val pos">41%</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Q2营收指引</span><span class="en">Q2 Revenue Guidance</span></span><span class="metric-val">$13.8B - $14.8B</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Q2 EPS预期</span><span class="en">Q2 EPS Consensus</span></span><span class="metric-val">$0.21</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Q2财报日</span><span class="en">Q2 Earnings Date</span></span><span class="metric-val">2026.07.23</span></div>
+    </div>
+    <div class="invest-card reveal d3">
+      <h3><span class="zh">估值快照 (截至6/27)</span><span class="en">Valuation Snapshot (as of 6/27)</span></h3>
+      <div class="metric-row"><span class="metric-label"><span class="zh">股价</span><span class="en">Price</span></span><span class="metric-val">$128.32</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">市值</span><span class="en">Market Cap</span></span><span class="metric-val">$644.9B</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">前瞻PE</span><span class="en">Forward P/E</span></span><span class="metric-val warn">147x</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Trailing PE</span><span class="en">Trailing P/E</span></span><span class="metric-val warn">904x</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">52周区间</span><span class="en">52-Week Range</span></span><span class="metric-val">$18.97 - $141.45</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">YTD涨幅</span><span class="en">YTD Gain</span></span><span class="metric-val pos">~450%</span></div>
+    </div>
+    <div class="invest-card reveal d4">
+      <h3><span class="zh">分析师目标价</span><span class="en">Analyst Price Targets</span></h3>
+      <div class="metric-row"><span class="metric-label"><span class="zh">最低</span><span class="en">Low</span></span><span class="metric-val neg">$45.00</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">平均</span><span class="en">Average</span></span><span class="metric-val">$89.00 (below current)</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">最高 (Goldman Sachs)</span><span class="en">High (Goldman Sachs)</span></span><span class="metric-val pos">$150.00</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Deutsche Bank</span><span class="en">Deutsche Bank</span></span><span class="metric-val">$100 (Hold)</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">TIKR模型中位预测</span><span class="en">TIKR Model Mid-Case</span></span><span class="metric-val pos">$237 (Dec 2026)</span></div>
+      <div class="metric-row"><span class="metric-label"><span class="zh">Mizuho</span><span class="en">Mizuho</span></span><span class="metric-val">$135 (Neutral)</span></div>
+    </div>
+    <div class="invest-card reveal d5">
+      <h3><span class="zh">Q2季度总结与展望</span><span class="en">Q2 Summary & Outlook</span></h3>
+      <p style="font-size:0.88rem; line-height:1.8; color:#4a4a4a; margin-top:0.5rem;">
+        <span class="zh">
+        <strong>Q2是Intel转折的确认期。</strong>三大里程碑事件——Apple代工交易正式确认（6/18 Trump宣布）、Google 300万TPU订单（6/8）、18A-P进入风险量产（6/16）——共同证明Intel Foundry正在从"自说自话"转向"获得顶级客户背书"。<br><br>
+        <strong>股价在Q2延续了Q1的疯狂涨势</strong>，从4月初的~$50飙升至6月22日的历史新高$141.45。但当前估值（147x前瞻PE）已经极度乐观，市场定价隐含了Apple/Google订单全部顺利执行、18A良率持续提升、Q2/Q3财报持续beat的预期。<br><br>
+        <strong>7/23的Q2财报将是下一个重大考验。</strong>市场预期EPS $0.21（vs Q1的$0.29），如果不及预期，在如此高估值下回调可能非常剧烈。建议投资者关注：①18A-P量产良率进展；②代工外部客户订单转化率；③AI数据中心营收是否持续高增长；④DRAM涨价对PC业务的利润挤压。
+        </span>
+        <span class="en">
+        <strong>Q2 was Intel's confirmation quarter.</strong> Three milestone events — the Apple foundry deal officially confirmed (6/18 Trump announcement), Google's 3M TPU order (6/8), and 18A-P entering risk production (6/16) — collectively prove Intel Foundry is transitioning from "self-claims" to "top-tier customer validation."<br><br>
+        <strong>The stock extended Q1's explosive rally in Q2</strong>, surging from ~$50 in early April to an all-time high of $141.45 on June 22. But current valuation (147x forward PE) is extremely optimistic, pricing in full execution of Apple/Google orders, continued 18A yield improvements, and sustained Q2/Q3 earnings beats.<br><br>
+        <strong>The July 23 Q2 earnings will be the next major test.</strong> Consensus EPS is $0.21 (vs Q1's $0.29). Any miss at this valuation could trigger a sharp pullback. Key metrics to watch: ① 18A-P production yield progress; ② External foundry customer order conversion; ③ AI data center revenue growth sustainability; ④ DRAM price impact on PC margins.
+        </span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="zh">数据来源：Intel Newsroom, Reuters, CNBC, Forbes, Bloomberg, WSJ, Yahoo Finance, Tom's Hardware, Fortune, TIKR, The Information, MarketBeat · 由Sky整理 · 2026年6月28日</span>
+  <span class="en">Sources: Intel Newsroom, Reuters, CNBC, Forbes, Bloomberg, WSJ, Yahoo Finance, Tom's Hardware, Fortune, TIKR, The Information, MarketBeat · Compiled by Sky · June 28, 2026</span>
+  <br><span style="opacity:0.6;">
+    <span class="zh">本页面仅供信息参考，不构成投资建议。</span>
+    <span class="en">For informational purposes only. Not investment advice.</span>
+  </span>
+</footer>
+
+<script>
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('btn-zh').className=l==='zh'?'active':'';
+  document.getElementById('btn-en').className=l==='en'?'active':'';
+  try{localStorage.setItem('sky-lang',l)}catch(e){}
+}
+try{var s=localStorage.getItem('sky-lang');if(s)setLang(s)}catch(e){}
+</script>
+</body>
+</html>

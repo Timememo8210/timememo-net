@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 Daily Market — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --sidebar-bg: #0f0f18;
+  --content-bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  height: 100vh; overflow: hidden;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+}
+
+/* ── Lang Toggle ── */
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.lang-toggle button {
+  padding: 4px 12px; border: none; background: transparent;
+  color: var(--text-dim); font-size: 0.72rem; cursor: pointer;
+  transition: all 0.25s; font-family: inherit;
+}
+.lang-toggle button.active { background: var(--accent); color: #000; }
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-header h1 {
+  font-size: 1.15em; font-weight: 700;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 8px;
+}
+.sidebar-header .home-link {
+  font-size: 0.78em; color: var(--text-dim);
+  text-decoration: none; margin-top: 6px; display: block;
+}
+.sidebar-header .home-link:hover { color: var(--accent); }
+.sidebar-nav {
+  flex: 1; overflow-y: auto; padding: 12px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.month-group { margin-bottom: 4px; }
+.month-label {
+  padding: 6px 20px; font-size: 0.75em;
+  color: var(--text-dim); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.report-link {
+  display: block; padding: 8px 20px;
+  text-decoration: none; color: var(--text);
+  font-size: 0.85em; transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.report-link:hover {
+  background: var(--card); border-left-color: var(--accent);
+}
+.report-link .date { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+.report-link .tag {
+  font-size: 0.72em; padding: 2px 6px;
+  border-radius: 4px; margin-left: 6px;
+}
+.tag-us { background: rgba(74,222,128,0.15); color: #4ade80; }
+.tag-cn { background: rgba(251,146,60,0.15); color: #fb923c; }
+.tag-both { background: rgba(96,165,250,0.15); color: #60a5fa; }
+.tag-weekend { background: rgba(168,85,247,0.15); color: #a855f7; }
+
+/* ── Content ── */
+.content {
+  overflow-y: auto; padding: 40px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.welcome {
+  text-align: center; padding: 80px 20px;
+}
+.welcome .icon { font-size: 4em; margin-bottom: 16px; }
+.welcome h2 { font-size: 1.5em; color: var(--accent); }
+.welcome p { color: var(--text-dim); margin-top: 8px; font-size: 0.95em; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar-header { display: none; }
+  .sidebar { background: transparent; border-right: none; overflow: visible; }
+  .sidebar-nav { padding: 0; }
+  .month-label { text-align: center; }
+  .content { padding: 20px; }
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+      <a href="../index.html" class="home-link">← <span class="zh">返回 Sky Portal</span><span class="en" style="display:none">Back to Sky Portal</span></a>
+      <div class="lang-toggle">
+        <button class="active" onclick="document.body.className='lang-zh';localStorage.setItem('lang','zh')">中文</button>
+        <button onclick="document.body.className='lang-en';localStorage.setItem('lang','en')">EN</button>
+      </div>
+    </div>
+    <div class="sidebar-nav" id="report-list">
+      <div class="month-group">
+        <div class="month-label">2026-08</div>
+        <a href="market-2026-08-08.html" class="report-link">
+          <span class="date">08-08</span>
+          <span class="tag tag-weekend">周末</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普历史新高 · 本周最佳 · 非农-2.3万 · SpaceX两日+23% · A股连涨 · 港股企稳</span><span class="en" style="display:none">S&P ATH · Best week · NFP -23K · SpaceX +23% 2d · A-shares rally · HK stabilizes</span></div>
+        </a>
+        <a href="market-2026-08-07.html" class="report-link">
+          <span class="date">08-07</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普创新高 · 纳指+1.30% · 费半+2.56%🔥 · 非农-2.3万 · SpaceX IPO+15.73% · 黄金+2.37%</span><span class="en" style="display:none">S&P ATH · Nasdaq +1.30% · SOX +2.56%🔥 · NFP -23K · SpaceX IPO +15.73% · Gold +2.37%</span></div>
+        </a>
+        <a href="market-2026-08-06.html" class="report-link">
+          <span class="date">08-06</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指-0.85%从纪录回落 · 标普-0.18% · 纳指-0.06% · 特朗普半导体新关税 · MCHP-4.41% · 恒指-1.49% · KOSPI-4.58% · 周五非农前瞻</span><span class="en" style="display:none">Dow -0.85% from record · S&P -0.18% · Nasdaq -0.06% · Trump semi tariff · MCHP -4.41% · HSI -1.49% · KOSPI -4.58% · Jobs Report Friday</span></div>
+        </a>
+        <a href="market-2026-08-05.html" class="report-link">
+          <span class="date">08-05</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道标普再创新高 · 纳指+2.59% · SOX逆势-1.40% · SpaceX首财报AI支出吓退 · 油价-6.47%</span><span class="en" style="display:none">Dow/S&P ATH again · Nasdaq +2.59% · SOX -1.40% · SpaceX AI spend scare · Oil -6.47%</span></div>
+        </a>
+        <a href="market-2026-08-04.html" class="report-link">
+          <span class="date">08-04</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指首破54,000 · 标普+1.79% · 纳指+2.59% · SOX+6.55%🔥 · SpaceX首份财报超预期 · 伊朗协议在即</span><span class="en" style="display:none">Dow first 54K · S&P +1.79% · Nasdaq +2.59% · SOX +6.55%🔥 · SpaceX beats on 1st earnings · Iran deal imminent</span></div>
+        </a>
+        <a href="market-2026-08-03.html" class="report-link">
+          <span class="date">08-03</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指创新高 · 标普+1.48% · 纳指+2.13% · AMZN首破$3万亿 · 油价-5.1% · 美伊协议框架 · 美日联合干预日元</span><span class="en" style="display:none">Dow ATH · S&P +1.48% · Nasdaq +2.13% · AMZN first $3T · Oil -5.1% · Iran deal framework · US-Japan yen intervention</span></div>
+        </a>
+        <a href="market-2026-08-02.html" class="report-link">
+          <span class="date">08-02</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 标普+1%周涨 · 纳指+1% · SOX周跌-4.3% · KOSPI-11%崩盘 · 中国DUV量产 · Fed按兵不动3票反对 · Apple重回市值第一</span><span class="en" style="display:none">Weekend · S&P +1% weekly · Nasdaq +1% · SOX -4.3% wk · KOSPI -11% crash · China DUV mass prod · Fed holds 3 dissents · Apple #1 market cap</span></div>
+        </a>
+        <a href="market-2026-08-01.html" class="report-link">
+          <span class="date">08-01</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 道指▲+0.5% · 纳指▲+1% · SOX+0.07%盘中冲高回落 · 费半7月暴跌20% · 创业板▲+3%+ · 存储概念全线走强 · CorePCE低于预期</span><span class="en" style="display:none">Weekend · Dow ▲+0.5% · Nasdaq ▲+1% · SOX +0.07% fade · SOX -20% in July · ChiNext ▲+3%+ · Storage surges · CorePCE below est</span></div>
+        </a>
+      </div>
+      <div class="month-group">
+        <div class="month-label">2026-07</div>
+        <a href="market-2026-07-31.html" class="report-link">
+          <span class="date">07-31</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">AMZN+15% AAPL-7.4% MSFT+8% · 道指▲+0.53% · 纳指▲+1% · SOX盘中11,885→11,311回落 · KOSPI▲+17.9% · 科创50+3% · 创业板+3.06% · Fed按兵不动</span><span class="en" style="display:none">AMZN+15% AAPL-7.4% MSFT+8% · Dow ▲+0.53% · Nasdaq ▲+1% · SOX 11,885→11,311 fade · KOSPI ▲+17.9% · STAR50 +3% · ChiNext +3.06% · Fed holds</span></div>
+        </a>
+        <a href="market-2026-07-30.html" class="report-link">
+          <span class="date">07-30</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">MSFT暴涨+16% · 纳指▲+2.78% · SMH▲+6.88% · KOSPI暴涨+13%熔断 · 日经▲+4.37% · Amazon盘后+9% · Apple盘后-6% · VIX▼-17%</span><span class="en" style="display:none">MSFT +16% · Nasdaq ▲+2.78% · SMH ▲+6.88% · KOSPI +13% circuit breaker · Nikkei ▲+4.37% · Amazon AH +9% · Apple AH -6% · VIX ▼-17%</span></div>
+        </a>
+        <a href="market-2026-07-28.html" class="report-link">
+          <span class="date">07-28</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指▲+1.03%ATH · 纳指▼-0.22% · SOX▼-4.49%连跌四日 · KOSPI暴跌-11%熔断 · A股创业板▼-7.35% · 恒指▲+0.41%逆势 · 超级财报周</span><span class="en" style="display:none">Dow ▲+1.03% ATH · Nasdaq ▼-0.22% · SOX ▼-4.49% 4-day drop · KOSPI -11% circuit breaker · ChiNext ▼-7.35% · HSI ▲+0.41% resilient · Super earnings week</span></div>
+        </a>
+        <a href="market-2026-07-27.html" class="report-link">
+          <span class="date">07-27</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指▲+0.51% · 纳指▼-0.18% · NVDA▼-5.4% · A股创业板▲+3.16% · 美伊暂停 · 半导体回调</span><span class="en" style="display:none">Dow ▲+0.51% · Nasdaq ▼-0.18% · NVDA ▼-5.4% · ChiNext ▲+3.16% · US-Iran pause · Chip pullback</span></div>
+        </a>
+        <a href="market-2026-07-26.html" class="report-link">
+          <span class="date">07-26</span>
+          <span class="tag tag-weekend">周末</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末特刊 · 美股周线三连跌 · SOX暴跌-4.25% · Tesla周跌18% · 美伊13夜空袭 · Anthropic Opus 5发布 · 下周FOMC+mega-cap财报超级周</span><span class="en" style="display:none">Weekend · US 3-week decline · SOX -4.25% · Tesla -18% weekly · 13 nights US-Iran strikes · Opus 5 launch · Super Week: FOMC + megacap earnings</span></div>
+        </a>
+        <a href="market-2026-07-25.html" class="report-link">
+          <span class="date">07-25</span>
+          <span class="tag tag-weekend">周末</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末分析 · SOX暴跌-4.25% · Tesla周跌20% · 伊朗战争升级 · AI估值警讯 · 空头$2万亿 · 下周预判</span><span class="en" style="display:none">Weekend · SOX crash -4.25% · Tesla -20% weekly · Iran escalation · AI valuation warning · $2T shorts · Next week outlook</span></div>
+        </a>
+        <a href="market-2026-07-24.html" class="report-link">
+          <span class="date">07-24</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">Trump新关税60国 · SOX熊市-4.3% · 纳指-0.6% · A股创业板-2.65% · 油价$96.78</span><span class="en" style="display:none">Trump 60-country tariffs · SOX bear -4.3% · Nasdaq -0.6% · ChiNext -2.65% · Oil $96.78</span></div>
+        </a>
+        <a href="market-2026-07-23.html" class="report-link">
+          <span class="date">07-23</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">油价破百$100.69 · Tesla-15% · 纳指-2.2% · 韩国KOSPI-5% · A股逆势+0.74%</span><span class="en" style="display:none">Oil $100.69 · Tesla -15% · Nasdaq -2.2% · KOSPI -5% · A-shares +0.74%</span></div>
+        </a>
+        <a href="market-2026-07-21.html" class="report-link">
+          <span class="date">07-21</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">芯片股暴涨+5.2% · SOX 12356 · A股科技大反攻 · 科创50+10.73% · 中东缓和信号</span><span class="en" style="display:none">SOX surges +5.2% · A-share tech counterattack · STAR 50 +10.73% · Mid-East de-escalation</span></div>
+        </a>
+        <a href="market-2026-07-14.html" class="report-link">
+          <span class="date">07-14</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">CPI降温降息预期升温 · IBM暴跌20%创50年最差 · 高盛+9%创新高 · 英伟达+4% · 半导体强劲反弹 · A股反弹+1.36%</span><span class="en" style="display:none">Cool CPI rate-cut hopes · IBM -20% worst in 50y · Goldman +9% ATH · NVDA +4% · Chip rebound · A-shares bounce +1.36%</span></div>
+        </a>
+        <a href="market-2026-07-15.html" class="report-link">
+          <span class="date">07-15</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指创新高+0.26% · 标普+0.79% · 纳指-1.52% · 芯片股暴跌SOX-4.65% · A股全面调整 · 科技股估值回调</span><span class="en" style="display:none">Dow ATH +0.26% · S&P +0.79% · Nasdaq -1.52% · SOX crash -4.65% · A-shares adjustment · Tech valuation pullback</span></div>
+        </a>
+        <a href="market-2026-07-13.html" class="report-link">
+          <span class="date">07-13</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">芯片股普遍上涨SK海力士+12.8% · 费半+2.7% · Arm+4.6% · 高盛看好中国AI · 科技股分化行情</span><span class="en" style="display:none">Chip stocks rise SK Hynix +12.8% · SOX +2.7% · Arm +4.6% · Goldman likes China AI · Tech divergence</span></div>
+        </a>
+        <a href="market-2026-07-12.html" class="report-link">
+          <span class="date">07-12</span>
+          <span class="tag tag-weekend">周末</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股休市 历史新高 · 纳指+2.03%本周表现最佳 · SOX年内+75%创纪录 · A股科技分化 · 港股年内强势 · AI芯片需求持续火热</span><span class="en" style="display:none">US market closed at ATH · Nasdaq +2.03% best week · SOX +75% YTD record · A-shares tech divergence · HK strong YTD · AI chip demand surge</span></div>
+        </a>
+        <a href="market-2026-07-11.html" class="report-link">
+          <span class="date">07-11</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股休市周道指+0.29%创纪录 · 纳指+1.3%标普+0.81% · 半导体SOX+22.9%科创50+8.41% · 恒指年内+33%创十年最佳 · AI算力需求强劲</span><span class="en" style="display:none">US market closed week Dow +0.29% record · Nasdaq +1.3% S&P +0.81% · SOX +22.9% STAR50 +8.41% · HSI +33% 10yr best · AI computing strong</span></div>
+        </a>
+        <a href="market-2026-07-10.html" class="report-link">
+          <span class="date">07-10</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股创新高标普+0.81%纳指+1.30% · 英伟达市值破4万亿 · 半导体板块平盘SOX+0.06% · A股调整沪指-1% · AI需求强劲支撑科技股</span><span class="en" style="display:none">US records S&P +0.81% Nasdaq +1.30% · NVDA >$4T cap · SOX +0.06% flat · China SSE -1% · AI demand boosts tech</span></div>
+        </a>
+        <a href="market-2026-07-09.html" class="report-link">
+          <span class="date">07-09</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股全线收涨道指+1.14% · A股强势反弹创业板+4.49%科创50+8.41% · 半导体爆发中芯+10%兆易+22% · AI服务器需求旺盛</span><span class="en" style="display:none">US rally DJIA +1.14% · A-shares surge ChiNext +4.49% STAR50 +8.41% · Semi boom SMIC +10% GigaDevice +22% · AI server demand</span></div>
+        </a>
+        <a href="market-2026-07-04.html" class="report-link">
+          <span class="date">07-04</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股休市日 · AI芯片将破1万亿 · 半导体指数+47% · 欧央行降息至2% · 地缘政治风险上升</span><span class="en" style="display:none">US market closed · AI chips $1T · SOX +47% · ECB to 2% · Geopolitical risks</span></div>
+        </a>
+        <a href="market-2026-07-07.html" class="report-link">
+          <span class="date">07-07</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股三大指数齐涨 道指首破53000点 · OpenAI+AMD 6GW GPU合作 · 半导体板块分化 · 港股科技反弹</span><span class="en" style="display:none">US Markets Rally DJIA 53000 · OpenAI+AMD 6GW Deal · Semiconductors Mixed · HK Tech Rebound</span></div>
+        </a>
+        <a href="market-2026-07-06.html" class="report-link">
+          <span class="date">07-06</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指历史新高+0.29%突破53000点 · SOX+22.9%半导体反弹 · 科创50逆势+1.04% · 港科+0.94%特朗普喊单戴尔</span><span class="en" style="display:none">Dow ATH +0.29% above 53000 · SOX +22.9% semis bounce · STAR50 +1.04% reverse · HSTECH +0.94% Trump calls Dell</span></div>
+        </a>
+        <a href="market-2026-07-05.html" class="report-link">
+          <span class="date">07-05</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">全球央行政策转向 · AI终端创新元年 · 存储芯片涨价100% · 半导体市场将破9754亿</span><span class="en" style="display:none">Global central bank shift · AI terminal innovation · Memory chips +100% · Semi market $975B</span></div>
+        </a>
+        <a href="market-2026-07-03.html" class="report-link">
+          <span class="date">07-03</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">独立日休市 · AI半导体万亿趋势 · 多速并行货币政策 · 中东局势紧张 · 下周关注超跌反弹</span><span class="en" style="display:none">Independence Day · AI semis $1T · Multi-speed policy · ME tensions · Watch bounce next week</span></div>
+        </a>
+        <a href="market-2026-07-02.html" class="report-link">
+          <span class="date">07-02</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股集体收跌半导暴跌-6.27% · A股分化港股强势 · 科技股分化 · 获利回吐为主 · AI产业链分化</span><span class="en" style="display:none">US markets down SOX crash -6.27% · China divergent HK strong · Tech divergence · Profit-taking · AI chain split</span></div>
+        </a>
+        <a href="market-2026-07-01.html" class="report-link">
+          <span class="date">07-01</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股调整半导暴跌-6.27% · A股平稳 · 费半-6.27% · AI降温 · 港股休市 · 地缘政治紧张</span><span class="en" style="display:none">US pullback SOX crash -6.27% · A-shares steady · SOX -6.27% · AI cooling · HK closed · Geo tensions</span></div>
+        </a>
+        <a href="market-2026-07-08.html" class="report-link">
+          <span class="date">07-08</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美伊冲突升级油价飙升 · 美股普跌道指-1.14% · A股全面调整 · 半导体板块分化 · 地缘政治风险主导</span><span class="en" style="display:none">US-Iran oil surge · US market down DJIA -1.14% · A-shares adjustment · Semi divergence · Geo risks</span></div>
+        </a>
+        <a href="market-2026-07-19.html" class="report-link">
+          <span class="date">07-19</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">AI行情降温 · 谷歌大跌超4% · 费城半导体指数进入技术性熊市 · 全球经济增速预期3.1% · 科技股调整压力显现</span><span class="en" style="display:none">AI market cooling · Google down >4% · SOX enters technical bear market · Global growth 3.1% · Tech adjustment pressure</span></div>
+        </a>
+        <div class="month-label">2026-06</div>
+        <a href="market-2026-06-30.html" class="report-link">
+          <span class="date">06-30</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指 ATH+0.59% · 标普7440 · 纳指+2.07% · 费半+近4% · A股全面上涨 · 科创50历史新高</span><span class="en" style="display:none">Dow ATH +0.59% · S&P 7440 · Nasdaq +2.07% · SOX +4% · A-shares surge · STAR50 ATH</span></div>
+        </a>
+        <a href="market-2026-06-29.html" class="report-link">
+          <span class="date">06-29</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指创新高+0.59% · 标普首破7600点 · 费半暴跌-5.29% · A股稳健上涨 · AI芯片投资情绪退潮</span><span class="en" style="display:none">Dow ATH +0.59% · SP500 first above 7600 · SOX crash -5.29% · A-shares steady · AI chip sentiment cooling</span></div>
+        </a>
+        <a href="market-2026-06-27.html" class="report-link">
+          <span class="date">06-27</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 全球科技抛售周！SOX周跌12%+ · 标普纳指连跌5日 · KOSPI暴跌10.5% · MU从$1255大幅回落 · 创业板-4.07% · 下周关注超跌反弹</span><span class="en" style="display:none">Weekend · Global tech selloff week! SOX -12%+ wk · S&P/Nasdaq 5-day decline · KOSPI -10.5% · MU off $1255 highs · ChiNext -4.07% · Watch for bounce</span></div>
+        </a>
+        <a href="market-2026-06-26.html" class="report-link">
+          <span class="date">06-26</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">霍尔木兹冲突升级！美军反击伊朗 · 费半SOX暴跌-5.29% · MU-6.63% · 创业板-4.07% · 恒科-3.41% · 大盘韧性尚存</span><span class="en" style="display:none">Hormuz escalation! US strikes Iran · SOX crashes -5.29% · MU -6.63% · ChiNext -4.07% · HSTECH -3.41% · Broad market resilient</span></div>
+        </a>
+        <a href="market-2026-06-25.html" class="report-link">
+          <span class="date">06-25</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美光炸裂！MU+15.7% Q3营收+346% · Apple暴跌-6%涨价反噬 · SOX反弹+3.59% · 创业板+2.84%科创50+3.8%双新高 · 恒指-1.43%</span><span class="en" style="display:none">Micron blowout! MU +15.7% Q3 rev +346% · Apple crashes -6% on price hikes · SOX bounce +3.59% · ChiNext +2.84% STAR50 +3.8% dual ATH · HSI -1.43%</span></div>
+        </a>
+        <a href="market-2026-06-24.html" class="report-link">
+          <span class="date">06-24</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">芯片大屠杀！费半SOX暴跌-7%+ · 纳指-2.2% · 标普-1.4% · 道指-0.1% · AI泡沫恐慌蔓延 · 半导体获利回吐</span><span class="en" style="display:none">Chip Massacre! SOX crash -7%+ · Nasdaq -2.2% · S&P -1.4% · Dow -0.1% · AI bubble panic · Semi profit-taking</span></div>
+        </a>
+        <a href="market-2026-06-23.html" class="report-link">
+          <span class="date">06-23</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">芯片大屠杀！费半SOX暴跌-7.87% · 纳指-2.2% · 标普-1.4% · 道指-0.1% · 创业板-3.84% · 恒科-3.30% · AI泡沫恐慌蔓延 · BTC $62K</span><span class="en" style="display:none">Chip Wreck! SOX crashes -7.87% · Nasdaq -2.2% · S&P -1.4% · Dow -0.1% · ChiNext -3.84% · HSTECH -3.30% · AI bubble fears spread · BTC $62K</span></div>
+        </a>
+        <a href="market-2026-06-22.html" class="report-link">
+          <span class="date">06-22</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">A股天量3.74万亿暴涨！创业板+科创50双新高 · SpaceX崩盘-16.4%($200亿债券) · SOX+2.04% · 美伊和谈推进油价$74 · 道指+0.44% 纳指-0.27%</span><span class="en" style="display:none">A-shares 3.74T volume surge! ChiNext+STAR ATH · SpaceX crash -16.4% ($20B bonds) · SOX +2.04% · US-Iran progress oil $74 · Dow +0.44% Nasdaq -0.27%</span></div>
+        </a>
+        <a href="market-2026-06-21.html" class="report-link">
+          <span class="date">06-21</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周日版 · 美伊瑞士谈判关键48h · SOX+6.42%反弹 · Intel+10.6% Apple合作 · 霍尔木兹罗生门 · BTC $64K · 下周震荡等消息</span><span class="en" style="display:none">Sunday · US-Iran Switzerland talks critical 48h · SOX +6.42% bounce · Intel +10.6% Apple deal · Hormuz Rashomon · BTC $64K · Range-bound week ahead</span></div>
+        </a>
+        <a href="market-2026-06-20.html" class="report-link">
+          <span class="date">06-20</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周六版 · 半导体全面爆发INTC+10.6% · 18A量产 · MU+8.7% · NVDA+2.95% · 伊朗再封霍尔木兹 · SpaceX 600亿收购Cursor · Warsh联储新时代</span><span class="en" style="display:none">Weekend · Semis surge INTC+10.6% · 18A production · MU+8.7% · NVDA+2.95% · Iran closes Hormuz again · SpaceX $60B Cursor deal · Warsh Fed era</span></div>
+        </a>
+        <a href="market-2026-06-19.html" class="report-link">
+          <span class="date">06-19</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">Juneteenth休市 · 美伊14点停火正式签署 · 霍尔木兹复航 · 油价暴跌21% · Warsh鹰派FOMC · 纳指周+2.4% · 上证4000点保卫</span><span class="en" style="display:none">Juneteenth holiday · US-Iran 14-pt ceasefire signed · Hormuz reopens · Oil -21% · Warsh hawkish FOMC · Nasdaq week +2.4% · SSE 4000 defense</span></div>
+        </a>
+        <a href="market-2026-06-18.html" class="report-link">
+          <span class="date">06-18</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">伊朗封锁解除！费半+6.42%新高 · Intel+10.64%(Apple合作) · 纳指+1.91% · 创业板+2.05%新高 · 恒指-1.59%三连跌</span><span class="en" style="display:none">Iran blockade lifted! SOX +6.42% ATH · Intel +10.64% (Apple deal) · Nasdaq +1.91% · ChiNext +2.05% ATH · HSI -1.59% 3-day loss</span></div>
+        </a>
+        <a href="market-2026-06-17.html" class="report-link">
+          <span class="date">06-17</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">Warsh首秀放鹰！道指-1.0% · 标普-1.21% · 纳指-1.3% · SOX反弹+1.38% · SpaceX超越微软/亚马逊 · 科创50暴涨4.69% · 创业板历史新高</span><span class="en" style="display:none">Warsh hawkish debut! Dow -1.0% · S&P -1.21% · Nasdaq -1.3% · SOX bounce +1.38% · SpaceX passes MSFT/AMZN · STAR 50 +4.69% · ChiNext ATH</span></div>
+        </a>
+        <a href="market-2026-06-16.html" class="report-link">
+          <span class="date">06-16</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指ATH+0.64% · 费半SOX暴跌-5.71% · 纳指-1.15% · Fed Warsh首次议息 · 创业板+1.72% · 恒科-2.24%</span><span class="en" style="display:none">Dow ATH +0.64% · SOX crash -5.71% · Nasdaq -1.15% · Fed Warsh 1st FOMC · ChiNext +1.72% · HSTECH -2.24%</span></div>
+        </a>
+        <a href="market-2026-06-28.html" class="report-link">
+          <span class="date">06-28</span>
+          <span class="tag tag-weekend">周末</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">地缘政治紧张升级 · 特朗普确认打击伊朗 · 央行5000亿MLF · 全球半导体创新高 · 科创50+6.32%逆势上涨 · AI重塑搜索格局</span><span class="en" style="display:none">Geopolitical tensions · Trump confirms Iran strikes · PBOC 500B MLF · Global semis record · STAR50 +6.32% · AI reshaping search</span></div>
+        </a>
+        <a href="market-2026-06-15.html" class="report-link">
+          <span class="date">06-15</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美伊和平协议达成 · 道指ATH+0.92% · 纳指+3.07% · 费半SOX+5.45%创历史新高 · 创业板+5.30% · SpaceX次日续涨</span><span class="en" style="display:none">US-Iran peace deal · Dow ATH +0.92% · Nasdaq +3.07% · SOX +5.45% ATH · ChiNext +5.30% · SpaceX Day 2 surge</span></div>
+        </a>
+        <a href="market-2026-06-14.html" class="report-link">
+          <span class="date">06-14</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · SpaceX首日$2.1T · 美伊和平协议逼近油价暴跌4% · 费半过山车周跌10% · G7+FOMC下周双击</span><span class="en" style="display:none">Weekend · SpaceX $2.1T debut · Iran peace imminent oil -4% · SOX rollercoaster -10% wk · G7+FOMC next week</span></div>
+        </a>
+        <a href="market-2026-06-13.html" class="report-link">
+          <span class="date">06-13</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · SpaceX首日+19%市值$2.1T · 美伊和平协议信号 · 油价回落 · 费半+1.52% · 沪指+1.12%回4000</span><span class="en" style="display:none">Weekend · SpaceX debut +19% $2.1T mkt cap · US-Iran peace signals · Oil falls · SOX +1.52% · SSE +1.12%</span></div>
+        </a>
+        <a href="market-2026-06-12.html" class="report-link">
+          <span class="date">06-12</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">SpaceX首日+19% · 马斯克万亿富豪 · 美伊和平80%+ · 费半+1.52% · ARM+11% · 沪指+1.12%回4000</span><span class="en" style="display:none">SpaceX debut +19% · Musk trillionaire · Iran peace 80%+ · SOX +1.52% · ARM +11% · SSE +1.12%</span></div>
+        </a>
+        <a href="market-2026-06-11.html" class="report-link">
+          <span class="date">06-11</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">特朗普取消打击伊朗 · 道指+929 · 纳指+2.54% · 费半+8% · SpaceX IPO定价$135 · A股反弹上证+1%</span><span class="en" style="display:none">Trump cancels Iran strikes · Dow +929 · Nasdaq +2.54% · SOX +8% · SpaceX IPO $135 · SSE +1%</span></div>
+        </a>
+        <a href="market-2026-06-10.html" class="report-link">
+          <span class="date">06-10</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">伊朗战争升级 · 道指-953点 · 纳指-2% · 费半-3.57% · A股缩量调整沪指失守4000 · SpaceX IPO明日</span><span class="en" style="display:none">Iran war escalates · Dow -953 · Nasdaq -2% · SOX -3.57% · A-shares pull back SSE below 4000 · SpaceX IPO tmrw</span></div>
+        </a>
+        <a href="market-2026-06-09.html" class="report-link">
+          <span class="date">06-09</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">芯片反弹失败 · 费半-1.93% · 纳指-0.97% · 美伊和谈最后阶段 · OpenAI提交IPO · A股暴力反弹创业板+3.93%</span><span class="en" style="display:none">Chip rebound fizzles · SOX -1.93% · Nasdaq -0.97% · US-Iran deal close · OpenAI IPO filed · ChiNext +3.93%</span></div>
+        </a>
+        <a href="market-2026-06-08.html" class="report-link">
+          <span class="date">06-08</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">芯片股全线反弹 · 费半+5.61% · Intel+11% · A股黑色星期一沪指-1.7% · SpaceX IPO倒计时 · WWDC26开幕</span><span class="en" style="display:none">Chip rebound · SOX +5.61% · Intel +11% · SSE Black Mon -1.7% · SpaceX IPO countdown · WWDC26 opens</span></div>
+        </a>
+        <a href="market-2026-06-07.html" class="report-link">
+          <span class="date">06-07</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 黑色星期五余震 · 纳指-4.18% · 费半-10.26% · SpaceX IPO 6/12 · CPI 6/10 · 加息概率70%+</span><span class="en" style="display:none">Weekend · Black Friday aftershock · Nasdaq -4.18% · SOX -10.26% · SpaceX IPO 6/12 · CPI 6/10 · Hike odds 70%+</span></div>
+        </a>
+        <a href="market-2026-06-06.html" class="report-link">
+          <span class="date">06-06</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周六周报：非农引爆加息预期 · 纳指周跌4.68% · 费半-10.26% · 黄金比特全线崩 · A/H承压</span><span class="en" style="display:none">Sat Weekly: NFP sparks hike fears · Nasdaq -4.68% wk · SOX -10.26% · Gold/BTC crash · A/H down</span></div>
+        </a>
+        <a href="market-2026-06-05.html" class="report-link">
+          <span class="date">06-05</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">费半-10.26%崩盘 · 非农172K翻倍超预期 · 纳指-4.18% · 科创50-4.01% · 恒指失守25000</span><span class="en" style="display:none">SOX -10.26% crash · NFP 172K doubles est · Nasdaq -4.18% · STAR50 -4.01% · HSI loses 25k</span></div>
+        </a>
+        <a href="market-2026-06-04.html" class="report-link">
+          <span class="date">06-04</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指+1.73%ATH · 博通暴雷-14% · 费半-2.15% · 油价回落$92 · A股缩量调整 · 恒指-1.48%</span><span class="en" style="display:none">Dow +1.73% ATH · Broadcom crashes -14% · SOX -2.15% · Oil drops $92 · A-shares shrink · HSI -1.48%</span></div>
+        </a>
+        <a href="market-2026-06-03.html" class="report-link">
+          <span class="date">06-03</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">九连涨终结 · 博通盘后-12% · SOX逆势+1.4% · 油价$95 · 创业板+1.65% · 恒指-1.56%</span><span class="en" style="display:none">Streak ends · Broadcom -12% AH · SOX +1.4% · Oil $95 · ChiNext +1.65% · HSI -1.56%</span></div>
+        </a>
+        <a href="market-2026-06-02.html" class="report-link">
+          <span class="date">06-02</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三指齐创新高 · MRVL+32% 黄仁勋点名 · SOX+6% · 美伊升温 · 创业板+2.7% · 恒指+2.5%</span><span class="en" style="display:none">Triple ATH · MRVL +32% Jensen pick · SOX +6% · US-Iran · ChiNext +2.7% · HSI +2.5%</span></div>
+        </a>
+        <a href="market-2026-06-01.html" class="report-link">
+          <span class="date">06-01</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指ATH · NVDA+6% RTX Spark发布 · 油价$94 · 科创50两日-10% · 港股六月开门红</span><span class="en" style="display:none">S&P/Nasdaq ATH · NVDA +6% RTX Spark · Oil $94 · STAR 50 -10% 2d · HK June green open</span></div>
+        </a>
+      </div>
+      <div class="month-group">
+        <div class="month-label">2026-05</div>
+        <a href="market-2026-05-31.html" class="report-link">
+          <span class="date">05-31</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 九连周ATH · 纳指月涨8% · Dell+33% · Micron月+88% · 科创50历史新高+11% · 美伊MOU停火</span><span class="en" style="display:none">Weekend · 9-wk ATH streak · Nasdaq +8% MoM · Dell +33% · Micron +88% · STAR 50 ATH +11% · Iran MOU ceasefire</span></div>
+        </a>
+        <a href="market-2026-05-30.html" class="report-link">
+          <span class="date">05-30</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 三指数ATH · Dell月涨101% · 半导体万亿拐点 · 美伊停火MOU · 科创50暴跌-5%</span><span class="en" style="display:none">Weekend · Triple ATH · Dell +101% May · Semi $1T · Iran MOU · STAR 50 -5%</span></div>
+        </a>
+        <a href="market-2026-05-29.html" class="report-link">
+          <span class="date">05-29</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三大指数再创新高 · Dell +33% AI服务器$121亿 · 美伊停火MOU · 科创50暴跌-5%</span><span class="en" style="display:none">Triple ATH · Dell +33% $12.1B AI orders · US-Iran MOU · STAR 50 -5% crash</span></div>
+        </a>
+        <a href="market-2026-05-28.html" class="report-link">
+          <span class="date">05-28</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三大指数连续两天ATH · PCE降温 · 美光/海力士双破万亿 · 油价-5% · 创业板+1.96%</span><span class="en" style="display:none">Triple ATH 2nd day · PCE cool · Micron/Hynix $1T · Oil -5% · ChiNext +1.96%</span></div>
+        </a>
+        <a href="market-2026-05-26.html" class="report-link">
+          <span class="date">05-26</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指ATH · 华为韬定律引爆半导体 · SOX+5.5% · 美光领涨 · 美伊和谈 · 科创50历史新高</span><span class="en" style="display:none">S&P/Nasdaq ATH · Huawei τ-Law ignites chips · SOX +5.5% · Micron leads · US-Iran talks · STAR 50 ATH</span></div>
+        </a>
+        <a href="market-2026-05-25.html" class="report-link">
+          <span class="date">05-25</span>
+          <span class="tag tag-red">Holiday</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">Memorial Day休市 · 道指ATH · Warsh就任Fed · NVDA $800亿回购 · SpaceX IPO · 油价$120</span><span class="en" style="display:none">Memorial Day · Dow ATH · Warsh Fed · NVDA $80B buyback · SpaceX IPO · Oil $120</span></div>
+        </a>
+        <a href="market-2026-05-24.html" class="report-link">
+          <span class="date">05-24</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 英伟达Q1 $816亿 · Warsh就任Fed · 道指ATH · 标普8周连涨 · 创业板+1.14%</span><span class="en" style="display:none">Weekend · NVIDIA Q1 $81.6B · Warsh sworn in Fed · Dow ATH · S&P 8-wk streak · ChiNext +1.14%</span></div>
+        </a>
+        <a href="market-2026-05-23.html" class="report-link">
+          <span class="date">05-23</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · Warsh就任Fed主席 · 道指ATH · 标普8周连涨 · AMD周涨13% · 创业板+2.84%</span><span class="en" style="display:none">Weekend · Warsh sworn in Fed · Dow ATH · S&P 8-wk streak · AMD +13% wk · ChiNext +2.84%</span></div>
+        </a>
+        <a href="market-2026-05-22.html" class="report-link">
+          <span class="date">05-22</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指ATH +0.6% · 连涨八周 · 美伊和谈进展 · 油价-5.2% · 深成指+2.3% · 商品暴涨31%隐忧</span><span class="en" style="display:none">Dow ATH +0.6% · 8-week streak · US-Iran progress · Oil -5.2% · SZSE +2.3% · Commodity +31% warning</span></div>
+        </a>
+        <a href="market-2026-05-21.html" class="report-link">
+          <span class="date">05-21</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指ATH+0.55% · SOX+1.28% · 美伊和谈进展 · Warsh就任Fed · A股暴跌2%+ · 硬科技泡沫破裂</span><span class="en" style="display:none">Dow ATH +0.55% · SOX +1.28% · US-Iran deal progress · Warsh Fed · A-shares crash 2%+ · Tech bubble pops</span></div>
+        </a>
+        <a href="market-2026-05-20.html" class="report-link">
+          <span class="date">05-20</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">强势反弹 · SOX+4.49% · Nvidia营收$81.6B超预期 · Q2指引$91B · 美伊和谈曙光 · 港股科技+2.66%</span><span class="en" style="display:none">Rebound · SOX+4.49% · Nvidia $81.6B beat · Q2 guide $91B · US-Iran peace hope · HK Tech +2.66%</span></div>
+        </a>
+        <a href="market-2026-05-19.html" class="report-link">
+          <span class="date">05-19</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三连跌 · 债市崩跌30Y破5.19% · Bessent制裁伊朗 · Nvidia财报前夕 · 芯片两日暴跌</span><span class="en" style="display:none">3-day slide · Bond rout 30Y>5.19% · Bessent sanctions Iran · Pre-Nvidia · Chips 2-day crash</span></div>
+        </a>
+        <a href="market-2026-07-29.html" class="report-link">
+          <span class="date">07-29</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指暴跌2.19% · 纳指回调10%+ · SOX -5.33% · 鹰派Fed · 中东冲突 · 30年债5.2%+</span><span class="en" style="display:none">Dow -2.19% · Nasdaq >10% correction · SOX -5.33% · Hawkish Fed · Mideast · 30Y 5.2%+</span></div>
+        </a>
+        <a href="market-2026-05-18.html" class="report-link">
+          <span class="date">05-18</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">存储芯片暴跌 · SOX -2.47% · 美伊谈判 · 油价$108+ · 债市抛售 · 标普纳指连跌</span><span class="en" style="display:none">Memory crash · SOX -2.47% · US-Iran talks · Oil $108+ · Bond selloff · S&P/Nasdaq down 2d</span></div>
+        </a>
+        <a href="market-2026-05-17.html" class="report-link">
+          <span class="date">05-17</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 三指数ATH · SOX 64% · 中美峰会 · NVIDIA财报周 · 创业板10年新高</span><span class="en" style="display:none">Weekend · Triple ATH · SOX +64% · Trump-Xi · NVIDIA week · ChiNext 10yr high</span></div>
+        </a>
+        <a href="market-2026-05-16.html" class="report-link">
+          <span class="date">05-16</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 纳指终结六连涨 · SOX周跌4% · 通胀+油价双重夹击 · 创业板周+3.5%</span><span class="en" style="display:none">Weekend · Nasdaq streak ends · SOX -4% wk · Inflation+oil · ChiNext +3.5%</span></div>
+        </a>
+        <a href="market-2026-05-15.html" class="report-link">
+          <span class="date">05-15</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股全线回调 · 油价$105+ · 中美峰会卖事实 · 科技获利回吐</span><span class="en" style="display:none">US pullback · Oil $105+ · Trump-Xi sell news · Tech profit-taking</span></div>
+        </a>
+        <a href="market-2026-05-14.html" class="report-link">
+          <span class="date">05-14</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三指数ATH · 道指返5万 · NVDA七天+20% · Cerebras IPO · A股回调</span><span class="en" style="display:none">Triple ATH · Dow 50K · NVDA 7d +20% · Cerebras IPO · A-shares pullback</span></div>
+        </a>
+        <a href="market-2026-05-13.html" class="report-link">
+          <span class="date">05-13</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指ATH · Trump-Xi峰会 · Cisco+19% · 半导体狂飙</span><span class="en" style="display:none">S&P/Nasdaq ATH · Trump-Xi Summit · Cisco +19% · Semi surge</span></div>
+        </a>
+        <a href="market-2026-05-12.html" class="report-link">
+          <span class="date">05-12</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">CPI超预期 · 费半-3% · 高通-11% · NVDA新高 · 中东反复</span><span class="en" style="display:none">Hot CPI · SOX -3% · QCOM -11% · NVDA ATH · Middle East</span></div>
+        </a>
+        <a href="market-2026-05-09.html" class="report-link">
+          <span class="date">05-09</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 标普纳指ATH · 六周连涨 · 非农金发姑娘 · AI芯片狂潮 · 科创综指新高</span><span class="en" style="display:none">Weekend · S&P/Nasdaq ATH · 6-week streak · Goldilocks NFP · AI chip frenzy · Sci-Tech ATH</span></div>
+        </a>
+        <a href="market-2026-05-08.html" class="report-link">
+          <span class="date">05-08</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指再创新高 · 连涨6周 · Burry泡沫警告 · A股高位调整</span><span class="en" style="display:none">S&P/Nasdaq new ATH · 6-week streak · Burry bubble warning · A-shares pullback</span></div>
+        </a>
+        <a href="market-2026-05-07.html" class="report-link">
+          <span class="date">05-07</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股从ATH回落 · 油价反弹 · A股创业板11年新高 · AI算力全面爆发</span><span class="en" style="display:none">US retreat from ATH · Oil rebound · ChiNext 11yr high · AI computing breakout</span></div>
+        </a>
+        <a href="market-2026-05-06.html" class="report-link">
+          <span class="date">05-06</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三指ATH · AMD+19.3% · SOX+4.48% · A股3.25万亿开门红</span><span class="en" style="display:none">Triple ATH · AMD +19.3% · SOX +4.48% · A-shares 3.25T open</span></div>
+        </a>
+        <a href="market-2026-05-05.html" class="report-link">
+          <span class="date">05-05</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指新高 · SOX+4.23% · AMD盘后+15% · Intel创新高</span><span class="en" style="display:none">S&P/Nasdaq ATH · SOX +4.23% · AMD +15% AH · Intel ATH</span></div>
+        </a>
+        <a href="market-2026-05-04.html" class="report-link">
+          <span class="date">05-04</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">道指-1.13% · 伊朗袭UAE · 油价$114 · Amazon开放物流</span><span class="en" style="display:none">Dow -1.13% · Iran strikes UAE · Oil $114 · Amazon opens logistics</span></div>
+        </a>
+        <a href="market-2026-05-03.html" class="report-link">
+          <span class="date">05-03</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 标普4月+10% · Fed 8:4分裂 · UAE退出OPEC+</span><span class="en" style="display:none">Weekend · S&P Apr +10% · Fed 8:4 split · UAE exits OPEC+</span></div>
+        </a>
+        <a href="market-2026-05-02.html" class="report-link">
+          <span class="date">05-02</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · 纳指首破25K · 闪迪暴涨8% · AI capex破7000亿</span><span class="en" style="display:none">Weekend · Nasdaq breaks 25K · SNDK +8% · AI capex >$700B</span></div>
+        </a>
+        <a href="market-2026-05-01.html" class="report-link">
+          <span class="date">05-01</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指再创新高 · 纳指首破25K · Q1盈利+27.8%</span><span class="en" style="display:none">S&P/Nasdaq ATH · Nasdaq first 25K · Q1 earnings +27.8%</span></div>
+        </a>
+      </div>
+      <div class="month-group">
+        <div class="month-label">2026-04</div>
+        <a href="market-2026-04-30.html" class="report-link">
+          <span class="date">04-30</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">四月完美收官 · 标普首破7200 · SOX月涨38%</span><span class="en" style="display:none">April grand finale · S&P first above 7200 · SOX +38%</span></div>
+        </a>
+        <a href="market-2026-04-29.html" class="report-link">
+          <span class="date">04-29</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">Fed按兵不动 · 油价$118 · 四大科技盘后财报</span><span class="en" style="display:none">Fed holds · Oil $118 · Big 4 tech after-hours earnings</span></div>
+        </a>
+        <a href="market-2026-04-28.html" class="report-link">
+          <span class="date">04-28</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">OpenAI未达标AI链回调 · 油价$110+ · FOMC前夕</span><span class="en" style="display:none">OpenAI miss AI selloff · Oil $110+ · Pre-FOMC</span></div>
+        </a>
+        <a href="market-2026-04-27.html" class="report-link">
+          <span class="date">04-27</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普纳指再创新高 · 美伊和谈停滞油价飙升 · 超级财报周</span><span class="en" style="display:none">S&P/Nasdaq ATH · Iran talks stall oil surges · Mega earnings week</span></div>
+        </a>
+        <a href="market-2026-04-26.html" class="report-link">
+          <span class="date">04-26</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末版 · NVDA $5万亿 · Intel暴超 · 下周超级财报周</span><span class="en" style="display:none">Weekend · NVDA $5T · Intel blowout · Super earnings week</span></div>
+        </a>
+        <a href="market-2026-04-25.html" class="report-link">
+          <span class="date">04-25</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">周末回顾 · 美伊谈判破裂 · Intel引爆AI狂欢 · 下周超级周</span><span class="en" style="display:none">Weekend Recap · Iran talks fail · Intel AI rally · Super week ahead</span></div>
+        </a>
+        <a href="market-2026-04-24.html" class="report-link">
+          <span class="date">04-24</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">纳指标普再创新高 · SOX 18连涨 · Intel暴涨27%</span><span class="en" style="display:none">Nasdaq/S&P ATH · SOX 18-day streak · Intel +27%</span></div>
+        </a>
+        <a href="market-2026-04-23.html" class="report-link">
+          <span class="date">04-23</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三指从新高回落 · 油价$107 · SOXX 17连涨</span><span class="en" style="display:none">Retreat from ATH · Oil $107 · SOX 17-day streak</span></div>
+        </a>
+        <a href="market-2026-04-22.html" class="report-link">
+          <span class="date">04-22</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">三指齐创新高 · 费半16连涨史诗纪录 · 创业板十年新高</span><span class="en" style="display:none">Triple ATH · SOX 16-day epic streak · ChiNext decade high</span></div>
+        </a>
+        <a href="market-2026-04-21.html" class="report-link">
+          <span class="date">04-21</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">美股全线下挫 · 美伊冲突反复 · 半导体逆势</span><span class="en" style="display:none">US stocks down · Iran tensions flare · Semis resilient</span></div>
+        </a>
+        <a href="market-2026-04-19.html" class="report-link">
+          <span class="date">04-19</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">标普周涨4.5%创新高 · Tesla/Intel下周财报</span><span class="en" style="display:none">S&P +4.5% week ATH · Tesla/Intel earnings ahead</span></div>
+        </a>
+        <a href="market-2026-04-18.html" class="report-link">
+          <span class="date">04-18</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">霍尔木兹解除 · 标普纳指同创新高</span><span class="en" style="display:none">Hormuz Open · S&P/Nasdaq ATH</span></div>
+        </a>
+        <a href="market-2026-04-17.html" class="report-link">
+          <span class="date">04-17</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">霍尔木兹开放 · 标普再创新高</span><span class="en" style="display:none">Hormuz Open · S&P ATH</span></div>
+        </a>
+        <a href="market-2026-04-16.html" class="report-link">
+          <span class="date">04-16</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">纳指12连涨 · TSMC利润+58%</span><span class="en" style="display:none">Nasdaq 12-day streak · TSMC +58%</span></div>
+        </a>
+        <a href="market-2026-04-15.html" class="report-link">
+          <span class="date">04-15</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;"><span class="zh">S&P/纳指历史新高 · AI芯片领涨</span><span class="en" style="display:none">S&P/Nasdaq ATH · AI chips lead</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="welcome">
+      <div class="icon">📊</div>
+      <h2><span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h2>
+      <p><span class="zh">美股 · A股 · 港股 — 每天晚上9点自动更新</span><span class="en" style="display:none">US · China · HK — Updated daily at 9 PM</span></p>
+      <p style="margin-top:16px;font-size:0.85em;color:var(--text-dim);">
+        <span class="zh">由 Sky ☁️ 自动生成 · <a href="../index.html" style="color:var(--accent);">返回首页</a></span>
+        <span class="en" style="display:none">Auto-generated by Sky ☁️ · <a href="../index.html" style="color:var(--accent);">Home</a></span>
+      </p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var l=localStorage.getItem('lang');
+  if(l==='en') document.body.className='lang-en';
+})();
+</script>
+</body>
+</html>

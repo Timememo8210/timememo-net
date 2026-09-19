@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-23 — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --sidebar-bg: #0f0f18;
+  --content-bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+
+.wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+
+/* Lang Toggle */
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+.lang-toggle button {
+  padding: 4px 12px; border: none; background: transparent;
+  color: var(--text-dim); font-size: 0.72rem; cursor: pointer;
+  transition: all 0.25s; font-family: inherit;
+}
+.lang-toggle button.active { background: var(--accent); color: #000; }
+
+h1 { color: var(--accent); font-size: 1.8em; margin-bottom: 4px; }
+.subtitle { color: var(--text-dim); font-size: 0.9em; margin-bottom: 28px; }
+h2 { color: var(--accent); font-size: 1.3em; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+h3 { color: var(--accent); margin: 16px 0 10px; font-size: 1.05em; }
+
+/* Poster Grid */
+.poster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
+.poster-card {
+  border-radius: 12px; padding: 20px 24px; color: #fff;
+  transition: transform 0.2s;
+}
+.poster-card:hover { transform: translateY(-2px); }
+.poster-icon { font-size: 2em; margin-bottom: 8px; }
+.poster-data { margin-top: 10px; font-size: 0.9em; opacity: 0.9; line-height: 1.6; }
+
+/* Cards */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px; margin-bottom: 14px;
+  transition: background 0.2s;
+}
+.card:hover { background: var(--card-hover); }
+.card h4 { color: #fff; font-size: 1.05em; margin-bottom: 8px; }
+.card p { margin-bottom: 6px; font-size: 0.92em; }
+.card .src { color: var(--text-dim); font-size: 0.8em; margin-top: 6px; }
+
+/* Stock Grid */
+.stock-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0; }
+.stock-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 10px; text-align: center;
+}
+.stock-ticker { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); font-size: 0.95em; }
+.stock-price { color: #fff; font-size: 1.1em; font-weight: 600; margin: 6px 0 4px; }
+.stock-change {
+  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+  font-size: 0.82em; padding: 3px 10px; border-radius: 5px; display: inline-block;
+}
+.up { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.down { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+/* K-line grid */
+.kline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.kline-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8em; font-weight: 600; color: var(--accent); text-align: center; margin-bottom: 4px; letter-spacing: 0.03em; }
+
+/* Index highlight box */
+.index-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+.index-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 12px; text-align: center;
+}
+.index-name { font-size: 0.82em; color: var(--text-dim); margin-bottom: 4px; }
+.index-val { font-size: 1.15em; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace; }
+.index-chg { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85em; margin-top: 4px; }
+
+.footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85em; }
+.footer a { color: var(--accent); text-decoration: none; }
+
+@media(max-width:768px) {
+  .stock-grid { grid-template-columns: repeat(2, 1fr); }
+  .kline-grid { grid-template-columns: 1fr; }
+  .poster-grid { grid-template-columns: 1fr; }
+  .index-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-toggle">
+<button class="active" onclick="switchLang('zh')">中文</button>
+<button onclick="switchLang('en')">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 60%,#991b1b 100%)">
+<div class="poster-icon">💥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">芯片大屠杀</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chip Wreck</div>
+<div class="zh poster-data">费城半导体SOX暴跌-7.87%<br>纳指-2.2% · 标普-1.4% · 道指-0.1%</div>
+<div class="en poster-data" style="display:none">SOX crashes -7.87%<br>Nasdaq -2.2% · S&P -1.4% · Dow -0.1%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f 60%,#0f172a 100%)">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI泡沫恐慌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Bubble Fears</div>
+<div class="zh poster-data">Broadcom指引余震蔓延<br>AI支出可持续性遭质疑 · 获利了结加速</div>
+<div class="en poster-data" style="display:none">Broadcom guidance fallout spreads<br>AI spending sustainability questioned</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c2d12 60%,#431407 100%)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股深调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Plunge</div>
+<div class="zh poster-data">创业板-3.84% · 深成指-3.17%<br>上证-1.37%退守4106 · 恒科-3.30%</div>
+<div class="en poster-data" style="display:none">ChiNext -3.84% · SZSE -3.17%<br>SSE -1.37% · HSTECH -3.30%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#365314 60%,#1a2e05 100%)">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">短期展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Outlook</div>
+<div class="zh poster-data">SOX极端超跌，技术反弹概率大<br>AI叙事出现裂痕，波动率将加剧</div>
+<div class="en poster-data" style="display:none">SOX oversold, bounce likely<br>AI narrative cracking, vol to surge</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-23 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="index-grid">
+<div class="index-item">
+<div class="index-name"><span class="zh">道指</span><span class="en" style="display:none">Dow</span></div>
+<div class="index-val">51,735</div>
+<div class="index-chg down">-0.1%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div>
+<div class="index-val">7,366</div>
+<div class="index-chg down">-1.4%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq</span></div>
+<div class="index-val">—</div>
+<div class="index-chg down">-2.2%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">费城半导体</span><span class="en" style="display:none">SOX</span></div>
+<div class="index-val">13,482</div>
+<div class="index-chg down">-7.87%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>💥 <span class="zh">"芯片大屠杀"（Chip Wreck）— 科技股遭遇连环抛售</span><span class="en" style="display:none">💥 "Chip Wreck" — Tech Stocks Hit by Cascade Sell-Off</span></h4>
+<p><span class="zh">6月23日，美国股市全线下跌，半导体板块遭遇自6月初Broadcom事件以来最猛烈的单日抛售。费城半导体指数（SOX）暴跌7.87%，收于13,482点，创下近期最大单日跌幅。科技股为主的纳斯达克综合指数下跌2.2%，标普500指数下跌1.4%，而道琼斯工业平均指数仅微跌0.1%，显示抛售高度集中于科技和芯片板块。</span><span class="en" style="display:none">June 23 saw US markets fall across the board, with semiconductors facing their most intense single-day sell-off since the early-June Broadcom incident. The PHLX Semiconductor Index (SOX) plunged 7.87% to 13,482, marking the largest single-day decline in recent weeks. The tech-heavy Nasdaq fell 2.2%, S&P 500 declined 1.4%, while the Dow slipped just 0.1%, showing the sell-off was highly concentrated in tech and chips.</span></p>
+<p class="src">来源：Investopedia / WSJ / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>🔥 <span class="zh">三大核心驱动因素</span><span class="en" style="display:none">🔥 Three Key Drivers</span></h4>
+<p><span class="zh"><b>1. AI泡沫恐慌持续蔓延：</b>Broadcom 6月初发布的财报中AI芯片收入指引不及市场预期，这一"催化剂"效应在过去两周持续发酵。投资者开始严重质疑AI基础设施支出的可持续性，担忧半导体行业的高速增长可能正在触顶。市场情绪从"AI无极限"转向"AI是否到头了"。</span><span class="en" style="display:none"><b>1. AI Bubble Fears Spreading:</b> Broadcom's early-June earnings revealed AI chip guidance below expectations. This catalyst has fermented over two weeks. Investors are seriously questioning AI infrastructure spending sustainability, fearing semiconductor growth may be peaking. Sentiment shifted from "AI has no limits" to "Is AI topping out?"</span></p>
+<p><span class="zh"><b>2. 获利了结加速：</b>SOX指数年初至今涨幅曾接近100%，大量机构投资者选择在高点锁定利润。半导体板块从"最受欢迎"迅速变成"争相出逃"，资金轮动迹象明显——从科技/芯片转向防御性和周期性板块。道指仅微跌0.1%正反映了这种轮动。</span><span class="en" style="display:none"><b>2. Profit-Taking Accelerates:</b> SOX was up nearly 100% YTD. Institutions are locking in profits at highs. Semiconductors went from "most loved" to "race for exits," with clear rotation from tech/chips into defensive and cyclical sectors. Dow's flat performance confirms this rotation.</span></p>
+<p><span class="zh"><b>3. 抛售从芯片外溢至全科技板块：</b>昨日的卖压从半导体扩展到记忆体芯片（美光MU等存储类股暴跌）和更广泛的科技股。Nvidia虽相对抗跌，但AMD、Intel、Broadcom等核心芯片股全线重挫。市场将其称为"chip wreck"（芯片残骸），暗示这不仅仅是调整，而可能是板块级别的趋势转变信号。</span><span class="en" style="display:none"><b>3. Sell-Off Spills from Chips to Broader Tech:</b> Selling pressure spread from semiconductors to memory chips (MU and storage stocks plunged) and wider tech. Nvidia held up relatively better, but AMD, Intel, Broadcom all fell sharply. The market is calling it a "chip wreck,"暗示 this may be more than a correction — potentially a sector-level trend shift.</span></p>
+<p class="src">来源：Barron's / CNBC / Business Insider / Investopedia</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en" style="display:none">China A-Shares Close</span></h2>
+
+<div class="index-grid">
+<div class="index-item">
+<div class="index-name"><span class="zh">上证综指</span><span class="en" style="display:none">SSE Composite</span></div>
+<div class="index-val">4,106</div>
+<div class="index-chg down">-1.37%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">深证成指</span><span class="en" style="display:none">SZSE Component</span></div>
+<div class="index-val">15,854</div>
+<div class="index-chg down">-3.17%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">创业板指</span><span class="en" style="display:none">ChiNext</span></div>
+<div class="index-val">4,192</div>
+<div class="index-chg down">-3.84%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div>
+<div class="index-val">—</div>
+<div class="index-chg down"><span class="zh">深跌</span><span class="en" style="display:none">Lower</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">A股午后加速下行，创业板重挫-3.84%</span><span class="en" style="display:none">📉 A-Shares Accelerate Lower, ChiNext Plunges -3.84%</span></h4>
+<p><span class="zh">6月23日，A股三大指数早盘窄幅震荡，午后全线加速走低。上证综指收报4,106.25点，下跌1.37%；深证成指收报15,854.20点，下跌3.17%；创业板指收报4,192.19点，大跌3.84%。创业板在昨日创出新高后连续调整，跌幅最为显著。板块方面，医药和人形机器人概念股逆势走强，有色金属板块也表现抗跌，但科技成长股全面承压，与全球半导体抛售形成共振。</span><span class="en" style="display:none">A-shares opened flat but accelerated lower in the afternoon. SSE Composite closed at 4,106.25 (-1.37%); SZSE Component at 15,854.20 (-3.17%); ChiNext at 4,192.19 (-3.84%). ChiNext saw the steepest drop after recent ATHs. Pharma and humanoid robot concept stocks bucked the trend, while tech growth stocks sold off in sympathy with the global semiconductor rout.</span></p>
+<p class="src">来源：证券时报 / 金融界 / 新浪财经</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+
+<div class="index-grid">
+<div class="index-item">
+<div class="index-name"><span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng</span></div>
+<div class="index-val">23,336</div>
+<div class="index-chg down">-1.82%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">恒生科技</span><span class="en" style="display:none">HSI Tech</span></div>
+<div class="index-val">4,399</div>
+<div class="index-chg down">-3.30%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">恒生科技指数大跌-3.30%，受全球科技抛售拖累</span><span class="en" style="display:none">📉 Hang Seng Tech Tumbles -3.30% on Global Tech Rout</span></h4>
+<p><span class="zh">港股跟随全球科技股调整，恒生指数收报23,336.28点，下跌1.82%；恒生科技指数收报4,399.22点，重挫3.30%。全球芯片和AI相关股票的抛售对港股科技板块形成明显压制，南向资金流入有所放缓。</span><span class="en" style="display:none">Hong Kong followed the global tech selloff. Hang Seng closed at 23,336.28 (-1.82%); Hang Seng Tech at 4,399.22 (-3.30%). Global chip and AI-related selling weighed on HK tech. Southbound capital inflows slowed.</span></p>
+<p class="src">来源：Yahoo Finance / Trading Economics</p>
+</div>
+
+<h2>💰 <span class="zh">其他资产</span><span class="en" style="display:none">Other Assets</span></h2>
+
+<div class="index-grid">
+<div class="index-item">
+<div class="index-name"><span class="zh">比特币</span><span class="en" style="display:none">Bitcoin</span></div>
+<div class="index-val">$62,250</div>
+<div class="index-chg down"><span class="zh">承压</span><span class="en" style="display:none">Weak</span></div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">黄金</span><span class="en" style="display:none">Gold</span></div>
+<div class="index-val">$4,096</div>
+<div class="index-chg down">-0.4%</div>
+</div>
+</div>
+
+<div class="card">
+<h4><span class="zh">比特币继续承压，黄金高位回落</span><span class="en" style="display:none">Bitcoin Under Pressure, Gold Pulls Back from Highs</span></h4>
+<p><span class="zh">比特币在$62,250附近震荡，受风险资产全面避险情绪影响继续承压。所有14条均线均发出看跌信号。黄金从历史高位小幅回落至$4,096/盎司，跌幅约0.4%。德意志银行将Q3黄金目标下调至$4,300/盎司。全球避险资产格局正在重新定价。</span><span class="en" style="display:none">Bitcoin traded near $62,250, pressured by broad risk-off sentiment. All 14 moving averages flashed bearish. Gold pulled back slightly from historic highs to $4,096/oz, down ~0.4%. Deutsche Bank cut Q3 gold target to $4,300/oz. The global safe-haven landscape is being repriced.</span></p>
+<p class="src">来源：Fortune / Yahoo Finance / Trading Economics / Kitco</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期（1-3日）：超跌反弹概率大，但波动率将显著加剧</span><span class="en" style="display:none">Short-term (1-3 days): Oversold bounce likely, but volatility to surge</span></h4>
+<p><span class="zh"><b>美股：</b>SOX单日-7.87%属于极端走势，历史上此类跌幅后往往出现技术性反弹。但AI叙事已出现实质性裂痕——这不仅仅是技术性调整。Broadcom事件的余震可能还有第二波。关注NVDA是否守住关键支撑，若NVDA也开始补跌，则说明AI板块的调整远未结束。</span><span class="en" style="display:none"><b>US:</b> A -7.87% SOX drop is extreme; historically, technical bounces follow. But the AI narrative has实质性 cracked — this isn't just a correction. Broadcom fallout may have a second wave. Watch if NVDA holds key support; if NVDA starts catching up to the downside, the AI adjustment is far from over.</span></p>
+<p><span class="zh"><b>A股：</b>创业板连续调整后4,000点整数关将面临考验。如果全球科技股企稳，A股有望在4,000-4,100区间获得支撑并反弹。需关注成交量变化——缩量意味着市场恐慌可控，放量则可能引发更深度调整。</span><span class="en" style="display:none"><b>A-Shares:</b> ChiNext's 4,000 level will be tested after consecutive declines. If global tech stabilizes, A-shares could find support at 4,000-4,100. Watch volume — declining volume means controllable panic; rising volume could trigger deeper correction.</span></p>
+<p><span class="zh"><b>关注要点：</b>① Broadcom后续影响是否扩散到NVDA核心标的 ② 本周剩余交易日成交量 ③ 美联储官员讲话（Warsh时代政策信号）④ 全球资金轮动方向</span><span class="en" style="display:none"><b>Key Watch:</b> ① Whether Broadcom fallout reaches NVDA core ② Remaining weekly volume ③ Fed officials' speeches (Warsh era signals) ④ Global capital rotation direction</span></p>
+<p class="src">来源：综合分析</p>
+</div>
+
+<h2>📈 <span class="zh">半导体股票行情（6月23日收盘）</span><span class="en" style="display:none">Semiconductor Stocks (Jun 23 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">13,482</div><div class="stock-change down">-7.87%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">承压</span><span class="en" style="display:none">Weak</span></div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">重挫</span><span class="en" style="display:none">Sharp loss</span></div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Lower</span></div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$380</div><div class="stock-change down">-3.1%</div></div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semi ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Investopedia, WSJ, Yahoo Finance, Reuters, 证券时报, Trading Economics, Fortune, Kitco</span><span class="en" style="display:none">Data: Investopedia, WSJ, Yahoo Finance, Reuters, Trading Economics, Fortune, Kitco</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  if (lang === 'zh') {
+    document.body.className = 'lang-zh';
+    document.querySelectorAll('.lang-toggle button')[0].classList.add('active');
+    document.querySelectorAll('.lang-toggle button')[1].classList.remove('active');
+  } else {
+    document.body.className = 'lang-en';
+    document.querySelectorAll('.lang-toggle button')[0].classList.remove('active');
+    document.querySelectorAll('.lang-toggle button')[1].classList.add('active');
+  }
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

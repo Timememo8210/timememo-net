@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLC 在美国的节税全景指南 | LLC Tax Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,500;6..72,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1115;
+      --ink-soft: #3a3d47;
+      --paper: #f0eee6;
+      --paper-deep: #e4dfd2;
+      --panel: #faf8f2;
+      --line: #1f2028;
+      --line-soft: rgba(31, 32, 40, 0.16);
+      --gold: #c4882f;
+      --gold-dark: #8c5e1a;
+      --electric: #5f6cff;
+      --electric-dark: #3d48c4;
+      --mint: #2dd4a8;
+      --mint-dark: #1a9972;
+      --red: #e04040;
+      --shadow: 0 20px 56px rgba(15, 17, 21, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(95, 108, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(196, 136, 47, 0.06) 1px, transparent 1px),
+        linear-gradient(135deg, #f2f0e8 0%, #e8e3d5 46%, #f0ede4 100%);
+      background-size: 64px 64px, 64px 64px, auto;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(15, 17, 21, 0.06) 0 1px, transparent 1px 5px),
+        repeating-linear-gradient(90deg, rgba(250, 248, 242, 0.28) 0 1px, transparent 1px 7px);
+      mix-blend-mode: multiply;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .progress {
+      position: fixed; inset: 0 auto auto 0;
+      height: 4px; width: 0;
+      background: linear-gradient(90deg, var(--gold), var(--electric), var(--mint));
+      z-index: 50;
+    }
+
+    /* ─── Topbar ─── */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px clamp(16px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(240, 238, 230, 0.90);
+      backdrop-filter: blur(18px);
+    }
+
+    .portal-home {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 38px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--ink); color: var(--paper);
+      padding: 8px 12px;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700;
+      box-shadow: 4px 4px 0 var(--gold);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .portal-home:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--line);
+    }
+
+    nav {
+      display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    nav a {
+      border: 1px solid var(--line-soft); border-radius: 999px;
+      padding: 6px 10px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600;
+      background: rgba(250, 248, 242, 0.56);
+      transition: all 140ms ease;
+    }
+    nav a:hover, nav a.active {
+      background: var(--ink); color: var(--paper); border-color: var(--ink);
+    }
+
+    /* ─── Mobile Menu Toggle ─── */
+    .menu-toggle {
+      display: none;
+      width: 40px; height: 38px;
+      align-items: center; justify-content: center; gap: 4px; flex-direction: column;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); cursor: pointer;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+    .menu-toggle span {
+      display: block; width: 18px; height: 2px; background: var(--ink);
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    @media (max-width: 860px) {
+      .menu-toggle { display: flex; }
+      .topbar { flex-wrap: wrap; }
+      .topbar nav {
+        display: none;
+        width: 100%; order: 3;
+        flex-direction: column; gap: 6px;
+        padding-top: 10px; border-top: 1px solid var(--line-soft);
+        margin-top: 6px;
+      }
+      .topbar.menu-open nav {
+        display: flex;
+      }
+      .topbar nav a {
+        border-radius: var(--radius); padding: 10px 12px;
+        font-size: 13px; text-align: left;
+      }
+    }
+
+    /* ─── Sections ─── */
+    .section {
+      padding: clamp(40px, 7vw, 88px) clamp(16px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+    }
+    .section-inner {
+      width: min(1180px, 100%); margin: 0 auto;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 82svh;
+      display: grid; align-items: center;
+      padding-top: clamp(32px, 5vw, 64px);
+      padding-bottom: clamp(28px, 5vw, 60px);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: clamp(20px, 4vw, 64px);
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      width: fit-content;
+      border: 1px solid var(--line); background: var(--panel);
+      padding: 7px 10px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      box-shadow: 4px 4px 0 var(--line);
+      margin-bottom: 20px;
+    }
+    .kicker .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--mint);
+      animation: pulse 1.6s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(38px, 5.8vw, 76px);
+      line-height: 1; letter-spacing: 0; font-weight: 700;
+      max-width: 720px; overflow-wrap: anywhere;
+    }
+    h1 .accent { color: var(--electric); }
+
+    .lead {
+      margin: 22px 0 0; max-width: 700px;
+      color: var(--ink-soft); font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.48; font-weight: 400;
+    }
+
+    /* ─── Metric Board ─── */
+    .metric-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px; align-self: stretch;
+    }
+    .metric-card {
+      min-height: 140px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); padding: 16px;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; position: relative;
+      opacity: 0; transform: translateY(16px);
+      animation: enter 580ms ease forwards;
+    }
+    .metric-card:nth-child(2) { animation-delay: 80ms; }
+    .metric-card:nth-child(3) { animation-delay: 160ms; }
+    .metric-card:nth-child(4) { animation-delay: 240ms; }
+
+    @keyframes enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .metric-card::after {
+      content: ""; position: absolute; right: -24px; bottom: -32px;
+      width: 90px; height: 90px;
+      border: 14px solid rgba(95, 108, 255, 0.10);
+      transform: rotate(14deg);
+    }
+    .metric-label {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--ink-soft); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; position: relative; z-index: 1;
+    }
+    .metric-value {
+      margin-top: 16px;
+      font-family: "Newsreader", serif; font-weight: 700;
+      line-height: 0.95; font-size: clamp(28px, 3vw, 46px);
+      position: relative; z-index: 1; overflow-wrap: anywhere;
+    }
+    .metric-note {
+      margin-top: 8px; color: var(--ink-soft);
+      font-size: 12px; line-height: 1.35; position: relative; z-index: 1;
+    }
+
+    /* ─── Chapter ─── */
+    .eyebrow {
+      margin: 0 0 10px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      color: var(--gold-dark); text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(32px, 4.5vw, 62px);
+      line-height: 0.98; letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px; line-height: 1.25; text-transform: uppercase;
+    }
+    .chapter-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(260px, 0.22fr);
+      gap: 20px; align-items: end; margin-bottom: 28px;
+    }
+    .chapter-note {
+      margin: 0; color: var(--ink-soft);
+      line-height: 1.55; font-size: 15px;
+    }
+
+    /* ─── Panels ─── */
+    .panel {
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: rgba(250, 248, 242, 0.92);
+      padding: clamp(16px, 2.5vw, 24px);
+      box-shadow: var(--shadow);
+    }
+    .panel.dark {
+      background: var(--ink); color: var(--paper);
+      box-shadow: 8px 8px 0 var(--gold);
+    }
+    .panel.electric {
+      background: var(--ink); color: var(--paper);
+      box-shadow: 8px 8px 0 var(--electric);
+    }
+
+    /* ─── Grid Layouts ─── */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-1-2 { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr); gap: 14px; }
+    .grid-2-1 { display: grid; grid-template-columns: minmax(300px, 1.05fr) minmax(0, 0.95fr); gap: 14px; }
+
+    /* ─── Finding List ─── */
+    .finding-list {
+      display: grid; gap: 14px; margin: 0; padding: 0; list-style: none;
+    }
+    .finding-list li {
+      display: grid; grid-template-columns: 30px minmax(0, 1fr);
+      gap: 12px; align-items: start;
+      line-height: 1.55; color: var(--ink-soft);
+    }
+    .panel.dark .finding-list li,
+    .panel.electric .finding-list li {
+      color: rgba(240, 238, 230, 0.82);
+    }
+    .number {
+      width: 30px; height: 30px; display: grid; place-items: center;
+      border: 1px solid currentColor; border-radius: 50%;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ─── Token Cards ─── */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .token-card {
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .token-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--line-soft);
+    }
+    .token-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .token-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 700;
+      border: 2px solid var(--line);
+    }
+    .token-name {
+      font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 700;
+    }
+    .token-ticker {
+      font-size: 11px; color: var(--ink-soft); font-weight: 500;
+    }
+    .token-body { font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+    .token-meta {
+      margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .tag {
+      font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(95, 108, 255, 0.06);
+      text-transform: uppercase;
+    }
+    .tag.risk-high { background: rgba(224, 64, 64, 0.08); color: var(--red); border-color: var(--red); }
+    .tag.risk-med { background: rgba(196, 136, 47, 0.08); color: var(--gold-dark); border-color: var(--gold); }
+    .tag.risk-low { background: rgba(45, 212, 168, 0.08); color: var(--mint-dark); border-color: var(--mint); }
+
+    /* ─── Allocation Bar ─── */
+    .alloc-bar {
+      display: flex; height: 48px; border-radius: var(--radius);
+      border: 1px solid var(--line); overflow: hidden;
+      margin: 20px 0;
+    }
+    .alloc-segment {
+      display: flex; align-items: center; justify-content: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700;
+      color: #fff; min-width: 50px;
+      transition: flex 300ms ease;
+    }
+
+    .alloc-legend {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    }
+    .alloc-legend span {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .alloc-dot {
+      width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--line);
+    }
+
+    /* ─── Table ─── */
+    table {
+      width: 100%; border-collapse: collapse; font-size: 14px;
+    }
+    th {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; text-align: left;
+      padding: 10px 12px; border-bottom: 2px solid var(--line);
+      color: var(--ink-soft);
+    }
+    td {
+      padding: 10px 12px; border-bottom: 1px solid var(--line-soft);
+      line-height: 1.45;
+    }
+    tr:hover td { background: rgba(95, 108, 255, 0.03); }
+
+    /* ─── Risk Matrix ─── */
+    .risk-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px; border: 1px solid var(--line);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .risk-cell {
+      padding: 16px; text-align: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600;
+    }
+    .risk-cell.header { background: var(--ink); color: var(--paper); }
+    .risk-cell.green { background: rgba(45, 212, 168, 0.12); }
+    .risk-cell.yellow { background: rgba(196, 136, 47, 0.10); }
+    .risk-cell.red { background: rgba(224, 64, 64, 0.08); }
+
+    /* ─── Callout ─── */
+    .callout {
+      border-left: 4px solid var(--electric);
+      background: rgba(95, 108, 255, 0.05);
+      padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 20px 0;
+      font-size: 14px; line-height: 1.55; color: var(--ink-soft);
+    }
+    .callout strong { color: var(--ink); }
+    .callout.warn {
+      border-left-color: var(--red);
+      background: rgba(224, 64, 64, 0.04);
+    }
+
+    /* ─── Timeline ─── */
+    .timeline {
+      display: grid; gap: 0; margin: 20px 0;
+      border-left: 2px solid var(--electric);
+      padding-left: 24px;
+    }
+    .timeline-item {
+      position: relative; padding: 12px 0;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute; left: -29px; top: 18px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--electric); border: 2px solid var(--paper);
+    }
+    .timeline-date {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      color: var(--electric-dark); text-transform: uppercase;
+    }
+    .timeline-text {
+      margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--ink-soft);
+    }
+
+    /* ─── Source ─── */
+    .source-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px; margin-top: 20px;
+    }
+    .source-card {
+      border: 1px solid var(--line-soft); border-radius: var(--radius);
+      padding: 14px; font-size: 13px; line-height: 1.45;
+      background: var(--panel);
+      transition: transform 140ms ease;
+    }
+    .source-card:hover { transform: translate(-1px, -1px); }
+    .source-card .src-type {
+      font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+      color: var(--electric); text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 40px clamp(16px, 4vw, 48px);
+      text-align: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px;
+      color: var(--ink-soft); line-height: 1.6;
+    }
+
+    /* ─── Side Rail (Desktop) ─── */
+    .side-rail {
+      display: none;
+      position: fixed; top: 60px; left: 0; bottom: 0;
+      width: 220px; z-index: 30;
+      padding: 24px 16px;
+      border-right: 1px solid var(--line-soft);
+      background: rgba(240, 238, 230, 0.92);
+      backdrop-filter: blur(14px);
+      overflow-y: auto;
+      flex-direction: column;
+    }
+    .side-brand {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0 0 14px; border-bottom: 1px solid var(--line);
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      text-transform: uppercase;
+    }
+    .side-nav { display: grid; gap: 6px; margin-top: 14px; }
+    .side-nav a {
+      display: flex; justify-content: space-between; gap: 8px;
+      border: 1px solid var(--line-soft); border-radius: var(--radius);
+      padding: 9px 10px; background: rgba(250, 248, 242, 0.68);
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600;
+      line-height: 1.2; transition: all 140ms ease;
+    }
+    .side-nav a:hover, .side-nav a.active {
+      background: var(--ink); border-color: var(--ink); color: var(--paper);
+    }
+    .side-rail-footer {
+      margin-top: auto; padding-top: 16px;
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace; font-size: 10px; line-height: 1.4;
+    }
+
+    .origin-badge {
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 6px 10px; background: var(--mint);
+      color: var(--ink); font-family: "IBM Plex Mono", monospace;
+      font-size: 11px; font-weight: 700; line-height: 1;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    @media (min-width: 1200px) {
+      .side-rail { display: flex; }
+      .section { padding-left: calc(220px + clamp(16px, 4vw, 48px)); }
+      .topbar { padding-left: calc(220px + 16px); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .metric-board { grid-template-columns: 1fr 1fr; }
+      .chapter-head { grid-template-columns: 1fr; }
+      .grid-2, .grid-1-2, .grid-2-1 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .token-grid { grid-template-columns: 1fr; }
+      .risk-matrix { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .metric-board { grid-template-columns: 1fr; }
+      .alloc-bar { flex-direction: column; height: auto; }
+      .alloc-segment { min-height: 36px; min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress" id="progress"></div>
+
+<!-- ─── Topbar ─── -->
+<header class="topbar" id="topbar">
+  <a href="../index.html" class="portal-home">← SKY PORTAL</a>
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="打开菜单">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <a href="#tax-basics">税务基础</a>
+    <a href="#strategies">节税策略</a>
+    <a href="#asset-protection">资产保护</a>
+    <a href="#compliance">合规指南</a>
+    <a href="#case-studies">案例分析</a>
+    <a href="#sources">来源</a>
+  </nav>
+</header>
+
+<!-- ─── Side Rail ─── -->
+<aside class="side-rail">
+  <div class="side-brand">
+    <span>📋 LLC 节税指南</span>
+  </div>
+  <nav class="side-nav">
+    <a href="#top">概览</a>
+    <a href="#tax-basics">税务基础</a>
+    <a href="#strategies">节税策略</a>
+    <a href="#asset-protection">资产保护</a>
+    <a href="#compliance">合规指南</a>
+    <a href="#case-studies">案例分析</a>
+    <a href="#sources">来源</a>
+  </nav>
+  <div class="side-rail-footer">
+    <span class="origin-badge">TAX GUIDE</span>
+    <p style="margin-top:10px;">2026.05.24<br>GLM 5.1 研究</p>
+    <p style="margin-top:8px; opacity:0.6;">数据截至 2026 年 5 月<br>不构成税务建议</p>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  HERO                                      -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section hero" id="top">
+  <div class="section-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">
+          <span class="dot"></span>
+          TAX GUIDE · 2026.05.24
+        </div>
+        <h1>LLC 在美国的<span class="accent">节税</span>全景指南</h1>
+        <p class="lead">
+          从税务结构基础到实战案例，5个维度深度解析LLC如何合法节税。专为Oregon州居民和在美华人创业者编写。
+        </p>
+      </div>
+
+      <div class="metric-board">
+        <div class="metric-card">
+          <span class="metric-label">S-Corp年省自雇税</span>
+          <span class="metric-value">$5K–$15K+</span>
+          <span class="metric-note">净利润$100K时约省$7,065/年</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Solo 401(k)年抵扣上限</span>
+          <span class="metric-value">$70,000</span>
+          <span class="metric-note">2025年员工+雇主合计上限</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">QBI扣除最高</span>
+          <span class="metric-value">20%</span>
+          <span class="metric-note">合格商业收入Section 199A</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Oregon LLC注册费</span>
+          <span class="metric-value">$100</span>
+          <span class="metric-note">在线提交，即时审批</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  CHAPTER 1: 税务结构基础                    -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="tax-basics">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 01</p>
+        <h2>税务结构基础</h2>
+      </div>
+      <p class="chapter-note">LLC是法律实体而非税务实体——IRS根据成员数量和主动选举决定税务身份。理解四种分类是节税的第一步。</p>
+    </div>
+
+    <!-- 4种税务身份对比 dark panel -->
+    <div class="panel dark" style="margin-bottom:14px;">
+      <h3>四种税务身份对比</h3>
+      <table style="color:var(--paper);">
+        <thead>
+          <tr>
+            <th style="color:rgba(240,238,230,0.7);">税务身份</th>
+            <th style="color:rgba(240,238,230,0.7);">适用条件</th>
+            <th style="color:rgba(240,238,230,0.7);">自雇税</th>
+            <th style="color:rgba(240,238,230,0.7);">QBI扣除</th>
+            <th style="color:rgba(240,238,230,0.7);">有效税率估算</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Disregarded Entity</strong></td>
+            <td>Single-member LLC默认</td>
+            <td>15.3%（全部利润）</td>
+            <td>最高20%</td>
+            <td>25%–50%+</td>
+          </tr>
+          <tr>
+            <td><strong>Partnership</strong></td>
+            <td>Multi-member LLC默认</td>
+            <td>15.3%（一般收入）</td>
+            <td>最高20%</td>
+            <td>25%–50%+</td>
+          </tr>
+          <tr>
+            <td><strong>S-Corporation</strong></td>
+            <td>提交Form 2553</td>
+            <td>15.3%（仅工资部分）</td>
+            <td>最高20%</td>
+            <td>20%–40%+</td>
+          </tr>
+          <tr>
+            <td><strong>C-Corporation</strong></td>
+            <td>提交Form 8832</td>
+            <td>不适用</td>
+            <td>不适用</td>
+            <td>36%–41%+（双重征税）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 联邦税率表 + S-Corp案例 -->
+    <div class="grid-2">
+      <div class="panel">
+        <h3>2025联邦个人所得税税率（单身）</h3>
+        <table>
+          <thead>
+            <tr><th>税率</th><th>应税收入区间（单身）</th><th>已婚联合申报</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>10%</td><td>$0 – $11,925</td><td>$0 – $23,850</td></tr>
+            <tr><td>12%</td><td>$11,925 – $48,475</td><td>$23,850 – $96,950</td></tr>
+            <tr><td>22%</td><td>$48,475 – $103,350</td><td>$96,950 – $206,700</td></tr>
+            <tr><td>24%</td><td>$103,350 – $197,300</td><td>$206,700 – $394,600</td></tr>
+            <tr><td>32%</td><td>$197,300 – $250,525</td><td>$394,600 – $501,050</td></tr>
+            <tr><td>35%</td><td>$250,525 – $626,350</td><td>$501,050 – $751,600</td></tr>
+            <tr><td>37%</td><td>超过 $626,350</td><td>超过 $751,600</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:16px;">
+          <strong>关键数字：</strong>自雇税率15.3%（12.4%社安 + 2.9%医保），社安税收入上限$176,100。C-Corp联邦企业税统一21%。
+        </div>
+      </div>
+
+      <div class="panel electric">
+        <h3>S-Corp省自雇税：$100K案例</h3>
+        <p style="font-size:14px; line-height:1.6; margin:0 0 16px; color:rgba(240,238,230,0.85);">
+          假设LLC净利润$100,000，S-Corp身份合理工资设为$50,000：
+        </p>
+        <table style="color:var(--paper); font-size:13px;">
+          <thead>
+            <tr>
+              <th style="color:rgba(240,238,230,0.7);">项目</th>
+              <th style="color:rgba(240,238,230,0.7);">Disregarded Entity</th>
+              <th style="color:rgba(240,238,230,0.7);">S-Corp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>净利润</td>
+              <td>$100,000</td>
+              <td>$100,000</td>
+            </tr>
+            <tr>
+              <td>需缴自雇税的收入</td>
+              <td>$100,000</td>
+              <td>$50,000（工资）</td>
+            </tr>
+            <tr>
+              <td>自雇税</td>
+              <td>~$14,130</td>
+              <td>~$7,065</td>
+            </tr>
+            <tr>
+              <td>Distribution部分自雇税</td>
+              <td>不适用</td>
+              <td style="color:var(--mint); font-weight:700;">$0</td>
+            </tr>
+            <tr style="border-top:2px solid var(--electric);">
+              <td style="font-weight:700;">自雇税节省</td>
+              <td>—</td>
+              <td style="color:var(--mint); font-weight:700; font-size:16px;">约$7,065/年</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:14px; font-size:13px; color:rgba(240,238,230,0.65);">
+          收入越高，S-Corp优势越大。净利润$50K以下时，S-Corp额外合规成本可能超过节省。
+        </p>
+      </div>
+    </div>
+
+    <!-- 州对比表格 -->
+    <div class="panel" style="margin-top:14px;">
+      <h3>四州LLC税务对比：Oregon vs Delaware vs Wyoming vs Nevada</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>税务指标</th>
+            <th>Oregon</th>
+            <th>Delaware</th>
+            <th>Wyoming</th>
+            <th>Nevada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>州企业所得税</td>
+            <td>6.6%（≤$1M）/ 7.6%</td>
+            <td>8.7%</td>
+            <td>无</td>
+            <td>无</td>
+          </tr>
+          <tr>
+            <td>州个人所得税</td>
+            <td>4.75%–9.9%</td>
+            <td>2.2%–6.6%</td>
+            <td>无</td>
+            <td>无</td>
+          </tr>
+          <tr>
+            <td>州销售税</td>
+            <td style="color:var(--mint-dark); font-weight:700;">无</td>
+            <td>无</td>
+            <td>无</td>
+            <td>6.85%+地方税</td>
+          </tr>
+          <tr>
+            <td>LLC注册费</td>
+            <td>$100</td>
+            <td>$90</td>
+            <td>$100</td>
+            <td>$425</td>
+          </tr>
+          <tr>
+            <td>年报/年审费</td>
+            <td>$100/年</td>
+            <td>$300/年</td>
+            <td>$60/年（最少）</td>
+            <td>$350/年</td>
+          </tr>
+          <tr>
+            <td>特许经营税/商业税</td>
+            <td>无（大多数LLC）</td>
+            <td>$300/年</td>
+            <td>无</td>
+            <td>商业许可费</td>
+          </tr>
+          <tr>
+            <td>S-Corp最低税</td>
+            <td>$150</td>
+            <td>无</td>
+            <td>无</td>
+            <td>无</td>
+          </tr>
+          <tr>
+            <td>隐私保护</td>
+            <td>一般</td>
+            <td>好</td>
+            <td>好（匿名LLC）</td>
+            <td>好</td>
+          </tr>
+          <tr>
+            <td>法庭体系</td>
+            <td>一般</td>
+            <td>Chancery Court</td>
+            <td>一般</td>
+            <td>一般</td>
+          </tr>
+          <tr>
+            <td>适合场景</td>
+            <td style="font-weight:600;">本地经营首选</td>
+            <td>融资型创业</td>
+            <td>持股/资产管理</td>
+            <td>高隐私需求</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top:16px;">
+        <strong>核心原则：</strong>LLC注册州 ≠ 缴税州。决定你在哪里缴税的是你的<strong>实际经营地（nexus）</strong>。住在Oregon并在Oregon经营？即使注册Wyoming LLC，你仍需在Oregon缴个人所得税。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  CHAPTER 2: 节税策略大全                    -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="strategies">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 02</p>
+        <h2>节税策略大全</h2>
+      </div>
+      <p class="chapter-note">五大合法节税策略，每个都有具体数字和计算案例。组合使用效果倍增。</p>
+    </div>
+
+    <div class="token-grid">
+      <!-- 策略1: S-Corp Election -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#1a1a2e,#5f6cff);color:#fff;">S</div>
+          <div>
+            <div class="token-name">S-Corp Election</div>
+            <div class="token-ticker">Form 2553 · 年省$5,000-$15,000+</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>核心：只有工资部分缴自雇税，分配利润免税。</strong>LLC净利润$150K，合理工资$60K时，自雇税从$21,228降至$9,180，年省约$6,400。工资一般占净利润的40%-60%，收入越高占比可越低。<br><br>
+          <strong>关键要求：</strong>工资必须"合理"——IRS参考BLS同行业数据。工资$0或极低是审计红旗。
+        </div>
+        <div class="token-meta">
+          <span class="tag">Form 2553</span>
+          <span class="tag">3月15日前</span>
+          <span class="tag risk-low">合规风险低</span>
+        </div>
+      </div>
+
+      <!-- 策略2: 业务费用抵扣 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#2d1b69,#ff6b6b);color:#fff;">$</div>
+          <div>
+            <div class="token-name">业务费用抵扣</div>
+            <div class="token-ticker">Home Office · 里程 · Section 179</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>家庭办公室：</strong>简化法$5/平方英尺，上限$1,500/年；常规法按面积比例，200sqft办公室可抵扣$4,152/年。<br><br>
+          <strong>车辆费用：</strong>标准里程率$0.70/英里（2025），8,000业务英里=抵扣$5,600。<br><br>
+          <strong>设备购买：</strong>Section 179限额$1,250,000，购买当年全额抵扣。
+        </div>
+        <div class="token-meta">
+          <span class="tag">Schedule C</span>
+          <span class="tag">Section 179</span>
+          <span class="tag risk-low">风险低</span>
+        </div>
+      </div>
+
+      <!-- 策略3: 退休计划 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#0f1115,#c4882f);color:#fff;">401</div>
+          <div>
+            <div class="token-name">退休计划节税</div>
+            <div class="token-ticker">Solo 401(k) · 上限$70,000</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>Solo 401(k)是最强大的退休节税工具。</strong>2025年：员工缴款$23,500 + 雇主缴款（工资25%）= 合计上限$70,000。50岁以上可追加$7,500。<br><br>
+          <strong>案例：</strong>张先生S-Corp工资$60K，员工缴款$23,500 + 雇主缴款$15,000 = $38,500/年。<br>
+          所得税省$8,470 + 自雇税省$1,798 = <strong>总省$10,268/年</strong>。
+        </div>
+        <div class="token-meta">
+          <span class="tag">Solo 401(k)</span>
+          <span class="tag">SEP IRA</span>
+          <span class="tag risk-low">风险低</span>
+        </div>
+      </div>
+
+      <!-- 策略4: 家庭成员雇用 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#1a9972,#2dd4a8);color:#fff;"> Fam</div>
+          <div>
+            <div class="token-name">家庭成员雇用</div>
+            <div class="token-ticker">子女免税$15,700 · 配偶退休增强</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>雇用18岁以下子女：</strong>工资免FICA税 + 免FUTA税，$15,700以内完全免联邦所得税。<br><br>
+          <strong>案例：</strong>李先生雇14岁儿子年工资$12,000 → 省所得税$2,640 + 省自雇税$1,836 = <strong>总省$4,476</strong>。<br><br>
+          <strong>配偶雇用：</strong>可额外开设独立退休账户，家庭退休缴款总额达$69,500。
+        </div>
+        <div class="token-meta">
+          <span class="tag">W-2 required</span>
+          <span class="tag">真实工作</span>
+          <span class="tag risk-med">需合规记录</span>
+        </div>
+      </div>
+
+      <!-- 策略5: QBI扣除 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#2a5ada,#5f6cff);color:#fff;">20%</div>
+          <div>
+            <div class="token-name">QBI扣除 (Section 199A)</div>
+            <div class="token-ticker">合格商业收入 · 最高20%免税</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>Section 199A允许合格商业收入享受最高20%扣除。</strong>2025年门槛：单身$191,950以下全额享受。<br><br>
+          <strong>案例：</strong>赵先生QBI $150,000 → 扣除$30,000 → 联邦所得税省$6,600。<br><br>
+          <strong>注意：</strong>工程师和建筑师不属于SSTB，可享全额扣除。按现行法律2025年底到期，但国会很可能延期。
+        </div>
+        <div class="token-meta">
+          <span class="tag">Section 199A</span>
+          <span class="tag">可能到期</span>
+          <span class="tag risk-med">政策风险</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 综合案例 -->
+    <div class="panel dark" style="margin-top:14px;">
+      <h3>综合省税案例：刘先生，年收入$180,000</h3>
+      <p style="font-size:14px; line-height:1.6; color:rgba(240,238,230,0.75); margin:0 0 16px;">
+        38岁，软件咨询师，已婚，居住在Oregon州。5策略组合：
+      </p>
+      <table style="color:var(--paper);">
+        <thead>
+          <tr>
+            <th style="color:rgba(240,238,230,0.7);">策略</th>
+            <th style="color:rgba(240,238,230,0.7);">具体操作</th>
+            <th style="color:rgba(240,238,230,0.7);">年省税额</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S-Corp Election</td>
+            <td>工资$70,000，分配$110,000</td>
+            <td>~$7,500</td>
+          </tr>
+          <tr>
+            <td>Solo 401(k)</td>
+            <td>缴款$41,250</td>
+            <td>~$10,500</td>
+          </tr>
+          <tr>
+            <td>家庭办公室抵扣</td>
+            <td>200平方英尺，实际费用法</td>
+            <td>~$1,000</td>
+          </tr>
+          <tr>
+            <td>雇用15岁女儿</td>
+            <td>暑假帮忙，工资$8,000</td>
+            <td>~$3,000</td>
+          </tr>
+          <tr>
+            <td>QBI扣除</td>
+            <td>20% × $110,000分配</td>
+            <td>~$4,800</td>
+          </tr>
+          <tr style="border-top:2px solid var(--mint);">
+            <td style="font-weight:700;">年度总省税</td>
+            <td></td>
+            <td style="color:var(--mint); font-weight:700; font-size:16px;">~$26,800</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:14px; font-size:13px; color:rgba(240,238,230,0.65);">
+        有效税率从约32%降到约20%。每年多留$26,800在自己口袋里。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  CHAPTER 3: 资产保护与高级策略              -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="asset-protection">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 03</p>
+        <h2>资产保护与高级策略</h2>
+      </div>
+      <p class="chapter-note">Charging Order Protection、Series LLC、Holding Company结构、国际税务——LLC资产保护的全景解析。</p>
+    </div>
+
+    <!-- Charging Order Protection -->
+    <div class="grid-2">
+      <div class="panel dark">
+        <h3>Charging Order Protection</h3>
+        <ol class="finding-list">
+          <li>
+            <span class="number" style="color:var(--mint);">1</span>
+            <span><strong>债权人不能成为LLC成员</strong> — 无权参与经营管理或投票决策</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">2</span>
+            <span><strong>无权强制分配</strong> — 即使LLC有利润，债权人也拿不到钱，只有实际分配时才能截取</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">3</span>
+            <span><strong>幻影收入</strong> — 债权人可能需要为从未收到的收入缴税，极大增加和解意愿</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">4</span>
+            <span><strong>Single-member LLC保护因州而异</strong> — Wyoming/Nevada/Delaware明确保护SMLLC；佛罗里达不保护</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="panel">
+        <h3>S-Corp维护个人资产隔离的5条铁律</h3>
+        <table>
+          <thead>
+            <tr><th>原则</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>资本充足</strong></td><td>LLC必须保持足够资本金，不能空壳运营</td></tr>
+            <tr><td><strong>合规运营</strong></td><td>按时缴纳年费、维护注册状态</td></tr>
+            <tr><td><strong>避免混同</strong></td><td>个人资金和LLC资金严格分开，独立银行账户</td></tr>
+            <tr><td><strong>正式文件</strong></td><td>维护Operating Agreement、会议记录</td></tr>
+            <tr><td><strong>合理交易</strong></td><td>LLC与成员之间按公允价值交易</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Series LLC vs Holding Company -->
+    <div class="panel" style="margin-top:14px;">
+      <h3>Series LLC vs Holding Company 结构对比</h3>
+      <div class="grid-2" style="margin-top:14px;">
+        <div>
+          <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:700; color:var(--electric); text-transform:uppercase; margin-bottom:8px;">Series LLC</p>
+          <p style="font-size:14px; line-height:1.55; color:var(--ink-soft); margin:0 0 10px;">
+            一个"主LLC"下创建多个独立"系列"，每个系列有独立资产和负债。适合房地产投资组合管理。
+          </p>
+          <div class="callout" style="margin:0;">
+            <strong>优势：</strong>成本低（单次注册），隔离各系列负债<br>
+            <strong>风险：</strong>跨州认可不确定，税务处理复杂
+          </div>
+          <p style="font-size:12px; color:var(--ink-soft); margin-top:8px;">支持州：Delaware、Texas、Nevada、Illinois等</p>
+        </div>
+        <div>
+          <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:700; color:var(--gold-dark); text-transform:uppercase; margin-bottom:8px;">Holding Company + 子LLC</p>
+          <p style="font-size:14px; line-height:1.55; color:var(--ink-soft); margin:0 0 10px;">
+            顶层Holding LLC持有多个独立子LLC的会员权益。法律确定性最强，税务优化空间最大。
+          </p>
+          <div class="callout" style="margin:0;">
+            <strong>优势：</strong>风险隔离最可靠，可合并报税，盈亏互抵<br>
+            <strong>成本：</strong>每个子LLC独立注册和维护，费用更高
+          </div>
+          <p style="font-size:12px; color:var(--ink-soft); margin-top:8px;">适用：高价值资产或高风险业务</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 国际税务 -->
+    <div class="grid-2" style="margin-top:14px;">
+      <div class="panel">
+        <h3>中国护照持有者：美国LLC税务</h3>
+        <table>
+          <thead>
+            <tr><th>收入类型</th><th>税率</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ECI</strong>（有效关联收入）</td>
+              <td>累进税率10%-37%</td>
+              <td>在美国实际经营（电商、咨询），可扣费用，需申报Form 1040-NR</td>
+            </tr>
+            <tr>
+              <td><strong>FDAP</strong>（固定收入）</td>
+              <td>30%固定（或协定税率）</td>
+              <td>股息、利息、被动租金，不可扣费用，通过预扣征收</td>
+            </tr>
+            <tr>
+              <td><strong>FIRPTA</strong>（不动产处置）</td>
+              <td>累进税率</td>
+              <td>出售美国不动产，买方须预扣售价15%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout warn" style="margin-top:14px;">
+          <strong>非ECI非FDAP的收入</strong>通常不需要缴纳美国联邦所得税——外国投资者选择LLC持有海外业务的原因之一。
+        </div>
+      </div>
+
+      <div class="panel electric">
+        <h3>中美双重征税协定关键条款</h3>
+        <ol class="finding-list">
+          <li>
+            <span class="number" style="color:var(--mint);">7</span>
+            <span><strong>第7条（Business Profits）</strong> — 仅在设有常设机构（PE）的缔约国征税。无PE = 可能不在美国纳税</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">10</span>
+            <span><strong>第10条（Dividends）</strong> — 股息预扣税率降至10%</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">11</span>
+            <span><strong>第11条（Interest）</strong> — 利息预扣税率降至10%</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">12</span>
+            <span><strong>第12条（Royalties）</strong> — 特许权使用费预扣税率降至10%</span>
+          </li>
+        </ol>
+        <p style="margin-top:14px; font-size:13px; color:rgba(240,238,230,0.65);">
+          利用协定需提交Form 8833（Treaty-Based Disclosure）和Form W-8BEN。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  CHAPTER 4: 合规指南                        -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="compliance">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 04</p>
+        <h2>合规指南</h2>
+      </div>
+      <p class="chapter-note">年度合规日历、常见陷阱、申报截止日期、预估税Safe Harbor——确保你不被罚款。</p>
+    </div>
+
+    <!-- 年度合规日历 -->
+    <div class="panel" style="margin-bottom:14px;">
+      <h3>年度合规日历（2026年，针对2025税年）</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">1月</div>
+          <div class="timeline-text"><strong>整理上年记录</strong> — 收入/支出记录归档；发放1099-NEC给独立承包商（<strong>1/31截止</strong>）</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2月</div>
+          <div class="timeline-text"><strong>收集税务表格</strong> — 收集所有K-1、W-2、1099表格</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">3月16日</div>
+          <div class="timeline-text"><strong>Multi-member LLC / S-Corp申报截止</strong> — Form 1065 / Form 1120-S（周日顺延）；如需延期提交Form 7004</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">4月15日</div>
+          <div class="timeline-text"><strong>个人税表+Schedule C截止</strong> — Form 1040；Q1预估税款到期；提交Form 4868可延期至10/15</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">6月15日</div>
+          <div class="timeline-text"><strong>Q2预估税款到期</strong> — 注意Q2只覆盖2个月（4-5月）</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">9月15日</div>
+          <div class="timeline-text"><strong>Q3预估税款到期</strong>；延期合伙/S-Corp税表截止</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">10月15日</div>
+          <div class="timeline-text"><strong>延期个人税表截止</strong></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">11-12月</div>
+          <div class="timeline-text"><strong>年末税务规划</strong> — 加速支出、延迟收入、退休计划供款、设备采购（Section 179）</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">次年1月15日</div>
+          <div class="timeline-text"><strong>Q4预估税款到期</strong>；年度总结</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4个常见陷阱 -->
+    <div class="grid-2" style="margin-bottom:14px;">
+      <div class="callout warn">
+        <strong>陷阱1：个人和业务资金混用（Commingling）</strong><br>
+        用个人信用卡付业务支出、用业务账户付个人开销——法庭可能认定LLC和个人没有实质分离，<strong>刺破公司面纱</strong>，使你个人对LLC债务承担连带责任。第一天就开独立银行账户。
+      </div>
+      <div class="callout warn">
+        <strong>陷阱2：S-Corp合理工资设定不当</strong><br>
+        净利润$120K只开$12K工资？IRS会将Distribution重新归类为工资，追缴自雇税+罚款+利息。工资应占净利润40-60%，参考BLS同行业数据文件化分析过程。
+      </div>
+      <div class="callout warn">
+        <strong>陷阱3：过度抵扣</strong><br>
+        Home Office面积过大（不是exclusive use）、车辆100%业务用途但有通勤、把个人聚餐当业务餐——IRS审计红旗。每笔抵扣都要有凭证和业务目的记录。
+      </div>
+      <div class="callout warn">
+        <strong>陷阱4：迟交罚款</strong><br>
+        个人税表迟交：欠税额5%/月，上限25%。3人LLC的Form 1065晚交3个月 → 3×3×$270 = <strong>$2,430罚款</strong>。设置日历提醒，先延期也别晚交。
+      </div>
+    </div>
+
+    <!-- 申报截止日期表格 + Safe Harbor -->
+    <div class="grid-2">
+      <div class="panel">
+        <h3>申报截止日期汇总（2026年）</h3>
+        <table>
+          <thead>
+            <tr><th>申报类型</th><th>截止日</th><th>延期后</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Form 1040 + Schedule C</td><td><strong>4/15</strong></td><td>10/15</td></tr>
+            <tr><td>Form 1065（Partnership）</td><td><strong>3/16</strong></td><td>9/15</td></tr>
+            <tr><td>Form 1120-S（S-Corp）</td><td><strong>3/16</strong></td><td>9/15</td></tr>
+            <tr><td>Form 1120（C-Corp）</td><td><strong>4/15</strong></td><td>10/15</td></tr>
+            <tr><td>Oregon州个人税</td><td><strong>4/15</strong></td><td>10/15</td></tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:14px;">
+          <strong>重要：</strong>延期只延期<strong>申报</strong>，不延期<strong>缴款</strong>！所有欠税仍需在原截止日前缴纳。
+        </div>
+      </div>
+
+      <div class="panel electric">
+        <h3>预估税 Safe Harbor 规则</h3>
+        <p style="font-size:14px; line-height:1.6; color:rgba(240,238,230,0.85); margin:0 0 14px;">
+          自雇人士年欠税超过$1,000需按季度预缴。满足以下<strong>任一条件</strong>即可免罚：
+        </p>
+        <ol class="finding-list">
+          <li>
+            <span class="number" style="color:var(--mint);">1</span>
+            <span><strong>100%规则</strong> — 预缴总额 ≥ 上年税单总税额</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">2</span>
+            <span><strong>110%规则</strong> — AGI > $150K时，预缴 ≥ 上年税额的110%</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">3</span>
+            <span><strong>90%规则</strong> — 预缴 ≥ 本年实际税额的90%</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">4</span>
+            <span><strong>$1,000豁免</strong> — 欠税金额 < $1,000</span>
+          </li>
+        </ol>
+        <p style="margin-top:14px; font-size:13px; color:rgba(240,238,230,0.65);">
+          最简单策略：拿去年税表总税额÷4，按时交。上年税额$20K → 每季度$5,000。EFTPS免费注册，推荐使用。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  CHAPTER 5: 实战案例分析                    -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="case-studies">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 05</p>
+        <h2>实战案例分析</h2>
+      </div>
+      <p class="chapter-note">5个典型场景，用具体数字量化不同税务选举的差异。案例5是晓波的定制建议。</p>
+    </div>
+
+    <div class="token-grid">
+      <!-- 案例1 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#1a1a2e,#5f6cff);color:#fff;">1</div>
+          <div>
+            <div class="token-name">独立咨询师/自由职业者</div>
+            <div class="token-ticker">年收入$150K · 单身 · Oregon</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <table style="font-size:13px;">
+            <thead>
+              <tr><th>对比项</th><th>Sole Prop</th><th>S-Corp</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>自雇/FICA税</td><td>$19,076</td><td>$11,475</td></tr>
+              <tr><td>联邦所得税</td><td>$14,122</td><td>$16,544</td></tr>
+              <tr><td>Oregon州税</td><td>$10,652</td><td>$10,710</td></tr>
+              <tr style="border-top:2px solid var(--ink);">
+                <td><strong>总税负</strong></td>
+                <td><strong>$43,850</strong></td>
+                <td style="color:var(--mint-dark);"><strong>$38,729</strong></td>
+              </tr>
+              <tr>
+                <td>有效税率</td>
+                <td>32.5%</td>
+                <td>28.7%</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px; font-size:13px;"><strong>年省$5,121</strong>。减去S-Corp合规成本$1-2K，净省$3-4K。收入越高优势越大。</p>
+        </div>
+        <div class="token-meta">
+          <span class="tag">推荐S-Corp</span>
+          <span class="tag risk-low">$150K+</span>
+        </div>
+      </div>
+
+      <!-- 案例2 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#2d1b69,#ff6b6b);color:#fff;">2</div>
+          <div>
+            <div class="token-name">小型科技咨询公司</div>
+            <div class="token-ticker">2人LLC · 总收入$300K · 各$130K</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <table style="font-size:13px;">
+            <thead>
+              <tr><th>对比项</th><th>Partnership</th><th>S-Corp</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2人自雇/FICA税</td><td>$36,790</td><td>$24,480</td></tr>
+              <tr><td>2人联邦所得税</td><td>$24,714</td><td>$32,582</td></tr>
+              <tr><td>2人Oregon州税</td><td>$20,676</td><td>$21,252</td></tr>
+              <tr style="border-top:2px solid var(--ink);">
+                <td><strong>2人总税负</strong></td>
+                <td><strong>$82,180</strong></td>
+                <td style="color:var(--mint-dark);"><strong>$78,314</strong></td>
+              </tr>
+              <tr>
+                <td>有效税率</td>
+                <td>31.6%</td>
+                <td>30.1%</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px; font-size:13px;">2人合计年省<strong>$3,866</strong>。加入401(k)后额外省$10,800+。<strong>务必设退休计划。</strong></p>
+        </div>
+        <div class="token-meta">
+          <span class="tag">推荐S-Corp</span>
+          <span class="tag">+Solo 401(k)</span>
+          <span class="tag risk-low">稳定</span>
+        </div>
+      </div>
+
+      <!-- 案例3 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#1a9972,#2dd4a8);color:#fff;">3</div>
+          <div>
+            <div class="token-name">房地产投资LLC</div>
+            <div class="token-ticker">3个出租物业 · 租金$120K · 净收入$50K</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <p style="font-size:14px; line-height:1.55; color:var(--ink-soft);">
+            <strong>租金收入不算自雇收入！</strong>无论LLC还是个人持有，<strong>不需要交15.3%自雇税</strong>。折旧$30K/年再减应税收入。含QBI 20%扣除后：
+          </p>
+          <table style="font-size:13px; margin-top:10px;">
+            <tbody>
+              <tr><td>联邦所得税</td><td><strong>$2,799</strong></td></tr>
+              <tr><td>Oregon州税</td><td><strong>$3,838</strong></td></tr>
+              <tr><td>自雇税</td><td style="color:var(--mint-dark);"><strong>$0</strong></td></tr>
+              <tr style="border-top:2px solid var(--ink);">
+                <td><strong>有效税率</strong></td>
+                <td><strong style="color:var(--mint-dark);">5.5%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px; font-size:13px;">LLC只为<strong>责任隔离</strong>，不需要选S-Corp。Cost Segregation可加速折旧，1031 Exchange递延资本利得税。</p>
+        </div>
+        <div class="token-meta">
+          <span class="tag">默认pass-through</span>
+          <span class="tag">1031 Exchange</span>
+          <span class="tag risk-low">极低税率</span>
+        </div>
+      </div>
+
+      <!-- 案例4 -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#0f1115,#c4882f);color:#fff;">4</div>
+          <div>
+            <div class="token-name">副业/兼职LLC</div>
+            <div class="token-ticker">W-2 $120K + 副业$50K · 单身 · Oregon</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <table style="font-size:13px;">
+            <thead>
+              <tr><th>对比项</th><th>Sole Prop</th><th>S-Corp</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>总税负（含W-2）</td><td>$57,776</td><td>$56,297</td></tr>
+              <tr><td>有效税率（$170K）</td><td>34.0%</td><td>33.1%</td></tr>
+              <tr style="border-top:2px solid var(--ink);">
+                <td><strong>年省</strong></td>
+                <td>—</td>
+                <td><strong>$1,479</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px; font-size:13px;">副业$50K时S-Corp节省有限（$1,479）。<strong>建议：先Sole Prop起步，副业收入稳定超$60K后转S-Corp。</strong>额外抵扣$15K后可再省$5K+。</p>
+        </div>
+        <div class="token-meta">
+          <span class="tag">$60K+转S-Corp</span>
+          <span class="tag risk-med">先观察</span>
+        </div>
+      </div>
+
+      <!-- 案例5: 晓波定制 — 突出显示 -->
+      <div class="token-card" style="border-color:var(--electric); box-shadow: var(--shadow), 0 0 0 2px rgba(95,108,255,0.15);">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#5f6cff,#2dd4a8);color:#fff;">★</div>
+          <div>
+            <div class="token-name" style="color:var(--electric);">晓波：Intel员工 + 咨询/投资</div>
+            <div class="token-ticker">W-2 $180K + 咨询$60K · 定制方案</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <p style="font-size:14px; line-height:1.55; color:var(--ink-soft); margin-bottom:10px;">
+            <strong>建议分设两个LLC：</strong>
+          </p>
+          <table style="font-size:13px;">
+            <thead>
+              <tr><th>LLC</th><th>用途</th><th>税务选举</th><th>年成本</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>LLC #1</strong></td>
+                <td>半导体咨询</td>
+                <td style="color:var(--electric);"><strong>S-Corp</strong></td>
+                <td>~$1,500</td>
+              </tr>
+              <tr>
+                <td><strong>LLC #2</strong></td>
+                <td>天使投资</td>
+                <td>默认pass-through</td>
+                <td>~$800</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="callout" style="margin-top:14px; font-size:13px;">
+            <strong>优化后整体方案：</strong><br>
+            Solo 401(k)抵扣$23,500+25%工资 · HSA抵扣$4,300 · 家庭办公抵扣$2,000-5,000<br>
+            总收入$240K+ → 优化后应税收入~$175-180K<br>
+            <strong>有效税率约20-22%</strong>，年省约$10,000-15,000+
+          </div>
+        </div>
+        <div class="token-meta">
+          <span class="tag">双LLC</span>
+          <span class="tag">咨询S-Corp</span>
+          <span class="tag">投资pass-through</span>
+          <span class="tag risk-low">定制优化</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 总体建议汇总 -->
+    <div class="panel dark" style="margin-top:14px;">
+      <h3>总体建议汇总</h3>
+      <table style="color:var(--paper);">
+        <thead>
+          <tr>
+            <th style="color:rgba(240,238,230,0.7);">案例</th>
+            <th style="color:rgba(240,238,230,0.7);">最优方案</th>
+            <th style="color:rgba(240,238,230,0.7);">年节省（vs最差）</th>
+            <th style="color:rgba(240,238,230,0.7);">关键理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. 独立咨询师</td>
+            <td>LLC → S-Corp</td>
+            <td>~$5,100</td>
+            <td>避免利润部分自雇税</td>
+          </tr>
+          <tr>
+            <td>2. 2人科技LLC</td>
+            <td>LLC → S-Corp</td>
+            <td>~$3,900–11,300</td>
+            <td>自雇税节省+退休计划</td>
+          </tr>
+          <tr>
+            <td>3. 房地产LLC</td>
+            <td>默认pass-through</td>
+            <td>无额外税节省</td>
+            <td>租金已免自雇税，只为责任保护</td>
+          </tr>
+          <tr>
+            <td>4. 副业LLC</td>
+            <td>视收入选S-Corp</td>
+            <td>~$1,500</td>
+            <td>$60K以下选Sole Prop</td>
+          </tr>
+          <tr>
+            <td style="color:var(--electric);">5. Intel+咨询/投资</td>
+            <td style="color:var(--electric);">双LLC</td>
+            <td style="color:var(--mint);">~$10,000-15,000+</td>
+            <td>分工明确，合规简单</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 通用建议 -->
+    <div class="panel" style="margin-top:14px;">
+      <h3>5条通用税务优化策略</h3>
+      <div class="grid-2" style="margin-top:14px;">
+        <ul class="finding-list">
+          <li>
+            <span class="number" style="color:var(--mint);">1</span>
+            <span><strong>退休计划是最大的合法避税工具</strong> — Solo 401(k)可让你交税前拿走$23,500-$70,000</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">2</span>
+            <span><strong>Section 179全额抵扣</strong> — 购买设备（电脑、家具）可在当年全额抵扣，上限$1,250,000</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">3</span>
+            <span><strong>里程追踪</strong> — $0.70/英里（2025），经常见客户每年可省$3,000-8,000</span>
+          </li>
+        </ul>
+        <ul class="finding-list">
+          <li>
+            <span class="number" style="color:var(--mint);">4</span>
+            <span><strong>医疗费用抵扣</strong> — S-Corp业主可通过公司为雇员（自己+配偶）支付医疗保险，全额抵扣</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">5</span>
+            <span><strong>两个LLC分工</strong> — 咨询选S-Corp省自雇税，投资保持pass-through简单运行</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SOURCES                                   -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="sources">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Sources</p>
+        <h2>研究来源</h2>
+      </div>
+      <p class="chapter-note">本指南基于5份深度研究报告，数据来源于IRS官方文件、州政府网站和税务法规。</p>
+    </div>
+
+    <div class="source-grid">
+      <div class="source-card">
+        <div class="src-type">Sub-Agent 1</div>
+        <strong>LLC税务结构基础</strong><br>4种税务身份对比、联邦税率表、S-Corp省税案例、州对比（OR/DE/WY/NV）
+      </div>
+      <div class="source-card">
+        <div class="src-type">Sub-Agent 2</div>
+        <strong>LLC合法节税策略大全</strong><br>S-Corp Election、业务费用抵扣、退休计划、家庭成员雇用、QBI扣除
+      </div>
+      <div class="source-card">
+        <div class="src-type">Sub-Agent 3</div>
+        <strong>LLC资产保护和高级策略</strong><br>Charging Order Protection、Series LLC、Holding Company、国际税务
+      </div>
+      <div class="source-card">
+        <div class="src-type">Sub-Agent 4</div>
+        <strong>LLC税务合规和实操指南</strong><br>成立流程、年度申报、预估税、常见陷阱、合规日历
+      </div>
+      <div class="source-card">
+        <div class="src-type">Sub-Agent 5</div>
+        <strong>LLC节税实战案例分析</strong><br>5个典型场景对比（咨询师/2人LLC/房地产/副业/Intel员工）
+      </div>
+      <div class="source-card">
+        <div class="src-type">官方来源</div>
+        <strong>IRS / Oregon Secretary of State</strong><br>Form 2553/8832/941/1065/1120-S、Oregon LLC注册和年费
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <p>
+    LLC税务节税全景指南 · 2026.05.24 · Sky Portal<br>
+    研究 by GLM 5.1 (5 subagents) · 数据截至 2026 年 5 月<br><br>
+    <strong>免责声明：</strong>本指南仅供教育和参考用途，不构成法律、税务或财务建议。税法复杂且经常变化，请在做出任何税务决策前咨询持证的专业税务顾问（CPA或税务律师）。文中所有数字基于2025-2026税务年度的现行法律，未来可能发生变化。
+  </p>
+</footer>
+
+<!-- ─── Scripts ─── -->
+<script>
+// Progress bar
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = h > 0 ? (scrollY / h * 100) + '%' : '0';
+});
+
+// Smooth nav active state (topbar + side rail)
+const allNavLinks = document.querySelectorAll('nav a, .side-nav a');
+const navSections = [...new Set([...allNavLinks].map(a => a.getAttribute('href')))].map(h => document.querySelector(h)).filter(Boolean);
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      allNavLinks.forEach(a => a.classList.toggle('active',
+        a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+navSections.forEach(s => io.observe(s));
+
+// Mobile hamburger menu
+const menuBtn = document.getElementById('menuToggle');
+const topbar = document.getElementById('topbar');
+menuBtn.addEventListener('click', () => {
+  const open = topbar.classList.toggle('menu-open');
+  menuBtn.setAttribute('aria-expanded', open);
+  menuBtn.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+});
+topbar.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    topbar.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && topbar.classList.contains('menu-open')) {
+    topbar.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Animate elements on scroll
+const fadeEls = document.querySelectorAll('.panel, .token-card, .callout, .timeline-item');
+const fadeIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      fadeIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  fadeIO.observe(el);
+});
+</script>
+
+</body>
+</html>

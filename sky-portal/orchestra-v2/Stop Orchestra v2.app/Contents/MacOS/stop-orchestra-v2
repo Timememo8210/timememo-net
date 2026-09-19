@@ -1,0 +1,30 @@
+#!/bin/zsh
+set -euo pipefail
+
+APP_DIR="$(cd "$(dirname "$0")" && pwd)"
+ORCHESTRA_DIR="$(cd "$APP_DIR/../../.." && pwd)"
+RUNTIME_DIR="${ORCHESTRA_DIR}/.orchestra-v2"
+PID_FILE="${RUNTIME_DIR}/server.pid"
+
+notify() {
+  /usr/bin/osascript -e "display notification \"$1\" with title \"Orchestra v2\"" >/dev/null 2>&1 || true
+}
+
+if [ ! -f "$PID_FILE" ]; then
+  notify "No Orchestra v2 server pid file found."
+  exit 0
+fi
+
+PID="$(cat "$PID_FILE" 2>/dev/null || true)"
+if [ -n "$PID" ] && /bin/kill -0 "$PID" >/dev/null 2>&1; then
+  /bin/kill "$PID" >/dev/null 2>&1 || true
+  sleep 1
+  if /bin/kill -0 "$PID" >/dev/null 2>&1; then
+    /bin/kill -9 "$PID" >/dev/null 2>&1 || true
+  fi
+  rm -f "$PID_FILE"
+  notify "Orchestra v2 has stopped."
+else
+  rm -f "$PID_FILE"
+  notify "Orchestra v2 was not running."
+fi

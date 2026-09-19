@@ -1,0 +1,2763 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HBM 市场与技术研究简报 | HBM Market & Technology Brief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,500;6..72,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #151611;
+      --ink-soft: #3f3c33;
+      --paper: #f4efe4;
+      --paper-deep: #e8dfcf;
+      --panel: #fffaf0;
+      --line: #27251f;
+      --line-soft: rgba(39, 37, 31, 0.18);
+      --copper: #b95f2f;
+      --copper-dark: #81411f;
+      --teal: #087f89;
+      --teal-dark: #075c63;
+      --acid: #d7e65f;
+      --red: #b8362f;
+      --blue: #2b5f86;
+      --shadow: 0 22px 60px rgba(21, 22, 17, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(8, 127, 137, 0.12) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(185, 95, 47, 0.1) 1px, transparent 1px),
+        linear-gradient(135deg, #f7f2e8 0%, #eee3d2 46%, #f3efe3 100%);
+      background-size: 58px 58px, 58px 58px, auto;
+      overflow-x: hidden;
+    }
+
+    body.lang-zh .en {
+      display: none !important;
+    }
+
+    body.lang-en .zh {
+      display: none !important;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(21, 22, 17, 0.07) 0 1px, transparent 1px 5px),
+        repeating-linear-gradient(90deg, rgba(255, 250, 240, 0.32) 0 1px, transparent 1px 7px);
+      mix-blend-mode: multiply;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      height: 4px;
+      width: 0;
+      background: linear-gradient(90deg, var(--copper), var(--teal), var(--acid));
+      z-index: 50;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px clamp(18px, 4vw, 54px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(244, 239, 228, 0.88);
+      backdrop-filter: blur(18px);
+    }
+
+    .side-rail {
+      display: none;
+    }
+
+    .portal-home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 10px 12px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 5px 5px 0 var(--copper);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .portal-home:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .mobile-home {
+      flex: 0 0 auto;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.72);
+      overflow: hidden;
+    }
+
+    .lang-toggle button {
+      border: 0;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 10px;
+    }
+
+    .lang-toggle button.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--line);
+      background:
+        linear-gradient(90deg, transparent 45%, var(--line) 45% 55%, transparent 55%),
+        linear-gradient(0deg, transparent 45%, var(--line) 45% 55%, transparent 55%),
+        var(--acid);
+      box-shadow: 4px 4px 0 var(--line);
+      flex: 0 0 auto;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1;
+      background: rgba(255, 250, 240, 0.56);
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .origin-badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: var(--acid);
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 40px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .menu-toggle span {
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    main {
+      width: 100%;
+    }
+
+    .side-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 2px 0 14px;
+      border-bottom: 1px solid var(--line);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .side-nav {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .side-nav a {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      padding: 11px 12px;
+      background: rgba(255, 250, 240, 0.68);
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .side-nav a:hover,
+    .side-nav a.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .side-rail-footer {
+      margin-top: auto;
+      display: grid;
+      gap: 12px;
+      padding-top: 18px;
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .section {
+      padding: clamp(46px, 8vw, 96px) clamp(18px, 4vw, 54px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-inner {
+      width: min(1220px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 86svh;
+      display: grid;
+      align-items: center;
+      padding-top: clamp(38px, 6vw, 76px);
+      padding-bottom: clamp(34px, 6vw, 72px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+      gap: clamp(24px, 5vw, 72px);
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 8px 10px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 5px 5px 0 var(--line);
+      margin-bottom: 24px;
+    }
+
+    .kicker .dot {
+      width: 9px;
+      height: 9px;
+      background: var(--red);
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(42px, 6.2vw, 82px);
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 700;
+      max-width: 780px;
+      overflow-wrap: anywhere;
+    }
+
+    .lead {
+      margin: 26px 0 0;
+      max-width: 760px;
+      color: var(--ink-soft);
+      font-size: clamp(18px, 2.2vw, 25px);
+      line-height: 1.45;
+      font-weight: 400;
+      overflow-wrap: break-word;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: var(--paper);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 5px 5px 0 var(--copper);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button.secondary {
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 5px 5px 0 var(--teal);
+    }
+
+    .button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .metric-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-self: stretch;
+    }
+
+    .metric-card {
+      min-height: 154px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: enter 620ms ease forwards;
+    }
+
+    .metric-card:nth-child(2) { animation-delay: 90ms; }
+    .metric-card:nth-child(3) { animation-delay: 180ms; }
+    .metric-card:nth-child(4) { animation-delay: 270ms; }
+
+    .metric-card::after {
+      content: "";
+      position: absolute;
+      right: -28px;
+      bottom: -38px;
+      width: 104px;
+      height: 104px;
+      border: 16px solid rgba(8, 127, 137, 0.13);
+      transform: rotate(14deg);
+    }
+
+    .metric-label {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric-value {
+      margin-top: 20px;
+      font-family: "Newsreader", serif;
+      font-weight: 700;
+      line-height: 0.95;
+      font-size: clamp(32px, 3.4vw, 52px);
+      position: relative;
+      z-index: 1;
+      overflow-wrap: anywhere;
+    }
+
+    .metric-note {
+      margin-top: 10px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.35;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chapter-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(280px, 0.22fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--copper-dark);
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(38px, 5vw, 70px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .chapter-note {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+
+    .market-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.9);
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: var(--shadow);
+    }
+
+    .panel.dark {
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 10px 10px 0 var(--copper);
+    }
+
+    .panel h3,
+    .signal h3,
+    .source-card h3 {
+      margin: 0 0 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .finding-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .finding-list li {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .panel.dark .finding-list li {
+      color: rgba(244, 239, 228, 0.82);
+    }
+
+    .number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--copper);
+    }
+
+    .tam-chart {
+      display: grid;
+      gap: 24px;
+    }
+
+    .tam-range {
+      position: relative;
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        repeating-linear-gradient(90deg, rgba(21, 22, 17, 0.07) 0 1px, transparent 1px 10%),
+        var(--paper);
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .tam-axis {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 34px;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .tam-bar {
+      position: absolute;
+      left: 38%;
+      right: 10%;
+      bottom: 70px;
+      height: 54px;
+      background: linear-gradient(90deg, var(--copper), var(--teal));
+      border: 1px solid var(--line);
+      box-shadow: 8px 8px 0 rgba(21, 22, 17, 0.16);
+    }
+
+    .tam-pin {
+      position: absolute;
+      bottom: 130px;
+      transform: translateX(-50%);
+      display: grid;
+      gap: 5px;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .tam-pin::after {
+      content: "";
+      width: 1px;
+      height: 58px;
+      background: var(--line);
+      justify-self: center;
+    }
+
+    .tam-pin.low {
+      left: 38%;
+    }
+
+    .tam-pin.high {
+      left: 90%;
+      text-align: right;
+    }
+
+    .tam-caption {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      max-width: 390px;
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 0.98;
+      font-family: "Newsreader", serif;
+      font-weight: 700;
+    }
+
+    .tam-caption span {
+      color: var(--copper-dark);
+    }
+
+    .tam-caption > .zh,
+    .tam-caption > .en {
+      color: inherit;
+    }
+
+    .tam-caption .figure {
+      color: var(--copper-dark);
+    }
+
+    .small-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mini-stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: var(--panel);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .mini-stat span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .stack-diagram {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .die {
+      position: relative;
+      min-height: 32px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .die::before,
+    .die::after {
+      content: "";
+      width: 7px;
+      height: 100%;
+      background:
+        linear-gradient(var(--teal), var(--teal)) center / 2px 100% no-repeat,
+        transparent;
+      opacity: 0.8;
+    }
+
+    .die.base {
+      min-height: 46px;
+      background: var(--acid);
+    }
+
+    .die.gpu {
+      min-height: 66px;
+      background: var(--ink);
+      color: var(--paper);
+      margin-top: 14px;
+      justify-content: center;
+    }
+
+    .interposer {
+      min-height: 22px;
+      border: 1px solid var(--line);
+      background:
+        repeating-linear-gradient(90deg, rgba(21, 22, 17, 0.28) 0 2px, transparent 2px 12px),
+        var(--copper);
+      margin: 8px 0 2px;
+    }
+
+    .diagram-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .ladder {
+      display: grid;
+      gap: 15px;
+      margin-top: 6px;
+    }
+
+    .ladder-row {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr) 92px;
+      align-items: center;
+      gap: 12px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .bar-track {
+      height: 30px;
+      border: 1px solid var(--line);
+      background: rgba(21, 22, 17, 0.06);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-right: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(255, 250, 240, 0.24), transparent),
+        var(--teal);
+    }
+
+    .bar-fill.copper {
+      background:
+        linear-gradient(90deg, rgba(255, 250, 240, 0.24), transparent),
+        var(--copper);
+    }
+
+    .bar-fill.red {
+      background:
+        linear-gradient(90deg, rgba(255, 250, 240, 0.24), transparent),
+        var(--red);
+    }
+
+    .bar-fill.purple {
+      background:
+        linear-gradient(90deg, rgba(255, 250, 240, 0.24), transparent),
+        #6d4aff;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .roadmap-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 16px;
+      min-height: 160px;
+    }
+
+    .roadmap-item strong {
+      display: block;
+      font-family: "Newsreader", serif;
+      font-size: 30px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .roadmap-item span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .horizon-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .spec-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 16px;
+      min-height: 142px;
+    }
+
+    .spec-card strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .spec-card span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .status-tag {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 5px 8px;
+      margin-bottom: 12px;
+      color: var(--copper-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      margin-top: 18px;
+    }
+
+    .pathway {
+      min-height: 210px;
+      padding: 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .pathway:last-child {
+      border-right: 0;
+    }
+
+    .pathway h3 {
+      margin: 0 0 12px;
+      font-family: "Newsreader", serif;
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1;
+    }
+
+    .pathway p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .source-note {
+      margin: 16px 0 0;
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .research-block {
+      margin-top: 18px;
+      scroll-margin-top: 140px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, 0.84);
+      padding: clamp(18px, 3vw, 26px);
+      box-shadow: 8px 8px 0 rgba(21, 22, 17, 0.11);
+    }
+
+    .research-block h3 {
+      margin: 0 0 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .base-die-note {
+      margin-top: 20px;
+      scroll-margin-top: 140px;
+    }
+
+    .base-die-note h4 {
+      margin: 0 0 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .evidence-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 14px;
+      min-height: 140px;
+    }
+
+    .evidence-card strong {
+      display: block;
+      font-family: "Newsreader", serif;
+      font-size: clamp(28px, 3.2vw, 42px);
+      line-height: 0.95;
+      margin-bottom: 10px;
+    }
+
+    .evidence-card span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      margin-top: 14px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 840px;
+      font-size: 13px;
+      line-height: 1.42;
+    }
+
+    .data-table th,
+    .data-table td {
+      border-bottom: 1px solid var(--line-soft);
+      border-right: 1px solid var(--line-soft);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .data-table th:last-child,
+    .data-table td:last-child {
+      border-right: 0;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .data-table th {
+      background: rgba(21, 22, 17, 0.06);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .data-table strong {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+
+    .quality {
+      display: inline-flex;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 3px 7px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .quality.official { color: var(--teal-dark); }
+    .quality.analyst { color: var(--copper-dark); }
+    .quality.scenario { color: var(--blue); }
+
+    .share-bars {
+      display: grid;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .share-row {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr) 46px;
+      gap: 10px;
+      align-items: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .share-track {
+      height: 26px;
+      border: 1px solid var(--line);
+      background: rgba(21, 22, 17, 0.06);
+      overflow: hidden;
+    }
+
+    .share-fill {
+      height: 100%;
+      border-right: 1px solid var(--line);
+      background: linear-gradient(90deg, var(--teal), var(--acid));
+    }
+
+    .share-fill.copper { background: linear-gradient(90deg, var(--copper), #f1c27d); }
+    .share-fill.red { background: linear-gradient(90deg, var(--red), #e3a39d); }
+
+    .matrix-note {
+      margin: 10px 0 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      background: var(--panel);
+      margin-top: 14px;
+    }
+
+    .risk-card {
+      min-height: 180px;
+      padding: 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .risk-card:last-child {
+      border-right: 0;
+    }
+
+    .risk-card strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .risk-card span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .supplier-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+      gap: 14px;
+    }
+
+    .supplier {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      min-height: 310px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 8px 8px 0 rgba(21, 22, 17, 0.12);
+    }
+
+    .supplier.featured {
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 10px 10px 0 var(--teal);
+    }
+
+    .supplier h3 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 0.95;
+    }
+
+    .supplier p {
+      color: var(--ink-soft);
+      line-height: 1.55;
+      margin: 18px 0;
+    }
+
+    .supplier.featured p {
+      color: rgba(244, 239, 228, 0.82);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .bottleneck-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .bottleneck {
+      min-height: 160px;
+      padding: 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .bottleneck:last-child {
+      border-right: 0;
+    }
+
+    .bottleneck strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .bottleneck span {
+      color: var(--ink-soft);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .watch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .signal {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      min-height: 180px;
+      background: var(--panel);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signal::before {
+      content: attr(data-index);
+      position: absolute;
+      right: 16px;
+      bottom: 8px;
+      font-family: "Newsreader", serif;
+      font-size: 90px;
+      font-weight: 700;
+      color: rgba(21, 22, 17, 0.08);
+      line-height: 1;
+    }
+
+    .signal p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      max-width: 560px;
+      position: relative;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source-card {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 16px;
+      min-height: 150px;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .source-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--line);
+    }
+
+    .source-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 680ms ease, transform 680ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes enter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 1120px) {
+      .side-rail {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 70;
+        width: 238px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 14px;
+        border-right: 1px solid var(--line);
+        background: rgba(244, 239, 228, 0.91);
+        backdrop-filter: blur(18px);
+      }
+
+      .topbar,
+      main {
+        margin-left: 238px;
+        width: calc(100% - 238px);
+      }
+
+      .mobile-home {
+        display: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .market-layout,
+      .tech-grid,
+      .horizon-grid,
+      .chapter-head {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .supplier-grid,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .evidence-grid,
+      .risk-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .risk-card {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .risk-card:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .risk-card:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .bottleneck-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .pathway-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pathway {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .pathway:last-child {
+        border-bottom: 0;
+      }
+
+      .bottleneck {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .bottleneck:last-child {
+        border-bottom: 0;
+      }
+
+      .roadmap {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .spec-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+      }
+
+      .topbar .brand {
+        min-width: 0;
+        font-size: 11px;
+        gap: 8px;
+      }
+
+      .topbar .brand span:last-child {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .topbar > nav {
+        justify-content: flex-start;
+      }
+
+      .mobile-home {
+        min-height: 36px;
+        padding: 9px 10px;
+        font-size: 11px;
+        box-shadow: 4px 4px 0 var(--copper);
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        justify-self: end;
+      }
+
+      .topbar > nav,
+      .topbar > .lang-toggle,
+      .topbar > .origin-badge {
+        display: none;
+      }
+
+      .topbar.menu-open > nav {
+        display: flex;
+        grid-column: 1 / -1;
+        gap: 8px;
+        padding-top: 6px;
+      }
+
+      .topbar.menu-open > .lang-toggle {
+        display: inline-flex;
+        grid-column: 1 / span 2;
+        width: fit-content;
+      }
+
+      .topbar.menu-open > .origin-badge {
+        display: inline-flex;
+        grid-column: 3;
+        justify-self: end;
+      }
+
+      .metric-board,
+      .small-grid,
+      .watch-grid,
+      .roadmap,
+      .spec-grid,
+      .evidence-grid,
+      .risk-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .risk-card {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .risk-card:nth-last-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .risk-card:last-child {
+        border-bottom: 0;
+      }
+
+      .tam-caption {
+        position: relative;
+        left: auto;
+        top: auto;
+        max-width: none;
+        margin-bottom: 32px;
+      }
+
+      .tam-range {
+        min-height: 300px;
+      }
+
+      .tam-bar {
+        left: 24%;
+        right: 8%;
+      }
+
+      .tam-pin.low {
+        left: 24%;
+      }
+
+      .tam-pin.high {
+        left: 92%;
+      }
+
+      .ladder-row {
+        grid-template-columns: 74px minmax(0, 1fr);
+      }
+
+      .ladder-row > span:last-child {
+        grid-column: 2;
+        color: var(--ink-soft);
+      }
+
+      h1 {
+        font-size: clamp(36px, 9.5vw, 44px);
+        max-width: 350px;
+      }
+
+      .section {
+        overflow-x: hidden;
+        scroll-margin-top: 86px;
+      }
+
+      .section-inner,
+      .hero-grid,
+      .horizon-grid,
+      .metric-board,
+      .metric-card,
+      .panel,
+      .spec-grid,
+      .spec-card,
+      .pathway-grid,
+      .pathway,
+      .research-block,
+      .evidence-card,
+      .table-wrap,
+      .risk-grid,
+      .risk-card,
+      .tam-range,
+      .supplier,
+      .signal,
+      .source-card {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .share-row {
+        grid-template-columns: 88px minmax(0, 1fr) 42px;
+        gap: 8px;
+      }
+
+      .section-inner {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .lead {
+        max-width: 350px;
+        font-size: 18px;
+      }
+
+      .metric-value {
+        font-size: clamp(30px, 10vw, 42px);
+      }
+    }
+
+  </style>
+</head>
+<body class="lang-zh">
+  <div class="progress" id="progress"></div>
+
+  <aside class="side-rail" aria-label="Report navigation">
+    <a class="portal-home" href="index.html">
+      <span class="zh">返回 Sky Portal</span>
+      <span class="en">Back to Sky Portal</span>
+    </a>
+    <div class="side-brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>HBM / codex_codex</span>
+    </div>
+    <nav class="side-nav" aria-label="章节导航">
+      <a data-section-link href="#market"><span class="zh">市场</span><span class="en">Market</span><span>01</span></a>
+      <a data-section-link href="#tech"><span class="zh">技术</span><span class="en">Technology</span><span>02</span></a>
+      <a data-section-link href="#hbm5"><span class="zh">HBM5 / Base Die</span><span class="en">HBM5 / Base Die</span><span>03</span></a>
+      <a data-section-link href="#supply"><span class="zh">供应链</span><span class="en">Supply Chain</span><span>04</span></a>
+      <a data-section-link href="#watch"><span class="zh">观察指标</span><span class="en">Watch List</span><span>05</span></a>
+      <a data-section-link href="#sources"><span class="zh">来源</span><span class="en">Sources</span><span>06</span></a>
+    </nav>
+    <div class="side-rail-footer">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" class="active">中文</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <span><span class="zh">静态研究页 · 已发布到 Sky Portal</span><span class="en">Static research page · Published to Sky Portal</span></span>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <a class="portal-home mobile-home" href="index.html">
+      <span class="zh">返回 Sky Portal</span>
+      <span class="en">Back to Sky Portal</span>
+    </a>
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>HBM Research / 2026</span>
+    </a>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-label="打开导航菜单" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <nav aria-label="页面导航">
+      <a data-section-link href="#market"><span class="zh">市场</span><span class="en">Market</span></a>
+      <a data-section-link href="#tech"><span class="zh">技术</span><span class="en">Technology</span></a>
+      <a data-section-link href="#hbm5"><span class="zh">HBM5</span><span class="en">HBM5</span></a>
+      <a data-section-link href="#supply"><span class="zh">供应链</span><span class="en">Supply Chain</span></a>
+      <a data-section-link href="#watch"><span class="zh">观察指标</span><span class="en">Watch List</span></a>
+      <a data-section-link href="#sources"><span class="zh">来源</span><span class="en">Sources</span></a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-lang="zh" class="active">中文</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <span class="origin-badge">codex_codex</span>
+  </header>
+
+  <main id="top">
+    <section class="section hero">
+      <div class="section-inner hero-grid">
+        <div>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span><span class="zh">codex_codex · 截至 2026-05-22</span><span class="en">codex_codex · As of 2026-05-22</span></div>
+          <h1><span class="zh">HBM 市场<br>与技术研究<br>简报</span><span class="en">HBM Market & Technology Brief</span></h1>
+          <p class="lead"><span class="zh">HBM 正从 AI 训练的高端内存，变成推理吞吐、长上下文和自研 ASIC 的关键瓶颈。2026 年主线是 HBM3E 放量、HBM4 验证与先进封装爬坡；2029-2031 年的 HBM5 则把竞争焦点进一步推向 base die、hybrid bonding 和客户定制。</span><span class="en">HBM is moving from premium AI training memory to a critical bottleneck for inference throughput, long context workloads, and custom AI ASICs. The 2026 story is HBM3E volume, HBM4 qualification, and advanced packaging ramps; the 2029-2031 HBM5 horizon pushes the battleground toward base die design, hybrid bonding, and customer-specific memory.</span></p>
+          <div class="hero-actions">
+            <a class="button" href="#market"><span class="zh">进入研究</span><span class="en">Start Reading</span></a>
+            <a class="button secondary" href="#sources"><span class="zh">查看来源</span><span class="en">View Sources</span></a>
+          </div>
+        </div>
+
+        <div class="metric-board" aria-label="关键指标">
+          <article class="metric-card">
+            <div class="metric-label">2026 HBM TAM</div>
+            <div>
+              <div class="metric-value">$45B-55B</div>
+              <div class="metric-note"><span class="zh">分析师口径集中在 450-550 亿美元区间。</span><span class="en">Analyst estimates cluster around the $45B-55B range.</span></div>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">HBM4 stack bandwidth</div>
+            <div>
+              <div class="metric-value">2.8-3.3TB/s</div>
+              <div class="metric-note"><span class="zh">厂商产品宣称值已高于 JEDEC 基准。</span><span class="en">Vendor product claims already exceed the JEDEC baseline.</span></div>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">HBM5 horizon</div>
+            <div>
+              <div class="metric-value">2029-31</div>
+              <div class="metric-note"><span class="zh">路线图窗口，不是已定 JEDEC 规格。</span><span class="en">A roadmap window, not a finalized JEDEC spec.</span></div>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">True bottleneck</div>
+            <div>
+              <div class="metric-value"><span class="zh">封装</span><span class="en">Package</span></div>
+              <div class="metric-note"><span class="zh">TSV、堆叠良率、CoWoS 和客户验证共同限制出货。</span><span class="en">TSV, stack yield, CoWoS capacity, and customer qualification jointly cap shipments.</span></div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="market">
+      <div class="section-inner">
+        <div class="chapter-head reveal">
+          <div>
+            <p class="eyebrow">01 / Market</p>
+            <h2><span class="zh">市场不是缺 DRAM，而是缺合格 HBM 系统件</span><span class="en">The market is short qualified HBM systems, not just DRAM bits</span></h2>
+          </div>
+          <p class="chapter-note"><span class="zh">HBM 的定价权来自 AI 加速器对本地带宽、容量和功耗的同时要求。传统 DRAM 周期仍重要，但 HBM 已经成为 memory supercycle 中最稀缺的高端切片。</span><span class="en">HBM pricing power comes from AI accelerators needing local bandwidth, capacity, and power efficiency at the same time. The traditional DRAM cycle still matters, but HBM has become the scarcest high-end slice of the memory supercycle.</span></p>
+        </div>
+
+        <div class="market-layout">
+          <article class="panel dark reveal">
+            <h3><span class="zh">核心判断</span><span class="en">Core Read</span></h3>
+            <ol class="finding-list">
+              <li><span class="number">1</span><span><span class="zh">2026 年 HBM TAM 大概率落在 450-550 亿美元区间，取决于 Blackwell Ultra、Rubin 预备量、AMD MI350 和 ASIC 客户的放量节奏。</span><span class="en">The 2026 HBM TAM likely lands in the $45B-55B range, depending on Blackwell Ultra, Rubin pre-builds, AMD MI350, and ASIC customer ramps.</span></span></li>
+              <li><span class="number">2</span><span><span class="zh">HBM3E 仍是收入主力；HBM4 的重要性在于验证窗口、产品溢价和 2027 年 HBM4E/custom HBM 的先发位置。</span><span class="en">HBM3E remains the revenue workhorse; HBM4 matters for qualification windows, premium pricing, and first-mover position into 2027 HBM4E/custom HBM.</span></span></li>
+              <li><span class="number">3</span><span><span class="zh">如果普通 DRAM 因供给挤压继续涨价，HBM 厂商会在高端 DRAM、server DRAM、HBM 间重新分配产能。</span><span class="en">If conventional DRAM keeps rising due to capacity diversion, suppliers will keep reallocating output across high-end DRAM, server DRAM, and HBM.</span></span></li>
+              <li><span class="number">4</span><span><span class="zh">HBM5 还不是 2026 年收入项目，但已经影响 2027-2028 年的 base die 合作、hybrid bonding 设备和定制 HBM 谈判。</span><span class="en">HBM5 is not a 2026 revenue item, but it already shapes 2027-2028 base-die partnerships, hybrid-bonding equipment plans, and custom-HBM negotiations.</span></span></li>
+            </ol>
+          </article>
+
+          <div class="tam-chart reveal">
+            <div class="tam-range" aria-label="2026 HBM TAM 估计区间图">
+              <p class="tam-caption"><span class="zh">2026 HBM 市场约 <span class="figure">450-550 亿美元</span></span><span class="en">2026 HBM market: roughly <span class="figure">$45B-55B</span></span></p>
+              <div class="tam-pin low">$45B<br>Goldman/TrendForce</div>
+              <div class="tam-pin high">$54.6B<br>BofA</div>
+              <div class="tam-bar"></div>
+              <div class="tam-axis"></div>
+            </div>
+
+            <div class="small-grid">
+              <div class="mini-stat"><strong><span class="zh">AI 半导体</span><span class="en">AI semis</span></strong><span><span class="zh">Gartner 预计 2026 年约占全球半导体收入 30%。</span><span class="en">Gartner expects AI semiconductors to represent about 30% of global semiconductor revenue in 2026.</span></span></div>
+              <div class="mini-stat"><strong>Memory cycle</strong><span><span class="zh">Omdia 指出 2025 年 DRAM 收入已超过 1500 亿美元。</span><span class="en">Omdia notes 2025 DRAM revenue has already exceeded $150B.</span></span></div>
+              <div class="mini-stat"><strong>Pricing</strong><span><span class="zh">HBM 高端产品有溢价，成熟 HBM3E 可能承受 ASP 压力。</span><span class="en">Top-end HBM keeps a premium, while mature HBM3E may face ASP pressure as supply improves.</span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">市场证据账本</span><span class="en">Market evidence ledger</span></h3>
+          <div class="evidence-grid">
+            <div class="evidence-card">
+              <strong>$54.6B</strong>
+              <span><span class="zh">BofA 通过 SK hynix 新闻室披露的 2026 HBM 市场估计，同比约 +58%。</span><span class="en">BofA's 2026 HBM estimate cited by SK hynix Newsroom, roughly +58% YoY.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>~2/3</strong>
+              <span><span class="zh">多家研究/券商口径认为 HBM3E 仍占 2026 HBM 出货约三分之二。</span><span class="en">Research and brokerage views cited by SK hynix put HBM3E near two-thirds of 2026 HBM shipments.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>$633B</strong>
+              <span><span class="zh">Gartner 预计 2026 年 memory 半导体收入 6333 亿美元，约为 2025 年的 2.9 倍。</span><span class="en">Gartner forecasts $633.3B of memory semiconductor revenue in 2026, about 2.9x 2025.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>30%</strong>
+              <span><span class="zh">Gartner 预计 AI 半导体约占 2026 全球半导体收入 30%，解释 HBM 需求的系统性来源。</span><span class="en">Gartner expects AI semiconductors to be about 30% of 2026 semiconductor revenue, explaining systemic HBM demand.</span></span>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">指标</span><span class="en">Metric</span></th>
+                  <th><span class="zh">数据点</span><span class="en">Data point</span></th>
+                  <th><span class="zh">投资/产业含义</span><span class="en">Read-through</span></th>
+                  <th><span class="zh">来源质量</span><span class="en">Source quality</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>2026 HBM TAM</strong></td>
+                  <td><span class="zh">BofA 估 546 亿美元；Goldman/TrendForce 区间约 450 亿美元以上。</span><span class="en">BofA estimates $54.6B; Goldman/TrendForce-style estimates cluster above roughly $45B.</span></td>
+                  <td><span class="zh">2026 年不是小众存储市场，而是 AI 加速器 BOM 与供应链谈判的核心变量。</span><span class="en">HBM is no longer a niche memory market; it is a core AI accelerator BOM and supply negotiation variable.</span></td>
+                  <td><span class="quality analyst">ANALYST</span></td>
+                </tr>
+                <tr>
+                  <td><strong>2026 mix</strong></td>
+                  <td><span class="zh">HBM3E 仍约占出货 2/3；HBM4 逐步放量。</span><span class="en">HBM3E remains near two-thirds of shipments; HBM4 ramps gradually.</span></td>
+                  <td><span class="zh">短期收入看 HBM3E，份额再分配看 HBM4 认证和 2027 HBM4E/custom HBM。</span><span class="en">Near-term revenue is HBM3E; share redistribution depends on HBM4 qualification and 2027 HBM4E/custom HBM.</span></td>
+                  <td><span class="quality analyst">ANALYST</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Q2 2025 share</strong></td>
+                  <td><span class="zh">Counterpoint/Yonhap：SK hynix 62%，Micron 21%，Samsung 17%。</span><span class="en">Counterpoint via Yonhap: SK hynix 62%, Micron 21%, Samsung 17%.</span></td>
+                  <td><span class="zh">当前份额高度集中，但 Micron 上升和 Samsung HBM4 追赶会让 2026-2027 份额更不稳定。</span><span class="en">Share is highly concentrated, but Micron's rise and Samsung's HBM4 catch-up make 2026-2027 less stable.</span></td>
+                  <td><span class="quality analyst">TRACKER</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Memory cycle</strong></td>
+                  <td><span class="zh">Gartner：2026 半导体收入 1.32 万亿美元，memory 6333 亿美元，DRAM 价格预计大幅上行。</span><span class="en">Gartner: $1.32T semiconductor revenue in 2026, $633.3B memory revenue, and sharply higher DRAM pricing.</span></td>
+                  <td><span class="zh">HBM 抢晶圆和先进封装，也会抬升服务器 DDR5/eSSD/普通 DRAM 的价格与交期。</span><span class="en">HBM consumes wafers and advanced packaging capacity, raising prices and lead times across server DDR5, eSSD, and standard DRAM.</span></td>
+                  <td><span class="quality analyst">ANALYST</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="matrix-note"><span class="zh">读法：HBM 市场规模预测差异很大，因此本页用“区间 + 来源质量”呈现，不把单一券商数字当作确定值。</span><span class="en">Read it as ranges, not point certainty. This page separates data source quality because HBM forecasts vary materially across analysts.</span></p>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">供应商份额快照：Q2 2025 出货口径</span><span class="en">Supplier share snapshot: Q2 2025 shipment basis</span></h3>
+          <div class="share-bars" aria-label="HBM supplier market share">
+            <div class="share-row"><span>SK hynix</span><div class="share-track"><div class="share-fill" style="width: 62%"></div></div><span>62%</span></div>
+            <div class="share-row"><span>Micron</span><div class="share-track"><div class="share-fill copper" style="width: 21%"></div></div><span>21%</span></div>
+            <div class="share-row"><span>Samsung</span><div class="share-track"><div class="share-fill red" style="width: 17%"></div></div><span>17%</span></div>
+          </div>
+          <p class="matrix-note"><span class="zh">这个图不是长期预测，而是“谁已经通过客户认证并能稳定出货”的结果。HBM4/HBM4E 认证会让份额呈阶跃变化，而不是线性变化。</span><span class="en">This is not a long-term forecast; it reflects who has qualified and shipped reliably. HBM4/HBM4E qualifications can move share in step changes rather than smooth trends.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tech">
+      <div class="section-inner">
+        <div class="chapter-head reveal">
+          <div>
+            <p class="eyebrow">02 / Technology</p>
+            <h2><span class="zh">HBM 的技术价值是把带宽贴近计算</span><span class="en">HBM's technical value is moving bandwidth next to compute</span></h2>
+          </div>
+          <p class="chapter-note"><span class="zh">HBM 不是 DDR 的线性升级。它通过 3D 堆叠、TSV、base die 和 2.5D 封装，把 DRAM 放到 GPU/ASIC 旁边，用宽总线换取 TB/s 级带宽和更低每 bit 能耗。</span><span class="en">HBM is not a linear DDR upgrade. Through 3D stacking, TSVs, a base die, and 2.5D packaging, it puts DRAM beside the GPU/ASIC and trades an ultra-wide bus for TB/s-class bandwidth and lower energy per bit.</span></p>
+        </div>
+
+        <div class="tech-grid">
+          <article class="panel reveal">
+            <h3>HBM stack anatomy</h3>
+            <div class="stack-diagram" aria-label="HBM 堆叠结构示意">
+              <div class="die">DRAM die 12/16-hi <span>TSV</span></div>
+              <div class="die">DRAM die <span>micro bump</span></div>
+              <div class="die">DRAM die <span>thermal path</span></div>
+              <div class="die base">Logic base die <span>PHY / control / test</span></div>
+              <div class="interposer" aria-hidden="true"></div>
+              <div class="die gpu">GPU / AI ASIC on 2.5D interposer</div>
+            </div>
+            <div class="diagram-label">
+              <span><span class="zh">垂直方向解决容量和距离</span><span class="en">Vertical stacking solves capacity and distance</span></span>
+              <span><span class="zh">水平方向解决 GPU 到 HBM 的超宽互连</span><span class="en">Horizontal packaging solves the GPU-to-HBM wide link</span></span>
+            </div>
+          </article>
+
+          <article class="panel reveal">
+            <h3>Bandwidth ladder</h3>
+            <div class="ladder" aria-label="HBM 带宽代际阶梯">
+              <div class="ladder-row">
+                <span>HBM3E</span>
+                <div class="bar-track"><div class="bar-fill copper" style="width: 38%"></div></div>
+                <span>1.2TB/s+</span>
+              </div>
+              <div class="ladder-row">
+                <span>JEDEC HBM4</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 62%"></div></div>
+                <span>2.0TB/s</span>
+              </div>
+              <div class="ladder-row">
+                <span>Micron HBM4</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 86%"></div></div>
+                <span>2.8TB/s+</span>
+              </div>
+              <div class="ladder-row">
+                <span>Samsung HBM4</span>
+                <div class="bar-track"><div class="bar-fill red" style="width: 100%"></div></div>
+                <span>3.3TB/s</span>
+              </div>
+              <div class="ladder-row">
+                <span>HBM5 scenario</span>
+                <div class="bar-track"><div class="bar-fill purple" style="width: 100%"></div></div>
+                <span>~4.0TB/s</span>
+              </div>
+            </div>
+
+            <div class="roadmap">
+              <div class="roadmap-item"><strong>HBM3E</strong><span><span class="zh">1024-bit I/O，8/12-hi，2026 收入主力。</span><span class="en">1024-bit I/O, 8/12-hi stacks, the 2026 revenue workhorse.</span></span></div>
+              <div class="roadmap-item"><strong>HBM4</strong><span><span class="zh">2048-bit I/O，12/16-hi，开始客户验证和量产爬坡。</span><span class="en">2048-bit I/O, 12/16-hi stacks, entering customer qualification and production ramp.</span></span></div>
+              <div class="roadmap-item"><strong>HBM4E</strong><span><span class="zh">更高速度、更深客户定制，预计成为 2027 主线。</span><span class="en">Higher speed and deeper customer customization, likely the 2027 mainline.</span></span></div>
+              <div class="roadmap-item"><strong>Custom</strong><span><span class="zh">base die 与 GPU/ASIC 协同设计，供应商分化加剧。</span><span class="en">Base-die co-design with GPUs/ASICs increases supplier differentiation.</span></span></div>
+              <div class="roadmap-item"><strong>HBM5</strong><span><span class="zh">2029-2031 路线图窗口；4096-bit、16/20-hi、hybrid bonding 仍应按情景看。</span><span class="en">A 2029-2031 roadmap window; 4096-bit, 16/20-hi, and hybrid bonding should be treated as scenarios.</span></span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">代际规格矩阵：把“标准、厂商产品、路线图情景”分开看</span><span class="en">Generation spec matrix: standard, vendor product, and roadmap scenario</span></h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">代际/产品</span><span class="en">Generation / product</span></th>
+                  <th><span class="zh">接口与堆叠</span><span class="en">Interface & stack</span></th>
+                  <th><span class="zh">容量/带宽</span><span class="en">Capacity / bandwidth</span></th>
+                  <th><span class="zh">量产状态</span><span class="en">Ramp status</span></th>
+                  <th><span class="zh">关键含义</span><span class="en">Key implication</span></th>
+                  <th><span class="zh">置信度</span><span class="en">Confidence</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>HBM3E</strong></td>
+                  <td><span class="zh">1024-bit I/O；8/12-hi 主流。</span><span class="en">1024-bit I/O; 8/12-hi mainstream.</span></td>
+                  <td><span class="zh">典型 24GB/36GB；单堆约 1.2TB/s+。</span><span class="en">Typical 24GB/36GB; roughly 1.2TB/s+ per stack.</span></td>
+                  <td><span class="zh">2026 收入主力，Blackwell Ultra、MI350、ASIC 仍大量采用。</span><span class="en">2026 revenue workhorse for Blackwell Ultra, MI350, and many ASIC programs.</span></td>
+                  <td><span class="zh">短期看良率、ASP 和客户配额。</span><span class="en">Near-term focus: yield, ASP, and customer allocation.</span></td>
+                  <td><span class="quality official">VENDOR</span></td>
+                </tr>
+                <tr>
+                  <td><strong>JEDEC HBM4</strong></td>
+                  <td><span class="zh">2048-bit I/O；12-hi 先行，16-hi 跟进。</span><span class="en">2048-bit I/O; 12-hi first, 16-hi follows.</span></td>
+                  <td><span class="zh">8Gbps 标准速率对应约 2TB/s 单堆基准。</span><span class="en">8Gbps standard speed implies about 2TB/s baseline per stack.</span></td>
+                  <td><span class="zh">TrendForce 口径：12-hi 2026，16-hi 2027。</span><span class="en">TrendForce view: 12-hi in 2026, 16-hi in 2027.</span></td>
+                  <td><span class="zh">接口翻倍是平台重构，不只是速度提升。</span><span class="en">The doubled interface is a platform redesign, not just a speed bump.</span></td>
+                  <td><span class="quality analyst">STANDARD</span></td>
+                </tr>
+                <tr>
+                  <td><strong>SK hynix HBM4</strong></td>
+                  <td><span class="zh">2048 I/O；1bnm DRAM；Advanced MR-MUF。</span><span class="en">2048 I/O; 1bnm DRAM; Advanced MR-MUF.</span></td>
+                  <td><span class="zh">超过 10Gbps；由接口宽度推算单堆超过 2.5TB/s。</span><span class="en">Over 10Gbps; interface math implies over 2.5TB/s per stack.</span></td>
+                  <td><span class="zh">2025-09 宣布完成开发并准备量产。</span><span class="en">Completed development and prepared mass production in September 2025.</span></td>
+                  <td><span class="zh">用成熟 MR-MUF 降低量产风险，优先保障客户交付。</span><span class="en">Uses mature MR-MUF to reduce ramp risk and protect customer delivery.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Samsung HBM4</strong></td>
+                  <td><span class="zh">1c DRAM + 4nm logic base die；12-hi 到 36GB，16-hi 到 48GB。</span><span class="en">1c DRAM plus 4nm logic base die; 12-hi to 36GB, 16-hi to 48GB.</span></td>
+                  <td><span class="zh">11.7Gbps 持续速度，可到 13Gbps；最高 3.3TB/s 单堆。</span><span class="en">11.7Gbps sustained, up to 13Gbps; up to 3.3TB/s per stack.</span></td>
+                  <td><span class="zh">2026-02 宣布量产并向客户商业出货。</span><span class="en">Announced mass production and commercial shipments in February 2026.</span></td>
+                  <td><span class="zh">垂直整合路线：memory、foundry、封装同时发力。</span><span class="en">Vertically integrated path across memory, foundry, and packaging.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Micron HBM4</strong></td>
+                  <td><span class="zh">2048-pin bus；36GB 12H，48GB 16H 客户样品。</span><span class="en">2048-pin bus; 36GB 12H and 48GB 16H customer samples.</span></td>
+                  <td><span class="zh">超过 11Gbps；超过 2.8TB/s 单堆。</span><span class="en">Greater than 11Gbps; greater than 2.8TB/s per stack.</span></td>
+                  <td><span class="zh">36GB 12H 量产爬坡，48GB 16H 2026 客户样品。</span><span class="en">36GB 12H volume ramp; 48GB 16H customer samples in 2026.</span></td>
+                  <td><span class="zh">从小份额但高规格切入，争夺第二供应源地位。</span><span class="en">A smaller-share but high-spec route toward second-source status.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>HBM5 scenario</strong></td>
+                  <td><span class="zh">常见研究假设：4096-bit、16/20-hi、hybrid bonding。</span><span class="en">Common research assumptions: 4096-bit, 16/20-hi, hybrid bonding.</span></td>
+                  <td><span class="zh">约 4TB/s 级单堆带宽；功耗/散热预算未标准化。</span><span class="en">Roughly 4TB/s-class per stack; power and thermal budgets are not standardized.</span></td>
+                  <td><span class="zh">SK hynix 路线图窗口为 2029-2031。</span><span class="en">SK hynix roadmap window is 2029-2031.</span></td>
+                  <td><span class="zh">应看作 base die、键合、液冷和客户定制投资信号。</span><span class="en">Treat it as a signal for base die, bonding, cooling, and customer-specific investment.</span></td>
+                  <td><span class="quality scenario">SCENARIO</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="matrix-note"><span class="zh">注：SK hynix HBM4 单堆带宽是根据“2048 I/O × 超过 10Gbps / 8”做的量级推算；HBM5 为研究情景，不是 JEDEC 最终规格。</span><span class="en">Note: SK hynix HBM4 per-stack bandwidth is inferred from 2048 I/O times over 10Gbps divided by 8; HBM5 is a research scenario, not final JEDEC spec.</span></p>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">AI 平台与 HBM 映射</span><span class="en">AI platform to HBM mapping</span></h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">平台</span><span class="en">Platform</span></th>
+                  <th><span class="zh">HBM 代际</span><span class="en">HBM generation</span></th>
+                  <th><span class="zh">容量/带宽</span><span class="en">Capacity / bandwidth</span></th>
+                  <th><span class="zh">对 HBM 市场的影响</span><span class="en">Market effect</span></th>
+                  <th><span class="zh">来源质量</span><span class="en">Source quality</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>NVIDIA H200</strong></td>
+                  <td>HBM3E</td>
+                  <td><span class="zh">141GB，4.8TB/s。</span><span class="en">141GB, 4.8TB/s.</span></td>
+                  <td><span class="zh">证明 HBM3E 的容量提升直接服务长上下文和推理吞吐。</span><span class="en">Shows HBM3E capacity directly supports long context and inference throughput.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Blackwell Ultra</strong></td>
+                  <td>HBM3E</td>
+                  <td><span class="zh">最高 288GB，8TB/s，8 个 12-hi stack。</span><span class="en">Up to 288GB, 8TB/s, eight 12-hi stacks.</span></td>
+                  <td><span class="zh">解释为什么 2026 HBM3E 仍是出货主力。</span><span class="en">Explains why HBM3E remains the 2026 shipment workhorse.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>AMD MI350</strong></td>
+                  <td>HBM3E</td>
+                  <td><span class="zh">288GB，8TB/s。</span><span class="en">288GB, 8TB/s.</span></td>
+                  <td><span class="zh">非 NVIDIA 高端 GPU 也在提升每卡 HBM 消耗。</span><span class="en">Non-NVIDIA high-end GPUs are also raising per-card HBM consumption.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>NVIDIA Rubin</strong></td>
+                  <td>HBM4</td>
+                  <td><span class="zh">每 GPU 最高 288GB HBM4；聚合带宽最高 22TB/s。</span><span class="en">Up to 288GB HBM4 per GPU; aggregate bandwidth up to 22TB/s.</span></td>
+                  <td><span class="zh">HBM4 第一轮认证会决定 SK hynix/Samsung/Micron 的下一轮份额。</span><span class="en">First-wave HBM4 qualification will shape the next share allocation.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Custom ASICs</strong></td>
+                  <td>HBM3E → HBM4E/custom</td>
+                  <td><span class="zh">Google、AWS 等 ASIC 扩大 HBM3E 使用；2027 起关注 custom base die。</span><span class="en">Google, AWS, and other ASICs expand HBM3E usage; watch custom base dies from 2027.</span></td>
+                  <td><span class="zh">需求从 GPU 单一路径扩散到 hyperscaler ASIC，提升 HBM 周期韧性。</span><span class="en">Demand spreads from a single GPU cadence to hyperscaler ASICs, improving cycle resilience.</span></td>
+                  <td><span class="quality analyst">ANALYST</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Post-2029 platforms</strong></td>
+                  <td>HBM5 / custom HBM5</td>
+                  <td><span class="zh">4096-bit、20-hi、约 4TB/s 属路线图情景。</span><span class="en">4096-bit, 20-hi, and ~4TB/s remain roadmap scenarios.</span></td>
+                  <td><span class="zh">真正变量是散热、hybrid bonding、base die 所有权和客户接口。</span><span class="en">The real variables are cooling, hybrid bonding, base-die ownership, and customer interfaces.</span></td>
+                  <td><span class="quality scenario">SCENARIO</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="research-block reveal" id="stack-mechanics">
+          <h3><span class="zh">Hi、die 厚度与翘曲：封装路线的机械约束</span><span class="en">Hi, die thickness, and warpage: the mechanical constraint behind packaging choices</span></h3>
+          <div class="evidence-grid">
+            <div class="evidence-card">
+              <strong>16-Hi</strong>
+              <span><span class="zh">表示垂直堆叠 16 层 DRAM die；另有一层 base die/logic die 在底部。</span><span class="en">Means 16 vertically stacked DRAM dies, plus a base/logic die at the bottom.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>20-Hi</strong>
+              <span><span class="zh">HBM5 路线图常见情景，不是已公开量产规格；难点是高度、散热、键合和良率同时收紧。</span><span class="en">A common HBM5 roadmap scenario, not a public production spec; height, thermal, bonding, and yield limits tighten together.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>Die 厚</strong>
+              <span><span class="zh">单片刚性更好、较不易弯，但 stack 总高度更难满足；TSV、热路径和封装高度都会受影响。</span><span class="en">A thicker die is stiffer, but makes total stack height harder to meet; TSV, thermal path, and package height are affected.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>Die 薄</strong>
+              <span><span class="zh">能堆更多层，但更容易翘曲、裂片、pickup/搬运失败，需要 carrier/tape、mold 和 bonding 窗口配合。</span><span class="en">Enables higher stacks but raises warpage, cracking, pickup/handling risk, requiring carrier/tape, mold, and bonding-window control.</span></span>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">问题</span><span class="en">Question</span></th>
+                  <th><span class="zh">物理逻辑</span><span class="en">Physical logic</span></th>
+                  <th><span class="zh">SK hynix / MR-MUF 含义</span><span class="en">SK hynix / MR-MUF implication</span></th>
+                  <th><span class="zh">Samsung / TC-NCF 含义</span><span class="en">Samsung / TC-NCF implication</span></th>
+                  <th><span class="zh">判断等级</span><span class="en">Confidence</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><span class="zh">Hi 是什么？</span><span class="en">What does Hi mean?</span></strong></td>
+                  <td><span class="zh">8-Hi/12-Hi/16-Hi 是 DRAM die 层数；容量随层数上升，但总高度、热阻、对准和良率变难。</span><span class="en">8-Hi/12-Hi/16-Hi are DRAM-die counts; capacity rises, but total height, thermal resistance, alignment, and yield become harder.</span></td>
+                  <td><span class="zh">MR-MUF 的优势在于一次性 reflow + mold/EMC 填充，适合追求高层数下的散热和结构稳定。</span><span class="en">MR-MUF's advantage is mass reflow plus mold/EMC fill, useful for thermal and structural stability at higher stacks.</span></td>
+                  <td><span class="zh">TC-NCF 通过 film 厚度、层间 gap 和热压窗口控制高层数，Samsung 官方称 12H 可满足 8H 同高度规格。</span><span class="en">TC-NCF controls high stacks through film thickness, inter-die gap, and bonding window; Samsung says 12H meets the same height spec as 8H.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">die 越厚翘曲越好吗？</span><span class="en">Does thicker die reduce warpage?</span></strong></td>
+                  <td><span class="zh">一般是：单片越厚刚性越高、越不容易弯；但 HBM 不能任意加厚，因为 stack 高度被 JEDEC/客户封装约束锁住。</span><span class="en">Generally yes: thicker die is stiffer and bends less; but HBM cannot thicken freely because stack height is constrained by JEDEC/customer package windows.</span></td>
+                  <td><span class="zh">SK 官方称 12-layer HBM3 为保持总厚度，DRAM die 比 8-layer HBM3 薄 40%，因此 warpage 成为显著问题。</span><span class="en">SK hynix says 12-layer HBM3 needed DRAM dies 40% thinner than 8-layer HBM3 to maintain total thickness, making warpage a significant issue.</span></td>
+                  <td><span class="zh">Samsung 通过更薄 NCF、7µm 层间 gap、消除 void 和大小不同的 bump 来改善密度、热和良率。</span><span class="en">Samsung uses thinner NCF, a 7µm inter-die gap, void elimination, and mixed bump sizes to improve density, thermals, and yield.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">为什么 SK 仍坚持 MR-MUF？</span><span class="en">Why does SK keep MR-MUF?</span></strong></td>
+                  <td><span class="zh">高层数 HBM 的瓶颈是热、压力、warpage、mold fill 和整体可靠性，不只是是否能把 die 粘起来。</span><span class="en">The bottleneck is heat, pressure, warpage, mold fill, and reliability, not just attaching dies.</span></td>
+                  <td><span class="zh">SK 官方称 Advanced MR-MUF 提供更好的 warpage control、降低堆叠压力；HBM4 继续采用 Advanced MR-MUF 和 1bnm 降低量产风险。</span><span class="en">SK says Advanced MR-MUF provides better warpage control and lower stack pressure; HBM4 keeps Advanced MR-MUF and 1bnm to reduce ramp risk.</span></td>
+                  <td><span class="zh">Samsung 的补课方向不是单纯换材料，而是 HBM4 的 1c DRAM、4nm logic base die、低压 TSV、PDN 和热设计一起改。</span><span class="en">Samsung's catch-up is not just a material swap; HBM4 combines 1c DRAM, 4nm logic base die, low-voltage TSV, PDN, and thermal design.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">Samsung HBM3E 问题是什么？</span><span class="en">What was the Samsung HBM3E issue?</span></strong></td>
+                  <td><span class="zh">客户认证不只测规格，还测功耗、热阻、信号完整性和长期可靠性；任何一项偏离都会造成导入延迟。</span><span class="en">Customer qualification tests not just spec sheets, but power, thermal resistance, signal integrity, and long-term reliability; any miss can delay adoption.</span></td>
+                  <td><span class="zh">SK 的优势在于较早通过客户平台认证，把 MR-MUF 的散热/warpage 稳定性转化成份额优势。</span><span class="en">SK's edge was early platform qualification, converting MR-MUF thermal/warpage stability into share leadership.</span></td>
+                  <td><span class="zh">Reuters/CNBC 曾报道 Samsung HBM3/HBM3E 在 NVIDIA 测试中遇到热和功耗问题；Samsung 后续否认“因热/功耗失败”的说法。官方技术路线显示其重点补强 thermal、power、base die 和 PDN。</span><span class="en">Reuters/CNBC reported Samsung HBM3/HBM3E heat and power issues in NVIDIA testing; Samsung later denied failure due to those causes. Its official roadmap shows focus on thermal, power, base-die, and PDN improvements.</span></td>
+                  <td><span class="quality analyst">REPORTED</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">如果实际说的是 base die 厚度？</span><span class="en">What if the real issue is base-die thickness?</span></strong></td>
+                  <td><span class="zh">那就不是 tape/临时支撑问题，而是底层有源 logic die 的电性与机械余量问题：PHY、模拟、PDN、ESD、TSV 和微凸点应力都要考虑。</span><span class="en">Then it is not a tape/temporary-support issue, but the electrical and mechanical margin of the bottom active logic die: PHY, analog, PDN, ESD, TSV, and micro-bump stress all matter.</span></td>
+                  <td><span class="zh">SK 的 MR-MUF 高层数路线会放大堆叠压力和 warpage 控制需求；若 base die 上还有 PHY/模拟电路，保留更厚底层是扩大良率和客户认证窗口。</span><span class="en">SK's high-stack MR-MUF route amplifies stacking pressure and warpage-control needs; if the base die also carries PHY/analog circuits, preserving a thicker bottom layer widens yield and qualification margins.</span></td>
+                  <td><span class="zh">Samsung HBM4 采用 4nm logic base die，重点在高速 PHY/PDN/功耗效率；它说明 base die 已成为有源逻辑芯片，而不是单纯机械层。</span><span class="en">Samsung's HBM4 uses a 4nm logic base die focused on high-speed PHY, PDN, and power efficiency; this shows the base die is an active logic chip, not a purely mechanical layer.</span></td>
+                  <td><span class="quality analyst">REVISED</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="matrix-note"><span class="zh">修正：如果供应链口径里的“Base 带/底层厚度”实际指 base die 本体，而不是临时 tape、carrier 或 NCF film，就必须转到下方 base die 厚度框架判断。</span><span class="en">Correction: if the supply-chain phrase "base tape/bottom-layer thickness" actually means the physical base die, not temporary tape, carrier, or NCF film, the analysis must move to the base-die thickness framework below.</span></p>
+
+          <div class="base-die-note" id="base-die-thickness">
+            <h4><span class="zh">Base die 厚度澄清：不是 tape，而是有 PHY 的混合信号逻辑层</span><span class="en">Base-die thickness: not tape, but a PHY-bearing mixed-signal logic layer</span></h4>
+            <div class="evidence-grid">
+              <div class="evidence-card">
+                <strong>PHY</strong>
+                <span><span class="zh">base die 承担 PHY、时钟、DQ/RX/TX、测试、repair、配置寄存器和部分控制逻辑；它不是被动垫片。</span><span class="en">The base die carries PHY, clocking, DQ/RX/TX, test, repair, configuration registers, and control logic; it is not a passive spacer.</span></span>
+              </div>
+              <div class="evidence-card">
+                <strong>PDN</strong>
+                <span><span class="zh">HBM4 把 I/O 从 1024 扩到 2048，base die 要承接更密的电源/地/信号路径，PDN、IR drop 和同步开关噪声更难。</span><span class="en">HBM4 expands I/O from 1024 to 2048, forcing denser power, ground, and signal paths; PDN, IR drop, and simultaneous switching noise become harder.</span></span>
+              </div>
+              <div class="evidence-card">
+                <strong>ESD</strong>
+                <span><span class="zh">PHY/模拟 I/O 需要 ESD、latch-up 和 substrate noise 余量。极端减薄会削弱热扩散和 ESD 鲁棒性，增加电性漂移风险。</span><span class="en">PHY and analog I/O need ESD, latch-up, and substrate-noise margin. Extreme thinning weakens heat spreading and ESD robustness, raising electrical drift risk.</span></span>
+              </div>
+              <div class="evidence-card">
+                <strong>Stress</strong>
+                <span><span class="zh">底层承受 TSV、micro-bump、underfill/interposer 与堆叠应力。过薄会放大翘曲、裂纹和晶体管应力引起的 PVT 偏移。</span><span class="en">The bottom layer takes TSV, micro-bump, underfill/interposer, and stack stress. Over-thinning amplifies warpage, cracking, and stress-induced PVT shifts.</span></span>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th><span class="zh">问题</span><span class="en">Question</span></th>
+                    <th><span class="zh">结论</span><span class="en">Conclusion</span></th>
+                    <th><span class="zh">依据</span><span class="en">Evidence</span></th>
+                    <th><span class="zh">判断等级</span><span class="en">Confidence</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong><span class="zh">这一层为什么不能像 DRAM core die 那样极薄？</span><span class="en">Why can't this layer be as thin as DRAM core dies?</span></strong></td>
+                    <td><span class="zh">因为 base die 是有源混合信号逻辑层，不只是硅支撑。它承载 PHY、模拟/时钟、电源分配、测试与修复逻辑，过度减薄会损伤电性、ESD、热扩散和应力余量。</span><span class="en">Because the base die is an active mixed-signal logic layer, not just silicon support. It carries PHY, analog/clocking, power distribution, test, and repair logic; over-thinning hurts electrical, ESD, thermal-spreading, and stress margins.</span></td>
+                    <td><span class="zh">SK hynix 早期 HBM 架构资料把 base die 分成 PHY、TSV、Test Port 三大区域；Samsung HBM4 明确采用 4nm logic base-die，Micron 也描述 HBM4 由 logic dies with TSVs 接口到系统。</span><span class="en">SK hynix's early HBM architecture material separates the base die into PHY, TSV, and test-port areas; Samsung explicitly uses a 4nm logic base die for HBM4, and Micron describes HBM4 as using logic dies with TSVs to interface with the system.</span></td>
+                    <td><span class="quality official">OFFICIAL</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong><span class="zh">厚度的首要考量是什么？</span><span class="en">What is the first-order thickness consideration?</span></strong></td>
+                    <td><span class="zh">不是“越厚散热越好”，而是电性可靠性 + 机械可靠性之间的窗口：既要足够薄以满足 HBM 总高度和 TSV/微凸点连接，又要足够厚以保护 PHY/模拟 I/O、ESD、PDN 和堆叠应力余量。</span><span class="en">Not simply "thicker is cooler"; it is an electrical-reliability plus mechanical-reliability window: thin enough for total HBM height and TSV/micro-bump connection, but thick enough to protect PHY/analog I/O, ESD, PDN, and stack-stress margin.</span></td>
+                    <td><span class="zh">TrendForce 指出 HBM4 12H/16H 名义封装高度为 775µm；DRAM die 通常 30-50µm。高度预算紧张时，行业优先把重复 DRAM die 和 bump gap 压薄，而不愿把唯一的 base logic die 推到同等极薄。</span><span class="en">TrendForce notes a 775um nominal package height for HBM4 12H/16H and DRAM dies around 30-50um. Under tight height budgets, the industry tends to thin repeated DRAM dies and bump gaps before pushing the unique base logic die to the same extreme.</span></td>
+                    <td><span class="quality analyst">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong><span class="zh">PHY/模拟电路为什么让它不能过薄？</span><span class="en">Why do PHY/analog circuits resist over-thinning?</span></strong></td>
+                    <td><span class="zh">高速 PHY 是混合信号电路，受 substrate noise、地弹、串扰、PVT 漂移和 ESD/latch-up 影响。更薄 substrate 会减少热容量和扩散路径，也更容易把封装应力传到器件层。</span><span class="en">High-speed PHY is mixed-signal circuitry affected by substrate noise, ground bounce, crosstalk, PVT drift, and ESD/latch-up. A thinner substrate reduces thermal mass and spreading paths, and transmits package stress more readily to the device layer.</span></td>
+                    <td><span class="zh">imec 对极薄 Si substrate 的研究显示，减薄会降低 ESD 器件的失效电流并造成更差热扩散；这不是 HBM base die 专属实验，但对含 I/O/ESD/模拟的 logic die 是直接警示。</span><span class="en">imec's extreme-Si-thinning work shows lower ESD failure current and worse thermal spreading. It is not an HBM-base-die-only experiment, but it directly warns against over-thinning logic dies that carry I/O, ESD, and analog blocks.</span></td>
+                    <td><span class="quality analyst">PROCESS INFERENCE</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong><span class="zh">TSV/PDN/微凸点有什么影响？</span><span class="en">How do TSV, PDN, and micro-bumps matter?</span></strong></td>
+                    <td><span class="zh">base die 是 DRAM 堆栈到 interposer/GPU 的转换层：上面接 DRAM TSV/微凸点，下面接外部 I/O、电源和地。HBM4 2048 I/O 让走线、供电和测试密度翻倍，厚度过薄会让 TSV keep-out、Cu 应力、IR drop 和 micro-bump 共面性窗口更紧。</span><span class="en">The base die converts the DRAM stack to the interposer/GPU: DRAM TSV/micro-bumps above, external I/O/power/ground below. HBM4's 2048 I/O tightens routing, power, and test density; over-thinning narrows TSV keep-out, copper-stress, IR-drop, and micro-bump coplanarity margins.</span></td>
+                    <td><span class="zh">SK hynix HBM4 公告称 I/O 从上一代翻倍到 2,048，速度超过 JEDEC 8Gbps；Samsung 与 Micron 的 HBM4 页面也强调 2048 I/O 和 logic base die。</span><span class="en">SK hynix's HBM4 release says I/O doubled to 2048 and speed exceeds the JEDEC 8Gbps baseline; Samsung and Micron also emphasize 2048 I/O and logic base die in HBM4.</span></td>
+                    <td><span class="quality official">OFFICIAL</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong><span class="zh">和 SK hynix 的封装路线有关吗？</span><span class="en">Is this related to SK hynix's packaging route?</span></strong></td>
+                    <td><span class="zh">有关，但不是“封装失败才加厚”。SK 的 Advanced MR-MUF 要在高层数堆叠中控制压力、翘曲和散热；如果 base die 同时是有源 PHY/PDN 层，保留更厚的 base die 是扩大量产工艺窗口和客户认证窗口的保守选择。</span><span class="en">Related, but not proof of a packaging failure. SK's Advanced MR-MUF must control pressure, warpage, and heat at high stack counts; if the base die is also an active PHY/PDN layer, retaining more base-die thickness is a conservative way to widen the mass-production and qualification window.</span></td>
+                    <td><span class="zh">SK hynix 官方称 Advanced MR-MUF 提供良好 warpage control、降低堆叠压力；这解释了为什么它会在 DRAM die 极薄化之外，对底层 logic/base die 留出更多可靠性余量。</span><span class="en">SK hynix says Advanced MR-MUF provides good warpage control and reduces stacking pressure; this explains why it may preserve more reliability margin in the bottom logic/base die while aggressively thinning DRAM dies.</span></td>
+                    <td><span class="quality analyst">HIGH</span></td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+          <p class="matrix-note"><span class="zh">修正结论：如果讨论的是集成 PHY/模拟/PDN 的 base die 本体厚度，较厚的要求主要来自电性可靠性、ESD/热扩散、TSV/微凸点应力和封装翘曲余量；热传导是局部热点和 ESD 热扩散层面的考量，不是“为了把最终 HBM 整体散热做厚”。这和上一版临时 base tape/carrier 判断不同，已按 base die 本体修正。</span><span class="en">Corrected conclusion: if the topic is the physical thickness of the base die that integrates PHY/analog/PDN, a thicker requirement is mainly about electrical reliability, ESD/thermal spreading, TSV/micro-bump stress, and package-warpage margin. Thermal matters for local hot spots and ESD heat spreading, not because final HBM should be made thicker for bulk heat removal. This differs from the prior temporary base-tape/carrier interpretation and has been corrected to base-die physics.</span></p>
+          </div>
+
+        </div>
+
+        <div class="research-block reveal" id="hbf-vs-hbm">
+          <h3><span class="zh">HBF vs HBM：同样追求高带宽，但服务不同内存层级</span><span class="en">HBF vs HBM: both chase bandwidth, but they serve different memory tiers</span></h3>
+          <div class="evidence-grid">
+            <div class="evidence-card">
+              <strong>HBM</strong>
+              <span><span class="zh">DRAM 堆叠，易失、低延迟、高带宽，是 GPU/ASIC 的热数据工作内存。2026 年 HBM TAM 约 450-550 亿美元。</span><span class="en">Stacked DRAM: volatile, low latency, high bandwidth, and the hot working memory for GPUs/ASICs. 2026 HBM TAM is roughly $45B-55B.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>HBF</strong>
+              <span><span class="zh">High Bandwidth Flash，NAND/Flash 堆叠，非易失、容量大、成本/bit 低，目标是推理容量层，而不是训练主内存。</span><span class="en">High Bandwidth Flash: stacked NAND/flash, non-volatile, high capacity, low cost per bit, aimed at inference capacity tiers rather than training main memory.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>512GB</strong>
+              <span><span class="zh">Sandisk 第一代 HBF 目标为 16-die stack、512GB、1.6TB/s 读带宽，物理 footprint/power/height 接近 HBM4。</span><span class="en">Sandisk's first-gen HBF target is a 16-die stack with 512GB and 1.6TB/s read bandwidth, with HBM4-like footprint, power, and stack height.</span></span>
+            </div>
+            <div class="evidence-card">
+              <strong>2030+</strong>
+              <span><span class="zh">HBF 标准化已启动，但商业化仍早。样品目标 2026H2，首批 AI 推理设备样品约 2027 年，需求加速窗口更像 2030 年后。</span><span class="en">HBF standardization has started, but commercialization is early. Samples are targeted for 2H26, first AI-inference device samples around 2027, and larger demand more likely after 2030.</span></span>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">维度</span><span class="en">Dimension</span></th>
+                  <th><span class="zh">HBM</span><span class="en">HBM</span></th>
+                  <th><span class="zh">HBF</span><span class="en">HBF</span></th>
+                  <th><span class="zh">产业判断</span><span class="en">Industry read</span></th>
+                  <th><span class="zh">等级</span><span class="en">Quality</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><span class="zh">本质</span><span class="en">Core technology</span></strong></td>
+                  <td><span class="zh">High Bandwidth Memory：3D 堆叠 DRAM，通过 TSV/micro-bump/base die 与 GPU/ASIC 近距离连接。</span><span class="en">High Bandwidth Memory: 3D-stacked DRAM connected near the GPU/ASIC through TSVs, micro-bumps, and a base die.</span></td>
+                  <td><span class="zh">High Bandwidth Flash：基于 NAND/Flash，利用 CBA、堆叠和宽接口把 flash 做成高容量、高读带宽内存。</span><span class="en">High Bandwidth Flash: NAND/flash-based memory using CBA, stacking, and wide interfaces to deliver high capacity and high read bandwidth.</span></td>
+                  <td><span class="zh">名字相似，但介质完全不同：HBM 是 DRAM，HBF 是 Flash/NAND。</span><span class="en">Similar names, different media: HBM is DRAM; HBF is flash/NAND.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">共同点</span><span class="en">Common ground</span></strong></td>
+                  <td><span class="zh">都靠 3D 堆叠、封装、热/翘曲控制和宽接口解决 AI 的 memory wall。</span><span class="en">Both use 3D stacking, packaging, thermal/warpage control, and wide interfaces to attack the AI memory wall.</span></td>
+                  <td><span class="zh">Sandisk 明确把 HBF 设计成 augment HBM 的技术，并强调 16-high、低 warpage 堆叠和 HBM4-like footprint。</span><span class="en">Sandisk positions HBF as augmenting HBM, with 16-high stacking, low warpage, and an HBM4-like footprint.</span></td>
+                  <td><span class="zh">HBF 复用了 HBM 时代的封装/堆叠语言，但系统角色更靠近“容量层”。</span><span class="en">HBF borrows HBM-era stacking and packaging language, but its system role is closer to a capacity tier.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">带宽/容量</span><span class="en">Bandwidth / capacity</span></strong></td>
+                  <td><span class="zh">HBM4 进入 2048 I/O；单 stack 带宽可达 2TB/s 以上，容量通常是数十 GB 级。</span><span class="en">HBM4 moves to 2048 I/O; per-stack bandwidth can exceed 2TB/s, while capacity is typically in the tens of GB.</span></td>
+                  <td><span class="zh">Sandisk HBF fact sheet：第一代 1.6TB/s read、512GB/16-die stack；Kioxia 另有 5TB、64GB/s flash module 原型。</span><span class="en">Sandisk's HBF fact sheet targets 1.6TB/s read and 512GB per 16-die stack; Kioxia separately prototyped a 5TB, 64GB/s flash module.</span></td>
+                  <td><span class="zh">HBF 的卖点不是打赢 HBM 延迟，而是用 8-16x 容量缓解 inference 的模型权重、KV cache、RAG/vector 数据瓶颈。</span><span class="en">HBF's pitch is not beating HBM latency; it is using 8-16x capacity to ease inference bottlenecks from model weights, KV cache, RAG, and vector data.</span></td>
+                  <td><span class="quality official">OFFICIAL</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">延迟/写入</span><span class="en">Latency / writes</span></strong></td>
+                  <td><span class="zh">DRAM 低延迟、适合频繁读写和训练/推理热数据；断电丢失，需要 refresh。</span><span class="en">DRAM has low latency and suits frequent reads/writes plus hot training/inference data; it is volatile and needs refresh.</span></td>
+                  <td><span class="zh">Flash 非易失、无 refresh，但 page 更大、延迟更高、写入耐久有限。TrendForce 转述专家口径称 HBF 更适合 read-intensive workload。</span><span class="en">Flash is non-volatile and needs no refresh, but has larger pages, higher latency, and finite write endurance. TrendForce relays expert views that HBF fits read-intensive workloads.</span></td>
+                  <td><span class="zh">HBF 不是 drop-in HBM；软件、编译器、缓存策略和数据布局必须配合。</span><span class="en">HBF is not drop-in HBM; software, compilers, caching policy, and data layout must cooperate.</span></td>
+                  <td><span class="quality analyst">ANALYST</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">最适 workload</span><span class="en">Best-fit workload</span></strong></td>
+                  <td><span class="zh">训练、prefill、attention 热路径、实时 activation、带宽和延迟都非常敏感的 GPU/ASIC 工作内存。</span><span class="en">Training, prefill, attention hot paths, live activations, and GPU/ASIC working memory where both bandwidth and latency are critical.</span></td>
+                  <td><span class="zh">推理、模型权重常驻、RAG/ANN reranking、超大向量库、本地大容量读密集数据层。</span><span class="en">Inference, resident model weights, RAG/ANN reranking, giant vector databases, and local high-capacity read-heavy data tiers.</span></td>
+                  <td><span class="zh">HBF 更像“让 GPU/ASIC 旁边多一个高带宽大容量 flash tier”，不是替代全部 HBM。</span><span class="en">HBF is more like adding a high-bandwidth, high-capacity flash tier beside the GPU/ASIC, not replacing all HBM.</span></td>
+                  <td><span class="quality analyst">RESEARCH</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">市场阶段</span><span class="en">Market stage</span></strong></td>
+                  <td><span class="zh">已量产、已形成 2026 年 450-550 亿美元级 TAM，三大玩家为 SK hynix、Samsung、Micron。</span><span class="en">In volume production with a 2026 TAM around $45B-55B; the three main vendors are SK hynix, Samsung, and Micron.</span></td>
+                  <td><span class="zh">标准化/样品阶段：Sandisk + SK hynix 推 OCP workstream；Sandisk 目标 2026H2 样品、2027 初 AI 推理设备样品。</span><span class="en">Standardization/sample stage: Sandisk and SK hynix are pushing an OCP workstream; Sandisk targets 2H26 samples and early-2027 AI inference device samples.</span></td>
+                  <td><span class="zh">HBF 目前没有成熟公开 TAM；2030 后可能放量，2038 超过 HBM 属专家情景，不是确定预测。</span><span class="en">HBF has no mature public TAM yet; volume is more plausible after 2030, while a 2038 HBM-overlap/overtake view is an expert scenario, not a firm forecast.</span></td>
+                  <td><span class="quality scenario">SCENARIO</span></td>
+                </tr>
+                <tr>
+                  <td><strong><span class="zh">领先者</span><span class="en">Leaders</span></strong></td>
+                  <td><span class="zh">SK hynix 份额和客户认证领先；Samsung 靠 HBM4/4nm base die 追赶；Micron 是重要第二/第三供应源。</span><span class="en">SK hynix leads in share and customer qualification; Samsung is catching up through HBM4/4nm base die; Micron is an important second/third source.</span></td>
+                  <td><span class="zh">Sandisk 是 HBF 概念和 fact sheet 主导者；SK hynix 提供 HBM/封装/量产标准化力量；Kioxia 走高带宽 flash module 路线。</span><span class="en">Sandisk leads the HBF concept and fact-sheet path; SK hynix contributes HBM/package/volume standardization muscle; Kioxia pursues a high-bandwidth flash-module path.</span></td>
+                  <td><span class="zh">长期赢家可能不是单一 NAND 厂，而是能把 NAND、controller、封装、OCP 标准和 GPU/ASIC 软件栈一起打通的生态。</span><span class="en">The long-term winner may not be one NAND vendor, but the ecosystem that aligns NAND, controllers, packaging, OCP standards, and GPU/ASIC software stacks.</span></td>
+                  <td><span class="quality analyst">ANALYST</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="matrix-note"><span class="zh">结论：HBM 是现在 AI 加速器的主工作内存；HBF 是面向推理的未来容量层。短期 HBF 更可能补充 HBM，减少“为了放下模型而堆昂贵 HBM”的压力；长期若软件栈成熟，可能侵蚀一部分因容量而配置的 HBM 需求，但很难替代训练和热数据路径中的 HBM。</span><span class="en">Conclusion: HBM is today's primary AI accelerator working memory; HBF is a future inference capacity tier. Near term, HBF is more likely to complement HBM and reduce pressure to add expensive HBM merely for capacity. Longer term, if the software stack matures, it may cannibalize some capacity-driven HBM demand, but it is unlikely to replace HBM in training and hot-data paths.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hbm5">
+      <div class="section-inner">
+        <div class="chapter-head reveal">
+          <div>
+            <p class="eyebrow">03 / HBM5 + Base Die</p>
+            <h2><span class="zh">HBM5 的重点不是更宽总线，而是 base die 控制权</span><span class="en">HBM5 is not just a wider bus; it is a fight over the base die</span></h2>
+          </div>
+          <p class="chapter-note"><span class="zh">目前 HBM4 已有标准和产品公告；HBM5 仍处于路线图和研究窗口。比较稳妥的读法是：2029-2031 年 HBM5/HBM5E/custom HBM5 会把行业从“卖堆叠 DRAM”推向“存储子系统协同设计”。</span><span class="en">HBM4 is now backed by standards and product announcements; HBM5 remains a roadmap and research horizon. The practical read: in 2029-2031, HBM5/HBM5E/custom HBM5 pushes the industry from selling stacked DRAM toward co-designing memory subsystems.</span></p>
+        </div>
+
+        <div class="horizon-grid">
+          <article class="panel dark reveal">
+            <span class="status-tag"><span class="zh">确认 vs 情景</span><span class="en">Confirmed vs scenario</span></span>
+            <h3><span class="zh">如何看 HBM5 资料</span><span class="en">How to read HBM5 claims</span></h3>
+            <ol class="finding-list">
+              <li><span class="number">1</span><span><span class="zh"><strong>已确认：</strong>SK hynix 路线图把 HBM5、HBM5E 和 custom HBM5 放在 2029-2031 年窗口。</span><span class="en"><strong>Confirmed:</strong> SK hynix's roadmap places HBM5, HBM5E, and custom HBM5 in the 2029-2031 window.</span></span></li>
+              <li><span class="number">2</span><span><span class="zh"><strong>高可信趋势：</strong>base die 承担更多控制、功耗、测试、遥测和客户接口功能，定制化程度上升。</span><span class="en"><strong>High-confidence trend:</strong> the base die takes on more control, power, test, telemetry, and customer-interface functions.</span></span></li>
+              <li><span class="number">3</span><span><span class="zh"><strong>情景假设：</strong>4096-bit I/O、16/20-hi、约 4TB/s 和更高功耗来自路线图/研究预测，不应当作最终 JEDEC 规格。</span><span class="en"><strong>Scenario:</strong> 4096-bit I/O, 16/20-hi, roughly 4TB/s, and higher power are roadmap/research projections, not final JEDEC specs.</span></span></li>
+            </ol>
+          </article>
+
+          <article class="panel reveal">
+            <h3><span class="zh">Base die 为什么成为核心</span><span class="en">Why the base die becomes strategic</span></h3>
+            <p><span class="zh">Base die 是 HBM 堆栈底部的逻辑层，连接 DRAM die、TSV、PHY、测试/修复、电源分配和外部 GPU/ASIC 接口。HBM4 以后，它不再只是“适配层”，而是客户可定制的性能、功耗和封装边界。</span><span class="en">The base die is the logic layer at the bottom of an HBM stack, linking DRAM dies, TSVs, PHY, test/repair, power distribution, and the external GPU/ASIC interface. After HBM4, it is no longer merely an adapter; it becomes a customer-tunable boundary for performance, power, and packaging.</span></p>
+            <div class="spec-grid" aria-label="HBM5 and base die markers">
+              <div class="spec-card">
+                <strong>HBM4 baseline</strong>
+                <span><span class="zh">JEDEC HBM4 将 I/O 扩到 2048-bit；厂商产品已把单堆带宽推进到 2.8-3.3TB/s。</span><span class="en">JEDEC HBM4 expands I/O to 2048-bit; vendor products are already pushing per-stack bandwidth to 2.8-3.3TB/s.</span></span>
+              </div>
+              <div class="spec-card">
+                <strong>HBM5 scenario</strong>
+                <span><span class="zh">研究路线图常见假设是 4096-bit、16/20-hi 和约 4TB/s，但标准化仍未完成。</span><span class="en">Research roadmaps often model 4096-bit, 16/20-hi, and roughly 4TB/s, but standardization is not complete.</span></span>
+              </div>
+              <div class="spec-card">
+                <strong>Hybrid bonding</strong>
+                <span><span class="zh">TrendForce 指出 HBM5 20-hi 世代会采用 hybrid bonding，原因是高度、I/O 密度和散热限制。</span><span class="en">TrendForce expects hybrid bonding for HBM5 20-hi because stack height, I/O density, and thermal limits tighten.</span></span>
+              </div>
+            </div>
+            <p class="source-note"><span class="zh">结论：HBM5 的商业价值可能不只在 bit 或带宽，而在谁能控制 base die、堆叠工艺和客户平台验证。</span><span class="en">Conclusion: HBM5's commercial value may lie less in bits alone and more in who controls the base die, stack process, and customer platform qualification.</span></p>
+          </article>
+        </div>
+
+        <div class="pathway-grid reveal">
+          <article class="pathway">
+            <h3><span class="zh">标准路径</span><span class="en">Standard path</span></h3>
+            <p><span class="zh">内存厂定义 base die，客户按标准 HBM PHY/controller 集成。优点是可替代性更强、导入更稳；缺点是很难针对单一 GPU/ASIC 优化功耗、延迟和封装面积。</span><span class="en">The memory vendor defines the base die and customers integrate through a standard HBM PHY/controller. This improves substitutability, but limits per-accelerator optimization of power, latency, and package area.</span></p>
+          </article>
+          <article class="pathway">
+            <h3><span class="zh">定制路径</span><span class="en">Custom path</span></h3>
+            <p><span class="zh">GPU/ASIC 客户与内存厂、代工厂共同定义 base die；控制器、遥测、功耗管理甚至部分近存计算逻辑可下沉。优点是性能/能效更强，代价是验证更长、锁定更深。</span><span class="en">GPU/ASIC customers co-define the base die with memory and foundry partners; controller, telemetry, power management, and even near-memory logic can move downward. Performance and efficiency improve, but qualification lengthens and lock-in deepens.</span></p>
+          </article>
+          <article class="pathway">
+            <h3><span class="zh">代工厂变量</span><span class="en">Foundry variable</span></h3>
+            <p><span class="zh">如果 wafer-to-wafer hybrid bonding 要求 base die 与 memory die 尺寸高度匹配，能同时承接 GPU/ASIC 与 base die 的代工/封装平台会更有话语权，TSMC 的角色会继续上升。</span><span class="en">If wafer-to-wafer hybrid bonding requires tight base-die and memory-die dimension matching, foundry/packaging platforms that handle both GPU/ASIC and base die work gain leverage; TSMC's role likely rises.</span></p>
+          </article>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">Base die 制程与所有权矩阵</span><span class="en">Base die node and ownership matrix</span></h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">阶段</span><span class="en">Phase</span></th>
+                  <th><span class="zh">base die 谁定义</span><span class="en">Who defines the base die</span></th>
+                  <th><span class="zh">制程/工艺证据</span><span class="en">Node / process evidence</span></th>
+                  <th><span class="zh">为什么重要</span><span class="en">Why it matters</span></th>
+                  <th><span class="zh">判断等级</span><span class="en">Confidence</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>HBM3E</strong></td>
+                  <td><span class="zh">以内存厂标准设计为主。</span><span class="en">Primarily memory-vendor standard design.</span></td>
+                  <td><span class="zh">重点在 DRAM die、TSV、MR-MUF/TC bonding 和客户认证；base die 不是主要差异化叙事。</span><span class="en">Focus is DRAM die, TSV, MR-MUF/TC bonding, and customer qualification; base die is not the dominant differentiation story.</span></td>
+                  <td><span class="zh">供应商竞争更像“谁能稳定堆叠并通过 NVIDIA/ASIC 认证”。</span><span class="en">Competition is mostly about stable stacking and NVIDIA/ASIC qualification.</span></td>
+                  <td><span class="quality official">OBSERVED</span></td>
+                </tr>
+                <tr>
+                  <td><strong>HBM4 standard</strong></td>
+                  <td><span class="zh">内存厂定义，但 logic base die 走向外部/先进逻辑代工。</span><span class="en">Defined by memory vendors, but logic base die moves toward external/advanced foundry logic.</span></td>
+                  <td><span class="zh">TrendForce 早期指出 HBM4 base die 会采用 12nm 逻辑晶圆；Samsung 官方披露 4nm logic base die。</span><span class="en">TrendForce earlier pointed to 12nm logic wafers for HBM4 base dies; Samsung officially disclosed a 4nm logic base die.</span></td>
+                  <td><span class="zh">base die 从“接口层”变成高带宽、功耗和信号完整性的关键节点。</span><span class="en">The base die moves from adapter layer to a key node for bandwidth, power, and signal integrity.</span></td>
+                  <td><span class="quality official">OFFICIAL+</span></td>
+                </tr>
+                <tr>
+                  <td><strong>HBM4E / custom 2027</strong></td>
+                  <td><span class="zh">GPU/ASIC 客户开始争夺设计权；内存厂和 TSMC/代工厂共同实现。</span><span class="en">GPU/ASIC customers start taking design control; memory vendors and TSMC/foundries implement it.</span></td>
+                  <td><span class="zh">TrendForce 报道 NVIDIA 2027 起设计 HBM logic die；标准 HBM4E 先走 TSMC 12nm，定制 HBM4E 转向 3nm。</span><span class="en">TrendForce reports NVIDIA logic-die design from 2027; standard HBM4E starts on TSMC 12nm, then custom HBM4E moves toward 3nm.</span></td>
+                  <td><span class="zh">内存厂的附加值可能被重新分配：DRAM 堆叠、base die IP、封装验证分工改变。</span><span class="en">Value-add may be redistributed across DRAM stacking, base-die IP, and package qualification.</span></td>
+                  <td><span class="quality analyst">REPORT</span></td>
+                </tr>
+                <tr>
+                  <td><strong>HBM5 / HBM5E</strong></td>
+                  <td><span class="zh">更可能进入客户定制与平台协同设计，但标准仍未定。</span><span class="en">More likely to move into customer-specific platform co-design, but standards remain unsettled.</span></td>
+                  <td><span class="zh">SK hynix 路线图窗口为 2029-2031；4096-bit、20-hi、N2 base die 等说法仍是情景假设。</span><span class="en">SK hynix roadmap window is 2029-2031; 4096-bit, 20-hi, and N2 base-die claims remain scenarios.</span></td>
+                  <td><span class="zh">技术竞争会从“谁的 DRAM 更快”扩展到“谁拥有可验证的存储子系统”。</span><span class="en">Competition expands from faster DRAM to ownership of a validated memory subsystem.</span></td>
+                  <td><span class="quality scenario">SCENARIO</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Hybrid bonding</strong></td>
+                  <td><span class="zh">base die 与 memory die 尺寸匹配会推高代工/封装平台权重。</span><span class="en">Base-die and memory-die size matching raises foundry/packaging leverage.</span></td>
+                  <td><span class="zh">TrendForce 指出 HBM5 20-hi 会采用 wafer-to-wafer hybrid bonding；粒子控制和前段良率是经济性瓶颈。</span><span class="en">TrendForce expects wafer-to-wafer hybrid bonding for HBM5 20-hi; particle control and front-end yield are economic bottlenecks.</span></td>
+                  <td><span class="zh">这会改变谁负责堆叠、谁承担良率风险、谁管理 HBM 订单。</span><span class="en">This changes who stacks, who bears yield risk, and who manages HBM orders.</span></td>
+                  <td><span class="quality analyst">ROADMAP</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">HBM5 需要重点跟踪的四个工程风险</span><span class="en">Four engineering risks to track for HBM5</span></h3>
+          <div class="risk-grid">
+            <article class="risk-card">
+              <strong>Standardization</strong>
+              <span><span class="zh">4096-bit、16/20-hi、封装厚度和热预算尚未成为公开标准。任何提前投资都带有规格漂移风险。</span><span class="en">4096-bit, 16/20-hi, package height, and thermal budgets are not public final standards. Early investment carries spec-drift risk.</span></span>
+            </article>
+            <article class="risk-card">
+              <strong>W2W yield</strong>
+              <span><span class="zh">Wafer-to-wafer hybrid bonding 要求更严格的粒子控制、晶圆平坦度和前段良率；坏 die 会放大整片晶圆损失。</span><span class="en">Wafer-to-wafer bonding demands tighter particle control, wafer planarity, and front-end yield; bad dies can magnify full-wafer losses.</span></span>
+            </article>
+            <article class="risk-card">
+              <strong>Thermal density</strong>
+              <span><span class="zh">更高 I/O、更高堆叠和更密互连会把瓶颈推向液冷、封装热阻和数据中心功耗预算。</span><span class="en">Higher I/O, taller stacks, and denser interconnects push the bottleneck toward liquid cooling, package thermal resistance, and data-center power budgets.</span></span>
+            </article>
+            <article class="risk-card">
+              <strong>Value split</strong>
+              <span><span class="zh">如果客户掌握 base die，内存厂可能从“完整产品供应商”部分转向“DRAM 堆叠与制造伙伴”。</span><span class="en">If customers own the base die, memory vendors may partially shift from full-product suppliers to DRAM stacking and manufacturing partners.</span></span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="supply">
+      <div class="section-inner">
+        <div class="chapter-head reveal">
+          <div>
+            <p class="eyebrow">04 / Supply chain</p>
+            <h2><span class="zh">三大厂竞争，胜负在量产质量和客户验证</span><span class="en">The three-way race is decided by production quality and qualification</span></h2>
+          </div>
+          <p class="chapter-note"><span class="zh">HBM 的供应链不像普通 DRAM 那样只看 bit output。AI 客户需要稳定的整栈良率、热表现、功耗曲线和封装协同，任何一项掉链都会影响 GPU 或 ASIC 出货。</span><span class="en">HBM supply is not measured like ordinary DRAM bit output. AI customers need stable full-stack yield, thermal behavior, power curves, and package integration; any weak link can delay GPU or ASIC shipments.</span></p>
+        </div>
+
+        <div class="supplier-grid reveal">
+          <article class="supplier featured">
+            <div>
+              <h3>SK hynix</h3>
+              <p><span class="zh">现阶段 HBM 龙头。优势在 NVIDIA 关系、HBM3E 量产、MR-MUF 封装经验和高份额。新变量是 custom HBM：路线图显示其正把控制器功能推向 base die，并与 TSMC 合作 base die。</span><span class="en">The current HBM leader. Its edge is the NVIDIA relationship, HBM3E volume production, MR-MUF packaging experience, and high share. The new variable is custom HBM: its roadmap points to moving controller functions toward the base die and collaborating with TSMC on base dies.</span></p>
+            </div>
+            <div class="tag-row">
+              <span class="tag"><span class="zh">份额领先</span><span class="en">Share leader</span></span>
+              <span class="tag"><span class="zh">HBM3E 强势</span><span class="en">HBM3E strength</span></span>
+              <span class="tag">Custom HBM5</span>
+            </div>
+          </article>
+
+          <article class="supplier">
+            <div>
+              <h3>Samsung</h3>
+              <p><span class="zh">2026 年最重要变量。HBM4 采用 1c DRAM 和 4nm logic base die，memory + foundry + packaging 一体化是优势；同时其计划 2027 年送 custom HBM 样品，直接切入 base die 定制竞争。</span><span class="en">The most important swing factor in 2026. Its HBM4 uses 1c DRAM and a 4nm logic base die, making memory + foundry + packaging integration an advantage; it also plans custom HBM samples in 2027, directly entering the base-die customization race.</span></p>
+            </div>
+            <div class="tag-row">
+              <span class="tag"><span class="zh">HBM4 追赶</span><span class="en">HBM4 catch-up</span></span>
+              <span class="tag">4nm base die</span>
+              <span class="tag">Custom samples 2027</span>
+            </div>
+          </article>
+
+          <article class="supplier">
+            <div>
+              <h3>Micron</h3>
+              <p><span class="zh">份额较小，但 HBM3E/HBM4 产品指标积极。已宣布 HBM4 36GB 12H 量产出货，并向客户送样 48GB 16H。后续重点是能否把高带宽产品指标转化为 custom HBM/base die 生态位置。</span><span class="en">Smaller share, but strong HBM3E/HBM4 product claims. Micron has announced production shipments of 36GB 12H HBM4 and customer samples of 48GB 16H. The next question is whether strong bandwidth specs translate into a custom-HBM/base-die ecosystem role.</span></p>
+            </div>
+            <div class="tag-row">
+              <span class="tag"><span class="zh">产品指标强</span><span class="en">Strong specs</span></span>
+              <span class="tag">36GB 12H</span>
+              <span class="tag">48GB 16H sample</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="bottleneck-strip reveal" style="margin-top: 18px;">
+          <div class="bottleneck"><strong>TSV</strong><span><span class="zh">穿硅通孔密度、均匀性和可靠性决定堆叠良率。</span><span class="en">Through-silicon-via density, uniformity, and reliability determine stack yield.</span></span></div>
+          <div class="bottleneck"><strong>12/16/20-hi stack</strong><span><span class="zh">堆叠层数越高，翘曲、散热和已知良品 die 管理越难，HBM5 20-hi 会放大这些问题。</span><span class="en">Higher stacks increase warpage, thermal, and known-good-die complexity; HBM5 20-hi would magnify these issues.</span></span></div>
+          <div class="bottleneck"><strong>Base die</strong><span><span class="zh">HBM4 后 logic base die 从接口层升级为客户协同设计和供应链锁定入口。</span><span class="en">After HBM4, the logic base die moves from interface layer to customer co-design and supply-chain lock-in point.</span></span></div>
+          <div class="bottleneck"><strong>2.5D package</strong><span><span class="zh">CoWoS/interposer 是 GPU 和 HBM 一起出货的硬上限之一。</span><span class="en">CoWoS/interposer capacity is one hard ceiling for shipping GPUs and HBM together.</span></span></div>
+          <div class="bottleneck"><strong>Qualification</strong><span><span class="zh">NVIDIA、AMD、ASIC 客户验证周期会造成份额阶跃变化。</span><span class="en">NVIDIA, AMD, and ASIC customer qualification cycles can shift share in steps.</span></span></div>
+        </div>
+
+        <div class="research-block reveal">
+          <h3><span class="zh">供应链竞争评分表</span><span class="en">Supply chain competitive scorecard</span></h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th><span class="zh">参与者</span><span class="en">Player</span></th>
+                  <th><span class="zh">2026 位置</span><span class="en">2026 position</span></th>
+                  <th><span class="zh">技术抓手</span><span class="en">Technical lever</span></th>
+                  <th><span class="zh">主要风险</span><span class="en">Key risk</span></th>
+                  <th><span class="zh">对 HBM5/base die 的含义</span><span class="en">HBM5/base-die implication</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>SK hynix</strong></td>
+                  <td><span class="zh">Q2 2025 HBM 出货份额 62%；HBM3E 领导地位延续到 HBM4 认证。</span><span class="en">62% Q2 2025 HBM shipment share; HBM3E leadership carries into HBM4 qualification.</span></td>
+                  <td><span class="zh">Advanced MR-MUF、1bnm DRAM、TSMC/base die 合作、custom HBM 路线图。</span><span class="en">Advanced MR-MUF, 1bnm DRAM, TSMC/base-die collaboration, custom-HBM roadmap.</span></td>
+                  <td><span class="zh">对 NVIDIA 订单集中度高；若客户拿走 base die 设计权，议价结构会变化。</span><span class="en">High NVIDIA concentration; if customers take base-die design control, bargaining structure changes.</span></td>
+                  <td><span class="zh">需要把“领先堆叠”升级为“领先存储子系统”。</span><span class="en">Must upgrade from leading stacker to leading memory-subsystem partner.</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Samsung</strong></td>
+                  <td><span class="zh">Q2 2025 份额 17%，但 2026 HBM4 量产与出货公告提升追赶确定性。</span><span class="en">17% Q2 2025 share, but 2026 HBM4 mass-production and shipment announcements improve catch-up visibility.</span></td>
+                  <td><span class="zh">1c DRAM、4nm logic base die、in-house foundry/packaging、2027 custom HBM samples。</span><span class="en">1c DRAM, 4nm logic base die, in-house foundry/packaging, 2027 custom HBM samples.</span></td>
+                  <td><span class="zh">客户认证历史拖累信任，需要证明高规格可稳定量产。</span><span class="en">Prior qualification issues weigh on trust; it must prove high specs can ramp reliably.</span></td>
+                  <td><span class="zh">若 4nm base die 路线稳定，Samsung 是少数能把 memory + foundry + package 打包的厂商。</span><span class="en">If the 4nm base-die path is stable, Samsung is one of few players that can bundle memory, foundry, and package.</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Micron</strong></td>
+                  <td><span class="zh">Q2 2025 份额 21%，成为第二；HBM4 规格积极。</span><span class="en">21% Q2 2025 share, second place; aggressive HBM4 specs.</span></td>
+                  <td><span class="zh">HBM4 2048-pin、>11Gbps、>2.8TB/s；36GB 12H 与 48GB 16H 样品。</span><span class="en">HBM4 2048-pin, >11Gbps, >2.8TB/s; 36GB 12H and 48GB 16H samples.</span></td>
+                  <td><span class="zh">份额基数和封装生态仍小于韩系厂商；需要更多头部客户认证。</span><span class="en">Share base and packaging ecosystem remain smaller than Korean peers; needs more top-customer qualifications.</span></td>
+                  <td><span class="zh">如果能成为可靠第二供应源，会在 custom HBM/base die 时代获得更大议价空间。</span><span class="en">If it becomes a reliable second source, it gains more leverage in custom-HBM/base-die negotiations.</span></td>
+                </tr>
+                <tr>
+                  <td><strong>TSMC / foundry packaging</strong></td>
+                  <td><span class="zh">不是 HBM 内存厂，但 CoWoS、logic base die、advanced node 是 AI 加速器交付上限。</span><span class="en">Not an HBM memory vendor, but CoWoS, logic base dies, and advanced nodes cap accelerator delivery.</span></td>
+                  <td><span class="zh">2.5D interposer、CoWoS/CoPoS、12nm/3nm base die、未来 W2W hybrid bonding 平台。</span><span class="en">2.5D interposer, CoWoS/CoPoS, 12nm/3nm base dies, future W2W hybrid-bonding platform.</span></td>
+                  <td><span class="zh">先进封装产能成为全行业共享瓶颈；客户预定会挤压后发者。</span><span class="en">Advanced-packaging capacity becomes a shared industry bottleneck; customer pre-booking squeezes late entrants.</span></td>
+                  <td><span class="zh">HBM5 若走 W2W hybrid bonding，代工/封装平台可能直接影响 HBM 订单管理。</span><span class="en">If HBM5 adopts W2W hybrid bonding, foundry/package platforms may directly affect HBM order management.</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="matrix-note"><span class="zh">结论：HBM 竞争不再只在三大 DRAM 厂之间。HBM4/HBM5 把 TSMC/封装、GPU/ASIC 客户和设备厂一起拉进价值分配。</span><span class="en">Bottom line: HBM is no longer only a three-DRAM-vendor race. HBM4/HBM5 pull TSMC/packaging, GPU/ASIC customers, and equipment vendors into value allocation.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="watch">
+      <div class="section-inner">
+        <div class="chapter-head reveal">
+          <div>
+            <p class="eyebrow">05 / Watch list</p>
+            <h2><span class="zh">接下来 6-18 个月该看什么</span><span class="en">What to watch over the next 6-18 months</span></h2>
+          </div>
+          <p class="chapter-note"><span class="zh">HBM 的研究重点不只是规格表。真正有预测价值的是客户认证、封装分配、ASP 曲线、非 NVIDIA 需求扩散，以及 HBM5/base die 相关的提前投资信号。</span><span class="en">The useful signals are not just spec sheets. Customer qualification, package allocation, ASP curves, demand outside NVIDIA, and early HBM5/base-die investment signals carry more predictive power.</span></p>
+        </div>
+
+        <div class="watch-grid">
+          <article class="signal reveal" data-index="01">
+            <h3><span class="zh">Rubin HBM4 验证节奏</span><span class="en">Rubin HBM4 qualification</span></h3>
+            <p><span class="zh">NVIDIA Rubin/Rubin Ultra 会决定 HBM4 首轮份额分配。谁先进供应链，谁就更可能在 HBM4E 和 custom HBM 里延续位置。</span><span class="en">NVIDIA Rubin/Rubin Ultra will set the first HBM4 share allocation. Whoever enters early has a better chance of carrying that position into HBM4E and custom HBM.</span></p>
+          </article>
+          <article class="signal reveal" data-index="02">
+            <h3><span class="zh">16-hi 良率</span><span class="en">16-hi yield</span></h3>
+            <p><span class="zh">16-hi 带来更高容量，但热、翘曲和堆叠良率压力更大。它是容量增长的关键，也是供应商分化的地方。</span><span class="en">16-hi raises capacity, but increases thermal, warpage, and stack-yield pressure. It is key to capacity growth and supplier differentiation.</span></p>
+          </article>
+          <article class="signal reveal" data-index="03">
+            <h3>CoWoS allocation</h3>
+            <p><span class="zh">HBM 有货不等于 GPU 能出货。TSMC 先进封装、interposer 和系统级良率仍会约束 AI 加速器交付。</span><span class="en">Available HBM does not automatically mean available GPUs. TSMC advanced packaging, interposers, and system-level yield still constrain accelerator delivery.</span></p>
+          </article>
+          <article class="signal reveal" data-index="04">
+            <h3>ASIC attach rate</h3>
+            <p><span class="zh">Google TPU、AWS Trainium、Broadcom/Marvell custom ASIC 的 HBM 用量，会决定市场是否摆脱对 NVIDIA 单一节奏的依赖。</span><span class="en">HBM usage in Google TPU, AWS Trainium, and Broadcom/Marvell custom ASICs will decide whether the market becomes less dependent on NVIDIA's cadence.</span></p>
+          </article>
+          <article class="signal reveal" data-index="05">
+            <h3>HBM3E ASP</h3>
+            <p><span class="zh">成熟 HBM3E 供给改善后可能承压。若 HBM4 溢价不足，供应商盈利弹性会低于出货增速。</span><span class="en">Mature HBM3E may face pressure as supply improves. If HBM4 premiums are insufficient, profit leverage may lag shipment growth.</span></p>
+          </article>
+          <article class="signal reveal" data-index="06">
+            <h3>Custom HBM</h3>
+            <p><span class="zh">base die 与客户 ASIC 的协同设计，会把 HBM 从标准品推向平台型组件，长期提高切换成本，也改变内存厂和代工厂的价值分配。</span><span class="en">Base-die co-design with customer ASICs can move HBM from a standard component toward a platform element, raising switching costs and changing value split between memory vendors and foundries.</span></p>
+          </article>
+          <article class="signal reveal" data-index="07">
+            <h3><span class="zh">HBM5 标准化</span><span class="en">HBM5 standardization</span></h3>
+            <p><span class="zh">重点看 4096-bit、16/20-hi、散热预算和封装高度是否进入正式标准或供应商公开规格。标准落地前，所有 HBM5 数字都应按情景处理。</span><span class="en">Watch whether 4096-bit, 16/20-hi, thermal budgets, and package-height assumptions enter formal standards or public vendor specs. Until then, HBM5 numbers are scenarios.</span></p>
+          </article>
+          <article class="signal reveal" data-index="08">
+            <h3><span class="zh">Hybrid bonding 量产学习曲线</span><span class="en">Hybrid bonding learning curve</span></h3>
+            <p><span class="zh">HBM5 20-hi 若采用 wafer-to-wafer hybrid bonding，颗粒控制、前端良率和 base die/memory die 尺寸匹配会成为新瓶颈。</span><span class="en">If HBM5 20-hi uses wafer-to-wafer hybrid bonding, particle control, front-end yield, and base-die/memory-die size matching become new bottlenecks.</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="section-inner">
+        <div class="chapter-head reveal">
+          <div>
+            <p class="eyebrow">06 / Sources</p>
+            <h2><span class="zh">主要来源</span><span class="en">Key Sources</span></h2>
+          </div>
+          <p class="chapter-note"><span class="zh">页面内容综合官方产品资料、行业机构预测、供应商公告和 HBM/HBF 路线图研究。HBM5 与 HBF 市场规模相关数字按情景看，除非后续进入 JEDEC/OCP 或厂商正式规格。</span><span class="en">This page combines official product material, industry forecasts, supplier announcements, and HBM/HBF roadmap research. HBM5 and HBF market-size figures are scenarios unless they enter JEDEC/OCP or public vendor specifications.</span></p>
+        </div>
+
+        <div class="source-grid reveal">
+          <a class="source-card" href="https://www.gartner.com/en/newsroom/press-releases/2026-04-08-gartner-forecasts-worldwide-semiconductor-revenue-to-exceed-us-dollars-one-point-3-trillion-in-2026" target="_blank" rel="noreferrer">
+            <h3>Gartner</h3>
+            <p><span class="zh">2026 半导体收入、memory 收入、AI 半导体占比。</span><span class="en">2026 semiconductor revenue, memory revenue, AI semiconductor share.</span></p>
+          </a>
+          <a class="source-card" href="https://omdia.tech.informa.com/pr/2026/mar/semiconductor-market-surpasses-830bn-dollars-in-2025-driven-by-ai-demand-and-broad-segment-growth" target="_blank" rel="noreferrer">
+            <h3>Omdia</h3>
+            <p><span class="zh">2025 半导体市场规模与 DRAM 复苏背景。</span><span class="en">2025 semiconductor market and DRAM recovery context.</span></p>
+          </a>
+          <a class="source-card" href="https://www.spglobal.com/market-intelligence/en/news-insights/articles/2026/4/ai-fueled-memory-chip-supercycle-to-reach-record-heights-in-2026-88052762" target="_blank" rel="noreferrer">
+            <h3>S&amp;P Global</h3>
+            <p><span class="zh">Memory supercycle、ASP 压力与供应商产能分配。</span><span class="en">Memory supercycle, ASP pressure and supplier allocation dynamics.</span></p>
+          </a>
+          <a class="source-card" href="https://news.skhynix.co.kr/2026-market-outlook/" target="_blank" rel="noreferrer">
+            <h3>SK hynix 2026 Outlook</h3>
+            <p><span class="zh">BofA/Goldman/UBS/Counterpoint 等市场口径汇总：2026 HBM TAM、HBM3E 占比、SK hynix 份额。</span><span class="en">Compilation of BofA, Goldman, UBS, Counterpoint views: 2026 HBM TAM, HBM3E mix, SK hynix share.</span></p>
+          </a>
+          <a class="source-card" href="https://en.yna.co.kr/view/AEN20250924007900320" target="_blank" rel="noreferrer">
+            <h3>Yonhap / Counterpoint</h3>
+            <p><span class="zh">2025 年 Q2 HBM 出货份额：SK hynix 62%，Micron 21%，Samsung 17%。</span><span class="en">Q2 2025 HBM shipment share: SK hynix 62%, Micron 21%, Samsung 17%.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/presscenter/news/20260213-12929.html" target="_blank" rel="noreferrer">
+            <h3>TrendForce</h3>
+            <p><span class="zh">HBM4 验证节奏与 NVIDIA 供应链观察。</span><span class="en">HBM4 validation and NVIDIA supply chain observations.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/presscenter/news/20231127-11928.html" target="_blank" rel="noreferrer">
+            <h3>TrendForce HBM4 base die</h3>
+            <p><span class="zh">HBM4 base die 逻辑制程、12-hi/16-hi 时间窗口与 hybrid bonding 早期判断。</span><span class="en">HBM4 base-die logic process, 12-hi/16-hi timing, and early hybrid-bonding read.</span></p>
+          </a>
+          <a class="source-card" href="https://news.skhynix.com/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/" target="_blank" rel="noreferrer">
+            <h3>SK hynix</h3>
+            <p><span class="zh">HBM4 开发、性能与功耗效率公告。</span><span class="en">HBM4 development, performance and power efficiency claims.</span></p>
+          </a>
+          <a class="source-card" href="https://news.skhynix.com/rulebreaker-revolutions-mr-muf-unlocks-hbm-heat-control/" target="_blank" rel="noreferrer">
+            <h3>SK hynix MR-MUF</h3>
+            <p><span class="zh">MR-MUF 与 Advanced MR-MUF：12-layer HBM3 的 40% 薄化、warpage、EMC 和散热材料。</span><span class="en">MR-MUF and Advanced MR-MUF: 40% thinner 12-layer HBM3 dies, warpage, EMC, and thermal materials.</span></p>
+          </a>
+          <a class="source-card" href="https://doczz.net/doc/8026249/hbm--memory-solution-for-bandwidth-hungry-processors" target="_blank" rel="noreferrer">
+            <h3>SK hynix Hot Chips HBM</h3>
+            <p><span class="zh">早期 HBM base die 架构：PHY、TSV、Test Port，以及未来 base die 定制功能。</span><span class="en">Early HBM base-die architecture: PHY, TSV, test-port areas, and future base-die customization functions.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/news/2025/09/29/news-breaking-the-memory-wall-hbm-basics-and-the-rise-of-hbm4-in-ai/" target="_blank" rel="noreferrer">
+            <h3>TrendForce HBM4 Basics</h3>
+            <p><span class="zh">HBM4 DRAM die 厚度、775µm 高度、2048 I/O 与 logic base die 成本/复杂度。</span><span class="en">HBM4 DRAM-die thickness, 775um height, 2048 I/O, and logic-base-die cost and complexity.</span></p>
+          </a>
+          <a class="source-card" href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noreferrer">
+            <h3>imec Thin Si / ESD</h3>
+            <p><span class="zh">极薄 silicon substrate 对 ESD 鲁棒性和热扩散的影响；用于解释 logic/PHY die 不能任意减薄。</span><span class="en">Impact of extremely thinned silicon substrates on ESD robustness and thermal spreading; used to explain why logic/PHY dies cannot be thinned arbitrarily.</span></p>
+          </a>
+          <a class="source-card" href="https://www.sandisk.com/company/newsroom/press-releases/2026/2026-02-25-sandisk-and-sk-hynix-begin-global-standardization-of-next-generation-memory-solution-high-bandwidth-flash-hbf" target="_blank" rel="noreferrer">
+            <h3>Sandisk / SK hynix HBF</h3>
+            <p><span class="zh">HBF 全球标准化、OCP workstream、AI 推理定位与 NAND/SoC/packaging 生态合作。</span><span class="en">HBF global standardization, OCP workstream, AI inference positioning, and NAND/SoC/packaging ecosystem work.</span></p>
+          </a>
+          <a class="source-card" href="https://documents.sandisk.com/content/dam/asset-library/en_us/assets/public/sandisk/collateral/company/Sandisk-HBF-Fact-Sheet.pdf" target="_blank" rel="noreferrer">
+            <h3>Sandisk HBF Fact Sheet</h3>
+            <p><span class="zh">HBF 512GB/16-die stack、1.6TB/s read bandwidth、8-16x HBM 容量与 CBA/advanced stacking。</span><span class="en">HBF 512GB per 16-die stack, 1.6TB/s read bandwidth, 8-16x HBM capacity, and CBA/advanced stacking.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/news/2026/02/26/news-sk-hynix-sandisk-kick-off-global-standardization-of-hbf-market-set-to-surge-by-2030/" target="_blank" rel="noreferrer">
+            <h3>TrendForce HBF Standardization</h3>
+            <p><span class="zh">HBF 作为 HBM 与 SSD 之间的新内存层、2030 年后需求加速与 2026H2/2027 样品节奏。</span><span class="en">HBF as a new tier between HBM and SSDs, post-2030 demand acceleration, and the 2H26/2027 sampling cadence.</span></p>
+          </a>
+          <a class="source-card" href="https://www.kioxia.com/en-jp/about/news/2025/20250820-1.html" target="_blank" rel="noreferrer">
+            <h3>Kioxia HBF Module</h3>
+            <p><span class="zh">5TB、64GB/s 高带宽 flash module 原型，面向 MEC/AI edge 的另一条 HBF-like 路线。</span><span class="en">5TB, 64GB/s high-bandwidth flash module prototype, a different HBF-like path for MEC and AI edge.</span></p>
+          </a>
+          <a class="source-card" href="https://arxiv.org/abs/2603.01175" target="_blank" rel="noreferrer">
+            <h3>HAVEN HBF Research</h3>
+            <p><span class="zh">HBF 增强 GPU 用于 RAG/ANN reranking：面向 read-heavy 大向量库的系统架构研究。</span><span class="en">HBF-augmented GPU research for RAG/ANN reranking: a system architecture for read-heavy giant vector databases.</span></p>
+          </a>
+          <a class="source-card" href="https://news.samsung.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing" target="_blank" rel="noreferrer">
+            <h3>Samsung</h3>
+            <p><span class="zh">HBM4 商业出货、1c DRAM、4nm logic base die、带宽与 2027 custom HBM 样品计划。</span><span class="en">HBM4 commercial shipment, 1c DRAM, 4nm logic base die, bandwidth, and 2027 custom HBM sampling plan.</span></p>
+          </a>
+          <a class="source-card" href="https://news.samsungsemiconductor.com/global/samsung-develops-industry-first-36gb-hbm3e-12h-dram/" target="_blank" rel="noreferrer">
+            <h3>Samsung HBM3E 12H</h3>
+            <p><span class="zh">Advanced TC-NCF、7µm 层间 gap、12H 与 8H 同高度规格、热阻改善。</span><span class="en">Advanced TC-NCF, 7µm inter-die gap, 12H at the same height spec as 8H, and thermal-resistance improvements.</span></p>
+          </a>
+          <a class="source-card" href="https://www.cnbc.com/2024/05/24/samsungs-hbm-chips-are-failing-nvidia-tests-reuters.html" target="_blank" rel="noreferrer">
+            <h3>Reuters / CNBC</h3>
+            <p><span class="zh">Samsung HBM3/HBM3E 客户认证争议：热、功耗问题报道与 Samsung 后续否认。</span><span class="en">Samsung HBM3/HBM3E qualification controversy: reported heat/power issues and Samsung's later denial.</span></p>
+          </a>
+          <a class="source-card" href="https://www.micron.com/products/memory/hbm/hbm4" target="_blank" rel="noreferrer">
+            <h3>Micron HBM4</h3>
+            <p><span class="zh">HBM4 12H/16H 容量与带宽产品信息。</span><span class="en">HBM4 12H/16H density and bandwidth product details.</span></p>
+          </a>
+          <a class="source-card" href="https://www.rambus.com/interface-ip/hbm/" target="_blank" rel="noreferrer">
+            <h3>Rambus HBM</h3>
+            <p><span class="zh">HBM4/4E 2048-bit 接口、控制器和 4TB/s+ 带宽方向。</span><span class="en">HBM4/4E 2048-bit interface, controller, and 4TB/s+ bandwidth direction.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/news/2025/11/04/news-sk-hynix-unveils-2029-2031-roadmap-featuring-hbm5-gddr7-next-and-400-layer-nand/" target="_blank" rel="noreferrer">
+            <h3>TrendForce HBM5</h3>
+            <p><span class="zh">SK hynix 2029-2031 路线图：HBM5、HBM5E、custom HBM5 与 base die 控制器迁移。</span><span class="en">SK hynix 2029-2031 roadmap: HBM5, HBM5E, custom HBM5, and controller migration toward the base die.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/news/2025/08/26/news-nvidia-reportedly-plans-2027-hbm-logic-die-design-to-gain-supply-chain-leverage-over-tsmc-sk-hynix/" target="_blank" rel="noreferrer">
+            <h3>TrendForce custom logic die</h3>
+            <p><span class="zh">NVIDIA 2027 HBM logic die 设计、TSMC 12nm/3nm 路线与 custom HBM4E 产业影响。</span><span class="en">NVIDIA 2027 HBM logic-die design, TSMC 12nm/3nm path, and custom HBM4E implications.</span></p>
+          </a>
+          <a class="source-card" href="https://www.trendforce.com/news/2026/01/13/news-sk-hynix-may-stick-with-mr-muf-for-hbm4-16-high-despite-asmpt-tc-bonder-orders/" target="_blank" rel="noreferrer">
+            <h3>TrendForce 16-High HBM4</h3>
+            <p><span class="zh">SK hynix 16-high HBM4、30µm DRAM wafer、775µm 高度限制与 MR-MUF/fluxless bonding 取舍。</span><span class="en">SK hynix 16-high HBM4, 30µm DRAM wafers, 775µm height limit, and MR-MUF versus fluxless bonding tradeoffs.</span></p>
+          </a>
+          <a class="source-card" href="https://www.businesswire.com/news/home/20241030527475/en/HBM5-20hi-Stack-to-Adopt-Hybrid-Bonding-Technology-Potentially-Transforming-Business-Models-Says-TrendForce" target="_blank" rel="noreferrer">
+            <h3>TrendForce Hybrid Bonding</h3>
+            <p><span class="zh">HBM5 20-hi、hybrid bonding、wafer-to-wafer 堆叠和 base die 商业模式变化。</span><span class="en">HBM5 20-hi, hybrid bonding, wafer-to-wafer stacking, and base-die business-model implications.</span></p>
+          </a>
+          <a class="source-card" href="https://semiengineering.com/hbm-roadmap-kaists-teralab/" target="_blank" rel="noreferrer">
+            <h3>KAIST / SemiEngineering</h3>
+            <p><span class="zh">HBM5-HBM8 路线图研究入口；用于情景判断，不作为最终标准。</span><span class="en">Entry point to HBM5-HBM8 roadmap research; useful for scenarios, not final specifications.</span></p>
+          </a>
+          <a class="source-card" href="https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/" target="_blank" rel="noreferrer">
+            <h3>NVIDIA Rubin</h3>
+            <p><span class="zh">Rubin 平台、HBM4 容量与带宽方向。</span><span class="en">Rubin platform, HBM4 capacity and bandwidth direction.</span></p>
+          </a>
+          <a class="source-card" href="https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/" target="_blank" rel="noreferrer">
+            <h3>NVIDIA Blackwell Ultra</h3>
+            <p><span class="zh">Blackwell Ultra HBM3E 容量、8 个 12-hi stack 与 8TB/s 带宽。</span><span class="en">Blackwell Ultra HBM3E capacity, eight 12-hi stacks, and 8TB/s bandwidth.</span></p>
+          </a>
+          <a class="source-card" href="https://www.amd.com/en/products/accelerators/instinct/mi350.html" target="_blank" rel="noreferrer">
+            <h3>AMD MI350</h3>
+            <p><span class="zh">MI350 HBM3E 容量与带宽定位。</span><span class="en">MI350 HBM3E capacity and bandwidth positioning.</span></p>
+          </a>
+        </div>
+
+        <footer class="footer" style="margin-top: 36px;">
+          <span><span class="zh">HBM 市场与技术研究简报</span><span class="en">HBM Market & Technology Brief</span></span>
+          <span><span class="zh">静态页面 · 无构建步骤</span><span class="en">Static page, no build step</span></span>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const progress = document.querySelector("#progress");
+    const topbar = document.querySelector(".topbar");
+    const menuToggle = document.querySelector("[data-menu-toggle]");
+    const navLinks = Array.from(document.querySelectorAll("[data-section-link]"));
+    const sections = navLinks
+      .map((link) => {
+        const href = link.getAttribute("href");
+        return href && href.startsWith("#") ? document.querySelector(href) : null;
+      })
+      .filter(Boolean);
+
+    function setMenuOpen(open) {
+      if (!topbar || !menuToggle) return;
+      topbar.classList.toggle("menu-open", open);
+      menuToggle.setAttribute("aria-expanded", String(open));
+      const isEnglish = document.body.classList.contains("lang-en");
+      menuToggle.setAttribute(
+        "aria-label",
+        open
+          ? (isEnglish ? "Close navigation menu" : "关闭导航菜单")
+          : (isEnglish ? "Open navigation menu" : "打开导航菜单")
+      );
+    }
+
+    function setLang(lang) {
+      document.body.classList.toggle("lang-zh", lang === "zh");
+      document.body.classList.toggle("lang-en", lang === "en");
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      localStorage.setItem("hbm-brief-lang", lang);
+      document.querySelectorAll("[data-lang]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+      });
+      setMenuOpen(topbar && topbar.classList.contains("menu-open"));
+    }
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
+      progress.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+
+      let activeId = "";
+      const anchorLine = scrollTop + Math.min(420, window.innerHeight * 0.45);
+      for (const section of sections) {
+        if (anchorLine >= section.offsetTop) activeId = section.id;
+      }
+
+      navLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${activeId}`);
+      });
+    }
+
+    function scrollToHashTarget() {
+      if (!location.hash) return;
+      const hashTarget = document.querySelector(location.hash);
+      if (!hashTarget) return;
+      hashTarget.scrollIntoView({ block: "start" });
+      updateProgress();
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll("[data-lang]").forEach((button) => {
+      button.addEventListener("click", () => setLang(button.dataset.lang));
+    });
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        setMenuOpen(!topbar.classList.contains("menu-open"));
+      });
+    }
+    document.querySelectorAll(".topbar nav a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    });
+    setLang(localStorage.getItem("hbm-brief-lang") || "zh");
+    if (location.hash) {
+      requestAnimationFrame(scrollToHashTarget);
+      window.addEventListener("load", () => setTimeout(scrollToHashTarget, 80), { once: true });
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => setTimeout(scrollToHashTarget, 0));
+      }
+    }
+    window.addEventListener("hashchange", () => setTimeout(scrollToHashTarget, 0));
+    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 720) setMenuOpen(false);
+      updateProgress();
+    });
+    updateProgress();
+  </script>
+</body>
+</html>

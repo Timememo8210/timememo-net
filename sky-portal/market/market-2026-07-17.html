@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-07-17</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股大跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Crash</div>
+<div class="zh poster-data">• 道指：-0.20% → 52146.42点<br>• 纳指：-1.47% → 26213.72点<br>• 费城半导体指数：-4%</div>
+<div class="en poster-data" style="display:none">• Dow: -0.20% → 52146.42<br>• Nasdaq: -1.47% → 26213.72<br>• SOX: -4%</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔴</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI芯片回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Chip Sell-off</div>
+<div class="zh poster-data">• AMD暴跌17%<br>• 英伟达、美光跌超5%<br>• 芯片股进入技术性熊市</div>
+<div class="en poster-data" style="display:none">• AMD down 17%<br>• NVDA, MU down >5%<br>• Chip stocks in bear market</div>
+</div>
+<div class="poster-card" style="background:#0891b2">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Market</div>
+<div class="zh poster-data">• 上证：-1.85% → 3882.41点<br>• 深成指：-1.97% → 14488.65点<br>• 创业板：-2.95% → 3692.46点</div>
+<div class="en poster-data" style="display:none">• Shanghai: -1.85% → 3882.41<br>• Shenzhen: -1.97% → 14488.65<br>• ChiNext: -2.95% → 3692.46</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🇭🇰</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">港股相对强势</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">HK Market</div>
+<div class="zh poster-data">• 恒生指数：+0.52%<br>• 南向资金净买入133亿港元<br>• 恒生科技指数小幅上涨</div>
+<div class="en poster-data" style="display:none">• Hang Seng: +0.52%<br>• Southbound flow: +13.3B HKD<br>• Hang Seng Tech: slight gain</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-17 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>📉 <span class="zh">美股大跌分析</span><span class="en" style="display:none">US Market Crash Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. AI板块恐慌性抛售，AMD暴跌17%</span><span class="en" style="display:none">1. AI Sector Panic Selling, AMD Down 17%</span></h4>
+<p><span class="zh">市场对AI芯片需求预期过高，实际需求不及预期，引发AI板块恐慌性抛售。AMD单日暴跌17%，成为拖累纳指的主要因素。英伟达下跌2.4%，美光科技、博通等芯片股均跌超5%。费城半导体指数跌超4%，正式进入技术性熊市区域。</span><span class="en" style="display:none">Market expectations for AI chip demand exceeded actual demand, triggering panic selling in the AI sector. AMD plunged 17%, becoming the main drag on Nasdaq. Nvidia fell 2.4%, with Micron, Broadcom and other chip stocks down over 5%. Philadelphia Semiconductor Index down >4%, officially entering technical bear market.</span></p>
+<p class="src">来源：新浪财经 / 华尔街见闻 / 路透社</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Meta拟出售AI算力消息引发担忧</span><span class="en" style="display:none">2. Meta AI Compute Sale Worries Market</span></h4>
+<p><span class="zh">据路透社报道，Meta首席执行官扎克伯格在内部全员大会上承认，"过去四个月，AI计算需求增长缓慢"，计划对外出售部分AI算力。这一消息让市场担忧各大科技公司对AI基础设施的投资回报率，引发了对AI资本开支可持续性的质疑。</span><span class="en" style="display:none">Reuters reported that Zuckerberg admitted in an all-hands meeting that "AI compute demand growth has slowed over the past four months," planning to sell some AI compute capacity. This news raised concerns about ROI of AI infrastructure investments, questioning sustainability of AI capex.</span></p>
+<p class="src">来源：路透社 / 华尔街见闻 / 金融时报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 美伊冲突升级，油价暴涨推升通胀担忧</span><span class="en" style="display:none">3. US-Iran Tensions, Oil Surge Fuels Inflation Fears</span></h4>
+<p><span class="zh">美伊冲突持续升级，国际油价单日暴涨近10%，市场对通胀担忧快速升温。油价上涨直接推升了能源股，但也加剧了美联储加息预期，对科技股形成压力。分析人士指出，高油价环境不利于科技等成长股的表现。</span><span class="en" style="display:none">Escalating US-Iran tensions caused oil prices to surge nearly 10% in a single day, fueling inflation fears. Higher oil prices boosted energy stocks but also increased Fed rate hike expectations, pressuring tech growth stocks.</span></p>
+<p class="src">来源：财联社 / 华尔街日报 / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 资金轮动：从科技股流向防御性资产</span><span class="en" style="display:none">4. Fund Rotation: Tech to Defensive Assets</span></h4>
+<p><span class="zh">市场出现明显的资金轮动迹象，资金从高估值的科技股流向防御性资产。道指逆势小幅下跌，显示传统板块相对抗跌。工业、能源等传统板块表现优于科技股，市场风险偏好下降，投资者更关注稳定收益。</span><span class="en" style="display:none">Clear fund rotation from high-tech stocks to defensive assets. Dow's slight decline shows traditional sectors relatively resilient. Industrial and energy sectors outperformed tech as risk appetite declined.</span></p>
+<p class="src">来源：东方财富 / 雪球 / 腾讯证券</p>
+</div>
+
+<h2>🏢 <span class="zh">半导体股票行情（7月17日收盘）</span><span class="en" style="display:none">Semiconductor Stocks (Jul 17 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$35.67</div><div class="stock-change down">-4.25%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$92.84</div><div class="stock-change down">-2.40%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$148.32</div><div class="stock-change down">-17.00%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$85.64</div><div class="stock-change down">-1.85%</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">$689.25</div><div class="stock-change down">-3.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$125.43</div><div class="stock-change down">-5.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$156.78</div><div class="stock-change down">-3.80%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">$178.92</div><div class="stock-change down">-2.90%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">$286.45</div><div class="stock-change down">-4.00%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOXX</div><div class="stock-price">$452.67</div><div class="stock-change down">-4.00%</div></div>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">AMD — Advanced Micro</div><div id="tv-amd"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股市场分析</span><span class="en" style="display:none">A-Share Market Analysis</span></h2>
+<div class="card">
+<h4><span class="zh">1. 沪深两市普跌，创业板领跌</span><span class="en" style="display:none">1. A-Shares Broadly Lower, ChiNext Leads Decline</span></h4>
+<p><span class="zh">受外围市场调整影响，A股三大股指集体收跌。上证指数跌1.85%报3882.41点，深证成指跌1.97%报14488.65点，创业板指跌2.95%报3692.46点。全市场成交额合计2.42万亿元，较前一交易日减少近15%，显示市场人气低迷。</span><span class="en" style="display:none">Influenced by overseas market adjustments, A-shares closed lower across the board. Shanghai Composite down 1.85% to 3882.41, Shenzhen Component down 1.97% to 14488.65, ChiNext down 2.95% to 3692.46. Total turnover 2.42 trillion yuan, down 15% from previous day.</span></p>
+<p class="src">来源：东方财富 / 同花顺 / 腾讯证券</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 传媒板块逆势走强，市场风格再平衡</span><span class="en" style="display:none">2. Media Sector Strength, Market Style Rotation</span></h4>
+<p><span class="zh">在市场整体调整中，传媒板块表现相对强势，成为为数不多逆势上涨的板块。市场正在经历风格再平衡，资金从高估值科技股向传媒等超跌板块转移。部分超跌个股成交放大，显示资金抄底意愿增强。</span><span class="en" style="display:none">Amid overall market correction, media sector showed relative strength, becoming one of the few sectors to rise. Market is undergoing style rotation, with funds moving from high-tech to oversold sectors like media.</span></p>
+<p class="src">来源：证券时报 / 21世纪经济报道</p></div>
+
+<div class="card">
+<h4><span class="zh">3. 宽基ETF显著放量，资金避险情绪升温</span><span class="en" style="display:none">3. Broad ETFs Volume Surges, Risk-Aversion Rises</span></h4>
+<p><span class="zh">2只科创、创业ETF成交额均突破百亿，显示资金在市场调整期间寻求避险。宽基ETF显著放量，表明投资者正在调整仓位，降低高风险资产的配置比例，增加防御性资产权重。</span><span class="en" style="display:none">Two Sci-Tech Innovation and ChiNext ETFs saw volume exceed 100 billion each, showing funds seeking safety during market correction. Broad-based ETFs volume surged as investors adjusted positions, reducing high-risk assets.</span></p>
+<p class="src">来源：同花顺 / 中证网</p></div>
+
+<h2>🇭🇰 <span class="zh">港股市场表现</span><span class="en" style="display:none">Hong Kong Market Performance</span></h2>
+<div class="card">
+<h4><span class="zh">1. 港股相对抗跌，南向资金持续流入</span><span class="en" style="display:none">1. HK Resilient, Southbound Flow Continues</span></h4>
+<p><span class="zh">在全球市场普跌背景下，港股表现相对抗跌。恒生指数微涨0.52%至24340.73点，恒生科技指数也有小幅上涨。南向资金净买入133.64亿港元，显示内地投资者对港股配置的热情不减。AI及大消费板块受到资金青睐。</span><span class="en" style="display:none">Amid global market declines, HK showed relative resilience. Hang Seng Index up 0.52% to 24340.73, Hang Seng Tech Index also gained slightly. Southbound funds net bought 13.364 billion HKD, showing continued mainland investor enthusiasm for HK stocks.</span></p>
+<p class="src">来源：东方财富 / 港交所 / 腾讯证券</p></div>
+
+<div class="card">
+<h4><span class="zh">2. 恒生中国企业指数表现稳定</span><span class="en" style="display:none">2. HSI-CEI Shows Stable Performance</span></h4>
+<p><span class="zh">恒生中国企业指数今日表现相对稳定，波动幅度小于港股主板指数。国企板块作为估值洼地，继续吸引价值型投资者关注。央企国企估值修复预期较强，在经济复苏背景下有望继续表现。</span><span class="en" style="display:none">Hang Sina Enterprises Index showed relatively stable performance with smaller fluctuations than main board. State-owned enterprises, as valuation attractors, continue to attract value investors. Valuation recovery expectations strong for SOEs amid economic recovery.</span></p>
+<p class="src">来源：新浪财经 / 雪球</p></div>
+
+<h2>🔮 <span class="zh">市场展望与投资策略</span><span class="en" style="display:none">Market Outlook & Strategy</span></h2>
+<div class="card">
+<h4><span class="zh">1. 短期市场展望：科技股仍有压力</span><span class="en" style="display:none">1. Short-term Outlook: Tech Faces Continued Pressure</span></h4>
+<p><span class="zh">短期内，科技板块仍面临压力。AI和芯片股的大幅回调可能持续，直到市场对AI芯片需求的实际增长有更清晰的认识。投资者应关注政策面和基本面数据的变化，特别是企业财报中对AI资本开支的指引。</span><span class="en" style="display:none">Short-term, tech sector faces continued pressure. The correction in AI and chip stocks may persist until market has clearer understanding of actual AI chip demand growth. Investors should monitor policy changes and fundamental data, especially AI capex guidance in earnings reports.</span></p>
+<p class="src">来源：国泰君安 / 中信证券</p></div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块：关注龙头股企稳信号</span><span class="en" style="display:none">2. Semiconductor Sector: Watch for Leader Stability</span></h4>
+<p><span class="zh">半导体板块已经进入技术性熊市，但长期逻辑并未改变。投资者应密切关注英伟达、AMD等龙头股的企稳信号。一旦龙头股出现反弹，板块有望迎来修复。建议关注有实际业绩支撑、估值合理的细分龙头。</span><span class="en" style="display:none">Semiconductor sector has entered technical bear market, but long-term thesis unchanged. Investors should watch for stability signals from leaders like NVDA and AMD. Once leaders rebound, sector may recover. Focus on sub-sector leaders with solid earnings and reasonable valuations.</span></p>
+<p class="src">来源：华泰证券 / 中金公司</p></div>
+
+<div class="card">
+<h4><span class="zh">3. 投资策略建议：平衡配置，防御为王</span><span class="en" style="display:none">3. Investment Strategy: Balanced Allocation, Defense First</span></h4>
+<p><span class="zh">在当前市场环境下，建议投资者采取平衡配置策略，降低高风险科技股仓位，增加防御性资产配置。关注以下几个方向：1）受益于高油价的能源板块；2）估值相对较低的金融板块；3）具有稳定现金流的消费龙头；4）超跌的传媒板块。</span><span class="en" style="display:none">In current market environment, recommend balanced allocation strategy, reducing high-risk tech positions, increasing defensive assets. Focus on: 1) Energy sectors benefiting from high oil prices; 2) Financials with low valuations; 3) Consumer leaders with stable cash flows; 4) Oversold media sector.</span></p>
+<p class="src">来源：招商证券 / 海通证券</p></div>
+
+<div class="card">
+<h4><span class="zh">4. 中长期展望：AI产业趋势未变，关注结构性机会</span><span class="en" style="display:none">4. Long-term View: AI Trend Unchanged, Focus Structural Opportunities</span></h4>
+<p><span class="zh">尽管短期回调，但AI产业的中长期发展趋势并未改变。回调为投资者提供了逢低布局的机会。建议关注：1）AI基础设施建设的长期需求；2）AI应用落地的实质性进展；3）国产替代加速的逻辑；4）产业链中估值合理的细分环节。</span><span class="en" style="display:none">Despite short-term correction, long-term AI development trend remains unchanged. Correction presents buying opportunity. Focus on: 1) Long-term AI infrastructure demand; 2) Practical progress in AI applications; 3) Domestic substitution acceleration; 4) Reasonably valued segments in the value chain.</span></p>
+<p class="src">来源：申万宏源 / 广发证券</p></div>
+
+<h2>📈 <span class="zh">重点关注公司</span><span class="en" style="display:none">Key Companies to Watch</span></h2>
+<div class="card">
+<h4><span class="zh">1. NVIDIA（NVDA）：关注数据中心业务指引</span><span class="en" style="display:none">1. NVIDIA: Watch Data Center Guidance</span></h4>
+<p><span class="zh">作为AI芯片龙头，NVIDIA的动向对整个板块有重要影响。投资者应密切关注其数据中心业务的指引，特别是H200和Blackwell芯片的出货情况。如果NVIDIA能够维持强劲的数据中心业务增长，将提振整个板块信心。</span><span class="en" style="display:none">As AI chip leader, NVIDIA's moves significantly impact the sector. Investors should watch its data center guidance, especially H200 and Blackwell chip shipments. Strong data center growth could boost sector confidence.</span></p>
+<p class="src">来源：Bloomberg / Reuters / Seeking Alpha</p></div>
+
+<div class="card">
+<h4><span class="zh">2. 台积电（TSM）：先进封装业务增长点</span><span class="en" style="display:none">2. TSMC: Advanced Packaging Growth Driver</span></h4>
+<p><span class="zh">台积电在先进封装领域的布局成为重要增长点。CoWoS封装业务虽然受到短期需求波动影响，但长期增长逻辑清晰。投资者应关注台积电在先进封装产能扩张和客户多元化方面的进展。</span><span class="en" style="display:none">TSMC's advanced packaging positioning is a key growth driver. CoWoS business faces short-term demand fluctuations but has clear long-term growth. Monitor capacity expansion and customer diversification.</span></p>
+<p class="src">来源：集邦咨询 / TrendForce</p></div>
+
+<div class="card">
+<h4><span class="zh">3. 中芯国际（0981.HK）：国产替代受益者</span><span class="en" style="display:none">3. SMIC: Beneficiary of Domestic Substitution</span></h4>
+<p><span class="zh">在地缘政治背景下，中芯国际作为国内晶圆代工龙头，有望继续受益于国产替代趋势。公司14nm工艺良率持续提升，产能扩张顺利。投资者应关注公司在先进制程研发和客户拓展方面的进展。</span><span class="en" style="display:none">Amid geopolitical tensions, SMIC as domestic foundry leader benefits from substitution trend. 14nm yield continuously improving, capacity expansion smooth. Monitor advanced process R&D and customer expansion.</span></p>
+<p class="src">来源：中金公司 / 招商证券</p></div>
+
+<div class="card">
+<h4><span class="zh">4. 长电科技（600584）：封测龙头估值优势</span><span class="en" style="display:none">4. JCET: Leading Packaging with Valuation Advantage</span></h4>
+<p><span class="zh">长电科技是国内封测龙头，在AI芯片封测领域具有技术优势。目前估值处于历史相对低位，具备修复空间。公司SiP和Chiplet技术布局完善，有望受益于先进封装需求增长。</span><span class="en" style="display:none">JCET is domestic packaging leader with technical edge in AI chip packaging. Currently at historically low valuation with room for recovery. Complete SiP and Chiplet technology positioning benefits from advanced packaging demand.</span></p>
+<p class="src">来源：国信证券 / 安信证券</p></div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: 新浪财经, 东方财富, 华尔街见闻, Reuters, Bloomberg, 腾讯证券, 港交所</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HKEX:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

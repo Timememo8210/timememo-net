@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-25</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#888;border:1px solid rgba(255,255,255,0.15)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.prediction-box{background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(74,222,128,0.02));border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:18px 20px;margin:16px 0}
+.prediction-box h4{color:#4ade80}
+.risk-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:18px 20px;margin:16px 0}
+.risk-box h4{color:#f87171}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#065f46,#047857)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股周度新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Weekly ATH</div>
+<div class="zh poster-data">• 标普500 7,165.08 🔥历史新高（周涨+0.55%）<br>• 纳斯达克 24,836.60 🔥历史新高（周涨+1.50%）<br>• 费半SOX 10,513.66 🔥18连涨</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,165.08 🔥 ATH (+0.55% week)<br>• Nasdaq 24,836.60 🔥 ATH (+1.50% week)<br>• SOX 10,513.66 🔥 18-day streak</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#991b1b,#b91c1c)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">油价飙升 · 美伊谈判破裂</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Surge · Iran Talks Collapse</div>
+<div class="zh poster-data">• WTI $94.40（周涨+13%）<br>• 布伦特$105.33（周涨+16%）<br>• 霍尔木兹海峡连续第8周关闭<br>• 巴基斯坦会谈失败，伊朗外长离开</div>
+<div class="en poster-data" style="display:none">• WTI $94.40 (+13% week)<br>• Brent $105.33 (+16% week)<br>• Strait of Hormuz closed 8th week<br>• Pakistan talks fail, Iran FM leaves</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8)">
+<div class="poster-icon">🧠</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Intel引爆AI芯片狂欢</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Intel Ignites AI Chip Rally</div>
+<div class="zh poster-data">• Intel周五暴涨+23.6%（1987年来最佳）<br>• NVIDIA重回$5万亿市值<br>• AMD涨+13.9%，突破$300<br>• 半导体Q1盈利增长+109.2%</div>
+<div class="en poster-data" style="display:none">• Intel +23.6% Friday (best since 1987)<br>• NVIDIA retakes $5T market cap<br>• AMD +13.9%, clears $300<br>• Semi Q1 earnings growth +109.2%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c2d12,#c2410c)">
+<div class="poster-icon">📅</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周超级事件</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Super Week Ahead</div>
+<div class="zh poster-data">• 美联储会议4/28-29（预计维持利率）<br>• 五大巨头财报齐发<br>• Q1 GDP + PCE通胀数据<br>• 消费者信心49.8（历史最低）</div>
+<div class="en poster-data" style="display:none">• Fed meeting Apr 28-29 (hold expected)<br>• 5 megacap tech earnings<br>• Q1 GDP + PCE inflation data<br>• Consumer sentiment 49.8 (record low)</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-25 (<span class="zh">周六 · 周末回顾</span><span class="en" style="display:none">Sat · Weekend Recap</span>) · Sky Portal · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股周度收盘（4/21-25）</span><span class="en" style="display:none">US Weekly Close (Apr 21-25)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJIA</div><div class="stock-price">49,230</div><div class="stock-change down">-0.44% wk</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,165</div><div class="stock-change up">+0.55% wk 🔥</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,836</div><div class="stock-change up">+1.50% wk 🔥</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">10,513</div><div class="stock-change up">+8% wk 🔥</div></div>
+<div class="stock-item"><div class="stock-ticker">R2K</div><div class="stock-price">2,792</div><div class="stock-change up">ATH Mon</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 标普500与纳斯达克同创历史新高</span><span class="en" style="display:none">📈 S&P 500 and Nasdaq Set Joint All-Time Highs</span></h4>
+<p><span class="zh">标普500收于7,165.08，纳斯达克收于24,836.60，双双刷新历史纪录。但表面繁荣之下，道指本周下跌0.44%，市场分化明显。科技和半导体是唯一的领涨力量。81.3%的已公布财报公司超预期，Q1盈利增长追踪16.1%。Russell 2000周一也创下2,792.96的收盘纪录。</span><span class="en" style="display:none">S&P 500 closed at 7,165.08 and Nasdaq at 24,836.60, both fresh records. Beneath the surface, the Dow slipped 0.44% for the week, signaling narrow leadership. Tech and semis were the sole drivers. 81.3% of reported earnings beat estimates, with Q1 tracking 16.1% growth. Russell 2000 also set a record close Monday at 2,792.96.</span></p>
+<p class="src">来源：Reuters / WSJ / LSEG</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🧠 Intel Q1业绩炸裂，AI芯片从训练走向推理</span><span class="en" style="display:none">🧠 Intel Q1 Blowout, AI Chips Expand Beyond Training</span></h4>
+<p><span class="zh">Intel周五暴涨23.6%，创1987年以来最佳单日表现。Q1营收$136亿（预期$124亿），非GAAP EPS $0.29（预期$0.01）。数据中心与AI部门增长22%至$51亿。Q2营收指引$138-148亿，大幅超预期。这标志着AI芯片需求正从GPU训练扩展到CPU推理，Intel凭借18A制程和代工业务迎来拐点。Edward Jones策略师直言："AI基础设施竞赛还在继续。"</span><span class="en" style="display:none">Intel surged 23.6% Friday, its best day since 1987. Q1 revenue $13.6B (vs $12.4B expected), non-GAAP EPS $0.29 (vs $0.01 expected). Data Center & AI grew 22% to $5.1B. Q2 guidance $13.8-14.8B crushed estimates. This signals AI demand expanding from GPU training to CPU inference, with Intel's 18A process and foundry at an inflection. Edward Jones: "The AI build-out race is still on."</span></p>
+<p class="src">来源：Reuters / CNBC / Benzinga</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🎮 NVIDIA重回$5万亿，AMD突破$300</span><span class="en" style="display:none">🎮 NVIDIA Retakes $5T, AMD Clears $300</span></h4>
+<p><span class="zh">NVIDIA周五收于$208.27，市值重回$5万亿。AMD飙升13.9%，股价突破$300大关。Arm也涨约14%。费城半导体指数（SOX）周五涨4.32%，连续第18个交易日上涨，创历史纪录。半导体子行业Q1盈利增长预计109.2%，远超IT行业整体的48.2%。Microsoft确认成为Intel 18A代工客户，Meta签署AWS Graviton CPU大单。</span><span class="en" style="display:none">NVIDIA closed at $208.27, reclaiming $5T market cap. AMD surged 13.9% clearing $300. Arm also rose ~14%. SOX climbed 4.32% Friday for its 18th consecutive session — a record streak. Semi Q1 earnings growth projected at 109.2% vs 48.2% for broader IT. Microsoft confirmed as Intel 18A foundry customer; Meta signed major AWS Graviton deal.</span></p>
+<p class="src">来源：Benzinga / Rolling Out / Reuters</p>
+</div>
+
+<h2>🛢️ <span class="zh">地缘政治与大宗商品</span><span class="en" style="display:none">Geopolitics & Commodities</span></h2>
+
+<div class="card">
+<h4><span class="zh">⚠️ 美伊停火谈判再度破裂</span><span class="en" style="display:none">⚠️ US-Iran Ceasefire Talks Collapse Again</span></h4>
+<p><span class="zh">原定在巴基斯坦举行的第二轮美伊间接会谈于周六宣告失败。伊朗外长Aragchi在没有会见美方代表的情况下离开。Trump随后取消了Witkoff和Kushner的巴基斯坦行程。伊朗拒绝接受"最大主义要求"，拒绝直接对话。Trump周三曾无限期延长停火，但周四下令海军"击杀"布雷船只。伊朗同日在霍尔木兹海峡扣押两艘船只。</span><span class="en" style="display:none">The second round of US-Iran indirect talks in Pakistan collapsed Saturday. Iran FM Aragchi left without meeting US representatives. Trump canceled the Witkoff/Kushner trip. Iran rejected "maximalist demands" and direct dialogue. Trump extended ceasefire indefinitely Wednesday but ordered Navy to "shoot and kill" mine-laying vessels Thursday. Iran seized two ships in Hormuz the same day.</span></p>
+<p class="src">来源：AP / Reuters / News.az</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🛢️ 油价周涨幅创近期新高</span><span class="en" style="display:none">🛢️ Oil Posts Sharp Weekly Gains</span></h4>
+<p><span class="zh">WTI原油收于$94.40/桶（周涨+13%），布伦特原油$105.33/桶（周涨+16%）。霍尔木兹海峡连续第8周基本关闭，全球石油流通受限。P&G警告战争可能导致2027财年$10亿利润损失。高油价正在传导至消费者端，加剧通胀预期。10年期美债收益率升至4.31%，2年期3.78%，均受油价推升。</span><span class="en" style="display:none">WTI crude at $94.40/bbl (+13% week), Brent at $105.33 (+16% week). Strait of Hormuz largely closed for an 8th week, constraining global oil flows. P&G warned war could cut ~$1B from FY2027 profits. 10Y Treasury at 4.31%, 2Y at 3.78%, both pulled higher by oil.</span></p>
+<p class="src">来源：Reuters / WSJ</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股与港股</span><span class="en" style="display:none">China A-Shares & Hong Kong</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SSE</span></div><div class="stock-price">4,064</div><div class="stock-change down">-0.33%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZSE</span></div><div class="stock-price">14,893</div><div class="stock-change down">-1.0%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div><div class="stock-price">3,670</div><div class="stock-change down">-1.36%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒指</span><span class="en" style="display:none">HSI</span></div><div class="stock-price">25,734</div><div class="stock-change flat">~flat wk</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">18.74</div><div class="stock-change down">+7% wk</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 A股从高位回调，创业板十年新高后回落</span><span class="en" style="display:none">📊 A-Shares Pull Back from Highs, ChiNext Retreats from Decade Peak</span></h4>
+<p><span class="zh">上证指数4月22日重返4,100点并实现五连阳，创业板同日大涨1.7%站上3,700点创十年新高。但周四（4/24）三大指数集体下跌：上证-0.33%、深成指-0.69%、创业板-1.41%。沪深两市成交额约2.64万亿元。周末（4/25-26）A股休市。整体来看，A股在4月中旬表现强劲，但短期面临获利了结压力。Trump预计5月访华会见习近平，市场关注中美贸易谈判进展。</span><span class="en" style="display:none">SSE reclaimed 4,100 on April 22 with a 5-day winning streak; ChiNext surged 1.7% to 3,700+ for a decade high. But Thursday saw broad declines: SSE -0.33%, SZSE -0.69%, ChiNext -1.41%. Volume ~¥2.64T. Markets closed for the weekend. Overall, A-shares had a strong mid-April but face near-term profit-taking. Trump expected to visit China in May to meet Xi; markets watching for trade developments.</span></p>
+<p class="src">来源：东方财富 / 新浪财经 / 经济观察网</p>
+</div>
+
+<h2>📅 <span class="zh">下周超级事件</span><span class="en" style="display:none">Super Week Ahead</span></h2>
+
+<div class="card">
+<h4><span class="zh">🔴 五大科技巨头财报周</span><span class="en" style="display:none">🔴 Megacap Tech Earnings Week</span></h4>
+<p><span class="zh">Apple、Microsoft、Google（Alphabet）、Meta、Amazon全部在下周公布财报。这是2026年最重要的财报周之一，将验证AI巨额投资的回报预期。Intel已将AI资本开支的信心拉满——如果五大巨头同样展现AI投入产出比改善，市场有望再上一个台阶。但若任何一家AI投资回报不及预期，可能触发科技板块回调。Argent Capital认为对AI投资回报的担忧"正在快速消退"。</span><span class="en" style="display:none">Apple, Microsoft, Alphabet, Meta, and Amazon all report next week — one of the most consequential earnings weeks of 2026. Intel's blowout has reset AI capex expectations high. If the megacaps also show improving AI ROI, the market could leg higher. But any disappointment could trigger a tech pullback. Argent Capital says AI ROI concerns are "fading real fast."</span></p>
+<p class="src">来源：WSJ / Reuters / Investor's Business Daily</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🏛️ 美联储4月会议（4/28-29）</span><span class="en" style="display:none">🏛️ Fed April Meeting (Apr 28-29)</span></h4>
+<p><span class="zh">市场100%预期维持利率3.50%-3.75%不变。期货定价显示到12月降息不足25个基点。Fed主席提名人Kevin Warsh的确认听证会已举行，承诺独立性并呼吁"新的通胀框架"。DOJ已撤销对现任主席Powell的调查，为Warsh确认扫清主要障碍。State Street策略师认为美联储按兵不动是"美国资产的顺风"。</span><span class="en" style="display:none">Markets price 100% probability of a hold at 3.50%-3.75%. Futures show less than a full 25bps cut priced by December. Fed Chair nominee Kevin Warsh's confirmation hearing held; he pledged independence and called for a "new inflation framework." DOJ dropped the Powell probe, clearing the main roadblock. State Street sees the hold as "a tailwind for US assets."</span></p>
+<p class="src">来源：Reuters / Polymarket / Federal Reserve</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 消费者信心创历史新低 + PMI释放滞胀信号</span><span class="en" style="display:none">📉 Record-Low Sentiment + PMI Flashes Stagflation</span></h4>
+<p><span class="zh">密歇根大学4月消费者信心终值降至49.8，为1952年有调查以来最低。1年期通胀预期4.7%。制造业PMI升至54.0（2022年5月以来最高），但供应商交货时间恶化至2022年8月以来最差。初请失业金升至214,000。数据呈现"滞胀"而非"再加速"特征——生产端强劲但成本压力和消费者信心恶化并存。</span><span class="en" style="display:none">University of Michigan final April sentiment fell to 49.8, the lowest since 1952. 1-year inflation expectations at 4.7%. Manufacturing PMI rose to 54.0 (highest since May 2022), but supplier delivery times deteriorated to worst since August 2022. Jobless claims rose to 214,000. The data reads as stagflation — strong production but rising cost pressures alongside collapsing consumer confidence.</span></p>
+<p class="src">来源：Reuters / University of Michigan / S&P Global</p>
+</div>
+
+<h2>🤖 <span class="zh">科技行业动态</span><span class="en" style="display:none">Tech Industry Updates</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Tesla营收不及预期，资本开支炸弹拖累股价</span><span class="en" style="display:none">1. Tesla Revenue Miss, Capex Bombshell Weighs</span></h4>
+<p><span class="zh">Tesla Q1营收$223.9亿（预期$226.4亿），交付量358,023辆（少约7,600辆）。CFO将2026年资本开支指引从$200亿上调至$250亿以上。抹去了robotaxi发布时间表，承认此前FSD/HW3能力声明被夸大。周跌幅约4-5%，收于$373.72。JPMorgan指出存在股权融资风险。</span><span class="en" style="display:none">Tesla Q1 revenue $22.39B (miss vs $22.64B expected), deliveries 358,023 (short by ~7,600). CFO raised 2026 capex guidance from $20B to above $25B. Erased robotaxi timeline, admitted prior FSD/HW3 claims overstated. Down ~4-5% for the week at $373.72. JPMorgan flagged equity-raise risk.</span></p>
+<p class="src">来源：Reuters / JPMorgan / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Meta裁员8,000人，Microsoft美国自愿离职7%</span><span class="en" style="display:none">2. Meta Cuts 8,000 Jobs, Microsoft Offers Voluntary Buyouts to 7%</span></h4>
+<p><span class="zh">Meta周四宣布裁员8,000人，周五签署AWS Graviton CPU大单采购数十万颗芯片。Microsoft向美国7%员工提供自愿离职方案，并确认成为Intel 18A代工客户。两家公司股价均随周五纳指大涨——投资者欢迎AI成本纪律，同时大厂在资本开支上加倍投入芯片。</span><span class="en" style="display:none">Meta announced 8,000 layoffs Thursday, then signed a massive AWS Graviton deal Friday for hundreds of thousands of chips. Microsoft offered voluntary buyouts to 7% of US staff and confirmed as Intel 18A foundry customer. Both stocks rallied with Friday's Nasdaq surge — investors cheered cost discipline alongside doubled-down chip investment.</span></p>
+<p class="src">来源：Reuters / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Google Cloud Next：TPU 8代发布，Anthropic大规模合作</span><span class="en" style="display:none">3. Google Cloud Next: TPU Gen 8 Launch, Massive Anthropic Deal</span></h4>
+<p><span class="zh">Google发布第八代TPU（TPU 8t训练 + TPU 8i推理），性能为Ironwood的3倍。Anthropic承诺从2027年起部署数GW规模的TPU。据报道Google对Anthropic投资达$400亿。Salesforce宣布扩大Google Cloud合作。但ServiceNow盈利暴跌18%引发AI/SaaS替代恐惧，CRM周四跌9%，收于$174。</span><span class="en" style="display:none">Google unveiled TPU gen 8 (8t for training + 8i for inference), 3x Ironwood performance. Anthropic committed multiple GW of TPUs starting 2027. Reports surfaced of a $40B Google investment in Anthropic. Salesforce expanded Google Cloud partnership. But ServiceNow's 18% earnings collapse reignited AI/SaaS cannibalization fears; CRM fell 9% Thursday to $174.</span></p>
+<p class="src">来源：Google Cloud Next / Reuters / Benzinga</p>
+</div>
+
+<h2>🎯 <span class="zh">走势预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="prediction-box">
+<h4><span class="zh">📈 看多因素</span><span class="en" style="display:none">📈 Bullish Factors</span></h4>
+<p><span class="zh">
+• <b>AI资本开支信心高涨</b> — Intel财报证明AI需求从GPU扩展到CPU，半导体盈利增长109%是硬数据<br>
+• <b>财报季超预期率高</b> — 81.3%公司超预期，Q1盈利增长16.1%，为市场提供基本面支撑<br>
+• <b>美联储确定性</b> — 100%预期维持利率不变，消除了短期政策不确定性<br>
+• <b>技术面强势</b> — 标普和纳指同创新高，SOX 18连涨，多头完全掌控
+</span><span class="en" style="display:none">
+• <b>AI capex confidence</b> — Intel proved AI demand extends beyond GPUs; 109% semi earnings growth is hard data<br>
+• <b>Strong earnings beat rate</b> — 81.3% beating, 16.1% Q1 growth provides fundamental support<br>
+• <b>Fed certainty</b> — 100% hold priced in, removing short-term policy uncertainty<br>
+• <b>Technical strength</b> — S&P/Nasdaq joint ATH, SOX 18-day streak, bulls in control
+</span></p>
+</div>
+
+<div class="risk-box">
+<h4><span class="zh">⚠️ 风险因素</span><span class="en" style="display:none">⚠️ Risk Factors</span></h4>
+<p><span class="zh">
+• <b>美伊冲突失控</b> — 谈判破裂+油价飙升→如果霍尔木兹海峡永久性改变，$100+油价可能成为新常态<br>
+• <b>滞胀信号</b> — 消费者信心历史新低+通胀预期4.7%，制造业PMI虽高但供应链恶化<br>
+• <b>五大巨头财报风险</b> — Intel拉高了预期，任何不及预期都可能触发剧烈回调<br>
+• <b>VIX上升7%</b> — 表面狂欢但聪明钱在买保险，市场定价的尾部风险在增加<br>
+• <b>Trump关税不确定性</b> — 5月访华前中美贸易博弈可能加剧波动
+</span><span class="en" style="display:none">
+• <b>Iran escalation</b> — Talks collapsed + surging oil → $100+ oil may be the new normal if Hormuz permanently changed<br>
+• <b>Stagflation signals</b> — Record-low sentiment + 4.7% inflation expectations + supply chain deterioration<br>
+• <b>Megacap earnings risk</b> — Intel raised the bar; any miss could trigger sharp pullback<br>
+• <b>VIX up 7%</b> — Smart money buying insurance; tail risk pricing increasing<br>
+• <b>Tariff uncertainty</b> — US-China trade tensions may intensify ahead of Trump's May China visit
+</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">AMD — AMD</div><div id="tv-amd"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="card" style="margin-top:24px">
+<h4><span class="zh">💡 核心结论</span><span class="en" style="display:none">💡 Key Takeaway</span></h4>
+<p><span class="zh"><b>短期（下周）：</b>科技财报是决定性变量。五大巨头如果延续超预期趋势，纳斯达克有望延续涨势；但任何一家AI支出不及预期都将触发回调。<b>中期（2-4周）：</b>美伊冲突走向是最大不确定性。如果油价持续$100+，通胀预期将固化，美联储全年降息预期可能归零，对成长股估值构成压力。<b>半导体依然是最强主线</b>，SOX 18连涨历史罕见，但追高风险也在累积。TD Wealth首席策略师提醒：市场反弹发生在"没有永久性解决方案"的情况下，冲突延续只会增加经济和市场风险。</span><span class="en" style="display:none"><b>Near-term (next week):</b> Tech earnings are the decisive variable. If megacaps continue beating, Nasdaq can extend; any AI disappointment triggers pullback. <b>Medium-term (2-4 weeks):</b> Iran conflict trajectory is the biggest uncertainty. If oil stays $100+, inflation expectations will entrench, Fed cut hopes could vanish, pressuring growth valuations. <b>Semis remain the strongest thesis</b>, but SOX 18-day streak is historically rare and chasing risk is building. TD Wealth CIO: the rally happened "without a permanent resolution" — prolonged conflict only increases economic and market risk.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span> · <span class="zh">由</span><span class="en" style="display:none">Generated by</span> Sky ☁️ <span class="zh">自动生成</span> · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源</span><span class="en" style="display:none">Sources</span>: Reuters, WSJ, CNBC, Benzinga, Yahoo Finance, 东方财富, 新浪财经, Polymarket, Federal Reserve</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receipt Scanner Demo — 3 Steps</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, -apple-system, system-ui, sans-serif; background: #F8FAFC; color: #475569; }
+  .container { max-width: 480px; margin: 0 auto; padding: 24px 16px; }
+  h1 { font-size: 20px; font-weight: 700; color: #1E293B; }
+  h2 { font-size: 16px; font-weight: 600; color: #1E293B; margin-bottom: 12px; }
+  .subtitle { font-size: 14px; color: #64748B; margin-top: 4px; }
+
+  /* Step indicator */
+  .steps { display: flex; justify-content: center; gap: 8px; margin: 20px 0 24px; align-items: center; }
+  .step-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; }
+  .step-dot.active { background: #007BFF; color: white; }
+  .step-dot.done { background: #10B981; color: white; }
+  .step-dot.pending { background: #E2E8F0; color: #94A3B8; }
+  .step-line { width: 40px; height: 2px; background: #E2E8F0; }
+  .step-label { font-size: 11px; color: #94A3B8; text-align: center; margin-top: 4px; }
+  .step-col { display: flex; flex-direction: column; align-items: center; }
+
+  /* Cards */
+  .card { background: white; border: 1px solid #E2E8F0; border-radius: 0.75rem; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+  .card-header { font-size: 12px; color: #94A3B8; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+
+  /* Fields */
+  .field { margin-bottom: 12px; }
+  .field-label { font-size: 13px; font-weight: 500; color: #64748B; margin-bottom: 4px; }
+  .field-value { font-size: 15px; color: #1E293B; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 0.5rem; padding: 8px 12px; }
+  .field-value.editable { border-color: #007BFF; background: white; box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+
+  /* Items table */
+  .item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #F1F5F9; font-size: 14px; }
+  .item-row:last-child { border-bottom: none; }
+  .item-amount { font-weight: 600; color: #1E293B; }
+
+  /* Notes section */
+  .notes-section { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 0.75rem; padding: 16px; margin-bottom: 16px; }
+  .note-tag { display: inline-block; background: #EFF6FF; color: #007BFF; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; margin-bottom: 8px; }
+  .note-customer { background: #FFF7ED; color: #EA580C; }
+  .note-text { font-size: 14px; color: #475569; }
+
+  /* Buttons */
+  .btn { border: none; border-radius: 0.75rem; padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .btn-primary { background: #007BFF; color: white; }
+  .btn-secondary { background: white; color: #007BFF; border: 1px solid #007BFF; }
+  .btn-row { display: flex; gap: 12px; margin-top: 16px; }
+  .btn-row .btn { flex: 1; text-align: center; }
+
+  /* Category badge */
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+  .badge-hvac { background: #FFF7ED; color: #EA580C; }
+  .badge-plumbing { background: #EFF6FF; color: #2563EB; }
+
+  /* Total */
+  .total-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: #1E293B; padding-top: 12px; border-top: 2px solid #E2E8F0; margin-top: 8px; }
+
+  /* Success */
+  .success-icon { width: 56px; height: 56px; background: #ECFDF5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .success-check { font-size: 28px; color: #10B981; }
+
+  /* Section divider */
+  .divider { text-align: center; margin: 24px 0 8px; position: relative; }
+  .divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #E2E8F0; }
+  .divider span { position: relative; background: #F8FAFC; padding: 0 16px; font-size: 12px; color: #94A3B8; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Page labels */
+  .page-label { text-align: center; padding: 8px; background: #007BFF; color: white; font-size: 13px; font-weight: 600; border-radius: 0.75rem; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<!-- ==================== STEP 1: UPLOAD ==================== -->
+<div style="max-width: 520px; margin: 24px auto; padding: 0 16px;">
+  <div class="page-label">Step 1: 上传收据</div>
+  <div class="container" style="padding-top: 0;">
+    <h1 style="text-align: center;">Receipt Scanner</h1>
+    <p class="subtitle" style="text-align: center;">上传收据或发票，开始自动识别</p>
+
+    <div class="steps">
+      <div class="step-col"><div class="step-dot active">1</div><div class="step-label">上传</div></div>
+      <div class="step-line"></div>
+      <div class="step-col"><div class="step-dot pending">2</div><div class="step-label">确认</div></div>
+      <div class="step-line"></div>
+      <div class="step-col"><div class="step-dot pending">3</div><div class="step-label">提交</div></div>
+    </div>
+
+    <div style="border: 2px dashed #E2E8F0; border-radius: 0.75rem; padding: 48px 24px; text-align: center; background: white;">
+      <div style="font-size: 32px; margin-bottom: 12px;">📤</div>
+      <div style="font-size: 15px; font-weight: 500; color: #475569;">拍照、选择图片或 PDF</div>
+      <div style="font-size: 13px; color: #94A3B8; margin-top: 4px;">拖拽文件到此处，或点击选择</div>
+    </div>
+
+    <div style="text-align: center; margin-top: 16px;">
+      <a style="font-size: 13px; color: #64748B; text-decoration: none;">查看历史记录</a>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center; padding: 32px 0; color: #94A3B8; font-size: 24px;">⬇️</div>
+
+<!-- ==================== STEP 2: CONFIRM ==================== -->
+<div style="max-width: 520px; margin: 0 auto; padding: 0 16px;">
+  <div class="page-label">Step 2: 确认信息 + 添加备注</div>
+  <div class="container" style="padding-top: 0;">
+    <h1 style="text-align: center;">确认收据信息</h1>
+    <p class="subtitle" style="text-align: center;">检查 AI 识别结果，添加额外备注</p>
+
+    <div class="steps">
+      <div class="step-col"><div class="step-dot done">✓</div><div class="step-label">上传</div></div>
+      <div class="step-line"></div>
+      <div class="step-col"><div class="step-dot active">2</div><div class="step-label">确认</div></div>
+      <div class="step-line"></div>
+      <div class="step-col"><div class="step-dot pending">3</div><div class="step-label">提交</div></div>
+    </div>
+
+    <!-- AI Captured Info -->
+    <div class="card">
+      <div class="card-header">收据信息（AI 自动识别）</div>
+      <div class="field">
+        <div class="field-label">日期</div>
+        <div class="field-value editable">2024-03-15</div>
+      </div>
+      <div class="field">
+        <div class="field-label">服务商</div>
+        <div class="field-value editable">COOL BREEZE HVAC INC.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">电话</div>
+        <div class="field-value editable">(503) 555-0187</div>
+      </div>
+      <div class="field">
+        <div class="field-label">地址</div>
+        <div class="field-value editable">4521 SE Division St, Portland, OR 97202</div>
+      </div>
+      <div class="field">
+        <div class="field-label">类别</div>
+        <div class="badge badge-hvac">HVAC</div>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <div class="field-label" style="margin-bottom: 8px;">服务明细</div>
+        <div class="item-row"><span>Seasonal AC tune-up & inspection</span><span class="item-amount">$125</span></div>
+        <div class="item-row"><span>Refrigerant recharge (R-410A, 2 lbs)</span><span class="item-amount">$180</span></div>
+        <div class="item-row"><span>Capacitor replacement (dual run)</span><span class="item-amount">$210</span></div>
+        <div class="item-row"><span>Condensate drain line clearing</span><span class="item-amount">$85</span></div>
+        <div class="item-row"><span>Thermostat recalibration</span><span class="item-amount">$75</span></div>
+        <div class="item-row"><span>Labor (2.5 hours)</span><span class="item-amount">$240</span></div>
+        <div class="total-row"><span>总计</span><span>$915.00</span></div>
+      </div>
+    </div>
+
+    <!-- Customer Notes -->
+    <div class="notes-section">
+      <div class="card-header">添加备注（手动添加）</div>
+      <div style="border: 1px solid #E2E8F0; border-radius: 0.5rem; padding: 10px 12px; background: white; font-size: 14px; color: #475569; min-height: 48px;">
+        师傅说 compressor 还有 1-2 年寿命，下次可能需要换整个外机
+      </div>
+      <div style="margin-top: 8px;">
+        <span class="note-tag note-customer">客户备注</span>
+        <span class="note-text">保修 2 年，发票已扫描存档到 Google Drive</span>
+      </div>
+      <div style="margin-top: 8px;">
+        <span class="note-tag note-customer">客户备注</span>
+        <span class="note-text">推荐给邻居 Mike，他也需要做 AC 维护</span>
+      </div>
+      <div style="margin-top: 8px; font-size: 13px; color: #007BFF; cursor: pointer; font-weight: 500;">+ 添加更多备注</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary">返回重传</button>
+      <button class="btn btn-primary">确认并继续</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center; padding: 32px 0; color: #94A3B8; font-size: 24px;">⬇️</div>
+
+<!-- ==================== STEP 3: PREVIEW & SUBMIT ==================== -->
+<div style="max-width: 520px; margin: 0 auto; padding: 0 16px;">
+  <div class="page-label">Step 3: 预览确认 + 提交</div>
+  <div class="container" style="padding-top: 0;">
+    <h1 style="text-align: center;">确认提交</h1>
+    <p class="subtitle" style="text-align: center;">确认以下信息将提交到 Home Passport</p>
+
+    <div class="steps">
+      <div class="step-col"><div class="step-dot done">✓</div><div class="step-label">上传</div></div>
+      <div class="step-line"></div>
+      <div class="step-col"><div class="step-dot done">✓</div><div class="step-label">确认</div></div>
+      <div class="step-line"></div>
+      <div class="step-col"><div class="step-dot active">3</div><div class="step-label">提交</div></div>
+    </div>
+
+    <!-- Receipt Info (Read Only) -->
+    <div class="card">
+      <div class="card-header">收据信息</div>
+      <div class="field">
+        <div class="field-label">日期</div>
+        <div class="field-value">2024-03-15</div>
+      </div>
+      <div class="field">
+        <div class="field-label">服务商</div>
+        <div class="field-value">COOL BREEZE HVAC INC.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">电话</div>
+        <div class="field-value">(503) 555-0187</div>
+      </div>
+      <div class="field">
+        <div class="field-label">地址</div>
+        <div class="field-value">4521 SE Division St, Portland, OR 97202</div>
+      </div>
+      <div class="field">
+        <div class="field-label">类别</div>
+        <div class="badge badge-hvac">HVAC</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <div class="item-row"><span>Seasonal AC tune-up & inspection</span><span class="item-amount">$125</span></div>
+        <div class="item-row"><span>Refrigerant recharge (R-410A, 2 lbs)</span><span class="item-amount">$180</span></div>
+        <div class="item-row"><span>Capacitor replacement (dual run)</span><span class="item-amount">$210</span></div>
+        <div class="item-row"><span>Condensate drain line clearing</span><span class="item-amount">$85</span></div>
+        <div class="item-row"><span>Thermostat recalibration</span><span class="item-amount">$75</span></div>
+        <div class="item-row"><span>Labor (2.5 hours)</span><span class="item-amount">$240</span></div>
+        <div class="total-row"><span>总计</span><span>$915.00</span></div>
+      </div>
+    </div>
+
+    <!-- Customer Notes (Read Only, different bg) -->
+    <div class="notes-section">
+      <div class="card-header">客户备注</div>
+      <div style="margin-bottom: 8px;">
+        <span class="note-tag note-customer">备注 1</span>
+        <div class="note-text">师傅说 compressor 还有 1-2 年寿命，下次可能需要换整个外机</div>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <span class="note-tag note-customer">备注 2</span>
+        <div class="note-text">保修 2 年，发票已扫描存档到 Google Drive</div>
+      </div>
+      <div>
+        <span class="note-tag note-customer">备注 3</span>
+        <div class="note-text">推荐给邻居 Mike，他也需要做 AC 维护</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary">返回修改</button>
+      <button class="btn btn-primary">提交到 Home Passport</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center; padding: 32px 0; color: #94A3B8; font-size: 24px;">⬇️</div>
+
+<!-- ==================== SUCCESS ==================== -->
+<div style="max-width: 520px; margin: 0 auto; padding: 0 16px;">
+  <div class="page-label" style="background: #10B981;">✅ 提交成功</div>
+  <div class="container" style="padding-top: 0; text-align: center;">
+    <div class="success-icon"><span class="success-check">✓</span></div>
+    <h2 style="text-align: center;">收据已成功提交到 Home Passport</h2>
+    <p style="font-size: 14px; color: #64748B; margin-top: 8px;">COOL BREEZE HVAC INC. — $915.00</p>
+    <div class="btn-row" style="margin-top: 24px;">
+      <button class="btn btn-secondary">查看历史记录</button>
+      <button class="btn btn-primary">上传另一张</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

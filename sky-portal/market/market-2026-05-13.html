@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-13</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.prediction-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:18px 20px;margin:20px 0}
+.prediction-box h3{color:#4ade80;margin-bottom:10px}
+.prediction-box ul{padding-left:20px}
+.prediction-box li{margin-bottom:8px;font-size:0.92em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1e40af 0%,#3b82f6 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets ATH</div>
+<div class="zh poster-data">• 标普500 +0.58% → 7,444（历史新高）<br>• 纳指 +1.20% → 26,402（历史新高）<br>• 道指 -0.14% → 49,693</div>
+<div class="en poster-data" style="display:none">• S&P 500 +0.58% → 7,444 (ATH)<br>• Nasdaq +1.20% → 26,402 (ATH)<br>• Dow -0.14% → 49,693</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#f97316 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股港股齐涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK Rise</div>
+<div class="zh poster-data">• 上证 +0.67% → 4,243<br>• 深成指 +1.67% → 16,090<br>• 恒生科技 +0.46%</div>
+<div class="en poster-data" style="display:none">• Shanghai +0.67% → 4,243<br>• Shenzhen +1.67% → 16,090<br>• Hang Seng Tech +0.46%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 100%)">
+<div class="poster-icon">🤝</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Trump-Xi峰会</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Trump-Xi Summit</div>
+<div class="zh poster-data">• 特朗普携库克、马斯克、黄仁勋访华<br>• 市场期待中美贸易缓和<br>• 半导体合作信号推动芯片股大涨</div>
+<div class="en poster-data" style="display:none">• Trump with Cook, Musk, Huang in Beijing<br>• Market hopeful for trade thaw<br>• Semiconductor cooperation signals</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#059669 0%,#34d399 100%)">
+<div class="poster-icon">⚡</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体狂飙</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semis Surge</div>
+<div class="zh poster-data">• NVDA、MU领涨科技板块<br>• Cisco盘后+19%（财报超预期）<br>• Tower Semiconductor+22%</div>
+<div class="en poster-data" style="display:none">• NVDA, MU lead tech rally<br>• Cisco +19% AH (earnings beat)<br>• Tower Semiconductor +22%</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-13 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘（5月13日周三）</span><span class="en" style="display:none">US Market Close (May 13, Wed)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,444</div><div class="stock-change up">+0.58%</div></div>
+<div class="stock-item"><div class="stock-ticker">Nasdaq</div><div class="stock-price">26,402</div><div class="stock-change up">+1.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">Dow Jones</div><div class="stock-price">49,693</div><div class="stock-change down">-0.14%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">↑↑</div><div class="stock-change up">领涨</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">↑↑</div><div class="stock-change up">领涨</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">标普500和纳指同创历史新高，科技股无视通胀</span><span class="en" style="display:none">S&P 500 & Nasdaq Hit New ATH, Tech Ignores Inflation</span></h4>
+<p><span class="zh">周三美股收盘分化，标普500上涨0.58%至7,444.25点，纳斯达克大涨1.20%至26,402.34点，双双刷新历史收盘新高。道指则小幅下跌0.14%至49,693.20点。半导体板块领涨，Nvidia和Micron Technology表现强劲。尽管4月PPI通胀数据远超预期（环比+1.4%，创2022年3月以来最大月度涨幅），科技股完全无视这一利空。</span><span class="en" style="display:none">Wednesday's US close was mixed: S&P 500 rose 0.58% to 7,444.25, Nasdaq surged 1.20% to 26,402.34 — both new all-time highs. Dow slipped 0.14% to 49,693.20. Semiconductors led with NVDA and MU outperforming. Tech completely ignored April PPI inflation at +1.4% MoM, the biggest jump since March 2022.</span></p>
+<p class="src">来源：CNBC / MarketWatch / WSJ</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">黄仁勋随Trump访华，半导体合作信号推动芯片股</span><span class="en" style="display:none">Jensen Huang Joins Trump's China Trip, Chip Cooperation Signals Boost Stocks</span></h4>
+<p><span class="zh">Nvidia CEO黄仁勋随同美国总统特朗普访问北京，与习近平主席会面。市场将黄仁勋随行解读为中美半导体合作的重要信号。与此同时，苹果CEO库克、特斯拉CEO马斯克等科技巨头也一同前往。这次高风险峰会被市场视为中美贸易关系可能缓和的关键时刻。Creative Planning CEO Peter Mallouk认为芯片股"整体仍被低估"，因为AI需求远超供给。</span><span class="en" style="display:none">Nvidia CEO Jensen Huang joined US President Trump's trip to Beijing to meet President Xi. The market interprets Huang's presence as a key signal for US-China semiconductor cooperation. Apple's Cook and Tesla's Musk also joined the delegation. This high-stakes summit is seen as a potential turning point for US-China trade. Creative Planning CEO Peter Mallouk says chip stocks are "actually undervalued" as AI demand far outstrips supply.</span></p>
+<p class="src">来源：CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">Cisco盘后暴涨19%：Q3财报超预期+裁员4000人</span><span class="en" style="display:none">Cisco Surges 19% After Hours: Q3 Beat + 4,000 Layoffs</span></h4>
+<p><span class="zh">Cisco Systems盘后大涨19%，公司发布Q3财报超出华尔街预期，并上调业绩指引。同时宣布将裁员约4000人以优化运营。Cisco正加速从硬件网络设备向软件和AI服务转型，这一转型策略获得投资者认可。</span><span class="en" style="display:none">Cisco Systems surged 19% in extended trading after Q3 earnings beat expectations and the company raised guidance. Cisco announced ~4,000 job cuts to optimize operations. The company is accelerating its shift from hardware networking to software and AI services, a transition investors are rewarding.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股收盘（5月14日北京时间）</span><span class="en" style="display:none">China A-Shares Close (May 14, Beijing)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-price">4,243</div><div class="stock-change up">+0.67%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-price">16,090</div><div class="stock-change up">+1.67%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板指</div><div class="stock-price">~9,322</div><div class="stock-change up">↑</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股三大指数齐涨，Trump-Xi峰会提振市场信心</span><span class="en" style="display:none">A-Shares Rise Across the Board on Trump-Xi Summit Optimism</span></h4>
+<p><span class="zh">周三A股午后拉升，上证指数收涨0.67%报4,243点，深证成指涨1.67%报16,090点，创业板指同步上涨。市场早间一度受压，但随着Trump-Xi峰会开幕在即，投资者对中美贸易关系缓和的乐观预期推动尾盘走强。科技板块表现突出，半导体概念延续强势。</span><span class="en" style="display:none">A-shares rallied in the afternoon session. Shanghai gained 0.67% to 4,243, Shenzhen rose 1.67% to 16,090, ChiNext also advanced. Early pressure gave way to strength as Trump-Xi summit optimism boosted sentiment. Tech and semiconductor sectors outperformed.</span></p>
+<p class="src">来源：证券时报 / Trading Economics</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股收盘（5月13日）</span><span class="en" style="display:none">HK Market Close (May 13)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒生指数</div><div class="stock-price">26,592</div><div class="stock-change up">+0.26%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">5,094</div><div class="stock-change up">+0.46%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生国企</div><div class="stock-price">—</div><div class="stock-change up">+0.11%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股尾盘拉升，恒生科技涨0.52%，大型科技股多数上涨</span><span class="en" style="display:none">HK Late Rally, Hang Seng Tech +0.52%, Big Tech Mostly Up</span></h4>
+<p><span class="zh">港股盘中下挫后尾盘拉升，恒生指数收涨0.26%，恒生科技指数涨0.52%。澜起科技涨6%，美团涨近5%，大型科技股多数上涨。市场等待Trump-Xi峰会结果，资金在低位承接意愿较强。</span><span class="en" style="display:none">HK markets dipped then rallied into the close. Hang Seng +0.26%, Hang Seng Tech +0.52%. Montage Tech +6%, Meituan ~+5%. Market awaiting Trump-Xi summit outcome with strong buying support at lows.</span></p>
+<p class="src">来源：证券时报 / 新浪财经 / 21世纪经济报道</p>
+</div>
+
+<h2>⚡ <span class="zh">半导体/AI重点</span><span class="en" style="display:none">Semiconductor / AI Focus</span></h2>
+
+<div class="card">
+<h4><span class="zh">Tower Semiconductor单日暴涨22%：狂揽13亿硅光订单</span><span class="en" style="display:none">Tower Semiconductor Surges 22% on $1.3B Silicon Photonics Orders</span></h4>
+<p><span class="zh">Tower Semiconductor发布2026年最新业绩，宣布获得价值13亿硅光子（Silicon Photonics）订单，股价单日暴涨22.44%。硅光技术是下一代AI数据中心高速互联的关键技术，Tower在此领域的布局获得市场高度认可。这进一步验证了AI基础设施投资热潮正在从GPU向封装、光互联等上游环节扩散。</span><span class="en" style="display:none">Tower Semiconductor surged 22.44% after announcing $1.3B in silicon photonics orders. Silicon photonics is a key technology for next-gen AI data center high-speed interconnects. This validates the AI infrastructure investment wave expanding from GPUs into packaging and optical interconnects.</span></p>
+<p class="src">来源：东方财富 / Tower Semiconductor IR</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">PPI通胀超预期但科技股"免疫"，分析师称芯片股仍被低估</span><span class="en" style="display:none">PPI Miss Ignored by Tech; Analysts Say Chips Still Undervalued</span></h4>
+<p><span class="zh">4月PPI环比+1.4%，远超预期，创2022年3月以来最大月度涨幅。传统能源板块承压，但半导体/AI板块完全不受影响。Creative Planning CEO Peter Mallouk表示："芯片股整体仍被低估，这是一个超级趋势。供给远远跟不上需求，还有很大上涨空间。"这番言论与近期半导体ETF持续创新高的走势相呼应。</span><span class="en" style="display:none">April PPI rose 1.4% MoM, far exceeding expectations — the biggest monthly jump since March 2022. Traditional/energy sectors weakened, but semiconductors/AI were completely unaffected. Creative Planning CEO Mallouk: "Chipmakers are actually undervalued. It's a mega trend. Demand far outstrips supply." This aligns with semiconductor ETFs continuing to make new highs.</span></p>
+<p class="src">来源：CNBC Power Lunch / Bureau of Labor Statistics</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">亚太多数市场上涨，日经+0.27%，等待峰会结果</span><span class="en" style="display:none">Asia-Pacific Mostly Higher; Nikkei +0.27%, Awaits Summit</span></h4>
+<p><span class="zh">亚太市场周四开盘多数上涨，日本日经225涨0.27%，韩国Kospi涨0.38%，Kosdaq涨1.31%。投资者密切关注Trump-Xi峰会进展，寻找中美关系和全球贸易走向的线索。港股恒生指数期货夜盘小幅走高。</span><span class="en" style="display:none">Asia-Pacific markets opened mostly higher Thursday. Japan's Nikkei 225 +0.27%, South Korea Kospi +0.38%, Kosdaq +1.31%. Investors closely watching Trump-Xi summit for clues on US-China relations and global trade. HK futures slightly higher in overnight trading.</span></p>
+<p class="src">来源：CNBC Asia / Reuters</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="prediction-box">
+<h3>📋 <span class="zh">明日/近期关注要点</span><span class="en" style="display:none">Key Points to Watch</span></h3>
+<ul>
+<li><span class="zh"><b>Trump-Xi峰会是本周最大变量：</b>如释放积极信号，A股港股周五可能大涨；如无实质成果，可能引发获利回吐。关注半导体出口管制相关表态。</span><span class="en" style="display:none"><b>Trump-Xi summit is this week's biggest variable:</b> Positive signals could send China/HK stocks sharply higher Friday; no concrete results may trigger profit-taking. Watch for semiconductor export control language.</span></li>
+<li><span class="zh"><b>半导体仍是最强主线：</b>CoWoS产能瓶颈+AI需求爆发，分析师认为芯片股仍有上涨空间。Tower Silicon的22%暴涨显示AI投资正从GPU向产业链上游扩散。</span><span class="en" style="display:none"><b>Semis remain the strongest theme:</b> CoWoS bottlenecks + exploding AI demand. Analysts see more upside. Tower's 22% surge shows AI investment diffusing up the supply chain.</span></li>
+<li><span class="zh"><b>关注周四美国数据：</b>4月零售销售、初请失业金、进出口价格指数。PPI已超预期，如果零售数据同样强劲，降息预期将进一步推迟。</span><span class="en" style="display:none"><b>Thursday US data to watch:</b> April retail sales, initial jobless claims, import/export price indices. PPI already hot; strong retail data would further delay rate cut expectations.</span></li>
+<li><span class="zh"><b>风险提示：</b>通胀持续超预期可能推迟降息至2026年末甚至2027年，传统板块（金融、消费、能源）将持续承压。高位科技股回调风险不容忽视。</span><span class="en" style="display:none"><b>Risk alert:</b> Persistent hot inflation could delay rate cuts to late 2026 or 2027. Traditional sectors (financials, consumer, energy) will remain under pressure. High-flying tech pullback risk is real.</span></li>
+</ul>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, WSJ, MarketWatch, Reuters, 证券时报, 新浪财经, Trading Economics</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Foundry Research Report v2.2 · 英伟达代工深度研究报告</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --g: #76b900; --dark: #0f0f0f; --card: #1a1a1a; --border: #2a2a2a;
+    --t1: #f0f0f0; --t2: #aaa;
+    --warn: #f5a623; --info: #4a9eff; --danger: #e74c3c; --ok: #2ecc71; --pu: #9b59b6;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--dark); color:var(--t1); line-height:1.6; }
+
+  /* === LANGUAGE TOGGLE === */
+  body.lang-zh .en-only { display:none !important; }
+  body.lang-en .zh-only { display:none !important; }
+  body { class: lang-zh; }
+
+  .lang-toggle { display:flex; gap:4px; align-items:center; }
+  .lang-btn {
+    padding:5px 14px; border-radius:20px; border:1px solid rgba(118,185,0,0.5);
+    background:transparent; color:var(--t2); font-size:12px; font-weight:700;
+    cursor:pointer; transition:all 0.2s; letter-spacing:0.5px;
+  }
+  .lang-btn.active { background:var(--g); color:black; border-color:var(--g); }
+  .lang-btn:hover:not(.active) { border-color:var(--g); color:var(--g); }
+
+  /* HERO */
+  .hero { background:linear-gradient(135deg,#0a0a0a 0%,#1a2a0a 50%,#0a1a00 100%); padding:48px 40px 32px; border-bottom:2px solid var(--g); position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-50%; right:-20%; width:600px; height:600px; background:radial-gradient(circle,rgba(118,185,0,0.08) 0%,transparent 70%); pointer-events:none; }
+  .hero-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; }
+  .label-tag { font-size:11.5px; font-weight:700; letter-spacing:3px; color:var(--g); text-transform:uppercase; margin-bottom:8px; }
+  .hero h1 { font-size:28px; font-weight:800; line-height:1.2; margin-bottom:6px; background:linear-gradient(90deg,#fff 0%,#c8e87a 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-sub { color:#999; font-size:13px; margin-top:4px; }
+  .hero-meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .badge { background:rgba(118,185,0,0.15); border:1px solid rgba(118,185,0,0.3); color:var(--g); padding:3px 11px; border-radius:20px; font-size:11px; font-weight:600; }
+  .badge-red { background:rgba(231,76,60,0.15); border:1px solid rgba(231,76,60,0.3); color:var(--danger); }
+  .badge-blue { background:rgba(74,158,255,0.15); border:1px solid rgba(74,158,255,0.3); color:var(--info); }
+  .version-note { display:inline-block; background:rgba(245,166,35,0.2); border:1px solid var(--warn); color:var(--warn); padding:3px 11px; border-radius:6px; font-size:11px; margin-top:8px; }
+
+  /* NAV */
+  .toc { background:var(--card); border-bottom:1px solid var(--border); padding:0 32px; position:sticky; top:0; z-index:100; display:flex; align-items:center; gap:0; overflow-x:auto; }
+  .toc-links { display:flex; flex:1; overflow-x:auto; }
+  .toc a { color:var(--t2); text-decoration:none; padding:12px 14px; font-size:12px; font-weight:500; white-space:nowrap; border-bottom:2px solid transparent; transition:all 0.2s; }
+  .toc a:hover { color:var(--g); border-bottom-color:var(--g); }
+  .toc-lang { padding:8px 16px; border-left:1px solid var(--border); flex-shrink:0; }
+
+  /* LAYOUT */
+  .container { max-width:1240px; margin:0 auto; padding:36px 40px; }
+  .section { margin-bottom:52px; }
+  h2 { font-size:20px; font-weight:700; color:var(--g); margin-bottom:20px; padding-bottom:9px; border-bottom:1px solid #222; display:flex; align-items:center; gap:9px; }
+  h3 { font-size:15.5px; font-weight:600; color:#ddd; margin:18px 0 11px; }
+  h4 { font-size:13.5px; font-weight:600; }
+  p { color:var(--t2); margin-bottom:9px; font-size:13.5px; }
+
+  /* KPI */
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(185px,1fr)); gap:13px; margin-bottom:26px; }
+  .kpi { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:17px; position:relative; overflow:hidden; }
+  .kpi::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:var(--kc,var(--g)); }
+  .kpi-lbl { font-size:10px; color:var(--t2); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
+  .kpi-val { font-size:24px; font-weight:800; color:var(--t1); }
+  .kpi-sub { font-size:11px; color:var(--t2); margin-top:3px; }
+
+  /* CARDS */
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:13px; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:13px; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:13px; }
+  @media(max-width:800px){ .two-col,.three-col{ grid-template-columns:1fr; } }
+
+  /* PRIMARY BOX */
+  .primary-box { border:2px solid var(--g); border-radius:14px; padding:22px; background:rgba(118,185,0,0.05); position:relative; overflow:hidden; margin-bottom:18px; }
+  .primary-box::after { content:'★'; position:absolute; top:10px; right:14px; background:var(--g); color:black; font-size:10px; font-weight:800; padding:3px 10px; border-radius:10px; }
+
+  /* TSV INSIGHT BOX */
+  .tsv-box { border:2px solid var(--warn); border-radius:14px; padding:20px; background:rgba(245,166,35,0.06); margin:16px 0; position:relative; overflow:hidden; }
+  .tsv-box::after { content:'🔑'; position:absolute; top:10px; right:14px; font-size:18px; }
+  .tsv-box h4 { color:var(--warn); margin-bottom:10px; font-size:14.5px; }
+
+  /* TABLES */
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th { background:rgba(118,185,0,0.1); color:var(--g); font-weight:600; padding:8px 12px; text-align:left; border-bottom:1px solid rgba(118,185,0,0.22); white-space:nowrap; }
+  td { padding:7px 12px; border-bottom:1px solid #1e1e1e; color:var(--t2); vertical-align:top; }
+  tr:hover td { background:rgba(255,255,255,0.02); }
+  .hl { color:var(--t1); font-weight:600; }
+  .green{color:var(--ok);} .yellow{color:var(--warn);} .red{color:var(--danger);} .blue{color:var(--info);} .purple{color:var(--pu);}
+
+  /* TIMELINE */
+  .timeline { position:relative; padding-left:26px; }
+  .timeline::before { content:''; position:absolute; left:6px;top:0;bottom:0; width:2px; background:linear-gradient(to bottom,var(--g),transparent); }
+  .tl-item { position:relative; margin-bottom:20px; }
+  .tl-item::before { content:''; position:absolute; left:-23px;top:5px; width:9px;height:9px; border-radius:50%; background:var(--tc,var(--g)); border:2px solid var(--dark); }
+  .tl-year { font-size:10px; font-weight:700; color:var(--tc,var(--g)); text-transform:uppercase; letter-spacing:2px; margin-bottom:2px; }
+  .tl-title { font-size:14px; font-weight:700; color:var(--t1); margin-bottom:2px; }
+  .tl-desc { font-size:12px; color:var(--t2); }
+
+  /* ALERTS */
+  .alert { padding:12px 15px; border-radius:8px; margin:12px 0; font-size:13px; border-left:3px solid; display:flex; gap:9px; align-items:flex-start; }
+  .alert-green { background:rgba(118,185,0,0.1); border-color:var(--g); color:#c8e87a; }
+  .alert-yellow { background:rgba(245,166,35,0.1); border-color:var(--warn); color:var(--warn); }
+  .alert-blue { background:rgba(74,158,255,0.1); border-color:var(--info); color:var(--info); }
+  .alert-red { background:rgba(231,76,60,0.1); border-color:var(--danger); color:var(--danger); }
+
+  /* TAGS */
+  .tag { display:inline-block; padding:2px 8px; border-radius:11px; font-size:10.5px; font-weight:600; margin:2px; }
+  .tg { background:rgba(118,185,0,0.2); color:var(--g); }
+  .tb { background:rgba(74,158,255,0.2); color:var(--info); }
+  .ty { background:rgba(245,166,35,0.2); color:var(--warn); }
+  .tr { background:rgba(231,76,60,0.2); color:var(--danger); }
+  .tp { background:rgba(155,89,182,0.2); color:var(--pu); }
+
+  /* PROGRESS */
+  .prog { margin:6px 0; }
+  .prog-lbl { display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px; }
+  .prog-lbl span:first-child { color:var(--t2); }
+  .prog-lbl span:last-child { color:var(--t1); font-weight:600; }
+  .prog-bar { background:#222; border-radius:4px; height:7px; overflow:hidden; }
+  .prog-fill { height:100%; border-radius:4px; background:var(--pf,var(--g)); }
+
+  /* DIFF TABLE */
+  .diff-grid { display:grid; grid-template-columns:175px 1fr 1fr; gap:1px; background:#222; border-radius:8px; overflow:hidden; margin:12px 0; }
+  .dc { background:var(--card); padding:10px 13px; font-size:12.5px; }
+  .dc.rh { color:var(--t2); font-weight:500; font-size:12px; }
+  .dc.ch { color:var(--g); font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:0.5px; background:rgba(118,185,0,0.08); }
+  .dc.chb { color:var(--info); background:rgba(74,158,255,0.08); font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:0.5px; }
+
+  /* OPP */
+  .opp { border:1px solid rgba(118,185,0,0.35); border-radius:10px; padding:17px; background:rgba(118,185,0,0.04); margin-bottom:13px; }
+  .opp.sec { border-color:rgba(74,158,255,0.35); background:rgba(74,158,255,0.04); }
+  .opp-t { color:var(--g); font-weight:700; font-size:14.5px; margin-bottom:7px; }
+  .opp.sec .opp-t { color:var(--info); }
+
+  /* STEPS */
+  .step { display:flex; gap:13px; align-items:flex-start; margin-bottom:14px; }
+  .snum { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; flex-shrink:0; }
+  .st { color:#fff; font-weight:600; margin-bottom:2px; font-size:13.5px; }
+  .sd { color:var(--t2); font-size:12.5px; }
+
+  .chart-wrap { position:relative; height:265px; padding:8px 0; }
+  .chart-wrap.tall { height:330px; }
+  .footnote { font-size:10.5px; color:#555; margin-top:5px; font-style:italic; }
+
+  ::-webkit-scrollbar { width:5px; height:5px; }
+  ::-webkit-scrollbar-track { background:#111; }
+  ::-webkit-scrollbar-thumb { background:#333; border-radius:3px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--g); }
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- Back to Sky Portal -->
+<a href="/sky-portal/" style="position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(15,15,15,0.9);backdrop-filter:blur(8px);border:1px solid rgba(118,185,0,0.3);border-radius:100px;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.8rem;font-family:-apple-system,sans-serif;transition:all 0.3s;" onmouseover="this.style.background='rgba(118,185,0,0.9)';this.style.color='#fff';" onmouseout="this.style.background='rgba(15,15,15,0.9)';this.style.color='rgba(255,255,255,0.7)';">☁️ Sky Portal</a>
+
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="label-tag">▶ Deep Research Report · v2.2 · 2026 Q2</div>
+      <h1>
+        <span class="zh-only">英伟达代工深度研究报告<br>消费级GPU主战场版</span>
+        <span class="en-only">NVIDIA Foundry Research Report<br>Consumer GPU: Primary Battlefield</span>
+      </h1>
+      <div class="hero-sub">
+        <span class="zh-only">面向代工合作伙伴 · 产品路线图 · 晶圆需求预测 · 窗口期机会评估</span>
+        <span class="en-only">For Foundry Partners · Product Roadmap · Wafer Demand Forecast · Opportunity Window Analysis</span>
+      </div>
+      <div class="version-note">
+        <span class="zh-only">⟳ v2.2 新增：NVIDIA历史质量事故专章（G84/$475M→RTX 5090 ROP缺陷），含代工相关性分析与来源链接</span>
+        <span class="en-only">⟳ v2.2 Added: NVIDIA Historical Failure Cases (G84/$475M → RTX 5090 ROP), with foundry relevance analysis and source links</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge zh-only">📅 2026年4月</span>
+        <span class="badge en-only">📅 April 2026</span>
+        <span class="badge badge-red zh-only">🎮 消费级主战场</span>
+        <span class="badge badge-red en-only">🎮 Consumer GPU Focus</span>
+        <span class="badge badge-blue">🔬 Feynman = A16</span>
+        <span class="badge zh-only">📊 月均晶圆预测</span>
+        <span class="badge en-only">📊 Monthly Wafer Forecast</span>
+      </div>
+    </div>
+    <div class="lang-toggle" style="margin-top:4px;">
+      <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+  <div class="toc-links">
+    <a href="#exec"><span class="zh-only">📋 摘要</span><span class="en-only">📋 Summary</span></a>
+    <a href="#tsv"><span class="zh-only">🔑 TSV关键逻辑</span><span class="en-only">🔑 TSV Key Logic</span></a>
+    <a href="#consumer"><span class="zh-only">🎮 消费级主战场</span><span class="en-only">🎮 Consumer GPU</span></a>
+    <a href="#product-lines"><span class="zh-only">📦 产品线</span><span class="en-only">📦 Product Lines</span></a>
+    <a href="#foundry"><span class="zh-only">🏭 代工现状</span><span class="en-only">🏭 Foundry</span></a>
+    <a href="#roadmap"><span class="zh-only">🗺️ 路线图</span><span class="en-only">🗺️ Roadmap</span></a>
+    <a href="#wafer"><span class="zh-only">📊 晶圆需求</span><span class="en-only">📊 Wafer Demand</span></a>
+    <a href="#tech"><span class="zh-only">⚗️ 技术要求</span><span class="en-only">⚗️ Tech Specs</span></a>
+    <a href="#opportunity"><span class="zh-only">💡 机会分析</span><span class="en-only">💡 Opportunities</span></a>
+    <a href="#arch-history"><span class="zh-only">📐 架构演进</span><span class="en-only">📐 Arch Evolution</span></a>
+    <a href="#failures"><span class="zh-only">🚨 历史事故</span><span class="en-only">🚨 Failure Cases</span></a>
+    <a href="#conclusion"><span class="zh-only">✅ 结论</span><span class="en-only">✅ Conclusion</span></a>
+  </div>
+  <div class="toc-lang">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-zh2" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" id="btn-en2" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ===== 执行摘要 ===== -->
+<section class="section" id="exec">
+  <h2>
+    <span>📋</span>
+    <span class="zh-only">执行摘要</span>
+    <span class="en-only">Executive Summary</span>
+  </h2>
+
+  <div class="kpi-grid">
+    <div class="kpi" style="--kc:#76b900;">
+      <div class="kpi-lbl"><span class="zh-only">消费级GPU年出货</span><span class="en-only">Consumer GPU Annual Shipments</span></div>
+      <div class="kpi-val">~44M</div>
+      <div class="kpi-sub"><span class="zh-only">2025年，NVIDIA占95%</span><span class="en-only">2025, NVIDIA ~95% share</span></div>
+    </div>
+    <div class="kpi" style="--kc:#f5a623;">
+      <div class="kpi-lbl"><span class="zh-only">主战场目标产品</span><span class="en-only">Primary Target Product</span></div>
+      <div class="kpi-val">RTX 60</div>
+      <div class="kpi-sub"><span class="zh-only">N3P工艺·2027H2–2028</span><span class="en-only">N3P Process · 2027H2–2028</span></div>
+    </div>
+    <div class="kpi" style="--kc:#4a9eff;">
+      <div class="kpi-lbl"><span class="zh-only">消费级无需CoWoS</span><span class="en-only">Consumer: No CoWoS Required</span></div>
+      <div class="kpi-val"><span class="zh-only">标准BGA</span><span class="en-only">Std BGA</span></div>
+      <div class="kpi-sub"><span class="zh-only">无TSV，封装链条更短</span><span class="en-only">No TSV, simpler supply chain</span></div>
+    </div>
+    <div class="kpi" style="--kc:#2ecc71;">
+      <div class="kpi-lbl"><span class="zh-only">消费级月均晶圆(估)</span><span class="en-only">Consumer GPU Est. Monthly WPM</span></div>
+      <div class="kpi-val">~35k</div>
+      <div class="kpi-sub"><span class="zh-only">RTX 60全线N3P月均</span><span class="en-only">RTX 60 full lineup N3P WPM</span></div>
+    </div>
+    <div class="kpi" style="--kc:#e74c3c;">
+      <div class="kpi-lbl"><span class="zh-only">Feynman制程 ✓已修正</span><span class="en-only">Feynman Process ✓ Corrected</span></div>
+      <div class="kpi-val">A16</div>
+      <div class="kpi-sub"><span class="zh-only">1.6nm级·含SPR背面供电</span><span class="en-only">~1.6nm · Super Power Rail</span></div>
+    </div>
+    <div class="kpi" style="--kc:#9b59b6;">
+      <div class="kpi-lbl"><span class="zh-only">数据中心vs消费级单价比</span><span class="en-only">DC vs Consumer GPU Price Ratio</span></div>
+      <div class="kpi-val">15:1</div>
+      <div class="kpi-sub"><span class="zh-only">但出货量消费级多10倍+</span><span class="en-only">Consumer ships 10x+ more units</span></div>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <span>🎯</span>
+    <div>
+      <span class="zh-only"><strong>核心战略：</strong>数据中心GPU必须与HBM共同封装（CoWoS + TSV），整条制造链被TSMC垄断，外部合作空间极小。<strong>消费级GeForce RTX 60系列（TSMC N3P，标准BGA封装）才是现实主战场</strong>，这一判断有完整的技术逻辑闭环支撑。</span>
+      <span class="en-only"><strong>Core Strategy:</strong> Data center GPUs must be co-packaged with HBM (CoWoS + TSV) — the entire manufacturing chain is monopolized by TSMC, leaving minimal room for external partners. <strong>Consumer GeForce RTX 60 series (TSMC N3P, standard BGA) is the realistic primary battlefield</strong>, backed by sound technical logic.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TSV 关键逻辑 ===== -->
+<section class="section" id="tsv">
+  <h2>
+    <span>🔑</span>
+    <span class="zh-only">核心技术判断：TSV/HBM 决定合作边界</span>
+    <span class="en-only">Key Technical Insight: TSV/HBM Defines Partnership Boundaries</span>
+  </h2>
+
+  <div class="tsv-box">
+    <h4>
+      <span class="zh-only">为什么数据中心GPU几乎不可能成为代工合作入口？</span>
+      <span class="en-only">Why Data Center GPUs Are Nearly Impossible to Enter as a Foundry Partner?</span>
+    </h4>
+    <div class="two-col">
+      <div>
+        <p class="zh-only"><strong style="color:#f5a623;">HBM的物理结构决定了一切：</strong>HBM（High Bandwidth Memory）本质上是多层DRAM Die通过TSV（硅通孔）垂直叠层的3D结构。GPU Die和HBM Stack必须封装在同一个interposer上，这就是CoWoS（Chip on Wafer on Substrate）。</p>
+        <p class="en-only"><strong style="color:#f5a623;">HBM's physical architecture determines everything:</strong> HBM (High Bandwidth Memory) is fundamentally a 3D stack of DRAM dies connected through TSV (Through-Silicon Vias). The GPU die and HBM stack must be co-packaged on the same interposer — this is CoWoS (Chip on Wafer on Substrate).</p>
+        <p class="zh-only">CoWoS是TSMC的专有封装技术，TSMC同时控制：① 前道晶圆制造 ② CoWoS先进封装 ③ HBM集成。这三步无法拆分——TSMC不会把封装业务单独剥离给外部做。</p>
+        <p class="en-only">CoWoS is TSMC's proprietary packaging technology. TSMC controls simultaneously: ① Front-end wafer fab ② CoWoS advanced packaging ③ HBM integration. These three steps cannot be separated — TSMC will not outsource packaging to third parties.</p>
+      </div>
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th><span class="zh-only">封装类型</span><span class="en-only">Package Type</span></th>
+              <th><span class="zh-only">应用产品</span><span class="en-only">Product</span></th>
+              <th><span class="zh-only">TSV需求</span><span class="en-only">TSV Required</span></th>
+              <th><span class="zh-only">控制方</span><span class="en-only">Controlled By</span></th>
+            </tr>
+            <tr>
+              <td class="hl">CoWoS-S / L</td>
+              <td><span class="zh-only">数据中心 H100/B200/Rubin</span><span class="en-only">DC H100/B200/Rubin</span></td>
+              <td class="red">✅ <span class="zh-only">必须</span><span class="en-only">Required</span></td>
+              <td class="red"><span class="zh-only">TSMC独家</span><span class="en-only">TSMC Exclusive</span></td>
+            </tr>
+            <tr>
+              <td class="hl">SoIC 3D Stacking</td>
+              <td>Feynman (2028)</td>
+              <td class="red">✅ <span class="zh-only">必须</span><span class="en-only">Required</span></td>
+              <td class="red"><span class="zh-only">TSMC独家</span><span class="en-only">TSMC Exclusive</span></td>
+            </tr>
+            <tr>
+              <td class="hl" style="color:#76b900;"><span class="zh-only">标准BGA</span><span class="en-only">Standard BGA</span></td>
+              <td style="color:#76b900;"><span class="zh-only">消费级 RTX 50/60</span><span class="en-only">Consumer RTX 50/60</span></td>
+              <td class="green">❌ <span class="zh-only">不需要</span><span class="en-only">Not Required</span></td>
+              <td class="green"><span class="zh-only">ASE/Amkor等OSAT</span><span class="en-only">ASE/Amkor OSATs</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manufacturing chain comparison -->
+    <h4 style="color:var(--t1); margin:18px 0 12px;">
+      <span class="zh-only">制造链对比：数据中心 vs 消费级</span>
+      <span class="en-only">Manufacturing Chain Comparison: DC vs Consumer</span>
+    </h4>
+    <div class="two-col">
+      <div class="card" style="border-color:rgba(231,76,60,0.4); background:rgba(231,76,60,0.04);">
+        <h4 style="color:var(--danger); margin-bottom:10px;">
+          🔴 <span class="zh-only">数据中心GPU（B200/Rubin）— 封闭链条</span>
+          <span class="en-only">Data Center GPU (B200/Rubin) — Closed Chain</span>
+        </h4>
+        <div style="font-size:13px; color:var(--t2); line-height:2.2;">
+          <span class="zh-only">
+          📍 <strong style="color:#fff;">Step 1</strong>: 前道晶圆 (TSMC N4P/N3P) → TSMC 台湾<br>
+          📍 <strong style="color:#fff;">Step 2</strong>: CoWoS封装 (TSMC专有) → TSMC 台湾<br>
+          📍 <strong style="color:#fff;">Step 3</strong>: HBM集成 (TSV互连) → TSMC 台湾<br>
+          ⛔ <strong style="color:#e74c3c;">外部插入点：几乎为零</strong>
+          </span>
+          <span class="en-only">
+          📍 <strong style="color:#fff;">Step 1</strong>: Front-end wafer (TSMC N4P/N3P) → TSMC Taiwan<br>
+          📍 <strong style="color:#fff;">Step 2</strong>: CoWoS packaging (TSMC proprietary) → TSMC Taiwan<br>
+          📍 <strong style="color:#fff;">Step 3</strong>: HBM integration (TSV interconnect) → TSMC Taiwan<br>
+          ⛔ <strong style="color:#e74c3c;">External entry points: Near zero</strong>
+          </span>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(118,185,0,0.5); background:rgba(118,185,0,0.05);">
+        <h4 style="color:var(--g); margin-bottom:10px;">
+          🟢 <span class="zh-only">消费级GPU（RTX 60）— 开放链条</span>
+          <span class="en-only">Consumer GPU (RTX 60) — Open Chain</span>
+        </h4>
+        <div style="font-size:13px; color:var(--t2); line-height:2.2;">
+          <span class="zh-only">
+          ✅ <strong style="color:#76b900;">Step 1</strong>: 前道晶圆 (TSMC N3P) → 可合作切入点<br>
+          ✅ <strong style="color:#76b900;">Step 2</strong>: 标准BGA封装 → 多家OSAT可承接<br>
+          ✅ <strong style="color:#76b900;">Step 3</strong>: GDDR7分开上板 → 标准接口，无TSV<br>
+          🎯 <strong style="color:#76b900;">外部插入点：前道晶圆代工完全独立</strong>
+          </span>
+          <span class="en-only">
+          ✅ <strong style="color:#76b900;">Step 1</strong>: Front-end wafer (TSMC N3P) → Accessible entry point<br>
+          ✅ <strong style="color:#76b900;">Step 2</strong>: Standard BGA packaging → Multiple OSATs can handle<br>
+          ✅ <strong style="color:#76b900;">Step 3</strong>: GDDR7 separate mounting → Standard interface, no TSV<br>
+          🎯 <strong style="color:#76b900;">External entry: Front-end foundry is fully separable</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <span>✅</span>
+    <div>
+      <span class="zh-only"><strong>技术逻辑闭环：</strong>消费级GPU是主战场，这一判断有技术根据。数据中心GPU因HBM/TSV/CoWoS被TSMC垂直整合，前道晶圆代工无法独立分离。消费级GPU采用标准BGA封装、GDDR7独立上板，前道晶圆是可以独立合作的环节，这是进入NVIDIA供应链最现实的路径。</span>
+      <span class="en-only"><strong>Technical Logic Closed Loop:</strong> Consumer GPU as the primary battlefield is technically grounded. Data center GPUs are vertically integrated by TSMC through HBM/TSV/CoWoS, making standalone wafer foundry cooperation nearly impossible. Consumer GPUs use standard BGA packaging with separate GDDR7, making front-end wafer foundry a separable, cooperable element.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 消费级主战场 ===== -->
+<section class="section" id="consumer">
+  <h2>
+    <span>🎮</span>
+    <span class="zh-only">消费级GPU — 主战场深度分析</span>
+    <span class="en-only">Consumer GPU — Primary Battlefield Deep Dive</span>
+  </h2>
+
+  <div class="primary-box">
+    <h3 style="color:var(--g); margin-top:0;">
+      <span class="zh-only">为什么消费级是现阶段主战场？三大理由</span>
+      <span class="en-only">Why Consumer GPU is the Primary Target? Three Reasons</span>
+    </h3>
+    <div class="three-col" style="margin-top:12px;">
+      <div>
+        <div style="color:#76b900; font-size:20px; font-weight:800; margin-bottom:3px;">44M <span style="font-size:14px;">台/年</span></div>
+        <div style="color:#aaa; font-size:12.5px;"><span class="zh-only">出货量是数据中心AI GPU的<strong style="color:#fff;">10–15倍</strong></span><span class="en-only">10–15x more units than DC AI GPU</span></div>
+      </div>
+      <div>
+        <div style="color:#4a9eff; font-size:20px; font-weight:800; margin-bottom:3px;">N3P</div>
+        <div style="color:#aaa; font-size:12.5px;"><span class="zh-only">比A16成熟，无CoWoS，<strong style="color:#fff;">前道可独立合作</strong></span><span class="en-only">More mature than A16, no CoWoS, <strong style="color:#fff;">front-end is separable</strong></span></div>
+      </div>
+      <div>
+        <div style="color:#f5a623; font-size:20px; font-weight:800; margin-bottom:3px;">2027–28</div>
+        <div style="color:#aaa; font-size:12.5px;"><span class="zh-only">精确匹配<strong style="color:#fff;">27年底准备→28-29年上市</strong>窗口</span><span class="en-only">Precisely matches <strong style="color:#fff;">prep end-2027 → launch 28-29</strong></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RTX 50 Current -->
+  <h3>
+    <span class="zh-only">🔵 当前代：RTX 50系列 Blackwell Desktop（TSMC N4P）</span>
+    <span class="en-only">🔵 Current Gen: RTX 50 Series Blackwell Desktop (TSMC N4P)</span>
+  </h3>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th><span class="zh-only">型号</span><span class="en-only">Model</span></th>
+        <th><span class="zh-only">Die代号</span><span class="en-only">Die</span></th>
+        <th><span class="zh-only">工艺</span><span class="en-only">Process</span></th>
+        <th><span class="zh-only">Die尺寸</span><span class="en-only">Die Size</span></th>
+        <th>SM</th>
+        <th><span class="zh-only">显存</span><span class="en-only">VRAM</span></th>
+        <th><span class="zh-only">位宽</span><span class="en-only">Bus</span></th>
+        <th>TDP</th>
+        <th><span class="zh-only">发布</span><span class="en-only">Launch</span></th>
+      </tr>
+      <tr><td class="hl">RTX 5090</td><td>GB202</td><td class="blue">N4P</td><td class="yellow">762 mm²</td><td>170</td><td>32GB GDDR7</td><td>512-bit</td><td class="red">575W</td><td>2025 Q1</td></tr>
+      <tr><td class="hl">RTX 5080</td><td>GB203</td><td class="blue">N4P</td><td>~378 mm²</td><td>84</td><td>16GB GDDR7</td><td>256-bit</td><td>360W</td><td>2025 Q1</td></tr>
+      <tr><td class="hl">RTX 5070 Ti</td><td>GB203</td><td class="blue">N4P</td><td>~378 mm²</td><td>70</td><td>16GB GDDR7</td><td>256-bit</td><td>300W</td><td>2025 Q1</td></tr>
+      <tr><td class="hl">RTX 5070</td><td>GB205</td><td class="blue">N4P</td><td>~261 mm²</td><td>48</td><td>12GB GDDR7</td><td>192-bit</td><td>250W</td><td>2025 Q2</td></tr>
+      <tr><td class="hl">RTX 5060 Ti</td><td>GB206</td><td class="blue">N4P</td><td>~185 mm²</td><td>36</td><td>16/8GB GDDR7</td><td>128-bit</td><td>180W</td><td>2025 H2</td></tr>
+      <tr><td style="color:#666;">RTX 5090 Ti?</td><td>GB202+?</td><td class="blue">N4P</td><td>~762 mm²</td><td>180?</td><td>32GB+</td><td>512-bit</td><td>600W+?</td><td class="yellow">2026 Q3 <span class="zh-only">传言</span><span class="en-only">rumor</span></td></tr>
+    </table>
+  </div>
+
+  <!-- RTX 60 Next Gen -->
+  <h3 style="color:#f5a623;">
+    <span class="zh-only">🟡 主战场：RTX 60系列 Rubin Consumer（TSMC N3P）</span>
+    <span class="en-only">🟡 Primary Target: RTX 60 Series Rubin Consumer (TSMC N3P)</span>
+  </h3>
+
+  <div class="alert alert-blue">
+    <span>💡</span>
+    <div>
+      <span class="zh-only"><strong>最新泄露信息（2026年）：</strong>RTX 60采用Rubin Consumer架构，Die代号 <strong>GE202/GR20X</strong>，制程 <strong>TSMC N3P</strong>，旗舰GE202 192 SM，512-bit总线，32GB GDDR7。规格尚未最终确认，下表为泄露+推测值。</span>
+      <span class="en-only"><strong>Latest Leaks (2026):</strong> RTX 60 uses Rubin Consumer architecture, Die code <strong>GE202/GR20X</strong>, process <strong>TSMC N3P</strong>, flagship GE202: 192 SM, 512-bit bus, 32GB GDDR7. Specs not yet finalized; table below is based on leaks + estimates.</span>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th><span class="zh-only">预测型号</span><span class="en-only">Expected Model</span></th>
+        <th><span class="zh-only">Die代号</span><span class="en-only">Die</span></th>
+        <th><span class="zh-only">工艺</span><span class="en-only">Process</span></th>
+        <th>SM (<span class="zh-only">泄露</span><span class="en-only">leaked</span>)</th>
+        <th><span class="zh-only">显存</span><span class="en-only">VRAM</span></th>
+        <th><span class="zh-only">位宽</span><span class="en-only">Bus</span></th>
+        <th><span class="zh-only">预期发布</span><span class="en-only">Expected Launch</span></th>
+        <th><span class="zh-only">可信度</span><span class="en-only">Confidence</span></th>
+      </tr>
+      <tr><td class="hl" style="color:#f5a623;">RTX 6090</td><td>GE202</td><td class="green">N3P</td><td class="green">192</td><td>32GB GDDR7</td><td>512-bit</td><td class="yellow">2027H2–2028</td><td class="yellow"><span class="zh-only">中（泄露）</span><span class="en-only">Medium (leaked)</span></td></tr>
+      <tr><td class="hl">RTX 6080</td><td>GE203?</td><td class="green">N3P</td><td>~96?</td><td>20GB GDDR7</td><td>320-bit?</td><td class="yellow">2028</td><td class="red"><span class="zh-only">低（推测）</span><span class="en-only">Low (estimate)</span></td></tr>
+      <tr><td class="hl">RTX 6070 Ti</td><td>GE203?</td><td class="green">N3P</td><td>~80?</td><td>16GB GDDR7</td><td>256-bit?</td><td class="yellow">2028</td><td class="red"><span class="zh-only">低</span><span class="en-only">Low</span></td></tr>
+      <tr><td class="hl">RTX 6070</td><td>GE205?</td><td class="green">N3P</td><td>~56?</td><td>16GB GDDR7</td><td>192-bit?</td><td class="yellow">2028</td><td class="red"><span class="zh-only">低</span><span class="en-only">Low</span></td></tr>
+      <tr><td>RTX 6060 Ti</td><td>GE206?</td><td class="blue">N3P?</td><td>~36?</td><td>12GB</td><td>128-bit?</td><td>2028–29</td><td class="red"><span class="zh-only">推测</span><span class="en-only">Speculative</span></td></tr>
+    </table>
+  </div>
+
+  <!-- DC vs Consumer Comparison -->
+  <h3>
+    <span class="zh-only">数据中心GPU vs 消费级GPU — 系统性差异（14维度）</span>
+    <span class="en-only">Data Center vs Consumer GPU — Systematic Comparison (14 Dimensions)</span>
+  </h3>
+  <div class="diff-grid">
+    <div class="dc ch"><span class="zh-only">对比维度</span><span class="en-only">Dimension</span></div>
+    <div class="dc ch">🖥️ <span class="zh-only">数据中心 (B200/Rubin)</span><span class="en-only">Data Center (B200/Rubin)</span></div>
+    <div class="dc chb">🎮 <span class="zh-only">消费级 (RTX5090/6090)</span><span class="en-only">Consumer (RTX5090/6090)</span></div>
+
+    <div class="dc rh"><span class="zh-only">核心任务</span><span class="en-only">Primary Task</span></div>
+    <div class="dc"><span class="zh-only">AI矩阵运算(FP8/FP4)·训练推理</span><span class="en-only">AI matrix ops (FP8/FP4) · Training & inference</span></div>
+    <div class="dc" style="color:var(--info);"><span class="zh-only">实时3D渲染·光追·AI帧生成</span><span class="en-only">Real-time 3D rendering · Ray tracing · AI frame gen</span></div>
+
+    <div class="dc rh"><span class="zh-only">封装方式</span><span class="en-only">Packaging</span></div>
+    <div class="dc red"><span class="zh-only">CoWoS-L（TSV必须）TSMC独家</span><span class="en-only">CoWoS-L (TSV required) TSMC Exclusive</span></div>
+    <div class="dc green"><span class="zh-only">标准BGA（无TSV）多家OSAT可做</span><span class="en-only">Standard BGA (no TSV) · Multiple OSATs</span></div>
+
+    <div class="dc rh"><span class="zh-only">显存类型</span><span class="en-only">Memory Type</span></div>
+    <div class="dc red"><span class="zh-only">HBM3e · 192GB（B200）· TSV叠层</span><span class="en-only">HBM3e · 192GB (B200) · TSV stacked</span></div>
+    <div class="dc green"><span class="zh-only">GDDR7 · 32GB · 独立上板 · 无TSV</span><span class="en-only">GDDR7 · 32GB · Separate board mount · No TSV</span></div>
+
+    <div class="dc rh"><span class="zh-only">代工合作空间</span><span class="en-only">Foundry Partnership Space</span></div>
+    <div class="dc red"><span class="zh-only">极小（CoWoS把前后道锁定在TSMC）</span><span class="en-only">Near zero (CoWoS locks all steps to TSMC)</span></div>
+    <div class="dc green"><span class="zh-only">较大（前道晶圆可独立分离）</span><span class="en-only">Viable (front-end wafer is fully separable)</span></div>
+
+    <div class="dc rh"><span class="zh-only">单GPU售价</span><span class="en-only">Per-GPU Price</span></div>
+    <div class="dc red">$30,000–50,000</div>
+    <div class="dc green">$1,999–$2,999 (<span class="zh-only">旗舰</span><span class="en-only">flagship</span>)</div>
+
+    <div class="dc rh"><span class="zh-only">年出货量</span><span class="en-only">Annual Shipments</span></div>
+    <div class="dc" style="color:var(--warn);">~3M <span class="zh-only">台/年</span><span class="en-only">units/yr</span></div>
+    <div class="dc green">~44M <span class="zh-only">台/年（约15倍）</span><span class="en-only">units/yr (~15x more)</span></div>
+
+    <div class="dc rh"><span class="zh-only">月均晶圆需求</span><span class="en-only">Monthly WPM Demand</span></div>
+    <div class="dc" style="color:var(--warn);">~3,400 WPM (<span class="zh-only">逻辑片</span><span class="en-only">logic wafer</span>)</div>
+    <div class="dc green">~30,000–35,000 WPM (<span class="zh-only">全线</span><span class="en-only">full lineup</span>)</div>
+
+    <div class="dc rh"><span class="zh-only">主要制程</span><span class="en-only">Process Node</span></div>
+    <div class="dc" style="color:var(--warn);">N4P → N3P → A16</div>
+    <div class="dc green">N4P → N3P (<span class="zh-only">更易切入</span><span class="en-only">more accessible</span>)</div>
+
+    <div class="dc rh"><span class="zh-only">可靠性要求</span><span class="en-only">Reliability</span></div>
+    <div class="dc red">7×24h · DPPM &lt;100</div>
+    <div class="dc green"><span class="zh-only">消费级 · DPPM &lt;500</span><span class="en-only">Consumer level · DPPM &lt;500</span></div>
+
+    <div class="dc rh"><span class="zh-only">TDP</span><span class="en-only">TDP</span></div>
+    <div class="dc red">700–1000W (<span class="zh-only">系统级</span><span class="en-only">system level</span>)</div>
+    <div class="dc" style="color:var(--warn);">575W (RTX 5090)</div>
+  </div>
+
+  <!-- Chart: Performance + Market -->
+  <div class="two-col" style="margin-top:18px;">
+    <div class="card">
+      <div class="chart-wrap"><canvas id="rtxPerfChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="chart-wrap"><canvas id="mktVolChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 产品线 ===== -->
+<section class="section" id="product-lines">
+  <h2><span>📦</span><span class="zh-only">产品线全景</span><span class="en-only">Product Lines Overview</span></h2>
+  <div class="card-grid">
+    <div class="card" style="border-color:rgba(118,185,0,0.4);">
+      <h4 style="color:#76b900; margin-bottom:7px;">🎮 GeForce Consumer GPU ← <span class="zh-only">主战场</span><span class="en-only">Primary Target</span></h4>
+      <p><span class="zh-only">RTX 50（当前）→ RTX 60（2027-28）→ RTX 70（2029+）。年出货44M台，N3P/N4P工艺，标准BGA封装。</span><span class="en-only">RTX 50 (current) → RTX 60 (2027-28) → RTX 70 (2029+). 44M units/yr, N3P/N4P, standard BGA.</span></p>
+      <div class="tag tg"><span class="zh-only">主战场</span><span class="en-only">Primary Target</span></div><div class="tag tb">N3P/N4P</div><div class="tag ty">44M<span class="zh-only">台/年</span><span class="en-only"> units/yr</span></div>
+    </div>
+    <div class="card">
+      <h4 style="color:#4a9eff; margin-bottom:7px;">🖥️ <span class="zh-only">数据中心 AI GPU</span><span class="en-only">Data Center AI GPU</span></h4>
+      <p><span class="zh-only">H100→B200→Rubin→Feynman。单价高，CoWoS+TSV全程TSMC锁定，外部合作空间极小。</span><span class="en-only">H100→B200→Rubin→Feynman. High ASP, CoWoS+TSV fully locked to TSMC, minimal external partnership space.</span></p>
+      <div class="tag tr"><span class="zh-only">极高门槛</span><span class="en-only">Very High Barrier</span></div><div class="tag tb">N3P/A16</div>
+    </div>
+    <div class="card">
+      <h4 style="color:#f5a623; margin-bottom:7px;">💼 RTX PRO / <span class="zh-only">专业卡</span><span class="en-only">Professional GPU</span></h4>
+      <p><span class="zh-only">GTC 2026发布RTX PRO Blackwell，工作站/内容创作市场。与GeForce共用Die，体量小但溢价高。</span><span class="en-only">RTX PRO Blackwell launched at GTC 2026. Workstation/content creation. Shares die with GeForce, small volume but high margin.</span></p>
+      <div class="tag ty"><span class="zh-only">共用Die</span><span class="en-only">Shared Die</span></div>
+    </div>
+    <div class="card">
+      <h4 style="color:#2ecc71; margin-bottom:7px;">🚗 DRIVE / <span class="zh-only">自动驾驶</span><span class="en-only">Automotive</span></h4>
+      <p><span class="zh-only">DRIVE Thor（2025）面向L2+~L4。GPU+CPU+ISP集成SoC，多家车厂采用，N4P工艺。</span><span class="en-only">DRIVE Thor (2025) for L2+~L4. GPU+CPU+ISP integrated SoC, adopted by multiple OEMs. N4P.</span></p>
+      <div class="tag tb">N4P</div>
+    </div>
+    <div class="card">
+      <h4 style="color:#9b59b6; margin-bottom:7px;">🌐 Networking (Mellanox)</h4>
+      <p><span class="zh-only">InfiniBand NDR/XDR、Spectrum-X、NVLink Switch内部芯片化，数据中心互联核心。</span><span class="en-only">InfiniBand NDR/XDR, Spectrum-X Ethernet, NVLink Switch internal silicon. Data center interconnect core.</span></p>
+      <div class="tag tp"><span class="zh-only">自研互联</span><span class="en-only">Internal Silicon</span></div>
+    </div>
+    <div class="card">
+      <h4 style="color:#aaa; margin-bottom:7px;">📟 Jetson Edge AI</h4>
+      <p><span class="zh-only">Jetson Orin/Nano系列，工业/机器人/嵌入式。N8工艺，成熟稳定市场。</span><span class="en-only">Jetson Orin/Nano, industrial/robotics/embedded. N8 process, stable mature market.</span></p>
+      <div class="tag ty">N8</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 代工现状 ===== -->
+<section class="section" id="foundry">
+  <h2><span>🏭</span><span class="zh-only">代工现状</span><span class="en-only">Foundry Status</span></h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="chart-wrap"><canvas id="foundryChart"></canvas></div>
+    </div>
+    <div>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th><span class="zh-only">产品</span><span class="en-only">Product</span></th>
+            <th><span class="zh-only">制程</span><span class="en-only">Process</span></th>
+            <th><span class="zh-only">封装</span><span class="en-only">Package</span></th>
+            <th><span class="zh-only">TSV</span><span class="en-only">TSV</span></th>
+            <th><span class="zh-only">生产地</span><span class="en-only">Location</span></th>
+          </tr>
+          <tr><td class="hl">H100/H200</td><td class="blue">N4/N4H</td><td>CoWoS-S</td><td class="red">✅</td><td><span class="zh-only">台湾</span><span class="en-only">Taiwan</span></td></tr>
+          <tr><td class="hl">B200</td><td class="blue">N4P</td><td>CoWoS-L</td><td class="red">✅</td><td><span class="zh-only">台湾为主</span><span class="en-only">Taiwan mainly</span></td></tr>
+          <tr><td class="hl">RTX 5090</td><td class="blue">N4P</td><td><span class="zh-only">标准BGA</span><span class="en-only">Std BGA</span></td><td class="green">❌</td><td><span class="zh-only">台湾/Arizona</span><span class="en-only">Taiwan/Arizona</span></td></tr>
+          <tr><td class="hl" style="color:#f5a623;">Rubin R100</td><td class="green">N3P</td><td>CoWoS-L</td><td class="red">✅</td><td><span class="zh-only">台湾</span><span class="en-only">Taiwan</span></td></tr>
+          <tr><td class="hl" style="color:#76b900;">RTX 6090 (est.)</td><td class="green">N3P</td><td><span class="zh-only">标准BGA</span><span class="en-only">Std BGA</span></td><td class="green">❌</td><td><span class="zh-only">台湾</span><span class="en-only">Taiwan</span></td></tr>
+          <tr><td class="hl" style="color:#e74c3c;">Feynman</td><td class="red">A16</td><td>3D SoIC</td><td class="red">✅</td><td><span class="zh-only">TBD（或部分Intel Foundry）</span><span class="en-only">TBD (partial Intel Foundry?)</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-red" style="margin-top:12px;">
+        <span>⚠️</span>
+        <div>
+          <span class="zh-only"><strong>Feynman A16产能危机：</strong>报道显示NVIDIA正重新设计Feynman，因A16产能无法保证。正探索将部分组件转移至<strong>Intel Foundry 18A/14A</strong>——这是NVIDIA首次认真考虑分散代工，历史性窗口。</span>
+          <span class="en-only"><strong>Feynman A16 Capacity Crisis:</strong> Reports indicate NVIDIA is redesigning Feynman due to uncertain A16 capacity. Exploring moving some components to <strong>Intel Foundry 18A/14A</strong> — NVIDIA's first serious consideration of foundry diversification, a historic window.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 路线图 ===== -->
+<section class="section" id="roadmap">
+  <h2><span>🗺️</span><span class="zh-only">完整产品路线图 2024–2030</span><span class="en-only">Complete Product Roadmap 2024–2030</span></h2>
+  <div class="two-col">
+    <div>
+      <h3 style="color:#76b900;">🎮 <span class="zh-only">消费级 GeForce（主战场）</span><span class="en-only">Consumer GeForce (Primary Target)</span></h3>
+      <div class="timeline">
+        <div class="tl-item" style="--tc:#4a9eff;">
+          <div class="tl-year">2025</div>
+          <div class="tl-title">RTX 50 — Blackwell Desktop</div>
+          <div class="tl-desc"><span class="zh-only">TSMC N4P · BGA封装（无TSV）· 762mm²旗舰 · DLSS4 · AI帧生成</span><span class="en-only">TSMC N4P · BGA pkg (no TSV) · 762mm² flagship · DLSS4 · AI frame gen</span></div>
+        </div>
+        <div class="tl-item" style="--tc:#555;">
+          <div class="tl-year"><span class="zh-only">2026 · 空档期</span><span class="en-only">2026 · Gap Year</span></div>
+          <div class="tl-title"><span class="zh-only">无新消费级GPU（已确认）</span><span class="en-only">No New Consumer GPU (Confirmed)</span></div>
+          <div class="tl-desc"><span class="zh-only">SUPER版本取消 · NVIDIA产能转向数据中心 · RTX 5090 Ti可能特供</span><span class="en-only">SUPER canceled · NVIDIA capacity shifted to DC · RTX 5090 Ti possible special edition</span></div>
+        </div>
+        <div class="tl-item" style="--tc:#f5a623;">
+          <div class="tl-year">2027H2–2028 🎯</div>
+          <div class="tl-title">RTX 60 — Rubin Consumer <span class="zh-only">【主战场】</span><span class="en-only">【Primary Target】</span></div>
+          <div class="tl-desc"><span class="zh-only">TSMC N3P · GE202旗舰 192SM · 512-bit GDDR7 · 无TSV BGA · 光追大突破</span><span class="en-only">TSMC N3P · GE202 flagship 192SM · 512-bit GDDR7 · No TSV BGA · Major RT breakthrough</span></div>
+        </div>
+        <div class="tl-item" style="--tc:#e74c3c;">
+          <div class="tl-year">2029–2030 🎯</div>
+          <div class="tl-title">RTX 70 — <span class="zh-only">Feynman消费版?</span><span class="en-only">Feynman Consumer?</span></div>
+          <div class="tl-desc"><span class="zh-only">制程TBD（N2/A16消费版?）· 高度推测 · 对应工厂准备期2027-28</span><span class="en-only">Process TBD (N2/A16 consumer?) · Highly speculative · Factory prep aligns with 2027-28</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="color:#4a9eff;">🖥️ <span class="zh-only">数据中心 GPU（参考）</span><span class="en-only">Data Center GPU (Reference)</span></h3>
+      <div class="timeline">
+        <div class="tl-item" style="--tc:#4a9eff;">
+          <div class="tl-year">2024–2025</div>
+          <div class="tl-title">Blackwell — B200/GB200</div>
+          <div class="tl-desc"><span class="zh-only">TSMC N4P · CoWoS-L+TSV · 9,000 TFLOPS FP8 · 供不应求</span><span class="en-only">TSMC N4P · CoWoS-L+TSV · 9,000 TFLOPS FP8 · Supply constrained</span></div>
+        </div>
+        <div class="tl-item" style="--tc:#76b900;">
+          <div class="tl-year">2026 H2</div>
+          <div class="tl-title">Vera Rubin R100</div>
+          <div class="tl-desc"><span class="zh-only">TSMC N3P · CoWoS-L+TSV · 50 PFLOPS FP4 · 288GB HBM4</span><span class="en-only">TSMC N3P · CoWoS-L+TSV · 50 PFLOPS FP4 · 288GB HBM4</span></div>
+        </div>
+        <div class="tl-item" style="--tc:#f5a623;">
+          <div class="tl-year">2027 H2</div>
+          <div class="tl-title">Rubin Ultra R200</div>
+          <div class="tl-desc"><span class="zh-only">TSMC N3P · CoWoS-L · 双Die Chiplet · NVL288</span><span class="en-only">TSMC N3P · CoWoS-L · Dual Die Chiplet · NVL288</span></div>
+        </div>
+        <div class="tl-item" style="--tc:#e74c3c;">
+          <div class="tl-year">2028</div>
+          <div class="tl-title">Feynman + Rosa</div>
+          <div class="tl-desc"><span class="zh-only">TSMC A16 (1.6nm·SPR背面供电) · SoIC 3D Stacking · TSV · 定制HBM · 可能部分转Intel Foundry</span><span class="en-only">TSMC A16 (1.6nm·SPR backside) · SoIC 3D Stacking · TSV · Custom HBM · Potential partial Intel Foundry</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;">
+    <div class="chart-wrap tall"><canvas id="roadmapChart"></canvas></div>
+  </div>
+</section>
+
+<!-- ===== 晶圆需求 ===== -->
+<section class="section" id="wafer">
+  <h2><span>📊</span><span class="zh-only">晶圆需求量估算</span><span class="en-only">Wafer Demand Estimates</span></h2>
+  <h3><span class="zh-only">消费级 RTX 60系列 N3P晶圆需求推算</span><span class="en-only">Consumer RTX 60 Series N3P Wafer Demand Estimates</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th><span class="zh-only">SKU层级</span><span class="en-only">SKU Tier</span></th>
+        <th><span class="zh-only">预估Die Size</span><span class="en-only">Est. Die Size</span></th>
+        <th><span class="zh-only">工艺</span><span class="en-only">Process</span></th>
+        <th><span class="zh-only">良品/wafer</span><span class="en-only">Good Die/wafer</span></th>
+        <th><span class="zh-only">估算良率</span><span class="en-only">Est. Yield</span></th>
+        <th><span class="zh-only">年出货量</span><span class="en-only">Annual Shipments</span></th>
+        <th><span class="zh-only">月均WPM</span><span class="en-only">Monthly WPM</span></th>
+      </tr>
+      <tr><td class="hl"><span class="zh-only">旗舰 RTX 6090 (GE202)</span><span class="en-only">Flagship RTX 6090 (GE202)</span></td><td class="yellow">~780–820 mm²</td><td class="green">N3P</td><td>~45</td><td class="yellow">~68–72%</td><td>~2.5M</td><td class="red"><strong>~4,600</strong></td></tr>
+      <tr><td class="hl"><span class="zh-only">高端 RTX 6080/6070Ti</span><span class="en-only">High-end RTX 6080/6070Ti</span></td><td>~380–420 mm²</td><td class="green">N3P</td><td>~95</td><td class="yellow">~76%</td><td>~4M</td><td class="red"><strong>~3,500</strong></td></tr>
+      <tr><td class="hl"><span class="zh-only">中端 RTX 6070</span><span class="en-only">Mid-range RTX 6070</span></td><td>~260–290 mm²</td><td class="green">N3P</td><td>~145</td><td class="green">~82%</td><td>~7M</td><td><strong>~4,000</strong></td></tr>
+      <tr><td class="hl"><span class="zh-only">入门中端 RTX 6060 Ti</span><span class="en-only">Entry-mid RTX 6060 Ti</span></td><td>~185–210 mm²</td><td class="green">N3P</td><td>~200</td><td class="green">~86%</td><td>~12M</td><td><strong>~5,000</strong></td></tr>
+      <tr style="background:rgba(118,185,0,0.04);"><td colspan="6" class="hl" style="color:#76b900;"><span class="zh-only">Desktop全线合计</span><span class="en-only">Desktop Total</span></td><td class="red"><strong>~17,000–20,000 WPM</strong></td></tr>
+      <tr style="background:rgba(74,158,255,0.04);"><td colspan="6" style="color:#4a9eff;"><span class="zh-only">加：Mobile版（约占出货1/3）</span><span class="en-only">Add: Mobile version (~1/3 of total)</span></td><td class="blue"><strong>+~10,000 WPM</strong></td></tr>
+      <tr style="background:rgba(245,166,35,0.06);"><td colspan="6" class="hl" style="color:#f5a623; font-weight:800;"><span class="zh-only">消费级N3P总计（含笔记本，峰值）</span><span class="en-only">Consumer N3P Total (incl. Mobile, peak)</span></td><td class="yellow"><strong>~30,000–35,000 WPM</strong></td></tr>
+    </table>
+  </div>
+  <p class="footnote"><span class="zh-only">N3P 300mm晶圆可用面积约530cm²。初期量产良率可能更低（旗舰Die可能低于65%）。Mobile版通常为Desktop版裁剪Die。</span><span class="en-only">N3P 300mm wafer usable area ~530cm². Early production yield may be lower (flagship die possibly below 65%). Mobile versions are typically harvested from desktop die.</span></p>
+
+  <div class="two-col" style="margin-top:16px;">
+    <div class="card"><div class="chart-wrap"><canvas id="waferChart"></canvas></div></div>
+    <div class="card"><div class="chart-wrap"><canvas id="tsmcCapChart"></canvas></div></div>
+  </div>
+</section>
+
+<!-- ===== 技术要求 ===== -->
+<section class="section" id="tech">
+  <h2><span>⚗️</span><span class="zh-only">技术规格要求</span><span class="en-only">Technical Specifications</span></h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3><span class="zh-only">⚡ IDDQ漏电控制（最关键）</span><span class="en-only">⚡ IDDQ Leakage (Most Critical)</span></h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th><span class="zh-only">指标</span><span class="en-only">Metric</span></th><th>RTX 6090 (est.)</th><th><span class="zh-only">严格度</span><span class="en-only">Strictness</span></th></tr>
+          <tr><td><span class="zh-only">静态漏电IDDQ</span><span class="en-only">Static IDDQ</span></td><td><span class="zh-only">严格Bin管理</span><span class="en-only">Strict Bin control</span></td><td class="red">★★★★★</td></tr>
+          <tr><td><span class="zh-only">漏电均一性</span><span class="en-only">IDDQ Uniformity</span></td><td>σ/μ &lt;5%</td><td class="red">★★★★★</td></tr>
+          <tr><td>TDP<span class="zh-only">达标率</span><span class="en-only"> compliance</span></td><td><span class="zh-only">出厂必须≤额定</span><span class="en-only">Must meet rated TDP</span></td><td class="red">★★★★★</td></tr>
+          <tr><td><span class="zh-only">Boost频率稳定性</span><span class="en-only">Boost Freq Stability</span></td><td><span class="zh-only">与IDDQ强相关</span><span class="en-only">Strongly tied to IDDQ</span></td><td class="yellow">★★★★</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12px; margin-top:8px;"><span class="zh-only">N3P旗舰Die约800mm²，漏电控制是代工最核心指标。IDDQ超标直接报废。</span><span class="en-only">N3P flagship ~800mm² die. IDDQ control is the #1 foundry metric. Excess IDDQ = scrap.</span></p>
+    </div>
+    <div class="card">
+      <h3><span class="zh-only">📡 Flicker Noise（1/f噪声）</span><span class="en-only">📡 Flicker Noise (1/f)</span></h3>
+      <p><span class="zh-only">消费级GPU对flicker noise要求属于<strong>中等偏高</strong>，主要影响：</span><span class="en-only">Consumer GPU flicker noise requirement is <strong>moderate-to-high</strong>, primarily affecting:</span></p>
+      <ul style="color:var(--t2); font-size:12.5px; line-height:2.2; padding-left:15px;">
+        <li><strong>PLL / <span class="zh-only">时钟生成：</span><span class="en-only">Clock Gen:</span></strong> <span class="zh-only">GPU Boost频率稳定性和超频窗口</span><span class="en-only">GPU Boost stability and OC headroom</span></li>
+        <li><strong>PCIe / DP SerDes：</strong> <span class="zh-only">高速链路相位噪声</span><span class="en-only">High-speed link phase noise</span></li>
+        <li><strong>DC-DC / VRM：</strong> <span class="zh-only">供电纹波和电压稳定性</span><span class="en-only">Power ripple and voltage stability</span></li>
+        <li><strong><span class="zh-only">温度传感器：</span><span class="en-only">Temp Sensor:</span></strong> <span class="zh-only">保护电路精度</span><span class="en-only">Thermal protection accuracy</span></li>
+      </ul>
+      <div class="tag ty"><span class="zh-only">中高要求</span><span class="en-only">Moderate-High</span></div>
+      <div class="tag tb"><span class="zh-only">重点在PLL/SerDes</span><span class="en-only">Focus: PLL/SerDes</span></div>
+    </div>
+    <div class="card">
+      <h3><span class="zh-only">🔬 N3P大Die特殊挑战</span><span class="en-only">🔬 N3P Large Die Challenges</span></h3>
+      <ul style="color:var(--t2); font-size:12.5px; line-height:2.2; padding-left:15px;">
+        <li><strong>LCDU：</strong><span class="zh-only">跨大面积CD均一性，影响漏电分布</span><span class="en-only">Local CD uniformity across large die area, affects IDDQ distribution</span></li>
+        <li><strong>Warpage：</strong><span class="zh-only">大Die封装翘曲影响良率</span><span class="en-only">Large die packaging warpage affects yield</span></li>
+        <li><strong>SAQP EUV：</strong><span class="zh-only">多重曝光缺陷密度要求极低</span><span class="en-only">Ultra-low defect density required for multi-patterning</span></li>
+        <li><strong>EM：</strong><span class="zh-only">高电流密度下电迁移可靠性</span><span class="en-only">Electromigration reliability at high current density</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="zh-only">🎯 可靠性要求（消费级）</span><span class="en-only">🎯 Reliability (Consumer Level)</span></h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th><span class="zh-only">项目</span><span class="en-only">Item</span></th><th><span class="zh-only">消费级要求</span><span class="en-only">Consumer Req.</span></th><th><span class="zh-only">vs 数据中心</span><span class="en-only">vs DC</span></th></tr>
+          <tr><td>HTOL</td><td>125°C / 500hr</td><td class="yellow"><span class="zh-only">DC需1000hr+</span><span class="en-only">DC: 1000hr+</span></td></tr>
+          <tr><td>ESD</td><td>HBM 2kV</td><td><span class="zh-only">相同</span><span class="en-only">Same</span></td></tr>
+          <tr><td>DPPM</td><td class="yellow">&lt;500</td><td class="red"><span class="zh-only">DC &lt;100</span><span class="en-only">DC: &lt;100</span></td></tr>
+          <tr><td><span class="zh-only">工作寿命</span><span class="en-only">Lifetime</span></td><td><span class="zh-only">5年/日常使用</span><span class="en-only">5yr/daily use</span></td><td class="red"><span class="zh-only">DC: 7年 7×24h</span><span class="en-only">DC: 7yr 24/7</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;"><div class="chart-wrap"><canvas id="specRadar"></canvas></div></div>
+</section>
+
+<!-- ===== 机会分析 ===== -->
+<section class="section" id="opportunity">
+  <h2><span>💡</span><span class="zh-only">机会窗口分析</span><span class="en-only">Opportunity Window Analysis</span></h2>
+
+  <div class="opp">
+    <div class="opp-t">🏆 <span class="zh-only">机会A（首要）：RTX 60系列 N3P 大Die代工能力</span><span class="en-only">Opportunity A (Primary): RTX 60 N3P Large Die Foundry</span></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;">
+      <span class="tag tr"><span class="zh-only">难度：高</span><span class="en-only">Difficulty: High</span></span>
+      <span class="tag tg"><span class="zh-only">潜力：最大</span><span class="en-only">Potential: Largest</span></span>
+      <span class="tag ty"><span class="zh-only">窗口：2026准备→2027-28量产</span><span class="en-only">Window: 2026 prep→2027-28 production</span></span>
+      <span class="tag tg">TSMC N3P</span>
+      <span class="tag tg"><span class="zh-only">无TSV，可独立合作</span><span class="en-only">No TSV, separable partnership</span></span>
+    </div>
+    <ul style="color:var(--t2);font-size:12.5px;line-height:2;padding-left:15px;">
+      <li><span class="zh-only">建立N3P大Die（700-820mm²）良率管理体系：OPC/SRAF优化、在线监控、IDDQ BIN策略</span><span class="en-only">Build N3P large die (700-820mm²) yield management: OPC/SRAF optimization, in-line monitoring, IDDQ BIN strategy</span></li>
+      <li><span class="zh-only">与TSMC建立N3P PDK深度合作，进入NVIDIA工艺认证流程</span><span class="en-only">Deep N3P PDK collaboration with TSMC, enter NVIDIA process qualification flow</span></li>
+      <li><span class="zh-only">建立消费级GPU测试方案（大Die ATE时间优化，降低测试成本）</span><span class="en-only">Establish consumer GPU test solution (large die ATE time optimization)</span></li>
+    </ul>
+  </div>
+
+  <div class="opp">
+    <div class="opp-t">🎯 <span class="zh-only">机会B：N3P→N2过渡，消费级RTX 70准备</span><span class="en-only">Opportunity B: N3P→N2 Transition, RTX 70 Prep</span></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;">
+      <span class="tag ty"><span class="zh-only">难度：中高</span><span class="en-only">Difficulty: Medium-High</span></span>
+      <span class="tag tg"><span class="zh-only">窗口：2027-2028准备</span><span class="en-only">Window: 2027-2028 prep</span></span>
+      <span class="tag tb">TSMC N2/N2P</span>
+    </div>
+    <p><span class="zh-only">RTX 70（2029-30）可能迁移N2（首个GAA消费版），GAA引入新的漏电机制，提前布局关键。</span><span class="en-only">RTX 70 (2029-30) may migrate to N2 (first GAA consumer version). GAA introduces new leakage mechanisms — early preparation is key.</span></p>
+  </div>
+
+  <div class="opp sec">
+    <div class="opp-t">🔵 <span class="zh-only">机会C（远期）：Feynman A16 数据中心</span><span class="en-only">Opportunity C (Long-term): Feynman A16 Data Center</span></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;">
+      <span class="tag tr"><span class="zh-only">难度：极高</span><span class="en-only">Difficulty: Extreme</span></span>
+      <span class="tag tb"><span class="zh-only">潜力：大但不确定</span><span class="en-only">Potential: Large but uncertain</span></span>
+      <span class="tag tr">TSMC A16 / Intel 18A</span>
+    </div>
+    <p><span class="zh-only">NVIDIA可能将部分Feynman转移Intel Foundry 18A/14A，历史性窗口。需要A16 PDK预研、SPR背面供电工艺、3D SoIC能力。注意：Feynman仍需CoWoS+TSV，前道代工单独合作意义有限，需综合方案。</span><span class="en-only">NVIDIA may move partial Feynman to Intel Foundry 18A/14A — historic window. Requires A16 PDK R&D, SPR backside power, 3D SoIC capability. Note: Feynman still needs CoWoS+TSV, so standalone front-end cooperation has limited value — comprehensive solution needed.</span></p>
+  </div>
+
+  <div class="opp sec">
+    <div class="opp-t">🔵 <span class="zh-only">机会D：供应链切入（现在即可开始）</span><span class="en-only">Opportunity D: Supply Chain Entry (Start Now)</span></div>
+    <ul style="color:var(--t2);font-size:12.5px;line-height:2;padding-left:15px;margin-top:8px;">
+      <li><span class="zh-only">消费级GPU测试方案（Burn-in / KGD筛选 / ATE优化）</span><span class="en-only">Consumer GPU test solutions (Burn-in / KGD screening / ATE optimization)</span></li>
+      <li><span class="zh-only">专用PMIC（对flicker noise有要求，可独立切入）</span><span class="en-only">Dedicated PMIC (flicker noise requirements, independent entry point)</span></li>
+      <li><span class="zh-only">PCB/封装基板供应（高层数、低翘曲）</span><span class="en-only">PCB/package substrate supply (high layer count, low warpage)</span></li>
+    </ul>
+  </div>
+
+  <div class="card"><div class="chart-wrap"><canvas id="oppChart"></canvas></div></div>
+</section>
+
+<!-- ===== 历史质量事故 ===== -->
+<section class="section" id="failures">
+  <h2><span>🚨</span><span class="zh-only">NVIDIA历史质量事故 — 有据可查的踩雷案例</span><span class="en-only">NVIDIA Historical Quality Failures — Documented Cases</span></h2>
+
+  <div class="alert alert-blue">
+    <span>📌</span>
+    <div>
+      <span class="zh-only">本节内容均来自可核实的公开报道、官方声明及财务披露，注明原始来源链接。区分"代工/Die级问题"与"AIB板级/连接器问题"。对于无法明确归因代工的事项，不作推断。</span>
+      <span class="en-only">All items in this section are sourced from verifiable public reports, official statements, or financial filings, with original source links. Clearly distinguishes "foundry/die-level issues" from "AIB board-level/connector issues." No speculation where causation cannot be confirmed.</span>
+    </div>
+  </div>
+
+  <!-- Case 1: G84/G86 -->
+  <div class="card" style="border-color:rgba(231,76,60,0.5); margin-bottom:16px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+      <div>
+        <div style="font-size:11px; color:var(--danger); font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">
+          <span class="zh-only">案例 1 · 2007–2008年 · NVIDIA历史上最大质量事故</span>
+          <span class="en-only">Case 1 · 2007–2008 · Largest Quality Incident in NVIDIA History</span>
+        </div>
+        <div style="font-size:18px; font-weight:800; color:var(--t1);">G84 / G86 全系 Solder Bump 失效</div>
+        <div style="font-size:12.5px; color:var(--t2); margin-top:3px;">
+          <span class="zh-only">GeForce 8400M / 8600M / 8700M 笔记本GPU全产品线</span>
+          <span class="en-only">GeForce 8400M / 8600M / 8700M Mobile GPU — Entire Product Line</span>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:22px; font-weight:800; color:var(--danger);">$475.9M</div>
+        <div style="font-size:11px; color:var(--t2);"><span class="zh-only">NVIDIA计提损失总计</span><span class="en-only">Total NVIDIA charge</span></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;">
+          <span class="zh-only">🔍 确认根本原因（有据可查）</span>
+          <span class="en-only">🔍 Confirmed Root Cause (Documented)</span>
+        </h4>
+        <ul style="color:var(--t2); font-size:13px; line-height:2.2; padding-left:16px;">
+          <li>
+            <span class="zh-only">Die-to-substrate的 <strong style="color:#fff;">Solder Bump材料缺陷</strong>——连接芯片I/O与基板焊盘的焊球在热循环下发生疲劳裂纹</span>
+            <span class="en-only"><strong style="color:#fff;">Solder bump material defect</strong> at die-to-substrate interface — thermal cycling caused fatigue cracking of solder balls connecting chip I/O to substrate pads</span>
+          </li>
+          <li>
+            <span class="zh-only">热循环（开机→加热→关机→冷却）反复循环导致焊球机械疲劳，最终断路</span>
+            <span class="en-only">Repeated thermal cycles (power on→heat→off→cool) caused mechanical fatigue and eventual open circuit</span>
+          </li>
+          <li>
+            <span class="zh-only">笔记本散热空间有限，芯片温度变化幅度更大，加速失效</span>
+            <span class="en-only">Notebook thermal environment limited heat dissipation, amplifying temperature swings and accelerating failure</span>
+          </li>
+        </ul>
+
+        <h4 style="color:var(--warn); margin-top:14px; margin-bottom:8px;">
+          <span class="zh-only">🏭 代工厂信息</span>
+          <span class="en-only">🏭 Foundry Information</span>
+        </h4>
+        <div class="alert alert-yellow" style="margin:0;">
+          <span>⚠️</span>
+          <div style="font-size:12.5px;">
+            <span class="zh-only">G84/G86采用 <strong>TSMC 65nm</strong> 工艺制造。根据TechPowerUp/EETimes报道，NVIDIA将问题归因于die packaging材料（solder bump合金成分及underfill工艺），由NVIDIA指定的封装材料规格与TSMC共同分担责任。NVIDIA未公开指名TSMC为单一责任方，财务报表将损失计入自身成本。</span>
+            <span class="en-only">G84/G86 manufactured on <strong>TSMC 65nm</strong>. Per TechPowerUp/EETimes reporting, NVIDIA attributed the issue to die packaging materials (solder bump alloy composition and underfill process), with shared responsibility between NVIDIA-specified materials and TSMC packaging. NVIDIA did not publicly name TSMC as sole responsible party; financial charges were recorded on NVIDIA's books.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;">
+          <span class="zh-only">📊 财务与规模影响（来自官方财报）</span>
+          <span class="en-only">📊 Financial & Scale Impact (From Official Filings)</span>
+        </h4>
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th><span class="zh-only">时间</span><span class="en-only">Date</span></th>
+              <th><span class="zh-only">事件</span><span class="en-only">Event</span></th>
+              <th><span class="zh-only">金额</span><span class="en-only">Amount</span></th>
+            </tr>
+            <tr><td>2008 Q2</td><td><span class="zh-only">首次计提损失</span><span class="en-only">Initial charge</span></td><td class="yellow">$150M</td></tr>
+            <tr><td>2008 Q3</td><td><span class="zh-only">追加损失计提</span><span class="en-only">Additional charge</span></td><td class="red">$193.9M</td></tr>
+            <tr><td><span class="zh-only">累计</span><span class="en-only">Total</span></td><td><span class="zh-only">总损失</span><span class="en-only">Total loss</span></td><td class="red"><strong>$475.9M</strong></td></tr>
+          </table>
+        </div>
+        <h4 style="color:var(--warn); margin-top:12px; margin-bottom:6px;">
+          <span class="zh-only">🔗 可核实来源</span>
+          <span class="en-only">🔗 Verified Sources</span>
+        </h4>
+        <div style="font-size:12px; line-height:2;">
+          <a href="https://www.tomshardware.com/news/gpu-g84-g86-defect-die,10856.html" style="color:var(--info);" target="_blank">Tom's Hardware: Nvidia's GPU Material Defect Cost $475.9 Million</a><br>
+          <a href="https://www.techpowerup.com/69704/nvidia-gpu-failures-caused-by-material-problem-sources-claim" style="color:var(--info);" target="_blank">TechPowerUp: GPU Failures Caused by Material Problem</a><br>
+          <a href="https://www.eetimes.com/nvidia-takes-charge-for-bad-chips-but-who-is-to-blame/" style="color:var(--info);" target="_blank">EE Times: Nvidia Takes Charge for Bad Chips, But Who Is to Blame?</a>
+        </div>
+
+        <div class="tag tr" style="margin-top:10px;"><span class="zh-only">★ Die/封装级问题</span><span class="en-only">★ Die/Package Level</span></div>
+        <div class="tag ty"><span class="zh-only">与代工直接相关</span><span class="en-only">Foundry Relevant</span></div>
+        <div class="tag tr">TSMC 65nm</div>
+      </div>
+    </div>
+
+    <div class="alert alert-red" style="margin-top:14px;">
+      <span>🎯</span>
+      <div style="font-size:13px;">
+        <span class="zh-only"><strong>对RTX 60代工的启示：</strong>RTX 60旗舰Die约800mm²（远大于G84），热循环下的bump fatigue风险更高。必须在OSAT工艺中指定高可靠性underfill材料，并进行≥1000次TC（-40°C~125°C）热循环测试验证，这是G84事故最直接的防范措施。</span>
+        <span class="en-only"><strong>Implication for RTX 60 Foundry:</strong> RTX 60 flagship die is ~800mm² (far larger than G84). Bump fatigue risk under thermal cycling is proportionally higher. Must specify high-reliability underfill in OSAT process and conduct ≥1000 thermal cycle (-40°C~125°C) tests. This is the most direct prevention for a G84-type failure.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 2: RTX 3090 -->
+  <div class="card" style="border-color:rgba(245,166,35,0.4); margin-bottom:16px;">
+    <div style="margin-bottom:12px;">
+      <div style="font-size:11px; color:var(--warn); font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">
+        <span class="zh-only">案例 2 · 2021年</span><span class="en-only">Case 2 · 2021</span>
+      </div>
+      <div style="font-size:18px; font-weight:800; color:var(--t1);">RTX 3090 批量损坏 (EVGA)</div>
+      <div style="font-size:12.5px; color:var(--t2); margin-top:3px;">
+        <span class="zh-only">Amazon《New World》游戏触发，EVGA品牌批量损坏</span>
+        <span class="en-only">Triggered by Amazon "New World" game — EVGA batch failures</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;"><span class="zh-only">🔍 确认根本原因</span><span class="en-only">🔍 Confirmed Root Cause</span></h4>
+        <ul style="color:var(--t2); font-size:13px; line-height:2.2; padding-left:16px;">
+          <li>
+            <span class="zh-only">EVGA官方确认：特定批次RTX 3090 PCB上存在<strong style="color:#fff;">焊接缺陷</strong>——特定电容焊点虚焊</span>
+            <span class="en-only">EVGA officially confirmed: specific batch of RTX 3090 PCBs had <strong style="color:#fff;">soldering defects</strong> — certain capacitor joints had cold solder</span>
+          </li>
+          <li>
+            <span class="zh-only">《New World》游戏主菜单无帧率限制，GPU持续满负荷运行（异常高帧率→极端功耗→过电流）触发了本已存在的焊接缺陷</span>
+            <span class="en-only">"New World" had no frame rate limiter in main menu, causing GPU to run at maximum load (extreme high FPS → peak power draw → overcurrent) which triggered pre-existing solder defects</span>
+          </li>
+        </ul>
+        <div class="alert alert-yellow" style="margin-top:10px;">
+          <span>⚠️</span>
+          <div style="font-size:12.5px;">
+            <span class="zh-only"><strong>代工厂相关性：低。</strong>这是AIB（EVGA）的PCB制造质量问题，与前道晶圆代工无关。Die本身（GA102，TSMC Samsung 8nm）无质量问题。触发条件是NVIDIA GPU的极端功耗特性被异常软件激活。</span>
+            <span class="en-only"><strong>Foundry relevance: Low.</strong> This was an AIB (EVGA) PCB manufacturing quality issue, unrelated to front-end wafer foundry. The die itself (GA102, Samsung 8nm) had no defects. Trigger was NVIDIA GPU's extreme power characteristic activated by abnormal software behavior.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;"><span class="zh-only">🏭 代工厂信息</span><span class="en-only">🏭 Foundry Information</span></h4>
+        <div class="table-wrap">
+          <table>
+            <tr><th><span class="zh-only">产品</span><span class="en-only">Product</span></th><th><span class="zh-only">代工厂</span><span class="en-only">Foundry</span></th><th><span class="zh-only">工艺</span><span class="en-only">Process</span></th></tr>
+            <tr><td>RTX 3090 (GA102)</td><td class="yellow">Samsung</td><td>8nm</td></tr>
+          </table>
+        </div>
+        <p style="font-size:12px; color:var(--t2); margin-top:8px;">
+          <span class="zh-only">RTX 30系列部分产品（包括GA102）由三星8nm代工，而非TSMC。EVGA的PCB焊接问题属于后道AIB制造环节。</span>
+          <span class="en-only">RTX 30 series (incl. GA102) was partly manufactured by Samsung 8nm, not TSMC. EVGA's PCB solder defect was in the downstream AIB manufacturing stage.</span>
+        </p>
+        <h4 style="color:var(--warn); margin-top:12px; margin-bottom:6px;"><span class="zh-only">🔗 来源</span><span class="en-only">🔗 Sources</span></h4>
+        <div style="font-size:12px; line-height:2;">
+          <a href="https://www.techpowerup.com/286260/evga-reveals-that-bad-soldering-was-the-culprit-behind-bricked-rtx-3090-cards" style="color:var(--info);" target="_blank">TechPowerUp: EVGA Reveals Bad Soldering Was the Culprit</a><br>
+          <a href="https://www.tomshardware.com/news/amazon-new-world-gpu-deaths-caused-by-hardware-not-game" style="color:var(--info);" target="_blank">Tom's Hardware: New World GPU Deaths Caused by Hardware, Not Game</a>
+        </div>
+        <div class="tag ty" style="margin-top:10px;"><span class="zh-only">AIB PCB级问题</span><span class="en-only">AIB PCB Level</span></div>
+        <div class="tag tg"><span class="zh-only">与前道代工无关</span><span class="en-only">Not Foundry Related</span></div>
+        <div class="tag tp">Samsung 8nm</div>
+      </div>
+    </div>
+
+    <div class="alert alert-green" style="margin-top:12px;">
+      <span>🎯</span>
+      <div style="font-size:13px;">
+        <span class="zh-only"><strong>对RTX 60代工的启示：</strong>Die侧的extreme peak power特性（RTX 60旗舰预计TDP 600W+，瞬态可能更高）是触发下游问题的根源。代工需确认：出货Die的 <strong>peak current spec已测试</strong>，Die-level PDN验证覆盖极端workload。前道代工虽不直接负责PCB，但准确的peak power spec输出是责任所在。</span>
+        <span class="en-only"><strong>Implication for RTX 60 Foundry:</strong> Die-side extreme peak power behavior (RTX 60 flagship TDP est. 600W+, transients may be higher) is what triggers downstream issues. Foundry must ensure: <strong>peak current spec is tested</strong> at the die level, die-level PDN validation covers extreme workloads. While front-end foundry is not responsible for PCB, accurate peak power spec output is a foundry responsibility.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 3: RTX 4090 connector -->
+  <div class="card" style="border-color:rgba(245,166,35,0.4); margin-bottom:16px;">
+    <div style="margin-bottom:12px;">
+      <div style="font-size:11px; color:var(--warn); font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">
+        <span class="zh-only">案例 3 · 2022年至今 · 持续性问题</span><span class="en-only">Case 3 · 2022–Present · Ongoing Issue</span>
+      </div>
+      <div style="font-size:18px; font-weight:800; color:var(--t1);">RTX 4090 / 5090 12VHPWR 连接器熔化</div>
+      <div style="font-size:12.5px; color:var(--t2); margin-top:3px;">
+        <span class="zh-only">数百至数千用户报告，NVIDIA召回部分产品，至RTX 5090代仍存在</span>
+        <span class="en-only">Hundreds to thousands of user reports; NVIDIA recalled some products; issue persisted into RTX 5090 generation</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;"><span class="zh-only">🔍 确认根本原因（Gamers Nexus深度调查）</span><span class="en-only">🔍 Confirmed Root Cause (Gamers Nexus Investigation)</span></h4>
+        <ul style="color:var(--t2); font-size:13px; line-height:2.2; padding-left:16px;">
+          <li>
+            <span class="zh-only">12VHPWR连接器本身设计裕量不足——额定600W但实测峰值可达800W+</span>
+            <span class="en-only">12VHPWR connector design had insufficient margin — rated 600W but measured peaks up to 800W+</span>
+          </li>
+          <li>
+            <span class="zh-only">连接器接触电阻过高（插入不到位、线材劣质）→ 局部发热 → 熔化</span>
+            <span class="en-only">High contact resistance (improper insertion, low-quality cables) → localized heating → melting</span>
+          </li>
+          <li>
+            <span class="zh-only">Gamers Nexus实验室测试：插入不完全的情况下失效可重复复现</span>
+            <span class="en-only">Gamers Nexus lab tests confirmed: failure was reproducible with incomplete connector insertion</span>
+          </li>
+        </ul>
+        <div class="alert alert-yellow" style="margin-top:10px;">
+          <span>⚠️</span>
+          <div style="font-size:12.5px;">
+            <span class="zh-only"><strong>代工厂相关性：间接。</strong>连接器熔化是PCIe connector规格与板级设计问题，与前道晶圆代工无直接关系。<strong>但Die侧的800W瞬态电流特性</strong>是整个问题的根源——代工需要准确测定并输出Die-level peak transient current spec。</span>
+            <span class="en-only"><strong>Foundry relevance: Indirect.</strong> Connector melting is a PCIe connector spec and board design issue, not directly foundry-related. <strong>However, the 800W die-level transient current behavior</strong> is the underlying cause — foundry must accurately measure and report die-level peak transient current specs.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;"><span class="zh-only">🏭 代工厂信息</span><span class="en-only">🏭 Foundry Information</span></h4>
+        <div class="table-wrap">
+          <table>
+            <tr><th><span class="zh-only">产品</span><span class="en-only">Product</span></th><th><span class="zh-only">代工厂</span><span class="en-only">Foundry</span></th><th><span class="zh-only">工艺</span><span class="en-only">Process</span></th></tr>
+            <tr><td>RTX 4090 (AD102)</td><td class="green">TSMC</td><td>N4 / 4nm</td></tr>
+            <tr><td>RTX 5090 (GB202)</td><td class="green">TSMC</td><td>N4P</td></tr>
+          </table>
+        </div>
+        <h4 style="color:var(--warn); margin-top:12px; margin-bottom:6px;"><span class="zh-only">🔗 来源</span><span class="en-only">🔗 Sources</span></h4>
+        <div style="font-size:12px; line-height:2;">
+          <a href="https://gamersnexus.net/gpus/12vhpwr-dumpster-fire-investigation-contradicting-specs-corner-cutting" style="color:var(--info);" target="_blank">Gamers Nexus: 12VHPWR Investigation (Full Technical Report)</a><br>
+          <a href="https://www.tomshardware.com/news/nvidia-16-pin-gpu-power-connector-all-we-know" style="color:var(--info);" target="_blank">Tom's Hardware: All We Know About RTX 4090 Connector Melting</a><br>
+          <a href="https://videocardz.com/newz/nvidia-tells-board-partners-to-collect-geforce-rtx-4090-cards-affected-by-melting-16-pin-power-adapter" style="color:var(--info);" target="_blank">VideoCardz: NVIDIA Collects Affected 4090 Cards from Board Partners</a>
+        </div>
+        <div class="tag ty" style="margin-top:10px;"><span class="zh-only">连接器/板级问题</span><span class="en-only">Connector/Board Level</span></div>
+        <div class="tag tb"><span class="zh-only">Die峰值电流间接相关</span><span class="en-only">Die Peak Current Indirect</span></div>
+      </div>
+    </div>
+
+    <div class="alert alert-red" style="margin-top:12px;">
+      <span>🎯</span>
+      <div style="font-size:13px;">
+        <span class="zh-only"><strong>对RTX 60代工的启示：</strong>RTX 60旗舰TDP预计600W+。代工测试必须准确测定<strong>Die-level peak transient current（瞬态峰值电流）</strong>并在规格书中明确标注，这是NVIDIA和AIB设计连接器/VRM方案的依据。漏测或低报此值，将直接导致下游系统设计留量不足。</span>
+        <span class="en-only"><strong>Implication for RTX 60 Foundry:</strong> RTX 60 flagship TDP estimated 600W+. Foundry testing must accurately measure <strong>die-level peak transient current</strong> and clearly specify it in datasheets — this is what NVIDIA and AIB partners use to design connectors/VRM. Underreporting this value directly causes downstream system design margin failures.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 4: RTX 5090 ROP -->
+  <div class="card" style="border-color:rgba(231,76,60,0.5); margin-bottom:16px;">
+    <div style="margin-bottom:12px;">
+      <div style="font-size:11px; color:var(--danger); font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">
+        <span class="zh-only">案例 4 · 2025年 · 最近案例 · 与代工测试直接相关</span>
+        <span class="en-only">Case 4 · 2025 · Most Recent · Directly Foundry-Relevant</span>
+      </div>
+      <div style="font-size:18px; font-weight:800; color:var(--t1);">RTX 5090 / 5080 / 5070 Ti — Missing ROPs 缺陷</div>
+      <div style="font-size:12.5px; color:var(--t2); margin-top:3px;">
+        <span class="zh-only">影响 &lt;0.5% 批次，NVIDIA官方承认并启动换货</span>
+        <span class="en-only">Affecting &lt;0.5% of units — NVIDIA officially acknowledged and initiated replacements</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;"><span class="zh-only">🔍 确认根本原因</span><span class="en-only">🔍 Confirmed Root Cause</span></h4>
+        <ul style="color:var(--t2); font-size:13px; line-height:2.2; padding-left:16px;">
+          <li>
+            <span class="zh-only">NVIDIA官方声明（2025年2月）：RTX 5090/5090D、5080、5070 Ti中&lt;0.5%的产品存在"比规格少一个ROP partition"的缺陷</span>
+            <span class="en-only">NVIDIA official statement (Feb 2025): &lt;0.5% of RTX 5090/5090D, 5080, 5070 Ti units shipped with "one fewer ROP partition than specified"</span>
+          </li>
+          <li>
+            <span class="zh-only">这类缺陷通常源于：<strong style="color:#fff;">e-Fuse编程错误</strong>（Die上的电子熔丝用于激活/屏蔽功能单元，programming错误导致ROP单元状态错误）或ATE测试向量未覆盖该功能单元</span>
+            <span class="en-only">This type of defect typically stems from: <strong style="color:#fff;">e-Fuse programming error</strong> (electronic fuses on die control enable/disable of functional units; programming error caused incorrect ROP unit state) or ATE test vector failing to cover this functional unit</span>
+          </li>
+          <li>
+            <span class="zh-only">缺陷在出厂测试中未被检出，直到用户进行第三方Benchmark测试才发现性能异常</span>
+            <span class="en-only">Defect was not detected at factory test; only discovered when users ran third-party benchmark tests and noticed performance anomalies</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:var(--warn); margin-bottom:8px;"><span class="zh-only">🏭 代工厂信息</span><span class="en-only">🏭 Foundry Information</span></h4>
+        <div class="table-wrap">
+          <table>
+            <tr><th><span class="zh-only">产品</span><span class="en-only">Product</span></th><th><span class="zh-only">代工厂</span><span class="en-only">Foundry</span></th><th><span class="zh-only">工艺</span><span class="en-only">Process</span></th></tr>
+            <tr><td>RTX 5090/5080/5070Ti (GB202/203)</td><td class="green">TSMC</td><td class="blue">N4P</td></tr>
+          </table>
+        </div>
+        <div class="alert alert-red" style="margin-top:10px;">
+          <span>🚨</span>
+          <div style="font-size:12.5px;">
+            <span class="zh-only"><strong>代工厂相关性：高。</strong>e-Fuse编程属于wafer probe/final test阶段的操作。无论是NVIDIA、TSMC、还是负责ATE的测试厂，这是<strong>与代工测试流程直接相关的缺陷</strong>。RTX 60代工必须建立：SM/ROP/TMU每个功能单元100%ATE覆盖，e-Fuse programming独立双重验证机制。</span>
+            <span class="en-only"><strong>Foundry relevance: High.</strong> e-Fuse programming happens during wafer probe/final test. Whether NVIDIA, TSMC, or the ATE test house is responsible, this is a <strong>defect directly related to foundry test flow.</strong> RTX 60 foundry must establish: 100% ATE coverage for each SM/ROP/TMU functional unit, independent dual-verification for e-Fuse programming.</span>
+          </div>
+        </div>
+        <h4 style="color:var(--warn); margin-top:12px; margin-bottom:6px;"><span class="zh-only">🔗 来源</span><span class="en-only">🔗 Sources</span></h4>
+        <div style="font-size:12px; line-height:2;">
+          <a href="https://www.theverge.com/news/618748/nvidia-admits-the-rtx-5080-is-affecte" style="color:var(--info);" target="_blank">The Verge: Nvidia Admits RTX 5080 Missing ROPs</a><br>
+          <a href="https://hothardware.com/news/nvidia-statement-geforce-rtx-50-cards-missing-rops" style="color:var(--info);" target="_blank">HotHardware: NVIDIA Statement on RTX 50 ROP Defect</a><br>
+          <a href="https://www.techpowerup.com/332884/nvidia-geforce-rtx-50-cards-spotted-with-missing-rops-nvidia-confirms-the-issue-multiple-vendors-affected" style="color:var(--info);" target="_blank">TechPowerUp: NVIDIA Confirms Missing ROPs Issue</a>
+        </div>
+        <div class="tag tr" style="margin-top:10px;"><span class="zh-only">★ 与代工测试直接相关</span><span class="en-only">★ Directly Foundry-Test Related</span></div>
+        <div class="tag tg">TSMC N4P</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Table -->
+  <h3><span class="zh-only">📊 事故汇总对比表</span><span class="en-only">📊 Summary Comparison Table</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th><span class="zh-only">案例</span><span class="en-only">Case</span></th>
+        <th><span class="zh-only">年份</span><span class="en-only">Year</span></th>
+        <th><span class="zh-only">产品</span><span class="en-only">Product</span></th>
+        <th><span class="zh-only">代工厂/工艺</span><span class="en-only">Foundry/Node</span></th>
+        <th><span class="zh-only">根本原因</span><span class="en-only">Root Cause</span></th>
+        <th><span class="zh-only">代工相关性</span><span class="en-only">Foundry Relevance</span></th>
+        <th><span class="zh-only">财务影响</span><span class="en-only">Financial Impact</span></th>
+      </tr>
+      <tr>
+        <td class="hl">G84/G86 Bump</td>
+        <td>2007–2008</td>
+        <td>GeForce 8M系列</td>
+        <td class="blue">TSMC 65nm</td>
+        <td><span class="zh-only">Solder Bump材料/热循环疲劳</span><span class="en-only">Solder bump material / thermal fatigue</span></td>
+        <td class="red"><span class="zh-only">高（Die封装材料）</span><span class="en-only">High (die packaging)</span></td>
+        <td class="red"><strong>$475.9M</strong></td>
+      </tr>
+      <tr>
+        <td class="hl">RTX 3090 EVGA</td>
+        <td>2021</td>
+        <td>RTX 3090</td>
+        <td class="yellow">Samsung 8nm</td>
+        <td><span class="zh-only">PCB虚焊（AIB问题）</span><span class="en-only">PCB cold solder (AIB issue)</span></td>
+        <td class="green"><span class="zh-only">低（AIB制造）</span><span class="en-only">Low (AIB manufacturing)</span></td>
+        <td><span class="zh-only">局部批次</span><span class="en-only">Limited batch</span></td>
+      </tr>
+      <tr>
+        <td class="hl">RTX 4090/5090 连接器</td>
+        <td>2022–今</td>
+        <td>RTX 4090, 5090</td>
+        <td class="blue">TSMC N4/N4P</td>
+        <td><span class="zh-only">12VHPWR设计裕量不足</span><span class="en-only">12VHPWR connector design margin</span></td>
+        <td class="yellow"><span class="zh-only">间接（Die峰值电流）</span><span class="en-only">Indirect (die peak current)</span></td>
+        <td><span class="zh-only">召回+持续报告</span><span class="en-only">Recall + ongoing</span></td>
+      </tr>
+      <tr>
+        <td class="hl">RTX 50系列 Missing ROPs</td>
+        <td>2025</td>
+        <td>RTX 5090/5080/5070Ti</td>
+        <td class="blue">TSMC N4P</td>
+        <td><span class="zh-only">e-Fuse编程/ATE测试漏测</span><span class="en-only">e-Fuse programming / ATE test gap</span></td>
+        <td class="red"><span class="zh-only">高（测试流程）</span><span class="en-only">High (test flow)</span></td>
+        <td><span class="zh-only">&lt;0.5%，换货处理</span><span class="en-only">&lt;0.5%, replacements</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Foundry Checklist -->
+  <h3 style="margin-top:20px;"><span class="zh-only">✅ RTX 60代工风险防控清单（基于历史案例）</span><span class="en-only">✅ RTX 60 Foundry Risk Prevention Checklist (Based on Historical Cases)</span></h3>
+  <div class="card-grid">
+    <div class="card" style="border-color:rgba(231,76,60,0.4);">
+      <h4 style="color:var(--danger); margin-bottom:10px;">🔴 <span class="zh-only">必须做（源自真实事故）</span><span class="en-only">Must-Do (Derived from Real Incidents)</span></h4>
+      <ul style="color:var(--t2); font-size:12.5px; line-height:2.2; padding-left:15px;">
+        <li><span class="zh-only">Underfill材料认证 + TC≥1000次热循环测试（防G84重演）</span><span class="en-only">Underfill material qualification + ≥1000 TC thermal cycle test (prevent G84 recurrence)</span></li>
+        <li><span class="zh-only">每颗Die的SM/ROP/TMU功能单元100% ATE测试向量覆盖（防ROP漏测）</span><span class="en-only">100% ATE test vector coverage per SM/ROP/TMU functional unit (prevent ROP miss)</span></li>
+        <li><span class="zh-only">e-Fuse programming独立双重验证机制（prevent 5090 ROP类缺陷）</span><span class="en-only">Independent dual-verification for e-Fuse programming (prevent 5090-type ROP defect)</span></li>
+        <li><span class="zh-only">Die-level peak transient current准确测定并在规格书中明确（防4090连接器类问题）</span><span class="en-only">Accurate measurement and clear spec of die-level peak transient current (prevent 4090 connector-type issues)</span></li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(245,166,35,0.4);">
+      <h4 style="color:var(--warn); margin-bottom:10px;">🟡 <span class="zh-only">强烈建议（技术最佳实践）</span><span class="en-only">Highly Recommended (Technical Best Practices)</span></h4>
+      <ul style="color:var(--t2); font-size:12.5px; line-height:2.2; padding-left:15px;">
+        <li><span class="zh-only">IDDQ严格BIN分级：漏电超标Die不得强行出货（防TDP超规）</span><span class="en-only">Strict IDDQ BIN grading: leakage-exceeded dies must not be force-shipped (prevent TDP overspec)</span></li>
+        <li><span class="zh-only">HTOL测试模拟实际GPU workload（游戏/渲染），而非仅标准IEC条件</span><span class="en-only">HTOL testing simulating actual GPU workloads (gaming/rendering), not just standard IEC conditions</span></li>
+        <li><span class="zh-only">EM（电迁移）规则100%DRC覆盖：高电流密度金属层专项PERC仿真</span><span class="en-only">100% DRC EM rule coverage: dedicated PERC simulation for high-current metal layers</span></li>
+        <li><span class="zh-only">ESD（CDM+HBM）双模式验证，边角I/O专项检查</span><span class="en-only">Dual-mode ESD validation (CDM+HBM), corner I/O dedicated review</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GPU架构演进 ===== -->
+<section class="section" id="arch-history">
+  <h2><span>📐</span><span class="zh-only">NVIDIA GPU 架构演进史（2006–2026）</span><span class="en-only">NVIDIA GPU Architecture Evolution (2006–2026)</span></h2>
+
+  <div class="alert alert-blue">
+    <span>📊</span>
+    <div><span class="zh-only">以下数据来自NVIDIA官方发布信息整理，覆盖从Tesla到Rubin共12代架构演进。</span><span class="en-only">Data compiled from NVIDIA official releases, covering 12 architecture generations from Tesla to Rubin.</span></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th><span class="zh-only">年份</span><span class="en-only">Year</span></th>
+        <th><span class="zh-only">架构</span><span class="en-only">Architecture</span></th>
+        <th><span class="zh-only">代表芯片</span><span class="en-only">Representative Chip</span></th>
+        <th><span class="zh-only">支持数据格式</span><span class="en-only">Data Formats</span></th>
+        <th><span class="zh-only">主要特性 Highlight</span><span class="en-only">Key Highlight</span></th>
+      </tr>
+      <tr>
+        <td class="hl">2006</td>
+        <td>Tesla <span class="zh-only">特斯拉</span></td>
+        <td>Tesla C870</td>
+        <td>FP32</td>
+        <td><span class="zh-only">CUDA 与 GPGPU 架构，开启通用计算平台</span><span class="en-only">CUDA & GPGPU architecture, launched general-purpose computing platform</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2010</td>
+        <td>Fermi <span class="zh-only">费米</span></td>
+        <td>Tesla M2050</td>
+        <td>FP32 · FP64 · INT32</td>
+        <td><span class="zh-only">ECC、FP64 与内存修复，GPU 成为科学计算与数据中心专用领域</span><span class="en-only">ECC, FP64 & memory resilience — GPU enters scientific computing & data center</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2012</td>
+        <td>Kepler <span class="zh-only">开普勒</span></td>
+        <td>Tesla K20X</td>
+        <td>FP32 · INT32</td>
+        <td><span class="zh-only">纹理单元、Dynamic Parallelism，大规模并行计算优化</span><span class="en-only">Texture units, Dynamic Parallelism, large-scale parallel computing optimization</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2014</td>
+        <td>Maxwell <span class="zh-only">马克斯韦</span></td>
+        <td>Tesla M40</td>
+        <td>FP32 · FP64(1/32)</td>
+        <td><span class="zh-only">SMM 结构，极致能效，GPU 更高效</span><span class="en-only">SMM structure, extreme energy efficiency, more efficient GPU</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2016</td>
+        <td>Pascal <span class="zh-only">帕斯卡</span></td>
+        <td>Tesla P100</td>
+        <td>FP32 · FP16(1/2) · INT32</td>
+        <td><span class="zh-only">HBM2 与 NVLink，变革数据中心与高性能计算</span><span class="en-only">HBM2 & NVLink, revolutionized data center & HPC</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2017</td>
+        <td>Volta <span class="zh-only">伏特</span></td>
+        <td>Tesla V100</td>
+        <td>FP32 · FP16(1/2) · INT32</td>
+        <td><span class="zh-only"><strong style="color:#f5a623;">Tensor Core 首次引入</strong>，AI 计算加速</span><span class="en-only"><strong style="color:#f5a623;">Tensor Core first introduced</strong>, AI compute acceleration</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2018</td>
+        <td>Turing <span class="zh-only">图灵</span></td>
+        <td>RTX 2080 Ti</td>
+        <td>FP32 · FP16 · INT4</td>
+        <td><span class="zh-only">RT Core + Tensor Core，光线追踪与 AI 计算融合</span><span class="en-only">RT Core + Tensor Core, ray tracing & AI fusion</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2020</td>
+        <td>Ampere <span class="zh-only">安培</span></td>
+        <td>A100</td>
+        <td>FP32 · TF32/BF16 · INT8/INT4</td>
+        <td><span class="zh-only">TF32 结构优化，MLG、cp_async 等新特性，提升 AI 性能</span><span class="en-only">TF32 optimization, MLG, cp_async, improved AI performance</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2022</td>
+        <td>Hopper <span class="zh-only">霍珀</span></td>
+        <td>H100</td>
+        <td>FP32 · BF16/FP16 · INT8 · INT4</td>
+        <td><span class="zh-only">Transformer Engine、TMA 等技术，优化大模型训练与推理</span><span class="en-only">Transformer Engine, TMA, optimized for LLM training & inference</span></td>
+      </tr>
+      <tr>
+        <td class="hl">2022</td>
+        <td>Ada <span class="zh-only">艾达</span></td>
+        <td>RTX 4090 / 4080</td>
+        <td>FP32 · INT8 · INT4</td>
+        <td><span class="zh-only">DLSS 3/3.5、Optical Flow，光线追踪与 AI 深度融合</span><span class="en-only">DLSS 3/3.5, Optical Flow, deep ray tracing & AI integration</span></td>
+      </tr>
+      <tr>
+        <td class="hl" style="color:#f5a623;">2024–2025</td>
+        <td>Blackwell <span class="zh-only">布莱克威尔</span></td>
+        <td>B200 / GB200</td>
+        <td>FP32 · BF16 · INT8 · INT4 · <strong style="color:#76b900;">FP4/FP8</strong></td>
+        <td><span class="zh-only">FP4/FP8、集成 NVLink、HBM3e，提升带宽与能效</span><span class="en-only">FP4/FP8, integrated NVLink, HBM3e, improved bandwidth & efficiency</span></td>
+      </tr>
+      <tr style="background:rgba(118,185,0,0.06);">
+        <td class="hl" style="color:#76b900;">2026</td>
+        <td style="color:#76b900;"><strong>Rubin <span class="zh-only">鲁宾</span></strong></td>
+        <td>Vera Rubin (R100)</td>
+        <td>FP32 · BF16 · FP8 · <strong style="color:#76b900;">FP4</strong></td>
+        <td><span class="zh-only"><strong style="color:#76b900;">HBM4、NVLink、下一代能效/制程，支持更复杂模型与计算</strong></span><span class="en-only"><strong style="color:#76b900;">HBM4, NVLink, next-gen efficiency/process, supports more complex models</strong></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="alert alert-green" style="margin-top:14px;">
+    <span>📊</span>
+    <div><span class="zh-only"><strong>关键趋势：</strong>从2006年仅支持FP32，到2026年Rubin支持FP4低精度计算，每代架构都在扩展数据格式支持。2017年Volta首次引入Tensor Core是分水岭——此后NVIDIA GPU从通用计算转向AI专用加速。消费级GPU（Ada→Blackwell）同样受益于这一演进。</span><span class="en-only"><strong>Key Trend:</strong> From FP32-only in 2006 to FP4 in 2026 Rubin, each generation extends data format support. Volta 2017's Tensor Core introduction was the watershed — NVIDIA GPUs shifted from general computing to AI acceleration. Consumer GPUs (Ada→Blackwell) benefit from this evolution too.</span></div>
+  </div>
+</section>
+
+<!-- ===== 结论 ===== -->
+<section class="section" id="conclusion">
+  <h2><span>✅</span><span class="zh-only">核心结论与行动建议</span><span class="en-only">Core Conclusions & Action Plan</span></h2>
+
+  <div class="card" style="border-color:rgba(118,185,0,0.5);">
+    <h3 style="color:#76b900; margin-top:0;">🔑 <span class="zh-only">五大核心结论</span><span class="en-only">Five Key Conclusions</span></h3>
+    <div style="display:grid;gap:13px;margin-top:13px;">
+      <div class="step">
+        <div class="snum" style="background:#76b900;color:black;">1</div>
+        <div>
+          <div class="st"><span class="zh-only">TSV/CoWoS闭环决定消费级是唯一现实主战场</span><span class="en-only">TSV/CoWoS closed loop makes consumer GPU the only realistic primary target</span></div>
+          <div class="sd"><span class="zh-only">数据中心GPU因HBM/TSV/CoWoS被TSMC垂直整合，外部代工几乎无插入点。消费级GPU标准BGA封装、GDDR7独立上板，前道晶圆可独立合作，技术逻辑完全闭环。</span><span class="en-only">DC GPUs are vertically integrated by TSMC via HBM/TSV/CoWoS, leaving no external entry. Consumer GPUs use standard BGA, GDDR7 separate mount — front-end wafer is separable and cooperable. Technical logic is fully self-consistent.</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum" style="background:#4a9eff;color:white;">2</div>
+        <div>
+          <div class="st"><span class="zh-only">消费级年出货44M台，月均晶圆需求~35k WPM，是数据中心的10倍</span><span class="en-only">Consumer GPU: 44M units/yr, ~35k WPM monthly — 10x DC volume</span></div>
+          <div class="sd"><span class="zh-only">RTX 60全线N3P月均30,000-35,000 WPM，远超B200逻辑片的3,400 WPM。体量巨大且工艺链更短。</span><span class="en-only">RTX 60 full lineup N3P: 30,000-35,000 WPM monthly, far exceeding B200 logic wafers at 3,400 WPM. Massive volume with shorter supply chain.</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum" style="background:#f5a623;color:black;">3</div>
+        <div>
+          <div class="st"><span class="zh-only">Feynman确认A16（非A14），但仍需CoWoS+TSV，独立前道合作意义有限</span><span class="en-only">Feynman confirmed A16 (not A14), but still needs CoWoS+TSV — standalone front-end cooperation has limited value</span></div>
+          <div class="sd"><span class="zh-only">TSMC A16含SPR背面供电，产能可能不足，NVIDIA探索Intel Foundry 18A。但Feynman仍是HBM+CoWoS体系，若无法提供完整封装方案，单独前道作用有限。</span><span class="en-only">TSMC A16 has SPR backside power, capacity may be insufficient, NVIDIA exploring Intel Foundry 18A. But Feynman still requires HBM+CoWoS — standalone front-end has limited value without full packaging capability.</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum" style="background:#e74c3c;color:white;">4</div>
+        <div>
+          <div class="st"><span class="zh-only">IDDQ漏电控制是GPU代工首要技术指标，Flicker Noise次之</span><span class="en-only">IDDQ leakage control is the #1 technical metric; Flicker Noise is secondary</span></div>
+          <div class="sd"><span class="zh-only">~800mm² 旗舰Die漏电极敏感，IDDQ BIN直接决定良率和收益。Flicker Noise主要影响PLL/SerDes，属中高要求。N3P大Die良率管理是竞争核心能力。</span><span class="en-only">~800mm² flagship die is extremely IDDQ-sensitive. IDDQ BIN directly determines yield and revenue. Flicker Noise affects PLL/SerDes, moderate-high requirement. N3P large die yield management is the core competitive capability.</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum" style="background:#9b59b6;color:white;">5</div>
+        <div>
+          <div class="st"><span class="zh-only">双轨并行：消费级N3P主攻 + A16远期布局</span><span class="en-only">Dual-track: Consumer N3P primary + A16 long-term</span></div>
+          <div class="sd"><span class="zh-only">近期主攻RTX 60 N3P（2026年工艺认证→2027年risk production→2027H2-2028量产），同步开展A16/A14 PDK预研作为远期布局。AMD和云厂商自研芯片作为补充备选。</span><span class="en-only">Near-term: RTX 60 N3P (2026 process qual → 2027 risk production → 2027H2-2028 ramp). Parallel: A16/A14 PDK R&D for long-term positioning. AMD and cloud custom chips as secondary alternatives.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3><span class="zh-only">行动时间表</span><span class="en-only">Action Timeline</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th><span class="zh-only">时间</span><span class="en-only">Timeline</span></th>
+        <th><span class="zh-only">核心行动</span><span class="en-only">Key Actions</span></th>
+        <th><span class="zh-only">工艺</span><span class="en-only">Process</span></th>
+        <th><span class="zh-only">目标产品</span><span class="en-only">Target Product</span></th>
+        <th><span class="zh-only">优先级</span><span class="en-only">Priority</span></th>
+      </tr>
+      <tr>
+        <td class="hl"><span class="zh-only">现在–2026</span><span class="en-only">Now–2026</span></td>
+        <td><span class="zh-only">N3P大Die良率方法论；IDDQ BIN体系；ATE方案；A16 PDK预研启动</span><span class="en-only">N3P large die yield methodology; IDDQ BIN system; ATE solution; A16 PDK R&D kickoff</span></td>
+        <td class="green">N3P / A16预研</td><td>RTX 60</td>
+        <td class="red">★★★★★</td>
+      </tr>
+      <tr>
+        <td class="hl">2026</td>
+        <td><span class="zh-only">TSMC N3P工艺认证；NVIDIA供应商资质申请；N3P Risk Lot投产</span><span class="en-only">TSMC N3P process qualification; NVIDIA supplier qualification; N3P risk lot production</span></td>
+        <td class="green">N3P</td><td>RTX 60<span class="zh-only">全线</span><span class="en-only"> full lineup</span></td>
+        <td class="red">★★★★★</td>
+      </tr>
+      <tr>
+        <td class="hl">2027</td>
+        <td><span class="zh-only">RTX 60 Risk Production；N2 GAA预研；Feynman供应商谈判</span><span class="en-only">RTX 60 risk production; N2 GAA R&D; Feynman supplier negotiations</span></td>
+        <td class="blue">N3P / N2预研</td><td>RTX 60 + Feynman</td>
+        <td class="yellow">★★★★</td>
+      </tr>
+      <tr>
+        <td class="hl">2027H2–2028</td>
+        <td><span class="zh-only">RTX 60量产爬坡；A16工艺验证完成</span><span class="en-only">RTX 60 production ramp; A16 process validation complete</span></td>
+        <td class="yellow">N3P / A16</td><td>RTX 60<span class="zh-only">量产</span><span class="en-only"> mass prod.</span></td>
+        <td class="green">★★★</td>
+      </tr>
+      <tr>
+        <td class="hl">2029+</td>
+        <td><span class="zh-only">RTX 70 N2量产；Feynman下代接触</span><span class="en-only">RTX 70 N2 production; Next-gen Feynman engagement</span></td>
+        <td class="red">N2 / A16</td><td>RTX 70</td>
+        <td class="green">★★</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="alert alert-green" style="margin-top:18px;">
+    <span>📌</span>
+    <div>
+      <span class="zh-only"><strong>最终战略建议：</strong>① 消费级RTX 60 N3P大Die良率能力为主攻 ② TSV/CoWoS技术闭环确认消费级是现实路径 ③ A16/Feynman技术预研作远期布局 ④ 封装/测试/PMIC作快速切入补充。三条路径并行推进，确保在2028年窗口期具备全面竞争资格。</span>
+      <span class="en-only"><strong>Final Strategic Recommendation:</strong> ① Consumer RTX 60 N3P large die yield capability as primary thrust ② TSV/CoWoS technical logic confirms consumer GPU as the realistic path ③ A16/Feynman PDK R&D for long-term positioning ④ Packaging/test/PMIC as fast-entry supplements. Three tracks in parallel to ensure full competitive qualification at the 2028 window.</span>
+    </div>
+  </div>
+
+  <p style="text-align:center; color:#333; font-size:11px; margin-top:36px; padding-top:18px; border-top:1px solid #1a1a1a;">
+    <span class="zh-only">报告 v2.1 · 2026年4月 · 数据来源：TSMC官方·NVIDIA GTC 2026·SemiAnalysis·TrendForce·Jon Peddie Research·TechPowerUp·VideoCardz等</span>
+    <span class="en-only">Report v2.1 · April 2026 · Sources: TSMC official · NVIDIA GTC 2026 · SemiAnalysis · TrendForce · Jon Peddie Research · TechPowerUp · VideoCardz et al.</span>
+    · <a href="/sky-portal/" style="color:var(--g);">Sky Portal</a>
+  </p>
+</section>
+</div>
+
+<script>
+// ===== LANGUAGE TOGGLE =====
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  ['btn-zh','btn-zh2'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('active', lang === 'zh');
+  });
+  ['btn-en','btn-en2'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('active', lang === 'en');
+  });
+}
+
+// ===== CHARTS =====
+Chart.defaults.color = '#888';
+Chart.defaults.borderColor = '#222';
+
+// 1. RTX Performance
+new Chart(document.getElementById('rtxPerfChart'), {
+  type:'bar',
+  data:{
+    labels:['RTX 4090\n(Ada 2022)', 'RTX 5090\n(Blackwell 2025)', 'RTX 6090\n(Rubin 2028 est.)'],
+    datasets:[
+      {label:'FP32 TFLOPS', data:[82.6,209,420], backgroundColor:['#2a5a00','#5a9a00','#76b900'], borderRadius:5},
+      {label:'VRAM Bandwidth (GB/s)', data:[1008,1792,3200], backgroundColor:['#1a4a8a','#2a6acc','#4a9eff'], borderRadius:5}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{font:{size:11}}}, title:{display:true,text:'GeForce Flagship Performance Evolution (RTX 6090 estimated)',color:'#ccc',font:{size:12}}},
+    scales:{x:{grid:{display:false}},y:{grid:{color:'#1a1a1a'}}}
+  }
+});
+
+// 2. Market Volume
+new Chart(document.getElementById('mktVolChart'), {
+  type:'bar',
+  data:{
+    labels:['2023','2024','2025','2026(E)','2027(E)','2028(E)'],
+    datasets:[
+      {label:'NVIDIA (M units)', data:[28,36,42,38,40,46], backgroundColor:'#76b900', borderRadius:4},
+      {label:'AMD (M units)', data:[5.5,4.5,2.5,2,2.5,3], backgroundColor:'#e74c3c', borderRadius:4},
+      {label:'Intel (M units)', data:[1,0.8,0.5,0.6,0.7,0.8], backgroundColor:'#4a9eff', borderRadius:4}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{font:{size:11}}}, title:{display:true,text:'Discrete GPU Annual Shipments (M units, E=estimate)',color:'#ccc',font:{size:12}}},
+    scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#1a1a1a'},title:{display:true,text:'M units',color:'#666'}}}
+  }
+});
+
+// 3. Foundry pie
+new Chart(document.getElementById('foundryChart'), {
+  type:'doughnut',
+  data:{
+    labels:['TSMC Taiwan N3P','TSMC Taiwan N4P','TSMC Arizona N4P','Others/Historical'],
+    datasets:[{data:[38,50,10,2], backgroundColor:['#76b900','#3a7a00','#4a9eff','#444'], borderWidth:0}]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{font:{size:11},padding:8}}, title:{display:true,text:'NVIDIA Foundry Capacity Distribution (incl. RTX 60 N3P migration est.)',color:'#ccc',font:{size:12}}}
+  }
+});
+
+// 4. Roadmap
+new Chart(document.getElementById('roadmapChart'), {
+  type:'line',
+  data:{
+    labels:['RTX 3090\nAmpere 2020','RTX 4090\nAda 2022','RTX 5090\nBlackwell 2025','RTX 6090\nRubin 2028(E)','RTX 70??\n2030(E)'],
+    datasets:[
+      {label:'FP32 TFLOPS (Consumer Flagship)', data:[35.6,82.6,209,420,800], borderColor:'#76b900', backgroundColor:'rgba(118,185,0,0.08)', fill:true, tension:0.4, pointRadius:5, pointBackgroundColor:'#76b900'},
+      {label:'DC AI FLOPS (FP8, ÷100)', data:[3.1,39.6,90,300,600], borderColor:'#4a9eff', borderDash:[5,5], tension:0.4, pointRadius:4, pointBackgroundColor:'#4a9eff'}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom'}, title:{display:true,text:'GPU Performance Roadmap — Consumer vs DC (DC values ÷100)',color:'#ccc',font:{size:12}}},
+    scales:{x:{grid:{color:'#1a1a1a'}},y:{type:'logarithmic',grid:{color:'#1a1a1a'},title:{display:true,text:'TFLOPS (log scale)',color:'#666'}}}
+  }
+});
+
+// 5. Wafer demand
+new Chart(document.getElementById('waferChart'), {
+  type:'bar',
+  data:{
+    labels:['B200 Logic\n(DC)', 'B200 CoWoS\n(DC pkg)', 'RTX 50 Full\n(Consumer N4P)', 'RTX 60 Full\n(Consumer N3P est.)'],
+    datasets:[{
+      label:'Monthly WPM',
+      data:[3400,18000,17000,32000],
+      backgroundColor:['#2a5a8a','#3a6acc','#5a8a00','#76b900'], borderRadius:5
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, title:{display:true,text:'Consumer vs DC Monthly Wafer Demand (WPM)',color:'#ccc',font:{size:12}}},
+    scales:{x:{grid:{display:false}},y:{grid:{color:'#1a1a1a'},title:{display:true,text:'Wafers/Month',color:'#666'}}}
+  }
+});
+
+// 6. TSMC N3P capacity
+new Chart(document.getElementById('tsmcCapChart'), {
+  type:'bar',
+  data:{
+    labels:['2025','2026','2027','2028'],
+    datasets:[
+      {label:'NVIDIA Consumer (RTX 60)', data:[0,5000,25000,32000], backgroundColor:'#76b900', borderRadius:3},
+      {label:'NVIDIA DC (Rubin)', data:[0,8000,12000,10000], backgroundColor:'#aade00', borderRadius:3},
+      {label:'AMD (Instinct etc.)', data:[2000,5000,8000,10000], backgroundColor:'#e74c3c', borderRadius:3},
+      {label:'Other (Apple/Qualcomm)', data:[20000,30000,25000,28000], backgroundColor:'#333', borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{font:{size:11}}}, title:{display:true,text:'TSMC N3P Capacity Allocation Forecast (WPM)',color:'#ccc',font:{size:12}}},
+    scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#1a1a1a'},title:{display:true,text:'Wafers/Month',color:'#666'}}}
+  }
+});
+
+// 7. Spec Radar
+new Chart(document.getElementById('specRadar'), {
+  type:'radar',
+  data:{
+    labels:['IDDQ Leakage\nControl','Large Die\nYield','Flicker Noise\n(PLL/SerDes)','TDP\nCompliance','Reliability\n(HTOL)','Test\nCoverage','Ramp\nSpeed','Process\nUniformity'],
+    datasets:[
+      {label:'Consumer GPU (RTX 60)', data:[95,88,65,90,72,80,92,85], borderColor:'#76b900', backgroundColor:'rgba(118,185,0,0.15)', pointBackgroundColor:'#76b900'},
+      {label:'Data Center GPU (Rubin)', data:[90,80,70,85,98,90,78,90], borderColor:'#4a9eff', backgroundColor:'rgba(74,158,255,0.1)', pointBackgroundColor:'#4a9eff'}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom'}, title:{display:true,text:'Key Foundry Spec Importance Weights (Consumer vs DC, 0-100)',color:'#ccc',font:{size:12}}},
+    scales:{r:{grid:{color:'#2a2a2a'}, pointLabels:{color:'#888',font:{size:10}}, ticks:{color:'#555',backdropColor:'transparent'}}}
+  }
+});
+
+// 8. Opportunity Matrix
+new Chart(document.getElementById('oppChart'), {
+  type:'bubble',
+  data:{
+    datasets:[
+      {label:'A: RTX60 N3P Consumer Foundry', data:[{x:72,y:95,r:22}], backgroundColor:'rgba(118,185,0,0.75)'},
+      {label:'B: RTX70 N2 Consumer Prep', data:[{x:78,y:80,r:15}], backgroundColor:'rgba(174,222,0,0.7)'},
+      {label:'C: Feynman A16 DC (long-term)', data:[{x:92,y:88,r:18}], backgroundColor:'rgba(74,158,255,0.65)'},
+      {label:'D: Pkg/Test/PMIC Supply Chain', data:[{x:38,y:58,r:13}], backgroundColor:'rgba(245,166,35,0.7)'},
+      {label:'E: AMD / Cloud ASIC Backup', data:[{x:52,y:50,r:11}], backgroundColor:'rgba(155,89,182,0.65)'}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom',labels:{font:{size:11}}},
+      title:{display:true,text:'Opportunity Matrix (X=Difficulty↑, Y=Potential↑, Bubble size=Strategic Value)',color:'#ccc',font:{size:12}}
+    },
+    scales:{
+      x:{min:0,max:100,grid:{color:'#1a1a1a'},title:{display:true,text:'Entry Difficulty →',color:'#666'}},
+      y:{min:0,max:100,grid:{color:'#1a1a1a'},title:{display:true,text:'Market Potential →',color:'#666'}}
+    }
+  }
+});
+</script>
+</body>
+</html>

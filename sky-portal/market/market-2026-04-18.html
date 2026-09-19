@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-18</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e8;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#6b6b80;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(74,222,128,0.2)}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card:hover{background:rgba(255,255,255,0.06)}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#6b6b80;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-item:hover{background:rgba(255,255,255,0.06)}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#888;border:1px solid rgba(255,255,255,0.12)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);color:#6b6b80;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{background:rgba(74,222,128,0.1);border-left:3px solid #4ade80;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.warning{background:rgba(239,68,68,0.1);border-left:3px solid #f87171;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- POSTER GRID -->
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#166534,#22c55e)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets ATH</div>
+<div class="zh poster-data">• 标普500：7,126（历史新高）<br>• 纳指连续12日上涨<br>• 道指单日+869点</div>
+<div class="en poster-data" style="display:none">• S&P 500: 7,126 (ATH)<br>• Nasdaq 12-day win streak<br>• Dow +869 pts on Friday</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f,#3b82f6)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">霍尔木兹海峡开放</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Strait of Hormuz Open</div>
+<div class="zh poster-data">• 伊朗宣布海峡完全开放<br>• 油价暴跌11%<br>• 市场风险情绪大改善</div>
+<div class="en poster-data" style="display:none">• Iran declares strait fully open<br>• Oil plunges 11%<br>• Risk sentiment improves sharply</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c2d12,#f97316)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 & 港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK</div>
+<div class="zh poster-data">• 上证：~4,027 周跌-1.1%<br>• 创业板周涨+2.36%<br>• 恒指：~26,200 震荡</div>
+<div class="en poster-data" style="display:none">• Shanghai: ~4,027, weekly -1.1%<br>• ChiNext weekly +2.36%<br>• HSI: ~26,200 range-bound</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#581c87,#a855f7)">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI & 半导体</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI & Semiconductors</div>
+<div class="zh poster-data">• TSMC Q1净利+58.3%<br>• NVDA回到$200+<br>• SOX一周暴涨15%+</div>
+<div class="en poster-data" style="display:none">• TSMC Q1 net income +58.3%<br>• NVDA back to $200+<br>• SOX surges 15%+ weekly</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-18 · <span class="zh">周六 · 周末回顾与展望</span><span class="en" style="display:none">Saturday · Weekend Recap & Outlook</span> · <a href="index.html" style="color:#4ade80"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- US MARKETS -->
+<h2>🇺🇸 <span class="zh">美股周五收盘（4月17日）</span><span class="en" style="display:none">US Markets Friday Close (Apr 17)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,126</div><div class="stock-change up">+1.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,150</div><div class="stock-change up">+1.79%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">ATH</div><div class="stock-change up">+1.02%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">9,200</div><div class="stock-change up">+15%+ W</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">Low</div><div class="stock-change down">恐慌降温</div></div>
+</div>
+
+<div class="highlight">
+<span class="zh"><strong>🎉 标普500和纳斯达克同创历史新高！</strong> 纳指连续第12个交易日上涨，道指单日飙升869点。本周是2026年以来最强劲的一周之一。</span>
+<span class="en" style="display:none"><strong>🎉 S&P 500 and Nasdaq both hit all-time highs!</strong> Nasdaq posted its 12th consecutive day of gains. Dow surged 869 points on Friday. One of the strongest weeks of 2026.</span>
+</div>
+
+<h3><span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h3>
+
+<div class="card">
+<h4>🛢️ <span class="zh">1. 霍尔木兹海峡开放 — 地缘风险骤降</span><span class="en" style="display:none">🛢️ 1. Strait of Hormuz Opens — Geopolitical Risk Plunges</span></h4>
+<p><span class="zh">伊朗外长周五宣布霍尔木兹海峡"完全向商业船只开放"，结束数周以来的封锁紧张局势。消息传出后油价暴跌11%，为2023年以来最大单日跌幅。市场风险偏好急剧升温，资金从能源防御板块转向科技成长股。这一事件是本周市场最强催化剂。</span><span class="en" style="display:none">Iran's foreign minister declared the Strait of Hormuz "fully open to commercial vessels" on Friday, ending weeks of blockade tension. Oil prices crashed 11% — the biggest single-day drop since 2023. Risk appetite surged as capital rotated from energy/defensive into tech/growth. This was the week's most powerful catalyst.</span></p>
+<p class="src">CNN / Reuters / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4>🤖 <span class="zh">2. TSMC财报炸裂 — AI芯片需求无减速迹象</span><span class="en" style="display:none">🤖 2. TSMC Blowout Earnings — AI Chip Demand Shows No Signs of Slowing</span></h4>
+<p><span class="zh">台积电Q1净利润同比增长58.3%，远超预期，全年营收增长35.9%。CoWoS先进封装产能在满负荷运转，AI相关营收持续翻倍增长。CEO确认AI需求远超供给，2026全年指引上调。财报直接推动SOX费半指数从周初的~7,900飙升至~9,200，单周暴涨超15%。</span><span class="en" style="display:none">TSMC Q1 net income surged 58.3% YoY, crushing expectations, with full-year revenue growth of 35.9%. CoWoS advanced packaging running at full capacity with AI-related revenue doubling. CEO confirmed demand far exceeds supply, raising 2026 full-year guidance. The earnings propelled SOX from ~7,900 to ~9,200, a 15%+ weekly surge.</span></p>
+<p class="src">TSMC IR / CNBC / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4>🕊️ <span class="zh">3. 美伊和谈预期 — 市场提前定价和平</span><span class="en" style="display:none">🕊️ 3. US-Iran Talks Hopes — Markets Price In Peace</span></h4>
+<p><span class="zh">本周初市场就开始押注美伊可能重启外交谈判。周二纳指即大涨2%，连续第10天上涨（2021年以来最长连涨纪录）。投资者预期中东紧张局势缓和将降低能源成本和通胀压力，为美联储降息创造更大空间。霍尔木兹海峡周五正式开放证实了这一乐观预期。</span><span class="en" style="display:none">Markets began pricing in a potential US-Iran diplomatic restart early in the week. On Tuesday, Nasdaq surged 2%, marking its 10th consecutive gain (longest streak since 2021). Investors expected Middle East de-escalation would lower energy costs and inflation, giving the Fed more room to cut rates. Friday's Hormuz opening confirmed the optimistic thesis.</span></p>
+<p class="src">WSJ / Financial Times</p>
+</div>
+
+<!-- SEMICONDUCTOR STOCKS -->
+<h2>💾 <span class="zh">半导体 & AI个股（4月17日收盘）</span><span class="en" style="display:none">Semiconductor & AI Stocks (Apr 17 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$201.68</div><div class="stock-change up">+1.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$370.50</div><div class="stock-change up">+2.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$248+</div><div class="stock-change up">+1.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$375+</div><div class="stock-change up">+1.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">ETF</div><div class="stock-change up">+15% W</div></div>
+</div>
+
+<div class="card">
+<h4>💎 <span class="zh">NVIDIA回到$200 — 五个月新高</span><span class="en" style="display:none">💎 NVIDIA Back at $200 — 5-Month High</span></h4>
+<p><span class="zh">NVDA周五收于$201.68，回到200美元心理关口上方，为去年11月以来最高水平。当前处于基底构建阶段，买入点在$212.19。台积电的强劲财报间接验证了NVIDIA的AI芯片需求持续性。本周NVDA累计涨幅约7%。</span><span class="en" style="display:none">NVDA closed at $201.68 on Friday, reclaiming the $200 psychological level for the first time since November. Currently in a base-building phase with a buy point at $212.19. TSMC's blowout earnings indirectly validated NVIDIA's sustained AI demand. NVDA gained ~7% for the week.</span></p>
+<p class="src">Yahoo Finance / Investor's Business Daily</p>
+</div>
+
+<!-- CHINA MARKETS -->
+<h2>🇨🇳 <span class="zh">A股 & 港股本周</span><span class="en" style="display:none">China A-Shares & HK This Week</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,027</div><div class="stock-change down">-1.1% W</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">14,640</div><div class="stock-change flat">持平</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,559</div><div class="stock-change up">+2.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">26,200</div><div class="stock-change flat">震荡</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">—</div><div class="stock-change up">跟涨</div></div>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">A股分化：创业板领涨，主板承压</span><span class="en" style="display:none">📈 China Divergence: ChiNext Leads, Main Board Under Pressure</span></h4>
+<p><span class="zh">本周A股呈现明显分化格局。创业板在AI和科技股带动下表现强势，周涨+2.36%。上证指数则围绕4,000点反复震荡，周线收阴十字星，全周跌-1.1%。成交额基本持平，市场方向不明。周一四大指数集体上涨（上证+0.95%、深成指+1.61%、创业板+2.36%），但后续缺乏持续动力。港股恒指在26,000-26,300区间窄幅震荡。</span><span class="en" style="display:none">China A-shares showed clear divergence. ChiNext outperformed with +2.36% weekly gain driven by AI and tech. Shanghai Composite oscillated around 4,000, closing the week with a bearish doji at -1.1%. Volume was flat, direction unclear. Monday saw a broad rally (Shanghai +0.95%, Shenzhen +1.61%, ChiNext +2.36%), but momentum faded. HK HSI ranged narrowly around 26,000-26,300.</span></p>
+<p class="src">东方财富 / 新浪财经</p>
+</div>
+
+<!-- RISKS -->
+<h2>⚠️ <span class="zh">风险关注</span><span class="en" style="display:none">Risk Watch</span></h2>
+
+<div class="warning">
+<span class="zh"><strong>关税风险：</strong>特朗普全球10%关税仍在执行中（已持续约150天），可能升至15%。印度、中国、俄罗斯正在被推动走得更近，全球贸易格局面临重塑。</span>
+<span class="en" style="display:none"><strong>Tariff Risk:</strong> Trump's 10% global tariffs remain in effect (~150 days), potentially rising to 15%. India, China, and Russia are being pushed closer together, reshaping global trade dynamics.</span>
+</div>
+
+<div class="card">
+<h4>🌍 <span class="zh">地缘格局变化</span><span class="en" style="display:none">🌍 Geopolitical Shifts</span></h4>
+<p><span class="zh">• 特朗普关税政策正推动印度、中国、俄罗斯加速靠拢<br>• 对八个欧洲国家的关税威胁仍在<br>• 达沃斯论坛讨论如何应对"特朗普贸易新秩序"<br>• A股周线十字星，4,000点为关键支撑</span><span class="en" style="display:none">• Trump tariffs pushing India, China, Russia closer<br>• Tariff threats against 8 European nations ongoing<br>• Davos debates countering "Trumpian trade order"<br>• Shanghai Composite doji at 4,000 support</span></p>
+</div>
+
+<!-- OUTLOOK -->
+<h2>🔮 <span class="zh">下周展望</span><span class="en" style="display:none">Next Week Outlook</span></h2>
+
+<div class="card">
+<h4>🇺🇸 <span class="zh">美股：新高后震荡消化，AI主线不变</span><span class="en" style="display:none">🇺🇸 US: Consolidation After ATH, AI Theme Intact</span></h4>
+<p><span class="zh">标普和纳指同创新高后，短期可能需要震荡消化获利盘。但AI和半导体的上行趋势非常明确——TSMC财报验证了需求端的强劲，海峡风险解除消除了最大的地缘不确定性。下周如果NVDA突破$212买点，将进一步确认趋势。关注美联储官员讲话和经济数据。</span><span class="en" style="display:none">After concurrent ATHs, some consolidation is likely. But the AI/semiconductor uptrend is clear — TSMC validated strong demand, Hormuz de-escalation removed the biggest geopolitical uncertainty. If NVDA breaks $212 buy point, it would further confirm the trend. Watch Fed speakers and economic data.</span></p>
+</div>
+
+<div class="card">
+<h4>🇨🇳 <span class="zh">A股：关注4,000点支撑</span><span class="en" style="display:none">🇨🇳 China: Watch 4,000 Support</span></h4>
+<p><span class="zh">上证周线十字星意味着方向选择在即。如果跌破4,000点，可能回踩3,900；如果突破4,050，则有挑战前高的机会。创业板AI概念持续火热，但需关注获利回吐风险。港股恒指若突破26,500可看高一线。</span><span class="en" style="display:none">Shanghai's weekly doji signals an imminent directional choice. Break below 4,000 could test 3,900; above 4,050 could challenge prior highs. ChiNext AI names remain hot but watch for profit-taking. HSI above 26,500 would open upside.</span></p>
+</div>
+
+<div class="card">
+<h4>🛢️ <span class="zh">原油与商品</span><span class="en" style="display:none">🛢️ Oil & Commodities</span></h4>
+<p><span class="zh">海峡开放后油价暴跌11%，短期有望企稳。但中东局势仍不稳定，任何反复都可能触发反弹。低油价对科技股和消费股有利，但能源板块承压。</span><span class="en" style="display:none">Oil crashed 11% after Hormuz opening, likely stabilizing short-term. Middle East remains unstable — any reversal could trigger a bounce. Low oil benefits tech and consumer but pressures energy stocks.</span></p>
+</div>
+
+<!-- KEY WATCH -->
+<div class="highlight">
+<span class="zh"><strong>👀 下周重点观察：</strong><br>
+• NVDA能否突破$212买入点<br>
+• 美伊谈判后续进展<br>
+• A股政策面是否有新的刺激信号<br>
+• 美联储官员关于降息的最新表态</span>
+<span class="en" style="display:none"><strong>👀 Key Watch Next Week:</strong><br>
+• Can NVDA break $212 buy point<br>
+• US-Iran talks follow-through<br>
+• Any new China stimulus signals<br>
+• Fed officials' latest rate-cut commentary</span>
+</div>
+
+<!-- K-LINE CHARTS -->
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSM — TSMC</div><div id="tv-tsm"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semi ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<span class="zh">由 Sky ☁️ 自动生成 · <a href="index.html">所有行情</a> · <a href="../index.html">Sky Portal</a></span>
+<span class="en" style="display:none">Auto-generated by Sky ☁️ · <a href="index.html">All Reports</a> · <a href="../index.html">Sky Portal</a></span>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang){
+  var zh=document.querySelectorAll('.zh'),en=document.querySelectorAll('.en');
+  if(lang==='zh'){zh.forEach(function(e){e.style.display=''});en.forEach(function(e){e.style.display='none'})}
+  else{zh.forEach(function(e){e.style.display='none'});en.forEach(function(e){e.style.display=''});}
+  document.getElementById('btn-zh').style.background=lang==='zh'?'#333':'#222';
+  document.getElementById('btn-zh').style.color=lang==='zh'?'#fff':'#aaa';
+  document.getElementById('btn-en').style.background=lang==='en'?'#555':'#222';
+  document.getElementById('btn-en').style.color=lang==='en'?'#fff':'#aaa';
+}
+</script>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols=[
+  {id:'tv-nvda',sym:'NASDAQ:NVDA'},
+  {id:'tv-tsm',sym:'NYSE:TSM'},
+  {id:'tv-smh',sym:'NASDAQ:SMH'},
+  {id:'tv-spy',sym:'AMEX:SPY'},
+  {id:'tv-sse',sym:'SSE:000001'},
+  {id:'tv-hsi',sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol:s.sym,interval:'1D',height:180,width:'100%',
+    theme:'dark',style:'1',chart_type:'candlesticks',
+    hide_top_toolbar:true,hide_legend:true,save_image:false,
+    calendar:false,hide_volume:true,
+    backgroundColor:'rgba(10,10,15,1)',gridColor:'rgba(42,42,42,1)',
+    container_id:s.id
+  });
+});
+</script>
+</body>
+</html>

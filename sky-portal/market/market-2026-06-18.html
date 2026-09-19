@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-18 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c1a 0%,#2d8f2d 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股全线收涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Rally</div>
+<div class="zh poster-data">• 道指 +0.14% → 51,564.70<br>• 标普500 +1.08% → 7,500.58<br>• 纳斯达克 +1.91% → 26,517.93<br>• 费城半导体 +6.42% → 14,341.78 🏆新高</div>
+<div class="en poster-data" style="display:none">• Dow +0.14% → 51,564.70<br>• S&P 500 +1.08% → 7,500.58<br>• Nasdaq +1.91% → 26,517.93<br>• SOX +6.42% → 14,341.78 🏆ATH</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#8B0000 0%,#CC4444 100%)">
+<div class="poster-icon">🇭🇰</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">港股三连跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">HK 3-Day Decline</div>
+<div class="zh poster-data">• 恒生指数 -1.59% → 23,924.81<br>• 恒生科技 -1.39% → 4,604.35<br>• 恒生国企 -2.06% → 7,976.04<br>• Warsh放鹰压制估值</div>
+<div class="en poster-data" style="display:none">• HSI -1.59% → 23,924.81<br>• HSTECH -1.39% → 4,604.35<br>• HSCEI -2.06% → 7,976.04<br>• Warsh hawkish pressure</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#0066CC 0%,#0099FF 100%)">
+<div class="poster-icon">💻</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Intel暴涨10.64%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Intel Surges 10.64%</div>
+<div class="zh poster-data">• Apple与Intel达成芯片全链条合作<br>• Intel创历史新高 $133.99<br>• 特朗普宣布重建本土半导体供应链</div>
+<div class="en poster-data" style="display:none">• Apple-Intel full chain partnership<br>• Intel ATH $133.99<br>• Trump announces domestic supply chain</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#996600 0%,#CC8800 100%)">
+<div class="poster-icon">🇮🇷</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美解除伊朗封锁</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Iran Blockade Lifted</div>
+<div class="zh poster-data">• 美军正式解除伊朗海上封锁<br>• 1200万桶原油通过霍尔木兹海峡<br>• 地缘风险大幅下降</div>
+<div class="en poster-data" style="display:none">• US lifts maritime blockade on Iran<br>• 12M barrels through Strait of Hormuz<br>• Geopolitical risk sharply lower</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-18 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股行情（6月18日收盘）</span><span class="en" style="display:none">US Markets (Jun 18 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">51,564.70</div><div class="stock-change up">+0.14%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,500.58</div><div class="stock-change up">+1.08%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,517.93</div><div class="stock-change up">+1.91%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">14,341.78</div><div class="stock-change up">+6.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPACEX</div><div class="stock-price">$184.98</div><div class="stock-change down">-3.57%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$133.99</div><div class="stock-change up">+10.64%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">↑6.94%</div><div class="stock-change up">+6.94%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">↑2.95%</div><div class="stock-change up">+2.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">↑4.70%</div><div class="stock-change up">+4.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price">↑11.54%</div><div class="stock-change up">+11.54%</div></div>
+</div>
+
+<h2>📰 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>🇮🇷 <span class="zh">1. 美国正式解除对伊朗海上封锁</span><span class="en" style="display:none">1. US Officially Lifts Maritime Blockade on Iran</span></h4>
+<p><span class="zh">美国中央司令部宣布，根据特朗普总统的指示，正式解除对伊朗沿海所有港口的海上封锁措施。通过阿拉伯湾和阿曼湾前往伊朗港口的船只可正常航行。美国副总统Vance披露，夜间已有超过1200万桶原油的油轮通过霍尔木兹海峡，创冲突以来新高。美军舰艇仍留驻中东水域监督美伊谅解备忘录的执行。地缘政治风险大幅下降，市场风险偏好急速升温。</span><span class="en" style="display:none">US Central Command officially announced the lifting of the maritime blockade on all Iranian ports. VP Vance disclosed that overnight, tankers carrying 12M+ barrels of crude passed through the Strait of Hormuz, a new high since the conflict. US warships remain to monitor compliance. Geopolitical risk sharply reduced, boosting market sentiment.</span></p>
+<p class="src">来源：TradingKey / US Central Command</p>
+</div>
+
+<div class="card">
+<h4>💻 <span class="zh">2. 特朗普宣布Apple与Intel达成芯片全链条合作，Intel暴涨创历史新高</span><span class="en" style="display:none">2. Trump Announces Apple-Intel Chip Partnership, Intel Surges to ATH</span></h4>
+<p><span class="zh">特朗普总统宣布Apple已正式同意与Intel合作，将整个芯片设计和制造链条放在美国国内。特朗普表示，美国一直拥有世界级芯片设计能力，但制造环节长期流失海外，这是本届政府将重建本土半导体供应链作为首要任务的核心原因。Intel收盘暴涨10.64%至$133.99，盘中触及$135.48创历史新高。此举标志着美国半导体回流战略的重大里程碑。</span><span class="en" style="display:none">President Trump announced Apple has formally agreed to partner with Intel to locate the entire chip design and manufacturing chain within the US. Intel surged 10.64% to $133.99, hitting an intraday ATH of $135.48. This marks a major milestone in the US semiconductor reshoring strategy.</span></p>
+<p class="src">来源：TradingKey / White House</p>
+</div>
+
+<div class="card">
+<h4>🔧 <span class="zh">3. 费城半导体指数暴涨6.42%创历史新高，存储芯片领涨</span><span class="en" style="display:none">3. Philadelphia SOX Surges 6.42% to ATH, Memory Chips Lead</span></h4>
+<p><span class="zh">费城半导体指数收涨6.42%至14,341.78点，再创历史新高，30只成分股全部上涨。存储芯片概念领涨：闪迪(SNDK) +11.54%，美光(MU) +8.70%，西部数据(WDC) +4.79%。大型科技股方面，TSMC +6.94%，Broadcom +4.70%，NVIDIA +2.95%，Amazon +2.90%，Meta +1.70%。Apple-Intel合作+伊朗封锁解除+AI需求持续强劲构成三重利好驱动。</span><span class="en" style="display:none">SOX surged 6.42% to 14,341.78, another ATH, with all 30 components advancing. Memory chips led: SanDisk +11.54%, Micron +8.70%, Western Digital +4.79%. Large caps: TSMC +6.94%, Broadcom +4.70%, NVIDIA +2.95%, Amazon +2.90%. Apple-Intel deal + Iran blockade lift + AI demand form a triple catalyst.</span></p>
+<p class="src">来源：TradingKey / Yahoo Finance</p>
+</div>
+
+<h2>🚀 <span class="zh">科技焦点</span><span class="en" style="display:none">Tech Spotlight</span></h2>
+
+<div class="card">
+<h4><span class="zh">SpaceX盘后拉升收复跌幅，传将与Tesla合并估值$4万亿</span><span class="en" style="display:none">SpaceX Recovers Losses, Tesla Merger Talks at $4T Valuation</span></h4>
+<p><span class="zh">SpaceX收盘下跌3.57%至$184.98，但盘中大幅拉升收复大部分失地，市值$2.43万亿仍为美国第六大公司。SpaceX总裁表示两家公司存在协同效应，合并可"简化马斯克的管理职责"，在火箭、AI、卫星、电动车、机器人、能源和社交媒体领域构建科技巨头。若合并正式落地，合并实体估值约$4万亿。SpaceX计划发行至少$200亿债券，用于再融资9月到期的$200亿过桥贷款。</span><span class="en" style="display:none">SpaceX closed down 3.57% at $184.98 but recovered most intraday losses. Market cap $2.43T, 6th largest US company. SpaceX president hinted at synergies with Tesla; combined entity valuation ~$4T. SpaceX plans $20B+ bond issuance to refinance a $20B bridge loan maturing in September.</span></p>
+<p class="src">来源：TradingKey / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">Amazon开始向外部客户出售自研Trainium AI芯片</span><span class="en" style="display:none">Amazon Starts Selling Trainium AI Chips Externally</span></h4>
+<p><span class="zh">Amazon正式加入向外部客户出售自研AI芯片的行列，计划向第三方企业数据中心出售Trainium AI加速器芯片。这是Amazon全面转向AI战略的关键里程碑。Trainium自2020年推出以来，已通过云服务模式锁定OpenAI和Anthropic等顶级客户，累计收入承诺超$2250亿。第三代产品已售罄，第四代芯片明年上市备受关注。</span><span class="en" style="display:none">Amazon officially joined the ranks of selling self-developed AI chips externally, planning to sell Trainium accelerators to third-party data centers. A key milestone in Amazon's AI strategy shift. Trainium has locked in OpenAI and Anthropic with $225B+ in cumulative revenue commitments. 3rd gen sold out; 4th gen arrives next year.</span></p>
+<p class="src">来源：TradingKey / AWS</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">欧盟拟将Azure和AWS纳入《数字市场法》严格监管</span><span class="en" style="display:none">EU to Regulate Azure and AWS Under Digital Markets Act</span></h4>
+<p><span class="zh">据消息人士透露，欧盟委员会最早下周发布初步调查结果，预计将认定Microsoft Azure和Amazon Web Services符合《数字市场法》(DMA)监管标准。最终决定预计今年底做出。若被全面纳入DMA监管，这两大云巨头将面临互操作性要求、限制客户锁定和自我优待等一系列义务。</span><span class="en" style="display:none">The European Commission is expected to release preliminary findings as early as next week, likely determining that Microsoft Azure and AWS meet DMA regulation criteria. Final decision by year-end. If fully regulated under DMA, both giants face interoperability requirements and restrictions on lock-in and self-preferencing.</span></p>
+<p class="src">来源：TradingKey / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">Anthropic向美国政府承诺解决Mythos/Fable模型安全风险</span><span class="en" style="display:none">Anthropic Pledges to Address Mythos/Fable Security Risks</span></h4>
+<p><span class="zh">Anthropic高管已向美国商务部长Lutnick提交正式提案，承诺深化与白宫合作，全面解决核心大模型"Mythos"和"Fable"的安全风险——这也是此前两款高性能模型被限制使用的主要原因。Anthropic承诺改善与特朗普政府的沟通效率，更快响应安全问题。谈判进展顺利，但完全解决的具体时间表尚未确定。</span><span class="en" style="display:none">Anthropic executives submitted a formal proposal to Commerce Secretary Lutnick, pledging deeper cooperation to address security risks in Mythos and Fable models. Anthropic committed to improving communication with the Trump administration. Talks progressing smoothly but no concrete timeline yet.</span></p>
+<p class="src">来源：TradingKey / Media Reports</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情（6月18日收盘）</span><span class="en" style="display:none">A-Shares (Jun 18 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SSE</span></div><div class="stock-price">4,090.48</div><div class="stock-change down">-0.43%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZSE</span></div><div class="stock-price">16,030.70</div><div class="stock-change up">+0.94%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div><div class="stock-price">4,252.39</div><div class="stock-change up">+2.05% 🏆</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">科创50</span><span class="en" style="display:none">STAR50</span></div><div class="stock-price">↑3.84%</div><div class="stock-change up">+3.84%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">成交额</span><span class="en" style="display:none">Volume</span></div><div class="stock-price">1.56万亿</div><div class="stock-change up"><span class="zh">活跃</span><span class="en" style="display:none">Active</span></div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">创业板涨2.05%创历史新高，芯片产业链走强</span><span class="en" style="display:none">ChiNext Up 2.05% to ATH, Chip Supply Chain Strengthens</span></h4>
+<p><span class="zh">A股三大指数涨跌不一。上证指数跌0.43%受权重股拖累，但创业板指和科创50指数齐创历史新高。芯片产业链表现强势，寒武纪盘中飙升。稀土、非金属材料、金属新材料、小金属板块涨幅居前；保险、玻璃板块跌幅居前。科技成长风格持续占优，与美国半导体板块形成共振。</span><span class="en" style="display:none">A-shares mixed. SSE dragged down 0.43% by weights, but ChiNext and STAR 50 both hit ATH. Chip supply chain strong, Cambricon surged intraday. Rare earth, new materials, metals led; insurance and glass lagged. Tech growth style continues to dominate, resonating with US semiconductor strength.</span></p>
+<p class="src">来源：东方财富 / 21财经 / 证券时报</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（6月18日收盘）</span><span class="en" style="display:none">Hong Kong (Jun 18 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒生</span><span class="en" style="display:none">HSI</span></div><div class="stock-price">23,924.81</div><div class="stock-change down">-1.59%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒科</span><span class="en" style="display:none">HSTECH</span></div><div class="stock-price">4,604.35</div><div class="stock-change down">-1.39%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">国企</span><span class="en" style="display:none">HSCEI</span></div><div class="stock-price">7,976.04</div><div class="stock-change down">-2.06%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">成交</span><span class="en" style="display:none">Turnover</span></div><div class="stock-price">3,587亿</div><div class="stock-change down">HKD</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">恒指三连跌失守24000，美联储放鹰压制估值</span><span class="en" style="display:none">HSI 3-Day Decline Below 24K, Fed Hawkish Pressure</span></h4>
+<p><span class="zh">港股震荡下探，恒生指数连续第三个交易日下跌，为2025年7月以来最低水平。美联储Warsh首秀放鹰，9月加息概率飙升超80%，对港股估值形成持续压制。中概股多数下跌：传奇生物-16.68%，GDS-4.49%，贝壳-3.93%，携程-3.48%，金山云-3.36%，理想汽车-2.72%。</span><span class="en" style="display:none">HK market declined for a 3rd straight day, lowest since July 2025. Fed Warsh's hawkish debut pushed September hike probability above 80%, pressuring valuations. China ADRs mostly fell: Legend Biotech -16.68%, GDS -4.49%, KE Holdings -3.93%, Trip.com -3.48%.</span></p>
+<p class="src">来源：新浪财经 / HSI / TradingKey</p>
+</div>
+
+<h2>⚖️ <span class="zh">宏观与政策</span><span class="en" style="display:none">Macro & Policy</span></h2>
+
+<div class="card">
+<h4><span class="zh">高盛解读Warsh首秀：短端利率波动放大，长端确定性上升</span><span class="en" style="display:none">Goldman on Warsh's Debut: Short-End Volatility Up, Long-End Certainty Rises</span></h4>
+<p><span class="zh">Warsh首次美联储政策会议传递了超预期鹰派信号。高盛资管分析指出，这将深刻重塑美债收益率曲线行为：短期利率波动将显著上升，长期价格波动将逐步收窄，推动曲线整体趋平。市场加息预期在两个交易日内快速上修——9月加息概率已飙升超80%，市场甚至定价了10月不止一次加息。Warsh明确将近通胀控制列为首要目标，并正式弱化了前瞻指引工具。</span><span class="en" style="display:none">Warsh's first FOMC delivered a more hawkish signal than expected. Goldman notes this will reshape the Treasury yield curve: short-term volatility rises significantly, long-end fluctuations narrow, driving curve flattening. September hike probability surged past 80%. Warsh designated near-term inflation control as primary objective and weakened forward guidance.</span></p>
+<p class="src">来源：TradingKey / Goldman Sachs Asset Management</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">OPEC：全球石油需求远未见顶，2030年将达1.13亿桶/日</span><span class="en" style="display:none">OPEC: Global Oil Demand Has Not Peaked, 113.3M bpd by 2030</span></h4>
+<p><span class="zh">OPEC发布年度《世界石油展望》，对长期石油需求给出远超市场预期的乐观评估：全球石油需求尚未达到增长拐点。预计到2030年全球需求将升至1.133亿桶/日，2050年达1.241亿桶/日。印度为最大增长来源，公路运输、石化和航空为核心增长领域。美国页岩油产量已于2025年见顶。</span><span class="en" style="display:none">OPEC's annual World Oil Outlook presents a far more optimistic demand assessment than the market: global demand has not reached an inflection point. Demand projected to rise to 113.3M bpd by 2030 and 124.1M bpd by 2050. India is the largest growth source. US shale production peaked in 2025.</span></p>
+<p class="src">来源：TradingKey / OPEC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">CME起诉CFTC，质疑永续期货监管审批合法性</span><span class="en" style="display:none">CME Sues CFTC Over Perpetual Futures Approval</span></h4>
+<p><span class="zh">CME集团正式向联邦法院起诉CFTC及其主席，主要寻求推翻CFTC批准Kalshi和Coinbase上线加密永续期货的决定。CME认为永续期货本质上是互换合约，将其作为期货审批是超越监管权限的任意决定。永续期货作为加密市场核心衍生品，去年总市场交易量攀升至$61.7万亿。</span><span class="en" style="display:none">CME Group filed an administrative lawsuit against the CFTC, seeking to overturn the approval of crypto perpetual futures by Kalshi and Coinbase. CME argues perpetuals are essentially swap contracts. Total perpetual futures trading volume reached $61.7T last year.</span></p>
+<p class="src">来源：TradingKey / CFTC</p>
+</div>
+
+<h2>🔮 <span class="zh">明日预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">美股：利好叠加但波动加大</span><span class="en" style="display:none">US: Catalysts Stack But Volatility Rises</span></h4>
+<p><span class="zh">伊朗封锁解除+Apple-Intel合作+半导体全线暴涨构成三重利好，短期风险偏好维持高位。但需警惕：①Warsh首秀后加息预期升温（9月概率>80%），②SpaceX连跌后市场对"万亿合并"传闻的消化，③周五可能出现获利了结。预计明日震荡偏强，费半新高趋势确立但需关注回调风险。</span><span class="en" style="display:none">Iran blockade lift + Apple-Intel + semiconductor surge form a triple catalyst. Risks: ①Warsh hawkish hike expectations (>80% Sep), ②SpaceX selloff digestion, ③Friday profit-taking. Expect choppy-to-strong with SOX uptrend intact but pullback risk.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股：科技成长主线延续</span><span class="en" style="display:none">A-Shares: Tech Growth Momentum Continues</span></h4>
+<p><span class="zh">创业板+科创板强势领涨，芯片产业链是核心主线，与美国半导体板块共振。科技成长风格大概率延续，上证受权重拖累但整体风险不大。关注：科创板跟涨力度、芯片板块持续度、成交额能否维持1.5万亿+。</span><span class="en" style="display:none">ChiNext + STAR 50 leading, chip supply chain is the core theme, resonating with US semis. Tech growth style likely continues. Watch: STAR follow-through, chip sector persistence, volume sustenance above 1.5T yuan.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股：短期偏弱，关注24000支撑</span><span class="en" style="display:none">HK: Weak Near-Term, Watch 24K Support</span></h4>
+<p><span class="zh">美联储鹰派信号+外资流出压力使港股短期偏弱。恒指24000为关键支撑，跌破则可能进一步下探。中期来看，AI/科技板块估值吸引力上升，但需等美联储加息预期消化后才有望反转。</span><span class="en" style="display:none">Fed hawkish signal + capital outflow pressure keep HK weak near-term. 24,000 is key support. AI/tech valuations increasingly attractive but reversal needs Fed hike expectations to be digested.</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSM — TSMC</div><div id="tv-tsm"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: TradingKey, CNBC, Reuters, Yahoo Finance, 东方财富, 证券时报, 新浪财经, 21财经, Goldman Sachs, OPEC</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tsm', sym:'NYSE:TSM'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-14</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.82em;margin-top:8px;text-align:right}
+.card .source{color:#888;font-size:0.85em;font-style:italic}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-14 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>CoWoS 先进封装：为什么 AI 芯片离不开它？</h3>
+<p>想象你要把一台超级计算机塞进一个鞋盒——这就是 CoWoS（Chip on Wafer on Substrate）在干的事。</p>
+<p>传统的芯片封装是把一颗裸片（die）放在绿色基板上，像个煎蛋。但 AI 芯片（如 NVIDIA H100）太大了，单颗 die 快顶到光刻机的极限（reticle limit，约 26mm×33mm），一颗 die 不够用。</p>
+<p>CoWoS 的思路是：<strong>先在硅中介层（silicon interposer）上并排放好几颗 die</strong>（GPU die + HBM 内存 die），用比头发丝还细的微凸块连接，密度远超传统 PCB 走线。然后再把整个硅中介层封装到基板上。</p>
+<p>这样做的好处：① GPU 和 HBM 之间距离极短，带宽巨大（HBM3E 可达 3.35 TB/s）；② 不用把所有功能做在一颗 die 上，良率更高；③ 可以灵活组合不同工艺的 die。</p>
+<p>台积电的 CoWoS 产能就是目前 AI 芯片最大的瓶颈——不是 NVIDIA 设计不出来，而是封装跟不上。这就是为什么 2024-2026 年 CoWoS 产能成了战略资源。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>🚀 NVIDIA 发布 RTX Spark 超级芯片，进军 PC 市场</h3>
+<p>NVIDIA 在 Computex 2026（台北国际电脑展，6月1日）上发布 <strong>RTX Spark</strong> 超级芯片，首次将 Blackwell GPU 架构带入 Windows PC 笔记本和台式机。该芯片搭载 6,144 个 CUDA 核心、第五代 Tensor Core（支持 FP4 精度），提供 1 PetaFLOP AI 算力，配备 128GB LPDDR5X 统一内存，带宽 300 GB/s。</p>
+<p>这是基于 ARM 架构的 Windows on Arm 平台，与微软深度合作，目标是让 PC 进入"AI Agent 时代"。RTX Spark 的发布直接导致 AMD 和 Intel 股价当日分别下跌 10.86% 和 11.28%。</p>
+<p><a href="https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark">→ NVIDIA 官方新闻</a> · <a href="https://www.bloomberg.com/news/articles/2026-06-01/nvidia-enters-windows-laptop-market-taking-on-intel-and-amd">→ Bloomberg 报道</a></p>
+<p class="source">来源：NVIDIA / Bloomberg / Tom's Hardware</p>
+<p class="date">2026-06-01</p>
+</div>
+
+<div class="card">
+<h3>🔬 硅光子量子随机数生成器芯片研制成功</h3>
+<p>新加坡国立大学研究团队开发了全球首款<strong>可自测的硅光子量子随机数生成器芯片</strong>。该芯片利用 3D 纳米打印的"光笼"（light cages）结构，在原子蒸汽中捕获和操控光子，实现了芯片级量子随机数生成。</p>
+<p>突破点在于"自测"功能：芯片能检测自身硬件是否被篡改或老化，解决了数十年来随机数生成器需要完全信任硬件的安全隐患。这对量子通信和密码学有重大意义。</p>
+<p><a href="https://news.sciencenet.cn/htmlnews/2026/6/566268.shtm">→ 科学网报道</a> · <a href="https://www.stdaily.com/web/gdxw/2026-06/09/content_529619.html">→ 中国科技网</a></p>
+<p class="source">来源：科技日报 / Science Daily</p>
+<p class="date">2026-06-09</p>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>💰 WSTS：2026 年全球半导体市场规模将突破 1.5 万亿美元</h3>
+<p>世界半导体贸易统计组织（WSTS）6月2日发布春季预测报告，大幅上调预期：<strong>2026 年全球半导体市场规模将同比增长约 90%，达到 1.511 万亿美元</strong>（约合人民币 10.2 万亿元）。这比此前预测的 9750 亿美元几乎翻倍。</p>
+<p>主要驱动力是 AI 芯片需求爆发——生成式 AI 芯片收入预计接近 5000 亿美元，占整个市场约三分之一。WSTS 还预测 2027 年市场将进一步增长 27%，达到 1.914 万亿美元。内存芯片（尤其是 HBM）是增长最快的细分领域。</p>
+<p><a href="https://www.wsts.org/76/Recent-News-Release">→ WSTS 官方</a> · <a href="https://finance.sina.com.cn/wm/2026-06-04/doc-iniahhrm2355074.shtml">→ 新浪财经</a></p>
+<p class="source">来源：WSTS / SIA / 新浪财经</p>
+<p class="date">2026-06-02</p>
+</div>
+
+<div class="card">
+<h3>📉 TrendForce：台积电代工市场份额升至 72.3%，是三星的 11 倍</h3>
+<p>市场研究机构 TrendForce 最新数据显示，<strong>2026 年 Q1 台积电在全球晶圆代工市场份额达到 72.3%</strong>（环比从 70.4% 继续上升），而三星仅占 6.5%。这意味着台积电的代工业务规模已经是三星的 11 倍以上。</p>
+<p>台积电的增长主要由 N3 工艺（3nm）在智能手机和 AI 芯片领域的产能爬坡驱动。三星虽然在 2nm 节点上计划将产能提升 163%，但在良率和客户获取上仍面临巨大挑战。AI 芯片需求让台积电的 CoWoS 先进封装产能成为行业瓶颈。</p>
+<p><a href="https://www.sammyfans.com/2026/06/12/samsung-tsmc-chip-foundry-business-trendforce-q1-2026/">→ Sammy Fans</a> · <a href="https://marklapedus.substack.com/p/tsmc-gains-foundry-share-in-q1-26">→ Semiecosystem</a></p>
+<p class="source">来源：TrendForce / Semiecosystem</p>
+<p class="date">2026-06-12</p>
+</div>
+
+<div class="card">
+<h3>🏭 芯联集成拟投 200 亿元建设 12 英寸数模混合芯片产线</h3>
+<p>芯联集成（Smicore）发布公告，拟在绍兴市联合合作方投资建设<strong>12 英寸数模混合芯片生产线</strong>，规划月产能 5 万片，总投资规模约 200 亿元，其中芯联集成出资 30.12 亿元。该项目瞄准新能源汽车、工业控制等领域的模拟混合信号芯片需求。</p>
+<p>同期，IEEE/JSAP VLSI Symposium 2026（6月14-18日，夏威夷）今日开幕，主题为"通过 VLSI 创新推进 AI 前沿"，将展示最新 CMOS、互连和背面供电等技术进展。</p>
+<p><a href="https://www.esmchina.com/news/">→ 国际电子商情</a> · <a href="https://www.vlsisymposium.org/">→ VLSI Symposium 2026</a></p>
+<p class="source">来源：国际电子商情 / SEMI / VLSI Symposium</p>
+<p class="date">2026-06-13</p>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>💎 IBM 承诺投入 100 亿美元，目标 2029 年交付容错量子计算机</h3>
+<p>IBM 在 6 月 2 日的公告中宣布，将在未来五年内投入<strong>超过 100 亿美元</strong>用于量子计算研发，目标是 2029 年交付全球首台大规模容错量子计算机——<strong>IBM Quantum Starling</strong>。该系统计划实现 200 个逻辑量子比特。</p>
+<p>这一投资规模在量子计算领域史无前例。IBM 同时公布了清晰的路线图：从当前的 Heron 处理器（156 量子比特），到 2026 年的 Flamingo（多芯片互连），再到 2029 年的 Starling（容错运行）。这笔资金将用于扩展硬件制造、量子软件开发工具链以及云服务。</p>
+<p><a href="https://newsroom.ibm.com/2026-06-02-ibm-commits-more-than-10-billion-to-quantum-computing,-funding-its-roadmap-from-todays-leading-systems-to-the-worlds-first-fault-tolerant-quantum-computers">→ IBM 新闻室</a> · <a href="https://qz.com/ibm-quantum-computing-10-billion-fault-tolerant-2029-060326">→ Quartz 报道</a></p>
+<p class="source">来源：IBM Newsroom / Quartz / Quantum Computing Report</p>
+<p class="date">2026-06-02</p>
+</div>
+
+<div class="card">
+<h3>🔬 微软量子芯片可靠性提升 1000 倍</h3>
+<p>微软宣布其新一代基于拓扑量子比特的芯片在可靠性方面<strong>比前代提升了 1000 倍</strong>。这是继 2025 年 Majorana 芯片发布后的重大进展。微软预测将在本十年末（2029-2030 年）拥有能够解决商业实际问题的量子计算机。</p>
+<p>拓扑量子比特利用马约拉纳费米子的特殊性质，理论上对环境噪声具有天然免疫力，是实现容错量子计算的重要候选方案之一。微软的路线与 IBM（超导）和 Google（超导）形成了差异化竞争。</p>
+<p><a href="https://www.bbc.com/news/articles/cj4p7gyvp52o">→ BBC News</a></p>
+<p class="source">来源：BBC News</p>
+<p class="date">2026-06-02</p>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p>由 GLM 5.1 生成 · 新闻来源已标注 · 仅供参考</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #1a1a1a;
+  --card-border: #2a2a2a;
+  --text: #ccc;
+  --text-dim: #888;
+  --accent: #4ade80;
+  --accent-dim: rgba(74,222,128,0.15);
+  --accent-border: rgba(74,222,128,0.3);
+  --red: #f87171;
+  --red-dim: rgba(239,68,68,0.15);
+  --red-border: rgba(239,68,68,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:920px;margin:0 auto}
+h1{text-align:center;color:var(--accent);font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:var(--text-dim);font-size:0.9em;margin-bottom:28px}
+.subtitle a{color:var(--accent);text-decoration:none}
+h2{color:var(--accent);font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:var(--accent);margin:16px 0 10px}
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:var(--text-dim);font-size:0.8em;margin-top:6px}
+
+/* Poster Grid */
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.poster-title{font-size:1.3em;font-weight:700}
+
+/* Stock Grid */
+.stock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stock-item{background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:0.95em}
+.stock-name{font-size:0.72em;color:var(--text-dim);margin-top:2px}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.down{background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)}
+
+/* Kline */
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:var(--accent);text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+
+/* Footer */
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:var(--accent);text-decoration:none}
+
+/* Lang Toggle */
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+
+/* Responsive */
+@media(max-width:768px){
+  .stock-grid{grid-template-columns:repeat(2,1fr)}
+  .kline-grid{grid-template-columns:1fr}
+  .poster-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- ═══ POSTER GRID ═══ -->
+<div id="poster">
+<div class="poster-grid">
+
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a 0%,#15803d 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh poster-title">美股强势反弹</div>
+<div class="en poster-title" style="display:none">US Markets Rebound</div>
+<div class="zh poster-data">• 道指 +1.31% · 标普 +1.08% · 纳指 +1.55%<br>• 费半暴涨 +4.49%，半导体领涨<br>• Nvidia盘后财报炸裂：营收$81.6B</div>
+<div class="en poster-data" style="display:none">• Dow +1.31% · S&P +1.08% · Nasdaq +1.55%<br>• SOX surges +4.49%, chips lead the way<br>• Nvidia after-hours: Revenue $81.6B beat</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🤖</div>
+<div class="zh poster-title">Nvidia业绩炸裂</div>
+<div class="en poster-title" style="display:none">Nvidia Blowout Quarter</div>
+<div class="zh poster-data">• Q1 FY27 营收$81.6B，同比+85%<br>• Q2指引~$91B，超预期<br>• $800亿回购 · "Agentic AI已到来"</div>
+<div class="en poster-data" style="display:none">• Q1 FY27 revenue $81.6B, +85% YoY<br>• Q2 guide ~$91B, beats expectations<br>• $80B buyback · "Agentic AI has arrived"</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#1d4ed8 0%,#1e40af 100%)">
+<div class="poster-icon">🇭🇰</div>
+<div class="zh poster-title">港股科技大涨</div>
+<div class="en poster-title" style="display:none">HK Tech Surges</div>
+<div class="zh poster-data">• 恒指 +1.62% · 恒生科技 +2.66%<br>• 美伊和谈曙光提振全球风险偏好<br>• 半导体板块强势</div>
+<div class="en poster-data" style="display:none">• HSI +1.62% · HS Tech +2.66%<br>• US-Iran peace hopes lift risk appetite<br>• Semiconductor sector strong</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)">
+<div class="poster-icon">🇮🇷</div>
+<div class="zh poster-title">美伊谈判突破</div>
+<div class="en poster-title" style="display:none">US-Iran Breakthrough</div>
+<div class="zh poster-data">• 特朗普称谈判"最后阶段"<br>• 油价和国债收益率双双回落<br>• 避险情绪显著降温</div>
+<div class="en poster-data" style="display:none">• Trump says talks in "final stages"<br>• Oil & Treasury yields both retreat<br>• Risk-off sentiment eases significantly</div>
+</div>
+
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-20 · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- ═══ US MARKETS ═══ -->
+<h2>🇺🇸 <span class="zh">美股行情（5月20日收盘）</span><span class="en" style="display:none">US Markets (May 20 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker">DJI</div>
+  <div class="stock-name"><span class="zh">道琼斯</span><span class="en" style="display:none">Dow Jones</span></div>
+  <div class="stock-price">50,009</div>
+  <div class="stock-change up">+1.31%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">S&P 500</div>
+  <div class="stock-name"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div>
+  <div class="stock-price">7,433</div>
+  <div class="stock-change up">+1.08%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">NASDAQ</div>
+  <div class="stock-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq Composite</span></div>
+  <div class="stock-price">26,270</div>
+  <div class="stock-change up">+1.55%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">SOX</div>
+  <div class="stock-name"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semiconductor</span></div>
+  <div class="stock-price">11,813</div>
+  <div class="stock-change up">+4.49%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">10Y</div>
+  <div class="stock-name"><span class="zh">10年期国债</span><span class="en" style="display:none">10Y Treasury</span></div>
+  <div class="stock-price">4.58%</div>
+  <div class="stock-change up"><span class="zh">↓ 回落</span><span class="en" style="display:none">↓ Retreating</span></div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">WTI</div>
+  <div class="stock-name"><span class="zh">原油</span><span class="en" style="display:none">Crude Oil</span></div>
+  <div class="stock-price">$106.5</div>
+  <div class="stock-change up"><span class="zh">↓ 回落</span><span class="en" style="display:none">↓ Retreating</span></div>
+</div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — <span class="zh">半导体ETF</span><span class="en" style="display:none">Semiconductor ETF</span></div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TLT — <span class="zh">20+年国债</span><span class="en" style="display:none">20Y+ Treasury</span></div><div id="tv-tlt"></div></div>
+<div class="kline-item"><div class="kline-label">USO — <span class="zh">原油ETF</span><span class="en" style="display:none">Oil ETF</span></div><div id="tv-uso"></div></div>
+</div>
+
+<!-- ═══ CHINA / HK ═══ -->
+<h2>🇨🇳 <span class="zh">A股行情（5月20日收盘）</span><span class="en" style="display:none">A-Shares (May 20 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SSE</span></div>
+  <div class="stock-name">000001</div>
+  <div class="stock-price">4,162</div>
+  <div class="stock-change down">-0.18%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZSE</span></div>
+  <div class="stock-name">399001</div>
+  <div class="stock-price">15,570</div>
+  <div class="stock-change up"><span class="zh">持平</span><span class="en" style="display:none">Flat</span></div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div>
+  <div class="stock-name">399006</div>
+  <div class="stock-price">3,943</div>
+  <div class="stock-change up">+0.34%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div>
+  <div class="stock-name"><span class="zh">历史新高</span><span class="en" style="display:none">All-Time High</span></div>
+  <div class="stock-price">🔥</div>
+  <div class="stock-change up">+3.20%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">A股窄幅震荡，科创50创历史新高</span><span class="en" style="display:none">A-Shares Range-Bound, STAR 50 Hits Record</span></h4>
+<p><span class="zh">周三A股涨跌分化，上证微跌0.18%至4,162点，深成指持平于15,570点。全球债市抛售继续打压传统板块，但科创50大涨3.2%创下历史新高，反映AI/半导体逻辑独立走强。成交额29,764亿元，较前日放量675亿元。央行连续第12个月维持LPR不变（1年期3%，5年期3.5%）。科技股方面，海光信息+7%，中际旭创+2.2%，胜宏科技+2.4%，宁德时代+1.2%。</span><span class="en" style="display:none">Wednesday A-shares diverged: Shanghai dipped 0.18% to 4,162 while SZSE held flat at 15,570. Global bond selloff continued to weigh on traditional sectors, but STAR 50 surged 3.2% to a record high, reflecting independent AI/semiconductor strength. Turnover was ¥2.976 trillion, up ¥67.5B from prior day. PBOC kept LPR unchanged for 12th month. Tech gainers: Hygon +7%, Zhongji Innolight +2.2%, Victory Giant +2.4%, CATL +1.2%.</span></p>
+<p class="src">来源：Trading Economics / 同花顺 / Sina Finance</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（5月20日收盘）</span><span class="en" style="display:none">Hong Kong (May 20 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">恒指</span><span class="en" style="display:none">HSI</span></div>
+  <div class="stock-name">Hang Seng</div>
+  <div class="stock-price">25,963</div>
+  <div class="stock-change up">+1.62%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">恒生科技</span><span class="en" style="display:none">HS Tech</span></div>
+  <div class="stock-name">HSTECH</div>
+  <div class="stock-price">4,941</div>
+  <div class="stock-change up">+2.66%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">国企指数</span><span class="en" style="display:none">HS CEI</span></div>
+  <div class="stock-name">HSCEI</div>
+  <div class="stock-price">8,691</div>
+  <div class="stock-change up">+1.89%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">港股全面反弹，科技股领涨</span><span class="en" style="display:none">HK Markets Rally, Tech Leads</span></h4>
+<p><span class="zh">恒生指数涨1.62%至25,963点，恒生科技指数涨2.66%至4,941点。美伊和谈曙光提振全球风险偏好，科技股受Nvidia盘前乐观情绪带动强势反弹。半导体板块表现亮眼，资金明显回流港股科技板块。习近平预计下周访问朝鲜（7年来首次），地缘消息也带来一定利好。</span><span class="en" style="display:none">Hang Seng rose 1.62% to 25,963; Hang Seng Tech surged 2.66% to 4,941. US-Iran peace hopes boosted global risk appetite, and tech stocks rallied on pre-Nvidia optimism. Semiconductor sector outperformed as funds flowed back into HK tech. Xi Jinping's expected visit to North Korea (first in 7 years) added a geopolitical positive.</span></p>
+<p class="src">来源：HSI.com.hk / Trading Economics / Yahoo Finance</p>
+</div>
+
+<!-- ═══ KEY DRIVERS ═══ -->
+<h2>⚡ <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>🤖 <span class="zh">1. Nvidia Q1 FY2027业绩炸裂 — AI需求"parabolic"</span><span class="en" style="display:none">1. Nvidia Q1 FY27 Blowout — AI Demand "Parabolic"</span></h4>
+<p><span class="zh"><b>财报亮点：</b><br>• 营收$81.6B，同比+85%，远超预期$78.8B<br>• 数据中心营收接近翻倍<br>• Q2指引约$91B，大幅超出市场预期<br>• 宣布$800亿股票回购计划<br>• CEO黄仁勋金句："Agentic AI has arrived. Demand has gone parabolic."<br><br><b>五大要点：</b><br>① Nvidia是唯一运行所有前沿AI模型的平台（Anthropic, OpenAI, SpaceXAI, Meta, Google Gemini）<br>② 支持所有超大规模数据中心核心需求<br>③ 产品组合扩展至新AI数据中心、主权AI云、企业级部署<br>④ 物理AI（自动驾驶+机器人）是"下一波浪潮"<br>⑤ Vera CPU是"重大新增长驱动力"，打开$2000亿市场<br><br><b>风险提示：</b>Nvidia在10-Q中承认数据中心格局正在变化，大客户（Google、Amazon、Meta、Microsoft）正自研ASIC芯片，可能成为未来竞争威胁。毛利率面临存储芯片涨价压力。</span><span class="en" style="display:none"><b>Highlights:</b><br>• Revenue $81.6B, +85% YoY, beating Street estimate of $78.8B<br>• Data center revenue nearly doubled<br>• Q2 guidance ~$91B, well above expectations<br>• Announced $80B share buyback program<br>• CEO Jensen Huang: "Agentic AI has arrived. Demand has gone parabolic."<br><br><b>Five Key Takeaways:</b><br>① Nvidia is the only platform running every frontier AI model (Anthropic, OpenAI, SpaceXAI, Meta, Google Gemini)<br>② Powers every hyperscaler's core data processing and ML workloads<br>③ Product portfolio expanding into new AI data centers, sovereign AI clouds, enterprise on-prem<br>④ Physical AI (autonomous vehicles + robotics) is "the next wave"<br>⑤ Vera CPU is a "major new growth driver" opening a $200B market<br><br><b>Risk:</b> Nvidia acknowledged in its 10-Q that hyperscaler customers are developing custom ASICs, potentially becoming future competitors. Gross margins face pressure from rising memory chip costs.</span></p>
+<p class="src">来源：CNBC / Reuters / Investopedia / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>🇮🇷 <span class="zh">2. 美伊和谈曙光 — 地缘风险降温</span><span class="en" style="display:none">2. US-Iran Peace Hopes — Geopolitical Risk Eases</span></h4>
+<p><span class="zh">美国总统特朗普表示与伊朗的谈判已进入"最后阶段"，愿意再等几天获得"正确答案"。伊朗外交部确认美伊之间信息传递仍在继续。此前三天因美以对伊冲突升级，油价飙升、国债收益率攀升至多年高位，美股连续三天下跌。周三和谈曙光推动油价回落、10年期国债收益率从16个月高点回调，全面提振风险偏好。</span><span class="en" style="display:none">President Trump said Iran negotiations are in the "final stages," willing to wait a few more days for the "right answer." Iran's foreign ministry confirmed messaging continues. The prior three days saw oil surge and yields hit multi-year highs on US-Israel conflict escalation. Wednesday's breakthrough drove oil lower, 10Y yields off 16-month highs, and broadly boosted risk appetite.</span></p>
+<p class="src">来源：Reuters / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4>🏦 <span class="zh">3. Fed会议纪要 — 加息铺垫但概率下降</span><span class="en" style="display:none">3. Fed Minutes — Rate Hike Groundwork, But Probability Down</span></h4>
+<p><span class="zh">美联储5月会议纪要显示更多官员倾向为可能的加息铺路。然而市场对12月加息的概率反而降至36.8%（此前更高）。10年期国债收益率连涨三日后周三首次回落，从此前的16个月高点回调。新任主席Warsh本周宣誓就职，债市正对其施压"压力测试"。</span><span class="en" style="display:none">Fed May minutes show more officials leaning toward laying groundwork for a possible rate hike. However, market-implied December hike probability actually fell to 36.8%. The 10Y yield retreated for the first time in four days, pulling back from 16-month highs. New Chair Warsh is sworn in this week amid a bond market "stress test."</span></p>
+<p class="src">来源：Reuters / CNBC</p>
+</div>
+
+<!-- ═══ SEMICONDUCTOR FOCUS ═══ -->
+<h2>🔬 <span class="zh">半导体 / AI 重点关注</span><span class="en" style="display:none">Semiconductor / AI Focus</span></h2>
+
+<div class="card">
+<h4>🔥 <span class="zh">费半暴涨4.49% — Nvidia财报前疯狂抢跑</span><span class="en" style="display:none">🔥 SOX Surges 4.49% — Chip Stocks Front-Run Nvidia</span></h4>
+<p><span class="zh">费城半导体指数暴涨4.49%，创下近期最大单日涨幅。盘前半导体已大幅抢跑：<br>• <b>Nvidia (NVDA)</b>：收盘+1.3%，盘后波动剧烈但财报后涨超2%<br>• <b>Astera Labs (ALAB)</b>：+17.7%<br>• <b>ARM Holdings</b>：+15%<br>• <b>Marvell (MRVL)</b>：+6%<br>• <b>Salesforce (CRM)</b>：+0.5%，AI+SaaS情绪稳定<br><br>BMO首席策略师Carol Schleif："科技再次驱动市场，AI主题回归。投资者把通胀担忧抛到脑后，全面拥抱AI故事。"</span><span class="en" style="display:none">The PHLX Semiconductor Index surged 4.49%, the largest single-day gain in recent weeks. Chips front-ran Nvidia aggressively:<br>• <b>Nvidia (NVDA)</b>: Closed +1.3%, volatile after-hours but >2% up post-earnings<br>• <b>Astera Labs (ALAB)</b>: +17.7%<br>• <b>ARM Holdings</b>: +15%<br>• <b>Marvell (MRVL)</b>: +6%<br>• <b>Salesforce (CRM)</b>: +0.5%, AI/SaaS sentiment steady<br><br>BMO's Carol Schleif: "Technology is driving the bus again, and the AI theme. We swapped back from inflation concerns into the all-things-AI story."</span></p>
+<p class="src">来源：Reuters / Yahoo Finance / Motley Fool</p>
+</div>
+
+<div class="card">
+<h4>🤖 <span class="zh">Nvidia盘后：$91B指引确认AI支出加速</span><span class="en" style="display:none">🤖 Nvidia After-Hours: $91B Guide Confirms AI Spending Acceleration</span></h4>
+<p><span class="zh"><b>盘后反应：</b>Nvidia财报公布后股价波动剧烈，先跌后涨超2%。<br><br><b>市场解读分歧：</b><br>• <b>乐观面：</b>$81.6B营收超预期$78.8B，$91B Q2指引确认AI资本支出继续加速。黄仁勋强调"Agentic AI已到来"，Nvidia是唯一覆盖所有前沿模型的平台。Vera CPU打开$2000亿市场，$800亿回购彰显信心。<br>• <b>谨慎面：</b>盘后股价反应相对平淡，体现"buy the rumor, sell the news"效应。毛利率面临存储芯片涨价压力，大客户自研ASIC芯片构成长期竞争威胁。Google/Blackstone新合资公司将部署TPU，直接竞争。<br><br><b>关键判断：</b>Nvidia的业绩确认AI基础设施投资周期远未结束，但超预期门槛已越来越高。</span><span class="en" style="display:none"><b>After-hours reaction:</b> Nvidia shares volatile post-earnings, initially dipping then rising >2%.<br><br><b>Market interpretation split:</b><br>• <b>Bull case:</b> $81.6B beat of $78.8B, $91B Q2 guide confirms AI capex acceleration. Huang's "Agentic AI has arrived" thesis, Nvidia as sole platform for all frontier models. Vera CPU opens $200B TAM, $80B buyback signals confidence.<br>• <b>Cautious case:</b> Muted after-hours reaction reflects "buy the rumor, sell the news." Gross margins pressured by memory chip costs, customer ASIC development poses long-term competitive threat. Google/Blackstone JV deploying TPUs is direct competition.<br><br><b>Key takeaway:</b> Nvidia's results confirm the AI infrastructure investment cycle is far from over, but the beat bar keeps rising.</span></p>
+<p class="src">来源：CNBC / Investopedia / Bloomberg</p>
+</div>
+
+<!-- ═══ OUTLOOK ═══ -->
+<h2>🔮 <span class="zh">短期预判</span><span class="en" style="display:none">Short-Term Outlook</span></h2>
+
+<div class="card">
+<h4>📅 <span class="zh">5/21（周四）展望</span><span class="en" style="display:none">📅 May 21 (Thu) Outlook</span></h4>
+<p><span class="zh"><b>美股：</b>Nvidia盘后$81.6B营收+$91B指引是正面催化剂，但"超预期门槛"已极高。若盘后涨势延续至明日开盘，科技/半导体可能再拉一波。关注大盘能否突破近期阻力。<br><br><b>A股：</b>今天受全球债券抛售拖累窄幅震荡，但科创50创历史新高说明AI/半导体逻辑独立走强。明天预计受Nvidia利好带动，科技板块有望继续上攻。上证4,200点附近面临压力。<br><br><b>港股：</b>今天已提前反弹，明天有望受Nvidia利好催化继续走强，恒生科技关注5,000点整数关口。</span><span class="en" style="display:none"><b>US:</b> Nvidia's $81.6B beat + $91B guide is a positive catalyst, but the beat bar is extremely high. If after-hours gains carry into Thursday's open, tech/semis may extend the rally. Watch for resistance tests.<br><br><b>A-Shares:</b> Today's range-bound session was dragged by global bond selloff, but STAR 50's record high shows AI/semiconductor strength is independent. Tomorrow should benefit from Nvidia's beat, with tech likely to push higher. Shanghai faces resistance near 4,200.<br><br><b>HK:</b> Already rallied today; tomorrow should see further strength on Nvidia catalyst. Watch HS Tech at the 5,000 level.</span></p>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">中期（1-2周）风险与机会</span><span class="en" style="display:none">📈 Medium-Term (1-2 Wks) Risks & Opportunities</span></h4>
+<p><span class="zh"><b>上行情景：</b>Nvidia $91B指引 + 美伊和谈成功 → AI/半导体强势反弹延续，纳指挑战新高，港股恒生科技重回5,200+。<br><br><b>下行风险：</b><br>① 毛利率受存储芯片涨价侵蚀引发估值重评<br>② 大客户自研ASIC加速（Google/Blackstone TPU合资公司），侵蚀Nvidia长期市场份额<br>③ 美伊谈判破裂，油价重回$115+，债市再度崩跌<br>④ 新任Fed主席Warsh政策不确定——鸽派信号可能引发市场信任危机<br><br><b>关注板块：</b>半导体（Nvidia财报催化剂）、AI基础设施（数据中心、光模块）、能源（油价双向波动）、港股科技（估值修复空间）。</span><span class="en" style="display:none"><b>Upside:</b> Nvidia $91B guide + successful US-Iran deal → AI/semi rally extends, Nasdaq challenges new highs, HK Tech reclaims 5,200+.<br><br><b>Downside risks:</b><br>① Gross margin erosion from memory chip cost inflation triggers re-rating<br>② Customer ASIC acceleration (Google/Blackstone TPU JV) erodes Nvidia's long-term share<br>③ US-Iran talks collapse, oil back above $115, bonds sell off again<br>④ New Fed Chair Warsh policy uncertainty — dovish signals could trigger confidence crisis<br><br><b>Sectors to watch:</b> Semis (Nvidia catalyst), AI infrastructure (data centers, optics), Energy (bidirectional oil), HK Tech (valuation recovery).</span></p>
+<p class="src">来源：BMO Private Wealth / Schwab / CNBC</p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+<p>📊 Sky Portal Daily Market · <span class="zh">由</span><span class="en" style="display:none">Generated by</span> Sky ☁️ <span class="zh">自动生成</span><span class="en" style="display:none">auto-generated</span> · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：</span><span class="en" style="display:none">Data sources: </span>Reuters, CNBC, Yahoo Finance, Investopedia, Motley Fool, Trading Economics, Bloomberg, 同花顺</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tlt', sym:'NASDAQ:TLT'},
+  {id:'tv-uso', sym:'NYSEARCA:USO'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

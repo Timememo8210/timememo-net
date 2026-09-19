@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-23</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card h3 a{color:#f0a040;text-decoration:none}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.8em;margin-top:8px}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-23 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 Chiplet（小芯片）？为什么要把大芯片拆成小块？</h3>
+<p>想象你要造一栋超级大楼。你可以一次性浇筑整体结构（monolithic），但万一某层有裂缝，整栋楼就废了。Chiplet 的思路是：把大楼拆成几个预制模块，分别建造、测试合格后再拼装在一起。</p>
+<p>传统单片芯片（如一颗大 CPU）如果任何一个晶体管坏了，整颗芯片就要丢弃。芯片越大、工艺越先进，良率越低、成本越高。Chiplet 方案将大芯片拆成多个小裸片（die），各自用最合适的工艺制造（CPU 核心用 3nm，I/O 用 6nm），然后通过先进封装（如 TSMC CoWoS、Intel EMIB）"拼"在一起。</p>
+<p><strong>核心优势：</strong>① 每个小 die 良率高，降低整体成本；② 不同模块可用不同工艺节点混合搭配；③ 方便快速迭代——升级 CPU 不用重新设计 I/O。AMD 的 Ryzen/EPYC 和 Intel 的 Meteor Lake 都采用了 Chiplet 架构。</p>
+<p><strong>挑战：</strong>die 之间的高速互连（UCIe 标准）、封装成本、以及测试复杂度，都是 Chiplet 大规模普及需要解决的问题。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>Intel 18A-P 进入风险量产，性能提升 9%</h3>
+<p>在 2026 VLSI 研讨会（6月16日，檀香山）上，Intel 宣布其 <strong>Intel 18A-P</strong> 工艺节点已正式进入风险量产（risk production）。18A-P 是 Intel 18A 家族的首个性能增强版本，采用 RibbonFET GAA 晶体管 + PowerVia 背面供电技术，相比 18A 实现约 9% 的性能提升和更好的热特性。Intel 还披露 Google 预计在 2027-2028 年间通过 Intel Foundry 生产超过 600 万颗 TPU 芯片，NVIDIA 也在评估 Intel 18A 及先进封装能力用于 2028 年产能。</p>
+<p>来源：<a href="https://newsroom.intel.com/intel-foundry/intel-foundry-details-process-milestones-future-innovation-at-vlsi-symposium" target="_blank">Intel Newsroom</a> · <a href="https://www.sahmcapital.com/news/content/intel-foundry-says-intel-18a-p-enters-risk-production-at-vlsi-symposium-2026-06-17" target="_blank">Sahm Capital</a></p>
+<p class="date">2026-06-17</p>
+</div>
+
+<div class="card">
+<h3>苹果、NVIDIA 考虑将部分芯片产能转移至 Intel Foundry</h3>
+<p>据 Digitimes 报道，Apple 和 NVIDIA 正在考虑在 2028 年将部分芯片生产转移至 Intel Foundry。报告指出，先进封装环节 Intel 可能占比约 25%，TSMC 占 75%。Google 已确认将超过 300 万颗 TPU 的生产交由 Intel，NVIDIA 正在评估 Intel 的 18A 工艺和先进封装能力。这标志着 TSMC 独占最先进 AI 芯片制造的局面可能被打破。</p>
+<p>来源：<a href="https://bits-chips.com/article/report-apple-and-nvidia-looking-at-partial-production-shift-to-intel/" target="_blank">Bits & Chips</a> · <a href="https://www.theinformation.com/articles/google-nvidia-consider-intel-backup-chip-manufacturer" target="_blank">The Information</a></p>
+<p class="date">2026-06-18</p>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>全球科技股暴跌：芯片股领跌，Samsung、SK Hynix 单日跌超 12%</h3>
+<p>6月23日，全球股市遭遇大规模抛售，科技股和芯片股首当其冲。韩国 KOSPI 指数从历史高点回落，<strong>三星电子和 SK 海力士单日跌幅均超过 12%</strong>，拖累亚洲市场。美股方面，Nasdaq 100 期货暴跌 2.8%，美光科技盘前跌超 8%，Marvell、高通跌幅在 6%-8% 之间。此次抛售由多因素引发：AI 芯片估值过高的回调压力、NVIDIA H20 芯片对华出口面临新限制、以及全球宏观不确定性。分析人士指出，经历数月暴涨后，AI 芯片板块正在经历必要的估值修正。</p>
+<p>来源：<a href="https://www.cnbc.com/2026/06/23/tech-stocks-sell-off-mag7-samsung-sk-hynix.html" target="_blank">CNBC</a> · <a href="https://www.bloomberg.com/news/articles/2026-06-23/us-stock-futures-tumble-as-megacap-tech-rout-hits-asian-peers" target="_blank">Bloomberg</a> · <a href="https://www.forbes.com/sites/siladityaray/2026/06/23/us-futures-and-global-markets-slump-led-by-tech-and-chipmaker-stock-rout/" target="_blank">Forbes</a></p>
+<p class="date">2026-06-23</p>
+</div>
+
+<div class="card">
+<h3>TSS2026 集邦咨询半导体产业高层论坛今日在深圳召开</h3>
+<p>6月23日，TrendForce 集邦咨询主办的 <strong>TSS2026 半导体产业高层论坛</strong>在深圳福田金茂 JW 万豪酒店举行。论坛聚焦"周期与变革"主题，围绕晶圆代工、存储器、AI 服务器、CPO（共封装光学）、具身智能等热门议题展开深入讨论。此前集邦数据显示，2026年Q1 全球 DRAM 合约价季增 93-98%，全球半导体销售额 WSTS 预估全年将逼近 9750 亿美元。日本半导体设备商（东京电子、迪斯科、爱德万等）订单饱和，产业链全面复苏。</p>
+<p>来源：<a href="https://www.trendforce.cn/" target="_blank">TrendForce 集邦咨询</a> · <a href="https://finance.sina.cn/stock/jdts/2026-06-22/detail-iniehmvu2588809.d.html" target="_blank">新浪财经</a></p>
+<p class="date">2026-06-23</p>
+</div>
+
+<div class="card">
+<h3>华尔街转向看好 Samsung、SK Hynix"AI 瓶颈股"</h3>
+<p>Chosun 报道，尽管短期经历剧烈波动，华尔街投行正在转向看好三星和 SK 海力士。原因是两家公司签订了长期合同、降低了收入波动性，且作为"AI 瓶颈"环节的存储芯片供应商，预计将受益于 AI 基础设施建设至少到 2027 年。不过，全球银行已开始限制对冲基金对这两只股票的杠杆押注，以控制风险。</p>
+<p>来源：<a href="https://www.chosun.com/english/market-money-en/2026/06/23/HXYNQYGGHFH6PCC5QOLISMCDMI/" target="_blank">Chosun</a> · <a href="https://www.bloomberg.com/news/articles/2026-06-12/banks-curb-hedge-fund-bets-on-sk-hynix-samsung-after-wild-moves" target="_blank">Bloomberg</a></p>
+<p class="date">2026-06-23</p>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>中国攻克硅基量子芯片核心材料：硅-28 同位素实现自主量产</h3>
+<p>6月15日，中核集团核工业理化工程研究院宣布，我国科学家在稳定同位素富集与高纯硅制备领域取得关键性突破——<strong>首次成功实现丰度超过 99.99% 的硅-28 同位素自主量产</strong>，产品关键指标达到国际先进水平。硅-28 是制造硅基量子计算芯片的核心基础材料（"纯硅"），此前长期被国外垄断。这一突破将为我国硅基量子计算芯片的自主研制，以及先进制程半导体、精确导航、计量基准等前沿科技领域提供坚实的材料支撑。</p>
+<p>来源：<a href="https://news.cctv.com/2026/06/15/ARTI9coaszWMx2q8X7RzRr27260615.shtml" target="_blank">央视新闻</a> · <a href="https://finance.sina.com.cn/wm/2026-06-15/doc-inicnisx5069100.shtml" target="_blank">新浪财经</a> · <a href="https://www.ncsti.gov.cn/kjdt/kjrd/202606/t20260617_249891.html" target="_blank">国家科技基础条件平台</a></p>
+<p class="date">2026-06-15</p>
+</div>
+
+<div class="card">
+<h3>Quantum.Tech World 2026 即将开幕：量子+AI+HPC 企业级融合</h3>
+<p><strong>Quantum.Tech World 2026</strong>大会将于 6月25-26日在波士顿 Encore Boston Harbor 举行，主题为"在企业规模上赋能量子计算、AI 与 HPC"。大会将聚焦后量子密码学（PQC）实施、量子计算商业化路径、以及量子与 AI/HPC 的协同架构。此前，NIST 已于 2024 年 8 月标准化了首批后量子密码算法，2026 年被认为是量子安全（Quantum Security）落地应用的关键一年。</p>
+<p>来源：<a href="https://www.alphaevents.com/events-quantumtechus" target="_blank">Alpha Events</a> · <a href="https://thequantuminsider.com/2026/01/06/after-a-year-of-quantum-awareness-2026-becomes-the-year-of-quantum-security/" target="_blank">The Quantum Insider</a></p>
+<p class="date">2026-06-23</p>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p>由 GLM 5.1 生成 · 新闻来源已标注，仅供参考</p>
+</div>
+
+</div>
+</body>
+</html>

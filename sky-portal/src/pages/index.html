@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>墨记 — 说出你的想法，AI 帮你变成网页</title>
+  <meta name="description" content="用语音或文字描述你的想法，AI 自动生成精美的互动网页。人人都是创作者。">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="墨记 — 每条内容都是一个完整网页">
+  <meta property="og:description" content="用AI把你的想法变成精美网页，分享给世界">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons 基础样式 -->
+  <style>
+    [data-lucide] { display: none; }
+    .lucide { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; vertical-align: middle; }
+    .lucide-lg { width: 32px; height: 32px; }
+    .lucide-sm { width: 18px; height: 18px; }
+    .lucide-inline { display: inline-block; vertical-align: -3px; }
+    .share-icon-item .lucide { width: 22px; height: 22px; }
+  </style>
+
+  <!-- 全局样式 -->
+  <link rel="stylesheet" href="../styles/global.css">
+
+  <style>
+    /* ========================================
+       首页特有样式
+       ======================================== */
+
+    /* --- Hero 区 --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 背景装饰圆 */
+    .hero__bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .hero__bg-circle--1 {
+      width: 500px;
+      height: 500px;
+      background: var(--accent-soft);
+      top: -120px;
+      right: -100px;
+      animation: breathe 8s ease-in-out infinite;
+    }
+
+    .hero__bg-circle--2 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent);
+      bottom: -60px;
+      left: -80px;
+      animation: breathe 10s ease-in-out infinite 2s;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      margin-bottom: 28px;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .hero__badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: breathe 2s ease-in-out infinite;
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.6s ease 0.15s both;
+    }
+
+    .hero__title-accent {
+      color: var(--accent);
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      animation: fadeInUp 0.6s ease 0.45s both;
+    }
+
+    @media (min-width: 640px) {
+      .hero__actions {
+        flex-direction: row;
+      }
+    }
+
+    .hero__demo-note {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      animation: fadeInUp 0.6s ease 0.6s both;
+    }
+
+    /* --- 特点区 --- */
+    .features {
+      padding: 100px 24px;
+      background: var(--bg-warm);
+      position: relative;
+    }
+
+    .features__header {
+      text-align: center;
+      max-width: var(--max-content);
+      margin: 0 auto 64px;
+    }
+
+    .features__header h2 {
+      margin-bottom: 16px;
+    }
+
+    .features__header p {
+      font-size: 1.1rem;
+    }
+
+    /* 单个特点：交替左右排列 */
+    .feature {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: var(--max-wide);
+      margin: 0 auto 80px;
+      align-items: center;
+    }
+
+    .feature:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 偶数项图文反转（桌面端） */
+    @media (min-width: 768px) {
+      .feature {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .feature:nth-child(odd) {
+        flex-direction: row-reverse;
+      }
+
+      .feature__text,
+      .feature__visual {
+        flex: 1;
+        max-width: 50%;
+      }
+
+      .feature__text {
+        padding-top: 24px;
+      }
+
+      .feature:nth-child(odd) .feature__text {
+        text-align: right;
+        padding-left: 48px;
+        padding-right: 0;
+      }
+
+      .feature:not(:nth-child(odd)) .feature__text {
+        padding-right: 48px;
+      }
+    }
+
+    .feature__number {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature__text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      margin-bottom: 14px;
+    }
+
+    .feature__text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+    }
+
+    /* 特点可视化区域 */
+    .feature__visual {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      background: var(--card);
+    }
+
+    .feature__visual-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    /* 特点1：语音输入模拟 */
+    .feature-voice .feature__visual {
+      background: linear-gradient(135deg, var(--accent-bg), var(--bg-cream));
+    }
+
+    .voice-wave {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 60px;
+    }
+
+    .voice-wave span {
+      display: block;
+      width: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { height: 12px; opacity: 0.4; }
+      50% { height: 48px; opacity: 1; }
+    }
+
+    /* 为每个bar设置不同延迟 */
+    .voice-wave span:nth-child(1) { animation-delay: 0s; }
+    .voice-wave span:nth-child(2) { animation-delay: 0.1s; }
+    .voice-wave span:nth-child(3) { animation-delay: 0.2s; }
+    .voice-wave span:nth-child(4) { animation-delay: 0.3s; }
+    .voice-wave span:nth-child(5) { animation-delay: 0.4s; }
+    .voice-wave span:nth-child(6) { animation-delay: 0.3s; }
+    .voice-wave span:nth-child(7) { animation-delay: 0.2s; }
+    .voice-wave span:nth-child(8) { animation-delay: 0.1s; }
+    .voice-wave span:nth-child(9) { animation-delay: 0s; }
+
+    /* 特点2：AI 生成模拟 */
+    .feature-ai .feature__visual {
+      background: var(--card);
+    }
+
+    .ai-lines {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .ai-line {
+      height: 10px;
+      border-radius: 5px;
+      background: var(--bg-cream);
+      margin-bottom: 12px;
+      animation: aiBuild 3s ease-in-out infinite;
+    }
+
+    .ai-line:nth-child(1) { width: 80%; animation-delay: 0s; }
+    .ai-line:nth-child(2) { width: 65%; animation-delay: 0.3s; }
+    .ai-line:nth-child(3) { width: 90%; animation-delay: 0.6s; }
+    .ai-line:nth-child(4) { width: 50%; animation-delay: 0.9s; }
+    .ai-line:nth-child(5) { width: 75%; animation-delay: 1.2s; }
+
+    @keyframes aiBuild {
+      0% { background: var(--bg-cream); }
+      50% { background: var(--accent-soft); }
+      100% { background: var(--bg-cream); }
+    }
+
+    /* 特点3：分享模拟 */
+    .feature-share .feature__visual {
+      background: linear-gradient(135deg, var(--bg-cream), var(--accent-bg));
+    }
+
+    .share-icons {
+      display: flex;
+      gap: 16px;
+      font-size: 1.8rem;
+    }
+
+    .share-icon-item {
+      width: 52px;
+      height: 52px;
+      background: var(--card);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition);
+      font-size: 1.3rem;
+    }
+
+    .share-icon-item:hover {
+      transform: scale(1.15);
+    }
+
+    /* --- 模板区 --- */
+    .templates {
+      padding: 100px 24px;
+    }
+
+    .templates__header {
+      text-align: center;
+      max-width: var(--max-content);
+      margin: 0 auto 56px;
+    }
+
+    .templates__header h2 {
+      margin-bottom: 16px;
+    }
+
+    /* 模板展示：左文右图交替布局（非网格） */
+    .template-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      max-width: var(--max-wide);
+      margin: 0 auto;
+    }
+
+    .template-showcase__item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .template-showcase__item {
+        flex-direction: row;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .template-showcase__item:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .template-showcase__item:nth-child(2) {
+        /* 第二项稍微偏小 */
+        max-width: 85%;
+        margin: 0 auto;
+      }
+
+      .template-showcase__preview,
+      .template-showcase__info {
+        flex: 1;
+      }
+    }
+
+    /* 第一项放大突出 */
+    .template-showcase__item:first-child .template-showcase__preview {
+      max-width: 480px;
+    }
+
+    .template-showcase__preview {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 16/10;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .template-showcase__preview:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .template-showcase__info {
+      padding: 12px 0;
+    }
+
+    .template-showcase__number {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .template-showcase__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .template-showcase__desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 小卡片行（3/4/5/6 用更紧凑的两列） */
+    .template-small-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: var(--max-wide);
+      margin: 48px auto 0;
+    }
+
+    .template-small-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .template-small-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .template-small-card__preview {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .template-small-card__info {
+      padding: 14px 18px;
+    }
+
+    .template-small-card__title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .template-small-card__desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* --- CTA 区 --- */
+    .cta-section {
+      padding: 100px 24px;
+      text-align: center;
+      background: var(--bg-cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-display);
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+    }
+
+    .cta-section__bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 20vw, 16rem);
+      font-weight: 700;
+      color: var(--border-light);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* --- 关于区 --- */
+    .about {
+      padding: 100px 24px;
+    }
+
+    .about__inner {
+      max-width: var(--max-content);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .about h2 {
+      margin-bottom: 8px;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      max-width: 560px;
+    }
+
+    .about__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .about__stat {
+      text-align: center;
+    }
+
+    .about__stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .about__stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 导航由 nav.js 自动注入 -->
+
+  <!-- ===== Hero 区 ===== -->
+  <section class="hero">
+    <div class="hero__bg-circle hero__bg-circle--1"></div>
+    <div class="hero__bg-circle hero__bg-circle--2"></div>
+
+    <div class="hero__content">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        用AI重新定义创作
+      </div>
+
+      <h1 class="hero__title">
+        说出来，<br><span class="hero__title-accent">AI帮你变成网页</span>
+      </h1>
+
+      <p class="hero__subtitle">
+        用一段语音、几句文字描述你的想法，墨记会帮你生成一个完整的、精美的互动网页。不需要会写代码，人人都是创作者。
+      </p>
+
+      <div class="hero__actions">
+        <a href="create.html" class="btn btn-primary">
+          <i data-lucide="zap" class="lucide-sm lucide-inline"></i>
+          开始创作
+        </a>
+        <a href="#features" class="btn btn-secondary">看看怎么玩</a>
+      </div>
+
+      <p class="hero__demo-note"><i data-lucide="sparkles" class="lucide-sm lucide-inline"></i> 无需注册，打开就能用</p>
+    </div>
+  </section>
+
+  <!-- ===== 特点区 ===== -->
+  <section class="features" id="features">
+    <div class="features__header reveal">
+      <h2>三步，从想法到网页</h2>
+      <p>不需要设计技能，不需要编程知识。你只需要一个想法。</p>
+    </div>
+
+    <!-- 特点 1：说 -->
+    <div class="feature reveal">
+      <div class="feature__text">
+        <div class="feature__number">01 — 说</div>
+        <h3>语音或文字，随意表达</h3>
+        <p>打开手机对着麦克风说一段话，或者用键盘敲下你的想法。无论是一次旅行的感受、一道菜的食谱，还是一条读书笔记——墨记都能听懂。</p>
+      </div>
+      <div class="feature__visual feature-voice">
+        <div class="feature__visual-inner">
+          <div class="voice-wave">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <p style="font-size:0.95rem; color:var(--text-muted); margin-top:8px;">"说你想说的..."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 特点 2：生成 -->
+    <div class="feature reveal">
+      <div class="feature__text">
+        <div class="feature__number">02 — 生成</div>
+        <h3>AI 自动构建精美网页</h3>
+        <p>墨记会理解你的内容，自动排版、配图、设计交互。生成的不是模板——而是为你量身定做的完整网页，每一个像素都恰到好处。</p>
+      </div>
+      <div class="feature__visual feature-ai">
+        <div class="feature__visual-inner">
+          <div class="ai-lines">
+            <div class="ai-line"></div>
+            <div class="ai-line"></div>
+            <div class="ai-line"></div>
+            <div class="ai-line"></div>
+            <div class="ai-line"></div>
+          </div>
+          <p style="font-size:0.9rem; color:var(--text-muted);">AI 正在构建...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 特点 3：分享 -->
+    <div class="feature reveal">
+      <div class="feature__text">
+        <div class="feature__number">03 — 分享</div>
+        <h3>一键发布，分享全世界</h3>
+        <p>生成的网页自带独立链接。复制发给朋友，发到朋友圈，或者嵌入你的博客。每一个网页都是一件小小的作品。</p>
+      </div>
+      <div class="feature__visual feature-share">
+        <div class="feature__visual-inner">
+          <div class="share-icons">
+            <div class="share-icon-item"><i data-lucide="link"></i></div>
+            <div class="share-icon-item"><i data-lucide="message-circle"></i></div>
+            <div class="share-icon-item"><i data-lucide="smartphone"></i></div>
+          </div>
+          <p style="font-size:0.95rem; color:var(--text-muted); margin-top:8px;">分享你的网页</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 模板区 ===== -->
+  <section class="templates" id="templates">
+    <div class="templates__header reveal">
+      <h2>看看别人做了什么</h2>
+      <p>这些作品全部由墨记AI生成，没有任何人工编辑代码。</p>
+    </div>
+
+    <!-- 前两个作品：左文右图交替 -->
+    <div class="template-showcase">
+      <!-- 作品 1：杭州游记（大展示） -->
+      <div class="template-showcase__item reveal">
+        <div class="template-showcase__preview" style="background: linear-gradient(135deg, #fef3ed, #fde8d8);">
+          <i data-lucide="book-open" class="lucide-lg" style="color:#c44a1a;"></i>
+        </div>
+        <div class="template-showcase__info">
+          <div class="template-showcase__number">01</div>
+          <div class="template-showcase__title">杭州三日游记</div>
+          <div class="template-showcase__desc">语音记录了三天的行程，AI自动排版成带地图标注的图文游记。西湖、灵隐寺、河坊街，每一站都变成了精美的卡片。</div>
+        </div>
+      </div>
+
+      <!-- 作品 2：红烧肉配方 -->
+      <div class="template-showcase__item reveal">
+        <div class="template-showcase__preview" style="background: linear-gradient(135deg, #eef6ee, #d4ecd4);">
+          <i data-lucide="chef-hat" class="lucide-lg" style="color:#3d8b3d;"></i>
+        </div>
+        <div class="template-showcase__info">
+          <div class="template-showcase__number">02</div>
+          <div class="template-showcase__title">妈妈的红烧肉配方</div>
+          <div class="template-showcase__desc">口述菜谱步骤，AI生成了可互动的步骤页面。每一步都有配图和计时器，做饭时打开手机跟着做就行。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 其余作品：紧凑网格 -->
+    <div class="template-small-grid">
+      <div class="template-small-card reveal">
+        <div class="template-small-card__preview" style="background: linear-gradient(135deg, #eef0f8, #d8ddf0);">
+          <i data-lucide="library" class="lucide-lg" style="color:#4a5a8a;"></i>
+        </div>
+        <div class="template-small-card__info">
+          <div class="template-small-card__title">《百年孤独》读书笔记</div>
+          <div class="template-small-card__desc">文字输入 → 优雅阅读页</div>
+        </div>
+      </div>
+
+      <div class="template-small-card reveal">
+        <div class="template-small-card__preview" style="background: linear-gradient(135deg, #fef8ee, #fcecc4);">
+          <i data-lucide="music" class="lucide-lg" style="color:#b8860b;"></i>
+        </div>
+        <div class="template-small-card__info">
+          <div class="template-small-card__title">2025年我听的50首歌</div>
+          <div class="template-small-card__desc">文字列表 → 可视化排行</div>
+        </div>
+      </div>
+
+      <div class="template-small-card reveal">
+        <div class="template-small-card__preview" style="background: linear-gradient(135deg, #f8eef8, #ecd8ec);">
+          <i data-lucide="plane" class="lucide-lg" style="color:#8a5a8a;"></i>
+        </div>
+        <div class="template-small-card__info">
+          <div class="template-small-card__title">一个人的京都散步</div>
+          <div class="template-small-card__desc">照片+文字 → 旅行杂志风</div>
+        </div>
+      </div>
+
+      <div class="template-small-card reveal">
+        <div class="template-small-card__preview" style="background: linear-gradient(135deg, #eef6f6, #d4ecec);">
+          <i data-lucide="brain" class="lucide-lg" style="color:#4a8a8a;"></i>
+        </div>
+        <div class="template-small-card__info">
+          <div class="template-small-card__title">为什么我放弃了965</div>
+          <div class="template-small-card__desc">随笔 → 博客排版页</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 关于区 ===== -->
+  <section class="about" id="about">
+    <div class="about__inner reveal">
+      <h2>关于墨记</h2>
+      <p>墨记相信，每个人心里都有值得被看见的想法。我们用AI把「表达」的门槛降到最低——你只负责想，我们负责让它好看。</p>
+
+      <div class="about__stats">
+        <div class="about__stat">
+          <div class="about__stat-number">10s</div>
+          <div class="about__stat-label">平均生成时间</div>
+        </div>
+        <div class="about__stat">
+          <div class="about__stat-number">∞</div>
+          <div class="about__stat-label">创作可能</div>
+        </div>
+        <div class="about__stat">
+          <div class="about__stat-number">0</div>
+          <div class="about__stat-label">代码要求</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA 区 ===== -->
+  <section class="cta-section">
+    <div class="cta-section__bg-text" aria-hidden="true">墨记</div>
+    <div class="cta-section__inner reveal">
+      <h2>你的第一个网页，<br>从现在开始</h2>
+      <p>不需要注册。不需要信用卡。打开就能用。</p>
+      <a href="create.html" class="btn btn-primary" style="font-size:1.1rem; padding:16px 40px;">
+        立即体验
+        <i data-lucide="arrow-right" class="lucide-sm lucide-inline"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <p>墨记 &copy; 2026 — 让想法被看见</p>
+    <p class="mt-1" style="font-size:0.85rem;">
+      <a href="javascript:void(0)"><i data-lucide="shield" class="lucide-sm lucide-inline"></i> 隐私政策</a> · <a href="javascript:void(0)"><i data-lucide="file-text" class="lucide-sm lucide-inline"></i> 使用条款</a> · <a href="javascript:void(0)"><i data-lucide="mail" class="lucide-sm lucide-inline"></i> 联系我们</a>
+    </p>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="../assets/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+
+  <!-- 导航组件 -->
+  <script src="../components/nav.js"></script>
+</body>
+</html>

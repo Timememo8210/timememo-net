@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-30</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #1a1a1f;
+  --card-border: #2a2a30;
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --red: #f87171;
+  --green: #4ade80;
+  --orange: #fb923c;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; padding: 20px 16px;
+}
+body.lang-zh .en { display: none !important; }
+body.lang-en .zh { display: none !important; }
+.wrap { max-width: 900px; margin: 0 auto; }
+h1 { text-align: center; color: var(--accent); font-size: 1.8em; margin-bottom: 4px; }
+.subtitle { text-align: center; color: var(--text-dim); font-size: 0.9em; margin-bottom: 28px; }
+h2 { color: var(--accent); font-size: 1.3em; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--card-border); }
+.card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+.card h4 { color: #fff; font-size: 1.05em; margin-bottom: 8px; }
+.card p { margin-bottom: 6px; font-size: 0.92em; }
+.card .src { color: var(--text-dim); font-size: 0.8em; margin-top: 6px; }
+
+.poster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
+.poster-card { border-radius: 12px; padding: 20px 24px; color: #fff; }
+.poster-icon { font-size: 2em; margin-bottom: 8px; }
+.poster-data { margin-top: 10px; font-size: 0.9em; opacity: 0.9; line-height: 1.6; }
+
+.stock-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0; }
+.stock-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 10px; padding: 14px 10px; text-align: center; }
+.stock-ticker { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); font-size: 0.95em; }
+.stock-price { color: #fff; font-size: 1.1em; font-weight: 600; margin: 6px 0 4px; }
+.stock-change { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.82em; padding: 3px 10px; border-radius: 5px; display: inline-block; }
+.up { background: rgba(74,222,128,0.15); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+.down { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+.flat { background: rgba(255,255,255,0.08); color: var(--text-dim); border: 1px solid rgba(255,255,255,0.12); }
+
+.lang-toggle { text-align: right; margin-bottom: 8px; }
+.lang-toggle button { padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; border: 1px solid #555; }
+button#btn-zh { background: #333; color: #fff; }
+button#btn-en { background: #222; color: #aaa; }
+
+.forecast-box { background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.02)); border: 1px solid rgba(74,222,128,0.2); border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+.forecast-box h4 { color: var(--accent); font-size: 1.1em; margin-bottom: 10px; }
+
+.footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--card-border); color: var(--text-dim); font-size: 0.85em; }
+.footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .stock-grid { grid-template-columns: repeat(2, 1fr); }
+  .poster-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="lang-toggle">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- Poster Grid -->
+<div class="poster-grid">
+  <div class="poster-card" style="background: linear-gradient(135deg, #065f46, #064e3b)">
+    <div class="poster-icon">🚀</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">科技强劲反弹</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Tech Rebound</div>
+    <div class="zh poster-data">• 纳指+2.78% 领涨三大指数<br>• MSFT暴涨+16% 创近年最大涨幅<br>• SMH半导体ETF+6.88%</div>
+    <div class="en poster-data" style="display:none">• Nasdaq +2.78% leads major indices<br>• MSFT surges +16% best in years<br>• SMH semiconductor ETF +6.88%</div>
+  </div>
+  <div class="poster-card" style="background: linear-gradient(135deg, #7c3aed, #581c87)">
+    <div class="poster-icon">💰</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">AI财报季爆发</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Earnings Explosion</div>
+    <div class="zh poster-data">• Azure增速超预期驱动MSFT<br>• Amazon盘后+9% 云业务强劲<br>• AI支出信号强劲明确</div>
+    <div class="en poster-data" style="display:none">• Azure beat drives MSFT rally<br>• Amazon AH +9% cloud strong<br>• AI spending signals robust & clear</div>
+  </div>
+  <div class="poster-card" style="background: linear-gradient(135deg, #dc2626, #991b1b)">
+    <div class="poster-icon">🇰🇷</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">韩国KOSPI暴涨13%</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">KOSPI Surges 13%</div>
+    <div class="zh poster-data">• SK海力士/三星暴涨触发熔断<br>• 日经+4.37% 跟涨<br>• HBM/AI内存需求持续驱动</div>
+    <div class="en poster-data" style="display:none">• SK Hynix/Samsung surge triggers circuit breaker<br>• Nikkei +4.37% follows suit<br>• HBM/AI memory demand drives gains</div>
+  </div>
+  <div class="poster-card" style="background: linear-gradient(135deg, #1e40af, #1e3a5f)">
+    <div class="poster-icon">📉</div>
+    <div class="zh" style="font-size:1.4em;font-weight:700">VIX暴跌-17%</div>
+    <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">VIX Plunges -17%</div>
+    <div class="zh poster-data">• 恐慌情绪快速消退<br>• 周三暴跌后V型反弹<br>• 30Y国债收益率仍处5.2%高位</div>
+    <div class="en poster-data" style="display:none">• Fear sentiment fades quickly<br>• V-shaped bounce after Wed crash<br>• 30Y yield still elevated at 5.2%</div>
+  </div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-07-30 <span class="zh">· Sky Portal ·</span><span class="en" style="display:none"> · Sky Portal ·</span> <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- US Markets -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">DJI</div>
+    <div class="stock-price">52,208</div>
+    <div class="stock-change up">+1.19%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">S&P 500</div>
+    <div class="stock-price">7,437.63</div>
+    <div class="stock-change up">+1.66%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">NASDAQ</div>
+    <div class="stock-price">25,122</div>
+    <div class="stock-change up">+2.78%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">SMH</div>
+    <div class="stock-price">538.90</div>
+    <div class="stock-change up">+6.88%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">VIX</div>
+    <div class="stock-price">17.09</div>
+    <div class="stock-change up">-17.28%</div>
+  </div>
+</div>
+
+<!-- Key Individual Stocks -->
+<h2>💎 <span class="zh">重点个股</span><span class="en" style="display:none">Key Stocks</span></h2>
+
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">MSFT</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+15.63%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">NVDA</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+2.65%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">AMD</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+13.08%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">MU</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+18.43%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">INTC</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+11.37%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">AVGO</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+4.73%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">AAPL</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change down">-1.33%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">AMZN</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">AH+9%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">GOOGL</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change down">-7%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">TSLA</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change down">-14.5%</div>
+  </div>
+</div>
+
+<!-- Key Drivers -->
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+  <h4><span class="zh">1. Microsoft Azure超预期 — 引爆科技全面反弹</span><span class="en" style="display:none">1. Microsoft Azure Beats — Ignites Broad Tech Rebound</span></h4>
+  <p><span class="zh">Microsoft财报显示Azure云业务增速超出市场预期，推动MSFT股价单日暴涨+15.63%，创下近年最大单日涨幅。Azure的强劲增长直接验证了企业AI支出的持续性和强度，引发AI/半导体板块全面大涨。SOXX半导体ETF涨超8%，NVDA +2.65%、AMD +13.08%、MU +18.43%、INTC +11.37%。Janus Henderson分析师指出："市场领导力正从'Magnificent 7'扩展到更广泛的AI受益标的。"</span><span class="en" style="display:none">Microsoft reported Azure cloud growth exceeding expectations, driving MSFT up +15.63% — one of its best single-day gains in years. The strong Azure numbers directly validated the persistence and magnitude of enterprise AI spending, triggering a broad rally across AI/semiconductor stocks. SOXX surged 8%+, with NVDA +2.65%, AMD +13.08%, MU +18.43%, INTC +11.37%. Janus Henderson noted: "Market leadership is expanding beyond the Magnificent 7."</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Yahoo Finance / Janus Henderson</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">2. 周三暴跌→周四V型反弹 — 恐慌消退</span><span class="en" style="display:none">2. Wednesday Crash → Thursday V-Bounce — Fear Recedes</span></h4>
+  <p><span class="zh">周三（7月29日）道指暴跌超1,100点（-2.19%），为2025年4月以来最差单日表现，触发因素包括美联储鹰派决议（3票反对）和30年期国债收益率逼近5.2%。周四市场情绪急剧逆转，VIX恐慌指数暴跌-17.28%至17.09，三大指数全面收涨。这种"暴跌→反弹"的模式反映了市场在极端情绪后的均值回归，但30年期国债收益率仍处2007年以来最高水平，长期风险未消。</span><span class="en" style="display:none">Wednesday (July 29) saw the Dow plunge 1,100+ points (-2.19%), the worst day since April 2025, triggered by the hawkish Fed decision (3 dissenting votes) and 30-year yields approaching 5.2%. Thursday saw a dramatic sentiment reversal, with VIX crashing -17.28% to 17.09 and all three major indices closing higher. This crash-bounce pattern reflects mean reversion after extreme sentiment, but the 30-year yield remains at 2007 highs — long-term risk persists.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">3. Amazon盘后+9% / Apple盘后-6% — 财报冰火两重天</span><span class="en" style="display:none">3. Amazon AH +9% / Apple AH -6% — Earnings Diverge</span></h4>
+  <p><span class="zh">Amazon Q2营收超预期，云计算业务（AWS）持续强劲，推动盘后股价暴涨超9%。Apple iPhone销量同比增长22%表现亮眼，但服务收入不及预期，导致盘后下跌6%。同时GOOGL -7%、TSLA -14.5%同样承压。这显示即使是科技巨头，业绩分化也愈发明显——AI/云受益者大涨，其他板块承压。</span><span class="en" style="display:none">Amazon beat Q2 revenue expectations with continued strong cloud (AWS) growth, driving after-hours gains of 9%+. Apple's iPhone sales jumped 22% YoY, but services revenue missed estimates, causing a 6% after-hours decline. Meanwhile, GOOGL -7% and TSLA -14.5% also under pressure. This shows even among mega-cap tech, divergence is widening — AI/cloud beneficiaries rally while other segments lag.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">4. 韩国KOSPI暴涨13%触发熔断 — SK海力士/三星疯涨</span><span class="en" style="display:none">4. KOSPI Surges 13% — SK Hynix & Samsung Trigger Circuit Breaker</span></h4>
+  <p><span class="zh">亚洲盘面出现罕见行情：韩国KOSPI指数暴涨超13%，盘中触发熔断机制停牌。SK海力士和三星电子股价暴涨是主要推手，HBM（高带宽内存）和AI内存需求持续火爆。日经225跟涨+4.37%。HSBC港股创历史新高，因Blackstone以A$360亿收购其澳大利亚住房贷款组合。这显示全球半导体供应链受AI需求驱动的乐观情绪依然强劲。</span><span class="en" style="display:none">Asia saw a rare event: Korea's KOSPI surged over 13%, triggering a circuit breaker trading halt. SK Hynix and Samsung Electronics led the surge, driven by booming HBM and AI memory demand. Nikkei 225 followed with +4.37%. HSBC HK shares hit a record high as Blackstone agreed to acquire its A$36B Australian home loan portfolio. This reflects continued global optimism around AI-driven semiconductor supply chain demand.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+  <h4><span class="zh">5. 中国制造业PMI意外收缩 — 经济复苏存疑</span><span class="en" style="display:none">5. China Manufacturing PMI Unexpectedly Contracts</span></h4>
+  <p><span class="zh">中国7月制造业PMI意外收缩，低于荣枯线50，表明工厂活动放缓。尽管深证成指大涨+2.96%，上证综指微涨+0.66%，但PMI数据为经济复苏前景蒙上阴影。恒指微跌-0.20%。中国作为全球最大的半导体消费市场，其制造业景气度直接影响全球芯片需求前景。</span><span class="en" style="display:none">China's July manufacturing PMI unexpectedly contracted below the 50 threshold, indicating factory activity slowed. Despite Shenzhen Composite rallying +2.96% and Shanghai Composite edging up +0.66%, the PMI data casts a shadow over the economic recovery outlook. Hang Seng dipped -0.20%. As the world's largest semiconductor consumer, China's manufacturing health directly impacts global chip demand outlook.</span></p>
+  <p class="src"><span class="zh">来源：</span><span class="en" style="display:none">Source: </span>CNBC</p>
+</div>
+
+<!-- Asia Markets -->
+<h2>🌏 <span class="zh">亚太市场</span><span class="en" style="display:none">Asia-Pacific Markets</span></h2>
+
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">上证综指</div>
+    <div class="stock-price">3,830</div>
+    <div class="stock-change up">+0.66%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">深证成指</div>
+    <div class="stock-price">13,705</div>
+    <div class="stock-change up">+3.16%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">恒生指数</div>
+    <div class="stock-price">25,808</div>
+    <div class="stock-change flat">-0.20%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">日经225</div>
+    <div class="stock-price">64,572</div>
+    <div class="stock-change up">+4.37%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">KOSPI</div>
+    <div class="stock-price">—</div>
+    <div class="stock-change up">+13%🔥</div>
+  </div>
+</div>
+
+<!-- Outlook -->
+<h2>🔮 <span class="zh">短期展望</span><span class="en" style="display:none">Short-Term Outlook</span></h2>
+
+<div class="forecast-box">
+  <h4><span class="zh">✅ 偏多 — AI财报强劲，反弹动能充足</span><span class="en" style="display:none">✅ Bullish Bias — Strong AI Earnings, Abundant Rebound Momentum</span></h4>
+  <p><span class="zh">
+    <b>利好因素：</b><br>
+    • Microsoft Azure超预期验证AI支出强劲，科技反弹动能充足<br>
+    • Amazon盘后+9%进一步强化AI/云信心<br>
+    • VIX暴跌-17%显示恐慌情绪快速消退<br>
+    • SMH今年YTD涨幅已达40%，AI/HBM需求仍是核心主线<br>
+    • 韩国半导体暴涨显示全球AI硬件需求持续旺盛<br><br>
+    <b>风险点：</b><br>
+    • 30年期国债收益率5.2%+持续压制高估值成长股<br>
+    • Apple服务收入不及预期，盘后跌6%可能拖累明日大盘<br>
+    • GOOGL -7%、TSLA -14.5%承压严重，Mega-cap分化加剧<br>
+    • 中国制造业PMI收缩，全球经济复苏不确定性增加<br><br>
+    <b>关注事件（周五）：</b><br>
+    • PCE通胀数据 — 关键变量，若超预期可能打击降息预期<br>
+    • Apple/Amazon盘后走势对周五开盘的影响<br>
+    • 下周重磅财报：Meta、ARM、Qualcomm、Lam Research、Fortinet
+  </span><span class="en" style="display:none">
+    <b>Bullish Factors:</b><br>
+    • Microsoft Azure beat validates robust AI spending; tech rebound momentum strong<br>
+    • Amazon AH +9% further strengthens AI/cloud confidence<br>
+    • VIX -17% shows panic fading rapidly<br>
+    • SMH YTD +40%; AI/HBM demand remains the core theme<br>
+    • Korean semiconductor surge reflects sustained global AI hardware demand<br><br>
+    <b>Risk Factors:</b><br>
+    • 30-year yield at 5.2%+ continues pressuring high-valuation growth stocks<br>
+    • Apple services miss, AH -6% could weigh on Friday's open<br>
+    • GOOGL -7%, TSLA -14.5% under severe pressure; mega-cap divergence widening<br>
+    • China manufacturing PMI contraction adds global recovery uncertainty<br><br>
+    <b>Key Events (Friday):</b><br>
+    • PCE inflation data — critical variable; upside surprise could hurt rate cut hopes<br>
+    • Apple/Amazon AH moves impact on Friday's open<br>
+    • Next week heavy earnings: Meta, ARM, Qualcomm, Lam Research, Fortinet
+  </span></p>
+</div>
+
+<div class="footer">
+  <span class="zh">由 Sky ☁️ 自动生成 · <a href="index.html">所有行情</a> · <a href="../index.html">返回首页</a></span>
+  <span class="en" style="display:none">Auto-generated by Sky ☁️ · <a href="index.html">All Reports</a> · <a href="../index.html">Home</a></span>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#333' : '#222';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#333' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+</body>
+</html>

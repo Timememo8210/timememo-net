@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-27 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #1a2a1a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#111118;border:1px solid #1a2a1a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#666;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#111118;border:1px solid #1a2a1a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1a2a1a;color:#555;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#4a0d0d,#6b1515)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">全球科技抛售周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Global Tech Selloff Week</div>
+<div class="zh poster-data">标普纳指连跌5日<br>费半SOX周跌12%+<br>韩国KOSPI暴跌10.5%</div>
+<div class="en poster-data" style="display:none">S&P & Nasdaq 5-day decline<br>SOX weekly drop 12%+<br>Korea KOSPI crashes 10.5%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1a3a1a,#0d4d2d)">
+<div class="zh" style="font-size:1.4em;font-weight:700">🇺🇸 美股周五收盘</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">🇺🇸 US Friday Close</div>
+<div class="zh poster-data">道指 51,876 (-0.09%)<br>标普 7,354 (-0.05%)<br>纳指 25,298 (-0.20%)</div>
+<div class="en poster-data" style="display:none">Dow 51,876 (-0.09%)<br>S&P 7,354 (-0.05%)<br>Nasdaq 25,298 (-0.20%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#3d1a0d,#5c2a14)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股港股重挫</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares & HK Plunge</div>
+<div class="zh poster-data">上证 -2.26% · 创业板 -4.07%<br>恒指 -1.76% · 恒科 -3.41%<br>科技板块全线回调</div>
+<div class="en poster-data" style="display:none">SSE -2.26% · ChiNext -4.07%<br>HSI -1.76% · HSTECH -3.41%<br>Tech sector broad selloff</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#2a1a3d,#3d2055)">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Next Week Outlook</div>
+<div class="zh poster-data">半导体超卖反弹机会<br>AI叙事能否企稳？<br>7/4独立日假期前低波动</div>
+<div class="en poster-data" style="display:none">Semi oversold bounce chance<br>Can AI narrative stabilize?<br>Low vol before July 4th</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-27 · Weekend Edition · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Markets</span></a></p>
+
+<h2>🔥 <span class="zh">本周核心事件：全球科技抛售潮</span><span class="en" style="display:none">Weekly Key: Global Tech Selloff</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. AI基础设施成本质疑引发全球科技股抛售</span><span class="en" style="display:none">1. AI Infrastructure Cost Fears Spark Global Tech Selloff</span></h4>
+<p><span class="zh">本周全球市场遭遇2026年以来最剧烈的科技股集中抛售。投资者对AI基础设施飙升的成本和投资回报可持续性产生严重质疑，芯片股首当其冲。抛售从亚洲蔓延至欧美——韩国KOSPI从历史高点暴跌10.5%，三星和SK海力士各跌约12%。费城半导体指数（SOX）单周暴跌超过12%，周五再度下跌5.29%收报13,204。</span><span class="en" style="display:none">Global markets faced the most intense tech selloff of 2026 this week. Investors seriously questioned the soaring costs and ROI sustainability of AI infrastructure, with chip stocks bearing the brunt. The selloff spread from Asia to Europe and the US — Korea's KOSPI plunged 10.5% from all-time highs, Samsung and SK Hynix each dropped ~12%. The Philadelphia Semiconductor Index (SOX) fell over 12% for the week, closing at 13,204 on Friday after another -5.29% session.</span></p>
+<p class="src">来源：NYT / Reuters / Bloomberg / WSJ</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美光财报引发存储芯片板块剧烈震荡</span><span class="en" style="display:none">2. Micron Earnings Trigger Memory Chip Volatility</span></h4>
+<p><span class="zh">美光（MU）6/24发布Q3财报后股价在$1,080-$1,255之间巨幅震荡。美光Q3营收同比增长超346%，AI驱动的HBM高带宽存储需求持续爆发。然而，市场对美光5月底突破$1万亿市值后的估值产生严重分歧——部分分析师认为AI芯片需求远未见顶，另一部分则警告"万亿泡沫"风险。本周MU收盘约$1,026，较高点大幅回落。</span><span class="en" style="display:none">Micron (MU) released Q3 earnings on June 24, with the stock swinging wildly between $1,080-$1,255. Q3 revenue surged 346% YoY driven by AI HBM demand. However, serious valuation disagreements emerged after MU's $1T market cap milestone in late May — some analysts see AI chip demand far from peaking, while others warn of a "trillion bubble." MU closed around $1,026 this week, well off highs.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 苹果芯片涨价冲击供应链，AI算力成本压力凸显</span><span class="en" style="display:none">3. Apple Chip Price Hikes Hit Supply Chain, AI Cost Pressure</span></h4>
+<p><span class="zh">苹果对新一代AI芯片的定价策略揭示了AI算力需求的成本传导效应。芯片涨价直接冲击了亚洲供应链，台积电、三星等代工厂面临"成本上升 vs 客户压价"的两难局面。市场开始重新审视AI叙事——如果端侧AI设备成本持续攀升，消费者接受度将成为行业增长的关键瓶颈。</span><span class="en" style="display:none">Apple's pricing strategy for next-gen AI chips revealed the cost transmission effects of AI computing demand. Price hikes directly impacted Asian supply chains, with TSMC and Samsung caught between rising costs and client pushback. Markets began reassessing the AI narrative — if edge AI device costs keep climbing, consumer acceptance becomes the critical bottleneck for industry growth.</span></p>
+<p class="src">来源：Bloomberg / CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 中东局势持续：霍尔木兹海峡冲突与油价波动</span><span class="en" style="display:none">4. Middle East: Hormuz Conflict & Oil Volatility</span></h4>
+<p><span class="zh">伊朗本周在霍尔木兹海峡再次袭击货轮，美军实施反击。此前签署的14点停火协议面临崩溃风险。地缘政治紧张推动油价波动加剧，能源板块成为本周少数上涨的避险板块。美伊谈判的走向将继续影响下周市场风险偏好。</span><span class="en" style="display:none">Iran struck cargo ships in the Strait of Hormuz this week, prompting US military retaliation. The previously signed 14-point ceasefire is at risk of collapse. Geopolitical tensions drove oil price volatility, with energy being one of the few safe-haven sectors to gain. The US-Iran negotiation trajectory will continue to influence market risk appetite next week.</span></p>
+<p class="src">来源：Reuters / Bloomberg / AP</p>
+</div>
+
+<h2>📈 <span class="zh">美股指数（周五6/26收盘）</span><span class="en" style="display:none">US Indexes (Fri 6/26 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">51,876</div><div class="stock-change down">-0.09%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,354</div><div class="stock-change down">-0.05%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">25,298</div><div class="stock-change down">-0.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">13,204</div><div class="stock-change down">-5.29%</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">—</div><div class="stock-change up">波动上升</div></div>
+</div>
+
+<h3><span class="zh">核心个股</span><span class="en" style="display:none">Key Stocks</span></h3>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$192.53</div><div class="stock-change down">-1.64%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$521.58</div><div class="stock-change down">-3.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$128.32</div><div class="stock-change down">-3.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$436.13</div><div class="stock-change down">-3.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">~$1,026</div><div class="stock-change down">巨幅波动</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股（周五6/26收盘）</span><span class="en" style="display:none">A-Shares & HK (Fri 6/26 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,027</div><div class="stock-change down">-2.26%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,782</div><div class="stock-change down">-3.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">4,194</div><div class="stock-change down">-4.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">22,672</div><div class="stock-change down">-1.76%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒科期指</div><div class="stock-price">4,406</div><div class="stock-change down">-3.41%</div></div>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SOX — 费城半导体</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — 半导体ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — 标普500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">MU — 美光</div><div id="tv-mu"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<h2>🔍 <span class="zh">板块与个股焦点</span><span class="en" style="display:none">Sector & Stock Focus</span></h2>
+
+<div class="card">
+<h4><span class="zh">半导体板块：本周最惨重灾区</span><span class="en" style="display:none">Semiconductors: Worst-Hit Sector This Week</span></h4>
+<p><span class="zh"><b>费城半导体指数（SOX）</b>本周累计下跌超过12%，周五单日再跌5.29%至13,204点。这是2026年以来SOX最惨烈的单周跌幅。所有主要芯片股均遭抛售：<br>• <b>NVDA</b>：$192.53（-1.64%），从年内高点$236回落近19%<br>• <b>AMD</b>：$521.58（-3.42%），连续多日下跌<br>• <b>Intel</b>：$128.32（-3.42%），回吐本月早些时候18A量产利好<br>• <b>TSM</b>：$436.13（-3.7%），台积电ADR持续走低<br>• <b>美光MU</b>：约$1,026，从$1,255高点大幅回落</span><span class="en" style="display:none"><b>Philadelphia Semiconductor Index (SOX)</b> fell over 12% for the week, with Friday's -5.29% drop closing at 13,204. The worst weekly decline of 2026. All major chip stocks were sold off:<br>• <b>NVDA</b>: $192.53 (-1.64%), down ~19% from YTD high of $236<br>• <b>AMD</b>: $521.58 (-3.42%), multi-day decline<br>• <b>Intel</b>: $128.32 (-3.42%), giving back 18A production gains<br>• <b>TSM</b>: $436.13 (-3.7%), ADR continues lower<br>• <b>Micron MU</b>: ~$1,026, sharply down from $1,255 high</span></p>
+<p class="src">来源：WSJ / MarketWatch / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">存储芯片三巨头分化：美光 vs 三星 vs 海力士</span><span class="en" style="display:none">Memory Trio Divergence: Micron vs Samsung vs Hynix</span></h4>
+<p><span class="zh">美光5月底成为首家突破$1万亿市值的存储芯片公司后，全球存储芯片三巨头走势分化加剧。三星和SK海力士本周各跌约12%，韩国KOSPI从纪录高点暴跌10.5%。AI驱动的HBM高带宽存储需求仍然旺盛，但市场开始担忧：估值是否已经透支了未来2-3年的增长预期？DRAM供应紧张的局面短期内难以缓解，但2027年后可能出现的产能过剩阴影正在笼罩市场。</span><span class="en" style="display:none">After Micron became the first memory chip company to surpass $1T market cap in late May, the global memory trio diverged sharply. Samsung and SK Hynix each dropped ~12% this week, with KOSPI plunging 10.5% from record highs. AI-driven HBM demand remains strong, but markets are questioning whether valuations have priced in 2-3 years of growth. DRAM supply tightness won't ease soon, but overcapacity shadows for 2027+ are looming.</span></p>
+<p class="src">来源：Bloomberg / Reuters / Distill Intelligence</p>
+</div>
+
+<h2>🔮 <span class="zh">下周市场展望（6/29-7/3）</span><span class="en" style="display:none">Next Week Outlook (6/29-7/3)</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 半导体板块超卖反弹机会</span><span class="en" style="display:none">1. Semiconductor Oversold Bounce Opportunity</span></h4>
+<p><span class="zh">SOX单周跌超12%为2026年罕见。从技术面看，NVDA在$190附近、TSM在$430附近存在一定支撑。如果下周出现正面催化剂（大客户订单、政策利好、机构抄底），半导体板块可能出现技术性反弹。但反弹力度取决于成交量配合和市场情绪改善。</span><span class="en" style="display:none">SOX's 12%+ weekly drop is rare for 2026. Technically, NVDA has support near $190 and TSM near $430. If positive catalysts emerge next week (major orders, policy favors, institutional dip-buying), a technical bounce is possible. However, bounce strength depends on volume confirmation and sentiment improvement.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI叙事能否企稳？</span><span class="en" style="display:none">2. Can the AI Narrative Stabilize?</span></h4>
+<p><span class="zh">市场正在重新审视AI估值模型。核心问题不是AI需求是否真实——这一点几乎毋庸置疑——而是当前估值是否合理反映了增长节奏。如果下周有大型云厂商重申AI资本支出指引，或芯片公司发布正面业务更新，市场情绪有望企稳。反之，任何需求放缓的信号都可能引发第二波抛售。</span><span class="en" style="display:none">Markets are reassessing AI valuation models. The core question isn't whether AI demand is real — that's almost undeniable — but whether current valuations reasonably reflect the growth trajectory. If major cloud providers reaffirm AI capex guidance next week, or chip companies issue positive business updates, sentiment could stabilize. Conversely, any demand slowdown signal could trigger a second wave of selling.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. A股/港股：政策面与资金流向</span><span class="en" style="display:none">3. A-Shares/HK: Policy & Capital Flows</span></h4>
+<p><span class="zh">创业板本周暴跌4.07%，科技板块资金大幅流出。上证4000点是心理关键支撑。港股方面，恒指22,500是重要技术位。下周关注：是否有政策面稳定信号（如央行流动性投放、产业政策利好），以及北向资金流向变化。如果政策出手，A股可能率先企稳反弹。</span><span class="en" style="display:none">ChiNext plunged 4.07% this week with heavy tech sector outflows. SSE 4,000 is the psychological key support. For HK, HSI 22,500 is a critical technical level. Watch for: policy stabilization signals (PBOC liquidity, industrial policy), and Northbound capital flow changes. If policy intervention comes, A-shares could stabilize and rebound first.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 风险因素与日历</span><span class="en" style="display:none">4. Risk Factors & Calendar</span></h4>
+<p><span class="zh">• <b>7/4 美国独立日</b>：周三休市，周一二可能低波动<br>• <b>伊朗局势</b>：霍尔木兹停火协议面临崩溃，任何军事升级都将冲击油价和风险偏好<br>• <b>经济数据</b>：关注下周非农前哨数据和PCE通胀指标<br>• <b>财报季前奏</b>：7月中旬Q2财报季开启，芯片公司指引将是市场拐点</span><span class="en" style="display:none">• <b>July 4 US Independence Day</b>: Markets closed Wednesday, Mon-Tue likely low volatility<br>• <b>Iran situation</b>: Hormuz ceasefire at risk, any military escalation hits oil and risk appetite<br>• <b>Economic data</b>: Watch NFP leading indicators and PCE inflation<br>• <b>Earnings preview</b>: Q2 season starts mid-July, chip company guidance will be the inflection point</span></p>
+</div>
+
+<div class="card" style="border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.04)">
+<h4>💡 <span class="zh">投资策略建议</span><span class="en" style="display:none">Investment Strategy</span></h4>
+<p><span class="zh"><b>短期（1-2周）：</b>谨慎为主。半导体可能技术性反弹，但不宜追高。控制仓位，等待成交量信号。<br><b>中期（1-3月）：</b>AI资本支出周期远未结束，半导体回调可能是布局窗口。关注Q2财报季指引。<br><b>长期：</b>AI革命基本面逻辑不变。先进封装、HBM存储、算力基础设施是确定性最高的赛道。每次深度回调都是长期布局机会。</span><span class="en" style="display:none"><b>Short-term (1-2 weeks):</b> Cautious. Semis may technically bounce, but don't chase. Control position size, wait for volume signals.<br><b>Medium-term (1-3 months):</b> AI capex cycle far from over; semiconductor pullback could be an entry window. Watch Q2 earnings guidance.<br><b>Long-term:</b> AI revolution fundamentals intact. Advanced packaging, HBM memory, and computing infrastructure are the highest-conviction themes. Every deep pullback is a long-term opportunity.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · <span class="zh">周末版</span><span class="en" style="display:none">Weekend Edition</span> · Generated by Sky ☁️ · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Markets</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：WSJ, MarketWatch, CNBC, Reuters, Bloomberg, Yahoo Finance, Trading Economics, Xinhua</span><span class="en" style="display:none">Sources: WSJ, MarketWatch, CNBC, Reuters, Bloomberg, Yahoo Finance, Trading Economics, Xinhua</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-mu', sym:'NASDAQ:MU'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(15,15,24,1)', gridColor: 'rgba(26,42,26,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

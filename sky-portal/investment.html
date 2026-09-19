@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💰 投资策略 — Sky Portal</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --green: #4ade80;
+    --orange: #fb923c;
+    --cyan: #22d3ee;
+    --red: #f87171;
+    --gold: #fbbf24;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .back-nav {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 6px 16px;
+    backdrop-filter: blur(12px);
+    color: var(--text-dim); font-size: 0.85rem;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .back-nav:hover { background: rgba(255,255,255,0.12); color: var(--text); text-decoration: none; }
+  .hero { text-align: center; padding: 60px 20px 30px; position: relative; }
+  .hero::before {
+    content: ''; position: absolute; top: -100px; left: 50%;
+    transform: translateX(-50%); width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(74,222,128,0.1) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero h1 { font-size: 2.2em; font-weight: 700; position: relative; z-index: 1; }
+  .hero .subtitle { color: var(--text-dim); font-size: 1em; margin-top: 8px; position: relative; z-index: 1; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+  .section {
+    margin-top: 32px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .section h2 {
+    font-size: 1.25em; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin: 12px 0; }
+  th { text-align: left; color: var(--text-dim); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 0.85em; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .tip-box {
+    background: rgba(108,138,255,0.08);
+    border: 1px solid rgba(108,138,255,0.25);
+    border-radius: 12px;
+    padding: 16px 20px; margin: 12px 0;
+    font-size: 0.9em; line-height: 1.6;
+  }
+  .green-box {
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 12px;
+    padding: 16px 20px; margin: 12px 0;
+    font-size: 0.9em; line-height: 1.6;
+  }
+  .warning-box {
+    background: rgba(251,146,60,0.08);
+    border: 1px solid rgba(251,146,60,0.25);
+    border-radius: 12px;
+    padding: 16px 20px; margin: 12px 0;
+    font-size: 0.9em; line-height: 1.6;
+  }
+  .tag { display:inline-block; padding:2px 10px; border-radius:6px; font-size:0.75em; font-weight:600; margin-right:4px; }
+  .tag-green { background:rgba(74,222,128,0.15); color:var(--green); }
+  .tag-orange { background:rgba(251,146,60,0.15); color:var(--orange); }
+  .tag-red { background:rgba(248,113,113,0.15); color:var(--red); }
+  .tag-gold { background:rgba(251,191,36,0.15); color:var(--gold); }
+  .footer {
+    text-align: center; padding: 40px 20px;
+    color: var(--text-dim); font-size: 0.85em;
+    border-top: 1px solid var(--border);
+  }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; font-size: 0.92em; }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.6em; }
+    table { font-size: 0.8em; }
+    td, th { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-nav">← ☁️ Sky Portal</a>
+
+<div class="hero">
+  <h1>💰 投资策略</h1>
+  <div class="subtitle">Intel RSU到期 → SMH转换 · 教育储蓄 · 税务优化 · 2026年4月</div>
+</div>
+
+<div class="container">
+
+<!-- 核心决策 -->
+<div class="section">
+  <h2>🎯 最终决策</h2>
+  <div class="green-box">
+    <strong>Intel RSU到期 → 卖掉 → 买SMH（VanEck半导体ETF）</strong><br><br>
+    理由：<br>
+    • SMH是半导体行业ETF，自动调仓，跟上行业趋势<br>
+    • 不需要自己管理个股，基金经理内部换仓不触发你的税务<br>
+    • 比单持Intel分散风险（雨露均沾整个半导体行业）<br>
+    • 如果Intel翻倍，整个半导体行业也一定大涨，SMH同样受益<br>
+    • 长期持有 > 1年，卖出时只交资本利得税（18.8%），本金不交税
+  </div>
+</div>
+
+<!-- 操作流程 -->
+<div class="section">
+  <h2>📋 操作流程</h2>
+  <table>
+    <tr><th>步骤</th><th>操作</th><th>税务影响</th></tr>
+    <tr><td>1. RSU到期</td><td>到期当天市值算普通收入（W-2自动处理）</td><td>已计入工资税</td></tr>
+    <tr><td>2. 到期当天卖</td><td>Schwab/Fidelity里直接卖出</td><td>到期价和卖出价几乎没有差额 → 几乎无额外资本利得税</td></tr>
+    <tr><td>3. 买SMH</td><td>现金转入股票账户，买入SMH</td><td>无税务影响（买入不触发税）</td></tr>
+    <tr><td>4. 持有SMH</td><td>长期持有，每年只收到少量分红（~0.5%）</td><td>分红要交税（很少）</td></tr>
+    <tr><td>5. 需要时卖出</td><td>持有>1年 → 长期资本利得税</td><td>增值部分 × 18.8%</td></tr>
+  </table>
+  <div class="tip-box">
+    💡 <strong>卖出策略：</strong>如果某年要卖很多，可以分两年卖，控制总收入不冲到20%税率档（$583,750/夫妻联合）。
+  </div>
+</div>
+
+<!-- 卖股票的批次选择 -->
+<div class="section">
+  <h2>📊 卖Intel股票：先卖哪批？</h2>
+  <p style="font-size:0.92em;color:var(--text-dim);margin-bottom:12px;">如果有多个批次可以选择：</p>
+  <table>
+    <tr><th>情况</th><th>建议</th><th>原因</th></tr>
+    <tr><td>有浮亏的批次</td><td><span class="tag tag-green">先卖亏的</span></td><td>资本损失可抵扣其他利得，最多抵$3K/年普通收入</td></tr>
+    <tr><td>全部浮盈</td><td><span class="tag tag-orange">先卖赚最少的</span></td><td>成本基础最高的批次 → 利得最少 → 当期交税最少</td></tr>
+    <tr><td>RSU刚到期</td><td><span class="tag tag-green">到期就卖</span></td><td>几乎没有额外利得，最省税</td></tr>
+  </table>
+</div>
+
+<!-- 资本利得税 -->
+<div class="section">
+  <h2>💰 资本利得税速查表（2026年）</h2>
+  <table>
+    <tr><th>持有时间</th><th>税率</th><th>说明</th></tr>
+    <tr><td>≤ 1年（短期）</td><td>按普通收入（最高37%）</td><td>⚠️ 尽量避免！等满1年再卖</td></tr>
+    <tr><td>> 1年（长期）</td><td>0% / 15% / 20% + 3.8% NIIT</td><td>看总收入</td></tr>
+  </table>
+  <p style="font-size:0.9em;margin-top:12px;"><strong>长期资本利得税三档（夫妻联合）：</strong></p>
+  <table>
+    <tr><th>税率</th><th>总收入区间（夫妻联合）</th><th>你的情况</th></tr>
+    <tr><td style="color:var(--green);">0%</td><td>≤ $96,700</td><td>不适用（除非退休后收入大降）</td></tr>
+    <tr><td style="color:var(--gold);">15% + 3.8% = 18.8%</td><td>$96,700 - $583,750</td><td>⭐ 大概率在这个档</td></tr>
+    <tr><td style="color:var(--red);">20% + 3.8% = 23.8%</td><td>> $583,750</td><td>某年卖太多可能冲到这个档</td></tr>
+  </table>
+  <div class="tip-box">
+    💡 <strong>3.8% NIIT</strong>（Net Investment Income Tax）：夫妻收入超过$250K就触发，你的投资收益额外加3.8%。<br>
+    💡 <strong>本金永远不交税</strong>——只有增值部分才交利得税。<br>
+    💡 <strong>SMH内部调仓不触发你的税务</strong>——基金经理换股不影响你。
+  </div>
+</div>
+
+<!-- 529 vs UTMA vs 自己账户 -->
+<div class="section">
+  <h2>📊 529 vs UTMA vs 自己账户（对比分析）</h2>
+  <table>
+    <tr><th></th><th>自己账户买SMH</th><th>529（Oregon/Nevada）</th><th>UTMA买SMH</th></tr>
+    <tr><td><strong>结论</strong></td><td style="color:var(--green);">⭐ 推荐</td><td>不推荐（限制太多）</td><td>可选（少量）</td></tr>
+    <tr><td>能买SMH</td><td>✅</td><td>❌ 只能买预设组合</td><td>✅</td></tr>
+    <tr><td>税务</td><td>卖出时18.8%</td><td>收益免税（教育用途）</td><td>Kiddie Tax，18岁后可能0%</td></tr>
+    <tr><td>资金控制</td><td>✅ 完全你控制</td><td>⚠️ 只能教育用途</td><td>❌ 18岁后归孩子</td></tr>
+    <tr><td>操作复杂度</td><td>⭐ 最简单</td><td>⭐⭐ 中等</td><td>⭐⭐⭐ 每年多报税</td></tr>
+    <tr><td>灵活性</td><td>✅ 任何用途</td><td>❌ 教育/罚款</td><td>⚠️ 18岁后孩子自由支配</td></tr>
+  </table>
+
+  <p style="font-size:0.9em;margin-top:16px;"><strong>为什么529不适合你：</strong></p>
+  <ul>
+    <li>529不能买SMH，只能买预设基金组合（科技成分最高的VIGAX年化约12%，SMH近5年年化约28%）</li>
+    <li>SMH的超额回报远超529省的那点税（约$30K/孩子）</li>
+    <li>529用不完需交10%罚款+补税（虽然有Roth IRA转换，但限制多）</li>
+  </ul>
+
+  <p style="font-size:0.9em;margin-top:12px;"><strong>为什么UTMA只适合少量：</strong></p>
+  <ul>
+    <li>18岁后钱完全归孩子，你无法控制（万一买跑车不去上学）</li>
+    <li>Kiddie Tax：超过$2,700/年的投资收益按你的最高税率</li>
+    <li>好处：孩子18岁后、年收入<$48K时卖出 → 资本利得0%</li>
+  </ul>
+</div>
+
+<!-- SMH vs Intel -->
+<div class="section">
+  <h2>📈 SMH vs 单持Intel：为什么选SMH</h2>
+  <table>
+    <tr><th>对比维度</th><th>SMH（半导体ETF）</th><th>Intel（个股）</th></tr>
+    <tr><td>分散性</td><td>25+半导体公司，雨露均沾</td><td>单一公司风险</td></tr>
+    <tr><td>调仓</td><td>基金经理自动换仓，你不操作无税</td><td>需要自己判断买卖时机</td></tr>
+    <tr><td>如果Intel翻倍</td><td>整个半导体也大涨，SMH同样受益</td><td>翻倍</td></tr>
+    <tr><td>如果Intel跌50%</td><td>SMH只受部分影响</td><td>直接亏50%</td></tr>
+    <tr><td>管理精力</td><td>零——买了不用管</td><td>需要持续关注</td></tr>
+    <tr><td>近5年年化</td><td>~28%</td><td>波动大</td></tr>
+  </table>
+  <div class="green-box">
+    ✅ <strong>核心逻辑：</strong>Intel你已经通过工资和RSU深度绑定了。投资层面应该分散到整个半导体行业，而不是把鸡蛋全放一个篮子。SMH让你跟着整个行业增长，而不仅仅是赌Intel一家。
+  </div>
+</div>
+
+<!-- 孩子教育储蓄 -->
+<div class="section">
+  <h2>👶 孩子教育储蓄：最终选择</h2>
+  <div class="tip-box">
+    <strong>决定：不用529，不用UTMA，用自己账户买SMH。</strong><br><br>
+    • 孩子需要学费时从自己账户卖SMH<br>
+    • 操作最简单，一个账户搞定<br>
+    • 钱完全在你控制下<br>
+    • 艾米的UTMA已开，可以保留少量（$25-50K）做税务优化<br>
+    • 中璐可考虑开UTMA同样少量放入<br>
+    • 大部分钱留在自己账户，安全可控
+  </div>
+</div>
+
+<!-- 资产配置概览 -->
+<div class="section">
+  <h2>📊 当前资产配置（2026年4月）</h2>
+  <table>
+    <tr><th>资产</th><th>估值</th><th>备注</th></tr>
+    <tr><td>上海房产</td><td>¥600万 ≈ $833K</td><td>你名下</td></tr>
+    <tr><td>国内房产（继承预期）</td><td>¥400万 ≈ $556K</td><td>父母名下</td></tr>
+    <tr><td>美国房产</td><td>$1.3M（贷款$700K）</td><td>Portland，净值$600K</td></tr>
+    <tr><td>Intel股票+401k+银行</td><td>~$2M</td><td>每年有大批RSU到期</td></tr>
+    <tr><td><strong>合计</strong></td><td><strong>≈ $4.7M</strong></td><td></td></tr>
+  </table>
+  <p style="font-size:0.85em;color:var(--text-dim);margin-top:8px;">
+    投资策略：Intel RSU到期 → 卖出 → 买SMH → 长期持有 → 需要时卖出（18.8%利得税）
+  </p>
+</div>
+
+<!-- 数据来源 -->
+<div class="section" style="background:transparent;border:none;padding:0;">
+  <p style="font-size:0.8em;color:var(--text-dim);line-height:1.6;">
+    📄 基于2026年4月26日研究分析 · IRS 2026年税率 · SMH/VIGAX历史收益数据 · Oregon/Nevada/Utah 529计划数据<br>
+    页面创建：2026-04-26 · Sky Portal
+  </p>
+</div>
+
+</div>
+
+<div class="footer">
+  <a href="index.html">☁️ 返回 Sky Portal</a> · · Sky Portal
+</div>
+
+</body>
+</html>

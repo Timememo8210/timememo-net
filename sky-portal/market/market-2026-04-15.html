@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-04-15 · Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#b91c1c,#dc2626)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股收盘</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Close</div>
+<div class="zh poster-data">• 标普500 7,022.95 📈 历史新高<br>• 纳斯达克 24,016.02 📈 历史新高<br>• 道指 48,463.72 📉</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,022.95 📈 ATH<br>• Nasdaq 24,016.02 📈 ATH<br>• Dow 48,463.72 📉</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#c2410c,#ea580c)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中国A股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China A-Shares</div>
+<div class="zh poster-data">• 创业板创近11年新高<br>• AI芯片、存储器概念领涨<br>• 科创50表现强劲</div>
+<div class="en poster-data" style="display:none">• ChiNext at 11-year high<br>• AI chips & storage lead gains<br>• STAR 50 strong performance</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#4338ca,#6d28d9)">
+<div class="poster-icon">⚡</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">核心事件</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Key Drivers</div>
+<div class="zh poster-data">• 伊朗和平谈判进展<br>• Tesla +7% AI5芯片+FSD 14.3<br>• 科技股AI交易强劲复苏</div>
+<div class="en poster-data" style="display:none">• Iran peace talks progress<br>• Tesla +7% AI5 chip + FSD 14.3<br>• Tech AI trade strong recovery</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#14532d,#166534)">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">明日预判</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Outlook</div>
+<div class="zh poster-data">• 科技股继续领跑<br>• 半导体有望企稳反弹<br>• 关注4/22 Tesla Q1财报</div>
+<div class="en poster-data" style="display:none">• Tech continues to lead<br>• Semis may stabilize & rebound<br>• Watch 4/22 Tesla Q1 earnings</div>
+</div>
+</div>
+</div>
+
+<h1>📈 每日行情</h1>
+<p class="subtitle">2026-04-15 · Sky Portal Daily Market · <a href="index.html">All Markets</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘数据</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,022.95</div><div class="stock-change up">+0.8% 🔥 ATH</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,016.02</div><div class="stock-change up">+1.6% 🔥 ATH</div></div>
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">48,463.72</div><div class="stock-change down">-0.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">9,189.23</div><div class="stock-change down">-0.2%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">1. 标普500与纳斯达克双双创历史新高</span><span class="en" style="display:none">1. S&P 500 & Nasdaq Hit All-Time Highs</span></h4>
+<p><span class="zh">标普500收于7,022.95点（+0.8%），纳斯达克收于24,016.02点（+1.6%），双双创下历史新高。科技股领涨，AI相关交易强劲复苏是主要推动力。道指则逆势下跌0.5%至48,463.72点，反映出资金从传统工业板块向科技板块轮动的趋势。</span><span class="en" style="display:none">S&P 500 closed at 7,022.95 (+0.8%) and Nasdaq at 24,016.02 (+1.6%), both all-time highs. Tech led the rally with AI-related trades recovering strongly. The Dow fell 0.5% to 48,463.72, reflecting rotation from industrials to tech.</span></p>
+<p class="src">来源：CNBC / Reuters / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 伊朗和平谈判进展推动风险偏好回升</span><span class="en" style="display:none">2. Iran Peace Talks Boost Risk Appetite</span></h4>
+<p><span class="zh">伊朗和平谈判取得实质性进展，地缘政治风险溢价显著下降。油价承压，但全球股市风险偏好明显改善。投资者将注意力从地缘冲突转向企业盈利和AI技术进展，为科技股走强提供了宏观层面的支撑。</span><span class="en" style="display:none">Substantive progress in Iran peace talks reduced geopolitical risk premiums. Oil prices under pressure, but global risk appetite improved significantly. Investors shifted focus from geopolitical conflict to corporate earnings and AI tech advances.</span></p>
+<p class="src">来源：Bloomberg / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 科技股AI交易强劲复苏</span><span class="en" style="display:none">3. Tech AI Trade Recovers Strongly</span></h4>
+<p><span class="zh">经历了近期的调整后，科技股资金大规模回流。AI相关交易再度成为市场主线，半导体、云计算、AI应用等板块全面上涨。市场对AI基础设施投资的持续增长保持高度乐观，认为当前AI周期的持续时间可能超出此前预期。</span><span class="en" style="display:none">After recent corrections, large-scale capital returned to tech. AI-related trades became the main market theme again, with semis, cloud, and AI apps rallying broadly. The market remains highly optimistic about sustained AI infrastructure investment growth.</span></p>
+<p class="src">来源：CNBC / Wall Street Journal</p>
+</div>
+
+<h2>📊 <span class="zh">个股亮点</span><span class="en" style="display:none">Stock Highlights</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">—</div><div class="stock-change up">+7.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">ORCL</div><div class="stock-price">—</div><div class="stock-change up">+12.69%</div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price">—</div><div class="stock-change up">+11.83%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$199.73</div><div class="stock-change up">+1.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">—</div><div class="stock-change down">-3.4%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🔥 Tesla +7%：AI5芯片tape-out + FSD 14.3 + UBS上调评级</span><span class="en" style="display:none">🔥 Tesla +7%: AI5 Tape-Out + FSD 14.3 + UBS Upgrade</span></h4>
+<p><span class="zh">Tesla股价大涨7%，三重利好叠加：①UBS上调评级至"买入"；②自研AI5芯片成功tape-out，标志着Tesla在自动驾驶芯片领域的重大突破；③FSD 14.3版本发布，驾驶表现显著提升。市场对Tesla在AI+机器人+能源三大领域的长期增长前景重新定价。重点关注4月22日Q1财报。</span><span class="en" style="display:none">Tesla surged 7% on triple catalysts: ① UBS upgraded to Buy; ② Self-designed AI5 chip tape-out — a major breakthrough in autonomous driving chips; ③ FSD 14.3 release with significantly improved driving performance. Market repricing Tesla's long-term growth in AI + robotics + energy. Key focus: April 22 Q1 earnings.</span></p>
+<p class="src">来源：CNBC / Bloomberg / UBS Research</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 ASML -3.4%：财报超预期但"卖事实"</span><span class="en" style="display:none">📉 ASML -3.4%: Beat Earnings but "Sell the News"</span></h4>
+<p><span class="zh">ASML季度财报超预期，但股价反而下跌3.4%。典型的"买预期卖事实"行情。此外，对中国出口管制进一步收紧的担忧也压制了市场情绪。作为全球唯一EUV光刻机供应商，ASML在中国的业务占其营收的重要份额，出口政策变化直接影响其增长前景。</span><span class="en" style="display:none">ASML beat earnings expectations but fell 3.4% — a classic "sell the news" event. Tightening China export controls added pressure. As the sole EUV lithography supplier, China represents a significant revenue share; export policy changes directly impact growth outlook.</span></p>
+<p class="src">来源：Reuters / Financial Times</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 Oracle +12.69% / SanDisk +11.83%：板块轮动受益</span><span class="en" style="display:none">📈 Oracle +12.69% / SanDisk +11.83%: Sector Rotation Beneficiaries</span></h4>
+<p><span class="zh">Oracle大涨12.69%，受益于云基础设施和AI数据库需求强劲增长。SanDisk上涨11.83%，存储板块在AI数据中心建设加速的背景下获得市场青睐。两者均体现出AI投资从芯片向基础设施和应用层的扩散趋势。</span><span class="en" style="display:none">Oracle surged 12.69% on strong cloud infrastructure and AI database demand. SanDisk gained 11.83% as the storage sector benefited from accelerated AI datacenter buildout. Both reflect AI investment expanding from chips to infrastructure and applications.</span></p>
+<p class="src">来源：Yahoo Finance / MarketWatch</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">中国A股</span><span class="en" style="display:none">China A-Shares</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">—</div><div class="stock-change up">+0.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">—</div><div class="stock-change up">🔥 11年新高</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">—</div><div class="stock-change up">强劲</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">创业板创近11年新高，AI芯片与存储器领涨</span><span class="en" style="display:none">ChiNext at 11-Year High, AI Chips & Storage Lead</span></h4>
+<p><span class="zh">创业板指数创下近11年新高，AI芯片和存储器概念股领涨市场。科创50指数表现同样强劲。上证综指微涨0.37%，整体呈现结构性行情特征。资金持续涌入AI产业链，从设计、制造到封测各环节全面受益。国内AI投资热情高涨，与美股科技股形成共振。</span><span class="en" style="display:none">ChiNext hit an 11-year high with AI chip and storage stocks leading. STAR 50 also strong. Shanghai Composite edged up 0.37% — structural rally. Capital flowing into the full AI supply chain from design to packaging. Domestic AI enthusiasm resonates with US tech rally.</span></p>
+<p class="src">来源：东方财富 / 证券时报 / Reuters</p>
+</div>
+
+<h2>🔮 <span class="zh">明日预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 科技股有望继续领跑</span><span class="en" style="display:none">1. Tech Likely to Continue Leading</span></h4>
+<p><span class="zh">AI交易复苏势头强劲，科技股资金回流趋势短期内难以逆转。标普和纳斯达克的历史新高将吸引更多追涨资金入场，但需警惕短期超买风险。</span><span class="en" style="display:none">AI trade recovery is strong and tech capital inflows unlikely to reverse short-term. ATH in S&P and Nasdaq will attract momentum money, but watch for short-term overbought risk.</span></p>
+<p class="src">来源：Market Analysis</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块有望企稳反弹</span><span class="en" style="display:none">2. Semiconductor Sector May Stabilize</span></h4>
+<p><span class="zh">费城半导体指数（SOX）小幅回落后有望企稳。ASML的回调提供了买入机会，而NVDA站稳$200关口将提振板块信心。存储器板块在AI需求推动下持续走强。</span><span class="en" style="display:none">After a small pullback, SOX may stabilize. ASML's dip could be a buying opportunity. NVDA holding $200 would boost sector confidence. Storage subsector strong on AI demand.</span></p>
+<p class="src">来源：Market Analysis</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 伊朗和平进展持续影响市场情绪</span><span class="en" style="display:none">3. Iran Peace Progress Continues to Shape Sentiment</span></h4>
+<p><span class="zh">地缘政治风险溢价的持续下降将继续利好风险资产。若谈判进一步取得进展，能源板块可能承压，但科技和成长股将获得更多上行动力。</span><span class="en" style="display:none">Declining geopolitical risk premium continues to favor risk assets. Further progress could pressure energy but boost tech and growth names.</span></p>
+<p class="src">来源：Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 关注4月22日Tesla Q1财报</span><span class="en" style="display:none">4. Watch for Tesla Q1 Earnings (Apr 22)</span></h4>
+<p><span class="zh">Tesla将于4月22日发布Q1财报，这是近期最重要的个股催化剂。市场将重点关注：汽车毛利率变化、FSD商业化进展、Cybertruck产能爬坡、以及AI5芯片量产时间表。财报表现将直接影响Tesla能否维持当前估值水平。</span><span class="en" style="display:none">Tesla reports Q1 on April 22 — the most important near-term stock catalyst. Focus areas: auto gross margin, FSD commercialization, Cybertruck ramp, and AI5 chip production timeline. Results will directly impact whether Tesla can sustain current valuations.</span></p>
+<p class="src">来源：CNBC / Bloomberg</p>
+</div>
+
+<div class="footer">
+<p>📈 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Markets</a> · <a href="../index.html">Home</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, Bloomberg, Yahoo Finance, 东方财富, 证券时报</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-28</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#c0392b">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">OpenAI冲击波</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">OpenAI Shockwave</div>
+<div class="zh poster-data">• OpenAI营收未达标，AI产业链集体回调<br>• NVDA -3%、AMD -6%、Oracle -4%</div>
+<div class="en poster-data" style="display:none">• OpenAI missed revenue targets, AI chain sells off<br>• NVDA -3%, AMD -6%, Oracle -4%</div>
+</div>
+<div class="poster-card" style="background:#b8860b">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">油价突破$110</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Breaks $110</div>
+<div class="zh poster-data">• 美伊和谈停滞，霍尔木兹海峡通行受限<br>• 布伦特原油三周新高，避险资产齐涨</div>
+<div class="en poster-data" style="display:none">• US-Iran talks stall, Hormuz restricted<br>• Brent 3-week high, safe havens rally</div>
+</div>
+<div class="poster-card" style="background:#2c3e50">
+<div class="poster-icon">📊</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股从新高回落</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Retreats from ATH</div>
+<div class="zh poster-data">• 标普 -0.49%、纳指 -0.90%<br>• 道指微跌 -0.05%，相对抗跌</div>
+<div class="en poster-data" style="display:none">• S&P -0.49%, Nasdaq -0.90%<br>• Dow -0.05%, relatively resilient</div>
+</div>
+<div class="poster-card" style="background:#16a085">
+<div class="poster-icon">🗓️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">超级财报周 + FOMC</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Earnings Week + FOMC</div>
+<div class="zh poster-data">• MSFT/META/AAPL本周财报<br>• 美联储利率决议前夕市场观望</div>
+<div class="en poster-data" style="display:none">• MSFT/META/AAPL earnings this week<br>• Fed rate decision looming</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-28 · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股指数（4/28收盘）</span><span class="en" style="display:none">US Market Indices (Apr 28 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,141</div><div class="stock-change down">-0.05%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,138</div><div class="stock-change down">-0.49%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,663</div><div class="stock-change down">-0.90%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">10,035</div><div class="stock-change down">-3.58%</div></div>
+<div class="stock-item"><div class="stock-ticker">BTC</div><div class="stock-price">$77k</div><div class="stock-change down">↓</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股指数（4/28收盘）</span><span class="en" style="display:none">China A-Share Indices (Apr 28 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SSE</span></div><div class="stock-price">4,078</div><div class="stock-change down">-0.19%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZSE</span></div><div class="stock-price">14,830</div><div class="stock-change down">-1.10%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div><div class="stock-price">3,596</div><div class="stock-change down">-1.43%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div><div class="stock-price">—</div><div class="stock-change up">+3.76%*</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">成交额</span><span class="en" style="display:none">Volume</span></div><div class="stock-price">2.6<span class="zh">万亿</span><span class="en" style="display:none">T</span></div><div class="stock-change down">-528<span class="zh">亿</span><span class="en" style="display:none">B</span></div></div>
+</div>
+<p style="font-size:0.78em;color:#666;margin-top:4px"><span class="zh">* 科创50为4/27数据，当日半导体产业链全线爆发</span><span class="en" style="display:none">* STAR 50 is Apr 27 data, semiconductor chain surged that day</span></p>
+
+<h2>🇭🇰 <span class="zh">港股指数（4/28收盘）</span><span class="en" style="display:none">HK Market Indices (Apr 28 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒指</span><span class="en" style="display:none">HSI</span></div><div class="stock-price">25,679</div><div class="stock-change down">-0.95%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒生科技</span><span class="en" style="display:none">HSTECH</span></div><div class="stock-price">4,827</div><div class="stock-change down">-2.28%</div></div>
+</div>
+
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">OpenAI营收未达标 → AI产业链集体回调</span><span class="en" style="display:none">1️⃣ OpenAI Misses Revenue Targets → AI Chain Selloff</span></h4>
+<p><span class="zh">OpenAI被曝未达到内部营收和用户增长目标，CFO与Sam Altman在此问题上产生分歧。OpenAI自身预测2026年将亏损$140亿，但预计2029年收入可达$1000亿。消息冲击整个"OpenAI生态链"——Oracle跌超4%，CoreWeave跌超5%，Nvidia跌超3%，AMD跌超6%，Rambus因Q1营收不及预期+分析师降级暴跌。市场开始质疑AI基础设施投资的回报周期。</span><span class="en" style="display:none">OpenAI reportedly missed internal revenue and user growth targets, with the CFO at odds with Sam Altman. OpenAI forecasts a $14B loss in 2026 but $100B revenue by 2029. The "OpenAI complex" sold off across the board — Oracle -4%, CoreWeave -5%, Nvidia -3%, AMD -6%. Rambus missed Q1 revenue estimates and was downgraded. Markets question AI infrastructure ROI timeline.</span></p>
+<p class="src"><span class="zh">来源：CNBC / Reuters / Fortune / Barron's / WSJ</span><span class="en" style="display:none">Sources: CNBC / Reuters / Fortune / Barron's / WSJ</span></p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">美伊和谈停滞 → 油价突破$110</span><span class="en" style="display:none">2️⃣ US-Iran Talks Stall → Oil Breaks $110</span></h4>
+<p><span class="zh">美伊和平谈判陷入僵局，霍尔木兹海峡通行持续受限。布伦特原油飙升至三周高点$110+/桶（自伊朗战争开始以来已涨超55%）。美国正在评估德黑兰提出的停战方案，但双方分歧巨大。能源板块受益上涨，但高油价加剧通胀担忧，黄金和白银同步走高。比特币回落至$77,000附近。</span><span class="en" style="display:none">US-Iran peace talks stalled, Strait of Hormuz shipments remain restricted. Brent crude surged to a 3-week high above $110/barrel (up 55%+ since the Iran war began). The US is weighing a Tehran proposal but gaps remain. Energy stocks benefited but inflation fears grew. Gold and silver rallied. Bitcoin retreated to ~$77,000.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Bloomberg / Al Jazeera / CNBC</span><span class="en" style="display:none">Sources: Reuters / Bloomberg / Al Jazeera / CNBC</span></p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">超级财报周 + FOMC会议前观望</span><span class="en" style="display:none">3️⃣ Mega Earnings Week + Pre-FOMC Caution</span></h4>
+<p><span class="zh">本周是4月最密集的财报周，Microsoft、Meta、Apple等科技巨头将先后发布业绩。同时美联储FOMC利率决议即将公布，市场在标普和纳指昨日同创新高后选择获利了结。投资者等待财报验证AI变现能力，以及美联储对通胀（受油价推动）和利率路径的最新表态。</span><span class="en" style="display:none">This is the heaviest earnings week of April with Microsoft, Meta, Apple and others reporting. The Fed FOMC rate decision is also due. After S&P and Nasdaq hit joint all-time highs yesterday, investors chose to take profits. Markets await earnings to validate AI monetization and the Fed's stance on oil-driven inflation.</span></p>
+<p class="src"><span class="zh">来源：Investopedia / Investors.com / CNBC</span><span class="en" style="display:none">Sources: Investopedia / Investors.com / CNBC</span></p>
+</div>
+
+<h2>🤖 <span class="zh">半导体/AI 重点个股</span><span class="en" style="display:none">Semiconductor / AI Focus Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$208*</div><div class="stock-change down">-3%+</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change down">-6%+</div></div>
+<div class="stock-item"><div class="stock-ticker">ORCL</div><div class="stock-price">—</div><div class="stock-change down">-4%+</div></div>
+<div class="stock-item"><div class="stock-ticker">CRWV</div><div class="stock-price">—</div><div class="stock-change down">-5%+</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">—</div><div class="stock-change down">↓</div></div>
+</div>
+<p style="font-size:0.78em;color:#666;margin-top:4px"><span class="zh">* NVDA前日收盘$208.27，今日受OpenAI消息冲击跌超3%</span><span class="en" style="display:none">* NVDA prev close $208.27, dropped 3%+ on OpenAI news</span></p>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股重点</span><span class="en" style="display:none">China & HK Focus</span></h2>
+<div class="card">
+<h4>📉 <span class="zh">A股：五一节前观望，科创50前日暴涨后回调</span><span class="en" style="display:none">📉 A-Shares: Pre-Holiday Caution, STAR 50 Pulls Back After Surge</span></h4>
+<p><span class="zh">4月28日是五一长假前最后一个完整交易日，市场整体震荡走弱。上证指数微跌0.19%报4,078点，深成指跌1.10%，创业板指跌1.43%（日线4连阴）。前一日科创50暴涨3.76%的半导体板块今日出现分化回调，临近假期资金兑现压力明显。全市场成交2.6万亿，较前日缩量528亿。煤炭板块涨幅居前。</span><span class="en" style="display:none">Apr 28 was the last full trading day before the May Day holiday. Overall weakness: SSE -0.19% at 4,078, SZSE -1.10%, ChiNext -1.43% (4th consecutive decline). The semiconductor sector that surged 3.76% (STAR 50) the prior day saw profit-taking. Volume at 2.6T CNY, down 52.8B from previous session. Coal sector led gains.</span></p>
+<p class="src"><span class="zh">来源：东方财富 / 新浪财经 / 证券时报</span><span class="en" style="display:none">Sources: EastMoney / Sina Finance / Securities Times</span></p>
+</div>
+<div class="card">
+<h4>📉 <span class="zh">港股：科网股普跌，恒生科技跌2.28%</span><span class="en" style="display:none">📉 HK: Tech Stocks Drop, HSTECH -2.28%</span></h4>
+<p><span class="zh">港股三大指数集体下跌，恒生指数跌0.95%报25,679点，恒生科技指数跌2.28%报4,827点。科网股普跌，锂电池板块也表现疲弱。前一日半导体板块午盘曾爆发（普达特科技涨超26%），但未能延续涨势。港汇走弱也是拖累因素之一。</span><span class="en" style="display:none">All three HK indices fell. HSI -0.95% at 25,679, HSTECH -2.28% at 4,827. Tech and lithium battery stocks weakened. The prior day's semiconductor rally (Pudate Tech +26%) faded. Weak HKD also weighed on sentiment.</span></p>
+<p class="src"><span class="zh">来源：新浪财经 / 英为财情 / 雪球</span><span class="en" style="display:none">Sources: Sina Finance / Investing.com / Xueqiu</span></p>
+</div>
+
+<h2>🔮 <span class="zh">走势预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+<div class="card">
+<h4><span class="zh">短期展望（未来1-2周）</span><span class="en" style="display:none">Short-term Outlook (1-2 Weeks)</span></h4>
+<p><span class="zh">
+<b>美股：</b>AI板块可能延续调整，关键观察点为MSFT/META财报能否验证AI变现能力。SOX指数单日暴跌3.58%为近期最大跌幅，短期有技术性反弹需求但趋势偏弱。油价若持续$110+将压制整体市场情绪。FOMC若释放鸽派信号可能支撑反弹。<br><br>
+<b>A股：</b>五一假期前最后一个交易日（4/29），预计延续缩量震荡。中线看半导体/AI逻辑不变，科创50的强势格局仍在。节后关注政策面是否有增量利好。<br><br>
+<b>港股：</b>科网股跟随美股科技板块调整，恒生科技跌破4,900支撑。短期关注4,800整数关口，若失守可能进一步探底。<br><br>
+<b>关注风险：</b>① 美伊局势恶化导致油价进一步飙升 ② AI财报不及预期引发板块深度回调 ③ 美联储鹰派信号
+</span><span class="en" style="display:none">
+<b>US:</b> AI sector may extend correction. Key watch: MSFT/META earnings to validate AI monetization. SOX -3.58% was the largest recent drop; technical bounce possible but trend weak. Oil at $110+ caps sentiment. Dovish FOMC could support a rebound.<br><br>
+<b>China:</b> Last trading day before May Day (4/29) — expect low volume, range-bound. Medium-term semiconductor/AI thesis intact. Watch for post-holiday policy catalysts.<br><br>
+<b>HK:</b> Tech stocks follow US tech lower. HSTECH broke below 4,900 support. Watch 4,800 level — further decline if breached.<br><br>
+<b>Key Risks:</b> ① Iran escalation + oil spike ② AI earnings miss → deeper rotation ③ Hawkish Fed signal
+</span></p>
+<p class="src"><span class="zh">分析：Sky AI 综合</span><span class="en" style="display:none">Analysis: Sky AI Composite</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">AMD</div><div id="tv-amd"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — <span class="zh">上证指数</span><span class="en" style="display:none">SSE</span></div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSTECH — <span class="zh">恒生科技</span><span class="en" style="display:none">Hang Seng Tech</span></div><div id="tv-hstech"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, WSJ, Bloomberg, Barron's, Fortune, Investopedia, EastMoney, Sina Finance</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hstech', sym:'HKEX:HSTECH'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

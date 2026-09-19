@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-17 — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card-bg: #111118;
+  --border: rgba(255,255,255,0.08);
+  --accent: #4ade80;
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --up: #4ade80;
+  --down: #f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,'Helvetica Neue',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:var(--accent);font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:var(--text-dim);font-size:0.9em;margin-bottom:28px}
+h2{color:var(--accent);font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+h3{color:var(--accent);margin:16px 0 10px}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:var(--text-dim);font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:var(--up);border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:var(--down);border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);color:var(--text-dim);font-size:0.85em}
+.footer a{color:var(--accent);text-decoration:none}
+.lang-toggle{text-align:right;margin-bottom:8px}
+.lang-toggle button{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid rgba(255,255,255,0.15);background:var(--card-bg);color:var(--text);font-family:inherit}
+.lang-toggle button.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.tag{font-size:0.72em;padding:2px 8px;border-radius:4px;font-weight:600}
+.tag-event{background:rgba(96,165,250,0.15);color:#60a5fa}
+.tag-risk{background:rgba(239,68,68,0.15);color:var(--down)}
+.tag-opportunity{background:rgba(74,222,128,0.15);color:var(--up)}
+.index-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.index-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px 12px;text-align:center}
+.index-name{font-size:0.8em;color:var(--text-dim);margin-bottom:4px}
+.index-value{font-family:'JetBrains Mono',monospace;font-size:1.15em;font-weight:700;color:#fff}
+.index-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.85em;margin-top:4px}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}.index-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-toggle">
+<button class="active" onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- ── Poster Grid ── -->
+<div class="poster-grid" style="margin-bottom:28px">
+<div class="poster-card" style="background:linear-gradient(135deg,#b71c1c 0%,#c62828 100%)">
+<div class="poster-icon">🏦</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Warsh首秀放鹰！三大指数集体下挫</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Warsh's Hawkish Debut — Indices Plunge</div>
+<div class="zh poster-data">道指 51,492 (-1.0%, -507点) ⚠️<br>标普500 -1.21% · 纳斯达克 -1.3%<br>半数FOMC委员预测今年加息 · 美债收益率飙升</div>
+<div class="en poster-data" style="display:none">Dow 51,492 (-1.0%, -507pts) ⚠️<br>S&amp;P -1.21% · Nasdaq -1.3%<br>Half of FOMC sees rate hikes · Treasury yields surge</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1a237e 0%,#283593 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SpaceX市值超越亚马逊和微软</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SpaceX Passes Amazon &amp; Microsoft</div>
+<div class="zh poster-data">市值一度达$2.97万亿 🔥<br>全球第四大上市公司<br>马斯克身家飙至$1.4万亿</div>
+<div class="en poster-data" style="display:none">Market cap hit $2.97T 🔥<br>World's 4th most valuable company<br>Musk net worth soars to $1.4T</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1b5e20 0%,#2e7d32 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股科创50暴涨4.69%！创业板历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">STAR 50 Soars 4.69%! ChiNext ATH</div>
+<div class="zh poster-data">创业板指 4167.05 (+1.56%) 历史新高<br>科创50 +4.69% · 半导体全线暴涨<br>兆易创新+14% · 澜起科技+11% · 华虹+8%</div>
+<div class="en poster-data" style="display:none">ChiNext 4167.05 (+1.56%) ATH<br>STAR 50 +4.69% · Semis surge<br>GigaDevice+14% · Montage+11% · Hua Hong+8%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#e65100 0%,#ef6c00 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊达成初步和平协议</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Preliminary Peace Deal</div>
+<div class="zh poster-data">特朗普称将签署协议重开霍尔木兹海峡<br>油价下跌 · 但市场焦点被Fed抢走<br>协议细节待公布</div>
+<div class="en poster-data" style="display:none">Trump says deal to reopen Strait of Hormuz<br>Oil falls · but Fed steals focus<br>Deal details pending</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-17 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a></p>
+
+<!-- ── US Market ── -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="index-grid">
+<div class="index-card">
+<div class="index-name"><span class="zh">道琼斯</span><span class="en" style="display:none">Dow Jones</span></div>
+<div class="index-value">51,492.55</div>
+<div class="index-change down">-1.0% (-507pts)</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">标普500</span><span class="en" style="display:none">S&amp;P 500</span></div>
+<div class="index-value">7,420.10</div>
+<div class="index-change down">-1.21%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq</span></div>
+<div class="index-value">—</div>
+<div class="index-change down">-1.3%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semi (SOX)</span></div>
+<div class="index-value">13,477.07</div>
+<div class="index-change up">+1.38%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">联邦基金利率</span><span class="en" style="display:none">Fed Funds Rate</span></div>
+<div class="index-value">3.50-3.75%</div>
+<div class="index-change" style="color:var(--text-dim)"><span class="zh">维持不变</span><span class="en" style="display:none">Unchanged</span></div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">10年期美债</span><span class="en" style="display:none">10Y Treasury</span></div>
+<div class="index-value">4.447%</div>
+<div class="index-change up"><span class="zh">收益率飙升</span><span class="en" style="display:none">Yields Surge</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4>🏦 <span class="zh">Warsh首秀Fed主席——维持利率但放鹰，市场暴跌</span><span class="en" style="display:none">🏦 Warsh's Fed Debut — Rates Held but Hawkish, Markets Plunge</span></h4>
+<p><span class="zh">美联储新主席Kevin Warsh主持其任内首次FOMC会议，一致投票维持联邦基金利率在3.5%-3.75%不变。然而，声明和新闻发布会上Warsh释放了强烈的鹰派信号：1）半数FOMC委员在点阵图中预测2026年底前至少加息一次；2）Warsh暗示将改革联储运作方式，可能取消"点阵图"和减少前瞻指引；3）通胀担忧主导会议基调。Warsh在42分钟的新闻发布会上表示"FOMC在价格稳定方面还有工作要做"。市场反应剧烈——三大指数在发布会后加速下跌，美债收益率飙升。Sevens Report的Tom Essaye评论称，Fed并不鹰派，Warsh也不鹰派，但他说"我要改变一切"——对一直运转良好的市场来说，这引发了不安。</span><span class="en" style="display:none">New Fed Chair Kevin Warsh's first FOMC voted unanimously to hold rates at 3.5%-3.75%. However, the statement and press conference were strongly hawkish: 1) Half of FOMC members penciled in at least one rate hike by end-2026; 2) Warsh hinted at operational reforms, potentially eliminating the dot plot and reducing forward guidance; 3) Inflation concerns dominated. Warsh said "the FOMC has some work to do on the price stability side" in a 42-minute presser. Markets reacted sharply — indices accelerated losses after the press conference, Treasury yields surged.</span></p>
+<p class="src"><span class="zh">来源：CNBC / WSJ / Barron's / Investopedia</span><span class="en" style="display:none">Source: CNBC / WSJ / Barron's / Investopedia</span></p>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">道指跌落历史高位，发布会后卖盘加速</span><span class="en" style="display:none">📉 Dow Drops from Record, Selling Accelerates After Presser</span></h4>
+<p><span class="zh">道琼斯指数下跌507点（-1.0%）至51,492.55点，跌落前一交易日的51,999.67历史高位。标普500跌1.21%至7,420.10点，纳斯达克跌约1.3%。在Warsh发布会前，市场还在窄幅震荡；讲话开始后，卖盘明显加速。Interactive Brokers首席策略师Steve Sosnick指出："如果有一个关键意外，那就是Warsh似乎远不如许多人预期的那样愿意配合总统的降息愿望。"Warsh的评论盖过了特朗普当天的美伊和平协议宣布——尽管油价以下跌收盘，但市场的焦点完全在Fed身上。</span><span class="en" style="display:none">The Dow fell 507 points (-1.0%) to 51,492.55, dropping from the prior session's record 51,999.67. S&amp;P 500 -1.21% to 7,420.10. Nasdaq -1.3%. Before Warsh's press conference, markets were range-bound; after, selling accelerated. Steve Sosnick of Interactive Brokers: "If there was one key surprise, it was that Warsh seemed far less willing to accommodate the President's desire to cut rates than many expected." Warsh's comments overshadowed Trump's announcement of a US-Iran peace deal — though oil ended lower, the market's focus was entirely on the Fed.</span></p>
+<p class="src"><span class="zh">来源：Barron's / CNBC / WSJ</span><span class="en" style="display:none">Source: Barron's / CNBC / WSJ</span></p>
+</div>
+
+<div class="card">
+<h4>🚀 <span class="zh">SpaceX市值一度超越亚马逊和微软，跻身全球前四</span><span class="en" style="display:none">🚀 SpaceX Briefly Passes Amazon and Microsoft, Global Top 4</span></h4>
+<p><span class="zh">SpaceX在IPO后延续疯狂涨势，市值一度触及$2.97万亿，先后超越亚马逊（$2.64万亿）和微软（$2.93万亿），一度成为全球第四大上市公司。马斯克个人净资产飙升至约$1.4万亿。SpaceX于6月11日以$135/股完成史上最大IPO，融资$860亿，仅一周时间股价已翻倍。这是2026年全球资本市场最具标志性的事件之一。不过今日SpaceX也随大盘有所回落。</span><span class="en" style="display:none">SpaceX extended its post-IPO rally, with market cap hitting $2.97T, surpassing Amazon ($2.64T) and Microsoft ($2.93T) to briefly become the world's 4th most valuable public company. Musk's net worth soared to ~$1.4T. SpaceX priced its record IPO at $135/share on June 11, raising $86B; shares have doubled in one week. Today SpaceX also pulled back with the broader market.</span></p>
+<p class="src"><span class="zh">来源：CNBC / Reuters / Forbes / WSJ / TechCrunch</span><span class="en" style="display:none">Source: CNBC / Reuters / Forbes / WSJ / TechCrunch</span></p>
+</div>
+
+<!-- ── Semiconductor Stocks ── -->
+<h2>🔧 <span class="zh">半导体/AI 个股</span><span class="en" style="display:none">Semiconductor &amp; AI Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$204.65</div><div class="stock-change down">-1.33%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$439.10</div><div class="stock-change up">+3.12%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$402.41</div><div class="stock-change up">+2.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">13,477</div><div class="stock-change up">+1.38%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">—</div><div class="stock-change" style="color:var(--text-dim)"><span class="zh">随板块</span><span class="en" style="display:none">Sector</span></div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Down</span></div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">—</div><div class="stock-change" style="color:var(--text-dim)"><span class="zh">盘整</span><span class="en" style="display:none">Sideways</span></div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">—</div><div class="stock-change up"><span class="zh">反弹</span><span class="en" style="display:none">Bounce</span></div></div>
+<div class="stock-item"><div class="stock-ticker">SPCX</div><div class="stock-price">~$192</div><div class="stock-change up"><span class="zh">IPO强势</span><span class="en" style="display:none">Post-IPO</span></div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">随大盘</span><span class="en" style="display:none">With market</span></div></div>
+</div>
+
+<div class="card">
+<h4>🔬 <span class="zh">费城半导体逆势反弹+1.38%，TSM/AVGO领涨</span><span class="en" style="display:none">🔬 SOX Bucks Trend +1.38%, TSM/AVGO Lead</span></h4>
+<p><span class="zh">与昨日SOX暴跌5.71%形成鲜明对比，今日费城半导体指数逆势反弹1.38%至13,477.07点。台积电ADR大涨3.12%至$439.10，Broadcom涨2.42%至$402.41。Nvidia在Fed鹰派信号下小跌1.33%至$204.65，但跌幅远小于昨日。半导体板块在昨日的大跌后展现韧性，显示AI驱动的长期增长逻辑依然被市场认可。昨日SOX暴跌的核心原因是获利了结而非基本面恶化，今日的快速反弹部分验证了这一判断。</span><span class="en" style="display:none">Contrasting with yesterday's -5.71% crash, SOX bounced +1.38% to 13,477.07 today. TSM ADR surged +3.12% to $439.10, AVGO +2.42% to $402.41. NVDA dipped -1.33% to $204.65 on Fed hawkishness, but far less than yesterday. The sector's resilience after yesterday's plunge confirms AI-driven long-term growth is still recognized. Yesterday's crash was profit-taking, not fundamental deterioration — today's quick bounce partly validates this.</span></p>
+<p class="src"><span class="zh">来源：MarketWatch / Investing.com / Yahoo Finance</span><span class="en" style="display:none">Source: MarketWatch / Investing.com / Yahoo Finance</span></p>
+</div>
+
+<!-- ── A-Shares ── -->
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en" style="display:none">A-Shares Close</span></h2>
+
+<div class="index-grid">
+<div class="index-card">
+<div class="index-name"><span class="zh">上证指数</span><span class="en" style="display:none">SSE Composite</span></div>
+<div class="index-value">4,108.08</div>
+<div class="index-change up">+0.40%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">深证成指</span><span class="en" style="display:none">SZSE Component</span></div>
+<div class="index-value">15,880.95</div>
+<div class="index-change up">+1.31%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">创业板指</span><span class="en" style="display:none">ChiNext</span></div>
+<div class="index-value">4,167.05</div>
+<div class="index-change up">+1.56% 🔥</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div>
+<div class="index-value">—</div>
+<div class="index-change up">+4.69% 🔥</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">科创综合</span><span class="en" style="display:none">STAR Composite</span></div>
+<div class="index-value">2,224.70</div>
+<div class="index-change up"><span class="zh">历史新高</span><span class="en" style="display:none">ATH</span></div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">沪市成交</span><span class="en" style="display:none">SH Volume</span></div>
+<div class="index-value">1.4<span class="zh">万亿</span><span class="en" style="display:none">T</span></div>
+<div class="index-change" style="color:var(--text-dim)"><span class="zh">放量</span><span class="en" style="display:none">Higher</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4>🔥 <span class="zh">A股低开高走三大指数收红，创业板/科创综指齐创历史新高</span><span class="en" style="display:none">🔥 A-Shares Low-Open High-Close, ChiNext &amp; STAR Composite ATH</span></h4>
+<p><span class="zh">6月17日A股低开高走，三大指数集体收红。上证指数涨0.40%报4108.08点；深证成指涨1.31%报15880.95点；创业板指涨1.56%报4167.05点，突破5月28日4125.07点的历史收盘新高，创下新的里程碑。科创50指数暴涨4.69%，科创综合指数收于2224.70点同样创历史收盘新高。内部分化极为显著——半导体设备、玻璃基板、电子化学品等科技板块涨幅居前，而权重蓝筹相对走弱。沪市成交14039亿，深市成交16902亿，两市合计超3万亿元。科创板做市股表现出色，显示资金对硬科技板块的持续追捧。</span><span class="en" style="display:none">A-shares opened low and closed higher, with all three major indices in the green. SSE Composite +0.40% at 4,108.08; SZSE Component +1.31% at 15,880.95; ChiNext +1.56% at 4,167.05, surpassing the May 28 record close of 4,125.07. STAR 50 surged +4.69%, STAR Composite at 2,224.70 also a record close. Internal divergence was stark — semiconductor equipment, glass substrate, and electronic chemicals led, while blue chips lagged. Total volume exceeded 3T RMB.</span></p>
+<p class="src"><span class="zh">来源：财联社 / 证券时报 / 东方财富网 / 新浪财经</span><span class="en" style="display:none">Source: cls.cn / Securities Times / East Money / Sina Finance</span></p>
+</div>
+
+<!-- ── Hong Kong ── -->
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+
+<div class="index-grid">
+<div class="index-card">
+<div class="index-name"><span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng Index</span></div>
+<div class="index-value">24,312.16</div>
+<div class="index-change down">-0.74%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">恒生科技</span><span class="en" style="display:none">Hang Seng TECH</span></div>
+<div class="index-value">—</div>
+<div class="index-change up">+0.22%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">恒生国企指数</span><span class="en" style="display:none">HSCEI</span></div>
+<div class="index-value">—</div>
+<div class="index-change down">-1.17%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">港股涨跌不一：恒指跌0.74%，恒生科技微涨0.22%</span><span class="en" style="display:none">📊 HK Mixed: HSI -0.74%, HSTECH +0.22%</span></h4>
+<p><span class="zh">港股三大指数涨跌不一。恒生指数跌0.74%报24312.16点，恒生科技指数微涨0.22%，国企指数跌1.17%。芯片半导体板块多数上涨——兆易创新涨超14%，澜起科技涨超11%，华虹宏力涨超8%。大型科网股分化，快手涨逾7%，美团、百度等涨跌不一。汽车股普跌。智谱AI概念股表现亮眼，智谱涨12.6%。南向资金继续流入，显示内地资金对港股科技板块的看好。</span><span class="en" style="display:none">HK indices were mixed. HSI fell -0.74% to 24,312.16; HSTECH rose +0.22%; HSCEI -1.17%. Semiconductor stocks mostly rose — GigaDevice +14%, Montage +11%, Hua Hong +8%. Large-cap tech diverged: Kuaishou +7%, Meituan and Baidu mixed. Auto stocks broadly lower. Zhipu AI concept jumped, Zhipu +12.6%. Southbound capital continued to flow in.</span></p>
+<p class="src"><span class="zh">来源：财联社 / 东方财富网 / 新浪财经 / 香港商報</span><span class="en" style="display:none">Source: cls.cn / East Money / Sina Finance / HKCD</span></p>
+</div>
+
+<!-- ── Core Drivers ── -->
+<h2>📌 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="tag tag-event">1</span> <span class="zh">Warsh首次FOMC——"改变一切"的鹰派信号</span><span class="en" style="display:none">Warsh's First FOMC — "Change Everything" Hawkish Signal</span></h4>
+<p><span class="zh">这是今日全球市场最大的单一驱动事件。Warsh在利率决议中维持3.5-3.75%不变（符合预期），但：1）点阵图显示半数委员预测年内加息——这是2026年最鹰派的信号；2）暗示可能取消点阵图和减少前瞻指引，相当于移除市场长期以来依赖的"Fed安全网"；3）新闻发布会语气偏鹰，强调通胀高于目标的担忧。利率期货市场迅速重新定价，加息预期升温。这是本轮周期中Fed可能从"按兵不动"转向"准备加息"的关键转折点。市场担忧：如果Warsh的联储真的减少沟通透明度，未来政策意外将更多，波动率将结构性上升。</span><span class="en" style="display:none">The single biggest market driver today. Warsh held rates at 3.5-3.75% (as expected), but: 1) Dot plot shows half of members see rate hikes this year — the most hawkish signal of 2026; 2) Hinted at eliminating the dot plot and reducing forward guidance, effectively removing the market's "Fed safety net"; 3) Press conference tone hawkish, emphasizing above-target inflation. Futures markets rapidly repriced. This could be the key turning point from "hold" to "preparing to hike" in this cycle. Markets worry: less communication transparency means more policy surprises and structurally higher volatility.</span></p>
+<p class="src"><span class="zh">来源：CNBC / WSJ / NYT / Yahoo Finance / Investopedia</span><span class="en" style="display:none">Source: CNBC / WSJ / NYT / Yahoo Finance / Investopedia</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">2</span> <span class="zh">SpaceX IPO后持续狂飙——2026年最具标志性市场事件</span><span class="en" style="display:none">SpaceX Post-IPO Ramp — 2026's Most Defining Market Event</span></h4>
+<p><span class="zh">SpaceX在6月11日完成$860亿融资的史上最大IPO后，股价在一周内从$135翻倍至$190+。今日盘中市值一度达$2.97万亿，超越亚马逊和微软，短暂位列全球第四。马斯克个人财富飙至$1.4万亿。SpaceX的暴涨吸引了大量资金从传统科技股流出，部分解释了近期NVDA等芯片股的获利了结压力。这也凸显了2026年市场的一个核心特征：资金正在从"AI故事"向"太空/国防/卫星"等新叙事轮动。</span><span class="en" style="display:none">After its record $86B IPO on June 11, SpaceX doubled from $135 to $190+ in one week. Today's intraday market cap hit $2.97T, surpassing Amazon and Microsoft to briefly rank #4 globally. Musk's wealth soared to $1.4T. SpaceX's rally is drawing capital from traditional tech, partly explaining recent chip stock profit-taking. This underscores a core 2026 market theme: capital rotating from "AI story" to new narratives like "space/defense/satellite."</span></p>
+<p class="src"><span class="zh">来源：CNBC / Reuters / Forbes / TechCrunch</span><span class="en" style="display:none">Source: CNBC / Reuters / Forbes / TechCrunch</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">3</span> <span class="zh">中美科技股完全分化——A股芯片独立暴涨</span><span class="en" style="display:none">China-US Tech Divergence — A-Share Chips Surge Independently</span></h4>
+<p><span class="zh">今日最引人注目的结构性特征是中美芯片股的完全分化：美股芯片昨日暴跌5.71%后今日仅微弹，而A股半导体板块今日全线暴涨——科创50涨4.69%，创业板创历史新高。兆易创新涨14%，澜起科技涨11%，华虹宏力涨8%。港股芯片股同样走强。这背后的逻辑是：1）国产替代加速——美国出口管制倒逼中国半导体自主化，政策利好持续释放；2）中国科技板块有独立的流动性和政策逻辑，不受Fed影响；3）科创板做市制度完善后，资金持续流入硬科技。中美科技脱钩在资本市场层面正在加速。</span><span class="en" style="display:none">Today's most striking structural feature: complete divergence between US and Chinese chip stocks. US chips crashed 5.71% yesterday and only bounced slightly today, while A-share semiconductors surged across the board — STAR 50 +4.69%, ChiNext at ATH. GigaDevice +14%, Montage +11%, Hua Hong +8%. Logic: 1) Accelerating domestic substitution driven by US export controls; 2) Chinese tech has independent liquidity and policy logic, unaffected by Fed; 3) STAR market market-maker system attracting sustained capital into hard tech. US-China tech decoupling is accelerating at the capital market level.</span></p>
+<p class="src"><span class="zh">来源：东方财富网 / 财联社 / 新浪财经</span><span class="en" style="display:none">Source: East Money / cls.cn / Sina Finance</span></p>
+</div>
+
+<!-- ── Outlook ── -->
+<h2>🔮 <span class="zh">走向预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="tag tag-risk">短期</span> <span class="zh">波动率上升——Warsh时代的不确定性溢价</span><span class="en" style="display:none">Short-term: Higher Volatility — Warsh Era Uncertainty Premium</span></h4>
+<p><span class="zh">Warsh暗示减少前瞻指引和可能取消点阵图，等于移除了市场多年来依赖的"Fed路线图"。这意味着：1）每一次FOMC会议都可能带来更大的意外；2）市场波动率（VIX）中枢将上移；3）风险资产的估值溢价面临重估。短期内（1-2周），市场需要消化Warsh的新沟通框架，预计震荡加剧。关注下周的零售销售和失业金数据，如果经济数据走弱但Fed仍偏鹰，将形成"坏数据=坏消息"的最差组合。</span><span class="en" style="display:none">Warsh's hints at reduced forward guidance and possibly eliminating the dot plot remove the market's "Fed roadmap." This means: 1) Each FOMC meeting could bring bigger surprises; 2) VIX center will shift higher; 3) Risk asset valuation premiums face re-rating. Short-term (1-2 weeks), markets need to digest Warsh's new communication framework — expect choppier trading. Watch next week's retail sales and jobless claims; weak data + hawkish Fed = the worst combination.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-opportunity">机会</span> <span class="zh">A股硬科技独立牛市——国产替代+政策红利</span><span class="en" style="display:none">Opportunity: A-Share Hard Tech Independent Bull Market</span></h4>
+<p><span class="zh">A股创业板和科创板的强势表现（双双历史新高）表明，中国硬科技板块正在走出完全独立于美股的行情。核心驱动力——半导体国产替代、AI算力自主、政策资金持续流入——均为长期逻辑，短期内不会逆转。科创板做市制度完善后流动性持续改善，创业板4167点突破后上方空间打开。可关注：半导体设备（北方华创、中微公司）、AI算力（寒武纪、海光信息）、先进封装等方向。</span><span class="en" style="display:none">ChiNext and STAR Board's strength (both at ATH) shows Chinese hard tech is trading completely independently from US markets. Core drivers — semiconductor import substitution, AI compute autonomy, sustained policy capital — are long-term and won't reverse soon. STAR market liquidity keeps improving post market-maker reforms. ChiNext breaking 4,167 opens upside. Focus areas: semiconductor equipment (NAURA, AMEC), AI compute (Cambricon, Hygon), advanced packaging.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">关注</span> <span class="zh">美伊和平协议后续 + 半导体基本面验证</span><span class="en" style="display:none">Watch: US-Iran Deal Follow-through + Semiconductor Fundamentals</span></h4>
+<p><span class="zh">1）特朗普表示将"本周末"签署美伊和平协议。若正式签署，霍尔木兹海峡重开将显著压低油价，利好全球通胀预期，可能部分对冲Fed的鹰派信号。2）半导体板块基本面仍在改善——台积电今日+3.12%、SOX反弹+1.38%显示基本面买盘仍在。关注下周NVDA是否有新订单/合作消息，以及台积电月营收数据。3）SpaceX涨势是否可持续——若开始回调，资金可能回流传统科技/半导体。</span><span class="en" style="display:none">1) Trump says he'll sign the US-Iran deal "this weekend." A formal signing would significantly lower oil prices, benefiting global inflation expectations and partially offsetting Fed hawkishness. 2) Semiconductor fundamentals still improving — TSM +3.12% and SOX +1.38% today show fundamental buyers remain. Watch for NVDA order/partnership news next week and TSMC monthly revenue. 3) Whether SpaceX's rally is sustainable — if it starts pulling back, capital may rotate back to traditional tech/semis.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a> · <a href="../research/index.html"><span class="zh">每日研报</span><span class="en" style="display:none">Daily Research</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：CNBC, WSJ, Barron's, Investopedia, Reuters, Forbes, Yahoo Finance, MarketWatch, TechCrunch, 财联社, 证券时报, 东方财富网, 新浪财经, 香港商報, 雪球, 搜狐证券</span><span class="en" style="display:none">Data: CNBC, WSJ, Barron's, Investopedia, Reuters, Forbes, Yahoo Finance, MarketWatch, TechCrunch, cls.cn, Securities Times, East Money, Sina Finance, HKCD, Xueqiu, Sohu Finance</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.body.className = 'lang-' + lang;
+  localStorage.setItem('market-lang', lang);
+}
+var saved = localStorage.getItem('market-lang');
+if (saved) switchLang(saved);
+</script>
+
+</body>
+</html>

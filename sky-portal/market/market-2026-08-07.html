@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-08-07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--card:rgba(255,255,255,0.04);--card-hover:rgba(255,255,255,0.08);--border:rgba(255,255,255,0.08);--text:#e0e0e8;--dim:#6b6b80;--accent:#4ade80;--glow:rgba(74,222,128,0.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+body.lang-zh .en{display:none!important}body.lang-en .zh{display:none!important}
+.lang-toggle{display:flex;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:100px;overflow:hidden;margin-bottom:16px;align-self:center}
+.lang-toggle button{padding:4px 14px;border:none;background:transparent;color:var(--dim);font-size:0.8rem;cursor:pointer;transition:all .25s;font-family:inherit}
+.lang-toggle button.active{background:var(--accent);color:#000}
+.header{text-align:center;margin-bottom:24px}
+.header h1{color:var(--accent);font-size:1.6em}
+.header .subtitle{color:var(--dim);font-size:0.85em;margin-top:4px}
+.header .subtitle a{color:var(--accent);text-decoration:none}
+
+h2{color:var(--accent);font-size:1.2em;margin:28px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;transition:background .2s}
+.card:hover{background:var(--card-hover)}
+.card h4{color:#fff;font-size:1em;margin-bottom:8px}
+.card p{font-size:0.9em;margin-bottom:6px}
+.card .src{color:var(--dim);font-size:0.78em;margin-top:6px}
+
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:0.92em}
+.stock-price{color:#fff;font-size:1.05em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.06);color:var(--dim);border:1px solid var(--border)}
+
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.88em;opacity:0.9;line-height:1.6}
+
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.kline-label{font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:var(--accent);text-align:center;margin-bottom:4px}
+
+.tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:0.7em;font-weight:600}
+.tag-us{background:rgba(59,130,246,0.15);color:#60a5fa}
+.tag-cn{background:rgba(251,113,133,0.15);color:#fb7185}
+.tag-both{background:var(--glow);color:var(--accent)}
+
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);color:var(--dim);font-size:0.8em}
+.footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+<div></div>
+<div class="lang-toggle">
+<button onclick="switchLang('zh')" class="active" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+</div>
+
+<div class="header">
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-08-07 (Fri) · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+</div>
+
+<!-- ── Poster Grid ── -->
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a 0%,#059669 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">标普500创新高</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">S&P 500 Hits New Record</div>
+<div class="zh poster-data">标普500收于7,757.64 (+0.62%)<br>纳指+1.30% · 费半+2.56%🔥<br>就业数据转弱推升降息预期</div>
+<div class="en poster-data" style="display:none">S&P 500 closes at 7,757.64 (+0.62%)<br>Nasdaq +1.30% · SOX +2.56%🔥<br>Weak jobs data fuels rate-cut hopes</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e40af 0%,#7c3aed 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">SpaceX IPO首日暴涨</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">SpaceX IPO Debut Surges</div>
+<div class="zh poster-data">SPCX首日涨+15.73%<br>美股史上最大IPO（$750亿）<br>Argus上调至买入，目标$160</div>
+<div class="en poster-data" style="display:none">SPCX +15.73% on debut day<br>Largest IPO in US history ($75B)<br>Argus upgrades to Buy, target $160</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">7月非农意外转负</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">July Jobs Unexpectedly Negative</div>
+<div class="zh poster-data">非农减少2.3万人，预期+8万<br>失业率4.1%<br>降息概率大增，股市反而大涨</div>
+<div class="en poster-data" style="display:none">NFP lost 23K jobs, expected +80K<br>Unemployment 4.1%<br>Rate-cut odds surge, stocks rally</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706 0%,#b45309 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">A股科技反弹</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9">China Tech Bounces Back</div>
+<div class="zh poster-data">上证+1.02% · 深成指+1.42%<br>创业板+1.35% · 恒指+0.54%<br>创新药/CRO领涨</div>
+<div class="en poster-data" style="display:none">SSE +1.02% · SZSE +1.42%<br>ChiNext +1.35% · HSI +0.54%<br>Innovative pharma/CRO leads</div>
+</div>
+</div>
+
+<!-- ── US Market Indices ── -->
+<h2>🇺🇸 <span class="zh">美股指数（8月7日收盘）</span><span class="en">US Market Indices (Aug 7 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">道指 DJI</div><div class="stock-price">54,036</div><div class="stock-change up">+0.28%</div></div>
+<div class="stock-item"><div class="stock-ticker">标普500</div><div class="stock-price">7,757</div><div class="stock-change up">+0.62% ATH</div></div>
+<div class="stock-item"><div class="stock-ticker">纳斯达克</div><div class="stock-price">26,690</div><div class="stock-change up">+1.30%</div></div>
+<div class="stock-item"><div class="stock-ticker">费半 SOX</div><div class="stock-price">12,356</div><div class="stock-change up">+2.56%</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">14.90</div><div class="stock-change up">-1.65%</div></div>
+</div>
+
+<!-- ── Notable Stocks ── -->
+<h2>🔴 <span class="zh">焦点个股</span><span class="en">Notable Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SPCX</div><div class="stock-price">133.00</div><div class="stock-change up">+15.73%</div></div>
+<div class="stock-item"><div class="stock-ticker">DOCS</div><div class="stock-price">27.40</div><div class="stock-change up">+32.62%</div></div>
+<div class="stock-item"><div class="stock-ticker">PLTR</div><div class="stock-price">172.01</div><div class="stock-change up">+10.32%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">223.94</div><div class="stock-change up">+2.26%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">101.65</div><div class="stock-change up">+1.84%</div></div>
+<div class="stock-item"><div class="stock-ticker">BTG</div><div class="stock-price">5.03</div><div class="stock-change up">+22.98%</div></div>
+<div class="stock-item"><div class="stock-ticker">TTD</div><div class="stock-price">13.84</div><div class="stock-change down">-21.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">BTC</div><div class="stock-price">$64,876</div><div class="stock-change up">+0.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOL</div><div class="stock-price">$73.73</div><div class="stock-change up">+1.53%</div></div>
+<div class="stock-item"><div class="stock-ticker">ETH</div><div class="stock-price">$1,914</div><div class="stock-change up">+0.64%</div></div>
+</div>
+
+<!-- ── China/HK Market ── -->
+<h2>🇨🇳 <span class="zh">A股与港股（8月7日收盘）</span><span class="en">China & HK Markets (Aug 7 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-price">3,940</div><div class="stock-change up">+1.02%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">13,448</div><div class="stock-change up">+1.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板指</div><div class="stock-price">3,302</div><div class="stock-change up">+1.35%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生指数</div><div class="stock-price">25,668</div><div class="stock-change up">+0.54%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,858</div><div class="stock-change up">+0.78%</div></div>
+</div>
+
+<!-- ── Commodities ── -->
+<h2>💎 <span class="zh">商品</span><span class="en">Commodities</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">黄金</div><div class="stock-price">$4,401</div><div class="stock-change up">+2.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">白银</div><div class="stock-price">$63.80</div><div class="stock-change up">+3.56%</div></div>
+<div class="stock-item"><div class="stock-ticker">WTI原油</div><div class="stock-price">$77.08</div><div class="stock-change down">-0.27%</div></div>
+<div class="stock-item"><div class="stock-ticker">Brent</div><div class="stock-price">$82.27</div><div class="stock-change down">-0.27%</div></div>
+<div class="stock-item"><div class="stock-ticker">铜</div><div class="stock-price">$6.59</div><div class="stock-change down">-1.85%</div></div>
+</div>
+
+<!-- ── K-line Charts ── -->
+<h3>📊 <span class="zh">K线图</span><span class="en">K-line Charts</span></h3>
+<div class="kline-grid">
+<div><div class="kline-label">NVDA</div><div id="tv-nvda"></div></div>
+<div><div class="kline-label">SOX</div><div id="tv-sox"></div></div>
+<div><div class="kline-label">SPY</div><div id="tv-spy"></div></div>
+<div><div class="kline-label">SPCX</div><div id="tv-spcx"></div></div>
+<div><div class="kline-label">上证 000001</div><div id="tv-sse"></div></div>
+<div><div class="kline-label">恒指 HSI</div><div id="tv-hsi"></div></div>
+</div>
+
+<!-- ── Core Drivers ── -->
+<h2>📌 <span class="zh">三大核心驱动</span><span class="en">Three Key Drivers</span></h2>
+
+<div class="card">
+<h4>1. <span class="zh">7月非农就业意外减少2.3万人</span><span class="en">July NFP Unexpectedly Falls by 23K</span></h4>
+<p><span class="zh">美国7月非农就业减少2.3万人，远低于市场预期的增加8万人，前值也从+5.7万下修至+2万。失业率4.1%基本持平。这是美国经济罕见的就业负增长，市场迅速解读为美联储降息概率大幅上升。降息预期升温直接利好成长股估值，科技/AI板块领涨。</span><span class="en">US July nonfarm payrolls fell by 23K, far below the expected +80K. June was revised down to +20K. Unemployment held at 4.1%. The rare negative print was immediately interpreted as a strong signal for Fed rate cuts, boosting growth stock valuations and leading a tech/AI rally.</span></p>
+<p class="src"><span class="zh">来源：BLS / CNBC / Schwab</span><span class="en">Source: BLS / CNBC / Schwab</span></p>
+</div>
+
+<div class="card">
+<h4>2. <span class="zh">SpaceX IPO首日表现强劲</span><span class="en">SpaceX IPO Debuts Strong</span></h4>
+<p><span class="zh">SpaceX（SPCX）以$135定价上市，首日开盘$150，收盘$133，全天涨幅+15.73%，成为美股历史上最大的IPO（募资$750亿，估值~$1.75万亿）。Argus将SPCX上调至买入评级，目标价$160。SPCX成交超2.27亿股，远超平均成交量。SpaceX上市为市场注入了巨大的情绪推动力。</span><span class="en">SpaceX (SPCX) IPO priced at $135, opened at $150, closed at $133 with +15.73% gain — the largest IPO in US history ($75B raised, ~$1.75T valuation). Argus upgraded to Buy with $160 target. Volume of 227M shares dwarfed averages. The debut injected massive bullish sentiment into the market.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Yahoo Finance / CNBC</span><span class="en">Source: Reuters / Yahoo Finance / CNBC</span></p>
+</div>
+
+<div class="card">
+<h4>3. <span class="zh">半导体/AI板块强势反弹</span><span class="en">Semiconductor/AI Sector Bounces Back</span></h4>
+<p><span class="zh">费城半导体指数大涨2.56%，收于12,356点。英伟达+2.26%，英特尔+1.84%，Palantir+10.32%。半导体板块从近期的回调中强劲反弹，降息预期与AI需求信心共同推动。此外，Doximity（DOCS）因AI搜索工具发布暴涨32.62%，显示AI应用层面的炒作持续升温。</span><span class="en">The Philadelphia Semiconductor Index surged 2.56% to 12,356. NVDA +2.26%, INTC +1.84%, PLTR +10.32%. The sector bounced back strongly from recent pullbacks, driven by both rate-cut hopes and sustained AI demand confidence. Doximity (DOCS) soared 32.62% on AI search tool announcement, showing AI application hype continues.</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance / MarketWatch / CNBC</span><span class="en">Source: Yahoo Finance / MarketWatch / CNBC</span></p>
+</div>
+
+<!-- ── Outlook ── -->
+<h2>🔮 <span class="zh">近期市场预判</span><span class="en">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期利多因素</span><span class="en">Short-term Bullish Factors</span></h4>
+<p><span class="zh">
+• 就业转弱大幅推升9月降息概率，对成长股（AI/半导体）形成直接利好<br>
+• 黄金+2.37%持续走强，避险资金流入风险资产<br>
+• SpaceX上市效应可能持续数个交易日<br>
+• A股科技赛道连续反弹，创新药/CRO成为新热点
+</span><span class="en">
+• Weak jobs significantly raise Sept rate-cut odds, directly benefiting growth stocks (AI/semiconductors)<br>
+• Gold +2.37% continues rising, safe-haven flows into risk assets<br>
+• SpaceX listing effect may persist for several trading days<br>
+• China tech sector rallying, innovative pharma/CRO as new hotspot
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">风险提示</span><span class="en">Risk Warnings</span></h4>
+<p><span class="zh">
+• SpaceX上市后波动可能剧烈，IPO后回调风险不容忽视<br>
+• 就业负增长若持续，可能引发经济衰退担忧（"bad news is bad news"阶段转换）<br>
+• The Trade Desk（TTD）暴跌21.70%提醒：个股分化加剧<br>
+• 下周三CPI数据是下一个关键催化剂
+</span><span class="en">
+• SpaceX post-IPO volatility could be extreme, pullback risk should not be ignored<br>
+• Sustained job losses could trigger recession fears ("bad news is bad news" regime shift)<br>
+• TTD's -21.70% plunge signals rising stock-level divergence<br>
+• Next Wednesday's CPI is the next key catalyst
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">下周关注焦点</span><span class="en">Next Week's Key Focus</span></h4>
+<p><span class="zh">
+• **周三**：美国7月CPI数据 — 通胀走势将决定降息节奏<br>
+• **Q2财报季尾声**：关注剩余科技巨头财报<br>
+• **SpaceX上市后走势**：首周波动值得密切关注<br>
+• **A股政策面**：周末如有利好政策出台，可能延续反弹<br>
+• **地缘政治**：中东局势、美伊关系动态
+</span><span class="en">
+• **Wednesday**: US July CPI — inflation trajectory will determine rate-cut pace<br>
+• **Q2 earnings tail end**: Watch remaining tech giants<br>
+• **SpaceX post-IPO action**: First-week volatility warrants close attention<br>
+• **China policy**: Weekend policy announcements could extend the rally<br>
+• **Geopolitics**: Middle East situation, US-Iran dynamics
+</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.72em;color:#444"><span class="zh">数据来源：Yahoo Finance, BLS, CNBC, Reuters, 东方财富, WSJ</span><span class="en" style="display:none">Data sources: Yahoo Finance, BLS, CNBC, Reuters, Eastmoney, WSJ</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang){
+  if(lang==='zh'){document.body.className='lang-zh'}
+  else{document.body.className='lang-en'}
+  document.getElementById('btn-zh').className=lang==='zh'?'active':'';
+  document.getElementById('btn-en').className=lang==='en'?'active':'';
+}
+</script>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols=[
+  {id:'tv-nvda',sym:'NASDAQ:NVDA'},
+  {id:'tv-sox',sym:'INDEXNASDAQ:SOX'},
+  {id:'tv-spy',sym:'AMEX:SPY'},
+  {id:'tv-spcx',sym:'NASDAQ:SPCX'},
+  {id:'tv-sse',sym:'SSE:000001'},
+  {id:'tv-hsi',sym:'HKEX:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol:s.sym,interval:'1D',height:180,width:'100%',
+    theme:'dark',style:'1',chart_type:'candlesticks',
+    hide_top_toolbar:true,hide_legend:true,save_image:false,
+    calendar:false,hide_volume:true,
+    backgroundColor:'rgba(10,10,15,1)',gridColor:'rgba(255,255,255,0.06)',
+    container_id:s.id
+  });
+});
+</script>
+
+</body>
+</html>

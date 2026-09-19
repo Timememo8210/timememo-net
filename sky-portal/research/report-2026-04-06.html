@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📡 每日研报 2026-04-06 — Sky Portal</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif;
+  background: #0f0f0f; color: #ccc; padding: 20px;
+}
+.container { max-width: 900px; margin: 0 auto; }
+.report-header {
+  text-align: center; padding: 40px 0 30px;
+  border-bottom: 1px solid #2a2a2a; margin-bottom: 30px;
+}
+.report-header h1 { color: #f0a040; font-size: 1.8em; margin-bottom: 8px; }
+.report-header .date { color: #888; font-size: 0.95em; }
+.section {
+  background: #1a1a1a; border: 1px solid #2a2a2a;
+  border-radius: 12px; padding: 24px; margin-bottom: 24px;
+}
+.section-title {
+  font-size: 1.15em; font-weight: 700; margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 1px solid #2a2a2a;
+}
+.section-title.semi { color: #f0a040; }
+.section-title.stock { color: #60cdff; }
+.section-title.barca { color: #a855f7; }
+.section-title.sports { color: #4CAF50; }
+.section-title.portland { color: #34d399; }
+.section-title.ai { color: #f472b6; }
+ul { list-style: none; padding: 0; }
+ul li {
+  padding: 8px 0; border-bottom: 1px solid #222;
+  line-height: 1.6; font-size: 0.93em;
+}
+ul li:last-child { border-bottom: none; }
+ul li::before { content: "▸ "; color: #f0a040; }
+.stock-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+.stock-item {
+  background: #111; border: 1px solid #2a2a2a; border-radius: 8px;
+  padding: 10px 12px;
+}
+.stock-ticker {
+  font-family: 'SF Mono', monospace; font-weight: 700;
+  font-size: 0.9em; color: #fff; margin-bottom: 4px;
+}
+.stock-price {
+  font-family: 'SF Mono', monospace; font-size: 1.05em; color: #fff;
+}
+.stock-change {
+  display: inline-block; margin-top: 4px;
+  font-family: 'SF Mono', monospace; font-weight: 600;
+  font-size: 0.82em; padding: 3px 10px; border-radius: 5px;
+}
+.up { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.down { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.na { background: rgba(120,120,120,0.15); color: #999; border: 1px solid rgba(120,120,120,0.3); }
+.kline-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px;
+}
+.kline-item { }
+.kline-label {
+  font-family: 'SF Mono', monospace; font-size: 0.8em; font-weight: 600;
+  color: #f0a040; text-align: center; margin-bottom: 4px; letter-spacing: 0.03em;
+}
+@media (max-width: 768px) {
+  .kline-grid { grid-template-columns: 1fr !important; }
+}
+.news-card {
+  background: #111; border-radius: 8px; padding: 14px; margin-bottom: 10px;
+}
+.news-card.barca-card { border: 1px solid rgba(168,85,247,0.3); background: rgba(168,85,247,0.05); }
+.news-card.sports-card { border: 1px solid rgba(76,175,80,0.3); background: rgba(76,175,80,0.05); }
+.news-card.portland-card { border: 1px solid rgba(52,211,153,0.3); background: rgba(52,211,153,0.05); }
+.news-card.ai-card { border: 1px solid rgba(244,114,182,0.3); background: rgba(244,114,182,0.05); }
+.news-card h4 { color: #fff; font-size: 0.95em; margin-bottom: 6px; }
+.news-card p { font-size: 0.88em; color: #aaa; line-height: 1.5; }
+.tag {
+  display: inline-block; font-size: 0.75em; padding: 2px 8px;
+  border-radius: 4px; margin-bottom: 6px; font-weight: 600;
+}
+.tag-barca { background: rgba(168,85,247,0.2); color: #c084fc; }
+.tag-wc { background: rgba(76,175,80,0.2); color: #4ade80; }
+.tag-nba { background: rgba(255,165,0,0.2); color: #fbbf24; }
+.tag-portland { background: rgba(52,211,153,0.2); color: #34d399; }
+.tag-ai { background: rgba(244,114,182,0.2); color: #f9a8d4; }
+.weather-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3);
+  border-radius: 8px; padding: 10px 16px; margin-bottom: 14px;
+  font-size: 0.9em; color: #34d399;
+}
+.footer {
+  text-align: center; padding: 30px 0; color: #555; font-size: 0.85em;
+  border-top: 1px solid #2a2a2a; margin-top: 20px;
+}
+.footer a { color: #f0a040; text-decoration: none; }
+.sub-title { color: #888; font-size: 0.85em; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="report-header">
+  <h1>📡 每日研报</h1>
+  <div class="date">2026年4月6日（周一）· Daily Research Report</div>
+</div>
+
+<!-- 板块1: 半导体与AI -->
+<div class="section">
+  <div class="section-title semi">🔬 板块1 — 半导体与AI行业动态</div>
+  <ul>
+    <li><strong>TSMC产能告急：</strong>TSMC先进制程产能（3nm/2nm）已预订至2028年，苹果、英伟达、AMD、高通均抢占全部名额，台积电计划在亚利桑那兴建GigaFab超级晶圆厂并在日本启动3nm量产以应对需求。</li>
+    <li><strong>英伟达供应链布局：</strong>英伟达通过战略股权投资巩固AI供应链，其公开股权投资组合从两年前约2.3亿美元飙升至2025年末逾130亿美元，2026年3月再追加80-100亿美元投资。</li>
+    <li><strong>AMD逆势崛起：</strong>AI加速器市场已形成三极格局——英伟达以80%市占率领跑，AMD成为"唯一可行替代方案"，在服务器市场占有率达约33%，持续蚕食市场份额。</li>
+    <li><strong>Intel战略调整：</strong>英特尔任命Aparna Bawa为首席法务与人事官，回购爱尔兰晶圆厂合资股份（142亿美元），并向AI芯片初创公司SambaNova投资；制造产能问题仍是中期挑战。</li>
+    <li><strong>中国AI芯片竞争加剧：</strong>中国本土GPU及AI芯片厂商2025年在AI加速器服务器市场占约41%，英伟达中国市场份额已降至55%，竞争格局正在重塑全球AI芯片供应链。</li>
+  </ul>
+</div>
+
+<!-- 板块2: 半导体股票 -->
+<div class="section">
+  <div class="section-title stock">📈 板块2 — 半导体股票行情</div>
+  <p class="sub-title">数据来源：Apr 4, 2026 收盘价（周五）| 假日前最新交易数据</p>
+  <div class="stock-grid">
+    <div class="stock-item">
+      <div class="stock-ticker">INTC</div>
+      <div class="stock-price">$50.38</div>
+      <div><span class="stock-change up">+4.89%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">TSM</div>
+      <div class="stock-price">$339.04</div>
+      <div><span class="stock-change down">-0.72%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">NVDA</div>
+      <div class="stock-price">$177.39</div>
+      <div><span class="stock-change up">+0.93%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">AMD</div>
+      <div class="stock-price">$217.50</div>
+      <div><span class="stock-change up">+3.47%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">ASML</div>
+      <div class="stock-price">$1,317.23</div>
+      <div><span class="stock-change down">-0.50%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">MU</div>
+      <div class="stock-price">$366.24</div>
+      <div><span class="stock-change down">-0.44%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">AVGO</div>
+      <div class="stock-price">$314.55</div>
+      <div><span class="stock-change up">+0.34%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">QCOM</div>
+      <div class="stock-price">$126.80</div>
+      <div><span class="stock-change down">-0.38%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">TSLA</div>
+      <div class="stock-price">$366.69</div>
+      <div><span class="stock-change up">+1.69%</span></div>
+    </div>
+    <div class="stock-item">
+      <div class="stock-ticker">SMH</div>
+      <div class="stock-price">$392.32</div>
+      <div><span class="stock-change up">+0.85%</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px">
+    <h3 style="color:#f0a040;margin-bottom:12px">📊 K线图</h3>
+    <div class="kline-grid">
+
+      <div class="kline-item">
+        <div class="kline-label">INTC — Intel</div>
+        <div class="tradingview-widget-container" id="tv-intc">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {"symbols":[["NASDAQ:INTC|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}
+          </script>
+        </div>
+      </div>
+
+      <div class="kline-item">
+        <div class="kline-label">NVDA — NVIDIA</div>
+        <div class="tradingview-widget-container" id="tv-nvda">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {"symbols":[["NASDAQ:NVDA|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}
+          </script>
+        </div>
+      </div>
+
+      <div class="kline-item">
+        <div class="kline-label">TSLA — Tesla</div>
+        <div class="tradingview-widget-container" id="tv-tsla">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {"symbols":[["NASDAQ:TSLA|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}
+          </script>
+        </div>
+      </div>
+
+      <div class="kline-item">
+        <div class="kline-label">SMH — Semiconductor ETF</div>
+        <div class="tradingview-widget-container" id="tv-smh">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {"symbols":[["NASDAQ:SMH|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}
+          </script>
+        </div>
+      </div>
+
+      <div class="kline-item">
+        <div class="kline-label">SPY — S&amp;P 500 ETF</div>
+        <div class="tradingview-widget-container" id="tv-spx">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {"symbols":[["AMEX:SPY|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}
+          </script>
+        </div>
+      </div>
+
+      <div class="kline-item">
+        <div class="kline-label">000001 — 上证指数</div>
+        <div class="tradingview-widget-container" id="tv-sse">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {"symbols":[["SSE:000001|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}
+          </script>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 板块3: FC Barcelona -->
+<div class="section">
+  <div class="section-title barca">⚽ 板块3 — FC Barcelona 动态</div>
+
+  <div class="news-card barca-card">
+    <span class="tag tag-barca">比赛结果</span>
+    <h4>巴萨客场2-1击败马德里竞技，联赛领先优势扩至7分</h4>
+    <p>莱万多夫斯基第87分钟打入制胜球，率队上演逆转好戏。巴萨在还剩8轮的情况下领先皇马7分，距第二次蝉联联赛冠军又近一步。</p>
+  </div>
+
+  <div class="news-card barca-card">
+    <span class="tag tag-barca">伤病更新</span>
+    <h4>马克·贝尔纳尔伤情确认，拉菲尼亚缺席约5周</h4>
+    <p>中场贝尔纳尔左脚踝扭伤已确认，预计短暂缺席。巴西边锋拉菲尼亚在国家队训练中大腿受伤，将缺席欧冠四分之一决赛两回合对阵马竞的比赛，约5周伤缺期。</p>
+  </div>
+
+  <div class="news-card barca-card">
+    <span class="tag tag-barca">转会动态</span>
+    <h4>达尼·奥尔莫拒绝沙特豪门天价报价，坚守诺坎普</h4>
+    <p>西班牙中场奥尔莫拒绝来自沙特阿拉伯的巨额报价，表示愿意在巴萨继续发展。同时俱乐部正积极谈判续约若昂·坎塞洛，更衣室一致希望他留队。</p>
+  </div>
+
+  <div class="news-card barca-card">
+    <span class="tag tag-barca">欧冠 / 联赛</span>
+    <h4>弗利克执教期间7胜1平，欧冠四强赛即将开打</h4>
+    <p>国家队比赛周后巴萨保持出色状态。本赛季新援阵容丰富：坎塞洛（来自利雅得新月）、马科斯·拉什福德（来自曼联）、胡安·加西亚（来自西班牙人）等均已融入球队。欧冠四分之一决赛对阵马竞将是下一大考。</p>
+  </div>
+</div>
+
+<!-- 板块4: 体育赛事 -->
+<div class="section">
+  <div class="section-title sports">🏟️ 板块4 — 体育赛事（World Cup &amp; NBA）</div>
+
+  <div class="news-card sports-card">
+    <span class="tag tag-wc">⚽ World Cup 2026</span>
+    <h4>48支球队全部确认出线！世界杯资格赛历史落幕</h4>
+    <p>2026年FIFA世界杯资格赛于2026年3月31日全部结束，历时两年半、共2527粒进球。伊拉克晋级最终填满了48支参赛名额，东道主加拿大、美国、墨西哥自动晋级。土耳其、波黑、瑞典、捷克成为欧洲区最后四支出线队。</p>
+  </div>
+
+  <div class="news-card sports-card">
+    <span class="tag tag-wc">⚽ World Cup 2026</span>
+    <h4>意大利三届连续无缘世界杯，首次参赛国家创历史</h4>
+    <p>意大利在点球大战中不敌波黑，三届世界杯（2018、2022、2026）连续缺席，震惊足球世界。首次晋级世界杯的历史性国家包括：佛得角、库拉索、约旦和乌兹别克斯坦——其中库拉索成为史上晋级世界杯最小国家。</p>
+  </div>
+
+  <div class="news-card sports-card">
+    <span class="tag tag-nba">🏀 NBA Playoffs</span>
+    <h4>活塞拿下东部1号种子，雷霆领跑西部</h4>
+    <p>底特律活塞以116-93击败76人，提前锁定东部第一名，这是活塞自2006-07赛季以来首次坐上东部头把交椅（目前战绩56-21）。西部方面，俄克拉荷马城雷霆战绩联盟最佳，几乎锁定1号种子；湖人因卢卡·东契奇（腿绳）和奥斯汀·里夫斯（腹部）季末报销，第三名地位岌岌可危。</p>
+  </div>
+
+  <div class="news-card sports-card">
+    <span class="tag tag-nba">🏀 NBA Playoffs</span>
+    <h4>常规赛最后阶段：附加赛席位争夺激烈</h4>
+    <p>常规赛最后一轮将于4月12日打响，届时将确定最终排名和附加赛配对。附加赛时间：4月14-17日；NBA季后赛正式开幕：4月18日。东部老鹰、76人、猛龙、黄蜂、魔术、热火六队仅两支能避免打附加赛，悬念十足。</p>
+  </div>
+</div>
+
+<!-- 板块5: Portland -->
+<div class="section">
+  <div class="section-title portland">🌲 板块5 — Portland 本地动态</div>
+
+  <div class="weather-badge">
+    ☀️ 今日天气：晴转多云 · 最高 78°F / 25°C · 最低 46°F / 8°C · 2026年最暖纪录
+  </div>
+
+  <div class="news-card portland-card">
+    <span class="tag tag-portland">本地新闻</span>
+    <h4>车辆冲入威拉米特河，紧急救援出动</h4>
+    <p>波特兰一辆轿车坠入威拉米特河，消防及救援部门紧急响应，事故原因正在调查中。</p>
+  </div>
+
+  <div class="news-card portland-card">
+    <span class="tag tag-portland">市政动态</span>
+    <h4>市长Wilson寻求周边郡县分摊1500万美元游民服务资金缺口</h4>
+    <p>波特兰市长Wilson就游民服务资金缺口向邻近郡县寻求支持，呼吁区域协作共同应对城市无家可归者危机，金额约1500万美元。</p>
+  </div>
+
+  <div class="news-card portland-card">
+    <span class="tag tag-portland">公共卫生</span>
+    <h4>俄勒冈州2026年前三个月累计13例麻疹病例</h4>
+    <p>2026年一季度俄勒冈州已确认13例麻疹病例，公共卫生部门呼吁居民确保疫苗接种完整，尤其关注儿童疫苗覆盖率。</p>
+  </div>
+
+  <div class="news-card portland-card">
+    <span class="tag tag-portland">社区活动</span>
+    <h4>复活节期间共同福音使命在市中心服务数百人</h4>
+    <p>Union Gospel Mission在复活节期间于市区提供数百份热餐，并向全市有需要的人群派发数千份餐食，展现社区互助精神。</p>
+  </div>
+</div>
+
+<!-- 板块6: AI动态 -->
+<div class="section">
+  <div class="section-title ai">🤖 板块6 — AI 工具 / 产品动态</div>
+
+  <div class="news-card ai-card">
+    <span class="tag tag-ai">OpenAI</span>
+    <h4>GPT-5.4发布，代理编程能力大幅跃升</h4>
+    <p>OpenAI于2026年3月5日发布GPT-5.4，在计算机操作基准测试OSWorld-Verified和WebArena Verified创下新高，知识工作任务测试GDPval得分达83%。下一代模型"Spud"（拟命名GPT-5.5或GPT-6）预计Q2 2026公布。</p>
+  </div>
+
+  <div class="news-card ai-card">
+    <span class="tag tag-ai">Google</span>
+    <h4>Gemini 3.1 Pro推理能力登顶，Flash-Lite主打高性价比</h4>
+    <p>Gemini 3.1 Pro在推理基准测试中表现亮眼，GPQA Diamond得分94.3%位居榜首。Gemini 3.1 Flash-Lite效率提升2.5倍，输出速度快45%，定价仅$0.25/百万token输入，主打低成本高效部署场景。</p>
+  </div>
+
+  <div class="news-card ai-card">
+    <span class="tag tag-ai">Anthropic</span>
+    <h4>Claude Sonnet 4.6发布，神秘新模型"Claude Mythos"传闻曝光</h4>
+    <p>Claude Sonnet 4.6以Sonnet定价达到接近Opus的性能，在GDPval-AA Elo榜以1633分领跑。Anthropic内部测试代号"Claude Mythos"的前沿模型，描述为"能力阶跃式突破"，预计将于2026年Q2亮相。</p>
+  </div>
+
+  <div class="news-card ai-card">
+    <span class="tag tag-ai">开源生态</span>
+    <h4>MCP协议突破9700万次安装，成为代理AI基础设施标准</h4>
+    <p>由Anthropic主导的MCP（Model Context Protocol）在2026年3月安装量突破9700万次，从实验标准正式晋升为代理AI基础设施核心。Linux基金会旗下的Agentic AI Foundation整合了MCP、OpenAI的AGENTS.md及Block的goose框架，推动标准统一。</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>📡 每日研报 · 2026-04-06 · 数据截止于发布时</p>
+  <p style="margin-top:8px"><a href="index.html">← 查看所有研报 All Reports</a></p>
+</div>
+
+</div>
+</body>
+</html>

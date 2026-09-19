@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-05</title>
+<meta name="description" content="每日市场分析报告 - 地缘政治、经济政策与半导体AI动态">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --sidebar-bg: #0f0f18;
+  --content-bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+/* ── Lang Toggle ── */
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+.lang-toggle button {
+  padding: 6px 16px; border: none; background: transparent;
+  color: var(--text-dim); font-size: 0.85rem; cursor: pointer;
+  transition: all 0.25s; font-family: inherit;
+}
+.lang-toggle button.active {
+  background: var(--accent-glow); color: var(--text);
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.title {
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.subtitle {
+  font-size: 1.1em;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 16px;
+}
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  font-size: 0.9em;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* ── Poster Grid ── */
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.poster-card {
+  background: linear-gradient(135deg, var(--accent) 0%, #22d3ee 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #0a0a0f;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.poster-card:hover {
+  transform: translateY(-4px);
+}
+.poster-icon {
+  font-size: 2.5em;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+.poster-title {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.poster-data {
+  font-size: 0.9em;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+.card:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+}
+.card h2 {
+  color: var(--accent);
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card h3 {
+  color: var(--accent);
+  font-size: 1.3em;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.card h4 {
+  color: #fff;
+  font-size: 1.1em;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.card p {
+  margin-bottom: 10px;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+.card .src {
+  color: var(--text-dim);
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+/* ── News Items ── */
+.news-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.news-item:last-child {
+  border-bottom: none;
+}
+.news-item h5 {
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-size: 1.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.news-item p {
+  margin-bottom: 6px;
+  font-size: 0.9em;
+}
+
+/* ── Stock Grid ── */
+.stock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.stock-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 10px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.stock-item:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+}
+.stock-ticker {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.95em;
+}
+.stock-price {
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 6px 0 4px;
+}
+.stock-change {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-weight: 600;
+  font-size: 0.85em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.up {
+  background: rgba(74,222,128,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.3);
+}
+.down {
+  background: rgba(239,68,68,0.15);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+/* ─── Analytics ─── */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+.analytics-card {
+  background: linear-gradient(135deg, rgba(74,222,128,0.1) 0%, rgba(34,211,238,0.1) 100%);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 12px;
+  padding: 20px;
+}
+.analytics-number {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.analytics-label {
+  font-size: 0.9em;
+  color: var(--text-dim);
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.9em;
+}
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media(max-width:768px) {
+  .container {
+    padding: 16px 12px;
+  }
+  .title {
+    font-size: 2em;
+  }
+  .poster-grid {
+    grid-template-columns: 1fr;
+  }
+  .stock-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card {
+  animation: fadeIn 0.6s ease-out;
+}
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+</style>
+</head>
+<body class="lang-zh">
+<div class="container">
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="active" onclick="switchLang('zh')">中文</button>
+  <button onclick="switchLang('en')">EN</button>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <h1 class="title">📊 每日行情</h1>
+  <p class="subtitle">2026年7月5日 · Daily Market Analysis · <a href="index.html">历史报告</a></p>
+</div>
+
+<!-- Poster Grid - Key Highlights -->
+<div class="poster-grid">
+  <div class="poster-card">
+    <div class="poster-icon">🌍</div>
+    <div class="poster-title">地缘政治</div>
+    <div class="poster-data">
+      • 美国加速全球资源收编<br>
+      • 欧洲主权焦虑上升<br>
+      • 产业链重构加速<br>
+      • 中国全球安全倡议
+    </div>
+  </div>
+  <div class="poster-card">
+    <div class="poster-icon">💡</div>
+    <div class="poster-title">半导体/AI</div>
+    <div class="poster-data">
+      • AI终端创新元年启动<br>
+      • 存储芯片涨价突破100%<br>
+      • 半导体市场预计9754亿美元<br>
+      • 新终端形态多样化
+    </div>
+  </div>
+  <div class="poster-card">
+    <div class="poster-icon">🔮</div>
+    <div class="poster-title">市场展望</div>
+    <div class="poster-data">
+      • 短期：AI需求持续爆发<br>
+      • 中期：产业链重构机会<br>
+      • 关注：终端新品、存储走势<br>
+      • 风险：地缘政治升级
+    </div>
+  </div>
+  <div class="poster-card">
+    <div class="poster-icon">⚡</div>
+    <div class="poster-title">动态更新</div>
+    <div class="poster-data">
+      • 韩元24小时外汇交易<br>
+      • 全球央行政策转向<br>
+      • 美联储改革关注度高<br>
+      • 半导体出口利好
+    </div>
+  </div>
+</div>
+
+<!-- Market Analysis -->
+<div class="card">
+  <h2>📈 市场概况</h2>
+  <div class="analytics-grid">
+    <div class="analytics-card">
+      <div class="analytics-number">+26.3%</div>
+      <div class="analytics-label">2026年半导体市场同比增长</div>
+    </div>
+    <div class="analytics-card">
+      <div class="analytics-number">100%+</div>
+      <div class="analytics-label">NAND Flash芯片涨幅</div>
+    </div>
+    <div class="analytics-card">
+      <div class="analytics-number">9754$B</div>
+      <div class="analytics-label">2026年半导体市场规模预期</div>
+    </div>
+    <div class="analytics-card">
+      <div class="analytics-number">300%</div>
+      <div class="analytics-label">AI辅助攻击事件增长</div>
+    </div>
+  </div>
+</div>
+
+<!-- Global News Analysis -->
+<div class="card">
+  <h2>🌍 全球要闻分析</h2>
+
+  <h3>重要政策动向</h3>
+  <div class="news-item">
+    <h5>🏦 <span class="zh">全球央行政策转向</span><span class="en" style="display:none">Global Central Bank Policy Shift</span></h5>
+    <p><span class="zh">各国央行货币政策出现明显转向信号，美联储改革引发全球关注。市场预期利率政策将进入新阶段，对全球资本市场产生深远影响。</span><span class="en" style="display:none">Central banks show clear policy shift signals. Fed reforms drawing global attention. Interest rates entering new phase with market-wide impact.</span></p>
+    <p class="src">来源：日经中文网 / CNBC</p>
+  </div>
+
+  <div class="news-item">
+    <h5>🔄 <span class="zh">韩元24小时外汇交易</span><span class="en" style="display:none">KRW 24-Hour Forex Trading</span></h5>
+    <p><span class="zh">韩国将实现韩元对美元24小时外汇交易，打破传统交易时间限制。此举源于1997年亚洲金融危机后的限制，现在取消将有利于半导体等出口业务。</span><span class="en" style="display:none">South Korea enabling 24-hour KRW-USD forex trading, ending post-1997 crisis restrictions. Benefits semiconductor exports and market flexibility.</span></p>
+    <p class="src">来源：韩国央行 / 金融时报</p>
+  </div>
+
+  <h3>地缘政治格局</h3>
+  <div class="news-item">
+    <h5>🔥 <span class="zh">美国资源收编战略</span><span class="en" style="display:none">US Resource Consolidation Strategy</span></h5>
+    <p><span class="zh">美国加速全球资源收编战略引发欧洲主权焦虑，可能改变全球贸易格局。欧洲国家担忧经济自主权受到威胁，纷纷寻求多元化合作方案。</span><span class="en" style="display:none">US accelerating global resource consolidation causing European sovereignty concerns. Trade格局面临重构 with multiple nations seeking alternatives.</span></p>
+    <p class="src">来源：前海国际事务研究院 / 人民日报</p>
+  </div>
+
+  <div class="news-item">
+    <h5>🤝 <span class="zh">中国全球安全倡议</span><span class="en" style="display:none">China's Global Security Initiative</span></h5>
+    <p><span class="zh">中国提出全球安全倡议，回应国际社会维护世界和平的迫切需求。倡议强调合作共赢，反对霸权霸道霸凌，符合大多数国家的共同愿望。</span><span class="en" style="display:none">China's Global Security Initiative responds to international peacekeeping needs. Emphasizes win-win cooperation opposing hegemonic behavior.</span></p>
+    <p class="src">来源：中国外交部 / 新华网</p>
+  </div>
+</div>
+
+<!-- Semiconductor & AI Focus -->
+<div class="card">
+  <h2>💻 半导体与AI专题</h2>
+
+  <h3>AI终端创新元年</h3>
+  <div class="news-item">
+    <h5>👓 <span class="zh">终端形态多样化</span><span class="en" style="display:none">Diverse Terminal Forms</span></h5>
+    <p><span class="zh">2026年被业界称为"AI终端创新元年"，Meta、苹果、谷歌、OpenAI均有新终端计划。AI眼镜、AI pin、智能摄像头耳机等新形态将陆续上市，推动AI从云端走向终端。</span><span class="en" style="display:none">2026 marks "AI Terminal Innovation Year" with Meta, Apple, Google, OpenAI all launching new devices. AI glasses, pins, camera-earbuds emerging to bring AI from cloud to edge.</span></p>
+    <p class="src">来源：财联社 / 投资界</p>
+  </div>
+
+  <div class="news-item">
+    <h5>💾 <span class="zh">存储芯片价格暴涨</span><span class="en" style="display:none">Memory Chip Price Surge</span></h5>
+    <p><span class="zh">受AI大模型和数据中心算力需求爆发驱动，存储芯片成为涨价领头羊。三星NAND Flash涨幅突破100%，DRAM产品涨幅达60%-70%，SK海力士部分LPDDR产品涨幅逼近100%。</span><span class="en" style="display:none">Driven by AI models and data center demand, memory chips lead the price surge. Samsung NAND Flash up 100%, DRAM 60-70%, SK Hynix LPDDR nearing 100% increases.</span></p>
+    <p class="src">来源：电子工程专辑 / 知乎</p>
+  </div>
+
+  <h3>市场预期与预测</h3>
+  <div class="news-item">
+    <h5>📊 <span class="zh">半导体市场前景</span><span class="en" style="display:none">Semiconductor Market Outlook</span></h5>
+    <p><span class="zh">WSTS预测2026年半导体市场规模将达9754.6亿美元，同比增长26.3%，逼近1万亿美元大关。TrendForce数据显示，中国整体高阶AI芯片需求持续增长。</span><span class="en" style="display:none">WSTS forecasts semiconductor market to reach $975.4B in 2026, up 26.3%, nearly hitting $1T. China's advanced AI chip demand continues strong growth.</span></p>
+    <p class="src">来源：WSTS / TrendForce / 21世纪经济报道</p>
+  </div>
+
+  <div class="news-item">
+    <h5>🏆 <span class="zh">英伟达持续领跑</span><span class="en" style="display:none">Nvidia Maintains Leadership</span></h5>
+    <p><span class="zh">英伟达继续保持行业领先地位，新一代Rubin系列即将推出。2025年营收同比增幅超100%，与Groq签署200亿美元授权协议，巩固在AI芯片领域的统治地位。</span><span class="en" style="display:none">Nvidia maintains leadership with next-gen Rubin series imminent. 2025 revenue growth over 100%, $2B Groq deal solidifies AI chip dominance.</span></p>
+    <p class="src">来源：新浪财经 / 21世纪经济报道</p>
+  </div>
+</div>
+
+<!-- Market Impact Analysis -->
+<div class="card">
+  <h2>🎯 市场影响与机会</h2>
+
+  <h3>短期机会</h3>
+  <div class="news-item">
+    <h5>⚡ <span class="zh">AI产业链受益</span><span class="en" style="display:none">AI Industry Chain Benefits</span></h5>
+    <p><span class="zh">半导体板块持续受益于AI需求爆发，从芯片设计、制造到封装测试全链条受益。特别是先进封装、HBM等细分领域需求强劲，龙头公司业绩有望超预期。</span><span class="en" design:none">Semiconductor sector benefits from AI demand surge. Full chain from design to packaging seeing strong demand. Advanced packaging and HBM segments particularly strong.</span></p>
+  </div>
+
+  <div class="news-item">
+    <h5>🔌 <span class="zh">数据中心扩张</span><span class="en" style="display:none">Data Center Expansion</span></h5>
+    <p><span class="zh">微软、谷歌等科技巨头加速数据中心建设，预计未来两年数据中心规模扩大一倍，带动芯片制造商营收进一步增长。</span><span class="en" style="display:none">Tech giants accelerating data center construction. Microsoft doubling capacity in two years, driving chip manufacturer revenue growth.</span></p>
+  </div>
+
+  <h3>中期趋势</h3>
+  <div class="news-item">
+    <h5>🔄 <span class="zh">产业链重构</span><span class="en" style="display:none">Industry Chain Restructuring</span></h5>
+    <p><span class="zh">全球产业链加速重构，地缘冲突和技术变革带来三重变局。各国加强半导体自主可控，产业链区域化、多元化趋势明显，带来结构性投资机会。</span><span class="display:none">Global industry chain accelerating restructuring with geopolitical conflicts and tech changes. Countries enhancing semiconductor self-sufficiency, creating regional/diversification opportunities.</span></p>
+  </div>
+
+  <div class="news-item">
+    <h5>🏭 <span class="zh">先进封装竞争</span><span class="en" style="display:none">Advanced Packaging Competition</span></h5>
+    <p><span class="zh">TSMC、三星和Intel共投入数百亿美元扩产先进封装产能。技术竞争加剧，但台积电在CoWoS等技术上仍保持领先优势。2027年后可能出现产能过剩风险。</span><span class="en" style="display:none">TSMC, Samsung, Intel investing billions in advanced packaging. Intensifying competition with TSMC maintaining CoWoS lead. Overcapacity risk post-2027.</span></p>
+  </div>
+
+  <h3>风险提示</h3>
+  <div class="news-item">
+    <h5>⚠️ <span class="zh">地缘政治风险</span><span class="en" style="display:none">Geopolitical Risks</span></h5>
+    <p><span class="zh">全球地缘政治冲突不断，乌克兰危机、巴以冲突等热点问题持续发酵，对全球产业链供应链稳定构成威胁，可能影响相关企业正常运营。</span><span class="en" style="display:none">Geopolitical conflicts persist with Ukraine and Israel-Hamas tensions threatening global supply chains and normal operations.</span></p>
+  </div>
+
+  <div class="news-item">
+    <h5>🚨 <span class="zh">技术竞争加剧</span><span class="en" style="display:none">Intensifying Tech Competition</span></h5>
+    <p><span class="zh">各国加速半导体布局，技术竞争日趋激烈。出口管制、技术封锁等因素可能影响全球技术合作，增加行业发展的不确定性。</span><span class="en" style="display:none">Countries accelerating semiconductor investment with intense competition. Export controls and tech barriers increasing uncertainty.</span></p>
+  </div>
+</div>
+
+<!-- Investment Strategy -->
+<div class="card">
+  <h2>💡 投资策略建议</h2>
+
+  <h3>重点关注方向</h3>
+  <div class="news-item">
+    <h5>🎯 <span class="zh">AI终端产业链</span><span class="en" style="display:none">AI Terminal产业链</span></h5>
+    <p><span class="zh">重点关注AI眼镜、AI pin、智能摄像头耳机等新兴终端产业链相关公司。随着Meta、苹果等巨头新品发布，相关产业链公司将迎来业绩增长。</span><span class="en" style="display:none">Focus on AI glasses, pins, smart camera-earbud supply chains. Growth expected as Meta, Apple launch new products.</span></p>
+  </div>
+
+  <div class="news-item">
+    <h5>💾 <span class="zh">存储芯片龙头</span><span class="en" style="display:none">Memory Chip Leaders</span></h5>
+    <p><span class="zh">关注三星、SK海力士、美光等存储芯片龙头。在AI需求驱动下，存储芯片价格和需求有望持续高位，龙头企业业绩确定性高。</span><span class="en" style="display:none">Focus on Samsung, SK Hynix, Micron. High memory chip prices and demand driven by AI ensuring strong performance.</span></p>
+  </div>
+
+  <h3>操作建议</h3>
+  <div class="news-item">
+    <h5>📈 <span class="zh">逢低布局核心资产</span><span class="en" style="display:none">Buy Core Assets on Dip</span></h5>
+    <p><span class="zh">半导体板块波动较大，建议在调整时逢低布局核心资产。重点关注技术领先、客户优质、业绩确定性高的龙头企业。</span><span class="en" style="display:none">Semiconductor sector volatile; buy core assets on dips. Focus on technology leaders, quality customers, high certainty performers.</span></p>
+  </div>
+
+  <div class="news-item">
+    <h5>🔄 <span class="zh">关注技术突破</span><span class="en" style="display:none">Watch Technical Breakthroughs</span></h5>
+    <p><span class="zh">密切关注Chiplet、3D IC、先进封装等新技术的进展。技术突破可能带来新的投资机会，改变行业竞争格局。</span><span class="en" style="display:none"> closely follow Chiplet, 3D IC, advanced packaging breakthroughs. New tech may create investment opportunities and change competition landscape.</span></p>
+  </div>
+
+  <h3>风险控制</h3>
+  <div class="news-item">
+    <h5>🛡️ <span class="zh">分散投资</span><span class="en" style="display:none">Diversified Investment</span></h5>
+    <p><span class="zh">半导体行业风险较高，建议分散投资于不同细分领域，避免单一技术路线风险。同时关注国际地缘政治变化，适时调整仓位。</span><span class="en" style="display:none">High-risk sector; diversify across segments. Monitor geopolitics and adjust positions accordingly.</span></p>
+  </div>
+
+  <div class="news-item">
+    <h5>⏱️ <span class="zh">长期视角</span><span class="en" style="display:none">Long-term Perspective</span></h5>
+    <p><span class="zh">AI和半导体是长期发展趋势，短期波动不影响长期价值。建议以3-5年为周期进行投资，重点关注技术领先和市场需求变化。</span><span class="en" style="display:none">AI and semiconductors long-term trend. Short-term volatility doesn't affect long-term value. Invest with 3-5 year horizon focusing on tech leadership.</span></p>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>📊 每日行情 · Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">历史报告</a> | <a href="../index.html">返回主页</a></p>
+  <p style="margin-top:8px;font-size:0.85em;color:#666">Data sources: CNBC, Reuters, Nikkei, China Daily, Financial Times, company reports</p>
+  <p style="margin-top:4px;font-size:0.8em;color:#444">© 2026 Sky Portal. All rights reserved.</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+  });
+}
+</script>
+
+</body>
+</html>

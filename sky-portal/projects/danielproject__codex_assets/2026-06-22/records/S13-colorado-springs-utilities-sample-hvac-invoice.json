@@ -1,0 +1,78 @@
+{
+  "sample_id": "S13",
+  "expected_category": "HVAC",
+  "source_file": "colorado-springs-utilities-sample-hvac-invoice.pdf",
+  "source_title": "Colorado Springs Utilities Sample HVAC Invoice",
+  "source_url": "https://www.csu.org/hubfs/Document-Library/Sample-HVAC-Invoice.pdf",
+  "model": "gemini-2.5-flash",
+  "status": "ok",
+  "elapsed_ms": 10178,
+  "extracted": {
+    "documentType": "invoice",
+    "date": "2025-01-20",
+    "property": {
+      "address": "",
+      "unit": "",
+      "city": "",
+      "region": "",
+      "postalCode": "",
+      "country": ""
+    },
+    "vendor": {
+      "name": "XYZ HVAC Company",
+      "address": "234 Academy Blvd, Colorado Springs, CO 80918",
+      "phone": "(123) 456-7890",
+      "email": "",
+      "licenseNumber": ""
+    },
+    "service": {
+      "projectName": "HVAC System Installation/Upgrade",
+      "workType": "HVAC Installation",
+      "areaOfHome": "Whole Home",
+      "workPerformed": "Installation of a Bosch 3 Ton Heat Pump, a Lennox Elite Series Gas Furnace, and a Triangle Tube Boiler.",
+      "materials": [
+        "Bosch 3 Ton Heat Pump (Model #: BOVA-36HDNI-M18M)",
+        "Lennox Elite Series, Gas Furnace 96% AFUE (Model #: EL297UH090XV36C)",
+        "Triangle Tube Boiler (Model #: INSTICT SOLO 155)"
+      ],
+      "laborSummary": "",
+      "warranty": "",
+      "permitNumber": "",
+      "followUpRecommendation": "",
+      "resaleValueNote": "This record documents the installation of major HVAC components, indicating a significant upgrade or replacement of the home's heating and cooling systems.",
+      "valueSignal": "upgrade"
+    },
+    "items": [
+      {
+        "description": "Bosch 3 Ton Heat Pump Model #: BOVA-36HDNI-M18M",
+        "quantity": 1,
+        "unitPrice": 10200,
+        "total": 10200,
+        "kind": "material"
+      },
+      {
+        "description": "Lennox Elite Series, Gas Furnace 96% AFUE Model #: EL297UH090XV36C",
+        "quantity": 1,
+        "unitPrice": 8119.6,
+        "total": 8119.6,
+        "kind": "material"
+      },
+      {
+        "description": "Triangle Tube Boiler Model #: INSTICT SOLO 155",
+        "quantity": 1,
+        "unitPrice": 10668,
+        "total": 10668,
+        "kind": "material"
+      }
+    ],
+    "subtotal": 28987.6,
+    "tax": 0,
+    "total": 28987.6,
+    "currency": "USD",
+    "category": "HVAC",
+    "notes": "Thank you for your business!",
+    "confidenceScore": 0.95
+  },
+  "error": "",
+  "api_status": 200
+}

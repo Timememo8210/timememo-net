@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* === Swiss Minimal: pure type + grid lines, zero cards === */
+:root {
+  --bg: #FFFFFF;
+  --text: #111111;
+  --text-2: #666666;
+  --text-3: #AAAAAA;
+  --accent: #E63B2E;
+  --line: #DDDDDD;
+  --font: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Grid Container ── */
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Header ── */
+.head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 2px solid var(--text);
+}
+.head-logo {
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.head-logo span { color: var(--accent); }
+.head-spacer {}
+.head-nav {
+  display: flex;
+  gap: 20px;
+}
+.head-nav a {
+  font-size: 0.8em;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-2);
+  transition: color 0.15s;
+  letter-spacing: 0.02em;
+}
+.head-nav a:hover { color: var(--accent); }
+
+/* ── Hero ── */
+.hero {
+  padding: 80px 0 64px;
+  border-bottom: 1px solid var(--line);
+}
+.hero h1 {
+  font-size: 4.5em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero p {
+  font-size: 1.05em;
+  color: var(--text-2);
+  max-width: 400px;
+  font-weight: 300;
+}
+
+/* ── Index Row (like a table of contents) ── */
+.index {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  margin-top: 48px;
+}
+.index-num {
+  font-size: 0.7em;
+  color: var(--text-3);
+  font-weight: 500;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.index-val {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.index-val:last-child .index-num,
+.index-val:last-child { border-bottom: 2px solid var(--text); }
+.index-name {
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.15s;
+}
+a.index-name:hover { color: var(--accent); }
+.index-meta {
+  font-size: 0.75em;
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+/* ── Section ── */
+.sec {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.sec-head .num {
+  font-size: 5em;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--line);
+  letter-spacing: -0.05em;
+}
+.sec-head .info h2 {
+  font-size: 1.4em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.sec-head .info p {
+  font-size: 0.8em;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+
+/* ── Text Links (list format) ── */
+.text-links {
+  display: flex;
+  flex-direction: column;
+}
+.t-link {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 10px 0;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid #F0F0F0;
+  transition: all 0.1s;
+}
+.t-link:last-child { border-bottom: none; }
+.t-link:hover { padding-left: 8px; }
+.t-link:hover .t-name { color: var(--accent); }
+.t-icon { font-size: 0.9em; opacity: 0.7; }
+.t-name {
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: color 0.1s;
+}
+.t-detail {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+.t-desc {
+  font-size: 0.78em;
+  color: var(--text-2);
+}
+.t-tag {
+  font-size: 0.65em;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Featured (large text block) ── */
+.feat {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--line);
+}
+.feat-label {
+  display: inline-block;
+  font-size: 0.65em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.feat h3 {
+  font-size: 2.6em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+.feat p {
+  font-size: 0.92em;
+  color: var(--text-2);
+  max-width: 480px;
+  font-weight: 300;
+}
+.feat a {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 1px;
+}
+.feat a:hover { color: var(--text); border-color: var(--text); }
+
+/* ── Footer ── */
+.foot {
+  padding: 32px 0;
+  border-top: 2px solid var(--text);
+  margin-top: 32px;
+}
+.foot p {
+  font-size: 0.72em;
+  color: var(--text-3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .wrap { padding: 0 20px; }
+  .hero h1 { font-size: 3em; }
+  .head { grid-template-columns: auto 1fr; gap: 8px; }
+  .head-nav { display: none; }
+  .sec-head .num { font-size: 3em; }
+  .t-detail { display: none; }
+  .t-link { grid-template-columns: 24px 1fr auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="head">
+    <div class="head-logo">SKY<span>.</span></div>
+    <div class="head-spacer"></div>
+    <div class="head-nav">
+      <a href="#daily">Daily</a>
+      <a href="#research">Research</a>
+      <a href="#life">Life</a>
+      <a href="#tools">Tools</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>数字<em>空间</em></h1>
+    <p>研究 · 工具 · 记录 — Sky AI 驱动的个人知识库</p>
+  </div>
+
+  <!-- Featured -->
+  <div class="feat">
+    <div class="feat-label">Featured Report</div>
+    <h3>Intel × Tesla<br>Terafab</h3>
+    <p>$200-250亿芯片超级工厂项目深度调研。半导体行业内部的持续追踪与分析。</p>
+    <a href="research/intel-tesla-terafab.html">阅读报告 →</a>
+  </div>
+
+  <!-- Daily -->
+  <div class="sec" id="daily">
+    <div class="sec-head">
+      <div class="num">01</div>
+      <div class="info">
+        <h2>每日更新</h2>
+        <p>自动化的日常信息流</p>
+      </div>
+    </div>
+    <div class="text-links">
+      <a class="t-link" href="research/index.html">
+        <span class="t-icon">📡</span>
+        <span class="t-name">每日研报</span>
+        <span class="t-detail"><span class="t-desc">半导体 · 股票 · 巴萨 · Portland</span><span class="t-tag">Auto</span></span>
+      </a>
+      <a class="t-link" href="tech/index.html">
+        <span class="t-icon">🔬</span>
+        <span class="t-name">每日科技</span>
+        <span class="t-detail"><span class="t-desc">芯片 · 突破 · 产业</span><span class="t-tag">Auto</span></span>
+      </a>
+      <a class="t-link" href="market/index.html">
+        <span class="t-icon">📊</span>
+        <span class="t-name">每日行情</span>
+        <span class="t-detail"><span class="t-desc">美股 · A股 · 港股</span><span class="t-tag">9PM</span></span>
+      </a>
+      <a class="t-link" href="science/index.html">
+        <span class="t-icon">🧬</span>
+        <span class="t-name">每周科学</span>
+        <span class="t-detail"><span class="t-desc">Science · Nature · Cell</span><span class="t-tag">Wed</span></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Research -->
+  <div class="sec" id="research">
+    <div class="sec-head">
+      <div class="num">02</div>
+      <div class="info">
+        <h2>研究专栏</h2>
+        <p>半导体与AI的深度思考</p>
+      </div>
+    </div>
+    <div class="text-links">
+      <a class="t-link" href="research/intel-tesla-terafab.html">
+        <span class="t-icon">🏭</span>
+        <span class="t-name">Intel × Tesla Terafab</span>
+        <span class="t-detail"><span class="t-desc">芯片超级工厂调研</span><span class="t-tag">Active</span></span>
+      </a>
+      <a class="t-link" href="nvidia-report.html">
+        <span class="t-icon">💚</span>
+        <span class="t-name">NVIDIA 深度报告</span>
+        <span class="t-detail"><span class="t-desc">财报与算力展望</span><span class="t-tag">Done</span></span>
+      </a>
+      <a class="t-link" href="ai-life.html">
+        <span class="t-icon">🤖</span>
+        <span class="t-name">AI 与生活</span>
+        <span class="t-detail"><span class="t-desc">个人工作流实践</span><span class="t-tag">Ongoing</span></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Life -->
+  <div class="sec" id="life">
+    <div class="sec-head">
+      <div class="num">03</div>
+      <div class="info">
+        <h2>生活</h2>
+        <p>个人与家庭</p>
+      </div>
+    </div>
+    <div class="text-links">
+      <a class="t-link" href="naturalization.html">
+        <span class="t-icon">🇺🇸</span>
+        <span class="t-name">入籍指南</span>
+        <span class="t-detail"><span class="t-desc">N-400全流程</span><span class="t-tag">2026</span></span>
+      </a>
+      <a class="t-link" href="travel.html">
+        <span class="t-icon">✈️</span>
+        <span class="t-name">旅行计划</span>
+        <span class="t-detail"><span class="t-desc">PDX↔NKG</span><span class="t-tag">Summer</span></span>
+      </a>
+      <a class="t-link" href="investment.html">
+        <span class="t-icon">💰</span>
+        <span class="t-name">投资理财</span>
+        <span class="t-detail"><span class="t-desc">投资笔记</span><span class="t-tag">Long-term</span></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="sec" id="tools">
+    <div class="sec-head">
+      <div class="num">04</div>
+      <div class="info">
+        <h2>项目 & 工具</h2>
+        <p>自动化与学习</p>
+      </div>
+    </div>
+    <div class="text-links">
+      <a class="t-link" href="coach/munger.html">
+        <span class="t-icon">📚</span>
+        <span class="t-name">芒格误判心理学</span>
+        <span class="t-detail"><span class="t-desc">每日一课 · 13/25</span><span class="t-tag">Daily</span></span>
+      </a>
+      <a class="t-link" href="skills.html">
+        <span class="t-icon">⚡</span>
+        <span class="t-name">OpenClaw Skills</span>
+        <span class="t-detail"><span class="t-desc">AI技能集</span><span class="t-tag">Running</span></span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrap">
+  <div class="foot">
+    <p>Sky Portal · Sky Portal's Digital Space · OpenClaw ☁️</p>
+  </div>
+</div>
+
+</body>
+</html>

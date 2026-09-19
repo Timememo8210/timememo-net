@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-05-17 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a 0%,#15803d 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股再创新高 · 七周连涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets ATH · 7-Week Streak</div>
+<div class="zh poster-data">• 标普500 7,501（+0.77%）历史新高<br>• 纳指 26,635（+0.88%）历史新高<br>• 道指 50,063 距历史最高仅0.3%</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,501 (+0.77%) ATH<br>• Nasdaq 26,635 (+0.88%) ATH<br>• Dow 50,063 just 0.3% from ATH</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SOX自3月底暴涨64%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SOX Up 64% Since Late March</div>
+<div class="zh poster-data">• 费半指数创下25年来最强25日涨幅<br>• 美光/AMD翻倍，英特尔近三倍<br>• 但泡沫警告声渐起，Burry持有做空头寸</div>
+<div class="en poster-data" style="display:none">• SOX strongest 25-day run since 2000<br>• MU/AMD doubled, Intel nearly tripled<br>• Bubble warnings grow, Burry holds puts</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%)">
+<div class="poster-icon">🤝</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中美峰会 · 贸易解冻信号</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Trump-Xi Summit · Trade Thaw Signal</div>
+<div class="zh poster-data">• 特朗普-习近平北京峰会<br>• 中国采购200架波音客机<br>• NVDA H200获准对华销售 · 人民币走强</div>
+<div class="en poster-data" style="display:none">• Trump-Xi Beijing summit<br>• China orders 200 Boeing jets<br>• NVDA H200 cleared for China · CNY strengthens</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#5b21b6 100%)">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周：NVIDIA财报超级周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Next: NVIDIA Earnings Super Week</div>
+<div class="zh poster-data">• 5/20 NVIDIA Q1财报（盘后）<br>• Palo Alto、Home Depot、Target<br>• FOMC会议纪要 + 多位Fed官员讲话</div>
+<div class="en poster-data" style="display:none">• 5/20 NVIDIA Q1 earnings (after-hours)<br>• Palo Alto, Home Depot, Target<br>• FOMC minutes + multiple Fed speakers</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情 · 周末版</span><span class="en" style="display:none">Daily Market · Weekend Edition</span></h1>
+<p class="subtitle">2026-05-17 · Weekend · US Market Closed · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">上周美股行情（5/15周四收盘）</span><span class="en" style="display:none">US Market Last Week (Thu May 15 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">50,063</div><div class="stock-change up">+0.75%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,501</div><div class="stock-change up">+0.77%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,635</div><div class="stock-change up">+0.88%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">+64%</div><div class="stock-change up">3/30以来</div></div>
+<div class="stock-item"><div class="stock-ticker">周线</div><div class="stock-price">7周</div><div class="stock-change up">连涨</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 三大指数齐创新高，标普连续第七周上涨</span><span class="en" style="display:none">📈 Triple ATH, S&P 7th Consecutive Weekly Gain</span></h4>
+<p><span class="zh"><b>周四（5/15）</b>：道指收于50,063（+0.75%），距历史最高仅0.3%。标普500收于7,501（+0.77%），纳斯达克收于26,635（+0.88%），双双再创历史新高。这是标普500连续第七周上涨。科技板块领涨标普11大行业板块，而材料板块跌幅最大。</span><span class="en" style="display:none"><b>Thursday (5/15)</b>: Dow closed at 50,063 (+0.75%), just 0.3% from its ATH. S&P 500 at 7,501 (+0.77%) and Nasdaq at 26,635 (+0.88%) both set new all-time highs. S&P 500 notched its 7th consecutive weekly gain. Tech led the 11 S&P sectors while materials fell the most.</span></p>
+<p><span class="zh"><b>周线回顾</b>：标普500本周+0.2%（周一已创历史新高），道指距2/10的历史最高仅一步之遥。但市场宽度极窄——标普仅半数个股站上50日均线。涨幅高度集中在少数超大盘科技/半导体股，半导体+存储股贡献了标普2026年全部5.1万亿美元市值增量的70%。</span><span class="en" style="display:none"><b>Weekly recap</b>: S&P 500 +0.2% for the week (Monday already ATH), Dow just shy of its Feb 10 ATH. However, market breadth was extremely narrow — barely over half of S&P stocks above their 50-day MAs. Gains concentrated in mega-cap tech/semis, with semis + memory accounting for 70% of S&P's $5.1T market cap added in 2026.</span></p>
+<p class="src">来源：Reuters / TradingKey / S&P Global</p>
+</div>
+
+<h2>📉 <span class="zh">热门个股（5/15周四）</span><span class="en" style="display:none">Hot Stocks (Thu May 15)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">+4.4%</div><div class="stock-change up">H200对华许可</div></div>
+<div class="stock-item"><div class="stock-ticker">CSCO</div><div class="stock-price">+13.4%</div><div class="stock-change up">历史新高</div></div>
+<div class="stock-item"><div class="stock-ticker">CBRS</div><div class="stock-price">+68%</div><div class="stock-change up">IPO首日</div></div>
+<div class="stock-item"><div class="stock-ticker">BA</div><div class="stock-price">-4.7%</div><div class="stock-change down">卖事实</div></div>
+<div class="stock-item"><div class="stock-ticker">NBIS</div><div class="stock-price">+6.7%</div><div class="stock-change up">目标价上调</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股/港股（4月月度+本周概况）</span><span class="en" style="display:none">China A-Shares / HK (April Monthly + Weekly)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,135</div><div class="stock-change down">周-1.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">~3,960</div><div class="stock-change up">周+3.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">月+25%</div><div class="stock-change up">4月最强</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">~26,370</div><div class="stock-change down">周回调</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">~5,090</div><div class="stock-change down">周回调</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股：AI国产替代加速，创业板创10年新高</span><span class="en" style="display:none">A-Shares: AI Domestic Substitution Accelerates, ChiNext 10-Year High</span></h4>
+<p><span class="zh"><b>4月整体</b>：上证全月+5.66%站稳4100点，创业板+15.45%创10年新高，科创50+25.05%。电子和通信板块分别涨26.65%和22.93%。DeepSeek-V4首次实现对华为昇腾、寒武纪等国产芯片的"Day 0"全栈适配，标志着国产AI软硬件进入"同频迭代"新阶段。寒武纪、海光信息、芯原股份股价不断刷新历史新高。</span><span class="en" style="display:none"><b>April overall</b>: Shanghai +5.66% holding above 4100, ChiNext +15.45% at 10-year high, STAR 50 +25.05%. Electronics & telecom sectors +26.65% and +22.93%. DeepSeek-V4 achieved "Day 0" full-stack compatibility with Huawei Ascend and Cambricon chips — a milestone for domestic AI hardware-software co-iteration. Cambricon, Haiguang, and VeriSilicon stock prices at all-time highs.</span></p>
+<p><span class="zh"><b>本周（5/11-5/15）</b>：周一上证站上4200，创业板涨3%+创11年新高；周二创业板首破4000历史新高；后半周高位震荡回调。全周创业板+3.5%最强，上证-1.07%。融资余额连续5周增加至2.8万亿历史新高。</span><span class="en" style="display:none"><b>This week (5/11-5/15)</b>: Monday Shanghai above 4200, ChiNext +3%+ at 11-year high; Tuesday ChiNext first broke 4000 ATH; late week high-level consolidation. Weekly: ChiNext +3.5% strongest, Shanghai -1.07%. Margin balances up for 5 straight weeks to record 2.8T.</span></p>
+<p><span class="zh"><b>港股</b>：4月恒指+3.99%，恒生科技+4.76%。港股IPO前4月募资1500亿港元，同比增长6倍领跑全球。中芯国际+39.8%，华虹+46.9%。但腾讯持续下跌，市场对其从"价值股"向"AI成长股"转型进行剧烈重估。</span><span class="en" style="display:none"><b>Hong Kong</b>: April HSI +3.99%, Hang Seng Tech +4.76%. HK IPO proceeds 150B HKD in first 4 months, 6x YoY, leading globally. SMIC +39.8%, Hua Hong +46.9%. But Tencent continued declining as the market aggressively re-rates its transition from "value stock" to "AI growth stock."</span></p>
+<p class="src">来源：新浪财经 / 证券时报 / 展博投资月报</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体/AI 专题</span><span class="en" style="display:none">Semiconductors & AI Focus</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. NVIDIA H200获准对华销售，中美芯片博弈新信号</span><span class="en" style="display:none">1. NVIDIA H200 Cleared for China Sales — New Signal in US-China Chip Game</span></h4>
+<p><span class="zh">美国政府批准NVIDIA H200芯片向10家中国公司销售，NVIDIA CEO黄仁勋随特朗普出席北京峰会。消息公布后NVDA当日涨4.4%。这是中美科技博弈中的重要信号——在AI芯片需求爆发的背景下，美国似乎在出口管制上有所松动。NVIDIA即将于5月20日（周二）盘后发布Q1财报，市场预期极高。</span><span class="en" style="display:none">The US government approved NVIDIA H200 chip sales to 10 Chinese firms, with CEO Jensen Huang attending the Beijing summit with Trump. NVDA rose 4.4% on the news. This is a significant signal in US-China tech rivalry — amid exploding AI chip demand, the US appears to be softening export controls. NVIDIA reports Q1 earnings after-hours on Tuesday May 20, with sky-high expectations.</span></p>
+<p class="src">来源：Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 费半SOX自3月底暴涨64%——25年来最快涨幅</span><span class="en" style="display:none">2. SOX Up 64% Since Late March — Fastest 25-Day Gain Since 2000</span></h4>
+<p><span class="zh">费城半导体指数自3月30日以来飙升64%，创下自2000年3月以来最强25日滚动涨幅。美光、AMD翻倍，英特尔近三倍。半导体在标普500中的权重已达18%。但泡沫担忧加剧：Michael Burry表示仍在持有iShares半导体ETF的看跌期权；Chase Investment Counsel已卖出高通持仓。摩根士丹利财富管理策略师称这是"基本面和技术面的完美结合"。全球半导体收入预计今年增长64%至1.3万亿美元（Gartner）。</span><span class="en" style="display:none">The PHLX Semiconductor Index has soared 64% since March 30, the strongest 25-day rolling performance since March 2000. MU and AMD doubled, Intel nearly tripled. Semis now comprise 18% of S&P 500 weighting. But bubble concerns are growing: Michael Burry said he's still holding puts on the iShares Semiconductor ETF; Chase Investment Counsel sold Qualcomm positions. Morgan Stanley Wealth Management strategist called it "a perfect mix of fundamental and technical stories." Global semiconductor revenue projected to rise 64% to $1.3T this year (Gartner).</span></p>
+<p class="src">来源：Reuters / Morningstar / Business Insider</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 应用材料Q1业绩超预期，AI相关部门创纪录</span><span class="en" style="display:none">3. Applied Materials Q1 Beats, AI-Linked Units at Record</span></h4>
+<p><span class="zh">半导体设备巨头应用材料（AMAT）公布2026财年Q1营收79.1亿美元（同比+11.4%），non-GAAP EPS $2.86，均超预期。与AI芯片制造强相关的半导体系统部门营收同比增长10%至59.7亿美元，创历史新高。亚马逊、谷歌等四大科技巨头2026年资本开支预计超7000亿美元，AI基础设施建设远未到顶。</span><span class="en" style="display:none">Semiconductor equipment giant Applied Materials reported FQ1 2026 revenue of $7.91B (+11.4% YoY), non-GAAP EPS $2.86, both beating expectations. The AI-linked Semiconductor Systems segment grew 10% YoY to $5.97B, a record. Amazon, Google, and other tech giants project over $700B in 2026 capex — AI infrastructure buildout is far from peaking.</span></p>
+<p class="src">来源：同花顺 / Sina Finance / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. Cerebras IPO首日暴涨68%，AI芯片新势力登场</span><span class="en" style="display:none">4. Cerebras Surges 68% in Debut — New AI Chip Player Arrives</span></h4>
+<p><span class="zh">AI芯片制造商Cerebras（CBRS）在美国市场首日交易暴涨68.2%，收盘价较IPO发行价高出近90%。Cerebras以其巨型晶圆级芯片（WSE）闻名，被视为NVIDIA在AI推理市场的潜在挑战者。上市首日的强劲表现反映了市场对AI芯片多元化供应商的渴求。</span><span class="en" style="display:none">AI chipmaker Cerebras (CBRS) surged 68.2% in its US market debut, closing nearly 90% above its IPO price. Known for its wafer-scale engine (WSE) chips, Cerebras is seen as a potential challenger to NVIDIA in AI inference. The strong debut reflects market appetite for diversified AI chip suppliers.</span></p>
+<p class="src">来源：Reuters</p>
+</div>
+
+<h2>🌍 <span class="zh">全球宏观</span><span class="en" style="display:none">Global Macro</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 特朗普-习近平北京峰会：贸易解冻的起点</span><span class="en" style="display:none">1. Trump-Xi Beijing Summit: Start of a Trade Thaw</span></h4>
+<p><span class="zh">中美首脑峰会在北京举行，特朗普携马斯克、黄仁勋等随行。峰会讨论了贸易、对台军售、霍尔木兹海峡重开等议题。中国同意采购200架波音客机。Complete Intelligence将本周信号定为"早期地缘政治稳定"——市场正在积极奖励与中美贸易解冻相关的资产。人民币走强，新兴市场亚洲ETF（EEMA）预计本周继续上行。</span><span class="en" style="display:none">Trump-Xi summit held in Beijing with Musk and Huang in attendance. Topics included trade, US arms sales to Taiwan, and reopening of the Strait of Hormuz. China agreed to buy 200 Boeing jets. Complete Intelligence labeled this week's signal as "Early-Stage Geopolitical Stability" — the market is actively rewarding assets tied to a US-China trade thaw. CNY strengthening, EEMA (iShares MSCI Emerging Markets Asia ETF) forecast to rally further.</span></p>
+<p><span class="zh"><b>⚠️ 风险</b>：如果后续出现关于关税或技术出口管制的意外鹰派言论，人民币走强和新兴市场反弹可能迅速逆转。</span><span class="en" style="display:none"><b>⚠️ Risk</b>: Any unexpected hawkish rhetoric on tariffs or tech export controls following the summit could instantly reverse the CNY's strength and trigger a sharp pullback in emerging markets.</span></p>
+<p class="src">来源：Complete Intelligence / Reuters / Fox News</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 伊朗战争持续，油价通胀压力不减</span><span class="en" style="display:none">2. Iran War Continues, Oil-Inflation Pressure Persists</span></h4>
+<p><span class="zh">美以对伊战争持续，霍尔木兹海峡事实上被封锁。布伦特原油5/11冲上$104/桶（特朗普称停火"岌岌可危"）。4月CPI同比+3.3%（汽油+19%），核心CPI环比+0.2%相对温和。CPI报收于3.8%。4月PPI同比+6%创2022年来最高。堪萨斯城联储主席称通胀是经济"最紧迫风险"。进口价格环比+1.9%（预期0.9%），燃料和润滑油价格飙升16.3%。</span><span class="en" style="display:none">The US-Israel war on Iran continues, with the Strait of Hormuz effectively shut down. Brent crude hit $104/barrel on May 11 (Trump said ceasefire "on the brink"). April CPI +3.3% YoY (gasoline +19%), core CPI +0.2% MoM relatively mild. CPI settled at 3.8%. April PPI +6% YoY, highest since 2022. Kansas City Fed President called inflation the "most pressing risk" to the economy. Import prices +1.9% MoM (vs 0.9% expected), fuel and lubricants surged 16.3%.</span></p>
+<p><span class="zh"><b>美联储动态</b>：FOMC 4月会议维持利率3.50-3.75%不变。鲍威尔任期5/15届满，Kevin Warsh预计继任。降息预期进一步推迟——部分投行对2026年全年降息表示怀疑。</span><span class="en" style="display:none"><b>Fed watch</b>: FOMC held rates at 3.50-3.75% in April. Powell's term ended May 15, Kevin Warsh expected to succeed. Rate cut expectations further delayed — some investment banks doubt any cuts in 2026.</span></p>
+<p class="src">来源：Reuters / TradingKey / S&P Global</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Q1财报季接近尾声：盈利增长强劲</span><span class="en" style="display:none">3. Q1 Earnings Season Wrapping Up: Strong Profit Growth</span></h4>
+<p><span class="zh">约89%的标普500成分股已发布Q1财报，营收同比+10.4%，利润+25.3%。83%的企业盈利超出预期。科技巨头（谷歌、微软、亚马逊、Meta）的AI投入正转化为实际收益：谷歌云业务营收同比+63%，首次单季突破200亿美元，云订单积压量翻倍至4620亿美元。四大科技巨头2026年资本开支预计超7000亿美元。</span><span class="en" style="display:none">~89% of S&P 500 companies have reported Q1 earnings, with revenue +10.4% YoY and profits +25.3%. 83% beat earnings expectations. Tech giants' AI investments are translating into real returns: Google Cloud revenue surged 63% YoY, first time exceeding $20B in a single quarter, with cloud order backlog nearly doubling to $462B. The four tech giants project over $700B in 2026 capex.</span></p>
+<p class="src">来源：TradingKey / 亿欧 / Sina Finance</p>
+</div>
+
+<h2>🔮 <span class="zh">下周预判（5/18-5/24）</span><span class="en" style="display:none">Next Week Outlook (May 18-24)</span></h2>
+
+<div class="card">
+<h4><span class="zh">美股：NVIDIA财报是试金石</span><span class="en" style="display:none">US Market: NVIDIA Earnings Are the Litmus Test</span></h4>
+<p><span class="zh"><b>核心事件</b>：NVIDIA将于5月20日（周二）盘后发布Q1财报——这是本周（甚至本月）最重要的事件。市场预期极高（上季度营收681亿美元），任何不及预期都可能触发半导体板块全面回调。考虑到SOX在标普500中18%的权重，其影响将远超芯片板块本身。</span><span class="en" style="display:none"><b>Key event</b>: NVIDIA reports Q1 earnings after-hours on Tuesday May 20 — the most important event this week, if not this month. Expectations are sky-high (prior quarter revenue $68.1B), and any miss could trigger a broad semiconductor selloff. Given semis' 18% weight in the S&P 500, the impact would extend far beyond chip stocks.</span></p>
+<p><span class="zh"><b>其他日程</b>：FOMC会议纪要发布；多位美联储官员讲话（Barr、Waller等）；制造业/服务业PMI数据；Palo Alto、Home Depot、Analog Devices、Target、Lowe's财报。</span><span class="en" style="display:none"><b>Other events</b>: FOMC minutes release; multiple Fed speakers (Barr, Waller); manufacturing/services PMI; earnings from Palo Alto, Home Depot, Analog Devices, Target, Lowe's.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">预判场景分析</span><span class="en" style="display:none">Scenario Analysis</span></h4>
+<p><span class="zh"><b>🟢 乐观场景（概率45%）</b>：NVIDIA财报超预期+前瞻指引强劲 → 半导体重拾涨势，标普再创新高。中美贸易解冻持续利好全球风险偏好，新兴市场资金加速流入。A股AI/半导体板块联动上涨。</span><span class="en" style="display:none"><b>🟢 Bullish scenario (45%)</b>: NVIDIA beats + strong guidance → semis resume rally, S&P new ATH. US-China trade thaw continues boosting global risk appetite, EM inflows accelerate. A-share AI/semi sectors rally in sympathy.</span></p>
+<p><span class="zh"><b>🟡 中性场景（概率35%）</b>：NVIDIA财报符合预期但前瞻保守 → 半导体震荡整理1-2周，大盘在当前位置消化获利盘。油价和通胀数据成为短期方向决定因素。</span><span class="en" style="display:none"><b>🟡 Neutral scenario (35%)</b>: NVIDIA meets expectations but conservative guidance → semis consolidate for 1-2 weeks, broad market digests gains. Oil and inflation data become short-term directional drivers.</span></p>
+<p><span class="zh"><b>🔴 悲观场景（概率20%）</b>：NVIDIA不及预期或前瞻大幅下调 → 半导体板块暴跌（SOX可能回调10%+），拖累标普大幅下跌。伊朗局势恶化+油价飙升+通胀数据超预期形成三重打击。</span><span class="en" style="display:none"><b>🔴 Bearish scenario (20%)</b>: NVIDIA misses or slashes guidance → semi sector plunges (SOX could correct 10%+), dragging S&P significantly lower. Triple threat of Iran escalation + oil spike + hot inflation data.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股/港股：关注NVIDIA财报对国产算力链的传导</span><span class="en" style="display:none">A-Shares/HK: Watch NVIDIA Earnings Impact on Domestic AI Chain</span></h4>
+<p><span class="zh">A股AI/半导体板块与美股高度联动。如果NVIDIA财报利好，寒武纪、海光信息等国产算力龙头有望继续走强。中美贸易解冻信号对港股中概股构成中期利好。但需注意融资余额已达2.8万亿历史新高，杠杆风险加大。关注半导体材料（抛光液、靶材、气体、光刻胶）和光通信（CPO方向）等细分领域。</span><span class="en" style="display:none">A-share AI/semi sectors are highly correlated with US markets. If NVIDIA earnings are positive, domestic computing leaders like Cambricon and Haiguang could continue rallying. US-China trade thaw signals are mid-term positive for HK-listed Chinese stocks. But margin balances at record 2.8T mean elevated leverage risk. Watch semi materials (CMP slurries, targets, gases, photoresists) and optical communication (CPO direction) subsectors.</span></p>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">399006 — 创业板指</div><div id="tv-chinext"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Reuters, TradingKey, Sina Finance, Complete Intelligence, S&P Global, 展博投资, CNBC, Yahoo Finance</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-chinext', sym:'SZSE:399006'},
+  {id:'tv-hsi', sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

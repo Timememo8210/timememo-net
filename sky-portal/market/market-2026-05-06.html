@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-06 — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e8;font-family:'Noto Sans SC',-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+
+.lang-btns{text-align:right;margin-bottom:8px}
+.lang-btns button{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid rgba(74,222,128,0.3);background:#1a1a2e;color:#aaa;font-family:inherit}
+.lang-btns button.active{background:#4ade80;color:#000;border-color:#4ade80}
+
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;margin-bottom:14px;transition:background 0.2s}
+.card:hover{background:rgba(255,255,255,0.07)}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#666;font-size:0.8em;margin-top:6px}
+
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-title{font-size:1.3em;font-weight:700}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+
+.news-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.news-item:last-child{border-bottom:none}
+
+.highlight-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:16px 20px;margin:16px 0}
+
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+
+@media(max-width:768px){
+  .stock-grid{grid-template-columns:repeat(2,1fr)}
+  .kline-grid{grid-template-columns:1fr}
+  .poster-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-btns">
+<button class="active" onclick="switchLang('zh')">中文</button>
+<button onclick="switchLang('en')">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+
+<div class="poster-card" style="background:linear-gradient(135deg,#059669 0%,#047857 100%)">
+<div class="poster-icon">🎯</div>
+<div class="zh poster-title">美股三指齐创新高</div>
+<div class="en poster-title" style="display:none">Triple ATH for US Markets</div>
+<div class="zh poster-data">
+道指 49,910 (+1.24%)<br>
+标普500 7,369 (+1.46%) 历史新高<br>
+纳指 25,839 (+1.97%) 历史新高<br>
+SOX半导体 11,473 (+4.48%) 52周新高
+</div>
+<div class="en poster-data" style="display:none">
+Dow 49,910 (+1.24%)<br>
+S&P 500 7,369 (+1.46%) ATH<br>
+Nasdaq 25,839 (+1.97%) ATH<br>
+SOX Semiconductor 11,473 (+4.48%) 52wk High
+</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh poster-title">AMD财报炸裂</div>
+<div class="en poster-title" style="display:none">AMD Earnings Blowout</div>
+<div class="zh poster-data">
+AMD 暴涨 +19.3%<br>
+Q1利润与营收大幅超预期<br>
+预计本季度营收增长46%<br>
+CEO苏姿丰：AI需求持续强劲
+</div>
+<div class="en poster-data" style="display:none">
+AMD surged +19.3%<br>
+Q1 profit & revenue beat big<br>
+Current quarter rev guide +46%<br>
+CEO Lisa Su: AI demand stays strong
+</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh poster-title">A股开门红</div>
+<div class="en poster-title" style="display:none">China A-Shares Strong Open</div>
+<div class="zh poster-data">
+上证 4,160 (+1.17%)<br>
+深证成指 15,460 (+2.33%)<br>
+创业板 3,778 (+2.75%) 近11年新高<br>
+两市成交3.25万亿 天量
+</div>
+<div class="en poster-data" style="display:none">
+SSE 4,160 (+1.17%)<br>
+SZSE Component 15,460 (+2.33%)<br>
+ChiNext 3,778 (+2.75%) 11yr High<br>
+Turnover 3.25T yuan record
+</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706 0%,#b45309 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh poster-title">霍尔木兹海峡重开</div>
+<div class="en poster-title" style="display:none">Strait of Hormuz Reopening</div>
+<div class="zh poster-data">
+伊朗宣布海峡"完全开放"<br>
+布伦特原油暴跌至$103.6 (-5.7%)<br>
+盘中最低触及$97<br>
+10年期美债收益率降至4.35%
+</div>
+<div class="en poster-data" style="display:none">
+Iran declares strait "completely open"<br>
+Brent crude crashes to $103.6 (-5.7%)<br>
+Intraday low hit $97<br>
+10Y Treasury yield drops to 4.35%
+</div>
+</div>
+
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-06 · Sky Portal · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股行情（5月6日收盘）</span><span class="en" style="display:none">US Markets (May 6 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,910</div><div class="stock-change up">+1.24%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,369</div><div class="stock-change up">+1.46%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">25,839</div><div class="stock-change up">+1.97%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">11,473</div><div class="stock-change up">+4.48%</div></div>
+<div class="stock-item"><div class="stock-ticker">R2000</div><div class="stock-price">—</div><div class="stock-change up">+1.75%</div></div>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">AI交易全面回归，三指同创历史新高</span><span class="en" style="display:none">AI Trade Returns, Triple ATH</span></h4>
+<p><span class="zh">美股三大指数连续第二天创下收盘历史新高。道指大涨612点（+1.24%）逼近5万点大关，标普500上涨1.46%站上7369，纳斯达克飙升1.97%突破25800。费城半导体指数暴涨4.48%至11473，创下52周新高。Russell 2000小盘股指数也上涨1.75%，显示市场广度改善。</span><span class="en" style="display:none">All three major US indices set closing records for a second straight day. Dow surged 612 pts (+1.24%) nearing 50K, S&P 500 rose 1.46% to 7369, Nasdaq climbed 1.97% past 25800. Philadelphia Semiconductor Index surged 4.48% to 11473, a 52-week high. Russell 2000 also gained 1.75%, showing broad market participation.</span></p>
+<p class="src">来源：WSJ / Yahoo Finance / Investopedia</p>
+</div>
+
+<div class="card">
+<h4>🛢️ <span class="zh">美伊停火+霍尔木兹海峡重开预期，油价暴跌</span><span class="en" style="display:none">Iran Ceasefire + Hormuz Reopening Hopes, Oil Plunges</span></h4>
+<p><span class="zh">伊朗宣布霍尔木兹海峡在停火期间"完全开放"通商，特朗普表示如果伊朗接受协议，海峡将"对所有国家开放"。布伦特原油从本周早些时候的$115+暴跌至$103.6（-5.7%），盘中一度跌破$97。油价暴跌缓解了全球通胀担忧，10年期美债收益率从4.43%降至4.35%。航空股和邮轮股大涨：美联航+5.2%，嘉年华+5.5%，皇家加勒比+5.2%。</span><span class="en" style="display:none">Iran declared the Strait of Hormuz "completely open" during the ceasefire. Trump said it could be "OPEN TO ALL" if Iran accepts a deal. Brent crude crashed from $115+ to $103.6 (-5.7%), briefly dipping below $97. The oil slump eased inflation fears — 10Y Treasury yield fell from 4.43% to 4.35%. Airlines and cruises surged: United +5.2%, Carnival +5.5%, Royal Caribbean +5.2%.</span></p>
+<p class="src">来源：BBC / AP / Times of India</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体 & AI 个股</span><span class="en" style="display:none">Semiconductors & AI Stocks</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$207.83</div><div class="stock-change up">+4.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change up">+19.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">AAPL</div><div class="stock-price">$287.51</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMCI</div><div class="stock-price">—</div><div class="stock-change up">+14.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">CVS</div><div class="stock-price">—</div><div class="stock-change up">+8.2%</div></div>
+</div>
+
+<div class="card">
+<h4>🚀 <span class="zh">AMD财报炸裂：暴涨19.3%，AI需求持续爆发</span><span class="en" style="display:none">AMD Earnings Blowout: +19.3%, AI Demand Exploding</span></h4>
+<p><span class="zh">AMD发布Q1财报，利润和营收双双大幅超越分析师预期。CEO苏姿丰表示，人工智能需求的持续增长是公司业绩飙升的核心驱动力。AMD预计本季度营收将增长约46%，远超市场预期。AMD股价单日暴涨19.3%，成为今日美股最大亮点。Super Micro Computer也因财报超预期上涨14.2%。WSJ评论称"AI再次拯救了股市"。</span><span class="en" style="display:none">AMD reported Q1 results with profit and revenue significantly beating expectations. CEO Lisa Su said continued AI demand growth was the core driver. AMD guided current quarter revenue growth of ~46%, far above consensus. Shares surged 19.3% — the biggest standout of the day. Super Micro Computer also jumped 14.2% on earnings beat. WSJ noted "AI has saved the stock market — again."</span></p>
+<p class="src">来源：Times of India / WSJ / CNBC</p>
+</div>
+
+<div class="card">
+<h4>🍎 <span class="zh">苹果再创2026年新高，AI追赶投资加速</span><span class="en" style="display:none">Apple New 2026 High, R&D AI Spend Accelerates</span></h4>
+<p><span class="zh">苹果收盘$287.51（+1.2%），连续第二天刷新2026年新高。报道显示苹果研发支出大幅增加，主要用于在AI竞赛中追赶竞争对手。Apple Intelligence功能和设备端AI部署是重点投入方向。华尔街对苹果AI策略从观望转向积极看好。</span><span class="en" style="display:none">Apple closed at $287.51 (+1.2%), a new 2026 high for the second straight day. Reports show Apple is significantly increasing R&D spend to catch up in the AI race. Apple Intelligence and on-device AI deployment are key focus areas. Wall Street sentiment has shifted from cautious to bullish on Apple's AI strategy.</span></p>
+<p class="src">来源：CNBC / Kalkine / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>💡 <span class="zh">NVDA六个月新高，半导体板块集体飙升</span><span class="en" style="display:none">NVDA 6-Month High, Semiconductor Sector Surges</span></h4>
+<p><span class="zh">NVIDIA收盘$207.83（+4.2%），创下六个月来新高。费城半导体指数（SOX）暴涨4.48%至11473，52周高点11477。半导体板块受三大因素共振推动：①AMD超预期财报提振整个芯片行业信心 ②AI需求持续扩大，CoWoS先进封装产能供不应求 ③地缘风险缓和降低供应链不确定性。</span><span class="en" style="display:none">NVIDIA closed at $207.83 (+4.2%), a 6-month high. The PHLX Semiconductor Index (SOX) surged 4.48% to 11473, near its 52-week high of 11477. The sector rallied on three catalysts: ①AMD's blowout earnings boosted confidence across chips ②AI demand keeps expanding, CoWoS packaging capacity still insufficient ③Geopolitical risk reduction lowered supply chain uncertainty.</span></p>
+<p class="src">来源：MarketWatch / CNBC / WSJ</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情（5月6日收盘·五一后首个交易日）</span><span class="en" style="display:none">China A-Shares (May 6 Close · Post-May Day)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,160</div><div class="stock-change up">+1.17%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-price">15,460</div><div class="stock-change up">+2.33%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,778</div><div class="stock-change up">+2.75%</div></div>
+<div class="stock-item"><div class="stock-ticker">北证50</div><div class="stock-price">—</div><div class="stock-change up">+2.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">3.25万亿</div><div class="stock-change up">放量</div></div>
+</div>
+
+<div class="card">
+<h4>🔴 <span class="zh">五一开门红！创业板创近11年新高，科技股百股涨停</span><span class="en" style="display:none">May Day Strong Open! ChiNext 11yr High, 100+ Tech Limit Ups</span></h4>
+<p><span class="zh">A股五一假期后首个交易日迎来"开门红"，三大指数全线放量大涨。上证指数涨1.17%报4160点，深证成指涨2.33%，创业板指涨2.75%创下近11年新高。两市成交额重返3万亿元大关（约3.25万亿），显示资金入场意愿强烈。科技股热情四射，超百股涨停。贵金属板块涨幅居前，航空航天ETF也表现亮眼。五一期间外围市场回暖、美伊停火利好消息积聚是主要催化剂。</span><span class="en" style="display:none">A-shares surged in the first trading day after May Day holiday. SSE rose 1.17% to 4160, SZSE Component +2.33%, ChiNext +2.75% hitting an 11-year high. Total turnover exceeded 3.25 trillion yuan, showing strong capital inflows. Tech stocks were on fire with 100+ limit-ups. Precious metals and aerospace ETFs also shined. Catalysts included improved global markets during the holiday and US-Iran ceasefire news.</span></p>
+<p class="src">来源：证券时报 / 新浪财经 / 东方财富</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（5月6日收盘）</span><span class="en" style="display:none">Hong Kong Stocks (May 6 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">26,214</div><div class="stock-change up">+1.22%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,969</div><div class="stock-change up">+0.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒科期货</div><div class="stock-price">5,064</div><div class="stock-change up">+1.79%</div></div>
+</div>
+
+<div class="card">
+<h4>🌏 <span class="zh">恒指突破26000，恒生科技冲击5000</span><span class="en" style="display:none">HSI Breaks 26K, Hang Seng Tech Targets 5K</span></h4>
+<p><span class="zh">港股恒生指数收涨1.22%报26214点，突破26000关口。恒生科技指数涨0.8%报4969点，夜盘期货进一步上涨至5064（+1.79%），正向5000点关口发起冲击。亚洲市场整体走强，韩国Kospi暴涨6.5%突破7000点创历史新高，伦敦富时100涨2.2%，法国CAC 40涨2.9%。</span><span class="en" style="display:none">Hang Seng Index rose 1.22% to 26214, breaking above 26K. Hang Seng Tech gained 0.8% to 4969, with night futures advancing to 5064 (+1.79%), targeting the 5000 level. Asian markets broadly rallied: South Korea's Kospi surged 6.5% past 7000 for the first time, London FTSE 100 +2.2%, France CAC 40 +2.9%.</span></p>
+<p class="src">来源：东方财富 / Investing.com / Yahoo Finance</p>
+</div>
+
+<h2>🔮 <span class="zh">走势预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4>🇺🇸 <span class="zh">美股：AI+地缘缓和双驱动，关注获利回吐</span><span class="en" style="display:none">US: AI + Geopolitical Easing Dual Catalyst, Watch Profit-Taking</span></h4>
+<p><span class="zh">
+<strong>看多因素：</strong><br>
+• AI交易持续升温，AMD财报证明AI需求远未见顶<br>
+• 美伊停火若正式落地，油价可能进一步回落至$90区间<br>
+• 10年期美债收益率下降至4.35%，利好成长股估值<br>
+• Russell 2000上涨1.75%，市场广度改善<br><br>
+<strong>风险关注：</strong><br>
+• AMD单日+19.3%后短期获利回吐压力<br>
+• SOX指数4.48%单日涨幅偏大，短期可能震荡消化<br>
+• 两周停火窗口期后，若伊朗方面反悔则油价可能剧烈反弹<br>
+• AI估值持续走高后的整体回调风险
+</span><span class="en" style="display:none">
+<strong>Bullish Factors:</strong><br>
+• AI trade heating up; AMD earnings prove AI demand far from peaking<br>
+• If ceasefire formalizes, oil could drop further to $90 range<br>
+• 10Y yield dropping to 4.35% supports growth valuations<br>
+• Russell 2000 +1.75% shows improving market breadth<br><br>
+<strong>Risks:</strong><br>
+• Profit-taking after AMD's 19.3% single-day surge<br>
+• SOX 4.48% daily gain is large; consolidation likely<br>
+• If Iran reneges after 2-week ceasefire window, oil could spike<br>
+• Overall AI valuation pullback risk
+</span></p>
+</div>
+
+<div class="card">
+<h4>🇨🇳 <span class="zh">A股/港股：短期上行仍有动能</span><span class="en" style="display:none">China/HK: Upside Momentum Remains</span></h4>
+<p><span class="zh">
+<strong>看多因素：</strong><br>
+• 3.25万亿天量成交说明资金入场意愿强烈<br>
+• 创业板创11年新高，科技股主线清晰<br>
+• 外围回暖+地缘缓和，风险偏好提升<br>
+• 王毅与伊朗外长会谈，中国在中东斡旋中角色积极<br><br>
+<strong>风险关注：</strong><br>
+• 创业板3800-3900区间压力位<br>
+• 天量成交后若无法持续放量需警惕短线见顶<br>
+• 原油若反弹回$110+将打击市场情绪
+</span><span class="en" style="display:none">
+<strong>Bullish Factors:</strong><br>
+• 3.25T yuan record turnover shows strong capital inflows<br>
+• ChiNext at 11-year high, clear tech leadership<br>
+• Global risk-on sentiment from geopolitical easing<br>
+• Wang Yi's talks with Iran FM signal active Chinese diplomacy<br><br>
+<strong>Risks:</strong><br>
+• ChiNext resistance at 3800-3900<br>
+• If volume fails to sustain after record day, watch for short-term top<br>
+• Oil rebounding to $110+ would hurt sentiment
+</span></p>
+</div>
+
+<div class="highlight-box">
+<p><span class="zh"><strong>⚡ 核心观点：</strong>AMD财报是本周最重要催化剂——46%的下季度营收指引证明AI需求远未见顶。叠加霍尔木兹海峡重开预期，形成"AI+地缘缓和"双重利好。半导体板块（SOX+4.48%）是最大受益者。短期关注道指5万点心理关口和停火协议落地进展。</span><span class="en" style="display:none"><strong>⚡ Key Takeaway:</strong> AMD's earnings are this week's most important catalyst — 46% next-quarter revenue guidance proves AI demand is far from peaking. Combined with Hormuz reopening hopes, creating a "AI + geopolitical easing" dual tailwind. Semiconductors (SOX +4.48%) are the biggest beneficiaries. Near-term watch: Dow 50K psychological level and ceasefire implementation progress.</span></p>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">AMD</div><div id="tv-amd"></div></div>
+<div class="kline-item"><div class="kline-label">AAPL — Apple</div><div id="tv-aapl"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: WSJ, Yahoo Finance, Investopedia, Sina Finance, BBC, AP, CNBC, Reuters</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.querySelectorAll('.lang-btns button').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btns button.' + (lang === 'zh' ? 'active' : '')).classList.add('active');
+  // Re-toggle active class
+  var btns = document.querySelectorAll('.lang-btns button');
+  btns.forEach(function(b){ b.classList.remove('active'); });
+  btns[lang==='zh'?0:1].classList.add('active');
+  localStorage.setItem('marketLang', lang);
+}
+(function(){
+  var l = localStorage.getItem('marketLang');
+  if(l==='en'){ document.body.className='lang-en'; switchLang('en'); }
+})();
+</script>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'},
+  {id:'tv-aapl', sym:'NASDAQ:AAPL'},
+  {id:'tv-sox', sym:'INDEX:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

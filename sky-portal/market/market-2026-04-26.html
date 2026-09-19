@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-26 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-name{font-size:0.72em;color:#888;margin-top:2px}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#888;border:1px solid rgba(255,255,255,0.15)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.risk-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.risk-box h4{color:#f87171;font-size:1.05em;margin-bottom:8px}
+.outlook-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.outlook-box h4{color:#4ade80;font-size:1.05em;margin-bottom:8px}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#166534 0%,#15803d 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股 · 历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks · All-Time Highs</div>
+<div class="zh poster-data">• 标普500：7,165 ▲+0.80% ✨新高<br>• 纳斯达克：24,837 ▲+1.63% ✨新高<br>• 费半(SOX)：10,514 ▲+4.32% 🔥</div>
+<div class="en poster-data" style="display:none">• S&P 500: 7,165 ▲+0.80% ✨ATH<br>• Nasdaq: 24,837 ▲+1.63% ✨ATH<br>• SOX: 10,514 ▲+4.32% 🔥</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#991b1b 0%,#dc2626 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI芯片狂欢</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Chip Rally</div>
+<div class="zh poster-data">• Nvidia 重返$5万亿市值<br>• Intel Q1暴超预期，暴涨~25%<br>• Google 发布新一代TPU 8</div>
+<div class="en poster-data" style="display:none">• Nvidia retakes $5T market cap<br>• Intel Q1 blowout, surges ~25%<br>• Google launches next-gen TPU 8</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 · 五一前最后一周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China · Pre-Labor Day Week</div>
+<div class="zh poster-data">• 上证周涨+0.70%，收~4,080<br>• 创业板周跌-0.29%<br>• 5/1-5/5劳动节休市</div>
+<div class="en poster-data" style="display:none">• Shanghai +0.70% week, ~4,080<br>• ChiNext -0.29% week<br>• Labor Day holiday 5/1-5/5</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#78350f 0%,#d97706 100%)">
+<div class="poster-icon">🎯</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周 · 超级周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Next Week · Super Week</div>
+<div class="zh poster-data">• Mag 7中5家公布财报<br>• 美联储FOMC 4/28-29<br>• 美伊停火谈判走向关键</div>
+<div class="en poster-data" style="display:none">• 5 of Mag 7 report earnings<br>• Fed FOMC Apr 28-29<br>• Iran ceasefire talks critical</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-26 (Sat) · Weekend Edition · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>📈 <span class="zh">美股指数（4/24周五收盘）</span><span class="en" style="display:none">US Market Indexes (Fri 4/24 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-name"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div><div class="stock-price">7,165.08</div><div class="stock-change up">▲+0.80%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq</span></div><div class="stock-price">24,836.60</div><div class="stock-change up">▲+1.63%</div></div>
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-name"><span class="zh">道琼斯</span><span class="en" style="display:none">Dow Jones</span></div><div class="stock-price">49,230.71</div><div class="stock-change down">▼-0.16%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-name"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semi</span></div><div class="stock-price">10,513.66</div><div class="stock-change up">▲+4.32%</div></div>
+<div class="stock-item"><div class="stock-ticker">BRENT</div><div class="stock-name"><span class="zh">布伦特原油</span><span class="en" style="display:none">Brent Crude</span></div><div class="stock-price">$106.01</div><div class="stock-change down"><span class="zh">高位</span><span class="en" style="display:none">Elevated</span></div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">中国股市（上周表现）</span><span class="en" style="display:none">China Market (Weekly)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-name">Shanghai</div><div class="stock-price">~4,080</div><div class="stock-change up">周▲+0.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-name">Shenzhen</div><div class="stock-price">—</div><div class="stock-change up">周▲+0.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-name">ChiNext</div><div class="stock-price">—</div><div class="stock-change down">周▼-0.29%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-name"><span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng</span></div><div class="stock-price">25,978</div><div class="stock-change up">▲+0.24%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSCEI</div><div class="stock-name"><span class="zh">恒生国企</span><span class="en" style="display:none">HSI CEI</span></div><div class="stock-price">8,775</div><div class="stock-change up">▲+0.49%</div></div>
+</div>
+
+<h2>🔥 <span class="zh">核心驱动 — AI芯片军备竞赛</span><span class="en" style="display:none">Key Driver — AI Chip Arms Race</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Intel Q1财报暴超预期，股价暴涨~25%创历史新高</span><span class="en" style="display:none">1. Intel Q1 Blowout Earnings, Stock Surges ~25% to Record</span></h4>
+<p><span class="zh">Intel 2026年Q1营收$136亿（同比+7%），远超市场预期$127亿。调整后EPS $0.29，而分析师仅预期$0.01——暴超28倍。Q2营收指引$138-148亿，同样大幅高于预期。AI和数据中心业务成为核心增长引擎，股价飙升突破互联网泡沫时代高点。Intel的复苏标志着AI芯片竞争进入新阶段。</span><span class="en" style="display:none">Intel Q1 revenue $13.6B (+7% YoY), smashing the $12.7B consensus. Adjusted EPS $0.29 vs $0.01 expected — a 28x beat. Q2 guidance of $13.8-14.8B also well above estimates. AI and data center business driving growth. Stock surpassed dot-com era highs, marking Intel's comeback in the AI chip race.</span></p>
+<p class="src">来源：CNBC / Reuters / Yahoo Finance / investing.com</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Nvidia重返$5万亿市值，AI芯片需求井喷</span><span class="en" style="display:none">2. Nvidia Retakes $5 Trillion Market Cap on AI Demand Surge</span></h4>
+<p><span class="zh">Nvidia周五收涨4.3%至$208.27，市值重回$5万亿以上。AI芯片需求持续爆发，S&P 500公司Q1财报季中81.3%超出预期，整体盈利预计同比增长16.1%。半导体板块集体创历史新高，费城半导体指数单日暴涨4.32%，周涨幅更为惊人。</span><span class="en" style="display:none">Nvidia rose 4.3% to $208.27, reclaiming $5T+ market cap. AI chip demand continues to explode. 81.3% of S&P 500 companies beat earnings estimates, with overall earnings expected up 16.1% YoY. Semiconductor sector hit collective record highs; SOX surged 4.32% in a single day.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Google Cloud Next发布TPU 8，正面挑战Nvidia</span><span class="en" style="display:none">3. Google Cloud Next Debuts TPU 8, Challenging Nvidia Directly</span></h4>
+<p><span class="zh">Google在Cloud Next 2026大会上发布新一代TPU 8芯片，首次采用训练和推理双轨道架构，性能和成本效率均大幅提升。同时推出基于Arm架构的新一代Axion处理器，用于AI推理工作负载。Google虽然自研芯片实力增强，但云平台仍继续提供Nvidia GPU选项。AI芯片的"军备竞赛"正从Nvidia独大演变为多方混战。</span><span class="en" style="display:none">Google unveiled TPU 8 at Cloud Next 2026, the first dual-track architecture for training and inference. Also debuted next-gen Axion Arm processors for AI inference workloads. Google's custom silicon is getting stronger, but still offers Nvidia GPUs in cloud. The AI chip "arms race" is evolving from Nvidia dominance to a multi-player battle.</span></p>
+<p class="src">来源：TechCrunch / Axios / The Register / Bloomberg</p>
+</div>
+
+<h2>🛢️ <span class="zh">地缘政治 — 美伊停火不稳</span><span class="en" style="display:none">Geopolitics — Fragile Iran Ceasefire</span></h2>
+
+<div class="card">
+<h4><span class="zh">美伊停火协议脆弱，油价维持$106高位</span><span class="en" style="display:none">Fragile Ceasefire Keeps Oil at $106</span></h4>
+<p><span class="zh">美国与伊朗在4月初达成两周停火协议，停火后霍尔木兹海峡重新开放，布伦特原油从$120+回落至$88。但停火局势持续不稳——伊朗曾在海峡扣押船只，海湾原油生产受到冲突影响。油价反弹至约$106/桶，停火谈判能否延续成为市场最大不确定性。美联储3月会议纪要显示对加息持开放态度，战争驱动的能源冲击令通胀前景恶化。</span><span class="en" style="display:none">The US-Iran two-week ceasefire in early April reopened the Strait of Hormuz, with Brent falling from $120+ to $88. But the truce remains fragile — Iran seized ships in the Strait, and Gulf crude production was disrupted. Oil rebounded to ~$106/barrel. Fed March minutes showed openness to rate hikes; war-driven energy shocks are worsening the inflation outlook.</span></p>
+<p class="src">来源：Reuters / NPR / NYT / The Guardian</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">美联储FOMC会议4/28-29：预计维持利率不变</span><span class="en" style="display:none">Fed FOMC Apr 28-29: Expected to Hold Rates Steady</span></h4>
+<p><span class="zh">美联储4月28-29日召开FOMC会议，市场预期维持基准利率3.50%-3.75%不变。3月纪要显示部分官员对加息持开放态度。路透社调查显示，受战争通胀风险影响，降息预期被推迟至2026年底，73%概率年内无降息。投资者需密切关注会议声明措辞变化——任何鹰派信号都可能冲击科技股估值。</span><span class="en" style="display:none">The Fed's Apr 28-29 FOMC meeting is expected to hold rates at 3.50-3.75%. March minutes showed some openness to hikes. A Reuters poll says rate cuts are pushed to late 2026; 73% chance of no cuts this year due to war-driven inflation. Investors should watch for language shifts — any hawkish signal could hit tech valuations.</span></p>
+<p class="src">来源：Federal Reserve / Reuters / Economic Times / Morningstar</p>
+</div>
+
+<h2>📅 <span class="zh">下周展望 — 超级财报周</span><span class="en" style="display:none">Next Week Outlook — Super Earnings Week</span></h2>
+
+<div class="card">
+<h4><span class="zh">Mag 7密集财报：5巨头齐亮相</span><span class="en" style="display:none">Mag 7 Earnings: 5 Giants Report</span></h4>
+<p><span class="zh">下周(4/27-5/1)是本财报季最关键的一周：<br>
+• **Apple (AAPL)** — 关注iPhone/iPad销售及AI功能进展<br>
+• **Microsoft (MSFT)** — Azure云增长和Copilot商业化<br>
+• **Amazon (AMZN)** — AWS增长+AI投资回报<br>
+• **Alphabet (GOOGL)** — 广告收入+Cloud Next后续催化<br>
+• **Meta (META)** — AI广告投放+Reality Labs亏损<br><br>
+这5家占纳斯达克100权重超50%，任何一家不及预期都可能引发大盘波动。S&P 500 Q1财报季至今81.3%超预期，整体盈利预计+16.1%。</span><span class="en" style="display:none">Next week (4/27-5/1) is the most critical week this earnings season:<br>
+• **Apple (AAPL)** — iPhone/iPad sales, AI features<br>
+• **Microsoft (MSFT)** — Azure growth, Copilot monetization<br>
+• **Amazon (AMZN)** — AWS growth + AI ROI<br>
+• **Alphabet (GOOGL)** — Ad revenue + Cloud Next catalyst<br>
+• **Meta (META)** — AI ad targeting + Reality Labs losses<br><br>
+These 5 account for 50%+ of Nasdaq 100 weight. Any miss could roil markets. 81.3% of S&P 500 have beaten estimates so far, with overall earnings up 16.1%.</span></p>
+<p class="src">来源：CNBC / Reuters / Zacks / EarningsWhispers</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股：五一前最后一周（4/27-4/30交易）</span><span class="en" style="display:none">China: Last Week Before Labor Day (Trading 4/27-4/30)</span></h4>
+<p><span class="zh">A股五一前仅交易4天（4/27周一至4/30周四），5/1-5/5休市。节前效应可能压制交投热情。关注要点：<br>
+• 证监会部署打击财务造假专项——监管趋严利好长期，短期可能影响情绪<br>
+• 国常会最新政策部署——关注科技/AI产业支持力度<br>
+• 半导体/AI板块跟随美股联动——上周费半暴涨，国内半导体ETF或有反应<br>
+• 沪深北交易所已发布劳动节休市安排</span><span class="en" style="display:none">Only 4 trading days (Mon 4/27-Thu 4/30) before the 5-day Labor Day holiday. Pre-holiday effect may dampen trading. Key watch:<br>
+• CSRC crackdown on financial fraud — tighter regulation, mixed short-term impact<br>
+• State Council policy — watch for tech/AI industry support<br>
+• Semiconductor/AI stocks may follow US lead after SOX surge<br>
+• Exchanges have confirmed holiday schedule</span></p>
+<p class="src">来源：新浪财经 / 证券时报 / 东方财富</p>
+</div>
+
+<div class="outlook-box">
+<h4>🔮 <span class="zh">市场预判与策略</span><span class="en" style="display:none">Market Outlook & Strategy</span></h4>
+<p><span class="zh">
+<b>美股：</b>超级财报周+美联储会议，波动性将显著放大。AI/半导体叙事极强，如果Mag 7财报继续超预期，纳指有望继续冲高。但估值已高+油价风险+Fed鹰派姿态，回调风险不可忽视。建议等财报落地后再做方向性判断。<br><br>
+<b>A股：</b>节前谨慎为主，关注政策面和外围联动。半导体/AI中线逻辑不变。<br><br>
+<b>港股：</b>恒指在26,000附近震荡，科技股受美股AI行情提振，但需留意节前资金流出压力。
+</span><span class="en" style="display:none">
+<b>US:</b> Super earnings week + Fed meeting = high volatility. AI/semi narrative is powerful; if Mag 7 delivers, Nasdaq could push higher. But rich valuations + oil risks + hawkish Fed pose downside risks. Wait for earnings clarity before directional bets.<br><br>
+<b>China:</b> Cautious pre-holiday stance. Watch policy cues and US spillovers. Semi/AI mid-term thesis intact.<br><br>
+<b>HK:</b> HSI consolidating around 26,000. Tech stocks benefit from US AI momentum, but watch pre-holiday outflows.
+</span></p>
+</div>
+
+<div class="risk-box">
+<h4>⚠️ <span class="zh">风险提示</span><span class="en" style="display:none">Risk Factors</span></h4>
+<p><span class="zh">
+• 🛢️ <b>美伊停火破裂</b> → 油价飙升 → 全球市场震荡（最大黑天鹅）<br>
+• 📉 <b>Mag 7财报不及预期</b> → 纳指回调5-10%<br>
+• 🏛️ <b>Fed措辞更鹰派</b> → 降息预期推迟，科技股估值承压<br>
+• 💰 <b>油价维持$100+</b> → 通胀粘性，消费端承压
+</span><span class="en" style="display:none">
+• 🛢️ <b>Iran ceasefire collapse</b> → Oil spike → Global market shock (biggest tail risk)<br>
+• 📉 <b>Mag 7 earnings miss</b> → Nasdaq 5-10% pullback<br>
+• 🏛️ <b>Hawkish Fed tone</b> → Rate cut hopes pushed out, tech valuations under pressure<br>
+• 💰 <b>Oil above $100</b> → Sticky inflation, consumer headwinds
+</span></p>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">SOXX — Semi ETF</div><div id="tv-soxx"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — <span class="zh">上证指数</span><span class="en" style="display:none">Shanghai</span></div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：CNBC, Reuters, Yahoo Finance, WSJ, Barron's, 新浪财经, 东方财富</span><span class="en" style="display:none">Sources: CNBC, Reuters, Yahoo Finance, WSJ, Barron's, Sina Finance, EastMoney</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-soxx', sym:'NASDAQ:SOXX'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

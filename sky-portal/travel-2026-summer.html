@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>2026夏日独行 — Olympic National Park</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #FEFCF8;
+  --bg-warm: #FFF9F0;
+  --bg-sage: #F0F5ED;
+  --bg-sky: #EDF4FA;
+  --bg-sand: #FAF6F0;
+  --ink: #1E1E1C;
+  --ink-light: #4A4A46;
+  --secondary: #7A7A72;
+  --tertiary: #B0AEA5;
+  --rule: #E2DED6;
+  --rule-light: #EDE9E2;
+  --forest: #2D5A3D;
+  --ocean: #1B6B93;
+  --sunset: #D4622B;
+  --gold: #C49A2A;
+  --berry: #9B2335;
+  --lavender: #7B68AE;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, 'Helvetica Neue', sans-serif;
+  --mono: 'DM Mono', 'SF Mono', monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --max-w: 1080px;
+  --gutter: 28px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+::selection { background: var(--sunset); color: #fff; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(254, 252, 248, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+  padding: 12px var(--gutter);
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.nav-brand span { color: var(--sunset); }
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a {
+  font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--secondary); padding: 6px 12px;
+  border-radius: 100px; transition: all 200ms;
+}
+.nav-links a:hover { color: var(--ink); background: var(--bg-warm); }
+
+/* ── Hero ── */
+.hero {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 64px var(--gutter) 56px;
+}
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--sunset); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1.5px; background: var(--sunset); }
+.hero h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  letter-spacing: -0.03em; line-height: 1.05;
+  margin-bottom: 20px; max-width: 18ch;
+}
+.hero h1 em { font-style: italic; color: var(--secondary); }
+.hero-desc {
+  font-size: 0.92rem; line-height: 1.8; color: var(--ink-light);
+  max-width: 52ch; margin-bottom: 32px;
+}
+.hero-meta {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  padding-top: 24px; border-top: 1px solid var(--rule);
+}
+.hero-stat { display: flex; flex-direction: column; gap: 2px; }
+.hero-stat-num {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.hero-stat-label {
+  font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--secondary);
+}
+
+/* ── Color Bar ── */
+.color-bar {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter);
+  display: flex; gap: 0; margin-bottom: 48px;
+}
+.color-bar div { flex: 1; height: 4px; }
+.color-bar .cb-forest { background: var(--forest); border-radius: 4px 0 0 4px; }
+.color-bar .cb-ocean { background: var(--ocean); }
+.color-bar .cb-sunset { background: var(--sunset); }
+.color-bar .cb-gold { background: var(--gold); border-radius: 0 4px 4px 0; }
+
+/* ── Section ── */
+.section {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter);
+}
+.section-header {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 32px 0 18px; border-bottom: 2px solid var(--ink);
+  margin-bottom: 28px;
+}
+.section-num {
+  font-family: var(--serif); font-size: 0.82rem; font-style: italic;
+  color: var(--secondary);
+}
+.section-title {
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.section-desc {
+  font-size: 0.72rem; color: var(--secondary); margin-left: auto; font-style: italic;
+}
+
+/* ── Itinerary Card ── */
+.day-card {
+  display: grid; grid-template-columns: 120px 1fr;
+  border-bottom: 1px solid var(--rule); padding: 28px 0;
+  gap: 24px;
+}
+.day-card:last-child { border-bottom: none; }
+.day-label {
+  font-family: var(--serif); font-size: 2.4rem; font-weight: 600;
+  letter-spacing: -0.03em; color: var(--tertiary);
+  line-height: 1;
+}
+.day-date {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.08em; color: var(--secondary);
+  text-transform: uppercase; margin-top: 6px;
+}
+.day-content h3 {
+  font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+  letter-spacing: -0.01em; margin-bottom: 6px;
+}
+.day-content p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 10px; }
+.day-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); font-size: 0.56rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px;
+  margin-right: 6px; margin-bottom: 4px;
+}
+.tag-drive { background: #FFF3E8; color: var(--sunset); }
+.tag-hike { background: #E8F5E8; color: var(--forest); }
+.tag-scenic { background: #E8F0F8; color: var(--ocean); }
+.tag-food { background: #FFF8E8; color: var(--gold); }
+.tag-stay { background: #F3EEF8; color: var(--lavender); }
+.tag-charge { background: #E8F8F0; color: #1A8B5A; }
+
+.time-block {
+  font-family: var(--mono); font-size: 0.68rem; color: var(--secondary);
+  margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--rule-light);
+}
+.time-block strong { color: var(--ink); }
+
+/* ── Info Grid ── */
+.info-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border: 1px solid var(--rule); margin-bottom: 32px;
+}
+.info-card {
+  padding: 22px 20px; border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 8px;
+  transition: background 300ms;
+}
+.info-card:nth-child(3n) { border-right: none; }
+.info-card:hover { background: var(--bg-warm); }
+.info-card .ic-icon { font-size: 1.5rem; }
+.info-card h4 {
+  font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.info-card p { font-size: 0.78rem; color: var(--ink-light); line-height: 1.6; }
+.info-card .ic-num {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 600;
+  letter-spacing: -0.02em; color: var(--ocean);
+}
+
+/* ── Hike Cards ── */
+.hike-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 16px; margin-bottom: 32px;
+}
+.hike-card {
+  border: 1px solid var(--rule); border-radius: 6px;
+  padding: 20px; transition: all 300ms var(--ease);
+}
+.hike-card:hover { border-color: var(--forest); background: var(--bg-sage); }
+.hike-card h4 {
+  font-family: var(--serif); font-size: 1rem; font-weight: 600;
+  margin-bottom: 4px;
+}
+.hike-card .hike-meta {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+  color: var(--secondary); text-transform: uppercase; margin-bottom: 8px;
+}
+.hike-card p { font-size: 0.8rem; color: var(--ink-light); line-height: 1.6; }
+.hike-difficulty {
+  display: inline-block; font-family: var(--mono); font-size: 0.56rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; margin-top: 8px;
+}
+.diff-easy { background: #E8F5E8; color: var(--forest); }
+.diff-moderate { background: #FFF3E8; color: var(--sunset); }
+.diff-hard { background: #FDE8E8; color: var(--berry); }
+
+/* ── Budget Table ── */
+.budget-wrap { overflow-x: auto; margin-bottom: 32px; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.82rem;
+}
+th {
+  text-align: left; font-family: var(--sans); font-weight: 600;
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--secondary); padding: 10px 14px;
+  border-bottom: 2px solid var(--ink);
+}
+td {
+  padding: 10px 14px; border-bottom: 1px solid var(--rule-light);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: 2px solid var(--ink); }
+.table-total td {
+  font-weight: 700; font-family: var(--sans);
+  background: var(--bg-warm);
+}
+td .price {
+  font-family: var(--mono); font-size: 0.78rem;
+  font-weight: 500; color: var(--forest);
+}
+
+/* ── Charging Map ── */
+.charge-timeline {
+  position: relative; padding-left: 28px; margin-bottom: 32px;
+}
+.charge-timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px; background: var(--rule);
+}
+.charge-stop {
+  position: relative; padding: 12px 0; padding-left: 20px;
+}
+.charge-stop::before {
+  content: ''; position: absolute; left: -20px; top: 18px;
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--ocean); background: var(--bg);
+}
+.charge-stop.supercharger::before { background: var(--ocean); }
+.charge-stop h4 {
+  font-size: 0.88rem; font-weight: 600; margin-bottom: 2px;
+}
+.charge-stop p { font-size: 0.78rem; color: var(--ink-light); }
+.charge-stop .charge-detail {
+  font-family: var(--mono); font-size: 0.62rem; color: var(--secondary);
+  margin-top: 2px;
+}
+
+/* ── Tips ── */
+.tip-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 12px; margin-bottom: 32px;
+}
+.tip-card {
+  padding: 16px 18px; border-radius: 6px;
+  border-left: 3px solid var(--sunset);
+  background: var(--bg-warm);
+}
+.tip-card h4 { font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; }
+.tip-card p { font-size: 0.78rem; color: var(--ink-light); line-height: 1.6; }
+
+/* ── Alternatives ── */
+.alt-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-bottom: 48px;
+}
+.alt-card {
+  border: 1px solid var(--rule); border-radius: 8px;
+  padding: 24px 20px; text-align: center;
+  transition: all 300ms;
+}
+.alt-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.alt-card .alt-badge {
+  font-family: var(--mono); font-size: 0.56rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px;
+  margin-bottom: 12px; display: inline-block;
+}
+.alt-card h4 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+  margin-bottom: 6px;
+}
+.alt-card p { font-size: 0.78rem; color: var(--ink-light); line-height: 1.5; }
+.alt-card .alt-price {
+  font-family: var(--mono); font-size: 1.1rem; font-weight: 500;
+  color: var(--ocean); margin-top: 12px;
+}
+.alt-recommended .alt-badge { background: #E8F5E8; color: var(--forest); }
+.alt-optional .alt-badge { background: #FFF3E8; color: var(--sunset); }
+.alt-backup .alt-badge { background: #EDE9E2; color: var(--secondary); }
+
+/* ── Footer ── */
+.footer {
+  max-width: var(--max-w); margin: 0 auto; padding: 32px var(--gutter);
+  border-top: 2px solid var(--ink); margin-top: 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand { font-family: var(--serif); font-size: 0.9rem; color: var(--secondary); }
+.footer-meta {
+  font-family: var(--mono); font-size: 0.56rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .info-grid { grid-template-columns: 1fr; }
+  .info-card { border-right: none; border-bottom: 1px solid var(--rule); }
+  .info-card:last-child { border-bottom: none; }
+  .hike-grid { grid-template-columns: 1fr; }
+  .day-card { grid-template-columns: 1fr; }
+  .day-label { font-size: 1.8rem; }
+  .alt-grid { grid-template-columns: 1fr; }
+  .tip-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-meta { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Sky <span>Travel</span></div>
+    <ul class="nav-links">
+      <li><a href="#itinerary">行程</a></li>
+      <li><a href="#hikes">徒步</a></li>
+      <li><a href="#charging">充电</a></li>
+      <li><a href="#budget">预算</a></li>
+      <li><a href="#tips">贴士</a></li>
+      <li><a href="#alternatives">备选</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">2026 年 6 月 · Solo Trip · Pacific Northwest</div>
+  <h1>Olympic<br><em>一个人的</em><br>国家公园</h1>
+  <p class="hero-desc">
+    6月11日送走孩子们之后，给自己四天三晚。从西雅图出发，穿过温带雨林、走上太平洋海岸、登上高山草甸——奥林匹克国家公园是太平洋西北最被低估的宝藏，三个生态系统在同一个公园里等你。
+  </p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <div class="hero-stat-num">4天3晚</div>
+      <div class="hero-stat-label">行程长度</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">~550mi</div>
+      <div class="hero-stat-label">总里程</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$210–520</div>
+      <div class="hero-stat-label">预算范围</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3条</div>
+      <div class="hero-stat-label">推荐徒步</div>
+    </div>
+  </div>
+</section>
+
+<!-- Color Bar -->
+<div class="color-bar">
+  <div class="cb-forest"></div>
+  <div class="cb-ocean"></div>
+  <div class="cb-sunset"></div>
+  <div class="cb-gold"></div>
+</div>
+
+<!-- 01 行程 -->
+<section class="section" id="itinerary">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">每日行程</span>
+    <span class="section-desc">6月11日周四 – 6月14日周日</span>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card">
+    <div>
+      <div class="day-label">D1</div>
+      <div class="day-date">Thu 6/11</div>
+    </div>
+    <div class="day-content">
+      <h3>波特兰 → 西雅图 → Hurricane Ridge</h3>
+      <p>上午从波特兰出发开Model Y到西雅图SEA机场送孩子。送完后不进城，直接走US-101北上，经Edmonds轮渡到Kingston（30分钟，$18.50含车），继续开到Port Angeles。</p>
+      <p>下午直奔Hurricane Ridge——海拔5242英尺的高山草甸，6月中旬野花正好。走Hurricane Hill Trail，往返约3.2英里，轻松但风景极好。天气好的时候能看到Mt. Olympus和Strait of Juan de Fuca对面的加拿大。</p>
+      <span class="day-tag tag-drive">🚗 PDX→SEA 175mi · 3h</span>
+      <span class="day-tag tag-drive">⛴️ Edmonds→Kingston 轮渡 30min</span>
+      <span class="day-tag tag-drive">🚗 Kingston→PA 55mi · 1h</span>
+      <span class="day-tag tag-hike">🥾 Hurricane Hill Trail 3.2mi · 2h</span>
+      <span class="day-tag tag-charge">⚡ Centralia超充补电</span>
+      <span class="day-tag tag-stay">🏨 Port Angeles Motel</span>
+      <div class="time-block">
+        <strong>06:00</strong> 波特兰出发 → <strong>09:00</strong> 西雅图机场送孩子 → <strong>10:30</strong> Edmonds轮渡 → <strong>12:30</strong> Port Angeles午餐 → <strong>14:00</strong> Hurricane Ridge → <strong>17:00</strong> 回PA入住 → 晚餐 Next Door Gastropub
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card">
+    <div>
+      <div class="day-label">D2</div>
+      <div class="day-date">Fri 6/12</div>
+    </div>
+    <div class="day-content">
+      <h3>Lake Crescent → Hoh Rain Forest → Rialto Beach</h3>
+      <p>今天走公园核心西线。先到Lake Crescent，碧蓝的冰川湖，走Marymere Falls Trail（1.8mi往返，轻松）。然后深入Hoh Rain Forest——北美最大的温带雨林之一，苔藓覆盖的巨大针叶树像绿野仙踪。走Hall of Mosses Loop（0.8mi）+ Hoh River Trail（可走5mi往返）。下午冲到Rialto Beach看太平洋日落。</p>
+      <span class="day-tag tag-scenic">🌊 Lake Crescent · Marymere Falls</span>
+      <span class="day-tag tag-hike">🥾 Hall of Mosses 0.8mi · 40min</span>
+      <span class="day-tag tag-hike">🥾 Hoh River Trail 至5mi标记 · 3h</span>
+      <span class="day-tag tag-scenic">🌅 Rialto Beach 日落</span>
+      <span class="day-tag tag-stay">🏕️ Forks露营 或 🏨 The Forks Motel</span>
+      <div class="time-block">
+        <strong>08:00</strong> PA出发 → <strong>08:40</strong> Lake Crescent → <strong>10:00</strong> Hoh Rain Forest → <strong>14:00</strong> 午餐 → <strong>15:30</strong> Rialto Beach → <strong>19:00</strong> 到Forks入住
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card">
+    <div>
+      <div class="day-label">D3</div>
+      <div class="day-date">Sat 6/13</div>
+    </div>
+    <div class="day-content">
+      <h3>Sol Duc Falls → Shi Shi Beach 或 Second Beach → Port Angeles</h3>
+      <p>上午走Sol Duc Falls Trail（1.6mi往返），三个瀑布分叉倾泻，非常漂亮。如果体力OK，可以挑战到Sol Duc Hot Springs泡个温泉。下午有两个选择：去Shi Shi Beach（需走2mi沙滩+海蚀柱，约4h往返，壮观但稍微累）或轻松一点的Second Beach（1.4mi往返）。</p>
+      <p>傍晚回到Port Angeles，沿着海滨散步，给行程收个尾。</p>
+      <span class="day-tag tag-hike">🥾 Sol Duc Falls 1.6mi · 1h</span>
+      <span class="day-tag tag-hike">🥾 Shi Shi Beach 4mi · 4h（或 Second Beach 1.4mi · 1.5h）</span>
+      <span class="day-tag tag-scenic">♨️ Sol Duc Hot Springs</span>
+      <span class="day-tag tag-stay">🏨 Port Angeles Motel</span>
+      <div class="time-block">
+        <strong>08:00</strong> Forks出发 → <strong>09:00</strong> Sol Duc Falls → <strong>11:00</strong> 热温泉 → <strong>13:00</strong> 午餐 → <strong>14:00</strong> Shi Shi/Second Beach → <strong>18:00</strong> 回PA
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card">
+    <div>
+      <div class="day-label">D4</div>
+      <div class="day-date">Sun 6/14</div>
+    </div>
+    <div class="day-content">
+      <h3>Dungeness Spit → 轮渡 → 波特兰</h3>
+      <p>最后一站：Dungeness National Wildlife Refuge。一条5.5英里长的天然沙洲伸入海峡，你可以走到灯塔（往返11mi，但走一半折返也很美，约2-3h）。海鸥、海豹、远望Olympic山脉。</p>
+      <p>中午回PA吃饭，下午走轮渡回西雅图方向，经I-5南回波特兰。途中在Centralia或Olympia补一次电。</p>
+      <span class="day-tag tag-hike">🥾 Dungeness Spit 至灯塔 5.5mi · 4h（或走一半折返 2.5mi · 2h）</span>
+      <span class="day-tag tag-drive">⛴️ PA→轮渡→I-5南</span>
+      <span class="day-tag tag-drive">🚗 → PDX 175mi · 3h</span>
+      <span class="day-tag tag-charge">⚡ Centralia超充补电</span>
+      <div class="time-block">
+        <strong>08:00</strong> Dungeness Spit → <strong>11:30</strong> 回PA午餐 → <strong>13:00</strong> 出发 → <strong>14:00</strong> 轮渡 → <strong>16:00</strong> Centralia补电 → <strong>19:00</strong> 到波特兰
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 徒步 -->
+<section class="section" id="hikes">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">推荐徒步</span>
+    <span class="section-desc">单日 ≤ 5-6h · 独行友好</span>
+  </div>
+
+  <div class="hike-grid">
+    <div class="hike-card">
+      <h4>Hurricane Hill Trail</h4>
+      <div class="hike-meta">3.2 mi round trip · 700ft elevation</div>
+      <p>从Hurricane Ridge Visitor Center出发，一路往上到山顶。6月中旬野花遍地，360°全景看Olympic山脉和海峡。路宽好走，独行完全没问题。</p>
+      <span class="hike-difficulty diff-easy">轻松</span>
+    </div>
+    <div class="hike-card">
+      <h4>Hoh River Trail（至5mi标记）</h4>
+      <div class="hike-meta">10 mi round trip · 500ft elevation</div>
+      <p>穿越北美最大的温带雨林。前5英里基本平路，沿Hoh河走，巨大Sitka云杉和西部铁杉上苔藓如帘。到5mi处过吊桥折返。5h往返，正好的极限。</p>
+      <span class="hike-difficulty diff-moderate">中等</span>
+    </div>
+    <div class="hike-card">
+      <h4>Shi Shi Beach</h4>
+      <div class="hike-meta">4 mi round trip · 200ft elevation</div>
+      <p>太平洋最壮观的海岸线之一。穿过森林下到沙滩，海蚀柱（sea stacks）矗立海中。需要走Makah Reservation步道（$10许可费）。潮汐时间要查好，低潮时才能走到Point of Arches。</p>
+      <span class="hike-difficulty diff-moderate">中等</span>
+    </div>
+    <div class="hike-card">
+      <h4>Marymere Falls</h4>
+      <div class="hike-meta">1.8 mi round trip · 200ft elevation</div>
+      <p>从Lake Crescent边的Storm King Ranger Station出发，穿过树林到90英尺高的瀑布。轻松散步级别，可以和Lake Crescent游泳搭配，完美的上午活动。</p>
+      <span class="hike-difficulty diff-easy">轻松</span>
+    </div>
+    <div class="hike-card">
+      <h4>Sol Duc Falls Trail</h4>
+      <div class="hike-meta">1.6 mi round trip · 200ft elevation</div>
+      <p>三个瀑布分叉倾泻而下，是Olympic NP最上镜的瀑布之一。路短好走，可以接着去Sol Duc Hot Springs泡温泉。</p>
+      <span class="hike-difficulty diff-easy">轻松</span>
+    </div>
+    <div class="hike-card">
+      <h4>Second Beach</h4>
+      <div class="hike-meta">1.4 mi round trip · 150ft elevation</div>
+      <p>Shi Shi太累的话就选Second Beach。穿过森林到沙滩，海蚀柱就在眼前。日落时分特别美。比Shi Shi轻松很多但风景同样壮观。</p>
+      <span class="hike-difficulty diff-easy">轻松</span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 充电 -->
+<section class="section" id="charging">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">Tesla 充电规划</span>
+    <span class="section-desc">Model Y · 全程无忧</span>
+  </div>
+
+  <div class="info-grid" style="margin-bottom: 24px;">
+    <div class="info-card">
+      <div class="ic-num">320mi</div>
+      <h4>Model Y 满电续航</h4>
+      <p>出发前家里充满，足够跑到西雅图</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-num">~$35</div>
+      <h4>全程充电费</h4>
+      <p>出发前家充+路上Supercharging 2次</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-num">0段</div>
+      <h4>续航焦虑路段</h4>
+      <p>沿途充电覆盖充分，无需担心</p>
+    </div>
+  </div>
+
+  <div class="charge-timeline">
+    <div class="charge-stop supercharger">
+      <h4>🏠 波特兰家充（出发前）</h4>
+      <p>充满100%，约$12家用电费</p>
+      <div class="charge-detail">预估续航 320mi → 足够跑到西雅图还有余</div>
+    </div>
+    <div class="charge-stop supercharger">
+      <h4>⚡ Centralia Supercharger</h4>
+      <p>I-5上最方便的补电站，去程和回程都可以用</p>
+      <div class="charge-detail">250kW V3 · 补15min加150mi · 约$10</div>
+    </div>
+    <div class="charge-stop">
+      <h4>🔌 Port Angeles — 城市公共充电</h4>
+      <p>无Tesla Supercharger，但有Level 2充电桩和CCS快充</p>
+      <div class="charge-detail">CCS DC快充 50kW · 1-2h充满 · 需要转接头</div>
+    </div>
+    <div class="charge-stop">
+      <h4>🏨 Tesla Destination Charger</h4>
+      <p>部分Port Angeles酒店有Tesla壁挂充电桩，过夜慢充</p>
+      <div class="charge-detail">选住有Destination Charger的酒店 = 免费过夜充电</div>
+    </div>
+    <div class="charge-stop supercharger">
+      <h4>⚡ Olympia Supercharger</h4>
+      <p>回程可选，如果Centralia没补够就在Olympia停一下</p>
+      <div class="charge-detail">250kW V3 · 约$8-12</div>
+    </div>
+  </div>
+
+  <div class="tip-grid">
+    <div class="tip-card">
+      <h4>💡 充电策略建议</h4>
+      <p>出发前充满 → Centralia补一次（去程）→ PA住店时用Destination Charger或CCS慢充 → Centralia再补一次（回程）。全程基本不会低于30%电量。</p>
+    </div>
+    <div class="tip-card">
+      <h4>🔌 CCS转接头备用</h4>
+      <p>Olympic半岛内部没有Supercharger，但在Forks、Port Angeles都有CCS公共充电桩。带好转接头，必要时50kW快充1小时能加150mi续航。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 预算 -->
+<section class="section" id="budget">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">费用预算</span>
+    <span class="section-desc">2026年6月 · 单人经济</span>
+  </div>
+
+  <div class="budget-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th>露营版</th>
+          <th>Motel版</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>住宿（3晚）</td>
+          <td><span class="price">$72</span> · 营地$24×3</td>
+          <td><span class="price">$210–300</span> · $70–100×3</td>
+          <td>Port Angeles & Forks</td>
+        </tr>
+        <tr>
+          <td>Olympic NP门票</td>
+          <td><span class="price">$30</span></td>
+          <td><span class="price">$30</span></td>
+          <td>7天有效，North Cascades免费</td>
+        </tr>
+        <tr>
+          <td>轮渡</td>
+          <td><span class="price">$18.50</span></td>
+          <td><span class="price">$18.50</span></td>
+          <td>Edmonds→Kingston 含车</td>
+        </tr>
+        <tr>
+          <td>充电费</td>
+          <td><span class="price">$30–40</span></td>
+          <td><span class="price">$30–40</span></td>
+          <td>家充+Supercharging 2次</td>
+        </tr>
+        <tr>
+          <td>餐饮（4天）</td>
+          <td><span class="price">$60–80</span></td>
+          <td><span class="price">$120–150</span></td>
+          <td>自带 vs 餐厅混合</td>
+        </tr>
+        <tr>
+          <td>Shi Shi许可</td>
+          <td><span class="price">$10</span></td>
+          <td><span class="price">$10</span></td>
+          <td>Makah Recreation Permit</td>
+        </tr>
+        <tr>
+          <td>杂费（停车等）</td>
+          <td><span class="price">$10</span></td>
+          <td><span class="price">$10</span></td>
+          <td></td>
+        </tr>
+        <tr class="table-total">
+          <td>合计</td>
+          <td><span class="price">$230–261</span></td>
+          <td><span class="price">$429–549</span></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-grid" style="margin-bottom: 32px;">
+    <div class="info-card">
+      <div class="ic-icon">🏨</div>
+      <h4>Port Angeles 住宿</h4>
+      <p><strong>经济:</strong> Great House Motel $50-70<br>
+      <strong>中档:</strong> Super 8 $80-120<br>
+      <strong>推荐:</strong> Quality Inn $75-110<br>
+      ⚡ 问前台有无Tesla Destination Charger</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🌲</div>
+      <h4>Forks 住宿</h4>
+      <p><strong>经济:</strong> Dew Drop Inn $55-80<br>
+      <strong>推荐:</strong> The Forks Motel $60-90<br>
+      <strong>特色:</strong> Quileute Oceanside Resort $100-150（La Push海滩看海）<br>
+      🏕️ 或 Mora Campground $24</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🍽️</div>
+      <h4>餐饮建议</h4>
+      <p><strong>自带为主：</strong>在波特兰Safeway大采购，面包三明治能量棒<br>
+      <strong>PA餐厅:</strong> Next Door Gastropub $12-18<br>
+      <strong>Forks:</strong> Sapporo日料 $10-15<br>
+      💡 公园内没有餐厅，务必自带午餐和水</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 贴士 -->
+<section class="section" id="tips">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">实用贴士</span>
+    <span class="section-desc">Solo Trip 注意事项</span>
+  </div>
+
+  <div class="tip-grid">
+    <div class="tip-card" style="border-left-color: var(--forest);">
+      <h4>🌧️ 天气准备</h4>
+      <p>Olympic半岛天气多变，6月中旬白天60-70°F但随时可能下雨。Hoh雨林更是名字就说明了一切。带防水外套、防水徒步鞋。分层穿搭是关键。</p>
+    </div>
+    <div class="tip-card" style="border-left-color: var(--ocean);">
+      <h4>📱 离线地图</h4>
+      <p>公园内部很多地方没手机信号。提前下载Google Maps离线地图、AllTrails徒步路线。Tesla导航在公园内也可能没信号，提前规划好路线。</p>
+    </div>
+    <div class="tip-card" style="border-left-color: var(--gold);">
+      <h4>🐻 野生动物</h4>
+      <p>Olympic NP有黑熊和美洲狮。独行时带熊铃或说话，不要戴耳机。食物要锁在bear canister或车内（营地都有bear box）。看到熊不要跑。</p>
+    </div>
+    <div class="tip-card" style="border-left-color: var(--lavender);">
+      <h4>🏕️ 营地预约</h4>
+      <p>旺季（5/15-9/20）热门营地需在recreation.gov提前6个月预约！6月的Hoh和Kalaloch很可能已满。如果营地满了，Forks的Motel是可靠的备选。</p>
+    </div>
+    <div class="tip-card" style="border-left-color: var(--berry);">
+      <h4>🌅 日落时间</h4>
+      <p>6月中旬日落约9:00pm，日照时间长。Rialto Beach日落绝美，计划在8:30pm前到达海滩。注意回Forks的路上没有路灯，开慢点。</p>
+    </div>
+    <div class="tip-card" style="border-left-color: var(--sunset);">
+      <h4>🌊 潮汐表必查</h4>
+      <p>Shi Shi Beach和Rialto Beach的活动都依赖潮汐。低潮时才能看到最好的海蚀柱和潮池。提前查NOAA潮汐表，避免被困在涨潮区。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 备选方案 -->
+<section class="section" id="alternatives">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-title">备选方案</span>
+    <span class="section-desc">如果时间或心情有变</span>
+  </div>
+
+  <div class="alt-grid">
+    <div class="alt-card alt-recommended">
+      <span class="alt-badge">✦ 推荐</span>
+      <h4>方案A：Olympic 深度</h4>
+      <p>如上所述的4天3晚方案。三个生态系统全覆盖，日均开车2-3小时，最平衡的选择。</p>
+      <div class="alt-price">$230–549</div>
+    </div>
+    <div class="alt-card alt-optional">
+      <span class="alt-badge">+ 延展</span>
+      <h4>加周末：North Cascades</h4>
+      <p>下周四-日单独去North Cascades。Diablo Lake翡翠绿 + Washington Pass。公园免费，Marblemount有充电桩。从波特兰走I-5北转HWY 20。</p>
+      <div class="alt-price">+$180–350</div>
+    </div>
+    <div class="alt-card alt-backup">
+      <span class="alt-badge">↺ 备选</span>
+      <h4>轻松版：Mt. Rainier 重访</h4>
+      <p>去年走过Skyline Trail，今年可以试Panorama Loop或Crystal Mountain缆车。离波特兰更近，公园内有EV充电桩。最省心的选择。</p>
+      <div class="alt-price">$180–400</div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="ic-icon">🚗</div>
+      <h4>FSD自动驾驶覆盖</h4>
+      <p>I-5全线FSD完全OK。US-101大部分路段也支持。公园内部山路需要手动驾驶，但路况都很好。</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">📅</div>
+      <h4>灵活组合</h4>
+      <p>每个周末都可以单独出发。周四请一天假 → 周四-周日4天。不需要一次全做完，分开玩更轻松。</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🎫</div>
+      <h4>门票建议</h4>
+      <p>只去一次：Olympic $30单次票。今年计划多去NP：$80 Annual Pass，Mt Rainier / Crater Lake / North Cascades 全覆盖。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-brand">Sky Travel · 2026</div>
+  <div class="footer-meta">Updated 2026-05-25 · Research by Sky ☁️</div>
+</footer>
+
+</body>
+</html>

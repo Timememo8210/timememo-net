@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-23</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(156,163,175,0.15);color:#9ca3af;border:1px solid rgba(156,163,175,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{color:#4ade80;font-weight:600}
+.warn{color:#f87171;font-weight:600}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 100%)">
+<div class="poster-icon">🏛️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Warsh宣誓就任美联储主席</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Warsh Sworn In as Fed Chair</div>
+<div class="zh poster-data">• 5月22日白宫宣誓，接替Powell<br>• Trump期望降息，但通胀压力或迫其加息<br>• 市场预期6月利率不变（3.50-3.75%）</div>
+<div class="en poster-data" style="display:none">• Sworn in at White House May 22, replacing Powell<br>• Trump wants cuts, but inflation may force hikes<br>• Markets expect June hold at 3.50-3.75%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#166534 0%,#22c55e 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股周五收高 · 道指再创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Up Friday · Dow New ATH</div>
+<div class="zh poster-data">• 道指 50,580 (+0.6%) 🏆 新高<br>• 标普 7,473 (+0.4%) · 纳指 26,344 (+0.2%)<br>• 标普连续8周上涨 · 2023年来最长</div>
+<div class="en poster-data" style="display:none">• Dow 50,580 (+0.6%) 🏆 Record<br>• S&P 7,473 (+0.4%) · Nasdaq 26,344 (+0.2%)<br>• S&P 8-week streak, longest since 2023</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#ef4444 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股科技股爆发</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Share Tech Surge</div>
+<div class="zh poster-data">• 上证 4,113 (+0.87%)<br>• 深成指 15,597 (+2.30%) 🔥<br>• 创业板 3,939 (+2.84%)<br>• PCB/光模块/电子化学品领涨</div>
+<div class="en poster-data" style="display:none">• SSE 4,113 (+0.87%)<br>• SZSE 15,597 (+2.30%) 🔥<br>• ChiNext 3,939 (+2.84%)<br>• PCB / optical module / chemicals lead</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#0369a1 0%,#0ea5e9 100%)">
+<div class="poster-icon">🔧</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AMD周暴涨13% · 半导体狂欢</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AMD +13% Weekly · Semi Frenzy</div>
+<div class="zh poster-data">• SOX费半指数 12,203 (+2.0%)<br>• AMD $467.51 周涨13% 创52周高<br>• TSM $404.52 年涨33%<br>• NVDA $215.33 小幅回调</div>
+<div class="en poster-data" style="display:none">• SOX 12,203 (+2.0%)<br>• AMD $467.51 +13% week, 52wk high<br>• TSM $404.52 +33% YTD<br>• NVDA $215.33 slight pullback</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情 <span style="font-size:0.6em;color:#888">· 周末版</span></h1>
+<p class="subtitle">2026-05-23 · Sky Portal Daily Market · <a href="index.html">All Markets</a></p>
+
+<h2>🏛️ <span class="zh">重大事件：Kevin Warsh宣誓就任美联储主席</span><span class="en" style="display:none">Breaking: Kevin Warsh Sworn In as Fed Chair</span></h2>
+
+<div class="card">
+<h4><span class="zh">🏛️ 新时代开启 — Warsh在白宫宣誓成为第17任美联储主席</span><span class="en" style="display:none">🏛️ A New Era — Warsh Sworn in as 17th Fed Chair at White House</span></h4>
+<p><span class="zh">5月22日，Kevin Warsh在白宫由总统Trump主持宣誓仪式，正式成为美联储第17任主席，接替 Jerome Powell。这是历史上首次在白宫举行的美联储主席宣誓仪式。Warsh此前以54-45票的党派线投票获得参议院确认。他在宣誓后发表简短声明，强调美联储的独立性，并表示"不会被政治压力左右"。</span><span class="en" style="display:none">On May 22, Kevin Warsh was sworn in as the 17th Chair of the Federal Reserve in a White House ceremony hosted by President Trump, succeeding Jerome Powell. This is the first time a Fed chair has been sworn in at the White House. Warsh was confirmed 54-45 along party lines. In his statement, he emphasized Fed independence and said he "won't be swayed by political pressure."</span></p>
+<p class="src">来源：CNBC / Reuters / Al Jazeera / Fortune</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚠️ 降息还是加息？市场预期与Trump期望背道而驰</span><span class="en" style="display:none">⚠️ Cut or Hike? Market Expectations Diverge from Trump's Wishes</span></h4>
+<p><span class="zh">Trump提名Warsh的核心诉求是降息，但市场却押注Warsh可能在年底前<b>加息</b>。原因是：通胀持续高于目标（受关税和能源价格推动），30年期国债收益率已升至2007年以来高位，Bank of America预测降息要等到2027年下半年。利率期货市场对6月会议维持利率不变的概率定价为100%。Warsh明确表示未对总统做任何降息承诺，这可能成为未来政治冲突的导火索。</span><span class="en" style="display:none">Trump nominated Warsh to cut rates, but markets are betting he may <b>hike</b> before year-end. The reason: inflation remains above target (driven by tariffs and energy), 30Y Treasury yields at 2007 highs, and Bank of America doesn't see cuts until H2 2027. Futures markets price 100% probability of a June hold. Warsh explicitly stated he made no rate cut promises to the president — a potential flashpoint for future political conflict.</span></p>
+<p class="src">来源：FT / Fortune / CBS News / Reuters</p>
+</div>
+
+<h2>🇺🇸 <span class="zh">美股行情（5月22日周五收盘）</span><span class="en" style="display:none">US Markets (Fri May 22 Close)</span></h2>
+
+<div class="card">
+<h4><span class="zh">🔥 道指再创历史新高，标普连涨八周 — 2023年以来最长</span><span class="en" style="display:none">🔥 Dow New ATH, S&P 8-Week Streak — Longest Since 2023</span></h4>
+<p><span class="zh">美股三大指数周五全线收涨，为连续第八周上涨。道琼斯指数上涨294点（+0.6%）收于<b>50,579.70</b>，创2026年第9个收盘历史新高。标普500上涨0.4%至7,473.47，纳斯达克微涨0.2%至26,343.97。罗素2000小盘股表现最强，上涨0.9%。本周道指累计涨2.1%，显示市场广度改善。</span><span class="en" style="display:none">All three major US indexes closed higher Friday, extending an 8-week winning streak. The Dow rose 294 pts (+0.6%) to a record <b>50,579.70</b>, its 9th record close of 2026. The S&P gained 0.4% to 7,473.47, and the Nasdaq edged up 0.2% to 26,343.97. Small caps led with Russell 2000 up 0.9%. The Dow gained 2.1% for the week, showing broadening market participation.</span></p>
+<p class="src">来源：WSJ / CNBC / Trading Economics</p>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">50,579.70</div><div class="stock-change up">+0.58%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,473.47</div><div class="stock-change up">+0.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,343.97</div><div class="stock-change up">+0.19%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX 费半</div><div class="stock-price">12,202.54</div><div class="stock-change up">+1.99%</div></div>
+</div>
+
+<h2>🔧 <span class="zh">半导体 & AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h4><span class="zh">🚀 AMD本周暴涨13%，创52周新高$481.41</span><span class="en" style="display:none">🚀 AMD Surges 13% This Week, 52-Week High $481.41</span></h4>
+<p><span class="zh">AMD成为本周半导体板块最大亮点，股价从周一的$412.60飙升至周五收盘的$467.51，周涨幅超13%。周五盘中更触及$481.41的52周新高。AMD市值已达$762亿，市场对AMD在AI芯片领域与Nvidia竞争的前景持续看好。OpenAI与AMD的合作消息以及数据中心需求增长是主要催化剂。</span><span class="en" style="display:none">AMD was the standout this week, surging from $412.60 Monday to $467.51 Friday, a 13%+ weekly gain. It hit a 52-week high of $481.41 intraday Friday. AMD's market cap reached $76.2B. The market is increasingly bullish on AMD's AI chip competition with Nvidia. The OpenAI partnership and data center demand are key catalysts.</span></p>
+<p class="src">来源：Yahoo Finance / Trading Economics / CNBC</p>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$467.51</div><div class="stock-change up">+4.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$119.84</div><div class="stock-change up">+1.1%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$404.52</div><div class="stock-change up">—</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$215.33</div><div class="stock-change down">-1.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$412.85</div><div class="stock-change down">-0.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">$1,628.07</div><div class="stock-change down">-0.3%</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China & Hong Kong</span></h2>
+
+<div class="card">
+<h4><span class="zh">🚀 A股强势反弹，深成指暴涨2.3%，创业板涨2.84%</span><span class="en" style="display:none">🚀 A-Shares Rally, SZSE +2.3%, ChiNext +2.84%</span></h4>
+<p><span class="zh">5月22日A股市场高开高走，三大指数全线收涨。深证成指单日暴涨2.30%至15,597点，创业板大涨2.84%至3,939点，上证指数涨0.87%至4,113点。成交额超2.9万亿，市场情绪明显转暖。板块方面，PCB概念集体走强，光模块（中际旭创+4.49%，光迅科技+7.2%）、电子化学品、金属新材料等板块涨幅居前。DeepSeek优惠到期催化AI商业化预期。</span><span class="en" style="display:none">A-shares opened higher and rallied on May 22. The SZSE Component surged 2.30% to 15,597, ChiNext jumped 2.84% to 3,939, and the Shanghai Composite rose 0.87% to 4,113. Turnover exceeded 2.9 trillion yuan. PCB, optical modules, electronic chemicals, and new materials led. DeepSeek promotion expiry catalyzed AI commercialization expectations.</span></p>
+<p class="src">来源：东方财富 / 同花顺 / Trading Economics</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🇭🇰 恒生指数回升，收涨0.86%</span><span class="en" style="display:none">🇭🇰 Hang Seng Rebounds +0.86%</span></h4>
+<p><span class="zh">恒生指数上涨0.86%收于25,606点，从前一交易日的跌势中反弹，跟随隔夜美股涨势。生物医药、芯片和港口运输等板块表现活跃。南向资金持续流入，市场对内地科技股信心逐步恢复。</span><span class="en" style="display:none">The Hang Seng rose 0.86% to 25,606, recovering from the prior session's losses, tracking overnight Wall Street gains. Biopharma, chips, and port sectors were active. Southbound capital flows continued.</span></p>
+<p class="src">来源：Trading Economics / Yahoo Finance</p>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-price">4,112.90</div><div class="stock-change up">+0.87%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-price">15,597.30</div><div class="stock-change up">+2.30%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,938.50</div><div class="stock-change up">+2.84%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生指数</div><div class="stock-price">25,606.03</div><div class="stock-change up">+0.86%</div></div>
+</div>
+
+<h2>🔑 <span class="zh">本周核心驱动</span><span class="en" style="display:none">Key Drivers This Week</span></h2>
+
+<div class="card">
+<h4><span class="zh">1️⃣ Kevin Warsh宣誓就任美联储新主席 — 政策不确定性高峰</span><span class="en" style="display:none">1️⃣ Kevin Warsh Sworn In as Fed Chair — Peak Policy Uncertainty</span></h4>
+<p><span class="zh">Warsh在白宫宣誓标志着美联储进入新纪元。虽然短期市场反应平稳（6月维持利率不变概率100%），但中长期政策走向充满变数。Warsh是"鹰派中的鹰派"，FT报道华尔街押注年底前加息。Trump的降息诉求与Warsh可能的政策路径形成尖锐矛盾，这将是下半年市场最大的不确定因素之一。</span><span class="en" style="display:none">Warsh's White House swearing-in marks a new era for the Fed. Short-term market reaction was calm (100% probability of June hold), but medium-term policy direction is highly uncertain. Warsh is a "hawk among hawks" — FT reports Wall Street bets on a rate hike before year-end. The clash between Trump's rate cut demands and Warsh's likely policy path is the biggest uncertainty for H2.</span></p>
+<p class="src">来源：CNBC / FT / Reuters / Fortune</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2️⃣ AI/半导体板块持续狂热 — AMD周涨13%，SOX月涨40%</span><span class="en" style="display:none">2️⃣ AI/Semi Frenzy Continues — AMD +13% Week, SOX +40% Monthly</span></h4>
+<p><span class="zh">费城半导体指数（SOX）收于12,203点，周五单日涨1.99%，月涨幅接近40%。AMD本周从$412暴涨至$467，创52周新高$481。台积电（TSM）年内已涨33%，受益于AI芯片封装需求持续井喷。NVDA小幅回调1.9%至$215，但市值仍超$5.2万亿。整个AI芯片供应链从设计（NVDA/AMD）→制造（TSM）→封装（TSM/INTC）→设备（ASML）均处于景气上行周期。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) closed at 12,203, up 1.99% Friday and nearly 40% for the month. AMD surged from $412 to $467 this week, hitting a 52-week high of $481. TSMC (TSM) is up 33% YTD on booming AI packaging demand. NVDA pulled back 1.9% to $215 but maintains a $5.2T+ market cap. The entire AI chip supply chain — design (NVDA/AMD) → foundry (TSM) → packaging (TSM/INTC) → equipment (ASML) — is in a powerful upcycle.</span></p>
+<p class="src">来源：Yahoo Finance / MarketWatch / Motley Fool</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3️⃣ A股DeepSeek催化 + 国产替代 — 创业板重回强势</span><span class="en" style="display:none">3️⃣ DeepSeek Catalyst + Import Substitution — ChiNext Resurgent</span></h4>
+<p><span class="zh">A股创业板周五暴涨2.84%，深成指涨2.30%，科技成长板块全面开花。DeepSeek宣布2.5折优惠将于5月31日到期，市场预期AI商业化加速将带动算力需求。PCB（印制电路板）、光模块（中际旭创+4.49%，光迅科技+7.2%）、电子化学品板块集体走强。国产替代逻辑继续发酵，科创50指数持续走强。A股成交额超2.9万亿，市场活跃度维持高位。</span><span class="en" style="display:none">ChiNext surged 2.84% Friday and SZSE jumped 2.30%, with tech growth sectors in full bloom. DeepSeek announced its 25%-off promotion expires May 31, and the market expects AI commercialization to accelerate compute demand. PCB, optical modules, and electronic chemicals rallied broadly. Import substitution logic continues to build. A-share turnover exceeded 2.9 trillion yuan.</span></p>
+<p class="src">来源：东方财富 / 证券时报 / Trading Economics</p>
+</div>
+
+<h2>🔮 <span class="zh">下周展望 & 市场预判</span><span class="en" style="display:none">Next Week Outlook & Forecast</span></h2>
+
+<div class="card">
+<h4><span class="zh">📈 短期：关注Warsh首次政策信号</span><span class="en" style="display:none">📈 Short-Term: Watch Warsh's First Policy Signals</span></h4>
+<p><span class="zh"><b>周一（5/26）美股休市</b>（Memorial Day），周二恢复交易。<br><br><b>关注要点：</b><br>• Warsh上任后首次公开讲话/政策声明 — 鹰鸽立场将决定市场方向<br>• 半导体板块短期涨幅过大（SOX月涨40%），高位震荡风险加大<br>• NVDA从高点$225回调至$215，关注$210支撑位<br>• AMD $467已严重超买，短期可能回调整固<br><br><b>利好因素：</b><br>• 美伊和谈持续进展 → 油价继续回落 → 通胀压力缓解<br>• Q1财报季超预期，企业基本面强健<br>• 小盘股（罗素2000）连续跑赢大盘，市场广度改善<br><br><b>风险因素：</b><br>• Warsh若释放鹰派信号 → 成长股估值承压<br>• 商品价格年涨31%，Ned Davis Research警告"历史看跌信号"<br>• 30年期国债收益率创2007年来新高<br>• 消费者信心指数低迷</span><span class="en" style="display:none"><b>Monday May 26: US Markets Closed</b> (Memorial Day), reopens Tuesday.<br><br><b>Key Watch:</b><br>• Warsh's first public remarks — hawk/dove tone will set market direction<br>• Semi sector overextended (SOX +40% monthly), high consolidation risk<br>• NVDA pulled back from $225 to $215, watch $210 support<br>• AMD $467 deeply overbought, short-term pullback likely<br><br><b>Bullish Factors:</b><br>• US-Iran progress → oil decline → inflation ease<br>• Q1 earnings beat, strong corporate fundamentals<br>• Russell 2000 outperformance shows broadening participation<br><br><b>Risk Factors:</b><br>• Hawkish Warsh signal → growth stock valuation pressure<br>• Commodity surge +31% YTD, Ned Davis warns "bearish historical signal"<br>• 30Y Treasury yields at 2007 highs<br>• Consumer sentiment weak</span></p>
+<p class="src">来源：综合分析</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🇨🇳 A股：4100-4250区间震荡，关注AI商业化进度</span><span class="en" style="display:none">🇨🇳 A-Shares: 4100-4250 Range, Watch AI Commercialization</span></h4>
+<p><span class="zh"><b>A股关键节点：</b><br>• 上证指数4100-4250区间震荡，5月11日曾触及4225高点后回落<br>• 创业板3900-4050区间，5月13日创4038近期新高<br>• DeepSeek优惠5月31日到期 → 关注AI应用商业化进度<br>• 中美关系边际改善预期继续支撑市场情绪<br>• 科创综指持续走强，硬科技赛道资金流入明显</span><span class="en" style="display:none"><b>A-Share Key Points:</b><br>• SSE range-bound 4100-4250, hit 4225 high on May 11 before pulling back<br>• ChiNext 3900-4050, recent high 4038 on May 13<br>• DeepSeek promo expires May 31 → watch AI commercialization progress<br>• US-China relations marginally improving, supporting sentiment<br>• Sci-tech index strengthening, hard tech seeing strong fund inflows</span></p>
+<p class="src">来源：综合分析</p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">AMD — Advanced Micro</div><div id="tv-amd"></div></div>
+<div class="kline-item"><div class="kline-label">FXI — China Large-Cap</div><div id="tv-fxi"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Markets</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: WSJ, CNBC, Reuters, Yahoo Finance, Trading Economics, 东方财富, 同花顺, FT, Fortune, FactSet</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'},
+  {id:'tv-fxi', sym:'NASDAQ:FXI'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

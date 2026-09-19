@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-01</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股小幅调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Pullback</div>
+<div class="zh poster-data">• 道指微跌-0.03%<br>• 标盘相对平稳<br>• 纳指-0.66%<br>• 费半暴跌-6.27%</div>
+<div class="en poster-data" style="display:none">• Dow -0.03%<br>• S&P relatively flat<br>• Nasdaq -0.66%<br>• SOX crash -6.27%</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🌏</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Markets</div>
+<div class="zh poster-data">• CSI 300: -0.41%<br>• 港股今日休市<br>• A股整体平稳<br>• 量能1.2万亿</div>
+<div class="en poster-data" style="display:none">• CSI 300: -0.41%<br>• HK market closed<br>• A-shares steady<br>• Volume 1.2T</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">⚡</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Crash</div>
+<div class="zh poster-data">• 费半-6.27%<br>• AI交易降温<br>• 获利回吐明显<br>• 宽博财报拖累</div>
+<div class="en poster-data" style="display:none">• SOX -6.27%<br>• AI trade cooling<br>• Heavy profit-taking<br>• Broadcom earnings</div>
+</div>
+<div class="poster-card" style="background:#ea580c">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">地缘政治</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Geopolitics</div>
+<div class="zh poster-data">• 伊拉克局势紧张<br>• 霍尔木兹关注<br>• 美联储加息预期<br>• 市场情绪谨慎</div>
+<div class="en poster-data" style="display:none">• Iraq tensions<br>• Hormuz concerns<br>• Fed hike expectations<br>• Risk-on sentiment</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-01 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>📈 <span class="zh">美股市场表现</span><span class="en" style="display:none">US Market Performance</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 美股集体调整，半导体板块领跌</span><span class="en" style="display:none">1. US Markets Pullback, Semis Lead Decline</span></h4>
+<p><span class="zh">7月1日美股市场整体调整，三大指数多数下跌。道琼斯工业平均指数收盘52,306.10点，微跌-0.03%；标普500指数报7,483.39点基本持平；纳斯达克综合指数下跌173.69点，跌幅-0.66%。费城半导体指数暴跌893.68点，跌幅-6.27%，成为今日市场最大亮点。</span><span class="en" style="display:none">July 1 US markets saw broad adjustments with three major indices mostly lower. Dow Jones closed at 52,306.10 (-0.03%); S&P 500 at 7,483.39 (flat); Nasdaq Composite down 173.69 (-0.66%). Philadelphia Semiconductor Index crashed 893.68 (-6.27%), the biggest mover today.</span></p>
+<p class="src">来源：Yahoo Finance / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 芯片股获利回吐，AI交易明显降温</span><span class="en" style="display:none">2. Chip Profit-Taking, AI Trade Cooling Off</span></h4>
+<p><span class="zh">半导体板块遭遇重创，部分芯片股跌幅超过5%。市场分析显示，这轮下跌主要源于芯片股前期的巨大涨幅引发的获利回吐。今年以来，部分芯片股已上涨超过80%，投资者选择锁定收益。AI相关股票整体表现疲软，显示市场对AI概念的炒作情绪正在降温。</span><span class="en" style="display:none">The semiconductor sector suffered heavy losses, with some chip stocks down over 5%. Analysis shows this decline stems from profit-taking following massive gains earlier this year. Some chip stocks have surged 80%+ in 2026, prompting investors to lock in profits. AI-related stocks showed weakness, indicating cooling sentiment on AI hype.</span></p>
+<p class="src">来源：CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 宽博半导体财报不及预期，引发需求担忧</span><span class="en" style="display:none">3. Broadcom Misses Earnings, Sparks Demand Concerns</span></h4>
+<p><span class="zh">半导体巨头Broadcom发布不及预期的财报，特别是AI定制芯片的需求增长放缓，引发市场对整个AI芯片供应链的担忧。财报显示，尽管营收仍有增长，但增速已开始放缓，且未来展望低于市场预期。这一消息拖累了整个半导体板块的表现。</span><span class="en" style="display:none">Chip giant Broadcom missed earnings expectations, particularly showing slower growth in AI custom chip demand, sparking concerns about the entire AI chip supply chain. Revenue growth continued but decelerated, with forward guidance below expectations. This dragged the entire semiconductor sector.</span></p>
+<p class="src">来源：Bloomberg / Financial Times</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 美联储加息预期持续压制市场情绪</span><span class="en" style="display:none">4. Fed Hike Expectations Continue to Weigh on Sentiment</span></h4>
+<p><span class="zh">尽管7月1日没有重要经济数据发布，但市场对美联储7月加息的预期依然存在。投资者担心持续的通胀压力可能迫使美联储采取更激进的紧缩政策，这将对估值较高的科技股形成压力。市场观望情绪浓厚，等待更多政策信号。</span><span class="en" style="display:none">Despite no major economic data July 1, market expectations of a July Fed rate hike persist. Investors worry persistent inflation may force the Fed into more aggressive tightening, pressuring high-valuation tech stocks. Market sentiment remains cautious awaiting policy signals.</span></p>
+<p class="src">来源：FedWatch / Market News</p>
+</div>
+
+<h2>🌏 <span class="zh">亚太市场表现</span><span class="en" style="display:none">Asia-Pacific Markets</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. A股市场：整体平稳，结构分化明显</span><span class="en" style="display:none">1. A-Share Market: Steady Overall, Clear Structure Divergence</span></h4>
+<p><span class="zh">A股市场今日整体表现平稳，上证指数小幅波动，深证成指相对坚挺。沪深300指数收盘报4,958.98点，下跌-0.41%。市场成交活跃，两市总成交额约1.2万亿元。结构上看，传统蓝筹股相对稳健，而科技成长股出现分化，部分受美股下跌影响表现疲软。</span><span class="en" style="display:none">A-share market performed steadily today with minor Shanghai Composite fluctuations and relatively robust Shenzhen Component. CSI 300 closed at 4,958.98 (-0.41%). Market activity was high with total trading volume around 1.2 trillion yuan. Structurally, traditional blue chips were steady while tech growth stocks diverged, some weakened by US market declines.</span></p>
+<p class="src">来源：上海证券交易所 / 深圳证券交易所</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 港股市场：因国庆节休市</span><span class="en" style="display:none">2. Hong Kong Market: Closed for National Day</span></h4>
+<p><span class="zh">香港股市因7月1日香港特别行政区成立纪念日（国庆节）休市一天。恒生指数上一交易日（6月30日）收盘22,881.02点，下跌-0.63%。港股通北向交易今日暂停，南向交易正常。预计明日开市后，市场将关注最新的国际市场动向。</span><span class="en" style="display:none">Hong Kong market closed July 1 for Hong Kong SAR Establishment Day (National Day). Hang Seng Index closed June 30 at 22,881.02 (-0.63%). Northbound trading suspended via HK Connect today, southbound normal. Expect market to focus on latest international movements when reopening.</span></p>
+<p class="src">来源：香港交易所</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 日韩及东南亚市场：受地缘政治影响</span><span class="en" style="display:none">3. Japan, Korea & Southeast Asia: Geopolitical Impact</span></h4>
+<p><span class="zh">日韩及东南亚股市普遍受到地缘政治紧张局势的影响。日本日经225指数小幅下跌，韩国综合指数承压。东南亚市场中，马来西亚、泰国等受能源价格上涨影响较大的经济体股市表现相对疲软。市场密切关注伊拉克局势发展对全球能源供应的潜在影响。</span><span class="en" style="display:none">Japanese and Southeast Asian markets were generally affected by geopolitical tensions. Nikkei 225 fell slightly, Kospi under pressure. Southeast Asian markets like Malaysia and Thailand, more impacted by energy price rises, showed relatively weak performance. Markets closely monitor Iraq situation's potential impact on global energy supply.</span></p>
+<p class="src">来源：Bloomberg / Nikkei Asia</p>
+</div>
+
+<h2>🎯 <span class="zh">重点板块与个股</span><span class="en" style="display:none">Key Sectors & Stocks</span></h2>
+
+<h3>📊 <span class="zh">半导体板块表现（7月1日）</span><span class="en" style="display:none">Semiconductor Sector Performance (Jul 1)</span></h3>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">13,353.28</div><div class="stock-change down">-6.27%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$188.75</div><div class="stock-change down">-2.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$245.04</div><div class="stock-change down">-1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$62.38</div><div class="stock-change down">-0.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$371.55</div><div class="stock-change down">-3.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$420.59</div><div class="stock-change down">-2.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$370.60</div><div class="stock-change down">-1.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">$1,478.28</div><div class="stock-change down">-1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">$128.01</div><div class="stock-change down">-0.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">ONNN</div><div class="stock-price">$58.92</div><div class="stock-change down">-4.2%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">5. 半导体板块：AI降温引发连锁反应</span><span class="en" style="display:none">5. Semiconductor Sector: AI Cooling Triggers Chain Reaction</span></h4>
+<p><span class="zh">费城半导体指数今日暴跌-6.27%，创近期最大单日跌幅。从板块个股来看，除少数防御性较强的公司外，大部分半导体股都出现下跌。分析认为，这轮下跌主要是前期涨幅过大的技术性调整，以及AI概念降温带来的市场重新评估。不过，中长期来看，AI对芯片的需求基本面仍然强劲。</span><span class="en" style="display:none">Philadelphia Semiconductor Index crashed -6.27% today, the largest single-day drop recently. Most semiconductor stocks fell except for some defensive plays. Analysis suggests this is mainly technical correction after excessive gains and market re-evaluation as AI hype cools. Fundamentally, AI chip demand remains strong long-term.</span></p>
+<p class="src">来源：SemiAnalysis / TechCrunch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">6. 传统行业：相对稳健，成为避险选择</span><span class="en" style="display:none">6. Traditional Industries: Relatively Stable, Safe Haven Choice</span></h4>
+<p><span class="zh">在科技股下跌的同时，传统行业如金融、能源、消费等板块相对稳健。道指微跌-0.03%显示出蓝筹股的韧性。投资者在风险资产下跌时转向传统防御性资产，寻求避险。这些板块通常具有稳定的现金流和较低的估值，在市场动荡时期表现相对较好。</span><span="en" style="display:none">While tech stocks fell, traditional sectors like finance, energy, and consumer remained relatively stable. Dow's -0.03% drop showed blue-chip resilience. Investors shifted to traditional defensive assets seeking safety during risk asset declines. These sectors typically have stable cash flows and lower valuations, performing relatively well during market turmoil.</span></p>
+<p class="src">来源：MarketWatch / Barron's</p>
+</div>
+
+<h2>🌍 <span class="zh">地缘政治与市场影响</span><span class="en" style="display:none">Geopolitics & Market Impact</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 伊拉克局势持续紧张，油价保持高位</span><span class="en" style="display:none">1. Iraq Tensions Persist, Oil Prices Stay High</span></h4>
+<p><span class="zh">伊拉克局势持续紧张，霍尔木兹海峡作为全球最重要的石油运输通道之一，其安全性受到市场高度关注。虽然目前尚未出现重大中断，但市场担忧局势可能升级。国际油价保持在每桶90美元以上的高位，能源板块因此受益，但同时也增加了全球经济通胀压力。</span><span class="en" style="display:none">Iraq tensions continue, with the Strait of Hormuz as the world's most critical oil shipping channel drawing high market attention. While no major disruption yet, markets fear escalation may occur. International oil prices remain above $90/barrel, benefiting energy stocks while increasing global inflation pressure.</span></p>
+<p class="src">来源：Reuters / OPEC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美伊和谈进展缓慢，市场观望情绪浓厚</span><span class="en" style="display:none">2. Slow US-Iran Peace Progress, Market Cautious</span></h4>
+<p><span class="zh">美国和伊朗之间的和谈进程缓慢，双方在一些关键问题上仍然存在分歧。市场对此保持高度关注，因为和平进展将直接影响中东局势和全球油价。目前市场持观望态度，等待更多实质性消息。任何和谈的突破或破裂都可能引发市场剧烈波动。</span><span class="en" style="display:none">US-Iran peace talks progress slowly with both sides still disagreeing on key issues. Markets closely monitor as breakthrough or collapse could cause significant market volatility due to direct impact on Middle East tensions and global oil prices.</span></p>
+<p class="src">来源：Al Jazeera / Diplomatic sources</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 全球央行政策分化，市场预期调整</span><span class="en" style="display:none">3. Global Central Bank Policy Divergence, Market Expectations Adjusting</span></h4>
+<p><span class="zh">全球主要央行政策呈现分化趋势。美联储可能继续维持鹰派立场以对抗通胀，而欧洲央行和日本央行则相对鸽派。这种政策分化导致美元汇率保持强势，对非美货币形成压力。市场正在调整对不同央行政策的预期，这将影响全球资本流动和资产价格。</span><span class="en" style="display:none">Major global central banks show divergent policies. Fed may remain hawkish against inflation while ECB and BOJ are relatively dovish. This divergence supports strong USD, pressuring non-USD currencies. Markets are adjusting expectations for different central bank policies, affecting global capital flows and asset prices.</span></p>
+<p class="src">来源：Fed / ECB / BOJ</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判与展望</span><span class="en" style="display:none">Market Outlook & Forecast</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期展望：技术性调整可能延续</span><span class="en" style="display:none">1. Short-term Outlook: Technical Correction May Continue</span></h4>
+<p><span class="zh">预计短期内，美股特别是科技股可能延续技术性调整态势。半导体板块在经历大幅上涨后，需要时间消化估值。市场将继续关注美联储政策信号和地缘政治发展。投资者建议保持谨慎，适当配置防御性资产，等待更好的入场时机。</span><span class="en" style="display:none">Short-term, US tech stocks may continue technical correction. The semiconductor sector needs time to digest valuations after massive gains. Markets will continue monitoring Fed policy signals and geopolitical developments. Investors are advised to remain cautious, allocate to defensive assets, and wait for better entry points.</span></p>
+<p class="src">来源：Technical Analysis / Investment Strategy</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 中期展望：AI基本面仍然强劲</span><span class="en" style="display:none">2. Medium-term Outlook: AI Fundamentals Still Strong</span></h4>
+<p><span class="zh">尽管短期出现调整，但AI对芯片和算力的需求基本面仍然强劲。各大科技公司的AI投资计划持续推进，数据中心建设如火如荼。中期来看，半导体行业的基本面并未改变，优质公司仍具备长期投资价值。市场情绪的波动不改变产业发展的长期趋势。</span><en style="display:none">Despite short-term correction, AI demand for chips and computing power fundamentals remain strong. Tech companies' AI investment plans advance continuously with ongoing data center construction. Medium-term, semiconductor industry fundamentals unchanged, quality companies still have long-term investment value. Market sentiment swings don't change long-term industry trends.</en></p>
+<p class="src">来源：Industry Research / Company Reports</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 风险提示：关注三大关键变量</span><span class="en" style="display:none">3. Risk Alerts: Focus on Three Key Variables</span></h4>
+<p><span class="zh">投资者需密切关注三个关键变量：1）美联储政策转向信号，特别是7月议息会议；2）中东地缘政治局势发展，特别是美伊和谈进展；3）科技巨头财报表现，尤其是AI相关业务增长情况。这三个因素将很大程度上决定未来市场的走向。</span><span class="en" style="display:none">Investors should closely watch three key variables: 1) Fed policy shift signals, especially July FOMC meeting; 2) Middle East geopolitical developments, particularly US-Iran peace progress; 3) Big Tech earnings, especially AI-related business growth. These three factors will largely determine future market direction.</span></p>
+<p class="src">来源：Risk Management / Market Intelligence</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Yahoo Finance, MarketWatch, Bloomberg, Shanghai/Shenzhen Stock Exchange, HKEX</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Transformation Executive Draft | Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #111614;
+  --paper: #fbfaf5;
+  --wash: #eef2ed;
+  --line: #d7ddd4;
+  --muted: #6c756f;
+  --green: #006f5f;
+  --green-soft: #dceee8;
+  --blue: #164c8a;
+  --blue-soft: #dfeaf5;
+  --amber: #9a5a16;
+  --amber-soft: #f1dfc7;
+  --red: #a33c32;
+  --red-soft: #f2ddda;
+  --shadow: 0 24px 70px rgba(17,22,20,0.12);
+  --font: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+  --latin: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(17,22,20,0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(17,22,20,0.035) 1px, transparent 1px),
+    radial-gradient(circle at 15% 5%, rgba(0,111,95,0.13), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(22,76,138,0.12), transparent 30%),
+    var(--wash);
+  background-size: 42px 42px, 42px 42px, auto, auto, auto;
+  line-height: 1.55;
+}
+
+a { color: inherit; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px clamp(16px, 4vw, 54px);
+  background: rgba(251,250,245,0.88);
+  border-bottom: 1px solid rgba(17,22,20,0.12);
+  backdrop-filter: blur(16px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font: 800 0.84rem var(--latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+.nav {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  flex: 0 0 auto;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(251,250,245,0.74);
+  text-decoration: none;
+  font: 800 0.72rem var(--latin);
+  letter-spacing: 0.02em;
+}
+.nav a:hover,
+.resource-link:hover { background: var(--ink); color: var(--paper); }
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.lang-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  min-width: 126px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(251,250,245,0.86);
+}
+.lang-switch a {
+  display: grid;
+  place-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  text-decoration: none;
+  font: 900 0.74rem var(--latin);
+  letter-spacing: 0.03em;
+}
+.lang-switch a + a { border-left: 1px solid var(--ink); }
+.lang-switch a[aria-current="page"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+.resource-link {
+  flex: 0 0 auto;
+  border: 1px solid rgba(17,22,20,0.55);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(251,250,245,0.54);
+  text-decoration: none;
+  font: 800 0.72rem var(--latin);
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.deck {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px clamp(14px, 3vw, 36px) 70px;
+}
+.slide {
+  min-height: calc(100vh - 92px);
+  margin: 0 0 28px;
+  padding: clamp(24px, 5vw, 58px);
+  border: 1px solid rgba(17,22,20,0.18);
+  background: rgba(251,250,245,0.92);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 84px;
+}
+.slide-head {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: start;
+  margin-bottom: 30px;
+}
+.num {
+  font: 900 clamp(2.6rem, 6vw, 5.3rem) var(--latin);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--ink);
+}
+.eyebrow {
+  color: var(--green);
+  font: 800 0.78rem var(--latin);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 1.02;
+  font-weight: 900;
+}
+h1 { font-size: clamp(2.9rem, 8vw, 7rem); max-width: 940px; }
+h2 { font-size: clamp(2rem, 5vw, 4.5rem); max-width: 980px; }
+.lead {
+  max-width: 860px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 22px;
+  align-items: stretch;
+}
+.hero-thesis {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(22px, 4vw, 38px);
+}
+.hero-thesis h3 {
+  margin: 0 0 16px;
+  font-size: clamp(1.4rem, 3vw, 2.3rem);
+}
+.hero-thesis p {
+  margin: 0;
+  color: rgba(251,250,245,0.82);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+}
+.thesis-list {
+  display: grid;
+  gap: 12px;
+}
+.thesis-item {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.6);
+  padding: 17px;
+}
+.thesis-item b {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+}
+.thesis-item span {
+  display: block;
+  color: var(--muted);
+}
+
+.scenario-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+  gap: 22px;
+}
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.phase {
+  min-height: 265px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.62);
+}
+.phase-label {
+  padding: 12px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 900 0.85rem var(--latin);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.phase.short .phase-label { background: var(--green); }
+.phase.mid .phase-label { background: var(--blue); }
+.phase.long .phase-label { background: var(--amber); }
+.phase-body {
+  flex: 1;
+  padding: 16px;
+}
+.phase-body h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.12rem, 2vw, 1.5rem);
+  line-height: 1.18;
+}
+.phase-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.one-line {
+  margin-top: 14px;
+  border-left: 5px solid var(--green);
+  background: var(--green-soft);
+  padding: 13px 15px;
+  font-weight: 800;
+}
+.visual-slot {
+  min-height: 100%;
+  border: 1px dashed rgba(17,22,20,0.45);
+  background:
+    linear-gradient(90deg, rgba(17,22,20,0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(17,22,20,0.035) 1px, transparent 1px),
+    rgba(255,255,255,0.42);
+  background-size: 24px 24px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.visual-slot h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.visual-slot p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 230px;
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  background: rgba(251,250,245,0.82);
+  color: var(--muted);
+  font-weight: 800;
+  text-align: center;
+}
+
+.final-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+}
+.tips,
+.support {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.62);
+  padding: 20px;
+}
+.tips h3,
+.support h3 {
+  margin: 0 0 18px;
+  font-size: 1.35rem;
+}
+.tip-list,
+.support-list {
+  display: grid;
+  gap: 12px;
+}
+.tip,
+.support-item {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.tip:last-child,
+.support-item:last-child { border-bottom: none; padding-bottom: 0; }
+.badge {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  font: 900 0.86rem var(--latin);
+}
+.tip b,
+.support-item b {
+  display: block;
+  margin-bottom: 4px;
+}
+.tip span,
+.support-item span {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.say-box {
+  margin-top: 20px;
+  border: 1px solid var(--ink);
+  background: linear-gradient(135deg, rgba(0,111,95,0.12), rgba(154,90,22,0.12));
+  padding: 18px;
+}
+.say-box h3 { margin: 0 0 12px; }
+.say-box p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+footer {
+  padding: 38px 18px 58px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+@media (max-width: 980px) {
+  .hero-grid,
+  .scenario-layout,
+  .final-grid,
+  .timeline-grid { grid-template-columns: 1fr; }
+  .slide-head { grid-template-columns: 1fr; }
+  .num { font-size: 3rem; }
+  .phase { min-height: auto; }
+  .visual-slot { min-height: 360px; }
+}
+
+@media (max-width: 720px) {
+  .topbar { position: static; align-items: flex-start; flex-direction: column; }
+  .nav { width: 100%; }
+  .top-actions { width: 100%; justify-content: space-between; }
+  .slide { min-height: auto; padding: 22px; scroll-margin-top: 16px; }
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2rem; }
+}
+
+@media print {
+  body { background: #fff; }
+  .topbar,
+  footer { display: none; }
+  .slide {
+    min-height: auto;
+    box-shadow: none;
+    page-break-after: always;
+  }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./index.html"><span class="brand-mark">S</span> Sky Portal</a>
+  <nav class="nav" aria-label="Slides">
+    <a href="#why">01 Why</a>
+    <a href="#meeting">02 Meeting</a>
+    <a href="#data">03 Data</a>
+    <a href="#weekly">04 Weekly</a>
+    <a href="#tips">05 Tips</a>
+  </nav>
+  <div class="top-actions">
+    <div class="lang-switch" aria-label="Language">
+      <a href="./ai-strategy-executive.html">中文</a>
+      <a href="./ai-strategy-executive-en.html" aria-current="page">EN</a>
+    </div>
+    <a class="resource-link" href="./ai-strategy-r2.html">R2 Notes</a>
+  </div>
+</header>
+
+<main class="deck">
+  <section class="slide" id="why">
+    <div class="slide-head">
+      <div class="num">01</div>
+      <div>
+        <div class="eyebrow">Executive draft</div>
+        <h1>AI amplifies people. It does not replace them.</h1>
+        <p class="lead">Start with people, not tools. AI accelerates the work we already do and unlocks work we never could.</p>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-thesis">
+        <h3>AI moves information. Only people build trust.</h3>
+        <p>Customers trust us not because one run looks clean. They trust us because when the data goes wrong, we own the fix. AI processes information; people deliver judgment, relationships, and accountability.</p>
+      </div>
+      <div class="thesis-list">
+        <div class="thesis-item"><b>Accelerate what we already do</b><span>Search, summarize, draft reports, prep meetings, and consolidate status.</span></div>
+        <div class="thesis-item"><b>Enable what one person never could</b><span>A single engineer now commands research, coding, editing, and data-analysis capabilities on demand.</span></div>
+        <div class="thesis-item"><b>Compress the path from question to action</b><span>Near term: ask sharper questions, get sourced answers, and act on them in the same workflow.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="meeting">
+    <div class="slide-head">
+      <div class="num">02</div>
+      <div>
+        <div class="eyebrow">Scenario 1</div>
+        <h2>Meeting scheduling: from manual coordination to one-click confirmation.</h2>
+        <p class="lead">A low-risk, high-resonance starting point. Everyone feels this pain.</p>
+      </div>
+    </div>
+    <div class="scenario-layout">
+      <div>
+        <div class="timeline-grid">
+          <article class="phase short">
+            <div class="phase-label">Now</div>
+            <div class="phase-body"><h3>Manual juggling</h3><p>Open Outlook, cross-check calendars, hunt for a room, and iterate through options one by one.</p></div>
+          </article>
+          <article class="phase mid">
+            <div class="phase-label">Near term</div>
+            <div class="phase-body"><h3>AI proposes, you confirm</h3><p>State the request once. Copilot surfaces the best time-and-room options; you approve with one click.</p></div>
+          </article>
+          <article class="phase long">
+            <div class="phase-label">Mid / long term</div>
+            <div class="phase-body"><h3>Agents handle end to end</h3><p>Agents negotiate calendars and book resources autonomously. You simply receive: "Done."</p></div>
+          </article>
+        </div>
+        <div class="one-line">The shift: "I arrange it" &rarr; "I approve it" &rarr; "I'm notified."</div>
+      </div>
+      <aside class="visual-slot">
+        <div><h3>Screenshot slot</h3><p>Insert Outlook / Copilot scheduling screenshots contrasting the old workflow with the new.</p></div>
+        <div class="placeholder">Drop screenshot here</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="slide" id="data">
+    <div class="slide-head">
+      <div class="num">03</div>
+      <div>
+        <div class="eyebrow">Scenario 2</div>
+        <h2>Data questions in meetings: answer now, decide now.</h2>
+        <p class="lead">The highest-impact engineering pain point -- and the strongest case for AI adoption.</p>
+      </div>
+    </div>
+    <div class="scenario-layout">
+      <div>
+        <div class="timeline-grid">
+          <article class="phase short">
+            <div class="phase-label">Now</div>
+            <div class="phase-body"><h3>Defer and follow up</h3><p>If the answer was pre-prepared, we respond. If not, we take an action item and circle back next meeting.</p></div>
+          </article>
+          <article class="phase mid">
+            <div class="phase-label">Near term</div>
+            <div class="phase-body"><h3>Meeting Prep Agent</h3><p>Before the meeting, AI anticipates the top questions. It drafts answers where data exists and flags the right owner where it does not.</p></div>
+          </article>
+          <article class="phase long">
+            <div class="phase-label">Mid / long term</div>
+            <div class="phase-body"><h3>Live retrieval + action plan</h3><p>Mid-meeting, AI delivers sourced answers in real time and drafts root-cause hypotheses with experiment options.</p></div>
+          </article>
+        </div>
+        <div class="one-line">The shift: collapse "flag &rarr; investigate &rarr; reconvene &rarr; plan" into "answer &rarr; assess &rarr; decide" -- all in one sitting.</div>
+      </div>
+      <aside class="visual-slot">
+        <div><h3>Screenshot slot</h3><p>Insert meeting recap, Copilot Q&amp;A, and sourced-answer examples.</p></div>
+        <div class="placeholder">Drop screenshot here</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="slide" id="weekly">
+    <div class="slide-head">
+      <div class="num">04</div>
+      <div>
+        <div class="eyebrow">Scenario 3</div>
+        <h2>Weekly updates: stop chasing information -- let it flow to you.</h2>
+        <p class="lead">Ground the story in something already underway. This makes the vision concrete, not aspirational.</p>
+      </div>
+    </div>
+    <div class="scenario-layout">
+      <div>
+        <div class="timeline-grid">
+          <article class="phase short">
+            <div class="phase-label">Now</div>
+            <div class="phase-body"><h3>Manual assembly</h3><p>Sit through meetings, draft minutes, update spreadsheets, then relay the latest status by hand.</p></div>
+          </article>
+          <article class="phase mid">
+            <div class="phase-label">Near term</div>
+            <div class="phase-body"><h3>Copilot-assisted roll-up</h3><p>Copilot ingests meeting recaps, preserves the master table, appends a weekly-delta column, and highlights what changed.</p></div>
+          </article>
+          <article class="phase long">
+            <div class="phase-label">Mid / long term</div>
+            <div class="phase-body"><h3>Auto-refreshing dashboards</h3><p>After every meeting, agents update customer, project, and portfolio views. People curate only the views they own.</p></div>
+          </article>
+        </div>
+        <div class="one-line">The shift: people stop chasing information -- information finds the people who need it.</div>
+      </div>
+      <aside class="visual-slot">
+        <div><h3>Screenshot slot</h3><p>Insert Excel weekly roll-up, highlighted delta column, and Copilot recap examples.</p></div>
+        <div class="placeholder">Drop screenshot here</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="slide" id="tips">
+    <div class="slide-head">
+      <div class="num">05</div>
+      <div>
+        <div class="eyebrow">Adoption</div>
+        <h2>Start now. Equip the team to go further.</h2>
+        <p class="lead">AI creates zero value on the shelf. Adoption requires asking questions, asking faster, asking with evidence -- and giving the team the access and examples to do so.</p>
+      </div>
+    </div>
+    <div class="final-grid">
+      <section class="tips">
+        <h3>Three habits to build today</h3>
+        <div class="tip-list">
+          <div class="tip"><span class="badge">1</span><div><b>Ask first, filter later</b><span>Every unasked question is a missed answer. Lower the bar to ask -- AI makes the cost of inquiry near zero.</span></div></div>
+          <div class="tip"><span class="badge">2</span><div><b>Demand sources, not guesses</b><span>Require citations. Leave gaps where no source exists; surface conflicting evidence for human judgment.</span></div></div>
+          <div class="tip"><span class="badge">3</span><div><b>Speak, don't type</b><span>Don't let typing speed throttle your thinking. AI handles rough input; speed of inquiry matters more than polish.</span></div></div>
+        </div>
+      </section>
+      <section class="support">
+        <h3>What we need from leadership</h3>
+        <div class="support-list">
+          <div class="support-item"><span class="badge">A</span><div><b>M365 Copilot licenses for every engineer</b><span>Before building advanced agents, give everyone the basics: ask, search, and summarize.</span></div></div>
+          <div class="support-item"><span class="badge">B</span><div><b>One or two wins shared weekly</b><span>Bundle real use cases into the weekly update so the team sees tangible productivity gains.</span></div></div>
+          <div class="support-item"><span class="badge">C</span><div><b>Power tools and training for key contributors</b><span>Copilot Studio, higher token/model tiers, AI conferences, and hands-on workshops.</span></div></div>
+          <div class="support-item"><span class="badge">D</span><div><b>Cross-functional AI working group</b><span>Launch in automation, QA, and engineering -- domains where alignment already exists.</span></div></div>
+        </div>
+      </section>
+    </div>
+    <div class="say-box">
+      <h3>The narrative arc</h3>
+      <p>Near term: practical, time-saving, evidence-based. Mid term: elevate existing knowledge systems and clarify ownership. Long term: a single source of truth that drives certainty -- not "opening all data to AI."</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  AI Transformation Strategy · Executive Draft · EN · Sky Portal
+</footer>
+</body>
+</html>

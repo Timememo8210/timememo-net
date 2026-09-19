@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-19</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c2a 0%,#2d8a4e 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股周涨幅亮眼</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Weekly Rally</div>
+<div class="zh poster-data">• 标普500周涨 +4.5% 创新高<br>• 道指周涨 +3.2% 至48,536<br>• 费半SOX周涨超4%</div>
+<div class="en poster-data" style="display:none">• S&P 500 +4.5% week, new ATH<br>• Dow +3.2% to 48,536<br>• SOX +4%+ weekly</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#8b1a1a 0%,#c0392b 100%)">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">地缘政治</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Geopolitics</div>
+<div class="zh poster-data">• 伊朗停火协议持续生效<br>• 油价回落，风险偏好回升<br>• 霍尔木兹海峡通航恢复中</div>
+<div class="en poster-data" style="display:none">• Iran ceasefire holding<br>• Oil prices retreating<br>• Strait of Hormuz reopening</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1a3a5c 0%,#2a6cb5 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 & 港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK</div>
+<div class="zh poster-data">• 创业板 +1.4% 独立走强<br>• 恒指 -0.89%，恒生科技 -0.97%<br>• 群核科技首日 +144%</div>
+<div class="en poster-data" style="display:none">• ChiNext +1.4%<br>• HSI -0.89%, HSTECH -0.97%<br>• Qunhe Tech IPO +144%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#5c1a8b 0%,#8e44ad 100%)">
+<div class="poster-icon">📅</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周财报</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Earnings Week</div>
+<div class="zh poster-data">• 特斯拉 (TSLA) 财报<br>• 英特尔 (INTC) 财报<br>• GE Aerospace, 3M, 洛克希德</div>
+<div class="en poster-data" style="display:none">• Tesla (TSLA) earnings<br>• Intel (INTC) earnings<br>• GE Aerospace, 3M, Lockheed</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-19 (周日 · Weekend Edition) · Sky Portal · <a href="index.html">All Reports</a></p>
+
+<h2>📈 <span class="zh">美股指数（4/17周五收盘）</span><span class="en" style="display:none">US Indices (Apr 17 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">48,536</div><div class="stock-change up">+0.7%</div><div style="color:#888;font-size:0.75em;margin-top:4px">周 +3.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,126</div><div class="stock-change up">+1.2%</div><div style="color:#888;font-size:0.75em;margin-top:4px">周 +4.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,468</div><div class="stock-change up">+1.5%</div><div style="color:#888;font-size:0.75em;margin-top:4px">周强劲</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">9,556</div><div class="stock-change up">+2.4%</div><div style="color:#888;font-size:0.75em;margin-top:4px">周 +4%+</div></div>
+<div class="stock-item"><div class="stock-ticker">Russell 2K</div><div class="stock-price">—</div><div class="stock-change up">📈</div><div style="color:#888;font-size:0.75em;margin-top:4px">同步上涨</div></div>
+</div>
+
+<h2>📈 <span class="zh">A股 & 港股（4/17收盘）</span><span class="en" style="display:none">China & HK (Apr 17 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,051</div><div class="stock-change down">-0.1%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">—</div><div class="stock-change up">+0.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">—</div><div class="stock-change up">+1.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">—</div><div class="stock-change down">-0.89%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">—</div><div class="stock-change down">-0.97%</div></div>
+</div>
+
+<h2>🔍 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 伊朗停火协议推动风险资产全面反弹</span><span class="en" style="display:none">1. Iran Ceasefire Drives Risk-On Rally</span></h4>
+<p><span class="zh">美国与伊朗于4月8日达成停火协议，布伦特原油从此前$120+高位大幅回落。霍尔木兹海峡通航逐步恢复，市场对能源供应中断的担忧显著缓解。地缘风险降温成为过去两周美股持续上涨的最核心催化剂，推动标普500重返历史新高。</span><span class="en" style="display:none">The US-Iran ceasefire (Apr 8) sent Brent crude tumbling from $120+ highs. Strait of Hormuz is gradually reopening, easing energy supply concerns. De-escalation has been the primary catalyst for the 2-week US stock rally, pushing S&P 500 to new all-time highs.</span></p>
+<p class="src">来源：CNBC / Bloomberg / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Q1财报季开局强劲，盈利预期乐观</span><span class="en" style="display:none">2. Strong Q1 Earnings Season Kickoff</span></h4>
+<p><span class="zh">已公布财报的大型银行表现亮眼，Citigroup股价涨至18年新高。市场对Q1盈利整体预期积极，企业盈利增长有望支撑股市进一步上行。标普500已连续两周上涨，累计涨幅达6%+，市场情绪从3月的中东恐慌中完全修复。</span><span class="en" style="display:none">Major banks delivered strong results, with Citigroup hitting 18-year highs. Q1 earnings expectations are broadly positive. The S&P 500 has rallied 6%+ over two consecutive weeks, fully recovering from March's Middle East panic.</span></p>
+<p class="src">来源：CNBC / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. AI/半导体持续领涨，全球芯片业迈向万亿美元</span><span class="en" style="display:none">3. AI/Semis Lead, Global Chip Industry Eyes $1T</span></h4>
+<p><span class="zh">费城半导体指数（SOX）周涨超4%，英伟达连续11个交易日上涨，创2023年以来最长连涨纪录，单日成交额高达263.93亿美元。行业分析预计全球半导体行业2026年收入有望突破1万亿美元，AI算力需求是核心驱动力。先进封装（CoWoS等）成为供应链最紧缺环节。</span><span class="en" style="display:none">SOX up 4%+ weekly. Nvidia rose for 11 consecutive days (longest streak since 2023) with $26.4B daily volume. The global semiconductor industry is projected to surpass $1T revenue in 2026, driven by AI compute demand. Advanced packaging (CoWoS etc.) remains the tightest supply chain bottleneck.</span></p>
+<p class="src">来源：Seeking Alpha / Reuters / Nikkei Asia</p>
+</div>
+
+<h2>📅 <span class="zh">下周关注（4/20-24）</span><span class="en" style="display:none">Week Ahead (Apr 20-24)</span></h2>
+
+<div class="card">
+<h4><span class="zh">重点财报 & 事件</span><span class="en" style="display:none">Key Earnings & Events</span></h4>
+<div class="news-item"><span class="zh">🚗 <b>特斯拉 (TSLA)</b> — 本周财报，市场关注FSD自动驾驶进展、Cybertruck产能和利润率变化</span><span class="en" style="display:none">🚗 <b>Tesla (TSLA)</b> — Earnings this week; focus on FSD progress, Cybertruck ramp, and margins</span></div>
+<div class="news-item"><span class="zh">💻 <b>英特尔 (INTC)</b> — 财报备受关注，代工业务转型进展和18A良率是焦点</span><span class="en" style="display:none">💻 <b>Intel (INTC)</b> — Earnings in focus; foundry turnaround and 18A yields under microscope</span></div>
+<div class="news-item"><span class="zh">✈️ <b>GE Aerospace</b> — 周二盘前发布，航空航天需求持续旺盛</span><span class="en" style="display:none">✈️ <b>GE Aerospace</b> — Tuesday pre-market; aerospace demand remains strong</span></div>
+<div class="news-item"><span class="zh">🏢 <b>3M, 洛克希德马丁, Philip Morris, RTX</b> — 本周密集发布</span><span class="en" style="display:none">🏢 <b>3M, Lockheed Martin, Philip Morris, RTX</b> — Dense earnings calendar</span></div>
+<div class="news-item"><span class="zh">🛢️ <b>霍尔木兹海峡</b> — 通航恢复进度将继续影响油价和市场风险偏好</span><span class="en" style="display:none">🛢️ <b>Strait of Hormuz</b> — Reopening progress will shape oil prices and risk sentiment</span></div>
+</div>
+
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期预判（下周）</span><span class="en" style="display:none">Short-term Outlook (Next Week)</span></h4>
+<p><span class="zh">• <b>美股：</b>连涨两周后进入财报密集期，Tesla和Intel是风向标。若财报超预期，标普500有望继续刷新高点；若不及预期，获利回吐压力增大。整体偏乐观，但波动率可能上升。<br>
+• <b>半导体/AI：</b>动能最强板块，英伟达连涨后短期或有技术性回调，但AI投资主线不变。关注Intel财报对代工叙事的影响。<br>
+• <b>A股/港股：</b>创业板独立走强反映国内AI+国产替代主线。恒生科技受海外中概情绪拖累但估值吸引力提升。<br>
+• <b>最大风险：</b>中东停火破裂 → 油价飙升；财报季不及预期 → 盈利担忧。</span><span class="en" style="display:none">• <b>US Stocks:</b> After 2 strong weeks, Tesla and Intel earnings are bellwethers. If beats → new highs; if misses → profit-taking. Cautiously optimistic but volatility may rise.<br>
+• <b>Semis/AI:</b> Strongest momentum. Nvidia may see technical pullback after 11-day streak, but AI investment thesis intact. Watch Intel foundry narrative.<br>
+• <b>China/HK:</b> ChiNext strength reflects domestic AI + import substitution theme. HSTECH dragged by sentiment but valuations attractive.<br>
+• <b>Key Risks:</b> Middle East ceasefire breakdown → oil spike; earnings misses → profit concerns.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Bloomberg, Reuters, MarketWatch, Seeking Alpha, 财联社 | As of Apr 17, 2026 close</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

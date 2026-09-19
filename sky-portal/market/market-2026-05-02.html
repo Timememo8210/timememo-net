@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-02</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#aaa;border:1px solid rgba(255,255,255,0.15)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);border-radius:10px;padding:16px 20px;margin:14px 0}
+.highlight-box h4{color:#4ade80;font-size:1.05em;margin-bottom:8px}
+.index-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}
+.index-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:16px}
+.index-name{font-size:0.85em;color:#888;margin-bottom:4px}
+.index-val{font-size:1.3em;font-weight:700;color:#fff}
+.index-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.85em;margin-top:4px}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75em;font-weight:600;margin-right:4px}
+.tag-ath{background:rgba(74,222,128,0.2);color:#4ade80}
+.tag-hot{background:rgba(251,146,60,0.2);color:#fb923c}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}.index-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#065f46 0%,#047857 100%)">
+<div class="poster-icon">🏆</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">标普 & 纳指再创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">S&P & Nasdaq New ATH</div>
+<div class="zh poster-data">• 标普500: 7,230 (+0.29%)<br>• 纳指首破25,000: 25,114 (+0.89%)<br>• 连续第五周上涨</div>
+<div class="en poster-data" style="display:none">• S&P 500: 7,230 (+0.29%)<br>• Nasdaq breaks 25K: 25,114 (+0.89%)<br>• 5th consecutive weekly gain</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)">
+<div class="poster-icon">💾</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">闪迪暴涨 + AI存储</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SanDisk Surges on AI Storage</div>
+<div class="zh poster-data">• 闪迪(SNDK)涨8.25%创新高<br>• AI数据中心NAND需求爆棚<br>• 年内涨幅超166%</div>
+<div class="en poster-data" style="display:none">• SNDK +8.25% record high<br>• AI data center NAND demand surge<br>• +166% YTD</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#b45309 0%,#92400e 100%)">
+<div class="poster-icon">💰</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI资本支出破纪录</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Record AI Capex</div>
+<div class="zh poster-data">• 科技七巨头合计>7000亿美元<br>• 美银预测2027年全球破万亿<br>• 微软capex指引超预期$240亿</div>
+<div class="en poster-data" style="display:none">• Magnificent 7 >$700B combined<br>• BofA forecasts $1T global in 2027<br>• Microsoft capex guide $24B above consensus</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股港股五月展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Market Outlook</div>
+<div class="zh poster-data">• 科创50暴涨5.19%收官<br>• 港股4月累涨近4%<br>• 五一节后半导体+AI双主线</div>
+<div class="en poster-data" style="display:none">• STAR 50 surges +5.19%<br>• HK Apr cumulative +4%<br>• Post-holiday semis + AI dual theme</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-02 (Saturday) · Sky Portal Daily Market · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股指数（5月1日 周五收盘）</span><span class="en" style="display:none">US Market Indices (May 1, Friday Close)</span></h2>
+
+<div class="index-grid">
+<div class="index-item">
+<div class="index-name"><span class="zh">道琼斯工业指数</span><span class="en" style="display:none">Dow Jones</span></div>
+<div class="index-val">49,499</div>
+<div class="index-change down">▼ 0.31% (-152.87)</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">标普500指数</span><span class="en" style="display:none">S&P 500</span> <span class="tag tag-ath">ATH</span></div>
+<div class="index-val">7,230</div>
+<div class="index-change up">▲ 0.29% (+21.11)</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">纳斯达克综合指数</span><span class="en" style="display:none">NASDAQ Composite</span> <span class="tag tag-ath">ATH</span></div>
+<div class="index-val">25,114</div>
+<div class="index-change up">▲ 0.89% (+222.13)</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">费城半导体指数</span><span class="en" style="display:none">PHLX Semiconductor (SOX)</span> <span class="tag tag-ath">ATH</span></div>
+<div class="index-val">10,595</div>
+<div class="index-change up">▲ 0.87%</div>
+</div>
+</div>
+
+<div class="highlight-box">
+<h4>📈 <span class="zh">本周累计表现</span><span class="en" style="display:none">Weekly Cumulative Performance</span></h4>
+<p><span class="zh">道指 <b>+0.55%</b> · 标普500 <b>+0.91%</b> · 纳指 <b>+1.12%</b> · 标普和纳指<b>连续第五周</b>上涨，创2024年以来最长周连涨纪录</span><span class="en" style="display:none">Dow <b>+0.55%</b> · S&P 500 <b>+0.91%</b> · Nasdaq <b>+1.12%</b> · S&P & Nasdaq <b>5th consecutive</b> weekly gain, longest streak since 2024</span></p>
+</div>
+
+<h2>🔥 <span class="zh">重点个股</span><span class="en" style="display:none">Key Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">AAPL</div><div class="stock-price"><span class="zh">苹果</span><span class="en" style="display:none">Apple</span></div><div class="stock-change up">+3%+</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price"><span class="zh">英特尔</span><span class="en" style="display:none">Intel</span></div><div class="stock-change up">+5%+ <span class="tag tag-ath">ATH</span></div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price"><span class="zh">闪迪</span><span class="en" style="display:none">SanDisk</span></div><div class="stock-change up">+8.25% <span class="tag tag-hot">🔥</span></div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price"><span class="zh">特斯拉</span><span class="en" style="display:none">Tesla</span></div><div class="stock-change up">+2%+</div></div>
+<div class="stock-item"><div class="stock-ticker">MSFT</div><div class="stock-price"><span class="zh">微软</span><span class="en" style="display:none">Microsoft</span></div><div class="stock-change up">+1%+</div></div>
+<div class="stock-item"><div class="stock-ticker">AMZN</div><div class="stock-price"><span class="zh">亚马逊</span><span class="en" style="display:none">Amazon</span></div><div class="stock-change up">+1%+</div></div>
+<div class="stock-item"><div class="stock-ticker">GOOGL</div><div class="stock-price"><span class="zh">谷歌</span><span class="en" style="display:none">Alphabet</span></div><div class="stock-change flat">+0.23%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price"><span class="zh">英伟达</span><span class="en" style="display:none">NVIDIA</span></div><div class="stock-change down">-0.56%</div></div>
+<div class="stock-item"><div class="stock-ticker">HXC</div><div class="stock-price"><span class="zh">中概金龙</span><span class="en" style="display:none">China ADR</span></div><div class="stock-change down">-0.59%</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股（4月30日 收官）</span><span class="en" style="display:none">China & HK Markets (Apr 30 Close)</span></h2>
+
+<div class="index-grid">
+<div class="index-item">
+<div class="index-name"><span class="zh">上证指数</span><span class="en" style="display:none">Shanghai Composite</span></div>
+<div class="index-val">4,112</div>
+<div class="index-change flat">▲ 0.11%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">深证成指</span><span class="en" style="display:none">Shenzhen Component</span></div>
+<div class="index-val">—</div>
+<div class="index-change down">▼ 0.09%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">创业板指</span><span class="en" style="display:none">ChiNext</span></div>
+<div class="index-val">—</div>
+<div class="index-change down">▼ 0.27%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span> <span class="tag tag-hot">🔥</span></div>
+<div class="index-val">—</div>
+<div class="index-change up">▲ 5.19%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng Index</span></div>
+<div class="index-val">25,777</div>
+<div class="index-change down">▼ 1.28%</div>
+</div>
+<div class="index-item">
+<div class="index-name"><span class="zh">恒生科技</span><span class="en" style="display:none">Hang Seng Tech</span></div>
+<div class="index-val">4,871</div>
+<div class="index-change down">▼ 0.79%</div>
+</div>
+</div>
+
+<div class="highlight-box">
+<h4>📊 <span class="zh">港股4月月度表现</span><span class="en" style="display:none">HK April Monthly Performance</span></h4>
+<p><span class="zh">恒指4月累涨 <b>+3.99%</b> · 恒生科技4月累涨 <b>+4.76%</b> · 国企指数累涨 <b>+3.67%</b> · 南向资金4/30净买入 <b>121.92亿港元</b></span><span class="en" style="display:none">HSI April +3.99% · HSTECH April +4.76% · HSCI April +3.67% · Southbound net buy HK$12.19B on Apr 30</span></p>
+</div>
+
+<h2>🎯 <span class="zh">三大核心驱动</span><span class="en" style="display:none">Three Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">AI基础设施军备竞赛全面升级</span><span class="en" style="display:none">AI Infrastructure Arms Race Escalates</span></h4>
+<p><span class="zh">美银上调2026全球云厂商资本支出至超8000亿美元（同比+67%），2027年或破万亿美元。科技七巨头合计资本支出将破7000亿美元。微软capex指引约1900亿美元，高于分析师预期的1500亿美元。闪迪年内暴涨166%，AI数据中心NAND存储供需失衡至少持续到2028年。AI投资正从"训练"走向"部署"阶段。</span><span class="en" style="display:none">BofA raised 2026 global cloud capex forecast to >$800B (+67% YoY), potentially topping $1T in 2027. Magnificent 7 combined capex to exceed $700B. Microsoft guided ~$190B vs $150B consensus. SanDisk +166% YTD on NAND supply-demand imbalance lasting until at least 2028. AI investment shifting from training to deployment phase.</span></p>
+<p class="src"><span class="zh">来源：美银/新浪财经/财联社</span><span class="en" style="display:none">Source: BofA / Sina Finance / CLS</span></p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">财报季持续超预期</span><span class="en" style="display:none">Earnings Season Continues to Beat</span></h4>
+<p><span class="zh">82%标普500成分股EPS超预期，78%的公司实现同比盈利增长。苹果Q1财报创史上最佳同期表现，所有地理区域营收均实现两位数增长。英特尔股价突破历史新高，市值突破5000亿美元。芯片股4月费城半导体指数暴涨35%，创下历史性月度行情。</span><span class="en" style="display:none">82% of S&P 500 companies beat EPS estimates, 78% achieved YoY earnings growth. Apple posted best-ever comparable quarter with double-digit growth across all regions. Intel hit all-time high, market cap surpassing $500B. PHLX SOX surged 35% in April for a historic monthly rally.</span></p>
+<p class="src"><span class="zh">来源：FactSet/财联社/证券时报</span><span class="en" style="display:none">Source: FactSet / CLS / STCN</span></p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">关税政策边际改善</span><span class="en" style="display:none">Tariff Policy Marginal Improvement</span></h4>
+<p><span class="zh">特朗普政府启动1660亿美元关税退款程序，市场对贸易战最坏时期的担忧有所缓解。美欧达成汽车关税15%协议，欧盟承诺增加6000亿美元对美投资。2026年不太可能再次发起大规模关税战，部分贸易保护措施可能根据国内市场需要逐步撤回。</span><span class="en" style="display:none">Trump administration launched $166B tariff refund process, easing worst-case trade war fears. US-EU reached 15% auto tariff deal with EU committing $600B in US investments. Major new tariff wars unlikely in 2026; some protectionist measures may gradually be rolled back.</span></p>
+<p class="src"><span class="zh">来源：BBC/证券时报/上观新闻</span><span class="en" style="display:none">Source: BBC / STCN / Shobserver</span></p>
+</div>
+
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4>🇺🇸 <span class="zh">美股</span><span class="en" style="display:none">US Stocks</span></h4>
+<p><span class="zh">标普和纳指连续5周上涨，但英伟达连跌四日+半导体高位引发短期获利了结压力。关注安森美(ON)周一盘前财报，半导体板块能否延续涨势是关键。82%财报超预期为市场提供坚实基本面支撑，但估值已处于历史高位，波动可能加大。</span><span class="en" style="display:none">S&P & Nasdaq on 5-week winning streak, but NVDA's 4-day decline and high semiconductor positioning create profit-taking pressure. Watch ON Semiconductor Monday pre-market earnings — key for semiconductor momentum continuation. 82% earnings beat provides fundamental support, but valuations at historical highs may increase volatility.</span></p>
+</div>
+
+<div class="card">
+<h4>🧠 <span class="zh">半导体/AI</span><span class="en" style="display:none">Semiconductors / AI</span></h4>
+<p><span class="zh">费城半导体指数单月暴涨35%，部分机构警示半导体周期可能逐步见顶，机构与散户仓位非常高。但洪灏指出，AI存储（闪迪、美光）供需结构性失衡至少持续到2028年，NAND闪存价格进入上行周期。2026年关键词是"分化"与"扩散"——资金将从纯云端训练基础设施转向边缘AI和存储等细分领域。</span><span class="en" style="display:none">SOX surged 35% in a month. Some warn the semi cycle may be peaking with very high positioning. But NAND flash supply-demand structural imbalance (SanDisk, Micron) lasts until at least 2028. 2026 keywords are "divergence" and "diffusion" — capital shifting from pure cloud training infra to edge AI and storage niches.</span></p>
+</div>
+
+<div class="card">
+<h4>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China & HK Stocks</span></h4>
+<p><span class="zh">A股5月6日节后开盘，科创50已率先爆发（+5.19%），半导体国产替代+AI应用双主线预计延续。上证4月K线形成高位阴孕阳形态，但中期趋势未破坏，日KD金叉确认短线反弹。港股4月三大指数齐涨超3%，节后预计跟随A股联动。南向资金持续净买入显示内地资金对港股信心。</span><span class="en" style="display:none">A-shares resume May 6 post-holiday. STAR 50 already surging (+5.19%), semi import substitution + AI application dual theme likely to continue. Shanghai April candlestick shows consolidation but medium-term uptrend intact, daily KD golden cross confirms short-term bounce. HK April all 3 indices up >3%, likely to follow A-share momentum. Southbound net buying continues.</span></p>
+</div>
+
+<div class="card">
+<h4>⚠️ <span class="zh">风险提示</span><span class="en" style="display:none">Risk Alerts</span></h4>
+<p><span class="zh">• 半导体仓位拥挤，高位波动加大<br>• 英伟达连跌四日，关注是否引发AI板块短线回调<br>• 关注美联储6月议息会议预期变化<br>• A股节后首日放量方向决定5月基调</span><span class="en" style="display:none">• Crowded semiconductor positioning increases volatility risk<br>• NVDA 4-day decline — watch for AI sector pullback<br>• Fed June FOMC expectations in flux<br>• A-share post-holiday volume direction sets May tone</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：新浪财经、财联社、英为财格、证券时报、东方财富、Reuters</span><span class="en" style="display:none">Sources: Sina Finance, CLS, Investing.com, STCN, East Money, Reuters</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

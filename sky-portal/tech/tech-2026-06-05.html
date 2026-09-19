@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-05 — Sky Portal</title>
+<style>
+:root {
+  --bg: #0f0f0f;
+  --card: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #ccc;
+  --text-dim: #888;
+  --accent: #f0a040;
+  --accent-glow: rgba(240,160,64,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Helvetica Neue','PingFang SC','Noto Sans SC',sans-serif;line-height:1.75;padding:20px}
+.container{max-width:860px;margin:0 auto}
+
+/* Header */
+h1{color:var(--accent);font-size:1.8em;text-align:center;margin:20px 0 4px;letter-spacing:-0.02em}
+.subtitle{text-align:center;color:var(--text-dim);font-size:0.88em;margin-bottom:32px}
+
+/* Sections */
+.section{margin-bottom:32px}
+.section-title{color:var(--accent);font-size:1.25em;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:10px;display:flex;align-items:center;gap:8px}
+
+/* Lesson card */
+.lesson{background:var(--card);border:1px solid rgba(240,160,64,0.25);border-radius:14px;padding:24px 26px;margin-bottom:14px}
+.lesson h3{color:var(--accent);font-size:1.12em;margin-bottom:12px}
+.lesson p{color:var(--text);font-size:0.93em;margin-bottom:8px}
+.lesson .highlight{color:#fff;font-weight:600;background:var(--accent-glow);padding:1px 6px;border-radius:4px}
+
+/* News cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:14px;transition:border-color 0.2s}
+.card:hover{border-color:rgba(240,160,64,0.4)}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px;line-height:1.4}
+.card p{color:var(--text);font-size:0.92em;margin-bottom:6px}
+.card a{color:var(--accent);text-decoration:none;font-size:0.88em}
+.card a:hover{text-decoration:underline}
+.card .date{color:var(--text-dim);font-size:0.78em;margin-top:8px;display:block;text-align:right}
+.tag{display:inline-block;font-size:0.72em;padding:2px 8px;border-radius:5px;font-weight:600;margin-right:6px}
+.tag-red{background:rgba(239,68,68,0.15);color:#f87171}
+.tag-blue{background:rgba(59,130,246,0.15);color:#60a5fa}
+.tag-green{background:rgba(34,197,94,0.15);color:#4ade80}
+.tag-purple{background:rgba(168,85,247,0.15);color:#c084fc}
+
+/* Footer */
+.footer{text-align:center;margin-top:36px;padding:22px 0;border-top:1px solid var(--border);color:#555;font-size:0.84em}
+.footer a{color:var(--accent);text-decoration:none}
+
+/* Responsive */
+@media(max-width:768px){
+  body{padding:12px}
+  .container{padding:0}
+  h1{font-size:1.5em}
+  .lesson,.card{padding:16px 18px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-05 · Sky Portal · <a href="index.html" style="color:var(--accent)">索引</a></div>
+
+<!-- ════════════════════════════════════ -->
+<!-- 板块1：每日一课                     -->
+<!-- ════════════════════════════════════ -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>EMIB vs CoWoS — 先进封装路线之争</h3>
+<p>先进封装是后摩尔时代的关键。目前两大主流方案：</p>
+<p><span class="highlight">CoWoS（Chip on Wafer on Substrate）</span>：台积电的看家本领。把多个芯片"摞"在一块硅中介层（silicon interposer）上，通过微凸块和TSV通孔互联。好处是带宽极高，坏处是面积受限（ reticle limit）、成本昂贵。英伟达几乎所有AI芯片都用CoWoS。</p>
+<p><span class="highlight">EMIB（Embedded Multi-die Interconnect Bridge）</span>：英特尔的方案。不铺满整块硅中介层，只在需要互联的地方嵌入一小条"桥"。就像修高速公路不打地基，只在十字路口架桥。成本更低、灵活性更高。最新版 <strong>EMIB-T</strong> 更支持3D堆叠。</p>
+<p>本周联发科宣布下一代芯片<span class="highlight">弃CoWoS选EMIB-T</span>，是先进封装格局的一次标志性转向——封装不再是台积电一家独大。</p>
+</div>
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- 板块2：技术突破                     -->
+<!-- ════════════════════════════════════ -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3><span class="tag tag-blue">封装</span>联发科弃CoWoS，下一代芯片独家采用英特尔 EMIB-T 先进封装</h3>
+<p>联发科在 COMPUTEX 2026 高盛日活动上宣布，下一代芯片将<span style="color:#fff;font-weight:600">仅采用英特尔 EMIB-T 先进封装技术</span>，不再使用台积电 CoWoS 方案。流片目标定于 2026 Q4，预计 2027 Q4 量产。这是英特尔代工服务（IFS）迄今为止最大的一笔先进封装订单，标志着先进封装竞争格局发生实质变化。EMIB-T 相比 CoWoS 可降低成本和复杂度，同时保持高带宽。</p>
+<a href="https://www.ithome.com/0/958/954.htm" target="_blank">IT之家</a> · <a href="https://www.chinaflashmarket.com/newsflash/37763" target="_blank">中国闪存市场</a>
+<span class="date">2026-06-03</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-green">GPU</span>NVIDIA COMPUTEX 发布 N1/N1X PC SoC — 700亿晶体管、3nm、联发科ARM CPU</h3>
+<p>黄仁勋在 COMPUTEX 2026 发布 NVIDIA 首款消费级 PC SoC——<span style="color:#fff;font-weight:600">N1X</span>。700亿晶体管、20核ARM CPU（联发科设计）+ 6144个CUDA核心（Blackwell架构）、3nm制程。另有低功耗版 N1 面向轻薄本。这标志着 NVIDIA 正式进军 x86/ARM 笔记本市场，直接与 Intel、AMD 竞争。预计 Dell、Lenovo 将首发搭载。</p>
+<a href="https://ee.ofweek.com/2026-06/ART-8110-2801-30689361.html" target="_blank">OFweek电子工程</a> · <a href="https://wccftech.com/mediatek-abruptly-pulled-from-computex-2026-keynote-slot-handing-nvidia-the-stage/" target="_blank">WCCFTech</a>
+<span class="date">2026-06-02</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-purple">量子</span>微软发布 Majorana 2 量子芯片 — 量子比特存活时间提升1000倍</h3>
+<p>微软于 6 月 2 日发布第二代拓扑量子芯片 <span style="color:#fff;font-weight:600">Majorana 2</span>。量子比特平均存活时间从 Majorana 1 的毫秒级跃升至<span style="color:#fff;font-weight:600">20秒</span>——提升约1000倍。该芯片采用全新材料堆栈，并大量借助 AI 辅助设计。微软预计 2029 年实现商用级量子计算机。不过学术界对其拓扑量子比特的物理验证仍有争议。</p>
+<a href="https://www.bbc.com/news/articles/cj4p7gyvp52o" target="_blank">BBC</a> · <a href="https://www.reuters.com/business/microsoft-reveals-new-quantum-chip-made-with-ai-says-it-will-have-systems-by-2026-06-02/" target="_blank">Reuters</a>
+<span class="date">2026-06-02</span>
+</div>
+
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- 板块3：产业动态                     -->
+<!-- ════════════════════════════════════ -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3><span class="tag tag-red">里程碑</span>WSTS：2026全球半导体市场规模将突破1.5万亿美元，同比增长近90%</h3>
+<p>世界半导体贸易统计组织（WSTS）6月2日发布最新预测：2026年全球半导体市场规模将达<span style="color:#fff;font-weight:600">1.511万亿美元</span>，同比增长89.9%，创历史纪录。其中存储芯片同比增幅预计达250%，规模突破8000亿美元。2027年还将再增长26.6%。AI芯片需求是最大驱动力。</p>
+<a href="https://www.ithome.com/0/958/877.htm" target="_blank">IT之家</a> · <a href="https://finance.sina.com.cn/roll/2026-06-04/doc-iniafmmv2690585.shtml" target="_blank">新浪财经</a>
+<span class="date">2026-06-02</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-blue">代工</span>Apple 探索 Intel、Samsung 作为芯片代工备选，降低对 TSMC 依赖</h3>
+<p>据 Bloomberg 报道，苹果正在与英特尔和三星进行<span style="color:#fff;font-weight:600">早期谈判</span>，探讨部分 M 系列芯片由这两家代工的可能性。苹果过去十余年几乎100%依赖台积电。地缘政治风险和台积电产能瓶颈是主要驱动因素。不过分析师认为短期内台积电仍不可替代。</p>
+<a href="https://9to5mac.com/2026/05/04/report-apple-considers-intel-and-samsung-to-diversify-chip-manufacturing-away-from-tsmc/" target="_blank">9to5Mac</a> · <a href="https://finance.yahoo.com/sectors/technology/articles/apple-explores-intel-samsung-u-125447486.html" target="_blank">Yahoo Finance</a>
+<span class="date">2026-05-04</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-green">Intel</span>COMPUTEX 2026：Intel 发布18A全线产品，四线并进战略亮相</h3>
+<p>英特尔 CEO 陈立武在 COMPUTEX 2026 宣布<span style="color:#fff;font-weight:600">"四线并进"</span>新战略：① Panther Lake（Core Ultra 3，18A制程）已量产上市；② 至强6+数据中心处理器，最高52核；③ Arc G3 掌机芯片；④ Clearwater Forest 288核服务器处理器。18A 制程较前代性能提升最高2.5倍，Intel 代工服务正积极争取苹果、联发科等大客户。</p>
+<a href="https://thenextweb.com/news/intel-computex-2026-18a-panther-nova-lake-ai-pc" target="_blank">TheNextWeb</a> · <a href="https://notebook.pconline.com.cn/2164/21644351.html" target="_blank">太平洋电脑网</a>
+<span class="date">2026-06-02</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-purple">NVIDIA</span>Vera Rubin NVL72 荣获 COMPUTEX 最佳选择奖，今年下半年推出</h3>
+<p>NVIDIA Vera Rubin NVL72 在 COMPUTEX 2026 上荣获最佳选择奖（Best Choice Award）。黄仁勋透露今年下半年将推出<span style="color:#fff;font-weight:600">Grace Blackwell → Vera Rubin → 一款未公布的全新平台</span>三连发。Vera Rubin GPU 配备第三代 Transformer Engine，50%性能提升。NVL72 机架定价约350-400万美元。</p>
+<a href="https://blogs.nvidia.cn/blog/nvidia-gtc-taipei-computex-2026-news/" target="_blank">NVIDIA Blog</a> · <a href="https://www.servethehome.com/nvidia-computex-2026-keynote-live-coverage/" target="_blank">ServeTheHome</a>
+<span class="date">2026-06-02</span>
+</div>
+
+</div>
+
+<!-- ════════════════════════════════════ -->
+<!-- 板块4：量子计算                     -->
+<!-- ════════════════════════════════════ -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3><span class="tag tag-purple">微软</span>Majorana 2：拓扑量子比特存活20秒，AI辅助设计加速</h3>
+<p>微软 Majorana 2 的量子比特相干时间达到<span style="color:#fff;font-weight:600">20秒</span>，较前代提升约1000倍，这在超导和离子阱量子比特中几乎不可想象。关键突破在于全新拓扑材料堆栈和 AI 辅助的芯片设计流程（Microsoft Discovery）。微软预测 2029 年交付商用级量子计算机。但 <em>Scientific American</em> 指出，拓扑量子比特的物理实验验证仍然不够充分，学术界存在质疑。</p>
+<a href="https://www.theverge.com/news/940874/microsoft-majorana-2-quantum-chip-build" target="_blank">The Verge</a> · <a href="https://www.scientificamerican.com/article/microsofts-upgraded-majorana-quantum-computing-chip-fizzles-with-physicists/" target="_blank">Scientific American</a>
+<span class="date">2026-06-02</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-blue">Google</span>Quantum Echoes 算法：Willow 芯片实现首个可验证量子优势</h3>
+<p>Google 宣布其 Willow 量子芯片运行 <span style="color:#fff;font-weight:600">Quantum Echoes</span> 算法，实现了首个在硬件上可复现、可验证的量子优势——运算速度是经典超级计算机的13,000倍。这不同于以前的"量子 supremacy"声明，该结果可在同类平台上重复验证，标志着量子计算从实验室走向实用化的重要里程碑。</p>
+<a href="https://blog.google/innovation-and-ai/technology/research/quantum-echoes-willow-verifiable-quantum-advantage/" target="_blank">Google Blog</a>
+<span class="date">2026-06-05</span>
+</div>
+
+<div class="card">
+<h3><span class="tag tag-green">产业</span>量子计算 2026：从突破到拐点</h3>
+<p>2026年被视为量子计算的关键拐点年。Google Willow 实现可验证优势，微软 Majorana 2 大幅提升相干时间，IBM 维持2029年容错量子计算路线图。与此同时，NVIDIA 推出 NVQLink 量子-GPU混合接口，CESGA 联合 IQM 部署54量子比特本地量子系统。<em>Scientific American</em> 评论称，量子计算正进入"成败在此一举"的关键时刻。</p>
+<a href="https://www.scientificamerican.com/article/quantum-computing-is-reaching-its-make-or-break-moment/" target="_blank">Scientific American</a> · <a href="https://www.ibm.com/quantum/blog/large-scale-ftqc" target="_blank">IBM Quantum</a>
+<span class="date">2026-06-02</span>
+</div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<p>☁️ Sky Portal · <a href="../index.html">返回主页</a> · <a href="index.html">每日科技索引</a></p>
+<p style="margin-top:6px">每日科技 · 由 AI 自动生成 · 内容基于公开新闻来源</p>
+</div>
+
+</div>
+</body>
+</html>

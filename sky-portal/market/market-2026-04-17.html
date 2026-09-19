@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-17</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#166534 0%,#15803d 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股全线大涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Surge</div>
+<div class="zh poster-data">• 标普500 +1.2%，再创新高<br>• 纳斯达克 +1.2%<br>• SOX半导体 +2.4%</div>
+<div class="en poster-data" style="display:none">• S&P 500 +1.2%, new ATH<br>• Nasdaq +1.2%<br>• SOX Semiconductor +2.4%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f 0%,#1e40af 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股震荡 港股走强</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Mixed, HK Strong</div>
+<div class="zh poster-data">• 上证 4,043 (-0.3%)<br>• 创业板 3,655 (+0.82%) 11年新高<br>• 恒指重回26,000</div>
+<div class="en poster-data" style="display:none">• Shanghai 4,043 (-0.3%)<br>• ChiNext 3,655 (+0.82%) 11yr high<br>• HSI back above 26,000</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#92400e 0%,#b45309 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">油价暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Plummets</div>
+<div class="zh poster-data">• 霍尔木兹海峡重新开放<br>• 油价单日暴跌约10%<br>• 以黎停火10天</div>
+<div class="en poster-data" style="display:none">• Strait of Hormuz reopened<br>• Oil drops ~10% in a day<br>• Israel-Lebanon 10-day ceasefire</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#312e81 0%,#4338ca 100%)">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI/半导体领涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI/Semis Lead</div>
+<div class="zh poster-data">• SOX费半指数 +2.4%<br>• TSMC、NVDA领跑<br>• AI超级周期叙事强化</div>
+<div class="en poster-data" style="display:none">• SOX Index +2.4%<br>• TSMC & NVDA leading<br>• AI supercycle narrative builds</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-04-17 · Sky Portal Daily Market · <a href="index.html">All Markets</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘行情</span><span class="en" style="display:none">US Market Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,125</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,390</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">48,700</div><div class="stock-change up">+0.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">9,556</div><div class="stock-change up">+2.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">R2000</div><div class="stock-price">—</div><div class="stock-change up">+0.2%</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情（4/18盘中）</span><span class="en" style="display:none">A-Shares (Apr 18 Intraday)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,043</div><div class="stock-change down">-0.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">14,845</div><div class="stock-change up">+0.33%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,655</div><div class="stock-change up">+0.82%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">26,168</div><div class="stock-change up">+1.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">—</div><div class="stock-change up">+3.0%</div></div>
+</div>
+
+<h2>🔑 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 伊朗宣布霍尔木兹海峡完全开放 — 地缘风险骤降</span><span class="en" style="display:none">1. Iran Declares Strait of Hormuz Fully Open — Geopolitical Risk Drops</span></h4>
+<p><span class="zh">伊朗外长宣布霍尔木兹海峡在以色列-黎巴嫩停火期间对所有商业油轮「完全开放」。这是中东局势近期最大的积极信号，此前市场一直担忧全球最关键石油运输通道可能被封锁。消息公布后油价暴跌约10%，全球风险资产应声大涨。以色列与黎巴嫩达成10天临时停火协议，进一步缓解了市场紧张情绪。</span><span class="en" style="display:none">Iran's foreign minister declared the Strait of Hormuz "completely open" for all commercial tankers during the Israel-Lebanon ceasefire. This is the biggest positive signal for Middle East tensions in recent weeks. Oil prices plunged ~10% on the news, and global risk assets surged. Israel and Lebanon agreed to a 10-day temporary ceasefire, further easing tensions.</span></p>
+<p class="src">来源：Reuters / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI超级周期叙事持续强化 — 半导体板块领涨</span><span class="en" style="display:none">2. AI Supercycle Narrative Strengthens — Semis Lead</span></h4>
+<p><span class="zh">费城半导体指数(SOX)大涨2.4%，台积电(TSM)财报前瞻乐观，市场预期AI芯片需求将持续爆发。Nvidia继续占据CoWoS先进封装大部分产能，Blackwell和Vera Rubin芯片产量爬坡顺利。TSMC已超越Nvidia成为同期表现更优的半导体标杆股。整个AI供应链从设计到封装到制造，全面进入超级景气周期。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) surged 2.4%. TSMC earnings preview is optimistic with AI chip demand expected to keep booming. Nvidia continues to dominate CoWoS packaging capacity. Blackwell and Vera Rubin production ramping smoothly. TSMC has even outperformed Nvidia over the same period. The entire AI supply chain is in a super-cycle.</span></p>
+<p class="src">来源：Investor's Business Daily / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 标普500连续创新高 — 市场进入「完美定价」区间</span><span class="en" style="display:none">3. S&P 500 Sets Consecutive Records — Market in "Perfect Pricing" Zone</span></h4>
+<p><span class="zh">标普500周四已收于7,041点创下历史新高，周五在霍尔木兹海峡利好推动下再涨1.2%至约7,125点。纳斯达克同样连续刷新纪录。本周以来标普累计涨约4.5%，纳斯达克涨约6.8%。市场情绪从「谨慎乐观」转向「全面看多」，但部分分析师警告估值偏高，需警惕获利回吐。</span><span class="en" style="display:none">S&P 500 closed Thursday at a record 7,041, then added another 1.2% Friday on Hormuz news to ~7,125. Nasdaq also set consecutive records. Weekly gains: S&P +4.5%, Nasdaq +6.8%. Sentiment shifted from "cautiously optimistic" to "broadly bullish," though some warn about rich valuations and profit-taking risks.</span></p>
+<p class="src">来源：MarketWatch / Bloomberg</p>
+</div>
+
+<h2>🌏 <span class="zh">亚太市场亮点</span><span class="en" style="display:none">Asia-Pacific Highlights</span></h2>
+
+<div class="card">
+<h4><span class="zh">港股：恒生科技大涨，百度+8%、宁德时代+9%</span><span class="en" style="display:none">HK: Hang Seng Tech Surges, Baidu +8%, CATL +9%</span></h4>
+<p><span class="zh">恒生指数重回26,000点上方，恒生科技指数周内大涨近3%。百度集团涨超8%，阿里巴巴普涨。宁德时代港股上市后涨9%，一季度业绩超预期成为市场焦点。AH溢价指数降至119，为两年多来最低，意味着港股相对A股的吸引力持续上升，南向资金加速流入。</span><span class="en" style="display:none">HSI reclaimed 26,000, with Hang Seng Tech up ~3% for the week. Baidu jumped 8%+, Alibaba broadly higher. CATL's HK listing surged 9% on Q1 earnings beat. The AH premium index dropped to 119, the lowest in over two years, meaning HK stocks are increasingly attractive vs A-shares. Southbound capital flows accelerating.</span></p>
+<p class="src">来源：每经 / South China Morning Post</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股：上证4000点拉锯，创业板创11年新高</span><span class="en" style="display:none">A-Shares: Shanghai Battles 4,000, ChiNext at 11-Year High</span></h4>
+<p><span class="zh">上证指数在4,000点关口反复震荡，微跌0.3%。但结构性机会突出：创业板指上涨0.82%至3,655点，创下近11年新高。深成指涨0.33%。市场交投活跃，沪深两市半日成交超1.58万亿元。科技成长风格明显占优，权重股承压但中小盘活跃。本周累计：沪指+1.64%，深成指+4.02%。</span><span class="en" style="display:none">Shanghai Composite oscillated around 4,000, down 0.3%. But structural opportunities stood out: ChiNext rose 0.82% to 3,655, an 11-year high. Shenzhen Component gained 0.33%. Trading was active with half-day volume exceeding ¥1.58 trillion. Tech/growth style clearly dominant. Weekly: Shanghai +1.64%, Shenzhen +4.02%.</span></p>
+<p class="src">来源：东方财富 / 新浪财经</p>
+</div>
+
+<h2>📈 <span class="zh">短期预判</span><span class class="en" style="display:none">Short-Term Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">美股：连创新高+地缘缓解放，下周有望延续升势</span><span class="en" style="display:none">US: Consecutive ATHs + Geopolitical Relief, Rally May Continue</span></h4>
+<p><span class="zh">霍尔木兹海峡开放和以黎停火消除了近期最大的地缘风险溢价，油价回落将继续利好通胀预期。AI/半导体是当前市场核心主线，下周进入财报密集期，TSMC等权重股业绩将验证AI超级周期叙事。风险点：标普连续创新高后可能面临技术性获利回吐；中东停火若破裂将引发剧烈波动。</span><span class="en" style="display:none">Hormuz opening and Israel-Lebanon ceasefire removed the biggest geopolitical risk premium. Lower oil benefits inflation expectations. AI/semis remain the core narrative. Next week's heavy earnings slate (including TSMC) will test the supercycle thesis. Risks: profit-taking after consecutive ATHs; ceasefire breakdown could trigger sharp volatility.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股/港股：科技成长占优，港股估值修复持续</span><span class="en" style="display:none">A/H: Tech/Growth Dominant, HK Valuation Recovery Continues</span></h4>
+<p><span class="zh">A股方面，4000点拉锯可能延续，但创业板的强势表明科技成长风格已确立主导地位。港股估值修复行情正在加速，AH溢价持续收敛意味着南向资金仍有空间。关注下周A股能否有效突破4,050点，以及港股恒生科技能否延续独立行情。宁德时代Q1超预期或带动新能源板块共振。</span><span class="en" style="display:none">A-shares may continue battling around 4,000, but ChiNext strength confirms tech/growth dominance. HK valuation recovery is accelerating with AH premium narrowing, suggesting southbound capital still has room. Watch for A-share breakout above 4,050 and whether Hang Seng Tech can sustain its independent rally. CATL's Q1 beat may lift the entire NEV/energy chain.</span></p>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSM — TSMC</div><div id="tv-tsm"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Markets</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, MarketWatch, Bloomberg, 东方财富, 每经</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-sox', sym:'PHLX:SOX'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tsm', sym:'NYSE:TSM'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

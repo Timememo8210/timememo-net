@@ -1,0 +1,71 @@
+{
+  "sample_id": "S12",
+  "expected_category": "Insulation",
+  "source_file": "focus-energy-insulation-sample-invoice.pdf",
+  "source_title": "Focus on Energy Insulation and Air Sealing Sample Invoice",
+  "source_url": "https://assets.focusonenergy.com/production/inline-files/TA-Insulation_and_Air_Sealing_Sample_Invoice.pdf",
+  "model": "gemini-2.5-flash",
+  "status": "ok",
+  "elapsed_ms": 14358,
+  "retry_attempt": 1,
+  "extracted": {
+    "documentType": "invoice",
+    "date": "2024-05-01",
+    "property": {
+      "address": "725 Park Drive",
+      "unit": "",
+      "city": "East Anytown",
+      "region": "WI",
+      "postalCode": "53703",
+      "country": "USA"
+    },
+    "vendor": {
+      "name": "XYZ Contractor",
+      "address": "1213 Expert Road, Anytown, WI 53523",
+      "phone": "608.222.5678",
+      "email": "",
+      "licenseNumber": ""
+    },
+    "service": {
+      "projectName": "Attic Insulation and Air Sealing Project",
+      "workType": "Energy Efficiency Upgrade",
+      "areaOfHome": "Attic, Sills",
+      "workPerformed": "Performed air sealing for attic penetrations and recessed lights, added 8 inches of cellulose insulation to the attic, and installed foam sills with additional insulation.",
+      "materials": [
+        "cellulose insulation",
+        "foam sills"
+      ],
+      "laborSummary": "",
+      "warranty": "",
+      "permitNumber": "",
+      "followUpRecommendation": "",
+      "resaleValueNote": "This record demonstrates energy efficiency upgrades that can improve home comfort and reduce utility costs, potentially increasing property value.",
+      "valueSignal": "upgrade"
+    },
+    "items": [
+      {
+        "description": "Insulation and Air Sealing Services (Air seal attic penetrations, recessed lights, 8\" cellulose insulation, foam sills)",
+        "quantity": 1,
+        "unitPrice": 3800,
+        "total": 3800,
+        "kind": "other"
+      },
+      {
+        "description": "Focus on Energy Instant Discount",
+        "quantity": 1,
+        "unitPrice": -1300,
+        "total": -1300,
+        "kind": "fee"
+      }
+    ],
+    "subtotal": 3800,
+    "tax": 0,
+    "total": 2500,
+    "currency": "USD",
+    "category": "Renovation",
+    "notes": "Invoice includes an instant discount from Focus on Energy. Payment is due upon receipt of invoice. A 1.5% per month interest charge applies to all past-due accounts.",
+    "confidenceScore": 0.95
+  },
+  "error": "",
+  "api_status": 200
+}

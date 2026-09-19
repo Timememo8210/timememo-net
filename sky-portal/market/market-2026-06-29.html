@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-29</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#4ade80">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股大盘</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets</div>
+<div class="zh poster-data">• 道指涨0.59%创历史新高<br>• 标普500首次收于7600点上方</div>
+<div class="en poster-data" style="display:none">• Dow up 0.59% all-time high<br>• SP500首次收于7600点上方</div>
+</div>
+<div class="poster-card" style="background:#1e40af">
+<div class="poster-icon">🔻</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体板块</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors</div>
+<div class="zh poster-data">• 费城指数跌5.29%<br>• 博通拖累芯片股集体走弱</div>
+<div class="en poster-data" style="display:none">• SOX down 5.29%<br>• Broadcom drags chip stocks</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股市场</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Markets</div>
+<div class="zh poster-data">• 上证涨1.16%<br>• 恒生科技涨1.60%</div>
+<div class="en poster-data" style="display:none">• Shanghai up 1.16%<br>• Hang Seng Tech up 1.60%</div>
+</div>
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">风险提示</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Risks</div>
+<div class="zh poster-data">• AI芯片投资情绪退潮<br>• 地缘政治风险持续</div>
+<div class="en poster-data" style="display:none">• AI chip sentiment cooling<br>• Geopolitical risks persist</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-29 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股市场</span><span class="en" style="display:none">US Markets</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">DJI</div>
+<div class="stock-price">52,182.74</div>
+<div class="stock-change up">+0.59%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SPX</div>
+<div class="stock-price">7,440.43</div>
+<div class="stock-change up">+1.18%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">IXIC</div>
+<div class="stock-price">15,709.43</div>
+<div class="stock-change down">-1.00%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX</div>
+<div class="stock-price">13,336.50</div>
+<div class="stock-change down">-5.29%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">VIX</div>
+<div class="stock-price">13.42</div>
+<div class="stock-change up">+2.34%</div>
+</div>
+</div>
+
+<h3><span class="zh">市场表现分析</span><span class="en" style="display:none">Market Performance Analysis</span></h3>
+
+<div class="card">
+<h4><span class="zh">1. 道指创历史新高，标普首次突破7600点</span><span class="en" style="display:none">1. Dow Hits All-Time High, SP500 Breaks 7600</span></h4>
+<p><span class="zh">道琼斯工业平均指数首次收于52000点上方，报52182.74点，涨幅0.59%，连续三日上涨并创历史新高。标普500指数涨幅1.18%，报7440.43点，首次收于7600点上方，显示市场情绪依然乐观。两大指数的创新高主要受益于经济数据表现良好和企业业绩超预期。</span><span class="en" style="display:none">Dow Jones Industrial Average closed above 52,000 for the first time at 52,182.74 (+0.59%), marking its third consecutive day of gains and an all-time high. SP500 gained 1.18% to 7,440.43, breaking above 7600 for the first time, driven by strong economic data and better-than-expected earnings.</span></p>
+<p class="src">来源：新浪财经 / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 纳指逆势下跌，AI芯片板块承压</span><span class="en" style="display:none">2. Nasdaq Falls, AI Chip Sector Under Pressure</span></h4>
+<p><span class="zh">纳斯达克综合指数下跌1.00%，主要受到科技股拖累。费城半导体指数重挫5.29%，创下近期最大单日跌幅。英伟达微涨0.22%，但博通大跌1.12%，美光科技等芯片股普遍走弱。市场对AI芯片的投资情绪明显降温，主要受博通营收不及预期影响。</span><span class="en" style="display:none">Nasdaq Composite fell 1.00% weighed down by tech stocks. Philadelphia Semiconductor Index plunged 5.29%, its largest single-day drop recently. NVDA edged up 0.22%, but AVGO dropped 1.12%, with chip stocks broadly weak. AI chip investment sentiment cooled due to Broadcom's revenue miss.</span></p>
+<p class="src">来源：财联社 / Bloomberg</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">中国市场</span><span class="en" style="display:none">China Markets</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">SH000001</div>
+<div class="stock-price">4,073.90</div>
+<div class="stock-change up">+1.16%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SZ399001</div>
+<div class="stock-price">15,812.87</div>
+<div class="stock-change up">+0.19%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SZ399006</div>
+<div class="stock-price">4,216.70</div>
+<div class="stock-change up">+0.54%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">HSI</div>
+<div class="stock-price">24,842.67</div>
+<div class="stock-change up">+0.69%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">HSTECH</div>
+<div class="stock-price">4,523.45</div>
+<div class="stock-change up">+1.60%</div>
+</div>
+</div>
+
+<h3><span class="zh">A股与港股表现</span><span class="en" style="display:none">A-shares & Hong Kong Markets</span></h3>
+
+<div class="card">
+<h4><span class="zh">1. A股三大指数集体上涨</span><span class="en" style="display:none">1. A-share Indexes All Rise</span></h4>
+<p><span class="zh">上证指数上涨1.16%，报4073.90点；深证成指上涨0.19%，报15812.87点；创业板指上涨0.54%，报4216.70点。A股市场在美股半导体板块大跌的背景下表现相对抗跌，显示投资者信心较强。家电、软件服务、传媒等板块表现较好，市场风格偏向成长。</span><span class="en" style="display:none">Shanghai Composite gained 1.16% to 4,073.90; Shenzhen Component rose 0.19% to 15,812.87; ChiNext increased 0.54% to 4,216.70. Despite weak US semiconductor stocks, A-shares showed relative resilience with strong performance in home appliances, software services, and media sectors.</span></p>
+<p class="src">来源：东方财富 / 腾讯证券</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 恒生科技指数领涨</span><span class="en" style="display:none">2. Hang Seng Tech Leads Gains</span></h4>
+<p><span class="zh">恒生指数上涨0.69%，恒生科技指数大涨1.60%，表现强于大盘。港股科技股受到资金青睐，市场对科技板块的预期较为乐观。香港出口前景被上调至增长20%以上，主要受益于AI带动的科技上行周期。</span><span class="en" style="display:none">Hang Seng Index rose 0.69%, while Hang Seng Tech Index surged 1.60%, outperforming the broader market. Hong Kong tech stocks attracted capital inflows, with positive market sentiment towards the tech sector. Hong Kong export forecasts were revised up to over 20% growth, driven by the AI-powered tech cycle.</span></p>
+<p class="src">来源：香港交易所 / 香港贸易发展局</p>
+</div>
+
+<h2>🔍 <span class="zh">市场深度分析</span><span class="en" style="display:none">Market Deep Analysis</span></h2>
+
+<h3><span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h3>
+
+<div class="card">
+<h4><span class="zh">1. 美股创新高的推动力</span><span class="en" style="display:none">1. Drivers of US Market Highs</span></h4>
+<p><span class="zh">道指和标普500创新高的主要动力来自于：1）经济数据显示美国经济依然稳健；2）企业整体业绩表现良好，特别是传统行业；3）美联储政策预期转向宽松；4）地缘政治风险有所缓和。这些因素共同推动了大盘股的上涨。</span><span class="en" style="display:none">The main drivers for Dow and SP500 highs include: 1) Robust economic data showing the US economy remains strong; 2) Better-than-expected corporate earnings, especially in traditional sectors; 3) Fed policy expectations shifting towards easing; 4) Reduced geopolitical risks. These factors collectively drove large-cap stocks higher.</span></p>
+<p class="src">来源：高盛 / 摩根士丹利</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块调整的原因</span><span class="en" style="display:none">2. Reasons for Semiconductor Sector Correction</span></h4>
+<p><span class="zh">费城半导体指数大跌5.29%的主要原因为：1）博通营收不及预期，引发市场对AI芯片需求的担忧；2）前期涨幅过大，技术面需要回调；3）投资者开始关注AI芯片的估值泡沫；4）竞争对手产能扩张带来的竞争加剧。英伟达作为板块权重股表现相对稳定。</span><span class="en" style="display:none">SOX's 5.29% drop was mainly due to: 1) Broadcom's revenue missing expectations, raising concerns about AI chip demand; 2) Overheating after previous gains requiring technical correction; 3) Investors focusing on AI chip valuation bubbles; 4) Intensified competition from competitors' capacity expansion. NVDA as the weighted stock remained relatively stable.</span></p>
+<p class="src">来源：彭博 / 路透社</p>
+</div>
+
+<h3><span class="zh">明日市场展望</span><span class="en" style="display:none">Tomorrow's Market Outlook</span></h3>
+
+<div class="card">
+<h4><span class="zh">1. 看好因素</span><span class="en" style="display:none">1. Bull Factors</span></h4>
+<p><span class="zh">• 道指创历史新高，显示经济基本面依然稳健<br>
+• A股市场资金面充裕，有望延续震荡上行<br>
+• 恒生科技指数表现亮眼，科技板块仍有结构性机会<br>
+• 地缘政治风险有所缓和，市场情绪改善</span><span class="en" style="display:none">• Dow at all-time high shows solid economic fundamentals<br>
+• A-share market remains well-funded, likely to continue upward trend<br>
+• Strong Hang Seng Tech performance indicates structural tech opportunities<br>
+• Geopolitical risks easing, improving market sentiment</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 风险提示</span><span class="en" style="display:none">2. Risk Warnings</span></h4>
+<p><span class="zh">• 半导体板块持续调整，AI相关个股或继续承压<br>
+• 地缘政治风险仍存，中东局势可能影响能源价格<br>
+• 需关注美联储政策动向和就业数据<br>
+• 技术面上，指数高位震荡，谨防快速回调</span><span class="en" style="display:none">• Semiconductor sector correction may continue, AI stocks under pressure<br>
+• Geopolitical risks persist, Middle East situation may affect energy prices<br>
+• Monitor Fed policy and employment data<br>
+• Technical indicators suggest high-level volatility, watch for sharp pullbacks</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 操作建议</span><span class="en" style="display:none">3. Trading Suggestions</span></h4>
+<p><span class="zh">• 短期关注半导体板块修复机会，特别是技术面调整充分的个股<br>
+• AI产业链龙头股逢低布局，关注业绩确定性高的公司<br>
+• A蓝筹股稳健配置，等待半导体板块企稳<br>
+• 关注消费升级和新能源板块的结构性机会</span><span class="en" style="display:none">• Focus on semiconductor sector recovery, especially technically oversold stocks<br>
+• Buy AI industry leaders on dips, prioritize companies with solid earnings<br>
+• Large-cap A-shares for stable allocation, wait for semiconductor stabilization<br>
+• Explore structural opportunities in consumption upgrading and new energy</span></p>
+</div>
+
+<h2>📰 <span class="zh">今日重要新闻</span><span class="en" style="display:none">Today's Key News</span></h2>
+
+<div class="card">
+<h4><span class="zh">• 世界经济论坛：地缘经济碎片化每年或致全球损失超3000亿美元</span><span class="en" style="display:none">• WEF: Geoeconomic fragmentation could cost $300B+ annually</span></h4>
+<p><span class="zh">世界经济论坛最新报告指出，地缘经济对抗成为2026年首要风险，现有产业碎片化政策将推动全球通胀率上升0.2至0.3个百分点。新兴市场和发展中经济体受冲击尤为严重。</span><span class="en" style="display:none">WEF's latest report identifies geoeconomic confrontation as the top risk for 2026, with industrial fragmentation policies expected to raise global inflation by 0.2-0.3 percentage points. Emerging markets face particularly severe impacts.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">• 高盛预测：6月新增就业岗位13万，世界杯相关贡献4万</span><span class="en" style="display:none">• Goldman Sachs: 130K new jobs in June, 40K from World Cup</span></h4>
+<p><span class="zh">高盛预测6月美国新增非农就业岗位约13万个，其中约4万个来自世界杯旅游相关岗位。这显示大型赛事对就业市场的积极影响，但整体就业增长依然温和。</span><span class="en" style="display:none">Goldman Sachs expects ~130K new US nonfarm jobs in June, with ~40K from World Cup tourism. This highlights the positive impact of major events on employment, though overall job growth remains moderate.</span></p>
+</div>
+
+<h2>💡 <span class="zh">投资策略</span><span class="en" style="display:none">Investment Strategy</span></h2>
+
+<div class="card">
+<h4><span class="zh">核心观点：结构性行情为主，关注两大主线</span><span class="en" style="display:none">Core View: Structural market focus on two main lines</span></h4>
+<p><span class="zh">当前市场呈现结构性行情，建议关注两大主线：1）半导体板块调整后的布局机会，特别是具有技术壁垒的龙头企业；2）消费升级和新能源板块的长期配置价值。短期注意控制仓位，避免追高。</span><span class="en" style="display:none">The current market shows structural trends with two main focuses: 1) Semiconductor sector opportunities after correction, especially leaders with technical moats; 2) Long-term allocation in consumption upgrading and new energy. Control positions short-term and avoid chasing gains.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">重点关注标的</span><span class="en" style="display:none">Key Stocks to Watch</span></h4>
+<p><span class="zh">• 半导体：英伟达、台积电、ASML<br>
+• AI应用：微软、谷歌、Meta<br>
+• 消费升级：茅台、宁德时代<br>
+• 新能源：比亚迪、隆基绿能</span><span class="en" style="display:none">• Semiconductors: NVDA, TSMC, ASML<br>
+• AI Applications: MSFT, GOOGL, META<br>
+• Consumption Upgrade: Kweichow Moutai, CATL<br>
+• New Energy: BYD, LONGi Green Energy</span></p>
+</div>
+
+<footer class="footer">
+<p>© 2026 Sky Portal Market Analysis | Data sources: Multiple financial platforms | <a href="../index.html">Back to Homepage</a></p>
+</footer>
+
+<script>
+function switchLang(lang) {
+    const zhElements = document.querySelectorAll('.zh');
+    const enElements = document.querySelectorAll('.en');
+    const btnZh = document.getElementById('btn-zh');
+    const btnEn = document.getElementById('btn-en');
+
+    if (lang === 'zh') {
+        zhElements.forEach(el => el.style.display = 'block');
+        enElements.forEach(el => el.style.display = 'none');
+        btnZh.style.background = '#333';
+        btnEn.style.background = '#222';
+        btnEn.style.color = '#aaa';
+    } else {
+        zhElements.forEach(el => el.style.display = 'none');
+        enElements.forEach(el => el.style.display = 'block');
+        btnZh.style.background = '#222';
+        btnZh.style.color = '#aaa';
+        btnEn.style.background = '#333';
+    }
+}
+</script>
+
+</body>
+</html>

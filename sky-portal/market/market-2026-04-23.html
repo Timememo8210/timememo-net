@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e8;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#6b6b80;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08)}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#6b6b80;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);color:#444;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid rgba(255,255,255,0.15)}
+button#btn-zh{background:rgba(255,255,255,0.12);color:#fff}
+button#btn-en{background:transparent;color:#6b6b80}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.highlight-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:10px;padding:16px 20px;margin:16px 0}
+.predict-box{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:10px;padding:16px 20px;margin:16px 0}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- Poster Grid -->
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">油价飙升 $107+</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Surges Past $107</div>
+<div class="zh poster-data">伊朗-霍尔木兹海峡对峙升级<br>特朗普下令海军击毁布雷船只</div>
+<div class="en poster-data" style="display:none">Iran-Hormuz Strait escalation<br>Trump orders Navy to destroy mining boats</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a 0%,#15803d 100%)">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">半导体17连涨 🔥</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SOX 17-Day Win Streak 🔥</div>
+<div class="zh poster-data">SOXX连续17个交易日上涨<br>英特尔盘后暴涨19%</div>
+<div class="en poster-data" style="display:none">SOXX up 17 sessions in a row<br>Intel surges 19% after hours</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">软件股暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Software Stocks Plunge</div>
+<div class="zh poster-data">AI替代恐慌持续发酵<br>即使业绩超预期也被抛售</div>
+<div class="en poster-data" style="display:none">AI displacement fears intensify<br>Sold off despite beating earnings</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#0891b2 0%,#0e7490 100%)">
+<div class="poster-icon">⚡</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">三指从历史新高回落</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">3 Indexes Retreat from ATH</div>
+<div class="zh poster-data">标普盘中创7,148新高后跌0.41%<br>纳指跌0.9%，近一月最差</div>
+<div class="en poster-data" style="display:none">S&P hit 7,148 intraday ATH then -0.41%<br>Nasdaq -0.9%, worst day in ~1 month</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-23 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- US Markets -->
+<h2>🇺🇸 <span class="zh">美股收盘（4月23日）</span><span class="en" style="display:none">US Markets Close (Apr 23)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,108</div><div class="stock-change down">-0.41%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,396</div><div class="stock-change down">-0.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,310</div><div class="stock-change down">-0.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">9,985</div><div class="stock-change up">+0.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">19.3</div><div class="stock-change up">+2.1%</div></div>
+</div>
+
+<div class="highlight-box">
+<h3 style="color:#4ade80;margin:0 0 8px">🔑 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h3>
+<p><span class="zh"><b>1. 伊朗-霍尔木兹海峡局势恶化</b> — 双方扣押商船，特朗普下令海军击毁布雷船只，布伦特原油突破$107，市场风险偏好骤降</span>
+<span class="en" style="display:none"><b>1. Iran-Hormuz Strait Escalation</b> — Both sides seized commercial ships, Trump ordered Navy to destroy mining boats, Brent above $107, risk appetite dropped</span></p>
+<p><span class="zh"><b>2. 软件股遭AI恐慌抛售</b> — AI替代传统软件的担忧持续加剧，ServiceNow等公司即使Q1业绩超预期也被大量抛售，软件板块全线下跌</span>
+<span class="en" style="display:none"><b>2. Software Stocks Hit by AI Fears</b> — AI displacement fears intensified. ServiceNow and others sold off despite beating Q1 estimates, entire software sector declined</span></p>
+<p><span class="zh"><b>3. 特斯拉盘后拖累</b> — Q1盈利超预期但盘后跌约3.4%，市场担忧中国报复性关税和巨额资本开支计划</span>
+<span class="en" style="display:none"><b>3. Tesla Weighs After Hours</b> — Q1 beat expectations but fell ~3.4% after hours on China tariff retaliation fears and heavy capex plans</span></p>
+</div>
+
+<div class="card">
+<h4>🛢️ <span class="zh">油价飙升 — 伊朗冲突是最大变量</span><span class="en" style="display:none">🛢️ Oil Surges — Iran Conflict Biggest Variable</span></h4>
+<p><span class="zh">布伦特原油突破$107/桶，自伊朗战争开始以来已上涨超55%，峰值曾接近$120。霍尔木兹海峡海军对峙持续升级，分析师警告若冲突进一步恶化，油价可能冲至$170。但以色列-黎巴嫩停火延长3周的消息在盘后提供了一定缓解，期货企稳。</span>
+<span class="en" style="display:none">Brent crude surged past $107/barrel, up 55%+ since the Iran war began with a peak near $120. Strait of Hormuz naval standoff escalating; analysts warn $170 possible if conflict worsens. However, Israel-Lebanon ceasefire 3-week extension provided some after-hours relief, futures stabilized.</span></p>
+<p class="src">来源：CNBC / WSJ / Investopedia</p>
+</div>
+
+<div class="card">
+<h4>🔬 <span class="zh">半导体逆势走强 — SOXX连涨17天史诗纪录</span><span class="en" style="display:none">🔬 Semis Defy Gravity — SOXX 17-Day Epic Streak</span></h4>
+<p><span class="zh">在大盘全面回调的背景下，半导体板块逆势走强。SOXX（iShares半导体ETF）连续第17个交易日上涨，创下史诗级连涨纪录。英特尔盘后暴涨19%，Q1盈利超预期且给出乐观Q2指引，18A制程良率持续改善。半导体与软件板块的分化加剧——芯片受益于AI基础设施建设，传统软件则面临AI替代威胁。</span>
+<span class="en" style="display:none">While the broader market pulled back, semiconductors defied gravity. SOXX posted its 17th consecutive positive session. Intel surged 19% after hours on Q1 beat and upbeat Q2 guidance, 18A yields improving. Divergence between chips and software widening — chips benefit from AI infrastructure buildout, traditional software faces AI displacement.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance / Forbes</p>
+</div>
+
+<div class="card">
+<h4>🚗 <span class="zh">特斯拉Q1超预期但盘后下跌</span><span class="en" style="display:none">🚗 Tesla Q1 Beats but Falls After Hours</span></h4>
+<p><span class="zh">特斯拉Q1盈利超出分析师预期，但盘后股价下跌约3.4%。市场主要担忧：(1) 中国可能推出报复性关税影响销量；(2) Elon Musk在政府事务中的参与引发不确定性；(3) 机器人出租车和FSD的巨额资本开支计划让投资者谨慎。不过，有分析师认为市场投机资金可能继续支撑股价。</span>
+<span class="en" style="display:none">Tesla's Q1 earnings beat analyst expectations, but shares fell ~3.4% after hours. Key concerns: (1) China retaliatory tariffs could hurt sales; (2) Elon Musk's government involvement creates uncertainty; (3) Massive capex for robotaxi and FSD makes investors cautious. However, some analysts see speculative flows keeping the stock afloat.</span></p>
+<p class="src">来源：CNBC / Fortune / Yahoo Finance</p>
+</div>
+
+<!-- China/HK Markets -->
+<h2>🇨🇳🇭🇰 <span class="zh">A股 & 港股（4月23日收盘）</span><span class="en" style="display:none">China A-Shares & HK (Apr 23 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,107</div><div class="stock-change down">-0.01%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">--</div><div class="stock-change down">-0.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">&lt;4900</div><div class="stock-change down">-1.98%</div></div>
+<div class="stock-item"><div class="stock-ticker">澜起科技</div><div class="stock-price">--</div><div class="stock-change up">+5%</div></div>
+<div class="stock-item"><div class="stock-ticker">纳芯微</div><div class="stock-price">--</div><div class="stock-change up">+4%</div></div>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">港股科技连跌三日，恒生科技失守4900</span><span class="en" style="display:none">📉 HK Tech Falls 3rd Day, HSTECH Below 4900</span></h4>
+<p><span class="zh">4月23日港股超1000只股票下跌，恒生指数收跌0.95%，恒生科技指数跌1.98%连续三个交易日下跌并失守4900点关口。科网股和芯片股同步走低，华虹半导体等下跌。4月24日早盘恒指低开0.7%，恒生科技低开0.8%。机构认为港股科技板块目前被低估。</span>
+<span class="en" style="display:none">Over 1000 HK stocks declined on Apr 23. HSI fell 0.95%, HSTECH dropped 1.98% for a 3rd consecutive decline, breaking below 4900. Tech and chip stocks fell together. Apr 24 open: HSI -0.7%, HSTECH -0.8%. Institutions see HK tech as undervalued.</span></p>
+<p class="src">来源：21财经 / 新浪财经 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">A股横盘整理，等待方向</span><span class="en" style="display:none">📊 A-Shares Consolidate, Awaiting Direction</span></h4>
+<p><span class="zh">上证指数在4100-4110区间窄幅震荡，4月22日收于4,107。深成指和创业板指小幅波动。整体市场处于高位整理状态，成交量维持稳定。半导体板块中部分个股表现亮眼，澜起科技涨近5%，纳芯微涨约4%。市场等待更多政策信号和外部催化剂。</span>
+<span class="en" style="display:none">Shanghai Composite consolidating in 4100-4110 range, closing at 4,107 on Apr 22. Shenzhen and ChiNext slightly volatile. Market in high consolidation with stable volume. Some semi stocks outperformed: Montage Tech +5%, NOVOSENSE +4%. Market awaits policy signals and external catalysts.</span></p>
+<p class="src">来源：东方财富 / 新浪财经</p>
+</div>
+
+<!-- Prediction -->
+<h2>🔮 <span class="zh">短期预判</span><span class="en" style="display:none">Short-term Outlook</span></h2>
+
+<div class="predict-box">
+<h3 style="color:#fb923c;margin:0 0 10px">⚠️ <span class="zh">关键风险与机会</span><span class="en" style="display:none">Key Risks & Opportunities</span></h3>
+<p><span class="zh">
+• <b>最大风险：</b>霍尔木兹海峡实质封锁 → 油价冲$120+，全球股市承压<br>
+• <b>积极信号：</b>以色列-黎巴嫩停火延长3周，盘后期货企稳<br>
+• <b>半导体独立行情：</b>英特尔盘后强势为明天提供支撑，SOXX 17连涨趋势可能延续<br>
+• <b>软件板块：</b>AI替代叙事短期难逆转，可能继续承压<br>
+• <b>港股科技：</b>4900是关键支撑，若破位可能加速下行；机构认为被低估是底部信号<br>
+• <b>A股：</b>高位整理，半导体个股仍有结构性机会
+</span>
+<span class="en" style="display:none">
+• <b>Biggest risk:</b> Actual Hormuz blockade → Oil to $120+, global pressure<br>
+• <b>Positive:</b> Israel-Lebanon ceasefire extended 3 weeks, futures stabilized<br>
+• <b>Semi momentum:</b> Intel after-hours surge supports tomorrow, SOXX streak may continue<br>
+• <b>Software:</b> AI displacement narrative hard to reverse short-term, likely more pressure<br>
+• <b>HK Tech:</b> 4900 key support; break below = acceleration. Undervaluation = bottom signal<br>
+• <b>A-Shares:</b> High consolidation, structural opportunities in semi names
+</span></p>
+</div>
+
+<!-- K-line Charts -->
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">SOXX — Semiconductor ETF</div><div id="tv-soxx"></div></div>
+<div class="kline-item"><div class="kline-label">TSLA — Tesla</div><div id="tv-tsla"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#333">Data sources: CNBC, WSJ, Yahoo Finance, Investopedia, 东方财富, 新浪财经, 21财经</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? 'rgba(255,255,255,0.12)' : 'transparent';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#6b6b80';
+  document.getElementById('btn-en').style.background = lang === 'en' ? 'rgba(255,255,255,0.12)' : 'transparent';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#6b6b80';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-soxx', sym:'NASDAQ:SOXX'},
+  {id:'tv-tsla', sym:'NASDAQ:TSLA'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(10,10,15,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

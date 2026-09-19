@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-08-04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+  --red: #f87171;
+  --green: #4ade80;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; padding: 20px 16px;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+.wrap { max-width:900px; margin:0 auto; }
+h1 { text-align:center; color:var(--accent); font-size:1.8em; margin-bottom:4px; }
+.subtitle { text-align:center; color:var(--text-dim); font-size:0.9em; margin-bottom:28px; }
+h2 { color:var(--accent); font-size:1.3em; margin:32px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+h3 { color:var(--accent); margin:16px 0 10px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
+.card h4 { color:#fff; font-size:1.05em; margin-bottom:8px; }
+.card p { margin-bottom:6px; font-size:0.92em; }
+.card .src { color:var(--text-dim); font-size:0.8em; margin-top:6px; }
+.stock-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:16px 0; }
+.stock-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 10px; text-align:center; }
+.stock-ticker { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); font-size:0.95em; }
+.stock-price { color:#fff; font-size:1.1em; font-weight:600; margin:6px 0 4px; }
+.stock-change { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:0.82em; padding:3px 10px; border-radius:5px; display:inline-block; }
+.up { background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.3); }
+.down { background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); }
+.poster-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.poster-card { border-radius:12px; padding:20px 24px; color:#fff; }
+.poster-icon { font-size:2em; margin-bottom:8px; }
+.poster-data { margin-top:10px; font-size:0.9em; opacity:0.9; line-height:1.6; }
+.footer { text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-dim); font-size:0.85em; }
+.footer a { color:var(--accent); text-decoration:none; }
+button#btn-zh,button#btn-en { padding:4px 12px; border-radius:4px; cursor:pointer; font-size:0.85em; border:1px solid #555; }
+button#btn-zh { background:#333; color:#fff; }
+button#btn-en { background:#222; color:#aaa; }
+.highlight { background:var(--accent-glow); border-left:3px solid var(--accent); padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; }
+@media(max-width:768px){ .stock-grid{grid-template-columns:repeat(2,1fr)} .poster-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#10b981">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股三大指数齐创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">All 3 Major Indices Hit ATH</div>
+<div class="zh poster-data">• 道指首次突破54,000 🎉<br>• 标普500 7,736 (+1.79%)<br>• 纳指 26,584 (+2.59%)</div>
+<div class="en poster-data" style="display:none">• Dow first above 54,000 🎉<br>• S&P 500 7,736 (+1.79%)<br>• Nasdaq 26,584 (+2.59%)</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体暴涨 SOX +6.55%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SOX Surges +6.55%</div>
+<div class="zh poster-data">• 费半 12,179 (+748.91)<br>• Nvidia +2.56% 盘后续涨<br>• Blackwell Ultra + Rubin双驱动</div>
+<div class="en poster-data" style="display:none">• SOX 12,179 (+748.91)<br>• NVDA +2.56%, AH higher<br>• Blackwell Ultra + Rubin dual driver</div>
+</div>
+<div class="poster-card" style="background:#2563eb">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SpaceX首份财报超预期</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SpaceX Beats on First Earnings</div>
+<div class="zh poster-data">• Q2营收$78亿（预期$68亿）<br>• ⚠️ 8/6锁定期到期 9.11亿股解禁<br>• 盘后跌约4%</div>
+<div class="en poster-data" style="display:none">• Q2 revenue $7.8B (est. $6.8B)<br>• ⚠️ Lock-up expiry 8/6, 911M shares<br>• AH down ~4%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#ef4444,#dc2626)">
+<div class="poster-icon">🕊️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">伊朗协议在即</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Iran Deal Imminent</div>
+<div class="zh poster-data">• 财长Bessent："今天或明天"达成协议<br>• 霍尔木兹海峡有望重开<br>• 油价回落，避险情绪降温</div>
+<div class="en poster-data" style="display:none">• Sec. Bessent: "Today or tomorrow"<br>• Strait of Hormuz may reopen<br>• Oil falls, risk-off eases</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-08-04 · <span class="zh">周二</span><span class="en" style="display:none">Tuesday</span> · Sky Portal · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘 — 三大指数齐创新高</span><span class="en" style="display:none">US Market Close — All-Time Highs</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">道指 DJI</div>
+<div class="stock-price" style="color:var(--green)">54,085.88</div>
+<div class="stock-change up">+1.71% 🎉</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">标普500</div>
+<div class="stock-price">7,736.52</div>
+<div class="stock-change up">+1.79%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">纳斯达克</div>
+<div class="stock-price">26,584.99</div>
+<div class="stock-change up">+2.59%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">纳斯达克100</div>
+<div class="stock-price">29,733.16</div>
+<div class="stock-change up">+3.32%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX</div>
+<div class="stock-price">12,179.26</div>
+<div class="stock-change up">+6.55% 🔥</div>
+</div>
+</div>
+
+<div class="highlight">
+<span class="zh">💡 道指首次站上54,000点，标普500和纳指同步创新高。半导体板块单日暴涨6.55%，为近一年最大单日涨幅之一。AI财报季乐观情绪+地缘风险缓解双重驱动。</span>
+<span class="en" style="display:none">💡 Dow breaks above 54,000 for the first time, with S&P 500 and Nasdaq also setting fresh records. Semiconductors surged 6.55% in one of the best days in a year, driven by AI earnings optimism and geopolitical de-escalation.</span>
+</div>
+
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Market Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 伊朗谈判突破信号 — 财长称"今天或明天"</span><span class="en" style="display:none">1. Iran Deal Signals — "Today or Tomorrow"</span></h4>
+<p><span class="zh">美国财长Bessent在CNBC表示，可能"今天或明天"与伊朗达成霍尔木兹海峡重开协议。他强调协议将确保"航行自由"而非收取过路费。避险情绪大幅降温，油价持续回落，为全市场注入乐观情绪。</span><span class="en" style="display:none">Treasury Secretary Bessent told CNBC a deal to reopen the Strait of Hormuz could come "today or tomorrow." He emphasized the deal would ensure "freedom of navigation" rather than toll charges. Risk-off sentiment eased sharply, oil fell, boosting market-wide optimism.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: CNBC / Arab News</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. SpaceX首份财报 — 营收$78亿超预期</span><span class="en" style="display:none">2. SpaceX First Earnings — $7.8B Revenue Beat</span></h4>
+<p><span class="zh">SpaceX公布上市以来首份财报：Q2营收$78亿，远超华尔街预期的$68亿。盘中一度涨6%，但盘后下跌约4%，因投资者担忧8月6日锁定期到期（9.11亿股解禁，相当于IPO流通量的143%）。SpaceX目前市值约$1.7万亿。</span><span class="en" style="display:none">SpaceX reported its first earnings since IPO: Q2 revenue $7.8B, beating the Street estimate of $6.8B. Shares rose ~6% intraday but fell ~4% AH as investors brace for the Aug 6 lock-up expiry (911M shares unlocking, 143% of IPO float). Current market cap ~$1.7T.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: WSJ / CNBC / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. AI财报季全面乐观 — Blackwell Ultra量产+Rubin路线图</span><span class="en" style="display:none">3. AI Earnings Season Optimism — Blackwell Ultra + Rubin</span></h4>
+<p><span class="zh">Nvidia Blackwell Ultra加速量产，新一代Rubin芯片路线图提振信心。AI基础设施投资周期持续加速，超大规模数据中心运营商采购强劲。半导体板块全线暴涨，SOX指数+6.55%创近期最大单日涨幅。</span><span class="en" style="display:none">Nvidia's Blackwell Ultra production ramps up, and the next-gen Rubin roadmap boosts confidence. AI infrastructure investment cycle continues to accelerate with strong hyperscaler procurement. Semiconductors surged across the board, SOX +6.55% — one of the best days in recent memory.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: Reuters / MarketWatch</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体 & AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">NVDA</div>
+<div class="stock-price">$211.94</div>
+<div class="stock-change up">+2.56%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">NVDA AH</div>
+<div class="stock-price">$216.73</div>
+<div class="stock-change up">+2.26%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX</div>
+<div class="stock-price">12,179.26</div>
+<div class="stock-change up">+6.55%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">NASDAQ 100</div>
+<div class="stock-price">29,733.16</div>
+<div class="stock-change up">+3.32%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SPCX</div>
+<div class="stock-price"><span class="zh">盘后跌</span><span class="en" style="display:none">AH down</span></div>
+<div class="stock-change down">~-4%</div>
+</div>
+</div>
+
+<div class="card">
+<h4><span class="zh">英伟达领涨 · 盘后续涨</span><span class="en" style="display:none">Nvidia Leads · After-Hours Rally Continues</span></h4>
+<p><span class="zh">英伟达收盘$211.94（+2.56%），盘后继续上涨至$216.73（+2.26%）。Blackwell Ultra放量出货+Rubin芯片路线图持续提振投资者信心。费城半导体指数单日暴涨6.55%，为近一年最大涨幅之一。</span><span class="en" style="display:none">NVDA closed at $211.94 (+2.56%), extended gains to $216.73 (+2.26%) after hours. Blackwell Ultra production ramp and Rubin roadmap continue to boost investor confidence. SOX surged 6.55% — one of the best single-day gains in a year.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: Yahoo Finance / MarketWatch</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 🇭🇰 港股</span><span class="en" style="display:none">China A-Shares & HK</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">上证综指</div>
+<div class="stock-price">3,822.28</div>
+<div class="stock-change up">+0.33%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">深证成指</div>
+<div class="stock-price">13,885.71</div>
+<div class="stock-change up">+3.25%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">恒生指数</div>
+<div class="stock-price">25,852.92</div>
+<div class="stock-change down">-0.60%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">北证50</div>
+<div class="stock-price">1,093.49</div>
+<div class="stock-change up">+1.62%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">创业板</div>
+<div class="stock-price"><span class="zh">走高</span><span class="en" style="display:none">Higher</span></div>
+<div class="stock-change up"><span class="zh">+3%+</span><span class="en" style="display:none">+3%+</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股企稳反弹，港股小幅走低</span><span class="en" style="display:none">A-Shares Stabilize, HK Slightly Lower</span></h4>
+<p><span class="zh">上证指数+0.33%报3,822.28，深成指+3.25%报13,885.71，创业板大幅走高。恒生指数-0.60%报25,852.92，受美股盘后SpaceX下跌拖累。A股近期从高位回调约5%后，当前位置有企稳迹象。</span><span class="en" style="display:none">SSE Composite +0.33% at 3,822.28, Shenzhen Component +3.25% at 13,885.71, ChiNext sharply higher. Hang Seng -0.60% at 25,852.92, dragged down by SpaceX AH decline. A-shares show signs of stabilization after ~5% pullback from highs.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>: 搜狐证券 / 东方财富 / Trading Economics</p>
+</div>
+
+<h2>🔮 <span class="zh">走向预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="highlight">
+<p><span class="zh"><strong>短期偏多</strong>：地缘风险缓解+AI财报窗口，多头氛围浓厚。三大指数齐创新高，技术面强势。半导体板块全面爆发有望延续。<br><br><strong>⚠️ 关键风险</strong>：SpaceX 8/6锁定期到期（143% IPO流通量解禁），可能引发科技股短期波动。伊朗谈判仍存不确定性，Trump的"最后机会"表态暗示协议窗口收窄。<br><br><strong>关注重点</strong>：油价走势（霍尔木兹海峡协议进展）、SpaceX解禁抛压、美联储利率政策信号、A股能否在当前位置形成有效支撑。</span></p>
+<p class="en" style="display:none"><strong>Short-term bullish</strong>: Geopolitical de-escalation + AI earnings window, strong bullish sentiment. All three major indices at ATHs, technical breakout. Semiconductor surge likely to continue.<br><br><strong>⚠️ Key risks</strong>: SpaceX lock-up expiry Aug 6 (143% of float unlocking) could trigger tech volatility. Iran talks still uncertain — Trump's "last chance" remark narrows the window.<br><br><strong>Watch</strong>: Oil prices (Hormuz deal progress), SpaceX unlock selling pressure, Fed rate signals, A-share support at current levels.</span></p>
+</div>
+
+<div class="footer">
+<span class="zh">由 Sky ☁️ 自动生成 · 数据来源：CNBC, Yahoo Finance, Reuters, WSJ · </span><span class="en" style="display:none">Auto-generated by Sky ☁️ · Sources: CNBC, Yahoo Finance, Reuters, WSJ · </span>
+<a href="index.html"><span class="zh">返回行情首页</span><span class="en" style="display:none">Back to Market Index</span></a> · <a href="../index.html"><span class="zh">Sky Portal</span><span class="en" style="display:none">Sky Portal</span></a>
+</div>
+
+</div>
+<script>
+function switchLang(lang){
+  document.body.className = lang==='zh' ? 'lang-zh' : 'lang-en';
+  document.getElementById('btn-zh').style.background = lang==='zh' ? '#333' : '#222';
+  document.getElementById('btn-zh').style.color = lang==='zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang==='en' ? '#333' : '#222';
+  document.getElementById('btn-en').style.color = lang==='en' ? '#fff' : '#aaa';
+  localStorage.setItem('lang', lang);
+}
+(function(){ var l=localStorage.getItem('lang'); if(l==='en') switchLang('en'); })();
+</script>
+</body>
+</html>

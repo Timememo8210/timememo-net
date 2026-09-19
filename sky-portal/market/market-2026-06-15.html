@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-15 — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card-bg: #111118;
+  --border: rgba(255,255,255,0.08);
+  --accent: #4ade80;
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --up: #4ade80;
+  --down: #f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,'Helvetica Neue',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:var(--accent);font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:var(--text-dim);font-size:0.9em;margin-bottom:28px}
+h2{color:var(--accent);font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+h3{color:var(--accent);margin:16px 0 10px}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:var(--text-dim);font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:var(--up);border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:var(--down);border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);color:var(--text-dim);font-size:0.85em}
+.footer a{color:var(--accent);text-decoration:none}
+.lang-toggle{text-align:right;margin-bottom:8px}
+.lang-toggle button{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid rgba(255,255,255,0.15);background:var(--card-bg);color:var(--text);font-family:inherit}
+.lang-toggle button.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.news-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.news-item:last-child{border-bottom:none}
+.tag{font-size:0.72em;padding:2px 8px;border-radius:4px;font-weight:600}
+.tag-event{background:rgba(96,165,250,0.15);color:#60a5fa}
+.tag-risk{background:rgba(239,68,68,0.15);color:var(--down)}
+.tag-opportunity{background:rgba(74,222,128,0.15);color:var(--up)}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-toggle">
+<button class="active" onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- ── Poster Grid ── -->
+<div class="poster-grid" style="margin-bottom:28px">
+<div class="poster-card" style="background:linear-gradient(135deg,#1b5e20 0%,#2e7d32 100%)">
+<div class="poster-icon">🕊️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊和平协议达成</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Peace Deal Reached</div>
+<div class="zh poster-data">WTI原油暴跌至~$80/桶<br>风险偏好全面爆发<br>道指创历史新高</div>
+<div class="en poster-data" style="display:none">WTI crude plummets to ~$80/bbl<br>Massive risk-on rally<br>Dow hits all-time high</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#4a148c 0%,#6a1b9a 100%)">
+<div class="poster-icon">🧠</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">费半SOX创历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SOX Semiconductor Index ATH</div>
+<div class="zh poster-data">费半暴涨+5.45% · 报14,100<br>纳指+3.07% · 存储芯片领涨<br>AI需求持续推动DRAM涨价</div>
+<div class="en poster-data" style="display:none">SOX surges +5.45% to 14,100<br>Nasdaq +3.07% · Memory chips lead<br>AI demand drives DRAM pricing</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1a237e 0%,#0d47a1 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SpaceX上市次日续涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SpaceX Day 2 Continues Higher</div>
+<div class="zh poster-data">IPO首日收$161(+19%)<br>次日继续飙升 · 估值>$2万亿<br>马斯克成首位万亿富翁</div>
+<div class="en poster-data" style="display:none">IPO Day 1 close $161 (+19%)<br>Day 2 surges · Valuation >$2T<br>Musk becomes first trillionaire</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#bf360c 0%,#e65100 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股创业板暴涨5.3%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China ChiNext Surges 5.3%</div>
+<div class="zh poster-data">上证+1.61% · 深成指+3.79%<br>创业板+5.30% 🔥 近11年新高<br>成长股重估序幕开启</div>
+<div class="en poster-data" style="display:none">SSE +1.61% · SZSE +3.79%<br>ChiNext +5.30% 🔥 11-yr high<br>Growth stock re-rating begins</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-15 Monday · <a href="index.html" style="color:var(--accent);text-decoration:none"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a></p>
+
+<!-- ── US Markets ── -->
+<h2>🇺🇸 <span class="zh">美股收盘（6/15 周一）</span><span class="en" style="display:none">US Markets Close (Mon 6/15)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">51,671</div><div class="stock-change up">+0.92%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,554</div><div class="stock-change up">+1.65%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,684</div><div class="stock-change up">+3.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">14,100</div><div class="stock-change up">+5.45%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPCX</div><div class="stock-price">$161+</div><div class="stock-change up">Day 2</div></div>
+</div>
+
+<div style="font-size:0.85em;color:var(--text-dim);margin:-8px 0 16px;padding-left:4px">
+<span class="zh">道琼斯创历史收盘新高 · 纳指+3.07%为近期最大单日涨幅 · 费半SOX突破14,000创历史新高</span>
+<span class="en" style="display:none">Dow record close · Nasdaq +3.07% best day recently · SOX breaks 14,000 all-time high</span>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">GEO</span> 🕊️ <span class="zh">美伊和平协议框架达成 — 油价暴跌引爆风险偏好</span><span class="en" style="display:none">🕊️ US-Iran Peace Framework — Oil Crash Ignites Risk-On</span></h4>
+<p><span class="zh">美国与伊朗达成和平协议框架，结束了持续数月的中东军事冲突。协议核心内容包括：美国解除对伊朗石油制裁、伊朗重新开放霍尔木兹海峡、允许油轮恢复通行。协议预计周五正式签署。受此影响，WTI原油暴跌至约$80/桶，创三个月新低。油价大幅下行直接缓解了全球通胀压力预期，风险偏好全面爆发——资金从能源和防御性板块流出，大举涌入科技股和成长股。道琼斯指数创历史收盘新高。</span><span class="en" style="display:none">The US and Iran reached a peace framework agreement, ending months of Middle East military conflict. Core terms: US lifts oil sanctions, Iran reopens the Strait of Hormuz to oil tanker traffic. Formal signing expected Friday. WTI crude plunged to ~$80/bbl, a three-month low. The oil crash directly eased global inflation expectations, triggering a massive risk-on rally — capital flowed out of energy and defensive sectors into tech and growth stocks. The Dow closed at an all-time high.</span></p>
+<p class="src">来源：CNBC / Investopedia / Axios / Yahoo Finance / Motley Fool</p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">IPO</span> 🚀 <span class="zh">SpaceX上市次日继续飙升 — 马斯克成为全球首位万亿富翁</span><span class="en" style="display:none">🚀 SpaceX Day 2 Surge — Musk Becomes First Trillionaire</span></h4>
+<p><span class="zh">SpaceX（代码SPCX）在6月12日以$135发行价完成$750亿史上最大IPO后，首日收报$161（+19.3%），市值达$2.1万亿。今日（上市第二个交易日）股价继续飙升，估值突破$2万亿。马斯克由此成为人类历史上第一位身家超过$1万亿的个体。SpaceX的强势表现为科技板块注入了额外的乐观情绪，但庞大的市值也引发了关于"抽血效应"的讨论——部分投资者可能卖出其他持仓来调整配置。SpaceX期权已开始交易，预计短期内波动性较大。</span><span class="en" style="display:none">SpaceX (SPCX) completed its record $75B IPO at $135/share on June 12, closing Day 1 at $161 (+19.3%), with a $2.1T market cap. On its second trading day, the stock continued to surge, with valuation exceeding $2T. Musk became the first person in history worth over $1 trillion. SpaceX's strong performance added to tech sector optimism, though its massive market cap raised "liquidity drain" concerns. SpaceX options have begun trading; high volatility expected near-term.</span></p>
+<p class="src">来源：NYT / CNBC / Reuters / Motley Fool</p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-opportunity">SEMI</span> 🧠 <span class="zh">半导体板块暴涨 — 费半SOX创历史新高</span><span class="en" style="display:none">🧠 Semiconductors Surge — SOX Hits All-Time High</span></h4>
+<p><span class="zh">费城半导体指数（SOX）暴涨5.45%，收报14,099.62点，创历史新高。这是SOX继上周"过山车"行情（周跌约10%后反弹）后的强势延续。存储芯片板块表现尤为突出：美光（Micron）和西部数据（Western Digital）大涨，受AI数据中心对DRAM和存储需求持续增长的推动。分析人士指出，AI基础设施建设正在加剧对存储芯片和存储设备的供应紧张，推动相关公司估值上行。Nvidia、AMD、ARM等设计公司同样涨幅显著。雅虎财经数据显示SOX收盘涨728.15点至14,099.62。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) surged 5.45% to close at 14,099.62 — an all-time high. This continues the strong rebound from last week's "rollercoaster" (down ~10% then bouncing). Memory chips led gains: Micron and Western Digital jumped on AI-driven DRAM demand. Analysts note AI infrastructure buildout is intensifying memory chip supply tightness, driving valuations higher. Nvidia, AMD, ARM also gained significantly. Yahoo Finance data shows SOX closed up 728.15 points at 14,099.62.</span></p>
+<p class="src">来源：Yahoo Finance / Motley Fool / CNBC / TradingKey</p>
+</div>
+
+<!-- ── China Markets ── -->
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">A-Shares & HK</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SSE</div><div class="stock-price">4,096</div><div class="stock-change up">+1.61%</div></div>
+<div class="stock-item"><div class="stock-ticker">SZSE</div><div class="stock-price">15,531</div><div class="stock-change up">+3.79%</div></div>
+<div class="stock-item"><div class="stock-ticker">ChiNext</div><div class="stock-price">—</div><div class="stock-change up">+5.30%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24,843</div><div class="stock-change up">+0.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">HS Tech</div><div class="stock-price">4,766</div><div class="stock-change up">+1.28%</div></div>
+</div>
+
+<div style="font-size:0.85em;color:var(--text-dim);margin:-8px 0 16px;padding-left:4px">
+<span class="zh">A股为6/15（周一）收盘数据 · 港股为6/12（上周五）收盘数据（6/16今日开盘）</span>
+<span class="en" style="display:none">A-shares are 6/15 (Mon) close · HK is 6/12 (Fri) close (opens today 6/16)</span>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">A股强势反弹 — 创业板暴涨5.3%创近11年新高</span><span class="en" style="display:none">📊 A-Shares Rebound — ChiNext Surges 5.3% to Near 11-Year High</span></h4>
+<p><span class="zh">周一A股强势反弹，呈现普涨格局。截至收盘：上证综指涨1.61%报4,096.47点；深证成指涨3.79%报15,531.11点；创业板指大涨5.30%，创近11年来新高。市场成交活跃，成长股重估序幕或已开启。受美伊和平协议推动，全球风险偏好回升，北向资金加速流入。人工智能、半导体、新能源等主线板块集体爆发。建筑材料等周期板块也表现活跃。同花顺数据显示，市场呈现明显的普涨特征，赚钱效应显著回暖。</span><span class="en" style="display:none">A-shares rebounded strongly on Monday with broad-based gains. SSE Composite rose 1.61% to 4,096.47; SZSE Component surged 3.79% to 15,531.11; ChiNext jumped 5.30% — an 11-year high. Active trading volume with growth stock re-rating potentially underway. The US-Iran peace deal boosted global risk appetite, accelerating northbound capital inflows. AI, semiconductors, and new energy sectors all surged. Building materials also gained. Tonghuashun data shows clear broad-based rally with significantly improved profit effects.</span></p>
+<p class="src">来源：东方财富 / 同花顺 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4>🇭🇰 <span class="zh">港股上周五收涨 — 恒生科技+1.28%</span><span class="en" style="display:none">🇭🇰 HK Friday Close — Hang Seng Tech +1.28%</span></h4>
+<p><span class="zh">港股上周五（6/12）收盘：恒生指数报24,842.67点（+0.50%），恒生科技指数报4,765.58点（+1.28%）。本周一（6/16）港股开盘预计将受美伊和平协议利好提振，可能出现跳空高开。恒生科技指数此前已从10月高点回落超过24%，估值处于相对低位。华泰报告指出，AI大模型龙头首次纳入恒生科技指数，有望带来"AI化"重估机遇。G7峰会（6/15-17法国埃维昂）和美联储FOMC会议（6/17-18）将是本周港股的关键事件。</span><span class="en" style="display:none">HK Friday (6/12) close: HSI at 24,842.67 (+0.50%), HSTECH at 4,765.58 (+1.28%). Monday (6/16) opening likely to gap up on US-Iran peace deal news. Hang Seng Tech has pulled back 24%+ from October highs, with relatively low valuations. Huatai notes AI model leaders newly added to HSTECH may trigger "AI re-rating." G7 Summit (Jun 15-17 Évian) and Fed FOMC (Jun 17-18) are key events this week for HK.</span></p>
+<p class="src">来源：HSI.com.hk / AAStocks / Investing.com</p>
+</div>
+
+<!-- ── Key Drivers ── -->
+<h2>🔑 <span class="zh">三大核心驱动</span><span class="en" style="display:none">Top 3 Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">美伊和平协议 — 2026年最大地缘政治利好</span><span class="en" style="display:none">US-Iran Peace Deal — Biggest Geopolitical Positive of 2026</span></h4>
+<p><span class="zh">美国与伊朗达成和平协议框架，结束了2026年初爆发的伊朗战争（包括3月霍尔木兹海峡封锁事件）。协议细节：美国解除石油制裁、伊朗重开霍尔木兹海峡。WTI原油从6月初的$92附近暴跌至约$80/桶。这一进展的意义深远：①油价下行→缓解全球通胀压力→降低美联储加息压力；②中东供应链恢复→全球贸易顺畅；③地缘风险溢价下降→风险资产估值提升。协议预计周五正式签署。</span><span class="en" style="display:none">The US-Iran peace framework ends the 2026 Iran war (including the March Strait of Hormuz closure). Terms: US lifts oil sanctions, Iran reopens Hormuz. WTI crashed from ~$92 in early June to ~$80/bbl. Far-reaching implications: ①lower oil → less global inflation → reduced Fed pressure; ②Middle East supply chain restored; ③lower geopolitical risk premium → higher risk asset valuations. Formal signing expected Friday.</span></p>
+<p class="src">来源：Axios / The Guardian / BBC / Al Jazeera</p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">AI存储芯片周期 — DRAM涨价推动半导体新高</span><span class="en" style="display:none">AI Memory Chip Cycle — DRAM Pricing Drives Semis Higher</span></h4>
+<p><span class="zh">AI基础设施建设正在加剧对存储芯片的需求紧张。CNN报道指出："AI基础设施的扩张正在加剧对存储芯片和存储设备的需求，并推高了提供这些产品的公司的价值。" Investing.com分析认为，标普500两个月内16%的涨幅中，存储芯片短缺是核心驱动力之一。美光等存储芯片公司受益于DRAM价格上涨预期，持续领涨半导体板块。费半SOX指数今日暴涨5.45%至14,100点的历史新高，印证了市场对AI芯片长周期的信心。</span><span class="en" style="display:none">AI infrastructure buildout is intensifying memory chip demand. CNN reports: "The AI infrastructure buildout is intensifying demand for memory chips and storage, driving up the value of companies providing them." Investing.com analysis suggests memory chip shortage is a core driver of the S&P 500's 16% two-month surge. Micron and other memory companies benefit from rising DRAM pricing expectations. The SOX index's 5.45% surge to a 14,100 ATH confirms market confidence in the AI chip cycle.</span></p>
+<p class="src">来源：CNN / Investing.com / Motley Fool / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">SpaceX万亿市值效应 — 科技生态重塑</span><span class="en" style="display:none">SpaceX Trillion-Dollar Effect — Tech Ecosystem Reshaped</span></h4>
+<p><span class="zh">SpaceX上市后的万亿级美元市值正在重塑科技股生态。马斯克成为全球首位万亿富翁，SPCX跃居美股第六大公司。SpaceX的太空互联网（Starlink）、卫星通信和太空运输业务代表了全新的科技赛道。虽然短期内庞大的市值可能对其他科技股形成"抽血"，但中长期来看，SpaceX的加入拓宽了科技股的整体边界，吸引了更多资金流入科技板块。SpaceX期权已开始交易，高波动性预计持续。</span><span class="en" style="display:none">SpaceX's trillion-dollar+ market cap is reshaping the tech stock ecosystem. Musk became the first trillionaire, SPCX is now the 6th largest US company. SpaceX's satellite internet (Starlink), satellite communications, and space transport businesses represent an entirely new tech sector. While the massive valuation may short-term "drain" other tech stocks, long-term it expands the tech sector's boundaries and attracts more capital. SpaceX options have begun trading; high volatility expected to continue.</span></p>
+<p class="src">来源：NYT / CNBC / Reuters</p>
+</div>
+
+<!-- ── Outlook ── -->
+<h2>🔮 <span class="zh">明日/近期预判</span><span class="en" style="display:none">Near-Term Outlook</span></h2>
+
+<div class="card">
+<h4><span class="tag tag-risk">RISK</span> ⚠️ <span class="zh">美联储FOMC会议（6/17-18）— 本周最大风险事件</span><span class="en" style="display:none">⚠️ Fed FOMC (Jun 17-18) — Biggest Risk Event This Week</span></h4>
+<p><span class="zh">美联储本周三至周四（6/17-18）召开FOMC会议，这将是沃什就任主席后的关键会议。30年期国债收益率上月触及19年高位，市场高度关注Fed对利率路径的表态。Motley Fool警告称："高涨的债券收益率历史上往往先于加息周期和股市大幅回调。"尽管美伊和平协议降低了通胀预期，但Fed可能仍然偏鹰派。如果沃什发出鹰派信号，近期的risk-on反弹可能面临回吐压力。</span><span class="en" style="display:none">The Fed's FOMC meeting (Wed-Thu Jun 17-18) will be critical under Chair Warsh. The 30-year Treasury yield hit a 19-year high last month. Markets are highly focused on the Fed's rate path guidance. Motley Fool warns: "Rising bond yields have historically preceded interest rate increases and steep stock market losses." Although the US-Iran deal eases inflation expectations, the Fed may still lean hawkish. If Warsh signals hawkishness, the recent risk-on rally could face a pullback.</span></p>
+<p class="src">来源：Motley Fool / WSJ</p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-opportunity">OPPORTUNITY</span> 📈 <span class="zh">半导体板块 — AI存储周期远未结束</span><span class="en" style="display:none">📈 Semiconductors — AI Memory Cycle Far From Over</span></h4>
+<p><span class="zh">费半SOX今日暴涨5.45%创历史新高，但分析人士认为AI存储芯片周期仍处于早期阶段。CNN指出AI基础设施扩张正加剧存储芯片短缺；Investing.com分析称标普500两个月16%的涨幅中存储短缺是核心驱动力。CNBC数据显示，分析师预计2027年半导体股票每股收益将增长12%、半导体设备股增长11%。美光等DRAM厂商在涨价周期中盈利弹性巨大。短期内SOX在14,000高位可能面临波动，但中期趋势仍然偏多。关注本周FOMC对利率预期的指引。</span><span class="en" style="display:none">SOX surged 5.45% to an ATH today, but analysts believe the AI memory cycle is still in early stages. CNN notes AI infrastructure expansion is intensifying memory shortages; Investing.com calls it a core driver of the S&P 500's 16% two-month surge. CNBC data shows analysts expect 12% EPS growth for semiconductor stocks and 11% for equipment stocks in 2027. Micron and other DRAM makers have massive earnings leverage in a pricing up-cycle. Short-term volatility likely around 14,000, but medium-term trend remains bullish. Watch FOMC guidance this week.</span></p>
+<p class="src">来源：CNBC / CNN / Investing.com</p>
+</div>
+
+<div class="card">
+<h4>🇨🇳 <span class="zh">A股 — 创业板5.3%大涨后的获利回吐风险</span><span class="en" style="display:none">🇨🇳 A-Shares — Profit-Taking Risk After ChiNext's 5.3% Surge</span></h4>
+<p><span class="zh">创业板今日暴涨5.3%创近11年新高，短期情绪极为亢奋。但需注意：①大涨后可能出现获利回吐；②本周美联储FOMC可能影响全球风险偏好；③A股6/19-21因端午节休市，节前资金可能趋于谨慎。不过中期来看，成长股重估的序幕可能刚刚开启——AI、半导体、新能源等主线在美伊和平推动全球risk-on的背景下，仍有上行空间。上证指数站稳4000点关口，若能持续放量，有望挑战前期高点。</span><span class="en" style="display:none">ChiNext surged 5.3% to an 11-year high with extremely bullish sentiment. Caution advised: ①profit-taking likely after such gains; ②Fed FOMC may impact global risk appetite; ③A-shares closed Jun 19-21 for Dragon Boat Festival, pre-holiday capital may turn cautious. Medium-term, however, growth stock re-rating may have just begun — AI, semis, and new energy sectors have upside potential amid the global risk-on environment. SSE holding above 4,000; if volume sustains, could test prior highs.</span></p>
+<p class="src">来源：东方财富 / 同花顺</p>
+</div>
+
+<!-- ── Footer ── -->
+<div class="footer">
+<p>📊 <span class="zh">Sky Portal · 每日行情</span><span class="en" style="display:none">Sky Portal · Daily Market</span></p>
+<p>2026-06-15 · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a> · <a href="../index.html"><span class="zh">返回首页</span><span class="en" style="display:none">Home</span></a></p>
+<p style="margin-top:8px;opacity:0.5">Generated by Sky ☁️ · Powered by z.ai MCP + GLM-5.1</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang){
+  document.body.className='lang-'+lang;
+  document.getElementById('btn-zh').classList.toggle('active',lang==='zh');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  localStorage.setItem('market-lang',lang);
+}
+(function(){
+  var saved=localStorage.getItem('market-lang');
+  if(saved){switchLang(saved);}
+})();
+</script>
+</body>
+</html>

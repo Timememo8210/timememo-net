@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-01 | 每日研报 | Daily Research Report</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.6em;margin-bottom:8px;text-align:center}
+.date{text-align:center;color:#888;font-size:0.9em;margin-bottom:24px}
+h2{color:#f0a040;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:20px;margin-bottom:16px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card h3 a{color:#5b9fff;text-decoration:none}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.tag-up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px}
+.tag-down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px}
+.stock-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #2a2a2a}
+.stock-row:last-child{border-bottom:none}
+.stock-left{display:flex;align-items:center;gap:12px}
+.stock-symbol{font-family:'SF Mono',monospace;font-weight:700;color:#fff;font-size:1em;min-width:60px}
+.stock-price{font-family:'SF Mono',monospace;color:#ccc;font-size:0.95em}
+.source{color:#666;font-size:0.8em;margin-top:4px}
+.source a{color:#5b9fff;text-decoration:none}
+.footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:0.85em}
+.footer a{color:#5b9fff;text-decoration:none}
+.sports-card{background:rgba(76,175,80,0.05);border:1px solid rgba(76,175,80,0.3);border-radius:12px;padding:20px;margin-bottom:16px}
+.sports-card h3{color:#4CAF50;font-size:1.05em;margin-bottom:8px}
+.sports-card h3 a{color:#5b9fff;text-decoration:none}
+.section-sports h2{color:#4CAF50}
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh" style="background:#555;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+<button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+<div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 半导体全线反弹：INTC +6%、AMD +7.7%、ASML +5.7%<br>• Anthropic发布Claude Sonnet 5：最强Agent模型</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Semiconductor rebound: INTC +6%, AMD +7.7%, ASML +5.7%<br>• Anthropic launches Claude Sonnet 5: most agentic model yet</div>
+</div>
+<div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Ansu Fati正式转会摩纳哥(€11M)已确认<br>• Salinas解约金今日翻倍至€16M，时间紧迫</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Ansu Fati transfer to Monaco confirmed (€11M)<br>• Salinas release clause doubles to €16M today</div>
+</div>
+<div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 世界杯今日三场32强：英格兰vs刚果(金)、比利时vs塞内加尔、🇺🇸美国vs波黑<br>• NBA自由市场昨天开启：Ja Morant加盟开拓者！</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• WC R32 today: England vs DR Congo, Belgium vs Senegal, USMNT vs Bosnia<br>• NBA free agency opened: Ja Morant to Trail Blazers!</div>
+</div>
+<div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Claude Sonnet 5发布：编程/Agent/推理全面升级<br>• Claude Science发布：AI科研工作台进军生物制药</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Claude Sonnet 5: major upgrade in coding, agents, reasoning<br>• Claude Science: AI workbench for bioscience research</div>
+</div>
+</div>
+</div>
+
+<script>
+function switchLang(lang){
+document.querySelectorAll('.zh').forEach(el=>el.style.display=lang==='zh'?'':'none');
+document.querySelectorAll('.en').forEach(el=>el.style.display=lang==='en'?'':'none');
+document.getElementById('btn-zh').style.background=lang==='zh'?'#555':'#333';
+document.getElementById('btn-zh').style.color=lang==='zh'?'#fff':'#aaa';
+document.getElementById('btn-en').style.background=lang==='en'?'#555':'#222';
+document.getElementById('btn-en').style.color=lang==='en'?'#fff':'#aaa';
+}
+</script>
+
+<h1 class="zh">📡 每日研报 — 2026年7月1日（星期三）</h1>
+<h1 class="en" style="display:none">📡 Daily Research Report — July 1, 2026 (Wednesday)</h1>
+<div class="date zh">生成时间：2026-07-01 06:00 AM PST</div>
+<div class="date en" style="display:none">Generated: 2026-07-01 06:00 AM PST</div>
+
+<div class="zh" style="background:#1a1a1a;border-left:4px solid #f0a040;padding:16px 20px;border-radius:8px;margin-bottom:24px;font-size:0.92em;color:#ddd">
+⚠️ <b>今日看点</b>：半导体板块上周五暴跌后昨日全线反弹——INTC +6%、AMD +7.7%、ASML +5.7%，SMH +3.8%。Anthropic昨日连发重磅：Claude Sonnet 5（最强Agent模型）+ Claude Science（生物制药AI工作台）。世界杯今日三场32强淘汰赛：英格兰vs刚果(金)、比利时vs塞内加尔、🇺🇸美国vs波黑（旧金山湾区体育场晚场）。NBA自由市场昨天开启：Ja Morant加盟开拓者！LeBron去向仍未定。巴萨转会：Ansu Fati正式转会摩纳哥，Salinas解约金今日翻倍。M365新价格今天正式生效。
+</div>
+<div class="en" style="display:none;background:#1a1a1a;border-left:4px solid #f0a040;padding:16px 20px;border-radius:8px;margin-bottom:24px;font-size:0.92em;color:#ddd">
+⚠️ <b>Today's Highlights</b>: Semiconductor sector rebounded sharply after Friday's selloff — INTC +6%, AMD +7.7%, ASML +5.7%, SMH +3.8%. Anthropic launched two major products: Claude Sonnet 5 (most agentic model) + Claude Science (bioscience AI workbench). WC R32 today: England vs DR Congo, Belgium vs Senegal, USMNT vs Bosnia (SF Bay Area evening). NBA free agency opened: Ja Morant to Trail Blazers! LeBron's destination still undecided. Barca: Ansu Fati transfer to Monaco confirmed, Salinas release clause doubles today. M365 new prices take effect.
+</div>
+
+<!-- 板块1: M365 Copilot -->
+<h2 class="zh">💼 M365 Copilot 专栏</h2>
+<h2 class="en" style="display:none">💼 M365 Copilot</h2>
+
+<div class="card">
+<h3 class="zh">🔥 M365新价格今日生效！Copilot正式并入基础计划</h3>
+<h3 class="en" style="display:none">🔥 New M365 Prices Take Effect Today! Copilot Folded Into Base Plans</h3>
+<p class="zh">2026年7月1日，Microsoft 365全系价格上调正式生效。涨幅因计划而异：Business计划涨9%-33%，Enterprise计划涨5%-13%。核心变化是Copilot AI功能现已深度集成到Word、Excel、PowerPoint和OneNote中，不再作为附加许可。例如Office 365 E3从$23涨至$26（+13%），M365 E3从$36涨至约$39。企业用户如未在6月30日前续约锁定原价，今天起将按新价格计费。<span class="source">[来源：<a href="https://www.microsoft.com/en-us/licensing/news/2026-m365-packaging-pricing-updates">Microsoft Licensing</a>]</span></p>
+<p class="en" style="display:none">On July 1, 2026, Microsoft 365 price increases take effect. Increases range from 9-33% for Business plans and 5-13% for Enterprise plans. The key change: Copilot AI features are now deeply integrated into Word, Excel, PowerPoint, and OneNote, no longer as an add-on license. Office 365 E3 goes from $23 to $26 (+13%), M365 E3 from $36 to ~$39. <span class="source">[Source: <a href="https://www.microsoft.com/en-us/licensing/news/2026-m365-packaging-pricing-updates">Microsoft Licensing</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">🤖 Copilot Cowork已GA + Claude模型可选 + Microsoft Scout</h3>
+<h3 class="en" style="display:none">🤖 Copilot Cowork GA + Claude Model Option + Microsoft Scout</h3>
+<p class="zh">6月M365 Copilot三大更新回顾：(1) Copilot Cowork于6月16日正式GA——不同于回答问题的Chat，Cowork在云端执行多步骤任务，笔记本关机也能继续运行；(2) Copilot Chat现在支持选择Anthropic Claude作为模型，适合需要深度结构化推理的工作；(3) Microsoft Scout在Build 2026发布——首个"始终在线"的Autopilot代理。Federated Connectors也正式GA。<span class="source">[来源：<a href="https://www.aguidetocloud.com/blog/microsoft-365-copilot-june-2026-updates/">AGuideToCloud</a>]</span></p>
+<p class="en" style="display:none">Three major M365 Copilot updates from June: (1) Copilot Cowork reached GA on June 16 — unlike Chat, Cowork executes multi-step tasks in the cloud, running even when your laptop is off; (2) Copilot Chat now supports Anthropic Claude as a model option; (3) Microsoft Scout announced at Build 2026 — the first "always-on" Autopilot agent. <span class="source">[Source: <a href="https://www.aguidetocloud.com/blog/microsoft-365-copilot-june-2026-updates/">AGuideToCloud</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">💡 技巧：用Copilot Cowork自动化邮件处理</h3>
+<h3 class="en" style="display:none">💡 Tip: Automate Email Processing with Copilot Cowork</h3>
+<p class="zh">Cowork与Chat的最大区别是它能"做事"而不只是"回答"。实用场景：在Outlook中让Cowork整理过去一周的所有客户邮件，自动生成摘要和待办事项列表，然后分配到Teams任务看板。关键是Cowork在云端运行，即使关闭电脑也会继续执行，完成后通过通知告知结果。管理员需先在M365 Admin Center开启Cowork并设置消费限额。<span class="source">[来源：<a href="https://www.youtube.com/watch?v=XiAHSHHMY2Q">YouTube</a>]</span></p>
+<p class="en" style="display:none">The biggest difference between Cowork and Chat is that Cowork "does things" rather than just "answering." Practical scenario: Ask Cowork in Outlook to compile all customer emails from the past week, auto-generate summaries and to-do lists, then assign them to Teams task boards. Cowork runs in the cloud and continues even when your computer is off. <span class="source">[Source: <a href="https://www.youtube.com/watch?v=XiAHSHHMY2Q">YouTube</a>]</span></p>
+</div>
+
+<!-- 板块2: 半导体与AI行业 -->
+<h2 class="zh">🔬 半导体与AI行业</h2>
+<h2 class="en" style="display:none">🔬 Semiconductors & AI Industry</h2>
+
+<div class="card">
+<h3 class="zh">🚀 半导体全线反弹！INTC +6%、AMD +7.7%、ASML +5.7%</h3>
+<h3 class="en" style="display:none">🚀 Semiconductor Sector Rebounds! INTC +6%, AMD +7.7%, ASML +5.7%</h3>
+<p class="zh">上周五暴跌后，半导体板块在6月30日全线反弹。Intel飙升6.01%至$139.63，AMD暴涨7.68%至$580.91（创历史新高$584.73），ASML大涨5.65%至$1,989.44（逼近$2,000大关）。TSM上涨4.94%至$477.57（创新高$479.00）。SMH半导体ETF上涨3.78%至$655.89。分析师认为反弹源于AI基础设施支出持续强劲，以及季度末再平衡操作。QCOM是唯一继续下跌的，跌2.08%至$184.79。SMCI因台湾办公室涉嫌NVIDIA芯片走私被搜查而大跌。<span class="source">[来源：<a href="https://invezz.com/news/2026/06/30/intel-stock-surges-7-on-tuesday-heres-why/">Invezz</a>]</span></p>
+<p class="en" style="display:none">After Friday's selloff, semiconductors rebounded across the board on June 30. Intel surged 6.01% to $139.63, AMD jumped 7.68% to $580.91 (all-time high $584.73), ASML climbed 5.65% to $1,989.44. TSMC rose 4.94% to $477.57 (new high $479.00). SMH ETF gained 3.78% to $655.89. QCOM was the lone decliner at -2.08%. SMCI plunged on news of Taiwan office raid related to NVIDIA chip smuggling. <span class="source">[Source: <a href="https://invezz.com/news/2026/06/30/intel-stock-surges-7-on-tuesday-heres-why/">Invezz</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">🏭 NVIDIA Vera Rubin新进展 + SMCI走私调查</h3>
+<h3 class="en" style="display:none">🏭 NVIDIA Vera Rubin Progress + SMCI Smuggling Investigation</h3>
+<p class="zh">NVIDIA下一代Vera Rubin芯片取得新进展，进一步巩固AI芯片领导地位。与此同时，Super Micro Computer (SMCI) 台湾办公室因涉嫌NVIDIA芯片走私被搜查，引发市场关注。这一事件凸显了AI芯片出口管制的复杂性。另外，NVIDIA投资$50亿入股Intel，被视为确保代工产能多元化的战略举措。Apple和NVIDIA都在考虑2028年前将部分生产从TSMC转移至Intel Foundry，因TSMC CoWoS产能持续紧张。<span class="source">[来源：<a href="https://www.bbc.com/news/articles/c4gjd1mnjpyo">BBC</a>、<a href="https://bits-chips.com/article/report-apple-and-nvidia-looking-at-partial-production-shift-to-intel/">Bits&Chips</a>]</span></p>
+<p class="en" style="display:none">NVIDIA's next-gen Vera Rubin chip makes progress, consolidating AI chip leadership. Meanwhile, Super Micro Computer's Taiwan office was raided over alleged NVIDIA chip smuggling, highlighting export control challenges. NVIDIA invested $5B in Intel, seen as a strategic move to secure foundry capacity diversification. Apple and NVIDIA are both considering shifting some production from TSMC to Intel Foundry by 2028. <span class="source">[Source: <a href="https://www.bbc.com/news/articles/c4gjd1mnjpyo">BBC</a>, <a href="https://bits-chips.com/article/report-apple-and-nvidia-looking-at-partial-production-shift-to-intel/">Bits&Chips</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">📅 Intel Q2财报7月23日：代工进展成焦点</h3>
+<h3 class="en" style="display:none">📅 Intel Q2 Earnings July 23: Foundry Progress in Focus</h3>
+<p class="zh">Intel将于7月23日发布Q2 2026财报。当前INTC收于$139.63，YTD回报率278%，1年回报率523%。Cantor Fitzgerald维持Neutral评级但将目标价从$90上调至$150。分析师共识目标价$98.50，远低于当前价格，估值分歧明显。关注重点：(1) Apple/NVIDIA代工合作的实质性进展；(2) 18A工艺节点量产时间表；(3) AI芯片营收增长。Intel还有意年底前推出新型AI数据中心芯片，使用比竞争对手更便宜的内存和冷却技术。<span class="source">[来源：<a href="https://www.ft.com/content/3ca15070-c1c7-4ec2-9598-e36b7de47bc0">Financial Times</a>]</span></p>
+<p class="en" style="display:none">Intel reports Q2 2026 earnings on July 23. INTC closed at $139.63, YTD return 278%, 1-year return 523%. Cantor Fitzgerald maintains Neutral but raised target from $90 to $150. Consensus target is $98.50, well below current price. Key focus areas: (1) Apple/NVIDIA foundry partnership progress; (2) 18A node production timeline; (3) AI chip revenue growth. Intel also plans a new AI data center chip by year-end. <span class="source">[Source: <a href="https://www.ft.com/content/3ca15070-c1c7-4ec2-9598-e36b7de47bc0">Financial Times</a>]</span></p>
+</div>
+
+<!-- 股票价格 -->
+<h2 class="zh">📈 半导体股票（6月30日周二收盘）</h2>
+<h2 class="en" style="display:none">📈 Semiconductor Stocks (June 30 Tuesday Close)</h2>
+
+<div class="card">
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">INTC</span><span class="stock-price zh">$139.63</span><span class="stock-price en" style="display:none">$139.63</span></div>
+<span class="tag-up">+6.01%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">NVDA</span><span class="stock-price">$200.09</span></div>
+<span class="tag-up">+2.63%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">AMD</span><span class="stock-price">$580.91</span></div>
+<span class="tag-up">+7.68%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">TSM</span><span class="stock-price">$477.57</span></div>
+<span class="tag-up">+4.94%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">ASML</span><span class="stock-price">$1,989.44</span></div>
+<span class="tag-up">+5.65%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">MU</span><span class="stock-price">$1,154.29</span></div>
+<span class="tag-up">+0.79%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">AVGO</span><span class="stock-price">$377.75</span></div>
+<span class="tag-up">+1.42%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">QCOM</span><span class="stock-price">$184.79</span></div>
+<span class="tag-down">-2.08%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">TSLA</span><span class="stock-price">$420.60</span></div>
+<span class="tag-up">+2.13%</span>
+</div>
+<div class="stock-row">
+<div class="stock-left"><span class="stock-symbol">SMH</span><span class="stock-price">$655.89</span></div>
+<span class="tag-up">+3.78%</span>
+</div>
+</div>
+
+<p class="zh" style="color:#888;font-size:0.85em;margin-top:8px">⚠️ 上周五暴跌后昨日全线反弹。AMD创历史新高$584.73，ASML逼近$2,000大关。本周关注：反弹能否持续？INTC在7/23财报前走势。QCOM是唯一仍在下跌的，连续两天累计跌超16%。</p>
+<p class="en" style="display:none;color:#888;font-size:0.85em;margin-top:8px">⚠️ Sharp rebound after Friday's crash. AMD hit all-time high $584.73, ASML approaching $2,000. Watch this week: Can the rebound sustain? INTC ahead of July 23 earnings. QCOM is the lone decliner, down 16%+ over two days.</p>
+
+<!-- 板块3: FC Barcelona -->
+<h2 class="zh">⚽ FC Barcelona</h2>
+<h2 class="en" style="display:none">⚽ FC Barcelona</h2>
+
+<div class="card">
+<h3 class="zh">✅ Ansu Fati正式转会摩纳哥（€11M）已完成</h3>
+<h3 class="en" style="display:none">✅ Ansu Fati Transfer to Monaco (€11M) Confirmed</h3>
+<p class="zh">巴萨已确认Ansu Fati永久转会AS摩纳哥，转会费€11M。Fati在摩纳哥赛季打进11球，摩纳哥决定激活买断条款。巴萨还保留了卖断分成条款。这笔交易为巴萨创造了€28.2M的财务空间（含工资节省），对6月30日财务截止日的1:1规则合规至关重要。Fati的巴萨生涯正式画上句号——曾经的梅西接班人，在22岁选择新的开始。<span class="source">[来源：<a href="https://www.barcablaugranes.com/fc-barcelona-transfer-rumors-news/125236/ansu-fati-completes-permanent-transfer-from-barcelona-to-monaco">Barca Blaugranes</a>]</span></p>
+<p class="en" style="display:none">Barcelona confirmed Ansu Fati's permanent transfer to AS Monaco for €11M. Fati scored 11 goals on loan at Monaco, who activated the buy clause. Barcelona retains a sell-on clause. The deal creates €28.2M in financial space (including wage savings), crucial for the June 30 financial deadline compliance. The one-time "Messi successor" officially leaves Barca at 22. <span class="source">[Source: <a href="https://www.barcablaugranes.com/fc-barcelona-transfer-rumors-news/125236/ansu-fati-completes-permanent-transfer-from-barcelona-to-monaco">Barca Blaugranes</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">⏰ Salinas解约金今日翻倍至€16M！转会紧迫</h3>
+<h3 class="en" style="display:none">⏰ Salinas Release Clause Doubles to €16M Today!</h3>
+<p class="zh">Jorge Salinas（Racing Santander后卫）是巴萨的战略签约目标。7月1日前（即昨天），他的转会费为€4-8M；今天（7月1日）起，解约金翻倍至€16M。巴萨昨天未能在截止时间前完成交易，意味着今天如果要签Salinas，需要支付翻倍的费用。Inaki Pena加盟帕纳辛纳科斯（~€3M）也已确认。Cancelo交易仍因Al Hilal要价过高而僵持。ter Stegen可能租借至阿贾克斯。<span class="source">[来源：<a href="https://barcauniversal.com/barcelona-face-race-against-time-to-close-key-transfer-operations-before-30-june/">BarcaUniversal</a>]</span></p>
+<p class="en" style="display:none">Jorge Salinas (Racing Santander defender) is Barcelona's strategic signing target. Before July 1, his transfer fee was €4-8M; starting today, the release clause doubles to €16M. Barca failed to complete the deal before yesterday's deadline, meaning they'll need to pay double today. Inaki Pena's move to Panathinaikos (~€3M) is also confirmed. Cancelo deal remains stuck over Al Hilal's asking price. <span class="source">[Source: <a href="https://barcauniversal.com/barcelona-face-race-against-time-to-close-key-transfer-operations-before-30-june/">BarcaUniversal</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">🌍 巴萨球员世界杯32强赛程</h3>
+<h3 class="en" style="display:none">🌍 Barca Players at World Cup R32</h3>
+<p class="zh">今日（7月2日）世界杯32强：西班牙（Pedri、Lamine Yamal、Cubarsí、Olmo、Ferran、Joan Garcia、Eric、Gavi）vs奥地利（SoFi体育场，洛杉矶）。英格兰（Gordon、Rashford）今日vs刚果民主共和国。葡萄牙（Cancelo）今日vs克罗地亚。法国（Koundé、Raphinha、Frenkie de Jong）昨日3-0大胜瑞典晋级。阿根廷（Messi 6球领跑射手榜）明天7月3日vs佛得角。荷兰已被摩洛哥点球淘汰，Frenkie de Jong的世界杯之旅结束。<span class="source">[来源：<a href="https://www.barcablaugranes.com/">Barca Blaugranes</a>]</span></p>
+<p class="en" style="display:none">Today (July 2) WC R32: Spain (Pedri, Lamine Yamal, Cubarsí, Olmo, Ferran, Gavi) vs Austria (SoFi Stadium, LA). England (Gordon, Rashford) vs DR Congo today. Portugal (Cancelo) vs Croatia today. France (Koundé, Raphinha, Frenkie de Jong) advanced with 3-0 win over Sweden. Argentina (Messi 6 goals, top scorer) plays Cape Verde tomorrow July 3. Netherlands eliminated by Morocco on penalties. <span class="source">[Source: <a href="https://www.barcablaugranes.com/">Barca Blaugranes</a>]</span></p>
+</div>
+
+<!-- 板块4: 体育赛事 -->
+<div class="section-sports">
+<h2 class="zh">🏟️ 体育赛事</h2>
+<h2 class="en" style="display:none">🏟️ Sports Events</h2>
+
+<div class="sports-card">
+<h3 class="zh">⚽ 世界杯6月30日赛果：法国3-0瑞典、挪威2-1科特迪瓦</h3>
+<h3 class="en" style="display:none">⚽ WC June 30 Results: France 3-0 Sweden, Norway 2-1 Ivory Coast</h3>
+<p class="zh">6月30日三场32强淘汰赛结果：(1) 挪威 2-1 科特迪瓦（达拉斯）——Haaland进球，挪威晋级16强；(2) 法国 3-0 瑞典（纽约新泽西体育场）——Mbappé进球追赶Messi的金靴和世界杯历史总进球纪录，法国强势晋级；(3) 墨西哥 2-0 厄瓜多尔（墨西哥城阿兹特克体育场夜场）——墨西哥主场优势明显，强势晋级。加上前一天的三场冷门（巴西绝杀日本、德国和荷兰双双点球被淘汰），世界杯32强阶段冷门迭出。<span class="source">[来源：<a href="https://www.espn.com/soccer/story/_/id/48939282/2026-fifa-world-cup-fixtures-results-match-schedule-group-stage-knockout-rounds-bracket">ESPN</a>]</span></p>
+<p class="en" style="display:none">June 30 R32 results: (1) Norway 2-1 Ivory Coast (Dallas) — Haaland scores, Norway advances; (2) France 3-0 Sweden (NY/NJ Stadium) — Mbappé closes gap on Messi's Golden Boot; (3) Mexico 2-0 Ecuador (Mexico City). Combined with previous day's upsets (Brazil last-minute winner vs Japan, Germany and Netherlands both eliminated on penalties), the R32 has been full of surprises. <span class="source">[Source: <a href="https://www.espn.com/soccer/story/_/id/48939282/2026-fifa-world-cup-fixtures-results-match-schedule-group-stage-knockout-rounds-bracket">ESPN</a>]</span></p>
+</div>
+
+<div class="sports-card">
+<h3 class="zh">📅 今日（7月1日）世界杯32强赛程</h3>
+<h3 class="en" style="display:none">📅 Today's (July 1) WC R32 Schedule</h3>
+<p class="zh">今日三场32强淘汰赛：(1) 12 PM ET 英格兰 vs 刚果民主共和国（亚特兰大体育场）；(2) 4 PM ET 比利时 vs 塞内加尔（西雅图体育场）；(3) 🔥 8 PM ET 🇺🇸美国 vs 波黑（旧金山湾区体育场晚场）——美国队作为D组第一出线，本场是美国队本届世界杯淘汰赛首战。明天7月2日：西班牙vs奥地利、葡萄牙vs克罗地亚、瑞士vs阿尔及利亚。<span class="source">[来源：<a href="https://www.nbcnewyork.com/world-cup/round-of-32-bracket-schedule/6517752/">NBC New York</a>]</span></p>
+<p class="en" style="display:none">Today's three R32 matches: (1) 12 PM ET England vs DR Congo (Atlanta); (2) 4 PM ET Belgium vs Senegal (Seattle); (3) 🔥 8 PM ET USMNT vs Bosnia (SF Bay Area Stadium evening) — US as Group D winners, their first knockout match. Tomorrow July 2: Spain vs Austria, Portugal vs Croatia, Switzerland vs Algeria. <span class="source">[Source: <a href="https://www.nbcnewyork.com/world-cup/round-of-32-bracket-schedule/6517752/">NBC New York</a>]</span></p>
+</div>
+
+<div class="sports-card">
+<h3 class="zh">🏀 NBA：Ja Morant抵达波特兰！自由市场开启</h3>
+<h3 class="en" style="display:none">🏀 NBA: Ja Morant Arrives in Portland! Free Agency Opens</h3>
+<p class="zh">NBA自由市场6月30日（周二）6 PM ET正式开启。重磅：灰熊将Ja Morant交易至波特兰开拓者，换来Jerami Grant和Kris Murray。Morant将与Scoot Henderson组成开拓者新后场核心。其他动态：LeBron James去向未定（勇士被曝将追求LeBron+AD），James Harden跳出选项与骑士谈判，Draymond Green跳出选项，Giannis已被交易至热火，LaMelo Ball被交易至森林狼。Kristaps Porzingis预计以2年$4000万续约勇士。LeBron去留是自由市场最大悬念。<span class="source">[来源：<a href="https://sports.yahoo.com/nba/live/nba-free-agency-2026-grizzlies-reportedly-trade-ja-morant-to-trail-blazers-james-harden-declines-option-while-negotiating-with-cavs-lebron-james-lakers-decision-looms-182955882.html">Yahoo Sports</a>]</span></p>
+<p class="en" style="display:none">NBA free agency officially opened June 30 at 6 PM ET. Blockbuster: Grizzlies trade Ja Morant to Portland Trail Blazers for Jerami Grant and Kris Murray. Morant teams with Scoot Henderson in Portland's new backcourt. Other moves: LeBron James undecided (Warriors pursuing LeBron+AD), James Harden declines option to negotiate with Cavs, Draymond Green declines option. Giannis traded to Heat, LaMelo Ball to Timberwolves. LeBron's decision is free agency's biggest storyline. <span class="source">[Source: <a href="https://sports.yahoo.com/nba/live/nba-free-agency-2026-grizzlies-reportedly-trade-ja-morant-to-trail-blazers-james-harden-declines-option-while-negotiating-with-cavs-lebron-james-lakers-decision-looms-182955882.html">Yahoo Sports</a>]</span></p>
+</div>
+</div>
+
+<!-- 板块5: Portland本地 -->
+<h2 class="zh">🌲 Portland 本地</h2>
+<h2 class="en" style="display:none">🌲 Portland Local</h2>
+
+<div class="card">
+<h3 class="zh">🔥 开拓者得到Ja Morant！波特兰体育史性时刻</h3>
+<h3 class="en" style="display:none">🔥 Blazers Get Ja Morant! Historic Moment for Portland Sports</h3>
+<p class="zh">这是波特兰体育史上最重要的交易之一——Ja Morant抵达玫瑰之城！Morant + Scoot Henderson的组合让开拓者拥有了联盟最具爆炸力的后场之一。波特兰球迷在社交媒体上彻底沸腾。灰熊选择重建（换取Grant和Kris Murray），而开拓者选择赢在当下。Morant上赛季场均25+分7+助攻，如果他能在波特兰保持健康和状态，开拓者将瞬间成为西部季后赛竞争者。 Rip City复兴在即！<span class="source">[来源：<a href="https://sports.yahoo.com/nba/breaking-news/article/grizzlies-reportedly-trade-ja-morant-to-trail-blazers-for-jerami-grant-kris-murray-203619969.html">Yahoo Sports</a>]</span></p>
+<p class="en" style="display:none">One of the most important trades in Portland sports history — Ja Morant arrives in Rip City! The Morant + Scoot Henderson pairing gives the Blazers one of the most explosive backcourts in the league. Portland fans are ecstatic on social media. The Grizzlies chose to rebuild (getting Grant and Kris Murray), while the Blazers chose to win now. Morant averaged 25+ points and 7+ assists last season. If healthy, the Blazers could instantly become Western Conference playoff contenders. <span class="source">[Source: <a href="https://sports.yahoo.com/nba/breaking-news/article/grizzlies-reportedly-trade-ja-morant-to-trail-blazers-for-jerami-grant-kris-murray-203619969.html">Yahoo Sports</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">🌡️ Portland天气：7月1-6日零星阵雨转凉</h3>
+<h3 class="en" style="display:none">🌡️ Portland Weather: July 1-6 Isolated Showers, Cool</h3>
+<p class="zh">根据Farmers' Almanac长期预报，波特兰7月1-6日将有零星阵雨，气温转凉。7月7-20日转为晴朗温暖。AccuWeather数据显示波特兰7月日均高温79°F（26°C），日均低温约58°F。NOAA气候预测中心预计ENSO中性将过渡到El Niño，2026-27冬季可能加强。上周热浪（94°F创纪录）已过去，本周气温回归正常。7月整体预计比正常偏暖偏干，需关注俄勒冈野火风险。<span class="source">[来源：<a href="https://www.almanac.com/weather/longrange/or/portland">Farmers' Almanac</a>、<a href="https://www.accuweather.com/en/us/portland/97209/july-weather/350473">AccuWeather</a>]</span></p>
+<p class="en" style="display:none">Per Farmers' Almanac, Portland expects isolated showers and cool temps July 1-6, turning sunny and warm July 7-20. Average July high is 79°F (26°C). NOAA predicts ENSO-neutral transitioning to El Niño, potentially strengthening into 2026-27 winter. Last week's heat wave (record 94°F) has passed. July overall expected warmer and drier than normal — monitor Oregon wildfire risk. <span class="source">[Source: <a href="https://www.almanac.com/weather/longrange/or/portland">Farmers' Almanac</a>, <a href="https://www.accuweather.com/en/us/portland/97209/july-weather/350473">AccuWeather</a>]</span></p>
+</div>
+
+<!-- 板块6: AI动态 -->
+<h2 class="zh">🤖 AI 工具/产品动态</h2>
+<h2 class="en" style="display:none">🤖 AI Tools & Product Updates</h2>
+
+<div class="card">
+<h3 class="zh">🧠 Anthropic发布Claude Sonnet 5：最强Agent模型</h3>
+<h3 class="en" style="display:none">🧠 Anthropic Launches Claude Sonnet 5: Most Agentic Model Yet</h3>
+<p class="zh">Anthropic于6月30日正式发布Claude Sonnet 5，定位为"最强Agent模型"。主要升级：更强的推理能力、更优秀的工具使用（浏览器、终端等）、编程能力提升、以及规模化专业工作能力。Sonnet 5能够自主制定计划并执行多步骤任务。此外，Anthropic还提出了一套行业范围的越狱严重性评分框架，与Amazon、Microsoft、Google等Glasswing合作伙伴共同推进。Anthropic目前估值约$965B，已提交IPO申请，企业市场份额（34.4%）已超过OpenAI（32.3%）。<span class="source">[来源：<a href="https://www.anthropic.com/news/claude-sonnet-5">Anthropic</a>]</span></p>
+<p class="en" style="display:none">Anthropic officially launched Claude Sonnet 5 on June 30, positioning it as the "most agentic model yet." Key upgrades: stronger reasoning, better tool use (browsers, terminals), improved coding, and scaled professional work capabilities. Sonnet 5 can autonomously plan and execute multi-step tasks. Anthropic also proposed an industry-wide jailbreak severity scoring framework with Amazon, Microsoft, and Google. Anthropic's valuation is ~$965B, with IPO filed and enterprise market share (34.4%) surpassing OpenAI (32.3%). <span class="source">[Source: <a href="https://www.anthropic.com/news/claude-sonnet-5">Anthropic</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">🔬 Claude Science发布：AI科研工作台进军生物制药</h3>
+<h3 class="en" style="display:none">🔬 Claude Science Launched: AI Workbench for Bioscience</h3>
+<p class="zh">同在6月30日，Anthropic发布Claude Science——面向科学研究的AI工作台，重点瞄准生物制药行业。CEO Dario Amodei表示这将从根本上颠覆生命科学研究方式。产品提供分子设计、文献分析、实验假设生成等功能。DeepMind联合创始人John Jumper在发布会上首次公开露面。此举被视为Anthropic在IPO前拓展垂直市场的重要战略——制药行业有充沛的AI预算和明确的使用场景。Claude Science目前处于Beta阶段。<span class="source">[来源：<a href="https://www.statnews.com/2026/06/30/anthropic-release-claude-science-ceo-dario-amodei/">STAT News</a>]</span></p>
+<p class="en" style="display:none">Also on June 30, Anthropic launched Claude Science — an AI workbench for scientific research, targeting the bioscience and pharma industries. CEO Dario Amodei said it will fundamentally transform life science research. Features include molecular design, literature analysis, and hypothesis generation. DeepMind co-founder John Jumper made his first public appearance at the event. This is seen as Anthropic's strategy to expand vertical markets before its IPO. Claude Science is currently in beta. <span class="source">[Source: <a href="https://www.statnews.com/2026/06/30/anthropic-release-claude-science-ceo-dario-amodei/">STAT News</a>]</span></p>
+</div>
+
+<div class="card">
+<h3 class="zh">💰 NVIDIA投资$50亿入股Intel + AI芯片竞赛升级</h3>
+<h3 class="en" style="display:none">💰 NVIDIA Invests $5B in Intel + AI Chip Race Escalates</h3>
+<p class="zh">NVIDIA宣布投资$50亿（约£40亿）入股Intel——这对Intel来说是重要 lifeline。同时，AMD宣布将投资超过$100亿在台湾芯片产业，与TSMC扩大合作生产下一代芯片。Google、Apple等消费科技巨头也在加速AI产品布局，与OpenAI和Anthropic在企业AI市场形成两条不同路线。AI芯片竞赛格局：NVIDIA押注Intel代工+投资、AMD押注TSMC产能、Google自研TPU、Apple自研芯片——多极化竞争加剧。<span class="source">[来源：<a href="https://www.bbc.com/news/articles/c4gjd1mnjpyo">BBC</a>、<a href="https://www.wsj.com/tech/amd-to-invest-more-than-10-billion-in-taiwans-chip-industry-28081fb7">WSJ</a>]</span></p>
+<p class="en" style="display:none">NVIDIA announced a $5B stake in Intel — a major lifeline. Meanwhile, AMD will invest over $10B in Taiwan's chip industry, expanding TSMC partnership for next-gen chips. Google and Apple are accelerating consumer AI products. The AI chip race landscape: NVIDIA bets on Intel foundry + investment, AMD bets on TSMC capacity, Google develops own TPU, Apple develops own chips — multipolar competition intensifying. <span class="source">[Source: <a href="https://www.bbc.com/news/articles/c4gjd1mnjpyo">BBC</a>, <a href="https://www.wsj.com/tech/amd-to-invest-more-than-10-billion-in-taiwans-chip-industry-28081fb7">WSJ</a>]</span></p>
+</div>
+
+<div class="footer">
+<p><a href="index.html">All Reports</a> | <a href="/sky-portal/">🏠 Home</a></p>
+<p style="margin-top:8px">Generated by Sky ☁️ · Powered by GLM-5.2</p>
+</div>
+
+</body>
+</html>

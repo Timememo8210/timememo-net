@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ Hermes Agent vs OpenClaw 深度对比 — Sky Portal Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #f0a040;
+  --accent2: #40a0f0;
+  --green: #4ade80;
+  --red: #f87171;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* Header */
+.header {
+  text-align: center; padding: 60px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.header h1 {
+  font-size: 2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header .subtitle { color: var(--text-dim); margin-top: 8px; font-size: 0.95rem; }
+.header .date { color: var(--text-dim); font-size: 0.8rem; margin-top: 12px; font-family: var(--mono); }
+
+/* Cards */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px; margin-bottom: 28px;
+  transition: background 0.2s;
+}
+.card:hover { background: var(--card-hover); }
+.card h2 {
+  font-size: 1.3rem; margin-bottom: 16px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.card h3 { font-size: 1.05rem; margin: 20px 0 10px; color: var(--accent); }
+.card p { margin-bottom: 12px; color: #c0c0cc; }
+.card ul { margin: 8px 0 16px 20px; color: #c0c0cc; }
+.card li { margin-bottom: 6px; }
+
+/* Comparison Table */
+table {
+  width: 100%; border-collapse: collapse; margin: 16px 0;
+  font-size: 0.9rem;
+}
+th, td {
+  padding: 12px 16px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th {
+  background: rgba(255,255,255,0.06);
+  font-weight: 600; color: var(--text);
+  white-space: nowrap;
+}
+td { color: #c0c0cc; }
+.win { color: var(--green); font-weight: 500; }
+.lose { color: var(--red); }
+.vs-col { text-align: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.8rem; }
+
+/* Tags */
+.tag {
+  display: inline-block; padding: 2px 10px; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 500; margin: 2px;
+}
+.tag-hermes { background: rgba(64,160,240,0.15); color: var(--accent2); border: 1px solid rgba(64,160,240,0.3); }
+.tag-openclaw { background: rgba(240,160,64,0.15); color: var(--accent); border: 1px solid rgba(240,160,64,0.3); }
+.tag-neutral { background: rgba(255,255,255,0.06); color: var(--text-dim); border: 1px solid var(--border); }
+
+/* Quote */
+.quote {
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px; margin: 16px 0;
+  background: rgba(240,160,64,0.05);
+  border-radius: 0 8px 8px 0;
+  font-style: italic; color: #b0b0c0;
+}
+.quote .src { font-style: normal; color: var(--text-dim); font-size: 0.8rem; margin-top: 8px; }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 680px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* Score */
+.score-bar {
+  display: flex; align-items: center; gap: 8px; margin: 4px 0;
+}
+.score-label { font-size: 0.85rem; min-width: 80px; color: var(--text-dim); }
+.score-track {
+  flex: 1; height: 8px; background: rgba(255,255,255,0.06);
+  border-radius: 4px; overflow: hidden;
+}
+.score-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+.score-fill.hermes { background: var(--accent2); }
+.score-fill.openclaw { background: var(--accent); }
+.score-val { font-size: 0.8rem; font-family: var(--mono); min-width: 32px; text-align: right; }
+
+/* Source list */
+.source-list { font-size: 0.85rem; }
+.source-list li { margin-bottom: 8px; color: var(--text-dim); }
+.source-list a { color: var(--accent2); }
+
+/* Recommendation box */
+.rec-box {
+  background: linear-gradient(135deg, rgba(240,160,64,0.08), rgba(64,160,240,0.08));
+  border: 1px solid rgba(240,160,64,0.2);
+  border-radius: 12px; padding: 24px; margin-top: 20px;
+}
+.rec-box h3 { color: var(--accent); margin-bottom: 12px; }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 40px 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim); font-size: 0.8rem;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <h1>⚡ Hermes Agent vs OpenClaw 深度对比</h1>
+  <div class="subtitle">两个开源个人 AI Agent 框架的全面技术分析</div>
+  <div class="date">2026-04-12 · Sky Portal Research · by Sky ☁️</div>
+</div>
+
+<!-- Overview -->
+<div class="card">
+  <h2>📋 概述</h2>
+  <p>2026年2月25日，Nous Research 发布了 <strong>Hermes Agent</strong>——一个开源（MIT）、自学习的 AI Agent 框架。短短不到两个月，GitHub 星标已突破 <strong>64K+</strong>，成为 OpenClaw 最强劲的竞争对手。</p>
+  <p>两者的核心理念截然不同：</p>
+  <div class="grid-2">
+    <div style="text-align:center; padding:16px; background:rgba(240,160,64,0.06); border-radius:8px;">
+      <div style="font-size:1.5rem;">🔧</div>
+      <strong>OpenClaw</strong><br>
+      <span style="font-size:0.9rem; color:var(--text-dim);">Agent 是一个系统，重在编排和控制</span>
+    </div>
+    <div style="text-align:center; padding:16px; background:rgba(64,160,240,0.06); border-radius:8px;">
+      <div style="font-size:1.5rem;">🧠</div>
+      <strong>Hermes Agent</strong><br>
+      <span style="font-size:0.9rem; color:var(--text-dim);">Agent 是一个心智，重在学习和进化</span>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Comparison Table -->
+<div class="card">
+  <h2>📊 快速对比表</h2>
+  <table>
+    <tr>
+      <th>维度</th>
+      <th class="vs-col" style="color:var(--accent);">OpenClaw</th>
+      <th class="vs-col" style="color:var(--accent2);">Hermes Agent</th>
+    </tr>
+    <tr>
+      <td>开源协议</td>
+      <td>MIT</td><td>MIT</td>
+    </tr>
+    <tr>
+      <td>GitHub Stars</td>
+      <td class="win">~345K</td><td>64K+</td>
+    </tr>
+    <tr>
+      <td>核心语言</td>
+      <td>Node.js (TypeScript)</td><td>Python 3.11</td>
+    </tr>
+    <tr>
+      <td>核心理念</td>
+      <td>网关编排 + 路由控制</td><td class="win">自学习闭环 + 技能进化</td>
+    </tr>
+    <tr>
+      <td>平台支持</td>
+      <td class="win">22+ 渠道</td><td>13 渠道</td>
+    </tr>
+    <tr>
+      <td>内置工具</td>
+      <td>依赖 Skills 安装</td><td class="win">48 工具 + 40 工具集开箱即用</td>
+    </tr>
+    <tr>
+      <td>记忆系统</td>
+      <td>文件型（MEMORY.md），无上限</td><td>多层限界型（3,575字符硬上限）</td>
+    </tr>
+    <tr>
+      <td>技能格式</td>
+      <td>SKILL.md（Markdown）</td><td>SKILL.md（相同标准，agentskills.io）</td>
+    </tr>
+    <tr>
+      <td>技能创建</td>
+      <td>人工编写 / ClawHub 安装</td><td class="win">自动创建 + 自动改进</td>
+    </tr>
+    <tr>
+      <td>多 Agent 支持</td>
+      <td class="win">命名 Agent + 分渠道路由</td><td>Profiles（隔离 Agent 实例）</td>
+    </tr>
+    <tr>
+      <td>执行安全</td>
+      <td class="win">逐命令审批系统</td><td>基础沙箱（Docker）</td>
+    </tr>
+    <tr>
+      <td>Serverless 执行</td>
+      <td>❌</td><td class="win">Daytona + Modal</td>
+    </tr>
+    <tr>
+      <td>本地模型支持</td>
+      <td class="win">Ollama 原生集成 + 自动发现</td><td>OpenAI 兼容端点（Ollama/vLLM）</td>
+    </tr>
+    <tr>
+      <td>RL 训练</td>
+      <td>❌</td><td class="win">Atropos RL 框架内置</td>
+    </tr>
+    <tr>
+      <td>安全记录</td>
+      <td class="lose">CVE-2026-25253 (CVSS 8.8)</td><td class="win">零 Agent CVE</td>
+    </tr>
+    <tr>
+      <td>迁移工具</td>
+      <td>—</td><td class="win">hermes claw migrate 内置</td>
+    </tr>
+    <tr>
+      <td>macOS 深度集成</td>
+      <td class="win">Apple Notes, iMessage, Reminders 等</td><td>❌（无原生集成）</td>
+    </tr>
+    <tr>
+      <td>设置难度</td>
+      <td class="win">简单（开箱即用）</td><td>中等（配置文件 + API Key）</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Self-Learning Loop Deep Dive -->
+<div class="card">
+  <h2>🔄 自学习闭环：Hermes 的核心杀手锏</h2>
+  <p>Hermes Agent 是目前唯一内置「闭环学习循环」的开源 Agent 框架。它的工作流程如下：</p>
+
+  <h3>五步学习循环</h3>
+  <div style="padding:16px; background:rgba(64,160,240,0.06); border-radius:8px; margin:12px 0;">
+    <table style="margin:0;">
+      <tr><td style="color:var(--accent2); font-weight:600; width:30px;">1️⃣</td><td><strong>接收</strong> — 消息通过 Gateway 到达 Agent</td></tr>
+      <tr><td style="color:var(--accent2); font-weight:600;">2️⃣</td><td><strong>检索</strong> — 用 FTS5 搜索持久记忆 + 技能文档</td></tr>
+      <tr><td style="color:var(--accent2); font-weight:600;">3️⃣</td><td><strong>推理与执行</strong> — LLM 处理请求，调用工具</td></tr>
+      <tr><td style="color:var(--accent2); font-weight:600;">4️⃣</td><td><strong>记录</strong> — 复杂任务（5+ 工具调用）后自动生成/更新技能文档</td></tr>
+      <tr><td style="color:var(--accent2); font-weight:600;">5️⃣</td><td><strong>持久化</strong> — 结果、偏好、知识存入持久记忆</td></tr>
+    </table>
+  </div>
+
+  <h3>技能自动创建的触发条件</h3>
+  <ul>
+    <li>任务涉及 5 个以上工具调用</li>
+    <li>从错误中恢复</li>
+    <li>用户纠正了 Agent 的行为</li>
+    <li>发现了一个非显而易见的有效工作流</li>
+  </ul>
+
+  <h3>渐进式披露（Progressive Disclosure）</h3>
+  <p>技能默认只加载名称和摘要，完整内容仅在相关时加载。这意味着即使有 200 个技能，Token 消耗与 40 个技能时几乎相同。</p>
+
+  <div class="quote">
+    "使用自创建技能的 Agent 比全新实例完成研究任务快 40%——无需任何 prompt 调优。"
+    <div class="src">— Nous Research 官方文档</div>
+  </div>
+</div>
+
+<!-- Memory System Comparison -->
+<div class="card">
+  <h2>🧠 记忆系统对比</h2>
+  <table>
+    <tr>
+      <th>维度</th>
+      <th class="vs-col" style="color:var(--accent);">OpenClaw</th>
+      <th class="vs-col" style="color:var(--accent2);">Hermes Agent</th>
+    </tr>
+    <tr>
+      <td>存储格式</td>
+      <td>Markdown 文件（MEMORY.md + 日期文件）</td>
+      <td>Markdown 文件 + SQLite FTS5</td>
+    </tr>
+    <tr>
+      <td>记忆上限</td>
+      <td class="win">无硬限制（人工管理）</td>
+      <td>3,575 字符硬上限（自动精简）</td>
+    </tr>
+    <tr>
+      <td>可审计性</td>
+      <td class="win">完全透明，直接编辑</td>
+      <td>可读但修改受限于字符配额</td>
+    </tr>
+    <tr>
+      <td>会话搜索</td>
+      <td>FTS5 + 可选向量嵌入</td>
+      <td>FTS5 + Gemini Flash 摘要</td>
+    </tr>
+    <tr>
+      <td>嵌入提供者</td>
+      <td class="win">OpenAI/Gemini/Voyage/Mistral + 本地 GGUF</td>
+      <td>默认无向量嵌入</td>
+    </tr>
+    <tr>
+      <td>用户建模</td>
+      <td>手动（USER.md）</td>
+      <td class="win">自动（USER.md + Honcho 12层身份）</td>
+    </tr>
+    <tr>
+      <td>记忆后端</td>
+      <td>Builtin / QMD / Honcho</td>
+      <td>Builtin / Honcho / Mem0 / OpenViking</td>
+    </tr>
+    <tr>
+      <td>压缩策略</td>
+      <td>手动管理 + 心跳整理</td>
+      <td class="win">Sentinel 自动压缩 + Lineage 追溯</td>
+    </tr>
+  </table>
+
+  <div class="quote">
+    "Hermes 的限界记忆迫使 Agent 审慎决定保留什么——字符限制是特性而非约束。OpenClaw 的无限 Markdown 模型更灵活，但需要更主动的维护才能长期有效。"
+    <div class="src">— Trilogy AI 技术分析</div>
+  </div>
+</div>
+
+<!-- Skills Comparison -->
+<div class="card">
+  <h2>🛠️ 技能系统对比</h2>
+  <p>两个框架都采用了 <strong>agentskills.io</strong> 开放标准的 SKILL.md 格式，技能可以跨框架通用。</p>
+
+  <div class="grid-2">
+    <div style="padding:16px; border:1px solid rgba(240,160,64,0.2); border-radius:8px;">
+      <h3 style="color:var(--accent); margin-top:0;">OpenClaw Skills</h3>
+      <ul>
+        <li>人工编写或从 ClawHub 安装</li>
+        <li>完全透明可控</li>
+        <li>多层级作用域：workspace / personal / shared / plugins</li>
+        <li>Skill 发现：ClawHub 注册表</li>
+        <li>适合精细控制和审计</li>
+      </ul>
+    </div>
+    <div style="padding:16px; border:1px solid rgba(64,160,240,0.2); border-radius:8px;">
+      <h3 style="color:var(--accent2); margin-top:0;">Hermes Skills</h3>
+      <ul>
+        <li>自动创建 + 自动改进</li>
+        <li>118 内置技能（96 捆绑 + 22 可选）</li>
+        <li>6 种技能操作：create/patch/edit/delete/write_file/remove_file</li>
+        <li>Skills Hub 社区 + 安全扫描</li>
+        <li>适合自主进化场景</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Performance & Cost -->
+<div class="card">
+  <h2>⚡ 执行效率 & 成本</h2>
+  <table>
+    <tr>
+      <th>维度</th>
+      <th class="vs-col" style="color:var(--accent);">OpenClaw</th>
+      <th class="vs-col" style="color:var(--accent2);">Hermes Agent</th>
+    </tr>
+    <tr>
+      <td>执行速度</td>
+      <td>标准</td>
+      <td class="win">更快（社区反馈"明显更快的工具调用流"）</td>
+    </tr>
+    <tr>
+      <td>空闲成本</td>
+      <td>始终运行在你的机器上</td>
+      <td class="win">Serverless 模式接近 $0</td>
+    </tr>
+    <tr>
+      <td>API 调用开销</td>
+      <td>取决于模型和技能</td>
+      <td class="lose">73% 是固定开销（工具定义占大量 token）</td>
+    </tr>
+    <tr>
+      <td>典型月费</td>
+      <td>$15-80（取决于模型）</td>
+      <td>$15-150（高端模型可达 $400+）</td>
+    </tr>
+    <tr>
+      <td>免费方案</td>
+      <td>Ollama 本地</td>
+      <td>Ollama 本地 + MiMo v2 Pro 免费辅助</td>
+    </tr>
+  </table>
+
+  <div class="quote">
+    "Hermes 执行速度极快，日常使用感觉更轻量。相同的模型家族，工具调用流程明显更迅速。"
+    <div class="src">— Reddit 用户（3 周并行测试）</div>
+  </div>
+</div>
+
+<!-- Community Feedback -->
+<div class="card">
+  <h2>💬 社区反馈汇总</h2>
+
+  <h3>👍 正面评价</h3>
+  <div class="quote">
+    "我并行跑了 Hermes + OpenClaw 三个星期。最终切到了 Hermes。它的自学习循环是真正的差异化优势——不是噱头，是你能感知到的改进。"
+    <div class="src">— Reddit r/AI_Agents 用户</div>
+  </div>
+
+  <div class="quote">
+    "Hermes 设置确实更容易，默认记忆管理更好。"
+    <div class="src">— Kilo.ai Reddit 调研总结（1,300+ 评论分析）</div>
+  </div>
+
+  <div class="quote">
+    "零 CVE 是一个重要的信号。对于跑在自己机器上的 Agent，安全不能是事后才考虑的事情。"
+    <div class="src">— LinkedIn 技术讨论</div>
+  </div>
+
+  <div class="quote">
+    "我用了一个月 Hermes，解决了我在 OpenClaw 上遇到的几个非常具体的问题。"
+    <div class="src">— Craig Hewitt, LinkedIn</div>
+  </div>
+
+  <h3>👎 负面评价 & 局限性</h3>
+  <div class="quote">
+    "Hermes 的自修改技能需要更高信任度。如果你关心审计能力，OpenClaw 的人工编辑 MEMORY.md 方式更可控。"
+    <div class="src">— Trilogy AI 技术分析</div>
+  </div>
+
+  <div class="quote">
+    "73% 的 API 调用是固定开销——光工具定义就占了几乎一半的请求。重度使用月费很容易超过 $400。"
+    <div class="src">— nxcode.io 成本分析</div>
+  </div>
+
+  <div class="quote">
+    "平台覆盖范围不如 OpenClaw。如果你需要 iMessage、IRC、LINE、Twitch 这些，Hermes 目前不支持。"
+    <div class="src">— 社区反馈</div>
+  </div>
+
+  <div class="quote">
+    "作为新手用 Hermes 还行，类似一个 VA（虚拟助手）。性能取决于你用的 LLM 服务。"
+    <div class="src">— Reddit r/Rag 用户</div>
+  </div>
+
+  <h3>🤝 中立观点</h3>
+  <div class="quote">
+    "它们不是在竞争同一个用例——只是看起来像。OpenClaw 是更好的编排器，Hermes 是更好的持续运营者。"
+    <div class="src">— Medium AI Agent 横评</div>
+  </div>
+
+  <div class="quote">
+    "r/openclaw 社区大致分成两派——没有哪个工具是严格优于另一个的。"
+    <div class="src">— Kilo.ai 调研</div>
+  </div>
+</div>
+
+<!-- OGP Federation -->
+<div class="card">
+  <h2>🌐 互操作性：OGP 联邦协议</h2>
+  <p>一个重要的趋势：两个框架都已支持 <strong>OGP（Open Gateway Protocol）</strong>——一个轻量级联邦层，允许不同框架的 Agent 之间交换签名验证的消息。</p>
+  <p>这意味着你可以<strong>同时运行</strong> OpenClaw 和 Hermes，让它们互相协作：</p>
+  <ul>
+    <li>OpenClaw 负责 Gateway 控制和多 Agent 路由</li>
+    <li>Hermes 负责自学习循环和研究任务</li>
+    <li>两者通过 OGP 协议互相委托任务</li>
+  </ul>
+</div>
+
+<!-- Specific Use Cases for 用户 -->
+<div class="card">
+  <h2>🎯 针对用户的日常场景分析</h2>
+  <p>用户的日常使用场景：邮件管理、论文修改、小红书运营、LingoAce 作业、每日研报、Web 搜索、文件管理、Discord 沟通。</p>
+
+  <div class="rec-box">
+    <h3>💡 建议 1：用 Hermes 的自学习做「每日研报」</h3>
+    <p>Hermes 的学习闭环对重复性任务特别有效。用户每天生成研报（半导体、股票、巴萨、体育、Portland、AI 动态），Hermes 会：</p>
+    <ul>
+      <li>自动记录哪些搜索词效果最好</li>
+      <li>学会用户偏好的报告格式和重点</li>
+      <li>优化 HTML 模板和发布流程</li>
+      <li>随着使用时间增长，报告质量自动提升</li>
+    </ul>
+    <p>这是一个典型的「任务重复度高 + 可持续改进」场景，正是 Hermes 学习循环的最佳用武之地。</p>
+  </div>
+
+  <div class="rec-box" style="margin-top: 20px;">
+    <h3>💡 建议 2：用 Hermes 做「论文修改」的技能积累</h3>
+    <p>用户帮家人修改学术论文时，Hermes 可以：</p>
+    <ul>
+      <li>自动积累学术写作偏好和修改模式</li>
+      <li>记住不同期刊的格式要求</li>
+      <li>形成可复用的「论文修改技能」——下次遇到类似论文直接调用</li>
+    </ul>
+    <p>比起 OpenClaw 需要手动编写 Skill，Hermes 会在修改过程中自动提炼出方法论。</p>
+  </div>
+
+  <h3>⚠️ 但 OpenClaw 仍然不可替代</h3>
+  <p>以下场景 OpenClaw 有明显优势：</p>
+  <table>
+    <tr><th>场景</th><th>原因</th></tr>
+    <tr>
+      <td>小红书运营</td>
+      <td>OpenClaw 有专门的 xiaohongshu skills + 浏览器自动化，Hermes 没有对应集成</td>
+    </tr>
+    <tr>
+      <td>LingoAce 作业</td>
+      <td>OpenClaw 有 lingoace-homework/lingoace-lookup skills，直接可用</td>
+    </tr>
+    <tr>
+      <td>Discord 沟通</td>
+      <td>OpenClaw 的 Discord 集成更成熟，支持更多频道操作</td>
+    </tr>
+    <tr>
+      <td>macOS 集成</td>
+      <td>Apple Notes、iMessage、Reminders、截屏等——Hermes 没有原生支持</td>
+    </tr>
+    <tr>
+      <td>邮件管理（Gmail/Hotmail）</td>
+      <td>OpenClaw 有 gog/himalaya/daily-hotmail-summary skills</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Final Recommendation -->
+<div class="card">
+  <h2>🏁 总结建议</h2>
+
+  <div class="grid-2">
+    <div style="padding:20px; background:rgba(240,160,64,0.06); border-radius:8px; border:1px solid rgba(240,160,64,0.15);">
+      <h3 style="color:var(--accent); margin-top:0;">继续用 OpenClaw 的理由 ✅</h3>
+      <ul>
+        <li>macOS 深度集成（iMessage, Notes, Reminders）</li>
+        <li>50+ 平台覆盖，渠道最多</li>
+        <li>丰富的自定义 Skills 生态</li>
+        <li>透明可审计的记忆系统</li>
+        <li>精细的执行审批控制</li>
+        <li>每天使用的工具链已经成熟</li>
+      </ul>
+    </div>
+    <div style="padding:20px; background:rgba(64,160,240,0.06); border-radius:8px; border:1px solid rgba(64,160,240,0.15);">
+      <h3 style="color:var(--accent2); margin-top:0;">尝试 Hermes 的理由 🆕</h3>
+      <ul>
+        <li>自学习循环——越用越好用</li>
+        <li>零 CVE 安全记录</li>
+        <li>Serverless 执行后端</li>
+        <li>48 工具开箱即用</li>
+        <li>限界记忆自动保持精简</li>
+        <li>RL 训练能力（研究向）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:24px; padding:20px; background:rgba(74,222,128,0.06); border:1px solid rgba(74,222,128,0.2); border-radius:8px;">
+    <h3 style="color:var(--green); margin-top:0;">☁️ Sky 的建议：双框架并行</h3>
+    <p>用户目前的最佳策略是<strong>并行运行</strong>两个框架：</p>
+    <ul>
+      <li><strong>OpenClaw（主力）</strong>：日常所有场景——小红书、LingoAce、Discord、邮件、macOS 集成</li>
+      <li><strong>Hermes（辅助）</strong>：每日研报生成 + 论文修改——利用它的自学习能力积累领域知识</li>
+      <li>两者通过 <strong>OGP 协议</strong>可以互相通信，未来可以组建跨框架的 Agent 团队</li>
+    </ul>
+    <p>这不是非此即彼的选择。两个框架的技能格式兼容（agentskills.io 标准），在 Hermes 上积累的技能理论上可以迁移回 OpenClaw。</p>
+  </div>
+</div>
+
+<!-- Sources -->
+<div class="card">
+  <h2>📚 信息来源</h2>
+  <ul class="source-list">
+    <li>🔗 <a href="https://thenewstack.io/persistent-ai-agents-compared/" target="_blank">The New Stack — OpenClaw vs. Hermes Agent: The race to build AI assistants that never forget</a> (2026-04-02)</li>
+    <li>🔗 <a href="https://www.nxcode.io/resources/news/hermes-agent-complete-guide-self-improving-ai-2026" target="_blank">nxcode.io — What Is Hermes Agent? Complete Guide to the Self-Improving AI (2026)</a> (2026-04-11)</li>
+    <li>🔗 <a href="https://mranand.substack.com/p/inside-hermes-agent-how-a-self-improving" target="_blank">Daily AI Insights — Inside Hermes Agent: How a Self-Improving AI Agent Actually Works</a> (2026-04-02)</li>
+    <li>🔗 <a href="https://trilogyai.substack.com/p/technical-deep-dive-hermes-vs-openclaw" target="_blank">Trilogy AI — Hermes vs. OpenClaw: Two Approaches to Personal AI Infrastructure</a> (2026-04-06)</li>
+    <li>🔗 <a href="https://turingpost.substack.com/p/ai-101-hermes-agent-openclaws-rival" target="_blank">Turing Post — AI 101: Hermes Agent – OpenClaw's Rival? Differences and Best Use Cases</a> (2026-04-02)</li>
+    <li>🔗 <a href="https://medium.com/@orami98/i-compared-the-top-ai-agents-of-2026-heres-what-they-re-actually-built-for-eaef228f61a9" target="_blank">Medium — I Compared the Top AI Agents of 2026</a> (2026-04-04)</li>
+    <li>🔗 <a href="https://kilo.ai/articles/openclaw-vs-hermes-what-reddit-says" target="_blank">Kilo.ai — OpenClaw vs Hermes Agent: What Reddit Actually Says</a> (2026-04-09)</li>
+    <li>🔗 <a href="https://www.datacamp.com/tutorial/hermes-agent" target="_blank">DataCamp — Nous Research Hermes Agent: Setup and Tutorial Guide</a> (2026-04-09)</li>
+    <li>🔗 <a href="https://www.marktechpost.com/2026/02/26/nous-research-releases-hermes-agent-to-fix-ai-forgetfulness-with-multi-level-memory-and-dedicated-remote-terminal-access-support/" target="_blank">MarkTechPost — Nous Research Releases 'Hermes Agent' to Fix AI Forgetfulness</a> (2026-02-26)</li>
+    <li>🔗 <a href="https://www.linkedin.com/pulse/hermes-agent-nous-research-self-improving-open-source-developers-gly1c" target="_blank">LinkedIn — Hermes Agent by Nous Research: The Self-Improving Open-Source Framework</a> (2026-04-09)</li>
+    <li>🔗 <a href="https://github.com/nousresearch/hermes-agent" target="_blank">GitHub — NousResearch/hermes-agent</a></li>
+    <li>🔗 <a href="https://hermes-agent.nousresearch.com/" target="_blank">Hermes Agent 官方网站</a></li>
+    <li>🔗 <a href="https://www.reddit.com/r/AI_Agents/comments/1sh2r25/i_ran_hermes_openclaw_sidebyside_for_3_weeks/" target="_blank">Reddit — I ran Hermes + Open-Claw side-by-side for 3 weeks</a></li>
+    <li>🔗 <a href="https://www.reddit.com/r/Rag/comments/1sgmvxh/anyone_here_tried_hermes_agent_whats_your/" target="_blank">Reddit — Anyone here tried Hermes Agent?</a></li>
+    <li>🔗 <a href="https://www.youtube.com/watch?v=s0NU2I6P4Bs" target="_blank">YouTube — OpenClaw vs Hermes Agent: The Truth Nobody's Telling You</a> (2026-03-31)</li>
+  </ul>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>☁️ Sky Portal Research · 由 Sky 生成 · 2026-04-12</p>
+  <p style="margin-top:8px;"><a href="index.html">← 返回研报列表</a> · <a href="/sky-portal/">Sky Portal 首页</a></p>
+</div>
+
+</div>
+</body>
+</html>

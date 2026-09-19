@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-03</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.highlight{color:#4ade80;font-weight:600}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#991b1b 0%,#7f1d1d 100%)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股高位回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Pull Back</div>
+<div class="zh poster-data">• 道指 <span class="highlight">50,687</span> (-1.21%) ↓416点<br>• 标普 <span class="highlight">7,567</span> (-0.56%)<br>• 纳指 <span class="highlight">~26,848</span> (-0.9%)</div>
+<div class="en poster-data" style="display:none">• Dow <span class="highlight">50,687</span> (-1.21%) ↓416 pts<br>• S&P <span class="highlight">7,567</span> (-0.56%)<br>• Nasdaq <span class="highlight">~26,848</span> (-0.9%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#92400e 0%,#78350f 100%)">
+<div class="poster-icon">⚡</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">博通财报"卖事实"</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Broadcom "Sell the News"</div>
+<div class="zh poster-data">• 营收 $221.87亿 (+47.9%) 超预期<br>• AI收入同比 <span class="highlight">+143%</span><br>• 盘后暴跌 <span class="highlight">-12%</span> 指引不及预期</div>
+<div class="en poster-data" style="display:none">• Revenue $22.19B (+47.9%) beat<br>• AI revenue <span class="highlight">+143%</span> YoY<br>• After-hours <span class="highlight">-12%</span> guidance miss</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1a7a3a 0%,#0d5a28 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股冲高回落</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Fade After Rally</div>
+<div class="zh poster-data">• 上证 <span class="highlight">4,083</span> (+0.22%)<br>• 创业板指 <span class="highlight">+1.65%</span> 一度涨超4%<br>• 科创50 <span class="highlight">+2.11%</span> 半导体领涨</div>
+<div class="en poster-data" style="display:none">• Shanghai <span class="highlight">4,083</span> (+0.22%)<br>• ChiNext <span class="highlight">+1.65%</span> briefly +4%<br>• STAR 50 <span class="highlight">+2.11%</span> chips lead</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">油价逼近$100</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Nears $100</div>
+<div class="zh poster-data">• WTI <span class="highlight">$95.28</span> (+1.74%)<br>• 伊朗威胁封锁霍尔木兹海峡<br>• 美军第6次击瘫油轮</div>
+<div class="en poster-data" style="display:none">• WTI <span class="highlight">$95.28</span> (+1.74%)<br>• Iran threatens Hormuz blockade<br>• 6th tanker disabled by US</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-03 · Sky Portal Market Daily · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘 — 九连涨终结，高位回调</span><span class="en" style="display:none">US Market Close — Win Streak Ends, Pullback from Highs</span></h2>
+
+<div class="card">
+<h4><span class="zh">三大指数全线回调，标普终结九连涨</span><span class="en" style="display:none">All Three Major Indexes Fall, S&P 9-Day Win Streak Ends</span></h4>
+<p><span class="zh">周三美股三大指数从历史高位集体回落。道指跌416点或1.21%报50,687.07点，标普500跌0.56%报7,567.19点，纳指跌0.9%报约26,848点。三大指数此前连续多日创历史新高，累计涨幅巨大，获利了结压力释放。标普500的九连涨纪录就此终结，此前追平了1995年以来最长连涨。</span><span class="en" style="display:none">All three major indexes retreated from record highs Wednesday. Dow fell 416 points or 1.21% to 50,687.07, S&P 500 -0.56% at 7,567.19, Nasdaq -0.9% at ~26,848. All had been setting consecutive records with massive cumulative gains. The S&P 500's 9-day win streak — matching the longest since 1995 — came to an end.</span></p>
+<p class="src">来源：Barron's / Investing.com / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">博通盘后发布Q2财报 — 超预期但指引不及，盘后暴跌12%</span><span class="en" style="display:none">Broadcom Q2 After-Hours — Beat but Guide Short, -12%</span></h4>
+<p><span class="zh">博通（AVGO）盘中收跌约0.5%报$479.23，盘后发布2026财年Q2财报：营收221.87亿美元（同比+47.9%），大幅超出市场预期的220.4亿。AI半导体收入同比暴增143%，公司预计2026财年AI半导体收入将达到560亿美元（同比+180%）。但这一指引低于分析师预期均值576亿美元（低约2.8%），引发"卖事实"行情——盘后股价暴跌超12%。博通管理层表示2026财年下半年AI半导体收入将比上半年翻番，2027财年将保持强劲增长。</span><span class="en" style="display:none">Broadcom (AVGO) closed down ~0.5% at $479.23, then reported FQ2 2026 after-hours: Revenue $22.19B (+47.9% YoY), beating consensus of $22.04B. AI semiconductor revenue surged 143% YoY, with full-year AI chip guidance of $56B (+180% YoY). However, this fell short of analyst expectations of $57.6B (about 2.8% below), triggering a "sell the news" reaction — shares plunged 12%+ after-hours. Management noted H2 AI chip revenue would double H1, with strong growth continuing into FY2027.</span></p>
+<p class="src">来源：Wall Street Journal / 华尔街见闻 / The Street / 新浪财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">费城半导体逆势上涨+1.39%，再创历史新高</span><span class="en" style="display:none">SOX Defies Market +1.39%, New All-Time High</span></h4>
+<p><span class="zh">尽管大盘下跌，费城半导体指数仍上涨1.39%收报13,917点，盘中一度触及13,998点的历史新高。博通盘前涨3.6%（财报预期乐观）带动半导体板块逆势走高。费半今年涨幅已超60%，远超标普500指数。高盛上调标普500指数预测，预计回报率6%，其中AI基础设施受益者预计贡献约一半盈利增长。但博通盘后暴跌12%可能改变明天半导体板块走势。</span><span class="en" style="display:none">Despite the broad market decline, the Philadelphia Semiconductor Index rose 1.39% to 13,917, briefly touching 13,998 — a new all-time high. Broadcom's +3.6% pre-market (on earnings optimism) lifted the sector. SOX is up 60%+ YTD, far outpacing the S&P 500. Goldman raised S&P 500 targets, projecting 6% returns with AI infrastructure beneficiaries contributing about half of earnings growth. However, Broadcom's 12% after-hours plunge may shift tomorrow's semiconductor trajectory.</span></p>
+<p class="src">来源：富途牛牛 / 新浪财经 / Goldman Sachs</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">油价逼近$100 — 美伊局势持续升温</span><span class="en" style="display:none">Oil Nears $100 — US-Iran Tensions Escalate</span></h4>
+<p><span class="zh">WTI原油期货收涨1.74%报$95.28，布伦特原油报约$97.74。伊朗威胁将停止与美方信息交换并全面封锁霍尔木兹海峡。美军中央司令部在阿拉伯湾击瘫第6艘驶向伊朗的油轮。能源股受益上涨（斯伦贝谢+3%+，康菲石油+1%+，雪佛龙+近1%），航空股全线下跌（波音-近3%，美国航空-近3%，达美航空下跌）。有报道称新的结束伊朗战争草案计划正在讨论中。</span><span class="en" style="display:none">WTI crude futures closed +1.74% at $95.28, Brent at ~$97.74. Iran threatened to stop exchanging messages with the US and fully block the Strait of Hormuz. US Central Command disabled the 6th tanker headed for Iran in the Arabian Gulf. Energy stocks gained (Schlumberger +3%+, ConocoPhillips +1%+, Chevron +~1%), airlines fell (Boeing -~3%, American Airlines -~3%, Delta down). Reports emerged of a new draft plan to end the Iran conflict.</span></p>
+<p class="src">来源：Barron's / CME Group / 新浪财经 / 证券时报</p>
+</div>
+
+<h2>📈 <span class="zh">美股主要个股行情</span><span class="en" style="display:none">US Stock Movers</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">费城半导体</div><div class="stock-change up">+1.39%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">Broadcom</div><div class="stock-change down">-0.49%</div></div>
+<div class="stock-item"><div class="stock-ticker">SLB</div><div class="stock-price">斯伦贝谢</div><div class="stock-change up">+3%+</div></div>
+<div class="stock-item"><div class="stock-ticker">CVX</div><div class="stock-price">雪佛龙</div><div class="stock-change up">+~1%</div></div>
+<div class="stock-item"><div class="stock-ticker">COP</div><div class="stock-price">康菲石油</div><div class="stock-change up">+1%+</div></div>
+<div class="stock-item"><div class="stock-ticker">BA</div><div class="stock-price">波音</div><div class="stock-change down">-~3%</div></div>
+<div class="stock-item"><div class="stock-ticker">AAL</div><div class="stock-price">美国航空</div><div class="stock-change down">-~3%</div></div>
+<div class="stock-item"><div class="stock-ticker">DAL</div><div class="stock-price">达美航空</div><div class="stock-change down">-下跌</div></div>
+<div class="stock-item"><div class="stock-ticker">XOM</div><div class="stock-price">埃克森美孚</div><div class="stock-change up">+0.19%</div></div>
+<div class="stock-item"><div class="stock-ticker">OXY</div><div class="stock-price">西方石油</div><div class="stock-change up">+0.29%</div></div>
+<div class="stock-item"><div class="stock-ticker">GOOGL</div><div class="stock-price">Alphabet</div><div class="stock-change down">-持续承压</div></div>
+<div class="stock-item"><div class="stock-ticker">MSFT</div><div class="stock-price">微软</div><div class="stock-change down">-下跌</div></div>
+<div class="stock-item"><div class="stock-ticker">AMZN</div><div class="stock-price">亚马逊</div><div class="stock-change down">-下跌</div></div>
+<div class="stock-item"><div class="stock-ticker">AAPL</div><div class="stock-price">苹果</div><div class="stock-change down">-下跌</div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">特斯拉</div><div class="stock-change down">-下跌</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股（6/3收盘）— 冲高回落，科技股强势</span><span class="en" style="display:none">A-Shares (Jun 3 Close) — Rally Then Fade, Tech Strong</span></h2>
+
+<div class="card">
+<h4><span class="zh">创业板指冲高回落涨1.65%，科创50涨2.11%领涨</span><span class="en" style="display:none">ChiNext +1.65% After Fading from +4%, STAR 50 +2.11% Leads</span></h4>
+<p><span class="zh">A股三大指数今日冲高回落，上证指数涨0.22%报4,083.97点，深证成指涨0.73%，创业板指涨1.65%（盘中一度涨超4%）。科创50指数涨2.11%表现最强。全市场成交额3.15万亿元，较上日放量3403亿。半导体芯片、光通信、光纤、培育钻石等板块涨幅居前。科创板成分股中，澜起科技涨10.66%，盛科通信涨7.30%，沪硅产业涨7.08%。油气开采板块因油价上涨也表现活跃。</span><span class="en" style="display:none">A-shares staged a rally then faded from highs. Shanghai Composite +0.22% at 4,083.97, Shenzhen Component +0.73%, ChiNext +1.65% (briefly +4%+ intraday). STAR 50 +2.11% was the strongest performer. Total market turnover reached 3.15 trillion yuan, up 340.3B from previous day. Semiconductor chips, optical communications, fiber optics, and lab-grown diamonds led gainers. STAR market leaders: Montage Technology +10.66%, Centec Networks +7.30%, Silicon Works +7.08%. Oil & gas sector also active on rising crude prices.</span></p>
+<p class="src">来源：同花顺 / 东方财富 / 新浪财经 / 证券时报</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股（6/3收盘）— 大幅回调</span><span class="en" style="display:none">Hong Kong (Jun 3 Close) — Sharp Pullback</span></h2>
+
+<div class="card">
+<h4><span class="zh">恒指跌1.56%，恒生科技跌2.74%</span><span class="en" style="display:none">HSI -1.56%, Hang Seng Tech -2.74%</span></h4>
+<p><span class="zh">港股6月3日大幅回调，恒生指数收报25,633.21点，跌405.11点或1.56%。恒生科技指数收报5,056.97点，跌2.74%。恒生国企指数跌1.90%，恒生生物科技指数跌3.00%。科技股领跌：联想集团大跌超8%（受财务调整影响），蔚来跌超3%，理想汽车、小鹏集团跌超2%，哔哩哔哩、百度、快手、京东、网易均跌超1%。恒生科技指数自2025年10月以来截至6月1日已跌超23%，6月2日刚大涨4.72%后即遭获利回吐。</span><span class="en" style="display:none">HK stocks pulled back sharply on June 3. Hang Seng Index closed at 25,633.21 (-405.11 or -1.56%). Hang Seng Tech -2.74% at 5,056.97. HSCEI -1.90%, Hang Seng Biotech -3.00%. Tech led declines: Lenovo Group -8%+ (financial adjustments), NIO -3%+, Li Auto & XPeng -2%+, Bilibili, Baidu, Kuaishou, JD, NetEase all -1%+. Hang Seng Tech had risen 4.72% on June 2 after dropping 23%+ since October 2025, then saw profit-taking.</span></p>
+<p class="src">来源：东方财富 / 恒生指数公司 / Yahoo Finance</p>
+</div>
+
+<h2>🔍 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 博通财报 — "英伟达之外第二条主线"的压力测试</span><span class="en" style="display:none">1. Broadcom Earnings — Stress Test for "The Second AI Thread"</span></h4>
+<p><span class="zh">博通Q2营收$221.87亿超预期（+47.9%），AI半导体收入同比暴增143%。但全年AI指引$560亿低于市场预期$576亿，引发盘后暴跌12%。这场财报被市场视为"6月美股AI行情最关键的一场考试"——市场想确认AI硬件行情能否从英伟达扩展到定制芯片/网络（博通的第二条主线）。结果虽不差但不够惊艳，显示AI叙事的"预期过高"风险正在积累。</span><span class="en" style="display:none">Broadcom's Q2 revenue of $22.19B beat estimates (+47.9%), with AI chip revenue surging 143% YoY. But full-year AI guidance of $56B fell short of the $57.6B consensus, triggering a 12% after-hours plunge. This earnings report was seen as "the most critical test for June's AI market" — confirming whether the AI hardware rally can extend beyond Nvidia to custom chips/networking (Broadcom's "second thread"). Results were good but not spectacular, showing "expectations too high" risk is building in the AI narrative.</span></p>
+<p class="src">来源：华尔街见闻 / 东方财富 / The Street</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美伊局势持续恶化 — 油价逼近$100心理关口</span><span class="en" style="display:none">2. US-Iran Deterioration — Oil Nears $100 Psychological Level</span></h4>
+<p><span class="zh">伊朗威胁停止与美方信息交换并全面封锁霍尔木兹海峡，美军在阿拉伯湾击瘫第6艘油轮。WTI原油升至$95.28（+1.74%），布伦特升至$97.74。全球约20%石油运输经过霍尔木兹海峡。尽管有报道称存在新的停火草案计划，但地缘紧张情绪持续升温。能源股受益但航空股大跌，市场开始定价更高的能源成本对通胀和企业盈利的负面影响。</span><span class="en" style="display:none">Iran threatened to stop exchanging messages and fully block the Strait of Hormuz, while US forces disabled the 6th tanker. WTI rose to $95.28 (+1.74%), Brent to $97.74. ~20% of global oil transits through Hormuz. Despite reports of a new ceasefire draft plan, geopolitical tensions continued to escalate. Energy stocks benefited but airlines sold off. Markets began pricing in higher energy costs' impact on inflation and corporate earnings.</span></p>
+<p class="src">来源：Barron's / 证券时报 / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 连涨后的获利了结 — 市场宽度收窄引发担忧</span><span class="en" style="display:none">3. Profit-Taking After Win Streak — Narrow Breadth Raises Concerns</span></h4>
+<p><span class="zh">标普500九连涨后首次回调，道指跌超400点。GOOGL $800亿融资事件持续发酵（"连最强公司都无法靠自身运营支撑AI投入"），科技巨头整体承压。Mercer Advisors等机构警告市场领涨范围过窄，过度集中于AI/半导体少数标的。博通盘后暴跌12%可能预示AI板块将进入"预期调整"阶段。</span><span class="en" style="display:none">The S&P 500's first pullback after a 9-day win streak saw the Dow drop 400+ points. GOOGL's $80B capital raise continued to weigh ("even the strongest company can't fund AI internally"), pressuring big tech overall. Mercer Advisors and others warned about narrow market leadership, overly concentrated in a handful of AI/semiconductor names. Broadcom's 12% after-hours plunge may signal the AI sector entering an "expectation reset" phase.</span></p>
+<p class="src">来源：Barron's / CNBC / Yahoo Finance</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期（本周）</span><span class="en" style="display:none">Short-Term (This Week)</span></h4>
+<p><span class="zh"><b>美股：</b>博通盘后暴跌12%是明天（周四）最大变量。AI半导体板块可能集体低开，考验AI叙事韧性。若博通引发的半导体抛售蔓延至大盘，标普可能下探7,500支撑。油价$95+持续走高将进一步压制成长股。关注周三（北京时间周四凌晨）博通管理层电话会是否释放更多积极信号。<br><b>A股：</b>科创50 +2.11%的强势说明资金仍在科技主线。光通信/半导体/光纤方向有望延续，但需警惕美股半导体回调传导。创业板指冲高回落（从+4%到+1.65%）显示上方抛压较重。<br><b>港股：</b>恒生科技5,000点是关键支撑，昨日+4.72%今日-2.74%的"过山车"行情显示多空博弈激烈。联想-8%拖累指数，美团/腾讯等能否企稳是关键。</span><span class="en" style="display:none"><b>US:</b> Broadcom's 12% after-hours plunge is Thursday's biggest variable. AI semiconductor sector likely opens sharply lower, testing the AI narrative's resilience. If the selloff spreads, S&P may test 7,500 support. Oil at $95+ continues to pressure growth stocks. Watch Broadcom's earnings call for more positive signals.<br><b>A-Shares:</b> STAR 50's +2.11% strength shows capital remains in the tech thesis. Optical comms/chips/fiber may continue, but watch for US semiconductor weakness transmission. ChiNext's fade from +4% to +1.65% shows heavy overhead supply.<br><b>HK:</b> Hang Seng Tech's 5,000 level is key support. Yesterday's +4.72% followed by today's -2.74% "roller coaster" shows intense multi-short battles. Lenovo's -8% dragged the index; whether Meituan/Tencent can stabilize is key.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">关注风险</span><span class="en" style="display:none">Key Risks</span></h4>
+<p><span class="zh">• 博通盘后-12% → 半导体连锁反应 → AI板块"预期重置"<br>• WTI $95+ → $100心理关口突破 → 通胀预期升温 → 压制成长股估值<br>• 美伊谈判破裂 → 霍尔木兹海峡封锁 → 全球原油供应中断风险<br>• 标普九连涨终结 → 短期或进入震荡调整期，关注7,500支撑<br>• 港股恒生科技5000点若失守 → 可能加速下探<br>• GOOGL融资事件发酵 → 科技巨头AI投入可持续性质疑扩散</span><span class="en" style="display:none">• Broadcom -12% AH → semiconductor chain reaction → AI "expectation reset"<br>• WTI $95+ → $100 breakout → inflation expectations → growth valuation pressure<br>• US-Iran breakdown → Hormuz blockade → global oil supply disruption risk<br>• S&P win streak ends → near-term consolidation likely, watch 7,500 support<br>• Hang Seng Tech 5,000 breach → potential accelerated decline<br>• GOOGL capital raise → big tech AI sustainability concerns spreading</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">AVGO — Broadcom</div><div id="tv-avgo"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Daily · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Barron's, Investing.com, Reuters, Sina Finance, 证券时报, 东方财富, 同花顺, Yahoo Finance, Trading Economics, Goldman Sachs</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-avgo', sym:'NASDAQ:AVGO'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

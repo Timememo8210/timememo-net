@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>墨记 — 阅读</title>
+  <meta name="description" content="来自墨记的精选内容">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="墨记 — 分享内容">
+  <meta property="og:description" content="来自墨记Web的精选内容">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons 基础样式 -->
+  <style>
+    .lucide { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; vertical-align: middle; }
+    .lucide-sm { width: 18px; height: 18px; }
+    .lucide-inline { display: inline-block; vertical-align: -3px; }
+
+    /* 简化顶部栏 */
+    .view-topbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--card, #fff);
+      border-bottom: 1px solid var(--border-light, #f0ede6);
+      backdrop-filter: blur(8px);
+    }
+    .view-topbar__logo {
+      font-family: var(--font-display, serif); font-size: 1.3rem; font-weight: 700;
+      color: var(--text, #2c2c2c); text-decoration: none;
+    }
+    .view-topbar__cta {
+      padding: 6px 16px; border-radius: 999px;
+      background: var(--accent, #e85d26); color: #fff;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .view-topbar__cta:hover { opacity: 0.85; }
+  </style>
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/detail.css">
+  <link rel="stylesheet" href="../styles/view.css">
+</head>
+<body>
+
+<!-- ====== 简化顶部栏 ====== -->
+<header class="view-topbar">
+  <a href="index.html" class="view-topbar__logo">墨记</a>
+  <a href="create.html" class="view-topbar__cta">创作</a>
+</header>
+
+<div class="view-page" id="viewPage">
+
+  <!-- ====== 密码解锁层（如有密码保护） ====== -->
+  <div class="unlock-overlay" id="unlockOverlay" style="display:none;">
+    <div class="unlock-card">
+      <div class="unlock-card__icon"><i data-lucide="lock" data-fallback="🔒" style="width:32px;height:32px;stroke:var(--accent);"></i></div>
+      <h2 class="unlock-card__title">这篇内容需要密码</h2>
+      <p class="unlock-card__desc">作者为这篇内容设置了密码保护，输入密码后即可查看</p>
+      <div class="unlock-card__input-wrap">
+        <label for="unlockInput" class="sr-only">输入密码解锁</label>
+        <input
+          type="password"
+          class="unlock-card__input"
+          id="unlockInput"
+          placeholder="请输入密码"
+          autocomplete="off"
+        >
+      </div>
+      <button class="unlock-card__btn" id="unlockBtn">解锁查看</button>
+      <div class="unlock-card__error" id="unlockError">密码不正确，请重新输入</div>
+    </div>
+  </div>
+
+  <!-- ====== 内容区 ====== -->
+  <div class="view-content" id="viewContent" style="display:none;">
+
+    <!-- 阅读进度条 -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- 顶部栏 -->
+    <header class="detail-header">
+      <a href="profile.html" class="detail-header__back" id="backLink">
+        <i data-lucide="arrow-left" data-fallback="←" class="lucide-sm lucide-inline"></i>
+        返回
+      </a>
+      <button class="detail-header__share" id="shareBtn">
+        <i data-lucide="share-2" data-fallback="📤" class="lucide-sm lucide-inline"></i>
+        分享
+      </button>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="detail-page">
+      <!-- 标题区 -->
+      <section class="detail-hero" id="heroSection">
+        <h1 class="detail-hero__title" id="pageTitle"></h1>
+        <div class="detail-hero__meta">
+          <span class="detail-hero__date" id="pageAuthor"></span>
+          <span class="detail-hero__dot"></span>
+          <span class="detail-hero__date" id="pageDate"></span>
+          <span class="detail-hero__dot"></span>
+          <span class="detail-hero__date" id="pageViews"></span>
+        </div>
+        <div class="detail-hero__tags" id="pageTags"></div>
+      </section>
+
+      <!-- 正文区 -->
+      <article class="detail-content">
+        <div class="detail-body" id="pageBody"></div>
+      </article>
+
+      <!-- 分隔线 -->
+      <div class="detail-divider"><hr></div>
+
+      <!-- 底部区域 -->
+      <footer class="detail-footer">
+        <!-- 作者卡片 -->
+        <div class="author-card" id="authorCard">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.4rem;color:var(--accent);flex-shrink:0;" id="authorAvatarFallback"></div>
+          <div class="author-card__info">
+            <div class="author-card__name" id="authorName"></div>
+            <div class="author-card__bio" id="authorBio"></div>
+          </div>
+        </div>
+
+        <!-- 分享按钮组 -->
+        <div class="share-bar">
+          <button class="share-btn share-btn--copy" id="copyLinkBtn">
+            <i data-lucide="copy" data-fallback="📋" class="lucide-sm lucide-inline"></i>
+            复制链接
+          </button>
+        </div>
+
+        <!-- 评论区占位 -->
+        <div class="view-comments">
+          <div class="view-comments__box">
+            <div class="view-comments__icon"><i data-lucide="message-circle" data-fallback="💬" style="width:28px;height:28px;stroke:var(--text-muted);"></i></div>
+            <p class="view-comments__text">评论功能即将上线</p>
+            <span class="view-comments__badge">Phase 2</span>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ====== 页面未找到 ====== -->
+  <div class="not-found" id="notFound" style="display:none;">
+    <div class="not-found__icon"><i data-lucide="search" data-fallback="🔍" style="width:48px;height:48px;stroke:var(--text-muted);"></i></div>
+    <h1 class="not-found__title">页面未找到</h1>
+    <p class="not-found__desc">这个链接可能已过期或不存在。检查一下链接是否正确。</p>
+    <a href="index.html" class="btn btn-primary">回到首页</a>
+  </div>
+
+  <!-- ====== 品牌水印 ====== -->
+  <div class="view-watermark" id="viewWatermark" style="display:none;">
+    <div class="view-watermark__brand">
+      <span class="view-watermark__brand-icon">墨</span>
+      <span>由墨记Web生成</span>
+    </div>
+    <p class="view-watermark__tagline">说出你的想法，AI帮你变成网页</p>
+    <a href="create.html" class="view-watermark__cta"><i data-lucide="sparkles" data-fallback="✨" class="lucide-sm lucide-inline"></i> 我也要创作</a>
+  </div>
+
+</div>
+
+<!-- ====== Scripts ====== -->
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>
+if (typeof lucide !== 'undefined') {
+  lucide.createIcons();
+} else {
+  document.querySelectorAll('[data-lucide]').forEach(function(el) {
+    el.textContent = el.getAttribute('data-fallback') || '';
+    el.style.display = 'inline-block';
+  });
+}
+</script>
+<script src="../utils/storage.js"></script>
+<script src="../utils/share.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  /* HTML sanitizer: strips dangerous tags and event handlers */
+  var _safeTags = {p:1,h1:1,h2:1,h3:1,h4:1,h5:1,h6:1,blockquote:1,ul:1,ol:1,li:1,strong:1,em:1,b:1,i:1,span:1,br:1,hr:1,div:1,img:1,a:1,pre:1,code:1,table:1,thead:1,tbody:1,tr:1,th:1,td:1,dl:1,dt:1,dd:1,figure:1,figcaption:1,details:1,summary:1,mark:1,small:1,sub:1,sup:1,abbr:1,cite:1,q:1};
+  var _safeAttrs = {img:{src:1,alt:1,style:1},a:{href:1}};
+  function sanitizeHtml(html) {
+    if (!html) return '';
+    var result = '', re = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*?)(\/?)>|<!--[\s\S]*?-->/g, li = 0, m;
+    while ((m = re.exec(html)) !== null) {
+      result += html.substring(li, m.index); li = re.lastIndex;
+      if (m[0].charAt(1) === '!') continue;
+      var tag = m[2].toLowerCase();
+      if (!_safeTags[tag]) continue;
+      if (m[1]) { result += '</' + tag + '>'; }
+      else {
+        var sa = '', a = m[3];
+        if (a) {
+          var ar = /\s([a-zA-Z][a-zA-Z0-9\-]*)\b(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*))?/g, am, al = _safeAttrs[tag] || null;
+          while ((am = ar.exec(a)) !== null) {
+            var n = am[1].toLowerCase();
+            if (n.indexOf('on') === 0) continue;
+            // 过滤危险协议：javascript: / vbscript:
+            if (tag === 'a' && n === 'href') {
+              var hrefRaw = am[0].replace(/^\s*href\s*=\s*/, '');
+              var cleanHref = hrefRaw.replace(/^["']|["']$/g, '').trim().toLowerCase();
+              if (cleanHref.indexOf('javascript:') === 0 || cleanHref.indexOf('vbscript:') === 0) continue;
+            }
+            // 阻止 SVG data URI XSS：只允许安全的图片类型
+            if (n === 'src' && am[0].indexOf('data:') !== -1) {
+              var srcAttrVal = am[0].replace(/^\s*src\s*=\s*/, '');
+              srcAttrVal = srcAttrVal.replace(/^["']|["']$/g, '').trim();
+              if (srcAttrVal.indexOf('data:') === 0) {
+                if (!/^data:image\/(jpeg|png|gif|webp);base64,/.test(srcAttrVal)) continue;
+              }
+            }
+            if (al && al[n]) sa += ' ' + am[0];
+          }
+        }
+        result += '<' + tag + sa + (m[4] ? ' /' : '') + '>';
+      }
+    }
+    return result + html.substring(li);
+  }
+
+  var pageId = new URLSearchParams(window.location.search).get('id');
+
+  // ---------- 不存在的页面 ----------
+  if (!pageId) {
+    showNotFound();
+    return;
+  }
+
+  var page = MojiStorage.getPage(pageId);
+  if (!page) {
+    showNotFound();
+    return;
+  }
+
+  // ---------- 有密码保护 ----------
+  if (page.passwordHash) {
+    showUnlock();
+  } else {
+    showContent();
+  }
+
+  // ---------- 功能函数 ----------
+
+  function showNotFound() {
+    document.getElementById('notFound').style.display = '';
+    document.title = '页面未找到 — 墨记';
+  }
+
+  function showUnlock() {
+    var overlay = document.getElementById('unlockOverlay');
+    overlay.style.display = '';
+
+    var input = document.getElementById('unlockInput');
+    var btn = document.getElementById('unlockBtn');
+    var error = document.getElementById('unlockError');
+
+    function attemptUnlock() {
+      var pwd = input.value.trim();
+      if (!pwd) {
+        input.focus();
+        return;
+      }
+      if (MojiStorage.verifyPassword(pageId, pwd)) {
+        overlay.classList.add('hidden');
+        setTimeout(function () {
+          overlay.style.display = 'none';
+          showContent();
+        }, 400);
+      } else {
+        error.classList.add('visible');
+        input.value = '';
+        input.focus();
+        setTimeout(function () {
+          error.classList.remove('visible');
+        }, 3000);
+      }
+    }
+
+    btn.addEventListener('click', attemptUnlock);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') attemptUnlock();
+    });
+
+    // 自动聚焦
+    setTimeout(function () { input.focus(); }, 300);
+  }
+
+  function showContent() {
+    // 显示内容区和水印
+    document.getElementById('viewContent').style.display = '';
+    document.getElementById('viewWatermark').style.display = '';
+
+    // 统计浏览
+    var viewCount = MojiStorage.trackView(pageId);
+
+    // 填充标题
+    document.getElementById('pageTitle').textContent = page.title || '无标题';
+    document.title = (page.title || '墨记') + ' — 墨记';
+
+    // 日期
+    var dateStr = page.createdAt
+      ? new Date(page.createdAt).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })
+      : '未知日期';
+    document.getElementById('pageDate').textContent = dateStr;
+
+    // 浏览量
+    document.getElementById('pageViews').textContent = viewCount + ' 次浏览';
+
+    // 作者 — 优先用页面数据中的 authorName（跨设备一致），否则 fallback 到当前用户
+    var authorName = page.authorName || (MojiStorage.getUser() || {}).name || '匿名作者';
+    var authorBio = page.authorBio || (MojiStorage.getUser() || {}).bio || '墨记创作者';
+    document.getElementById('pageAuthor').textContent = authorName;
+    document.getElementById('authorName').textContent = authorName;
+    document.getElementById('authorBio').textContent = authorBio;
+    document.getElementById('authorAvatarFallback').textContent = authorName.charAt(0);
+
+    // 标签
+    var tagsContainer = document.getElementById('pageTags');
+ if (page.tags && page.tags.length) {
+      tagsContainer.innerHTML = page.tags.map(function (t) {
+        return '<span class="tag">' + escapeHtml(t) + '</span>';
+      }).join('');
+    }
+
+    // 正文渲染：优先使用 fullHtml（完整模板），否则 fallback 到 body
+    var contentArea = document.getElementById('pageBody');
+    if (page.fullHtml) {
+      // 用 iframe 渲染完整模板，确保样式一致
+      contentArea.innerHTML = '';
+      var iframe = document.createElement('iframe');
+      iframe.style.cssText = 'width:100%;border:none;min-height:60vh;display:block;';
+      // sandbox: allow-same-origin is needed for parent to write via contentDocument
+      // and to read scrollHeight for auto-height. XSS is prevented by sanitizeHtml()
+      // which strips all scripts, event handlers, and dangerous tags before rendering.
+      iframe.setAttribute('sandbox', 'allow-same-origin');
+      iframe.setAttribute('title', '内容预览');
+      contentArea.appendChild(iframe);
+      var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      iframeDoc.open();
+      iframeDoc.write(page.fullHtml);
+      iframeDoc.close();
+      // 自适应高度
+      iframe.onload = function() {
+        try {
+          var h = iframe.contentDocument.body.scrollHeight;
+          iframe.style.height = Math.max(h, 300) + 'px';
+        } catch(e) {}
+      };
+    } else if (page.body) {
+      // Fallback 也用 iframe 渲染，保持与 fullHtml 一致的显示体验
+      var defaultBodyHtml = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+        '<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Noto Sans SC",system-ui,sans-serif;background:#fff;color:#2c2c2c;padding:24px 16px;line-height:1.8}.container{max-width:640px;margin:0 auto}p{margin-bottom:1.1em;font-size:1rem}h2{font-size:1.3rem;margin:1.6em 0 0.5em;color:#e85d26;font-weight:600}h3{font-size:1.1rem;margin:1.2em 0 0.3em;font-weight:600}blockquote{border-left:3px solid #e85d26;padding:12px 20px;margin:1.5em 0;background:#fef3ed;border-radius:0 12px 12px 0;color:#6b6560}ul,ol{margin:0.8em 0 1.2em 1.5em}li{margin-bottom:0.4em}strong{color:#e85d26}</style></head><body><div class="container">' +
+        page.body +
+        '</div></body></html>';
+      contentArea.innerHTML = '';
+      var fallbackIframe = document.createElement('iframe');
+      fallbackIframe.style.cssText = 'width:100%;border:none;min-height:60vh;display:block;';
+      fallbackIframe.setAttribute('sandbox', 'allow-same-origin');
+      fallbackIframe.setAttribute('title', '内容预览');
+      contentArea.appendChild(fallbackIframe);
+      var fallbackDoc = fallbackIframe.contentDocument || fallbackIframe.contentWindow.document;
+      fallbackDoc.open();
+      fallbackDoc.write(defaultBodyHtml);
+      fallbackDoc.close();
+      fallbackIframe.onload = function() {
+        try {
+          var h = fallbackIframe.contentDocument.body.scrollHeight;
+          fallbackIframe.style.height = Math.max(h, 300) + 'px';
+        } catch(e) {}
+      };
+    } else {
+      contentArea.innerHTML = '<p style="color:var(--text-muted);">这篇内容暂无正文</p>';
+    }
+
+    // 分享按钮
+    document.getElementById('shareBtn').addEventListener('click', function () {
+      if (navigator.share) {
+        navigator.share({
+          title: page.title,
+          text: page.title + ' — 来自墨记',
+          url: window.location.href
+        }).catch(function () {});
+      } else {
+        ShareUtils.copyLink();
+      }
+    });
+
+    document.getElementById('copyLinkBtn').addEventListener('click', function () {
+      ShareUtils.copyLink();
+    });
+
+    // 阅读进度条
+    var progressBar = document.getElementById('readingProgress');
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }, { passive: true });
+
+    // 确保解锁后所有 Lucide 图标正常渲染
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    } else {
+      document.querySelectorAll('[data-lucide]').forEach(function(el) {
+        el.textContent = el.getAttribute('data-fallback') || '';
+        el.style.display = 'inline-block';
+      });
+    }
+
+    // 返回链接：直接访问时返回首页
+    var backLink = document.getElementById('backLink');
+    if (backLink && !document.referrer.includes('profile')) {
+      backLink.href = 'index.html';
+    }
+
+    // Open Graph 动态更新
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogTitle) ogTitle.setAttribute('content', (page.title || '墨记') + ' — 墨记');
+    if (ogDesc) ogDesc.setAttribute('content', page.subtitle || page.title || '来自墨记Web的精选内容');
+  }
+})();
+</script>
+
+</body>
+</html>

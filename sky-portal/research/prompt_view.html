@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>⚙ 研报生成指令</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC',sans-serif;background:#0f0f0f;color:#ccc;padding:30px 20px;max-width:800px;margin:0 auto;line-height:1.8}
+h1{color:#f0a040;font-size:1.4em;margin-bottom:4px}
+.meta{color:#666;font-size:0.85em;margin-bottom:24px}
+h2{color:#fff;font-size:1.1em;margin:24px 0 8px;padding-top:16px;border-top:1px solid #2a2a2a}
+h3{color:#f0a040;font-size:0.95em;margin:16px 0 6px}
+p{margin-bottom:10px;font-size:0.92em}
+code{background:#1a1a1a;color:#f0a040;padding:2px 6px;border-radius:4px;font-size:0.88em}
+pre{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:14px;overflow-x:auto;font-size:0.85em;margin:10px 0;color:#4ade80}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #2a2a2a;padding:8px 12px;text-align:left;font-size:0.88em}
+th{background:#1a1a1a;color:#f0a040}
+.back{color:#666;text-decoration:none;font-size:0.85em;display:inline-block;margin-bottom:16px}
+.back:hover{color:#f0a040}
+</style></head><body>
+<a class="back" href="index.html">← 返回研报中心</a>
+<h1>📡 每日研报生成指令</h1>
+<p class="meta">最后更新: 2026-04-05 · v1.0</p>
+
+<h2>执行流程</h2>
+<p>搜索以下五个板块的最新新闻和数据，生成一份 HTML 研报并发布到 GitHub。</p>
+
+<h3>板块1 — 🔬 半导体与AI</h3>
+<p>搜索 Intel, TSMC, NVIDIA, AMD, Samsung foundry, EUV, 先进封装, AI 芯片相关行业新闻，总结 top 5 要点。</p>
+
+<h3>板块2 — 📈 半导体股票</h3>
+<p>搜索 INTC, TSM, NVDA, AMD, ASML, MU, AVGO, QCOM, TSLA, SMH 的最新收盘价和涨跌幅。</p>
+<p>涨幅 &gt; 0 用绿色标签，跌幅 &lt; 0 用红色标签。</p>
+<p>底部嵌入 6 个 TradingView K 线图：<code>INTC</code> <code>NVDA</code> <code>TSLA</code> <code>SMH</code> <code>SPX</code> <code>SSE:000001</code></p>
+
+<h3>板块3 — ⚽ FC Barcelona</h3>
+<p>搜索巴萨最近 24 小时新闻：比赛结果、转会传闻、伤病更新、La Liga 排名、欧冠进展。</p>
+
+<h3>板块4 — 🌲 Portland 本地</h3>
+<p>搜索 Portland Oregon 今日新闻和天气：天气预报、重大本地新闻、交通更新、社区活动。</p>
+
+<h3>板块5 — 🤖 AI 工具/产品动态</h3>
+<p>搜索最新 AI 工具发布、产品重大更新、行业动态。关注 OpenAI, Google, Anthropic, 开源模型。</p>
+
+<h2>HTML 报告格式</h2>
+<p>深色主题：body <code>#0f0f0f</code>，卡片 <code>#1a1a1a</code>，标题 <code>#f0a040</code>，正文 <code>#ccc</code>，最大宽度 <code>900px</code></p>
+<p>文件名：<code>report-YYYY-MM-DD.html</code></p>
+
+<h2>发布流程</h2>
+<p>1. PUT 报告到 <code>research/report-{日期}.html</code>（已存在先 GET sha）</p>
+<p>2. GET <code>research/index.html</code>，在 REPORTS 数组末尾加入今天日期，PUT 更新</p>
+<p>3. 输出完整文字摘要 + 报告链接</p>
+
+<h2>变更记录</h2>
+<table>
+<tr><th>日期</th><th>变更</th></tr>
+<tr><td>2026-04-05</td><td>初始版本：五板块 + 涨跌颜色 + TradingView K线图</td></tr>
+</table>
+</body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-01</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.85em}
+.stock-name{color:#888;font-size:0.72em;margin:2px 0}
+.stock-price{color:#fff;font-size:1.05em;font-weight:600;margin:4px 0}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(250,204,21,0.15);color:#facc15;border:1px solid rgba(250,204,21,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.prediction-box{background:linear-gradient(135deg,#1a2a1a 0%,#1a1a2a 100%);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:20px 24px;margin:16px 0}
+.prediction-box h4{color:#4ade80;margin-bottom:10px}
+.prediction-box ul{list-style:none;padding-left:0}
+.prediction-box li{padding:6px 0;padding-left:20px;position:relative;font-size:0.92em}
+.prediction-box li::before{content:'→';position:absolute;left:0;color:#4ade80}
+.risk-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75em;font-weight:600;margin-left:6px}
+.risk-high{background:rgba(239,68,68,0.2);color:#f87171}
+.risk-med{background:rgba(250,204,21,0.2);color:#facc15}
+.risk-low{background:rgba(74,222,128,0.2);color:#4ade80}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#065f46 0%,#047857 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">美股收盘 · 全线上涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Close · All Green</div>
+<div class="zh poster-data">• 标普500 7,599.96 (+0.26%)<br>• 纳斯达克 27,086 (+0.42%)<br>• 道指 51,078 (+0.09%)<br>• NVDA +6% RTX Spark发布</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,599.96 (+0.26%)<br>• Nasdaq 27,086 (+0.42%)<br>• Dow 51,078 (+0.09%)<br>• NVDA +6% RTX Spark launch</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7f1d1d 0%,#991b1b 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">A股 · 科技股调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares · Tech Correction</div>
+<div class="zh poster-data">• 上证 4,057 (-0.27%)<br>• 创业板 3,950 (-2.15%)<br>• 科创50 连续两日-5%<br>• 超3700只个股上涨</div>
+<div class="en poster-data" style="display:none">• Shanghai 4,057 (-0.27%)<br>• ChiNext 3,950 (-2.15%)<br>• STAR 50 two-day -5%<br>• 3,700+ stocks rose</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f 0%,#1e40af 100%)">
+<div class="poster-icon">🇭🇰</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">港股 · 六月开门红</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">HK Market · June Green Open</div>
+<div class="zh poster-data">• 恒指 25,398 (+0.86%)<br>• 恒生科技 ~4,972 (+1.8%)<br>• 金蝶国际 +19%<br>• 联想创新高</div>
+<div class="en poster-data" style="display:none">• HSI 25,398 (+0.86%)<br>• Hang Seng Tech ~4,972 (+1.8%)<br>• Kingdee +19%<br>• Lenovo ATH</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#78350f 0%,#92400e 100%)">
+<div class="poster-icon">⛽</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">伊朗战争 · 油价高企</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Iran War · Oil Surge</div>
+<div class="zh poster-data">• WTI ~$94/桶<br>• Brent ~$96-109/桶<br>• 霍尔木兹海峡持续关闭<br>• 海湾国家关停部分设施</div>
+<div class="en poster-data" style="display:none">• WTI ~$94/bbl<br>• Brent ~$96-109/bbl<br>• Strait of Hormuz shut<br>• Gulf facilities partially closed</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-01 (Mon) · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股行情</span><span class="en" style="display:none">US Markets</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJIA</div><div class="stock-name"><span class="zh">道琼斯</span><span class="en" style="display:none">Dow Jones</span></div><div class="stock-price">51,078</div><div class="stock-change up">+0.09%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-name"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div><div class="stock-price">7,599.96</div><div class="stock-change up">+0.26%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq</span></div><div class="stock-price">27,086.81</div><div class="stock-change up">+0.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-name"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semi</span></div><div class="stock-price">12,965.65</div><div class="stock-change up">+1.04%</div></div>
+</div>
+
+<div class="card">
+<h4>🔥 <span class="zh">Nvidia发布RTX Spark超级芯片，正式进军PC市场</span><span class="en" style="display:none">🔥 Nvidia Launches RTX Spark Superchip, Enters PC Market</span></h4>
+<p><span class="zh">黄仁勋在Computex 2026发布<b>RTX Spark</b>超级芯片，标志着Nvidia正式进军Windows笔记本和台式机市场，与Intel、AMD、Apple正面竞争。RTX Spark结合Blackwell架构GPU和Arm架构N1X处理器，配备128GB统一内存，专为AI代理和高端游戏设计。联想、戴尔、惠普等PC厂商今年秋季将推出搭载该芯片的产品。Nvidia股价大涨5.45-6.2%，市值突破<b>5.4万亿美元</b>，盘中触及222.30美元历史新高。</span><span class="en" style="display:none">Jensen Huang unveiled the <b>RTX Spark</b> superchip at Computex 2026, marking Nvidia's entry into the Windows laptop/desktop market — competing directly with Intel, AMD, and Apple. It combines a Blackwell GPU with an Arm-based N1X processor and 128GB unified memory, purpose-built for AI agents and high-end gaming. Lenovo, Dell, HP will ship RTX Spark PCs this fall. NVDA surged 5.45-6.2%, market cap surpassing <b>$5.4 trillion</b>, intraday ATH of $222.30.</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance / Investopedia / Tom's Hardware / Bloomberg</span><span class="en" style="display:none">Source: Yahoo Finance / Investopedia / Tom's Hardware / Bloomberg</span></p>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">标普500和纳指连续创历史新高，芯片股领涨</span><span class="en" style="display:none">📈 S&P 500 & Nasdaq Hit Fresh ATHs, Chips Lead</span></h4>
+<p><span class="zh">标普500收于7,599.96（+0.26%），纳斯达克收于27,086.81（+0.42%），费城半导体SOX盘中冲至13,088后收于12,965。道指基本持平（+0.09%）。市场呈现典型的"AI vs 油价"拉锯格局——Nvidia和芯片股的强势完全对冲了伊朗战争和油价飙升带来的压力。标普500已连续多周创历史新高，芯片股目前占标普500权重约18%。</span><span class="en" style="display:none">S&P 500 closed at 7,599.96 (+0.26%), Nasdaq at 27,086.81 (+0.42%), SOX hit 13,088 intraday before settling at 12,965. Dow was flat (+0.09%). Classic "AI vs oil" tug-of-war — Nvidia/chips fully offset Iran war and oil pressure. S&P 500 on multi-week ATH streak, chips now ~18% of S&P 500 weight.</span></p>
+<p class="src"><span class="zh">来源：MarketWatch / WSJ / Reuters</span><span class="en" style="display:none">Source: MarketWatch / WSJ / Reuters</span></p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情</span><span class="en" style="display:none">Hong Kong Markets</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-name"><span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng</span></div><div class="stock-price">25,398</div><div class="stock-change up">+0.86%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSTECH</div><div class="stock-name"><span class="zh">恒生科技</span><span class="en" style="display:none">Hang Seng Tech</span></div><div class="stock-price">~4,972</div><div class="stock-change up">+1.81%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSCEI</div><div class="stock-name"><span class="zh">恒生国企</span><span class="en" style="display:none">HS CEI</span></div><div class="stock-price">~8,514</div><div class="stock-change up">+1.05%</div></div>
+<div class="stock-item"><div class="stock-ticker">—</div><div class="stock-name"><span class="zh">亮点</span><span class="en" style="display:none">Highlight</span></div><div class="stock-price" style="font-size:0.85em">金蝶+19%</div><div class="stock-change up">联想ATH</div></div>
+</div>
+
+<div class="card">
+<h4>🚀 <span class="zh">港股六月开门红，科技股全线走强</span><span class="en" style="display:none">🚀 HK Market Opens June Strong, Tech Stocks Rally</span></h4>
+<p><span class="zh">恒生指数收于25,398（+0.86%），恒生科技指数午盘一度涨2.7%，收涨约1.8%至4,972点。金蝶国际暴涨近19%领涨科技板块，联想集团再创历史新高。应用软件、科网股全线走强。市场情绪受AI投资持续乐观和Nvidia RTX Spark发布带动。</span><span class="en" style="display:none">HSI closed at 25,398 (+0.86%), Hang Seng Tech surged as much as 2.7% intraday, closing ~1.8% higher at 4,972. Kingdee International soared ~19% leading tech, Lenovo hit new ATH. Application software and tech stocks rallied broadly, fueled by continued AI optimism and Nvidia RTX Spark launch.</span></p>
+<p class="src"><span class="zh">来源：格隆汇 / 证券时报 / Investing.com</span><span class="en" style="display:none">Source: Gelonghui / Securities Times / Investing.com</span></p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情</span><span class="en" style="display:none">China A-Shares</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">000001</div><div class="stock-name"><span class="zh">上证指数</span><span class="en" style="display:none">Shanghai</span></div><div class="stock-price">4,057.74</div><div class="stock-change down">-0.27%</div></div>
+<div class="stock-item"><div class="stock-ticker">399001</div><div class="stock-name"><span class="zh">深证成指</span><span class="en" style="display:none">SZSE Comp</span></div><div class="stock-price">15,340.36</div><div class="stock-change down">-1.51%</div></div>
+<div class="stock-item"><div class="stock-ticker">399006</div><div class="stock-name"><span class="zh">创业板指</span><span class="en" style="display:none">ChiNext</span></div><div class="stock-price">3,950.94</div><div class="stock-change down">-2.15%</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-name"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div><div class="stock-price">—</div><div class="stock-change down">-5.00%</div></div>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">A股六月首日分化：指数下跌但超3700只个股上涨</span><span class="en" style="display:none">📉 A-Shares June Open: Indices Fall but 3,700+ Stocks Rise</span></h4>
+<p><span class="zh">6月1日A股市场呈现罕见"指数跌、个股涨"的结构性分化。上证指数微跌0.27%报4,057点，深成指跌1.51%，创业板指跌2.15%，科创50更是连续第二个交易日暴跌约5%。然而全市场超3700只个股上涨，逾160只涨停。<b>核心矛盾：半导体/AI硬科技交易极度拥挤</b>，5月半导体板块涨幅巨大，叠加约200只基金6月1日起调整业绩比较基准引发调仓。煤炭、AIGC、操作系统等板块爆发，红利指数涨逾3%。成交额2.9万亿元，较前日缩量。</span><span class="en" style="display:none">June 1 saw a rare divergence — indices fell but 3,700+ stocks rose. Shanghai dropped 0.27% to 4,057, SZSE -1.51%, ChiNext -2.15%, STAR 50 crashed ~5% for the 2nd straight day. Yet 3,700+ stocks advanced with 160+ hitting limit-up. <b>Key issue: extreme crowding in semiconductor/AI trades</b>. May's huge semi gains + ~200 funds adjusting benchmarks on June 1 triggered rotation. Coal, AIGC, OS sectors surged; dividend index +3%. Volume 2.9T yuan, lower than prior day.</span></p>
+<p class="src"><span class="zh">来源：证券时报 / 财联社 / 21经济网 / 国际金融报</span><span class="en" style="display:none">Source: Securities Times / Cailian / 21jingji / IFN</span></p>
+</div>
+
+<div class="card">
+<h4>🔧 <span class="zh">科创50两日暴跌10%：公募调仓还是交易拥挤？</span><span class="en" style="display:none">🔧 STAR 50 Two-Day -10%: Fund Rebalancing or Crowded Trade?</span></h4>
+<p><span class="zh">科创50指数连续两个交易日各跌约5%，累计跌幅达10%。半导体芯片股领跌，斯达半导等跌停。市场对此有两派解读：①<b>公募调仓说</b>——约200只基金6月1日起调整业绩基准，引发从科技向低估值板块的集中调仓；②<b>交易拥挤说</b>——中银国际指出全A拥挤度（前5%个股成交额占比）已达极值，半导体板块成交占比过高。分析人士认为两者叠加，叠加6月PMI数据混合信号，短期高估值板块波动仍大。但长期AI/半导体逻辑不变。</span><span class="en" style="display:none">STAR 50 fell ~5% for two consecutive days, -10% cumulative. Semiconductor chips led the decline. Two interpretations: ① <b>Fund rebalancing</b> — ~200 funds adjusting benchmarks on June 1, rotating from tech to value; ② <b>Crowded trade</b> — BOC International noted top 5% stocks' volume share hit extreme levels, semi sector over-concentrated. Analysts see both factors plus mixed PMI data. Short-term volatility in high-valuation sectors remains high, but long-term AI/semi thesis intact.</span></p>
+<p class="src"><span class="zh">来源：21经济网 / 财联社 / 川观新闻</span><span class="en" style="display:none">Source: 21jingji / Cailian / Sichuan Daily</span></p>
+</div>
+
+<h2>⛽ <span class="zh">地缘政治与油价</span><span class="en" style="display:none">Geopolitics & Oil</span></h2>
+
+<div class="card">
+<h4>🌍 <span class="zh">伊朗战争持续升级：霍尔木兹海峡关闭，海湾设施遭袭</span><span class="en" style="display:none">🌍 Iran War Escalation: Hormuz Shut, Gulf Facilities Attacked</span></h4>
+<p><span class="zh">伊朗-美以联军战争持续。阿联酋遭伊朗导弹攻击后，海湾国家被迫关停部分油气设施。霍尔木兹海峡仍然关闭，全球约20%的石油运输受阻。WTI原油约94美元/桶，Brent在96-109美元区间波动。油价自2月底战争爆发以来已上涨约50%。市场密切关注美国是否会对伊朗发动新一轮军事行动或推动外交谈判。油价高企已成为压制全球经济和美联储降息预期的最大因素。</span><span class="en" style="display:none">The Iran–US/Israel coalition war continues. After Iranian missile strikes on the UAE, Gulf nations shut down some oil/gas facilities. The Strait of Hormuz remains closed, disrupting ~20% of global oil transit. WTI at ~$94/bbl, Brent in the $96-109 range. Oil has surged ~50% since the war began in late February. Markets watch for new US military action or diplomatic push. Elevated oil is the biggest factor weighing on the global economy and Fed rate-cut expectations.</span></p>
+<p class="src"><span class="zh">来源：Business Insider / BBC / The Guardian / Reuters</span><span class="en" style="display:none">Source: Business Insider / BBC / The Guardian / Reuters</span></p>
+</div>
+
+<h2>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px">
+<div><div style="font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div><div style="font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div><div style="font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px">SOX — PHLX Semi</div><div id="tv-sox"></div></div>
+<div><div style="font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px">000001 — <span class="zh">上证指数</span><span class="en" style="display:none">Shanghai</span></div><div id="tv-sse"></div></div>
+<div><div style="font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px">^HSI — <span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng</span></div><div id="tv-hsi"></div></div>
+<div><div style="font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px">CL=F — <span class="zh">原油</span><span class="en" style="display:none">Crude Oil</span></div><div id="tv-oil"></div></div>
+</div>
+
+<h2>🔮 <span class="zh">明日/近期预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="prediction-box">
+<h4>🇺🇸 <span class="zh">美股</span><span class="en" style="display:none">US Markets</span></h4>
+<ul>
+<li><span class="zh">标普500和纳指持续创历史新高，AI/半导体仍是核心主线。Nvidia RTX Spark发布可能带动AMD、Intel、高通等PC芯片概念股重新定价</span><span class="en" style="display:none">S&P & Nasdaq on sustained ATH streak. AI/semis remain the core narrative. Nvidia RTX Spark may reprice AMD, Intel, Qualcomm in the PC chip space</span></li>
+<li><span class="zh">油价走势是最大变量——若WTI突破$100，可能触发通胀预期升温，推迟美联储降息</span><span class="en" style="display:none">Oil is the key variable — WTI breaking $100 could trigger inflation fears, delay Fed cuts</span></li>
+<li><span class="zh">费城半导体SOX在13,000附近有强支撑，回调即买点</span><span class="en" style="display:none">SOX has strong support near 13,000; pullbacks are buying opportunities</span></li>
+</ul>
+</div>
+
+<div class="prediction-box">
+<h4>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">A-Shares & HK</span></h4>
+<ul>
+<li><span class="zh">半导体短期调整可能延续（拥挤交易需要时间消化），但中长期逻辑不变。6月进入高低切换，关注从科技转向低估值（煤炭、消费）的轮动机会</span><span class="en" style="display:none">Semi correction may extend (crowded trade needs time to digest), but long-term thesis intact. June rotation: watch for tech → value (coal, consumer) shift</span></li>
+<li><span class="zh">上证4,050-4,100区间震荡。创业板和科创50短期承压，等待拥挤度下降后的加仓机会</span><span class="en" style="display:none">Shanghai 4,050-4,100 range. ChiNext/STAR 50 under pressure; wait for crowding to ease before adding positions</span></li>
+<li><span class="zh">港股恒指6月开门红，恒生科技关注5,000点能否站稳。金蝶、联想等应用软件股值得关注</span><span class="en" style="display:none">HK HSI June green open; watch if Hang Seng Tech holds 5,000. Kingdee, Lenovo worth monitoring</span></li>
+</ul>
+</div>
+
+<div class="prediction-box" style="border-color:rgba(239,68,68,0.3)">
+<h4>⚠️ <span class="zh">风险提示</span><span class="en" style="display:none">Risk Alert</span></h4>
+<ul>
+<li><span class="zh">伊朗局势升级 → 油价破$100 → 通胀预期升温 → 美联储降息预期推迟 <span class="risk-tag risk-high">高风险</span></span><span class="en" style="display:none">Iran escalation → Oil $100+ → Inflation fears → Fed cuts delayed <span class="risk-tag risk-high">HIGH</span></span></li>
+<li><span class="zh">A股半导体交易拥挤度仍高，短期可能继续波动 <span class="risk-tag risk-med">中风险</span></span><span class="en" style="display:none">A-share semi crowding still high, short-term volatility may continue <span class="risk-tag risk-med">MEDIUM</span></span></li>
+<li><span class="zh">美股AI/科技板块估值偏高，若油价冲击加剧可能触发获利回吐 <span class="risk-tag risk-med">中风险</span></span><span class="en" style="display:none">US AI/tech valuations elevated; oil shock could trigger profit-taking <span class="risk-tag risk-med">MEDIUM</span></span></li>
+</ul>
+</div>
+
+<div class="footer">
+<p>📊 每日行情 Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Yahoo Finance, MarketWatch, WSJ, Reuters, Investopedia, 证券时报, 财联社, 格隆汇, TradingEconomics</span><span class="en" style="display:none">Sources: Yahoo Finance, MarketWatch, WSJ, Reuters, Investopedia, Securities Times, Cailian, Gelonghui, TradingEconomics</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HSI:HSI'},
+  {id:'tv-oil', sym:'NYMEX:CL1!'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

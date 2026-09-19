@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧳 Sky Portal旅行管家 - Sky Portal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        header h1 {
+            font-size: 2.2em;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        header p { color: #888; font-size: 0.95em; }
+
+        .trip-card {
+            background: rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s;
+        }
+        .trip-card:hover { transform: translateY(-2px); }
+
+        .trip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .trip-title {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        .trip-dates {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        .trip-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        .status-upcoming { background: #1a4a2e; color: #4ade80; }
+        .status-planned { background: #4a3a1a; color: #fbbf24; }
+        .status-past { background: #333; color: #999; }
+
+        .trip-items { margin-top: 12px; }
+        .trip-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .trip-item:last-child { border-bottom: none; }
+        .trip-item-icon { font-size: 1.3em; width: 36px; text-align: center; }
+        .trip-item-content { flex: 1; }
+        .trip-item-title { font-weight: 500; }
+        .trip-item-detail { color: #888; font-size: 0.85em; margin-top: 2px; }
+        .trip-item-status { font-size: 0.8em; }
+        .confirmed { color: #4ade80; }
+        .pending { color: #fbbf24; }
+        .not-booked { color: #666; }
+
+        .trip-ref {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85em;
+            color: #7dd3fc;
+        }
+
+        .countdown {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 8px 0;
+        }
+        .countdown-label {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            color: #7dd3fc;
+            margin: 30px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(125,211,252,0.2);
+        }
+
+        .tip-box {
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 0.9em;
+            color: #93c5fd;
+        }
+        .tip-box strong { color: #60a5fa; }
+
+        .back-link {
+            display: inline-block;
+            color: #7dd3fc;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        footer {
+            text-align: center;
+            color: #555;
+            padding: 30px 0;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回 Sky Portal</a>
+
+        <header>
+            <h1>🧳 Sky Portal旅行管家</h1>
+            <p>所有行程一目了然 · Sky自动整理</p>
+        </header>
+
+        <!-- ====== 即将到来 ====== -->
+        <div class="section-title">📅 即将到来</div>
+
+        <a class="trip-card" href="smith-rock-2026.html" style="display:block;text-decoration:none;color:inherit;">
+            <div class="trip-header">
+                <div>
+                    <div class="trip-title">🏜️ Smith Rock · 2026暑期周末独行</div>
+                    <div class="trip-dates">Portland 自驾 · Tesla 充电 · 徒步 · 可当天往返/住一晚</div>
+                </div>
+                <span class="trip-status status-planned">攻略已做</span>
+            </div>
+            <div class="trip-items">
+                <div class="trip-item">
+                    <div class="trip-item-icon">⚡</div>
+                    <div class="trip-item-content">
+                        <div class="trip-item-title">主充电点：Madras Supercharger</div>
+                        <div class="trip-item-detail">Sandy 备用 · Redmond 住宿节点</div>
+                    </div>
+                    <div class="trip-item-status confirmed">✓ 已规划</div>
+                </div>
+                <div class="trip-item">
+                    <div class="trip-item-icon">🥾</div>
+                    <div class="trip-item-content">
+                        <div class="trip-item-title">核心路线：Rim Rock + Crooked River</div>
+                        <div class="trip-item-detail">Misery Ridge 作为体力和天气都合适时的加餐</div>
+                    </div>
+                    <div class="trip-item-status confirmed">✓ 已规划</div>
+                </div>
+            </div>
+        </a>
+
+        <div class="trip-card">
+            <div class="trip-header">
+                <div>
+                    <div class="trip-title">🇨🇳 南京 · 6月</div>
+                    <div class="trip-dates">6月11日(周四) — 6月12日(周五) · 2天</div>
+                </div>
+                <span class="trip-status status-planned">计划中</span>
+            </div>
+
+            <div class="countdown" id="nanjing-countdown"></div>
+            <div class="countdown-label">距离出发</div>
+
+            <div class="trip-items">
+                <div class="trip-item">
+                    <div class="trip-item-icon">✈️</div>
+                    <div class="trip-item-content">
+                        <div class="trip-item-title">机票</div>
+                        <div class="trip-item-detail">PDX → NKG（或 PDX → SFO/PVG → NKG）</div>
+                    </div>
+                    <div class="trip-item-status not-booked">未预订</div>
+                </div>
+                <div class="trip-item">
+                    <div class="trip-item-icon">🏨</div>
+                    <div class="trip-item-content">
+                        <div class="trip-item-title">酒店</div>
+                        <div class="trip-item-detail">南京市区</div>
+                    </div>
+                    <div class="trip-item-status not-booked">未预订</div>
+                </div>
+                <div class="trip-item">
+                    <div class="trip-item-icon">🚄</div>
+                    <div class="trip-item-content">
+                        <div class="trip-item-title">高铁/交通</div>
+                        <div class="trip-item-detail">待安排</div>
+                    </div>
+                    <div class="trip-item-status not-booked">待定</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== 已有预订 ====== -->
+        <div class="section-title">🎫 已有预订信息</div>
+
+        <div class="trip-card">
+            <div class="trip-header">
+                <div>
+                    <div class="trip-title">✈️ 国泰航空 PDX → SFO</div>
+                    <div class="trip-dates">2026年2月（已出行）</div>
+                </div>
+                <span class="trip-status status-past">已完成</span>
+            </div>
+            <div class="trip-ref">
+                📋 确认号: B6EPPG &nbsp;|&nbsp; 航司: Cathay Pacific
+            </div>
+            <div class="trip-items">
+                <div class="trip-item">
+                    <div class="trip-item-icon">📧</div>
+                    <div class="trip-item-content">
+                        <div class="trip-item-title">来源: Gmail电子机票</div>
+                        <div class="trip-item-detail">2026-02-20 收到确认邮件 · 可能为2/28南京行的转机段</div>
+                    </div>
+                    <div class="trip-item-status confirmed">✓ 已确认</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== 过往行程 ====== -->
+        <div class="section-title">📜 过往行程</div>
+
+        <div class="trip-card">
+            <div class="trip-header">
+                <div>
+                    <div class="trip-title">🇨🇳 南京 · 2月</div>
+                    <div class="trip-dates">2月28日(周六) — 3月2日(周一) · 3天</div>
+                </div>
+                <span class="trip-status status-past">已完成</span>
+            </div>
+        </div>
+
+        <div class="trip-card">
+            <div class="trip-header">
+                <div>
+                    <div class="trip-title">🏜️ Phoenix, AZ · 1月</div>
+                    <div class="trip-dates">1月28日(周三) — 1月30日(周五) · 3天</div>
+                </div>
+                <span class="trip-status status-past">已完成</span>
+            </div>
+        </div>
+
+        <!-- ====== 使用说明 ====== -->
+        <div class="tip-box">
+            <strong>💡 如何使用旅行管家：</strong><br>
+            · 告诉Sky "我订了XX酒店" → 自动录入<br>
+            · 说 "帮我查邮箱里的行程" → 自动扫描整理<br>
+            · 说 "明天去哪？需要什么票？" → 秒回行程<br>
+            · 出发前可生成PDF行程单<br>
+            · 转发预订确认邮件给Sky → 自动解析
+        </div>
+
+        <footer>
+            ☁️ Sky Travel Manager · 最后更新 2026-03-08<br>
+            数据来源: Gmail (timememo8210@gmail.com) + TripIt
+        </footer>
+    </div>
+
+    <script>
+        // Countdown to Nanjing trip
+        function updateCountdown() {
+            const target = new Date('2026-06-11T00:00:00-07:00');
+            const now = new Date();
+            const diff = target - now;
+            if (diff <= 0) {
+                document.getElementById('nanjing-countdown').textContent = '已出发！';
+                return;
+            }
+            const days = Math.floor(diff / (1000*60*60*24));
+            document.getElementById('nanjing-countdown').textContent = days + ' 天';
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+/**
+ * 墨记Web — 共享主题变量
+ * 所有页面引用这个CSS文件保持视觉一致性
+ */
+
+/* ========== 主题变量 ========== */
+:root {
+  /* 主背景 */
+  --bg: #faf9f6;
+  --bg-warm: #f5f3ef;
+  --bg-cream: #f0ede6;
+
+  /* 卡片 */
+  --card: #ffffff;
+  --card-hover: #fefefe;
+
+  /* 文字 */
+  --text: #2c2c2c;
+  --text-secondary: #5a5550;
+  --text-muted: #7a746d;
+
+  /* 强调色 */
+  --accent: #e85d26;
+  --accent-soft: #f4a67a;
+  --accent-bg: #fef3ed;
+  --accent-hover: #d4521e;
+
+  /* 边框 */
+  --border: #e8e4de;
+  --border-light: #f0ece6;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* 字体 */
+  --font-display: 'Noto Serif SC', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-body: 'Noto Sans SC', 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* 代码块专用 */
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
+
+  /* 布局 */
+  --content-width: 680px;
+  --wide-width: 960px;
+  --page-padding: 2rem;
+
+  /* 动画 */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+
+  /* 别名 — 跨页面统一引用 */
+  --max-content: 680px;
+  --max-wide: 960px;
+  --transition: 0.3s ease;
+  --nav-height: 64px;
+
+  /* 语义色 */
+  --success: #4caf50;
+  --success-bg: #e8f5e9;
+}
+
+/* ========== 基础重置 ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========== 通用组件 ========== */
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232, 93, 38, 0.3);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.8rem;
+}
+
+.btn-ghost:hover {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+/* 标签 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.tag.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* 分割线 */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  border: none;
+}
+
+/* Toast提示 */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 200;
+  transition: transform var(--transition-normal);
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== 动画 ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ========== 布局工具类 ========== */
+
+.container {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+}
+
+/* ========== 滚动揭示动画 ========== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== 页脚 ========== */
+
+.site-footer {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--bg-warm);
+  border-top: 1px solid var(--border-light);
+}
+
+.site-footer p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.site-footer a {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+}
+
+/* ========== 间距工具类 ========== */
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+/* ========== 无障碍：减弱动画 ========== */
+
+/* ========== 无障碍：焦点可见 ========== */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ========== 无障碍：屏幕阅读器专用 ========== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========== 响应式断点 ========== */
+@media (max-width: 768px) {
+  :root {
+    --page-padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-padding: 1rem;
+  }
+}

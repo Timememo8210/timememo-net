@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Style 6: Horizontal Scroll</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC','Space Grotesk',sans-serif;background:#111;color:#fff;font-size:14px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+/* Fixed nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,17,17,0.8);backdrop-filter:blur(12px)}
+.nav h1{font-family:'Space Grotesk',sans-serif;font-size:0.95em;font-weight:700}
+.nav h1 span{color:#5E6AD2}
+.nav-links{display:flex;gap:16px}
+.nav-links a{font-size:0.78em;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.15s}
+.nav-links a:hover{color:#fff}
+
+/* Progress */
+.progress{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,#5E6AD2,#22c55e,#f59e0b,#ef4444);z-index:100;transition:width 0.05s;width:0}
+
+/* Vertical intro section */
+.intro{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.intro h2{font-family:'Space Grotesk',sans-serif;font-size:3.5em;font-weight:700;letter-spacing:-0.04em;line-height:1.05}
+.intro h2 em{font-style:normal;background:linear-gradient(90deg,#5E6AD2,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.intro p{color:rgba(255,255,255,0.4);margin-top:12px;font-size:0.95em}
+.intro .scroll-hint{position:absolute;bottom:40px;font-size:0.72em;color:rgba(255,255,255,0.2);animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* Horizontal scroll container */
+.h-scroll-wrap{position:relative}
+.h-scroll{display:flex;gap:0;height:100vh}
+.h-panel{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+
+/* Panel backgrounds */
+.panel-daily{background:linear-gradient(135deg,#0f172a,#1e293b)}
+.panel-research{background:linear-gradient(135deg,#1e1b4b,#312e81)}
+.panel-life{background:linear-gradient(135deg,#052e16,#14532d)}
+.panel-tools{background:linear-gradient(135deg,#422006,#78350f)}
+
+/* Panel content */
+.panel-inner{max-width:600px;padding:0 48px}
+.panel-label{font-family:'Space Grotesk',sans-serif;font-size:0.68em;text-transform:uppercase;letter-spacing:0.2em;opacity:0.4;margin-bottom:16px}
+.panel-title{font-family:'Space Grotesk',sans-serif;font-size:2.6em;font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:24px}
+.panel-title em{font-style:italic;opacity:0.6}
+
+/* Vertical link list inside panel */
+.plinks{display:flex;flex-direction:column;gap:0}
+.plink{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-decoration:none;color:rgba(255,255,255,0.7);transition:all 0.15s}
+.plink:last-child{border-bottom:none}
+.plink:hover{color:#fff;padding-left:8px}
+.plink-left{display:flex;align-items:baseline;gap:10px}
+.plink-ico{opacity:0.4;font-size:0.9em}
+.plink-name{font-weight:600}
+.plink-tag{font-family:'Space Grotesk',sans-serif;font-size:0.6em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;opacity:0.3}
+
+/* Vertical footer */
+.footer{height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;color:rgba(255,255,255,0.2);font-size:0.8em}
+
+/* Scroll indicator */
+.scroll-ind{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;font-family:'Space Grotesk',sans-serif;font-size:0.65em;color:rgba(255,255,255,0.2);background:rgba(0,0,0,0.5);padding:6px 16px;border-radius:100px;pointer-events:none}
+
+@media(max-width:768px){
+  .intro h2{font-size:2.4em}
+  .panel-title{font-size:1.8em}
+  .nav-links{display:none}
+  .plink-tag{display:none}
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="nav">
+  <h1>SKY<span>.</span></h1>
+  <div class="nav-links"><a href="#daily"><span class="zh">每日</span><span class="en">Daily</span></a><a href="#research"><span class="zh">研究</span><span class="en">Research</span></a><a href="#life"><span class="zh">生活</span><span class="en">Life</span></a><a href="#tools"><span class="zh">项目</span><span class="en">Projects</span></a></div>
+</div>
+<div class="progress" id="progress"></div>
+<div class="scroll-ind" id="scrollInd">→ <span class="zh">横向滚动</span><span class="en">Scroll →</span></div>
+
+<!-- Vertical Intro -->
+<div class="intro" id="intro">
+  <div>
+    <h2><span class="zh">Sky Portal的<br><em>数字空间</em></span><span class="en">Sky Portal's<br><em>Digital Space</em></span></h2>
+    <p><span class="zh">向右滑动开始探索 →</span><span class="en">Scroll right to explore →</span></p>
+  </div>
+  <div class="scroll-hint">↓</div>
+</div>
+
+<!-- Horizontal Scroll Track -->
+<div class="h-scroll-wrap" id="hWrap">
+  <div class="h-scroll" id="hScroll">
+
+    <div class="h-panel panel-daily" id="daily">
+      <div class="panel-inner">
+        <div class="panel-label"><span class="zh">每日更新</span><span class="en">Daily</span></div>
+        <div class="panel-title"><span class="zh">自动化的<em>信息流</em></span><span class="en">Automated <em>Flow</em></span></div>
+        <div class="plinks">
+          <a class="plink" href="research/index.html"><div class="plink-left"><span class="plink-ico">📡</span><span class="plink-name"><span class="zh">每日研报</span><span class="en">Briefing</span></span></div><span class="plink-tag">auto</span></a>
+          <a class="plink" href="tech/index.html"><div class="plink-left"><span class="plink-ico">🔬</span><span class="plink-name"><span class="zh">每日科技</span><span class="en">Tech</span></span></div><span class="plink-tag">auto</span></a>
+          <a class="plink" href="market/index.html"><div class="plink-left"><span class="plink-ico">📊</span><span class="plink-name"><span class="zh">每日行情</span><span class="en">Market</span></span></div><span class="plink-tag">9pm</span></a>
+          <a class="plink" href="science/index.html"><div class="plink-left"><span class="plink-ico">🧬</span><span class="plink-name"><span class="zh">每周科学</span><span class="en">Science</span></span></div><span class="plink-tag">wed</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-panel panel-research" id="research">
+      <div class="panel-inner">
+        <div class="panel-label"><span class="zh">研究专栏</span><span class="en">Research</span></div>
+        <div class="panel-title"><span class="zh">半导体 & AI<em>深度</em></span><span class="en">Semi & AI <em>Deep</em></span></div>
+        <div class="plinks">
+          <a class="plink" href="research/intel-tesla-terafab.html"><div class="plink-left"><span class="plink-ico">⚡</span><span class="plink-name">Intel × Tesla Terafab</span></div><span class="plink-tag">new</span></a>
+          <a class="plink" href="ai-cvd-optimization.html"><div class="plink-left"><span class="plink-ico">🏭</span><span class="plink-name"><span class="zh">AI半导体</span><span class="en">AI Semi</span></span></div><span class="plink-tag">new</span></a>
+          <a class="plink" href="nvidia-report.html"><div class="plink-left"><span class="plink-ico">🟢</span><span class="plink-name">NVIDIA Foundry</span></div><span class="plink-tag">v2.2</span></a>
+          <a class="plink" href="ai-life.html"><div class="plink-left"><span class="plink-ico">🤖</span><span class="plink-name"><span class="zh">AI生活</span><span class="en">AI Life</span></span></div><span class="plink-tag">updated</span></a>
+          <a class="plink" href="claude-code-leak.html"><div class="plink-left"><span class="plink-ico">🔓</span><span class="plink-name">Claude Code</span></div><span class="plink-tag">research</span></a>
+          <a class="plink" href="skills.html"><div class="plink-left"><span class="plink-ico">☁️</span><span class="plink-name"><span class="zh">Sky技能</span><span class="en">Skills</span></span></div><span class="plink-tag">30+</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-panel panel-life" id="life">
+      <div class="panel-inner">
+        <div class="panel-label"><span class="zh">生活</span><span class="en">Life</span></div>
+        <div class="panel-title"><span class="zh">个人 & <em>家庭</em></span><span class="en">Personal & <em>Family</em></span></div>
+        <div class="plinks">
+          <a class="plink" href="naturalization.html"><div class="plink-left"><span class="plink-ico">🇺🇸</span><span class="plink-name"><span class="zh">入籍</span><span class="en">N-400</span></span></div><span class="plink-tag">prep</span></a>
+          <a class="plink" href="coach/index.html"><div class="plink-left"><span class="plink-ico">📚</span><span class="plink-name"><span class="zh">教练</span><span class="en">Coach</span></span></div><span class="plink-tag">daily</span></a>
+          <a class="plink" href="my-garden/"><div class="plink-left"><span class="plink-ico">🌸</span><span class="plink-name"><span class="zh">花园</span><span class="en">Garden</span></span></div><span class="plink-tag">2026</span></a>
+          <a class="plink" href="investment.html"><div class="plink-left"><span class="plink-ico">💰</span><span class="plink-name"><span class="zh">投资</span><span class="en">Invest</span></span></div><span class="plink-tag">ongoing</span></a>
+          <a class="plink" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><div class="plink-left"><span class="plink-ico">🌍</span><span class="plink-name"><span class="zh">欧洲行</span><span class="en">Europe</span></span></div><span class="plink-tag">v5</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-panel panel-tools" id="tools">
+      <div class="panel-inner">
+        <div class="panel-label"><span class="zh">项目 & 工具</span><span class="en">Projects</span></div>
+        <div class="panel-title"><span class="zh">创造 & <em>探索</em></span><span class="en">Create & <em>Explore</em></span></div>
+        <div class="plinks">
+          <a class="plink" href="prolynk.html"><div class="plink-left"><span class="plink-ico">🏠</span><span class="plink-name">ProLynk</span></div><span class="plink-tag">new</span></a>
+          <a class="plink" href="https://timememo8210.github.io/家人-War-Game/" target="_blank"><div class="plink-left"><span class="plink-ico">⚔️</span><span class="plink-name"><span class="zh">时代之战</span><span class="en">War</span></span></div><span class="plink-tag">game</span></a>
+          <a class="plink" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank"><div class="plink-left"><span class="plink-ico">🌍</span><span class="plink-name"><span class="zh">世界征服</span><span class="en">Conquest</span></span></div><span class="plink-tag">game</span></a>
+          <a class="plink" href="https://timememo8210.github.io/moji-journal/" target="_blank"><div class="plink-left"><span class="plink-ico">📝</span><span class="plink-name"><span class="zh">墨记</span><span class="en">Moji</span></span></div><span class="plink-tag">dev</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">Sky Portal · OpenClaw ☁️</div>
+
+<script>
+// Horizontal scroll: translate on vertical scroll
+var wrap=document.getElementById('hWrap');
+var scroll=document.getElementById('hScroll');
+var panels=scroll.children;
+var totalW=panels.length*window.innerWidth;
+
+wrap.style.height=(panels.length*100)+'vh';
+
+window.addEventListener('scroll',function(){
+  var introH=document.getElementById('intro').offsetHeight;
+  var scrollY=window.scrollY-introH;
+  if(scrollY<0){scrollY=0}
+  var maxScroll=wrap.offsetHeight-window.innerHeight;
+  var progress=Math.min(scrollY/maxScroll,1);
+  scroll.style.transform='translateX('+(-progress*(totalW-window.innerWidth))+'px)';
+  // Progress bar
+  var fullH=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('progress').style.width=(window.scrollY/fullH*100)+'%';
+  // Hide hint
+  if(progress>0.01)document.getElementById('scrollInd').style.opacity='0';
+});
+</script>
+</body>
+</html>

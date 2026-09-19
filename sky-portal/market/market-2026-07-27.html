@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-27 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #1a2a1a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#111118;border:1px solid #1a2a1a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#666;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#111118;border:1px solid #1a2a1a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#aaa;border:1px solid rgba(255,255,255,0.15)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1a2a1a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c2a,#0d3320)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股分化</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Diverge</div>
+<div class="zh poster-data">• 道指 ▲ +0.51% 至52,210<br>• 标普基本持平 +0.02%<br>• 纳指 ▼ -0.18%<br>• 半导体 ▼ -2.23%</div>
+<div class="en poster-data" style="display:none">• Dow ▲ +0.51% to 52,210<br>• S&P 500 flat +0.02%<br>• Nasdaq ▼ -0.18%<br>• SOX ▼ -2.23%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#b91c1c,#7f1d1d)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股大涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Surge</div>
+<div class="zh poster-data">• 创业板 ▲ +3.16% 领涨<br>• 深成指 ▲ +2.72%<br>• 上证 ▲ +1.15%<br>• 恒生科技 ▲ +1.57%</div>
+<div class="en poster-data" style="display:none">• ChiNext ▲ +3.16% leads<br>• Shenzhen ▲ +2.72%<br>• Shanghai ▲ +1.15%<br>• Hang Seng Tech ▲ +1.57%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">
+<div class="poster-icon">🔧</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chip Sell-Off</div>
+<div class="zh poster-data">• 费半 ▼ -2.23%<br>• NVDA ▼ -5.38%<br>• 资金轮动至加密板块<br>• 7月费半累计仍跌超13%</div>
+<div class="en poster-data" style="display:none">• SOX ▼ -2.23%<br>• NVDA ▼ -5.38%<br>• Rotation to crypto<br>• SOX still down >13% in July</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#0369a1,#075985)">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊缓和</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran De-escalation</div>
+<div class="zh poster-data">• 冲突暂停谈判进行中<br>• 原油价格大幅回落<br>• 风险偏好回升<br>• 道指受益领涨</div>
+<div class="en poster-data" style="display:none">• Conflict pause, talks ongoing<br>• Oil prices plunge<br>• Risk appetite improves<br>• Dow benefits, leads rally</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-07-27 (Monday) · Sky Portal · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,210</div><div class="stock-change up">+0.51%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,413</div><div class="stock-change flat">+0.02%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">24,932</div><div class="stock-change down">-0.18%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">11,555</div><div class="stock-change down">-2.23%</div></div>
+<div class="stock-item"><div class="stock-ticker">Russell</div><div class="stock-price">—</div><div class="stock-change up">+0.6%</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China & HK Markets</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">3,858</div><div class="stock-change up">+1.15%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">14,149</div><div class="stock-change up">+2.72%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,591</div><div class="stock-change up">+3.16%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">25,207</div><div class="stock-change up">+0.98%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,702</div><div class="stock-change up">+1.57%</div></div>
+</div>
+
+<h2>🔬 <span class="zh">半导体个股</span><span class="en" style="display:none">Semiconductor Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$196.51</div><div class="stock-change down">-5.38%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">11,555</div><div class="stock-change down">-2.23%</div></div>
+</div>
+
+<h2>🔍 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 美伊冲突暂停 → 原油回落 → 风险偏好回升</span><span class="en" style="display:none">1. US-Iran Conflict Pause → Oil Plunges → Risk-On</span></h4>
+<p><span class="zh">美伊双方周末暂停军事行动并启动谈判，国际油价大幅回落，远离$100/桶关口。地缘风险降温推动资金回流股市，道指领涨，能源板块承压但整体市场情绪改善。小盘股Russell 2000上涨0.6%，反映市场风险偏好明显回暖。</span><span class="en" style="display:none">US and Iran paused military operations over the weekend and initiated talks, with crude oil prices falling sharply away from $100/barrel. De-escalation drove capital back into equities, with the Dow leading gains. Energy stocks pressured but overall sentiment improved. Russell 2000 +0.6% signals improved risk appetite.</span></p>
+<p class="src">Source: CNBC / Reuters / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块持续回调，NVDA暴跌5.4%</span><span class="en" style="display:none">2. Chip Sector Continues Pullback, NVDA -5.4%</span></h4>
+<p><span class="zh">费城半导体指数下跌2.23%，NVDA收于$196.51暴跌5.38%。资金从AI基础设施板块轮动至加密货币相关股票（Strategy +7%，Coinbase +4.5%）。分析师指出市场对中国半导体竞争加剧以及AI capex投入回报的担忧升温。7月费半累计跌幅仍超13%，但部分华尔街机构认为已到入场时机。</span><span class="en" style="display:none">SOX fell 2.23%, with NVDA closing at $196.51, down 5.38%. Capital rotated from AI infrastructure to crypto stocks (Strategy +7%, Coinbase +4.5%). Analysts cite growing concerns over Chinese semiconductor competition and AI capex returns. SOX still down >13% in July, but some Wall Street firms see entry opportunities.</span></p>
+<p class="src">Source: CNBC / Yahoo Finance / Axios</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. A股全面大涨，创业板领涨+3.16%</span><span class="en" style="display:none">3. A-Shares Rally Broadly, ChiNext Leads +3.16%</span></h4>
+<p><span class="zh">中国A股三大指数集体收涨，创业板指大涨3.16%领涨，深证成指涨2.72%，上证指数涨1.15%。恒生指数上涨0.98%至25,207点，恒生科技指数涨1.57%。港股主板成交2105亿港元。中国资产情绪全面回暖，可能与国内政策预期及外围地缘缓和有关。</span><span class="en" style="display:none">All three major A-share indices closed higher. ChiNext surged 3.16% leading the rally, Shenzhen Composite +2.72%, Shanghai Composite +1.15%. Hang Seng +0.98% to 25,207, Hang Seng Tech +1.57%. HK mainboard turnover HK$210.5B. Chinese asset sentiment broadly improved, possibly driven by domestic policy expectations and geopolitical de-escalation.</span></p>
+<p class="src">Source: Eastmoney / Xinhua / HK Exchange</p>
+</div>
+
+<h2>📅 <span class="zh">本周关注</span><span class="en" style="display:none">This Week's Watchlist</span></h2>
+<div class="card">
+<p><span class="zh">📌 <strong>巨型财报季</strong>：本周多家科技巨头发布Q2财报，将是市场核心催化剂<br>📌 <strong>美联储FOMC会议</strong>：利率决议及鲍威尔讲话，关注降息信号<br>📌 <strong>半导体止跌信号</strong>：费半经历近期大幅回调，关注是否出现企稳迹象<br>📌 <strong>美伊局势</strong>：谈判进展将持续影响油价和风险偏好</span><span class="en" style="display:none">📌 <strong>Megacap Earnings</strong>: Major tech giants report Q2 results this week — key catalyst<br>📌 <strong>Fed FOMC Meeting</strong>: Rate decision & Powell press conference — watch for dovish signals<br>📌 <strong>Chip Sector Bottom</strong>: SOX in deep correction — watch for stabilization signals<br>📌 <strong>US-Iran Talks</strong>: Negotiation progress will continue to impact oil and risk sentiment</span></p>
+</div>
+
+<h2>🔮 <span class="zh">走向预判</span><span class="en" style="display:none">Outlook</span></h2>
+<div class="card">
+<p><span class="zh">美股短期延续分化格局：道指和价值股受益于油价回落及地缘缓和，但科技/AI板块面临持续获利回吐压力。本周财报季和FOMC会议是关键催化剂——若财报超预期且美联储释放鸽派信号，科技股有望止跌反弹。A股 momentum 较强，短期有望继续走强。半导体板块7月累计跌幅超13%，部分华尔街机构已开始呼吁"逢低买入"，但建议等待本周财报和FOMC明确方向后再做判断。</span><span class="en" style="display:none">US stocks likely to remain divided near-term: Dow and value benefit from lower oil and de-escalation, but tech/AI faces continued profit-taking pressure. This week's earnings and FOMC are key catalysts — if earnings beat and Fed signals dovish tilt, tech could bounce. A-share momentum is strong with upside near-term. SOX down >13% in July; some Wall Street firms calling "buy the dip," but better to wait for earnings/FOMC clarity this week.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal · <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span> · 2026-07-27</p>
+<p><a href="index.html">← <span class="zh">返回全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+</div>
+</div>
+
+<script>
+function switchLang(lang){
+  document.body.className='lang-'+lang;
+  document.getElementById('btn-zh').style.background=lang==='zh'?'#333':'#222';
+  document.getElementById('btn-zh').style.color=lang==='zh'?'#fff':'#aaa';
+  document.getElementById('btn-en').style.background=lang==='en'?'#333':'#222';
+  document.getElementById('btn-en').style.color=lang==='en'?'#fff':'#aaa';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-05-03</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.8em;margin-top:4px}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;line-height:1.8}
+.lesson .analogy{background:rgba(240,160,64,0.08);border-left:3px solid #f0a040;padding:12px 16px;margin-top:12px;border-radius:0 8px 8px 0;font-size:0.9em}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+.tag{display:inline-block;background:rgba(240,160,64,0.15);color:#f0a040;padding:2px 8px;border-radius:4px;font-size:0.78em;margin-right:6px}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-05-03 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>HBM4 vs DDR5：为什么AI芯片需要"贴脸"内存？</h3>
+<p>你可能听说过，AI芯片（如NVIDIA的GPU）不用普通DDR5内存，而是用一种叫<strong>HBM（High Bandwidth Memory，高带宽内存）</strong>的东西。区别在哪？</p>
+<p><strong>DDR5</strong>是"远距离恋爱"——内存芯片和CPU/GPU之间隔着主板上的长长的PCB走线，信号要走很远的路，带宽受限。就像用很长的水管接水，水压不够。</p>
+<p><strong>HBM</strong>是"同居模式"——内存芯片直接堆叠在GPU芯片旁边，通过硅中介层（interposer）用微米级的微凸点连接，走线极短，信号通路又短又宽。就像把水塔直接架在水龙头上方，水流汹涌。</p>
+<p>具体数字：DDR5带宽约 <strong>~50GB/s</strong>；HBM4带宽达 <strong>~2TB/s</strong>，是DDR5的40倍。三星最新的HBM4E更是达到 <strong>4TB/s</strong>。</p>
+<p>代价是什么？HBM贵很多，而且必须和GPU封装在一起（CoWoS等先进封装），不能像DDR5那样插拔升级。</p>
+<div class="analogy">💡 <strong>一句话理解：</strong>DDR5是"高速公路"，够快但有限速；HBM4是"直接把仓库建在工厂车间里"，物料（数据）随取随用，吞吐量碾压。</div>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>🔥 三星全球首发HBM4E，单Pin速度突破16Gbps</h3>
+<p>在NVIDIA GTC 2026上，三星首次展示了<strong>HBM4E</strong>实物芯片。这是第六代HBM的增强版，单Pin速度达16Gbps，总带宽<strong>4.0TB/s</strong>，比当前HBM4提升37%。三星宣布已为NVIDIA Vera Rubin平台量产HBM4（11Gbps版本），HBM4E为下一代AI加速器铺路。</p>
+<p><a href="https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026" target="_blank">🔗 Samsung Newsroom</a> · <a href="https://www.chosun.com/english/industry-en/2026/03/17/5X6EUET3MNGU3KTZAMDQRHX4CE/" target="_blank">🔗 Chosun</a></p>
+<div class="date">2026-03-17</div>
+</div>
+
+<div class="card">
+<h3>🔬 量子计算安全倒计时：Google论文警告加密体系比预期更脆弱</h3>
+<p>Nature发表报告称，Google量子AI团队和Oratomic公司分别独立发布的研究表明，量子计算机<strong>可能在2030年前</strong>破解现有椭圆曲线加密（ECC）和加密货币。Google已制定2029年前迁移至后量子密码学（PQC）的时间表。这比之前行业预期的2035年大幅提前。</p>
+<p><a href="https://www.nature.com/articles/d41586-026-01054-1" target="_blank">🔗 Nature</a></p>
+<div class="date">2026-03-30</div>
+</div>
+
+<div class="card">
+<h3>⚛️ IEEE Spectrum：中性原子量子计算2026年迎来重大突破</h3>
+<p>IEEE Spectrum深度报道了中性原子量子计算的进展。Microsoft、Atom Computing和QuEra正在竞相交付小型<strong>纠错量子计算机</strong>。中性原子方案的优势在于：原子可以用激光"抓住"并重新排列，实现并行操作和灵活连接。Microsoft提出了量子计算三级成熟度框架，2026年是从NISQ迈向Level 2（可靠逻辑量子比特）的关键节点。</p>
+<p><a href="https://spectrum.ieee.org/neutral-atom-quantum-computing" target="_blank">🔗 IEEE Spectrum</a></p>
+<div class="date">2026-05（月刊）</div>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>📈 韩国4月半导体出口飙升173.5%，连续13个月刷新纪录</h3>
+<p>韩国4月半导体出口额达<strong>319亿美元</strong>，同比暴增173.5%。AI数据中心大规模投资推动HBM、DDR5、NAND需求激增。存储芯片价格同比暴涨：DDR4 8Gb涨870%，DDR5 16Gb涨662%，NAND 128Gb涨766%。韩国已连续两个月总出口超800亿美元，为史上首次。</p>
+<p><a href="https://finance.sina.com.cn/wm/2026-05-01/doc-inhwkpti0626948.shtml" target="_blank">🔗 新浪财经</a></p>
+<div class="date">2026-05-01</div>
+</div>
+
+<div class="card">
+<h3>💰 三星Q1净利润暴增474%，HBM4已开始为英伟达Vera Rubin量产</h3>
+<p>三星电子Q1净利润<strong>47.22万亿韩元（~318亿美元）</strong>，同比增长474.3%。营收增长69%至133.9万亿韩元。三星已于2月开始为NVIDIA Vera Rubin平台量产HBM4芯片，预计今年HBM收入将增长3倍以上。三星高管表示"供应远不能满足客户需求"，2027年供需缺口预计比2026年更大。</p>
+<p><a href="https://finance.sina.com.cn/wm/2026-05-01/doc-inhwkpti0626948.shtml" target="_blank">🔗 新浪财经</a></p>
+<div class="date">2026-05-01</div>
+</div>
+
+<div class="card">
+<h3>🌍 德勤：2026全球半导体冲刺万亿美元，但繁荣背后暗藏风险</h3>
+<p>德勤报告预测2026年全球半导体销售额达<strong>9750亿美元</strong>，增长率26%。AI芯片贡献约50%收入但仅占0.2%销量。存储价格预计年中再涨50%。报告同时警告：电力供应（AI数据中心2027年需额外92GW）、AI商业化ROI、创新效率提升可能导致需求不及预期等风险值得警惕。</p>
+<p><a href="https://m.thepaper.cn/newsDetail_forward_32867446" target="_blank">🔗 澎湃新闻</a></p>
+<div class="date">2026（报告发布）</div>
+</div>
+
+<div class="card">
+<h3>🇨🇳 中国AI芯片企业Top10发布，寒武纪4434亿市值领跑</h3>
+<p>2026年中国AI芯片企业Top10榜单出炉。寒武纪以<strong>4434亿元市值</strong>居首，2025年实现上市以来首次年度盈利，营收约65亿元。摩尔线程市值2682亿元排名第二。平头哥发布AI芯片"真武810E"，采用自研并行计算架构。深圳发布AI+先进制造行动计划，以AI芯片为突破口。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/2023326371326240367" target="_blank">🔗 知乎</a></p>
+<div class="date">2026-04</div>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>🚀 NVIDIA黄仁勋在GTC 2026定位量子计算为AI基础设施下一层</h3>
+<p>在GTC 2026上，NVIDIA CEO黄仁勋将量子计算定位为AI基础设施的下一个关键层级。NVIDIA正推动量子-经典混合计算架构，量子计算不再是独立系统，而是作为加速器嵌入AI工作流。2026年可能是量子计算从实验室走向商业化的转折点。</p>
+<p><a href="https://thedigitalpost.ch/en/articles/quantum-computing-is-leaving-the-lab-2026-may-mark-the-commercial-turning-point/" target="_blank">🔗 The Digital Post</a></p>
+<div class="date">2026-03</div>
+</div>
+
+<div class="card">
+<h3>🔐 Google设定2029年后量子密码迁移时间表</h3>
+<p>Google量子AI团队发布白皮书，详细评估了破解椭圆曲线加密所需的量子资源，并设定<strong>2029年前完成PQC迁移</strong>的时间表。独立研究机构Oratomic的预印本也得出了类似结论。业界此前普遍认为量子威胁在2035年后才会出现，最新研究将这一时间线大幅提前。</p>
+<p><a href="https://www.nature.com/articles/d41586-026-01054-1" target="_blank">🔗 Nature</a></p>
+<div class="date">2026-03-30</div>
+</div>
+
+<div class="card">
+<h3>❄️ 中性原子量子计算：2026年纠错竞速进入白热化</h3>
+<p>Microsoft、Atom Computing和QuEra正利用中性原子技术竞逐<strong>首台纠错量子计算机</strong>。中性原子方案用光镊（optical tweezers）操控原子阵列，可实现大规模并行操作，且相邻原子间可灵活建立量子纠缠连接。Microsoft提出的"三级量子成熟度"框架已成为行业参考标准。</p>
+<p><a href="https://spectrum.ieee.org/neutral-atom-quantum-computing" target="_blank">🔗 IEEE Spectrum</a></p>
+<div class="date">2026-05（月刊）</div>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p style="margin-top:6px;font-size:0.78em;color:#555">新闻来源：新浪财经 · Nature · IEEE Spectrum · Samsung Newsroom · 澎湃新闻 · The Digital Post</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code + HTML：不可思议的奇效 — AI Web HTML</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans SC','Inter',sans-serif;background:#0a0a0b;color:#e8e8ed;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:#8b5cf6;text-decoration:none}.muted{color:#71717a}
+::selection{background:#8b5cf6;color:#fff}
+
+/* Header */
+header{position:relative;padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid #1e1e24;
+background:linear-gradient(180deg,rgba(139,92,246,.08) 0%,transparent 60%)}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:#8b5cf6;background:rgba(139,92,246,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:1.5rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
+h1 em{font-style:normal;background:linear-gradient(135deg,#a78bfa,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{font-size:1.1rem;color:#a1a1aa;max-width:600px;margin:0 auto 1.5rem;font-weight:300}
+.source{font-size:.8rem;color:#52525b;margin-top:1rem}
+.source a{color:#71717a;border-bottom:1px dashed #52525b}
+
+/* Container */
+.container{max-width:860px;margin:0 auto;padding:0 2rem}
+
+/* Section */
+.section{padding:4rem 0;border-bottom:1px solid #1e1e24}
+.section:last-child{border-bottom:none}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#8b5cf6;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem}
+h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.01em;margin-bottom:1rem;line-height:1.2}
+h2 em{font-style:normal;color:#a78bfa}
+.desc{font-size:1rem;color:#a1a1aa;margin-bottom:2rem;max-width:640px}
+h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem;color:#d4d4d8}
+p{margin-bottom:1rem;color:#d4d4d8}
+
+/* Feature grid */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin:2rem 0}
+.feat-card{background:#141418;border:1px solid #27272a;border-radius:14px;padding:1.5rem;transition:all .3s}
+.feat-card:hover{border-color:#8b5cf6;transform:translateY(-2px)}
+.feat-icon{font-size:2rem;margin-bottom:.8rem}
+.feat-card h3{margin-bottom:.4rem}
+.feat-card p{font-size:.85rem;color:#a1a1aa;margin-bottom:0}
+
+/* Code */
+.code-block{background:#141418;border:1px solid #27272a;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.8;overflow-x:auto;color:#a1a1aa}
+.code-block .red{color:#ef4444}.code-block .yellow{color:#eab308}.code-block .green{color:#22c55e}
+
+/* Prompt box */
+.prompt{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(129,140,248,.05));border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:1.2rem 1.5rem;margin:2rem 0}
+.prompt-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8b5cf6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+.prompt pre{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#c4b5fd;white-space:pre-wrap;word-break:break-all}
+
+/* Quote */
+.quote{font-size:1.3rem;font-weight:700;text-align:center;padding:2rem;margin:2rem 0;background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(129,140,248,.05));border-radius:14px;border-left:4px solid #8b5cf6}
+.quote em{font-style:normal;color:#a78bfa}
+
+/* Comparison table */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.vs-card{padding:1.5rem;border-radius:12px}
+.vs-bad{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15)}
+.vs-good{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.2)}
+.vs-card h4{font-size:.85rem;font-weight:600;margin-bottom:.8rem}
+.vs-bad h4{color:#ef4444}.vs-good h4{color:#a78bfa}
+.vs-card ul{list-style:none;padding:0}
+.vs-card li{font-size:.85rem;color:#a1a1aa;padding:.3rem 0;padding-left:1.2rem;position:relative}
+.vs-card li::before{position:absolute;left:0}
+.vs-bad li::before{content:'✕';color:#ef4444}.vs-good li::before{content:'✓';color:#a78bfa}
+
+/* FAQ */
+.faq{margin:2rem 0}
+.faq-item{background:#141418;border:1px solid #27272a;border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1rem}
+.faq-q{font-weight:700;color:#e8e8ed;margin-bottom:.4rem}
+.faq-a{color:#a1a1aa;font-size:.9rem}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,#8b5cf6,#6d28d9);border-radius:16px;padding:3rem 2rem;text-align:center;margin:3rem 0}
+.cta-box h2{color:#fff;margin-bottom:1rem}
+.cta-box p{color:rgba(255,255,255,.8);margin-bottom:1.5rem}
+.cta-btn{display:inline-block;padding:.8rem 2rem;background:#fff;color:#6d28d9;border-radius:999px;font-weight:700;font-size:.95rem;cursor:pointer}
+.cta-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+.cta-col{text-align:center;padding:1rem;background:rgba(255,255,255,.1);border-radius:10px}
+.cta-col h4{color:#fff;font-size:.9rem;margin-bottom:.3rem}
+.cta-col p{color:rgba(255,255,255,.7);font-size:.8rem;margin:0}
+
+/* Insight box */
+.insight{background:#141418;border:1px solid #8b5cf6;border-radius:14px;padding:2rem;margin:2rem 0}
+.insight-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8b5cf6;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem}
+.insight h3{color:#a78bfa;margin-bottom:.6rem}
+.insight p{color:#d4d4d8}
+
+/* Footer */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid #1e1e24;color:#52525b;font-size:.8rem}
+footer a{color:#71717a}
+
+/* Responsive */
+@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.cta-cols{grid-template-columns:1fr}.feat-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:100;padding:.8rem 2rem;background:rgba(10,10,11,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e1e24;display:flex;justify-content:space-between;align-items:center">
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a href="index.html" style="color:#8b5cf6;font-size:.85rem;font-weight:600">← Sky Portal</a>
+    <span style="color:#27272a">|</span>
+    <a href="ai-web-html.html" style="color:#a1a1aa;font-size:.85rem;font-weight:600">AI Web HTML</a>
+    <span style="color:#27272a">/</span>
+    <span style="color:#e8e8ed;font-size:.85rem">Claude Code + HTML</span>
+  </div>
+  <a href="ai-web-html.html" style="font-size:.75rem;color:#8b5cf6;padding:.3rem .8rem;border:1px solid rgba(139,92,246,.3);border-radius:999px">AI Web HTML 主页 ↑</a>
+</nav>
+<header style="padding-top:6rem">
+  <div class="tag">AI Web HTML · 晓波笔记</div>
+  <h1>Claude Code + HTML<br><em>不可思议的奇效</em></h1>
+  <p class="subtitle">AI 不够强？不，是格式装不下。HTML 让 AI 的表达力彻底释放。</p>
+  <p class="source">原文：Claude Code 团队 Thariq · 翻译：宝玉 · 整理：Sky · 2026-05-10</p>
+</header>
+
+<div class="container">
+
+<!-- Markdown的三面墙 -->
+<div class="section">
+  <div class="section-num">问题</div>
+  <h2>Markdown 的三面墙</h2>
+  <p class="desc"><em>不是 AI 不够强，是格式装不下</em></p>
+
+  <div class="vs-grid">
+    <div class="vs-card vs-bad">
+      <h4>❌ Markdown 的困境</h4>
+      <ul>
+        <li>只能处理标题和列表</li>
+        <li>表格、SVG、代码高亮、交互组件全超出能力范围</li>
+        <li>AI 被逼急了用 ASCII 硬拼图表</li>
+        <li>超过 100 行的 Markdown 没人想读</li>
+        <li>发给别人大概率打不开</li>
+        <li>浏览器不渲染，只能当附件塞邮件</li>
+      </ul>
+    </div>
+    <div class="vs-card vs-good">
+      <h4>✓ HTML 的解法</h4>
+      <ul>
+        <li>表格、SVG、流程图、交互组件原生支持</li>
+        <li>颜色区分优先级，手机端自适应</li>
+        <li>选项卡分层、折叠收纳，信息密度高</li>
+        <li>同样内容从"没人看"变成"看得完"</li>
+        <li>传到云端发个链接就行</li>
+        <li>任何设备点开就看</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote">
+    <em>格式是天花板。AI 的能力已经溢出 Markdown 了。</em>
+  </div>
+</div>
+
+<!-- 场景1：需求文档 -->
+<div class="section">
+  <div class="section-num">场景 1</div>
+  <h2>需求文档与技术方案</h2>
+  <p class="desc"><em>HTML 是一块可以深入探讨问题的画布</em></p>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🕸️</div>
+      <h3>从单薄计划到思考网络</h3>
+      <p>不再指望 AI 丢一个 Markdown 计划就完事。生成一组 HTML 文件交织的思考网络——方案探索、界面草图、代码片段，全部放在可视化页面里。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3>多方案并排，一眼看清取舍</h3>
+      <p>让 AI 同时出 6 种方案，放在一个 HTML 网格里并排展示，每种标注优劣和适用场景。选定方向后再展开细节。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">✅</div>
+      <h3>验证环节也能用</h3>
+      <p>满意后开新会话，把 HTML 文件全部喂给 AI 正式写代码。负责检查的 AI 也能读这些 HTML，拥有更完整的全局视角。</p>
+    </div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-label">💬 提示词参考</div>
+    <pre>请生成 6 种不同的方案，放在 HTML 网格布局里对比，标注每种方案的取舍
+
+请生成详细的实施计划，画出界面草图，补充核心代码片段</pre>
+  </div>
+</div>
+
+<!-- 场景2：代码审查 -->
+<div class="section">
+  <div class="section-num">场景 2</div>
+  <h2>代码审查</h2>
+  <p class="desc"><em>不用干瞪 diff，重点问题一眼看到</em></p>
+
+  <h3>🎨 颜色编码，按严重程度分级</h3>
+  <p><span style="color:#ef4444;font-weight:700">红色</span> = 严重问题，必须修 &nbsp; <span style="color:#eab308;font-weight:700">黄色</span> = 建议优化，可以改 &nbsp; <span style="color:#22c55e;font-weight:700">绿色</span> = 没问题，直接过</p>
+  <p>不用逐行读代码，看颜色就知道重点在哪。</p>
+
+  <div class="code-block">
+<span class="red">🔴</span> if (user == null)
+       throw new Error('Fatal');
+
+<span class="yellow">🟡</span> // Consider caching this value
+   return processedData;
+
+<span class="green">✅</span> return processedData;</div>
+
+  <h3>📐 行内注释 + 数据流图</h3>
+  <p>AI 在代码旁边自动加注释。复杂逻辑配上数据流向图。不熟悉的模块也能快速看懂。提交 PR 时附一个 HTML 解读页，评审人看完的概率大幅提升。</p>
+
+  <div class="prompt">
+    <div class="prompt-label">💬 提示词参考</div>
+    <pre>审查这个 PR，生成 HTML，按严重程度颜色编码，加上行内注释和辅助理解的流程图</pre>
+  </div>
+</div>
+
+<!-- 场景3：双向交互 -->
+<div class="section">
+  <div class="section-num">场景 3</div>
+  <h2>双向交互</h2>
+  <p class="desc"><em>文档不再是死的，可以动手调</em></p>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🎚️</div>
+      <h3>滑块和旋钮，实时调参数</h3>
+      <p>让 AI 在页面上加几个滑块，实时调整动画效果、算法参数。拖一拖就能看到结果变化，不用反复改代码重新跑。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h3>一键复制，粘回 Claude Code</h3>
+      <p>调到满意后点"复制"按钮，参数自动导出为 prompt 或 JSON，直接粘回 Claude Code 继续干活。HTML 成了你和 AI 之间的操作台。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔀</div>
+      <h3>拖拽排序、编辑数据</h3>
+      <p>30 个任务卡片拖到四个栏目：现在做 / 接下来 / 以后 / 砍掉。编辑功能开关、整理数据集。用完即走的临时可视化编辑器。</p>
+    </div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-label">💬 提示词参考</div>
+    <pre>做一个 HTML，用滑块调整按钮动画参数，加一个复制按钮导出最终配置</pre>
+  </div>
+</div>
+
+<!-- 场景4：报告与研究 -->
+<div class="section">
+  <div class="section-num">场景 4</div>
+  <h2>报告与研究</h2>
+  <p class="desc"><em>多源数据自动整合，一页看清全局</em></p>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📈</div>
+      <h3>海量数据自动提炼成报告</h3>
+      <p>Claude Code 能读代码库、Git 历史。通过 MCP 接入 Slack 记录、Linear 任务。多个来源的信息自动汇总成一份报告，不用手动拼凑。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎨</div>
+      <h3>SVG 图表，数据一目了然</h3>
+      <p>AI 直接在 HTML 里画 SVG 图表——折线图、饼图、架构图。比截图清晰，比手画专业。传到云端发个链接，任何设备都能看。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📄</div>
+      <h3>周报、复盘、故障报告全适用</h3>
+      <p>给老板出周报 5 分钟搞定。故障复盘附上时间线和影响范围图。还能做幻灯片格式演示。用 Claude Code 而非网页版的原因：上下文够大。</p>
+    </div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-label">💬 提示词参考</div>
+    <pre>读取相关代码的 Git 历史，生成一份 HTML 研究报告，包含 SVG 图表和核心代码注释</pre>
+  </div>
+</div>
+
+<!-- 晓波的新感悟 -->
+<div class="section">
+  <div class="section-num">💡 晓波的延伸思考</div>
+  <h2>AI Web HTML 的<em>深层价值</em></h2>
+
+  <div class="insight">
+    <div class="insight-label">感悟一：HTML 是 AI 之间的沟通桥梁</div>
+    <h3>多 Agent 协作的新范式</h3>
+    <p>在 AI 共同工作时，用 HTML 来沟通——修正代码时按问题严重性用红黄蓝标注修复进度。一个 Agent 修复了，另一个去检查状态。如果还是黄色或红色，再派一个 sub-agent 去修复。</p>
+    <p>整个修复流程通过 HTML 加强沟通，目的是<strong>一次性修好</strong>。只要还有黄色部分就继续工作，直到全部完成。迭代 10 轮仍无法成功，返回问题定位标注，再想其他方法。</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">感悟二：HTML 是人机沟通的最佳媒介</div>
+    <h3>三种沟通场景，一个格式搞定</h3>
+    <p><strong>AI ↔ AI：</strong>HTML 做出来的页面不仅 AI 自己能读，结构清晰、信息密度高。</p>
+    <p><strong>AI ↔ 人：</strong>图表、交互、颜色编码，人类读起来也很顺畅。比 Markdown 丰富，比 PDF 灵活。</p>
+    <p><strong>人 ↔ 人：</strong>一个链接搞定。Word/PDF/PPT 常常发不出——太大、格式不对、对方没软件。HTML 只要有浏览器就能看，沟通效率不可想象。</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">感悟三：下一步是可编辑 HTML</div>
+    <h3>从"只读"到"可协作"</h3>
+    <p>HTML 当前的问题是不能快速大量编辑。但 AI 存在后，这个问题应该能被打破——Token 消耗也许是问题，但整体沟通效率（人↔AI、人↔人）将极大提升。</p>
+    <p>这就是 AI Web HTML 的核心：<strong>人与人之间分享的便利性</strong>。</p>
+  </div>
+</div>
+
+<!-- 常见顾虑 -->
+<div class="section">
+  <div class="section-num">FAQ</div>
+  <h2>常见顾虑</h2>
+
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">Q1：不会写 HTML 怎么办？</div>
+      <div class="faq-a">不需要会。直接跟 AI 说"生成一个 HTML 文件"，一句话的事，零门槛。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q2：不浪费 Token 吗？</div>
+      <div class="faq-a">比 Markdown 多一些。但百万级上下文窗口下基本可以忽略。输出质量的提升远超多花的 Token。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q3：生成速度慢吗？</div>
+      <div class="faq-a">慢 2-4 倍。但可读性和表达力的提升是质变。值得等。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q4：版本控制怎么办？</div>
+      <div class="faq-a">这是最大的短板，老实承认。HTML 在 Git 里 diff 比较杂乱。适合方案文档、报告这类不频繁改动的场景。</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <em>不完美，但瑕不掩瑜。用过的人基本都不想换回去了。</em>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section">
+  <div class="cta-box">
+    <h2>今天就试一句</h2>
+    <p>不需要任何设置，不需要写任何配置</p>
+    <div style="background:rgba(0,0,0,.2);border-radius:10px;padding:1.2rem;margin:1.5rem 0;font-family:'JetBrains Mono',monospace;font-size:.95rem;color:#e0d4fc">
+      帮我把这个分析/计划/报告<br>做成一个好看的 HTML 文件
+    </div>
+    <p style="font-weight:600;color:#fff">就这一句，体验差距立刻拉开</p>
+    <div class="cta-cols">
+      <div class="cta-col"><h4>零门槛</h4><p>不需要会写 HTML</p></div>
+      <div class="cta-col"><h4>零配置</h4><p>不需要装任何工具</p></div>
+      <div class="cta-col"><h4>零前端知识</h4><p>跟 AI 说就行</p></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>原文来自 Claude Code 团队 Thariq · 宝玉翻译 · Sky 整理发布</p>
+  <p style="margin-top:.5rem"><a href="ai-web-html.html">← AI Web HTML 主页</a> &nbsp;·&nbsp; <a href="index.html">Sky Portal</a></p>
+</footer>
+
+</body>
+</html>

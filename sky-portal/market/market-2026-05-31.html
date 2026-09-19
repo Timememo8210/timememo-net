@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-31</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.stock-sub{color:#888;font-size:0.72em;margin-top:4px}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{color:#4ade80;font-weight:600}
+.highlight-red{color:#f87171;font-weight:600}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75em;font-weight:600;margin-left:4px}
+.badge-record{background:rgba(74,222,128,0.2);color:#4ade80}
+.badge-hot{background:rgba(250,204,21,0.2);color:#facc15}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- POSTER GRID -->
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#065f46,#10b981)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股九连周 + 历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks: 9-Week Win Streak</div>
+<div class="zh poster-data">
+• 标普 7,580 🏆 纳指 26,973 🏆 道指 51,032<br>
+• 纳指月涨8%｜Dell单日+33%<br>
+• 费城半导体SOX盘中创13,115新高
+</div>
+<div class="en poster-data" style="display:none">
+• S&P 7,580 🏆 Nasdaq 26,973 🏆 Dow 51,032<br>
+• Nasdaq +8% MoM | Dell +33% in a day<br>
+• SOX hit 13,115 intraday high
+</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#991b1b,#ef4444)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股科创50创历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China: STAR 50 at All-Time High</div>
+<div class="zh poster-data">
+• 科创50 月涨11.47% 🏆 创业板月涨近10%<br>
+• 创业板指历史性超越上证指数！<br>
+• 半导体月尾大幅回调，消费/医药接力
+</div>
+<div class="en poster-data" style="display:none">
+• STAR 50 +11.47% MoM 🏆 ChiNext +~10%<br>
+• ChiNext surpasses Shanghai for the first time!<br>
+• Semis corrected late May, consumers rotated in
+</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI算力狂潮</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Compute Mania</div>
+<div class="zh poster-data">
+• NVIDIA Q1营收$816亿创纪录<br>
+• Micron月涨88%｜Qualcomm月涨40%<br>
+• Dell AI服务器需求井喷，股价翻倍
+</div>
+<div class="en poster-data" style="display:none">
+• NVIDIA Q1 revenue $81.6B record<br>
+• Micron +88% MoM | Qualcomm +40% MoM<br>
+• Dell AI server demand exploding
+</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e40af,#3b82f6)">
+<div class="poster-icon">🕊️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊停火进展</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Ceasefire Progress</div>
+<div class="zh poster-data">
+• 60天MOU停火备忘录待特朗普批准<br>
+• 油价创2020年来最大月度跌幅<br>
+• 霍尔木兹海峡有望重新开放
+</div>
+<div class="en poster-data" style="display:none">
+• 60-day MOU ceasefire pending Trump approval<br>
+• Oil: biggest monthly drop since 2020<br>
+• Strait of Hormuz may reopen
+</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle"><span class="zh">2026-05-31（周日）· 周末特刊 · 数据截至5/29收盘</span><span class="en" style="display:none">2026-05-31 (Sunday) · Weekend Edition · Data as of May 29 close</span> · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- US MARKETS -->
+<h2>🇺🇸 <span class="zh">美股行情（5/29 周五收盘）</span><span class="en" style="display:none">US Markets (May 29 Friday Close)</span></h2>
+
+<div class="card">
+<h4><span class="zh">三大指数全线创历史新高，标普500录得<span class="highlight">连续第9周上涨</span></span><span class="en" style="display:none">All Three Major Indexes Hit All-Time Highs, S&P 500 Logs <span class="highlight">9th Straight Weekly Gain</span></span></h4>
+<p><span class="zh">5月最后一个交易日，美股三大指数全线收于历史新高。标普500报7,580.06（+0.22%），纳斯达克报26,972.62（+0.2%），道指报51,032.46（+0.72%），道指首次站上51,000关口。<b>5月整体表现：</b>纳指月涨8%领涨，标普月涨5%，道指月涨约3%。这是标普500自2024年11月以来最长的连续周线涨势。</span><span class="en" style="display:none">On the final trading day of May, all three major indexes closed at record highs. S&P 500 at 7,580.06 (+0.22%), Nasdaq at 26,972.62 (+0.2%), Dow at 51,032.46 (+0.72%), the first time above 51,000. <b>Monthly performance:</b> Nasdaq led with +8%, S&P +5%, Dow +~3%. Longest weekly win streak since Nov 2024.</span></p>
+<p class="src">来源：CNBC / WSJ / MarketWatch / Barron's</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">Dell暴涨33%领跑，AI服务器需求井喷</span><span class="en" style="display:none">Dell Surges 33%, AI Server Demand Explodes</span></h4>
+<p><span class="zh">Dell Technologies单日暴涨近33%，创下历史最佳单日表现。公司Q1财报超预期，上调全年指引，AI服务器业务成为核心增长引擎。今年以来Dell累计涨幅已超150%。分析师称Dell已成为"AI基建故事扩散"的标志性案例——从芯片、存储，到整个AI基础设施栈。</span><span class="en" style="display:none">Dell Technologies surged nearly 33% in its best day ever after a Q1 beat and raised full-year guidance, driven by AI server demand. The stock is up over 150% YTD. Analysts call Dell the poster child for the "AI broadening" story — from chips and memory to the full AI infrastructure stack.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">油价创2020年以来最大月度跌幅，美伊停火推进中</span><span class="en" style="display:none">Oil Posts Biggest Monthly Drop Since 2020, US-Iran Ceasefire Advances</span></h4>
+<p><span class="zh">原油价格5月暴跌，创2020年以来最大月度跌幅。美国与伊朗达成60天MOU停火备忘录，待特朗普在战情室做出最终决定。特朗普要求伊朗承诺永不拥核，并要求霍尔木兹海峡"立即开放"。能源板块本月承压，但地缘风险溢价的下降利好科技和消费板块。</span><span class="en" style="display:none">Oil prices crashed in May with the biggest monthly decline since 2020. The US and Iran agreed on a 60-day MOU ceasefire, pending Trump's final decision. Trump demanded Iran commit to never acquiring nuclear weapons and immediate reopening of the Strait of Hormuz. Energy sector under pressure, but falling geopolitical risk premium benefits tech and consumer sectors.</span></p>
+<p class="src">来源：WSJ / BBC / Al Jazeera / Reuters</p>
+</div>
+
+<h3>📊 <span class="zh">美股主要指数</span><span class="en" style="display:none">US Major Indexes</span></h3>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">S&P 500</div>
+<div class="stock-price">7,580.06</div>
+<div class="stock-change up">+0.22% 日</div>
+<div class="stock-sub">周+1.4% ｜月+5%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">NASDAQ</div>
+<div class="stock-price">26,972.62</div>
+<div class="stock-change up">+0.2% 日</div>
+<div class="stock-sub">周+2.4% ｜月+8%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">DOW</div>
+<div class="stock-price">51,032.46</div>
+<div class="stock-change up">+0.72% 日</div>
+<div class="stock-sub">周+0.9% ｜月+~3%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX</div>
+<div class="stock-price">12,829</div>
+<div class="stock-change up">月内新高</div>
+<div class="stock-sub">5/28盘中 13,115 🏆</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">Russell 2K</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">周线收涨</div>
+<div class="stock-sub">连续上涨</div>
+</div>
+</div>
+
+<h3>🔥 <span class="zh">AI / 半导体重点个股</span><span class="en" style="display:none">AI / Semiconductor Spotlight</span></h3>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">NVDA</div>
+<div class="stock-price">$208.27</div>
+<div class="stock-change up">月+8%</div>
+<div class="stock-sub">Q1 $81.6B营收 市值$5T</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">DELL</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">日+33%</div>
+<div class="stock-sub">年累涨150%+</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">MU</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">月+88%</div>
+<div class="stock-sub">存储芯片景气上行</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">QCOM</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">月+40%</div>
+<div class="stock-sub">AI芯片需求推动</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">XLK</div>
+<div class="stock-price">52周新高</div>
+<div class="stock-change up">月+20%</div>
+<div class="stock-sub">科技板块ETF</div>
+</div>
+</div>
+
+<!-- CHINA MARKETS -->
+<h2>🇨🇳 <span class="zh">A股 & 港股（5/29 收盘）</span><span class="en" style="display:none">China & Hong Kong (May 29 Close)</span></h2>
+
+<div class="card">
+<h4><span class="zh">A股5月收官：科创50月涨11.47%创历史新高，创业板指历史性超越上证指数</span><span class="en" style="display:none">China May Wrap: STAR 50 +11.47% ATH, ChiNext Surpasses Shanghai for the First Time</span></h4>
+<p><span class="zh">5月29日（周五），A股三大指数涨跌不一，月末呈结构性分化。<b>上证指数</b>报4,068.57（日-0.73%），月线收阴，呈"先扬后抑"走势。<b>深成指</b>报15,575.13（日-1.81%）。<b>创业板指</b>站稳4,000点上方，月涨近10%，盘中一度突破4,125点，<span class="highlight">历史性超越上证指数</span>，为A股开市36年来首次。<b>科创50</b>报1,751.32，<span class="highlight">月涨11.47%，突破2020年7月高点，创历史新高</span>。</span><span class="en" style="display:none">May 29 (Friday), A-shares showed structural divergence. <b>Shanghai Composite</b> at 4,068.57 (-0.73% daily), monthly close negative. <b>Shenzhen Component</b> at 15,575.13 (-1.81%). <b>ChiNext</b> held above 4,000, +~10% for May, <span class="highlight">historically surpassing the Shanghai index for the first time in 36 years.</span> <b>STAR 50</b> at 1,751.32, <span class="highlight">+11.47% for May, breaking 2020 highs to set a new ATH.</span></span></p>
+<p><span class="zh"><b>板块亮点：</b>半导体、PCB、光模块5月全线爆发，主力净流入近200亿元；月末出现明显的高低切换，半导体周五大幅回调，消费、医药、创新药逆势活跃。科创综指月涨6.16%，科创50月涨11.47%，"含科量"持续提升。</span><span class="en" style="display:none"><b>Sector highlights:</b> Semiconductors, PCBs, optical modules surged in May with ~20B net inflows; late-month rotation saw semis sell off sharply on Friday while consumers, pharma, and biotech strengthened. STAR Composite +6.16% MoM, STAR 50 +11.47%.</span></p>
+<p class="src">来源：财联社 / 东方财富 / 新浪财经 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股五月震荡收官，恒指月跌2.3%，恒生科技月涨0.27%</span><span class="en" style="display:none">Hong Kong: Hang Seng -2.3% MoM, Hang Seng Tech +0.27% MoM</span></h4>
+<p><span class="zh">5月29日港股收盘，恒生指数报25,182.39（月跌2.30%），恒生科技指数报4,884.23（月涨0.27%），国企指数报8,425.82（月跌2.95%）。本周市场震荡走弱，周三恒指单日跌2.29%，受国际局势和获利回吐影响。华虹半导体逆势涨超11%，美团、紫金矿业等回调较大。恒生科技指数夜盘收涨0.44%，报25,098点。</span><span class="en" style="display:none">May 29 Hong Kong close: Hang Seng at 25,182.39 (-2.30% MoM), Hang Seng Tech at 4,884.23 (+0.27% MoM), H-share Index at 8,425.82 (-2.95% MoM). Volatile week — HSI fell 2.29% on Wednesday amid geopolitical concerns and profit-taking. Hua Hong Semiconductor bucked the trend +11%, while Meituan and Zijin Mining pulled back. HSI futures night session +0.44% at 25,098.</span></p>
+<p class="src">来源：新浪财经 / 财联社 / 东方财富</p>
+</div>
+
+<h3>📊 <span class="zh">A股 & 港股指数</span><span class="en" style="display:none">China & HK Indexes</span></h3>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">上证</div>
+<div class="stock-price">4,068.57</div>
+<div class="stock-change down">日-0.73%</div>
+<div class="stock-sub">月线收阴</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">深成指</div>
+<div class="stock-price">15,575.13</div>
+<div class="stock-change down">日-1.81%</div>
+<div class="stock-sub">月末回调</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">创业板</div>
+<div class="stock-price">~4,100+</div>
+<div class="stock-change up">月+~10%</div>
+<div class="stock-sub">🏆 超越上证</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">科创50</div>
+<div class="stock-price">1,751.32</div>
+<div class="stock-change up">月+11.47%</div>
+<div class="stock-sub">🏆 历史新高</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">恒指</div>
+<div class="stock-price">25,182.39</div>
+<div class="stock-change down">月-2.30%</div>
+<div class="stock-sub">震荡走弱</div>
+</div>
+</div>
+
+<!-- KEY DRIVERS -->
+<h2>🔑 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1️⃣ AI算力狂潮 — 全球共振主线</span><span class="en" style="display:none">1️⃣ AI Compute Mania — Global Theme</span></h4>
+<p><span class="zh"><b>美股：</b>NVIDIA Q1营收$816亿创纪录（净利$583亿），市值重回$5万亿。Dell AI服务器需求井喷，单日暴涨33%。Micron月涨88%、Qualcomm月涨40%，存储和AI芯片全面爆发。XLK科技ETF月涨20%。<br><b>A股：</b>科创50创历史新高，年内累涨41%。半导体板块主力净流入近200亿元，PCB、光模块、AI服务器从配角升级为主线。投资者不再只看芯片龙头，开始更激进地追逐存储、光模块、半导体设备。<br><b>关键转变：</b>AI行情从"芯片独角戏"扩展到"AI基础设施全栈"，从NVIDIA扩散到Dell/Micron/Qualcomm，从美股扩散到A股科创。</span><span class="en" style="display:none"><b>US:</b> NVIDIA Q1 record $81.6B revenue ($58.3B net income), market cap back at $5T. Dell AI server demand exploding +33% in a day. Micron +88% MoM, Qualcomm +40% MoM. XLK tech ETF +20%.<br><b>China:</b> STAR 50 ATH, +41% YTD. Semis saw ~20B net inflows, PCBs, optical modules, AI servers all surged. Investors chasing the full stack beyond just chip leaders.<br><b>Key shift:</b> AI theme broadening from "chips only" to "full AI infrastructure stack," from NVIDIA to Dell/Micron/Qualcomm, from US to China STAR board.</span></p>
+<p class="src">来源：WSJ / CNBC / 财联社 / 新浪财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2️⃣ 美伊停火进展 — 地缘风险缓释</span><span class="en" style="display:none">2️⃣ US-Iran Ceasefire — Geopolitical Risk Easing</span></h4>
+<p><span class="zh">美国与伊朗达成60天MOU停火备忘录，双方同意暂停军事行动，给予60天谈判窗口达成最终协议。特朗普在Truth Social发文称正在战情室做"最终决定"，要求伊朗承诺永不拥核并立即开放霍尔木兹海峡。<br><b>市场影响：</b>油价5月暴跌，创2020年以来最大月度跌幅，能源板块承压。但地缘风险溢价下降直接利好风险资产——标普和纳指得以持续创新高。如正式签署，将进一步释放上行动能。</span><span class="en" style="display:none">The US and Iran agreed on a 60-day MOU ceasefire, halting military actions and opening a negotiation window. Trump posted on Truth Social he's making a "final determination" in the Situation Room, demanding Iran commit to no nukes and immediate Hormuz reopening.<br><b>Market impact:</b> Oil crashed in May, biggest monthly drop since 2020. Energy under pressure, but falling geopolitical risk premium directly benefited risk assets — enabling S&P and Nasdaq to keep hitting records. A formal signing would unlock further upside.</span></p>
+<p class="src">来源：BBC / WSJ / Al Jazeera / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3️⃣ 全球科技政策共振</span><span class="en" style="display:none">3️⃣ Global Tech Policy Alignment</span></h4>
+<p><span class="zh"><b>台湾：</b>凭AI算力优势，总市值强势跃升为全球第六大资本帝国，两岸三地千大企业大洗牌。<br><b>A股改革：</b>创业板增设第四套上市标准，科技保险体制机制加快构建，工信部部署上百项"揭榜挂帅"任务布局未来产业。MSCI季度成分股调整，"含科量"进一步提升。<br><b>美国：</b>特朗普政府继续推动制造业回归，大力发展半导体、AI、生物医药等关键高科技产业。</span><span class="en" style="display:none"><b>Taiwan:</b> Leveraging AI compute advantage, total market cap surged to 6th globally.<br><b>China reforms:</b> ChiNext added 4th listing standard, tech insurance mechanisms accelerated, Ministry of Industry deployed 100+ "unveiling" tasks for future industries. MSCI quarterly rebalance increasing tech weight.<br><b>US:</b> Trump admin continuing push for manufacturing reshoring,大力发展 semiconductors, AI, and biotech.</span></p>
+<p class="src">来源：商务部 / 人民日报 / MSCI / 财联社</p>
+</div>
+
+<!-- OUTLOOK -->
+<h2>🔮 <span class="zh">下周展望（6/1-6/5）</span><span class="en" style="display:none">Outlook (June 1-5)</span></h2>
+
+<div class="card">
+<h4><span class="zh">✅ 乐观因素</span><span class="en" style="display:none">✅ Bullish Factors</span></h4>
+<p><span class="zh">
+• <b>美股动能强劲：</b>标普500连续9周上涨，AI财报季全面超预期（NVIDIA、Dell、Micron），市场信心高涨<br>
+• <b>美伊停火利好：</b>若正式签署 → 油价进一步下行，利好科技/消费/制造业<br>
+• <b>A股科创主线未变：</b>科创50创历史新高后回调幅度有限，半导体和AI仍是核心赛道<br>
+• <b>全球资金流向科技：</b>AI行情从芯片扩散到全栈，从美股扩散到全球，资金面支撑充分
+</span><span class="en" style="display:none">
+• <b>US momentum strong:</b> 9-week win streak, AI earnings all beats (NVIDIA, Dell, Micron), high confidence<br>
+• <b>Iran ceasefire tailwind:</b> Formal signing → further oil decline, benefits tech/consumer/manufacturing<br>
+• <b>China tech thesis intact:</b> STAR 50 limited pullback from ATH, semis/AI remain core theme<br>
+• <b>Global tech flows:</b> AI broadening from chips to full stack, from US to global, well-supported by fund flows
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚠️ 关注风险</span><span class="en" style="display:none">⚠️ Risk Factors</span></h4>
+<p><span class="zh">
+• <b>短期获利回吐：</b>标普/纳指连涨9周，历史上罕见，技术面超买信号渐现<br>
+• <b>A股板块切换：</b>半导体月末大幅回调（科创50日跌超5%），消费/医药接力，短期需观察持续性<br>
+• <b>伊朗协议不确定性：</b>特朗普可能否决 → 油价反弹、避险情绪升温<br>
+• <b>6月FOMC：</b>美联储议息会议前市场可能偏谨慎，关注通胀数据和利率指引<br>
+• <b>油价波动：</b>WTI/Brent走势直接反映停火进展，能源板块继续承压
+</span><span class="en" style="display:none">
+• <b>Short-term profit-taking:</b> 9-week win streak historically rare, overbought signals emerging<br>
+• <b>China rotation risk:</b> Semis sold off sharply (STAR 50 -5%+ daily), consumers/pharma rotating in, sustainability TBD<br>
+• <b>Iran deal uncertainty:</b> Trump could veto → oil rebound, risk-off sentiment<br>
+• <b>June FOMC:</b> Markets may turn cautious ahead of Fed meeting, watch inflation data and rate guidance<br>
+• <b>Oil volatility:</b> WTI/Brent directly reflects ceasefire progress, energy stays under pressure
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🎯 重点关注</span><span class="en" style="display:none">🎯 Key Watch Items</span></h4>
+<p><span class="zh">
+• <b>半导体：</b>NVIDIA $5万亿市值能否守住，费城SOX能否突破13,000<br>
+• <b>A股机会：</b>科创50回调后的买入机会，半导体分化中找真龙头<br>
+• <b>地缘政治：</b>特朗普对伊朗协议的最终决定，将直接决定下周市场方向<br>
+• <b>资金流向：</b>关注AI从"芯片→全栈"扩散过程中的新赢家（服务器、存储、网络设备）
+</span><span class="en" style="display:none">
+• <b>Semiconductors:</b> Can NVIDIA hold $5T market cap? Can SOX break 13,000?<br>
+• <b>China opportunity:</b> Buy-the-dip on STAR 50 pullback, identify true leaders amid semi divergence<br>
+• <b>Geopolitics:</b> Trump's final call on Iran deal will set next week's market direction<br>
+• <b>Capital flows:</b> Watch for new winners as AI broadens from "chips → full stack" (servers, storage, networking)
+</span></p>
+</div>
+
+<!-- KLINE CHARTS -->
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semi ETF</div><div id="tv-smh"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：CNBC, WSJ, Reuters, MarketWatch, Barron's, Investopedia, 财联社, 东方财富, 新浪财经, BBC, Al Jazeera</span><span class="en" style="display:none">Data sources: CNBC, WSJ, Reuters, MarketWatch, Barron's, Investopedia, CLS, EastMoney, Sina, BBC, Al Jazeera</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

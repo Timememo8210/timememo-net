@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-14</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#4ade80">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股三连涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Rally 3rd Day</div>
+<div class="zh poster-data">• 标普500：+0.38%<br>• 纳斯达克：+0.90%<br>• 道指：+0.02%</div>
+<div class="en poster-data" style="display:none">• S&P 500: +0.38%<br>• Nasdaq: +0.90%<br>• DJIA: +0.02%</div>
+</div>
+<div class="poster-card" style="background:#10a37f">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股强力反弹</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China A-Shares Bounce Back</div>
+<div class="zh poster-data">• 上证：+1.36%<br>• 创业板：+2.4%<br>• 恒指：+0.52%</div>
+<div class="en poster-data" style="display:none">• SSE: +1.36%<br>• ChiNext: +2.4%<br>• HSI: +0.52%</div>
+</div>
+<div class="poster-card" style="background:#d92d20">
+<div class="poster-icon">💥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">IBM崩盘暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">IBM Collapses -20%</div>
+<div class="zh poster-data">• 50年来最差单日<br>• Q2营收不及预期<br>• 客户支出转向硬件</div>
+<div class="en poster-data" style="display:none">• Worst day in 50 years<br>• Q2 revenue miss<br>• Spending shifts to hardware</div>
+</div>
+<div class="poster-card" style="background:#e08c0b">
+<div class="poster-icon">🏦</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">大银行财报超预期</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Big Banks Beat Earnings</div>
+<div class="zh poster-data">• 高盛+9%创新高<br>• 摩根大通+2.5%<br>• AI交易成增长引擎</div>
+<div class="en poster-data" style="display:none">• Goldman +9% all-time high<br>• JPM +2.5%<br>• AI deals drive growth</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-14 · Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>📉 <span class="zh">CPI降温+银行财报，美股三连涨</span><span class="en" style="display:none">Cool CPI + Bank Earnings, US Stocks Rise 3rd Day</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. CPI数据低于预期，降息预期升温</span><span class="en" style="display:none">1. June CPI Below Expectations, Rate-Cut Hopes Rise</span></h4>
+<p><span class="zh">美国6月CPI数据低于预期，显示通胀压力正在缓解。债券交易员已放弃7月加息押注，降息预期升温。市场对美联储货币政策的乐观情绪推动成长股走强，标普500和纳斯达克分别上涨0.38%和0.90%。不过美联储主席Warsh仍强调将应对高通胀。</span><span class="en" style="display:none">US June CPI came in below expectations, signaling easing inflation pressure. Bond traders have abandoned July rate hike bets, with rate-cut expectations rising. Optimism on Fed policy boosted growth stocks, with S&P 500 and Nasdaq up 0.38% and 0.90% respectively. However, Fed Chair Warsh vowed to tackle high inflation.</span></p>
+<p class="src">来源：Reuters / CNBC / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. IBM暴跌~20%，创50年来最差单日表现</span><span class="en" style="display:none">2. IBM Crashes ~20%, Worst Day in 50 Years</span></h4>
+<p><span class="zh">IBM提前发布Q2业绩预告，营收$172亿（预期$178.6亿），利润也大幅不及预期。CEO Arvind Krishna表示，客户在最近几周将资本支出从软件和咨询服务转向硬件采购（服务器、存储、内存设备），导致IBM软件和咨询收入大幅下滑。IBM股价盘中暴跌超20%，市值蒸发近$600亿，为50年来最差单日表现。此举引发软件和咨询板块恐慌，但CrowdStrike等网络安全概念股反而大涨+5.9%。</span><span class="en" style="display:none">IBM preannounced Q2 results with revenue at $17.2B (expected $17.86B), with profits also well below expectations. CEO Arvind Krishna said customers redirected spending from software and consulting to hardware (servers, storage, memory) in recent weeks, causing significant declines in IBM's software and consulting revenue. IBM shares plunged over 20% intra-day, wiping out ~$60B in market cap — worst day in 50 years. This triggered panic in software/consulting sectors, but cybersecurity stocks like CrowdStrike rallied +5.9%.</span></p>
+<p class="src">来源：Yahoo Finance / MarketWatch / CNN / QZ</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 大银行财报强劲，高盛+9%创纪录新高</span><span class="en" style="display:none">3. Big Banks Report Strong Earnings, Goldman +9% Record High</span></h4>
+<p><span class="zh">财报季正式拉开序幕，大银行财报普遍超预期。高盛Q2股票交易收入达$74.2亿创纪录，股价大涨9%收于历史新高。摩根大通Q2同样创历史最佳季度，CEO Jamie Dimon称"银行业环境接近完美"。大银行CEO纷纷表示，SpaceX等大型AI交易将继续推动利润增长。银行板块的强劲表现为整体市场提供了重要支撑。</span><span class="en" style="display:none">Earnings season kicked off with big banks beating expectations across the board. Goldman's Q2 stock trading revenue hit a record $7.42B, shares surging 9% to all-time high. JPMorgan also posted record Q2 results, CEO Jamie Dimon calling the banking environment "close to as good as it gets." Big bank CEOs said mega AI deals like SpaceX will continue driving profit growth. Strong bank results provided key support for the broader market.</span></p>
+<p class="src">来源：Yahoo Finance / WSJ / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 半导体板块强劲反弹，英伟达+4%</span><span class="en" style="display:none">4. Semiconductor Stocks Rebound Strongly, Nvidia +4%</span></h4>
+<p><span class="zh">半导体板块延续昨日反弹势头，费城半导体指数收于12,662点，涨幅约2.5%。英伟达大涨4.06%收于$211.80，市场等待即将发布的Q2财报。Intel、Micron、AMD等芯片股集体上涨。此前半导体板块因AI估值担忧曾大幅回调，市场正在重新评估芯片股的投资价值。分析人士认为，基本面扎实的芯片龙头有望在财报季中表现出色。</span><span class="en" style="display:none">Semiconductor sector extended yesterday's rebound, with SOX closing at 12,662, up ~2.5%. Nvidia surged 4.06% to $211.80 as market awaits upcoming Q2 earnings report. Intel, Micron, AMD and other chip stocks rose collectively. The semiconductor sector had pulled back sharply on AI valuation concerns, and the market is reassessing chip stock values. Analysts believe fundamentally strong chip leaders may perform well in earnings season.</span></p>
+<p class="src">来源：Yahoo Finance / Barron's / TradingView</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">5. 美伊局势持续紧张，地缘政治风险仍存</span><span class="en" style="display:none">5. US-Iran Tensions Persist, Geopolitical Risks Remain</span></h4>
+<p><span class="zh">特朗普宣布海湾投资协议以取代霍尔木兹海峡20%的"GUARDIAN"费用，油价维持小幅上涨。美伊紧张局势仍是市场的重要不确定因素，但投资者目前更关注CPI数据和银行财报等基本面因素。分析师提醒，地缘政治风险可能在任何时间重新主导市场情绪。</span><span class="en" style="display:none">Trump announced Gulf investment deals to replace the 20% Hormuz "GUARDIAN" fee, with oil prices holding modest gains. US-Iran tensions remain a key market uncertainty, but investors are currently more focused on fundamentals like CPI data and bank earnings. Analysts warn geopolitical risks could re-dominate market sentiment at any time.</span></p>
+<p class="src">来源：Yahoo Finance / Reuters</p>
+</div>
+
+<h2>📈 <span class="zh">全球股市行情（7月14日收盘）</span><span class="en" style="display:none">Global Market Close (Jul 14)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SPX</div><div class="stock-price">7,543.59</div><div class="stock-change up">+0.38%</div></div>
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,508.66</div><div class="stock-change up">+0.02%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">26,107.01</div><div class="stock-change up">+0.90%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,662</div><div class="stock-change up">+2.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">000001</div><div class="stock-price">3,967.13</div><div class="stock-change up">+1.36%</div></div>
+<div class="stock-item"><div class="stock-ticker">399006</div><div class="stock-price">2,591</div><div class="stock-change up">+2.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24,340.73</div><div class="stock-change up">+0.52%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSTECH</div><div class="stock-price">4,676</div><div class="stock-change up">+0.59%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">211.80</div><div class="stock-change up">+4.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">GS</div><div class="stock-price">1,122</div><div class="stock-change up">+9.00%</div></div>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPX — 标普500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">DJI — 道琼斯</div><div id="tv-dji"></div></div>
+<div class="kline-item"><div class="kline-label">IXIC — 纳斯达克</div><div id="tv-ixic"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — 费半导体</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<h2>🔮 <span class="zh">明日市场展望</span><span class="en" style="display:none">Tomorrow's Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期：风险偏好上行，关注英伟达财报</span><span class="en" style="display:none">Short-Term: Risk Appetite Up, Watch Nvidia Earnings</span></h4>
+<p><span class="zh">CPI降温+银行财报强劲，短期风险偏好明显上行。美股连续第三天上涨，纳指涨幅领先。英伟达即将发布财报，将成为半导体板块的下一个催化剂。如果财报超预期，有望推动半导体板块进一步走强。但IBM暴雷提醒市场，单一公司的负面冲击可能拖累整个板块。</span><span class="en" style="display:none">Cool CPI + strong bank earnings have lifted short-term risk appetite. US stocks rise for 3rd consecutive day, with Nasdaq leading. Nvidia's upcoming earnings will be the next catalyst for the semiconductor sector. A beat could drive further chip stock gains. However, IBM's crash reminds that a single company's negative surprise can drag down an entire sector.</span></p>
+<p class="src">来源：Reuters / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">中期：软件/咨询板块面临重估压力</span><span class="en" style="display:none">Medium-Term: Software/Consulting Faces Revaluation Pressure</span></h4>
+<p><span class="zh">IBM的业绩预警揭示了企业IT支出结构正在发生变化——客户将更多预算投向硬件基础设施（服务器、存储、内存），而非软件和咨询服务。这可能预示着软件板块整体面临重估压力，尤其是那些过度依赖传统企业软件收入的公司。相反，网络安全、AI基础设施、硬件等受益于支出转向的细分领域可能获得更多关注。</span><span class="en" style="display:none">IBM's earnings warning reveals shifting enterprise IT spending — customers allocating more budget to hardware infrastructure (servers, storage, memory) rather than software and consulting. This may signal revaluation pressure for the broader software sector, especially companies relying heavily on traditional enterprise software revenue. Conversely, cybersecurity, AI infrastructure, and hardware segments benefiting from the spending shift may attract more attention.</span></p>
+<p class="src">来源：QZ / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">风险提示：美伊局势+财报季波动</span><span class="en" style="display:none">Risks: US-Iran Tensions + Earnings Season Volatility</span></h4>
+<p><span class="zh">投资者需关注两大风险因素：1)美伊紧张局势可能在任何时间升级，冲击全球市场；2)财报季进入高峰期，个股波动可能加大。建议保持均衡配置，关注半导体和AI基础设施等受益于支出结构变化的领域，同时对高估值软件股保持谨慎。</span><span class="en" style="display:none">Two key risk factors: 1) US-Iran tensions could escalate at any time, impacting global markets; 2) Earnings season entering peak with elevated individual stock volatility. Maintain balanced allocation, favor semiconductors and AI infrastructure benefiting from spending shifts, while being cautious on high-valuation software stocks.</span></p>
+<p class="src">来源：Bloomberg / Yahoo Finance</p>
+</div>
+
+<div class="footer">
+<p>📊 Daily Market Reports · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Yahoo Finance, Reuters, CNBC, Bloomberg, MarketWatch, WSJ, CNN, Barron's, QZ</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'SP:SPX'},
+  {id:'tv-dji', sym:'INDEX:DJI'},
+  {id:'tv-ixic', sym:'NASDAQ:IXIC'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HKEX:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Fluent Design: Mica + WinUI</title>
+<style>
+/* === Design Tokens (fluent-design: Mica + WinUI 3) === */
+:root {
+  /* Mica background */
+  --bg-mica: rgba(243,243,243,0.92);
+  --bg-card: rgba(255,255,255,0.70);
+  --bg-card-hover: rgba(255,255,255,0.85);
+  --bg-subtle: rgba(0,0,0,0.024);
+  --bg-secondary: rgba(0,0,0,0.036);
+  /* Fluent text hierarchy */
+  --text-primary: rgba(0,0,0,0.895);
+  --text-secondary: rgba(0,0,0,0.606);
+  --text-tertiary: rgba(0,0,0,0.445);
+  --text-disabled: rgba(0,0,0,0.361);
+  /* Fluent accent */
+  --accent: #0078D4;
+  --accent-hover: #429CE3;
+  --accent-pressed: #005A9E;
+  /* Fluent strokes */
+  --stroke: rgba(0,0,0,0.0578);
+  --stroke-strong: rgba(0,0,0,0.10);
+  --stroke-divider: rgba(0,0,0,0.0802);
+  /* Fluent semantic */
+  --success: #0F7B0F;
+  --success-bg: rgba(15,123,15,0.08);
+  --warning: #9D5D00;
+  --warning-bg: rgba(157,93,0,0.08);
+  --error: #C42B1C;
+  --error-bg: rgba(196,43,28,0.08);
+  /* Fluent shadows (elevation) */
+  --shadow-2: 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-4: 0 2px 4px rgba(0,0,0,0.04), 0 0 2px rgba(0,0,0,0.06);
+  --shadow-8: 0 4px 8px rgba(0,0,0,0.08), 0 0 2px rgba(0,0,0,0.06);
+  /* Fluent radius */
+  --radius-window: 8px;
+  --radius-control: 4px;
+  --radius-card: 8px;
+  /* Fluent font */
+  --font: 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* Fluent spacing (8px grid) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: #f0f0f0;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: auto; /* Fluent: Windows uses ClearType, not antialiased */
+}
+
+/* ── Mica Window Frame ── */
+.window {
+  max-width: 1200px;
+  margin: 24px auto;
+  background: var(--bg-mica);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-16, 0 8px 16px rgba(0,0,0,0.12), 0 0 2px rgba(0,0,0,0.06));
+  overflow: hidden;
+  min-height: calc(100vh - 48px);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* ── Title Bar (Fluent NavigationView) ── */
+.titlebar {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--sp-4);
+  border-bottom: 1px solid var(--stroke);
+  background: rgba(243,243,243,0.6);
+}
+.titlebar-icon {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 3px;
+  margin-right: var(--sp-3);
+}
+.titlebar-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.titlebar-controls {
+  margin-left: auto;
+  display: flex;
+  gap: 0;
+}
+.titlebar-btn {
+  width: 46px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 10px;
+  transition: background 0.1s;
+}
+.titlebar-btn:hover { background: rgba(0,0,0,0.04); }
+.titlebar-btn.close:hover { background: #C42B1C; color: #fff; }
+
+/* ── Layout: NavigationView ── */
+.navview {
+  display: flex;
+  min-height: calc(100vh - 96px);
+}
+
+/* ── Left Rail (Fluent: Left Compact) ── */
+.rail {
+  width: 68px;
+  padding: var(--sp-3) 0;
+  border-right: 1px solid var(--stroke);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+  flex-shrink: 0;
+}
+.rail-item {
+  width: 44px;
+  height: 44px; /* Fluent: touch target 44px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-control);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  transition: all 0.1s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+.rail-item span {
+  font-size: 8px;
+  margin-top: 1px;
+  font-weight: 500;
+}
+.rail-item:hover { background: var(--bg-subtle); color: var(--text-primary); }
+.rail-item.active {
+  background: var(--bg-subtle);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Content Area ── */
+.main {
+  flex: 1;
+  padding: var(--sp-8) var(--sp-10);
+  overflow-y: auto;
+}
+
+/* ── Page Header (Fluent: Title Large = 40px Semibold) ── */
+.page-header {
+  margin-bottom: var(--sp-8);
+}
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+  color: var(--text-primary);
+}
+.page-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: var(--sp-1);
+}
+
+/* ── InfoBar (Fluent: status banner) ── */
+.infobar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: rgba(0,120,212,0.06);
+  border: 1px solid rgba(0,120,212,0.15);
+  border-radius: var(--radius-control);
+  margin-bottom: var(--sp-8);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+.infobar-icon { font-size: 16px; }
+.infobar-title { font-weight: 600; }
+.infobar-link {
+  margin-left: auto;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.infobar-link:hover { text-decoration: underline; }
+
+/* ── Stats Row ── */
+.stats {
+  display: flex;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+.stat-card {
+  flex: 1;
+  padding: var(--sp-4);
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-card);
+  /* Fluent: bottom border thicker */
+  border-bottom: 1px solid var(--stroke-strong);
+  box-shadow: var(--shadow-2);
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: var(--sp-1);
+  font-weight: 400;
+}
+
+/* ── Section ── */
+.section { margin-bottom: var(--sp-10); }
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--stroke-divider);
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--sp-3);
+}
+
+/* ── Fluent Card (Elevation 2) ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-card);
+  border-bottom: 1px solid var(--stroke-strong);
+  padding: var(--sp-4);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.083s ease-out; /* Fluent: Fast = 83ms */
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  box-shadow: var(--shadow-2);
+}
+.card:hover {
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-4);
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--stroke);
+}
+
+/* ── Fluent Badge ── */
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.badge--accent { background: rgba(0,120,212,0.1); color: var(--accent); }
+.badge--success { background: var(--success-bg); color: var(--success); }
+.badge--warning { background: var(--warning-bg); color: var(--warning); }
+.badge--subtle { background: var(--bg-secondary); color: var(--text-tertiary); }
+
+.card-time {
+  font-size: 12px;
+  color: var(--text-disabled);
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: var(--sp-6) var(--sp-4);
+  border-top: 1px solid var(--stroke);
+  font-size: 12px;
+  color: var(--text-disabled);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .window { margin: 0; border-radius: 0; border: none; }
+  .rail { display: none; }
+  .main { padding: var(--sp-5) var(--sp-4); }
+  .stats { flex-wrap: wrap; }
+  .stat-card { min-width: 100px; }
+  .grid { grid-template-columns: 1fr; }
+  .titlebar { padding: 0 var(--sp-3); }
+}
+</style>
+</head>
+<body>
+
+<div class="window">
+  <!-- Title Bar -->
+  <div class="titlebar">
+    <div class="titlebar-icon"></div>
+    <span class="titlebar-text">Sky Portal — Sky Portal</span>
+    <div class="titlebar-controls">
+      <button class="titlebar-btn">─</button>
+      <button class="titlebar-btn">□</button>
+      <button class="titlebar-btn close">✕</button>
+    </div>
+  </div>
+
+  <div class="navview">
+    <!-- Left Rail -->
+    <div class="rail">
+      <a class="rail-item active" href="#daily" title="每日更新">📡<span>每日</span></a>
+      <a class="rail-item" href="#research" title="研究">🔬<span>研究</span></a>
+      <a class="rail-item" href="#life" title="生活">👤<span>生活</span></a>
+      <a class="rail-item" href="#tools" title="项目">🛠<span>项目</span></a>
+    </div>
+
+    <!-- Content -->
+    <div class="main">
+      <div class="page-header">
+        <h1>Sky Portal</h1>
+        <p>研究 · 工具 · 记录 — 由 Sky AI 驱动</p>
+      </div>
+
+      <div class="infobar">
+        <span class="infobar-icon">💡</span>
+        <span><span class="infobar-title">Featured:</span> Intel × Tesla Terafab 深度调研已更新</span>
+        <a class="infobar-link" href="research/intel-tesla-terafab.html">查看 →</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value">11</div>
+          <div class="stat-label">已发布内容</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">5</div>
+          <div class="stat-label">进行中项目</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">76</div>
+          <div class="stat-label">天 · 从 2/15 起</div>
+        </div>
+      </div>
+
+      <!-- Daily -->
+      <div class="section" id="daily">
+        <div class="section-title">📡 每日更新</div>
+        <div class="grid">
+          <a class="card" href="research/index.html">
+            <div class="card-title">📡 每日研报</div>
+            <div class="card-desc">半导体 · 股票 · 巴萨 · Portland · AI工具</div>
+            <div class="card-footer">
+              <span class="badge badge--accent">自动化</span>
+              <span class="card-time">每日</span>
+            </div>
+          </a>
+          <a class="card" href="tech/index.html">
+            <div class="card-title">🔬 每日科技</div>
+            <div class="card-desc">芯片架构 · 技术突破 · 产业动态</div>
+            <div class="card-footer">
+              <span class="badge badge--accent">自动化</span>
+              <span class="card-time">每日</span>
+            </div>
+          </a>
+          <a class="card" href="market/index.html">
+            <div class="card-title">📊 每日行情</div>
+            <div class="card-desc">美股 · A股 · 港股 — 9PM</div>
+            <div class="card-footer">
+              <span class="badge badge--accent">自动化</span>
+              <span class="card-time">9PM PDT</span>
+            </div>
+          </a>
+          <a class="card" href="science/index.html">
+            <div class="card-title">🧬 每周科学</div>
+            <div class="card-desc">Science · Nature · Cell · PNAS</div>
+            <div class="card-footer">
+              <span class="badge badge--success">自动化</span>
+              <span class="card-time">每周三</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="section" id="research">
+        <div class="section-title">🔬 研究专栏</div>
+        <div class="grid">
+          <a class="card" href="research/intel-tesla-terafab.html">
+            <div class="card-title">🏭 Intel × Tesla Terafab</div>
+            <div class="card-desc">$200-250亿芯片超级工厂深度调研</div>
+            <div class="card-footer">
+              <span class="badge badge--warning">进行中</span>
+              <span class="card-time">自动更新</span>
+            </div>
+          </a>
+          <a class="card" href="nvidia-report.html">
+            <div class="card-title">💚 NVIDIA 深度报告</div>
+            <div class="card-desc">GPU龙头财报分析与AI算力展望</div>
+            <div class="card-footer">
+              <span class="badge badge--success">已完成</span>
+              <span class="card-time">2026-04</span>
+            </div>
+          </a>
+          <a class="card" href="ai-life.html">
+            <div class="card-title">🤖 AI 与生活</div>
+            <div class="card-desc">AI时代的个人工作流与数字生活</div>
+            <div class="card-footer">
+              <span class="badge badge--subtle">思考</span>
+              <span class="card-time">持续</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Life -->
+      <div class="section" id="life">
+        <div class="section-title">👤 生活</div>
+        <div class="grid">
+          <a class="card" href="naturalization.html">
+            <div class="card-title">🇺🇸 入籍指南</div>
+            <div class="card-desc">N-400全流程记录与时间线追踪</div>
+            <div class="card-footer">
+              <span class="badge badge--warning">进行中</span>
+              <span class="card-time">2026</span>
+            </div>
+          </a>
+          <a class="card" href="travel.html">
+            <div class="card-title">✈️ 旅行计划</div>
+            <div class="card-desc">2026夏季 · PDX↔NKG</div>
+            <div class="card-footer">
+              <span class="badge badge--subtle">计划中</span>
+              <span class="card-time">2026夏</span>
+            </div>
+          </a>
+          <a class="card" href="investment.html">
+            <div class="card-title">💰 投资理财</div>
+            <div class="card-desc">个人投资笔记与市场观察</div>
+            <div class="card-footer">
+              <span class="badge badge--success">持续</span>
+              <span class="card-time">长期</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="section" id="tools">
+        <div class="section-title">🛠 项目 & 工具</div>
+        <div class="grid">
+          <a class="card" href="coach/munger.html">
+            <div class="card-title">📚 芒格误判心理学</div>
+            <div class="card-desc">每日一课 · 25条原则 · 进度 13/25</div>
+            <div class="card-footer">
+              <span class="badge badge--accent">每日推送</span>
+              <span class="card-time">13/25</span>
+            </div>
+          </a>
+          <a class="card" href="skills.html">
+            <div class="card-title">⚡ OpenClaw Skills</div>
+            <div class="card-desc">AI助手技能集 · 自动化工作流</div>
+            <div class="card-footer">
+              <span class="badge badge--subtle">工具</span>
+              <span class="card-time">运行中</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Sky Portal · Sky Portal · Powered by OpenClaw ☁️</div>
+</div>
+</body>
+</html>

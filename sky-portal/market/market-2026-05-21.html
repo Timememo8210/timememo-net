@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-21</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #1a1a1a;
+  --card-border: #2a2a2a;
+  --text: #ccc;
+  --text-dim: #888;
+  --accent: #4ade80;
+  --accent-dim: rgba(74,222,128,0.15);
+  --accent-border: rgba(74,222,128,0.3);
+  --red: #f87171;
+  --red-dim: rgba(239,68,68,0.15);
+  --red-border: rgba(239,68,68,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:920px;margin:0 auto}
+h1{text-align:center;color:var(--accent);font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:var(--text-dim);font-size:0.9em;margin-bottom:28px}
+.subtitle a{color:var(--accent);text-decoration:none}
+h2{color:var(--accent);font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:var(--accent);margin:16px 0 10px}
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:var(--text-dim);font-size:0.8em;margin-top:6px}
+
+/* Poster Grid */
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.poster-title{font-size:1.3em;font-weight:700}
+
+/* Stock Grid */
+.stock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stock-item{background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:0.95em}
+.stock-name{font-size:0.72em;color:var(--text-dim);margin-top:2px}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.down{background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)}
+
+/* Kline */
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:var(--accent);text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+
+/* Footer */
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:var(--accent);text-decoration:none}
+
+/* Lang Toggle */
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+
+/* Responsive */
+@media(max-width:768px){
+  .stock-grid{grid-template-columns:repeat(2,1fr)}
+  .kline-grid{grid-template-columns:1fr}
+  .poster-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- ═══ POSTER GRID ═══ -->
+<div id="poster">
+<div class="poster-grid">
+
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a 0%,#15803d 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh poster-title">道指再创历史新高</div>
+<div class="en poster-title" style="display:none">Dow Hits New Record</div>
+<div class="zh poster-data">• 道指 +0.55%，连涨第八周<br>• 标普 +0.17% · 纳指 +0.09%<br>• 费半 +1.28%，芯片股持续强势</div>
+<div class="en poster-data" style="display:none">• Dow +0.55%, 8th straight weekly gain<br>• S&P +0.17% · Nasdaq +0.09%<br>• SOX +1.28%, chips stay strong</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh poster-title">A股暴跌逾2%</div>
+<div class="en poster-title" style="display:none">A-Shares Plunge >2%</div>
+<div class="zh poster-data">• 上证 -2.04% 失守4100<br>• 创业板 -2.35% · 科创50 -3.70%<br>• 硬科技抱团泡沫破裂，量化踩踏</div>
+<div class="en poster-data" style="display:none">• SSE -2.04%, breaks below 4100<br>• ChiNext -2.35% · STAR 50 -3.70%<br>• Tech bubble pops, quant stampede</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#1d4ed8 0%,#1e40af 100%)">
+<div class="poster-icon">🇮🇷</div>
+<div class="zh poster-title">美伊谈判取得进展</div>
+<div class="en poster-title" style="display:none">US-Iran Deal Progress</div>
+<div class="zh poster-data">• 油价大跌：WTI $96, Brent $103<br>• 30年期国债收益率从5.19%回落<br>• 避险情绪降温</div>
+<div class="en poster-data" style="display:none">• Oil drops: WTI $96, Brent $103<br>• 30Y yield retreats from 5.19%<br>• Risk-off sentiment eases</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%)">
+<div class="poster-icon">🏦</div>
+<div class="zh poster-title">Warsh周五就任美联储主席</div>
+<div class="en poster-title" style="display:none">Warsh Sworn In Friday</div>
+<div class="zh poster-data">• 接替Powell出任美联储主席<br>• 市场关注货币政策立场<br>• 当前利率维持3.75%</div>
+<div class="en poster-data" style="display:none">• Replaces Powell as Fed Chair<br>• Markets watch for policy signals<br>• Rate holds at 3.75%</div>
+</div>
+
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-21 · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- ═══ US MARKETS ═══ -->
+<h2>🇺🇸 <span class="zh">美股行情（5月21日收盘）</span><span class="en" style="display:none">US Markets (May 21 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker">DJI</div>
+  <div class="stock-name"><span class="zh">道琼斯 📌历史新高</span><span class="en" style="display:none">Dow Jones 📌Record Close</span></div>
+  <div class="stock-price">50,284</div>
+  <div class="stock-change up">+0.55%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">S&P 500</div>
+  <div class="stock-name"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div>
+  <div class="stock-price">7,458</div>
+  <div class="stock-change up">+0.17%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">NASDAQ</div>
+  <div class="stock-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq Composite</span></div>
+  <div class="stock-price">26,317</div>
+  <div class="stock-change up">+0.09%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">SOX</div>
+  <div class="stock-name"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semiconductor</span></div>
+  <div class="stock-price">11,964</div>
+  <div class="stock-change up">+1.28%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">30Y</div>
+  <div class="stock-name"><span class="zh">30年期国债</span><span class="en" style="display:none">30Y Treasury</span></div>
+  <div class="stock-price">5.09%</div>
+  <div class="stock-change up"><span class="zh">↓ 从5.19%回落</span><span class="en" style="display:none">↓ From 5.19%</span></div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker">WTI</div>
+  <div class="stock-name"><span class="zh">原油</span><span class="en" style="display:none">Crude Oil</span></div>
+  <div class="stock-price">$96.35</div>
+  <div class="stock-change up"><span class="zh">↓ -2%</span><span class="en" style="display:none">↓ -2%</span></div>
+</div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — <span class="zh">半导体ETF</span><span class="en" style="display:none">Semiconductor ETF</span></div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TLT — <span class="zh">20+年国债</span><span class="en" style="display:none">20Y+ Treasury</span></div><div id="tv-tlt"></div></div>
+<div class="kline-item"><div class="kline-label">USO — <span class="zh">原油ETF</span><span class="en" style="display:none">Oil ETF</span></div><div id="tv-uso"></div></div>
+</div>
+
+<!-- ═══ CHINA / HK ═══ -->
+<h2>🇨🇳 <span class="zh">A股行情（5月21日收盘）</span><span class="en" style="display:none">A-Shares (May 21 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SSE</span></div>
+  <div class="stock-name">000001</div>
+  <div class="stock-price">4,077</div>
+  <div class="stock-change down">-2.04%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZSE</span></div>
+  <div class="stock-name">399001</div>
+  <div class="stock-price">15,247</div>
+  <div class="stock-change down">-2.07%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div>
+  <div class="stock-name">399006</div>
+  <div class="stock-price">3,855</div>
+  <div class="stock-change down">-2.35%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div>
+  <div class="stock-name"><span class="zh">领跌</span><span class="en" style="display:none">Leading Decline</span></div>
+  <div class="stock-price">📉</div>
+  <div class="stock-change down">-3.70%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">成交额</span><span class="en" style="display:none">Turnover</span></div>
+  <div class="stock-name"><span class="zh">天量</span><span class="en" style="display:none">Record</span></div>
+  <div class="stock-price">3.51万亿</div>
+  <div class="stock-change down"><span class="zh">+5308亿</span><span class="en" style="display:none">+530B</span></div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">涨跌比</span><span class="en" style="display:none">A/D</span></div>
+  <div class="stock-name"><span class="zh">全面下跌</span><span class="en" style="display:none">Broad Sell-off</span></div>
+  <div class="stock-price">695:4700</div>
+  <div class="stock-change down"><span class="zh">1:8</span><span class="en" style="display:none">1:8</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">A股冲高暴跌 — 硬科技抱团泡沫破裂</span><span class="en" style="display:none">A-Shares Crash from Highs — Tech Bubble Bursts</span></h4>
+<p><span class="zh">5月21日A股上演极端行情，三大指数集体重挫逾2%，呈现典型的"早盘冲高诱多、午后断崖跳水"特征。<br><br><b>暴跌原因分析：</b><br>① <b>硬科技抱团泡沫极致化：</b>5月来半导体板块涨超26%，CPO涨60%，科创50半月涨22%。多数公司Q1业绩增速仅10-30%，但估值已处于历史95%分位以上，部分芯片设计公司PE超200倍。<br>② <b>Nvidia"利好兑现即利空"示范效应：</b>5月20日Nvidia财报超预期但盘后微跌1.5%，A股科技龙头借早盘冲高完成高位出货。<br>③ <b>中特估虹吸流动性：</b>午后13:30银行、券商等大盘权重突然拉升，抽干成长赛道流动性，半导体板块净流出280.8亿。<br>④ <b>量化止损踩踏：</b>趋势跟踪模型触发一致平仓信号，30分钟内半导体成交超500亿，量化卖出占比40%+。<br>⑤ <b>主力资金净流出1,451亿创纪录。</b><br><br>与外围形成强烈反差：日经+3.14%，韩国KOSPI+8.42%，美股全线反弹。</span><span class="en" style="display:none">May 21 saw an extreme A-share session, all three major indices plunging >2% with a classic "morning pump, afternoon dump" pattern.<br><br><b>Crash Analysis:</b><br>① <b>Tech bubble extremes:</b> Semis +26% in May, CPO +60% YTD, STAR 50 +22% in two weeks. Most companies showing only 10-30% earnings growth but valuations at 95th percentile, some chip designers at 200x+ PE.<br>② <b>Nvidia "sell the news"示范:</b> Nvidia beat earnings but dipped 1.5% after-hours, prompting A-share tech leaders to distribute into morning strength.<br>③ <b>State-owned enterprise rotation:</b> After 13:30, banks/brokerages surged, draining growth-sector liquidity. Semi net outflow ¥28.08B.<br>④ <b>Quant stop-loss cascade:</b> Trend-following models triggered simultaneous liquidation. 500B+ semi volume in 30 minutes, 40%+ from quant selling.<br>⑤ <b>Main force net outflow ¥145.1B, a record.</b><br><br>Stark contrast with global markets: Nikkei +3.14%, KOSPI +8.42%, US equities all rebounding.</span></p>
+<p class="src">来源：同花顺 / 新浪财经 / 证券时报 / 网易财经</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（5月21日收盘）</span><span class="en" style="display:none">Hong Kong (May 21 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">恒指</span><span class="en" style="display:none">HSI</span></div>
+  <div class="stock-name">Hang Seng</div>
+  <div class="stock-price">25,387</div>
+  <div class="stock-change down">-0.57%</div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">恒生科技</span><span class="en" style="display:none">HS Tech</span></div>
+  <div class="stock-name">HSTECH</div>
+  <div class="stock-price">~4,860</div>
+  <div class="stock-change down"><span class="zh">回调</span><span class="en" style="display:none">Pullback</span></div>
+</div>
+<div class="stock-item">
+  <div class="stock-ticker"><span class="zh">5/22早盘</span><span class="en" style="display:none">5/22 AM</span></div>
+  <div class="stock-name"><span class="zh">反弹中</span><span class="en" style="display:none">Rebounding</span></div>
+  <div class="stock-price">25,540</div>
+  <div class="stock-change up">+0.66%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">港股周四回落，周五早盘反弹</span><span class="en" style="display:none">HK Pulls Back Thu, Rebounds Fri AM</span></h4>
+<p><span class="zh">恒生指数周四小幅回落0.57%，受A股暴跌拖累。周五早盘反弹0.66%至25,540点，受美伊和谈进展和隔夜美股上涨提振。亚太市场周五普遍走高：日经225+1.36%（日本核心通胀降至1.4%，弱化加息预期），韩国KOSDAQ+3%，澳洲ASX 200+0.5%。关注今日恒指季度检讨结果公布，成分股变动6月8日生效。恒指公司将于5月22日公布2026年Q1检讨结果。</span><span class="en" style="display:none">Hang Seng slipped 0.57% Thursday, dragged by the A-share crash. Friday's early session rebounded 0.66% to 25,540, boosted by US-Iran peace progress and overnight Wall Street gains. Asia-Pacific broadly higher Friday: Nikkei +1.36% (Japan core CPI eased to 1.4%, weakening rate hike case), Kosdaq +3%, ASX 200 +0.5%. Watch for HSI quarterly review results due today, with component changes effective June 8.</span></p>
+<p class="src">来源：Trading Economics / CNBC / Yahoo Finance</p>
+</div>
+
+<!-- ═══ KEY DRIVERS ═══ -->
+<h2>⚡ <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>🇮🇷 <span class="zh">1. 美伊和谈取得进展 — 油价国债双降</span><span class="en" style="display:none">1. US-Iran Deal Progress — Oil & Yields Fall</span></h4>
+<p><span class="zh">伊朗正在评估美国最新和平提案，国务卿Rubio称有"积极信号"。分析机构Vital Knowledge认为"协议达成的概率远高于不达成，但已充分定价，冲突将在未来数季度产生滞胀效应"。<br><br>• <b>WTI原油</b>：$96.35（-2%）<br>• <b>Brent原油</b>：$102.58（-2%+）<br>• <b>30年期国债</b>：从5.19%（金融危机以来最高）回落至5.09%<br><br>伊朗坚持保留浓缩铀库存的要求可能成为谈判障碍。</span><span class="en" style="display:none">Iran is assessing the latest US peace proposal, with Secretary of State Rubio citing "some good signs." Vital Knowledge notes "a deal is much more likely than not, but this is already priced in, and the conflict will have stagflationary effects for at least the next few quarters."<br><br>• <b>WTI crude:</b> $96.35 (-2%)<br>• <b>Brent crude:</b> $102.58 (-2%+) <br>• <b>30Y Treasury:</b> Eased from 5.19% (highest since financial crisis) to 5.09%<br><br>Iran's insistence on keeping enriched uranium stockpiles could complicate negotiations.</span></p>
+<p class="src">来源：Reuters / CNBC / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4>🏦 <span class="zh">2. Kevin Warsh周五宣誓就任美联储主席</span><span class="en" style="display:none">2. Kevin Warsh to Be Sworn In as Fed Chair Friday</span></h4>
+<p><span class="zh">特朗普提名Kevin Warsh接替Jerome Powell出任美联储主席，周五举行宣誓就职仪式。当前联邦基金利率维持3.75%不变。市场关注Warsh对通胀和就业的态度，以及他是否延续Powell的渐进主义路线或转向更鹰派立场。<br><br>美国4月CPI 3.8%（高于前值3.3%），失业率4.3%。通胀粘性+就业韧性给新主席带来政策难题。</span><span class="en" style="display:none">Trump's pick Kevin Warsh will be sworn in Friday to succeed Jerome Powell as Fed Chair. The fed funds rate holds at 3.75%. Markets are watching for Warsh's stance on inflation and employment — whether he continues Powell's gradualism or shifts hawkish.<br><br>US April CPI 3.8% (up from 3.3%), unemployment 4.3%. Sticky inflation + resilient employment pose a policy dilemma for the new Chair.</span></p>
+<p class="src">来源：CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4>🤖 <span class="zh">3. Nvidia Q1 FY27财报 — "利好兑现"效应</span><span class="en" style="display:none">3. Nvidia Q1 FY27 Earnings — "Sell the News"</span></h4>
+<p><span class="zh">Nvidia发布Q1 FY27财报，营收约$780亿超预期，数据中心营收继续翻倍增长。然而股价盘后微跌，呈现典型的"利好兑现即利空"效应。<br><br><b>关键数据：</b><br>• Q1营收：~$78B（超预期$73B），同比+85%左右<br>• 数据中心营收：继续主导增长引擎<br>• 盘后反应：微跌，反映预期已经极高<br><br>这一"利好兑现"效应波及A股科技板块，5月21日早盘半导体板块冲高后暴跌，主力借Nvidia利好完成高位出货。</span><span class="en" style="display:none">Nvidia reported Q1 FY27 earnings with ~$78B revenue beating expectations, data center revenue continuing to double. However, shares dipped slightly after-hours in a classic "sell the news" reaction.<br><br><b>Key data:</b><br>• Q1 revenue: ~$78B (beating $73B estimate), ~85% YoY<br>• Data center: continues to drive growth<br>• After-hours: slight dip, reflecting sky-high expectations<br><br>This "sell the news" effect rippled into A-share tech, where the semi sector surged then crashed on May 21 as institutions distributed into Nvidia-fueled strength.</span></p>
+<p class="src">来源：CNBC / Reuters / Gotrade</p>
+</div>
+
+<div class="card">
+<h4>🎮 <span class="zh">4. 盘后重要个股</span><span class="en" style="display:none">4. Key After-Hours Movers</span></h4>
+<p><span class="zh">• <b>Workday (WDAY)</b>：+11%，盈利超预期，上调全年利润率展望<br>• <b>Take-Two (TTWO)</b>：+7%，营收微超预期，确认GTA VI仍计划11月发售<br>• <b>Zoom (ZM)</b>：+7%，财报获投资者认可<br>• <b>Ross Stores (ROST)</b>：+7%，财报超预期，上调同店销售及全年EPS指引<br>• <b>Estee Lauder (EL)</b>：+12%，确认与Puig终止并购谈判</span><span class="en" style="display:none">• <b>Workday (WDAY):</b> +11%, beat estimates, raised full-year margin outlook<br>• <b>Take-Two (TTWO):</b> +7%, slight revenue beat, GTA VI confirmed for November<br>• <b>Zoom (ZM):</b> +7%, investors cheered results<br>• <b>Ross Stores (ROST):</b> +7%, beat estimates, raised comp sales & EPS guidance<br>• <b>Estee Lauder (EL):</b> +12%, confirmed merger talks with Puig ended</span></p>
+<p class="src">来源：CNBC / Yahoo Finance</p>
+</div>
+
+<!-- ═══ SEMICONDUCTOR FOCUS ═══ -->
+<h2>🔬 <span class="zh">半导体 / AI 重点关注</span><span class="en" style="display:none">Semiconductor / AI Focus</span></h2>
+
+<div class="card">
+<h4>🔥 <span class="zh">费半涨1.28%连涨 — AI芯片需求持续强劲</span><span class="en" style="display:none">🔥 SOX +1.28% Streak — AI Chip Demand Stays Strong</span></h4>
+<p><span class="zh">费城半导体指数收11,964点（+1.28%），延续周三4.49%暴涨后的涨势。Nvidia财报确认AI资本支出周期远未结束，数据中心需求"parabolic"（抛物线式增长）。<br><br><b>半导体板块亮点：</b><br>• SOX两日累计涨幅约5.8%<br>• Nvidia盘后微跌但中长期逻辑不变<br>• 关注AI芯片竞争格局：大客户（Google、Amazon、Meta）自研ASIC加速<br>• 物理AI（自动驾驶+机器人）被黄仁勋定义为"下一波浪潮"<br><br>IBM（+12.55%）和思科（+3.44%）领涨道指成分股。</span><span class="en" style="display:none">SOX closed at 11,964 (+1.28%), extending gains after Wednesday's 4.49% surge. Nvidia's earnings confirmed the AI capex cycle is far from over, with "parabolic" data center demand.<br><br><b>Semi highlights:</b><br>• SOX two-day cumulative gain ~5.8%<br>• Nvidia dipped after-hours but long-term thesis intact<br>• Watch AI chip competitive landscape: hyperscaler custom ASIC acceleration (Google, Amazon, Meta)<br>• Physical AI (autonomous vehicles + robotics) defined by Jensen Huang as "the next wave"<br><br>IBM (+12.55%) and Cisco (+3.44%) led Dow components.</span></p>
+<p class="src">来源：MarketWatch / Nasdaq / CNBC</p>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">A股半导体暴跌 — 科创50重挫3.70%</span><span class="en" style="display:none">📉 A-Share Semis Crash — STAR 50 Plunges 3.70%</span></h4>
+<p><span class="zh">A股半导体板块成砸盘主力，单日净流出280.8亿元。科创50重挫3.70%领跌全场。<br><br><b>暴跌链条：</b><br>① 半月涨22%后估值极端泡沫化（PE 200倍+）<br>② Nvidia"利好兑现"示范 → 早盘诱多<br>③ 午后中特估大盘拉升 → 虹吸流动性<br>④ 量化趋势策略触发一致止损<br>⑤ 主力资金集中抛售，半导体单板块占净流出20%<br><br>值得注意的是，半导体逆势板块中玻璃基板、人形机器人概念仍有表现。</span><span class="en" style="display:none">A-share semis were the primary drag, with single-day net outflow of ¥28.08B. STAR 50 plunged 3.70%, leading the decline.<br><br><b>Cascade:</b><br>① Extreme valuation bubble after 22% in two weeks (200x+ PE)<br>② Nvidia "sell the news" → morning pump trap<br>③ Afternoon state-owned rally → liquidity drain<br>④ Quant trend strategies triggered synchronized stop-losses<br>⑤ Institutional distribution, semis accounting for 20% of total outflow<br><br>Glass substrate and humanoid robot concepts still showed relative strength.</span></p>
+<p class="src">来源：同花顺 / 东方财富 / 新浪财经</p>
+</div>
+
+<!-- ═══ OUTLOOK ═══ -->
+<h2>🔮 <span class="zh">短期预判</span><span class="en" style="display:none">Short-Term Outlook</span></h2>
+
+<div class="card">
+<h4>📅 <span class="zh">5/22（周五）展望</span><span class="en" style="display:none">📅 May 22 (Fri) Outlook</span></h4>
+<p><span class="zh"><b>美股：</b>期货微涨（道指+0.1%，纳指+0.3%），有望完成连续第八周上涨。Warsh宣誓就任是今日焦点事件，关注其政策表态。8个S&P板块收涨，市场广度良好。<br><br><b>A股：</b>硬科技短期回调压力大，4100点关口失守后可能惯性下探。关注3,900-4,000点支撑区域。风格切换风险显著——中特估大盘股可能接棒。中期AI国产替代逻辑不变，但短期需消化泡沫。<br><br><b>港股：</b>早盘已反弹0.66%，恒指季度检讨结果今日公布（成分股变动6月8日生效）。科技板块受全球AI叙事支撑，但A股暴跌情绪可能传导。<br><br><b>亚太：</b>日本核心通胀1.4%（大幅低于预期1.7%），削弱BOJ加息预期，日经+1.36%。韩国KOSDAQ+3%领涨亚太。</span><span class="en" style="display:none"><b>US:</b> Futures slightly higher (Dow +0.1%, Nasdaq +0.3%), on track for an 8th straight weekly gain. Warsh's swearing-in is today's focal event; watch for policy signals. 8 of 11 S&P sectors closed green, showing healthy breadth.<br><br><b>A-Shares:</b> Tech faces continued pullback pressure. Breaking below 4,100 may trigger further downside toward 3,900-4,000 support. Style rotation risk is significant — state-owned large-caps may take the baton. Medium-term AI/substitution thesis intact, but short-term bubble digestion needed.<br><br><b>HK:</b> Already rebounded 0.66% in early trading. HSI quarterly review results due today (component changes effective June 8). Tech supported by global AI narrative, but A-share crash sentiment may weigh.<br><br><b>Asia-Pacific:</b> Japan core CPI 1.4% (well below 1.7% expected), weakening BOJ rate hike case. Nikkei +1.36%. Korea Kosdaq +3% leading Asia.</span></p>
+</div>
+
+<div class="card">
+<h4>📈 <span class="zh">中期（1-2周）风险与机会</span><span class="en" style="display:none">📈 Medium-Term (1-2 Wks) Risks & Opportunities</span></h4>
+<p><span class="zh"><b>上行情景：</b>美伊协议达成 + Warsh释放鸽派信号 → 风险偏好全面修复，纳指/费半挑战新高。A股硬科技消化泡沫后重回上升通道。<br><br><b>下行风险：</b><br>① 美伊谈判破裂（伊朗坚持保留浓缩铀），油价重回$115+，滞胀风险加剧<br>② 30年期国债收益率再冲5.2%+，全球流动性收紧<br>③ A股风格剧烈切换，成长→价值轮动引发更多止损<br>④ Warsh鹰派立场超预期，加息预期重燃<br>⑤ Nvidia盘后跌势扩大，科技股估值重评<br><br><b>关注板块：</b><br>• 半导体/AI（Nvidia财报催化后消化期，关注ASIC竞争格局）<br>• 能源（油价双向波动剧烈）<br>• A股中特估/价值板块（风格切换受益者）<br>• 港股科技（估值修复+恒指检讨催化）</span><span class="en" style="display:none"><b>Upside:</b> US-Iran deal + Warsh dovish signals → full risk appetite recovery, Nasdaq/SOX challenge new highs. A-share tech resumes uptrend after bubble digestion.<br><br><b>Downside risks:</b><br>① US-Iran talks collapse (Iran insists on keeping enriched uranium), oil back to $115+, stagflation risk<br>② 30Y yield retests 5.2%+, global liquidity tightening<br>③ A-share violent style rotation, growth → value triggering more stop-losses<br>④ Warsh more hawkish than expected, rate hike expectations revive<br>⑤ Nvidia after-hours losses widen, tech valuation re-rating<br><br><b>Sectors to watch:</b><br>• Semis/AI (digesting Nvidia catalyst, watch ASIC competition)<br>• Energy (bidirectional oil volatility)<br>• A-share state-owned/value (style rotation beneficiary)<br>• HK Tech (valuation recovery + HSI review catalyst)</span></p>
+<p class="src">来源：BMO Private Wealth / Schwab / CNBC / Vital Knowledge</p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+<p>📊 Sky Portal Daily Market · <span class="zh">由</span><span class="en" style="display:none">Generated by</span> Sky ☁️ <span class="zh">自动生成</span><span class="en" style="display:none">auto-generated</span> · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：</span><span class="en" style="display:none">Data sources: </span>CNBC, Reuters, Yahoo Finance, Trading Economics, Bloomberg, 同花顺, 东方财富, 新浪财经</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tlt', sym:'NASDAQ:TLT'},
+  {id:'tv-uso', sym:'NYSEARCA:USO'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-22</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card h3 a{color:#f0a040;text-decoration:none}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.8em;margin-top:8px}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-22 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 Chiplet（小芯片）？为什么要拆成小芯片？</h3>
+<p>想象你要造一栋超级大楼。传统做法是把所有房间、管道、电线浇铸成一个整体——这就是<strong>单片芯片（monolithic die）</strong>。芯片越大，制造时越容易出现缺陷：一处坏点，整块芯片报废。良率随面积指数级下降，一块 800mm² 的大芯片成本可能是四块 200mm² 小芯片的 10 倍以上。</p>
+<p><strong>Chiplet（小芯片）</strong>的思路是：与其造一栋巨型建筑，不如盖几栋小楼再用高速走廊连起来。把大芯片拆成多个小 die（裸片），每个 die 用最合适的制程制造（CPU 用 3nm，I/O 用 6nm），然后用<strong>先进封装</strong>（如 TSMC CoWoS、Intel EMIB）把它们拼到一起，通过硅通孔（TSV）和微凸点高密度互连。</p>
+<p>好处：① 良率大幅提升（小芯片几乎无坏点）；② 不同功能模块可以用不同制程，成本最优；③ 可以混合搭配不同厂商的 die（比如 AMD 在 Zen 处理器里拼自己的 CPU die + TSMC 的 I/O die）。代价是封装复杂度和互连标准（UCIe）的挑战。</p>
+<p>AMD 的 Ryzen/EPYC、Intel 的 Ponte Vecchio、Apple 的 M-series Ultra（用 UltraFusion 拼接两块 Max）都是 Chiplet 设计的代表作。当单片芯片逼近光刻面积极限（reticle limit ~858mm²），Chiplet 不是选择，而是<strong>必然</strong>。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>欧洲 L2D2 项目突破：激光工艺将石墨烯等 2D 材料直接转移到 CMOS 晶圆</h3>
+<p>欧洲 Horizon Europe 资助的 <strong>L2D2 项目</strong>开发了一种名为"激光数字转移"（LDT）的工艺，能够将石墨烯等原子级厚度的 2D 材料直接转移到 CMOS 兼容晶圆和硅光子晶圆上。该工艺为无溶剂、单步操作，可在 4 英寸和 8 英寸晶圆上精确转移 10μm 级别的 2D 材料"像素"，解决了传统高分子/溶剂转移法带来的污染和缺陷问题。参与方包括雅典国家技术大学、Graphenea Semiconductor、NVIDIA Mellanox 和巴伊兰大学。这一突破为 2D 材料从实验室走向量产铺平道路。</p>
+<p>来源：<a href="https://www.innovationnewsnetwork.com/laser-breakthrough-brings-2d-materials-closer-to-chip-factories/65200/" target="_blank">Innovation News Network</a></p>
+<div class="date">2026-06-19</div>
+</div>
+
+<div class="card">
+<h3>WSTS 春季预测：2026 全球半导体市场飙升 90%，突破 1.5 万亿美元</h3>
+<p>世界半导体贸易统计组织（<strong>WSTS</strong>）发布 2026 春季预测，将全球半导体市场预期大幅上调：<strong>2026 年增长 90%，达 1.51 万亿美元</strong>。其中存储器暴增约 250%，超过 8000 亿美元——AI 基础设施和 HBM 需求是核心驱动力。逻辑芯片增长 37%，达 4113 亿美元。美洲市场预计翻倍（+112%），亚太 +87%，欧洲 +58%。2027 年预计进一步增长 27%，达 1.9 万亿美元。</p>
+<p>来源：<a href="https://www.bisinfotech.com/global-semiconductor-market-surges-beyond-usd-1-5-trillion-in-2026-driven-by-extraordinary-memory-expansion/" target="_blank">Bisinfotech / WSTS</a></p>
+<div class="date">2026-06-02</div>
+</div>
+
+<div class="card">
+<h3>TechInsights：AI 驱动半导体市场 2027 年突破 2 万亿美元</h3>
+<p>市场分析机构 <strong>TechInsights</strong> 在 6 月 16 日发布预测，称 AI 芯片需求正推动半导体行业以超预期速度增长，<strong>2027 年市场规模将超过 2 万亿美元</strong>。这一预测比 WSTS 更为激进，反映了 AI 加速计算对逻辑芯片、HBM 和先进封装的拉动力仍在持续放大。HBM3/HBM4 成为 AI 芯片标配，三星、SK 海力士、美光将先进产能向高端倾斜。</p>
+<p>来源：<a href="https://www.techinsights.com/" target="_blank">TechInsights</a></p>
+<div class="date">2026-06-16</div>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>Apple 和 NVIDIA 考虑将部分芯片产能转移至 Intel</h3>
+<p>据 Digitimes 报道，<strong>Apple 和 NVIDIA</strong> 正在考虑将部分芯片生产转移至 Intel Foundry。<strong>NVIDIA</strong> 计划在 2028 年的 Feynman GPU 平台使用 Intel 的先进封装技术，并评估其 14A 制程节点（核心 GPU die 仍留在 TSMC）。<strong>Apple</strong> 则据报道与 Intel 合作生产入门级 M 系列处理器（可能使用 18A-P 子节点，2027 年量产）。这反映了美国芯片厂商"双代工厂"策略趋势——Google、AMD、Microsoft、Qualcomm 也在重新评估产能分配。Samsung 也预计其 2nm 订单 2026 年同比增长超 30%。</p>
+<p>来源：<a href="https://bits-chips.com/article/report-apple-and-nvidia-looking-at-partial-production-shift-to-intel/" target="_blank">Bits & Chips</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>半导体板块大幅回调：NVIDIA -2.4%，Intel -8.5%，AMD -7.3%</h3>
+<p>6 月 17 日，半导体板块遭遇大幅抛售。<strong>AMD 跌 7.3%，Intel 跌 8.5%，Micron 跌 6.2%，Broadcom 跌 4.4%，NVIDIA 跌 2.4%</strong>，而同期标普 500 上涨 0.33%。这是 AI 行情持续数月后的获利了结——半导体板块是 2026 年至今最强板块之一，SpaceX 6 月 13 日上市后吸引了大量资金轮动。YTD 流入美股 ETF 的 8300 亿美元中，大量集中在大型科技股，集中度风险在此次回调中显现。</p>
+<p>来源：<a href="https://www.myfindex.com/finance-trends/semiconductor-selloff-nvidia-amd-june-2026" target="_blank">MyFinDate</a></p>
+<div class="date">2026-06-17</div>
+</div>
+
+<div class="card">
+<h3>TSS2026 集邦咨询半导体产业高层论坛明日深圳开幕</h3>
+<p>6 月 23 日，<strong>TrendForce 集邦咨询</strong>将在深圳举办"TSS2026 半导体产业高层论坛"。多位资深分析师将聚焦 AI 领域，围绕晶圆代工、存储器、先进封装、化合物半导体等主题展开研讨。核心议题包括"周期与变革"——在全球半导体超级周期下，产业链如何应对供需重构。本次论坛是中国半导体行业上半年最重要的行业活动之一。</p>
+<p>来源：<a href="https://www.trendforce.cn/" target="_blank">TrendForce 集邦咨询</a></p>
+<div class="date">2026-06-22</div>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>IBM 投入超 100 亿美元加速量子计算路线图</h3>
+<p><strong>IBM</strong> 在 6 月 2 日宣布，未来五年将投入<strong>超过 100 亿美元</strong>用于量子计算，覆盖研发、制造、并购和生态扩展。CEO Arvind Krishna 表示"量子时代已经开始"。IBM 目前运营全球最大量子计算机机队（90+ 台），遍布纽约、德国、克里夫兰诊所等地。投资计划目标是 2029 年交付全球首台大规模容错量子计算机。这笔投资也巩固了 IBM 在美国本土的量子领导地位。</p>
+<p>来源：<a href="https://newsroom.ibm.com/2026-06-02-ibm-commits-more-than-10-billion-to-quantum-computing,-funding-its-roadmap-from-todays-leading-systems-to-the-world-s-first-fault-tolerant-quantum-computers" target="_blank">IBM Newsroom</a></p>
+<div class="date">2026-06-02</div>
+</div>
+
+<div class="card">
+<h3>D-Wave 推出门模型量子模拟器，支持错误感知编程</h3>
+<p><strong>D-Wave Quantum Inc.</strong> 在 6 月 18 日推出了一款<strong>门模型量子模拟器</strong>，集成到其 Ocean SDK 中，支持最多 21 个量子比特，将于 2026 年 9 月通过 Leap 量子云平台上线。这是 D-Wave 在 1 月以 5.5 亿美元收购 Quantum Circuits Inc.、将门模型能力纳入其退火平台后的首个产品落地。D-Wave 目前是唯一同时拥有退火和门模型量子计算能力的公司。</p>
+<p>来源：<a href="https://quantumcomputingreport.com/news/" target="_blank">Quantum Computing Report</a></p>
+<div class="date">2026-06-18</div>
+</div>
+
+<div class="card">
+<h3>中性原子量子计算成为 2026 年焦点：Microsoft、Atom Computing、QuEra 领跑</h3>
+<p>IEEE Spectrum 报道，<strong>中性原子量子计算</strong>正在成为 2026 年最热门的量子技术路线。Microsoft、Atom Computing 和 QuEra 正在竞相交付小型容错量子计算机。中性原子方案的优势在于：量子比特天然一致（都是铷/锶原子）、可二维/三维阵列扩展、且能通过光镊实现任意比特间互连。多个团队预计在 2026 年内实现初步错误纠正里程碑。</p>
+<p>来源：<a href="https://spectrum.ieee.org/neutral-atom-quantum-computing" target="_blank">IEEE Spectrum</a></p>
+<div class="date">2026-06-05</div>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+</div>
+</div>
+</body>
+</html>

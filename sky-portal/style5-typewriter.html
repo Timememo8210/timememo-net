@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Style 5: Typewriter Newsletter</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans SC','IBM Plex Mono',sans-serif;background:#FAFAF9;color:#1a1a1a;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+.wrap{max-width:640px;margin:0 auto;padding:0 24px}
+
+/* Top bar */
+.topbar{padding:20px 0;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#FAFAF9;z-index:50}
+.topbar-left{font-family:'IBM Plex Mono',monospace;font-size:0.75em;font-weight:600;letter-spacing:0.05em}
+.topbar-right{display:flex;gap:16px}
+.topbar-right a{font-family:'IBM Plex Mono',monospace;font-size:0.72em;color:#999;text-decoration:none;transition:color 0.15s}
+.topbar-right a:hover{color:#1a1a1a}
+
+/* Hero with typewriter */
+.hero{padding:80px 0 60px}
+.hero-overline{font-family:'IBM Plex Mono',monospace;font-size:0.7em;color:#999;margin-bottom:12px}
+.hero h1{font-size:2.8em;font-weight:700;letter-spacing:-0.03em;line-height:1.15;margin-bottom:12px}
+.cursor{display:inline-block;width:2px;height:0.9em;background:#1a1a1a;margin-left:2px;animation:blink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
+.hero .sub{color:#666;font-size:0.92em;max-width:400px;font-weight:300}
+
+/* Date + stats inline */
+.meta-line{font-family:'IBM Plex Mono',monospace;font-size:0.72em;color:#999;padding:20px 0;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;margin:32px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.meta-line span{display:inline-flex;align-items:center;gap:4px}
+.meta-line .dot{width:4px;height:4px;border-radius:50%;background:#ccc}
+
+/* Section — editorial blocks */
+.sec{padding:40px 0;border-bottom:1px solid #e8e8e8}
+.sec-title{font-family:'IBM Plex Mono',monospace;font-size:0.68em;text-transform:uppercase;letter-spacing:0.15em;color:#999;margin-bottom:20px}
+
+/* Link entries — newspaper style */
+.entries{}
+.entry{padding:16px 0;border-bottom:1px solid #f0f0f0;text-decoration:none;color:inherit;display:block;transition:all 0.15s}
+.entry:last-child{border-bottom:none}
+.entry:hover{padding-left:8px}
+.entry-header{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.entry-icon{font-size:0.85em;opacity:0.5}
+.entry-name{font-weight:600;font-size:1em}
+.entry-tag{font-family:'IBM Plex Mono',monospace;font-size:0.6em;font-weight:600;color:#c23c2a;text-transform:uppercase;letter-spacing:0.05em;margin-left:auto;flex-shrink:0}
+.entry-desc{font-size:0.82em;color:#666;padding-left:24px}
+
+/* Blockquote */
+.bq{padding:24px 0;margin:24px 0;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8}
+.bq p{font-style:italic;font-size:1.05em;color:#666;line-height:1.6}
+.bq cite{display:block;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:0.68em;color:#aaa;margin-top:8px}
+
+.foot{padding:32px 0;border-top:2px solid #1a1a1a;margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:0.68em;color:#aaa}
+
+@media(max-width:480px){.hero h1{font-size:2em}.wrap{padding:0 16px}.entry-desc{padding-left:0}}
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="topbar-left">SKY PORTAL<span id="typed-cursor" class="cursor"></span></div>
+    <div class="topbar-right">
+      <a href="#daily"><span class="zh">每日</span><span class="en">Daily</span></a>
+      <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+      <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+      <a href="#tools"><span class="zh">项目</span><span class="en">Projects</span></a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-overline">// xiaobo's digital space</div>
+    <h1 id="hero-title"></h1>
+    <p class="sub"><span class="zh">研究、工具、记录。<br>一个人与AI共创的知识库。</span><span class="en">Research, tools, records.<br>A personal knowledge base, co-created with AI.</span></p>
+  </div>
+
+  <div class="meta-line">
+    <span><span class="dot"></span> 11 published</span>
+    <span><span class="dot"></span> 5 active</span>
+    <span><span class="dot"></span> 76 days</span>
+    <span>2026-05-01</span>
+  </div>
+
+  <div class="bq">
+    <p>「半导体研发本质上全是数据，AI将彻底重构研发流程。」</p>
+    <cite>— Sky Portal, 2026</cite>
+  </div>
+
+  <div class="sec" id="daily">
+    <div class="sec-title">⟡ 每日更新 / Daily</div>
+    <div class="entries">
+      <a class="entry" href="research/index.html"><div class="entry-header"><span class="entry-icon">📡</span><span class="entry-name"><span class="zh">每日研报</span><span class="en">Briefing</span></span><span class="entry-tag">auto</span></div><div class="entry-desc"><span class="zh">半导体 · 股票 · 巴萨 · Portland</span><span class="en">Semi · Stocks · Barça</span></div></a>
+      <a class="entry" href="tech/index.html"><div class="entry-header"><span class="entry-icon">🔬</span><span class="entry-name"><span class="zh">每日科技</span><span class="en">Tech</span></span><span class="entry-tag">auto</span></div><div class="entry-desc"><span class="zh">芯片 · 技术突破 · 产业</span><span class="en">Chips · Breakthroughs</span></div></a>
+      <a class="entry" href="market/index.html"><div class="entry-header"><span class="entry-icon">📊</span><span class="entry-name"><span class="zh">每日行情</span><span class="en">Market</span></span><span class="entry-tag">9pm</span></div><div class="entry-desc"><span class="zh">美股 · A股 · 港股</span><span class="en">US · CN · HK</span></div></a>
+      <a class="entry" href="science/index.html"><div class="entry-header"><span class="entry-icon">🧬</span><span class="entry-name"><span class="zh">每周科学</span><span class="en">Science</span></span><span class="entry-tag">wed</span></div><div class="entry-desc">Science · Nature · Cell</div></a>
+    </div>
+  </div>
+
+  <div class="sec" id="research">
+    <div class="sec-title">⟡ 研究 / Research</div>
+    <div class="entries">
+      <a class="entry" href="research/intel-tesla-terafab.html"><div class="entry-header"><span class="entry-icon">⚡</span><span class="entry-name">Intel × Tesla Terafab</span><span class="entry-tag">new</span></div><div class="entry-desc"><span class="zh">$200-250亿超级半导体制造</span><span class="en">$20-25B mega fab</span></div></a>
+      <a class="entry" href="ai-cvd-optimization.html"><div class="entry-header"><span class="entry-icon">🏭</span><span class="entry-name"><span class="zh">AI赋能半导体设备</span><span class="en">AI Equipment</span></span><span class="entry-tag">new</span></div><div class="entry-desc">Lam / AMAT AIx</div></a>
+      <a class="entry" href="semiconductor-equipment-ai.html"><div class="entry-header"><span class="entry-icon">🔐</span><span class="entry-name"><span class="zh">AI安全方案</span><span class="en">AI Security</span></span><span class="entry-tag">new</span></div><div class="entry-desc">NVIDIA / Azure</div></a>
+      <a class="entry" href="nvidia-report.html"><div class="entry-header"><span class="entry-icon">🟢</span><span class="entry-name">NVIDIA Foundry</span><span class="entry-tag">v2.2</span></div><div class="entry-desc"><span class="zh">GPU晶圆代工战略</span><span class="en">GPU foundry strategy</span></div></a>
+      <a class="entry" href="intel-news-2026.html"><div class="entry-header"><span class="entry-icon">📰</span><span class="entry-name"><span class="zh">Intel 2026新闻</span><span class="en">Intel News</span></span><span class="entry-tag">2026</span></div><div class="entry-desc">18A · Fab 52 · INTC $48</div></a>
+      <a class="entry" href="ai-life.html"><div class="entry-header"><span class="entry-icon">🤖</span><span class="entry-name"><span class="zh">AI生活实践</span><span class="en">AI Life</span></span><span class="entry-tag">updated</span></div><div class="entry-desc"><span class="zh">效能记录 V1+V2</span><span class="en">Productivity</span></div></a>
+      <a class="entry" href="claude-code-leak.html"><div class="entry-header"><span class="entry-icon">🔓</span><span class="entry-name">Claude Code Leak</span><span class="entry-tag">research</span></div><div class="entry-desc">512K lines · hidden features</div></a>
+      <a class="entry" href="skills.html"><div class="entry-header"><span class="entry-icon">☁️</span><span class="entry-name"><span class="zh">Sky技能全家福</span><span class="en">Sky Skills</span></span><span class="entry-tag">30+</span></div><div class="entry-desc"><span class="zh">30+技能一览</span><span class="en">30+ skills</span></div></a>
+    </div>
+  </div>
+
+  <div class="sec" id="life">
+    <div class="sec-title">⟡ 生活 / Life</div>
+    <div class="entries">
+      <a class="entry" href="naturalization.html"><div class="entry-header"><span class="entry-icon">🇺🇸</span><span class="entry-name"><span class="zh">入籍规划</span><span class="en">N-400</span></span><span class="entry-tag">prep</span></div><div class="entry-desc"><span class="zh">9月递交 · 时间线</span><span class="en">Sep · Timeline</span></div></a>
+      <a class="entry" href="coach/index.html"><div class="entry-header"><span class="entry-icon">📚</span><span class="entry-name"><span class="zh">私人教练</span><span class="en">Coach</span></span><span class="entry-tag">daily</span></div><div class="entry-desc"><span class="zh">芒格误判 13/25</span><span class="en">Munger 13/25</span></div></a>
+      <a class="entry" href="my-garden/"><div class="entry-header"><span class="entry-icon">🌸</span><span class="entry-name"><span class="zh">我的花园</span><span class="en">Garden</span></span><span class="entry-tag">2026</span></div><div class="entry-desc"><span class="zh">绣球 · 月季 · Portland</span><span class="en">Hydrangeas · Portland</span></div></a>
+      <a class="entry" href="https://timememo8210.github.io/health-report/" target="_blank"><div class="entry-header"><span class="entry-icon">🏥</span><span class="entry-name"><span class="zh">健康报告</span><span class="en">Health</span></span><span class="entry-tag">new</span></div><div class="entry-desc"><span class="zh">11年 · 327万条</span><span class="en">11yrs · 3.27M</span></div></a>
+      <a class="entry" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><div class="entry-header"><span class="entry-icon">🌍</span><span class="entry-name"><span class="zh">欧洲行 v5</span><span class="en">Europe v5</span></span><span class="entry-tag">latest</span></div><div class="entry-desc">Swiss → Paris → NYC</div></a>
+      <a class="entry" href="investment.html"><div class="entry-header"><span class="entry-icon">💰</span><span class="entry-name"><span class="zh">投资策略</span><span class="en">Invest</span></span><span class="entry-tag">ongoing</span></div><div class="entry-desc">RSU · 529 · SMH</div></a>
+      <a class="entry" href="car-decision.html"><div class="entry-header"><span class="entry-icon">🚗</span><span class="entry-name"><span class="zh">换车决策</span><span class="en">Car</span></span><span class="entry-tag">2026</span></div><div class="entry-desc"><span class="zh">省$26K+</span><span class="en">Save $26K+</span></div></a>
+    </div>
+  </div>
+
+  <div class="sec" id="tools">
+    <div class="sec-title">⟡ 项目 / Projects</div>
+    <div class="entries">
+      <a class="entry" href="prolynk.html"><div class="entry-header"><span class="entry-icon">🏠</span><span class="entry-name">ProLynk</span><span class="entry-tag">new</span></div><div class="entry-desc"><span class="zh">家居维修 · Oregon</span><span class="en">Home Repair · Oregon</span></div></a>
+      <a class="entry" href="https://timememo8210.github.io/家人-War-Game/" target="_blank"><div class="entry-header"><span class="entry-icon">⚔️</span><span class="entry-name"><span class="zh">时代之战</span><span class="en">War of Ages</span></span><span class="entry-tag">game</span></div><div class="entry-desc"><span class="zh">回合制策略</span><span class="en">Turn-based</span></div></a>
+      <a class="entry" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank"><div class="entry-header"><span class="entry-icon">🌍</span><span class="entry-name"><span class="zh">世界征服</span><span class="en">Conquest</span></span><span class="entry-tag">game</span></div><div class="entry-desc"><span class="zh">实时策略</span><span class="en">RTS</span></div></a>
+      <a class="entry" href="https://timememo8210.github.io/moji-journal/" target="_blank"><div class="entry-header"><span class="entry-icon">📝</span><span class="entry-name"><span class="zh">墨记</span><span class="en">Moji</span></span><span class="entry-tag">dev</span></div><div class="entry-desc"><span class="zh">极简日记</span><span class="en">Minimal diary</span></div></a>
+    </div>
+  </div>
+
+  <div class="foot">Sky Portal · Sky Portal's Digital Space · OpenClaw ☁️</div>
+</div>
+
+<script>
+// Typewriter effect
+(function(){
+  var text='数字空间。';
+  var el=document.getElementById('hero-title');
+  var i=0;
+  function type(){
+    if(i<text.length){el.textContent+=text[i];i++;setTimeout(type,80)}
+  }
+  setTimeout(type,600);
+})();
+</script>
+</body>
+</html>

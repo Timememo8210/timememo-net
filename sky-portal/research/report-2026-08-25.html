@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日研报 2026-08-25</title>
+<style>
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;padding:24px 16px;max-width:900px;margin:0 auto}
+h2{color:#f0a040;border-bottom:1px solid #2a2a2a;padding-bottom:8px;margin-top:32px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin:14px 0}
+.card h3{color:#fff;margin:0 0 10px;font-size:1.05em}
+.card p{margin:6px 0;line-height:1.6;color:#ccc}
+.card .src{color:#f0a040;font-size:0.85em}
+.tag{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px}
+.green{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.red{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #2a2a2a;font-family:'SF Mono',monospace}
+th{color:#f0a040;font-weight:600}
+.sport-card{border-left:3px solid rgba(76,175,80,0.8);background:rgba(76,175,80,0.05)}
+a{color:#f0a040}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#f0a040;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.footer{text-align:center;margin-top:40px;color:#666;font-size:0.85em}
+@media (max-width:768px){.kline-grid{grid-template-columns:1fr !important}}
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+  <div style="text-align:right;margin-bottom:8px">
+    <button onclick="switchLang('zh')" id="btn-zh" style="background:#333;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+    <button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+    <div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">🔬</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">AMD暴涨5%创高 · Nvidia/Google挤压台积电N3产能，Intel补缺</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">AMD jumps 5%; Nvidia/Google crowd TSMC N3 node, Intel filling the gap</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">⚽</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">Rodri首训 · Gavi虚惊一场，官方声明伤情无大碍</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">Rodri first training; Gavi injury scare, official statement</div>
+    </div>
+    <div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">🏀</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">美国男篮公布8月世界杯预选名单 · 世界盃/季后赛稳TV收视</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">USA WC qualifier team out; World Cup/NBA stabilize TV ratings</div>
+    </div>
+    <div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">🤖</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">DeepMind系Inherent AI"队友"超Anthropic/OpenAI复现研究</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">DeepMind alumni AI teammate beats Anthropic/OpenAI</div>
+    </div>
+  </div>
+</div>
+
+<h1>📡 每日研报 · 2026-08-25</h1>
+
+<h2>🔬 半导体与AI</h2>
+<div class="card">
+  <h3>AMD 单日暴涨5%创阶段新高，AI算力需求持续点燃</h3>
+  <p>AMD 收盘大涨4.91%至 $479.18，领涨半导体板块。市场继续追捧AI算力主线，GPU/加速卡需求旺盛带动先进制程与先进封装景气。</p>
+  <span class="tag green">涨</span><span class="tag green">AI算力</span>
+</div>
+<div class="card">
+  <h3>Nvidia与Google挤占台积电N3产能，Intel成"补位"赢家</h3>
+  <p>随着Nvidia、Google等大客户涌入台积电N3节点，产能持续吃紧，市场关注Intel能否填补供应缺口。Intel先进封装EMIB也获青睐，Google 9代TPU据报道采用。</p>
+  <span class="tag green">台积电</span><span class="tag">Intel</span>
+</div>
+<div class="card">
+  <h3>半导体ETF全线走强，美股芯片股普涨</h3>
+  <p>费城半导体权重ETF SMH 收涨1.65%，NVDA +2.19%、MU +2.48%、AMD +4.91%；仅AVGO小幅回调-0.56%。</p>
+  <span class="tag green">SMH +1.39%</span>
+</div>
+
+<h2>📈 半导体股票</h2>
+<div class="card">
+<table>
+<tr><th>代码</th><th>公司</th><th>收盘价</th><th>涨跌</th></tr>
+<tr><td>INTC</td><td>Intel</td><td>$87.48</td><td><span class="tag green">+0.25%</span></td></tr>
+<tr><td>NVDA</td><td>NVIDIA</td><td>$213.05</td><td><span class="tag green">+2.19%</span></td></tr>
+<tr><td>TSM</td><td>台积电</td><td>$417.41</td><td><span class="tag green">+1.78%</span></td></tr>
+<tr><td>AMD</td><td>AMD</td><td>$479.18</td><td><span class="tag green">+4.91%</span></td></tr>
+<tr><td>ASML</td><td>ASML</td><td>$1744.16</td><td><span class="tag green">+0.23%</span></td></tr>
+<tr><td>MU</td><td>美光</td><td>$932.97</td><td><span class="tag green">+2.48%</span></td></tr>
+<tr><td>AVGO</td><td>博通</td><td>$356.74</td><td><span class="tag red">-0.56%</span></td></tr>
+<tr><td>QCOM</td><td>高通</td><td>$160.56</td><td><span class="tag green">+1.28%</span></td></tr>
+<tr><td>TSLA</td><td>特斯拉</td><td>$350.25</td><td><span class="tag green">+0.37%</span></td></tr>
+<tr><td>SMH</td><td>半导体ETF</td><td>$555.82</td><td><span class="tag green">+1.65%</span></td></tr>
+</table>
+<p style="font-size:0.85em;color:#666">数据：Yahoo Finance 2026-08-25 收盘价（chart API）</p>
+</div>
+
+<div style="margin-top:24px">
+<h3 style="color:#f0a040;margin-bottom:12px">📊 K线图</h3>
+<div class="kline-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener nofollow" target="_blank"><span class="blue-text">TradingView</span></a></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+{"symbols":[["NASDAQ:INTC","INTC — Intel"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"hideDateRanges":true,"chartOnly":true,"locale":"zh_CN"}</script></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener nofollow" target="_blank"><span class="blue-text">TradingView</span></a></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[{"symbol":"NASDAQ:NVDA","title":"NVDA — NVIDIA"}],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"hideDateRanges":true,"chartOnly":true,"locale":"zh_CN"}</script></div></div>
+<div class="kline-item"><div class="kline-label">TSLA — Tesla</div><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener nofollow" target="_blank"><span class="blue-text">TradingView</span></a></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+{"symbols":[{"symbol":"NASDAQ:TSLA","title":"TSLA — Tesla"}],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"hideDateRanges":true,"chartOnly":true,"locale":"zh_CN"}</script></div></div>
+<div class="kline-item"><div class="kline-label">SMH — 半导体ETF</div><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener nofollow" target="_blank"><span class="blue-text">TradingView</span></a></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+{"symbols":[{"symbol":"NASDAQ:SMH","title":"SMH — 半导体ETF"}],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"hideDateRanges":true,"chartOnly":true,"locale":"zh_CN"}</script></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener nofollow" target="_blank"><span class="blue-text">TradingView</span></a></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+{"symbols":[{"symbol":"AMEX:SPY","title":"SPY — S&P 500"}],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"hideDateRanges":true,"chartOnly":true,"locale":"zh_CN"}</script></div></div>
+<div class="kline-item"><div class="kline-label">上证指数</div><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener nofollow" target="_blank"><span class="blue-text">TradingView</span></a></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+{"symbols":[{"symbol":"SSE:000001","title":"上证指数"}],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"hideDateRanges":true,"chartOnly":true,"locale":"zh_CN"}</script></div></div>
+</div>
+</div>
+
+<h2>⚽ FC Barcelona</h2>
+<div class="card">
+  <h3>Rodri首训亮相 · Gavi虚惊一场</h3>
+  <p>新援Rodri迎来加盟巴萨首个训练课。此前Gavi训练中疑似受伤引发担忧，但官方检查后确认无大碍，避免了一次重大打击。Gavi本人发信："对不起让大家担心了。"</p>
+  <span class="tag green">转会</span><span class="tag">伤员</span>
+</div>
+<div class="card">
+  <h3>新赛季5球起步 · 巴萨仍需前锋引援？</h3>
+  <p>巴萨新赛季首战五球大胜引发讨论：是否还需要顶锋？同时消息称巴萨对夏窗攻击手有明确B计划，Balde被传愿赴曼联。</p>
+  <span class="tag">前锋争夺</span>
+</div>
+
+<h2>🏟️ 体育赛事</h2>
+<div class="card sport-card">
+  <h3>🏀 美国男篮公布世界杯预选赛名单</h3>
+  <p>USA Basketball揭晓2026年8月男篮世界杯预选赛阵容，部分NBA球星入选。Utah Jazz的Josh Okogie领衔尼日利亚D'Tigers阵容。</p>
+  <p class="tag"><a href="#">来源：NBA.com/ESPN</a></p>
+</div>
+<div class="card sport-card">
+  <h3>⚽ 世界杯NBC/观看 · 收视率</h3>
+  <p>FIFA世界杯与NBA季后赛有效拉动Q2广告电视收视稳定。NBA Finals与世界杯联手将6月家庭收视率推至+19.8%。</p>
+  <span class="tag">世界杯</span><span class="tag">NBA</span>
+</div>
+
+<h2>🌲 Portland 本地</h2>
+<div class="card">
+  <h3>🌫️ 山火烟雾回流 + 交通/社区</h3>
+  <p><strong>天气：</strong>野火烟尘周一吹回波特兰，空气质量受关注。<strong>交通：</strong>Rose Quarter段I-5南向封闭最长5周，料严重拥堵；雾霾灰落东部多县车顶。<strong>社区：</strong>波特兰非营利组织进入后院开展果实摘采活动。</p>
+  <span class="tag">烟尘</span><span class="tag">I-5封闭</span>
+</div>
+
+<h2>🤖 AI 动态</h2>
+<div class="card">
+  <h3>DeepMind校友创企Inherent：AI"队友"复现研究胜过Anthropic/OpenAI</h3>
+  <p>由DeepMind前成员创立的Inherent称其AI"teammate"在复现科研任务上超越Anthropic与OpenAI模型，引发AI研究自动化讨论。</p>
+  <span class="tag">AI研究</span>
+</div>
+<div class="card">
+  <h3>白宫将约见Meta/OpenAI/Google/Anthropic谈AI安全测试</h3>
+  <p>继Hugging Face事件后，白宫计划召集四大AI公司会商AI安全测试框架，行业监管博弈持续升温。</p>
+  <span class="tag">AI监管</span>
+</div>
+
+<div class="footer">
+  <a href="index.html">All Reports</a>
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Brutalist</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ── Tokens ── */
+:root {
+  --newsprint: #F4F4F0;
+  --carbon: #050505;
+  --red: #E61919;
+  --dim: #8A8A82;
+  --rule: rgba(5,5,5,0.12);
+  --heavy: 'Archivo Black', 'Impact', sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--mono);
+  background: var(--newsprint);
+  color: var(--carbon);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.lang-en .zh { display: none !important; }
+body.lang-zh .en { display: none !important; }
+
+/* ── Reveal (mechanical) ── */
+.reveal {
+  opacity: 0;
+  transition: opacity 100ms step-end;
+}
+.reveal.visible {
+  opacity: 1;
+}
+
+/* ── Register Strip ── */
+.register {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.register-left {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.register-right {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.register a {
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 100ms;
+}
+
+.register a:hover {
+  color: var(--carbon);
+}
+
+.register .red-rule {
+  width: 20px;
+  height: 1px;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+.lang-btn-brut {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 3px 8px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 100ms;
+}
+
+.lang-btn-brut:hover {
+  color: var(--newsprint);
+  background: var(--carbon);
+}
+
+/* ── Navigation ── */
+.nav-strip {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+}
+
+.nav-strip a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--carbon);
+  text-decoration: none;
+  border-right: 1px solid var(--rule);
+  transition: all 100ms;
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.nav-strip a:last-child { border-right: none; }
+
+.nav-strip a:hover {
+  background: var(--carbon);
+  color: var(--newsprint);
+}
+
+.nav-strip a:active {
+  background: var(--newsprint);
+  color: var(--carbon);
+}
+
+/* ── Hero ── */
+.hero-brut {
+  padding: 48px 24px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  min-height: 50vh;
+  overflow: hidden;
+}
+
+.hero-left {
+  padding-right: 32px;
+  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero-word {
+  font-family: var(--heavy);
+  font-size: clamp(4rem, 10vw, 15rem);
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--carbon);
+}
+
+.hero-word .red-strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 3px;
+}
+
+.hero-right {
+  border-left: 1px solid var(--rule);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-meta-block {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  line-height: 2.2;
+}
+
+.hero-meta-block .value {
+  color: var(--carbon);
+  font-weight: 700;
+}
+
+.hero-meta-block .red-num {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  display: block;
+  line-height: 1.2;
+}
+
+.hero-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--dim);
+  max-width: 32ch;
+  margin-top: 16px;
+}
+
+/* ── Section Headers ── */
+.section-strip {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--carbon);
+  color: var(--newsprint);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 12px;
+}
+
+.section-strip .num {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.section-strip .ascii {
+  margin-left: auto;
+  opacity: 0.4;
+}
+
+/* ── Data Grid (gap: 1px on ink bg) ── */
+.data-grid-wrapper {
+  background: var(--carbon);
+  padding: 1px;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+}
+
+.data-cell {
+  background: var(--newsprint);
+  padding: 24px 20px;
+  text-decoration: none;
+  color: var(--carbon);
+  transition: all 100ms;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.data-cell:hover {
+  background: var(--carbon);
+  color: var(--newsprint);
+}
+
+.data-cell:hover .cell-tag { color: var(--red); }
+.data-cell:hover .cell-desc { color: rgba(255,255,255,0.5); }
+.data-cell:hover .cell-meta { color: rgba(255,255,255,0.3); }
+
+.data-cell:active {
+  background: var(--newsprint);
+  color: var(--carbon);
+}
+
+.cell-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.cell-title {
+  font-family: var(--heavy);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cell-desc {
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+.cell-meta {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0.5;
+  margin-top: auto;
+}
+
+.data-cell.wide {
+  grid-column: span 2;
+}
+
+/* ── Manifest (numbered) ── */
+.manifest {
+  padding: 0 24px;
+}
+
+.manifest-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--carbon);
+  transition: padding-left 100ms;
+  align-items: flex-start;
+}
+
+.manifest-item:hover {
+  padding-left: 12px;
+}
+
+.manifest-item:active {
+  background: var(--carbon);
+  color: var(--newsprint);
+  margin: 0 -24px;
+  padding: 20px 24px 20px 36px;
+}
+
+.manifest-num {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  font-weight: 700;
+  flex-shrink: 0;
+  min-width: 28px;
+  padding-top: 2px;
+}
+
+.manifest-body {
+  flex: 1;
+}
+
+.manifest-title {
+  font-family: var(--heavy);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.manifest-desc {
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+.manifest-tag {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+
+/* ── Colophon ── */
+.colophon {
+  background: var(--carbon);
+  color: var(--newsprint);
+  padding: 32px 24px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 2.4;
+}
+
+.colophon-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.colophon .red {
+  color: var(--red);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero-brut {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero-right {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+  .hero-word {
+    font-size: clamp(3rem, 12vw, 6rem);
+  }
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+  .data-cell.wide { grid-column: span 1; }
+  .nav-strip a {
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+  .register { font-size: 8px; }
+  .register-left { gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .hero-word { font-size: 2.5rem; }
+  .nav-strip { flex-wrap: nowrap; overflow-x: auto; }
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- ── Register Strip ── -->
+<header class="register">
+  <div class="register-left">
+    <span>[ SKY PORTAL ]</span>
+    <span class="red-rule"></span>
+    <span><span class="zh">第 001 期</span><span class="en">ISSUE 001</span></span>
+    <span class="red-rule"></span>
+    <span id="today-date">2026.05.03</span>
+  </div>
+  <div class="register-right">
+    <span>45.5234° N, 122.6762° W</span>
+    <button class="lang-btn-brut" onclick="toggleLang()">EN / 中</button>
+  </div>
+</header>
+
+<!-- ── Navigation ── -->
+<nav class="nav-strip">
+  <a href="#daily"><span class="zh">/// 每日更新</span><span class="en">/// DAILY</span></a>
+  <a href="#research"><span class="zh">/// 研究</span><span class="en">/// RESEARCH</span></a>
+  <a href="#ai"><span class="zh">/// AI 专区</span><span class="en">/// AI LAB</span></a>
+  <a href="#life"><span class="zh">/// 生活</span><span class="en">/// LIFE</span></a>
+  <a href="#projects"><span class="zh">/// 项目</span><span class="en">/// PROJECTS</span></a>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero-brut reveal">
+  <div class="hero-left">
+    <div class="hero-word">
+      <span class="zh">SKY<br><span class="red-strike">PORTAL</span></span>
+      <span class="en">SKY<br><span class="red-strike">PORTAL</span></span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-meta-block">
+      <span class="zh">[ 所有者 ]</span><span class="en">[ OWNER ]</span><br>
+      <span class="value"><span class="zh">Sky Portal</span><span class="en"></span></span><br><br>
+      <span class="zh">[ 类型 ]</span><span class="en">[ TYPE ]</span><br>
+      <span class="value"><span class="zh">个人数字空间</span><span class="en">PERSONAL DIGITAL SPACE</span></span><br><br>
+      <span class="zh">[ 状态 ]</span><span class="en">[ STATUS ]</span><br>
+      <span class="value"><span class="zh">>>> 活跃中</span><span class="en">>>> ACTIVE</span></span>
+    </div>
+    <div>
+      <div class="hero-meta-block">
+        <span class="zh">[ 已发布 ]</span><span class="en">[ PUBLISHED ]</span>
+        <span class="red-num">11</span>
+        <span class="zh">[ 进行中 ]</span><span class="en">[ ACTIVE ]</span>
+        <span class="red-num">05</span>
+        <span class="zh">[ 天数 ]</span><span class="en">[ DAYS ]</span>
+        <span class="red-num" id="day-count">—</span>
+      </div>
+      <p class="hero-desc">
+        <span class="zh">半导体研究 · AI探索 · 投资分析 · 生活记录 — 一个工程师对世界保持好奇的方式。</span>
+        <span class="en">Semiconductor research · AI exploration · Investment analysis · Life notes — an engineer's curiosity about the world.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 01 Daily Updates ── -->
+<div class="section-strip reveal" id="daily">
+  <span class="num">01.</span>
+  <span><span class="zh">每日更新</span><span class="en">DAILY UPDATES</span></span>
+  <span class="ascii">>>> [ FEED ]</span>
+</div>
+<div class="data-grid-wrapper reveal">
+  <div class="data-grid">
+    <a class="data-cell wide" href="research/index.html">
+      <span class="cell-tag"><span class="zh">[ 研报 ]</span><span class="en">[ BRIEFING ]</span></span>
+      <span class="cell-title"><span class="zh">每日研报</span><span class="en">DAILY BRIEFING</span></span>
+      <span class="cell-desc"><span class="zh">半导体 · AI · 市场 · 科技趋势 — 每日自动生成</span><span class="en">Semiconductor · AI · Market · Tech — auto-generated</span></span>
+      <span class="cell-meta">AUTO-GENERATED /// DAILY</span>
+    </a>
+    <a class="data-cell" href="tech/index.html">
+      <span class="cell-tag"><span class="zh">[ 科技 ]</span><span class="en">[ TECH ]</span></span>
+      <span class="cell-title"><span class="zh">科技动态</span><span class="en">TECH FEED</span></span>
+      <span class="cell-desc"><span class="zh">前沿科技新闻追踪</span><span class="en">Cutting-edge tech news</span></span>
+      <span class="cell-meta">DAILY</span>
+    </a>
+    <a class="data-cell" href="market/index.html">
+      <span class="cell-tag"><span class="zh">[ 行情 ]</span><span class="en">[ MARKET ]</span></span>
+      <span class="cell-title"><span class="zh">市场行情</span><span class="en">MARKET WATCH</span></span>
+      <span class="cell-desc"><span class="zh">全球市场与投资追踪</span><span class="en">Global markets & investment</span></span>
+      <span class="cell-meta">DAILY</span>
+    </a>
+    <a class="data-cell" href="science/index.html">
+      <span class="cell-tag"><span class="zh">[ 科学 ]</span><span class="en">[ SCIENCE ]</span></span>
+      <span class="cell-title"><span class="zh">科学前沿</span><span class="en">SCIENCE DIGEST</span></span>
+      <span class="cell-desc"><span class="zh">Science · Nature · Cell · PNAS</span><span class="en">Science · Nature · Cell · PNAS</span></span>
+      <span class="cell-meta">WEEKLY /// WED</span>
+    </a>
+    <a class="data-cell wide" href="prompts/index.html">
+      <span class="cell-tag"><span class="zh">[ 提示词 ]</span><span class="en">[ PROMPTS ]</span></span>
+      <span class="cell-title"><span class="zh">提示词库</span><span class="en">PROMPT LIBRARY</span></span>
+      <span class="cell-desc"><span class="zh">AI 提示词收藏与管理</span><span class="en">AI prompt collection & management</span></span>
+      <span class="cell-meta">COLLECTION</span>
+    </a>
+  </div>
+</div>
+
+<!-- ── 02 Research ── -->
+<div class="section-strip reveal" id="research">
+  <span class="num">02.</span>
+  <span><span class="zh">研究</span><span class="en">RESEARCH</span></span>
+  <span class="ascii">>>> [ DEEP DIVE ]</span>
+</div>
+<div class="data-grid-wrapper reveal">
+  <div class="data-grid">
+    <a class="data-cell" href="ai-cvd-optimization.html">
+      <span class="cell-tag">[ CVD ]</span>
+      <span class="cell-title"><span class="zh">AI CVD 优化</span><span class="en">AI CVD OPTIMIZATION</span></span>
+      <span class="cell-desc"><span class="zh">AI驱动的CVD工艺参数优化</span><span class="en">AI-driven CVD process optimization</span></span>
+    </a>
+    <a class="data-cell" href="semiconductor-equipment-ai.html">
+      <span class="cell-tag"><span class="zh">[ 半导体 ]</span><span class="en">[ SEMI ]</span></span>
+      <span class="cell-title"><span class="zh">半导体设备 AI</span><span class="en">SEMI EQUIPMENT AI</span></span>
+      <span class="cell-desc"><span class="zh">设备智能化与AI应用</span><span class="en">Equipment intelligence & AI</span></span>
+    </a>
+    <a class="data-cell" href="nvidia-report.html">
+      <span class="cell-tag">[ NVIDIA ]</span>
+      <span class="cell-title">NVIDIA</span>
+      <span class="cell-desc"><span class="zh">GPU架构 · 数据中心 · AI芯片</span><span class="en">GPU · Data center · AI chips</span></span>
+    </a>
+    <a class="data-cell wide" href="intel-news-2026.html">
+      <span class="cell-tag">[ INTEL ]</span>
+      <span class="cell-title"><span class="zh">INTEL 新闻追踪</span><span class="en">INTEL NEWS TRACKER</span></span>
+      <span class="cell-desc"><span class="zh">Intel 18A · 代工 · 战略转型跟踪</span><span class="en">Intel 18A · Foundry · Strategy pivot</span></span>
+    </a>
+    <a class="data-cell" href="cvd-supply-chain.html">
+      <span class="cell-tag"><span class="zh">[ 供应链 ]</span><span class="en">[ SUPPLY ]</span></span>
+      <span class="cell-title"><span class="zh">CVD 供应链</span><span class="en">CVD SUPPLY CHAIN</span></span>
+      <span class="cell-desc"><span class="zh">关键材料与供应商映射</span><span class="en">Key materials & supplier mapping</span></span>
+    </a>
+  </div>
+</div>
+
+<!-- ── 03 AI Lab ── -->
+<div class="section-strip reveal" id="ai">
+  <span class="num">03.</span>
+  <span><span class="zh">AI 专区</span><span class="en">AI LAB</span></span>
+  <span class="ascii">>>> [ NEURAL ]</span>
+</div>
+<div class="data-grid-wrapper reveal">
+  <div class="data-grid">
+    <a class="data-cell wide" href="ai/index.html">
+      <span class="cell-tag">[ AI ]</span>
+      <span class="cell-title"><span class="zh">AI 研究中心</span><span class="en">AI RESEARCH HUB</span></span>
+      <span class="cell-desc"><span class="zh">AI 技术研究、模型对比、应用探索</span><span class="en">AI research, model comparisons, applications</span></span>
+    </a>
+    <a class="data-cell" href="ai-life.html">
+      <span class="cell-tag"><span class="zh">[ 生活 ]</span><span class="en">[ LIFE ]</span></span>
+      <span class="cell-title"><span class="zh">AI 与生活</span><span class="en">AI & LIFE</span></span>
+      <span class="cell-desc"><span class="zh">AI如何改变我们的日常</span><span class="en">How AI shapes daily lives</span></span>
+    </a>
+    <a class="data-cell" href="claude-code-leak.html">
+      <span class="cell-tag"><span class="zh">[ 分析 ]</span><span class="en">[ ANALYSIS ]</span></span>
+      <span class="cell-title"><span class="zh">CLAUDE CODE 泄露分析</span><span class="en">CLAUDE CODE LEAK</span></span>
+      <span class="cell-desc"><span class="zh">系统提示词深度解读</span><span class="en">System prompt deep dive</span></span>
+    </a>
+    <a class="data-cell" href="skills.html">
+      <span class="cell-tag"><span class="zh">[ 技能 ]</span><span class="en">[ SKILLS ]</span></span>
+      <span class="cell-title"><span class="zh">AI 技能库</span><span class="en">AI SKILL LIBRARY</span></span>
+      <span class="cell-desc"><span class="zh">Claude Code 技能管理</span><span class="en">Skill management</span></span>
+    </a>
+    <a class="data-cell wide" href="https://github.com/Timememo8210/claude-app-memory" target="_blank">
+      <span class="cell-tag">[ GITHUB ]</span>
+      <span class="cell-title">CLAUDE APP MEMORY</span>
+      <span class="cell-desc"><span class="zh">AI 应用记忆管理系统 — 开源项目</span><span class="en">AI app memory management — open source</span></span>
+    </a>
+  </div>
+</div>
+
+<!-- ── 04 Life (manifest) ── -->
+<div class="section-strip reveal" id="life">
+  <span class="num">04.</span>
+  <span><span class="zh">生活</span><span class="en">LIFE</span></span>
+  <span class="ascii">>>> [ PERSONAL ]</span>
+</div>
+<div class="manifest reveal">
+  <a class="manifest-item" href="my-garden/">
+    <span class="manifest-num">01.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">我的花园</span><span class="en">MY GARDEN</span></div>
+      <div class="manifest-desc"><span class="zh">种植日记</span><span class="en">Growing diary</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 花园 ]</span><span class="en">[ GARDEN ]</span></span>
+  </a>
+  <a class="manifest-item" href="coach/index.html">
+    <span class="manifest-num">02.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">教练专区</span><span class="en">COACH ZONE</span></div>
+      <div class="manifest-desc"><span class="zh">足球教练资料</span><span class="en">Soccer coaching materials</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 教练 ]</span><span class="en">[ COACH ]</span></span>
+  </a>
+  <a class="manifest-item" href="investment.html">
+    <span class="manifest-num">03.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">投资分析</span><span class="en">INVESTMENT ANALYSIS</span></div>
+      <div class="manifest-desc"><span class="zh">策略与分析</span><span class="en">Strategy & analysis</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 投资 ]</span><span class="en">[ FINANCE ]</span></span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank">
+    <span class="manifest-num">04.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">2026 旅行计划</span><span class="en">2026 TRAVEL PLAN</span></div>
+      <div class="manifest-desc"><span class="zh">瑞士 → 巴黎 → 纽约</span><span class="en">Switzerland → Paris → NYC</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 旅行 ]</span><span class="en">[ TRAVEL ]</span></span>
+  </a>
+  <a class="manifest-item" href="naturalization.html">
+    <span class="manifest-num">05.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">入籍准备</span><span class="en">NATURALIZATION PREP</span></div>
+      <div class="manifest-desc"><span class="zh">公民考试</span><span class="en">Citizenship exam</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 个人 ]</span><span class="en">[ PERSONAL ]</span></span>
+  </a>
+  <a class="manifest-item" href="worldcup-2026.html">
+    <span class="manifest-num">06.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">2026 世界杯</span><span class="en">2026 WORLD CUP</span></div>
+      <div class="manifest-desc">FIFA 2026</div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 体育 ]</span><span class="en">[ SPORTS ]</span></span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/health-report/" target="_blank">
+    <span class="manifest-num">07.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">健康报告</span><span class="en">HEALTH REPORT</span></div>
+      <div class="manifest-desc"><span class="zh">健康追踪</span><span class="en">Health tracking</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 健康 ]</span><span class="en">[ HEALTH ]</span></span>
+  </a>
+</div>
+
+<!-- ── 05 Projects (manifest) ── -->
+<div class="section-strip reveal" id="projects">
+  <span class="num">05.</span>
+  <span><span class="zh">项目 & 工具</span><span class="en">PROJECTS & TOOLS</span></span>
+  <span class="ascii">>>> [ BUILD ]</span>
+</div>
+<div class="manifest reveal">
+  <a class="manifest-item" href="https://timememo8210.github.io/polyclaw/" target="_blank">
+    <span class="manifest-num">01.</span>
+    <div class="manifest-body">
+      <div class="manifest-title">POLYCLAW</div>
+      <div class="manifest-desc"><span class="zh">多模态投资分析</span><span class="en">Multi-modal investment analysis</span></div>
+    </div>
+    <span class="manifest-tag">[ APP ]</span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/moji-journal/" target="_blank">
+    <span class="manifest-num">02.</span>
+    <div class="manifest-body">
+      <div class="manifest-title">MOJI JOURNAL</div>
+      <div class="manifest-desc"><span class="zh">表情日记</span><span class="en">Emoji diary</span></div>
+    </div>
+    <span class="manifest-tag">[ APP ]</span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/travelsnap/" target="_blank">
+    <span class="manifest-num">03.</span>
+    <div class="manifest-body">
+      <div class="manifest-title">TRAVELSNAP</div>
+      <div class="manifest-desc"><span class="zh">旅行相册</span><span class="en">Travel album</span></div>
+    </div>
+    <span class="manifest-tag">[ APP ]</span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/家人-War-Game/" target="_blank">
+    <span class="manifest-num">04.</span>
+    <div class="manifest-body">
+      <div class="manifest-title">SIMON WAR GAME</div>
+      <div class="manifest-desc"><span class="zh">记忆战争</span><span class="en">Memory war</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 游戏 ]</span><span class="en">[ GAME ]</span></span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank">
+    <span class="manifest-num">05.</span>
+    <div class="manifest-body">
+      <div class="manifest-title">SIMON WORLD CONQUEST</div>
+      <div class="manifest-desc"><span class="zh">世界征服</span><span class="en">World conquest</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 游戏 ]</span><span class="en">[ GAME ]</span></span>
+  </a>
+  <a class="manifest-item" href="prolynk.html">
+    <span class="manifest-num">06.</span>
+    <div class="manifest-body">
+      <div class="manifest-title">PROLYNK</div>
+      <div class="manifest-desc"><span class="zh">QA测试报告</span><span class="en">QA test reports</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 项目 ]</span><span class="en">[ PROJECT ]</span></span>
+  </a>
+  <a class="manifest-item" href="https://timememo8210.github.io/app-ideas/" target="_blank">
+    <span class="manifest-num">07.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">APP 创意</span><span class="en">APP IDEAS</span></div>
+      <div class="manifest-desc"><span class="zh">产品创意收集</span><span class="en">Product ideation</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 想法 ]</span><span class="en">[ IDEAS ]</span></span>
+  </a>
+</div>
+
+<!-- ── 06 Thoughts (manifest) ── -->
+<div class="section-strip reveal">
+  <span class="num">06.</span>
+  <span><span class="zh">思考专栏</span><span class="en">THOUGHTS</span></span>
+  <span class="ascii">>>> [ ESSAY ]</span>
+</div>
+<div class="manifest reveal">
+  <a class="manifest-item" href="thoughts/future-transportation.html">
+    <span class="manifest-num">01.</span>
+    <div class="manifest-body">
+      <div class="manifest-title"><span class="zh">未来交通</span><span class="en">FUTURE TRANSPORTATION</span></div>
+      <div class="manifest-desc"><span class="zh">自动驾驶与城市出行</span><span class="en">Autonomous driving & urban mobility</span></div>
+    </div>
+    <span class="manifest-tag"><span class="zh">[ 思考 ]</span><span class="en">[ ESSAY ]</span></span>
+  </a>
+</div>
+
+<!-- ── Colophon ── -->
+<footer class="colophon reveal">
+  <div class="colophon-inner">
+    <div>
+      [ SKY PORTAL ]<br>
+      <span class="zh">Sky Portal</span><span class="en">'S DIGITAL SPACE</span><br>
+      <span class="zh">用技术记录思考 /// 用好奇心连接世界</span><span class="en">RECORDING THOUGHTS /// CONNECTING THROUGH CURIOSITY</span>
+    </div>
+    <div style="text-align: right;">
+      <span class="zh">设计风格</span><span class="en">DESIGN</span>: <span class="red">INDUSTRIAL BRUTALIST</span><br>
+      BUILT WITH CURIOSITY /// 2026<br>
+      45.5234° N, 122.6762° W
+    </div>
+  </div>
+</footer>
+
+<script>
+// Day counter
+(function() {
+  const start = new Date(2025, 1, 15);
+  const now = new Date();
+  const days = Math.floor((now - start) / 86400000);
+  document.getElementById('day-count').textContent = days;
+})();
+
+// Today's date
+(function() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  document.getElementById('today-date').textContent = y + '.' + m + '.' + day;
+})();
+
+// Language toggle
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  document.body.classList.toggle('lang-en');
+}
+
+// Mechanical reveal (instant opacity)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

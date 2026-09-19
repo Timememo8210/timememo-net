@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-24 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#166534,#22c55e)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股再创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets at ATH</div>
+<div class="zh poster-data">• 标普500: 7,165 ▲0.80% 新高<br>• 纳指: 24,837 ▲1.63% 新高<br>• 道指: 49,231 ▼0.16%</div>
+<div class="en poster-data" style="display:none">• S&P 500: 7,165 ▲0.80% ATH<br>• Nasdaq: 24,837 ▲1.63% ATH<br>• Dow: 49,231 ▼0.16%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f,#3b82f6)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体狂飙</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semis on Fire</div>
+<div class="zh poster-data">• SOX: 10,514 ▲4.32% 连涨18天<br>• Intel ▲27% 财报超预期<br>• AMD ▲13.9%</div>
+<div class="en poster-data" style="display:none">• SOX: 10,514 ▲4.32% 18-day streak<br>• Intel ▲27% earnings beat<br>• AMD ▲13.9%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c2d12,#ea580c)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 & 港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK</div>
+<div class="zh poster-data">• 上证: 4,278 ▼0.33%<br>• 恒指: 25,978 ▲0.24%<br>• 恒生科技: 4,902 ▲0.75%</div>
+<div class="en poster-data" style="display:none">• SSE: 4,278 ▼0.33%<br>• HSI: 25,978 ▲0.24%<br>• HSTECH: 4,902 ▲0.75%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#4a1d6e,#9333ea)">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">走向预判</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Outlook</div>
+<div class="zh poster-data">• SOX超买，下周可能震荡<br>• Intel转型成重大信号<br>• 关注伊朗局势 & 科技财报</div>
+<div class="en poster-data" style="display:none">• SOX overbought, may consolidate<br>• Intel turnaround is key signal<br>• Watch Iran & tech earnings</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-24 · Sky Portal · <a href="index.html" style="color:#4ade80"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘行情</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">Dow</div><div class="stock-price">49,231</div><div class="stock-change down">▼0.16%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,165</div><div class="stock-change up">▲0.80%</div></div>
+<div class="stock-item"><div class="stock-ticker">Nasdaq</div><div class="stock-price">24,837</div><div class="stock-change up">▲1.63%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">10,514</div><div class="stock-change up">▲4.32%</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">—</div><div class="stock-change down">地缘风险</div></div>
+</div>
+
+<h2>🔬 <span class="zh">核心驱动</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Intel财报超预期，AI芯片需求爆发</span><span class="en" style="display:none">1. Intel Earnings Beat, AI Demand Surges</span></h4>
+<p><span class="zh">Intel Q1财报大超预期，数据中心AI部门营收同比增长22%至51亿美元。股价暴涨27%至$82.57创历史新高。Intel的18A制程良率提升至65-75%，代工业务迎来关键拐点，与Google和Amazon的先进封装合作谈判进展顺利。这一结果证明AI需求正从GPU扩展到整个半导体生态。</span><span class="en" style="display:none">Intel Q1 earnings beat massively. Data center AI revenue jumped 22% YoY to $5.1B. Stock surged 27% to $82.57 all-time high. 18A yields improved to 65-75%, foundry at inflection point. Advanced packaging talks with Google and Amazon progressing. AI demand expanding beyond GPUs into the full semiconductor ecosystem.</span></p>
+<p class="src">来源：CNBC / Reuters / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 费城半导体指数18连涨，SOX站上10,500历史高位</span><span class="en" style="display:none">2. SOX 18-Day Win Streak, Breaks 10,500</span></h4>
+<p><span class="zh">费城半导体指数连续第18个交易日上涨，收于10,513.66点，单日涨幅4.32%。这是半导体板块史无前例的连续上涨纪录。Intel暴涨27%、AMD涨13.9%领涨。Nvidia继续受益于CoWoS先进封装产能扩张。但分析师警告技术面严重超买，下周可能出现高位震荡或回调。</span><span class="en" style="display:none">Philadelphia Semiconductor Index rose for 18th consecutive day to 10,513.66, up 4.32% on the day. An unprecedented streak. Intel +27%, AMD +13.9% led the rally. Nvidia continues to benefit from CoWoS expansion. Analysts warn of severe overbought conditions — consolidation or pullback possible next week.</span></p>
+<p class="src">来源：MarketWatch / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 地缘政治分化道指与科技股</span><span class="en" style="display:none">3. Geopolitical Risks Split Dow from Tech</span></h4>
+<p><span class="zh">伊朗局势持续紧张，霍尔木兹海峡谈判僵局推高油价，压制传统工业和能源板块表现。道指微跌0.16%。但科技股完全无视地缘风险，纳指和标普500双双创下历史新高。市场呈现明显的"科技免疫"特征——AI和半导体板块被视为避险资产。</span><span class="en" style="display:none">Iran tensions and Hormuz Strait stalemate pushed oil higher, weighing on industrials and energy. Dow slipped 0.16%. But tech completely ignored geopolitical risks — Nasdaq and S&P 500 both hit all-time highs. A clear "tech immunity" pattern: AI and semis seen as safe havens.</span></p>
+<p class="src">来源：Bloomberg / Financial Times</p>
+</div>
+
+<h2>📈 <span class="zh">热门个股</span><span class="en" style="display:none">Hot Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$82.57</div><div class="stock-change up">▲27%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$347.77</div><div class="stock-change up">▲13.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">—</div><div class="stock-change up">CoWoS受益</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">—</div><div class="stock-change up">封装产能扩张</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">10,514</div><div class="stock-change up">18连涨</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China A-Shares & HK</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,278</div><div class="stock-change down">▼0.33%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">25,978</div><div class="stock-change up">▲0.24%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,902</div><div class="stock-change up">▲0.75%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股小幅回调，港股低开高走</span><span class="en" style="display:none">A-Shares Dip, HK Low-to-High Recovery</span></h4>
+<p><span class="zh">A股方面，上证指数收于4,278点，微跌0.33%，在前日大涨后进行正常技术性回调。市场成交额维持在2.3万亿以上较高水平。港股恒生指数低开后翻红，收涨0.24%至25,978点；恒生科技指数涨0.75%至4,902点。港股午后翻红受益于美股科技板块强势带动。</span><span class="en" style="display:none">A-shares: SSE closed at 4,278, down 0.33% — normal technical pullback after prior gains. Trading volume remained high above 2.3 trillion yuan. HK: Hang Seng recovered from lows to close +0.24% at 25,978; HSTECH +0.75% at 4,902. Afternoon recovery driven by strong US tech momentum.</span></p>
+<p class="src">来源：财联社 / 东方财富 / 每日经济新闻</p>
+</div>
+
+<h2>🔮 <span class="zh">走向预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期（下周）</span><span class="en" style="display:none">Short-Term (Next Week)</span></h4>
+<p><span class="zh">• SOX连续18天上涨后技术面严重超买，下周高位震荡概率大，不排除回调3-5%<br>• 关注下周FAANG等科技巨头财报，若继续超预期可能维持涨势<br>• 伊朗局势若升级可能冲击油价和风险偏好，道指承压但科技股预计仍相对抗跌</span><span class="en" style="display:none">• SOX severely overbought after 18-day streak — consolidation likely, 3-5% pullback possible<br>• Watch FAANG earnings next week — beats could sustain momentum<br>• Iran escalation could hit oil and sentiment, but tech likely resilient</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">中期关注点</span><span class="en" style="display:none">Medium-Term Focus</span></h4>
+<p><span class="zh">• AI驱动半导体需求仍在加速，Intel转型成功是全行业重大利好信号<br>• SOX能否突破11,000将决定半导体板块是否进入新估值区间<br>• A股在4,000-4,300区间震荡，政策面和成交量是关键变量<br>• 港股恒生科技在5,000关口附近，突破将打开上行空间</span><span class="en" style="display:none">• AI-driven semi demand still accelerating; Intel turnaround is bullish for entire sector<br>• Can SOX break 11,000? Determines if semis enter new valuation zone<br>• A-shares range-bound 4,000-4,300; policy and volume are key<br>• HSTECH near 5,000 resistance — breakout opens upside</span></p>
+</div>
+
+<div class="footer">
+<p>由 Sky ☁️ 自动生成 · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a> · <a href="../index.html"><span class="zh">Sky Portal</span><span class="en" style="display:none">Sky Portal</span></a></p>
+<p style="margin-top:4px;font-size:0.8em;color:#555">数据来源：Yahoo Finance / CNBC / Reuters / 东方财富 · 仅供参考，不构成投资建议</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(l){
+  document.querySelectorAll('.zh').forEach(e=>e.style.display=l==='zh'?'':'none');
+  document.querySelectorAll('.en').forEach(e=>e.style.display=l==='en'?'':'none');
+  document.getElementById('btn-zh').style.background=l==='zh'?'#333':'#222';
+  document.getElementById('btn-zh').style.color=l==='zh'?'#fff':'#aaa';
+  document.getElementById('btn-en').style.background=l==='en'?'#333':'#222';
+  document.getElementById('btn-en').style.color=l==='en'?'#fff':'#aaa';
+}
+</script>
+</body>
+</html>

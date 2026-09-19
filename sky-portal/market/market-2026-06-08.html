@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-08 — Chip Stock Rebound</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(160,160,160,0.15);color:#aaa;border:1px solid rgba(160,160,160,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25)}
+.highlight h4{color:#f87171}
+.callout{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.callout h4{color:#4ade80;font-size:1.1em;margin-bottom:8px}
+.callout p{font-size:0.92em}
+.warning-callout{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.warning-callout h4{color:#fb923c;font-size:1.1em;margin-bottom:8px}
+.warning-callout p{font-size:0.92em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a,#052e16)">
+<div class="poster-icon">💚</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">芯片股全线反弹</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chip Stocks Full Rebound</div>
+<div class="zh poster-data">费城半导体(SOX) +5.61%<br>30只成分股全涨 · Intel +11%</div>
+<div class="en poster-data" style="display:none">SOX +5.61%<br>All 30 components green · Intel +11%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626,#7f1d1d)">
+<div class="poster-icon">🌏</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股黑色星期一</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Black Monday</div>
+<div class="zh poster-data">上证 -1.70% · 深成指 -3.22%<br>创业板 -3.69% · 科技成长重挫</div>
+<div class="en poster-data" style="display:none">SSE -1.70% · SZSE -3.22%<br>ChiNext -3.69% · Tech growth hit</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1d4ed8,#1e3a5f)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SpaceX IPO倒计时</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SpaceX IPO Countdown</div>
+<div class="zh poster-data">6月12日(周五)上市 · 估值$1.75-2万亿<br>募资$750亿 · 史上最大IPO</div>
+<div class="en poster-data" style="display:none">Lists June 12 (Fri) · Valuation $1.75-2T<br>Raising $75B · Largest IPO ever</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706,#92400e)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中东局势暂缓</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Middle East Pause</div>
+<div class="zh poster-data">伊朗冲突暂告平息 · 布伦特$80+<br>油价高位运行 · 风险未消除</div>
+<div class="en poster-data" style="display:none">Iran clash pauses · Brent $80+<br>Oil elevated · Risk remains</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-08 (Monday) · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘（6/8）</span><span class="en" style="display:none">US Markets Close (6/8)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">DJIA</div>
+<div class="stock-price">50,786</div>
+<div class="stock-change down">▼ -81 / -0.16%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">S&P 500</div>
+<div class="stock-price">7,406</div>
+<div class="stock-change up">▲ +22 / +0.30%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">NASDAQ</div>
+<div class="stock-price">25,930</div>
+<div class="stock-change up">▲ +220 / +0.86%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX (费半)</div>
+<div class="stock-price">12,907</div>
+<div class="stock-change up">▲ +686 / +5.61%</div>
+</div>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">INTC 英特尔</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ +11%+</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">MU 美光</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ +10.4%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">AMD</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ +4.9%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">NVDA 英伟达</div>
+<div class="stock-price">$207.16</div>
+<div class="stock-change up">▲ +1.7%</div>
+</div>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">TSLA 特斯拉</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ +4.6%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SMH 半导体ETF</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ +5.0%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">AAPL 苹果</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ (小幅上涨)</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">AVGO 博通</div>
+<div class="stock-price">—</div>
+<div class="stock-change up">▲ 反弹</div>
+</div>
+</div>
+
+<div class="callout">
+<h4>💚 <span class="zh">核心亮点：芯片股全线反弹，30只成分股全涨</span><span class="en" style="display:none">💚 Highlight: Full Chip Rebound, All 30 SOX Components Green</span></h4>
+<p><span class="zh">
+上周五（6/5）费半暴跌10.26%，创2020年3月以来最大单日跌幅，芯片板块蒸发<b>1.3万亿美元</b>市值。周一资金大举逢低抄底，费半反弹5.61%，VanEck半导体ETF(SMH)涨5%。<b>英特尔领涨11%+</b>，美光+10.4%（受英伟达与SK海力士签署长期HBM合作协议刺激），AMD +4.9%。市场高开低走，道指受传统板块拖累微跌，纳指和标普收涨。
+</span><span class="en" style="display:none">
+Last Friday (6/5) SOX crashed 10.26%, the worst day since March 2020, wiping <b>$1.3 trillion</b> from chip stocks. Monday saw aggressive dip-buying with SOX rebounding 5.61%, SMH +5%. <b>Intel led at +11%+</b>, Micron +10.4% (boosted by Nvidia-SK Hynix long-term HBM deal), AMD +4.9%. Market opened strong but faded; Dow slipped on traditional sector weakness while Nasdaq and S&P closed higher.
+</span></p>
+<p class="src">来源：证券时报 / Reuters / Investopedia / 证券时报</p>
+</div>
+
+<h2>💎 <span class="zh">芯片 / AI板块深度分析</span><span class="en" style="display:none">Chips / AI Sector Deep Dive</span></h2>
+
+<div class="card">
+<h4>🔥 <span class="zh">反弹逻辑：恐慌抛售后的技术性修复</span><span class="en" style="display:none">🔥 Rebound Logic: Technical Recovery After Panic Sell-off</span></h4>
+<p><span class="zh">
+• 上周五暴跌核心原因：5月非农17.2万（预期8.8万）→ 加息预期飙至70%+ → AI交易拥挤度极高 → 博通业绩未提升AI指引 → 雪崩式抛售<br>
+• 周一反弹驱动力：①超跌后资金抄底 ②英伟达与SK海力士签署长期HBM合作协议 → 利好存储芯片供应链 ③中东局势暂时平息降低地缘风险溢价<br>
+• 英特尔涨超11%：Intel在先进封装领域与Google/Amazon谈判合作的消息持续发酵，代工业务迎来转机<br>
+• 美光涨超10%：HBM供应短缺加剧（高盛：15年来最严重存储芯片短缺），英伟达-SK海力士协议进一步验证需求刚性
+</span><span class="en" style="display:none">
+• Friday crash drivers: May NFP 172K (est 88K) → Hike odds >70% → Extreme AI trade crowding → Broadcom no AI upgrade → Avalanche selling<br>
+• Monday rebound drivers: ① Dip-buying after oversold conditions ② Nvidia-SK Hynix long-term HBM deal → positive for memory supply chain ③ Middle East de-escalation lowers geopolitical risk premium<br>
+• Intel +11%+: Advanced packaging partnership talks with Google/Amazon continue to develop, foundry turning corner<br>
+• Micron +10%+: HBM shortage intensifying (Goldman: worst memory shortage in 15 years), Nvidia-SK Hynix deal validates demand rigidity
+</span></p>
+<p class="src">来源：财联社 / 每日经济新闻 / Investopedia / 高盛</p>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">存储芯片：15年来最严重供应短缺</span><span class="en" style="display:none">📊 Memory Chips: Worst Shortage in 15 Years</span></h4>
+<p><span class="zh">
+高盛2月研报指出，市场正处于过去15年来最严重的存储芯片供应短缺前夜：<br>
+• 2026年全球DRAM供需缺口达<b>4.9%</b>，NAND Flash缺口<b>4.2%</b><br>
+• AI核心配件HBM（高带宽存储器）供需矛盾最突出<br>
+• 英伟达与SK海力士签署长期HBM合作协议，进一步锁死产能<br>
+• 美光科技受益于HBM需求爆发，周一涨超10%<br>
+• 半导体设备板块同步大涨，A股6/9盘初半导体设备ETF涨超3%
+</span><span class="en" style="display:none">
+Goldman's February report warned of the worst memory shortage in 15 years:<br>
+• 2026 global DRAM supply gap reaches <b>4.9%</b>, NAND Flash gap <b>4.2%</b><br>
+• HBM (High Bandwidth Memory) for AI faces the tightest supply-demand imbalance<br>
+• Nvidia-SK Hynix long-term HBM deal further locks up capacity<br>
+• Micron benefits from HBM demand explosion, up 10%+ Monday<br>
+• Semiconductor equipment sector also surged; A-share semi equip ETF up 3%+ at 6/9 open
+</span></p>
+<p class="src">来源：高盛 / 南方财经 / 财联社</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">A-Shares & Hong Kong</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">上证指数</div>
+<div class="stock-price">3,959</div>
+<div class="stock-change down">▼ -1.70%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">深证成指</div>
+<div class="stock-price">14,821</div>
+<div class="stock-change down">▼ -3.22%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">创业板指</div>
+<div class="stock-price">3,812</div>
+<div class="stock-change down">▼ -3.69%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">恒生指数</div>
+<div class="stock-price">24,657</div>
+<div class="stock-change down">▼ -1.22%</div>
+</div>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">恒生科技</div>
+<div class="stock-price">—</div>
+<div class="stock-change down">▼ -2.71%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">A股6/9早盘</div>
+<div class="stock-price">沪指3,978</div>
+<div class="stock-change up">▲ +0.46%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">深成指6/9</div>
+<div class="stock-price">14,993</div>
+<div class="stock-change up">▲ +1.16%</div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">创业板6/9</div>
+<div class="stock-price">3,866</div>
+<div class="stock-change up">▲ +1.41%</div>
+</div>
+</div>
+
+<div class="card highlight">
+<h4>🔴 <span class="zh">A股6/8"黑色星期一"：科技成长领跌，沪指盘中破4000</span><span class="en" style="display:none">🔴 A-Shares Black Monday 6/8: Tech Growth Leads Decline, SSE Breaks 4,000</span></h4>
+<p><span class="zh">
+• 上证指数收跌1.70%报3,959点，创两个月新低<br>
+• 深成指重挫3.22%至14,821点，创一个多月新低<br>
+• 创业板指暴跌3.69%至3,812点，科技成长方向成为主要杀跌力量<br>
+• 前期领涨的科技成长方向全面回调，半导体、AI概念跟跌美股上周五暴跌<br>
+• 亚洲乃至全球市场均遭遇调整<br>
+• <b>但6/9（周二）早盘高开反弹</b>：受隔夜美股芯片股大涨提振，存储芯片、半导体板块领涨，A股三大指数集体高开
+</span><span class="en" style="display:none">
+• SSE fell 1.70% to 3,959, lowest in two months<br>
+• SZSE plunged 3.22% to 14,821, lowest in over a month<br>
+• ChiNext crashed 3.69% to 3,812, tech growth led the sell-off<br>
+• Previously leading tech sectors corrected broadly, semis/AI followed US Friday crash<br>
+• Asian and global markets broadly adjusted<br>
+• <b>However, 6/9 (Tue) opened higher</b>: Boosted by overnight US chip rally, memory/semi stocks led gains, all three A-share indices opened up
+</span></p>
+<p class="src">来源：东方财富 / 证券时报 / 新浪财经 / 同花顺</p>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">港股：恒指跌1.22%，恒生科技跌2.71%</span><span class="en" style="display:none">📊 Hong Kong: HSI -1.22%, HSTECH -2.71%</span></h4>
+<p><span class="zh">
+• 恒指收24,657点（-304点，-1.22%），午后跌幅扩大<br>
+• 恒生科技指数跌2.71%，受全球科技股抛售拖累<br>
+• 港股先跌后继续走弱，6/8全天处于下跌态势<br>
+• 半导体、互联网科技股承压明显
+</span><span class="en" style="display:none">
+• HSI closed at 24,657 (-304 pts, -1.22%), losses extended in afternoon<br>
+• Hang Seng Tech fell 2.71%, dragged by global tech selloff<br>
+• HK market weakened throughout 6/8 session<br>
+• Semiconductor and internet tech stocks under pressure
+</span></p>
+<p class="src">来源：东方财富 / 恒生指数公司 / HKEX</p>
+</div>
+
+<h2>🌍 <span class="zh">全球重大事件</span><span class="en" style="display:none">Global Events</span></h2>
+
+<div class="card">
+<h4>🚀 <span class="zh">SpaceX史上最大IPO：6月12日(周五)上市</span><span class="en" style="display:none">🚀 SpaceX Largest IPO Ever: Lists June 12 (Friday)</span></h4>
+<p><span class="zh">
+• SpaceX计划通过IPO发售股份，目标估值<b>$1.75-2万亿</b><br>
+• 拟募资约<b>$750亿</b>，定价约$135/股，史上最大IPO<br>
+• Goldman Sachs和Morgan Stanley联合承销<br>
+• <b>30%股份配售散户</b>，认购已大幅超额<br>
+• SpaceX已进行1:5拆股，调整后每股约$105<br>
+• 市场担忧：$750亿募资规模将对市场流动性形成巨大虹吸效应<br>
+• SpaceX与英伟达签订大额算力协议：每月$9.2亿，从10月至2029年<br>
+• 在加息预期升温和SpaceX抽血双重压力下，其他科技股可能继续承压
+</span><span class="en" style="display:none">
+• SpaceX targeting <b>$1.75-2 trillion</b> valuation via IPO<br>
+• Raising ~<b>$75B</b>, pricing at ~$135/share, largest IPO in history<br>
+• Goldman Sachs and Morgan Stanley joint bookrunners<br>
+• <b>30% of shares allocated to retail</b>, subscription heavily oversubscribed<br>
+• SpaceX completed 1:5 stock split, adjusted price ~$105/share<br>
+• Market concern: $75B raise will create massive liquidity drain<br>
+• SpaceX signed major compute deal with NVIDIA: $920M/month from Oct to 2029<br>
+• Under dual pressure of rate hike fears and SpaceX liquidity drain, other tech stocks may remain under pressure
+</span></p>
+<p class="src">来源：Reuters / Bloomberg / Forbes / 新浪财经</p>
+</div>
+
+<div class="card">
+<h4>🛢️ <span class="zh">中东局势：伊朗冲突暂缓，油价仍高</span><span class="en" style="display:none">🛢️ Middle East: Iran Clash Pauses, Oil Remains Elevated</span></h4>
+<p><span class="zh">
+• 北京时间6/8凌晨，伊朗时隔两个月再次发动攻击，但局势随后暂告平息<br>
+• 布伦特原油维持在<b>$80+</b>高位，远高于冲突前水平<br>
+• 霍尔木兹海峡通行风险犹存，海运保险费率上升<br>
+• 高油价持续向全球产业链传导通胀压力<br>
+• 渣打银行分析：中东溢价虽不高但拒绝承保风险上升<br>
+• 若冲突再度升级，油价可能突破$100关口
+</span><span class="en" style="display:none">
+• At ~4AM Beijing time 6/8, Iran attacked again after 2-month pause, but situation de-escalated<br>
+• Brent crude remains elevated above <b>$80</b>, well above pre-conflict levels<br>
+• Strait of Hormuz transit risk persists, marine insurance rates rising<br>
+• High oil prices continue transmitting inflation through global supply chains<br>
+• Standard Chartered: Middle East premium modest but denial-of-coverage risk rising<br>
+• If conflict re-escalates, oil could break above $100
+</span></p>
+<p class="src">来源：新华网 / Schroders / 渣打银行 / 南方财经</p>
+</div>
+
+<div class="card">
+<h4>🍎 <span class="zh">WWDC26开幕：库克最后一次WWDC主题演讲</span><span class="en" style="display:none">🍎 WWDC26 Opens: Cook's Last WWDC Keynote</span></h4>
+<p><span class="zh">
+• 苹果全球开发者大会6月8日开幕<br>
+• 库克作为CEO的最后一次WWDC主持演讲<br>
+• Apple Intelligence与Siri AI重构全面落地<br>
+• 市场关注苹果AI战略能否在加息环境中支撑估值<br>
+• 苹果计划更新"AI重大进展"
+</span><span class="en" style="display:none">
+• Apple WWDC kicked off June 8<br>
+• Tim Cook's last WWDC keynote as CEO<br>
+• Apple Intelligence and Siri AI overhaul fully launching<br>
+• Market watching whether Apple's AI strategy can support valuation amid rate hikes<br>
+• Apple plans to announce "major AI progress"
+</span></p>
+<p class="src">来源：苹果官方 / 新浪财经 / Investopedia</p>
+</div>
+
+<h2>🔮 <span class="zh">短期预判与展望</span><span class="en" style="display:none">Short-term Outlook</span></h2>
+
+<div class="callout">
+<h4>🎯 <span class="zh">核心判断：恐慌抛售后技术修复，但宏观风险未消</span><span class="en" style="display:none">🎯 Key Takeaway: Technical Bounce After Panic, Macro Risks Remain</span></h4>
+<p><span class="zh">
+周一的芯片股反弹是上周五暴跌后的<b>技术性修复</b>，而非趋势反转。费半从-10.26%到+5.61%的V型反弹说明市场仍具备强劲的逢低买入力量，但三大宏观风险依然悬而未决：<b>①加息预期 ②SpaceX IPO抽血 ③中东局势</b>。投资者应关注本周CPI数据（6/10）和SpaceX挂牌日（6/12）这两个关键催化剂。
+</span><span class="en" style="display:none">
+Monday's chip rebound is a <b>technical recovery</b> after Friday's crash, not a trend reversal. SOX's V-shaped bounce from -10.26% to +5.61% shows strong dip-buying demand, but three macro risks remain unresolved: <b>①Rate hike fears ②SpaceX IPO liquidity drain ③Middle East tensions</b>. Investors should watch this week's CPI data (6/10) and SpaceX listing day (6/12) as key catalysts.
+</span></p>
+</div>
+
+<div class="card">
+<h4>📅 <span class="zh">本周关键日程</span><span class="en" style="display:none">This Week Key Events</span></h4>
+<p><span class="zh">
+• <b>6/9（周二）</b>：美国4月外贸数据 + 成屋销售<br>
+• <b>6/10（周三）</b>：⭐ <b>5月CPI数据</b> — 最关键催化剂！决定加息路径<br>
+• <b>6/11（周四）</b>：欧央行利率决议（预计加息25bp）+ 美国PPI<br>
+• <b>6/12（周五）</b>：🚀 <b>SpaceX IPO上市日</b> + 密歇根消费者信心初值 + 甲骨文/Adobe财报
+</span><span class="en" style="display:none">
+• <b>6/9 (Tue)</b>: US April trade data + existing home sales<br>
+• <b>6/10 (Wed)</b>: ⭐ <b>May CPI data</b> — Most critical catalyst! Determines rate hike path<br>
+• <b>6/11 (Thu)</b>: ECB rate decision (expected +25bp hike) + US PPI<br>
+• <b>6/12 (Fri)</b>: 🚀 <b>SpaceX IPO listing day</b> + Michigan consumer sentiment prelim + Oracle/Adobe earnings
+</span></p>
+</div>
+
+<div class="card">
+<h4>⚠️ <span class="zh">情景预判</span><span class="en" style="display:none">⚠️ Scenario Analysis</span></h4>
+<p><span class="zh">
+<b>情景A（概率35%）：CPI超预期 → 加息恐慌升级</b><br>
+通胀再超预期 → 加息概率进一步升至80%+ → 半导体/AI反弹昙花一现 → A股4000关口告急<br><br>
+<b>情景B（概率45%）：CPI温和 → 反弹延续</b><br>
+通胀符合或低于预期 → 加息担忧暂时缓解 → 芯片股延续反弹 → A股跟随回暖 → SpaceX IPO前短线修复<br><br>
+<b>情景C（概率20%）：SpaceX虹吸效应主导</b><br>
+无论CPI结果，SpaceX $750亿募资开始抽血 → 科技股板块轮动加剧 → 资金从AI/芯片转向SpaceX概念
+</span><span class="en" style="display:none">
+<b>Scenario A (35%): Hot CPI → Hike Fears Escalate</b><br>
+Inflation beats again → Hike odds rise to 80%+ → Chip rebound proves fleeting → SSE 4,000 at risk<br><br>
+<b>Scenario B (45%): Tame CPI → Rebound Extends</b><br>
+Inflation inline or below → Hike fears ease → Chip stocks continue rebound → A-shares warm up → Short-term repair before SpaceX IPO<br><br>
+<b>Scenario C (20%): SpaceX Crowding Dominates</b><br>
+Regardless of CPI, SpaceX $75B raise starts draining capital → Tech sector rotation intensifies → Funds rotate from AI/chips to SpaceX theme
+</span></p>
+<p class="src">综合判断 · 数据来源：CME FedWatch / 证券时报 / 摩根大通</p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500 ETF</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100 ETF</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SOXX — Semiconductor ETF</div><div id="tv-soxx"></div></div>
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Yahoo Finance, Reuters, Bloomberg, Investopedia, 财联社, 东方财富, 证券时报, 新华社, 新浪财经, 高盛, CME FedWatch</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-soxx', sym:'NASDAQ:SOXX'},
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

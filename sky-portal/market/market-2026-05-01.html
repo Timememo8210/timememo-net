@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-01</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(250,204,21,0.15);color:#facc15;border:1px solid rgba(250,204,21,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{color:#4ade80;font-weight:600}
+.highlight-red{color:#f87171;font-weight:600}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:600;margin-left:4px}
+.tag-green{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.tag-red{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.tag-blue{background:rgba(96,165,250,0.15);color:#60a5fa;border:1px solid rgba(96,165,250,0.3)}
+.tag-orange{background:rgba(251,146,60,0.15);color:#fb923c;border:1px solid rgba(251,146,60,0.3)}
+.insight-box{background:#141418;border:1px solid #2a2a2a;border-radius:10px;padding:16px 20px;margin:16px 0}
+.insight-box h3{color:#4ade80;margin:0 0 10px}
+.insight-item{padding:8px 0;border-bottom:1px solid #1a1a1a;font-size:0.92em}
+.insight-item:last-child{border-bottom:none}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- Poster Grid -->
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#15803d 0%,#22c55e 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">标普&纳指再创历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">S&P 500 & Nasdaq Hit New Records</div>
+<div class="zh poster-data">• 标普500 <span class="highlight">+0.29%</span> → 7,230 📈 ATH<br>• 纳指 <span class="highlight">+0.89%</span> → 25,114 📈 首次站上25K<br>• 连续<span class="highlight">6周</span>上涨（2024年10月以来最长）</div>
+<div class="en poster-data" style="display:none">• S&P 500 <span class="highlight">+0.29%</span> → 7,230 📈 ATH<br>• Nasdaq <span class="highlight">+0.89%</span> → 25,114 📈 First above 25K<br>• <span class="highlight">6-week</span> winning streak (longest since Oct 2024)</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">AI财报超级周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Mega Earnings Week</div>
+<div class="zh poster-data">• Q1盈利增长 <span class="highlight">27.8%</span>（2021 Q4以来最高）<br>• 83%公司超预期，78%营收超预期<br>• Apple +3.4%，Oracle +7%</div>
+<div class="en poster-data" style="display:none">• Q1 earnings growth <span class="highlight">27.8%</span> (highest since Q4 2021)<br>• 83% beat EPS, 78% beat revenue<br>• Apple +3.4%, Oracle +7%</div>
+</div>
+<div class="poster-card" style="background:#b91c1c">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">中东局势与油价</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Middle East & Oil</div>
+<div class="zh poster-data">• 伊朗提交新谈判方案<br>• 霍尔木兹海峡局势现缓和迹象<br>• 原油从高位回落，但ISM价格指数跳升</div>
+<div class="en poster-data" style="display:none">• Iran submits new negotiation proposal<br>• Strait of Hormuz tensions easing<br>• Oil pulled back; ISM prices jumped to 4-yr high</div>
+</div>
+<div class="poster-card" style="background:#1d4ed8">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">A股五一休市</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares on Labor Day Break</div>
+<div class="zh poster-data">• 上证 <span class="highlight">4,112</span>（+0.11%）月涨5.66%<br>• 深成指 15,108（-0.09%）月涨12.09%<br>• PMI超预期：官方50.3，财新52.2</div>
+<div class="en poster-data" style="display:none">• Shanghai <span class="highlight">4,112</span> (+0.11%) +5.66% MTD<br>• Shenzhen 15,108 (-0.09%) +12.09% MTD<br>• PMI beat: official 50.3, Caixin 52.2</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market Report</span></h1>
+<p class="subtitle">2026-05-01 · <span class="zh">Sky Portal 每日行情</span><span class="en" style="display:none">Sky Portal Daily Market</span> · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- US Market Indexes -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">DOW</div>
+<div class="stock-price">49,499</div>
+<div class="stock-change down">-0.31%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">道琼斯工业</span><span class="en" style="display:none">DJIA</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">S&P 500</div>
+<div class="stock-price">7,230</div>
+<div class="stock-change up">+0.29% 🔥</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">历史新高</span><span class="en" style="display:none">All-Time High</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">NASDAQ</div>
+<div class="stock-price">25,114</div>
+<div class="stock-change up">+0.89% 🔥</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">首次站上25K</span><span class="en" style="display:none">First Above 25K</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX</div>
+<div class="stock-price">10,595</div>
+<div class="stock-change up">+0.87%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semi</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">SOX YTD</div>
+<div class="stock-price">+49.6%</div>
+<div class="stock-change up">🚀</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">年初至今</span><span class="en" style="display:none">Year-to-Date</span></div>
+</div>
+</div>
+
+<!-- China & HK Market -->
+<h2>🇨🇳 <span class="zh">A股 & 港股（4/30收盘）</span><span class="en" style="display:none">China A-Shares & HK (Apr 30 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SHCOMP</span></div>
+<div class="stock-price">4,112</div>
+<div class="stock-change up">+0.11%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">月涨5.66%</span><span class="en" style="display:none">+5.66% MTD</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZCOMP</span></div>
+<div class="stock-price">15,108</div>
+<div class="stock-change down">-0.09%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">月涨12.09%</span><span class="en" style="display:none">+12.09% MTD</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div>
+<div class="stock-price">—</div>
+<div class="stock-change flat">休市</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">五一假期</span><span class="en" style="display:none">Labor Day</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker"><span class="zh">恒指</span><span class="en" style="display:none">HSI</span></div>
+<div class="stock-price">25,777</div>
+<div class="stock-change down">-1.28%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">月涨3.99%</span><span class="en" style="display:none">+3.99% MTD</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker"><span class="zh">恒生科技</span><span class="en" style="display:none">HSTECH</span></div>
+<div class="stock-price">4,871</div>
+<div class="stock-change down">-0.79%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">科技板块</span><span class="en" style="display:none">Tech Sector</span></div>
+</div>
+</div>
+
+<!-- Key Drivers -->
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 超级财报周：Q1盈利增长27.8%，创2021年来新高</span><span class="en" style="display:none">1. Mega Earnings Week: Q1 Earnings Growth 27.8%, Best Since 2021</span></h4>
+<p><span class="zh">本周是2026年最重要的财报周，涵盖标普500超过40%市值的公司。LSEG数据显示，Q1整体盈利增长27.8%，较上周预期上调11.7个百分点，为2021年Q4以来最大增幅。已公布财报的314家公司中，<span class="highlight">83%超盈利预期，78%超营收预期</span>。五大"七巨头"成员本周密集发布财报，投资者密切关注AI巨额投资何时转化为实际回报。</span><span class="en" style="display:none">This was the most important earnings week of 2026, covering over 40% of S&P 500 market cap. LSEG data shows Q1 aggregate earnings growth of 27.8%, revised up 11.7 percentage points from a week ago — the biggest since Q4 2021. Of 314 companies reporting, <span class="highlight">83% beat EPS estimates and 78% beat revenue</span>. Five of the Magnificent Seven reported this week as investors scrutinize when massive AI investments translate into returns.</span></p>
+<p class="src">来源：Reuters / LSEG I/B/E/S / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Apple领涨 +3.4%：iPhone销售强劲，中国市场回暖</span><span class="en" style="display:none">2. Apple Leads +3.4%: Strong iPhone Sales, China Recovery</span></h4>
+<p><span class="zh">Apple（AAPL）在发布强劲财报和乐观指引后大涨3.4%，成为本日科技板块最大亮点。新一代iPhone销售表现优异，尤其在中国市场显示出明显的回暖迹象。Apple的业绩也验证了消费电子需求在AI功能驱动下正在复苏。Oracle（ORCL）同步大涨近7%，受AI相关云业务需求推动。</span><span class="en" style="display:none">Apple (AAPL) surged 3.4% after reporting strong earnings and optimistic guidance, making it the day's tech standout. New iPhone models showed robust sales, with notable improvement in China. Apple's results validated that consumer electronics demand is recovering, driven by AI features. Oracle (ORCL) also jumped nearly 7% on AI-driven cloud demand.</span></p>
+<p class="src">来源：Reuters / Yahoo Finance / TradingEconomics</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中东局势：伊朗提交新方案，油价高位回落</span><span class="en" style="display:none">3. Middle East: Iran's New Proposal, Oil Pulls Back</span></h4>
+<p><span class="zh">霍尔木兹海峡因美以对伊朗军事行动而关闭，一度推动油价飙升至四年高位。但伊朗据报道向华盛顿提交了新的谈判方案，局势出现缓和迹象，原油期货从高位回落。然而，ISM制造业价格指数跳升至<span class="highlight-red">四年高位</span>，通胀压力持续。美联储维持利率3.50-3.75%不变，仅暗示2026年一次降息。</span><span class="en" style="display:none">The Strait of Hormuz closure following US-Israel military action against Iran pushed oil to 4-year highs. However, Iran reportedly submitted a fresh negotiation proposal to Washington, easing tensions and pulling crude futures back. Still, the ISM manufacturing prices-paid index jumped to a <span class="highlight-red">4-year high</span>, signaling persistent inflation. The Fed held rates at 3.50-3.75% with only one cut signaled for 2026.</span></p>
+<p class="src">来源：Reuters / ISM / GO Markets</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. AI投资热潮：半导体YTD涨近50%</span><span class="en" style="display:none">4. AI Investment Boom: Semiconductors Up ~50% YTD</span></h4>
+<p><span class="zh">AI资本开支持续膨胀，Goldman Sachs预测2026年AI相关投资将超过<span class="highlight">5000亿美元</span>。AI投资已拉动Q1美国GDP增长，抵消了私人消费放缓的迹象。费城半导体指数年初至今暴涨49.6%，TSMC CoWoS封装产能持续扩张但仍供不应求。Meta止跌企稳，Atlassian上调指引后软件板块集体上涨。</span><span class="en" style="display:none">AI capex continues to surge, with Goldman Sachs projecting over <span class="highlight">$500 billion</span> in AI investment for 2026. AI spending drove Q1 US GDP growth, offsetting slowing private consumption. The PHLX Semiconductor Index has soared 49.6% YTD. TSMC's CoWoS packaging capacity keeps expanding but remains insufficient. Meta stabilized, and software stocks rallied after Atlassian raised guidance.</span></p>
+<p class="src">来源：Goldman Sachs / CNBC / MarketWatch</p>
+</div>
+
+<!-- Market Prediction -->
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="insight-box">
+<h3>📈 <span class="zh">短期预判</span><span class="en" style="display:none">Short-term Outlook</span></h3>
+<div class="insight-item">
+<span class="zh"><b>美股：</b>标普和纳指连续6周上涨，动能强劲。Carson Group首席策略师认为"上行势头很可能在5月延续"。但历史上5-10月标普平均仅涨2%（vs 11-4月的7%），"Sell in May"效应值得关注。道指盘中一度逼近50,000大关（49,988），短线可能围绕这一整数关口震荡。</span>
+<span class="en" style="display:none"><b>US Stocks:</b> S&P and Nasdaq on a 6-week winning streak with strong momentum. Carson Group's chief strategist sees "upward momentum very well could continue in May." However, historically the S&P gains only ~2% from May-Oct (vs 7% Nov-Apr). The "Sell in May" effect warrants attention. Dow briefly neared 50,000 (49,988), may oscillate around this milestone.</span>
+</div>
+<div class="insight-item">
+<span class="zh"><b>半导体/AI：</b>主线逻辑不变。费城半导体YTD +49.6%，但估值高企后波动可能加大。关注TSMC、NVDA等龙头后续产能和订单数据。</span>
+<span class="en" style="display:none"><b>AI/Semiconductors:</b> Core thesis intact. SOX +49.6% YTD, but elevated valuations may increase volatility. Watch TSMC and NVDA capacity and order data.</span>
+</div>
+<div class="insight-item">
+<span class="zh"><b>A股：</b>五一假期后（5月6日开市）预计受PMI超预期数据提振。官方PMI 50.3、财新PMI 52.2（2020年12月以来最高），科技股有望接力。北方华创Q1业绩强劲，NAURA涨5.15%。</span>
+<span class="en" style="display:none"><b>A-Shares:</b> After Labor Day break (reopens May 6), expect PMI beat to boost sentiment. Official PMI 50.3, Caixin PMI 52.2 (highest since Dec 2020). Tech stocks likely to lead. NAURA +5.15% on strong Q1.</span>
+</div>
+<div class="insight-item">
+<span class="zh"><b>风险点：</b>①中东局势恶化导致油价重新飙升；②ISM价格指数暗示通胀顽固，美联储可能推迟甚至取消降息；③"Sell in May"历史规律。</span>
+<span class="en" style="display:none"><b>Risks:</b> ① Middle East escalation driving oil higher; ② ISM prices signal sticky inflation, Fed may delay/cancel rate cuts; ③ "Sell in May" historical pattern.</span>
+</div>
+</div>
+
+<!-- Key Stocks -->
+<h2>📊 <span class="zh">重点个股表现</span><span class="en" style="display:none">Key Stock Movers</span></h2>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-ticker">AAPL</div>
+<div class="stock-price">Apple</div>
+<div class="stock-change up">+3.4%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">财报强劲</span><span class="en" style="display:none">Strong Earnings</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">ORCL</div>
+<div class="stock-price">Oracle</div>
+<div class="stock-change up">+~7%</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">AI云需求</span><span class="en" style="display:none">AI Cloud</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">TEAM</div>
+<div class="stock-price">Atlassian</div>
+<div class="stock-change up">↑</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">上调指引</span><span class="en" style="display:none">Raised Guide</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">RBLX</div>
+<div class="stock-price">Roblox</div>
+<div class="stock-change down">Plunge</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">削减预订</span><span class="en" style="display:none">Cut Bookings</span></div>
+</div>
+<div class="stock-item">
+<div class="stock-ticker">XOM</div>
+<div class="stock-price">Exxon</div>
+<div class="stock-change flat">Flat</div>
+<div style="font-size:0.75em;color:#888;margin-top:4px"><span class="zh">利润超预期</span><span class="en" style="display:none">Beat Profit</span></div>
+</div>
+</div>
+
+<!-- K-line Charts -->
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">AAPL — Apple</div><div id="tv-aapl"></div></div>
+<div class="kline-item"><div id="tv-nvda" style="width:100%"></div></div>
+<div class="kline-label">NVDA — NVIDIA</div>
+<div class="kline-item"><div class="kline-label">000001 — <span class="zh">上证指数</span><span class="en" style="display:none">Shanghai</span></div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Reuters, Yahoo Finance, TradingEconomics, MarketWatch, LSEG, CNBC, Goldman Sachs</span><span class="en" style="display:none">Sources: Reuters, Yahoo Finance, TradingEconomics, MarketWatch, LSEG, CNBC, Goldman Sachs</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-aapl', sym:'NASDAQ:AAPL'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

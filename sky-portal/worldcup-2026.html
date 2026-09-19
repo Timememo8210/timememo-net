@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ 2026 FIFA World Cup — 世界杯指南</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --green: #1a8d3f;
+  --green-dark: #0d5c28;
+  --green-light: #2ecc71;
+  --gold: #f5a623;
+  --gold-dark: #d4941a;
+  --dark: #1a1a2e;
+  --darker: #0f0f1e;
+  --white: #ffffff;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --red: #e74c3c;
+  --blue: #3498db;
+  --shadow: 0 8px 32px rgba(0,0,0,0.15);
+  --radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 40%, #27ae60 70%, var(--gold) 100%);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 30px,
+    rgba(255,255,255,0.03) 30px,
+    rgba(255,255,255,0.03) 60px
+  );
+  animation: heroBg 20s linear infinite;
+}
+
+@keyframes heroBg {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(60px, 60px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.hero h1 .year {
+  color: var(--gold);
+  font-size: clamp(3.5rem, 9vw, 7rem);
+}
+
+.hero-sub {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  letter-spacing: 3px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.hero-stat {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.hero-stat .num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hero-stat .label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--darker);
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.nav-inner {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav a {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+}
+
+.nav a:hover, .nav a.active {
+  color: white;
+  background: rgba(255,255,255,0.05);
+  border-bottom-color: var(--gold);
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section:nth-child(even) {
+  background: var(--white);
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-title .icon {
+  font-size: 2.5rem;
+}
+
+.section-sub {
+  color: var(--gray);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+}
+
+/* ===== FORMAT CARDS ===== */
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.format-card {
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  color: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+
+.format-card:hover {
+  transform: translateY(-4px);
+}
+
+.format-card .big-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.format-card .desc {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+}
+
+/* ===== SEATTLE SPOTLIGHT ===== */
+.seattle-section {
+  background: linear-gradient(135deg, #1e3a5f, #2c5f8a);
+  color: white;
+  padding: 4rem 1.5rem;
+}
+
+.seattle-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.seattle-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.seattle-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.seattle-sub {
+  opacity: 0.8;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.match-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.match-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.3s;
+}
+
+.match-card:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+.match-card.usa {
+  border: 2px solid var(--gold);
+  background: rgba(245,166,35,0.15);
+}
+
+.match-date {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.match-teams {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.match-type {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ===== TICKET INFO ===== */
+.ticket-box {
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.ticket-item {
+  text-align: center;
+}
+
+.ticket-price {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.ticket-label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* ===== GROUPS ===== */
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.group-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+}
+
+.group-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.group-header {
+  background: var(--green);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.group-teams {
+  padding: 0.75rem 1rem;
+  list-style: none;
+}
+
+.group-teams li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.group-teams li:last-child {
+  border-bottom: none;
+}
+
+/* ===== PLAYERS ===== */
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.player-card {
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+
+.player-card:hover {
+  transform: translateY(-4px);
+}
+
+.player-top {
+  background: linear-gradient(135deg, var(--dark), #2d2d5e);
+  padding: 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.player-emoji {
+  font-size: 3rem;
+}
+
+.player-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+}
+
+.player-country {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.player-body {
+  padding: 1.25rem;
+}
+
+.player-fact {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ===== NEWS ===== */
+.news-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.news-item {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--green);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.3s;
+}
+
+.news-item:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.news-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  color: var(--green);
+  min-width: 2rem;
+}
+
+.news-text h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.news-text p {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+/* ===== SCHEDULE TABLE ===== */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.schedule-table th {
+  background: var(--green);
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.schedule-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.schedule-table tr:hover td {
+  background: #f0fdf4;
+}
+
+.schedule-table .seattle-row {
+  background: #fffbeb;
+}
+
+.schedule-table .seattle-row td {
+  font-weight: 600;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--darker);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+}
+
+.footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero { min-height: 60vh; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero-stats { gap: 1rem; }
+  .hero-stat { padding: 0.75rem 1.25rem; }
+  .section { padding: 3rem 1rem; }
+  .seattle-section { padding: 3rem 1rem; }
+  .match-list { grid-template-columns: 1fr; }
+  .schedule-table { font-size: 0.8rem; }
+  .schedule-table th, .schedule-table td { padding: 0.6rem 0.5rem; }
+}
+
+/* ===== SCROLL ANIMATION ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-badge">🇺🇸 🇨🇦 🇲🇽 首届三国联办</div>
+    <h1><span class="year">2026</span><br>FIFA WORLD CUP</h1>
+    <div class="hero-sub">⭐ 世界杯指南 · WEST COAST EDITION ⭐</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">48</div>
+        <div class="label">支参赛队</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">104</div>
+        <div class="label">场比赛</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">16</div>
+        <div class="label">座主办城市</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">39</div>
+        <div class="label">天足球盛宴</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top">🏠 首页</a>
+    <a href="#format">📋 赛制</a>
+    <a href="#seattle">🏟️ 西雅图</a>
+    <a href="#groups">🏆 分组</a>
+    <a href="#players">⭐ 球星</a>
+    <a href="#news">📰 新闻</a>
+    <a href="#schedule">📅 赛程</a>
+  </div>
+</nav>
+
+<!-- ===== FORMAT ===== -->
+<div class="section fade-in" id="format">
+  <div class="section-title"><span class="icon">📋</span> 赛制革新</div>
+  <p class="section-sub">2026年世界杯迎来史上最大变革——48支球队、12个小组、全新的32强淘汰赛</p>
+  <div class="format-grid">
+    <div class="format-card">
+      <div class="big-num">48</div>
+      <div class="desc">参赛队伍（首次扩军至48队）</div>
+    </div>
+    <div class="format-card">
+      <div class="big-num">12×4</div>
+      <div class="desc">12个小组，每组4队</div>
+    </div>
+    <div class="format-card">
+      <div class="big-num">32</div>
+      <div class="desc">晋级淘汰赛（前2名+8个最佳第3名）</div>
+    </div>
+    <div class="format-card">
+      <div class="big-num">6.11→7.19</div>
+      <div class="desc">2026年6月11日开幕 · 7月19日决赛</div>
+    </div>
+  </div>
+  <div style="margin-top:2rem; background:#f0fdf4; padding:1.5rem; border-radius:12px; border-left:4px solid var(--green);">
+    <strong>🏆 决赛：</strong>2026年7月19日 · MetLife Stadium, New York/New Jersey<br>
+    <strong>📺 美国直播：</strong>FOX (70场) + FS1 (34场) · 全部4K<br>
+    <strong>⚽ 卫冕冠军：</strong>阿根廷 🇦🇷
+  </div>
+</div>
+
+<!-- ===== SEATTLE SPOTLIGHT ===== -->
+<section class="seattle-section fade-in" id="seattle">
+  <div class="seattle-inner">
+    <div class="seattle-badge">📍 距波特兰仅3小时车程</div>
+    <h2 class="seattle-title">🏟️ 西雅图 · Lumen Field</h2>
+    <p class="seattle-sub">6场世界杯比赛就在你家门口！从波特兰开车3小时即可到达</p>
+
+    <div class="match-list">
+      <div class="match-card">
+        <div class="match-date">📅 6月15日 · 3:00 PM ET</div>
+        <div class="match-teams">🇧🇪 比利时 vs 埃及 🇪🇬</div>
+        <div class="match-type">小组赛 G组</div>
+      </div>
+      <div class="match-card usa">
+        <div class="match-date">📅 6月19日 · 3:00 PM ET ⭐ 重点推荐</div>
+        <div class="match-teams">🇺🇸 美国 vs 澳大利亚 🇦🇺</div>
+        <div class="match-type">小组赛 D组 · 美国队第二场</div>
+      </div>
+      <div class="match-card">
+        <div class="match-date">📅 6月24日 · 3:00 PM ET</div>
+        <div class="match-teams">🇧🇦 波黑 vs 卡塔尔 🇶🇦</div>
+        <div class="match-type">小组赛 B组</div>
+      </div>
+      <div class="match-card">
+        <div class="match-date">📅 6月26日 · 11:00 PM ET</div>
+        <div class="match-teams">🇪🇬 埃及 vs 伊朗 🇮🇷</div>
+        <div class="match-type">小组赛 G组</div>
+      </div>
+      <div class="match-card">
+        <div class="match-date">📅 7月1日 · 时间待定</div>
+        <div class="match-teams">🔥 32强淘汰赛</div>
+        <div class="match-type">1G vs 最佳第3名</div>
+      </div>
+      <div class="match-card">
+        <div class="match-date">📅 7月6日 · 5:00 PM ET</div>
+        <div class="match-teams">🔥 16强淘汰赛</div>
+        <div class="match-type">胜者81 vs 胜者82</div>
+      </div>
+    </div>
+
+    <div class="ticket-box">
+      <h3 style="font-family:'Oswald',sans-serif; font-size:1.5rem; margin-bottom:1rem;">🎫 球票信息</h3>
+      <div class="ticket-grid">
+        <div class="ticket-item">
+          <div class="ticket-price">$60</div>
+          <div class="ticket-label">Supporter入门票（限量）</div>
+        </div>
+        <div class="ticket-item">
+          <div class="ticket-price">$163+</div>
+          <div class="ticket-label">转售票起步价（StubHub）</div>
+        </div>
+        <div class="ticket-item">
+          <div class="ticket-price">$100-8,680</div>
+          <div class="ticket-label">官方动态定价范围</div>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem; font-size:0.9rem; opacity:0.8;">
+        <p>📍 <strong>购票渠道：</strong><a href="https://www.fifa.com/tickets" target="_blank" style="color:var(--gold);">FIFA.com/tickets</a> · StubHub · SeatGeek</p>
+        <p>⚠️ FIFA动态定价首次引入世界杯，转售价已被炒至$2M+；FIFA官方收取买卖双方各15%手续费</p>
+        <p>🚗 <strong>交通：</strong>波特兰→西雅图约3小时车程 · Amtrak Cascades火车约3.5小时</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GROUPS ===== -->
+<div class="section fade-in" id="groups">
+  <div class="section-title"><span class="icon">🏆</span> 12个小组 · 48支球队</div>
+  <p class="section-sub">2025年12月5日抽签结果 · 华盛顿特区</p>
+  <div class="groups-grid">
+    <div class="group-card"><div class="group-header">A组</div><ul class="group-teams"><li>🇲🇽 墨西哥</li><li>🇿🇦 南非</li><li>🇰🇷 韩国</li><li>🇨🇿 捷克</li></ul></div>
+    <div class="group-card"><div class="group-header">B组</div><ul class="group-teams"><li>🇨🇦 加拿大</li><li>🇧🇦 波黑</li><li>🇶🇦 卡塔尔</li><li>🇨🇭 瑞士</li></ul></div>
+    <div class="group-card"><div class="group-header">C组</div><ul class="group-teams"><li>🇧🇷 巴西</li><li>🇲🇦 摩洛哥</li><li>🇭🇹 海地</li><li>🏴󠁧󠁢󠁳󠁣󠁴󠁿 苏格兰</li></ul></div>
+    <div class="group-card"><div class="group-header">D组 ⭐</div><ul class="group-teams"><li>🇺🇸 美国</li><li>🇵🇾 巴拉圭</li><li>🇦🇺 澳大利亚</li><li>🇹🇷 土耳其</li></ul></div>
+    <div class="group-card"><div class="group-header">E组</div><ul class="group-teams"><li>🇩🇪 德国</li><li>🇨🇼 库拉索</li><li>🇨🇮 科特迪瓦</li><li>🇪🇨 厄瓜多尔</li></ul></div>
+    <div class="group-card"><div class="group-header">F组</div><ul class="group-teams"><li>🇳🇱 荷兰</li><li>🇯🇵 日本</li><li>🇸🇪 瑞典</li><li>🇹🇳 突尼斯</li></ul></div>
+    <div class="group-card"><div class="group-header">G组</div><ul class="group-teams"><li>🇧🇪 比利时</li><li>🇪🇬 埃及</li><li>🇮🇷 伊朗</li><li>🇳🇿 新西兰</li></ul></div>
+    <div class="group-card"><div class="group-header">H组</div><ul class="group-teams"><li>🇪🇸 西班牙</li><li>🇨🇻 佛得角</li><li>🇸🇦 沙特</li><li>🇺🇾 乌拉圭</li></ul></div>
+    <div class="group-card"><div class="group-header">I组</div><ul class="group-teams"><li>🇫🇷 法国</li><li>🇸🇳 塞内加尔</li><li>🇮🇶 伊拉克</li><li>🇳🇴 挪威</li></ul></div>
+    <div class="group-card"><div class="group-header">J组</div><ul class="group-teams"><li>🇦🇷 阿根廷</li><li>🇩🇿 阿尔及利亚</li><li>🇦🇹 奥地利</li><li>🇯🇴 约旦</li></ul></div>
+    <div class="group-card"><div class="group-header">K组</div><ul class="group-teams"><li>🇵🇹 葡萄牙</li><li>🇨🇩 刚果(金)</li><li>🇺🇿 乌兹别克斯坦</li><li>🇨🇴 哥伦比亚</li></ul></div>
+    <div class="group-card"><div class="group-header">L组</div><ul class="group-teams"><li>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰</li><li>🇭🇷 克罗地亚</li><li>🇬🇭 加纳</li><li>🇵🇦 巴拿马</li></ul></div>
+  </div>
+
+  <div style="margin-top:2rem; background:#fef2f2; padding:1.5rem; border-radius:12px; border-left:4px solid var(--red);">
+    <strong>😱 遗憾缺席：</strong>意大利 🇮🇹（连续3届无缘！）、丹麦、尼日利亚、波兰、喀麦隆、中国、哥斯达黎加、俄罗斯（禁赛）
+  </div>
+</div>
+
+<!-- ===== PLAYERS ===== -->
+<div class="section fade-in" id="players">
+  <div class="section-title"><span class="icon">⭐</span> 巨星闪耀</div>
+  <p class="section-sub">最后一舞？最后一射？这些名字将定义2026之夏</p>
+  <div class="players-grid">
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇦🇷</div>
+        <div><div class="player-name">Messi 梅西</div><div class="player-country">阿根廷 · 38岁 · 可能是最后一届</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">尚未正式确认，但所有迹象指向参赛。2022年夺冠后，他可能选择以冠军身份告别世界杯舞台。</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇵🇹</div>
+        <div><div class="player-name">Ronaldo C罗</div><div class="player-country">葡萄牙 · 41岁 · 已确认第6次出征</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">已确认参赛！41岁仍在沙特联赛征战，只为追逐职业生涯唯一缺失的奖杯。世预赛中被红牌罚下但葡萄牙依然晋级。</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇫🇷</div>
+        <div><div class="player-name">Mbappé 姆巴佩</div><div class="player-country">法国 · 距世界杯历史射手王仅4球</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">只需再进4球就能超越克洛泽成为世界杯历史最佳射手。预选赛4-0大胜乌克兰独中两元。本届世界杯的门面人物。</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇪🇸</div>
+        <div><div class="player-name">Lamine Yamal 亚马尔</div><div class="player-country">西班牙 · 18岁 · 巴萨天才</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">欧洲杯2024最闪亮的新星，18岁已经是世界顶级边锋。这届世界杯可能是他真正封王的舞台。</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+        <div><div class="player-name">Harry Kane 凯恩</div><div class="player-country">英格兰 · 本赛季德甲31球</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">英格兰历史射手王，本赛季在拜仁慕尼黑打进31粒德甲进球。能否带领英格兰走得更远？</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇧🇷</div>
+        <div><div class="player-name">Vinícius Jr. 维尼修斯</div><div class="player-country">巴西 · 皇马核心前锋</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">当今世界最具威胁的边锋之一。内马尔淡出后，他是巴西进攻的绝对核心。</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇪🇬</div>
+        <div><div class="player-name">Mohamed Salah 萨拉赫</div><div class="player-country">埃及 · 可能是最后一次世界杯</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">利物浦传奇，英超历史级别的射手。即将34岁，这几乎是他最后一次在世界杯舞台亮相的机会。西雅图有埃及的比赛！</div></div>
+    </div>
+    <div class="player-card">
+      <div class="player-top">
+        <div class="player-emoji">🇺🇸</div>
+        <div><div class="player-name">USMNT 美国队</div><div class="player-country">5月26日公布26人名单</div></div>
+      </div>
+      <div class="player-body"><div class="player-fact">主教练波切蒂诺将在5月26日于纽约公布最终名单。5月31日在夏洛特对阵塞内加尔进行最后热身。小组对手：巴拉圭、澳大利亚（西雅图！）、土耳其。</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NEWS ===== -->
+<div class="section fade-in" id="news">
+  <div class="section-title"><span class="icon">📰</span> 最新动态</div>
+  <p class="section-sub">2026年5月 · 赛前最热门话题</p>
+  <div class="news-list">
+    <div class="news-item">
+      <div class="news-num">1</div>
+      <div class="news-text">
+        <h4>🎫 球票价格引发巨大争议</h4>
+        <p>FIFA首次引入动态定价，决赛转售票被炒到200万美元以上。欧洲球迷组织已向欧盟委员会提交18页投诉书，指责FIFA"激进的剥削性售票策略"。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">2</div>
+      <div class="news-text">
+        <h4>🇮🇹 意大利连续三届无缘世界杯！</h4>
+        <p>四届世界杯冠军意大利在附加赛点球大战负于波黑，连续错过2018、2022、2026三届世界杯，堪称足球史上最大的衰退之一。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">3</div>
+      <div class="news-text">
+        <h4>🛂 多国球迷面临入境限制</h4>
+        <p>特朗普政府的旅行禁令影响塞内加尔、科特迪瓦、伊朗、海地等7个参赛国球迷。"签证保证金计划"要求部分国家公民缴纳最高$15,000入境押金。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">4</div>
+      <div class="news-text">
+        <h4>🇺🇸 美国特使要求用意大利替换伊朗</h4>
+        <p>美国特使Zampolli要求FIFA用意大利替换伊朗，FIFA确认无此计划。伊朗代表团据报被拒绝入境加拿大参加抽签仪式。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">5</div>
+      <div class="news-text">
+        <h4>⚽ FIFA新规：捂嘴将吃红牌</h4>
+        <p>FIFA宣布比赛中球员用手捂嘴将被直接出示红牌。目的是防止不当行为并改善转播分析质量。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">6</div>
+      <div class="news-text">
+        <h4>🏟️ 场地质量引担忧</h4>
+        <p>2025年世俱杯作为测试赛暴露问题——贝林厄姆直言"场地质量很糟糕"。NFL球场铺设天然草的质量仍是疑问。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">7</div>
+      <div class="news-text">
+        <h4>🇺🇸 USMNT名单5月26日揭晓</h4>
+        <p>波切蒂诺将在纽约公布26人最终名单。5月31日对阵塞内加尔是最后热身赛。D组对手：巴拉圭(6/12)、澳大利亚(6/19西雅图)、土耳其(6/25)。</p>
+      </div>
+    </div>
+    <div class="news-item">
+      <div class="news-num">8</div>
+      <div class="news-text">
+        <h4>🇨🇦 加拿大抗议声不断</h4>
+        <p>伊朗参赛和签证问题引发加拿大与多个参赛国的外交摩擦。温哥华和多伦多的比赛也可能受到影响。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCHEDULE ===== -->
+<div class="section fade-in" id="schedule">
+  <div class="section-title"><span class="icon">📅</span> 重点赛程</div>
+  <p class="section-sub">小组赛精选 + 美国队完整赛程 + 淘汰赛时间表</p>
+
+  <h3 style="margin: 1.5rem 0 1rem; color: var(--blue);">🇺🇸 美国队小组赛</h3>
+  <table class="schedule-table">
+    <thead><tr><th>日期</th><th>对阵</th><th>场地</th><th>开球(ET)</th><th>直播</th></tr></thead>
+    <tbody>
+      <tr><td>6月12日</td><td>🇺🇸 美国 vs 巴拉圭 🇵🇾</td><td>SoFi Stadium, LA</td><td>9:00 PM</td><td>FOX</td></tr>
+      <tr class="seattle-row"><td>6月19日 ⭐</td><td>🇺🇸 美国 vs 澳大利亚 🇦🇺</td><td>Lumen Field, 西雅图</td><td>3:00 PM</td><td>FOX</td></tr>
+      <tr><td>6月25日</td><td>🇺🇸 美国 vs 土耳其 🇹🇷</td><td>SoFi Stadium, LA</td><td>10:00 PM</td><td>FOX</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin: 2rem 0 1rem; color: var(--green);">⚽ 小组赛精选</h3>
+  <table class="schedule-table">
+    <thead><tr><th>日期</th><th>对阵</th><th>小组</th><th>场地</th></tr></thead>
+    <tbody>
+      <tr><td>6月11日</td><td>🇲🇽 墨西哥 vs 南非 🇿🇦</td><td>A（揭幕战）</td><td>墨西哥城</td></tr>
+      <tr><td>6月13日</td><td>🇧🇷 巴西 vs 摩洛哥 🇲🇦</td><td>C</td><td>MetLife, NY/NJ</td></tr>
+      <tr class="seattle-row"><td>6月15日</td><td>🇧🇪 比利时 vs 埃及 🇪🇬</td><td>G</td><td>西雅图</td></tr>
+      <tr class="seattle-row"><td>6月19日</td><td>🇺🇸 美国 vs 澳大利亚 🇦🇺</td><td>D</td><td>西雅图</td></tr>
+      <tr><td>6月16日</td><td>🇫🇷 法国 vs 塞内加尔 🇸🇳</td><td>I</td><td>MetLife, NY/NJ</td></tr>
+      <tr><td>6月16日</td><td>🇦🇷 阿根廷 vs 阿尔及利亚 🇩🇿</td><td>J</td><td>Kansas City</td></tr>
+      <tr><td>6月17日</td><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰 vs 克罗地亚 🇭🇷</td><td>L</td><td>Dallas</td></tr>
+      <tr><td>6月17日</td><td>🇵🇹 葡萄牙 vs 刚果(金) 🇨🇩</td><td>K</td><td>Houston</td></tr>
+      <tr class="seattle-row"><td>6月24日</td><td>🇧🇦 波黑 vs 卡塔尔 🇶🇦</td><td>B</td><td>西雅图</td></tr>
+      <tr><td>6月24日</td><td>🇨🇦 加拿大 vs 瑞士 🇨🇭</td><td>B</td><td>Vancouver</td></tr>
+      <tr class="seattle-row"><td>6月26日</td><td>🇪🇬 埃及 vs 伊朗 🇮🇷</td><td>G</td><td>西雅图</td></tr>
+      <tr><td>6月26日</td><td>🇺🇾 乌拉圭 vs 西班牙 🇪🇸</td><td>H</td><td>Guadalajara</td></tr>
+      <tr><td>6月27日</td><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰 vs 巴拿马 🇵🇦</td><td>L</td><td>MetLife, NY/NJ</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin: 2rem 0 1rem; color: var(--gold);">🏆 淘汰赛</h3>
+  <table class="schedule-table">
+    <thead><tr><th>轮次</th><th>日期</th><th>场数</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>32强</td><td>6月28日 - 7月2日</td><td>16场</td><td>新增轮次</td></tr>
+      <tr><td>16强</td><td>7月3日 - 7月7日</td><td>8场</td><td>含西雅图7/6</td></tr>
+      <tr><td>四分之一决赛</td><td>7月9日 - 7月12日</td><td>4场</td><td>LA/Boston/KC/Miami</td></tr>
+      <tr><td>半决赛</td><td>7月14日-15日</td><td>2场</td><td>Dallas/Atlanta</td></tr>
+      <tr><td>季军赛</td><td>7月17日</td><td>1场</td><td>Miami</td></tr>
+      <tr style="background:#fffbeb; font-weight:700;"><td>🏆 决赛</td><td>7月19日</td><td>1场</td><td>MetLife Stadium, NY/NJ</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <p>⚽ 2026 FIFA World Cup Guide · Made by Sky Portal ☁️</p>
+  <p>数据来源：FIFA.com · ESPN · FOX Sports · BBC · Guardian · SeattleFWC26.org</p>
+  <p style="margin-top:0.5rem;">部署于 <a href="/sky-portal/">Sky Portal</a> · 更新于 2026-05-02</p>
+</div>
+
+<script>
+// Scroll-based fade-in animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

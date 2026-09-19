@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-07</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#d97706">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股从历史新高回落</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Retreat from ATH</div>
+<div class="zh poster-data">• 道指 49,597 (−0.63%)，5万关口得而复失<br>• 标普500 7,337 (−0.38%)<br>• 纳指 25,806 (−0.13%)</div>
+<div class="en poster-data" style="display:none">• Dow 49,597 (−0.63%), 50K elusive again<br>• S&P 500 7,337 (−0.38%)<br>• Nasdaq 25,806 (−0.13%)</div>
+</div>
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊和谈拉锯</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Deal Tug-of-War</div>
+<div class="zh poster-data">• 油价反弹，压制风险偏好<br>• 和平协议前景仍有不确定性<br>• 周三大涨因和谈乐观预期</div>
+<div class="en poster-data" style="display:none">• Oil rebound pressured risk appetite<br>• Peace deal outlook uncertain<br>• Wed rally driven by deal optimism</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股逼近年内高点</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Near Year High</div>
+<div class="zh poster-data">• 上证 4,160+ (+0.48%)，逼近4,197前高<br>• 创业板指创近11年新高<br>• 120只个股涨停，AI算力领涨</div>
+<div class="en poster-data" style="display:none">• SSE 4,160+ (+0.48%), near 4,197 high<br>• ChiNext 11-year high<br>• 120 stocks limit-up, AI leads</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI/半导体持续火热</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI/Semis Stay Hot</div>
+<div class="zh poster-data">• NVDA收复5万亿美元市值<br>• AMD周三暴涨，AI主线不变<br>• A股科创50大涨，CPO/光通信爆发</div>
+<div class="en poster-data" style="display:none">• NVDA reclaims $5T market cap<br>• AMD surged Wednesday, AI theme intact<br>• A-share STAR 50 surged, CPO breakout</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-07 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股行情（5月7日收盘）</span><span class="en" style="display:none">US Market (May 7 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,597</div><div class="stock-change down">−0.63%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,337</div><div class="stock-change down">−0.38%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">25,806</div><div class="stock-change down">−0.13%</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">17.08</div><div class="stock-change up">↑</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$212.31</div><div class="stock-change up">+0.38%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 从历史新高回落，5万关口得而复失</span><span class="en" style="display:none">📉 Retreat from Record Highs, 50K Mark Elusive Again</span></h4>
+<p><span class="zh">周三（5月6日）美股三大指数集体创下历史新高——道指飙升612点（+1.24%）至49,910，标普500涨1.46%至7,365，纳指涨2.02%至25,839——主要受美伊和平谈判进展乐观预期推动。但周四（5月7日）市场从高位回落，道指下跌约313点，5万点关口再次失守。标普500和纳指也从盘中历史高位回落。</span><span class="en" style="display:none">On Wednesday (May 6), all three major US indices hit record highs — Dow surged 612 pts (+1.24%) to 49,910, S&P 500 +1.46% to 7,365, Nasdaq +2.02% to 25,839 — driven by optimism over US-Iran peace talks. But Thursday (May 7) saw a pullback, with Dow dropping ~313 pts, failing to hold 50K again. S&P 500 and Nasdaq also retreated from intraday records.</span></p>
+<p class="src"><span class="zh">来源：Investopedia / Barron's / Yahoo Finance</span><span class="en" style="display:none">Sources: Investopedia / Barron's / Yahoo Finance</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🛢️ 油价反弹成回调主因</span><span class="en" style="display:none">🛢️ Oil Rebound Drives Pullback</span></h4>
+<p><span class="zh">周四油价转涨，此前美伊和平协议报道推动油价暴跌（上期所原油主力合约日跌超6%）。但市场意识到谈判仍有不确定性，伊朗尚未正式回应美国和平方案，投资者选择在历史高位获利了结。原油期货反弹至$114附近。</span><span class="en" style="display:none">Oil futures turned higher on Thursday after plunging on peace deal reports (Shanghai crude futures fell 6%+). But the market realized deal uncertainty remains — Iran hasn't formally responded to the US proposal — and investors chose to take profits at record highs. Crude futures rebounded to around $114.</span></p>
+<p class="src"><span class="zh">来源：证券时报 / Investopedia / Reuters</span><span class="en" style="display:none">Sources: Securities Times / Investopedia / Reuters</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🤖 AI/半导体仍是市场主线</span><span class="en" style="display:none">🤖 AI/Semiconductors Remain the Main Theme</span></h4>
+<p><span class="zh">尽管大盘回调，AI交易持续火热。NVIDIA周三收复5万亿美元市值（收于$212.31），AMD周三大涨，半导体ETF（SMH）延续强势。AI芯片需求驱动TSMC等代工厂订单满载。市场即使短期调整，AI/半导体仍是最强主线。</span><span class="en" style="display:none">Despite the broader pullback, the AI trade remains red-hot. NVIDIA reclaimed its $5 trillion market cap Wednesday (closing at $212.31), AMD surged, and the semiconductor ETF (SMH) stayed strong. AI chip demand keeps TSMC and other foundries at full capacity. Even with short-term corrections, AI/semiconductors remain the dominant theme.</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance / CNBC / 证券时报</span><span class="en" style="display:none">Sources: Yahoo Finance / CNBC / Securities Times</span></p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情（5月7日收盘）</span><span class="en" style="display:none">A-Shares (May 7 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,160+</div><div class="stock-change up">+0.48%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">—</div><div class="stock-change up">+1.18%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">—</div><div class="stock-change up">+1.45%</div></div>
+<div class="stock-item"><div class="stock-ticker">北证50</div><div class="stock-price">—</div><div class="stock-change up">+3.05%</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">3.17万亿</div><div class="stock-change down">−783亿</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 三指集体上涨，创业板创近11年新高</span><span class="en" style="display:none">📈 All Three Indices Up, ChiNext at 11-Year High</span></h4>
+<p><span class="zh">A股三大指数集体收涨。上证指数涨0.48%报4,160+，逼近3月3日前高4,197；深成指涨1.18%；创业板指涨1.45%创近11年新高。北证50涨3.05%领涨。全市场超3,500只个股上涨，120只涨停。成交额3.17万亿，较前一交易日缩量783亿。</span><span class="en" style="display:none">All three A-share indices closed higher. SSE +0.48% at 4,160+, approaching the March 3 high of 4,197; SZSE +1.18%; ChiNext +1.45% hitting an 11-year high. BSE 50 +3.05% led the way. Over 3,500 stocks rose, 120 hit daily limit-up. Turnover 3.17 trillion yuan, down 78.3B from previous session.</span></p>
+<p class="src"><span class="zh">来源：同花顺 / 证券时报 / 每日经济新闻</span><span class="en" style="display:none">Sources: 10jqka / Securities Times / National Business Daily</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">💻 AI算力/CPO/光通信全面爆发</span><span class="en" style="display:none">💻 AI Computing / CPO / Optical Comms Breakout</span></h4>
+<p><span class="zh">AI算力主线延续强势，工业母机板块活跃，临近午盘CPO（光通信）板块加速上行。科创板（科创50）表现尤为亮眼，芯片股大涨，海光信息等20%涨停。AI产业链、CPO、PCB、算力租赁等概念表现强势。科技股热情四射，超百股涨停。</span><span class="en" style="display:none">The AI computing theme extended its rally, with CNC machine tools active and CPO (co-packaged optics) accelerating into midday. STAR 50 was especially strong — chip stocks surged with Hygon Information hitting 20% limit-up. AI supply chain, CPO, PCB, and computing leasing all performed strongly. Over 100 stocks hit limit-up.</span></p>
+<p class="src"><span class="zh">来源：新浪财经 / 东方财富 / 证券时报</span><span class="en" style="display:none">Sources: Sina Finance / EastMoney / Securities Times</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 上证4,170附近的纠结</span><span class="en" style="display:none">📊 Struggling Around SSE 4,170</span></h4>
+<p><span class="zh">上证指数在4,170附近进入微妙位置。3月3日的3.13万亿天量对应4,197高点，1月29日3.22万亿对应4,170高点。当前3.17万亿的成交额维持在一定水准但不够攻击量，需要进一步放量才能突破4,197前高。多家机构认为A股有望再攀新高，但短期需注意防守。</span><span class="en" style="display:none">SSE is in a delicate zone around 4,170. March 3's 3.13 trillion peak volume corresponded to the 4,197 high, and Jan 29's 3.22 trillion to 4,170. Current 3.17 trillion turnover is adequate but not enough for a breakout past 4,197. Multiple institutions expect new highs, but caution is warranted short-term.</span></p>
+<p class="src"><span class="zh">来源：新浪财经 / 网易财经 / 德邦证券</span><span class="en" style="display:none">Sources: Sina Finance / 163.com / Deutsche Securities</span></p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（5月7日收盘）</span><span class="en" style="display:none">HK Market (May 7 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">26,213</div><div class="stock-change up">+1.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">5,121</div><div class="stock-change up">+2.90%</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">3,047亿</div><div class="stock-change up">↑</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🏦 恒指高位收市，科技股个别发展</span><span class="en" style="display:none">🏦 HSI Closes Near Highs, Tech Stocks Mixed</span></h4>
+<p><span class="zh">恒指反复上升，以全日高位26,213点收市，升315点，成交3,047亿元。南向资金（北水）重临，但单日净流出85亿元。科技股个别发展，百度升近半成，阿里巴巴升2%。恒生科技指数收于5,121点。5月8日（今日）港股盘中恒生科技一度升至5,137。</span><span class="en" style="display:none">HSI rose to close at the day's high of 26,213, up 315 pts, with turnover of 304.7B HKD. Southbound trading resumed but saw 8.5B net outflow. Tech stocks mixed — Baidu up nearly 5%, Alibaba up 2%. Hang Seng Tech closed at 5,121. On May 8, HSTECH reached 5,137 intraday.</span></p>
+<p class="src"><span class="zh">来源：i-Cable / Yahoo Finance / ETNet</span><span class="en" style="display:none">Sources: i-Cable / Yahoo Finance / ETNet</span></p>
+</div>
+
+<h2>🔮 <span class="zh">核心驱动与预判</span><span class="en" style="display:none">Key Drivers & Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">1️⃣ 美伊和谈 — 市场最大变量</span><span class="en" style="display:none">1️⃣ US-Iran Talks — Biggest Market Variable</span></h4>
+<p><span class="zh">美伊冲突自2月底爆发以来，一直是2026年最大的地缘政治风险。特朗普近期发言暗示双方可能在30天内通过谈判解决冲突。若和平协议达成，油价将大幅回落，风险资产将重估；若谈判破裂，油价飙升将重创全球市场。当前市场在乐观与谨慎之间拉锯。</span><span class="en" style="display:none">The US-Iran conflict since late February has been 2026's biggest geopolitical risk. Trump's recent comments suggest both sides could resolve the conflict through negotiations within 30 days. If a peace deal is reached, oil prices would drop sharply and risk assets would reprice higher; if talks fail, surging oil would slam global markets. The market is oscillating between optimism and caution.</span></p>
+<p class="src"><span class="zh">来源：新华社 / 证券时报 / Investopedia</span><span class="en" style="display:none">Sources: Xinhua / Securities Times / Investopedia</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2️⃣ AI/半导体 — 跨市场最强主线</span><span class="en" style="display:none">2️⃣ AI/Semiconductors — Strongest Cross-Market Theme</span></h4>
+<p><span class="zh">无论美股还是A股，AI和半导体都是最强主线。美股方面，NVDA收复5万亿美元市值，AMD持续走强，TSMC订单满载。A股方面，AI算力、CPO、光通信全面爆发，科创板大涨。这一主线短期内不会改变，即使大盘调整，AI/半导体板块也有望保持相对强势。</span><span class="en" style="display:none">Across both US and China markets, AI and semiconductors are the dominant theme. In the US, NVDA reclaimed $5T market cap, AMD stayed strong, TSMC at full capacity. In A-shares, AI computing, CPO, and optical communications broke out, with STAR 50 surging. This theme won't change soon — even during market pullbacks, AI/semis should maintain relative strength.</span></p>
+<p class="src"><span class="zh">来源：综合分析</span><span class="en" style="display:none">Sources: Composite Analysis</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3️⃣ 短期预判</span><span class="en" style="display:none">3️⃣ Short-term Outlook</span></h4>
+<p><span class="zh"><b>美股：</b>周四回调属正常技术调整，周三创历史新高后的获利了结。关注周五走势——若美伊谈判有实质进展，市场将再次冲高。道指5万点仍是短期争夺焦点。<br><b>A股：</b>上证逼近4,197前高，需要放量突破。AI主线强势，科创50表现突出，突破概率较大但需注意防守。创业板已创11年新高，趋势向好。<br><b>港股：</b>恒指26,000-26,500区间震荡，科技股有弹性但南向资金流出需关注。</span><span class="en" style="display:none"><b>US Stocks:</b> Thursday's pullback was a normal technical correction after Wednesday's ATH. Watch Friday — if Iran-US talks make progress, markets will rally again. Dow 50K remains the short-term battleground.<br><b>A-Shares:</b> SSE approaching 4,197 prior high, needs volume to break through. AI theme is strong, STAR 50 outstanding. Breakout is likely but play defense. ChiNext already at 11-year high, trend positive.<br><b>HK:</b> HSI consolidating 26,000-26,500 range. Tech stocks have bounce but watch southbound outflows.</span></p>
+<p class="src"><span class="zh">来源：Sky 综合分析</span><span class="en" style="display:none">Sources: Sky Composite Analysis</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSTECH — 恒生科技</div><div id="tv-hstech"></div></div>
+<div class="kline-item"><div class="kline-label">AMD</div><div id="tv-amd"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Investopedia, Barron's, Yahoo Finance, 证券时报, 同花顺, 东方财富, ETNet</span><span class="en" style="display:none">Data sources: Investopedia, Barron's, Yahoo Finance, Securities Times, 10jqka, EastMoney, ETNet</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hstech', sym:'HKEX:HSTECH'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

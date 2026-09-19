@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>每日研报 2026-04-10</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;max-width:900px;margin:0 auto;padding:20px}
+a{color:#f0a040;text-decoration:none}
+a:hover{text-decoration:underline}
+h1{color:#f0a040;font-size:1.8em;margin:24px 0 8px;text-align:center}
+h2{color:#f0a040;font-size:1.3em;margin:24px 0 12px;border-bottom:1px solid #2a2a2a;padding-bottom:6px}
+h3{color:#f0a040;font-size:1.05em;margin:16px 0 8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:16px 20px;margin-bottom:14px}
+.card p{margin:6px 0;font-size:0.93em}
+.card .src{color:#888;font-size:0.82em;margin-top:6px}
+.tag-up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.tag-down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:10px;text-align:center}
+.stock-item .sym{color:#f0a040;font-family:'SF Mono',monospace;font-weight:700;font-size:1em}
+.stock-item .price{color:#fff;font-size:1.1em;font-weight:600;margin:4px 0}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#f0a040;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.sport-card{background:rgba(76,175,80,0.05);border:1px solid rgba(76,175,80,0.3);border-radius:12px;padding:16px 20px;margin-bottom:14px}
+.sport-card h3{color:#4CAF50}
+footer{text-align:center;margin-top:32px;padding:16px;color:#666;font-size:0.85em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}}
+.zh{display:inline}.en{display:none}
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh" style="background:#555;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+<button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+<div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• AI芯片需求激增，中国芯片业强势增长<br>• 半导体板块全线反弹，ASML涨4.2%</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• AI demand surges, China chip industry grows rapidly<br>• Semiconductor sector rallies across the board</div>
+</div>
+<div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 欧冠首回合0-2负马竞，次回合4月15日<br>• 周末联赛对阵西班牙人</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• UCL QF 1st leg: 0-2 loss vs Atlético, 2nd leg Apr 15<br>• La Liga vs Espanyol this weekend</div>
+</div>
+<div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 开拓者进附加赛！第9对勇士<br>• NBA季后赛4月18日开打</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Blazers in Play-In as 9th vs Warriors<br>• NBA Playoffs start April 18</div>
+</div>
+<div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• OpenAI确认大规模融资，ChatGPT超级应用<br>• AWS发布自主Agent服务</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• OpenAI confirms massive funding round, ChatGPT super app<br>• AWS launches autonomous agents</div>
+</div>
+</div>
+</div>
+
+<h1>📡 <span class="zh">每日研报</span><span class="en">Daily Research</span> 2026-04-10</h1>
+<p style="text-align:center;color:#888;margin-bottom:24px"><span class="zh">Sky Portal 每日研报</span><span class="en">Sky Portal Daily Research Report</span></p>
+
+<!-- 板块1: 半导体与AI -->
+<h2>🔬 <span class="zh">半导体与AI</span><span class="en">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h3><span class="zh">1. AI需求激增推动中国芯片业强势增长，供应链承压</span><span class="en">1. AI Boom Accelerates China's Chip Industry Growth</span></h3>
+<p><span class="zh">据Reuters报道，全球AI基础设施建设的爆发式增长正推动中国芯片产业展现出强劲的增长势头，但需求激增也给全球供应链带来了前所未有的压力。分析指出，AI芯片需求增长速度远超预期，中国芯片制造商正加速扩产以满足国内市场需求。</span><span class="en">According to Reuters, the explosive growth in global AI infrastructure is driving strong momentum in China's chip industry, but surging demand is straining the global supply chain. AI chip demand is growing faster than anyone predicted, pushing Chinese manufacturers to accelerate capacity expansion.</span></p>
+<p class="src">来源：Reuters (2026-03-25)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">2. 三星存储芯片AI：$269亿季度改变格局</span><span class="en">2. Samsung Memory Chip AI: The $26.9B Quarter</span></h3>
+<p><span class="zh">Oplexa Insights报道，三星凭借AI驱动的HBM（高带宽内存）订单，单季度收入达到$269亿，创下历史新高。这一数据反映出AI对存储芯片的巨大拉动作用。三星和SK海力士在HBM领域的竞争白热化，两者几乎瓜分了全球HBM产能。</span><span class="en">Samsung posted a record $26.9B quarterly revenue driven by AI-fueled HBM (High Bandwidth Memory) orders. This reflects AI's massive pull on memory chips. Samsung and SK Hynix are in a fierce competition, nearly splitting global HBM capacity between them.</span></p>
+<p class="src">来源：Oplexa Insights (Mar 2026)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">3. Semicon China 2026：AI支出逼近$8000亿，IBS警示2028芯片周期风险</span><span class="en">3. Semicon China 2026: AI Spending Nears $800B</span></h3>
+<p><span class="zh">在Semicon China 2026展会上，行业研究机构IBS指出全球AI投资已逼近$8000亿大关。但同时警告2028年可能面临芯片周期下行风险——当前的大量投资可能导致产能过剩。TSMC和三星继续缩减8英寸晶圆产能，集中资源于先进AI芯片制造。</span><span class="en">At Semicon China 2026, IBS reported global AI investment nearing $800B. However, the firm warned of a potential chip cycle downturn in 2028 — massive current investments may lead to overcapacity. TSMC and Samsung continue scaling back 8-inch wafer production to focus on advanced AI chips.</span></p>
+<p class="src">来源：DigiTimes (2026-03-27)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">4. AI和芯片股4月1日大涨，市场信心回升</span><span class="en">4. AI and Chip Stocks Soared on April 1</span></h3>
+<p><span class="zh">4月1日，AI和半导体板块经历了显著上涨，结束了此前一段时间的调整期。市场分析认为，这一涨势反映了投资者对AI长期增长潜力的信心恢复。多只半导体龙头股当日涨幅超过3%，板块整体走强延续至本周。</span><span class="en">On April 1, AI and semiconductor sectors experienced a notable surge, ending a period of correction. Market analysis suggests this rally reflects renewed investor confidence in AI's long-term growth potential. Multiple semiconductor leaders gained over 3%, with sector strength continuing into this week.</span></p>
+<p class="src">来源：xpressurway.com (2026-04-01)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">5. 半导体行业2026年有望突破$1万亿年销售额</span><span class="en">5. Semiconductor Industry Tracking Toward $1T Annual Sales</span></h3>
+<p><span class="zh">据Medium分析，2026年初半导体行业正处于AI驱动的强劲上升周期中，全年销售额有望首次突破$1万亿大关。然而结构性瓶颈依然存在——先进制程产能紧张、EUV光刻机交付周期长、先进封装产能不足等问题制约着供给端的响应速度。</span><span class="en">According to analysis, the semiconductor industry is in a strong AI-led upswing in early 2026, tracking toward $1T in annual sales for the first time. However, structural bottlenecks persist — tight advanced node capacity, long EUV lithography delivery cycles, and insufficient advanced packaging capacity constrain supply response.</span></p>
+<p class="src">来源：Medium / Adnan Masood (2026-01-28)</p>
+</div>
+
+<!-- 板块2: 股票 -->
+<h2>📈 <span class="zh">半导体股票行情（4月9日收盘）</span><span class="en">Semiconductor Stocks (Apr 9 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="sym">INTC</div>
+<div class="price">$62.95</div>
+<span class="tag-up">+3.85%</span>
+</div>
+<div class="stock-item">
+<div class="sym">TSM</div>
+<div class="price">$374.93</div>
+<span class="tag-up">+3.63%</span>
+</div>
+<div class="stock-item">
+<div class="sym">NVDA</div>
+<div class="price">$186.56</div>
+<span class="tag-up">+2.67%</span>
+</div>
+<div class="stock-item">
+<div class="sym">AMD</div>
+<div class="price">$245.59</div>
+<span class="tag-up">+5.57%</span>
+</div>
+<div class="stock-item">
+<div class="sym">ASML</div>
+<div class="price">$1,487.16</div>
+<span class="tag-up">+4.17%</span>
+</div>
+<div class="stock-item">
+<div class="sym">MU</div>
+<div class="price">$418.90</div>
+<span class="tag-up">+4.51%</span>
+</div>
+<div class="stock-item">
+<div class="sym">AVGO</div>
+<div class="price">$370.48</div>
+<span class="tag-up">+4.85%</span>
+</div>
+<div class="stock-item">
+<div class="sym">QCOM</div>
+<div class="price">$129.90</div>
+<span class="tag-up">+1.31%</span>
+</div>
+<div class="stock-item">
+<div class="sym">TSLA</div>
+<div class="price">$345.61</div>
+<span class="tag-up">+1.81%</span>
+</div>
+<div class="stock-item">
+<div class="sym">SMH</div>
+<div class="price">$437.92</div>
+<span class="tag-up">+3.16%</span>
+</div>
+</div>
+
+<!-- K线图 -->
+<div style="margin-top:24px">
+<h3 style="color:#f0a040;margin-bottom:12px">📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item">
+<div class="kline-label">INTC — Intel</div>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+new TradingView.widget({"symbol":"NASDAQ:INTC","interval":"1D","height":180,"theme":"dark","style":"1","locale":"zh_CN","chart_only":true,"backgroundColor":"rgba(20,20,30,1)","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"container_id":"tv-intc"});
+</script>
+</div>
+</div>
+<div class="kline-item">
+<div class="kline-label">NVDA — NVIDIA</div>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget" id="tv-nvda"></div>
+<script type="text/javascript">
+new TradingView.widget({"symbol":"NASDAQ:NVDA","interval":"1D","height":180,"theme":"dark","style":"1","locale":"zh_CN","chart_only":true,"backgroundColor":"rgba(20,20,30,1)","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"container_id":"tv-nvda"});
+</script>
+</div>
+</div>
+<div class="kline-item">
+<div class="kline-label">TSLA — Tesla</div>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget" id="tv-tsla"></div>
+<script type="text/javascript">
+new TradingView.widget({"symbol":"NASDAQ:TSLA","interval":"1D","height":180,"theme":"dark","style":"1","locale":"zh_CN","chart_only":true,"backgroundColor":"rgba(20,20,30,1)","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"container_id":"tv-tsla"});
+</script>
+</div>
+</div>
+<div class="kline-item">
+<div class="kline-label">SMH — Semiconductor ETF</div>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget" id="tv-smh"></div>
+<script type="text/javascript">
+new TradingView.widget({"symbol":"NASDAQ:SMH","interval":"1D","height":180,"theme":"dark","style":"1","locale":"zh_CN","chart_only":true,"backgroundColor":"rgba(20,20,30,1)","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"container_id":"tv-smh"});
+</script>
+</div>
+</div>
+<div class="kline-item">
+<div class="kline-label">SPY — S&P 500</div>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget" id="tv-spy"></div>
+<script type="text/javascript">
+new TradingView.widget({"symbol":"AMEX:SPY","interval":"1D","height":180,"theme":"dark","style":"1","locale":"zh_CN","chart_only":true,"backgroundColor":"rgba(20,20,30,1)","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"container_id":"tv-spy"});
+</script>
+</div>
+</div>
+<div class="kline-item">
+<div class="kline-label">000001 — 上证指数</div>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget" id="tv-sse"></div>
+<script type="text/javascript">
+new TradingView.widget({"symbol":"SSE:000001","interval":"1D","height":180,"theme":"dark","style":"1","locale":"zh_CN","chart_only":true,"backgroundColor":"rgba(20,20,30,1)","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"container_id":"tv-sse"});
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 板块3: 巴萨 -->
+<h2>⚽ FC Barcelona</h2>
+
+<div class="card">
+<h3><span class="zh">🏅 欧冠1/4决赛首回合 — 10人巴萨0-2负马竞 😔</span><span class="en">🏅 UCL QF 1st Leg — 10-man Barça 0-2 Atlético 😔</span></h3>
+<p><span class="zh">4月8日晚，欧冠1/4决赛首回合在Spotify Camp Nou上演。上半场Pau Cubarsí被红牌罚下成为转折点，Julián Álvarez任意球破门，Alexander Sørloth锁定胜局。巴萨0-2负于马竞，次回合4月15日将在马德里大都会球场上演。主帅Flick已制定逆转计划，球队面临背水一战。</span><span class="en">April 8, UCL QF 1st leg at Spotify Camp Nou. Pau Cubarsí's first-half red card was the turning point. Julián Álvarez scored from a free kick and Alexander Sørloth sealed the win. Barça lost 0-2 to Atlético. The 2nd leg is April 15 at the Metropolitano. Coach Flick has drawn up a comeback plan.</span></p>
+<p class="src">来源：BBC Sport, Barca Blaugranes, The Guardian</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">📋 周末联赛对阵西班牙人，Flick准备多位置调整</span><span class="en">📋 Weekend La Liga vs Espanyol, Flick Prepares Changes</span></h3>
+<p><span class="zh">本周末巴萨将在西甲迎战同城对手西班牙人。由于Cubarsí红牌停赛、Raphinha因腿筋伤势缺阵约5周，Flick准备在多个位置进行调整。好消息是一位巴萨"超级中场"已接近获得医疗许可，可能在对阵西班牙人时复出。此外，一位"天才小将"正在稳步恢复，有望赶上欧冠次回合。</span><span class="en">Barça face city rivals Espanyol in La Liga this weekend. With Cubarsí suspended and Raphinha out ~5 weeks with a hamstring injury, Flick is preparing multiple positional changes. Good news: a "superstar midfielder" is nearing medical clearance for the Espanyol clash, and a "wonderkid" is making steady progress and could return for the UCL 2nd leg.</span></p>
+<p class="src">来源：Barca Universal</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">📊 西甲积分榜（第30轮后）</span><span class="en">📊 La Liga Standings (After MD30)</span></h3>
+<p><span class="zh">1. 巴塞罗那 76分（30场） 2. 皇家马德里 69分（30场） 3. 比利亚雷亚尔 58分（29场） 4. 马德里竞技 57分（30场）。巴萨仍以7分优势领跑，剩余8轮比赛，联赛冠军主动权在握。</span><span class="en">1. Barcelona 76pts (30 games) 2. Real Madrid 69pts (30) 3. Villarreal 58pts (29) 4. Atlético Madrid 57pts (30). Barça lead by 7 points with 8 rounds remaining.</span></p>
+</div>
+
+<div class="card">
+<h3><span class="zh">🔄 转会动态</span><span class="en">🔄 Transfer News</span></h3>
+<p><span class="zh">• 贝尔纳多·席尔瓦 — 曼城中场，合同6月到期，仍是巴萨首要引援目标<br>• 马竞体育总监与巴萨中场新星秘密会谈，引发关注<br>• 一名巴萨前锋感到未获充分重视，准备探索转会</span><span class="en">• Bernardo Silva — Man City midfielder, contract expiring in June, remains Barça's top target<br>• Atlético sporting director held secret talks with Barça midfield gem<br>• A Barça forward feeling underappreciated, ready to explore a move</span></p>
+<p class="src">来源：Barca Universal, MSN</p>
+</div>
+
+<!-- 板块4: 体育 -->
+<h2>🏟️ <span class="zh">体育赛事</span><span class="en">Sports Events</span></h2>
+
+<div class="sport-card">
+<h3><span class="zh">🏀 波特兰开拓者 — 进入附加赛！第9种子对阵勇士</span><span class="en">🏀 Portland Trail Blazers — Play-In Bound! 9th Seed vs Warriors</span></h3>
+<p><span class="zh">开拓者以40-40结束常规赛，锁定西部第9种子，将在SoFi附加赛中主场对阵金州勇士（第10种子）。这是开拓者5年来首次进入季后赛争夺。新老板Tom Dundon已经开始推动球队从重建模式转向赢球模式。Deni Avdija在对马刺的比赛中砍下29分6篮板，表现出色。附加赛4月14日开打。</span><span class="en">The Blazers finished the regular season 40-40, clinching the 9th seed in the West. They'll face the Golden State Warriors (10th seed) in the SoFi Play-In Tournament at home. This is Portland's first postseason appearance in 5 years. New owner Tom Dundon has already begun shifting the team from rebuild mode to winning mode. Deni Avdija dropped 29 pts & 6 reb vs the Spurs. Play-In starts April 14.</span></p>
+<p class="src">来源：NBA.com, OregonLive, OPB</p>
+</div>
+
+<div class="sport-card">
+<h3><span class="zh">🏀 NBA季后赛对阵出炉 — 雷霆锁定联盟第一</span><span class="en">🏀 NBA Playoff Bracket Set — Thunder Clinch Best Record</span></h3>
+<p><span class="zh">俄克拉荷马城雷霆锁定联盟最佳战绩（约65-17），成为西部第一种子。西部：雷霆vs附加赛胜者、马刺vs附加赛胜者、掘金vs森林狼、湖人vs火箭。东部：活塞（最大黑马）vs附加赛胜者、凯尔特人vs附加赛胜者、尼克斯vs老鹰、骑士vs猛龙。附加赛4月14-17日，季后赛首轮4月18日开打，总决赛G1为6月3日。</span><span class="en">OKC Thunder clinched the NBA's best record (~65-17) as the West #1 seed. West: Thunder vs Play-In winner, Spurs vs Play-In winner, Nuggets vs Timberwolves, Lakers vs Rockets. East: Pistons (biggest Cinderella) vs Play-In winner, Celtics vs Play-In winner, Knicks vs Hawks, Cavaliers vs Raptors. Play-In: Apr 14-17. Playoffs start Apr 18. Finals Game 1: June 3.</span></p>
+<p class="src">来源：NBA.com, CBS Sports, Yahoo Sports</p>
+</div>
+
+<div class="sport-card">
+<h3><span class="zh">🌍 FIFA 2026世界杯 — 48支球队全部确定</span><span class="en">🌍 FIFA 2026 World Cup — All 48 Teams Confirmed</span></h3>
+<p><span class="zh">伊拉克在洲际附加赛中击败玻利维亚，成为第48支晋级2026年世界杯的球队。欧洲附加赛中捷克、波黑、土耳其和瑞典晋级。本届世界杯将在美国、加拿大、墨西哥联合举办，史上首次扩军至48队。部分球迷投诉门票"货不对板"，FIFA表示正在处理。</span><span class="en">Iraq defeated Bolivia in the intercontinental playoff to become the 48th and final team to qualify for the 2026 World Cup. Czech Republic, Bosnia, Turkey, and Sweden advanced from European playoffs. The tournament will be hosted across the US, Canada, and Mexico — the first-ever 48-team World Cup.</span></p>
+<p class="src">来源：BBC Sport, The Guardian</p>
+</div>
+
+<!-- 板块5: Portland -->
+<h2>🌲 Portland <span class="zh">本地</span><span class="en">Local</span></h2>
+
+<div class="card">
+<h3><span class="zh">🌤️ 今日天气 — 凉爽多云</span><span class="en">🌤️ Today's Weather — Cool & Partly Cloudy</span></h3>
+<p><span class="zh">今日波特兰天气多云转晴，当前温度53°F（12°C），湿度61%。较前几日有所降温，周末可能转为阴雨天气。建议外出备好薄外套。</span><span class="en">Portland today: partly cloudy, currently 53°F (12°C), humidity 61%. Cooler than recent days. Weekend may turn rainy — bring a light jacket if heading out.</span></p>
+<p class="src">来源：wttr.in</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">🚗 车辆坠入Willamette河，最多4人涉事</span><span class="en">🚗 Car Crashes into Willamette River, Up to 4 People Involved</span></h3>
+<p><span class="zh">据KGW报道，一辆汽车坠入Willamette河，据称车内可能有多达4人。搜救行动正在进行中。事故原因尚在调查中。</span><span class="en">According to KGW, a car crashed into the Willamette River with potentially up to 4 people inside. Rescue operations are underway. The cause is under investigation.</span></p>
+<p class="src">来源：KGW News (2026-04-09)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">🔫 Portland警方打击非法飙车活动，逮捕多人缴获枪支</span><span class="en">🔫 PPB Disrupts Illegal Street Takeovers, Makes Arrests</span></h3>
+<p><span class="zh">Portland警察局在4月4日针对North Portland多处非法飙车活动进行打击，逮捕多人并缴获枪支和涉事车辆。此类非法活动近期在Portland有所增加，警方表示将持续加大执法力度。</span><span class="en">Portland Police Bureau cracked down on multiple illegal street takeover events in North Portland on April 4, making arrests and seizing firearms and vehicles. Such illegal activities have increased recently, and police say they will continue intensified enforcement.</span></p>
+<p class="src">来源：Portland.gov (2026-04-06)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">🏛️ America's首个$10亿气候基金引发Portland支出争论</span><span class="en">🏛️ America's First $1B Climate Fund Sparks Portland Spending Debate</span></h3>
+<p><span class="zh">PBS NewsHour报道，Portland 2018年 voters 批准的全国首个$10亿气候基金正在引发激烈的支出争论。如何分配这笔巨额资金用于气候行动成为市议会的焦点议题。这一案例被视为全美其他城市气候投资的标杆。</span><span class="en">PBS NewsHour reports that Portland's first-in-the-nation $1B climate fund, approved by voters in 2018, is sparking heated spending debates. How to allocate this massive sum for climate action has become a focal point for City Council. This case is seen as a benchmark for climate investment in other US cities.</span></p>
+<p class="src">来源：PBS NewsHour (2026-04-09)</p>
+</div>
+
+<!-- 板块6: AI -->
+<h2>🤖 <span class="zh">AI 工具/产品动态</span><span class="en">AI Tools & Products</span></h2>
+
+<div class="card">
+<h3><span class="zh">1. OpenAI确认大规模融资，ChatGPT变身超级应用</span><span class="en">1. OpenAI Confirms Massive Funding Round, ChatGPT Super App</span></h3>
+<p><span class="zh">据MarketingProfs报道，OpenAI确认了新一轮大规模融资，并推出了ChatGPT超级应用概念——将搜索、购物、日程管理等功能整合到一个AI驱动的平台中。然而Fortune此前报道OpenAI内部人事动荡可能影响IPO前景，多位高管离职，公司战略方向存在分歧。</span><span class="en">OpenAI confirmed a new massive funding round and unveiled a ChatGPT super app concept — integrating search, shopping, scheduling and more into one AI-driven platform. However, Fortune reports internal turmoil with executive departures that could impact the upcoming IPO.</span></p>
+<p class="src">来源：MarketingProfs, Fortune (2026-04-03)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">2. AWS发布自主Agent服务，华为推出950PR芯片</span><span class="en">2. AWS Launches Autonomous Agents, Huawei Unveils 950PR Chip</span></h3>
+<p><span class="zh">AWS发布了自主Agent服务，使企业能够部署可自动执行多步骤任务的AI Agent。与此同时，华为推出了950PR AI芯片，在中国市场进一步扩展AI计算能力。这两项发布标志着AI从工具向自主Agent的转变加速。</span><span class="en">AWS launched an autonomous agent service enabling enterprises to deploy AI agents that automatically execute multi-step tasks. Meanwhile, Huawei unveiled the 950PR AI chip, expanding AI computing capabilities in China. Both launches mark AI's accelerating shift from tools to autonomous agents.</span></p>
+<p class="src">来源：mean.ceo Blog (2026-04)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">3. AI开发者难以衡量AI工具的实际改进效果</span><span class="en">3. Developers Struggle to Measure Real AI Tool Improvements</span></h3>
+<p><span class="zh">据4月8日的最新报道，尽管AI工具快速发展，开发者却发现很难衡量这些工具带来的真正改进。报告指出，开发者经常质疑AI辅助编码工具是否真正提升了生产力，还是只是增加了噪音。这一发现引发了对AI工具实际价值的行业反思。</span><span class="en">Despite rapid AI tool development, developers struggle to measure genuine improvements, per an April 8 report. Developers often question whether AI-assisted coding tools truly boost productivity or just add noise. This has sparked industry-wide reflection on the actual value of AI tools.</span></p>
+<p class="src">来源：coaio.com (2026-04-08)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">4. Meta AI重大升级，Applied AI Engineering部门成立</span><span class="en">4. Meta AI Major Upgrade, New Applied AI Engineering Unit</span></h3>
+<p><span class="zh">Meta AI进行了重大升级，重组了新的Applied AI Engineering部门，由Maher Saba领导。此前发布的Muse Spark模型已集成到Meta AI助手中，未来将逐步进入Facebook、Instagram和WhatsApp。Meta正在加速将AI能力嵌入其所有核心产品。</span><span class="en">Meta AI received a major upgrade with a new Applied AI Engineering unit led by Maher Saba. The previously released Muse Spark model is now integrated into Meta AI assistant and will gradually roll out to Facebook, Instagram, and WhatsApp. Meta is accelerating embedding AI into all core products.</span></p>
+<p class="src">来源：Instagram Official (2026-04)</p>
+</div>
+
+<div class="card">
+<h3><span class="zh">5. AI安全与监管：2026年政策全面收紧</span><span class="en">5. AI Safety & Regulation: Policy Tightens Across the Board</span></h3>
+<p><span class="zh">据Alston & Bird的AI季报，2026年AI面临新的联邦和州级法规、全球隐私格局变化、诉讼风险增加以及网络安全压力。AI安全不再是可选项——各科技巨头正在联合制定标准。此前Apple、Google、Microsoft、Amazon等12家公司宣布了联合网络安全计划。</span><span class="en">Per Alston & Bird's AI Quarterly, 2026 brings new federal and state rules, global privacy shifts, litigation exposure, and cybersecurity pressure. AI safety is no longer optional — tech giants are jointly setting standards. Apple, Google, Microsoft, Amazon and 8 others announced a joint cybersecurity initiative.</span></p>
+<p class="src">来源：Alston & Bird AI Quarterly (2026-04)</p>
+</div>
+
+<footer>
+<p><a href="index.html">← All Reports</a> | <span class="zh">由 Sky AI 生成</span><span class="en">Generated by Sky AI</span></p>
+</footer>
+
+<script>
+function switchLang(lang){
+document.querySelectorAll('.zh').forEach(el=>el.style.display=lang==='zh'?'':'none');
+document.querySelectorAll('.en').forEach(el=>el.style.display=lang==='en'?'':'none');
+document.getElementById('btn-zh').style.background=lang==='zh'?'#555':'#333';
+document.getElementById('btn-zh').style.color=lang==='zh'?'#fff':'#aaa';
+document.getElementById('btn-en').style.background=lang==='en'?'#555':'#222';
+document.getElementById('btn-en').style.color=lang==='en'?'#fff':'#aaa';
+}
+</script>
+</body>
+</html>

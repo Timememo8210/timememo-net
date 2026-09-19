@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚗 换车决策分析 — Sky Portal</title>
+<style>
+:root{--bg:#0a0a0f;--card:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);--text:#e0e0e8;--dim:#6b6b80;--accent:#6c8aff;--green:#4ade80;--orange:#fb923c;--red:#f87171;--cyan:#22d3ee}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:20px}
+body.lang-zh .en{display:none!important}body.lang-en .zh{display:none!important}
+.lang-toggle{position:fixed;top:16px;right:16px;z-index:99;display:flex;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:100px;overflow:hidden}
+.lang-toggle button{padding:6px 14px;border:none;background:transparent;color:var(--dim);font-size:.78rem;cursor:pointer;transition:.25s}
+.lang-toggle button.active{background:var(--accent);color:#fff}
+.container{max-width:900px;margin:0 auto}
+h1{font-size:2em;text-align:center;margin:30px 0 10px}
+h2{font-size:1.3em;margin:36px 0 14px;color:var(--accent);display:flex;align-items:center;gap:8px}
+h3{font-size:1.1em;margin:20px 0 10px;color:var(--orange)}
+.subtitle{text-align:center;color:var(--dim);margin-bottom:30px;font-size:.95em}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em}
+th{background:rgba(108,138,255,0.1);color:var(--accent);text-align:left;padding:10px 12px;font-weight:600;border-bottom:2px solid var(--border)}
+td{padding:9px 12px;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:none}
+.highlight{background:rgba(74,222,128,0.08)}
+.best{color:var(--green);font-weight:700}
+.worst{color:var(--red)}
+.tag{display:inline-block;padding:2px 10px;border-radius:8px;font-size:.78em;font-weight:500}
+.tag-green{background:rgba(74,222,128,0.15);color:var(--green)}
+.tag-orange{background:rgba(251,146,60,0.15);color:var(--orange)}
+.tag-red{background:rgba(248,113,113,0.15);color:var(--red)}
+.tag-cyan{background:rgba(34,211,238,0.15);color:var(--cyan)}
+.verdict{background:linear-gradient(135deg,rgba(74,222,128,0.1),rgba(74,222,128,0.03));border:1px solid rgba(74,222,128,0.25);border-radius:16px;padding:28px;margin:24px 0}
+.verdict h3{color:var(--green);margin:0 0 12px}
+.note{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:12px;padding:16px;margin:16px 0;font-size:.9em}
+.note strong{color:var(--orange)}
+ul{padding-left:20px;margin:8px 0}
+li{margin:4px 0}
+.footer{text-align:center;padding:30px 0;color:var(--dim);font-size:.85em;border-top:1px solid var(--border);margin-top:40px}
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="lang-toggle">
+<button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+<button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="container">
+<h1>🚗 <span class="zh">换车决策分析</span><span class="en">Car Decision Analysis</span></h1>
+<p class="subtitle"><span class="zh">卖掉 Honda Odyssey → Lease / Finance / Turo 租车？</span><span class="en">Sell Honda Odyssey → Lease / Finance / Turo Rental?</span></p>
+
+<!-- 当前状况 -->
+<h2>📋 <span class="zh">当前资产状况</span><span class="en">Current Asset Status</span></h2>
+<div class="card">
+<table>
+<tr><th><span class="zh">项目</span><span class="en">Item</span></th><th><span class="zh">详情</span><span class="en">Details</span></th></tr>
+<tr><td><span class="zh">车辆</span><span class="en">Vehicle</span></td><td>2015 Honda Odyssey (白)</td></tr>
+<tr><td><span class="zh">里程</span><span class="en">Mileage</span></td><td>~90,000 miles</td></tr>
+<tr><td><span class="zh">预估残值</span><span class="en">Estimated Value</span></td><td><strong>$5,700 - $8,500</strong> <span class="zh">(KBB/Edmunds)</span><span class="en">(KBB/Edmunds)</span></td></tr>
+<tr><td><span class="zh">年保险费</span><span class="en">Annual Insurance</span></td><td>~$900-1,100</td></tr>
+<tr><td><span class="zh">年注册费</span><span class="en">Annual Registration</span></td><td>~$130-150</td></tr>
+<tr><td><span class="zh">年维护保养</span><span class="en">Annual Maintenance</span></td><td>~$500-800 <span class="zh">(10年老车)</span><span class="en">(10yr old car)</span></td></tr>
+<tr><td><span class="zh">年持有总成本</span><span class="en">Annual Holding Cost</span></td><td><strong style="color:var(--red)">~$1,600-2,100</strong></td></tr>
+</table>
+<div class="note">
+<strong>💡 <span class="zh">沉没成本分析</span><span class="en">Opportunity Cost</span>：</strong><br>
+<span class="zh">如果卖掉Odyssey拿到$7,000，投入半导体/AI基金（年化30%）：</span>
+<span class="en">Sell Odyssey for $7,000, invest in semiconductor/AI fund (30% annual return):</span>
+<ul>
+<li><span class="zh">第1年收益：$2,100</span><span class="en">Year 1 gain: $2,100</span></li>
+<li><span class="zh">第3年复利：$3,880</span><span class="en">Year 3 compound: $3,880</span></li>
+<li><span class="zh">而且不花钱养车，实际省得更多</span><span class="en">Plus no car holding costs = even more savings</span></li>
+</ul>
+</div>
+</div>
+
+<!-- 三种方案 -->
+<h2>⚖️ <span class="zh">三种方案对比</span><span class="en">Three Options Compared</span></h2>
+
+<h3><span class="zh">方案A：Lease Model 3 Premium AWD（36个月）</span><span class="en">Option A: Lease Model 3 Premium AWD (36 months)</span></h3>
+<div class="card">
+<div class="note" style="margin-top:0;margin-bottom:12px"><strong>🔄 4月4日降价：</strong> <span class="zh">Premium AWD $449/月（注：官网起价$299是RWD）</span><span class="en">Premium AWD $449/mo (note: $299 starting price is RWD)</span></div>
+<table>
+<tr><th><span class="zh">费用项</span><span class="en">Cost Item</span></th><th><span class="zh">月费</span><span class="en">Monthly</span></th><th><span class="zh">年费</span><span class="en">Annual</span></th><th><span class="zh">3年总计</span><span class="en">3yr Total</span></th></tr>
+<tr><td><span class="zh">月供</span><span class="en">Lease Payment</span></td><td>$449</td><td>$5,388</td><td>$16,164</td></tr>
+<tr><td><span class="zh">交车时付款（含首付$3,000+首月$449+手续费$695）</span><span class="en">Due at Signing (down $3k + first mo $449 + acq fee $695)</span></td><td>—</td><td>—</td><td>$4,144</td></tr>
+<tr><td><span class="zh">保险（全年，基于Model X实际$2,000+估算）</span><span class="en">Insurance (year-round, based on Model X actual $2,000+)</span></td><td>$150</td><td>$1,800</td><td>$5,400</td></tr>
+<tr><td><span class="zh">FSD 订阅（仅用4个月/年）</span><span class="en">FSD Subscription (4 mo/yr only)</span></td><td>$99</td><td>$396</td><td>$1,188</td></tr>
+<tr><td><span class="zh">注册费</span><span class="en">Registration</span></td><td>—</td><td>$145</td><td>$435</td></tr>
+<tr><td><span class="zh">电费（仅用车4个月）</span><span class="en">Electricity (4 mo/yr only)</span></td><td>$40</td><td>$160</td><td>$480</td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年总现金流出</span><span class="en">3yr Total Cash Out</span></strong></td><td></td><td></td><td><strong>$27,661</strong></td></tr>
+<tr><td><span class="zh">3年后卖车拿回</span><span class="en">Cash Back After 3yr</span></td><td colspan="3">$0 <span class="zh">（车还给Tesla）</span><span class="en">(car returned to Tesla)</span></td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年净成本</span><span class="en">3yr Net Cost</span></strong></td><td></td><td></td><td><strong>$27,661</strong></td></tr>
+<tr><td><span class="zh">3年后资产</span><span class="en">Asset After 3yr</span></td><td colspan="3"><span class="zh">车还回去，无资产</span><span class="en">Car returned, no asset</span></td></tr>
+<tr><td><span class="zh">MSRP</span><span class="en">MSRP</span></td><td colspan="3">$47,490 <span class="zh">（含destination fee）</span><span class="en">(incl. destination)</span></td></tr>
+<tr><td><span class="zh">里程限制</span><span class="en">Mileage Limit</span></td><td colspan="3">10,000 mi/年 <span class="zh">（超里程$0.25/mi）</span><span class="en">(overage $0.25/mi)</span></td></tr>
+</table>
+<span class="tag tag-orange">⚠️ <span class="zh">FSD $99/月按需租（送30天试用），3年后车还给Tesla</span><span class="en">FSD $99/mo on-demand (30-day trial), car returned to Tesla after 3yr</span></span>
+</div>
+
+<h3><span class="zh">方案B：Finance Model 3 Premium AWD（0.99% APR，72个月）+ 3年后卖车</span><span class="en">Option B: Finance Model 3 Premium AWD (0.99% APR, 72 mo) + Sell After 3yr</span></h3>
+<div class="card">
+<div class="note" style="margin-top:0;margin-bottom:12px"><strong>⚠️ 利率注意：</strong> <span class="zh">Premium AWD是0.99% APR，不是0%！只有RWD才是0%</span><span class="en">Premium AWD is 0.99% APR, not 0%! Only RWD gets 0%</span></div>
+<table>
+<tr><th><span class="zh">费用项</span><span class="en">Cost Item</span></th><th><span class="zh">月费</span><span class="en">Monthly</span></th><th><span class="zh">年费</span><span class="en">Annual</span></th><th><span class="zh">3年总计</span><span class="en">3yr Total</span></th></tr>
+<tr><td><span class="zh">月供（0.99%利息）</span><span class="en">Payment (0.99% APR)</span></td><td>$646</td><td>$7,752</td><td>$23,256</td></tr>
+<tr><td><span class="zh">首付（5%）</span><span class="en">Down Payment (5%)</span></td><td>—</td><td>—</td><td>$2,374</td></tr>
+<tr><td><span class="zh">保险（全年）</span><span class="en">Insurance (year-round)</span></td><td>$150</td><td>$1,800</td><td>$5,400</td></tr>
+<tr><td><span class="zh">FSD 订阅（仅用4个月/年）</span><span class="en">FSD Subscription (4 mo/yr only)</span></td><td>$99</td><td>$396</td><td>$1,188</td></tr>
+<tr><td><span class="zh">注册费</span><span class="en">Registration</span></td><td>—</td><td>$145</td><td>$435</td></tr>
+<tr><td><span class="zh">电费（仅用车4个月）</span><span class="en">Electricity (4 mo/yr only)</span></td><td>$40</td><td>$160</td><td>$480</td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年总现金流出</span><span class="en">3yr Total Cash Out</span></strong></td><td></td><td></td><td><strong>$33,133</strong></td></tr>
+</table>
+
+<div style="margin-top:16px;padding:12px;background:rgba(34,211,238,0.06);border-radius:10px;border:1px solid rgba(34,211,238,0.2)">
+<strong style="color:var(--cyan)">🔄 <span class="zh">3年后卖车算账</span><span class="en">3yr Later: Sell The Car</span></strong>
+<table>
+<tr><td><span class="zh">车卖价（60%残值）</span><span class="en">Car Sale Price (60% residual)</span></td><td colspan="2"><strong>$28,494</strong></td></tr>
+<tr><td><span class="zh">剩余贷款（还了36/72期）</span><span class="en">Remaining Loan (36/72 paid)</span></td><td colspan="2"><strong style="color:var(--red)">-$22,893</strong></td></tr>
+<tr><td><span class="zh">口袋拿回现金</span><span class="en">Cash In Your Pocket</span></td><td colspan="2"><strong style="color:var(--green)">$5,601</strong></td></tr>
+</table>
+</div>
+
+<table style="margin-top:12px">
+<tr class="highlight"><td><strong><span class="zh">总现金流出 $33,133 - 卖车拿回 $5,601 = 3年净成本</span><span class="en">Cash Out $33,133 - Cash Back $5,601 = 3yr Net Cost</span></strong></td><td></td><td></td><td><strong>$27,532</strong></td></tr>
+</table>
+<span class="tag tag-orange">⚠️ <span class="zh">0.99%利率比0%贵一些，但3年后卖车还能拿回$5,601</span><span class="en">0.99% APR costs more, but still get $5,601 back selling after 3yr</span></span>
+</div>
+
+<h3><span class="zh">方案C：卖 Odyssey + Turo 按需租车</span><span class="en">Option C: Sell Odyssey + Turo On-Demand</span></h3>
+<div class="card">
+<table>
+<tr><th><span class="zh">费用项</span><span class="en">Cost Item</span></th><th><span class="zh">单次</span><span class="en">Per Trip</span></th><th><span class="zh">年费（3个月）</span><span class="en">Annual (3mo)</span></th><th><span class="zh">3年总计</span><span class="en">3yr Total</span></th></tr>
+<tr><td><span class="zh">Turo 租车（含FSD+保险）</span><span class="en">Turo Rental (FSD+ins)</span></td><td>~$700/2周</td><td>$4,200</td><td>$12,600</td></tr>
+<tr><td><span class="zh">偶尔临时租车</span><span class="en">Occasional rentals</span></td><td>~$80/天</td><td>$400</td><td>$1,200</td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年租车总支出</span><span class="en">3yr Rental Total</span></strong></td><td></td><td></td><td><strong style="color:var(--green)">$13,800</strong>
+</td></tr>
+<tr><td><span class="zh">保险</span><span class="en">Insurance</span></td><td colspan="3">$0 <span class="zh">（Turo自带）</span><span class="en">(Turo included)</span></td></tr>
+<tr><td><span class="zh">注册费</span><span class="en">Registration</span></td><td colspan="3">$0</td></tr>
+<tr><td><span class="zh">折旧</span><span class="en">Depreciation</span></td><td colspan="3">$0</td></tr>
+<tr><td><span class="zh">月供</span><span class="en">Monthly Payment</span></td><td colspan="3">$0 <span class="zh">（不用车时零成本）</span><span class="en">(zero cost when not using)</span></td></tr>
+</table>
+
+<!-- 投资收益已按用户要求删除 -->
+
+<span class="tag tag-green">✅ <span class="zh">优势：不用车时零成本，永远开最新款，无折旧无月供</span><span class="en">Pros: Zero cost when parked, always latest model, no depreciation</span></span>
+</div>
+
+<!-- 方案D：保持现状 -->
+<h3><span class="zh">方案D：保持现状 — 留着 Odyssey</span><span class="en">Option D: Keep the Odyssey</span></h3>
+<div class="card">
+<table>
+<tr><th><span class="zh">费用项</span><span class="en">Cost Item</span></th><th><span class="zh">年费</span><span class="en">Annual</span></th><th><span class="zh">3年总计</span><span class="en">3yr Total</span></th></tr>
+<tr><td><span class="zh">保险（全保）</span><span class="en">Insurance (Full)</span></td><td>$1,000</td><td>$3,000</td></tr>
+<tr><td><span class="zh">注册费</span><span class="en">Registration</span></td><td>$140</td><td>$420</td></tr>
+<tr><td><span class="zh">保养维修（10年旧车）</span><span class="en">Maintenance (10yr old)</span></td><td>$800-1,200</td><td>$3,000</td></tr>
+<tr><td><span class="zh">油费（偶尔用）</span><span class="en">Gas (occasional)</span></td><td>$600</td><td>$1,800</td></tr>
+<tr><td><span class="zh">折旧（继续贬值）</span><span class="en">Further Depreciation</span></td><td>~$1,500</td><td>~$4,500</td></tr>
+<tr><td><span class="zh">资金占用成本（$7,000不投资的损失）</span><span class="en">Opportunity Cost ($7k not invested)</span></td><td>~$1,190</td><td>~$3,570</td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年总成本（含机会成本）</span><span class="en">3yr Total Cost (incl. opportunity)</span></strong></td><td></td><td><strong>$16,290</strong></td></tr>
+<tr><td><span class="zh">3年后车值</span><span class="en">Car Value After 3yr</span></td><td colspan="2"><strong style="color:var(--dim)">~$2,000-3,000</strong> <span class="zh">（继续贬值）</span><span class="en">(still depreciating)</span></td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年净成本</span><span class="en">3yr Net Cost</span></strong></td><td></td><td><strong>~$13,290-14,290</strong></td></tr>
+</table>
+
+<div style="margin-top:12px">
+<p><strong style="color:var(--green)"><span class="zh">✅ 优点：</span><span class="en">✅ Pros:</span></strong></p>
+<ul>
+<li><span class="zh">零额外支出，不用做任何决定</span><span class="en">No extra spending, no decisions needed</span></li>
+<li><span class="zh">没有月供压力</span><span class="en">No monthly payment pressure</span></li>
+<li><span class="zh">偶尔用车时方便（不用预约租车）</span><span class="en">Convenient for occasional use (no booking needed)</span></li>
+</ul>
+<p style="margin-top:10px"><strong style="color:var(--red)"><span class="zh">❌ 缺点：</span><span class="en">❌ Cons:</span></strong></p>
+<ul>
+<li><span class="zh">🚫 <strong>没有自动驾驶</strong> — 这是最大的痛点，你想要 FSD</span><span class="en">🚫 <strong>No Autopilot/FSD</strong> — the biggest pain point</span></li>
+<li><span class="zh">🔧 10年旧车，保养频率增加，随时可能出大问题</span><span class="en">🔧 10yr old, maintenance frequency increasing, major issues possible</span></li>
+<li><span class="zh">📉 车子继续贬值，$7,000过3年可能只值$2,000</span><span class="en">📉 Keeps depreciating, $7,000 may only be worth $2,000 in 3 years</span></li>
+<li><span class="zh">💰 $7,000被锁在车里，不能投资赚钱</span><span class="en">💰 $7,000 locked in a car, can't invest for returns</span></li>
+<li><span class="zh">⛽ 油费比电车贵</span><span class="en">⛽ Gas costs more than electricity</span></li>
+</ul>
+</div>
+<span class="tag tag-orange">⚠️ <span class="zh">核心问题：没有自动驾驶，这个车你开得越来越不爽</span><span class="en">Core issue: no FSD, you'll enjoy driving less and less</span></span>
+</div>
+
+<h3><span class="zh">方案E：Lease Model Y AWD（36个月）🌧️</span><span class="en">Option E: Lease Model Y AWD (36 months) 🌧️</span></h3>
+<div class="card">
+<div class="note" style="margin-top:0;margin-bottom:12px"><strong>🌧️ AWD全轮驱动：</strong> <span class="zh">波特兰雨多AWD更安全</span><span class="en">AWD safer in Portland rain</span></div>
+<table>
+<tr><th><span class="zh">费用项</span><span class="en">Cost Item</span></th><th><span class="zh">月费</span><span class="en">Monthly</span></th><th><span class="zh">年费</span><span class="en">Annual</span></th><th><span class="zh">3年总计</span><span class="en">3yr Total</span></th></tr>
+<tr><td><span class="zh">月供</span><span class="en">Lease Payment</span></td><td>$499</td><td>$5,988</td><td>$17,964</td></tr>
+<tr><td><span class="zh">交车时付款（含首付$3,000+首月$499+手续费$695）</span><span class="en">Due at Signing (down $3k + first mo $499 + acq fee $695)</span></td><td>—</td><td>—</td><td>$4,194</td></tr>
+<tr><td><span class="zh">保险（全年，基于Model X实际$2,000+估算）</span><span class="en">Insurance (year-round, based on Model X actual $2,000+)</span></td><td>$167</td><td>$2,000</td><td>$6,000</td></tr>
+<tr><td><span class="zh">FSD 订阅（仅用4个月/年）</span><span class="en">FSD Subscription (4 mo/yr only)</span></td><td>$99</td><td>$396</td><td>$1,188</td></tr>
+<tr><td><span class="zh">注册费</span><span class="en">Registration</span></td><td>—</td><td>$145</td><td>$435</td></tr>
+<tr><td><span class="zh">电费（仅用车4个月）</span><span class="en">Electricity (4 mo/yr only)</span></td><td>$45</td><td>$180</td><td>$540</td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年总现金流出</span><span class="en">3yr Total Cash Out</span></strong></td><td></td><td></td><td><strong>$30,321</strong></td></tr>
+<tr><td><span class="zh">3年后卖车拿回</span><span class="en">Cash Back After 3yr</span></td><td colspan="3">$0 <span class="zh">（车还给Tesla）</span><span class="en">(car returned to Tesla)</span></td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年净成本</span><span class="en">3yr Net Cost</span></strong></td><td></td><td></td><td><strong>$30,321</strong></td></tr>
+<tr><td><span class="zh">MSRP</span><span class="en">MSRP</span></td><td colspan="3">$44,630 <span class="zh">（含destination fee）</span><span class="en">(incl. destination)</span></td></tr>
+<tr><td><span class="zh">里程限制</span><span class="en">Mileage Limit</span></td><td colspan="3">10,000 mi/年 <span class="zh">（超里程$0.25/mi）</span><span class="en">(overage $0.25/mi)</span></td></tr>
+</table>
+<span class="tag tag-cyan">🌧️ <span class="zh">SUV + AWD，但3年后车还给Tesla，一分钱拿不回</span><span class="en">SUV + AWD, but car returned to Tesla after 3yr, zero equity</span></span> (30-day trial), paying lease+insurance even when parked</span></span>
+</div>
+
+<h3><span class="zh">方案F：Finance Model Y AWD（0% APR，72个月）+ 3年后卖车 🌧️</span><span class="en">Option F: Finance Model Y AWD (0% APR, 72 mo) + Sell After 3yr 🌧️</span></h3>
+<div class="card">
+<div class="note" style="margin-top:0;margin-bottom:12px"><strong>✨ 0% APR + 3年后卖车拿回现金：</strong> <span class="zh">纯现金流计算，3年后卖车还贷款，口袋拿回$5,579</span><span class="en">Pure cash flow: sell after 3yr, pay off loan, pocket $5,579</span></div>
+<table>
+<tr><th><span class="zh">费用项</span><span class="en">Cost Item</span></th><th><span class="zh">月费</span><span class="en">Monthly</span></th><th><span class="zh">年费</span><span class="en">Annual</span></th><th><span class="zh">3年总计</span><span class="en">3yr Total</span></th></tr>
+<tr><td><span class="zh">月供（0%利息）</span><span class="en">Payment (0% APR)</span></td><td>$589</td><td>$7,066</td><td>$21,199</td></tr>
+<tr><td><span class="zh">首付（5%）</span><span class="en">Down Payment (5%)</span></td><td>—</td><td>—</td><td>$2,232</td></tr>
+<tr><td><span class="zh">保险（全年）</span><span class="en">Insurance (year-round)</span></td><td>$167</td><td>$2,000</td><td>$6,000</td></tr>
+<tr><td><span class="zh">FSD 订阅（仅用4个月/年）</span><span class="en">FSD Subscription (4 mo/yr only)</span></td><td>$99</td><td>$396</td><td>$1,188</td></tr>
+<tr><td><span class="zh">注册费</span><span class="en">Registration</span></td><td>—</td><td>$145</td><td>$435</td></tr>
+<tr><td><span class="zh">电费（仅用车4个月）</span><span class="en">Electricity (4 mo/yr only)</span></td><td>$45</td><td>$180</td><td>$540</td></tr>
+<tr class="highlight"><td><strong><span class="zh">3年总现金流出</span><span class="en">3yr Total Cash Out</span></strong></td><td></td><td></td><td><strong>$31,594</strong></td></tr>
+</table>
+
+<div style="margin-top:16px;padding:12px;background:rgba(34,211,238,0.06);border-radius:10px;border:1px solid rgba(34,211,238,0.2)">
+<strong style="color:var(--cyan)">🔄 <span class="zh">3年后卖车算账</span><span class="en">3yr Later: Sell The Car</span></strong>
+<table>
+<tr><td><span class="zh">车卖价（60%残值，保守估计）</span><span class="en">Car Sale Price (60% residual)</span></td><td colspan="2"><strong>$26,778</strong></td></tr>
+<tr><td><span class="zh">剩余贷款（还了36/72期）</span><span class="en">Remaining Loan (36/72 paid)</span></td><td colspan="2"><strong style="color:var(--red)">-$21,199</strong></td></tr>
+<tr><td><span class="zh">口袋拿回现金</span><span class="en">Cash In Your Pocket</span></td><td colspan="2"><strong style="color:var(--green);font-size:1.1em">$5,579</strong></td></tr>
+</table>
+</div>
+
+<table style="margin-top:12px">
+<tr class="highlight"><td><strong><span class="zh">总现金流出 $31,594 - 卖车拿回 $5,579 = 3年净成本</span><span class="en">Cash Out $31,594 - Cash Back $5,579 = 3yr Net Cost</span></strong></td><td></td><td></td><td><strong style="font-size:1.1em">$26,015</strong></td></tr>
+</table>
+<span class="tag tag-green">💰 <span class="zh">0% APR！3年后卖车拿回$5,579。比Lease（$30,321）省$4,306</span><span class="en">0% APR! Get $5,579 back selling after 3yr. $4,306 cheaper than Lease ($30,321)</span></span>
+</div>
+
+<!-- 总结对比 -->
+<h2>📊 <span class="zh">三年总成本终极对比（6方案）</span><span class="en">3-Year Total Cost Final Comparison (6 Options)</span></h2>
+<div class="card">
+<table>
+<tr><th><span class="zh">方案</span><span class="en">Option</span></th><th><span class="zh">3年总支出</span><span class="en">3yr Spending</span></th><th><span class="zh">3年后资产</span><span class="en">Asset After 3yr</span></th><th><span class="zh">3年净成本</span><span class="en">3yr Net Cost</span></th><th><span class="zh">推荐</span><span class="en">Recommend</span></th></tr>
+<tr>
+<td><span class="zh">A: Lease M3 AWD</span><span class="en">A: Lease M3 AWD</span></td>
+<td>$27,661</td>
+<td>$0</td>
+<td>$27,661</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><span class="zh">B: Finance M3 AWD</span><span class="en">B: Finance M3 AWD</span></td>
+<td>$33,133</td>
+<td>$5,601</td>
+<td>$27,532</td>
+<td>⚠️ 0.99%</td>
+</tr>
+<tr class="highlight">
+<td><strong><span class="zh">C: 卖Odyssey + Turo</span><span class="en">C: Sell Odyssey + Turo</span></strong></td>
+<td>$13,800</td>
+<td><span class="zh">~$3,570（卖车收入）</span><span class="en">~$3,570 (sale proceeds)</span></td>
+<td class="best">$10,230</td>
+<td>✅ <span class="zh">最划算</span><span class="en">Best Value</span></td>
+</tr>
+<tr>
+<td><span class="zh">D: 保持Odyssey</span><span class="en">D: Keep Odyssey</span></td>
+<td>$12,720</td>
+<td><span class="zh">~$2,500</span><span class="en">~$2,500</span></td>
+<td>$13,720</td>
+<td>⚠️ <span class="zh">没FSD</span><span class="en">no FSD</span></td>
+</tr>
+<tr>
+<td><span class="zh">E: Lease MY AWD 🌧️</span><span class="en">E: Lease MY AWD 🌧️</span></td>
+<td>$30,321</td>
+<td>$0</td>
+<td>$30,321</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><span class="zh">F: Finance MY AWD 🌧️</span><span class="en">F: Finance MY AWD 🌧️</span></td>
+<td>$31,594</td>
+<td>$5,579</td>
+<td>$26,015</td>
+<td>✅ 0%!</td>
+</tr>
+</table>
+</div>
+
+<!-- 额外考量 -->
+<h2>🤔 <span class="zh">额外考量</span><span class="en">Additional Considerations</span></h2>
+<div class="card">
+<h3><span class="zh">选择Turo的理由</span><span class="en">Why Turo Wins</span></h3>
+<ul>
+<li><span class="zh">✅ <strong>轻度用户最划算</strong> — 一年只用3-4个月，养车不如租车</span><span class="en">✅ <strong>Best for light users</strong> — only need a car 3-4 months/year</span></li>
+<li><span class="zh">✅ <strong>永远开最新款</strong> — 2-3年后新的FSD出来，租新车就行</span><span class="en">✅ <strong>Always latest model</strong> — rent new cars when FSD upgrades arrive</span></li>
+<li><span class="zh">✅ <strong>Model X 日常够用</strong> — 你一个人在波特兰不需要第二辆车</span><span class="en">✅ <strong>Model X sufficient daily</strong> — don't need a second car solo in Portland</span></li>
+<li><span class="zh">✅ <strong>资金灵活</strong> — $7,000投资 > 停在车库里贬值</span><span class="en">✅ <strong>Capital flexibility</strong> — $7,000 invested > depreciating in garage</span></li>
+<li><span class="zh">✅ <strong>无固定支出</strong> — 不用月供、不买保险、不付注册费</span><span class="en">✅ <strong>No fixed costs</strong> — no payments, insurance, or registration</span></li>
+</ul>
+
+<h3 style="margin-top:20px"><span class="zh">需要注意的风险</span><span class="en">Risks to Consider</span></h3>
+<ul>
+<li><span class="zh">⚠️ Turo 车源可能临时被订走 — 提前预订</span><span class="en">⚠️ Turo cars may be booked — reserve early</span></li>
+<li><span class="zh">⚠️ 家人来的时候用车需求重叠 — Model X + Turo 租车可解决</span><span class="en">⚠️ Overlapping car needs when wife visits — Model X + Turo solves this</span></li>
+<li><span class="zh">⚠️ 基金收益不保证 — 20-30%是乐观估计，可能5-10%</span><span class="en">⚠️ Fund returns not guaranteed — 20-30% is optimistic, could be 5-10%</span></li>
+<li><span class="zh">⚠️ Odyssey 卖了就回不来了 — 但10年旧车，不卖也会继续贬值</span><span class="en">⚠️ Selling Odyssey is irreversible — but 10yr car keeps depreciating anyway</span></li>
+</ul>
+</div>
+
+<!-- 最终建议 -->
+<div class="verdict">
+<h3>🎯 <span class="zh">Sky 的建议：方案C最划算，方案F是最佳“拥有”选择</span><span class="en">Sky's Take: C cheapest, F is best "own" option</span></h3>
+<p><span class="zh">
+<strong>按需使用（一年只用4个月）→ 方案C Turo租车最划算</strong>，3年净成本$13,800，比任何lease/finance都省$8,800+。
+<br><br>
+<strong>但如果想“拥有”一辆车 → 方案F Finance Model Y AWD：</strong>
+<ul>
+<li>0% APR 真正零利息（比Model 3的0.99%强）</li>
+<li>FSD按月租，用4个月就付4个月，不用就退</li>
+<li>AWD雨天安全，SUV空间大</li>
+<li>3年净成本$22,601 — 比Lease Model 3（$27,661）还便宜$5,000</li>
+</ul>
+<strong>排序：</strong>C ($13,800) > F ($22,601) > B ($24,860) > A ($27,661) > E ($30,273) > D ($13,720但没FSD)
+</span><span class="en">
+<strong>Occasional use (4 mo/yr) → Option C Turo wins</strong>, $13,800 over 3 years, $8,800+ cheaper than any lease/finance.
+<br><br>
+<strong>But if you want to "own" → Option F Finance Model Y AWD:</strong>
+<ul>
+<li>True 0% APR (better than Model 3's 0.99%)</li>
+<li>FSD rent on-demand — 4 months only</li>
+<li>AWD for Portland rain, SUV space</li>
+<li>3yr net cost $22,601 — $5,000 cheaper than Lease Model 3 ($27,661)</li>
+</ul>
+<strong>Ranking:</strong> C ($13,800) > F ($22,601) > B ($24,860) > A ($27,661) > E ($30,273) > D ($13,720 but no FSD)
+</span></p>
+</div>
+
+<div class="footer">
+<p>☁️ <span class="zh">由 Sky 分析制作 · 数据来源：Tesla官网、Edmunds、KBB、Turo、The Zebra</span><span class="en">Analyzed by Sky · Data: Tesla, Edmunds, KBB, Turo, The Zebra</span></p>
+<p>2026-04-18</p>
+</div>
+</div>
+
+<script>
+function setLang(l){document.body.className='lang-'+l;document.getElementById('btn-zh').className=l==='zh'?'active':'';document.getElementById('btn-en').className=l==='en'?'active':'';try{localStorage.setItem('car-lang',l)}catch(e){}}
+try{var s=localStorage.getItem('car-lang');if(s)setLang(s)}catch(e){}
+</script>
+</body>
+</html>

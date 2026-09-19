@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Style 7: Tab Gateway</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8f9fa;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#64748b;--text3:#94a3b8;--accent:#3b82f6;--font:'Inter','Noto Sans SC',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+/* Single-page app feel */
+.app{max-width:960px;margin:0 auto;padding:0 24px;min-height:100vh}
+
+/* Header with search */
+.header{padding:32px 0 24px;border-bottom:2px solid var(--text)}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.header h1{font-size:1.6em;font-weight:700;letter-spacing:-0.03em}
+.header h1 span{color:var(--accent)}
+.header .meta{font-size:0.72em;color:var(--text3)}
+.search-box{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:10px;font-size:0.9em;font-family:var(--font);background:var(--surface);color:var(--text);transition:border-color 0.2s}
+.search-box:focus{outline:none;border-color:var(--accent)}
+.search-box::placeholder{color:var(--text3)}
+
+/* Tab navigation */
+.tabs{display:flex;gap:4px;padding:20px 0 0;border-bottom:1px solid var(--border);margin-top:20px}
+.tab{padding:10px 20px;font-size:0.88em;font-weight:500;color:var(--text2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:all 0.15s;font-family:var(--font)}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+/* Tab content */
+.tab-content{display:none;padding:28px 0;animation:fadeIn 0.3s}
+.tab-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Grouped sections within tabs */
+.group{margin-bottom:28px}
+.group-title{font-size:0.72em;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.group-title .line{flex:1;height:1px;background:var(--border)}
+
+/* List items */
+.items{display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:baseline;padding:12px 0;border-bottom:1px solid #f1f5f9;text-decoration:none;color:var(--text);transition:all 0.1s}
+.item:last-child{border-bottom:none}
+.item:hover{background:#f8fafc;padding-left:6px;padding-right:6px;border-radius:6px}
+.item .ico{font-size:1em;opacity:0.5;text-align:center}
+.item .info{display:flex;flex-direction:column;gap:1px}
+.item .name{font-weight:600;font-size:0.92em}
+.item .desc{font-size:0.78em;color:var(--text2)}
+.item .side{display:flex;align-items:center;gap:8px}
+.item .date{font-size:0.7em;color:var(--text3)}
+.badge{font-size:0.6em;font-weight:600;padding:2px 8px;border-radius:100px}
+.b-blue{background:#eff6ff;color:#3b82f6}
+.b-green{background:#f0fdf4;color:#16a34a}
+.b-amber{background:#fffbeb;color:#d97706}
+.b-purple{background:#f5f3ff;color:#7c3aed}
+.b-gray{background:#f1f5f9;color:#64748b}
+
+.foot{padding:24px 0;border-top:1px solid var(--border);margin-top:20px;font-size:0.72em;color:var(--text3);text-align:center}
+
+@media(max-width:480px){.header h1{font-size:1.2em}.tabs{overflow-x:auto}.tab{font-size:0.8em;padding:8px 14px}.item{grid-template-columns:22px 1fr auto}.item .desc{display:none}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="app">
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>Sky<span>Portal</span></h1>
+        <div class="meta"><span class="zh">Sky Portal · 11 已发布 · 5 进行中</span><span class="en">Sky Portal's Digital Space · 11 Published · 5 Active</span></div>
+      </div>
+    </div>
+    <input class="search-box" type="text" id="search" placeholder="<span class='zh'>搜索...</span><span class='en'>Search...</span>" oninput="filterItems(this.value)">
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('all',this)"><span class="zh">全部</span><span class="en">All</span></div>
+    <div class="tab" onclick="switchTab('daily',this)"><span class="zh">每日</span><span class="en">Daily</span></div>
+    <div class="tab" onclick="switchTab('research',this)"><span class="zh">研究</span><span class="en">Research</span></div>
+    <div class="tab" onclick="switchTab('life',this)"><span class="zh">生活</span><span class="en">Life</span></div>
+    <div class="tab" onclick="switchTab('tools',this)"><span class="zh">项目</span><span class="en">Projects</span></div>
+  </div>
+
+  <!-- All -->
+  <div class="tab-content active" id="tab-all">
+    <div class="group"><div class="group-title"><span class="zh">📡 每日更新</span><span class="en">📡 Daily</span><span class="line"></span></div>
+      <div class="items" data-cat="daily">
+        <a class="item" href="research/index.html"><span class="ico">📡</span><div class="info"><span class="name"><span class="zh">每日研报</span><span class="en">Briefing</span></span><span class="desc"><span class="zh">半导体 · 股票 · Portland</span><span class="en">Semi · Stocks</span></span></div><div class="side"><span class="badge b-blue">Auto</span></div></a>
+        <a class="item" href="tech/index.html"><span class="ico">🔬</span><div class="info"><span class="name"><span class="zh">每日科技</span><span class="en">Tech</span></span><span class="desc"><span class="zh">芯片 · 突破</span><span class="en">Chips</span></span></div><div class="side"><span class="badge b-blue">Auto</span></div></a>
+        <a class="item" href="market/index.html"><span class="ico">📊</span><div class="info"><span class="name"><span class="zh">每日行情</span><span class="en">Market</span></span><span class="desc">US · CN · HK</span></div><div class="side"><span class="badge b-blue">9PM</span></div></a>
+        <a class="item" href="science/index.html"><span class="ico">🧬</span><div class="info"><span class="name"><span class="zh">每周科学</span><span class="en">Science</span></span><span class="desc">Nature · Cell</span></div><div class="side"><span class="badge b-green">Wed</span></div></a>
+      </div>
+    </div>
+    <div class="group"><div class="group-title"><span class="zh">🔬 研究</span><span class="en">🔬 Research</span><span class="line"></span></div>
+      <div class="items" data-cat="research">
+        <a class="item" href="research/intel-tesla-terafab.html"><span class="ico">⚡</span><div class="info"><span class="name">Intel × Tesla Terafab</span><span class="desc"><span class="zh">$200-250亿</span><span class="en">$20-25B</span></span></div><div class="side"><span class="badge b-amber">New</span></div></a>
+        <a class="item" href="ai-cvd-optimization.html"><span class="ico">🏭</span><div class="info"><span class="name"><span class="zh">AI半导体</span><span class="en">AI Semi</span></span><span class="desc">Lam / AMAT</span></div><div class="side"><span class="badge b-amber">New</span></div></a>
+        <a class="item" href="nvidia-report.html"><span class="ico">🟢</span><div class="info"><span class="name">NVIDIA Foundry</span><span class="desc"><span class="zh">GPU代工</span><span class="en">Foundry</span></span></div><div class="side"><span class="badge b-green">Done</span></div></a>
+        <a class="item" href="ai-life.html"><span class="ico">🤖</span><div class="info"><span class="name"><span class="zh">AI生活</span><span class="en">AI Life</span></span><span class="desc">V1+V2</span></div><div class="side"><span class="badge b-purple">Updated</span></div></a>
+        <a class="item" href="skills.html"><span class="ico">☁️</span><div class="info"><span class="name"><span class="zh">Sky技能</span><span class="en">Skills</span></span><span class="desc">30+</span></div><div class="side"><span class="badge b-blue">Running</span></div></a>
+      </div>
+    </div>
+    <div class="group"><div class="group-title"><span class="zh">👤 生活</span><span class="en">👤 Life</span><span class="line"></span></div>
+      <div class="items" data-cat="life">
+        <a class="item" href="naturalization.html"><span class="ico">🇺🇸</span><div class="info"><span class="name"><span class="zh">入籍</span><span class="en">N-400</span></span><span class="desc"><span class="zh">9月递交</span><span class="en">Sep</span></span></div><div class="side"><span class="badge b-amber">Prep</span></div></a>
+        <a class="item" href="coach/index.html"><span class="ico">📚</span><div class="info"><span class="name"><span class="zh">教练</span><span class="en">Coach</span></span><span class="desc">Munger 13/25</span></div><div class="side"><span class="badge b-purple">Daily</span></div></a>
+        <a class="item" href="my-garden/"><span class="ico">🌸</span><div class="info"><span class="name"><span class="zh">花园</span><span class="en">Garden</span></span><span class="desc">Portland</span></div><div class="side"><span class="badge b-green">2026</span></div></a>
+        <a class="item" href="investment.html"><span class="ico">💰</span><div class="info"><span class="name"><span class="zh">投资</span><span class="en">Invest</span></span><span class="desc">RSU · SMH</span></div><div class="side"><span class="badge b-green">Ongoing</span></div></a>
+        <a class="item" href="car-decision.html"><span class="ico">🚗</span><div class="info"><span class="name"><span class="zh">换车</span><span class="en">Car</span></span><span class="desc">Save $26K+</span></div><div class="side"><span class="badge b-amber">2026</span></div></a>
+      </div>
+    </div>
+    <div class="group"><div class="group-title"><span class="zh">🛠 项目</span><span class="en">🛠 Projects</span><span class="line"></span></div>
+      <div class="items" data-cat="tools">
+        <a class="item" href="prolynk.html"><span class="ico">🏠</span><div class="info"><span class="name">ProLynk</span><span class="desc"><span class="zh">家居维修</span><span class="en">Home Repair</span></span></div><div class="side"><span class="badge b-amber">New</span></div></a>
+        <a class="item" href="https://timememo8210.github.io/家人-War-Game/" target="_blank"><span class="ico">⚔️</span><div class="info"><span class="name"><span class="zh">时代之战</span><span class="en">War</span></span><span class="desc"><span class="zh">回合制</span><span class="en">Turn-based</span></span></div><div class="side"><span class="badge b-blue">Game</span></div></a>
+        <a class="item" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><span class="ico">🌍</span><div class="info"><span class="name"><span class="zh">欧洲行</span><span class="en">Europe</span></span><span class="desc">Swiss→Paris→NYC</span></div><div class="side"><span class="badge b-green">v5</span></div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily tab -->
+  <div class="tab-content" id="tab-daily">
+    <div class="items" data-cat="daily"></div>
+  </div>
+  <!-- Research tab -->
+  <div class="tab-content" id="tab-research">
+    <div class="items" data-cat="research"></div>
+  </div>
+  <!-- Life tab -->
+  <div class="tab-content" id="tab-life">
+    <div class="items" data-cat="life"></div>
+  </div>
+  <!-- Tools tab -->
+  <div class="tab-content" id="tab-tools">
+    <div class="items" data-cat="tools"></div>
+  </div>
+
+  <div class="foot">Sky Portal · <span class="zh">Sky Portal</span><span class="en">Sky Portal's Digital Space</span> · OpenClaw ☁️</div>
+</div>
+
+<script>
+function switchTab(id,el){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+  el.classList.add('active');
+  if(id==='all'){
+    document.getElementById('tab-all').classList.add('active');
+  }else{
+    var src=document.querySelector('#tab-all .items[data-cat="'+id+'"]');
+    var dst=document.querySelector('#tab-'+id+' .items');
+    dst.innerHTML=src.innerHTML;
+    document.getElementById('tab-'+id).classList.add('active');
+  }
+}
+function filterItems(q){
+  q=q.toLowerCase();
+  document.querySelectorAll('#tab-all .item').forEach(function(item){
+    var t=item.textContent.toLowerCase();
+    item.style.display=t.indexOf(q)>=0?'':'none';
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 Daily Market — 2026-07-24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+  --up: #4ade80;
+  --down: #f87171;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; padding: 20px 16px;
+}
+body.lang-en .zh { display:none !important; }
+body.lang-zh .en { display:none !important; }
+.wrap { max-width:900px; margin:0 auto; }
+
+/* Lang Toggle */
+.lang-toggle {
+  display:flex; background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12); border-radius:100px;
+  overflow:hidden; margin-bottom:24px; width:fit-content; margin-left:auto;
+}
+.lang-toggle button {
+  padding:4px 12px; border:none; background:transparent;
+  color:var(--text-dim); font-size:0.8em; cursor:pointer;
+  transition:all 0.25s; font-family:inherit;
+}
+.lang-toggle button.active { background:var(--accent); color:#000; }
+
+/* Title */
+h1 { text-align:center; color:var(--accent); font-size:1.8em; margin-bottom:4px; }
+.subtitle { text-align:center; color:#888; font-size:0.9em; margin-bottom:28px; }
+.subtitle a { color:var(--accent); text-decoration:none; }
+
+/* Poster Grid */
+.poster-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px; }
+.poster-card { border-radius:12px; padding:20px 24px; color:#fff; }
+.poster-icon { font-size:2em; margin-bottom:8px; }
+.poster-title { font-size:1.3em; font-weight:700; }
+.poster-data { margin-top:10px; font-size:0.88em; opacity:0.92; line-height:1.7; }
+
+/* Section Headers */
+h2 { color:var(--accent); font-size:1.3em; margin:32px 0 16px; padding-bottom:8px; border-bottom:1px solid #2a2a2a; }
+h3 { color:var(--accent); margin:20px 0 12px; font-size:1.1em; }
+
+/* Cards */
+.card {
+  background:#1a1a1a; border:1px solid #2a2a2a;
+  border-radius:12px; padding:18px 20px; margin-bottom:14px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: rgba(74,222,128,0.3); }
+.card h4 { color:#fff; font-size:1.05em; margin-bottom:8px; }
+.card p { margin-bottom:6px; font-size:0.92em; }
+.card .src { color:#888; font-size:0.8em; margin-top:6px; }
+
+/* Stock Grid */
+.stock-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:16px 0; }
+.stock-item {
+  background:#1a1a1a; border:1px solid #2a2a2a;
+  border-radius:10px; padding:14px 10px; text-align:center;
+  transition: border-color 0.2s;
+}
+.stock-item:hover { border-color: rgba(74,222,128,0.3); }
+.stock-ticker { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); font-size:0.95em; }
+.stock-price { color:#fff; font-size:1.05em; font-weight:600; margin:6px 0 4px; }
+.stock-change {
+  font-family:'JetBrains Mono',monospace; font-weight:600;
+  font-size:0.82em; padding:3px 10px; border-radius:5px; display:inline-block;
+}
+.up { background:rgba(34,197,94,0.15); color:var(--up); border:1px solid rgba(34,197,94,0.3); }
+.down { background:rgba(239,68,68,0.15); color:var(--down); border:1px solid rgba(239,68,68,0.3); }
+.flat { background:rgba(255,255,255,0.06); color:#aaa; border:1px solid rgba(255,255,255,0.1); }
+
+/* Forecast Box */
+.forecast-box {
+  background: linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.02));
+  border:1px solid rgba(74,222,128,0.2); border-radius:12px;
+  padding:20px 24px; margin:16px 0;
+}
+.forecast-box h4 { color:var(--accent); font-size:1.1em; margin-bottom:10px; }
+
+/* Footer */
+.footer {
+  text-align:center; margin-top:40px; padding-top:20px;
+  border-top:1px solid #2a2a2a; color:#666; font-size:0.85em;
+}
+.footer a { color:var(--accent); text-decoration:none; }
+
+/* Responsive */
+@media(max-width:768px) {
+  .stock-grid { grid-template-columns:repeat(2,1fr); }
+  .poster-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-toggle">
+  <button class="active" onclick="document.body.className='lang-zh'">中文</button>
+  <button onclick="document.body.className='lang-en'">EN</button>
+</div>
+
+<!-- Poster Grid -->
+<div class="poster-grid">
+  <div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f,#0d1b2a)">
+    <div class="poster-icon">🇺🇸</div>
+    <div class="poster-title">
+      <span class="zh">美股分化</span>
+      <span class="en">US Markets Diverge</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">道指 +0.5% · 标普持平 · 纳指 -0.6%<br>本周：纳指 -2.1% · 科技板块承压</span>
+      <span class="en">Dow +0.5% · S&P flat · Nasdaq -0.6%<br>Week: Nasdaq -2.1% · Tech under pressure</span>
+    </div>
+  </div>
+  <div class="poster-card" style="background:linear-gradient(135deg,#8b1a1a,#2d0a0a)">
+    <div class="poster-icon">⚡</div>
+    <div class="poster-title">
+      <span class="zh">Trump新关税</span>
+      <span class="en">Trump New Tariffs</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">60国征收10-12.5%新关税<br>覆盖99%进口商品 · 关税墙重建</span>
+      <span class="en">10-12.5% tariffs on 60 countries<br>Covers 99% of imports · Tariff wall rebuilt</span>
+    </div>
+  </div>
+  <div class="poster-card" style="background:linear-gradient(135deg,#1a3a1a,#0a1a0a)">
+    <div class="poster-icon">🇨🇳</div>
+    <div class="poster-title">
+      <span class="zh">A股大幅回调</span>
+      <span class="en">A-Shares Pullback</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">上证 -1.61% · 创业板 -2.65%<br>成交1.94万亿 · 三月新低</span>
+      <span class="en">SSE -1.61% · ChiNext -2.65%<br>Volume 1.94T · 3-month low</span>
+    </div>
+  </div>
+  <div class="poster-card" style="background:linear-gradient(135deg,#3a1a5f,#1a0a2d)">
+    <div class="poster-icon">💻</div>
+    <div class="poster-title">
+      <span class="zh">半导体熊市确认</span>
+      <span class="en">SOX Confirms Bear Market</span>
+    </div>
+    <div class="poster-data">
+      <span class="zh">费半较6月高点跌20%+<br>AI支出疑虑升温 · NVDA -2%</span>
+      <span class="en">SOX -20%+ from June record<br>AI spending doubts · NVDA -2%</span>
+    </div>
+  </div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en">Daily Market</span></h1>
+<p class="subtitle">2026-07-24 · <a href="index.html"><span class="zh">所有行情</span><span class="en">All Reports</span></a></p>
+
+<!-- US Stocks -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en">US Market Close</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">S&P 500</div>
+    <div class="stock-price">7,411.98</div>
+    <div class="stock-change flat">+0.05%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">DOW</div>
+    <div class="stock-price">51,947.25</div>
+    <div class="stock-change up">+0.5%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">NASDAQ</div>
+    <div class="stock-price">24,975.82</div>
+    <div class="stock-change down">-0.6%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">RUSSELL 2K</div>
+    <div class="stock-price">2,930.00</div>
+    <div class="stock-change down">-0.3%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">SOX</div>
+    <div class="stock-price">~11,819</div>
+    <div class="stock-change down">~-4.3%</div>
+  </div>
+</div>
+
+<h3><span class="zh">📊 年初至今表现</span><span class="en">YTD Performance</span></h3>
+<div class="card">
+<p><span class="zh">
+标普500 <strong style="color:var(--up)">+8.3%</strong> · 道指 <strong style="color:var(--up)">+8.1%</strong> · 纳指 <strong style="color:var(--up)">+7.5%</strong> · Russell 2000 <strong style="color:var(--up)">+18.1%</strong><br>
+本周表现：标普 <strong style="color:var(--down)">-0.6%</strong> · 道指 <strong style="color:var(--down)">-0.4%</strong> · 纳指 <strong style="color:var(--down)">-2.1%</strong>
+</span><span class="en">
+S&P 500 <strong style="color:var(--up)">+8.3%</strong> · Dow <strong style="color:var(--up)">+8.1%</strong> · Nasdaq <strong style="color:var(--up)">+7.5%</strong> · Russell 2000 <strong style="color:var(--up)">+18.1%</strong><br>
+Weekly: S&P <strong style="color:var(--down)">-0.6%</strong> · Dow <strong style="color:var(--down)">-0.4%</strong> · Nasdaq <strong style="color:var(--down)">-2.1%</strong>
+</span></p>
+</div>
+
+<!-- China Stocks -->
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en">China A-Shares Close</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">上证指数</div>
+    <div class="stock-price">3,814.20</div>
+    <div class="stock-change down">-1.61%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">深证成指</div>
+    <div class="stock-price">13,774.68</div>
+    <div class="stock-change down">-2.47%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">创业板指</div>
+    <div class="stock-price">3,480.87</div>
+    <div class="stock-change down">-2.65%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">北证50</div>
+    <div class="stock-price">1,031.72</div>
+    <div class="stock-change down">-4.03%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">成交额</div>
+    <div class="stock-price">1.94万亿</div>
+    <div class="stock-change down">-12%</div>
+  </div>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en">Hong Kong Close</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">恒生指数</div>
+    <div class="stock-price">24,963.23</div>
+    <div class="stock-change down">-0.98%</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">恒生科技</div>
+    <div class="stock-price">~4,698</div>
+    <div class="stock-change flat">~flat</div>
+  </div>
+  <div class="stock-item">
+    <div class="stock-ticker">国企指数</div>
+    <div class="stock-price">8,352.67</div>
+    <div class="stock-change flat">前日+1.23%</div>
+  </div>
+</div>
+
+<!-- Commodities -->
+<h2>💰 <span class="zh">大宗商品</span><span class="en">Commodities</span></h2>
+<div class="stock-grid">
+  <div class="stock-item">
+    <div class="stock-ticker">Brent</div>
+    <div class="stock-price">$96.78</div>
+    <div class="stock-change down">-3.9%</div>
+  </div>
+</div>
+
+<!-- Key Drivers -->
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Trump新关税落地 — 重建关税墙</span><span class="en">1. Trump New Tariffs — Rebuilding the Tariff Wall</span></h4>
+<p><span class="zh">7月24日是临时关税到期日，Trump政府以"强迫劳动"名义对60个贸易伙伴（包括欧盟、中国、加拿大）征收10-12.5%新关税，覆盖约99%的美国进口商品。这是重建关税体系最激进的一步，引发全球贸易伙伴抗议。市场担忧贸易战升级将对全球供应链和经济增长造成冲击。</span><span class="en">July 24 marked the expiration of temporary tariffs. The Trump administration imposed new 10-12.5% duties on 60 trading partners (EU, China, Canada) under forced labor allegations, covering ~99% of US imports. The most aggressive step yet in rebuilding the tariff regime, drawing protests from global partners.</span></p>
+<p class="src">Source: Reuters / NPR / NYTimes</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 科技/AI板块深度回调 — 半导体进入熊市</span><span class="en">2. Tech/AI Deep Pullback — Semis Enter Bear Market</span></h4>
+<p><span class="zh">费城半导体指数（SOX）已较6月纪录高点下跌超20%，正式进入技术性熊市。Nvidia周五再跌2%，AMD、Broadcom、Intel均收跌。投资者对AI支出可持续性产生疑虑，科技板块本周持续承压。半导体股盘中大幅波动后，尾盘有所收窄跌幅。</span><span class="en">The Philadelphia Semiconductor Index (SOX) has fallen over 20% from its June record, entering technical bear market territory. Nvidia dropped 2% on Friday; AMD, Broadcom, and Intel all closed lower. Investors question AI spending sustainability. Semi stocks saw extreme intraday volatility before trimming losses late.</span></p>
+<p class="src">Source: Reuters / Yahoo Finance / Barron's</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. A股成交萎缩 — "科技牛"行情分化</span><span class="en">3. A-Share Volume Shrinks — "Tech Bull" Diverges</span></h4>
+<p><span class="zh">A股三大指数齐跌，创业板失守3500点，成交额降至1.94万亿元创三个多月新低，较前日缩量2650亿。此前7月21日创业板曾暴涨7%，但随后连续回调。市场观望情绪浓厚，但机构普遍认为"科技牛"行情逻辑未变，急跌可能是布局机会。</span><span class="en">All three major A-share indices declined, with ChiNext falling below 3,500. Volume dropped to 1.94T yuan, a 3+ month low, shrinking 265B from the prior day. After ChiNext surged 7% on July 21, it has pulled back for consecutive days. Sentiment is cautious, but institutions generally believe the "tech bull" thesis remains intact.</span></p>
+<p class="src">Source: 中新经纬 / 同花顺 / 新浪财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 油价大幅回落 — Brent跌破$97</span><span class="en">4. Oil Prices Retreat — Brent Below $97</span></h4>
+<p><span class="zh">尽管中东局势持续紧张，Brent原油从前日$102暴跌近4%至$96.78。油价回落部分缓解了通胀压力，但对能源板块造成冲击。红海石油运输持续运行，供给担忧有所缓解。</span><span class="en">Despite ongoing Middle East tensions, Brent crude tumbled nearly 4% from $102 to $96.78. The decline partially eases inflation pressure but hits the energy sector. Red Sea oil shipments continue operating, alleviating supply concerns.</span></p>
+<p class="src">Source: Oilprice.com / MarketWatch</p>
+</div>
+
+<!-- Forecast -->
+<h2>🔮 <span class="zh">市场预判</span><span class="en">Market Outlook</span></h2>
+<div class="forecast-box">
+<h4><span class="zh">📊 后市展望</span><span class="en">Weekly Outlook</span></h4>
+<p><span class="zh">
+<strong>美股：</strong>关税不确定性+AI板块疲软，短期可能继续承压。但财报季已开启，个股分化机会大。下周重点关注科技巨头财报能否扭转市场情绪。道指相对抗跌，价值股或继续跑赢成长股。<br><br>
+<strong>A股：</strong>成交缩至新低通常是短期筑底信号，但反弹需要量能配合。"科技牛"核心逻辑（AI+半导体+国产替代）未变，急跌可能是"黄金坑"。关注半导体产业链和AI应用方向。<br><br>
+<strong>港股：</strong>跟随A股走势，恒指25,000点为关键心理支撑。关税影响下港股可能承压，但估值优势仍在。<br><br>
+<strong>关注焦点：</strong>Nvidia财报（8月下旬）、关税后续谈判进展、中东局势对油价影响、A股成交量变化。
+</span><span class="en">
+<strong>US Markets:</strong> Tariff uncertainty + AI weakness may pressure markets short-term. But earnings season brings stock-picking opportunities. Watch Big Tech earnings to gauge sentiment reversal. Dow resilient; value may outperform growth.<br><br>
+<strong>A-Shares:</strong> Volume at multi-month low often signals short-term bottom. "Tech bull" thesis (AI + semis + import substitution) intact — sharp drops may be golden pits. Watch semiconductor chain and AI applications.<br><br>
+<strong>Hong Kong:</strong> Tracking A-share direction, 25,000 is key psychological support. Tariff impact may weigh on HK, but valuation advantage remains.<br><br>
+<strong>Key Watch:</strong> Nvidia earnings (late Aug), tariff negotiations, Middle East oil impact, A-share volume trends.
+</span></p>
+</div>
+
+<div class="footer">
+<p><span class="zh">📊 每日行情 · 由 Sky ☁️ 自动生成 · 数据来源：Yahoo Finance / Reuters / 中新经纬</span><span class="en">📊 Daily Market · Auto-generated by Sky ☁️ · Sources: Yahoo Finance / Reuters / CCTV Finance</span></p>
+<p style="margin-top:8px;"><a href="index.html">← <span class="zh">返回行情列表</span><span class="en">Back to Index</span></a> · <a href="../index.html"><span class="zh">Sky Portal</span><span class="en">Sky Portal</span></a></p>
+</div>
+
+</div>
+<script>
+(function(){
+  var l=localStorage.getItem('lang');
+  if(l==='en') document.body.className='lang-en';
+})();
+</script>
+</body>
+</html>

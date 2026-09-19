@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-26 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #1a2a1a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#111118;border:1px solid #1a2a1a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#666;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#111118;border:1px solid #1a2a1a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.news-item{padding:10px 0;border-bottom:1px solid #1a1a22}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #1a2a1a;color:#555;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#1a3a1a;border:1px solid rgba(74,222,128,0.3)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股周线三连跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks 3-Week Decline</div>
+<div class="zh poster-data">道指 51,947 (-0.38%)<br>标普 7,412 (-0.61%)<br>纳指 24,976 (-2.13%)<br>费半 SOX -4.25%（周五）</div>
+<div class="en poster-data" style="display:none">Dow 51,947 (-0.38%)<br>S&P 7,412 (-0.61%)<br>Nasdaq 24,976 (-2.13%)<br>SOX -4.25% (Fri)</div>
+</div>
+<div class="poster-card" style="background:#3a1a1a;border:1px solid rgba(239,68,68,0.3)">
+<div class="poster-icon">💥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体血洗</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Bloodbath</div>
+<div class="zh poster-data">闪迪 -10%｜SK海力士 -8%<br>英特尔 -7%｜美光 -6%<br>博通 -3%｜AMD -3%<br>创一年多最差周</div>
+<div class="en poster-data" style="display:none">Sandisk -10%｜SK Hynix -8%<br>Intel -7%｜Micron -6%<br>Broadcom -3%｜AMD -3%<br>Worst week in 1+ year</div>
+</div>
+<div class="poster-card" style="background:#2a1a3a;border:1px solid rgba(168,85,247,0.3)">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周超级周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Super Week Ahead</div>
+<div class="zh poster-data">FOMC 7/28-29 利率决议<br>MSFT/META/AAPL/AMZN/GOOGL 财报<br>美伊冲突关键窗口</div>
+<div class="en poster-data" style="display:none">FOMC 7/28-29 rate decision<br>MSFT/META/AAPL/AMZN/GOOGL earnings<br>US-Iran conflict window</div>
+</div>
+<div class="poster-card" style="background:#1a2a3a;border:1px solid rgba(96,165,250,0.3)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中东战火</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Middle East Conflict</div>
+<div class="zh poster-data">美军连续13夜空袭伊朗<br>布伦特原油 $96.78<br>特朗普考虑"大规模攻击"</div>
+<div class="en poster-data" style="display:none">13th night of US strikes on Iran<br>Brent $96.78<br>Trump mulls "massive attack"</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-07-26 · <span class="zh">周日 · 周末特刊</span><span class="en" style="display:none">Sunday · Weekend Special</span> · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>📈 <span class="zh">上周美股行情（7月24日收盘）</span><span class="en" style="display:none">US Market Last Week (July 24 Close)</span></h2>
+
+<div class="card">
+<h4><span class="zh">三大指数周线续跌，半导体创一年最差周</span><span class="en" style="display:none">Major Indices Fall for 3rd Week, Semis Worst in a Year</span></h4>
+<p><span class="zh"><b>周五收盘：</b>道指涨0.46%报51,947.02点；标普500涨0.05%报7,411.98点；纳指跌0.64%报24,975.82点。费城半导体指数（SOX）暴跌4.25%。<br><b>周线：</b>道指累计-0.38%（连续第三周下跌），标普-0.61%，纳指-2.13%（均连续第二周下跌）。</span><span class="en" style="display:none"><b>Friday close:</b> Dow +0.46% at 51,947.02; S&P 500 +0.05% at 7,411.98; Nasdaq -0.64% at 24,975.82. SOX -4.25%.<br><b>Weekly:</b> Dow -0.38% (3rd consecutive weekly decline), S&P -0.61%, Nasdaq -2.13% (both 2nd consecutive weekly decline).</span></p>
+<p class="src">来源：Sina Finance / CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">特斯拉单周崩跌18% — 2022年以来最大周跌幅</span><span class="en" style="display:none">Tesla Crashes 18% Weekly — Worst Since 2022</span></h4>
+<p><span class="zh">特斯拉Q2财报令人大失所望：调整后EPS仅$0.33（vs 去年同期$0.55），资本支出飙升至创纪录的$57.9亿。尽管交付量创历史新高，但盈利能力大幅下滑，市场担忧Robotaxi和AI投入的回报周期。本周累跌近18%，为2022年以来最大单周跌幅。</span><span class="en" style="display:none">Tesla Q2 earnings disappointed: adjusted EPS $0.33 (vs $0.55 prior year), capex surged to record $5.79B. Despite record deliveries, profitability dropped sharply. Weekly loss ~18%, worst since 2022.</span></p>
+<p class="src">来源：S&P Global / Forbes / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">英特尔Q2超预期但股价仍跌7% — 盈利回吐</span><span class="en" style="display:none">Intel Q2 Beats But Stock Falls 7% — Profit Taking</span></h4>
+<p><span class="zh">英特尔Q2 2026财报超预期：营收$161亿（non-GAAP），EPS $0.42，毛利率41.8%。但股价在财报后逆向下跌7%，逆转早盘涨幅。市场对英特尔18A制程良率（65-75%）和代工业务拐点持谨慎乐观态度，但短期获利了结压力明显。其他芯片股随之走低：博通-3%、AMD-3%、美光-6%。</span><span class="en" style="display:none">Intel Q2 2026 beat: revenue $16.1B (non-GAAP), EPS $0.42, gross margin 41.8%. Stock reversed -7% after initial gains. 18A yields at 65-75%, foundry at inflection. Profit-taking pressure. Broadcom -3%, AMD -3%, Micron -6%.</span></p>
+<p class="src">来源：CNBC / Intel IR / MarketBeat</p>
+</div>
+
+<h3><span class="zh">半导体个股行情（7月24日收盘）</span><span class="en" style="display:none">Semiconductor Stocks (Jul 24 Close)</span></h3>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$58.30</div><div class="stock-change down">-6.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$178.40</div><div class="stock-change down">-0.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$238.50</div><div class="stock-change down">-3.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$365.20</div><div class="stock-change down">-2.1%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$360.10</div><div class="stock-change down">-3.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$394.80</div><div class="stock-change down">-6.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">$135.60</div><div class="stock-change up">+0.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">$332.00</div><div class="stock-change down">-2.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">AAPL</div><div class="stock-price">$232.50</div><div class="stock-change up">+3.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">$412.30</div><div class="stock-change down">-3.0%</div></div>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSLA — Tesla</div><div id="tv-tsla"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">A-Shares & Hong Kong</span></h2>
+
+<div class="card">
+<h4><span class="zh">A股周五全线调整 — 创业板跌2.65%</span><span class="en" style="display:none">A-Shares Sell Off Friday — ChiNext -2.65%</span></h4>
+<p><span class="zh">7月25日收盘：上证指数跌1.61%报3,814.20点；深成指跌2.47%；创业板指跌2.65%；沪深300跌1.67%。两市成交约1.93万亿。本周早些时候，科创50指数曾暴跌7.12%，创业板暴跌7.15%，亚太科技股全线下挫。存储芯片股持续回调，但白酒、煤炭、油气板块逆势上涨。</span><span class="en" style="display:none">July 25 close: Shanghai Composite -1.61% at 3,814.20; Shenzhen Component -2.47%; ChiNext -2.65%; CSI 300 -1.67%. Turnover ~1.93T yuan. STAR 50 crashed 7.12% earlier in the week. Memory chip stocks continued correction; baijiu, coal, oil sectors gained.</span></p>
+<p class="src">来源：RTHK / Sina Finance / Oriental Daily</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股 — 恒指ADR微涨0.10%</span><span class="en" style="display:none">HK Stocks — HSI ADR +0.10%</span></h4>
+<p><span class="zh">恒生指数ADR收报24,987.23点，较香港收市涨24点或0.10%。本周港股跟随亚太科技股调整，恒生科技指数承压。不过7月港股有技术反弹预期，估值低位+外资回流+AI算力需求是支撑因素。联想跌逾9%为跌幅最大蓝筹，中国人寿、中国平安、宁德时代升逾2%。</span><span class="en" style="display:none">HSI ADR at 24,987.23, up 24 pts or 0.10%. HK tech under pressure this week. Technical rebound expected in July on low valuations, foreign capital inflow, and AI demand. Lenovo -9% worst blue chip; China Life, Ping An, CATL +2%.</span></p>
+<p class="src">来源：Investing.com / Yahoo Finance HK</p>
+</div>
+
+<h2>🔥 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">中东战火 — 美伊冲突持续升级</span><span class="en" style="display:none">Middle East — US-Iran Escalation</span></h4>
+<p><span class="zh">美军中央司令部已完成第13个夜晚对伊朗目标的空袭。特朗普在白宫表示正考虑发动"大规模攻击"，称"比以往任何时候都更大"，并重新实施海上封锁——水上的"铁墙"。副总统万斯、国务卿鲁比奥等参与闭门会议讨论扩大军事行动。巴基斯坦试图斡旋美伊新和谈，但障碍巨大。交易员因担心周末伊朗遭更猛烈攻击而不愿持仓过夜。布伦特原油一度突破$100/桶（5月下旬以来首次），后回落至$96.78；WTI $89.31。</span><span class="en" style="display:none">US Central Command completed 13th night of airstrikes on Iran. Trump considering "massive attack, bigger than ever." Maritime blockade reimposed ("iron wall"). VP Vance, Sec. Rubio in closed-door meetings. Pakistan attempting to mediate. Brent hit $100/bbl briefly, settled at $96.78; WTI $89.31. Traders unwilling to hold positions over weekend.</span></p>
+<p class="src">来源：Sina Finance / South Finance / CNBC</p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">半导体集体抛售 — AI叙事从狂热转向ROI审视</span><span class="en" style="display:none">Semiconductor Selloff — AI Narrative Shifts to ROI Scrutiny</span></h4>
+<p><span class="zh">对冲基金过去8周有6周净卖出科技股，科技股抛售规模创10年以上最大记录，可比拟2024年夏季抛售。动量组合已从高点回落32%，年初至今仅涨16%（此前年度涨幅一度达60%）。存储芯片、光通信成重灾区：闪迪-10%、Coherent-9%、SK海力士-8%、铠侠ADR-14%。不过，空头ETF曝险已降至3月初以来最低，投降式抛售迹象浮现，暗示跌势或趋缓。市场正从"AI叙事驱动"转向对"资本支出回报率"的严苛审视。</span><span class="en" style="display:none">Hedge funds net sold tech 6 of 8 weeks, largest tech sell-off in 10+ years. Momentum group down 32% from peak. Memory/optical hit hardest: Sandisk -10%, Coherent -9%, SK Hynix -8%, Kioxia ADR -14%. However, short ETF exposure at lowest since March — capitulation signs emerging. Market shifting from "AI narrative" to "capex ROI scrutiny."</span></p>
+<p class="src">来源：Eastmoney / Reuters / Forbes / FT</p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">Anthropic发布Opus 5 — AI模型价格战白热化</span><span class="en" style="display:none">Anthropic Launches Opus 5 — AI Price War Intensifies</span></h4>
+<p><span class="zh">7月24日，Anthropic发布Claude Opus 5，在多个类别中能力接近其最先进模型Fable 5，但价格仅为一半。随着企业越来越关注AI支出回报，OpenAI、Meta、xAI等竞争对手也在竞相提供更具成本效率的模型。AI模型加速"内卷"，价格不断下探，模型能力继续冲击AGI边界。此前Anthropic年化收入已突破$300亿，三倍增长。</span><span class="en" style="display:none">July 24: Anthropic launched Claude Opus 5, near Fable 5 capability at half the price. As enterprises scrutinize AI spending, OpenAI, Meta, xAI all competing on cost-efficiency. AI model prices falling, capabilities pushing AGI boundaries. Anthropic ARR surpassed $30B, tripled.</span></p>
+<p class="src">来源：ScriptByAI / Anthropic / South Finance</p>
+</div>
+
+<div class="card">
+<h4>4️⃣ <span class="zh">三星/SK海力士将公布美国重大芯片合作 · 高通涨价双位数</span><span class="en" style="display:none">Samsung/SK Hynix Major US Chip Deals · Qualcomm Double-Digit Price Hike</span></h4>
+<p><span class="zh">韩国总统李在明访问硅谷期间，三星电子和SK海力士将公布与美国领先科技公司的重大协议，涉及长期存储芯片供应、战略投资和谅解备忘录，金额"非常庞大"。李在明将会见英伟达CEO黄仁勋、OpenAI CEO奥特曼、Anthropic CEO阿莫代伊等。韩国上月公布8800亿美元投资计划。此外，高通宣布9月1日起产品涨价双位数百分比，因供应链成本飙升。</span><span class="en" style="display:none">Korean President Lee Jae-myung's Silicon Valley visit: Samsung and SK Hynix to announce major US tech partnerships — long-term memory chip supply, strategic investments, MOUs. Meetings with Nvidia CEO Huang, OpenAI CEO Altman, Anthropic CEO Amodei. Korea's $880B investment plan. Qualcomm raising prices by double digits from Sept 1.</span></p>
+<p class="src">来源：South Finance / Reuters</p>
+</div>
+
+<h2>⚠️ <span class="zh">下周超级周预判（7月27-31日）</span><span class="en" style="display:none">Super Week Outlook (July 27-31)</span></h2>
+
+<div class="card">
+<h4><span class="zh">三重风暴交汇 — FOMC + Mega-cap财报 + 中东局势</span><span class="en" style="display:none">Triple Storm — FOMC + Megacap Earnings + Middle East</span></h4>
+<p><span class="zh"><b>① FOMC议息（7月28-29日）：</b>当前联邦基金利率3.50%-3.75%。CME FedWatch显示市场预计65.3%维持不变、34.7%加息25bp。美联储主席Warsh偏鹰派，油价飙升增加通胀压力。若意外加息将冲击市场。<br><br><b>② Mega-cap财报集中轰炸：</b><br>• 周二盘后：Microsoft (MSFT)<br>• 周三盘后：Meta (META)<br>• 周四盘后：Apple (AAPL)、Amazon (AMZN)<br>• Alphabet (GOOGL) 也在本周<br>AI资本支出能否兑现回报 = 纳指方向关键。Mag 7仓位偏轻但估值处近年最低，若AI收入亮眼+capex审慎，纳指可能大幅走高。<br><br><b>③ 中东局势：</b>任何周末军事升级都可能引发周一油价跳涨、避险情绪飙升。特朗普是否扩大对伊朗军事行动是最大黑天鹅。</span><span class="en" style="display:none"><b>① FOMC (Jul 28-29):</b> Current rate 3.50%-3.75%. CME FedWatch: 65.3% hold, 34.7% hike 25bp. Fed Chair Warsh hawkish; oil surge adds inflation pressure. Surprise hike would shock markets.<br><br><b>② Megacap earnings barrage:</b><br>• Tue after-close: Microsoft (MSFT)<br>• Wed after-close: Meta (META)<br>• Thu after-close: Apple (AAPL), Amazon (AMZN)<br>• Alphabet (GOOGL) also this week<br>AI capex ROI = Nasdaq direction key. Mag 7 positioning light but valuations lowest in years. Strong AI revenue + disciplined capex could drive Nasdaq sharply higher.<br><br><b>③ Middle East:</b> Any weekend military escalation could trigger Monday oil spike and risk-off. Trump's decision on expanding Iran strikes is the biggest black swan.</span></p>
+<p class="src">来源：CNBC / CME FedWatch / EarningsWhispers / Aicoin</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">策略建议</span><span class="en" style="display:none">Strategy</span></h4>
+<div class="news-item"><span class="zh">📌 <b>超级周波动剧烈</b> — 财报前不宜重仓，观望为上</span><span class="en" style="display:none">📌 <b>Super week volatility</b> — Don't go heavy before earnings, stay cautious</span></div>
+<div class="news-item"><span class="zh">📌 <b>若FOMC维持不变 + 财报AI收入亮眼</b> — 可能是反弹契机，关注纳指</span><span class="en" style="display:none">📌 <b>If FOMC holds + strong AI revenue</b> — Rebound opportunity, watch Nasdaq</span></div>
+<div class="news-item"><span class="zh">📌 <b>半导体投降式抛售信号浮现</b> — 空头仓位已降至低位，财报超预期可能逼空反弹</span><span class="en" style="display:none">📌 <b>Semi capitulation signs</b> — Short positioning low, earnings beat could trigger short squeeze</span></div>
+<div class="news-item"><span class="zh">📌 <b>若AI capex无法兑现ROI</b> — 纳指或继续下探，防守为上</span><span class="en" style="display:none">📌 <b>If AI capex ROI disappoints</b> — Nasdaq could extend losses, play defense</span></div>
+<div class="news-item"><span class="zh">📌 <b>中东局势是最大黑天鹅</b> — 油价若再破$100，通胀预期升温，加息概率大增</span><span class="en" style="display:none">📌 <b>Middle East is biggest tail risk</b> — Oil above $100 again could fuel inflation, hike odds</span></div>
+<p class="src">来源：Eastmoney / BlackRock / CNBC</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, Sina Finance, Eastmoney, S&P Global, Forbes, FT, CNBC, EarningsWhispers, CME FedWatch, Investing.com</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tsla', sym:'NASDAQ:TSLA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(15,15,20,1)', gridColor: 'rgba(26,42,26,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

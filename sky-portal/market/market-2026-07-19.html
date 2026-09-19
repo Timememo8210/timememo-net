@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-07-19</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+<script>
+function switchLang(lang) {
+    const zhElems = document.querySelectorAll('.zh');
+    const enElems = document.querySelectorAll('.en');
+
+    if (lang === 'en') {
+        zhElems.forEach(el => el.style.display = 'none');
+        enElems.forEach(el => el.style.display = 'block');
+        document.getElementById('btn-zh').style.background = '#222';
+        document.getElementById('btn-zh').style.color = '#aaa';
+        document.getElementById('btn-en').style.background = '#333';
+        document.getElementById('btn-en').style.color = '#fff';
+    } else {
+        zhElems.forEach(el => el.style.display = 'block');
+        enElems.forEach(el => el.style.display = 'none');
+        document.getElementById('btn-zh').style.background = '#333';
+        document.getElementById('btn-zh').style.color = '#fff';
+        document.getElementById('btn-en').style.background = '#222';
+        document.getElementById('btn-en').style.color = '#aaa';
+    }
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI行情降温</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Market Cools</div>
+<div class="zh poster-data">• 谷歌大跌超4%<br>• 英伟达、Meta跌超2%<br>• 费城半导体指数进入技术性熊市</div>
+<div class="en poster-data" style="display:none">• Google down >4%<br>• NVDA, Meta down >2%<br>• SOX enters technical bear market</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔴</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">科技股回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Tech Correction</div>
+<div class="zh poster-data">• "日本股王"铠侠控股股价"腰斩"<br>• SpaceX跌超3%<br>• 亚马逊、亚马逊跌超2%</div>
+<div class="en poster-data" style="display:none">• Kioxia stock halved<br>• SpaceX down >3%<br>• Amazon down >2%</div>
+</div>
+<div class="poster-card" style="background:#0891b2">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">经济政策</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Economy Policy</div>
+<div class="zh poster-data">• IMF维持2026年全球经济增速3.1%<br>• 贸易政策不确定性仍是主要风险<br>• 全球多家央行进入降息周期</div>
+<div class="en poster-data" style="display:none">• IMF keeps 2026 global growth at 3.1%<br>• Trade policy uncertainty remains key risk<br>• Global central banks cutting rates</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🎯</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周预判</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Next Week Outlook</div>
+<div class="zh poster-data">• AI科技股或面临调整压力<br>• 弱美元环境下股市展现韧性<br>• 关注半导体产业链基本面</div>
+<div class="en poster-data" style="display:none">• Tech stocks may face pressure<br>• Markets resilient with weak USD<br>• Focus on semiconductor fundamentals</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-19 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>📉 <span class="zh">AI行情降温分析</span><span class="en" style="display:none">AI Market Cooling Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 谷歌Gemini开发进度落后，AI巨头集体回调</span><span class="en" style="display:none">1. Google Gemini Development Lags, AI Giants Rally Sells</span></h4>
+<p><span class="zh">据最新报道，谷歌在推出其最强旗舰AI模型Gemini 3.5 Pro的进度上已落后计划数月，导致投资者担忧AI技术发展不及预期。受此影响，谷歌股价大跌超4%，英伟达、Meta、亚马逊等AI相关科技股普遍下跌2-3%。市场对AI芯片需求的乐观预期正在降温，短期调整压力显现。</span><span class="en" style="display:none">Latest reports indicate Google is months behind schedule for its flagship Gemini 3.5 Pro AI model, causing investor concerns about AI development timeline. Google plunged over 4%, with Nvidia, Meta, Amazon and other AI-related tech stocks down 2-3%. Market optimism for AI chip demand is cooling, with short-term adjustment pressure emerging.</span></p>
+<p class="src">来源：新浪财经 / 华尔街见闻 / 路透社</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 费城半导体指数进入技术性熊市</span><span class="en" style="display:none">2. Philadelphia Semiconductor Index Enters Technical Bear Market</span></h4>
+<p><span class="zh">费城半导体指数(.SOX)近期持续下跌，已从高位下跌超过20%，正式进入技术性熊市。其中存储芯片龙头铠侠控股(Kioxia)一个月内股价"腰斩"，成为半导体板块重挫的缩影。分析师认为，这反映了市场对AI硬件需求过热预期的修正，但长期来看，AI基础设施建设仍是半导体产业的主要驱动力。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (.SOX) has been declining continuously, down over 20% from its high, officially entering a technical bear market. Storage chip leader Kioxia's stock has halved in a month, reflecting the broader semiconductor sector slump. Analysts believe this reflects market correction of overheated AI hardware demand expectations, but long-term, AI infrastructure remains the main driver.</span></p>
+<p class="src">来源：东方财富 / 同花顺财经 / 彭博社</p>
+</div>
+
+<h2>🔍 <span class="zh">地缘政治与经济政策</span><span class="en" style="display:none">Geopolitics & Economic Policy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. IMF维持全球经济增速预期，贸易政策仍是主要风险</span><span class="en" style="display:none">1. IMF Maintains Global Growth Outlook, Trade Policy Main Risk</span></h4>
+<p><span class="zh">国际货币基金组织(IMF)最新报告显示，维持2026年全球经济增长预期3.1%，但警告贸易政策不确定性仍是主要下行风险。报告指出，虽然关税冲击比最初宣布的要小，但仍是预测全球经济增长率放缓的重要原因。全球多家主要央行已进入降息周期，但政策利率仍高于疫情前水平。</span><span class="en" style="display:none">The IMF's latest report maintains the 2026 global growth forecast at 3.1%, but warns that trade policy uncertainty remains the main downside risk. The report notes that while tariff impacts are smaller than initially announced, they remain a key factor in the growth slowdown prediction. Major global central banks have entered rate-cutting cycles, but policy rates remain above pre-pandemic levels.</span></p>
+<p class="src">来源：国际货币基金组织 / 联合国报告 / BBC中文网</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. "中国式现代化与亚太经济合作"研讨会在深圳举办</span><span class="en" style="display:none">2. "Chinese Modernization & Asia-Pacific Economic Cooperation" Seminar Held in Shenzhen</span></h4>
+<p><span class="zh">百川论坛——"中国式现代化与亚太经济合作"2026研讨会在深圳前海举行。论坛聚焦亚太地区经济合作新模式，探讨在全球化背景下如何加强区域经济一体化。与会专家认为，尽管面临地缘政治紧张和贸易保护主义，亚太地区仍是全球经济增长的重要引擎。</span><span class="en" style="display:none">The "Chinese Modernization & Asia-Pacific Economic Cooperation" 2026 Seminar was held in Qianhai, Shenzhen. The forum focused on new models for Asia-Pacific economic cooperation, exploring how to strengthen regional economic integration in a globalized context. Experts believe that despite geopolitical tensions and protectionism, Asia-Pacific remains a key engine of global growth.</span></p>
+<p class="src">来源：中新网 / 深圳特区报 / 新华网</p>
+</div>
+
+<h2>📊 <span class="zh">市场预判与投资策略</span><span class="en" style="display:none">Market Outlook & Investment Strategy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期市场：科技股调整压力显现，关注基本面</span><span class="en" style="display:none">1. Short-term Market: Tech Stocks Face Pressure, Focus on Fundamentals</span></h4>
+<p><span class="zh">随着AI行情降温，科技股面临短期调整压力。投资者应更加关注企业基本面，包括AI技术的实际落地进度、营收增长可持续性以及估值合理性。建议关注具有核心技术优势和稳定现金流的龙头企业，避免追逐短期概念炒作。</span><span class="en" style="display:none">As the AI market cools, tech stocks face short-term adjustment pressure. Investors should focus more on fundamentals, including AI technology implementation progress, revenue growth sustainability, and valuation rationality. Recommended focus on leading companies with core technological advantages and stable cash flows.</span></p>
+<p class="src">来源：申万宏源 / 中信证券 / 华泰证券</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 中长期展望：AI基建仍是半导体产业核心驱动力</span><span class="en" style="display:none">2. Long-term Outlook: AI Infrastructure Remains Core Driver</span></h4>
+<p><span class="zh">尽管短期面临调整，但长期来看，AI基础设施建设仍是半导体产业的核心驱动力。据德勤《2026全球半导体行业趋势报告》显示，受AI基础设施建设驱动，2026年全球半导体销售额预计将达9750亿美元，创历史新高。企业应关注AI应用落地的实质性进展，以及产业链各环节的供需变化。</span><span class="en" style="display:none">Despite short-term adjustments, long-term AI infrastructure remains the core driver of the semiconductor industry. According to Deloitte's "2026 Global Semiconductor Industry Outlook," driven by AI infrastructure construction, global semiconductor sales are expected to reach $975 billion in 2026, a historic high.</span></p>
+<p class="src">来源：德勤中国 / Counterpoint / 半导体行业协会</p>
+</div>
+
+<h2>⚠️ <span class="zh">风险提示</span><span class="en" style="display:none">Risk Warnings</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 技术发展不及预期风险</span><span class="en" style="display:none">1. Technology Development Underperformance Risk</span></h4>
+<p><span class="zh">AI技术发展可能不及市场预期，导致相关企业估值回调。投资者需密切关注技术进展，避免盲目追高。</span><span class="en" style="display:none">AI technology development may underperform market expectations, leading to valuation adjustments for related companies. Investors should closely monitor technological progress and avoid盲目追高.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 全球贸易摩擦加剧风险</span><span class="en" style="display:none">2. Global Trade Tensions Escalation Risk</span></h4>
+<p><span class="zh">国际贸易政策不确定性可能加剧，影响全球产业链稳定。建议关注政策变化，适当分散投资地域风险。</span><span class="en" style="display:none">International trade policy uncertainty may intensify, affecting global industrial chain stability. Recommended monitoring policy changes and appropriately diversifying regional investment risks.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 半导体产能过剩风险</span><span class="en" style="display:none">3. Semiconductor Overcapacity Risk</span></h4>
+<p><span class="zh">随着各大厂商扩产，半导体行业可能面临阶段性产能过剩，价格竞争加剧。建议关注行业供需平衡变化。</span><span class="en" style="display:none">As major manufacturers expand production, the semiconductor industry may face阶段性产能过剩, with intensified price competition. Recommended monitoring industry supply-demand balance changes.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis | 📧 Contact: sky@timememo8210.github.io | 🌐 Website: /sky-portal/</p>
+</div>
+
+</div>
+</body>
+</html>

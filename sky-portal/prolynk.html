@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProLynk — 🏠 家居维修服务平台</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --accent-glow: rgba(108,138,255,0.15);
+    --green: #4ade80;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+    --purple: #a78bfa;
+    --red: #f87171;
+    --yellow: #facc15;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  body.lang-zh .en { display:none !important; }
+  body.lang-en .zh { display:none !important; }
+
+  /* Nav */
+  .nav {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; border-bottom:1px solid var(--border);
+    background:rgba(10,10,15,0.85); backdrop-filter:blur(16px);
+    position:sticky; top:0; z-index:100;
+  }
+  .nav a { color:var(--accent); text-decoration:none; font-size:0.9em; display:flex; align-items:center; gap:6px; }
+  .nav a:hover { text-decoration:underline; }
+  .nav-title { font-weight:700; font-size:1.1em; }
+
+  /* Lang toggle */
+  .lang-toggle {
+    display:flex; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+    border-radius:100px; overflow:hidden;
+  }
+  .lang-toggle button {
+    padding:5px 12px; border:none; background:transparent;
+    color:var(--text-dim); font-size:0.75rem; cursor:pointer; transition:all 0.25s; font-family:inherit;
+  }
+  .lang-toggle button.active { background:var(--accent); color:#fff; }
+
+  /* Hero */
+  .hero {
+    text-align:center; padding:50px 20px 30px; position:relative;
+  }
+  .hero::before {
+    content:''; position:absolute; top:0; left:50%;
+    transform:translateX(-50%); width:500px; height:500px;
+    background:radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events:none; z-index:0;
+  }
+  .hero h1 { font-size:2.4em; font-weight:700; letter-spacing:-0.02em; position:relative; z-index:1; }
+  .hero .subtitle { color:var(--text-dim); font-size:1.05em; margin-top:10px; position:relative; z-index:1; }
+  .hero .status-badge {
+    display:inline-block; margin-top:16px; padding:6px 16px; border-radius:100px;
+    background:rgba(251,146,60,0.15); color:var(--orange); font-size:0.85em; font-weight:500;
+    position:relative; z-index:1;
+  }
+
+  .container { max-width:960px; margin:0 auto; padding:0 20px 60px; }
+  .section-title {
+    font-size:1.25em; font-weight:600; margin:40px 0 16px;
+    display:flex; align-items:center; gap:10px;
+  }
+
+  /* Link cards */
+  .link-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px; }
+  .link-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:14px;
+    padding:20px; text-decoration:none; color:var(--text);
+    transition:all 0.25s ease; display:flex; align-items:center; gap:14px;
+  }
+  .link-card:hover { background:var(--card-hover); border-color:var(--accent); transform:translateY(-2px); box-shadow:0 8px 30px rgba(108,138,255,0.1); }
+  .link-icon { font-size:1.8em; flex-shrink:0; }
+  .link-title { font-weight:600; font-size:0.95em; }
+  .link-url { color:var(--text-dim); font-size:0.78em; margin-top:3px; word-break:break-all; }
+
+  /* Test report */
+  .report-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:16px;
+    padding:28px; margin-top:12px;
+  }
+  .report-card h3 { font-size:1.05em; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { padding:6px 0; font-size:0.9em; color:var(--text); display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+  .check-list li .icon { flex-shrink:0; }
+  .warn-list { list-style:none; padding:0; margin-top:8px; }
+  .warn-list li { padding:6px 0; font-size:0.9em; display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+  .warn-list li .num { flex-shrink:0; font-weight:700; color:var(--orange); min-width:20px; }
+  .score-bar {
+    margin-top:18px; display:flex; align-items:center; gap:14px;
+    padding-top:16px; border-top:1px solid var(--border);
+  }
+  .score-num { font-size:2em; font-weight:700; color:var(--yellow); }
+  .score-label { color:var(--text-dim); font-size:0.85em; }
+
+  /* Launch plan */
+  .plan-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px; margin-top:12px; }
+  .plan-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:14px;
+    padding:22px; position:relative;
+  }
+  .plan-card h3 { font-size:1em; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .plan-card .highlight { color:var(--green); font-weight:700; }
+  .cost-row { display:flex; justify-content:space-between; padding:4px 0; font-size:0.88em; border-bottom:1px solid var(--border); }
+  .cost-row:last-child { border-bottom:none; }
+  .cost-row .label { color:var(--text-dim); }
+  .cost-total { margin-top:12px; padding-top:10px; border-top:2px solid var(--accent); display:flex; justify-content:space-between; font-weight:700; font-size:1em; color:var(--green); }
+
+  /* Timeline */
+  .timeline-wrapper { margin-top:12px; }
+  .week-label { font-size:1em; font-weight:600; margin:20px 0 10px; color:var(--cyan); }
+  .week-label:first-child { margin-top:0; }
+  .day-row {
+    display:flex; align-items:center; gap:12px; padding:10px 14px;
+    background:var(--card-bg); border:1px solid var(--border); border-radius:10px;
+    margin-bottom:6px; font-size:0.88em; transition:background 0.2s;
+  }
+  .day-row:hover { background:var(--card-hover); }
+  .day-num { font-weight:700; color:var(--accent); min-width:55px; }
+  .day-task { flex:1; }
+  .day-who { color:var(--text-dim); min-width:80px; text-align:center; }
+  .day-cost { color:var(--green); min-width:60px; text-align:right; font-weight:500; }
+
+  /* Role cards */
+  .role-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:12px; margin-top:12px; }
+  .role-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:12px;
+    padding:18px;
+  }
+  .role-card .role-icon { font-size:1.4em; margin-bottom:6px; }
+  .role-card .role-name { font-weight:600; margin-bottom:6px; }
+  .role-card .role-tasks { color:var(--text-dim); font-size:0.85em; line-height:1.6; }
+
+  /* Total invest */
+  .invest-card {
+    background:linear-gradient(135deg, rgba(108,138,255,0.1), rgba(108,138,255,0.03));
+    border:1px solid rgba(108,138,255,0.2); border-radius:14px;
+    padding:22px; margin-top:16px;
+  }
+  .invest-card h3 { font-size:1em; font-weight:600; margin-bottom:12px; }
+  .invest-row { display:flex; justify-content:space-between; padding:6px 0; font-size:0.9em; }
+  .invest-row .label { color:var(--text-dim); }
+  .invest-row .value { font-weight:600; }
+
+  .footer { text-align:center; padding:40px 20px; color:var(--text-dim); font-size:0.85em; border-top:1px solid var(--border); }
+  .footer a { color:var(--accent); text-decoration:none; }
+  .footer a:hover { text-decoration:underline; }
+
+  @media (max-width:640px) {
+    .hero h1 { font-size:1.8em; }
+    .plan-grid { grid-template-columns:1fr; }
+    .link-grid { grid-template-columns:1fr; }
+    .role-grid { grid-template-columns:1fr; }
+    .day-row { flex-wrap:wrap; gap:6px; }
+    .day-who, .day-cost { min-width:auto; text-align:left; }
+    .nav { padding:12px 16px; }
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="nav">
+  <a href="index.html">← <span class="zh">Sky Portal</span><span class="en">Sky Portal</span></a>
+  <span class="nav-title">🏠 ProLynk</span>
+  <div class="lang-toggle">
+    <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>🏠 ProLynk</h1>
+  <div class="subtitle">
+    <span class="zh">家居维修服务平台 — 连接房主与专业维修师傅</span>
+    <span class="en">Home Repair Service Platform — Connecting Homeowners with Pros</span>
+  </div>
+  <div class="status-badge">
+    <span class="zh">🔧 工程调试中</span>
+    <span class="en">🔧 Engineering Debug</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Section 1: Overview & Links -->
+  <div class="section-title">
+    <span>📋</span>
+    <span class="zh">项目概览 & 快速链接</span>
+    <span class="en">Project Overview & Quick Links</span>
+  </div>
+  <div style="margin-bottom:16px;color:var(--text-dim);font-size:0.9em;">
+    <span class="zh">合作方：<strong style="color:var(--text);">Daniel Zhu (瑜杰)</strong></span>
+    <span class="en">Partner: <strong style="color:var(--text);">Daniel Zhu (瑜杰)</strong></span>
+  </div>
+  <div class="link-grid">
+    <a class="link-card" href="https://lynksync.ie" target="_blank">
+      <div class="link-icon">🌐</div>
+      <div>
+        <div class="link-title"><span class="zh">工程调试版</span><span class="en">Engineering Build</span></div>
+        <div class="link-url">lynksync.ie</div>
+      </div>
+    </a>
+    <a class="link-card" href="prolynk-testing-2026-04-25.html" target="_blank" style="border: 1px solid rgba(74,222,128,0.3); background: rgba(74,222,128,0.05);">
+      <div class="link-icon">🆕</div>
+      <div>
+        <div class="link-title"><span class="zh">第二轮深度测试报告 (04-25)</span><span class="en">Round 2 Deep Testing Report</span></div>
+        <div class="link-url">PRO/HO登录 + 报价流程 + 8张截图 + AI建议 · 7.0/10 · NEW</div>
+      </div>
+    </a>
+    <a class="link-card" href="projects/danielproject__codex.html" target="_blank" style="border: 1px solid rgba(34,211,238,0.35); background: rgba(34,211,238,0.06);">
+      <div class="link-icon">🧪</div>
+      <div>
+        <div class="link-title"><span class="zh">Daniel Codex 工作台</span><span class="en">Daniel Codex Lab</span></div>
+        <div class="link-url">每日更新 + Gemini OCR 表格 + 测试结果存根</div>
+      </div>
+    </a>
+    <a class="link-card" href="prolynk-qa-report.html" target="_blank">
+      <div class="link-icon">🔍</div>
+      <div>
+        <div class="link-title"><span class="zh">第一轮QA测试报告 (04-18)</span><span class="en">Round 1 QA Report</span></div>
+        <div class="link-url">注册/登录Bug清单 + 修复建议 · 7.5/10</div>
+      </div>
+    </a>
+    <a class="link-card" href="prolynk-qa-report.pdf" target="_blank">
+      <div class="link-icon">📄</div>
+      <div>
+        <div class="link-title"><span class="zh">QA报告 PDF版</span><span class="en">QA Report PDF</span></div>
+        <div class="link-url">可下载PDF版发给合作方</div>
+      </div>
+    </a>
+    <a class="link-card" href="https://prolynk-report.vercel.app" target="_blank">
+      <div class="link-icon">📊</div>
+      <div>
+        <div class="link-title"><span class="zh">市场调研报告</span><span class="en">Market Research Report</span></div>
+        <div class="link-url">prolynk-report.vercel.app</div>
+      </div>
+    </a>
+    <a class="link-card" href="research/prolynk-market-analysis.html">
+      <div class="link-icon">📋</div>
+      <div>
+        <div class="link-title"><span class="zh">竞品深度分析</span><span class="en">Competitor Deep Analysis</span></div>
+        <div class="link-url">sky-portal/research/prolynk-market-analysis.html</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Section 2: Test Report -->
+  <div class="section-title">
+    <span>🔍</span>
+    <span class="zh">网站测试报告</span>
+    <span class="en">Website Test Report</span>
+    <span style="color:var(--text-dim);font-size:0.8em;font-weight:400;">2026-04-17</span>
+  </div>
+  <div class="report-card">
+    <h3 style="color:var(--green);">✅ <span class="zh">做得好的</span><span class="en">What's Good</span></h3>
+    <ul class="check-list">
+      <li><span class="icon">✅</span><span class="zh">干净清爽的设计，配色舒适</span><span class="en">Clean design with comfortable color palette</span></li>
+      <li><span class="icon">✅</span><span class="zh">服务分类丰富（Plumbing/Electrical/Building等18个分类）</span><span class="en">Rich service categories (Plumbing/Electrical/Building, 18 total)</span></li>
+      <li><span class="icon">✅</span><span class="zh">搜索框 + Eircode 定位</span><span class="en">Search box + Eircode location</span></li>
+      <li><span class="icon">✅</span><span class="zh">Before & After 对比滑块功能很酷</span><span class="en">Before & After comparison slider — very cool</span></li>
+      <li><span class="icon">✅</span><span class="zh">Smart Quote 示例展示很直观</span><span class="en">Smart Quote demo is intuitive</span></li>
+      <li><span class="icon">✅</span><span class="zh">项目进度追踪清晰</span><span class="en">Clear project progress tracking</span></li>
+      <li><span class="icon">✅</span><span class="zh">Cookie consent、ToS、Privacy Policy 都有</span><span class="en">Cookie consent, ToS, Privacy Policy all present</span></li>
+      <li><span class="icon">✅</span><span class="zh">Homeowner 注册流程简洁，支持 Google 登录</span><span class="en">Simple homeowner registration with Google login</span></li>
+      <li><span class="icon">✅</span><span class="zh">Pro 端三步注册流程清晰</span><span class="en">Pro 3-step registration is clear</span></li>
+      <li><span class="icon">✅</span><span class="zh">密码验证实时反馈</span><span class="en">Real-time password validation feedback</span></li>
+    </ul>
+
+    <h3 style="color:var(--orange);margin-top:20px;">⚠️ <span class="zh">待修复（优先级排序）</span><span class="en">To Fix (Priority Order)</span></h3>
+    <ol class="warn-list">
+      <li><span class="num">1.</span><span class="zh"><strong>Signup 链接跳转 bug</strong>（跳到 Tesla 网站）— 需要修复 href</span><span class="en"><strong>Signup link redirect bug</strong> (goes to Tesla site) — fix href</span></li>
+      <li><span class="num">2.</span><span class="zh"><strong>/pro-registration 需要登录才能访问</strong> — 应允许未登录用户进入</span><span class="en"><strong>/pro-registration requires login</strong> — should allow unauthenticated access</span></li>
+      <li><span class="num">3.</span><span class="zh"><strong>Home Passport 功能尚未在页面上看到</strong></span><span class="en"><strong>Home Passport feature not visible on site</strong></span></li>
+      <li><span class="num">4.</span><span class="zh"><strong>首页文案本地化</strong>（Maynooth/Kildare/Dublin）需美国版</span><span class="en"><strong>Homepage localization</strong> (Maynooth/Kildare/Dublin) needs US version</span></li>
+    </ol>
+
+    <div class="score-bar">
+      <div class="score-num">7.5<span style="font-size:0.5em;color:var(--text-dim);">/10</span></div>
+      <div class="score-label"><span class="zh">整体评分 — 基础扎实，修复细节后可上线</span><span class="en">Overall — solid foundation, ready after fixes</span></div>
+    </div>
+  </div>
+
+  <!-- Section: Latest Meeting Notes -->
+  <div class="section-title">
+    <span>📝</span>
+    <span class="zh">最新对话记录（Get笔记）</span>
+    <span class="en">Latest Meeting Notes (Get笔记)</span>
+    <span style="color:var(--text-dim);font-size:0.8em;font-weight:400;">2026-05-07 ~ 06-15</span>
+  </div>
+
+  <!-- Note: 6/15 AI开发经验分享 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--cyan);">
+    <h3 style="color:var(--cyan);">🤖 <span class="zh">AI辅助开发经验分享 — blink agent + MCP API</span><span class="en">AI Dev Workflow — blink agent + MCP API</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-06-15 · <span class="zh">约39分钟</span><span class="en">~39 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🔧 <span class="zh"><strong style="color:var(--text)">blink agent API + MCP API 开发基本完成</strong> — MCP是对接OpenAI/各AI Agent的通用协议，降低对接出错率</span><span class="en"><strong style="color:var(--text)">blink agent API + MCP API basically complete</strong> — MCP is universal protocol for OpenAI/AI Agent integration</span></li>
+      <li>🧪 <span class="zh"><strong style="color:var(--text)">纯JSON文字测试方案</strong> — 替换Playwright浏览器测试，速度更快，API同时供开发者测试和未来AI调用</span><span class="en"><strong style="color:var(--text)">Pure JSON test plan</strong> — replacing Playwright browser tests, faster, API serves both dev testing and future AI calls</span></li>
+      <li>🪟 <span class="zh"><strong style="color:var(--text)">4窗口并行 + worktree版本管理</strong> — 每个ChatGPT窗口独立任务，worktree避免代码冲突</span><span class="en"><strong style="color:var(--text)">4-window parallel + worktree</strong> — each ChatGPT window for independent task, worktree avoids code conflicts</span></li>
+      <li>🔑 <span class="zh"><strong style="color:var(--text)">密钥安全</strong> — 公钥写代码配置，私钥存Cloudflare密钥库，AI不接触敏感信息</span><span class="en"><strong style="color:var(--text)">Key security</strong> — public keys in code config, private keys in Cloudflare vault, AI never touches secrets</span></li>
+      <li>🌐 <span class="zh"><strong style="color:var(--text)">双环境部署</strong> — engineering(lynkthink.ie)验证后再合并到production</span><span class="en"><strong style="color:var(--text)">Dual-env deployment</strong> — verify on engineering (lynkthink.ie) before merging to production</span></li>
+      <li>🗺️ <span class="zh"><strong style="color:var(--text)">Google Maps Pro抓取</strong> — 输入工种/城市/数量自动抓取，生成个人页面，Pro可一键认领</span><span class="en"><strong style="color:var(--text)">Google Maps Pro scraping</strong> — auto-scrape by trade/city/count, generate profile pages, one-click claim</span></li>
+      <li>📸 <span class="zh"><strong style="color:var(--text)">存储分层</strong> — Cloudflare R2存照片（便宜大容量），Supabase存敏感文档（高加密）</span><span class="en"><strong style="color:var(--text)">Storage tiers</strong> — Cloudflare R2 for photos (cheap/large), Supabase for sensitive docs (encrypted)</span></li>
+      <li>💡 <span class="zh"><strong style="color:var(--text)">模型选型</strong> — Gemini Flash 2.5做图片识别（比OCR便宜），Whisper做语音识别</span><span class="en"><strong style="color:var(--text)">Model selection</strong> — Gemini Flash 2.5 for image recognition (cheaper than OCR), Whisper for speech</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 6/11 半导体+创业 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--purple);">
+    <h3 style="color:var(--purple);">💼 <span class="zh">半导体行业动态 + 创业项目进展 + AI模型升级</span><span class="en">Semiconductor Update + Startup Progress + AI Model Upgrade</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-06-11 · <span class="zh">约36分钟</span><span class="en">~36 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🏢 <span class="zh"><strong style="color:var(--text)">英特尔18A大单</strong> — 刚签大单更可能是封装业务，TD整合团队仅150人，竞争力落后台积电（人才/成本/产出三重劣势）</span><span class="en"><strong style="color:var(--text)">Intel 18A deal</strong> — likely packaging, TD integration team only 150, lagging TSMC (talent/cost/output)</span></li>
+      <li>🤖 <span class="zh"><strong style="color:var(--text)">AI模型升级建议</strong> — 6/22前升级到200额度opus性价比极高（成本仅为API付费的1/5-1/10）</span><span class="en"><strong style="color:var(--text)">AI model upgrade</strong> — upgrade to 200 opus quota before 6/22, cost 1/5-1/10 of API pricing</span></li>
+      <li>🚀 <span class="zh"><strong style="color:var(--text)">项目约定</strong> — 周末线上启动共同项目</span><span class="en"><strong style="color:var(--text)">Project agreement</strong> — start joint project online this weekend</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 6/3 域名+登录+市场 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--accent);">
+    <h3 style="color:var(--accent);">🔗 <span class="zh">域名部署 + 统一账号登录 + 市场拓展节奏</span><span class="en">Domain Setup + Unified Login + Market Expansion</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-06-03 · <span class="zh">约37分钟</span><span class="en">~37 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🌐 <span class="zh"><strong style="color:var(--text)">域名分配</strong> — domain.ie + domain.com双域名，.com预留后续使用，CloudFlare免费版共享权限</span><span class="en"><strong style="color:var(--text)">Domain allocation</strong> — domain.ie + domain.com, .com reserved, CloudFlare free tier for shared access</span></li>
+      <li>🔐 <span class="zh"><strong style="color:var(--text)">统一账号体系</strong> — Domic配置独立ProLink账号，支持ProLink快捷登录+Google快捷登录，一套账号多端使用</span><span class="en"><strong style="color:var(--text)">Unified accounts</strong> — Domic with independent ProLink account, ProLink + Google login, one account multi-device</span></li>
+      <li>📍 <span class="zh"><strong style="color:var(--text)">市场节奏</strong> — 2026年内爱尔兰站稳脚跟 → 明年英国 → 后续美国。成功标准：稳定现金流覆盖成本</span><span class="en"><strong style="color:var(--text)">Market pace</strong> — 2026 Ireland → 2027 UK → later US. Success = stable cashflow covering costs</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 6/2 WhatsApp审核 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--orange);">
+    <h3 style="color:var(--orange);">📱 <span class="zh">WhatsApp审核修正 + 产品功能优化</span><span class="en">WhatsApp Audit Fix + Product Optimization</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-06-02 · <span class="zh">约13分钟</span><span class="en">~13 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>❌ <span class="zh"><strong style="color:var(--text)">WhatsApp被拒原因</strong> — 网站未清晰标注公司地址，API权限申请范围过大</span><span class="en"><strong style="color:var(--text)">WhatsApp rejection</strong> — no company address on site, API scope too broad</span></li>
+      <li>✅ <span class="zh"><strong style="color:var(--text)">二次申请</strong> — 更新ToS/Privacy Policy，缩小权限范围到仅WhatsApp商业账号权限，已重新提交</span><span class="en"><strong style="color:var(--text)">Resubmitted</strong> — updated ToS/Privacy, narrowed API scope to WhatsApp Business only</span></li>
+      <li>💰 <span class="zh"><strong style="color:var(--text)">催审方案</strong> — 通过日投2元广告获得官方沟通渠道，下周第三次催促审核</span><span class="en"><strong style="color:var(--text)">Expedite plan</strong> — €2/day ads for official support channel, follow up next week</span></li>
+      <li>🎨 <span class="zh"><strong style="color:var(--text)">自动生成功能</strong> — 项目完成后自动生成项目页+对比照片，Whisper语音输入，Gemini Flash生成内容</span><span class="en"><strong style="color:var(--text)">Auto-generation</strong> — auto project page + comparison photos, Whisper voice input, Gemini Flash</span></li>
+      <li>🏆 <span class="zh"><strong style="color:var(--text)">差异化定位</strong> — 专注案例前后效果对比和作品展示，不放客户联系方式，自动对齐前后对比图</span><span class="en"><strong style="color:var(--text)">Differentiation</strong> — focus on before/after showcase, no client contact info, auto-aligned comparison</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 5/22 VS Code工作流 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--pink);">
+    <h3 style="color:var(--pink);">💻 <span class="zh">VS Code + Codex + Cloud Code AI编码工作流</span><span class="en">VS Code + Codex + Cloud Code AI Coding Workflow</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-22 · <span class="zh">约23分钟</span><span class="en">~23 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🖥️ <span class="zh"><strong style="color:var(--text)">统一IDE</strong> — VS Code统一管理所有AI编码工具（Cloud Code写代码+review，Codex在Terminal执行修改），避免多窗口混乱</span><span class="en"><strong style="color:var(--text)">Unified IDE</strong> — VS Code manages all AI tools (Cloud Code for code/review, Codex in Terminal for execution)</span></li>
+      <li>🔀 <span class="zh"><strong style="color:var(--text)">多Terminal分栏</strong> — 可拆分2-3个Terminal同时运行多个Codex实例</span><span class="en"><strong style="color:var(--text)">Multi-terminal</strong> — split into 2-3 terminals running multiple Codex instances</span></li>
+      <li>📡 <span class="zh"><strong style="color:var(--text)">远程开发</strong> — 代码存Mac mini（24h不关机），通过Tailscale+SSH远程访问</span><span class="en"><strong style="color:var(--text)">Remote dev</strong> — code on Mac mini (24/7), Tailscale + SSH remote access</span></li>
+      <li>📱 <span class="zh"><strong style="color:var(--text)">移动端触发</strong> — 手机ChatGPT集成Codex，可直接下发任务到Mac mini</span><span class="en"><strong style="color:var(--text)">Mobile trigger</strong> — ChatGPT mobile with Codex, dispatch tasks to Mac mini remotely</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 5/20 核心产品机制 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--green);">
+    <h3 style="color:var(--green);">⚙️ <span class="zh">ProLynk核心机制设计 — 30天保修 + 订阅 + 跳单抑制</span><span class="en">ProLynk Core Mechanics — 30-Day Warranty + Subscription + Anti-Skip</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-20 · <span class="zh">约64分钟</span><span class="en">~64 min</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">📱 <span class="zh">WhatsApp审核推进</span><span class="en">WhatsApp Audit</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">公司名link sync与网站名prolink不匹配导致延迟。订阅Facebook蓝标服务获取人工客服催审，已在网站底部标注所有权归属</span>
+          <span class="en">Company name mismatch (link sync vs prolink) causing delay. Subscribed Facebook Blue for human support, added ownership notice on site</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🛡️ <span class="zh">30天保修流程</span><span class="en">30-Day Warranty</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">用户上传问题照片→AI判断→先安排原PRO返修（2周）→超时走平台保修（仅人工费）。保修Pro获排单优先权+Warranty Super Pro标识，平台仅收6成佣金</span>
+          <span class="en">User uploads photo → AI verifies → original PRO fixes first (2 weeks) → platform warranty (labor only). Warranty PRO gets priority + Super Pro badge, platform takes 60% commission</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">💰 <span class="zh">订阅+保修资金池</span><span class="en">Subscription + Warranty Pool</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">10欧/20欧月订阅，佣金的80%返还到Pro钱包存入资金池，满200欧获Warranty Assurance标签。筛选高质量Pro，增加平台粘性</span>
+          <span class="en">€10/€20 monthly, 80% commission rebate to Pro wallet → warranty pool. €200 threshold for Assurance badge. Filters quality Pros, increases retention</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🚫 <span class="zh">跳单抑制方案</span><span class="en">Anti-Skip-Order</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">保修绑定用户习惯 + 首单返5-10欧平台钱包（不可提现，仅限平台内使用），培养用户平台下单习惯</span>
+          <span class="en">Warranty binds users + €5-10 first-order rebate (platform-only wallet), builds platform ordering habit</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">⭐ <span class="zh">评价体系</span><span class="en">Review System</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">完成50欧以上真实订单才允许评价，防止刷单。平台review + Google Map评分双展示</span>
+          <span class="en">Only ≥€50 real orders can leave reviews. Platform reviews + Google Maps ratings both displayed</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">📱 <span class="zh">移动端开发</span><span class="en">Mobile Dev</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">Capacitor封装，安卓模拟器已可用，iOS同步开发。房东版/PRO版分两个APP，共用一套代码，环境变量切换。上线前找专人小范围测试</span>
+          <span class="en">Capacitor wrapper, Android emulator working, iOS in parallel. Homeowner/Pro as separate apps, shared codebase with env switching. Dedicated testing before launch</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:12px 16px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:10px;font-size:0.88em;line-height:1.6;">
+      <strong style="color:var(--green);">🎯 <span class="zh">Domic核心上线计划</span><span class="en">Domic Launch Plan</span>：</strong>
+      <span class="zh">最迟7月初出可用版本，核心三功能：接收ProLynk文件自动传输→按时间纵向滚动维护时间线；接收邮件转发/手动上传收据PDF；AI自动识别内容归档。Cloudflare R2存储，先做内部测试再迭代</span>
+      <span class="en">Latest July for MVP. 3 core features: auto-import ProLynk files → vertical maintenance timeline; email forwarding/PDF upload; AI auto-classify. Cloudflare R2 storage, internal testing first</span>
+    </div>
+  </div>
+
+  <!-- Note: 5/18 AI战略提案 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--yellow);">
+    <h3 style="color:var(--yellow);">📊 <span class="zh">面向MDCE领导层的AI战略提案准备</span><span class="en">AI Strategy Proposal for MDCE Leadership</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-18 · <span class="zh">约20分钟</span><span class="en">~20 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🎯 <span class="zh"><strong style="color:var(--text)">核心理念</strong> — 「不是为AI做产品，而是用AI来做产品」，两件事：做得更快 + 扩大边界</span><span class="en"><strong style="color:var(--text)">Core idea</strong> — "Not making products FOR AI, but USING AI to make products" — faster + expand boundaries</span></li>
+      <li>🏢 <span class="zh"><strong style="color:var(--text)">切入点</strong> — 从已有的Microsoft 365 Copilot开始（合规、安全），M365 App智能安排会议/预定会议室</span><span class="en"><strong style="color:var(--text)">Entry point</strong> — start with existing M365 Copilot (compliant, secure), smart meeting scheduling</span></li>
+      <li>📋 <span class="zh"><strong style="color:var(--text)">最终交付</strong> — 高管层级的演示报告给MDCE部门领导</span><span class="en"><strong style="color:var(--text)">Deliverable</strong> — executive-level presentation for MDCE leadership</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 5/13 移民+创业 -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--cyan);">
+    <h3 style="color:var(--cyan);">🌍 <span class="zh">移民规划 + 海外创业布局 + AI趋势判断</span><span class="en">Immigration Planning + Global Startup + AI Trends</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-13 · <span class="zh">约12分钟</span><span class="en">~12 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🇺🇸 <span class="zh"><strong style="color:var(--text)">父母移民</strong> — 十年签证足够（6个月/次），绿卡移民监是负担，不申请</span><span class="en"><strong style="color:var(--text)">Parents</strong> — 10-year visa sufficient (6mo/visit), green card residency requirement is burden, not applying</span></li>
+      <li>🇮🇪 <span class="zh"><strong style="color:var(--text)">爱尔兰税务优势</strong> — 非居民境外收入不征税，比美国全球征税友好</span><span class="en"><strong style="color:var(--text)">Ireland tax advantage</strong> — non-resident foreign income not taxed, friendlier than US worldwide taxation</span></li>
+      <li>🤖 <span class="zh"><strong style="color:var(--text)">AI趋势预判</strong> — 1-2年内AI token价格降至当前1/10，AI Agent Worker可替代大量基础工作</span><span class="en"><strong style="color:var(--text)">AI prediction</strong> — AI token prices drop to 1/10 in 1-2 years, AI Agent Workers replace basic work</span></li>
+      <li>📍 <span class="zh"><strong style="color:var(--text)">未来选址</strong> — 新加坡（直飞南京5h，生活环境好），约定11月复盘AI趋势判断</span><span class="en"><strong style="color:var(--text)">Future location</strong> — Singapore (5h to Nanjing, great livability), review AI predictions in Nov</span></li>
+    </ul>
+  </div>
+
+  <!-- Note: 5/12 ProLynk自动化+APP -->
+  <div class="report-card" style="margin-bottom:16px;border-left:3px solid var(--accent);">
+    <h3 style="color:var(--accent);">🚀 <span class="zh">ProLynk自动化对接 + APP开发 + 设备采购</span><span class="en">ProLynk Automation + APP Dev + Hardware</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-12 · <span class="zh">约68分钟</span><span class="en">~68 min</span></div>
+    <ul style="list-style:none;padding:0;color:var(--text-dim);font-size:0.88em;line-height:1.8;">
+      <li>🔗 <span class="zh"><strong style="color:var(--text)">Google Map→ProLynk自动化</strong> — 一键推送PRO信息，自动生成表格+profile页，支持批量上传（最多7-8个）</span><span class="en"><strong style="color:var(--text)">Google Map → ProLynk automation</strong> — one-click PRO push, auto table + profile, batch upload (up to 7-8)</span></li>
+      <li>📄 <span class="zh"><strong style="color:var(--text)">自动文档打包</strong> — 30天质保单+收据+PRO认证卡片+项目展示页，上传到Domic维护历史+Hash防伪</span><span class="en"><strong style="color:var(--text)">Auto document pack</strong> — 30-day warranty + receipt + PRO cert + project page, upload to Domic + Hash verification</span></li>
+      <li>📱 <span class="zh"><strong style="color:var(--text)">APP开发</strong> — Capacitor封装，房东版/PRO版分两个APP（PRO端低评分不影响整体），苹果开发者账号99美元/年</span><span class="en"><strong style="color:var(--text)">APP dev</strong> — Capacitor wrapper, separate Homeowner/Pro apps (Pro low ratings isolated), Apple dev $99/yr</span></li>
+      <li>🖥️ <span class="zh"><strong style="color:var(--text)">设备采购</strong> — 计划订购48G Mac mini Pro（6月底前下单，8周交货），8T外接SSD做家庭共享存储</span><span class="en"><strong style="color:var(--text)">Hardware</strong> — ordering 48GB Mac mini Pro (order by June, 8-week delivery), 8TB shared SSD</span></li>
+      <li>📋 <span class="zh"><strong style="color:var(--text)">HTML替代Markdown</strong> — 探讨用HTML作为信息载体替代Markdown的产品构思</span><span class="en"><strong style="color:var(--text)">HTML vs Markdown</strong> — exploring HTML as information carrier replacing Markdown</span></li>
+    </ul>
+  </div>
+
+  <!-- Note 1: ProLynk + Domic 生态规划 -->
+  <div class="report-card" style="margin-bottom:16px;">
+    <h3 style="color:var(--cyan);">🔄 <span class="zh">ProLynk × Domic 双轮驱动生态规划</span><span class="en">ProLynk × Domic Dual-Engine Ecosystem</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-07 · <span class="zh">项目战略文档</span><span class="en">Strategic Document</span></div>
+    <p style="font-size:0.9em;line-height:1.7;margin-bottom:14px;">
+      <span class="zh">ProLynk（交易撮合平台）+ Domic（数字化房产护照）形成完美闭环：<strong style="color:var(--green);">ProLynk 是矛</strong>，负责开疆拓土和高频交易；<strong style="color:var(--accent);">Domic 是盾</strong>，负责资产沉淀和留存用户。</span>
+      <span class="en">ProLynk (transaction platform) + Domic (digital property passport) form a perfect loop: <strong style="color:var(--green);">ProLynk is the spear</strong> for growth and transactions; <strong style="color:var(--accent);">Domic is the shield</strong> for asset retention.</span>
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🏦 <span class="zh">数字化资产保险库</span><span class="en">Digital Vault</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">自动导入 + 手动上传的结构化档案，区分设备型号/安装日期/维保周期，Cloudflare R2 存高清施工对比图，Hash 校验确保文档真实性</span>
+          <span class="en">Auto-import + manual upload structured archives, device model/install date/warranty tracking, Cloudflare R2 for HD before/after photos, Hash verification for document authenticity</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🏠 <span class="zh">业主主动增值</span><span class="en">Homeowner Empowerment</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">AI 房屋健康分 + 维护路线图，智能升级推荐反哺 ProLynk，一键交接生成「房屋履历报告」用于出售/出租</span>
+          <span class="en">AI Home Health Score + maintenance roadmap, smart upgrade recommendations feed back to ProLynk, one-click Digital Handover for sale/rent</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">⭐ <span class="zh">PRO 信用背书</span><span class="en">PRO Loyalty</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">优质服务永久记录在业主 Domic 档案，「30-Day Guaranteed」高转化标签，设备保养到期优先推荐复购</span>
+          <span class="en">Quality service permanently recorded in homeowner's Domic, "30-Day Guaranteed" tag, priority repeat booking when warranty expires</span>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🤖 <span class="zh">AI + 技术架构</span><span class="en">AI + Tech Stack</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">Next.js 前端 + Supabase 数据库 + Cloudflare R2 存储，RAG 智能解析纸质单据和设备铭牌，AI 自动提取品牌/保修信息</span>
+          <span class="en">Next.js frontend + Supabase DB + Cloudflare R2 storage, RAG-powered intelligent parsing of paper receipts and equipment nameplates</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:12px 16px;background:rgba(108,138,255,0.08);border:1px solid rgba(108,138,255,0.2);border-radius:10px;font-size:0.88em;line-height:1.6;">
+      <strong style="color:var(--accent);">💡 <span class="zh">市场策略</span><span class="en">Market Strategy</span>：</span>
+      <span class="zh">立足爱尔兰社区网络效应（「您社区已有 35% 家庭升级了外墙保温」），对接欧盟 EPBD 建筑能效指令，Domic 免费/Freemium + ProLynk 撮合现金流 + 未来保险公司数据变现</span>
+      <span class="en">Community network effect in Ireland, EU EPBD compliance, Domic free/Freemium + ProLynk transaction cashflow + future insurance data monetization</span>
+    </div>
+  </div>
+
+  <!-- Note 2: 5/8 meeting -->
+  <div class="report-card">
+    <h3 style="color:var(--purple);">📞 <span class="zh">对话记录 — 入籍、AI战略、项目合作</span><span class="en">Meeting — Citizenship, AI Strategy, Partnership</span></h3>
+    <div style="color:var(--text-dim);font-size:0.82em;margin-bottom:12px;">2026-05-08 00:27 ~ 00:52 · <span class="zh">约25分钟</span><span class="en">~25 min</span></div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">
+      <!-- Citizenship -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🇺🇸 <span class="zh">入籍决策</span><span class="en">Citizenship Decision</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">确认本人入籍、配偶保留中国国籍。不钻双护照规则漏洞，正大光明申请。顾虑：上海户口/房产处理、回国签证。近期将提交申请。</span>
+          <span class="en">Confirmed: self applies for US citizenship, spouse keeps Chinese nationality. No dual passport loophole. Shanghai hukou/property concerns. Applying soon.</span>
+        </div>
+      </div>
+
+      <!-- AI Strategy -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">🤖 <span class="zh">公司AI战略项目</span><span class="en">Corporate AI Strategy</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">Chris Os 邀请牵头 MDC 部门 AI 战略。核心障碍：数据库隔离，AI 只能访问共享盘和邮件。计划从小处着手，先打通 1-2 个高频功能验证效果。</span>
+          <span class="en">Chris Os invited to lead MDC dept AI strategy. Key blocker: siloed databases. Plan: start small, unblock 1-2 high-frequency features first.</span>
+        </div>
+      </div>
+
+      <!-- Tech & Cost -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">☁️ <span class="zh">独立网站技术选型</span><span class="en">Indie Site Tech Stack</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">Supabase（数据库）+ Cloudflare（存储部署，月费 ¥5-20）+ Stripe（支付 3%/笔）。当前不谈股权，先做起来。</span>
+          <span class="en">Supabase (DB) + Cloudflare (storage/deploy, ¥5-20/mo) + Stripe (3%/txn). No equity discussion yet, build first.</span>
+        </div>
+      </div>
+
+      <!-- Mindset -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;">
+        <div style="font-weight:600;font-size:0.9em;margin-bottom:6px;">💭 <span class="zh">核心共识</span><span class="en">Key Consensus</span></div>
+        <div style="color:var(--text-dim);font-size:0.82em;line-height:1.6;">
+          <span class="zh">做自己的项目，所有障碍都是技术问题，不需要处理公司内耗。如果爱尔兰跑通，可复制到英国→美国。AI 模型每月快速进化。</span>
+          <span class="en">Own project = all obstacles are technical, no corporate politics. If Ireland works, replicate to UK → US. AI models evolve fast monthly.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;padding:12px 16px;background:rgba(164,139,250,0.08);border:1px solid rgba(164,139,250,0.2);border-radius:10px;font-size:0.88em;line-height:1.6;">
+      <strong style="color:var(--purple);">✨ <span class="zh">金句</span><span class="en">Quotes</span>：</strong>
+      <span class="zh">「做自己的项目，所有障碍都是技术问题；在公司做项目，大部分时间都用来处理内部政治阻碍。」—— 「独立做出可用的产品，这种成就感是公司工作无法替代的。」</span>
+      <span class="en">"Own projects: all obstacles are technical. Corporate: most time spent on politics." — "Building a usable product independently — this sense of achievement is irreplaceable."</span>
+    </div>
+  </div>
+
+  <!-- Section 3: US Launch Plan -->
+  <div class="section-title">
+    <span>🚀</span>
+    <span class="zh">美国启动计划</span>
+    <span class="en">US Launch Plan</span>
+  </div>
+
+  <!-- LLC + Cost + Total cards -->
+  <div class="plan-grid">
+    <!-- LLC Card -->
+    <div class="plan-card">
+      <h3>🏛️ <span class="zh">注册公司（Oregon LLC）</span><span class="en">Company Registration (Oregon LLC)</span></h3>
+      <div class="cost-row"><span class="label"><span class="zh">LLC 注册费</span><span class="en">LLC Filing Fee</span></span><span>$100 <span class="zh">（一次性）</span><span class="en">(one-time)</span></span></div>
+      <div class="cost-row"><span class="label"><span class="zh">年报费</span><span class="en">Annual Report</span></span><span>$100/<span class="zh">年</span><span class="en">yr</span></span></div>
+      <div class="cost-row"><span class="label">EIN</span><span class="zh" style="color:var(--green);">免费在线申请</span><span class="en" style="color:var(--green);">Free online</span></div>
+      <div class="cost-row"><span class="label"><span class="zh">Registered Agent</span><span class="en">Registered Agent</span></span><span class="zh" style="color:var(--green);">用自己地址（免费）</span><span class="en" style="color:var(--green);">Own address (free)</span></div>
+      <div class="cost-row"><span class="label"><span class="zh">批准时间</span><span class="en">Approval</span></span><span>1-3 <span class="zh">个工作日</span><span class="en">business days</span></span></div>
+    </div>
+
+    <!-- Monthly Cost Card -->
+    <div class="plan-card">
+      <h3>💰 <span class="zh">月度最低运营成本</span><span class="en">Min Monthly Operating Cost</span></h3>
+      <div class="cost-row"><span class="label"><span class="zh">LLC 年报摊月</span><span class="en">LLC Annual (monthly)</span></span><span>$8</span></div>
+      <div class="cost-row"><span class="label"><span class="zh">域名</span><span class="en">Domain</span></span><span>$1</span></div>
+      <div class="cost-row"><span class="label"><span class="zh">服务器</span><span class="en">Server</span></span><span>$0-20</span></div>
+      <div class="cost-row"><span class="label"><span class="zh">支付处理</span><span class="en">Payment Processing</span></span><span class="zh" style="color:var(--green);">按交易，无月费</span><span class="en" style="color:var(--green);">Per txn, no monthly</span></div>
+      <div class="cost-row"><span class="label"><span class="zh">广告（最低）</span><span class="en">Ads (minimum)</span></span><span>$100-300</span></div>
+      <div class="cost-total"><span><span class="zh">月度总计</span><span class="en">Monthly Total</span></span><span>$110-380</span></div>
+    </div>
+
+    <!-- Total Investment Card -->
+    <div class="plan-card">
+      <h3>📊 <span class="zh">总投入概算</span><span class="en">Total Investment Estimate</span></h3>
+      <div class="cost-row"><span class="label"><span class="zh">Sky Portal时间</span><span class="en">Sky Portal's Time</span></span><span><span class="zh">15-20小时</span><span class="en">15-20 hrs</span></span></div>
+      <div class="cost-row"><span class="label"><span class="zh">节奏</span><span class="en">Pace</span></span><span><span class="zh">两周，每天1-1.5小时</span><span class="en">2 weeks, 1-1.5 hrs/day</span></span></div>
+      <div class="cost-row"><span class="label"><span class="zh">首月现金</span><span class="en">First Month Cash</span></span><span>$210-610</span></div>
+      <div class="cost-total"><span><span class="zh">最小试错成本</span><span class="en">Min Trial Cost</span></span><span class="highlight">$210<span class="zh">起</span><span class="en">+</span></span></div>
+    </div>
+  </div>
+
+  <!-- 14-Day Action Plan Timeline -->
+  <div class="section-title" style="margin-top:36px;">
+    <span>📅</span>
+    <span class="zh">14 天行动计划</span>
+    <span class="en">14-Day Action Plan</span>
+  </div>
+  <div class="timeline-wrapper">
+    <div class="week-label">🏗️ Week 1 — <span class="zh">基础设施</span><span class="en">Infrastructure</span></div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 1</span><span class="en">Day 1</span></span>
+      <span class="day-task"><span class="zh">确认公司名 + 提交 Oregon LLC 注册</span><span class="en">Confirm name + file Oregon LLC</span></span>
+      <span class="day-who">👤 <span class="zh">Sky Portal</span><span class="en"Sky</span></span>
+      <span class="day-cost">$100</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 2</span><span class="en">Day 2</span></span>
+      <span class="day-task"><span class="zh">申请 EIN + 注册域名</span><span class="en">Apply EIN + register domain</span></span>
+      <span class="day-who">👤🤖</span>
+      <span class="day-cost">$12</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 3</span><span class="en">Day 3</span></span>
+      <span class="day-task"><span class="zh">开商业银行账户 + 起草 ToS/Privacy Policy</span><span class="en">Open biz bank + draft ToS/Privacy</span></span>
+      <span class="day-who">👤🤖</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 4</span><span class="en">Day 4</span></span>
+      <span class="day-task"><span class="zh">设置 Google Business + 社交媒体</span><span class="en">Set up Google Business + social</span></span>
+      <span class="day-who">🤖 Sky</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 5</span><span class="en">Day 5</span></span>
+      <span class="day-task"><span class="zh">对接合作方网站需求 + 确认支付方案</span><span class="en">Align with partner on site + payment</span></span>
+      <span class="day-who">👤🤝</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 6-7</span><span class="en">Day 6-7</span></span>
+      <span class="day-task"><span class="zh">准备营销素材 + 等待网站</span><span class="en">Prep marketing assets + wait for site</span></span>
+      <span class="day-who">🤖 Sky</span>
+      <span class="day-cost">$0</span>
+    </div>
+
+    <div class="week-label">🚀 Week 2 — <span class="zh">上线准备</span><span class="en">Launch Prep</span></div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 8</span><span class="en">Day 8</span></span>
+      <span class="day-task"><span class="zh">审核网站 + 反馈修改</span><span class="en">Review site + give feedback</span></span>
+      <span class="day-who">👤 <span class="zh">Sky Portal</span><span class="en"Sky</span></span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 9</span><span class="en">Day 9</span></span>
+      <span class="day-task"><span class="zh">写 Pro 招募文案 + 设置广告</span><span class="en">Write Pro recruitment copy + setup ads</span></span>
+      <span class="day-who">🤖👤</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 10</span><span class="en">Day 10</span></span>
+      <span class="day-task"><span class="zh">手动招募前 10 个 Pro</span><span class="en">Manually recruit first 10 Pros</span></span>
+      <span class="day-who">👤🤖</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 11</span><span class="en">Day 11</span></span>
+      <span class="day-task"><span class="zh">本地 SEO 优化</span><span class="en">Local SEO optimization</span></span>
+      <span class="day-who">🤖 Sky</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 12</span><span class="en">Day 12</span></span>
+      <span class="day-task"><span class="zh">发布到 Facebook 本地群组</span><span class="en">Post to local Facebook groups</span></span>
+      <span class="day-who">🤖 Sky</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row">
+      <span class="day-num"><span class="zh">Day 13</span><span class="en">Day 13</span></span>
+      <span class="day-task"><span class="zh">最终测试 + Bug 修复</span><span class="en">Final testing + bug fixes</span></span>
+      <span class="day-who">👤🤝</span>
+      <span class="day-cost">$0</span>
+    </div>
+    <div class="day-row" style="border-color:var(--green);background:rgba(74,222,128,0.06);">
+      <span class="day-num" style="color:var(--green);"><span class="zh">Day 14</span><span class="en">Day 14</span></span>
+      <span class="day-task"><span class="zh">🎉 Soft Launch！</span><span class="en">🎉 Soft Launch!</span></span>
+      <span class="day-who">👤 <span class="zh">Sky Portal</span><span class="en"Sky</span></span>
+      <span class="day-cost">$100-300</span>
+    </div>
+  </div>
+
+  <!-- Who Does What -->
+  <div class="section-title" style="margin-top:36px;">
+    <span>👥</span>
+    <span class="zh">谁做什么</span>
+    <span class="en">Who Does What</span>
+  </div>
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="role-icon">👤</div>
+      <div class="role-name"><span class="zh">Sky Portal</span><span class="en"Sky</span></div>
+      <div class="role-tasks"><span class="zh">签署文件、申请 EIN、开银行账户、最终决策</span><span class="en">Sign docs, apply EIN, open bank, final decisions</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-icon">🤖</div>
+      <div class="role-name">Sky</div>
+      <div class="role-tasks"><span class="zh">起草法律文档、调研竞品、注册域名、SEO、营销文案、社交媒体</span><span class="en">Draft legal docs, competitor research, domain reg, SEO, marketing, social</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-icon">🤝</div>
+      <div class="role-name"><span class="zh">合作方</span><span class="en">Partner</span></div>
+      <div class="role-tasks"><span class="zh">网站开发、技术维护、支付系统</span><span class="en">Site dev, tech maintenance, payment system</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>☁️ Powered by Sky · <a href="index.html"><span class="zh">返回 Portal</span><span class="en">Back to Portal</span></a></p>
+</div>
+
+<script>
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('btn-zh').className=l==='zh'?'active':'';
+  document.getElementById('btn-en').className=l==='en'?'active':'';
+  try{localStorage.setItem('sky-lang',l)}catch(e){}
+}
+try{var s=localStorage.getItem('sky-lang');if(s)setLang(s)}catch(e){}
+</script>
+</body>
+</html>

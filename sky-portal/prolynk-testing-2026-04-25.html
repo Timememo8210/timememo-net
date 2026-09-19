@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProLynk 第二轮测试报告 — 2026-04-25</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; line-height: 1.7; font-size: 14px; background: #fafafa; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+  h1 { font-size: 26px; margin-bottom: 6px; color: #111; }
+  h2 { font-size: 18px; color: #2563eb; margin: 32px 0 12px; border-bottom: 2px solid #3b82f6; padding-bottom: 6px; }
+  h3 { font-size: 15px; color: #374151; margin: 16px 0 8px; }
+
+  .meta { color: #6b7280; font-size: 12px; margin-bottom: 24px; line-height: 1.8; }
+
+  .badge { display: inline-block; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; margin-right: 6px; }
+  .badge-date { background: #dbeafe; color: #1e40af; }
+  .badge-env { background: #fef3c7; color: #92400e; }
+  .badge-score { background: #d1fae5; color: #065f46; font-size: 14px; padding: 4px 14px; }
+
+  .score-hero { text-align: center; margin: 24px 0; padding: 24px; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 16px; }
+  .score-number { font-size: 56px; font-weight: 800; color: #2563eb; }
+  .score-label { color: #6b7280; font-size: 13px; margin-top: 4px; }
+
+  .summary-box { background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .summary-box h3 { color: #1e40af; margin-top: 0; }
+
+  .good-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .good-box h3 { color: #166534; margin-top: 0; }
+
+  .bug-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .bug-id { display: inline-block; background: #3b82f6; color: #fff; border-radius: 4px; padding: 2px 10px; font-size: 11px; font-weight: 600; margin-right: 8px; }
+  .severity { display: inline-block; border-radius: 4px; padding: 2px 10px; font-size: 11px; font-weight: 600; }
+  .sev-critical { background: #fecaca; color: #991b1b; }
+  .sev-high { background: #fed7aa; color: #9a3412; }
+  .sev-medium { background: #fef08a; color: #854d0e; }
+  .sev-low { background: #d1fae5; color: #065f46; }
+
+  .screenshot-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; margin: 12px 0; }
+  .screenshot-card .caption { color: #6b7280; font-size: 11px; margin-bottom: 6px; font-weight: 500; }
+  .screenshot-card img { max-width: 100%; border-radius: 6px; border: 1px solid #e5e7eb; }
+  .screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  @media (max-width: 600px) { .screenshot-grid { grid-template-columns: 1fr; } }
+
+  .fix-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-top: 10px; }
+  .fix-box .label { color: #166534; font-weight: 600; font-size: 13px; }
+
+  .ai-box { background: linear-gradient(135deg, #faf5ff, #ede9fe); border: 1px solid #c4b5fd; border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .ai-box h3 { color: #5b21b6; margin-top: 0; }
+  .ai-item { background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .ai-item strong { color: #6d28d9; }
+
+  .flow-step { display: flex; align-items: flex-start; margin: 10px 0; padding: 12px; background: #fff; border-radius: 8px; border: 1px solid #e5e7eb; }
+  .flow-step .step-num { background: #3b82f6; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; margin-right: 12px; flex-shrink: 0; }
+  .flow-step .step-content { flex: 1; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { border: 1px solid #e5e7eb; padding: 8px 12px; text-align: left; }
+  th { background: #f3f4f6; font-weight: 600; color: #374151; }
+
+  ul, ol { margin-left: 20px; margin-top: 6px; }
+  li { margin: 4px 0; }
+
+  .nav-top { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); padding: 10px 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 20px; z-index: 100; }
+  .nav-top a { color: #3b82f6; text-decoration: none; font-size: 13px; margin-right: 16px; font-weight: 500; }
+  .nav-top a:hover { text-decoration: underline; }
+
+  .footer { text-align: center; color: #9ca3af; font-size: 11px; margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 16px; }
+
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Navigation -->
+<div class="nav-top">
+  <a href="#summary">📊 概要</a>
+  <a href="#screenshots">📸 截图记录</a>
+  <a href="#bugs">🐛 问题清单</a>
+  <a href="#ai">🤖 AI建议</a>
+  <a href="#actions">📌 后续事项</a>
+  <a href="prolynk.html">← 项目主页</a>
+  <a href="prolynk-qa-report.html">第一轮报告(04-18)</a>
+</div>
+
+<!-- Header -->
+<h1>🔍 ProLynk 第二轮测试报告</h1>
+<div class="meta">
+  <span class="badge badge-date">📅 2026-04-25</span>
+  <span class="badge badge-env">🔧 Engineering Environment</span>
+  <br>
+  测试环境：lynksync.ie<br>
+  测试账号：PRO (mlocalpro+clean2) + Home Owner (mlocalpro+cus1)<br>
+  测试人：Sky (AI QA Tester)<br>
+  测试工具：Playwright + OpenClaw Browser Automation<br>
+  测试范围：PRO登录、HO Dashboard、搜索流程、报价请求、PRO Dashboard、跨角色切换
+</div>
+
+<!-- Score -->
+<div class="score-hero">
+  <div class="score-number">7.0/10</div>
+  <div class="score-label">第二轮深度测试评分（对比第一轮 7.5/10）</div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box" id="summary">
+  <h3>📊 测试摘要</h3>
+  <table>
+    <tr><th>项目</th><th>结果</th></tr>
+    <tr><td>发现新Bug数量</td><td>4个</td></tr>
+    <tr><td>Critical</td><td>0个</td></tr>
+    <tr><td>High</td><td>2个</td></tr>
+    <tr><td>Medium</td><td>2个</td></tr>
+    <tr><td>PRO账号登录</td><td>✅ 成功</td></tr>
+    <tr><td>HO账号登录</td><td>❌ 失败（Email not confirmed）</td></tr>
+    <tr><td>PRO/HO角色切换</td><td>✅ 成功</td></tr>
+    <tr><td>HO Dashboard</td><td>✅ 正常</td></tr>
+    <tr><td>搜索+报价流程</td><td>⚠️ UI完整但提交可能未成功</td></tr>
+    <tr><td>PRO Dashboard</td><td>❌ 被Claim Profile阻断</td></tr>
+    <tr><td>报价请求创建</td><td>⚠️ 走完流程但未出现在Active Requests</td></tr>
+  </table>
+</div>
+
+<!-- Screenshots -->
+<h2 id="screenshots">📸 浏览器截图记录</h2>
+
+<h3>1. Login 登录页面</h3>
+<p>支持两种角色选择（Homeowner / Service Pro），Google一键登录，邮箱密码登录。HO账号报"Email not confirmed"错误。</p>
+<div class="screenshot-card">
+  <div class="caption">📸 Login页面 — 角色选择 + 邮箱密码登录</div>
+  <img src="prolynk-screenshots/02-login-page.png" alt="Login page">
+</div>
+
+<h3>2. Home Owner Dashboard</h3>
+<p>登录后HO首页：欢迎语 + 服务搜索 + Popular Services + Active Requests + Activity。布局清晰。</p>
+<div class="screenshot-card">
+  <div class="caption">📸 HO Dashboard — 主面板概览</div>
+  <img src="prolynk-screenshots/01-ho-dashboard.png" alt="HO Dashboard">
+</div>
+
+<h3>3. 首页（Landing Page）</h3>
+<p>ProLynk公开首页：Hero区 + 搜索框 + 服务分类。18个服务类型，支持Eircode定位。</p>
+<div class="screenshot-card">
+  <div class="caption">📸 Landing Page — 公开首页</div>
+  <img src="prolynk-screenshots/03-homepage.png" alt="Homepage">
+</div>
+
+<h3>4. 服务搜索</h3>
+<p>搜索Plumbing后显示细分服务：Plumbing system maintenance, Plumbing installation, Plumbing for appliances, General Plumbing等。</p>
+<div class="screenshot-card">
+  <div class="caption">📸 搜索结果 — Plumbing细分服务</div>
+  <img src="prolynk-screenshots/04-search-plumbing.png" alt="Search results">
+</div>
+
+<h3>5. 报价请求流程（3步）</h3>
+<div class="flow-step">
+  <div class="step-num">1</div>
+  <div class="step-content">
+    <strong>What is the issue?</strong> — 选择问题类型（Leak / Blocked Drain / No Hot Water / Low Water Pressure / Installation / Other）
+  </div>
+</div>
+<div class="screenshot-card">
+  <div class="caption">📸 Step 1 — 选择问题类型</div>
+  <img src="prolynk-screenshots/05-quote-step1.png" alt="Quote Step 1">
+</div>
+<div class="flow-step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <strong>When do you need this done?</strong> — ASAP / Within a week / Within a month / Planning
+  </div>
+</div>
+<div class="flow-step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <strong>Description & photos</strong> — 文字描述（最多800字）+ 照片上传（可选）→ Submit Quote
+  </div>
+</div>
+
+<h3>6. PRO端 — Claim Profile</h3>
+<p>PRO账号登录后被强制要求认领Profile（Dyedra Assuncao），无法跳过进入PRO Dashboard。</p>
+<div class="screenshot-card">
+  <div class="caption">📸 PRO端 — Claim Profile 阻断页面</div>
+  <img src="prolynk-screenshots/06-pro-claim.png" alt="PRO Claim">
+</div>
+
+<h3>7. HO Jobs 和 Messages</h3>
+<div class="screenshot-grid">
+  <div class="screenshot-card">
+    <div class="caption">📸 Jobs 页面 — No active jobs</div>
+    <img src="prolynk-screenshots/07-ho-jobs.png" alt="HO Jobs">
+  </div>
+  <div class="screenshot-card">
+    <div class="caption">📸 Messages — No active conversations</div>
+    <img src="prolynk-screenshots/08-ho-messages.png" alt="HO Messages">
+  </div>
+</div>
+
+<!-- Bugs -->
+<h2 id="bugs">🐛 问题清单</h2>
+
+<div class="bug-box">
+  <h3><span class="bug-id">BUG-06</span> HO账号邮箱未验证无法登录 <span class="severity sev-high">🟠 HIGH</span></h3>
+  <p><strong>账号：</strong>mlocalpro+cus1@gmail.com</p>
+  <p><strong>现象：</strong>登录时显示红色提示 "Email not confirmed"，无法进入系统</p>
+  <p><strong>影响：</strong>HO测试账号完全无法使用，阻断HO端测试</p>
+  <p><strong>复现：</strong>选择 "I am a Homeowner" → 输入邮箱密码 → 点击Log In → 报错</p>
+  <div class="fix-box">
+    <div class="label">🔧 修复建议</div>
+    <p>1. 在Supabase后台手动确认该测试账号邮箱</p>
+    <p>2. 或提供重新发送确认邮件的功能</p>
+    <p><strong>修复难度：</strong>⭐ 极低（5分钟）</p>
+  </div>
+</div>
+
+<div class="bug-box">
+  <h3><span class="bug-id">BUG-07</span> PRO Dashboard被Claim Profile阻断 <span class="severity sev-high">🟠 HIGH</span></h3>
+  <p><strong>账号：</strong>mlocalpro+clean2@gmail.com</p>
+  <p><strong>现象：</strong>PRO登录后直接跳转到 "Claim this profile" 页面（Dyedra Assuncao），点击Dashboard按钮仍然回到同一页面，无法进入PRO管理面板</p>
+  <p><strong>影响：</strong>无法测试PRO端核心功能（接单、报价、日历、收入等）</p>
+  <p><strong>URL：</strong><code>/pro/professional-cleaning-leixlip-kildare-dyedra-assuncao/claim</code></p>
+  <div class="fix-box">
+    <div class="label">🔧 修复建议</div>
+    <p>1. 添加"Skip"或"Later"按钮允许PRO跳过claim流程</p>
+    <p>2. 或为测试账号预先完成claim</p>
+    <p>3. Dashboard应始终可访问，claim作为可选步骤</p>
+    <p><strong>修复难度：</strong>⭐⭐ 低（30分钟）</p>
+  </div>
+</div>
+
+<div class="bug-box">
+  <h3><span class="bug-id">BUG-08</span> 报价请求提交后未出现在Active Requests <span class="severity sev-medium">🟡 MEDIUM</span></h3>
+  <p><strong>流程：</strong>选General Plumbing → 选Leak → 选ASAP → 填写描述 → 点击Submit Quote</p>
+  <p><strong>现象：</strong>提交后跳转回HO Dashboard，Active Requests仍显示"No active requests"，Jobs页面也显示"No active jobs"</p>
+  <p><strong>影响：</strong>核心报价流程可能存在后端问题，或者前端提交未成功</p>
+  <div class="fix-box">
+    <div class="label">🔧 修复建议</div>
+    <p>1. 检查后端quote创建API是否正常接收数据</p>
+    <p>2. 提交后显示成功/失败提示</p>
+    <p>3. 添加console.log或network面板检查实际请求</p>
+    <p><strong>修复难度：</strong>⭐⭐⭐ 中（需排查前后端）</p>
+  </div>
+</div>
+
+<div class="bug-box">
+  <h3><span class="bug-id">BUG-09</span> 搜索无Pro列表展示 <span class="severity sev-medium">🟡 MEDIUM</span></h3>
+  <p><strong>现象：</strong>选择服务类型+输入Eircode后，只显示服务细分选项，没有展示可用的Pro列表</p>
+  <p><strong>影响：</strong>HO无法浏览和选择具体的Pro，供需匹配核心链路未闭环</p>
+  <div class="fix-box">
+    <div class="label">🔧 可能原因</div>
+    <p>1. 测试环境中没有足够的Pro数据</p>
+    <p>2. Pro列表功能尚未实现（只有报价请求流程）</p>
+    <p>3. 需确认产品定位：是"HO发布需求→Pro抢单"模式还是"HO浏览Pro→选择"模式</p>
+  </div>
+</div>
+
+<!-- What's Good -->
+<div class="good-box">
+  <h3>✅ 做得好的地方（对比第一轮改进）</h3>
+  <ul>
+    <li>✅ <strong>3步报价流程设计优秀</strong> — 问题类型→时间→描述，步骤清晰不啰嗦</li>
+    <li>✅ <strong>PRO/HO角色切换顺滑</strong> — User menu里的"Switch to Homeowner View"一键切换</li>
+    <li>✅ <strong>服务分类层级合理</strong> — 大类→子类→具体问题，层层递进</li>
+    <li>✅ <strong>Dashboard导航清晰</strong> — Home / Team / Jobs / Messages 四个核心功能一目了然</li>
+    <li>✅ <strong>UI整体完成度高</strong> — 对比第一轮（04-18）有显著进步</li>
+    <li>✅ <strong>Jobs页面有List/Schedule视图切换</strong> — 日程管理概念好</li>
+    <li>✅ <strong>Documents独立入口</strong> — 文档管理意识到位</li>
+  </ul>
+</div>
+
+<!-- AI Suggestions -->
+<h2 id="ai">🤖 AI功能增强建议</h2>
+<div class="ai-box">
+  <h3>💡 AI差异化方向 — 这是你们的核心竞争力</h3>
+
+  <div class="ai-item">
+    <strong>1. 🏠 AI智能估价 (Smart Estimate)</strong><br>
+    用户上传照片 + 文字描述 → AI分析问题类型和严重程度 → 自动生成参考价格区间<br>
+    <em>对标：Thumbtack的"Instant Estimate"，但用AI做得更智能</em>
+  </div>
+
+  <div class="ai-item">
+    <strong>2. 🎯 AI智能匹配 (Pro Matching)</strong><br>
+    根据job描述、位置、时间偏好 → 自动匹配最合适的3-5个Pro<br>
+    考虑因素：距离、专长、评分、当前空闲状态、历史完成率<br>
+    <em>减少HO的搜索成本，提高成交率</em>
+  </div>
+
+  <div class="ai-item">
+    <strong>3. 📸 AI照片诊断 (Photo Diagnosis)</strong><br>
+    HO上传问题照片 → AI识别问题类型（漏水/电路故障/墙裂等）<br>
+    自动建议需要什么类型的Pro + 预估严重程度 + 紧急度<br>
+    <em>很多HO不知道自己需要什么服务，AI帮他们翻译"问题"→"需求"</em>
+  </div>
+
+  <div class="ai-item">
+    <strong>4. 💬 AI辅助沟通 (Smart Messaging)</strong><br>
+    Pro忙碌时AI自动回复常见问题（"什么时候能来？""大概多少钱？"）<br>
+    AI翻译功能：爱尔兰英语 ↔ 其他语言<br>
+    <em>解决Pro响应慢导致的流失问题</em>
+  </div>
+
+  <div class="ai-item">
+    <strong>5. 📋 AI自动生成工单 (Auto Work Order)</strong><br>
+    从对话和照片中自动提取：问题描述、位置、紧急程度、建议方案<br>
+    Pro到场前已有完整信息，不用再问一遍<br>
+    <em>减少重复沟通，提升Pro效率</em>
+  </div>
+
+  <div class="ai-item">
+    <strong>6. ⭐ AI评价分析 (Review Intelligence)</strong><br>
+    分析用户评价中的关键词 → 帮Pro了解自己优势和改进方向<br>
+    帮HO筛选评价真实性（检测虚假评价模式）<br>
+    <em>建立信任体系的核心工具</em>
+  </div>
+</div>
+
+<!-- Priority Table -->
+<h3>🎯 AI功能优先级建议</h3>
+<table>
+  <tr><th>功能</th><th>优先级</th><th>开发难度</th><th>用户价值</th><th>建议阶段</th></tr>
+  <tr><td>AI照片诊断</td><td>🔥 最高</td><td>⭐⭐ 中</td><td>⭐⭐⭐⭐⭐</td><td>Phase 1 MVP</td></tr>
+  <tr><td>AI智能估价</td><td>🔥 最高</td><td>⭐⭐ 中</td><td>⭐⭐⭐⭐⭐</td><td>Phase 1 MVP</td></tr>
+  <tr><td>AI智能匹配</td><td>高</td><td>⭐⭐⭐ 中高</td><td>⭐⭐⭐⭐</td><td>Phase 1</td></tr>
+  <tr><td>AI辅助沟通</td><td>中</td><td>⭐⭐ 中</td><td>⭐⭐⭐</td><td>Phase 2</td></tr>
+  <tr><td>AI自动工单</td><td>中</td><td>⭐⭐⭐ 中高</td><td>⭐⭐⭐</td><td>Phase 2</td></tr>
+  <tr><td>AI评价分析</td><td>低</td><td>⭐⭐ 中</td><td>⭐⭐</td><td>Phase 3</td></tr>
+</table>
+
+<!-- Actions -->
+<h2 id="actions">📌 需要向Daniel确认的事项</h2>
+
+<div class="summary-box">
+  <h3>❓ 待确认问题</h3>
+  <ol>
+    <li><strong>HO测试账号</strong>：mlocalpro+cus1@gmail.com 的邮箱确认链接能否重发？或在Supabase后台直接确认？</li>
+    <li><strong>PRO端</strong>：PRO Dashboard有没有办法跳过Claim Profile流程？或者帮测试账号完成claim？</li>
+    <li><strong>报价请求</strong>：提交后Active Requests为空是bug还是预期行为？后端是否收到数据？</li>
+    <li><strong>Pro列表</strong>：是否有Pro浏览功能？还是纯靠报价请求模式？</li>
+    <li><strong>产品方向</strong>：AI功能你们有计划吗？我们这边可以帮设计AI功能方案</li>
+  </ol>
+</div>
+
+<!-- Fix Priority -->
+<h3>🔧 修复优先级总览（含第一轮遗留）</h3>
+<table>
+  <tr><th>Bug ID</th><th>问题</th><th>严重性</th><th>来源</th><th>修复难度</th><th>预估时间</th></tr>
+  <tr><td>BUG-01</td><td>Signup链接跳Tesla</td><td>🔴 Critical</td><td>04-18</td><td>⭐</td><td>1分钟</td></tr>
+  <tr><td>BUG-06</td><td>HO账号邮箱未验证</td><td>🟠 High</td><td>04-25</td><td>⭐</td><td>5分钟</td></tr>
+  <tr><td>BUG-07</td><td>PRO Dashboard被Claim阻断</td><td>🟠 High</td><td>04-25</td><td>⭐⭐</td><td>30分钟</td></tr>
+  <tr><td>BUG-08</td><td>报价请求提交未生效</td><td>🟡 Medium</td><td>04-25</td><td>⭐⭐⭐</td><td>需排查</td></tr>
+  <tr><td>BUG-09</td><td>搜索无Pro列表</td><td>🟡 Medium</td><td>04-25</td><td>⭐⭐⭐</td><td>需确认</td></tr>
+  <tr><td>BUG-02</td><td>Pro注册需登录</td><td>🟠 High</td><td>04-18</td><td>⭐⭐</td><td>30分钟</td></tr>
+  <tr><td>BUG-03</td><td>角色选择不直观</td><td>🟡 Medium</td><td>04-18</td><td>⭐⭐</td><td>1小时</td></tr>
+  <tr><td>BUG-04</td><td>确认邮件提示差</td><td>🟡 Medium</td><td>04-18</td><td>⭐⭐</td><td>30分钟</td></tr>
+</table>
+
+<div class="footer">
+  ProLynk 第二轮QA报告 · Generated by Sky ☁️ · 2026-04-25<br>
+  工程调试版深度测试 · lynksync.ie · All screenshots captured via Playwright automation<br>
+  <a href="prolynk-qa-report.html">📋 第一轮测试报告 (2026-04-18)</a> · <a href="prolynk.html">🏠 项目主页</a>
+</div>
+
+</div>
+</body>
+</html>

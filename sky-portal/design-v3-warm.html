@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky Portal · Sky Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #faf8f5;
+      --bg2:       #f3ede4;
+      --card:      #ffffff;
+      --border:    #ede8e0;
+      --text:      #374151;
+      --text-soft: #6b7280;
+      --text-light:#9ca3af;
+      --accent:    #e08d5a;
+      --accent-bg: #fef3eb;
+      --purple:    #8b5cf6;
+      --purple-bg: #f5f3ff;
+      --green:     #10b981;
+      --green-bg:  #ecfdf5;
+      --blue:      #3b82f6;
+      --blue-bg:   #eff6ff;
+      --amber:     #d97706;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+      --shadow:    0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.09);
+      --radius-sm: 10px;
+      --radius:    16px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'PingFang SC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 58px;
+    }
+
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-right: 12px;
+      white-space: nowrap;
+    }
+
+    .nav-logo .logo-icon {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--accent), #f59e3f);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: 0 2px 8px rgba(224,141,90,0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-soft);
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-link:hover { background: var(--bg2); color: var(--text); }
+    .nav-link.active { background: var(--accent-bg); color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: var(--bg2);
+      border-radius: 99px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-soft);
+      transition: all 0.18s;
+    }
+    .lang-btn.active {
+      background: var(--card);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 58px;
+      left: 0; right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px 20px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { font-size: 15px; padding: 10px 14px; }
+
+    /* ─── Hero ─── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .hero-greeting {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 4px 12px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title .wave {
+      display: inline-block;
+      animation: wave 2.4s ease-in-out infinite;
+      transform-origin: 70% 70%;
+    }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(20deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(12deg); }
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-pill.orange { background: var(--accent-bg); color: var(--accent); }
+    .stat-pill.purple { background: var(--purple-bg); color: var(--purple); }
+    .stat-pill.green  { background: var(--green-bg);  color: var(--green);  }
+
+    .stat-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
+    .stat-dot.pulse { animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* ─── Divider wave ─── */
+    .wave-divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .wave-divider hr {
+      border: none;
+      border-top: 2px dashed var(--border);
+      margin: 8px 0 40px;
+    }
+
+    /* ─── Sections ─── */
+    .sections {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .section { }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .section-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .section-title.purple::after  { background: var(--purple); }
+    .section-title.green::after   { background: var(--green); }
+    .section-title.blue::after    { background: var(--blue); }
+
+    .section-count {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: var(--bg2);
+      color: var(--text-soft);
+    }
+
+    /* ─── Subsections ─── */
+    .subsection {
+      margin-bottom: 28px;
+    }
+
+    .subsection-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .subsection-label::before {
+      content: '';
+      display: inline-block;
+      width: 16px; height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    /* ─── Card Grid ─── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card-grid.wide {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    /* ─── Card ─── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card.orange::before { background: linear-gradient(90deg, var(--accent), #f59e3f); }
+    .card.purple::before { background: linear-gradient(90deg, var(--purple), #a78bfa); }
+    .card.green::before  { background: linear-gradient(90deg, var(--green), #34d399); }
+    .card.blue::before   { background: linear-gradient(90deg, var(--blue), #60a5fa); }
+
+    .card-icon {
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 99px;
+    }
+
+    .badge.orange { background: var(--accent-bg); color: var(--accent); }
+    .badge.purple { background: var(--purple-bg); color: var(--purple); }
+    .badge.green  { background: var(--green-bg);  color: var(--green); }
+    .badge.blue   { background: var(--blue-bg);   color: var(--blue); }
+    .badge.gray   { background: var(--bg2);        color: var(--text-soft); }
+
+    .card-arrow {
+      font-size: 14px;
+      color: var(--text-light);
+      transition: transform 0.18s, color 0.18s;
+    }
+    .card:hover .card-arrow { transform: translateX(3px); color: var(--text-soft); }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .footer-logo .logo-icon {
+      width: 26px; height: 26px;
+      background: linear-gradient(135deg, var(--accent), #f59e3f);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 36px 20px 28px; }
+      .hero-title { font-size: 36px; }
+
+      .sections { padding: 0 20px 60px; gap: 40px; }
+
+      .card-grid, .card-grid.wide {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── Subtle texture on hero ─── */
+    .hero-bg {
+      position: fixed;
+      top: 0; right: 0;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at top right, rgba(224,141,90,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+
+<!-- ─── Nav ─── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="logo-icon">✦</span>
+      Sky Portal
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#daily"    class="nav-link active">📡 每日更新</a>
+      <a href="#research" class="nav-link">🔬 研究</a>
+      <a href="#life"     class="nav-link">👤 生活</a>
+      <a href="#projects" class="nav-link">🛠️ 项目&工具</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnZh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Mobile Menu ─── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#daily"    class="nav-link" onclick="toggleMenu()">📡 每日更新</a>
+  <a href="#research" class="nav-link" onclick="toggleMenu()">🔬 研究</a>
+  <a href="#life"     class="nav-link" onclick="toggleMenu()">👤 生活</a>
+  <a href="#projects" class="nav-link" onclick="toggleMenu()">🛠️ 项目&工具</a>
+</div>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero-greeting">👋 你好，欢迎回来</div>
+
+  <h1 class="hero-title">
+    Sky Portal <span class="wave">🌤️</span>
+  </h1>
+
+  <p class="hero-sub" data-zh="Sky Portal · 研究 · 工具 · 记录" data-en="Sky Portal's Digital Space · Research · Tools · Notes">
+    Sky Portal · 研究 · 工具 · 记录
+  </p>
+
+  <div class="hero-stats">
+    <span class="stat-pill orange">
+      <span class="stat-dot"></span>
+      <span data-zh="11 已发布" data-en="11 Published">11 已发布</span>
+    </span>
+    <span class="stat-pill purple">
+      <span class="stat-dot pulse"></span>
+      <span data-zh="5 进行中" data-en="5 In Progress">5 进行中</span>
+    </span>
+    <span class="stat-pill green">
+      <span class="stat-dot"></span>
+      <span id="dayCounter">计算中...</span>
+    </span>
+  </div>
+</section>
+
+<div class="wave-divider"><hr /></div>
+
+<!-- ─── Sections ─── -->
+<main class="sections">
+
+  <!-- ── 每日更新 ── -->
+  <section id="daily">
+    <div class="section-header">
+      <span class="section-icon">📡</span>
+      <h2 class="section-title" data-zh="每日更新" data-en="Daily Updates">每日更新</h2>
+      <span class="section-count">5</span>
+    </div>
+
+    <div class="card-grid">
+
+      <a href="research/index.html" class="card orange">
+        <span class="card-icon">📰</span>
+        <div class="card-title" data-zh="每日研报" data-en="Daily Research">每日研报</div>
+        <div class="card-desc" data-zh="半导体、AI、科技行业深度研究报告，每日更新" data-en="Deep research reports on semiconductors, AI, and tech industry — updated daily">
+          半导体、AI、科技行业深度研究报告，每日更新
+        </div>
+        <div class="card-footer">
+          <span class="badge orange" data-zh="每日" data-en="Daily">每日</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="tech/index.html" class="card orange">
+        <span class="card-icon">💻</span>
+        <div class="card-title" data-zh="每日科技" data-en="Daily Tech">每日科技</div>
+        <div class="card-desc" data-zh="科技动态、产品发布、行业新闻整理汇总" data-en="Tech news, product launches, and industry roundup">
+          科技动态、产品发布、行业新闻整理汇总
+        </div>
+        <div class="card-footer">
+          <span class="badge orange" data-zh="每日" data-en="Daily">每日</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="market/index.html" class="card orange">
+        <span class="card-icon">📈</span>
+        <div class="card-title" data-zh="每日行情" data-en="Daily Markets">每日行情</div>
+        <div class="card-desc" data-zh="股市行情、重要指数、市场动向与个股追踪" data-en="Market data, indices, trends and individual stock tracking">
+          股市行情、重要指数、市场动向与个股追踪
+        </div>
+        <div class="card-footer">
+          <span class="badge orange" data-zh="每日" data-en="Daily">每日</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="science/index.html" class="card orange">
+        <span class="card-icon">🔭</span>
+        <div class="card-title" data-zh="每周科学前沿" data-en="Weekly Science">每周科学前沿</div>
+        <div class="card-desc" data-zh="前沿科学进展、论文精选、跨学科视野" data-en="Frontier science advances, curated papers, cross-disciplinary perspectives">
+          前沿科学进展、论文精选、跨学科视野
+        </div>
+        <div class="card-footer">
+          <span class="badge gray" data-zh="每周" data-en="Weekly">每周</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="prompts/index.html" class="card orange">
+        <span class="card-icon">✨</span>
+        <div class="card-title" data-zh="Prompt 库" data-en="Prompt Library">Prompt 库</div>
+        <div class="card-desc" data-zh="精选 AI Prompt 收藏，提升工作效率与创意输出" data-en="Curated AI prompts collection for productivity and creative output">
+          精选 AI Prompt 收藏，提升工作效率与创意输出
+        </div>
+        <div class="card-footer">
+          <span class="badge gray" data-zh="持续更新" data-en="Ongoing">持续更新</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── 研究 ── -->
+  <section id="research">
+    <div class="section-header">
+      <span class="section-icon">🔬</span>
+      <h2 class="section-title purple" data-zh="研究" data-en="Research">研究</h2>
+      <span class="section-count">7</span>
+    </div>
+
+    <!-- 半导体 & 行业 -->
+    <div class="subsection">
+      <div class="subsection-label" data-zh="半导体 & 行业" data-en="Semiconductors & Industry">半导体 &amp; 行业</div>
+      <div class="card-grid wide">
+
+        <a href="ai-cvd-optimization.html" class="card purple">
+          <span class="card-icon">🤖</span>
+          <div class="card-title" data-zh="AI赋能半导体设备优化" data-en="AI-Enabled Semiconductor Equipment Optimization">AI赋能半导体设备优化</div>
+          <div class="card-desc" data-zh="CVD工艺参数优化与AI集成方案深度研究" data-en="Deep research on CVD process parameter optimization and AI integration">
+            CVD工艺参数优化与AI集成方案深度研究
+          </div>
+          <div class="card-footer">
+            <span class="badge purple" data-zh="研究报告" data-en="Research Report">研究报告</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="semiconductor-equipment-ai.html" class="card purple">
+          <span class="card-icon">🔐</span>
+          <div class="card-title" data-zh="半导体设备AI安全方案" data-en="Semiconductor Equipment AI Safety">半导体设备AI安全方案</div>
+          <div class="card-desc" data-zh="设备AI化落地的安全架构与风险管控框架" data-en="Security architecture and risk management for AI-enabled equipment deployment">
+            设备AI化落地的安全架构与风险管控框架
+          </div>
+          <div class="card-footer">
+            <span class="badge purple" data-zh="研究报告" data-en="Research Report">研究报告</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="research/intel-tesla-terafab.html" class="card purple">
+          <span class="card-icon">🏭</span>
+          <div class="card-title" data-zh="Intel × Tesla Terafab" data-en="Intel × Tesla Terafab">Intel × Tesla Terafab</div>
+          <div class="card-desc" data-zh="英特尔与特斯拉超级晶圆厂战略合作分析" data-en="Strategic analysis of Intel-Tesla gigafab collaboration">
+            英特尔与特斯拉超级晶圆厂战略合作分析
+          </div>
+          <div class="card-footer">
+            <span class="badge purple" data-zh="2026" data-en="2026">2026</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="nvidia-report.html" class="card purple">
+          <span class="card-icon">🟢</span>
+          <div class="card-title" data-zh="NVIDIA Foundry战略 v2.2" data-en="NVIDIA Foundry Strategy v2.2">NVIDIA Foundry战略 v2.2</div>
+          <div class="card-desc" data-zh="英伟达代工业务战略布局深度解析" data-en="In-depth analysis of NVIDIA's foundry business strategy">
+            英伟达代工业务战略布局深度解析
+          </div>
+          <div class="card-footer">
+            <span class="badge purple" data-zh="最新版" data-en="Latest">最新版</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="intel-news-2026.html" class="card purple">
+          <span class="card-icon">🔵</span>
+          <div class="card-title" data-zh="Intel 2026 新闻" data-en="Intel 2026 News">Intel 2026 新闻</div>
+          <div class="card-desc" data-zh="英特尔2026年动态追踪与战略进展整理" data-en="Intel 2026 news tracking and strategic developments">
+            英特尔2026年动态追踪与战略进展整理
+          </div>
+          <div class="card-footer">
+            <span class="badge gray" data-zh="持续更新" data-en="Ongoing">持续更新</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- AI & 技术 -->
+    <div class="subsection">
+      <div class="subsection-label" data-zh="AI & 技术" data-en="AI & Technology">AI &amp; 技术</div>
+      <div class="card-grid">
+
+        <a href="ai/index.html" class="card purple">
+          <span class="card-icon">🎙️</span>
+          <div class="card-title" data-zh="AI访谈档案" data-en="AI Interview Archive">AI访谈档案</div>
+          <div class="card-desc" data-zh="与AI的深度对话记录，思维探索与洞见存档" data-en="Deep conversations with AI — thoughts, explorations, insights archived">
+            与AI的深度对话记录，思维探索与洞见存档
+          </div>
+          <div class="card-footer">
+            <span class="badge purple" data-zh="档案" data-en="Archive">档案</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="ai-life.html" class="card purple">
+          <span class="card-icon">🌱</span>
+          <div class="card-title" data-zh="AI生活" data-en="AI Life">AI生活</div>
+          <div class="card-desc" data-zh="AI融入日常生活的实验、工具与方法论" data-en="Experiments, tools, and methods for integrating AI into daily life">
+            AI融入日常生活的实验、工具与方法论
+          </div>
+          <div class="card-footer">
+            <span class="badge purple" data-zh="生活实验" data-en="Life Lab">生活实验</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 生活 ── -->
+  <section id="life">
+    <div class="section-header">
+      <span class="section-icon">👤</span>
+      <h2 class="section-title green" data-zh="生活" data-en="Life">生活</h2>
+      <span class="section-count">5</span>
+    </div>
+
+    <div class="card-grid wide">
+
+      <a href="investment.html" class="card green">
+        <span class="card-icon">💰</span>
+        <div class="card-title" data-zh="投资决策工具" data-en="Investment Decision Tool">投资决策工具</div>
+        <div class="card-desc" data-zh="个人投资组合分析、决策辅助与资产配置工具" data-en="Personal portfolio analysis, decision support and asset allocation tools">
+          个人投资组合分析、决策辅助与资产配置工具
+        </div>
+        <div class="card-footer">
+          <span class="badge green" data-zh="工具" data-en="Tool">工具</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="my-garden/" class="card green">
+        <span class="card-icon">🌿</span>
+        <div class="card-title" data-zh="我的花园" data-en="My Garden">我的花园</div>
+        <div class="card-desc" data-zh="记录花园里的植物、季节变化与园艺心得" data-en="Recording plants, seasonal changes, and gardening insights">
+          记录花园里的植物、季节变化与园艺心得
+        </div>
+        <div class="card-footer">
+          <span class="badge green" data-zh="生活记录" data-en="Life Log">生活记录</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="naturalization.html" class="card green">
+        <span class="card-icon">🗽</span>
+        <div class="card-title" data-zh="入籍之路" data-en="Path to Citizenship">入籍之路</div>
+        <div class="card-desc" data-zh="美国入籍申请过程记录、准备材料与心路历程" data-en="US naturalization application journey, preparation materials and reflections">
+          美国入籍申请过程记录、准备材料与心路历程
+        </div>
+        <div class="card-footer">
+          <span class="badge gray" data-zh="进行中" data-en="In Progress">进行中</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="travel.html" class="card green">
+        <span class="card-icon">✈️</span>
+        <div class="card-title" data-zh="旅行" data-en="Travel">旅行</div>
+        <div class="card-desc" data-zh="旅行计划、游记与目的地探索笔记" data-en="Travel plans, trip journals and destination exploration notes">
+          旅行计划、游记与目的地探索笔记
+        </div>
+        <div class="card-footer">
+          <span class="badge green" data-zh="探索" data-en="Explore">探索</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="worldcup-2026.html" class="card green">
+        <span class="card-icon">⚽</span>
+        <div class="card-title" data-zh="2026 世界杯" data-en="2026 World Cup">2026 世界杯</div>
+        <div class="card-desc" data-zh="2026年美加墨世界杯赛程、球队分析与观赛追踪" data-en="2026 USA/Canada/Mexico World Cup schedule, team analysis, and match tracking">
+          2026年美加墨世界杯赛程、球队分析与观赛追踪
+        </div>
+        <div class="card-footer">
+          <span class="badge green" data-zh="2026" data-en="2026">2026</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── 项目&工具 ── -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-icon">🛠️</span>
+      <h2 class="section-title blue" data-zh="项目&工具" data-en="Projects & Tools">项目&工具</h2>
+      <span class="section-count">3</span>
+    </div>
+
+    <div class="card-grid">
+
+      <a href="prolynk.html" class="card blue">
+        <span class="card-icon">🔗</span>
+        <div class="card-title">ProLynk</div>
+        <div class="card-desc" data-zh="专业人脉管理工具，智能连接与关系维护平台" data-en="Professional networking tool — smart connections and relationship management">
+          专业人脉管理工具，智能连接与关系维护平台
+        </div>
+        <div class="card-footer">
+          <span class="badge blue" data-zh="进行中" data-en="Active">进行中</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="skills.html" class="card blue">
+        <span class="card-icon">🧠</span>
+        <div class="card-title" data-zh="Skills" data-en="Skills">Skills</div>
+        <div class="card-desc" data-zh="技能地图、学习进度追踪与成长记录" data-en="Skill map, learning progress tracking and growth record">
+          技能地图、学习进度追踪与成长记录
+        </div>
+        <div class="card-footer">
+          <span class="badge blue" data-zh="成长" data-en="Growth">成长</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="car-decision.html" class="card blue">
+        <span class="card-icon">🚗</span>
+        <div class="card-title" data-zh="汽车决策" data-en="Car Decision">汽车决策</div>
+        <div class="card-desc" data-zh="选车分析、对比评估与购车决策辅助工具" data-en="Car selection analysis, comparison evaluation and purchase decision tool">
+          选车分析、对比评估与购车决策辅助工具
+        </div>
+        <div class="card-footer">
+          <span class="badge gray" data-zh="分析中" data-en="Analyzing">分析中</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-icon">✦</span>
+      Sky Portal
+    </div>
+    <div class="footer-text">© 2026 · Built with AI assistance · Sky Portal</div>
+  </div>
+</footer>
+
+<!-- ─── JS ─── -->
+<script>
+  // ── Day counter ──
+  (function () {
+    var start = new Date('2026-02-15T00:00:00');
+    var now   = new Date();
+    var days  = Math.floor((now - start) / 86400000);
+    var el    = document.getElementById('dayCounter');
+    var zh    = '第 ' + days + ' 天';
+    var en    = 'Day ' + days;
+    el.setAttribute('data-zh', zh);
+    el.setAttribute('data-en', en);
+    el.textContent = zh;
+  })();
+
+  // ── Language toggle ──
+  var currentLang = 'zh';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+    var els = document.querySelectorAll('[data-zh][data-en]');
+    els.forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+  }
+
+  // ── Mobile hamburger ──
+  function toggleMenu() {
+    var menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+    document.getElementById('hamburger').textContent = menu.classList.contains('open') ? '✕' : '☰';
+  }
+
+  // Close mobile menu on scroll
+  window.addEventListener('scroll', function () {
+    var menu = document.getElementById('mobileMenu');
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      document.getElementById('hamburger').textContent = '☰';
+    }
+  }, { passive: true });
+
+  // ── Active nav link on scroll ──
+  var sections = ['daily', 'research', 'life', 'projects'];
+  var navLinks  = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', function () {
+    var scrollY = window.scrollY + 100;
+    var active  = sections[0];
+
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) active = id;
+    });
+
+    navLinks.forEach(function (link) {
+      var href = link.getAttribute('href').replace('#', '');
+      link.classList.toggle('active', href === active);
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>

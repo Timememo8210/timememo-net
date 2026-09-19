@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-24</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card h3 a{color:#f0a040;text-decoration:none}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date-tag{color:#888;font-size:0.78em;margin-top:6px;display:block}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.lesson .analogy{color:#8ab4f8;font-size:0.88em;font-style:italic;margin-top:10px;padding:10px;background:rgba(138,180,248,0.05);border-radius:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-24 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 Chiplet？为什么芯片要"拆"成小片？</h3>
+<p>传统芯片制造是把一个完整的处理器做在一整块硅片上（monolithic die），随着工艺节点越来越小（3nm、2nm…），整片大芯片的良率急剧下降、成本指数级上升。一块 800mm² 的大芯片，哪怕只有一个晶体管坏了，整片报废。</p>
+<p><b>Chiplet（小芯片）</b>的思路是：与其做一大块，不如把功能拆分成多个小芯片（CPU核、GPU核、内存、IO等），每块单独用最优工艺制造，然后通过高速互联（如 TSMC CoWoS、Intel EMIB）"拼"到同一个封装内。</p>
+<p>好处显而易见：① 小芯片良率高、成本低；② 不同模块可以用不同工艺（CPU用3nm，IO用6nm）；③ 可以灵活组合，像搭积木一样扩展。</p>
+<p>AMD 的 Ryzen/EPYC、Intel 的 Meteor Lake、Apple 的 M-series（UltraFusion）都在用 chiplet 设计。可以说，<b>先进封装 + chiplet 已经取代单纯缩小晶体管，成为性能提升的主路径</b>。</p>
+<div class="analogy">🧩 打个比方：以前是雕一块完整的大理石雕像，一处失手全盘皆输；现在是3D打印各个部件再精密组装，哪个部件坏了换哪个，还能自由组合材质。</div>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>中国最高法院禁售英飞凌 GaN 产品，国产第三代半导体迎来洗牌时刻</h3>
+<p>中国最高人民法院维持了对德国芯片巨头英飞凌（Infineon）的禁令——因其侵犯了英诺赛科（Innoscience）的两项核心氮化镓（GaN）专利，须立即停止在中国境内销售和进口侵权产品，并赔偿1000万元人民币。</p>
+<p>这一裁决直接引爆了国产化合物半导体股票：英诺赛科港股暴涨16.6%，士兰微、三安光电双双涨停。GaN 作为第三代半导体代表，在快充、5G基站、电动车功率器件中应用广泛。英飞凌表示将上诉。</p>
+<a href="https://www.scmp.com/tech/tech-trends/article/3357172/chinese-compound-chip-stocks-surge-after-supreme-court-blocks-infineon-gan-patent-case">阅读全文 →</a>
+<span class="date-tag">2026-06-15</span>
+</div>
+
+<div class="card">
+<h3>Eclipse Qrisp 整合 NVIDIA CUDA-Q，打造高级量子编程框架</h3>
+<p>Eclipse Qrisp——由弗劳恩霍夫研究所发起、Eclipse 基金会管理的开源 Python 量子编程框架——正式整合 NVIDIA CUDA-Q 平台。开发者可以用高级数据类型（QuantumFloat、QuantumModulus 等）编写量子算法，框架自动处理量子比特分配和回收，然后直接在 NVIDIA GPU 加速引擎上执行。</p>
+<p>相比传统 Qiskit 需要手动逐门操作，Qrisp 能将复杂算法压缩为简洁的数学表达，大幅降低量子编程门槛。</p>
+<a href="https://quantumcomputingreport.com/eclipse-qrisp-integrates-nvidia-cuda-q-for-high-level-open-source-quantum-programming/">阅读全文 →</a>
+<span class="date-tag">2026-06-23</span>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>中国电信豪掷17亿美元采购4万台服务器，华为鲲鹏生态成最大赢家</h3>
+<p>中国电信公布2026-2027年度高性能服务器集采结果：4万台服务器分两包，其中28,000台基于ARM架构的鲲鹏生态服务器（占70%），12,000台C86（x86兼容）服务器。虽然华为未直接投标，但中标企业全部公开关联鲲鹏生态。</p>
+<p>这意味着华为通过合作伙伴"隐形"拿下了国产替代最大份额。中兴、新华三、浪潮、联想瓜分了C86订单。此前中国移动采购63,000台、中国联通87,000台，三大运营商全面加速去美化。</p>
+<a href="https://www.scmp.com/tech/big-tech/article/3358204/huawei-partners-win-big-china-telecom-invests-us17-billion-40000-servers">阅读全文 →</a>
+<span class="date-tag">2026-06-24</span>
+</div>
+
+<div class="card">
+<h3>阿里芯片部门"平头哥"注册资本三倍增至10亿元，AI芯片战略全面加码</h3>
+<p>阿里巴巴旗下芯片设计单元 T-Head（平头哥）将注册资本从3亿元增至10亿元（约1.48亿美元），这是三年多来首次注资。此举正值阿里重申全栈AI基础设施承诺——将自研芯片与阿里云、通义千问模型深度整合，同时推进平头哥独立分拆。</p>
+<p>成立于2018年的平头哥过去颇为低调，但今年以来阿里将芯片置于AI战略核心位置。融资潮正在中国半导体行业重新汇聚。</p>
+<a href="https://www.scmp.com/tech/big-tech/article/3358032/alibaba-chip-unit-t-head-triples-capital-amid-ai-hardware-bet">阅读全文 →</a>
+<span class="date-tag">2026-06-23</span>
+</div>
+
+<div class="card">
+<h3>中国AI芯片替代实验：5个模型尝试用国产硅片训练</h3>
+<p>SCMP 梳理发现，越来越多中国AI实验室开始尝试在预训练（最计算密集的阶段）中使用国产芯片。虽然国产芯片在推理阶段已被广泛采用，但预训练阶段仍高度依赖英飞凌NVIDIA等进口GPU。文章分析了三个阶段（预训练→后训练→推理）中各厂商的国产化进度，指出虽然效率可能较低，但中国正在构建全球罕见的完整本土AI供应链。</p>
+<a href="https://www.scmp.com/tech/tech-trends/article/3357391/can-chinese-silicon-replace-nvidia-here-are-5-ai-models-trained-local-chips">阅读全文 →</a>
+<span class="date-tag">2026-06-17</span>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>Quantum Motion 联手 NVIDIA 解决量子化学"状态准备"瓶颈</h3>
+<p>硅自旋量子硬件公司 Quantum Motion 与 NVIDIA 合作，发布了开源 Julia 包 MPSCircuits.jl，利用矩阵乘积态（MPS）和密度矩阵重整化群（DMRG）算法，将复杂化学系统转化为优化的量子电路。</p>
+<p>这解决了量子相位估计（QPE）算法的关键瓶颈——"状态准备"问题。简单说，如果输入量子态的初始化不够精确，QPE就无法提取有用信息，浪费大量量子比特资源。该工具在 NVIDIA CUDA-Q 平台上运行，可加速药物发现和电池材料设计中的分子模拟。</p>
+<a href="https://quantumcomputingreport.com/quantum-motion-and-nvidia-partner-to-resolve-state-preparation-obstacles-in-quantum-chemistry/">阅读全文 →</a>
+<span class="date-tag">2026-06-23</span>
+</div>
+
+<div class="card">
+<h3>Classiq + NVIDIA：量子建模与GPU加速在金融优化中的统一环境</h3>
+<p>Classiq 和 NVIDIA 联合开发了一个统一环境，将 Classiq 的量子建模语言与 NVIDIA CUDA-Q 混合开发栈集成。该系统可将金融数学问题（投资组合优化、衍生品定价）自动转换为硬件优化的量子电路，利用 GPU 加速执行。</p>
+<p>金融分析师只需专注高层建模，底层量子和GPU执行细节由系统自动处理——这是量子计算走向实用化的重要一步。</p>
+<a href="https://quantumcomputingreport.com/high-level-quantum-modeling-and-gpu-acceleration-in-financial-computational-optimization/">阅读全文 →</a>
+<span class="date-tag">2026-06-23</span>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p>新闻来源：SCMP · Quantum Computing Report · 仅供技术跟踪参考</p>
+</div>
+</div>
+</body>
+</html>

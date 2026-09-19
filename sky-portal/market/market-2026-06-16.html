@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-16 — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card-bg: #111118;
+  --border: rgba(255,255,255,0.08);
+  --accent: #4ade80;
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --up: #4ade80;
+  --down: #f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,'Helvetica Neue',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:var(--accent);font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:var(--text-dim);font-size:0.9em;margin-bottom:28px}
+h2{color:var(--accent);font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+h3{color:var(--accent);margin:16px 0 10px}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:var(--text-dim);font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:var(--up);border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:var(--down);border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);color:var(--text-dim);font-size:0.85em}
+.footer a{color:var(--accent);text-decoration:none}
+.lang-toggle{text-align:right;margin-bottom:8px}
+.lang-toggle button{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid rgba(255,255,255,0.15);background:var(--card-bg);color:var(--text);font-family:inherit}
+.lang-toggle button.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.news-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.news-item:last-child{border-bottom:none}
+.tag{font-size:0.72em;padding:2px 8px;border-radius:4px;font-weight:600}
+.tag-event{background:rgba(96,165,250,0.15);color:#60a5fa}
+.tag-risk{background:rgba(239,68,68,0.15);color:var(--down)}
+.tag-opportunity{background:rgba(74,222,128,0.15);color:var(--up)}
+.index-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.index-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px 12px;text-align:center}
+.index-name{font-size:0.8em;color:var(--text-dim);margin-bottom:4px}
+.index-value{font-family:'JetBrains Mono',monospace;font-size:1.15em;font-weight:700;color:#fff}
+.index-change{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.85em;margin-top:4px}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}.index-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="wrap">
+
+<div class="lang-toggle">
+<button class="active" onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- ── Poster Grid ── -->
+<div class="poster-grid" style="margin-bottom:28px">
+<div class="poster-card" style="background:linear-gradient(135deg,#1b5e20 0%,#2e7d32 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">道指再创历史新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Dow Hits Record High</div>
+<div class="zh poster-data">道指 51,999.67 (+0.64%) 🔥<br>连续4日新高 · 年内第17次<br>工业/金融/运输板块轮动上涨</div>
+<div class="en poster-data" style="display:none">Dow 51,999.67 (+0.64%) 🔥<br>4-day winning streak · 17th ATH of 2026<br>Rotation into industrials/financials/transports</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#b71c1c 0%,#c62828 100%)">
+<div class="poster-icon">💀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">费城半导体暴跌-5.71%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SOX Semiconductor Crashes -5.71%</div>
+<div class="zh poster-data">SOX 13,294.22 (-5.71%) ⚠️<br>NVDA/AVGO/MU/AMD全线下跌<br>芯片板块获利了结 · 约$1.4万亿蒸发</div>
+<div class="en poster-data" style="display:none">SOX 13,294.22 (-5.71%) ⚠️<br>NVDA/AVGO/MU/AMD all lower<br>Chip profit-taking · ~$1.4T erased</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#4a148c 0%,#6a1b9a 100%)">
+<div class="poster-icon">🏦</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美联储Warsh首次议息</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Fed Chair Warsh's First FOMC</div>
+<div class="zh poster-data">利率预计维持3.5-3.75%不变<br>明日公布决议 + 点阵图<br>通胀高于目标 · 加息预期浮现</div>
+<div class="en poster-data" style="display:none">Rate expected unchanged at 3.5-3.75%<br>Decision + dot plot tomorrow<br>Inflation above target · Hike bets emerging</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#e65100 0%,#ef6c00 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股独立行情 · 创业板+1.72%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Diverge · ChiNext +1.72%</div>
+<div class="zh poster-data">上证 4091.89 (-0.11%)<br>创业板指 +1.72% · 成交3.06万亿<br>港股承压 · 恒科-2.24%</div>
+<div class="en poster-data" style="display:none">SSE 4091.89 (-0.11%)<br>ChiNext +1.72% · Volume 3.06T RMB<br>HK under pressure · HSTECH -2.24%</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-16 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a></p>
+
+<!-- ── US Market ── -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="index-grid">
+<div class="index-card">
+<div class="index-name"><span class="zh">道琼斯</span><span class="en" style="display:none">Dow Jones</span></div>
+<div class="index-value">51,999.67</div>
+<div class="index-change up">+0.64% 🔥</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div>
+<div class="index-value">7,511.35</div>
+<div class="index-change down">-0.57%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq</span></div>
+<div class="index-value">26,376.34</div>
+<div class="index-change down">-1.15%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">费城半导体</span><span class="en" style="display:none">PHLX Semi (SOX)</span></div>
+<div class="index-value">13,294.22</div>
+<div class="index-change down">-5.71% ⚠️</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">VIX恐慌指数</span><span class="en" style="display:none">VIX</span></div>
+<div class="index-value">16.41</div>
+<div class="index-change up"><span class="zh">低位波动</span><span class="en" style="display:none">Low volatility</span></div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">罗素2000</span><span class="en" style="display:none">Russell 2000</span></div>
+<div class="index-value">—</div>
+<div class="index-change" style="color:var(--text-dim)"><span class="zh">持平</span><span class="en" style="display:none">Flat</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4>📉 <span class="zh">道指连续4日创新高，板块轮动加速</span><span class="en" style="display:none">📉 Dow 4-Day ATH Streak, Sector Rotation Accelerates</span></h4>
+<p><span class="zh">道琼斯工业平均指数上涨0.64%至51,999.67点，连续第四个交易日创历史新高，这也是2026年第17个纪录收盘日。JPMorgan等金融股、运输和工业板块领涨，受益于油价回落和美伊霍尔木兹海峡重开协议的乐观情绪。然而，科技和芯片板块遭遇猛烈获利了结，标普500下跌0.57%，纳斯达克跌1.15%。</span><span class="en" style="display:none">The Dow rose 0.64% to 51,999.67, its 4th consecutive record close and 17th of 2026. JPMorgan and other financials led gains alongside transports and industrials, buoyed by falling oil prices and US-Iran Hormuz reopening optimism. However, tech and chip stocks faced fierce profit-taking: S&P 500 -0.57%, Nasdaq -1.15%.</span></p>
+<p class="src"><span class="zh">来源：Investopedia / WSJ / CNBC</span><span class="en" style="display:none">Source: Investopedia / WSJ / CNBC</span></p>
+</div>
+
+<div class="card">
+<h4>⚠️ <span class="zh">费城半导体(SOX)暴跌5.71%，芯片股遭遇"黑色星期二"</span><span class="en" style="display:none">⚠️ SOX Crashes 5.71% — Black Tuesday for Chips</span></h4>
+<p><span class="zh">费城半导体指数从上一交易日的14,099.62暴跌至13,294.22，单日跌幅高达5.71%，约$1.4万亿市值蒸发。这是SOX自6月5日-10.26%崩盘后的又一次重创。Nvidia、Broadcom、Micron和AMD全线下跌。分析认为，在SOX前期创出52周新高14,134.60后，大规模获利了结不可避免。年迄今SOX仍涨87.69%，但短期内调整压力显著。</span><span class="en" style="display:none">The PHLX Semiconductor Index crashed from 14,099.62 to 13,294.22, a 5.71% single-day drop that erased ~$1.4T in market value. This follows the June 5 -10.26% crash. NVDA, AVGO, MU, AMD all fell broadly. After hitting a 52-week high of 14,134.60, profit-taking was inevitable. SOX remains +87.69% YTD but near-term correction pressure is significant.</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance / Motley Fool / MarketWatch</span><span class="en" style="display:none">Source: Yahoo Finance / Motley Fool / MarketWatch</span></p>
+</div>
+
+<div class="card">
+<h4>🚀 <span class="zh">SpaceX IPO后持续走高，CoreWeave大涨10%</span><span class="en" style="display:none">🚀 SpaceX Post-IPO Surge, CoreWeave +10%</span></h4>
+<p><span class="zh">SpaceX在6月11日以$135/股完成史上最大IPO（$750亿融资）后，股价继续在二级市场走高，最新报约$201，市值一度超越亚马逊。SpaceX目前是全球最有价值的上市公司之一。另一方面，AI基础设施公司CoreWeave在分析师看多情绪推动下大涨近10%，成为少数逆势上涨的科技股。Moderna因流感疫苗FDA审批乐观预期也录得涨幅。</span><span class="en" style="display:none">After pricing its IPO at $135/share on June 11 (record $75B raise), SpaceX continues to trade higher in secondary markets at ~$201, briefly surpassing Amazon in market cap. It's now one of the world's most valuable public companies. Meanwhile, AI infrastructure firm CoreWeave jumped ~10% on bullish analyst sentiment. Moderna also gained on optimistic FDA flu vaccine approval expectations.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Forbes / WSJ</span><span class="en" style="display:none">Source: Reuters / Forbes / WSJ</span></p>
+</div>
+
+<!-- ── Semiconductor Stocks ── -->
+<h2>🔧 <span class="zh">半导体/AI 个股</span><span class="en" style="display:none">Semiconductor & AI Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$212</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Down</span></div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$376.71</div><div class="stock-change down">-4.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Down</span></div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Down</span></div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Down</span></div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">—</div><div class="stock-change" style="color:var(--text-dim)"><span class="zh">持平</span><span class="en" style="display:none">Flat</span></div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">—</div><div class="stock-change down"><span class="zh">下跌</span><span class="en" style="display:none">Down</span></div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">—</div><div class="stock-change" style="color:var(--text-dim)"><span class="zh">盘整</span><span class="en" style="display:none">Consolidating</span></div></div>
+<div class="stock-item"><div class="stock-ticker">SPCX</div><div class="stock-price">$201</div><div class="stock-change up"><span class="zh">IPO后强势</span><span class="en" style="display:none">Post-IPO surge</span></div></div>
+<div class="stock-item"><div class="stock-ticker">CORE</div><div class="stock-price">—</div><div class="stock-change up">+10%</div></div>
+</div>
+
+<!-- ── A-Shares ── -->
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en" style="display:none">A-Shares Close</span></h2>
+
+<div class="index-grid">
+<div class="index-card">
+<div class="index-name"><span class="zh">上证指数</span><span class="en" style="display:none">SSE Composite</span></div>
+<div class="index-value">4,091.89</div>
+<div class="index-change down">-0.11%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">深证成指</span><span class="en" style="display:none">SZSE Component</span></div>
+<div class="index-value">15,675.25</div>
+<div class="index-change up">+0.93%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">创业板指</span><span class="en" style="display:none">ChiNext</span></div>
+<div class="index-value">4,102.94</div>
+<div class="index-change up">+1.72%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></div>
+<div class="index-value">1,758.42</div>
+<div class="index-change up">+0.58%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">沪深300</span><span class="en" style="display:none">CSI 300</span></div>
+<div class="index-value">4,884.23</div>
+<div class="index-change down">-0.15%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">成交额</span><span class="en" style="display:none">Volume</span></div>
+<div class="index-value">3.06<span class="zh">万亿</span><span class="en" style="display:none">T</span></div>
+<div class="index-change" style="color:var(--text-dim)"><span class="zh">缩量</span><span class="en" style="display:none">Lower</span></div>
+</div>
+</div>
+
+<div class="card">
+<h4>📊 <span class="zh">A股冲高回落，创业板逆势涨1.72%</span><span class="en" style="display:none">📊 A-Shares Pull Back from Highs, ChiNext +1.72%</span></h4>
+<p><span class="zh">6月16日A股走出冲高回落行情。创业板指盘中一度涨超2.5%，最终收涨1.72%报4,102.94点。上证指数微跌0.11%收于4,091.89点，深成指涨0.93%。两市总成交额3.06万亿元，较上一交易日缩量。逾百股涨停，市场结构性分化明显——新能源、半导体材料等科技板块表现强势，而权重蓝筹走弱拖累沪指收绿。</span><span class="en" style="display:none">A-shares staged an early rally then pulled back. ChiNext traded up over 2.5% intraday before closing +1.72% at 4,102.94. SSE Composite dipped 0.11% to 4,091.89, SZSE Component +0.93%. Total volume reached 3.06T RMB. Over 100 stocks hit daily limits — new energy and semiconductor materials led while blue chips dragged.</span></p>
+<p class="src"><span class="zh">来源：央广网 / 证券时报 / 东方财富网</span><span class="en" style="display:none">Source: CNR / Securities Times / East Money</span></p>
+</div>
+
+<!-- ── Hong Kong ── -->
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+
+<div class="index-grid">
+<div class="index-card">
+<div class="index-name"><span class="zh">恒生指数</span><span class="en" style="display:none">Hang Seng Index</span></div>
+<div class="index-value">24,493.95</div>
+<div class="index-change down">-1.40%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">恒生科技</span><span class="en" style="display:none">Hang Seng TECH</span></div>
+<div class="index-value">4,658.65</div>
+<div class="index-change down">-2.24%</div>
+</div>
+<div class="index-card">
+<div class="index-name"><span class="zh">恒生国企指数</span><span class="en" style="display:none">HSCEI</span></div>
+<div class="index-value">8,240.05</div>
+<div class="index-change down">-1.62%</div>
+</div>
+</div>
+
+<div class="card">
+<h4>🔴 <span class="zh">港股三大指数集体下探，恒生科技跌破4700</span><span class="en" style="display:none">🔴 HK Indices Sell Off, HSTECH Breaks Below 4,700</span></h4>
+<p><span class="zh">6月16日港股收盘走低，恒生指数跌348.72点（-1.40%）报24,493.95点；恒生科技指数跌106.93点（-2.24%）报4,658.65点，一举跌破4700点关口。科技股和内房股重挫，美团跌近4%，百度跌超3%。安德利果汁逆势暴涨34.56%，文远知行-W涨10.23%。港股整体情绪偏向谨慎，受美股科技股前夜走弱及地缘不确定性影响。</span><span class="en" style="display:none">HK closed lower across the board. HSI fell 348.72 pts (-1.40%) to 24,493.95; HSTECH dropped 106.93 pts (-2.24%) to 4,658.65, breaking below 4,700. Tech and mainland property sold off heavily: Meituan -4%, Baidu -3%+. Andrey Juice surged +34.56%, WeRide +10.23%. Sentiment cautious on Wall Street tech weakness and geopolitical uncertainty.</span></p>
+<p class="src"><span class="zh">来源：东方财富网 / 证券时报 / 财联社</span><span class="en" style="display:none">Source: East Money / Securities Times / cls.cn</span></p>
+</div>
+
+<!-- ── Core Drivers ── -->
+<h2>📌 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="tag tag-event">1</span> <span class="zh">芯片板块获利了结 — SOX创6月第二次暴跌</span><span class="en" style="display:none">Chip Profit-Taking — SOX's 2nd June Crash</span></h4>
+<p><span class="zh">费城半导体指数在6月5日暴跌10.26%后反弹创历史新高14,134.60，但6月16日再次暴跌5.71%至13,294.22。一个月内两次单日跌幅超5%，表明AI芯片板块在经历了年迄今+87.69%的巨大涨幅后，获利回吐压力巨大。Nvidia、Broadcom、Micron、AMD无一幸免。然而AI基本面未变——CoWoS产能仍在扩张，DRAM涨价持续，云计算巨头AI capex仍在加速。这次下跌更多是技术性调整而非趋势反转。</span><span class="en" style="display:none">After the June 5 -10.26% crash, SOX rebounded to a 52-week high of 14,134.60, only to crash again -5.71% on June 16 to 13,294.22. Two 5%+ drops in one month signals massive profit-taking pressure after +87.69% YTD gains. NVDA, AVGO, MU, AMD all fell. However, AI fundamentals remain unchanged — CoWoS capacity expanding, DRAM pricing rising, hyperscaler capex accelerating. This is a technical pullback, not a trend reversal.</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance / Motley Fool / Intellectia.ai</span><span class="en" style="display:none">Source: Yahoo Finance / Motley Fool / Intellectia.ai</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">2</span> <span class="zh">美联储Warsh首次议息 — 利率决议明日公布</span><span class="en" style="display:none">Fed Chair Warsh's First FOMC — Decision Tomorrow</span></h4>
+<p><span class="zh">美联储新主席Kevin Warsh主持其任内首次FOMC会议，利率决议将于美东时间周三下午2:00公布。市场普遍预计利率维持3.5-3.75%不变，但关注焦点在于：1）Warsh的声明措辞是否暗示鹰派转向；2）点阵图是否显示年内加息可能。部分前Fed官员认为，在通胀高于目标的背景下，Warsh可能不得不在2026年底前加息。利率期货定价显示，本次会议维持不变概率超过90%。</span><span class="en" style="display:none">New Fed Chair Kevin Warsh chairs his first FOMC meeting. Decision due Wednesday 2:00 PM ET. Markets overwhelmingly expect rates unchanged at 3.5-3.75%, but focus is on: 1) whether Warsh's language hints at a hawkish pivot; 2) whether the dot plot shows potential rate hikes this year. Some former Fed officials believe Warsh may need to hike before end-2026 given above-target inflation. Fed funds futures price >90% odds of no change at this meeting.</span></p>
+<p class="src"><span class="zh">来源：Kiplinger / Morgan Stanley / Dallas Fed</span><span class="en" style="display:none">Source: Kiplinger / Morgan Stanley / Dallas Fed</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">3</span> <span class="zh">美伊霍尔木兹协议 — 和平信号推动板块轮动</span><span class="en" style="display:none">US-Iran Hormuz Deal — Peace Signals Drive Rotation</span></h4>
+<p><span class="zh">美国与伊朗就重开霍尔木兹海峡达成初步协议，推动油价回落，运输、工业和金融板块受益上涨。然而由于协议缺乏具体细节，市场在短暂乐观后转为谨慎。道指受此利好推动再创新高，但科技板块未能跟随。霍尔木兹海峡是全球约20%石油运输的咽喉要道，其重开将显著缓解全球能源通胀压力。协议正式签署时间表尚未确定。</span><span class="en" style="display:none">The US and Iran reached a preliminary agreement to reopen the Strait of Hormuz, pushing oil prices lower and boosting transports, industrials, and financials. However, the market turned cautious after the initial optimism due to a lack of concrete details. The Dow benefited with another record close, but tech didn't follow. Hormuz handles ~20% of global oil transit; its reopening would significantly ease energy inflation pressure. Formal signing timeline TBD.</span></p>
+<p class="src"><span class="zh">来源：Bloomberg / Reuters / WSJ</span><span class="en" style="display:none">Source: Bloomberg / Reuters / WSJ</span></p>
+</div>
+
+<!-- ── Outlook ── -->
+<h2>🔮 <span class="zh">走向预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="tag tag-risk">短期</span> <span class="zh">半导体承压，关注本周能否企稳</span><span class="en" style="display:none">Short-term: Semiconductor Pressure, Watch for Stabilization</span></h4>
+<p><span class="zh">SOX单日-5.71%是6月第二次暴跌，技术面严重走坏。明日Fed决议若偏鹰，芯片股可能继续承压。关注SOX 13,000点心理支撑位，若失守则可能回测6月5日低点。NVDA $200整数关口也是关键位置。但若Fed释放偏鸽信号，超跌反弹概率较大。</span><span class="en" style="display:none">SOX -5.71% is the 2nd June crash; technically damaged. If Fed is hawkish tomorrow, chips could fall further. Watch SOX 13,000 psychological support — a break could retest June 5 lows. NVDA $200 is key. But if Fed is dovish, an oversold bounce is likely.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-opportunity">机会</span> <span class="zh">A股/港股科技低吸窗口</span><span class="en" style="display:none">Opportunity: A/H Tech Dip-Buying Window</span></h4>
+<p><span class="zh">A股创业板逆势涨1.72%，显示内资主导下的独立行情特征。国产替代、半导体材料、新能源等方向依然强势。港股恒生科技跌2.24%后估值回到相对吸引区间，美团、百度等权重股短期超跌。如果美股芯片板块企稳，港股科技有望率先反弹。</span><span class="en" style="display:none">ChiNext's +1.72% divergence shows A-shares are domestically driven. Semiconductor substitution, new energy remain strong. HSTECH's -2.24% drop brings valuations to attractive levels — Meituan, Baidu oversold. If US chips stabilize, HK tech could lead the rebound.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="tag tag-event">明日焦点</span> <span class="zh">Fed决议 + 点阵图</span><span class="en" style="display:none">Tomorrow's Focus: Fed Decision + Dot Plot</span></h4>
+<p><span class="zh">美东时间周三下午2:00公布利率决议，2:30 Warsh举行首次新闻发布会。核心关注：1）声明措辞是否删除"通胀正在缓和"等鸽派语言；2）点阵图中值是否显示2026年底有加息可能；3）Warsh发布会语气。任何鹰派意外都将冲击科技/芯片股，反之则可能触发超跌反弹。此外还需关注周四的零售销售数据和周五的失业金申请。</span><span class="en" style="display:none">Wednesday 2:00 PM ET: Rate decision. 2:30 PM: Warsh's first press conference. Key watches: 1) Whether statement removes dovish "inflation is easing" language; 2) Whether dot plot median shows potential 2026 hike; 3) Warsh's tone. Any hawkish surprise hits tech/chips; dovish could trigger oversold bounces. Also watch Thursday retail sales and Friday jobless claims.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a> · <a href="../research/index.html"><span class="zh">每日研报</span><span class="en" style="display:none">Daily Research</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Investopedia, WSJ, CNBC, Yahoo Finance, Motley Fool, MarketWatch, Reuters, 东方财富网, 证券时报, 财联社, 央广网, Kiplinger, Morgan Stanley</span><span class="en" style="display:none">Data: Investopedia, WSJ, CNBC, Yahoo Finance, Motley Fool, MarketWatch, Reuters, East Money, Securities Times, cls.cn, CNR, Kiplinger, Morgan Stanley</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.body.className = 'lang-' + lang;
+  localStorage.setItem('market-lang', lang);
+}
+// Restore preference
+var saved = localStorage.getItem('market-lang');
+if (saved) switchLang(saved);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Pro Max: Bento Grid Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* === Design Tokens (ui-ux-pro-max: Portfolio/Personal palette #12) === */
+:root {
+  /* Core palette */
+  --surface: #FAFAFA;
+  --surface-raised: #FFFFFF;
+  --surface-dim: #F5F5F5;
+  --text-primary: #18181B;
+  --text-secondary: #71717A;
+  --text-dim: #A1A1AA;
+  --accent: #2563EB;
+  --accent-light: #EFF6FF;
+  --accent-mid: #BFDBFE;
+  --border: #E4E4E7;
+  --border-light: #F4F4F5;
+  /* Semantic */
+  --green: #16A34A;
+  --green-bg: #F0FDF4;
+  --amber: #D97706;
+  --amber-bg: #FFFBEB;
+  --violet: #7C3AED;
+  --violet-bg: #F5F3FF;
+  --rose: #E11D48;
+  --rose-bg: #FFF1F2;
+  --cyan: #0891B2;
+  --cyan-bg: #ECFEFF;
+  /* Spacing scale (8px base) */
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 32px;
+  --sp-2xl: 48px;
+  --sp-3xl: 64px;
+  /* Type scale */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 30px;
+  --text-3xl: 40px;
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+  --font-display: 'Geist', 'Noto Sans SC', sans-serif;
+  --font-body: 'Noto Sans SC', 'Geist', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Sticky Nav ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,250,250,0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+}
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 var(--sp-lg);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-pills {
+  display: flex;
+  gap: var(--sp-xs);
+}
+.nav-pill {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+.nav-pill:hover { color: var(--text-primary); background: var(--surface-dim); }
+
+/* ── Container ── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 var(--sp-lg);
+}
+
+/* ══════════════════════════════════════════
+   BENTO GRID — The Signature Layout
+   ══════════════════════════════════════════ */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-md);
+  padding: var(--sp-2xl) 0;
+}
+
+/* ── Bento Cells ── */
+.bento-hero {
+  grid-column: span 3;
+  padding: var(--sp-xl) var(--sp-2xl);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bento-hero .overline {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--sp-sm);
+}
+.bento-hero h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: var(--sp-sm);
+}
+.bento-hero p {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  max-width: 480px;
+}
+
+.bento-stat {
+  grid-column: span 1;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+.bento-stat .big-num {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent);
+}
+.bento-stat .label {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.bento-stat .trend {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--green);
+  margin-top: auto;
+}
+
+/* ── Featured (full-width bento) ── */
+.bento-featured {
+  grid-column: 1 / -1;
+  background: var(--text-primary);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: var(--sp-xl) var(--sp-2xl);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--sp-lg);
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.bento-featured::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -5%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(37,99,235,0.25), transparent 70%);
+  pointer-events: none;
+}
+.bento-featured:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.bento-featured .tag {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.bento-featured h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-top: var(--sp-sm);
+}
+.bento-featured p {
+  color: rgba(255,255,255,0.6);
+  font-size: var(--text-sm);
+  margin-top: var(--sp-xs);
+}
+.bento-featured .arrow {
+  font-size: var(--text-xl);
+  color: rgba(255,255,255,0.3);
+  transition: all 0.2s;
+  position: relative;
+  z-index: 1;
+}
+.bento-featured:hover .arrow { color: var(--accent-mid); transform: translateX(6px); }
+
+/* ── Section Header ── */
+.bento-section-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding-top: var(--sp-lg);
+}
+.bento-section-header .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.bento-section-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.bento-section-header .line { flex: 1; height: 1px; background: var(--border-light); }
+.bento-section-header .count {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-dim);
+  background: var(--surface-dim);
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+/* ── Bento Card (standard) ── */
+.bento-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.bento-card:hover {
+  border-color: var(--accent-mid);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.bento-card .emoji { font-size: 24px; margin-bottom: var(--sp-sm); }
+.bento-card .title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.bento-card .desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: var(--sp-xs);
+  flex: 1;
+}
+.bento-card .bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--sp-md);
+  padding-top: var(--sp-sm);
+  border-top: 1px solid var(--border-light);
+}
+
+/* ── Chip ── */
+.chip {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+}
+.chip--blue { background: var(--accent-light); color: var(--accent); }
+.chip--green { background: var(--green-bg); color: var(--green); }
+.chip--amber { background: var(--amber-bg); color: var(--amber); }
+.chip--violet { background: var(--violet-bg); color: var(--violet); }
+.chip--cyan { background: var(--cyan-bg); color: var(--cyan); }
+.chip--subtle { background: var(--surface-dim); color: var(--text-dim); }
+.time-label {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: var(--sp-2xl) var(--sp-lg);
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-light);
+  margin-top: var(--sp-lg);
+}
+
+/* ── Stagger ── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bento > * { animation: rise 0.4s ease-out both; }
+.bento > *:nth-child(2) { animation-delay: 0.04s; }
+.bento > *:nth-child(3) { animation-delay: 0.08s; }
+.bento > *:nth-child(4) { animation-delay: 0.12s; }
+.bento > *:nth-child(5) { animation-delay: 0.16s; }
+.bento > *:nth-child(6) { animation-delay: 0.20s; }
+.bento > *:nth-child(7) { animation-delay: 0.24s; }
+.bento > *:nth-child(8) { animation-delay: 0.28s; }
+.bento > *:nth-child(9) { animation-delay: 0.32s; }
+.bento > *:nth-child(10) { animation-delay: 0.36s; }
+.bento > *:nth-child(11) { animation-delay: 0.40s; }
+.bento > *:nth-child(12) { animation-delay: 0.44s; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-hero { grid-column: span 2; }
+  .bento-featured { grid-column: 1 / -1; }
+  .bento-section-header { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .bento { grid-template-columns: 1fr; }
+  .bento-hero { grid-column: span 1; }
+  .container { padding: 0 var(--sp-md); }
+  .nav-pills { display: none; }
+  .bento-hero h1 { font-size: var(--text-2xl); }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Sky<span>Portal</span></a>
+    <div class="nav-pills">
+      <a class="nav-pill" href="#daily">每日更新</a>
+      <a class="nav-pill" href="#research">研究</a>
+      <a class="nav-pill" href="#life">生活</a>
+      <a class="nav-pill" href="#tools">项目</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="bento">
+
+    <!-- Hero + Stats Row -->
+    <div class="bento-hero">
+      <div class="overline">Personal Dashboard</div>
+      <h1>Sky Portal</h1>
+      <p>研究 · 工具 · 记录 — 由 Sky AI 驱动的个人知识库</p>
+    </div>
+
+    <div class="bento-stat">
+      <div class="big-num">11</div>
+      <div class="label">已发布内容</div>
+      <div class="trend">↑ 活跃</div>
+    </div>
+
+    <!-- Featured -->
+    <a class="bento-featured" href="research/intel-tesla-terafab.html">
+      <div>
+        <div class="tag">⚡ Featured Report</div>
+        <h3>Intel × Tesla Terafab</h3>
+        <p>$200-250亿芯片超级工厂深度调研 · 持续追踪更新</p>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <!-- Daily Section -->
+    <div class="bento-section-header" id="daily">
+      <div class="icon" style="background:var(--accent-light)">📡</div>
+      <h2>每日更新</h2>
+      <div class="line"></div>
+      <span class="count">4</span>
+    </div>
+
+    <a class="bento-card" href="research/index.html">
+      <div class="emoji">📡</div>
+      <div class="title">每日研报</div>
+      <div class="desc">半导体 · 股票 · 巴萨 · Portland · AI工具</div>
+      <div class="bottom"><span class="chip chip--blue">自动化</span><span class="time-label">每日</span></div>
+    </a>
+    <a class="bento-card" href="tech/index.html">
+      <div class="emoji">🔬</div>
+      <div class="title">每日科技</div>
+      <div class="desc">芯片架构 · 技术突破 · 产业动态</div>
+      <div class="bottom"><span class="chip chip--blue">自动化</span><span class="time-label">每日</span></div>
+    </a>
+    <a class="bento-card" href="market/index.html">
+      <div class="emoji">📊</div>
+      <div class="title">每日行情</div>
+      <div class="desc">美股 · A股 · 港股 — 9PM</div>
+      <div class="bottom"><span class="chip chip--blue">自动化</span><span class="time-label">9PM</span></div>
+    </a>
+    <a class="bento-card" href="science/index.html">
+      <div class="emoji">🧬</div>
+      <div class="title">每周科学前沿</div>
+      <div class="desc">Science · Nature · Cell · PNAS</div>
+      <div class="bottom"><span class="chip chip--green">自动化</span><span class="time-label">周三</span></div>
+    </a>
+
+    <!-- Research Section -->
+    <div class="bento-section-header" id="research">
+      <div class="icon" style="background:var(--violet-bg)">🔬</div>
+      <h2>研究专栏</h2>
+      <div class="line"></div>
+      <span class="count">3</span>
+    </div>
+
+    <a class="bento-card" href="research/intel-tesla-terafab.html">
+      <div class="emoji">🏭</div>
+      <div class="title">Intel × Tesla Terafab</div>
+      <div class="desc">$200-250亿芯片超级工厂深度调研</div>
+      <div class="bottom"><span class="chip chip--amber">进行中</span><span class="time-label">自动</span></div>
+    </a>
+    <a class="bento-card" href="nvidia-report.html">
+      <div class="emoji">💚</div>
+      <div class="title">NVIDIA 深度报告</div>
+      <div class="desc">GPU龙头财报分析与AI算力展望</div>
+      <div class="bottom"><span class="chip chip--green">完成</span><span class="time-label">04</span></div>
+    </a>
+    <a class="bento-card" href="ai-life.html">
+      <div class="emoji">🤖</div>
+      <div class="title">AI 与生活</div>
+      <div class="desc">AI时代的个人工作流与数字生活</div>
+      <div class="bottom"><span class="chip chip--violet">思考</span><span class="time-label">持续</span></div>
+    </a>
+
+    <!-- Life Section -->
+    <div class="bento-section-header" id="life">
+      <div class="icon" style="background:var(--green-bg)">👤</div>
+      <h2>生活</h2>
+      <div class="line"></div>
+      <span class="count">3</span>
+    </div>
+
+    <a class="bento-card" href="naturalization.html">
+      <div class="emoji">🇺🇸</div>
+      <div class="title">入籍指南</div>
+      <div class="desc">N-400全流程记录与时间线追踪</div>
+      <div class="bottom"><span class="chip chip--amber">进行中</span><span class="time-label">2026</span></div>
+    </a>
+    <a class="bento-card" href="travel.html">
+      <div class="emoji">✈️</div>
+      <div class="title">旅行计划</div>
+      <div class="desc">PDX↔NKG · 2026夏季</div>
+      <div class="bottom"><span class="chip chip--violet">计划</span><span class="time-label">夏</span></div>
+    </a>
+    <a class="bento-card" href="investment.html">
+      <div class="emoji">💰</div>
+      <div class="title">投资理财</div>
+      <div class="desc">个人投资笔记与市场观察</div>
+      <div class="bottom"><span class="chip chip--green">持续</span><span class="time-label">长期</span></div>
+    </a>
+
+    <!-- Tools Section -->
+    <div class="bento-section-header" id="tools">
+      <div class="icon" style="background:var(--amber-bg)">🛠</div>
+      <h2>项目 & 工具</h2>
+      <div class="line"></div>
+      <span class="count">2</span>
+    </div>
+
+    <a class="bento-card" href="coach/munger.html">
+      <div class="emoji">📚</div>
+      <div class="title">芒格误判心理学</div>
+      <div class="desc">每日一课 · 25条 · 13/25</div>
+      <div class="bottom"><span class="chip chip--blue">每日</span><span class="time-label">13/25</span></div>
+    </a>
+    <a class="bento-card" href="skills.html">
+      <div class="emoji">⚡</div>
+      <div class="title">OpenClaw Skills</div>
+      <div class="desc">AI技能集 · 自动化工作流</div>
+      <div class="bottom"><span class="chip chip--cyan">工具</span><span class="time-label">运行</span></div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="footer">Sky Portal · Sky Portal · Powered by OpenClaw ☁️</footer>
+
+</body>
+</html>

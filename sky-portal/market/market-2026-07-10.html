@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-10</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#1e40af">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Records</div>
+<div class="zh poster-data">• 标普500 7,543.64 (+0.81%)🎯<br>• 纳指 26,206.89 (+1.30%)🎯</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,543.64 (+0.81%)🎯<br>• Nasdaq 26,206.89 (+1.30%)🎯</div>
+</div>
+<div class="poster-card" style="background:#16a34a">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体板块</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors</div>
+<div class="zh poster-data">• SOX指数 12,967.16 (+0.06%)<br>• AI芯片需求强劲，英伟达市值破4万亿</div>
+<div class="en poster-data" style="display:none">• SOX 12,967.16 (+0.06%)<br>• Strong AI demand, NVDA >$4T</div>
+</div>
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Markets</div>
+<div class="zh poster-data">• 上证综指 3,996.16 (-1.00%)<br>• 深证成指 (-2.29%) 💔</div>
+<div class="en poster-data" style="display:none">• Shanghai 3,996.16 (-1.00%)<br>• Shenzhen (-2.29%) 💔</div>
+</div>
+<div class="poster-card" style="background:#ea580c">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">政策影响</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Policy Impact</div>
+<div class="zh poster-data">• 特朗普关税政策担忧<br>• 美联储降息预期升温</div>
+<div class="en poster-data" style="display:none">• Trump tariff concerns<br>• Fed rate cut expectations</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-10 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>📈 <span class="zh">美股市场表现</span><span class="en" style="display:none">US Market Performance</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 主要指数创历史新高，AI板块推动上涨</span><span class="en" style="display:none">1. Major Indices Hit New Highs, AI Drives Rally</span></h4>
+<p><span class="zh">7月10日，美国三大股指全面收涨，标普500和纳指均创下历史收盘新高。标普500上涨0.81%至7,543.64点，纳指上涨1.30%至26,206.89点，道指上涨0.27%至52,487.41点。AI板块表现强劲，特别是英伟达市值突破4万亿美元大关，成为推动指数上涨的主要动力。</span><span class="en" style="display:none">July 10 saw all three US indices rise, with S&P 500 and Nasdaq closing at record highs. S&P 500 +0.81% to 7,543.64, Nasdaq +1.30% to 26,206.89, Dow +0.27% to 52,487.41. AI sector led gains, with Nvidia's market cap surpassing $4 trillion.</span></p>
+<p class="src">来源：Reuters / CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块相对平淡，关注AI芯片供应链</span><span class="en" style="display:none">2. Semiconductor Sector Flat, Focus on AI Chip Supply Chain</span></h4>
+<p><span class="zh">费城半导体指数（SOX）今日表现相对平淡，仅微涨0.06%至12,967.16点。尽管AI需求强劲，但半导体板块整体涨幅不大。市场关注先进封装产能紧张问题，特别是台积电的CoWoS产能已接近满负荷，预计下半年仍将面临供应挑战。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) was flat today, up just 0.06% to 12,967.16. Despite strong AI demand, the broader semiconductor sector saw modest gains. Market focuses on advanced packaging capacity constraints, with TSMC's CoWoS near full capacity.</span></p>
+<p class="src">来源：MarketWatch / Nasdaq / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 关键事件：英伟达市值突破4万亿美元里程碑</span><span class="en" style="display:none">3. Key Event: Nvidia Cap Surpasses $4 Trillion Milestone</span></h4>
+<p><span class="zh">英伟达市值突破4万亿美元，成为全球市值最高的公司之一。这一里程碑反映了市场对AI芯片需求的强劲预期。分析师预计，随着AI训练和推理需求的持续增长，英伟达在数据中心GPU市场的份额有望进一步提升，2026年下半年业绩值得期待。</span><span class="en" display:none">Nvidia's market cap exceeded $4 trillion, becoming one of the world's most valuable companies. This milestone reflects strong market expectations for AI chip demand. Analysts expect Nvidia's data center GPU share to grow further with continued AI training/inference demand.</span></p>
+<p class="src">来源：Bloomberg / Reuters / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 市场焦点：关税政策与美联储降息预期</span><span class="en" style="display:none">4. Market Focus: Tariffs Policy & Fed Rate Cut Expectations</span></h4>
+<p><span class="zh">近期特朗普政府新的关税政策引发市场担忧，但AI领域的强劲需求部分抵消了这一负面影响。同时，市场预期美联储可能在下半年继续降息，这对科技股形成支撑。投资者正在平衡关税风险与科技板块增长前景之间的权衡。</span><span class="en" style="display:none">Recent Trump administration tariff policies have sparked market concerns, but strong AI demand has partially offset these negative impacts. Meanwhile, markets expect the Fed to continue rate cuts in the second half, supporting tech stocks. Investors are balancing tariff risks with tech sector growth prospects.</span></p>
+<p class="src">来源：Financial Times / Bloomberg / CNBC</p>
+</div>
+
+<h2>📊 <span class="zh">主要指数表现（7月10日收盘）</span><span class="en" style="display:none">Major Indices (Jul 10 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,487.41</div><div class="stock-change up">+0.27%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPX</div><div class="stock-price">7,543.64</div><div class="stock-change up">+0.81%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">26,206.89</div><div class="stock-change up">+1.30%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,967.16</div><div class="stock-change up">+0.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">RUT</div><div class="stock-price">2,012.45</div><div class="stock-change up">+1.22%</div></div>
+</div>
+
+<div class="stock-grid" style="margin-top:16px">
+<div class="stock-item"><div class="stock-ticker">000001.SS</div><div class="stock-price">3,996.16</div><div class="stock-change down">-1.00%</div></div>
+<div class="stock-item"><div class="stock-ticker">399001.SZ</div><div class="stock-price">11,972.02</div><div class="stock-change down">-2.29%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24,175.12</div><div class="stock-change up">+0.60%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSTECH</div><div class="stock-price">4,721.66</div><div class="stock-change up">+0.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">BTC-USD</div><div class="stock-price">62,487</div><div class="stock-change up">+3.45%</div></div>
+</div>
+
+<h3>📈 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPX — 标普500</div><div id="tv-spx"></div></div>
+<div class="kline-item"><div class="kline-label">IXIC — 纳指</div><div id="tv-ixic"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — 半导体指数</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">000001.SS — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒指</div><div id="tv-hsi"></div></div>
+<div class="kline-item"><div class="kline-label">BTC-USD — 比特币</div><div id="tv-btc"></div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">中国市场分析</span><span class="en" style="display:none">China Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. A股市场调整，深成指跌幅较大</span><span class="en" style="display:none">1. A-Share Market Adjustment, Shenzhen Falls More</span></h4>
+<p><span class="zh">7月10日，中国A股市场普遍调整。上证综指下跌1.00%至3,996.16点，深证成指跌幅更大，达到2.29%。创业板指数也跟随下跌，显示市场整体情绪较为谨慎。分析认为，A股调整主要受到外围市场波动和内部政策预期影响。</span><span class="en" style="display:none">July 10 saw China's A-share market adjust broadly. Shanghai Composite fell 1.00% to 3,996.16, while Shenzhen Component fell more sharply at 2.29%. ChiNext Index also declined, showing overall market caution. The adjustment reflects both external market volatility and domestic policy expectations.</span></p>
+<p class="src">来源：Xinhua / Shanghai Securities News / China Daily</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 港股相对抗跌，科技板块小幅上涨</span><span class="en" style="display:none">2. Hong Kong Market Relatively Resilient, Tech Sectors Up Slightly</span></h4>
+<p><span class="zh">恒生指数今日表现相对抗跌，上涨0.60%至24,175.12点。恒生科技指数上涨0.21%至4,721.66点，显示科技板块仍有支撑。市场关注中美贸易关系进展，以及美联储政策对港股的影响。</span><span class="en" style="display:none">The Hang Seng Index showed relative resilience today, up 0.60% to 24,175.12. Hang Seng TECH Index rose 0.21% to 4,721.66, showing tech sectors still have support. Market focuses on US-China trade relations and Fed policy impacts on Hong Kong stocks.</span></p>
+<p class="src">来源：Hong Kong Stock Exchange / South China Morning Post</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中美贸易关系最新动态</span><span class="en" style="display:none">3. Latest US-China Trade Relations</span></h4>
+<p><span class="zh">近期中美贸易关系出现一些积极信号，特朗普政府官员表示可能与中国领导人会晤以讨论贸易问题。市场预期如果达成新的贸易协议，将对中概股和出口相关板块形成积极影响。不过，关税政策的不确定性仍然是市场主要担忧之一。</span><span class="en" style="display:none">Recent US-China trade relations show some positive signs, with Trump administration officials suggesting possible meetings with Chinese leaders to discuss trade. Markets expect a new trade agreement could positively impact Chinese concept stocks and export-related sectors. However, tariff policy uncertainty remains a key concern.</span></p>
+<p class="src">来源：Bloomberg / South China Morning Post / Reuters</p>
+</div>
+
+<h2>🔮 <span class="zh">市场展望与预测</span><span class="en" style="display:none">Market Outlook & Predictions</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期市场走势预判</span><span class="en" style="display:none">1. Short-term Market Trend Prediction</span></h4>
+<p><span class="zh">短期来看，美股科技股仍有韧性，特别是AI相关的半导体和云计算板块。预计标普500将继续在历史高位附近震荡，突破7,600点的可能性较高。A股可能跟随美股反弹，但需要更多政策支持来恢复投资者信心。</span><span class="en" style="display:none">In the short term, US tech stocks remain resilient, especially AI-related semiconductors and cloud computing. S&P 500 is likely to continue fluctuating near record highs, with a high probability of breaking 7,600. A-shares may rebound following US markets but need more policy support to restore investor confidence.</span></p>
+<p class="src">来源：Morgan Stanley / Goldman Sachs / China International Capital Corporation</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 中期重点关注领域</span><span class="en" style="display:none">2. Medium-term Key Focus Areas</span></h4>
+<p><span class="zh">中期来看，建议重点关注以下领域：1）AI芯片和先进封装技术，这是当前半导体行业的主要增长点；2）云计算和数据中心相关股票，受益于AI算力需求增长；3）新能源产业链，在全球能源转型背景下长期看好；4）生物医药创新药，人口老龄化带来长期需求。</span><span class="en" style="display:none">For medium-term focus, recommend these areas: 1) AI chips and advanced packaging, the main growth point in semiconductors; 2) Cloud computing and data center stocks benefiting from AI compute demand; 3) New energy supply chain, long-term positive in global energy transition; 4) Biopharmaceutical innovative drugs, long-term demand from aging population.</span></p>
+<p class="src">来源：UBS / BNP Paribas / CITIC Securities</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 风险提示</span><span class="en" style="display:none">3. Risk Warnings</span></h4>
+<p><span class="zh">投资者需要注意以下风险：1）关税政策可能引发的市场波动；2）美联储货币政策转向可能对市场流动性产生影响；3）AI技术发展不及预期可能影响相关板块表现；4）地缘政治紧张局势升级的风险。建议投资者保持多元化配置，适当控制仓位。</span><span class="en" style="display:none">Investors should note these risks: 1) Market volatility from tariff policies; 2) Fed monetary policy shifts affecting market liquidity; 3) AI development underperformance impacting related sectors; 4) Geopolitical tensions escalation. Recommended to maintain diversified allocation and control positions appropriately.</span></p>
+<p class="src">来源：BlackRock / Vanguard / China Merchants Securities</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Reuters, CNBC, Yahoo Finance, Xinhua, Bloomberg, China Daily, MarketWatch</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spx', sym:'SPX'},
+  {id:'tv-ixic', sym:'IXIC'},
+  {id:'tv-sox', sym:'SOX'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HSI'},
+  {id:'tv-btc', sym:'BTC:USD'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

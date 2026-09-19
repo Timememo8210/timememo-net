@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-15</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股全线回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Pull Back</div>
+<div class="zh poster-data">• 标普500 ▼1.24% 至 7408<br>• 纳指 ▼约1.5%<br>• 道指 ▼约1.1%</div>
+<div class="en poster-data" style="display:none">• S&P 500 ▼1.24% to 7408<br>• Nasdaq ▼~1.5%<br>• Dow ▼~1.1%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706 0%,#92400e 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中东冲突→油价飙升</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Mideast Conflict → Oil Surge</div>
+<div class="zh poster-data">• WTI: $101.17 / 布伦特: $105.72<br>• 霍尔木兹海峡安全成焦点<br>• 4月进出口价格创2022年来新高</div>
+<div class="en poster-data" style="display:none">• WTI: $101.17 / Brent: $105.72<br>• Strait of Hormuz safety in focus<br>• Apr import/export prices highest since 2022</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#2563eb 0%,#1e3a5f 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中美峰会"买预期卖事实"</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Trump-Xi Summit: Buy Rumor, Sell News</div>
+<div class="zh poster-data">• 中国将采购200架波音飞机<br>• 增加数百亿美元农产品进口<br>• A股/港股均利好出尽走弱</div>
+<div class="en poster-data" style="display:none">• China to buy 200 Boeing jets<br>• Boost ag imports by double-digit billions<br>• A-shares & HK sell off on limited details</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#4c1d95 100%)">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">科技股获利回吐</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Tech Profit-Taking</div>
+<div class="zh poster-data">• 前日标普/纳指刚创历史新高<br>• 英伟达▼2%，Intel▼5%<br>• 微软逆势▲4%（Ackman建仓）</div>
+<div class="en poster-data" style="display:none">• S&P/Nasdaq just hit ATH prior day<br>• NVDA ▼2%, Intel ▼5%<br>• MSFT ▲4% (Ackman stake)</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-15 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Markets Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,408</div><div class="stock-change down">▼1.24%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">▼1.5%</div><div class="stock-change down">▼1.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">▼1.1%</div><div class="stock-change down">▼1.1%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">分化</div><div class="stock-change down">▼涨跌不一</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">—</div><div class="stock-change up">波动率上升</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 三大指数全线下跌，前日新高后获利回吐</span><span class="en" style="display:none">📉 All Three Major Indices Fall, Profit-Taking After ATH</span></h4>
+<p><span class="zh">标普500在前一天创下7517.12历史新高后，周五大幅回调1.24%至7408.50。纳斯达克综合指数下跌约1.5%，道琼斯下跌约1.1%。这是典型的"创新高后回调"模式，投资者在通胀担忧和中东局势升级的背景下选择锁定利润。</span><span class="en" style="display:none">The S&P 500 pulled back sharply -1.24% to 7408.50 after setting an all-time high of 7517.12 the prior day. The Nasdaq fell ~1.5% and the Dow dropped ~1.1%. A classic post-ATH pullback as investors locked in profits amid inflation fears and Middle East tensions.</span></p>
+<p class="src">来源：Trading Economics / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🛢️ 中东冲突推动油价突破$105，通胀压力加剧</span><span class="en" style="display:none">🛢️ Mideast Conflict Pushes Oil Past $105, Inflation Fears Mount</span></h4>
+<p><span class="zh">伊朗局势持续紧张，WTI原油收于$101.17，布伦特原油$105.72。霍尔木兹海峡安全成为中美峰会讨论的核心议题之一，双方同意海峡必须保持畅通。美国4月进口价格环比跳涨1.9%（预期0.9%），出口价格环比涨3.3%，均创2022年以来最高。能源成本飙升正推动通胀预期再度升温。</span><span class="en" style="display:none">Iran tensions continue: WTI $101.17, Brent $105.72. Strait of Hormuz safety was a key topic at the Trump-Xi summit, with both sides agreeing it must stay open. April US import prices jumped 1.9% MoM (vs 0.9% expected), export prices +3.3%, both highest since 2022. Surging energy costs are reigniting inflation fears.</span></p>
+<p class="src">来源：Sina Finance / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🤝 中美峰会成果有限，市场"买预期卖事实"</span><span class="en" style="display:none">🤝 Trump-Xi Summit: Limited Details, Buy Rumor Sell News</span></h4>
+<p><span class="zh">特朗普称中美达成了"fantastic trade deals"，习近平表示双方同意稳定贸易关系。具体成果包括：中国将采购200架波音飞机（但仅略高于预期），未来三年增加数百亿美元美国农产品进口。市场对缺乏更多细节感到失望，A股和港股均出现"利好出尽"走势。波音股价在前一日下跌近5%后继续走低。</span><span class="en" style="display:none">Trump claimed "fantastic trade deals," Xi said both sides agreed to stabilize ties. Specifics: 200 Boeing jets (only modestly above expectations), double-digit billions in ag imports over 3 years. Markets disappointed by limited details. A-shares and HK sold off. Boeing extended losses after dropping ~5% the prior day.</span></p>
+<p class="src">来源：CNBC / Trading Economics</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China A-Shares & HK</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,135</div><div class="stock-change down">▼1.02%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,561</div><div class="stock-change down">▼1.17%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">25,963</div><div class="stock-change down">▼1.62%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">—</div><div class="stock-change down">▼普跌</div></div>
+<div class="stock-item"><div class="stock-ticker">中芯国际</div><div class="stock-price">—</div><div class="stock-change up">▲约2%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 A股港股双双走弱，峰会细节不足拖累情绪</span><span class="en" style="display:none">📉 A-Shares & HK Both Weak, Summit Details Disappoint</span></h4>
+<p><span class="zh">上证指数收跌1.02%至4135点，深成指跌1.17%至15561点。港股跌幅更大，恒指跌1.62%至25963点。投资者对中美峰会缺乏具体成果感到失望，"利好出尽"情绪明显。主要拖累股：农业银行-1.33%，富士康工业互联网-1.43%，中际旭光-3.15%，比亚迪-2.42%。科技股方面，腾讯-0.4%，小米-2.7%，美团-3.1%，快手-2.8%。中芯国际逆势涨近2%。</span><span class="en" style="display:none">Shanghai Composite fell 1.02% to 4135, Shenzhen Component dropped 1.17% to 15561. HK fell harder with HSI down 1.62% to 25963. Investors disappointed by lack of concrete summit outcomes. Key decliners: ABC -1.33%, Foxconn Industrial -1.43%, Zhongji Innolight -3.15%, BYD -2.42%. Tech: Tencent -0.4%, Xiaomi -2.7%, Meituan -3.1%, Kuaishou -2.8%. SMIC bucked the trend +~2%.</span></p>
+<p class="src">来源：Trading Economics / Wind</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体 & AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">▼2%</div><div class="stock-change down">▼2%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">▲5%</div><div class="stock-change up">▲5%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">▲4%</div><div class="stock-change up">▲4%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">▼5%</div><div class="stock-change down">▼5%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">▼6%</div><div class="stock-change down">▼6%</div></div>
+</div>
+
+<div class="stock-grid" style="margin-top:-6px">
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">▼3%</div><div class="stock-change down">▼3%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">▼3%</div><div class="stock-change down">▼3%</div></div>
+<div class="stock-item"><div class="stock-ticker">ARM</div><div class="stock-price">▲3%</div><div class="stock-change up">▲3%</div></div>
+<div class="stock-item"><div class="stock-ticker">Cerebras</div><div class="stock-price">▼4%</div><div class="stock-change down">▼4% (IPO后回调)</div></div>
+<div class="stock-item"><div class="stock-ticker">MSFT</div><div class="stock-price">▲4%</div><div class="stock-change up">▲4% (Ackman建仓)</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">💾 芯片股涨跌分化，获利回吐与结构性需求并存</span><span class="en" style="display:none">💾 Chip Stocks Mixed: Profit-Taking Meets Structural Demand</span></h4>
+<p><span class="zh">费城半导体指数微涨0.46%，但个股分化严重。前一日因思科财报大涨+13%带动整体情绪后，周五出现分化。博通+5%、台积电+4%领涨，反映AI基础设施需求依然强劲。但高通-6%、英特尔-5%、美光-3%明显回调。Cerebras在IPO首日暴涨68%后回调4%。Creative Planning CEO Peter Mallouk认为"芯片制造商整体被低估，这是一个大趋势，有太多需求等待供应去满足"。</span><span class="en" style="display:none">Philadelphia Semiconductor Index edged up 0.46% but individual names diverged sharply. Broadcom +5%, TSMC +4% led gainers reflecting strong AI infrastructure demand. Qualcomm -6%, Intel -5%, Micron -3% pulled back. Cerebras fell 4% after surging 68% on IPO debut. Creative Planning CEO Peter Mallouk argues "chip makers as a whole are actually undervalued — so much demand waiting for supply."</span></p>
+<p class="src">来源：Sina Finance / Trading Economics</p>
+</div>
+
+<h2>💰 <span class="zh">大宗商品</span><span class="en" style="display:none">Commodities</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">WTI原油</div><div class="stock-price">$101.17</div><div class="stock-change up">▲0.15%</div></div>
+<div class="stock-item"><div class="stock-ticker">布伦特</div><div class="stock-price">$105.72</div><div class="stock-change up">▲0.09%</div></div>
+<div class="stock-item"><div class="stock-ticker">COMEX黄金</div><div class="stock-price">$4,656</div><div class="stock-change down">▼1.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">COMEX白银</div><div class="stock-price">$84.04</div><div class="stock-change down">▼5.97%</div></div>
+<div class="stock-item"><div class="stock-ticker">美元指数</div><div class="stock-price">98.81</div><div class="stock-change up">▲0.29%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 油价继续走高，贵金属大幅回调</span><span class="en" style="display:none">📊 Oil Continues Higher, Precious Metals Sell Off Sharply</span></h4>
+<p><span class="zh">原油价格在地缘政治紧张局势下继续攀升，布伦特站上$105关口，WTI突破$101。美国4月进出口价格数据显示，燃料和润滑油价格环比飙升16.3%，石油产品价格涨19%。贵金属则出现大幅获利了结，白银暴跌近6%，黄金跌超1%。美元指数小幅走强至98.81。</span><span class="en" style="display:none">Oil continued climbing on geopolitical tensions, Brent above $105, WTI above $101. April import/export data showed fuel & lubricants up 16.3% MoM, petroleum products +19%. Precious metals saw sharp profit-taking with silver plunging ~6% and gold down >1%. Dollar index firmed slightly to 98.81.</span></p>
+<p class="src">来源：ChinaNews / Trading Economics</p>
+</div>
+
+<h2>🌍 <span class="zh">欧洲市场</span><span class="en" style="display:none">European Markets</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">FTSE 100</div><div class="stock-price">10,373</div><div class="stock-change up">▲0.46%</div></div>
+<div class="stock-item"><div class="stock-ticker">CAC 40</div><div class="stock-price">8,082</div><div class="stock-change up">▲0.93%</div></div>
+<div class="stock-item"><div class="stock-ticker">DAX</div><div class="stock-price">24,456</div><div class="stock-change up">▲1.32%</div></div>
+</div>
+
+<h2>🔮 <span class="zh">走势预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期：通胀+中东双杀，风险偏好承压</span><span class="en" style="display:none">1. Near-Term: Inflation + Mideast Double Whammy</span></h4>
+<p><span class="zh">霍尔木兹海峡风险若升级，油价可能突破$110，进一步冲击风险偏好。4月CPI 3.8%（高于前值3.3%），加上进出口价格暴涨，市场对美联储降息预期可能继续推迟。下周关注美国耐用品订单和PCE数据。</span><span class="en" style="display:none">If Strait of Hormuz risks escalate, oil could break $110, further pressuring risk appetite. April CPI at 3.8% (up from 3.3%) plus surging import/export prices may push back Fed rate cut expectations. Watch for durable goods and PCE data next week.</span></p>
+<p class="src">来源：Trading Economics</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 科技/AI：长期趋势未变，回调即机会</span><span class="en" style="display:none">2. Tech/AI: Long-Term Trend Intact, Pullback = Opportunity</span></h4>
+<p><span class="zh">标普500刚发布创纪录盈利，AI商业化正从概念走向落地。芯片板块的回调可能是中期加仓机会。微软逆势大涨4%（Ackman/Pershing Square建仓），说明大资金仍在找科技龙头入场点。思科财报超预期+裁员4000人显示企业AI支出周期加速。</span><span class="en" style="display:none">S&P 500 just posted record earnings with AI monetization arriving. Chip pullback may be a mid-term buying opportunity. Microsoft surged 4% on Ackman/Pershing Square stake, showing big money still seeking tech entry points. Cisco beat expectations + cutting 4,000 jobs signals accelerating enterprise AI spending cycle.</span></p>
+<p class="src">来源：TipRanks / Creative Planning</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中美关系：利好已定价，市场开始脱敏</span><span class="en" style="display:none">3. US-China: Good News Priced In, Markets Desensitizing</span></h4>
+<p><span class="zh">波音200架订单不及市场预期（仅略高于之前预测），市场对"中美缓和"叙事已开始脱敏。若无更多实质细节（关税减免、科技合作等），A股港股可能继续震荡。Goldman Sachs偏好A股多于港股。</span><span class="en" style="display:none">200 Boeing jets only modestly above expectations. Markets beginning to desensitize to "US-China thaw" narrative. Without more concrete details (tariff relief, tech cooperation), A-shares and HK may continue to churn. Goldman prefers A-shares over H-shares.</span></p>
+<p class="src">来源：CNBC / Goldman Sachs</p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — 半导体ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Trading Economics, Sina Finance, CNBC, MarketWatch, Wind, ChinaNews</span><span class="en" style="display:none">Sources: Trading Economics, Sina Finance, CNBC, MarketWatch, Wind, ChinaNews</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HKEX:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

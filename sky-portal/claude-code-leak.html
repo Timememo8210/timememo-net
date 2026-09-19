@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 源代码泄露深度研究报告 — Sky Portal ☁️</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --accent-glow: rgba(108,138,255,0.15);
+    --green: #4ade80;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+    --purple: #a78bfa;
+    --red: #f87171;
+    --yellow: #facc15;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Nav */
+  .nav {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: var(--accent); }
+  .nav .sep { color: var(--border); }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 30px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(circle, rgba(248,113,113,0.08) 0%, var(--accent-glow) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 500;
+    background: rgba(248,113,113,0.15);
+    color: var(--red);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: 2.6em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+    line-height: 1.2;
+  }
+  .hero .subtitle {
+    color: var(--text-dim);
+    font-size: 1.1em;
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    max-width: 800px;
+    margin: 30px auto 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-card .label {
+    font-size: 0.75em;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+  .section-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin: 50px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--red), var(--orange));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .tl-item.critical::before { background: var(--red); }
+  .tl-item.warning::before { background: var(--orange); }
+  .tl-time {
+    font-size: 0.78em;
+    color: var(--accent);
+    font-weight: 600;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+  .tl-item.critical .tl-time { color: var(--red); }
+  .tl-item.warning .tl-time { color: var(--orange); }
+  .tl-text {
+    font-size: 0.92em;
+    margin-top: 4px;
+    color: var(--text);
+  }
+
+  /* Repo Cards */
+  .repo-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .repo-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .repo-card:hover {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(108,138,255,0.1);
+  }
+  .repo-card .repo-name {
+    font-size: 1.05em;
+    font-weight: 600;
+  }
+  .repo-card .repo-desc {
+    color: var(--text-dim);
+    font-size: 0.85em;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .repo-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.78em;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+  }
+  .repo-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .repo-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.72em;
+    font-weight: 500;
+  }
+  .tag-best { background: rgba(74,222,128,0.15); color: var(--green); }
+  .tag-run { background: rgba(34,211,238,0.15); color: var(--cyan); }
+  .tag-full { background: rgba(167,139,250,0.15); color: var(--purple); }
+
+  /* Discovery Cards (expandable) */
+  .discovery-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .discovery-card:hover { border-color: rgba(255,255,255,0.15); }
+  .discovery-header {
+    padding: 18px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+  }
+  .discovery-header:hover { background: var(--card-hover); }
+  .discovery-icon { font-size: 1.4em; flex-shrink: 0; }
+  .discovery-title { font-weight: 600; font-size: 1.02em; flex: 1; }
+  .discovery-tag {
+    font-size: 0.72em;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .tag-danger { background: rgba(248,113,113,0.15); color: var(--red); }
+  .tag-secret { background: rgba(251,146,60,0.15); color: var(--orange); }
+  .tag-fun { background: rgba(250,204,21,0.15); color: var(--yellow); }
+  .tag-arch { background: rgba(108,138,255,0.15); color: var(--accent); }
+  .discovery-arrow {
+    color: var(--text-dim);
+    transition: transform 0.3s;
+    font-size: 0.9em;
+  }
+  .discovery-card.open .discovery-arrow { transform: rotate(90deg); }
+  .discovery-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .discovery-card.open .discovery-body {
+    max-height: 600px;
+  }
+  .discovery-content {
+    padding: 0 20px 20px;
+    color: var(--text-dim);
+    font-size: 0.9em;
+    line-height: 1.7;
+  }
+  .discovery-content strong { color: var(--text); }
+  .discovery-content code {
+    background: rgba(255,255,255,0.06);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* Article Cards */
+  .article-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .article-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .article-card:hover {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(108,138,255,0.08);
+  }
+  .article-source {
+    font-size: 0.72em;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .article-title {
+    font-size: 0.98em;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .article-desc {
+    color: var(--text-dim);
+    font-size: 0.82em;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  /* Conclusion */
+  .conclusion {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 20px;
+    line-height: 1.8;
+  }
+  .conclusion p {
+    margin-bottom: 14px;
+    color: var(--text-dim);
+    font-size: 0.95em;
+  }
+  .conclusion p:last-child { margin-bottom: 0; }
+  .conclusion strong { color: var(--text); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.8em; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .repo-cards, .article-cards { grid-template-columns: 1fr; }
+    .hero { padding: 40px 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="index.html">☁️ Sky Portal</a>
+  <span class="sep">/</span>
+  <a href="claude-code-leak.html" style="color:var(--text);">Claude Code 泄露研究</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">🔴 安全事件研究</div>
+  <h1>Claude Code 源代码泄露<br>深度研究报告</h1>
+  <p class="subtitle">2026年3月31日，Anthropic 旗舰 AI 编程工具 Claude Code 因一个 <code>.npmignore</code> 配置遗漏，意外将 512,000 行 TypeScript 源代码发布到公共 npm 注册表——这是 AI 行业有史以来最大的源代码意外泄露事件。</p>
+</div>
+
+<!-- Key Stats -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="num">512K+</div>
+    <div class="label">行源代码</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">1,906</div>
+    <div class="label">TypeScript 文件</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">59.8MB</div>
+    <div class="label">Source Map</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">44</div>
+    <div class="label">隐藏 Feature Flags</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">$25亿</div>
+    <div class="label">Claude Code ARR</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">2100万</div>
+    <div class="label">首发推文浏览量</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Timeline -->
+  <div class="section-title"><span>⏱️</span> 事件时间线</div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">2025年底</div>
+      <div class="tl-text">Anthropic 收购 Bun JavaScript 运行时</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2026-03-11</div>
+      <div class="tl-text">Bun bug #28001 被提交 — source map 在生产模式下泄露。无人修复。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2026-03-26</div>
+      <div class="tl-text">Anthropic CMS 配置错误泄露 Mythos 模型草稿博文（第一次小规模泄露）</div>
+    </div>
+    <div class="tl-item warning">
+      <div class="tl-time">2026-03-31 00:21 UTC</div>
+      <div class="tl-text">恶意 axios 版本出现在 npm — 含 RAT 木马（与 Anthropic 无关，但时间巧合引发阴谋论）</div>
+    </div>
+    <div class="tl-item critical">
+      <div class="tl-time">2026-03-31 ~04:00 UTC</div>
+      <div class="tl-text"><strong>Claude Code v2.1.88 发布到 npm</strong> — 包含完整 59.8MB source map，512K行源码全部暴露</div>
+    </div>
+    <div class="tl-item critical">
+      <div class="tl-time">2026-03-31 04:23 UTC</div>
+      <div class="tl-text">安全研究员 Chaofan Shou 在 X 上首发 — 推文最终获得 2100万+ 浏览</div>
+    </div>
+    <div class="tl-item critical">
+      <div class="tl-time">2026-03-31 ~06:00 UTC</div>
+      <div class="tl-text">GitHub 镜像仓库涌现。claw-code 清洁室重写 2小时内达 50,000 stars — 疑似 GitHub 历史最快</div>
+    </div>
+    <div class="tl-item warning">
+      <div class="tl-time">2026-03-31 ~08:00 UTC</div>
+      <div class="tl-text">Anthropic 从 npm 撤包，发布官方声明："release packaging issue caused by human error"</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2026-04-01</div>
+      <div class="tl-text">多个 Python/Rust 清洁室重写出现。DMCA 开始但去中心化镜像声称"永不下架"</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2026-04-02</div>
+      <div class="tl-text">大量中文分析文章涌现（微信公众号、B站、GitHub 学习资料库）</div>
+    </div>
+  </div>
+
+  <!-- Repos -->
+  <div class="section-title"><span>📦</span> 开源资料库</div>
+  <div class="repo-cards">
+    <a class="repo-card" href="https://github.com/luyao618/Claude-Code-Source-Study" target="_blank">
+      <div class="repo-name">📚 Claude-Code-Source-Study</div>
+      <div class="repo-desc">25 篇深度中文源码分析，逐文件逐函数拆解。覆盖启动优化、状态管理、System Prompt 工程、工具系统、Agent 系统、Memory 架构等。<strong>最佳学习入口。</strong></div>
+      <div class="repo-meta">
+        <span>⭐ ~758</span>
+        <span>📁 1.3MB</span>
+        <span class="repo-tag tag-best">🏆 最佳学习</span>
+      </div>
+    </a>
+    <a class="repo-card" href="https://github.com/oboard/claude-code-rev" target="_blank">
+      <div class="repo-name">🔧 claude-code-rev</div>
+      <div class="repo-desc">唯一可运行的还原版本。通过 <code>bun install</code> + <code>bun run dev</code> 可启动 CLI。已恢复 Chrome MCP、Computer Use MCP 兼容层。</div>
+      <div class="repo-meta">
+        <span>⭐ ~2.6k</span>
+        <span>📁 44MB</span>
+        <span class="repo-tag tag-run">▶️ 可运行</span>
+      </div>
+    </a>
+    <a class="repo-card" href="https://github.com/ChinaSiro/claude-code-sourcemap" target="_blank">
+      <div class="repo-name">🗃️ claude-code-sourcemap</div>
+      <div class="repo-desc">最完整源码还原。含原始 tgz 包、source map、提取脚本和完整 restored-src 目录结构（264MB）。</div>
+      <div class="repo-meta">
+        <span>⭐ ~8.2k</span>
+        <span>📁 264MB</span>
+        <span class="repo-tag tag-full">📋 最完整</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Technical Discoveries -->
+  <div class="section-title"><span>🔮</span> 技术发现 — 源码里的猛料</div>
+
+  <div class="discovery-card">
+    <div class="discovery-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="discovery-icon">🤖</span>
+      <span class="discovery-title">KAIROS — 永不休眠的自主后台代理</span>
+      <span class="discovery-tag tag-secret">未发布</span>
+      <span class="discovery-arrow">▸</span>
+    </div>
+    <div class="discovery-body">
+      <div class="discovery-content">
+        <p>源码中 <strong>150+ 次引用</strong>。KAIROS 是一个自主后台守护进程模式，Claude 可以作为持久化、常驻的后台 Agent 运行。</p>
+        <p>核心特点：接收周期性 <code>&lt;tick&gt;</code> 提示来决定是否主动行动；维护 append-only 日志文件；订阅 GitHub webhooks。</p>
+        <p>配套功能 <strong>autoDream</strong> — 后台记忆整合进程，在用户空闲时作为 fork 子 Agent 运行，合并分散观察、消除逻辑矛盾、将模糊洞察转化为明确事实。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="discovery-card">
+    <div class="discovery-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="discovery-icon">🧠</span>
+      <span class="discovery-title">ULTRAPLAN — 远程云容器 30 分钟深度规划</span>
+      <span class="discovery-tag tag-secret">未发布</span>
+      <span class="discovery-arrow">▸</span>
+    </div>
+    <div class="discovery-body">
+      <div class="discovery-content">
+        <p>将复杂规划任务卸载到<strong>远程云容器</strong>，运行 <strong>Opus 4.6（代号 Fennec）</strong>，给予最多 <strong>30 分钟</strong>的专用思考时间。</p>
+        <p>这是 Anthropic 对"深度思考"能力的产品化尝试 — 不在本地消耗上下文窗口，而是用专门的云实例来处理需要长时间推理的任务。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="discovery-card">
+    <div class="discovery-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="discovery-icon">🐾</span>
+      <span class="discovery-title">BUDDY — 终端宠物 Tamagotchi 系统</span>
+      <span class="discovery-tag tag-fun">趣味彩蛋</span>
+      <span class="discovery-arrow">▸</span>
+    </div>
+    <div class="discovery-body">
+      <div class="discovery-content">
+        <p>一个完整的 Tamagotchi 风格终端伴侣系统：</p>
+        <p>🎮 <strong>18 种物种</strong>，稀有度从普通(60%)到传奇(1%)<br>
+        ✨ <strong>1% Shiny 概率</strong><br>
+        📊 <strong>5 个属性</strong>：DEBUGGING、PATIENCE、CHAOS、WISDOM、SNARK</p>
+        <p>这是 Anthropic 工程师的浪漫 — 在价值 $25亿 ARR 的严肃产品里，藏了一个虚拟宠物。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="discovery-card">
+    <div class="discovery-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="discovery-icon">🕵️</span>
+      <span class="discovery-title">Undercover Mode — 隐藏 AI 身份模式</span>
+      <span class="discovery-tag tag-danger">最具争议</span>
+      <span class="discovery-arrow">▸</span>
+    </div>
+    <div class="discovery-body">
+      <div class="discovery-content">
+        <p>文件 <code>undercover.ts</code>，约 90 行代码。注入系统提示指令：</p>
+        <p>⚠️ <strong>永远不提及自己是 AI</strong><br>
+        ⚠️ <strong>移除所有 Co-Authored-By 署名</strong>（向外部仓库贡献代码时）</p>
+        <p>这是本次泄露中<strong>争议最大</strong>的发现。它意味着 Anthropic 准备了（或至少原型了）让 Claude 在开源项目中匿名贡献代码的能力，这引发了关于 AI 透明度和开源伦理的激烈讨论。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="discovery-card">
+    <div class="discovery-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="discovery-icon">🛡️</span>
+      <span class="discovery-title">Anti-Distillation — 毒化竞争对手训练数据</span>
+      <span class="discovery-tag tag-danger">攻防策略</span>
+      <span class="discovery-arrow">▸</span>
+    </div>
+    <div class="discovery-body">
+      <div class="discovery-content">
+        <p><code>ANTI_DISTILLATION_CC</code> feature flag 触发两种防御机制：</p>
+        <p>🔹 <strong>假工具注入</strong> — 向 API 请求中注入虚假工具定义，污染记录 API 流量的竞争对手训练数据<br>
+        🔹 <strong>推理链替换</strong> — 用密码学签名的摘要替代完整推理链，防止对手通过蒸馏复制能力</p>
+        <p>这揭示了 AI 公司之间<strong>隐秘的攻防战</strong> — Anthropic 假设竞争对手正在监听其 API 流量来训练模型。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="discovery-card">
+    <div class="discovery-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="discovery-icon">🏗️</span>
+      <span class="discovery-title">架构亮点 — 三层记忆 + 40 工具插件</span>
+      <span class="discovery-tag tag-arch">核心架构</span>
+      <span class="discovery-arrow">▸</span>
+    </div>
+    <div class="discovery-body">
+      <div class="discovery-content">
+        <p><strong>三层记忆架构：</strong></p>
+        <p>📌 <code>MEMORY.md</code> — 轻量指针索引（~150字符/行），始终加载到上下文<br>
+        📂 Topic Files — 项目知识按需加载<br>
+        📄 Raw Transcripts — 从不完整读回，仅 grep 特定标识符</p>
+        <p><strong>工具系统：</strong>~40 个工具插件架构。BashTool 12,400+ 行，四层安全防线。</p>
+        <p><strong>渲染引擎：</strong>React + Ink 终端渲染，游戏引擎式 60fps 技术。46,000 行查询引擎。</p>
+        <p><strong>多 Agent 编排：</strong>Coordinator 模式，一个 Claude 管理多个 worker 并行运行。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommended Reading -->
+  <div class="section-title"><span>📖</span> 推荐阅读</div>
+  <div class="article-cards">
+    <a class="article-card" href="https://dev.to/varshithvhegde/the-great-claude-code-leak-of-2026-accident-incompetence-or-the-best-pr-stunt-in-ai-history-3igm" target="_blank">
+      <div class="article-source">Dev.to</div>
+      <div class="article-title">The Great Claude Code Leak of 2026</div>
+      <div class="article-desc">最详细的事件全景分析。含完整时间线、技术发现、阴谋论探讨（是不是 PR 策划？）、以及开发者应学到的教训。推荐第一篇读这个。</div>
+    </a>
+    <a class="article-card" href="https://layer5.io/blog/engineering/the-claude-code-source-leak-512000-lines-a-missing-npmignore-and-the-fastest-growing-repo-in-github-history" target="_blank">
+      <div class="article-source">Layer5.io</div>
+      <div class="article-title">512,000 Lines, a Missing .npmignore</div>
+      <div class="article-desc">最全面的技术深度分析。详解 KAIROS、Undercover Mode、Anti-Distillation 机制、安全影响、以及对 AI 编程工具生态的长远冲击。</div>
+    </a>
+    <a class="article-card" href="https://venturebeat.com/technology/claude-codes-source-code-appears-to-have-leaked-heres-what-we-know" target="_blank">
+      <div class="article-source">VentureBeat</div>
+      <div class="article-title">Claude Code's source code leaked: here's what we know</div>
+      <div class="article-desc">主流科技媒体视角。含 Anthropic 官方回应、三层记忆架构详解、内部模型代号（Capybara/Fennec/Numbat）和用户建议。</div>
+    </a>
+    <a class="article-card" href="https://www.reddit.com/r/ClaudeAI/comments/1s9d9j9/claude_code_source_leak_megathread/" target="_blank">
+      <div class="article-source">r/ClaudeAI</div>
+      <div class="article-title">Claude Code Source Leak Megathread</div>
+      <div class="article-desc">Reddit 社区讨论大本营。汇集开发者即时反应、法律问题讨论、fork/重写版本的风险提醒。</div>
+    </a>
+    <a class="article-card" href="https://www.reddit.com/r/LocalLLaMA/comments/1s8xj2e/claude_codes_source_just_leaked_i_extracted_its/" target="_blank">
+      <div class="article-source">r/LocalLLaMA</div>
+      <div class="article-title">I extracted its multi-agent orchestration system</div>
+      <div class="article-desc">从泄露源码提取多 Agent 编排架构，重写为开源框架 open-multi-agent（MIT 许可，8000 行 TypeScript）。Coordinator/MessageBus/TaskQueue 模式详解。</div>
+    </a>
+  </div>
+
+  <!-- Conclusion -->
+  <div class="section-title"><span>💭</span> 结语</div>
+  <div class="conclusion">
+    <p>这次泄露事件的根源荒诞得令人难以置信 — <strong>一行 .npmignore 配置的缺失</strong>，加上一个 20 天无人修复的 Bun bug，就将价值 $25亿 ARR 的产品源码完全暴露。</p>
+    <p>但真正有趣的不是泄露本身，而是<strong>源码里揭示的 Anthropic 的野心</strong>：KAIROS 展示了 AI Agent 从"被动工具"到"主动伙伴"的进化方向；ULTRAPLAN 预示了"深度思考即服务"的产品形态；而 Anti-Distillation 和 Undercover Mode 则揭开了 AI 公司之间暗流涌动的攻防战。</p>
+    <p>代码可以重构，feature flag 可以重命名。但泄露出去的<strong>产品战略和架构哲学</strong>——三层记忆系统、Coordinator 多 Agent 模式、游戏引擎式终端渲染——这些才是真正无法收回的东西。竞争对手现在可以直接站在 Anthropic 的肩膀上。</p>
+    <p>对开发者而言，这是一个<strong>千载难逢的学习机会</strong>。512,000 行生产级代码、40+ 工具的插件架构、工业级 prompt engineering——这些通常只在公司内部可见的技术实践，现在成了最好的开源教材。</p>
+    <p><strong>教训很简单：<code>npm pack --dry-run</code>。发布前，看看你到底在发什么。</strong></p>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>☁️ Sky | April 2026</p>
+  <p style="margin-top:8px;">
+    <a href="index.html">← 返回 Sky Portal</a> ·
+    研究资料整理于 2026-04-03
+  </p>
+</div>
+
+</body>
+</html>

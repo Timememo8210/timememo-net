@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="referrer" content="no-referrer">
+  <title>Sky Portal · 访问验证</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --panel: rgba(16, 28, 48, 0.82);
+      --line: rgba(148, 163, 184, 0.22);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --blue: #60a5fa;
+      --violet: #a78bfa;
+      --danger: #fca5a5;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow: hidden;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(96, 165, 250, 0.22), transparent 34%),
+        radial-gradient(circle at 82% 74%, rgba(167, 139, 250, 0.2), transparent 36%),
+        var(--bg);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    .access-card {
+      position: relative;
+      width: min(100%, 430px);
+      padding: 36px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .mark {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(96, 165, 250, 0.22), rgba(167, 139, 250, 0.16));
+      font-size: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 7vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .description {
+      margin: 14px 0 26px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    input {
+      width: 100%;
+      height: 52px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      outline: none;
+      background: rgba(2, 6, 23, 0.56);
+      color: var(--text);
+      font: inherit;
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.14);
+    }
+
+    button {
+      width: 100%;
+      height: 52px;
+      margin-top: 14px;
+      border: 0;
+      border-radius: 13px;
+      cursor: pointer;
+      color: #06101f;
+      background: linear-gradient(135deg, #93c5fd, #c4b5fd);
+      font: inherit;
+      font-weight: 800;
+      transition: transform 160ms ease, filter 160ms ease;
+    }
+
+    button:hover { transform: translateY(-1px); filter: brightness(1.04); }
+    button:disabled { cursor: wait; opacity: 0.7; transform: none; }
+
+    .message {
+      min-height: 22px;
+      margin: 12px 0 0;
+      color: var(--danger);
+      font-size: 13px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    @media (max-width: 520px) {
+      .access-card { padding: 28px 22px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="access-card">
+    <div class="mark" aria-hidden="true">☁️</div>
+    <p class="eyebrow">TimeMemo.net</p>
+    <h1>Sky Portal</h1>
+    <p class="description">此区域仅供受邀访问。请输入密码继续浏览 Sky Portal。</p>
+
+    <form id="access-form">
+      <label for="password">访问密码</label>
+      <input id="password" name="password" type="password" inputmode="numeric" autocomplete="current-password" autofocus required aria-describedby="message">
+      <button id="submit" type="submit">进入 Sky Portal</button>
+      <p id="message" class="message" role="alert" aria-live="polite"></p>
+    </form>
+
+    <a class="back-link" href="/">← 返回 TimeMemo.net</a>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var authKey = "timememo-sky-portal-auth-v1";
+      var expectedHash = "2926a2731f4b312c08982cacf8061eb14bf65c1a87cc5d70e864e079c6220731";
+      var form = document.getElementById("access-form");
+      var password = document.getElementById("password");
+      var submit = document.getElementById("submit");
+      var message = document.getElementById("message");
+
+      function safeNext() {
+        var candidate = new URLSearchParams(window.location.search).get("next") || "";
+        var pathOnly = candidate.split(/[?#]/, 1)[0];
+        var unsafe = candidate.startsWith("/") ||
+          candidate.startsWith("\\") ||
+          candidate.includes("://") ||
+          pathOnly.split("/").includes("..");
+
+        return unsafe ? "" : candidate;
+      }
+
+      function enterPortal() {
+        window.location.replace("/sky-portal/" + safeNext());
+      }
+
+      try {
+        if (window.sessionStorage.getItem(authKey) === "granted") {
+          enterPortal();
+          return;
+        }
+      } catch (error) {
+        message.textContent = "浏览器未允许会话存储，请调整隐私设置后重试。";
+      }
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        message.textContent = "";
+        submit.disabled = true;
+
+        try {
+          var bytes = new TextEncoder().encode(password.value);
+          var digest = await window.crypto.subtle.digest("SHA-256", bytes);
+          var actualHash = Array.from(new Uint8Array(digest), function (byte) {
+            return byte.toString(16).padStart(2, "0");
+          }).join("");
+
+          if (actualHash !== expectedHash) {
+            password.value = "";
+            password.focus();
+            message.textContent = "密码不正确，请重新输入。";
+            return;
+          }
+
+          window.sessionStorage.setItem(authKey, "granted");
+          enterPortal();
+        } catch (error) {
+          message.textContent = "暂时无法验证，请刷新页面后重试。";
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

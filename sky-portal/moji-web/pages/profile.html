@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>墨记 — 个人空间</title>
+  <meta name="description" content="我的墨记个人空间">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="我的墨记空间">
+  <meta property="og:description" content="记录思考，分享生活">
+  <meta property="og:type" content="profile">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons 基础样式 -->
+  <style>
+    .lucide { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; vertical-align: middle; }
+    .lucide-sm { width: 16px; height: 16px; }
+    .lucide-inline { display: inline-block; vertical-align: -2px; }
+  </style>
+
+  <!-- 全局样式 -->
+  <link rel="stylesheet" href="../styles/global.css">
+
+  <style>
+    /* ========================================
+       个人空间页特有样式
+       ======================================== */
+
+    /* --- 顶部个人资料区 --- */
+    .profile-header {
+      padding: calc(var(--nav-height) + 48px) 24px 40px;
+      text-align: center;
+      background: var(--bg-warm);
+      position: relative;
+    }
+
+    .profile-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: var(--bg-warm);
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    }
+
+    @media (min-width: 768px) {
+      .profile-header::after { height: 60px; }
+    }
+
+    .profile-header__inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-content);
+      margin: 0 auto;
+    }
+
+    /* 头像 */
+    .profile-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 3px solid var(--card);
+      background: var(--accent-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-avatar__fallback {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    /* 用户名 */
+    .profile-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .profile-handle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .profile-bio {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* 统计 */
+    .profile-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .profile-stat { text-align: center; }
+
+    .profile-stat__number {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .profile-stat__label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* 编辑按钮 */
+    .profile-edit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      padding: 8px 20px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-edit-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* --- 首次设置面板 --- */
+    .setup-panel {
+      max-width: 480px;
+      margin: 80px auto;
+      padding: 48px 36px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .setup-panel__icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .setup-panel__title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .setup-panel__desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .setup-panel__input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 1.1rem;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg-warm);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: border-color 0.3s ease;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .setup-panel__input:focus {
+      border-color: var(--accent);
+    }
+
+    .setup-panel__input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .setup-panel__bio {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg-warm);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 20px;
+    }
+
+    .setup-panel__bio:focus {
+      border-color: var(--accent);
+    }
+
+    .setup-panel__bio::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* --- 内容区 --- */
+    .profile-content {
+      padding: 60px 24px 100px;
+      max-width: var(--max-content);
+      margin: 0 auto;
+    }
+
+    /* --- 标签筛选 --- */
+    .tag-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .tag-filter .tag {
+      padding: 6px 16px;
+      font-size: 0.9rem;
+    }
+
+    /* --- 时间线 --- */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 7px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+      border-radius: 1px;
+    }
+
+    .timeline__item {
+      position: relative;
+      margin-bottom: 28px;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .timeline__item:last-child { margin-bottom: 0; }
+
+    .timeline__dot {
+      position: absolute;
+      left: -32px;
+      top: 24px;
+      width: 16px;
+      height: 16px;
+      background: var(--card);
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      z-index: 1;
+      transition: var(--transition);
+    }
+
+    .timeline__item:hover .timeline__dot {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    .timeline__date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .timeline__block {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      border-left: 4px solid var(--accent-soft);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .timeline__block:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-left-color: var(--accent);
+    }
+
+    .timeline__block-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .timeline__block-excerpt {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .timeline__block-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .timeline__block-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timeline__block-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .timeline__block-tag {
+      padding: 2px 10px;
+      background: var(--bg-cream);
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* 密码标识 */
+    .timeline__block-lock {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* 删除按钮 */
+    .timeline__block-delete {
+      float: right;
+      padding: 4px 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .timeline__block-delete:hover {
+      border-color: #dc2626;
+      color: #dc2626;
+      background: #fef2f2;
+    }
+
+    /* 密码按钮 */
+    .timeline__block-pwd {
+      float: right;
+      margin-right: 6px;
+      padding: 4px 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .timeline__block-pwd:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    /* --- 空状态 --- */
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .empty-state__icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .empty-state__title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .empty-state__desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    /* --- 设置模态框 --- */
+    .settings-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .settings-modal.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .settings-modal__card {
+      width: calc(100% - 48px);
+      max-width: 440px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .settings-modal.visible .settings-modal__card {
+      transform: translateY(0);
+    }
+
+    .settings-modal__title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .settings-modal__field {
+      margin-bottom: 16px;
+    }
+
+    .settings-modal__label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .settings-modal__input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg-warm);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .settings-modal__input:focus {
+      border-color: var(--accent);
+    }
+
+    .settings-modal__textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg-warm);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      resize: vertical;
+      min-height: 72px;
+      transition: border-color 0.3s ease;
+    }
+
+    .settings-modal__textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .settings-modal__actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    /* --- 密码设置弹窗 --- */
+    .password-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .password-modal.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .password-modal__card {
+      width: calc(100% - 48px);
+      max-width: 400px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .password-modal.visible .password-modal__card {
+      transform: translateY(0);
+    }
+
+    .password-modal__title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .password-modal__desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* --- 响应式 --- */
+    @media (max-width: 639px) {
+      .timeline { padding-left: 28px; }
+      .timeline::before { left: 5px; }
+      .timeline__dot { left: -28px; width: 14px; height: 14px; top: 22px; }
+      .timeline__block { padding: 18px 20px; }
+      .profile-stats { gap: 24px; }
+    }
+
+    .timeline__item.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- 导航由 nav.js 自动注入 -->
+
+  <!-- ===== 首次设置面板 ===== -->
+  <div class="setup-panel" id="setupPanel" style="display:none;">
+    <div class="setup-panel__icon">👋</div>
+    <h2 class="setup-panel__title">欢迎来到墨记</h2>
+    <p class="setup-panel__desc">给你的个人空间起个名字吧，让朋友们知道你是谁</p>
+    <label for="setupName" class="sr-only">你的名字</label>
+    <input type="text" class="setup-panel__input" id="setupName" placeholder="你的名字" maxlength="20" autocomplete="off">
+    <label for="setupBio" class="sr-only">个人简介</label>
+    <textarea class="setup-panel__bio" id="setupBio" placeholder="一句话介绍自己（可选）" maxlength="100"></textarea>
+    <button class="btn btn-primary" id="setupSaveBtn" style="width:100%;padding:16px;font-size:1.05rem;">开始使用</button>
+  </div>
+
+  <!-- ===== 个人资料区（已设置后显示） ===== -->
+  <section class="profile-header" id="profileHeader" style="display:none;">
+    <div class="profile-header__inner">
+      <div class="profile-avatar">
+        <span class="profile-avatar__fallback" id="avatarLetter"></span>
+      </div>
+      <h1 class="profile-name" id="profileName"></h1>
+      <p class="profile-handle" id="profileHandle"></p>
+      <p class="profile-bio" id="profileBio"></p>
+      <div class="profile-stats" id="profileStats">
+        <div class="profile-stat">
+          <div class="profile-stat__number" id="statPages">0</div>
+          <div class="profile-stat__label">作品</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat__number" id="statViews">0</div>
+          <div class="profile-stat__label">浏览</div>
+        </div>
+      </div>
+      <button class="profile-edit-btn" id="editProfileBtn">✏️ 编辑资料</button>
+    </div>
+  </section>
+
+  <!-- ===== 内容区 ===== -->
+  <main class="profile-content" id="profileContent" style="display:none;">
+    <!-- 标签筛选 -->
+    <div class="tag-filter" id="tagFilter">
+      <span class="tag active" data-tag="all">全部</span>
+    </div>
+
+    <!-- 时间线内容 -->
+    <div class="timeline" id="timeline"></div>
+
+    <!-- 空状态 -->
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-state__icon"><i data-lucide="file-edit" data-fallback="📝" style="width:48px;height:48px;stroke:var(--text-muted);"></i></div>
+      <div class="empty-state__title">还没有作品</div>
+      <p class="empty-state__desc">去创作你的第一个网页吧！</p>
+      <a href="create.html" class="btn btn-primary">开始创作</a>
+    </div>
+  </main>
+
+  <!-- ===== 设置模态框 ===== -->
+  <div class="settings-modal" id="settingsModal">
+    <div class="settings-modal__card">
+      <h3 class="settings-modal__title">编辑个人资料</h3>
+      <div class="settings-modal__field">
+        <label class="settings-modal__label" for="settingsName">名字</label>
+        <input type="text" class="settings-modal__input" id="settingsName" placeholder="你的名字" maxlength="20">
+      </div>
+      <div class="settings-modal__field">
+        <label class="settings-modal__label" for="settingsBio">个人介绍</label>
+        <textarea class="settings-modal__textarea" id="settingsBio" placeholder="一句话介绍自己" maxlength="100"></textarea>
+      </div>
+      <div class="settings-modal__actions">
+        <button class="btn btn-secondary" id="settingsCancelBtn">取消</button>
+        <button class="btn btn-primary" id="settingsSaveBtn">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 密码设置弹窗 ===== -->
+  <div class="password-modal" id="passwordModal">
+    <div class="password-modal__card">
+      <h3 class="password-modal__title" id="passwordModalTitle">设置密码保护</h3>
+      <p class="password-modal__desc" id="passwordModalDesc">为这篇内容设置密码，访客需要输入密码才能查看</p>
+      <div class="settings-modal__field">
+        <label class="settings-modal__label" for="passwordInput">密码</label>
+        <input type="password" class="settings-modal__input" id="passwordInput" placeholder="输入密码" autocomplete="off">
+      </div>
+      <div class="settings-modal__actions">
+        <button class="btn btn-secondary" id="passwordCancelBtn">取消</button>
+        <button class="btn btn-ghost" id="passwordRemoveBtn" style="display:none;color:#dc2626;">移除密码</button>
+        <button class="btn btn-primary" id="passwordSaveBtn">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>墨记 &copy; 2026 — 让想法被看见</p>
+    <p class="mt-1" style="font-size:0.85rem;">
+      <a href="javascript:void(0)">隐私政策</a> · <a href="javascript:void(0)">使用条款</a> · <a href="javascript:void(0)">联系我们</a>
+    </p>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script>
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  } else {
+    document.querySelectorAll('[data-lucide]').forEach(function(el) {
+      el.textContent = el.getAttribute('data-fallback') || '';
+      el.style.display = 'inline-block';
+    });
+  }
+  </script>
+
+  <!-- Scripts -->
+  <script src="../utils/storage.js"></script>
+  <script src="../components/nav.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var $ = function (sel) { return document.querySelector(sel); };
+
+    // ======== 初始化 ========
+
+    function init() {
+      var user = MojiStorage.ensureUser();
+
+      if (!user.name) {
+        showSetup();
+      } else {
+        showProfile();
+      }
+    }
+
+    // ======== 首次设置 ========
+
+    function showSetup() {
+      var panel = $('#setupPanel');
+      panel.style.display = '';
+
+      var nameInput = $('#setupName');
+      setTimeout(function () { nameInput.focus(); }, 300);
+
+      $('#setupSaveBtn').addEventListener('click', function () {
+        var name = nameInput.value.trim();
+        if (!name) {
+          nameInput.focus();
+          return;
+        }
+        var bio = $('#setupBio').value.trim();
+        var user = MojiStorage.getUser();
+        user.name = name;
+        user.bio = bio;
+        user.handle = '@' + name.toLowerCase().replace(/\s+/g, '');
+        MojiStorage.setUser(user);
+
+        panel.style.display = 'none';
+        showProfile();
+      });
+
+      // Enter 键提交
+      nameInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') $('#setupSaveBtn').click();
+      });
+    }
+
+    // ======== 个人主页 ========
+
+    function showProfile() {
+      var user = MojiStorage.getUser();
+      if (!user || !user.name) return;
+
+      // 显示区域
+      $('#profileHeader').style.display = '';
+      $('#profileContent').style.display = '';
+
+      // 填充资料
+      $('#avatarLetter').textContent = user.name.charAt(0);
+      $('#profileName').textContent = user.name;
+      $('#profileHandle').textContent = user.handle || ('@' + user.name.toLowerCase().replace(/\s+/g, ''));
+      $('#profileBio').textContent = user.bio || '这个人很懒，什么都没写';
+
+      // 标题
+      document.title = '墨记 — @' + user.name + '的个人空间';
+
+      // 渲染页面列表
+      renderPages();
+
+      // 绑定编辑按钮
+      bindSettings();
+
+      // 绑定密码弹窗
+      bindPasswordModal();
+
+      // 绑定时间线事件代理（只绑定一次）
+      bindTimelineEvents();
+
+      // 绑定标签筛选（只绑定一次）
+      bindTagFilter();
+    }
+
+    // ======== 渲染页面列表 ========
+
+    function renderPages() {
+      var pages = MojiStorage.getPageList();
+      var timeline = $('#timeline');
+      var tagFilter = $('#tagFilter');
+      var emptyState = $('#emptyState');
+
+      // 清空
+      timeline.innerHTML = '';
+
+      // 收集所有标签
+      var allTags = {};
+      var totalViews = 0;
+
+      pages.forEach(function (page) {
+        totalViews += MojiStorage.getViewCount(page.id);
+        if (page.tags) {
+          page.tags.forEach(function (t) {
+            allTags[t] = true;
+          });
+        }
+      });
+
+      // 统计
+      $('#statPages').textContent = pages.length;
+      $('#statViews').textContent = totalViews;
+
+      // 渲染标签筛选（保留"全部"）
+      tagFilter.innerHTML = '<span class="tag active" data-tag="all">全部</span>';
+      Object.keys(allTags).forEach(function (tag) {
+        var span = document.createElement('span');
+        span.className = 'tag';
+        span.dataset.tag = tag;
+        span.textContent = tag;
+        tagFilter.appendChild(span);
+      });
+
+      // 空状态
+      if (pages.length === 0) {
+        emptyState.style.display = '';
+        timeline.style.display = 'none';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      timeline.style.display = '';
+
+      // 渲染时间线
+      pages.forEach(function (page, idx) {
+        var dateStr = page.createdAt
+          ? new Date(page.createdAt).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })
+          : '未知日期';
+
+        var excerpt = stripHtml(page.body || '').substring(0, 120);
+        var views = MojiStorage.getViewCount(page.id);
+        var hasLock = !!page.passwordHash;
+
+        var item = document.createElement('div');
+        item.className = 'timeline__item';
+        item.dataset.tags = (page.tags || []).join(' ');
+        item.style.animationDelay = (idx * 0.08) + 's';
+
+        item.innerHTML =
+          '<div class="timeline__dot"></div>' +
+          '<div class="timeline__date">' + escapeHtml(dateStr) + '</div>' +
+          '<div class="timeline__block" data-id="' + page.id + '">' +
+            '<button class="timeline__block-delete" data-id="' + page.id + '" title="删除" aria-label="删除">删除</button>' +
+            '<button class="timeline__block-pwd" data-pwd-id="' + page.id + '" title="密码保护" aria-label="设置密码">🔒</button>' +
+            '<div class="timeline__block-title">' + escapeHtml(page.title || '无标题') + '</div>' +
+            '<div class="timeline__block-excerpt">' + escapeHtml(excerpt) + '</div>' +
+            '<div class="timeline__block-meta">' +
+              '<div class="timeline__block-meta-item"><i data-lucide="eye" data-fallback="👁️" class="lucide-sm lucide-inline"></i> <span>' + views + '</span></div>' +
+              (hasLock ? '<div class="timeline__block-lock"><i data-lucide="lock" data-fallback="🔒" class="lucide-sm lucide-inline"></i> 已加密</div>' : '') +
+              '<div class="timeline__block-tags">' +
+                (page.tags || []).map(function (t) { return '<span class="timeline__block-tag">' + escapeHtml(t) + '</span>'; }).join('') +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+        timeline.appendChild(item);
+      });
+
+      // Re-initialize Lucide icons for dynamically added elements
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      } else {
+        document.querySelectorAll('[data-lucide]').forEach(function(el) {
+          el.textContent = el.getAttribute('data-fallback') || '';
+          el.style.display = 'inline-block';
+        });
+      }
+    }
+
+    // ======== 时间线事件代理（初始化时绑定一次） ========
+
+    function bindTimelineEvents() {
+      var timeline = $('#timeline');
+
+      timeline.addEventListener('click', function (e) {
+        // 密码按钮
+        var pwdBtn = e.target.closest('.timeline__block-pwd');
+        if (pwdBtn) {
+          e.stopPropagation();
+          openPasswordModal(pwdBtn.dataset.pwdId);
+          return;
+        }
+
+        // 删除按钮
+        var deleteBtn = e.target.closest('.timeline__block-delete');
+        if (deleteBtn) {
+          e.stopPropagation();
+          var id = deleteBtn.dataset.id;
+          if (confirm('确定删除这篇内容吗？删除后无法恢复。')) {
+            MojiStorage.deletePage(id);
+            renderPages();
+          }
+          return;
+        }
+
+        // 点击内容块 → 打开分享页
+        var block = e.target.closest('.timeline__block');
+        if (block) {
+          var pageId = block.dataset.id;
+          window.location.href = 'view.html?id=' + encodeURIComponent(pageId);
+        }
+      });
+    }
+
+    // ======== 标签筛选 ========
+
+    function bindTagFilter() {
+      var tagFilter = $('#tagFilter');
+      var timeline = $('#timeline');
+      var emptyState = $('#emptyState');
+
+      tagFilter.onclick = function (e) {
+        var tag = e.target.closest('.tag');
+        if (!tag) return;
+
+        tagFilter.querySelectorAll('.tag').forEach(function (t) { t.classList.remove('active'); });
+        tag.classList.add('active');
+
+        var selectedTag = tag.dataset.tag;
+        var items = timeline.querySelectorAll('.timeline__item');
+        var visible = 0;
+
+        items.forEach(function (item) {
+          var itemTags = item.dataset.tags || '';
+          if (selectedTag === 'all' || itemTags.split(' ').indexOf(selectedTag) >= 0) {
+            item.classList.remove('hidden');
+            visible++;
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+
+        if (emptyState) {
+          emptyState.style.display = visible === 0 ? '' : 'none';
+          timeline.style.display = visible === 0 ? 'none' : '';
+        }
+      };
+    }
+
+    // ======== 设置模态框 ========
+
+    function bindSettings() {
+      var modal = $('#settingsModal');
+      var nameInput = $('#settingsName');
+      var bioInput = $('#settingsBio');
+
+      $('#editProfileBtn').addEventListener('click', function () {
+        var user = MojiStorage.getUser();
+        nameInput.value = user.name || '';
+        bioInput.value = user.bio || '';
+        modal.classList.add('visible');
+        setTimeout(function () { nameInput.focus(); }, 200);
+      });
+
+      $('#settingsCancelBtn').addEventListener('click', function () {
+        modal.classList.remove('visible');
+      });
+
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) modal.classList.remove('visible');
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('visible')) modal.classList.remove('visible');
+      });
+
+      $('#settingsSaveBtn').addEventListener('click', function () {
+        var name = nameInput.value.trim();
+        if (!name) {
+          nameInput.focus();
+          return;
+        }
+        var bio = bioInput.value.trim();
+        var user = MojiStorage.getUser();
+        user.name = name;
+        user.handle = '@' + name.toLowerCase().replace(/\s+/g, '');
+        user.bio = bio;
+        MojiStorage.setUser(user);
+
+        modal.classList.remove('visible');
+        showProfile();
+      });
+    }
+
+    // ======== 密码弹窗 ========
+
+    var currentPasswordPageId = null;
+
+    function openPasswordModal(pageId) {
+      currentPasswordPageId = pageId;
+      var modal = $('#passwordModal');
+      var input = $('#passwordInput');
+      var removeBtn = $('#passwordRemoveBtn');
+      var titleEl = $('#passwordModalTitle');
+      var descEl = $('#passwordModalDesc');
+
+      // 检查是否已有密码
+      var page = MojiStorage.getPage(pageId);
+      var hasPwd = page && !!page.passwordHash;
+
+      if (hasPwd) {
+        titleEl.textContent = '修改密码保护';
+        descEl.textContent = '这篇内容已设置密码，可以修改或移除';
+        removeBtn.style.display = '';
+      } else {
+        titleEl.textContent = '设置密码保护';
+        descEl.textContent = '为这篇内容设置密码，访客需要输入密码才能查看';
+        removeBtn.style.display = 'none';
+      }
+
+      input.value = '';
+      modal.classList.add('visible');
+      setTimeout(function () { input.focus(); }, 200);
+    }
+
+    function bindPasswordModal() {
+      var modal = $('#passwordModal');
+      var input = $('#passwordInput');
+
+      // 确认按钮
+      $('#passwordSaveBtn').addEventListener('click', function () {
+        var pwd = input.value.trim();
+        if (!pwd) {
+          input.focus();
+          return;
+        }
+        if (currentPasswordPageId) {
+          MojiStorage.setPassword(currentPasswordPageId, pwd);
+        }
+        modal.classList.remove('visible');
+        renderPages();
+      });
+
+      // 取消按钮
+      $('#passwordCancelBtn').addEventListener('click', function () {
+        modal.classList.remove('visible');
+      });
+
+      // 移除密码按钮
+      $('#passwordRemoveBtn').addEventListener('click', function () {
+        if (currentPasswordPageId) {
+          MojiStorage.removePassword(currentPasswordPageId);
+        }
+        modal.classList.remove('visible');
+        renderPages();
+      });
+
+      // 点击 overlay 关闭
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) modal.classList.remove('visible');
+      });
+
+      // Escape 键关闭
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('visible')) modal.classList.remove('visible');
+      });
+
+      // Enter 键确认
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') $('#passwordSaveBtn').click();
+      });
+    }
+
+    // ======== 工具函数 ========
+
+    function stripHtml(html) {
+      if (!html) return '';
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    // ======== 启动 ========
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#4ade80;--accent-glow:rgba(74,222,128,0.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:'Noto Sans SC',-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'JetBrains Mono','SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'JetBrains Mono','SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'JetBrains Mono','SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">💀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体崩盘日</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Bloodbath</div>
+<div class="zh poster-data">• 费城半导体 SOX ▼10.26%（罕见）<br>• 纳斯达克 ▼4.18%（4月来最差）<br>• 博通财报后 AI 展望不及预期</div>
+<div class="en poster-data" style="display:none">• SOX ▼10.26% (extremely rare)<br>• Nasdaq ▼4.18% (worst since Apr)<br>• Broadcom AI outlook disappoints</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#ea580c 0%,#9a3412 100%)">
+<div class="poster-icon">📋</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">非农超预期 × 2</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Jobs Report Blowout</div>
+<div class="zh poster-data">• 5月非农 +172K（预期 80K）<br>• 失业率持稳 4.3%<br>• 加息预期飙升，美债收益率大涨</div>
+<div class="en poster-data" style="display:none">• May NFP +172K (est. 80K)<br>• Unemployment steady at 4.3%<br>• Rate hike bets surge, yields spike</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#0d9488 0%,#115e59 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A/H 股跟跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A/H Shares Slide</div>
+<div class="zh poster-data">• 科创50 ▼4.01% · 创业板 ▼3.20%<br>• 恒指失守 25,000 · 恒生科技 ▼1.75%<br>• 半导体板块领跌</div>
+<div class="en poster-data" style="display:none">• STAR50 ▼4.01% · ChiNext ▼3.20%<br>• HSI loses 25,000 · HSTECH ▼1.75%<br>• Semiconductor sector leads decline</div>
+</div>
+
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#4c1d95 100%)">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">下周展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Outlook</div>
+<div class="zh poster-data">• 半导体超卖或迎技术反弹<br>• 6/17-18 FOMC 成焦点<br>• AI 硬件链进入"预期回调期"</div>
+<div class="en poster-data" style="display:none">• Oversold bounce possible<br>• 6/17-18 FOMC in focus<br>• AI hardware entering "expectation reset"</div>
+</div>
+
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-05 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a></p>
+
+<!-- ═══════ 美股指数 ═══════ -->
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">50,866</div><div class="stock-change down">-1.35%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,383</div><div class="stock-change down">-2.64%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">25,709</div><div class="stock-change down">-4.18%</div></div>
+<div class="stock-item"><div class="stock-ticker">NDX 100</div><div class="stock-price">28,957</div><div class="stock-change down">-4.77%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,220</div><div class="stock-change down">-10.26%</div></div>
+</div>
+
+<!-- ═══════ A股/港股指数 ═══════ -->
+<h2>🇨🇳 <span class="zh">A股 & 港股收盘</span><span class="en" style="display:none">A-Shares & HK Close</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,027</div><div class="stock-change down">-0.74%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,314</div><div class="stock-change down">-2.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,957</div><div class="stock-change down">-3.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">1,668</div><div class="stock-change down">-4.01%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">24,961</div><div class="stock-change down">-1.15%</div></div>
+</div>
+<div class="stock-grid" style="margin-top:-6px">
+<div class="stock-item" style="grid-column:span 1"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,888</div><div class="stock-change down">-1.75%</div></div>
+</div>
+
+<!-- ═══════ 重点个股 ═══════ -->
+<h2>🔥 <span class="zh">重点个股</span><span class="en" style="display:none">Key Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$205.10</div><div class="stock-change down">-6.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">财报后</div><div class="stock-change down">-14%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change down">-6~8%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">—</div><div class="stock-change down">-7%</div></div>
+<div class="stock-item"><div class="stock-ticker">MRVL</div><div class="stock-price">—</div><div class="stock-change down">-7.5%</div></div>
+</div>
+
+<!-- ═══════ K线图 ═══════ -->
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">AVGO — Broadcom</div><div id="tv-avgo"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SSE:000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<!-- ═══════ 核心驱动 ═══════ -->
+<h2>📌 <span class="zh">三大核心驱动</span><span class="en" style="display:none">3 Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">博通 AI 芯片需求不及预期 — 引发全芯片板块连锁抛售</span><span class="en" style="display:none">1. Broadcom AI Chip Outlook Disappoints — Chain Sell-off</span></h4>
+<p><span class="zh">博通周三盘后发布 Q2 财报，虽然营收和利润均超预期（EPS $2.44 vs 预期 $2.40），营收创纪录，但<b>AI 芯片全年展望未上调</b>，市场大失所望。盘后暴跌12%，周四正式交易再跌约14%，拖累整个半导体板块。费城半导体指数（SOX）单日暴跌 10.26%，极为罕见。Nvidia 跌 6.2%，AMD、Micron、Marvell 均跌 6-8%。</span><span class="en" style="display:none">Broadcom posted Q2 earnings after Wednesday's close — revenue and EPS beat ($2.44 vs $2.40 est.), but the <b>AI chip full-year outlook was not raised</b>, deeply disappointing markets. Shares crashed 12% AH, then ~14% Thursday, dragging the entire chip sector. SOX plunged 10.26% in a single day — extremely rare. Nvidia fell 6.2%; AMD, Micron, Marvell all dropped 6-8%.</span></p>
+<p class="src">来源：CNBC / Reuters / MarketWatch / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">非农就业数据远超预期 — 加息预期飙升</span><span class="en" style="display:none">2. Jobs Report Blows Past Expectations — Rate Hike Bets Surge</span></h4>
+<p><span class="zh">5月非农新增就业 172K，远超市场预期的 80K，翻倍超出。失业率维持在 4.3%。数据公布后，市场迅速重新定价美联储政策路径，降息预期大幅降温，加息概率上升。10 年期美债收益率飙升，科技股估值承压。道指受加息预期影响跌 695 点，但跌幅小于科技股（金融、医疗板块相对抗跌）。</span><span class="en" style="display:none">May NFP added 172K jobs — more than double the 80K consensus. Unemployment held at 4.3%. Markets immediately repriced Fed policy: rate cut hopes faded, hike odds rose. 10Y Treasury yields spiked, pressuring tech valuations. Dow fell 695 pts but outperformed tech as financials and healthcare attracted rotation flows.</span></p>
+<p class="src">来源：BLS / CNBC / Reuters / Investopedia</p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">资金从科技转向防御板块 — 市场风格切换</span><span class="en" style="display:none">3. Tech-to-Defense Rotation — Style Switch Underway</span></h4>
+<p><span class="zh">在半导体崩盘和加息预期的双重打击下，资金大规模从科技板块流出，涌入金融和医疗等防御性板块。约 56% 的标普 500 个股仍高于 50 日均线，说明市场内部并非全面崩塌，但科技股的集中抛售拖累指数表现。纳斯达克本周累计跌幅为数月以来最大。</span><span class="en" style="display:none">Under the dual shock of the chip crash and rate hike fears, capital rotated aggressively from tech into financials and healthcare. ~56% of S&P 500 stocks remain above their 50-day MA, meaning the selloff isn't broad-based — it's concentrated in tech. Nasdaq's weekly loss is the largest in months.</span></p>
+<p class="src">来源：Schwab / Barron's / WSJ</p>
+</div>
+
+<!-- ═══════ A股/港股分析 ═══════ -->
+<h2>🇨🇳 <span class="zh">A/H 股分析</span><span class="en" style="display:none">A/H Shares Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">A股：科创50重挫4%，半导体板块领跌</span><span class="en" style="display:none">A-Shares: STAR50 Plunges 4%, Chips Lead Decline</span></h4>
+<p><span class="zh">A股全天低开低走，半导体板块受美股博通暴雷拖累大幅回调。科创50 指数跌 4.01% 领跌，创业板跌 3.20%，深成指跌 2.21%，上证相对抗跌仅 0.74%。两市成交额约 2.8 万亿元。电子化学品、稀土、煤炭板块逆势上涨。联想集团、兆易创新、澜起科技等芯片股跌超 4%。</span><span class="en" style="display:none">A-shares fell throughout the day, with chips hit hardest by Broadcom's fallout. STAR50 dropped 4.01%, ChiNext -3.20%, SZSE Component -2.21%, while Shanghai was relatively resilient at -0.74%. Total volume ~2.8 trillion yuan. Electronic chemicals, rare earths, and coal bucked the trend. Lenovo, GigaDevice, and Montage each fell 4%+.</span></p>
+<p class="src">来源：东方财富 / 同花顺 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股：恒指失守25,000大关，三连跌</span><span class="en" style="display:none">HK: HSI Loses 25,000, 3-Day Losing Streak</span></h4>
+<p><span class="zh">恒生指数下跌 1.15% 报 24,961.95，失守 25,000 关口，录得三连跌。恒生科技指数跌 1.75% 报 4,888.39。南向资金净卖出 24.26 亿港元。值得注意的是，智谱和 MiniMax 将于 6 月 8 日起正式纳入恒生科技指数，成为指数历史上首批纯 AI 大模型成分股。</span><span class="en" style="display:none">HSI fell 1.15% to 24,961.95, losing the 25,000 mark for a 3-day losing streak. Hang Seng Tech dropped 1.75% to 4,888.39. Southbound net sell HK$2.426B. Notably, Zhipu and MiniMax will join HSTECH effective June 8 — the first pure AI model companies in the index.</span></p>
+<p class="src">来源：英为财情 / 证券时报 / AASTOCKS</p>
+</div>
+
+<!-- ═══════ 预判 ═══════ -->
+<h2>🔮 <span class="zh">走势预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期（下周）</span><span class="en" style="display:none">Short-term (Next Week)</span></h4>
+<p><span class="zh">
+• <b>半导体超卖反弹可能：</b>SOX 单日 -10% 极为罕见，技术面严重超卖，短期有反弹需求，但高度取决于 AI 叙事修复力度<br>
+• <b>关注 CPI 数据：</b>下周将公布通胀数据，若低于预期可能缓和加息担忧<br>
+• <b>博通后续影响：</b>市场需消化博通 AI 展望的信号意义 — "AI 硬件支出能否持续"的质疑可能蔓延
+</span><span class="en" style="display:none">
+• <b>Oversold bounce likely:</b> SOX -10% in one day is rare; technicals deeply oversold. Magnitude depends on AI narrative repair.<br>
+• <b>Watch CPI data:</b> Next week's inflation print could ease rate hike fears if below consensus.<br>
+• <b>Broadcom fallout:</b> Markets need to digest the signal — "can AI hardware spending sustain?" may spread.
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">中期焦点</span><span class="en" style="display:none">Medium-term Focus</span></h4>
+<p><span class="zh">
+• <b>6/17-18 FOMC 会议：</b>美联储利率决议将成为下一个关键催化剂，市场将密切关注点阵图和经济预测<br>
+• <b>AI 叙事裂痕：</b>博通事件是第一个重大警示信号 — 若后续 Nvidia 财报或台积电月营收也显露疲态，AI 主题可能进入深度调整<br>
+• <b>A/H 股独立行情：</b>A 股内资主导板块（消费、新能源）可能走出独立于美股的行情，但半导体板块高度联动
+</span><span class="en" style="display:none">
+• <b>6/17-18 FOMC:</b> Fed rate decision is the next major catalyst. Dot plot and SEP will be scrutinized.<br>
+• <b>AI narrative cracks:</b> Broadcom is the first major warning — if Nvidia earnings or TSMC monthly revenue also soften, the AI theme could enter deep correction.<br>
+• <b>A/H decoupling potential:</b> Domestically-driven sectors (consumer, EV) may decouple from US tech, but semis remain highly correlated.
+</span></p>
+</div>
+
+<div class="card">
+<h4>⚠️ <span class="zh">风险提示</span><span class="en" style="display:none">Risk Warning</span></h4>
+<p><span class="zh">
+• SOX -10% 后的恐慌性抛售可能带来短期抄底机会，但需等待情绪指标稳定<br>
+• 若 10Y 美债收益率持续上行突破关键阻力，成长股估值将进一步承压<br>
+• 恒生科技指数纳入智谱/MiniMax 后，纯 AI 概念股波动可能加大
+</span><span class="en" style="display:none">
+• Panicked selling after SOX -10% may create dip-buying opportunities, but wait for sentiment stabilization.<br>
+• If 10Y yields break key resistance to the upside, growth valuations face further pressure.<br>
+• Zhipu/MiniMax joining HSTECH may increase volatility for pure AI plays.
+</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Markets</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, MarketWatch, WSJ, BLS, Investopedia, 东方财富, 同花顺, 证券时报, 英为财情</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-avgo', sym:'NASDAQ:AVGO'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

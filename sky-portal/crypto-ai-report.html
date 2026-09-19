@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI × Crypto 2026 深度研报 | AI × Crypto Deep Dive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,500;6..72,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1115;
+      --ink-soft: #3a3d47;
+      --paper: #f0eee6;
+      --paper-deep: #e4dfd2;
+      --panel: #faf8f2;
+      --line: #1f2028;
+      --line-soft: rgba(31, 32, 40, 0.16);
+      --gold: #c4882f;
+      --gold-dark: #8c5e1a;
+      --electric: #5f6cff;
+      --electric-dark: #3d48c4;
+      --mint: #2dd4a8;
+      --mint-dark: #1a9972;
+      --red: #e04040;
+      --shadow: 0 20px 56px rgba(15, 17, 21, 0.10);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(95, 108, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(196, 136, 47, 0.06) 1px, transparent 1px),
+        linear-gradient(135deg, #f2f0e8 0%, #e8e3d5 46%, #f0ede4 100%);
+      background-size: 64px 64px, 64px 64px, auto;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(15, 17, 21, 0.06) 0 1px, transparent 1px 5px),
+        repeating-linear-gradient(90deg, rgba(250, 248, 242, 0.28) 0 1px, transparent 1px 7px);
+      mix-blend-mode: multiply;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .progress {
+      position: fixed; inset: 0 auto auto 0;
+      height: 4px; width: 0;
+      background: linear-gradient(90deg, var(--gold), var(--electric), var(--mint));
+      z-index: 50;
+    }
+
+    /* ─── Topbar ─── */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px clamp(16px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(240, 238, 230, 0.90);
+      backdrop-filter: blur(18px);
+    }
+
+    .portal-home {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 38px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--ink); color: var(--paper);
+      padding: 8px 12px;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700;
+      box-shadow: 4px 4px 0 var(--gold);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .portal-home:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--line);
+    }
+
+    nav {
+      display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    nav a {
+      border: 1px solid var(--line-soft); border-radius: 999px;
+      padding: 6px 10px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600;
+      background: rgba(250, 248, 242, 0.56);
+      transition: all 140ms ease;
+    }
+    nav a:hover, nav a.active {
+      background: var(--ink); color: var(--paper); border-color: var(--ink);
+    }
+
+    /* ─── Mobile Menu Toggle ─── */
+    .menu-toggle {
+      display: none;
+      width: 40px; height: 38px;
+      align-items: center; justify-content: center; gap: 4px; flex-direction: column;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); cursor: pointer;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+    .menu-toggle span {
+      display: block; width: 18px; height: 2px; background: var(--ink);
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    @media (max-width: 860px) {
+      .menu-toggle { display: flex; }
+      .topbar { flex-wrap: wrap; }
+      .topbar nav {
+        display: none;
+        width: 100%; order: 3;
+        flex-direction: column; gap: 6px;
+        padding-top: 10px; border-top: 1px solid var(--line-soft);
+        margin-top: 6px;
+      }
+      .topbar.menu-open nav {
+        display: flex;
+      }
+      .topbar nav a {
+        border-radius: var(--radius); padding: 10px 12px;
+        font-size: 13px; text-align: left;
+      }
+    }
+
+    /* ─── Sections ─── */
+    .section {
+      padding: clamp(40px, 7vw, 88px) clamp(16px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+    }
+    .section-inner {
+      width: min(1180px, 100%); margin: 0 auto;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 82svh;
+      display: grid; align-items: center;
+      padding-top: clamp(32px, 5vw, 64px);
+      padding-bottom: clamp(28px, 5vw, 60px);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: clamp(20px, 4vw, 64px);
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      width: fit-content;
+      border: 1px solid var(--line); background: var(--panel);
+      padding: 7px 10px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      box-shadow: 4px 4px 0 var(--line);
+      margin-bottom: 20px;
+    }
+    .kicker .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--mint);
+      animation: pulse 1.6s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(38px, 5.8vw, 76px);
+      line-height: 1; letter-spacing: 0; font-weight: 700;
+      max-width: 720px; overflow-wrap: anywhere;
+    }
+    h1 .accent { color: var(--electric); }
+
+    .lead {
+      margin: 22px 0 0; max-width: 700px;
+      color: var(--ink-soft); font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.48; font-weight: 400;
+    }
+
+    /* ─── Metric Board ─── */
+    .metric-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px; align-self: stretch;
+    }
+    .metric-card {
+      min-height: 140px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); padding: 16px;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden; position: relative;
+      opacity: 0; transform: translateY(16px);
+      animation: enter 580ms ease forwards;
+    }
+    .metric-card:nth-child(2) { animation-delay: 80ms; }
+    .metric-card:nth-child(3) { animation-delay: 160ms; }
+    .metric-card:nth-child(4) { animation-delay: 240ms; }
+
+    @keyframes enter {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .metric-card::after {
+      content: ""; position: absolute; right: -24px; bottom: -32px;
+      width: 90px; height: 90px;
+      border: 14px solid rgba(95, 108, 255, 0.10);
+      transform: rotate(14deg);
+    }
+    .metric-label {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--ink-soft); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; position: relative; z-index: 1;
+    }
+    .metric-value {
+      margin-top: 16px;
+      font-family: "Newsreader", serif; font-weight: 700;
+      line-height: 0.95; font-size: clamp(28px, 3vw, 46px);
+      position: relative; z-index: 1; overflow-wrap: anywhere;
+    }
+    .metric-note {
+      margin-top: 8px; color: var(--ink-soft);
+      font-size: 12px; line-height: 1.35; position: relative; z-index: 1;
+    }
+
+    /* ─── Chapter ─── */
+    .eyebrow {
+      margin: 0 0 10px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      color: var(--gold-dark); text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-family: "Newsreader", serif;
+      font-size: clamp(32px, 4.5vw, 62px);
+      line-height: 0.98; letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px; line-height: 1.25; text-transform: uppercase;
+    }
+    .chapter-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(260px, 0.22fr);
+      gap: 20px; align-items: end; margin-bottom: 28px;
+    }
+    .chapter-note {
+      margin: 0; color: var(--ink-soft);
+      line-height: 1.55; font-size: 15px;
+    }
+
+    /* ─── Panels ─── */
+    .panel {
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: rgba(250, 248, 242, 0.92);
+      padding: clamp(16px, 2.5vw, 24px);
+      box-shadow: var(--shadow);
+    }
+    .panel.dark {
+      background: var(--ink); color: var(--paper);
+      box-shadow: 8px 8px 0 var(--gold);
+    }
+    .panel.electric {
+      background: var(--ink); color: var(--paper);
+      box-shadow: 8px 8px 0 var(--electric);
+    }
+
+    /* ─── Grid Layouts ─── */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-1-2 { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr); gap: 14px; }
+    .grid-2-1 { display: grid; grid-template-columns: minmax(300px, 1.05fr) minmax(0, 0.95fr); gap: 14px; }
+
+    /* ─── Finding List ─── */
+    .finding-list {
+      display: grid; gap: 14px; margin: 0; padding: 0; list-style: none;
+    }
+    .finding-list li {
+      display: grid; grid-template-columns: 30px minmax(0, 1fr);
+      gap: 12px; align-items: start;
+      line-height: 1.55; color: var(--ink-soft);
+    }
+    .panel.dark .finding-list li,
+    .panel.electric .finding-list li {
+      color: rgba(240, 238, 230, 0.82);
+    }
+    .number {
+      width: 30px; height: 30px; display: grid; place-items: center;
+      border: 1px solid currentColor; border-radius: 50%;
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ─── Token Cards ─── */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .token-card {
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--panel); padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .token-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--line-soft);
+    }
+    .token-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .token-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 700;
+      border: 2px solid var(--line);
+    }
+    .token-name {
+      font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 700;
+    }
+    .token-ticker {
+      font-size: 11px; color: var(--ink-soft); font-weight: 500;
+    }
+    .token-body { font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+    .token-meta {
+      margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .tag {
+      font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(95, 108, 255, 0.06);
+      text-transform: uppercase;
+    }
+    .tag.risk-high { background: rgba(224, 64, 64, 0.08); color: var(--red); border-color: var(--red); }
+    .tag.risk-med { background: rgba(196, 136, 47, 0.08); color: var(--gold-dark); border-color: var(--gold); }
+    .tag.risk-low { background: rgba(45, 212, 168, 0.08); color: var(--mint-dark); border-color: var(--mint); }
+
+    /* ─── Allocation Bar ─── */
+    .alloc-bar {
+      display: flex; height: 48px; border-radius: var(--radius);
+      border: 1px solid var(--line); overflow: hidden;
+      margin: 20px 0;
+    }
+    .alloc-segment {
+      display: flex; align-items: center; justify-content: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700;
+      color: #fff; min-width: 50px;
+      transition: flex 300ms ease;
+    }
+
+    .alloc-legend {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    }
+    .alloc-legend span {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .alloc-dot {
+      width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--line);
+    }
+
+    /* ─── Table ─── */
+    table {
+      width: 100%; border-collapse: collapse; font-size: 14px;
+    }
+    th {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; text-align: left;
+      padding: 10px 12px; border-bottom: 2px solid var(--line);
+      color: var(--ink-soft);
+    }
+    td {
+      padding: 10px 12px; border-bottom: 1px solid var(--line-soft);
+      line-height: 1.45;
+    }
+    tr:hover td { background: rgba(95, 108, 255, 0.03); }
+
+    /* ─── Risk Matrix ─── */
+    .risk-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px; border: 1px solid var(--line);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .risk-cell {
+      padding: 16px; text-align: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600;
+    }
+    .risk-cell.header { background: var(--ink); color: var(--paper); }
+    .risk-cell.green { background: rgba(45, 212, 168, 0.12); }
+    .risk-cell.yellow { background: rgba(196, 136, 47, 0.10); }
+    .risk-cell.red { background: rgba(224, 64, 64, 0.08); }
+
+    /* ─── Callout ─── */
+    .callout {
+      border-left: 4px solid var(--electric);
+      background: rgba(95, 108, 255, 0.05);
+      padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 20px 0;
+      font-size: 14px; line-height: 1.55; color: var(--ink-soft);
+    }
+    .callout strong { color: var(--ink); }
+    .callout.warn {
+      border-left-color: var(--red);
+      background: rgba(224, 64, 64, 0.04);
+    }
+
+    /* ─── Timeline ─── */
+    .timeline {
+      display: grid; gap: 0; margin: 20px 0;
+      border-left: 2px solid var(--electric);
+      padding-left: 24px;
+    }
+    .timeline-item {
+      position: relative; padding: 12px 0;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute; left: -29px; top: 18px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--electric); border: 2px solid var(--paper);
+    }
+    .timeline-date {
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      color: var(--electric-dark); text-transform: uppercase;
+    }
+    .timeline-text {
+      margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--ink-soft);
+    }
+
+    /* ─── Source ─── */
+    .source-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px; margin-top: 20px;
+    }
+    .source-card {
+      border: 1px solid var(--line-soft); border-radius: var(--radius);
+      padding: 14px; font-size: 13px; line-height: 1.45;
+      background: var(--panel);
+      transition: transform 140ms ease;
+    }
+    .source-card:hover { transform: translate(-1px, -1px); }
+    .source-card .src-type {
+      font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+      color: var(--electric); text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 40px clamp(16px, 4vw, 48px);
+      text-align: center;
+      font-family: "IBM Plex Mono", monospace; font-size: 12px;
+      color: var(--ink-soft); line-height: 1.6;
+    }
+
+    /* ─── Side Rail (Desktop) ─── */
+    .side-rail {
+      display: none;
+      position: fixed; top: 60px; left: 0; bottom: 0;
+      width: 220px; z-index: 30;
+      padding: 24px 16px;
+      border-right: 1px solid var(--line-soft);
+      background: rgba(240, 238, 230, 0.92);
+      backdrop-filter: blur(14px);
+      overflow-y: auto;
+      flex-direction: column;
+    }
+    .side-brand {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0 0 14px; border-bottom: 1px solid var(--line);
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 700;
+      text-transform: uppercase;
+    }
+    .side-nav { display: grid; gap: 6px; margin-top: 14px; }
+    .side-nav a {
+      display: flex; justify-content: space-between; gap: 8px;
+      border: 1px solid var(--line-soft); border-radius: var(--radius);
+      padding: 9px 10px; background: rgba(250, 248, 242, 0.68);
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600;
+      line-height: 1.2; transition: all 140ms ease;
+    }
+    .side-nav a:hover, .side-nav a.active {
+      background: var(--ink); border-color: var(--ink); color: var(--paper);
+    }
+    .side-rail-footer {
+      margin-top: auto; padding-top: 16px;
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", monospace; font-size: 10px; line-height: 1.4;
+    }
+
+    .origin-badge {
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 6px 10px; background: var(--mint);
+      color: var(--ink); font-family: "IBM Plex Mono", monospace;
+      font-size: 11px; font-weight: 700; line-height: 1;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    @media (min-width: 1200px) {
+      .side-rail { display: flex; }
+      .section { padding-left: calc(220px + clamp(16px, 4vw, 48px)); }
+      .topbar { padding-left: calc(220px + 16px); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .metric-board { grid-template-columns: 1fr 1fr; }
+      .chapter-head { grid-template-columns: 1fr; }
+      .grid-2, .grid-1-2, .grid-2-1 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .token-grid { grid-template-columns: 1fr; }
+      .risk-matrix { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .metric-board { grid-template-columns: 1fr; }
+      .alloc-bar { flex-direction: column; height: auto; }
+      .alloc-segment { min-height: 36px; min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress" id="progress"></div>
+
+<!-- ─── Topbar ─── -->
+<header class="topbar" id="topbar">
+  <a href="index.html" class="portal-home">← SKY PORTAL</a>
+  <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="打开菜单">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <a href="#thesis">核心论点</a>
+    <a href="#bitcoin">BTC</a>
+    <a href="#ai-tokens">AI Tokens</a>
+    <a href="#depin">DePIN</a>
+    <a href="#portfolio">$1K 配置</a>
+    <a href="#risks">风险</a>
+    <a href="#sources">来源</a>
+  </nav>
+</header>
+
+<!-- ─── Side Rail ─── -->
+<aside class="side-rail">
+  <div class="side-brand">
+    <span>⛓️ AI × CRYPTO</span>
+  </div>
+  <nav class="side-nav">
+    <a href="#top">概览</a>
+    <a href="#thesis">核心论点</a>
+    <a href="#bitcoin">BTC 角色</a>
+    <a href="#ai-tokens">AI 标的</a>
+    <a href="#depin">DePIN</a>
+    <a href="#stablecoin">Coinbase 生态</a>
+    <a href="#portfolio">$1K 配置</a>
+    <a href="#timeline">关键日历</a>
+    <a href="#risks">风险警告</a>
+    <a href="#sources">信息来源</a>
+  </nav>
+  <div class="side-rail-footer">
+    <span class="origin-badge">DEEP DIVE</span>
+    <p style="margin-top:10px;">2026.05.24<br>Opus 4.6 研究</p>
+    <p style="margin-top:8px; opacity:0.6;">数据截至 2026 年 5 月<br>不构成投资建议</p>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  HERO                                      -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section hero" id="top">
+  <div class="section-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">
+          <span class="dot"></span>
+          DEEP DIVE RESEARCH · 2026.05.24
+        </div>
+        <h1>当 <span class="accent">AI</span> 遇上 Crypto：<br>$1,000 的赌注</h1>
+        <p class="lead">
+          AI 正在重塑加密市场的底层逻辑——从去中心化 GPU 算力、自主 AI Agent 交易，到 Lightning Network 的机器对机器支付。
+          这份研报深度拆解 AI × Crypto 的交叉赛道，为 Coinbase 平台上 $1,000 小额投资找到最靠谱的「赌注方向」。
+        </p>
+      </div>
+
+      <div class="metric-board">
+        <div class="metric-card">
+          <span class="metric-label">AI Crypto 板块总市值</span>
+          <span class="metric-value">$28B+</span>
+          <span class="metric-note">2026.03 数据，含 TAO/NEAR/RENDER/FET</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">DePIN 月收入</span>
+          <span class="metric-value">$150M</span>
+          <span class="metric-note">2026年1月，同比增长 800%</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Lightning 月交易量</span>
+          <span class="metric-value">$1B+</span>
+          <span class="metric-note">AI Agent 支付新赛道已开跑</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">BTC 2026 共识预测</span>
+          <span class="metric-value">$120K–$200K</span>
+          <span class="metric-note">六位数成为分析师共识区间</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  THESIS                                    -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="thesis">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 01</p>
+        <h2>核心论点</h2>
+      </div>
+      <p class="chapter-note">AI 和 Crypto 为什么会在 2026 年「撞在一起」，背后的底层逻辑是什么？</p>
+    </div>
+
+    <div class="grid-1-2">
+      <div class="panel dark">
+        <h3>三股力量的交汇</h3>
+        <ol class="finding-list">
+          <li>
+            <span class="number">1</span>
+            <span><strong>AI 算力需求爆炸</strong> — 全球 AI 支出 2026 年预计超 $3,000 亿（IDC），NVIDIA 预测到 2027 年芯片需求达 $1 万亿。中心化算力供不应求，去中心化 GPU 网络（DePIN）应运而生。</span>
+          </li>
+          <li>
+            <span class="number">2</span>
+            <span><strong>AI Agent 需要原生支付轨道</strong> — 当 AI 从「工具」进化为「自主 Agent」，它需要无需银行账户、无需 KYC、即时结算的支付方式。Crypto 和 Lightning Network 是天然选项。</span>
+          </li>
+          <li>
+            <span class="number">3</span>
+            <span><strong>监管清晰化释放机构资金</strong> — 2025-2026 年主要市场的监管框架逐步清晰，机构投资者信心增强，VC 投向 Crypto 的每一美元中，已有 40 美分同时在做 AI 产品（2024 年仅 18 美分）。</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="panel">
+        <h3>一句话总结</h3>
+        <p style="font-family:'Newsreader',serif; font-size:clamp(22px,2.5vw,32px); line-height:1.3; margin:0 0 16px;">
+          AI 是需求引擎，<br>
+          Crypto 是结算层。
+        </p>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-soft); margin:0;">
+          AI 需要算力、数据、支付——这三样东西的去中心化供给，正是区块链最擅长的。
+          Crypto 不再只是「投机品」，它正在成为 AI 经济的基础设施。
+        </p>
+
+        <div class="callout" style="margin-top:20px;">
+          <strong>关键数据点：</strong> BlackRock 估算，AI 资本支出对美国 GDP 增长的贡献已达历史平均水平的 3 倍。超级计算公司（微软、Meta）2026 年合计 capex 承诺超 $3,000 亿。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  BITCOIN                                   -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="bitcoin">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 02</p>
+        <h2>BTC 在 AI 时代的角色</h2>
+      </div>
+      <p class="chapter-note">比特币不只是「数字黄金」——它正在成为 AI 经济的结算层和储备资产。</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>储备资产地位</h3>
+        <ul class="finding-list">
+          <li>
+            <span class="number">●</span>
+            <span>2025 年行政令建立<strong>美国战略比特币储备</strong>，政府持有 328,372 BTC</span>
+          </li>
+          <li>
+            <span class="number">●</span>
+            <span>BTC ETF 资产规模达 <strong>$957 亿</strong>，机构通道已打通</span>
+          </li>
+          <li>
+            <span class="number">●</span>
+            <span>越来越多 CEO/CFO 将 BTC 列为<strong>资产负债表储备资产</strong></span>
+          </li>
+          <li>
+            <span class="number">●</span>
+            <span>Fidelity 研究：传统组合配 2% BTC，退休年度支出能力提升 1-4%，损失风险仅增 0.5-1%</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>AI × Lightning Network</h3>
+        <ul class="finding-list">
+          <li>
+            <span class="number">⚡</span>
+            <span><strong>2026.02</strong> — Lightning Labs 开源 <code>lightning-agent-tools</code>，AI Agent 可直接运行闪电节点、发起支付、无需银行账户或 API Key</span>
+          </li>
+          <li>
+            <span class="number">⚡</span>
+            <span>Lightning 月交易量突破 <strong>$10 亿</strong>，Agentic Payment 是最大增量场景</span>
+          </li>
+          <li>
+            <span class="number">⚡</span>
+            <span>Coinbase + Stripe 推进 <strong>x402 协议</strong>：链上自主支付标准，机器对机器商务的基石</span>
+          </li>
+          <li>
+            <span class="number">⚡</span>
+            <span>应用场景：AI Agent 自动付费调 API、购买数据、打赏内容、结算微额发票——全用 BTC 在闪电网络实时完成</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px;">
+      <h3>BTC 2026-2027 价格展望</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>分析师 / 机构</th>
+            <th>2026 预测</th>
+            <th>2027 展望</th>
+            <th>核心逻辑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tom Lee (Fundstrat)</td>
+            <td><strong>$250,000</strong></td>
+            <td>—</td>
+            <td>供给减半 + ETF 需求</td>
+          </tr>
+          <tr>
+            <td>Bernstein</td>
+            <td>$150,000 – $200,000</td>
+            <td><strong>$200,000</strong></td>
+            <td>企业资产负债表积累</td>
+          </tr>
+          <tr>
+            <td>Citigroup</td>
+            <td>$112,000</td>
+            <td>—</td>
+            <td>机构化 + 流动性改善</td>
+          </tr>
+          <tr>
+            <td>Arthur Hayes</td>
+            <td>$125,000</td>
+            <td>—</td>
+            <td>宏观流动性周期</td>
+          </tr>
+          <tr>
+            <td>保守区间</td>
+            <td>$75,000 – $79,000</td>
+            <td>$78,000 – $86,000</td>
+            <td>周期性回调</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:var(--electric);">主流共识</td>
+            <td style="font-weight:700;">$120,000 – $175,000</td>
+            <td style="font-weight:700;">$165,000+</td>
+            <td>ETF + 减半 + AI 需求</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top:16px;">
+        <strong>警告：</strong>BTC 目前距 2025 年高点下跌约 40-43%。「数字黄金」叙事正在 2026 年面临最大考验。高度关注 AI 叙事是否能接替 ETF 叙事成为下一个需求驱动力。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  AI TOKENS                                 -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="ai-tokens">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 03</p>
+        <h2>AI 赛道核心标的</h2>
+      </div>
+      <p class="chapter-note">Coinbase 上可以买到的 AI 相关代币深度分析。不是所有「名字里带 AI」的币都值得关注。</p>
+    </div>
+
+    <div class="token-grid">
+      <!-- TAO -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#1a1a2e,#5f6cff);color:#fff;">τ</div>
+          <div>
+            <div class="token-name">Bittensor</div>
+            <div class="token-ticker">TAO · ~$255 · 市值 $2.45B</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>去中心化 AI 训练网络。</strong>把全球 GPU 节点组成「子网」，每个子网专注不同 AI 任务（语言模型、图像生成、数据分析）。矿工贡献算力获得 TAO 奖励。<br><br>
+          <strong>催化剂：</strong>Grayscale + Bitwise 已提交 TAO 现货 ETF 申请（2026.04），SEC 决定最早 2026 年 8 月。70%+ TAO 处于质押状态，流通供给极其紧张。<br><br>
+          <strong>风险：</strong>距历史高点仍跌 60%。ETF 若被拒，可能大幅回调。
+        </div>
+        <div class="token-meta">
+          <span class="tag">去中心化 AI</span>
+          <span class="tag">ETF 预期</span>
+          <span class="tag risk-med">中高风险</span>
+        </div>
+      </div>
+
+      <!-- RENDER -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#2d1b69,#ff6b6b);color:#fff;">R</div>
+          <div>
+            <div class="token-name">Render Network</div>
+            <div class="token-ticker">RENDER · ~$5-8 · DePIN/AI GPU</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>去中心化 GPU 渲染 + AI 算力。</strong>网络已处理 7100 万+ 帧，AI 工作负载占比达 35-40%。2026 年 1 月收入 $3,800 万。整合 Salad Network 新增 ~6 万企业级 GPU。<br><br>
+          <strong>催化剂：</strong>AI 推理需求爆发式增长，已迁移至 Solana 提升吞吐。NVIDIA GTC 2026 送出强利好。<br><br>
+          <strong>风险：</strong>面临中心化云厂商（AWS/Azure/GCP）正面竞争。Token 价格和网络增长存在脱钩。
+        </div>
+        <div class="token-meta">
+          <span class="tag">DePIN</span>
+          <span class="tag">GPU 算力</span>
+          <span class="tag risk-med">中风险</span>
+        </div>
+      </div>
+
+      <!-- NEAR -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#000,#00ec97);color:#fff;">N</div>
+          <div>
+            <div class="token-name">NEAR Protocol</div>
+            <div class="token-ticker">NEAR · L1 公链 · AI 原生</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>AI 原生的 L1 公链。</strong>联合创始人 Illia Polosukhin 是 Transformer 论文《Attention Is All You Need》共同作者——AI 血统最正的区块链项目。Nightshade 3.0 分片测试突破 100 万 TPS。<br><br>
+          <strong>催化剂：</strong>Arthur Hayes 将 NEAR 列入「圣三位一体」组合。IronClaw 加密 AI Agent 运行时上线。月活 5000 万用户。<br><br>
+          <strong>风险：</strong>L1 竞争激烈（Solana/ETH），AI 功能落地进度待观察。
+        </div>
+        <div class="token-meta">
+          <span class="tag">L1 公链</span>
+          <span class="tag">AI 基础设施</span>
+          <span class="tag risk-med">中风险</span>
+        </div>
+      </div>
+
+      <!-- VIRTUAL -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#0f1115,#c4882f);color:#fff;">V</div>
+          <div>
+            <div class="token-name">Virtuals Protocol</div>
+            <div class="token-ticker">VIRTUAL · ~$0.70-1.20 · Base L2</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>AI Agent 发射平台。</strong>建在 Coinbase 的 Base L2 上。已创建 17,000+ AI Agent，协议累计收入 $3,950 万。每个 Agent 代币都与 VIRTUAL 配对——「铲子和镐」逻辑。<br><br>
+          <strong>催化剂：</strong>若 AI Agent 赛道爆发，VIRTUAL 是最大受益者。Luna（50 万 TikTok 粉）、AIXBT（500M 市值峰值）证明了代币化 AI Agent 的可行性。<br><br>
+          <strong>风险：</strong>从 $5.07 高点跌 80%+。面临 LangChain 等开源框架竞争。日活地址在下降。
+        </div>
+        <div class="token-meta">
+          <span class="tag">AI Agent</span>
+          <span class="tag">Base 生态</span>
+          <span class="tag risk-high">高风险/高回报</span>
+        </div>
+      </div>
+
+      <!-- FET/ASI -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#1a2a4a,#2dd4a8);color:#fff;">A</div>
+          <div>
+            <div class="token-name">ASI Alliance (Fetch.ai)</div>
+            <div class="token-ticker">FET · ~$0.21 · AI 联盟</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>去中心化 AI 联盟。</strong>Fetch.ai + SingularityNET 合并（Ocean Protocol 已退出）。Q1 2026 涨 67%。ASI:Chain DevNet 在测试中，主网预计 2026 年底/2027 年初。<br><br>
+          <strong>催化剂：</strong>ASI:Chain 主网上线。AI Agent 自主经济生态。联盟整合后的协同效应。<br><br>
+          <strong>风险：</strong>$0.21 低价反映市场对合并的怀疑。Ocean 退出是负面信号。$0.25-$0.28 是关键阻力位。
+        </div>
+        <div class="token-meta">
+          <span class="tag">AI 联盟</span>
+          <span class="tag">低价</span>
+          <span class="tag risk-high">高风险</span>
+        </div>
+      </div>
+
+      <!-- LINK -->
+      <div class="token-card">
+        <div class="token-header">
+          <div class="token-icon" style="background:linear-gradient(135deg,#2a5ada,#4a7aff);color:#fff;">◆</div>
+          <div>
+            <div class="token-name">Chainlink</div>
+            <div class="token-ticker">LINK · Oracle 基础设施</div>
+          </div>
+        </div>
+        <div class="token-body">
+          <strong>预言机网络 — AI 与现实世界数据的桥梁。</strong>AI 需要可验证的外部数据，Chainlink 是行业标准。RWA（真实世界资产）代币化也高度依赖 Chainlink。<br><br>
+          <strong>催化剂：</strong>CCIP 跨链协议扩展。RWA 赛道增长。AI 需要可信数据源。<br><br>
+          <strong>风险：</strong>作为基础设施层，价格波动相对较小，「爆发性」有限。
+        </div>
+        <div class="token-meta">
+          <span class="tag">Oracle</span>
+          <span class="tag">基础设施</span>
+          <span class="tag risk-low">低-中风险</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  DePIN                                     -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="depin">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 04</p>
+        <h2>DePIN：AI 的物理层</h2>
+      </div>
+      <p class="chapter-note">去中心化物理基础设施网络——用 Token 激励协调现实世界的 GPU、存储、无线网络资源。</p>
+    </div>
+
+    <div class="grid-2-1">
+      <div class="panel">
+        <h3>为什么 DePIN 是 AI 时代最大的 Crypto 叙事</h3>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-soft); margin:0 0 16px;">
+          AI 需要算力。算力需要 GPU。GPU 需要数据中心。但中心化数据中心的建设速度跟不上 AI 需求的增长——DePIN 通过 Token 激励把全球闲置的 GPU、存储、带宽整合成一个分布式网络，相当于「众筹建数据中心」。
+        </p>
+        <table>
+          <thead>
+            <tr><th>项目</th><th>市值</th><th>做什么</th><th>月收入</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Bittensor (TAO)</td><td>$2.45B</td><td>去中心化 AI 训练</td><td>—</td></tr>
+            <tr><td>Render (RENDER)</td><td>$887M</td><td>GPU 渲染 + AI 算力</td><td>$38M</td></tr>
+            <tr><td>Filecoin (FIL)</td><td>$629M</td><td>去中心化存储</td><td>—</td></tr>
+            <tr><td>Helium (HNT)</td><td>—</td><td>去中心化无线网络</td><td>—</td></tr>
+            <tr><td>ICP</td><td>$1.25B</td><td>去中心化云计算</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel electric">
+        <h3>DePIN 核心数据</h3>
+        <ol class="finding-list">
+          <li>
+            <span class="number" style="color:var(--mint);">1</span>
+            <span>DePIN 总市值 <strong>~$9,100 亿</strong>，已超过 Oracle 板块</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">2</span>
+            <span>2026年1月月收入 <strong>$1.5 亿</strong>，来自真实客户的存储、算力、数据服务</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">3</span>
+            <span>Helium 移动用户 <strong>12 万+</strong>，IoT 热点 <strong>90 万+</strong></span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">4</span>
+            <span>Filecoin 存储容量 <strong>20 EiB+</strong>，全球最大去中心化存储网络</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--mint);">5</span>
+            <span>Render AI 工作负载占比 <strong>35-40%</strong>，比 2024 年翻倍</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  STABLECOIN & BASE                         -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="stablecoin">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 05</p>
+        <h2>Coinbase 生态 & Stablecoin</h2>
+      </div>
+      <p class="chapter-note">Coinbase 不只是交易所——它的 Base L2 和 USDC 正在建设 AI 经济的支付基础设施。</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>USDC & 支付革命</h3>
+        <ul class="finding-list">
+          <li>
+            <span class="number">$</span>
+            <span>USDC 流通量 <strong>~$700 亿</strong>（2026.04），创历史新高</span>
+          </li>
+          <li>
+            <span class="number">$</span>
+            <span>稳定币转账量已<strong>超越 ACH 网络</strong>（美国电子转账主干）</span>
+          </li>
+          <li>
+            <span class="number">$</span>
+            <span>Coinbase × Nium：USDC 支付 + 法币出金覆盖 <strong>190+ 国家</strong></span>
+          </li>
+          <li>
+            <span class="number">$</span>
+            <span>Shopify 商户已支持 Base 链上 USDC 购物付款</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3>Base 链：Coinbase 的 L2</h3>
+        <ul class="finding-list">
+          <li>
+            <span class="number">B</span>
+            <span>Virtuals Protocol（AI Agent 发射台）建在 Base 上——Base 生态最火的 AI 项目</span>
+          </li>
+          <li>
+            <span class="number">B</span>
+            <span>x402 协议：Coinbase + Stripe 联合推进的<strong>链上自主支付标准</strong></span>
+          </li>
+          <li>
+            <span class="number">B</span>
+            <span>Flipcash USDF 稳定币使用 Coinbase 平台构建——生态正在扩展</span>
+          </li>
+          <li>
+            <span class="number">B</span>
+            <span>对投资者意味着：Base 生态繁荣 → USDC 使用量 ↑ → Coinbase 收入 ↑。间接利好 Coinbase 股票（$COIN）</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  PORTFOLIO                                 -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="portfolio">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 06</p>
+        <h2>$1,000 配置方案</h2>
+      </div>
+      <p class="chapter-note">三种风险偏好的配置策略，基于以上所有调研，在 Coinbase 上均可执行。</p>
+    </div>
+
+    <!-- Strategy 1: Conservative -->
+    <div class="panel" style="margin-bottom:14px;">
+      <h3 style="color:var(--mint-dark);">方案 A：稳健型 — 「先活下来」</h3>
+      <div class="alloc-bar">
+        <div class="alloc-segment" style="flex:5; background:linear-gradient(135deg,#f7931a,#e8a43a);">BTC $500</div>
+        <div class="alloc-segment" style="flex:3; background:linear-gradient(135deg,#627eea,#8ca0f0);">ETH $300</div>
+        <div class="alloc-segment" style="flex:1; background:linear-gradient(135deg,#5f6cff,#8b95ff);">TAO $100</div>
+        <div class="alloc-segment" style="flex:1; background:linear-gradient(135deg,#2dd4a8,#5ee8c5);">LINK $100</div>
+      </div>
+      <div class="alloc-legend">
+        <span><span class="alloc-dot" style="background:#f7931a;"></span>BTC 50%</span>
+        <span><span class="alloc-dot" style="background:#627eea;"></span>ETH 30%</span>
+        <span><span class="alloc-dot" style="background:#5f6cff;"></span>TAO 10%</span>
+        <span><span class="alloc-dot" style="background:#2dd4a8;"></span>LINK 10%</span>
+      </div>
+      <p style="margin:14px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.55;">
+        80% 大盘蓝筹 + 20% AI 赛道龙头。适合不想天天看盘的人。ETF 批准/机构入场是最大催化剂。预期年化 30-80%，最大回撤 -30% 至 -50%。
+      </p>
+    </div>
+
+    <!-- Strategy 2: Balanced -->
+    <div class="panel" style="margin-bottom:14px;">
+      <h3 style="color:var(--gold-dark);">方案 B：均衡型 — 「AI 主题增强」</h3>
+      <div class="alloc-bar">
+        <div class="alloc-segment" style="flex:3.5; background:linear-gradient(135deg,#f7931a,#e8a43a);">BTC $350</div>
+        <div class="alloc-segment" style="flex:2; background:linear-gradient(135deg,#627eea,#8ca0f0);">ETH $200</div>
+        <div class="alloc-segment" style="flex:1.5; background:linear-gradient(135deg,#1a1a2e,#5f6cff);">TAO $150</div>
+        <div class="alloc-segment" style="flex:1.5; background:linear-gradient(135deg,#2d1b69,#ff6b6b);">RENDER $150</div>
+        <div class="alloc-segment" style="flex:1.5; background:linear-gradient(135deg,#000,#00ec97);">NEAR $150</div>
+      </div>
+      <div class="alloc-legend">
+        <span><span class="alloc-dot" style="background:#f7931a;"></span>BTC 35%</span>
+        <span><span class="alloc-dot" style="background:#627eea;"></span>ETH 20%</span>
+        <span><span class="alloc-dot" style="background:#5f6cff;"></span>TAO 15%</span>
+        <span><span class="alloc-dot" style="background:#ff6b6b;"></span>RENDER 15%</span>
+        <span><span class="alloc-dot" style="background:#00ec97;"></span>NEAR 15%</span>
+      </div>
+      <p style="margin:14px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.55;">
+        55% 蓝筹底仓 + 45% AI/DePIN 赛道。如果 AI 叙事在 2026-2027 继续爆发，RENDER 和 NEAR 有更大的弹性空间。预期年化 50-200%，最大回撤 -40% 至 -65%。
+      </p>
+    </div>
+
+    <!-- Strategy 3: Aggressive -->
+    <div class="panel" style="margin-bottom:14px; border-color:var(--red);">
+      <h3 style="color:var(--red);">方案 C：激进型 — 「全押 AI 赌注」</h3>
+      <div class="alloc-bar">
+        <div class="alloc-segment" style="flex:2; background:linear-gradient(135deg,#f7931a,#e8a43a);">BTC $200</div>
+        <div class="alloc-segment" style="flex:2.5; background:linear-gradient(135deg,#1a1a2e,#5f6cff);">TAO $250</div>
+        <div class="alloc-segment" style="flex:2; background:linear-gradient(135deg,#000,#00ec97);">NEAR $200</div>
+        <div class="alloc-segment" style="flex:2; background:linear-gradient(135deg,#2d1b69,#ff6b6b);">RENDER $200</div>
+        <div class="alloc-segment" style="flex:1.5; background:linear-gradient(135deg,#0f1115,#c4882f);">VIRTUAL $150</div>
+      </div>
+      <div class="alloc-legend">
+        <span><span class="alloc-dot" style="background:#f7931a;"></span>BTC 20%</span>
+        <span><span class="alloc-dot" style="background:#5f6cff;"></span>TAO 25%</span>
+        <span><span class="alloc-dot" style="background:#00ec97;"></span>NEAR 20%</span>
+        <span><span class="alloc-dot" style="background:#ff6b6b;"></span>RENDER 20%</span>
+        <span><span class="alloc-dot" style="background:#c4882f;"></span>VIRTUAL 15%</span>
+      </div>
+      <p style="margin:14px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.55;">
+        只保留 20% BTC 底仓，80% 全押 AI 赛道。VIRTUAL 是最高风险的「彩票仓」——如果 AI Agent 赛道爆发，它建在 Base 上，每个 Agent 代币都需要 VIRTUAL 配对，有平台级放大效应。<strong>但这个方案可能归零 50%+。</strong>
+      </p>
+      <div class="callout warn">
+        <strong>适合人群：</strong>真的只有 $1,000，亏完不心疼，纯粹赌一把方向。严格设定 -30% 止损线。用 DCA（定投）分 4 周买入，不要一次性全仓。
+      </div>
+    </div>
+
+    <!-- Recommended approach -->
+    <div class="panel dark" style="margin-top:14px;">
+      <h3>研报推荐：方案 B + DCA</h3>
+      <ol class="finding-list">
+        <li>
+          <span class="number" style="color:var(--mint);">1</span>
+          <span><strong>分 4 周买入</strong> — 每周 $250，降低入场时机风险</span>
+        </li>
+        <li>
+          <span class="number" style="color:var(--mint);">2</span>
+          <span><strong>每月检视一次</strong> — 任何单个持仓偏离目标权重 ±15% 就重新平衡</span>
+        </li>
+        <li>
+          <span class="number" style="color:var(--mint);">3</span>
+          <span><strong>止损纪律</strong> — 单个标的跌破买入价 -30% 减仓一半；-50% 清仓</span>
+        </li>
+        <li>
+          <span class="number" style="color:var(--mint);">4</span>
+          <span><strong>催化剂驱动</strong> — TAO ETF 获批？加仓。NEAR 主网升级？加仓。反之，利好不涨，果断走。</span>
+        </li>
+        <li>
+          <span class="number" style="color:var(--mint);">5</span>
+          <span><strong>绝不加杠杆</strong> — $1,000 本金在牛市有足够的赔率，杠杆只会让你在波动中被清算。</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  TIMELINE                                  -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="timeline">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 07</p>
+        <h2>2026-2027 关键日历</h2>
+      </div>
+      <p class="chapter-note">重要催化剂时间表——这些事件可能决定你的仓位方向。</p>
+    </div>
+
+    <div class="panel">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2026.06.02-03</div>
+          <div class="timeline-text"><strong>Proof of Talk 巴黎峰会</strong> — Bittensor 创始人演讲，120+ 管理 $18 万亿 AUM 的高管参会。TAO 叙事催化剂。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2026 Q3 (预计 8 月)</div>
+          <div class="timeline-text"><strong>TAO 现货 ETF SEC 决定</strong> — Grayscale + Bitwise 申请的二进制事件。获批 = 类比 BTC ETF 的资金涌入效应。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2026 Q3-Q4</div>
+          <div class="timeline-text"><strong>ETH 质押收益 ETF</strong> — BlackRock + Fidelity 申请中。获批意味着 ETH 被重新定价为「机构收益资产」。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2026 年底 / 2027 年初</div>
+          <div class="timeline-text"><strong>ASI:Chain 主网上线</strong> — FET/ASI 联盟的关键节点。主网能否吸引开发者决定联盟的生死。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2027</div>
+          <div class="timeline-text"><strong>NVIDIA 预测 $1 万亿芯片需求</strong> — 如果兑现，去中心化 GPU（RENDER/TAO）的需求叙事将获得巨大验证。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  RISKS                                     -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="risks">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Chapter 08</p>
+        <h2>风险与警告</h2>
+      </div>
+      <p class="chapter-note">投入之前必须知道的「泼冷水」。</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel" style="border-color:var(--red);">
+        <h3 style="color:var(--red);">系统性风险</h3>
+        <ul class="finding-list">
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>AI 与 Crypto 高度相关</strong> — AI 股票和 AI Token 的相关性高达 92%。科技股回调 → Crypto 暴跌。</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>AI 放大诈骗</strong> — 诈骗者用 AI 让旧骗局更快、更大、更逼真。DYOR（Do Your Own Research）比任何时候都重要。</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>监管不确定性</strong> — 虽然整体方向清晰，但具体执法和分类仍在变化中。SEC 态度可能反复。</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>BTC 减半周期</strong> — 2024 减半的「牛市效应」可能在 2027 年消退，2028 年进入新一轮熊市。你的退出时机很关键。</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel" style="border-color:var(--red);">
+        <h3 style="color:var(--red);">赛道特定风险</h3>
+        <ul class="finding-list">
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>DePIN 竞争</strong> — AWS/Azure/GCP 的中心化算力在成本、可靠性、速度上仍有压倒性优势。去中心化的「叙事溢价」不等于真正的商业竞争力。</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>Token 价值捕获问题</strong> — 网络使用量增长 ≠ Token 价格增长。很多 DePIN 项目的 Token 和网络收入之间存在脱钩。</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>「AI 概念币」泛滥</strong> — 不是所有名字带 AI 的 Token 都有真正的技术实力。本报告推荐的标的都有实际收入或技术壁垒，但仍需持续验证。</span>
+          </li>
+          <li>
+            <span class="number" style="color:var(--red);">!</span>
+            <span><strong>流动性风险</strong> — 小市值 Token（VIRTUAL、FET）可能在市场恐慌时流动性枯竭，卖不出去。</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin-top:14px;">
+      <strong>免责声明：</strong>本研报仅供研究参考，不构成投资建议。加密货币是高风险资产类别，价格可能归零。$1,000 的投入请确保是你完全可以承受损失的金额。永远 DYOR。
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  SOURCES                                   -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="section" id="sources">
+  <div class="section-inner">
+    <div class="chapter-head">
+      <div>
+        <p class="eyebrow">Sources</p>
+        <h2>信息来源</h2>
+      </div>
+      <p class="chapter-note">本研报所有数据均来自以下可验证来源，非社交媒体传言。</p>
+    </div>
+
+    <div class="source-grid">
+      <div class="source-card">
+        <div class="src-type">机构研究</div>
+        <strong>BlackRock / Fidelity / Bernstein</strong><br>AI 资本支出对 GDP 贡献、BTC 组合配置研究、价格预测
+      </div>
+      <div class="source-card">
+        <div class="src-type">交易所数据</div>
+        <strong>Coinbase SEC 8-K / 10-Q / DEF 14A</strong><br>USDC 流通量、Base 生态数据、公司战略
+      </div>
+      <div class="source-card">
+        <div class="src-type">行业分析</div>
+        <strong>IDC / NVIDIA GTC 2026</strong><br>全球 AI 支出预测（$3,000亿+）、芯片需求预测（$1万亿）
+      </div>
+      <div class="source-card">
+        <div class="src-type">链上数据</div>
+        <strong>CoinGecko / CoinMarketCap / DePIN 收入</strong><br>实时市值、价格、DePIN 月收入 $1.5 亿
+      </div>
+      <div class="source-card">
+        <div class="src-type">协议公告</div>
+        <strong>Lightning Labs / Grayscale / Bitwise</strong><br>AI Agent 工具开源、TAO ETF S-1 申请
+      </div>
+      <div class="source-card">
+        <div class="src-type">媒体报道</div>
+        <strong>CoinDesk / The Block / Bitcoin Magazine</strong><br>NEAR AI 战略、Lightning 月交易量突破 $10 亿
+      </div>
+      <div class="source-card">
+        <div class="src-type">支付生态</div>
+        <strong>Stripe / Nium / Shopify</strong><br>x402 协议、USDC 跨境支付覆盖 190+ 国家
+      </div>
+      <div class="source-card">
+        <div class="src-type">风投数据</div>
+        <strong>Bessemer Venture Partners / SVB</strong><br>VC Crypto-AI 交叉投资比例、稳定币生态分析
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <p>
+    AI × Crypto 深度研报 · 2026.05.24 · Sky Portal<br>
+    研究 & 撰写 by Opus 4.6 · 数据截至 2026 年 5 月<br>
+    本报告不构成投资建议 · DYOR
+  </p>
+</footer>
+
+<!-- ─── Scripts ─── -->
+<script>
+// Progress bar
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = h > 0 ? (scrollY / h * 100) + '%' : '0';
+});
+
+// Smooth nav active state (topbar + side rail)
+const allNavLinks = document.querySelectorAll('nav a, .side-nav a');
+const navSections = [...new Set([...allNavLinks].map(a => a.getAttribute('href')))].map(h => document.querySelector(h)).filter(Boolean);
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      allNavLinks.forEach(a => a.classList.toggle('active',
+        a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+navSections.forEach(s => io.observe(s));
+
+// Mobile hamburger menu
+const menuBtn = document.getElementById('menuToggle');
+const topbar = document.getElementById('topbar');
+menuBtn.addEventListener('click', () => {
+  const open = topbar.classList.toggle('menu-open');
+  menuBtn.setAttribute('aria-expanded', open);
+  menuBtn.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+});
+topbar.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    topbar.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && topbar.classList.contains('menu-open')) {
+    topbar.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Animate elements on scroll
+const fadeEls = document.querySelectorAll('.panel, .token-card, .callout, .timeline-item');
+const fadeIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      fadeIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  fadeIO.observe(el);
+});
+</script>
+
+</body>
+</html>

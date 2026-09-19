@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇺🇸 入籍规划 — Sky Portal</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --accent-glow: rgba(108,138,255,0.15);
+    --green: #4ade80;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+    --purple: #a78bfa;
+    --red: #f87171;
+    --gold: #fbbf24;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back-nav {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 6px 16px;
+    backdrop-filter: blur(12px);
+    color: var(--text-dim); font-size: 0.85rem;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .back-nav:hover { background: rgba(255,255,255,0.12); color: var(--text); text-decoration: none; }
+
+  .hero { text-align: center; padding: 60px 20px 30px; position: relative; }
+  .hero::before {
+    content: ''; position: absolute; top: -100px; left: 50%;
+    transform: translateX(-50%); width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(251,191,36,0.12) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero h1 { font-size: 2.4em; font-weight: 700; position: relative; z-index: 1; }
+  .hero .subtitle { color: var(--text-dim); font-size: 1em; margin-top: 8px; position: relative; z-index: 1; }
+  .hero .status {
+    display: inline-block; margin-top: 16px; padding: 6px 20px;
+    background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.3);
+    border-radius: 100px; color: var(--green); font-size: 0.85em; font-weight: 600;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+
+  .section {
+    margin-top: 32px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .section h2 {
+    font-size: 1.25em; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .info-grid {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 8px 16px; font-size: 0.92em;
+  }
+  .info-grid .label { color: var(--text-dim); font-weight: 500; }
+  .info-grid .value { color: var(--text); }
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .timeline-box {
+    position: relative; padding-left: 28px;
+    border-left: 2px solid var(--border);
+    margin: 12px 0;
+  }
+  .timeline-item {
+    position: relative; padding: 12px 0 20px;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -33px; top: 16px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .timeline-item.active::before { background: var(--green); box-shadow: 0 0 8px rgba(74,222,128,0.5); }
+  .timeline-item .date { font-size: 0.8em; color: var(--accent); font-weight: 600; }
+  .timeline-item .event { font-size: 0.95em; margin-top: 4px; }
+  .timeline-item .detail { font-size: 0.82em; color: var(--text-dim); margin-top: 2px; }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.92em;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check { color: var(--green); font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
+  .uncheck { color: var(--text-dim); font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
+
+  .warning-box {
+    background: rgba(251,146,60,0.08);
+    border: 1px solid rgba(251,146,60,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
+  .danger-box {
+    background: rgba(248,113,113,0.08);
+    border: 1px solid rgba(248,113,113,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
+  .tip-box {
+    background: rgba(108,138,255,0.08);
+    border: 1px solid rgba(108,138,255,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
+
+  .tag {
+    display: inline-block; padding: 2px 10px;
+    border-radius: 6px; font-size: 0.75em; font-weight: 600;
+    margin-right: 6px;
+  }
+  .tag-green { background: rgba(74,222,128,0.15); color: var(--green); }
+  .tag-orange { background: rgba(251,146,60,0.15); color: var(--orange); }
+  .tag-red { background: rgba(248,113,113,0.15); color: var(--red); }
+  .tag-blue { background: rgba(108,138,255,0.15); color: var(--accent); }
+  .tag-gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.9em; margin: 12px 0;
+  }
+  th { text-align: left; color: var(--text-dim); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 0.85em; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+
+  .qa-block {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .qa-block .question {
+    font-weight: 700; color: var(--gold); margin-bottom: 8px;
+    font-size: 0.95em;
+  }
+  .qa-block .answer {
+    font-size: 0.9em; color: var(--text); line-height: 1.7;
+  }
+
+  .footer {
+    text-align: center; padding: 40px 20px;
+    color: var(--text-dim); font-size: 0.85em;
+    border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-nav">← ☁️ Sky Portal</a>
+
+<div class="hero">
+  <h1>🇺🇸 入籍规划</h1>
+  <div class="subtitle">N-400 · N-400 Naturalization · 最后更新 2026-05-12</div>
+  <div class="status">N-400 已提交 · Receipt 已收到 · 等待 Biometrics</div>
+</div>
+
+<div class="container">
+
+<!-- 子页面导航 -->
+<div class="section">
+  <h2>📂 详细资料</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <a href="naturalization/profile.html" style="display:block;background:var(--card-hover);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;">
+      <div style="font-size:1.3em;">👤</div>
+      <div style="font-weight:600;margin-top:6px;">个人资料</div>
+      <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">住址 · 雇主 · 结婚 · 子女 · 父母</div>
+    </a>
+    <a href="naturalization/travel.html" style="display:block;background:var(--card-hover);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;">
+      <div style="font-size:1.3em;">✈️</div>
+      <div style="font-weight:600;margin-top:6px;">旅行记录</div>
+      <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">11次出境 · 108天 · 完整出入境表</div>
+    </a>
+    <a href="naturalization/greencard.html" style="display:block;background:var(--card-hover);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;">
+      <div style="font-size:1.3em;">🟢</div>
+      <div style="font-weight:600;margin-top:6px;">绿卡信息</div>
+      <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">USCIS# · A-Number · MRZ · 全部字段</div>
+    </a>
+    <a href="naturalization/court-case.html" style="display:block;background:var(--card-hover);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;">
+      <div style="font-size:1.3em;">⚖️</div>
+      <div style="font-weight:600;margin-top:6px;">事故与诉讼</div>
+      <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">Naldo vs Chen · 车祸 · 罚单 · 和解</div>
+    </a>
+    <a href="naturalization/n400-guide.html" style="display:block;background:var(--card-hover);border:1px solid var(--border);border-radius:12px;padding:16px;text-decoration:none;transition:all 0.2s;grid-column:1/-1;">
+      <div style="font-size:1.3em;">📝</div>
+      <div style="font-weight:600;margin-top:6px;">N-400 申请详情 + 进度跟踪</div>
+      <div style="font-size:0.82em;color:var(--text-dim);margin-top:4px;">已提交 5/7 · Receipt 5/10 · 面试材料清单 · 时间线 · 进度追踪</div>
+    </a>
+  </div>
+</div>
+
+<!-- 一、个人概况 -->
+<div class="section">
+  <h2>📋 一、个人概况</h2>
+  <div class="info-grid">
+    <div class="label">当前身份</div><div class="value">美国合法永久居民（绿卡）</div>
+    <div class="label">绿卡获得</div><div class="value">2020年8月（2025年8月满5年）</div>
+    <div class="label">居住地</div><div class="value">俄勒冈州波特兰</div>
+    <div class="label">USCIS Office</div><div class="value">Portland Field Office (1455 NW Overton St)</div>
+    <div class="label">当前工作</div><div class="value">半导体行业 — Principal Engineer</div>
+    <div class="label">配偶</div><div class="value">配偶，大学教授</div>
+    <div class="label">子女</div><div class="value">两个孩子在美国（儿子5年级）</div>
+    <div class="label">原籍</div><div class="value">中国</div>
+  </div>
+</div>
+
+<!-- 二、资格确认 -->
+<div class="section">
+  <h2>✅ 二、申请资格（已全部满足）</h2>
+  <ul class="checklist">
+    <li><span class="check">✓</span> 18岁以上</li>
+    <li><span class="check">✓</span> 持有绿卡满5年（2020年8月 → 2025年8月已满）</li>
+    <li><span class="check">✓</span> 5年中至少30个月 physical presence 在美</li>
+    <li><span class="check">✓</span> 申请前在 Portland field office 辖区居住至少3个月</li>
+    <li><span class="check">✓</span> 能读写说 basic English</li>
+    <li><span class="check">✓</span> Good moral character（无刑事记录、税务正常）</li>
+    <li><span class="uncheck">○</span> Civics Test — 需复习 <strong>2025年10月20日新版</strong>（128题抽20答对12）</li>
+  </ul>
+  <div class="tip-box">
+    💡 <strong>Portland Field Office</strong>：批准率~90%，全美第3快。<br>
+    <strong>2026年5月最新数据：</strong>全国平均7.8个月，Portland实际中位数 <strong>5-7个月</strong>。<br>
+    ✅ <strong>已于2026-05-07在线递交，05-10收到Receipt。</strong>
+  </div>
+</div>
+
+<!-- 三、推荐时间线 -->
+<div class="section">
+  <h2>🗓️ 三、入籍时间线（已在进行中）</h2>
+  <div class="timeline-box">
+    <div class="timeline-item" style="opacity:0.5;">
+      <div class="date" style="color:var(--green);">✅ 2026-05-07 · 递交申请</div>
+      <div class="event">网上递交 N-400（$710）· 01/20/2025 版本 · my.uscis.gov</div>
+      <div class="detail">上传结婚证+翻译件、交通罚单记录</div>
+    </div>
+    <div class="timeline-item" style="opacity:0.5;">
+      <div class="date" style="color:var(--green);">✅ 2026-05-10 · Receipt Notice</div>
+      <div class="event">收到 I-797C 收据通知（提交后3天）</div>
+      <div class="detail">可用 receipt number 在 egov.uscis.gov 查进度</div>
+    </div>
+    <div class="timeline-item active">
+      <div class="date">📍 2026年6月中~7月 · 打指纹（预计）</div>
+      <div class="event">Biometrics 预约 — 17112 SE Powell Blvd, Portland, OR 97236</div>
+      <div class="detail">绿卡指纹已过期（2020年），必须重新打。约15分钟。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="date">2026年7~9月 · 背景调查+等待期</div>
+      <div class="event">FBI背景调查 + 案件排队</div>
+      <div class="detail">可短期出差/探亲（单次<3周），状态可能长期显示"actively reviewing"，正常</div>
+    </div>
+    <div class="timeline-item">
+      <div class="date">2026年10~12月 · 面试（预计）</div>
+      <div class="event">Naturalization Interview + Civics Test (128题新版，问20答对12) + English Test</div>
+      <div class="detail">Portland 通常当日批准。最快案例24天收到面试通知。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="date">2026年10~12月 · 宣誓（预计）</div>
+      <div class="event">Oath Ceremony → 正式成为美国公民 🎉</div>
+      <div class="detail">Portland 经常面试当天宣誓（same-day oath）。否则等2-8周安排 Hatfield 法院仪式。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="date">宣誓后 · 后续</div>
+      <div class="event">当天可申请美国护照（2-6周）、处理中国侧事项</div>
+      <div class="detail">办10年Q类签证、更新银行身份等</div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <strong>Portland 最新数据（VisaJourney 187个案例）：</strong><br>
+    • 官方中位数：<strong>9个月</strong>，但Portland实际中位数 <strong>5-7个月</strong><br>
+    • 最快案例：3个月（同一天面试+宣誓）<br>
+    • Portland 是全美第3快的 USCIS 办公室<br>
+    • <strong>预估完成时间：最乐观2026年10月，大概率年底前</strong>
+  </div>
+</div>
+
+<!-- 四、材料清单 -->
+<div class="section">
+  <h2>📁 四、申请材料清单</h2>
+  <p style="font-size:0.9em;color:var(--text-dim);margin-bottom:12px;">随 N-400 递交（<span class="tag tag-green">已完成</span>）：</p>
+  <ul class="checklist">
+    <li><span class="check">✓</span> Form N-400（01/20/2025 版本，在线提交 5/7）</li>
+    <li><span class="check">✓</span> 申请费 $710（在线支付）</li>
+    <li><span class="check">✓</span> 结婚证 + 翻译件（已上传）</li>
+    <li><span class="check">✓</span> 交通罚单记录（已上传）</li>
+  </ul>
+  <p style="font-size:0.9em;color:var(--text-dim);margin:16px 0 12px;">面试时携带：</p>
+  <ul class="checklist">
+    <li><span class="uncheck">○</span> 绿卡原件 + 驾照</li>
+    <li><span class="uncheck">○</span> 过去5年所有护照（含过期）</li>
+    <li><span class="uncheck">○</span> 过去5年 IRS 税务 transcripts</li>
+    <li><span class="uncheck">○</span> 详细 travel history（每次出境精确日期）</li>
+    <li><span class="uncheck">○</span> 结婚证 + 翻译件（原件）</li>
+    <li><span class="uncheck">○</span> 子女出生证明</li>
+    <li><span class="uncheck">○</span> 交通罚单原件 / court disposition</li>
+    <li><span class="uncheck">○</span> 面试通知信 (Interview Appointment Notice)</li>
+    <li><span class="uncheck">○</span> 护照照片 2张（2x2 inches, 白底, 6个月内）</li>
+  </ul>
+</div>
+
+<!-- 五、税务影响 -->
+<div class="section">
+  <h2>💰 五、税务影响分析</h2>
+
+  <div class="tip-box">
+    💡 <strong>核心结论：入籍对你的税务影响极小。</strong>美国对绿卡持有者和公民的税务待遇几乎完全相同。你已经在做的全球收入申报、FBAR、FATCA 等，入籍后不变。
+  </div>
+
+  <table>
+    <tr><th>项目</th><th>入籍后变化</th></tr>
+    <tr><td>所得税税率</td><td><span class="tag tag-green">无变化</span></td></tr>
+    <tr><td>境外收入排除 (FEIE)</td><td><span class="tag tag-green">无变化</span></td></tr>
+    <tr><td>境外税收抵免</td><td><span class="tag tag-green">无变化</span></td></tr>
+    <tr><td>给太太的年赠与免税额</td><td><span class="tag tag-orange">$194,000/年（2026）</span> 非美籍配偶无无限豁免</td></tr>
+    <tr><td>遗产税配偶豁免</td><td><span class="tag tag-orange">有限制</span> 非美籍配偶不能无限豁免，但你有$13.99M终身额度</td></tr>
+    <tr><td>未来放弃美籍</td><td><span class="tag tag-red">Expatriation Tax</span> 按"退籍前一天市值"对全球资产征税</td></tr>
+  </table>
+</div>
+
+<!-- 六、Expatriation Tax 详解 -->
+<div class="section">
+  <h2>⚠️ 六、Expatriation Tax（退籍税）详解</h2>
+  <p style="font-size:0.88em;color:var(--text-dim);margin-bottom:12px;">这是你<strong>未来如果放弃美籍</strong>才会面对的税，不是入籍时的事。</p>
+
+  <p style="font-size:0.92em;margin-bottom:8px;"><strong>触发条件（任一即为 "Covered Expatriate"）：</strong></p>
+  <ul class="checklist">
+    <li><span class="check">•</span> 净资产 ≥ <strong>$2,000,000</strong>（全球资产）</li>
+    <li><span class="check">•</span> 过去5年平均年缴税 ≥ <strong>$211,000</strong>（2026年标准）</li>
+    <li><span class="check">•</span> 无法证明过去5年税务完全合规（Form 8854）</li>
+  </ul>
+
+  <p style="font-size:0.92em;margin:12px 0 8px;"><strong>税怎么算（Mark-to-Market）：</strong></p>
+  <div class="tip-box">
+    IRS 视为你在退籍前一天把<strong>全球所有资产按市价全部卖出</strong>。<br>
+    所有未实现收益加总 → 减去 <strong>$910,000 免税额</strong>（2026年）→ 超出部分按资本利得税缴税（最高 23.8%）<br><br>
+    <strong>举例：</strong>净资产 $2.5M，成本 $800K → 未实现收益 $1.7M → 减 $910K → 应税 $790K → 税 ≈ <strong>$188K</strong><br><br>
+    ⚠️ <strong>退休账户（401k/IRA）单独算</strong>，不能免税，按普通收入税率预扣。
+  </div>
+
+  <div class="danger-box">
+    🚫 <strong>这是不可逆决策。</strong>一旦入籍，放弃美籍的成本极高。但这只是"万一你永久回国"才需要面对的，正常生活完全不影响。
+  </div>
+</div>
+
+<!-- 七、中国资产处理 -->
+<div class="section">
+  <h2>🇨🇳 七、入籍对中国资产的影响</h2>
+
+  <div class="danger-box">
+    ⚖️ <strong>中国不承认双重国籍。</strong>《国籍法》第九条：自愿加入外国国籍的，<strong>自动丧失中国国籍</strong>。你入籍美国当天，中国国籍已自动丧失，只是没有主动来注销。
+  </div>
+
+  <table>
+    <tr><th>项目</th><th>入籍后建议</th></tr>
+    <tr><td>中国户口</td><td>暂不主动注销，但2024年起多省启动"沉睡户口"清理</td></tr>
+    <tr><td>中国护照</td><td>不主动交回，但<strong>不再使用</strong>。回国一律用美国护照+中国签证</td></tr>
+    <tr><td>共有房产</td><td>保持现状不变</td></tr>
+    <tr><td>个人名下房产</td><td>建议过户给太太，法律上更干净</td></tr>
+    <tr><td>中国银行账户</td><td>大额转给太太；自己保留小额，走 FATCA 合规路径</td></tr>
+    <tr><td>支付宝/微信支付</td><td>可保留，日常便利无影响</td></tr>
+    <tr><td>回国签证</td><td>办10年多次往返（Q类/M类），实际很方便</td></tr>
+  </table>
+</div>
+
+<!-- 八、核心利弊 -->
+<div class="section">
+  <h2>⚖️ 八、核心利与弊</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div>
+      <p style="font-size:0.95em;font-weight:700;color:var(--green);margin-bottom:10px;">✅ 核心收益</p>
+      <ul class="checklist">
+        <li><span class="check">•</span> 不可被驱逐</li>
+        <li><span class="check">•</span> 不怕长期离美失去身份</li>
+        <li><span class="check">•</span> 美国护照免签190+国家</li>
+        <li><span class="check">•</span> Security Clearance 更顺</li>
+        <li><span class="check">•</span> Sponsor 父母无配额限制</li>
+        <li><span class="check">•</span> 极端情境法律保护</li>
+        <li><span class="check">•</span> 回国创业对外籍人才有优惠政策</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:0.95em;font-weight:700;color:var(--red);margin-bottom:10px;">❌ 需要权衡</p>
+      <ul class="checklist">
+        <li><span style="color:var(--red);">•</span> 失去中国户口和长期居留权</li>
+        <li><span style="color:var(--red);">•</span> 每次回国必须办签证</li>
+        <li><span style="color:var(--red);">•</span> 父辈情感上的失落</li>
+        <li><span style="color:var(--red);">•</span> 被中国视为外国人</li>
+        <li><span style="color:var(--red);">•</span> 放弃美籍需缴退籍税</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 九、家庭策略 -->
+<div class="section">
+  <h2>👨‍👩‍👧‍👦 九、家庭策略：夫妻一边一国籍</h2>
+  <div class="tip-box">
+    💡 <strong>这是对你最优的策略。</strong><br>
+    • 太太保留中国籍：中国房产、银行账户、户口、教师工作全部正常持有<br>
+    • 你拿美籍：美国稳定身份、职业发展、未来创业便利<br>
+    • 两个孩子在美（出生即美籍）<br>
+    • 风险对冲：极端情景下家庭可从两端往任一边收缩<br><br>
+    ❌ "重新结婚"是误解——中国结婚证经公证认证在美国完全有效。未来给太太办移民，美籍 sponsor 配偶是 immediate relative，等待约12-18个月。
+  </div>
+</div>
+
+<!-- 十、出境规则 -->
+<div class="section">
+  <h2>✈️ 十、申请期间出境规则</h2>
+  <table>
+    <tr><th>限制项</th><th>具体规则</th></tr>
+    <tr><td>单次出境时长</td><td>必须 <6个月（>6个月推定打破 continuous residence）</td></tr>
+    <tr><td>单次出境>1年</td><td>直接判定打破，5年计时重新开始</td></tr>
+    <tr><td>累计 physical presence</td><td>5年中必须 ≥30个月在美</td></tr>
+    <tr><td>申请期间出差</td><td>短期OK，但面试/打指纹/宣誓通知后必须人在美国</td></tr>
+  </table>
+  <div class="warning-box">
+    ⚠️ 从递交到面试约5-8个月窗口期内，单次出境控制在 <strong>3周以内</strong> 最稳。海外 fab 派任尽量推迟到 oath 之后。
+  </div>
+</div>
+
+<!-- 十一、常见错误 -->
+<div class="section">
+  <h2>🚫 十一、需要规避的常见错误</h2>
+  <table>
+    <tr><th>错误</th><th>后果</th><th>规避方法</th></tr>
+    <tr><td>使用旧版 N-400</td><td>被拒，延误数周</td><td>仅用 <strong>01/20/2025 版本</strong></td></tr>
+    <tr><td>Travel history 日期不精确</td><td>面试官质疑</td><td>提前从护照戳+航班记录核对每一次出境</td></tr>
+    <tr><td>税务 transcripts 不齐</td><td>被要求补充证据</td><td>提前下载5年 IRS transcripts</td></tr>
+    <tr><td>Civics test 用旧题库</td><td>挂掉，延误2-3个月</td><td>用 <strong>2025年10月新版128题题库</strong></td></tr>
+    <tr><td>申请期间长期出境</td><td>触发额外审查</td><td>单次<3周，关键阶段必须在美国</td></tr>
+    <tr><td>错过官方通知</td><td>每次 reschedule 延误几周到几个月</td><td>USCIS account 开邮件通知</td></tr>
+    <tr><td>姓名拼写不一致</td><td>触发欺诈调查</td><td>所有文件统一使用法定姓名</td></tr>
+  </table>
+</div>
+
+<!-- 十二、Q&A 问答 -->
+<div class="section">
+  <h2>💬 十二、补充问答（2026-04-26 Sky 研究）</h2>
+
+  <div class="qa-block">
+    <div class="question">Q0: 我的个人财务场景分析 — 遗产税 vs 退籍税具体数字</div>
+    <div class="answer">
+      <p><strong>当前资产盘点（2026年）：</strong></p>
+      <table>
+        <tr><th>资产</th><th>估值</th><th>备注</th></tr>
+        <tr><td>上海房产</td><td>¥600万 ≈ $833K</td><td>你名下</td></tr>
+        <tr><td>国内房产（继承预期）</td><td>¥400万 ≈ $556K</td><td>父母名下</td></tr>
+        <tr><td>美国房产</td><td>$1.3M（贷款$700K，净值$600K）</td><td>Portland</td></tr>
+        <tr><td>股票+401k+银行</td><td>$2M</td><td>部分税前</td></tr>
+        <tr><td><strong>合计</strong></td><td><strong>≈ $4.7M 市值</strong></td><td>已超$2M门槛</td></tr>
+      </table>
+      <p style="margin-top:16px;"><strong>退休时（~2032年）三种场景对比：</strong></p>
+      <table>
+        <tr><th></th><th>场景A $5M</th><th>场景B $7M</th><th>场景C $10M</th></tr>
+        <tr><td>保持绿卡·遗产税</td><td style="color:#4ade80;">$0</td><td style="color:#4ade80;">$0</td><td style="color:#4ade80;">$0</td></tr>
+        <tr><td>入籍后·遗产税</td><td style="color:#4ade80;">$0</td><td style="color:#4ade80;">$0</td><td style="color:#4ade80;">$0</td></tr>
+        <tr><td>入籍后退籍税</td><td style="color:#f87171;">~$825K</td><td style="color:#f87171;">~$1.37M</td><td style="color:#f87171;">~$2.26M</td></tr>
+      </table>
+      <p style="margin-top:12px;"><strong>结论：</strong></p>
+      <p>• 遗产税：入籍 vs 不入籍<strong>完全一样</strong>（都是$0，因为$5-10M全部在$14.5M免税额度内）</p>
+      <p>• 退籍税：入籍的真正沉没成本，只有你主动放弃美籍时才触发</p>
+      <p>• <strong>只要你不退籍，入籍的额外税务成本 = $0</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="question">Q1: Expatriation Tax 具体怎么算？我大概要交多少？</div>
+    <div class="answer">
+      <p>触发条件：净资产 ≥ $2M <strong>或</strong> 过去5年平均年缴税 ≥ $211K（2026）。</p>
+      <p>计算方法：IRS 假设你退籍前一天把<strong>所有全球资产按市价卖掉</strong>。未实现收益总和减去 $910,000 免税额（2026），超出部分按最高 23.8% 缴税。</p>
+      <p><strong>以你的情况估算：</strong>Principal Engineer + 股票期权，净资产很可能接近或超过 $2M，大概率会触发 Covered Expatriate。</p>
+      <p>⚠️ 401k/IRA 退休账户<strong>单独计算</strong>，不享受 $910K 免税，这是很多人忽略的坑。</p>
+      <p><strong>结论：入籍后想放弃美籍的成本确实很高，但这是"万一"场景，正常生活完全不影响。</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="question">Q2: 遗产税/赠与税，太太保留中国籍有什么影响？</div>
+    <div class="answer">
+      <p>你入美籍、太太保留中国籍 → 夫妻间<strong>没有无限配偶豁免</strong>，但影响有限：</p>
+      <p>• 每年给太太免税赠与：<strong>$194,000</strong>（2026年，每年涨）</p>
+      <p>• 超过部分消耗你的终身免税额度：<strong>$13,990,000</strong>（2026年）</p>
+      <p>• 以你目前的资产规模，$13.99M 终身额度<strong>完全够用</strong></p>
+      <p>• 如果未来资产增长很快，可以通过 QDOT 信托等工具解决</p>
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="question">Q3: 朋友说拿墨西哥绿卡"双持"保中国籍，走香港入境，可行吗？</div>
+    <div class="answer">
+      <p><strong>操作原理：</strong>拿第三国绿卡（墨西哥最常见），入籍美国后仍保留中国护照不交回。回国时走第三国中转（香港/日本/韩国），用中国护照入境中国，用美国护照入境美国。</p>
+      <p><strong>2026年评估：</strong></p>
+      <p>🔴 <strong>越来越危险，不建议走这条路。</strong></p>
+      <p>• <strong>2025年9月起</strong>：边检系统全国联网 + 生物识别，多名华人出境被"弹窗"标记双国籍，当场要求销户</p>
+      <p>• 一个定居墨尔本的华人从杭州出境被拦，系统直接弹出"双重国籍"警告</p>
+      <p>• 多省启动"沉睡户口"清理，长期海外定居 + 有外籍记录会被标记</p>
+      <p>• <strong>后果</strong>：强制注销户口、没收中国护照、限制出入境，甚至影响国内房产和银行账户</p>
+      <p><strong>对你尤其不值得：</strong>你涉及国家安全的岗位，被发现双持的后果比普通人严重得多。为了多几年"便利"冒被查处的风险，性价比极差。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 十三、最终建议 -->
+<div class="section">
+  <h2>🎯 十三、当前状态与下一步</h2>
+
+  <div class="tip-box" style="border-color:rgba(74,222,128,0.3);">
+    <p><strong>1. N-400已提交（2026-05-07），Receipt已收到（2026-05-10）。</strong>比原计划9月提前了4个月。</p>
+    <p style="margin-top:10px;"><strong>2. 下一步：等待Biometrics通知（预计6月中~7月）。</strong>指纹地点：17112 SE Powell Blvd, Portland, OR 97236。</p>
+    <p style="margin-top:10px;"><strong>3. 开始复习Civics Test。</strong>2025年10月新版：128题题库，面试问20题，答对12题通过。</p>
+    <p style="margin-top:10px;"><strong>4. 申请期间注意出境。</strong>单次控制在3周内，收到通知后必须人在美国。</p>
+  </div>
+
+  <div style="margin-top:20px; font-size:0.92em; line-height:1.8;">
+    <p>关于<strong>"心理认同"</strong>：你说"内核还是一个中国人，但也认同美国价值观"——这种身份是真实的，<strong>入籍不会改变它</strong>。一本护照不会让你变成另一个人。国籍是法律身份，不是文化认同。</p>
+    <p style="margin-top:10px;">关于<strong>父辈期望</strong>：值得尊重，但不应成为否决项。他们真正担心的多半是情感连接断裂，这些入籍实际上一个都不会发生。</p>
+    <p style="margin-top:10px;">关于<strong>极端政治风险</strong>：涉及18Å节点和CHIPS Act项目，如果未来出现限制中国籍人员参与的法案，美籍给你的保护是绿卡无法替代的。</p>
+  </div>
+</div>
+
+<!-- 数据来源 -->
+<div class="section" style="background:transparent;border:none;padding:0;">
+  <p style="font-size:0.8em;color:var(--text-dim);line-height:1.6;">
+    📄 基于原N-400决策分析报告（2026年4月26日生成）+ 2026年5月最新处理时间更新（Immiva/Herrera Firm数据）+ USCIS官方N-400表格要求<br>
+    所有时间线数据为估算，实际以USCIS官方为准。重大决策建议执行前与持牌移民律师确认。<br>
+    页面创建：2026-04-26 · 最后更新：2026-05-12 · Sky Portal
+  </p>
+</div>
+
+</div>
+
+<div class="footer">
+  <a href="index.html">☁️ 返回 Sky Portal</a> · · Sky Portal
+</div>
+
+</body>
+</html>

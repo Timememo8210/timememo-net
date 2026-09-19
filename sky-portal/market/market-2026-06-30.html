@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-30</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#10a37f">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股表现强劲</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Strong</div>
+<div class="zh poster-data">• 道指ATH+0.59%→52182点<br>• 标普+1.18%→7440点<br>• 纳指+2.07%→26683点</div>
+<div class="en poster-data" style="display:none">• Dow ATH +0.59%→52182<br>• S&P +1.18%→7440<br>• Nasdaq +2.07%→26683</div>
+</div>
+<div class="poster-card" style="background:#16a34a">
+<div class="poster-icon">💎</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体爆发</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Surge</div>
+<div class="zh poster-data">• 费半指数+近4%<br>• 芯片股全线反弹<br>• AI需求持续旺盛</div>
+<div class="en poster-data" style="display:none">• SOX + nearly 4%<br>• All chip stocks up<br>• AI demand strong</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股全面上涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Markets Rise</div>
+<div class="zh poster-data">• 科创50新高+3.85%<br>• 创业板+2.99%→4342点<br>• 上证+0.5%→4094点</div>
+<div class="en poster-data" style="display:none">• STAR50 ATH +3.85%<br>• ChiNext +2.99%→4342<br>• SSE +0.5%→4094</div>
+</div>
+<div class="poster-card" style="background:#0d9488">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">后市展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Outlook</div>
+<div class="zh poster-data">• AI为主线分化<br>• 关注估值风险<br>• 下半年可期</div>
+<div class="en poster-data" style="display:none">• AI主线 with differentiation<br>• Watch valuations<br>• H2 looks promising</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-30 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>📈 <span class="zh">美股市场表现</span><span class="en" style="display:none">US Market Performance</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 道指创历史新高，三大指数集体收涨</span><span class="en" style="display:none">1. Dow Jones ATH, All Three Indices Rise</span></h4>
+<p><span class="zh">道琼斯工业平均指数首次收于52000点上方，报52182.74点，涨幅0.59%，创历史新高。标普500指数上涨1.18%至7440.43点，纳斯达克综合指数大涨2.07%至26683.94点。三大指数延续上半年以来的强势表现，科技股领涨市场。</span><span class="en" style="display:none">The Dow Jones Industrial Average closed above 52,000 for the first time, up 0.59% to 52,182.74. The S&P 500 gained 1.18% to 7,440.43, while the Nasdaq surged 2.07% to 26,683.94. All three indices continued their strong performance, led by technology stocks.</span></p>
+<p class="src">来源：CNBC / Reuters / 新浪财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块全面爆发，费城半导体指数大涨近4%</span><span class="en" style="display:none">2. Semiconductor Sector Surges, SOX Index Up Nearly 4%</span></h4>
+<p><span class="zh">费城半导体指数今日表现突出，上涨近4%，芯片股全线反弹。英伟达、AMD、英特尔等芯片巨头普遍上涨。半导体板块成为今日市场最大亮点，AI基础设施需求旺盛继续支撑芯片股表现。费城半导体指数30只成份股全部收涨，显示行业整体强势。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index rose nearly 4%, with all chip stocks rebounding. Major semiconductor companies like NVIDIA, AMD, and Intel saw gains. The semiconductor sector was today's standout performer, with strong AI infrastructure demand continuing to support chip stocks. All 30 SOX components finished higher.</span></p>
+<p class="src">来源：财联社 / TradingKey / 凤凰网财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. AI产业链持续受益，英伟达等AI芯片厂商表现强劲</span><span class="en" style="display:none">3. AI Industry Continues to Benefit, AI Chip Companies Strong</span></h4>
+<p><span class="zh">AI产业链今日表现亮眼，英伟达等AI芯片厂商股价上涨。市场对AI基础设施需求保持旺盛，2026年AI领域企业资本投入预计达到6600亿-6900亿美元。大型科技股多数走高，苹果涨3.17%，博通涨0.69%，亚马逊涨0.37%，显示AI相关企业持续受益于行业高增长。</span><span class="en" style="display:none">The AI industry had a strong day, with AI chip companies like NVIDIA gaining. Market demand for AI infrastructure remains robust, with projected AI capital expenditures reaching $660-690 billion in 2026. Most large tech stocks rose, with Apple +3.17%, Broadcom +0.69%, and Amazon +0.37%, showing AI companies continue to benefit from industry growth.</span></p>
+<p class="src">来源：华尔街见闻 / Moomoo / 财经新闻</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股市场表现</span><span class="en" style="display:none">China Market Performance</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 科创50指数暴涨26%创历史新高</span><span class="en" style="display:none">1. STAR50 Index Surges 26% to New High</span></h4>
+<p><span class="zh">科创50指数今日表现突出，上涨3.85%，报2207.86点，创下历史新高。2026年上半年，科创50指数累计暴涨26%，成为A股市场最耀眼的指数。科创板的强势表现反映了投资者对科技创新企业的强烈看好，尤其是半导体、AI等硬科技领域。</span><span class="en" style="display:none">The STAR 50 Index had an outstanding day, rising 3.85% to 2,207.86, a new all-time high. In H1 2026, the STAR 50 has surged 26% cumulatively, becoming the brightest star in China's market. The strong performance reflects strong investor confidence in technology innovation companies, especially in hard tech sectors like semiconductors and AI.</span></p>
+<p class="src">来源：东方财富 / 中国基金报 / 金融界</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 创业板指上涨2.99%，A股上半年收官表现亮眼</span><span class="en" style="display:none">2. ChiNext Rises 2.99%, Strong H1 Conclusion</span></h4>
+<p><span class="zh">创业板指今日上涨2.99%，报4342.71点。A股上半年正式收官，主要股指全部收涨。上证指数累计上涨3.16%，深证成指累计上涨19.8%，创业板指表现最佳。市场成交活跃，上半年A股"科技牛"行情持续，科技股成为市场主线。</span><span class="en" style="display:none">The ChiNext Index rose 2.99% today to 4,342.71. China's A-share market concluded H1 with all major indices up. The SSE Composite gained 3.16% cumulatively, the SZSE Component gained 19.8%, with ChiNext performing best. Market activity remained high, with the "tech bull" continuing throughout H1.</span></p>
+<p class="src">来源：证券时报 / 新浪财经 / 同花顺</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 半导体材料股逆势走强，科技股分化加剧</span><span class="en" style="display:none">3. Semiconductor Materials Outperform, Tech Stocks Diversify</span></h4>
+<p><span class="zh">A股市场今日科技股出现分化，但半导体材料板块表现强势。半导体、AI、电子等硬科技领域继续受到资金关注。市场分析认为，随着AI技术的不断发展和应用落地，半导体产业链将长期受益。科创50指数的强势表现也印证了科技板块的长期投资价值。</span><span class="en" style="display:none">China's tech sector showed differentiation today, but semiconductor materials outperformed. Hard tech sectors like semiconductors, AI, and electronics continued to attract capital. Market analysis suggests that as AI technology develops and applications land, the semiconductor industry will benefit long-term.</span></p>
+<p class="src">来源：观点网 / 21经济网 / 新华网</p>
+</div>
+
+<h2>🌐 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 半导体板块全面爆发</span><span class="en" style="display:none">1. Semiconductor Sector Explosion</span></h4>
+<p><span class="zh">半导体板块成为今日最大亮点，芯片股全线反弹。费城半导体指数大涨近4%，英特尔、英伟达等芯片巨头普遍上涨。分析师认为，AI基础设施需求持续旺盛，半导体行业正处于新一轮上升周期，2026年全球半导体市场预计达到9750亿美元规模。</span><span class="en" style="display:none">The semiconductor sector was today's biggest highlight, with all chip stocks rebounding. The SOX index rose nearly 4%, with Intel, NVIDIA and others gaining. Analysts believe sustained AI infrastructure demand has kicked off a new upcycle, with the global semiconductor market expected to reach $975B in 2026.</span></p>
+<p class="src">来源：半导体行业观察 / 德勤报告</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI基础设施需求旺盛</span><span class="en" style="display:none">2. Strong AI Infrastructure Demand</span></h4>
+<p><span class="zh">AI基础设施需求成为市场重要推动力。2026年AI领域企业资本投入预计达到6600亿-6900亿美元，七大科技巨头占据标普500约三分之一总权重。市场对AI芯片、服务器、数据中心等基础设施的持续需求，支撑了相关板块的强势表现。</span><span class="en" style="display:none">AI infrastructure demand has become a key market driver. Projected AI capital expenditures of $660-690B in 2026, with seven tech giants representing ~1/3 of S&P 500 market cap. Continued demand for AI chips, servers, and data centers supports strong performance.</span></p>
+<p class="src">来源：新浪财经 / Business Insider / 苹果公司</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 科技牛行情延续</span><span class="en" style="display:none">3. Tech Bull Market Continues</span></h4>
+<p><span class="zh">2026年上半年科技股表现突出，AI和半导体成为市场主线。标普500指数在2026年已录得24次收盘新高，纳斯达克指数达到20次。科技板块的强势表现反映了投资者对科技创新的长期信心，以及AI革命带来的产业变革预期。</span><span class="en" style="display:none">Tech stocks have performed exceptionally well in H1 2026, with AI and semiconductors as the main themes. The S&P 500 has had 24 new closing highs in 2026, the Nasdaq 20. The strong performance reflects long-term investor confidence in tech innovation and expectations of industry transformation from AI.</span></p>
+<p class="src">来源：Moomoo / 华尔街日报 / Bloomberg</p>
+</div>
+
+<h2>📊 <span class="zh">今日股票行情</span><span class="en" style="display:none">Today's Stock Prices</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,182.74</div><div class="stock-change up">+0.59%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPX</div><div class="stock-price">7,440.43</div><div class="stock-change up">+1.18%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">26,683.94</div><div class="stock-change up">+2.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">13,781.98</div><div class="stock-change up">+3.96%</div></div>
+<div class="stock-item"><div class="stock-ticker">SSE</div><div class="stock-price">4,094.40</div><div class="stock-change up">+0.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">SZSE</div><div class="stock-price">16,205.56</div><div class="stock-change up">+2.48%</div></div>
+<div class="stock-item"><div class="stock-ticker">CNINX</div><div class="stock-price">4,342.71</div><div class="stock-change up">+2.99%</div></div>
+<div class="stock-item"><div class="stock-ticker">STAR50</div><div class="stock-price">2,207.86</div><div class="stock-change up">+3.85%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$188.75</div><div class="stock-change up">+2.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$62.38</div><div class="stock-change up">+1.8%</div></div>
+</div>
+
+<h3>📈 <span class="zh">指数走势图</span><span class="en" style="display:none">Index Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">道指 — Dow Jones</div><div id="tv-dji"></div></div>
+<div class="kline-item"><div class="kline-label">标普 — S&P 500</div><div id="tv-spx"></div></div>
+<div class="kline-item"><div class="kline-label">纳指 — Nasdaq</div><div id="tv-ndx"></div></div>
+<div class="kline-item"><div class="kline-label">费半 — SOX</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">上证 — SSE</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">科创50 — STAR50</div><div id="tv-star"></div></div>
+</div>
+
+<h2>🔮 <span class="zh">后市展望与投资策略</span><span class="en" style="display:none">Outlook & Strategy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 看好方向：半导体、AI硬件、算力基础设施</span><span class="en" style="display:none">1. Bullish Sectors: Semiconductors, AI Hardware, Computing Infrastructure</span></h4>
+<p><span class="zh">分析师认为，半导体、AI硬件和算力基础设施仍是2026年下半年最看好的方向。AI基础设施的持续投入将支撑半导体行业的高增长，预计2026年全球半导体市场规模将达到9750亿美元。国产替代和技术自主也将推动相关板块的长期价值。</span><span class="en" style="display:none">Analysts remain bullish on semiconductors, AI hardware, and computing infrastructure for H2 2026. Continued AI infrastructure investment will support semiconductor industry growth, with the global market expected to reach $975B. Domestic substitution and tech independence will also drive long-term value.</span></p>
+<p class="src">来源：德勤半导体报告 / 高盛研究 / 中信建投</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 关注风险：估值回调压力和板块分化</span><span class="en" style="display:none">2. Risks: Valuation Pressure and Sector Differentiation</span></h4>
+<p><span class="zh">尽管基本面支撑强劲，但部分科技股短期涨幅较大，存在估值回调压力。市场将逐渐从单纯的概念炒作转向对订单、现金流和盈利兑现的实际要求。AI和半导体板块可能出现分化，具备实质性业绩支撑的企业将表现更佳。</span><span class="en" style="display:none">Despite strong fundamentals, some tech stocks have seen large short-term gains, creating valuation pressure. The market is shifting from pure concept speculation toward actual orders, cash flow, and earnings requirements. AI and semiconductor sectors may see differentiation, with companies实质性 performance support outperforming.</span></p>
+<p class="src">来源：万得证券 / 金融界 / 券商中国</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 趋势判断：AI为主线，关注结构性机会</span><span class="en" style="display:none">3. Trend Analysis: AI as Main Theme, Focus on Structural Opportunities</span></h4>
+<p><span class="zh">2026年下半年，AI仍将作为市场主线，但需关注结构性机会。AI产业链将从硬件向软件和应用延伸，算力、算法、数据三要素共同驱动。同时，半导体行业将受益于AI、5G、汽车电子等多重需求，产业链各环节将呈现不同节奏的增长。</span><span class="en" style="display:none">For H2 2026, AI will remain the main market theme, but structural opportunities deserve attention. The AI industry chain will extend from hardware to software and applications, with computing power, algorithms, and data jointly driving growth. Semiconductors will benefit from multiple demands including AI, 5G, and automotive electronics.</span></p>
+<p class="src">来源：钛资本 / 德勤 / 海通证券</p>
+</div>
+
+<h2>🌍 <span class="zh">全球市场动态</span><span class="en" style="display:none">Global Market News</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 德勤发布2026全球半导体行业展望</span><span class="en" style="display:none">1. Deloitte Publishes 2026 Global Semiconductor Outlook</span></h4>
+<p><span class="zh">德勤发布的2026年全球半导体行业展望预测，受人工智能基础设施热潮推动，2026年半导体行业销售额将创下9750亿美元的新高。繁荣背后暗藏隐忧，行业正面临产能分配和技术路线的激烈竞争。</span><span class="en" style="display:none">Deloitte's 2026 semiconductor outlook predicts the industry will reach a record $975B in sales, driven by AI infrastructure热潮. Despite the boom, challenges include capacity allocation and intense competition in technology routes.</span></p>
+<p class="src">来源：德勤中国 / New York Times / Fortune</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI投资策略：从算力向应用延伸</span><span class="en" style="display:none">2. AI Investment Strategy: Extending from Computing to Applications</span></h4>
+<p><span class="zh">2026年AI投资策略正在从单纯关注算力向应用端延伸。市场分析认为，AI产业链将呈现"算力硬件全链条迭代机遇、存储芯片的'超级周期'与结构性失衡、端侧AI爆发"等多元化投资机会。投资重点正从单纯的AI处理器向支撑整个AI生态的各个环节扩散。</span><span="en" style="display:none">AI investment strategy in 2026 is extending beyond computing power to applications. Market analysis identifies diversified opportunities: computing hardware iteration, memory chip supercycle, and edge AI explosion. Investment focus is shifting from pure AI processors to supporting the entire AI ecosystem.</span></p>
+<p class="src">来源：知乎专栏 / 中金公司 / 华泰证券</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 全球半导体创新周期持续</span><span class="en" style="display:none">3. Global Semiconductor Innovation Cycle Continues</span></h4>
+<p><span class="zh">电子行业2026年度策略指出，全球半导体测试设备市场将迎来高速增长，预计2025年测试设备销售额将大幅增长23.2%，达到93亿美元，并在2026年继续攀升至97.7亿美元。半导体行业正处于创新周期的高峰期，技术变革带来新的增长机遇。</span><span class="en" style="display:none">The electronics industry 2026 strategy notes that global semiconductor test equipment will see high growth, with test equipment sales expected to jump 23.2% to $9.3B in 2025, and continue climbing to $9.77B in 2026. The semiconductor industry is at an innovation peak, with technological transformation creating new opportunities.</span></p>
+<p class="src">来源：电子行业报告 / DFCF / Wind</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, 东方财富, 新浪财经, 华尔街见闻, 德勤, 高盛, 中信建投</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-dji', sym:'DJI'},
+  {id:'tv-spx', sym:'SPX'},
+  {id:'tv-ndx', sym:'NDX'},
+  {id:'tv-sox', sym:'SOX'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-star', sym:'SSE:000688'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

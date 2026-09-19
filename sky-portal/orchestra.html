@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orchestra — Multi-Model Agent Pipeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --cream: #faf8f4;
+    --warm: #f3efe8;
+    --paper: #fffefa;
+    --ink: #1c1917;
+    --ink2: #44403c;
+    --ink3: #78716c;
+    --ink4: #a8a29e;
+    --rule: #e7e5e4;
+    --rule2: #d6d3d1;
+    --rose: #e11d48;
+    --rose-light: #fff1f2;
+    --indigo: #4338ca;
+    --indigo-light: #eef2ff;
+    --emerald: #059669;
+    --emerald-light: #ecfdf5;
+    --amber: #d97706;
+    --amber-light: #fffbeb;
+    --slate: #334155;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(20px, 4vw, 60px); height: 56px;
+    background: rgba(250,248,244,0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav a.back {
+    font-size: 0.82rem; color: var(--ink3); text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  nav a.back:hover { color: var(--ink); }
+  nav .nav-r { display: flex; align-items: center; gap: 16px; }
+  nav .tag {
+    font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink4);
+  }
+  .lang-sw {
+    display: flex; border: 1px solid var(--rule2); border-radius: 6px; overflow: hidden;
+  }
+  .lang-sw button {
+    padding: 4px 12px; border: none; background: transparent;
+    font-size: 0.72rem; font-family: inherit; cursor: pointer;
+    color: var(--ink3); font-weight: 500; transition: all 0.2s;
+  }
+  .lang-sw button.on { background: var(--ink); color: #fff; }
+  body.en .zh { display: none !important; }
+  body.zh .en { display: none !important; }
+
+  /* HERO — editorial style */
+  .hero {
+    padding: 120px clamp(20px, 8vw, 120px) 60px;
+    max-width: 900px; margin: 0 auto;
+  }
+  .hero .kicker {
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--rose);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 400; line-height: 1.15;
+    color: var(--ink); margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--indigo);
+  }
+  .hero .lead {
+    font-size: 1.1rem; color: var(--ink2);
+    max-width: 640px; line-height: 1.8;
+  }
+
+  /* META BAR */
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 20px 0; margin-top: 32px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.8rem;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-item .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink4); font-weight: 600; }
+  .meta-item .value { color: var(--ink2); font-weight: 500; }
+  .meta-item a { color: var(--indigo); text-decoration: none; }
+  .meta-item a:hover { text-decoration: underline; }
+
+  /* CONTENT */
+  .content {
+    max-width: 900px; margin: 0 auto;
+    padding: 48px clamp(20px, 8vw, 120px) 80px;
+  }
+
+  .content h2 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.8rem; font-weight: 400;
+    margin: 56px 0 20px; padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink);
+  }
+  .content h2:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+
+  .content h3 {
+    font-size: 1rem; font-weight: 700;
+    margin: 32px 0 12px; color: var(--ink);
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+
+  .content p {
+    margin-bottom: 16px; color: var(--ink2);
+    font-size: 0.95rem;
+  }
+
+  .content ul, .content ol {
+    margin: 12px 0 20px 20px; color: var(--ink2); font-size: 0.95rem;
+  }
+  .content li { margin-bottom: 6px; }
+  .content li strong { color: var(--ink); }
+
+  /* PIPELINE DIAGRAM — hand-drawn feel */
+  .pipeline {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; padding: 48px 0; margin: 24px 0;
+    overflow-x: auto;
+  }
+  .pipe-step {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 24px 20px; min-width: 150px;
+    position: relative;
+  }
+  .pipe-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin-bottom: 12px;
+    border: 2px solid;
+    transition: transform 0.3s;
+  }
+  .pipe-circle:hover { transform: scale(1.1); }
+  .pipe-step:nth-child(1) .pipe-circle { border-color: var(--indigo); background: var(--indigo-light); }
+  .pipe-step:nth-child(3) .pipe-circle { border-color: var(--emerald); background: var(--emerald-light); }
+  .pipe-step:nth-child(5) .pipe-circle { border-color: var(--amber); background: var(--amber-light); }
+  .pipe-name { font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; }
+  .pipe-model { font-size: 0.72rem; color: var(--ink3); font-family: 'DM Mono', monospace; }
+  .pipe-arrow {
+    font-size: 1.5rem; color: var(--ink4); padding: 0 4px;
+    align-self: center; margin-bottom: 30px;
+  }
+  .pipe-loop {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.75rem; color: var(--rose);
+    font-weight: 600; margin-top: 8px;
+    padding: 4px 14px; border: 1.5px dashed var(--rose);
+    border-radius: 100px;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 16px 0 28px; font-size: 0.85rem;
+  }
+  th {
+    text-align: left; padding: 10px 14px;
+    border-bottom: 2px solid var(--ink);
+    font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink3); font-weight: 600;
+  }
+  td {
+    padding: 10px 14px; border-bottom: 1px solid var(--rule);
+    color: var(--ink2); vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td code, p code {
+    font-family: 'DM Mono', monospace; font-size: 0.82rem;
+    background: var(--warm); padding: 2px 6px; border-radius: 4px;
+    color: var(--indigo);
+  }
+
+  /* CODE BLOCK */
+  pre {
+    background: #1e1e2e; color: #cdd6f4;
+    padding: 20px 24px; border-radius: 10px;
+    font-family: 'DM Mono', 'Menlo', monospace;
+    font-size: 0.78rem; line-height: 1.7;
+    overflow-x: auto; margin: 16px 0 24px;
+    border: 1px solid #313244;
+  }
+  pre .comment { color: #6c7086; }
+  pre .cmd { color: #89b4fa; }
+  pre .string { color: #a6e3a1; }
+  pre .flag { color: #f9e2af; }
+
+  /* CALLOUT */
+  .callout {
+    padding: 20px 24px; margin: 24px 0;
+    border-radius: 8px; font-size: 0.88rem;
+  }
+  .callout-link {
+    background: var(--indigo-light); border-left: 3px solid var(--indigo);
+  }
+  .callout-note {
+    background: var(--amber-light); border-left: 3px solid var(--amber);
+  }
+  .callout strong { display: block; margin-bottom: 4px; }
+  .callout a { color: var(--indigo); font-family: 'DM Mono', monospace; font-size: 0.82rem; }
+
+  /* ARCHITECTURE GRID */
+  .arch-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin: 24px 0;
+  }
+  .arch-card {
+    padding: 20px; border-radius: 10px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    transition: border-color 0.2s;
+  }
+  .arch-card:hover { border-color: var(--indigo); }
+  .arch-card .ac-icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .arch-card .ac-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+  .arch-card .ac-desc { font-size: 0.78rem; color: var(--ink3); line-height: 1.5; }
+
+  /* FLOW — text-based step sequence */
+  .steps { counter-reset: step; margin: 24px 0; }
+  .step {
+    display: flex; gap: 20px; padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .step:last-child { border-bottom: none; }
+  .step::before {
+    counter-increment: step;
+    content: counter(step);
+    flex-shrink: 0; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; border: 2px solid var(--rule2);
+    font-weight: 700; font-size: 0.85rem; color: var(--ink3);
+  }
+  .step-body { flex: 1; }
+  .step-body .step-title { font-weight: 700; margin-bottom: 4px; }
+  .step-body .step-desc { font-size: 0.88rem; color: var(--ink2); }
+
+  /* FOOTER */
+  footer {
+    max-width: 900px; margin: 0 auto;
+    padding: 32px clamp(20px, 8vw, 120px) 48px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.78rem; color: var(--ink4);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+
+  @media (max-width: 640px) {
+    .pipeline { flex-direction: column; }
+    .pipe-arrow { transform: rotate(90deg); }
+    .meta-bar { gap: 16px; }
+  }
+</style>
+</head>
+<body class="zh">
+
+<nav>
+  <a class="back" href="index.html">&larr; Sky Portal</a>
+  <div class="nav-r">
+    <span class="tag"><span class="zh">项目文档</span><span class="en">Project Doc</span></span>
+    <div class="lang-sw">
+      <button class="on" onclick="setLang('zh')">中</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="kicker"><span class="zh">内部项目</span><span class="en">Internal Project</span></div>
+  <h1>
+    <span class="zh">Orchestra<br>多模型 Agent <em>协同流水线</em></span>
+    <span class="en">Orchestra<br>Multi-Model Agent <em>Pipeline</em></span>
+  </h1>
+  <p class="lead">
+    <span class="zh">一个让三种 AI 模型自动协同工作的编排系统。Opus 做架构规划，GLM 5.1 并行编码，Codex 审查质量——循环迭代直到代码通过审查。睡觉前启动，醒来收代码。</span>
+    <span class="en">An orchestration system that coordinates three AI models automatically. Opus architects the plan, GLM 5.1 workers code in parallel, Codex reviews quality — looping until the code passes review. Start before bed, wake up to working code.</span>
+  </p>
+
+  <div class="meta-bar">
+    <div class="meta-item">
+      <span class="label"><span class="zh">状态</span><span class="en">Status</span></span>
+      <span class="value" style="color:var(--emerald);"><span class="zh">v1.0 已保留 / v2 草案已发布</span><span class="en">v1.0 preserved / v2 draft shipped</span></span>
+    </div>
+    <div class="meta-item">
+      <span class="label"><span class="zh">创建日期</span><span class="en">Created</span></span>
+      <span class="value">2026-05-22</span>
+    </div>
+    <div class="meta-item">
+      <span class="label">Dashboard</span>
+      <a class="value" href="http://100.108.145.51:8420" target="_blank">http://100.108.145.51:8420</a>
+    </div>
+    <div class="meta-item">
+      <span class="label"><span class="zh">源码路径</span><span class="en">Source Path</span></span>
+      <span class="value" style="font-family:'DM Mono',monospace;font-size:0.78rem;">~/.openclaw/workspace/orchestra/</span>
+    </div>
+    <div class="meta-item">
+      <span class="label"><span class="zh">v2 方案包</span><span class="en">v2 Package</span></span>
+      <a class="value" href="orchestra-v2/README.md" style="font-family:'DM Mono',monospace;font-size:0.78rem;">orchestra-v2/</a>
+    </div>
+    <div class="meta-item">
+      <span class="label"><span class="zh">技术栈</span><span class="en">Stack</span></span>
+      <span class="value">Python 3 + HTML/JS</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<h2><span class="zh">设计思路</span><span class="en">Design Philosophy</span></h2>
+
+<p>
+  <span class="zh">核心问题：Claude Code (Opus) 很强但很贵，GLM 5.1 便宜但需要指导，Codex 擅长审查但不擅长规划。如果能让它们各司其职、协同工作呢？</span>
+  <span class="en">Core problem: Claude Code (Opus) is powerful but expensive, GLM 5.1 is cheap but needs guidance, Codex excels at review but not planning. What if they each did what they're best at?</span>
+</p>
+
+<p>
+  <span class="zh">Orchestra 的答案是一个三阶段循环流水线——不是框架，不需要额外依赖，就是一个 Python 脚本加一个 HTML 页面。简单到可以在 10 分钟内读完全部代码。</span>
+  <span class="en">Orchestra's answer is a three-phase loop pipeline — not a framework, no extra dependencies, just a Python script and an HTML page. Simple enough to read all the code in 10 minutes.</span>
+</p>
+
+<!-- Pipeline Diagram -->
+<div class="pipeline">
+  <div class="pipe-step">
+    <div class="pipe-circle">&#x1F9E0;</div>
+    <div class="pipe-name">Plan</div>
+    <div class="pipe-model">Opus 4.6</div>
+  </div>
+  <div class="pipe-arrow">&rarr;</div>
+  <div class="pipe-step">
+    <div class="pipe-circle">&#x26A1;</div>
+    <div class="pipe-name">Execute</div>
+    <div class="pipe-model">GLM 5.1 &times; N</div>
+  </div>
+  <div class="pipe-arrow">&rarr;</div>
+  <div class="pipe-step">
+    <div class="pipe-circle">&#x1F50E;</div>
+    <div class="pipe-name">Review</div>
+    <div class="pipe-model">Codex / Opus</div>
+    <div class="pipe-loop">&larrhk; <span class="zh">有 Bug 则循环</span><span class="en">Loop if bugs found</span></div>
+  </div>
+</div>
+
+<h2><span class="zh">架构与组件</span><span class="en">Architecture</span></h2>
+
+<div class="arch-grid">
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F4C4;</div>
+    <div class="ac-name">orchestrator.py</div>
+    <div class="ac-desc"><span class="zh">核心引擎。编排三阶段流水线，管理状态，提供 HTTP API，支持并发 Worker。约 400 行。</span><span class="en">Core engine. Orchestrates the 3-phase pipeline, manages state, serves HTTP API, handles concurrent workers. ~400 lines.</span></div>
+  </div>
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F3A8;</div>
+    <div class="ac-name">dashboard.html</div>
+    <div class="ac-desc"><span class="zh">Web 控制面板。实时显示 Pipeline 进度、Worker 卡片、日志流。单文件，无依赖。</span><span class="en">Web dashboard. Real-time pipeline progress, worker cards, log stream. Single file, zero dependencies.</span></div>
+  </div>
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F680;</div>
+    <div class="ac-name">start.sh</div>
+    <div class="ac-desc"><span class="zh">一键启动脚本。启动引擎 + 自动打开浏览器。支持命令行参数。</span><span class="en">One-click launcher. Starts engine + auto-opens browser. Supports CLI args.</span></div>
+  </div>
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F4BE;</div>
+    <div class="ac-name">.orchestra/</div>
+    <div class="ac-desc"><span class="zh">运行时状态目录。state.json（Dashboard 轮询）、plan.json、review-round-N.json、Worker 日志。</span><span class="en">Runtime state directory. state.json (polled by dashboard), plan.json, review-round-N.json, worker logs.</span></div>
+  </div>
+</div>
+
+<h2><span class="zh">技术实现</span><span class="en">Technical Implementation</span></h2>
+
+<h3><span class="zh">模型调度策略</span><span class="en">Model Dispatch Strategy</span></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th><span class="zh">阶段</span><span class="en">Phase</span></th>
+      <th><span class="zh">模型</span><span class="en">Model</span></th>
+      <th><span class="zh">调用方式</span><span class="en">Invocation</span></th>
+      <th><span class="zh">为什么选它</span><span class="en">Why This Model</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Plan</strong></td>
+      <td>Opus 4.6</td>
+      <td><code>claude -p --model opus</code></td>
+      <td><span class="zh">最强推理能力，适合架构决策和任务分解</span><span class="en">Strongest reasoning — ideal for architecture and task decomposition</span></td>
+    </tr>
+    <tr>
+      <td><strong>Execute</strong></td>
+      <td>GLM 5.1 (ACP)</td>
+      <td><code>claude -p</code> + ACP env</td>
+      <td><span class="zh">便宜 ($1.2/M input)，202K 上下文，并行不心疼</span><span class="en">Cheap ($1.2/M input), 202K context, scale without regret</span></td>
+    </tr>
+    <tr>
+      <td><strong>Review</strong></td>
+      <td>Codex &rarr; Opus</td>
+      <td><code>codex exec</code></td>
+      <td><span class="zh">独立视角交叉审查；Codex 不可用时回退 Opus</span><span class="en">Independent cross-review; falls back to Opus if Codex unavailable</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3><span class="zh">GLM 5.1 ACP 接入</span><span class="en">GLM 5.1 ACP Integration</span></h3>
+<p>
+  <span class="zh">Worker 进程通过环境变量注入 ACP 配置，让 Claude Code CLI 透明切换到智谱 Z.AI 端点：</span>
+  <span class="en">Worker processes inject ACP config via environment variables, transparently switching Claude Code CLI to Zhipu Z.AI endpoint:</span>
+</p>
+<pre><span class="comment"># ACP 环境变量（Worker 进程自动注入）</span>
+ANTHROPIC_BASE_URL=<span class="string">"https://api.z.ai/api/anthropic"</span>
+ANTHROPIC_DEFAULT_SONNET_MODEL=<span class="string">"glm-5.1"</span>
+ANTHROPIC_DEFAULT_OPUS_MODEL=<span class="string">"glm-5.1"</span>
+ANTHROPIC_DEFAULT_HAIKU_MODEL=<span class="string">"glm-4.5-air"</span></pre>
+
+<h3><span class="zh">Agent 间记忆共享</span><span class="en">Memory Sharing Between Agents</span></h3>
+<p>
+  <span class="zh">每个 Worker 是独立的 <code>claude -p</code> 进程，它们之间没有直接通信。共享上下文通过两种方式传递：</span>
+  <span class="en">Each worker is an independent <code>claude -p</code> process with no direct communication. Shared context flows through two channels:</span>
+</p>
+<ol>
+  <li><span class="zh"><strong>Prompt 注入</strong> — Opus 规划时生成 <code>shared_context</code> 字段，编排脚本将其写入 <code>.orchestra-context.md</code>，所有 Worker 启动时读取</span><span class="en"><strong>Prompt injection</strong> — Opus generates a <code>shared_context</code> field during planning, written to <code>.orchestra-context.md</code>, read by all workers at startup</span></li>
+  <li><span class="zh"><strong>文件系统</strong> — Worker 修改代码文件，Review 阶段通过 <code>git diff</code> 看到所有变更</span><span class="en"><strong>File system</strong> — Workers modify code files; the review phase sees all changes via <code>git diff</code></span></li>
+</ol>
+
+<h2><span class="zh">2026-05-22 v2 更新</span><span class="en">2026-05-22 v2 Update</span></h2>
+
+<p>
+  <span class="zh">v1 页面和备份已保留；v2 新增在 <code>orchestra-v2/</code>。这次更新把“多个 Agent 同时写同一个 Markdown”的风险拆掉：共享状态只允许主控写，子 Agent 只写自己的报告和独立邮箱文件。</span>
+  <span class="en">The v1 page and backup are preserved; v2 lives in <code>orchestra-v2/</code>. This update removes the risk of many agents editing the same Markdown file: shared state is coordinator-owned, while child agents write only their own reports and unique mailbox files.</span>
+</p>
+
+<h3><span class="zh">更新了什么，为什么这么更新</span><span class="en">What Changed and Why</span></h3>
+<table>
+  <thead>
+    <tr>
+      <th><span class="zh">更新</span><span class="en">Change</span></th>
+      <th><span class="zh">原因</span><span class="en">Reason</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>todo.md</code> / <code>state.json</code> / <code>memory/global.md</code> 只由 Coordinator 写</td>
+      <td><span class="zh">避免多个子 Agent 同时写 Markdown 或 JSON 造成覆盖、截断、状态错乱。</span><span class="en">Prevents concurrent Markdown or JSON writes from causing overwrite, truncation, or inconsistent status.</span></td>
+    </tr>
+    <tr>
+      <td><code>agents/&lt;id&gt;/status.json</code>, <code>progress.ndjson</code>, <code>handoff.md</code></td>
+      <td><span class="zh">每个子 Agent 有自己的进度、难点、交付记录；主控按固定间隔轮询并汇总。</span><span class="en">Each child agent owns progress, blockers, and handoff notes; the coordinator polls and summarizes them.</span></td>
+    </tr>
+    <tr>
+      <td><code>mailbox/*.md</code> 追加式通信</td>
+      <td><span class="zh">Agent 之间可以沟通，但每条消息都是新文件，不互相抢写同一个聊天记录。</span><span class="en">Agents can communicate, but every message is a new file, so nobody races on one shared chat log.</span></td>
+    </tr>
+    <tr>
+      <td>默认 <code>git worktree</code> 隔离</td>
+      <td><span class="zh">每个 Worker 在自己的 worktree 改代码，主控收集 patch，再交给 Review 判断和合并。</span><span class="en">Each worker edits its own worktree; the coordinator collects patches for review and merge decisions.</span></td>
+    </tr>
+    <tr>
+      <td>Review 输出转成下一轮任务</td>
+      <td><span class="zh">审查问题不是停在报告里，而是回流给主控，由主控派发下一轮修复。</span><span class="en">Review issues do not stop at a report; they flow back into the coordinator as repair tasks.</span></td>
+    </tr>
+    <tr>
+      <td>Planner / Worker / Reviewer 模型和 Worker 数量可选</td>
+      <td><span class="zh">启动任务前可以选择 Opus、GLM 5.1、Codex、Codex all-apps 或测试用 noop，也可以指定 1-12 个子 Agent。</span><span class="en">Before a run, choose Opus, GLM 5.1, Codex, Codex all-apps, or test-only noop, and choose 1-12 workers.</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3><span class="zh">v2 文件结构</span><span class="en">v2 Files</span></h3>
+<div class="arch-grid">
+  <div class="arch-card">
+    <div class="ac-icon">&#x2699;</div>
+    <div class="ac-name">orchestrator_v2.py</div>
+    <div class="ac-desc"><span class="zh">标准库 Python 编排器。提供 Dashboard API、模型选择、轮询、worktree、patch 收集、Review 循环。</span><span class="en">Standard-library Python coordinator with dashboard API, model selection, polling, worktrees, patch collection, and review loops.</span></div>
+  </div>
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F5A5;</div>
+    <div class="ac-name">dashboard_v2.html</div>
+    <div class="ac-desc"><span class="zh">运行前选择 Planner / Worker / Reviewer、Worker 数量、轮询间隔、隔离模式。</span><span class="en">Choose planner, worker, reviewer, worker count, polling interval, and isolation mode before a run.</span></div>
+  </div>
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F4D8;</div>
+    <div class="ac-name">ORCHESTRATION_PROTOCOL.md</div>
+    <div class="ac-desc"><span class="zh">写清楚谁能写哪些文件、邮箱怎么通信、Review 如何回流任务。</span><span class="en">Defines file ownership, mailbox communication, and review-to-task feedback.</span></div>
+  </div>
+  <div class="arch-card">
+    <div class="ac-icon">&#x1F9EA;</div>
+    <div class="ac-name">CONFIG.example.json</div>
+    <div class="ac-desc"><span class="zh">命令行运行示例；也可用 <code>noop</code> 模型测试编排协议。</span><span class="en">CLI example config; use the <code>noop</code> model to test the orchestration protocol.</span></div>
+  </div>
+</div>
+
+<h3><span class="zh">v2 启动方式</span><span class="en">v2 Launch</span></h3>
+<p>
+  <span class="zh">最简单方式：在 Mac mini 上打开 <code>orchestra-v2</code> 文件夹，双击 <code>Orchestra v2.app</code>。它会后台启动服务并自动打开浏览器。要停止后台服务，双击 <code>Stop Orchestra v2.app</code>。</span>
+  <span class="en">Simplest path: on the Mac mini, open the <code>orchestra-v2</code> folder and double-click <code>Orchestra v2.app</code>. It starts the service in the background and opens the browser. To stop it, double-click <code>Stop Orchestra v2.app</code>.</span>
+</p>
+<div class="callout callout-link">
+  <strong><span class="zh">Mac 一键包</span><span class="en">Mac One-Click Package</span></strong>
+  <span class="zh">下载后解压，进入 <code>orchestra-v2</code> 文件夹，双击 <code>Orchestra v2.app</code>。如果 macOS 第一次提示未知开发者，右键 App 选择“打开”。</span>
+  <span class="en">Download, unzip, open the <code>orchestra-v2</code> folder, and double-click <code>Orchestra v2.app</code>. If macOS blocks the unsigned app the first time, right-click it and choose Open.</span><br>
+  <a href="downloads/Orchestra-v2-Mac.zip">downloads/Orchestra-v2-Mac.zip</a>
+</div>
+<pre><span class="cmd">cd</span> orchestra-v2
+<span class="cmd">./start_v2.sh</span></pre>
+<p>
+  <span class="zh">Dashboard 默认仍在 <code>http://127.0.0.1:8420</code>。如果 8420 被占用，可以用 <code>PORT=8421 ./start_v2.sh</code>。</span>
+  <span class="en">The dashboard still defaults to <code>http://127.0.0.1:8420</code>. If 8420 is busy, run <code>PORT=8421 ./start_v2.sh</code>.</span>
+</p>
+
+<h3><span class="zh">在哪台机器运行？</span><span class="en">Which Machine Should Run It?</span></h3>
+<p>
+  <span class="zh">线上 GitHub Pages 只负责展示说明和静态预览，不能直接调用你 Mac mini 或 Mac Pro 本地的 Claude / GLM / Codex。真正运行 Agent 的 <code>orchestrator_v2.py</code> 必须在配置齐全的那台机器上启动。</span>
+  <span class="en">GitHub Pages only serves documentation and a static preview. It cannot directly call Claude / GLM / Codex on your Mac mini or Mac Pro. The real <code>orchestrator_v2.py</code> service must run on the machine where the model CLIs and API credentials are configured.</span>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th><span class="zh">机器</span><span class="en">Machine</span></th>
+      <th><span class="zh">适合做什么</span><span class="en">Best For</span></th>
+      <th><span class="zh">原因</span><span class="en">Reason</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mac mini</td>
+      <td><span class="zh">优先试运行 v2</span><span class="en">First place to test v2</span></td>
+      <td><span class="zh">如果 Claude Code、GLM 5.1 ACP、Codex 已经配好，就不需要在 Mac Pro 重新配一遍。</span><span class="en">If Claude Code, GLM 5.1 ACP, and Codex are already configured there, you do not need to repeat that setup on the Mac Pro first.</span></td>
+    </tr>
+    <tr>
+      <td>Mac Pro</td>
+      <td><span class="zh">编辑、发布、也可以单独配置后运行</span><span class="en">Editing, publishing, or running after setup</span></td>
+      <td><span class="zh">本页和 v2 代码是在 Mac Pro 上发布的；但 GLM 5.1 API / ACP 如果没配，真实 Worker 不能用 GLM 跑。</span><span class="en">This page and v2 code were published from the Mac Pro; but if GLM 5.1 API / ACP is not configured, real GLM workers will not run here.</span></td>
+    </tr>
+  </tbody>
+</table>
+<pre><span class="comment"># 推荐：在 Mac mini 上双击 Orchestra v2.app</span>
+<span class="comment"># 或者用命令行启动，然后从 Mac Pro 打开</span>
+<span class="cmd">cd</span> sky-portal/orchestra-v2
+HOST=<span class="string">0.0.0.0</span> PORT=<span class="string">8420</span> <span class="cmd">./start_v2.sh</span>
+
+<span class="comment"># Mac Pro 浏览器打开</span>
+http://&lt;Mac mini 的 Tailscale 或局域网 IP&gt;:8420</pre>
+
+<h2><span class="zh">使用方法</span><span class="en">Usage</span></h2>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-body">
+      <div class="step-title"><span class="zh">启动 Dashboard</span><span class="en">Start Dashboard</span></div>
+      <div class="step-desc">
+        <pre><span class="cmd">cd</span> ~/.openclaw/workspace/orchestra
+<span class="cmd">./start.sh</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-body">
+      <div class="step-title"><span class="zh">打开浏览器</span><span class="en">Open Browser</span></div>
+      <div class="step-desc">
+        <span class="zh">Mac Mini 本地: <code>http://localhost:8420</code><br>MacBook Pro (Tailscale): <code>http://100.108.145.51:8420</code></span>
+        <span class="en">Mac Mini local: <code>http://localhost:8420</code><br>MacBook Pro (Tailscale): <code>http://100.108.145.51:8420</code></span>
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-body">
+      <div class="step-title"><span class="zh">填写项目描述 + 工作目录，点 Start</span><span class="en">Enter project description + working directory, click Start</span></div>
+      <div class="step-desc">
+        <span class="zh">也可以命令行直接启动：</span><span class="en">Or start directly from command line:</span>
+        <pre><span class="cmd">./start.sh</span> <span class="flag">--dir</span> ~/projects/my-app <span class="string">"Build a React dashboard"</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-body">
+      <div class="step-title"><span class="zh">观察或离开</span><span class="en">Watch or Walk Away</span></div>
+      <div class="step-desc"><span class="zh">Pipeline 会自动循环：Plan → Execute → Review → 有 bug 就重来。最多 10 轮，或没有 P1 bug 时自动停止。</span><span class="en">Pipeline auto-loops: Plan → Execute → Review → restart if bugs found. Stops after 10 rounds max, or when no P1 bugs remain.</span></div>
+    </div>
+  </div>
+</div>
+
+<h2><span class="zh">关键设计决策</span><span class="en">Key Design Decisions</span></h2>
+
+<ul>
+  <li><span class="zh"><strong>不用框架</strong> — 不依赖 CrewAI / LangGraph / AutoGen。200 行 Python + 400 行 HTML 就够了。引入框架只会增加学习成本和调试难度。</span><span class="en"><strong>No frameworks</strong> — No CrewAI / LangGraph / AutoGen. 200 lines Python + 400 lines HTML is enough. Frameworks add learning curves and debugging complexity.</span></li>
+  <li><span class="zh"><strong>文件即总线</strong> — Agent 间通过文件系统通信（.orchestra-context.md, state.json）。比消息队列简单，对 AI 编码 Agent 来说足够了。</span><span class="en"><strong>Files as message bus</strong> — Agents communicate via file system (.orchestra-context.md, state.json). Simpler than message queues, sufficient for AI coding agents.</span></li>
+  <li><span class="zh"><strong>三模型混搭</strong> — 不同阶段用不同提供商的不同模型。Anthropic (Opus), Z.AI/Zhipu (GLM), OpenAI (Codex)。取长补短。</span><span class="en"><strong>Multi-vendor model mixing</strong> — Different models from different providers for different phases. Anthropic (Opus), Z.AI/Zhipu (GLM), OpenAI (Codex). Best of each.</span></li>
+  <li><span class="zh"><strong>优雅降级</strong> — Codex 不可用时自动回退 Opus 审查。JSON 解析失败时有兜底逻辑。Worker 失败不阻塞其他 Worker。</span><span class="en"><strong>Graceful degradation</strong> — Falls back to Opus review if Codex unavailable. JSON parse failures have fallback logic. Worker failures don't block others.</span></li>
+</ul>
+
+<h2><span class="zh">迭代路线图</span><span class="en">Roadmap</span></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><span class="zh">版本</span><span class="en">Version</span></th>
+      <th><span class="zh">内容</span><span class="en">Features</span></th>
+      <th><span class="zh">状态</span><span class="en">Status</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>v1.0</strong></td>
+      <td><span class="zh">三阶段循环 + Dashboard + GLM ACP 接入</span><span class="en">3-phase loop + Dashboard + GLM ACP integration</span></td>
+      <td style="color:var(--emerald);">&#x2713; Done</td>
+    </tr>
+    <tr>
+      <td>v1.1</td>
+      <td><span class="zh">Discord / OpenClaw 远程触发</span><span class="en">Discord / OpenClaw remote trigger</span></td>
+      <td><span class="zh">计划中</span><span class="en">Planned</span></td>
+    </tr>
+    <tr>
+      <td>v1.2</td>
+      <td><span class="zh">Git worktree 隔离（Worker 互不冲突）</span><span class="en">Git worktree isolation (conflict-free workers)</span></td>
+      <td style="color:var(--emerald);"><span class="zh">v2 已落地</span><span class="en">Shipped in v2</span></td>
+    </tr>
+    <tr>
+      <td>v2.0</td>
+      <td><span class="zh">可选模型编排 + 子 Agent 数量控制 + 文件所有权协议 + Review 回流</span><span class="en">Selectable model orchestration + worker count control + file ownership protocol + review feedback loop</span></td>
+      <td style="color:var(--emerald);"><span class="zh">草案已发布</span><span class="en">Draft shipped</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-link">
+  <strong>&#x1F517; <span class="zh">快速链接</span><span class="en">Quick Links</span></strong>
+  <span class="zh">Dashboard: </span><span class="en">Dashboard: </span>
+  <a href="http://100.108.145.51:8420" target="_blank">http://100.108.145.51:8420</a><br>
+  <span class="zh">源码目录: </span><span class="en">Source directory: </span>
+  <a href="#">~/.openclaw/workspace/orchestra/</a><br>
+  <span class="zh">v1 备份: </span><span class="en">v1 Backup: </span>
+  <a href="orchestra-v1-backup-2026-05-22.html">orchestra-v1-backup-2026-05-22.html</a><br>
+  <span class="zh">v2 方案包: </span><span class="en">v2 Package: </span>
+  <a href="orchestra-v2/README.md">orchestra-v2/README.md</a><br>
+  <span class="zh">v2 Dashboard 源文件: </span><span class="en">v2 Dashboard Source: </span>
+  <a href="orchestra-v2/dashboard_v2.html">orchestra-v2/dashboard_v2.html</a>
+</div>
+
+<div class="callout callout-note">
+  <strong><span class="zh">给 Codex 的说明</span><span class="en">Note for Codex</span></strong>
+  <p>
+    <span class="zh">如果你是 Codex 在审查这个项目：v1 原始运行源码路径仍记录为 <code>~/.openclaw/workspace/orchestra/</code>；本页新增的 v2 参考实现在 <code>orchestra-v2/</code>。请重点审查 <code>orchestrator_v2.py</code> 的文件所有权、worktree 隔离、模型 profile 调用、JSON 解析和 Review 回流逻辑。</span>
+    <span class="en">If you're Codex reviewing this project: the original v1 runtime source path remains <code>~/.openclaw/workspace/orchestra/</code>; the new v2 reference implementation is in <code>orchestra-v2/</code>. Focus on file ownership, worktree isolation, model profile invocation, JSON parsing, and review feedback logic in <code>orchestrator_v2.py</code>.</span>
+  </p>
+</div>
+
+</div>
+
+<footer>
+  <span>Orchestra v1.0 + v2 draft &mdash; 2026-05-22</span>
+  <span><span class="zh">v1 已备份，v2 新增在 orchestra-v2/</span><span class="en">v1 backed up, v2 added in orchestra-v2/</span></span>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.body.className = lang;
+  document.querySelectorAll('.lang-sw button').forEach(b => {
+    b.classList.toggle('on', b.textContent.trim() === (lang === 'zh' ? '中' : 'EN'));
+  });
+}
+</script>
+</body>
+</html>

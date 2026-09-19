@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-24</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股大跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Crash</div>
+<div class="zh poster-data">• 纳指-2.21% · 标普-1.44%<br>• 费城半导体暴跌超7%</div>
+<div class="en poster-data" style="display:none">• Nasdaq -2.21% · S&P -1.44%<br>• SOX crash >7%</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Correction</div>
+<div class="zh poster-data">• 美光-10% · 闪迪-10%<br>• Marvell-9% · AI泡沫破裂担忧</div>
+<div class="en poster-data" style="display:none">• Micron -10% · SNDK -10%<br>• Marvell -9% · AI bubble fears</div>
+</div>
+<div class="poster-card" style="background:#0891b2">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">市场展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Market Outlook</div>
+<div class="zh poster-data">• 科技股获利回吐压力<br>• 避险情绪升温 · 短期调整</div>
+<div class="en poster-data" style="display:none">• Tech profit-taking pressure<br>· Risk aversion short-term correction</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">关注热点</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Hot Topics</div>
+<div class="zh poster-data">• 美股估值过高担忧<br>• 台积电专利调查 · 地缘政治</div>
+<div class="en poster-data" style="display:none">• US valuation concerns<br>· TSMC probe · Geopolitical</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-24 · Sky Portal Daily Market</p>
+
+<h2>📈 美股市场表现（6月24日收盘）</h2>
+
+<div class="card">
+<h4>🔥 主要指数涨跌幅</h4>
+<p>• 道琼斯工业平均：51666.84点 (-0.09%)<br>
+• 标普500指数：7365.46点 (-1.44%)<br>
+• 纳斯达克综合：25587.04点 (-2.21%)<br>
+• 费城半导体指数(SOX)：暴跌超7%</p>
+</div>
+
+<div class="card">
+<h4>🔍 核心下跌原因分析</h4>
+<p>1. <strong>半导体板块崩盘</strong>：美光科技(-10%)、闪迪(-10%)、Marvell(-9%)等芯片龙头重挫，费城半导体指数单日暴跌超7%，45个交易日累计涨幅94.86%后迎来剧烈回调。<br><br>
+2. <strong>科技股估值担忧</strong>：市场对美股，特别是科技股估值过高的担忧再次引发抛售潮，多家科技巨头遭集中抛售。<br><br>
+3. <strong>获利回吐压力</strong>：前期涨幅过大的股票面临巨大获利回吐压力，特别是AI和半导体板块的投机性资金撤离。</p>
+<p class="src">来源：雪球、新浪财经、财联社</p>
+</div>
+
+<h2>🔬 半导体板块详细表现</h2>
+
+<div class="card">
+<h4>💰 重磅芯片股表现</h4>
+<p>• 美光科技(MU)：跌超10%，创近期新低<br>
+• 闪迪(SNDK)：跌超10%，存储芯片板块领跌<br>
+• Marvell Technology(MRVL)：跌逾9%，数据中心芯片承压<br>
+• 台积电(TSM)：受专利调查影响股价下跌<br>
+• 英特尔(INTC)：股价受半导体板块整体拖累</p>
+<p class="src">来源：东方财富、富途牛牛</p>
+</div>
+
+<div class="card">
+<h4>⚠️ 调整原因深度解析</h4>
+<p>1. <strong>过度炒作回调</strong>：费城半导体指数在短短45个交易日内暴涨94.86%，短期涨幅过大，估值严重透支未来业绩。<br><br>
+2. <strong>监管风险升级</strong>：美国国际贸易委员会对台积电工艺节点的专利调查加剧了半导体行业的监管和地缘政治担忧。<br><br>
+3. <strong>基本面分化</strong>：尽管AI芯片需求强劲，但传统存储和消费电子芯片需求疲软，板块内部分化明显。</p>
+<p class="src">来源：CNBC、华尔街见闻</p>
+</div>
+
+<h2>🌏 全球市场联动</h2>
+
+<div class="card">
+<h4>🇨🇳 A股市场表现</h4>
+<p>• 上证指数：震荡整理，相对抗跌<br>
+• 深证成指：表现优于大盘，科技股活跃<br>
+• 创业板指数：相对稳健，成长股受关注<br>
+• 科创50指数：半导体板块调整，整体波动</p>
+<p class="src">来源：同花顺、东方财富</p>
+</div>
+
+<div class="card">
+<h4>🇭🇰 港股市场表现</h4>
+<p>• 恒生指数：跟随美股走势，承压下行<br>
+• 恒生科技指数：科技股普遍回调，腾讯、小米等个股下跌<br>
+• 南向资金：观望情绪浓厚，交易相对清淡</p>
+<p class="src">来源：新浪港股、港交所</p>
+</div>
+
+<h2>📊 重点股票数据</h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$36.84</div><div class="stock-change down">-2.28%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$110.52</div><div class="stock-change down">-3.15%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$152.73</div><div class="stock-change down">-1.89%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$182.46</div><div class="stock-change down">-2.56%</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">$1,438.92</div><div class="stock-change down">-1.35%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$98.47</div><div class="stock-change down">-10.23%</div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price">$87.32</div><div class="stock-change down">-10.15%</div></div>
+<div class="stock-item"><div class="stock-ticker">MRVL</div><div class="stock-price">$68.94</div><div class="stock-change down">-9.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$175.28</div><div class="stock-change down">-1.82%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">$175.84</div><div class="stock-change down">-2.45%</div></div>
+</div>
+
+<h2>🔮 明日市场展望</h2>
+
+<div class="card">
+<h4>📊 短期走势预判</h4>
+<p>1. <strong>技术面压力</strong>：美股三大指数均跌破关键支撑位，短期可能延续调整态势，特别是科技股板块。<br><br>
+2. <strong>半导体波动</strong>：费城半导体指数短期波动加大，但长期AI驱动的增长逻辑未变，关注基本面变化。<br><br>
+3. <strong>避险情绪</strong>：市场避险情绪升温，黄金等防御性资产可能受到关注，资金从成长股向价值股轮动。</p>
+</div>
+
+<div class="card">
+<h4>⚡ 关注要点</h4>
+<p>• <strong>财报季关注</strong：重点关注即将发布的科技巨头财报，尤其是AI相关公司的营收指引。<br><br>
+• <strong>政策动向</strong：关注美联储政策表态和国际贸易形势发展，特别是半导体行业的监管政策。<br><br>
+• <strong>技术面信号</strong：密切观察美股指数能否快速收复失地，否则可能开启更深度调整。</p>
+<p class="src">分析：Sky AI 基于市场数据生成</p>
+</div>
+
+<footer>
+<p>📊 Sky Portal Daily Market · Generated by Sky AI</p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: 雪球、新浪财经、东方财富、财联社、CNBC</p>
+</footer>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Editorial</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Tokens ── */
+:root {
+  --canvas: #FBFBFA;
+  --ink: #111111;
+  --secondary: #787774;
+  --border: #EAEAEA;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04);
+  --tag-pink: #FDEBEC;
+  --tag-blue: #E1F3FE;
+  --tag-green: #EDF3EC;
+  --tag-yellow: #FBF3DB;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: -apple-system, 'Helvetica Neue', 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--canvas);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.lang-en .zh { display: none !important; }
+body.lang-zh .en { display: none !important; }
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Navbar (sticky pill) ── */
+.navbar {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  margin-bottom: 32px;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(251, 251, 250, 0.82);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  max-width: 720px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-links a {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--secondary);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: color 300ms var(--ease), background 300ms var(--ease);
+  white-space: nowrap;
+}
+
+.navbar-links a:hover {
+  color: var(--ink);
+  background: rgba(0,0,0,0.03);
+}
+
+.lang-btn {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all 300ms var(--ease);
+  margin-left: 4px;
+}
+.lang-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ── Hero (asymmetric) ── */
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 32px 96px;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  background: var(--tag-blue);
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--secondary);
+}
+
+.hero-lede {
+  max-width: 52ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--secondary);
+  font-weight: 300;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stat-num {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+}
+
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Bento Grid ── */
+.bento-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bento-item {
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 400ms var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bento-item:nth-child(3n) { border-right: none; }
+.bento-item:nth-last-child(-n+3) { border-bottom: none; }
+
+.bento-item:hover {
+  background: rgba(0,0,0,0.015);
+}
+
+.bento-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.bento-tag.pink { background: var(--tag-pink); color: #9B3D3F; }
+.bento-tag.blue { background: var(--tag-blue); color: #2D6A8A; }
+.bento-tag.green { background: var(--tag-green); color: #3D6B3D; }
+.bento-tag.yellow { background: var(--tag-yellow); color: #7A6B2D; }
+
+.bento-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.bento-desc {
+  font-size: 0.82rem;
+  color: var(--secondary);
+  line-height: 1.5;
+}
+
+.bento-meta {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--secondary);
+  margin-top: auto;
+  opacity: 0.7;
+}
+
+.bento-item.wide {
+  grid-column: span 2;
+}
+
+/* ── Contrast block (what it is / isn't) ── */
+.contrast-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.contrast-block {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.contrast-col h3 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 16px;
+}
+
+.contrast-col ul {
+  list-style: none;
+}
+
+.contrast-col ul li {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.contrast-col ul li:last-child { border-bottom: none; }
+.contrast-col.yes li { color: var(--ink); }
+
+/* ── List sections ── */
+.list-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.list-items {
+  border-top: 1px solid var(--border);
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--ink);
+  transition: padding-left 400ms var(--ease);
+}
+
+.list-item:hover {
+  padding-left: 8px;
+}
+
+.list-item-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  letter-spacing: -0.015em;
+  flex: 1;
+}
+
+.list-item-meta {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+/* ── Footer ── */
+.footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+
+.footer-inner {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--secondary);
+  line-height: 2;
+  letter-spacing: 0.02em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .navbar-inner {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .navbar-links { justify-content: center; }
+  .hero { padding: 48px 20px 64px; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-item { border-right: none !important; }
+  .bento-item:last-child { border-bottom: none; }
+  .bento-item.wide { grid-column: span 1; }
+  .contrast-grid { grid-template-columns: 1fr; gap: 32px; }
+  .list-item { flex-wrap: wrap; gap: 8px; }
+  .footer-inner { flex-direction: column; }
+  .bento-section, .contrast-section, .list-section, .footer { padding-left: 20px; padding-right: 20px; }
+}
+
+@media (max-width: 480px) {
+  .navbar { top: 8px; padding: 0 12px; }
+  .hero h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">Sky Portal</a>
+    <div class="navbar-links">
+      <a href="#daily"><span class="zh">每日更新</span><span class="en">Daily</span></a>
+      <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+      <a href="#ai"><span class="zh">AI专区</span><span class="en">AI Lab</span></a>
+      <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+      <a href="#projects"><span class="zh">项目</span><span class="en">Projects</span></a>
+      <button class="lang-btn" onclick="toggleLang()">EN / 中</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero reveal">
+  <div class="hero-eyebrow"><span class="zh">个人数字空间</span><span class="en">Personal Digital Space</span></div>
+  <h1><span class="zh">Sky Portal的<br><em>数字花园</em></span><span class="en">Sky Portal's<br><em>Digital Garden</em></span></h1>
+  <p class="hero-lede">
+    <span class="zh">半导体研究、AI 探索、投资分析、生活记录 —— 一个工程师对世界保持好奇的方式。</span>
+    <span class="en">Semiconductor research, AI exploration, investment analysis, and life notes — an engineer's way of staying curious about the world.</span>
+  </p>
+  <div class="hero-stats">
+    <div>
+      <span class="hero-stat-num">11</span>
+      <span class="hero-stat-label"><span class="zh">已发布</span><span class="en">Published</span></span>
+    </div>
+    <div>
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label"><span class="zh">进行中</span><span class="en">Active</span></span>
+    </div>
+    <div>
+      <span class="hero-stat-num" id="day-count">—</span>
+      <span class="hero-stat-label"><span class="zh">天 · 从 2/15 起</span><span class="en">Days since 2/15</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 01 Daily Updates (Bento) ── -->
+<section class="bento-section" id="daily">
+  <div class="section-label reveal"><span class="zh">01 — 每日更新</span><span class="en">01 — Daily Updates</span></div>
+  <div class="bento-grid reveal">
+    <a class="bento-item wide" href="research/index.html">
+      <span class="bento-tag blue"><span class="zh">研报</span><span class="en">Briefing</span></span>
+      <span class="bento-title"><span class="zh">每日研报</span><span class="en">Daily Briefing</span></span>
+      <span class="bento-desc"><span class="zh">半导体 · AI · 市场 · 科技趋势 — 每日自动生成</span><span class="en">Semiconductor · AI · Market · Tech — auto-generated daily</span></span>
+      <span class="bento-meta">auto-generated</span>
+    </a>
+    <a class="bento-item" href="tech/index.html">
+      <span class="bento-tag green"><span class="zh">科技</span><span class="en">Tech</span></span>
+      <span class="bento-title"><span class="zh">科技动态</span><span class="en">Tech Feed</span></span>
+      <span class="bento-desc"><span class="zh">前沿科技新闻追踪</span><span class="en">Cutting-edge tech news</span></span>
+      <span class="bento-meta">daily</span>
+    </a>
+    <a class="bento-item" href="market/index.html">
+      <span class="bento-tag yellow"><span class="zh">行情</span><span class="en">Market</span></span>
+      <span class="bento-title"><span class="zh">市场行情</span><span class="en">Market Watch</span></span>
+      <span class="bento-desc"><span class="zh">全球市场与投资追踪</span><span class="en">Global markets & investment tracking</span></span>
+      <span class="bento-meta">daily</span>
+    </a>
+    <a class="bento-item" href="science/index.html">
+      <span class="bento-tag pink"><span class="zh">科学</span><span class="en">Science</span></span>
+      <span class="bento-title"><span class="zh">科学前沿</span><span class="en">Science Digest</span></span>
+      <span class="bento-desc"><span class="zh">Science · Nature · Cell · PNAS — 每周三精选</span><span class="en">Science · Nature · Cell · PNAS — Wednesdays</span></span>
+      <span class="bento-meta">weekly · wed</span>
+    </a>
+    <a class="bento-item wide" href="prompts/index.html">
+      <span class="bento-tag green"><span class="zh">提示词</span><span class="en">Prompts</span></span>
+      <span class="bento-title"><span class="zh">提示词库</span><span class="en">Prompt Library</span></span>
+      <span class="bento-desc"><span class="zh">AI 提示词收藏与管理</span><span class="en">AI prompt collection & management</span></span>
+      <span class="bento-meta">collection</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── 02 Research (Bento) ── -->
+<section class="bento-section" id="research">
+  <div class="section-label reveal"><span class="zh">02 — 研究</span><span class="en">02 — Research</span></div>
+  <div class="bento-grid reveal">
+    <a class="bento-item" href="ai-cvd-optimization.html">
+      <span class="bento-tag blue">CVD</span>
+      <span class="bento-title"><span class="zh">AI CVD 优化</span><span class="en">AI CVD Optimization</span></span>
+      <span class="bento-desc"><span class="zh">AI驱动的CVD工艺参数优化</span><span class="en">AI-driven CVD process optimization</span></span>
+    </a>
+    <a class="bento-item" href="semiconductor-equipment-ai.html">
+      <span class="bento-tag blue"><span class="zh">半导体</span><span class="en">Semi</span></span>
+      <span class="bento-title"><span class="zh">半导体设备 AI</span><span class="en">Semiconductor Equipment AI</span></span>
+      <span class="bento-desc"><span class="zh">设备智能化与AI应用</span><span class="en">Equipment intelligence & AI applications</span></span>
+    </a>
+    <a class="bento-item" href="nvidia-report.html">
+      <span class="bento-tag yellow">NVIDIA</span>
+      <span class="bento-title"><span class="zh">NVIDIA 深度报告</span><span class="en">NVIDIA Deep Dive</span></span>
+      <span class="bento-desc"><span class="zh">GPU架构 · 数据中心 · AI芯片</span><span class="en">GPU architecture · Data center · AI chips</span></span>
+    </a>
+    <a class="bento-item wide" href="intel-news-2026.html">
+      <span class="bento-tag pink">INTEL</span>
+      <span class="bento-title"><span class="zh">Intel 新闻追踪</span><span class="en">Intel News Tracker</span></span>
+      <span class="bento-desc"><span class="zh">Intel 18A · 代工 · 战略转型跟踪</span><span class="en">Intel 18A · Foundry · Strategy pivot tracking</span></span>
+    </a>
+    <a class="bento-item" href="cvd-supply-chain.html">
+      <span class="bento-tag green"><span class="zh">供应链</span><span class="en">Supply</span></span>
+      <span class="bento-title"><span class="zh">CVD 供应链分析</span><span class="en">CVD Supply Chain</span></span>
+      <span class="bento-desc"><span class="zh">关键材料与供应商映射</span><span class="en">Key materials & supplier mapping</span></span>
+    </a>
+    <a class="bento-item" href="cvd-competitor-analysis.html">
+      <span class="bento-tag yellow"><span class="zh">竞争</span><span class="en">Compete</span></span>
+      <span class="bento-title"><span class="zh">CVD 竞争分析</span><span class="en">CVD Competitive Analysis</span></span>
+      <span class="bento-desc"><span class="zh">竞争格局与市场份额</span><span class="en">Competitive landscape & market share</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ── 03 AI Lab (Bento) ── -->
+<section class="bento-section" id="ai">
+  <div class="section-label reveal"><span class="zh">03 — AI 专区</span><span class="en">03 — AI Lab</span></div>
+  <div class="bento-grid reveal">
+    <a class="bento-item wide" href="ai/index.html">
+      <span class="bento-tag blue">AI</span>
+      <span class="bento-title"><span class="zh">AI 研究中心</span><span class="en">AI Research Hub</span></span>
+      <span class="bento-desc"><span class="zh">AI 技术研究、模型对比、应用探索</span><span class="en">AI research, model comparisons, applications</span></span>
+    </a>
+    <a class="bento-item" href="ai-life.html">
+      <span class="bento-tag green"><span class="zh">生活</span><span class="en">Life</span></span>
+      <span class="bento-title"><span class="zh">AI 与生活</span><span class="en">AI & Life</span></span>
+      <span class="bento-desc"><span class="zh">AI如何改变我们的日常</span><span class="en">How AI shapes our daily lives</span></span>
+    </a>
+    <a class="bento-item" href="claude-code-leak.html">
+      <span class="bento-tag pink"><span class="zh">分析</span><span class="en">Analysis</span></span>
+      <span class="bento-title"><span class="zh">Claude Code 泄露分析</span><span class="en">Claude Code Leak Analysis</span></span>
+      <span class="bento-desc"><span class="zh">系统提示词深度解读</span><span class="en">System prompt deep dive</span></span>
+    </a>
+    <a class="bento-item" href="skills.html">
+      <span class="bento-tag yellow"><span class="zh">技能</span><span class="en">Skills</span></span>
+      <span class="bento-title"><span class="zh">AI 技能库</span><span class="en">AI Skill Library</span></span>
+      <span class="bento-desc"><span class="zh">Claude Code 技能管理</span><span class="en">Claude Code skill management</span></span>
+    </a>
+    <a class="bento-item wide" href="https://github.com/Timememo8210/claude-app-memory" target="_blank">
+      <span class="bento-tag green">GITHUB</span>
+      <span class="bento-title">Claude App Memory</span>
+      <span class="bento-desc"><span class="zh">AI 应用记忆管理系统 — 开源项目</span><span class="en">AI application memory management — open source</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ── What it is / What it isn't ── -->
+<section class="contrast-section">
+  <div class="contrast-block reveal">
+    <div class="contrast-grid">
+      <div class="contrast-col yes">
+        <h3><span class="zh">这个空间是</span><span class="en">What this space is</span></h3>
+        <ul>
+          <li><span class="zh">一个工程师的数字花园</span><span class="en">An engineer's digital garden</span></li>
+          <li><span class="zh">深度研究与思考的记录</span><span class="en">Deep research and reflection notes</span></li>
+          <li><span class="zh">AI 驱动的自动化内容</span><span class="en">AI-powered automated content</span></li>
+          <li><span class="zh">持续进化的知识库</span><span class="en">A continuously evolving knowledge base</span></li>
+        </ul>
+      </div>
+      <div class="contrast-col">
+        <h3><span class="zh">不是</span><span class="en">What it isn't</span></h3>
+        <ul>
+          <li><span class="zh">不是博客或社交媒体</span><span class="en">Not a blog or social media</span></li>
+          <li><span class="zh">不是新闻聚合器</span><span class="en">Not a news aggregator</span></li>
+          <li><span class="zh">不追求流量或关注</span><span class="en">Not chasing traffic or attention</span></li>
+          <li><span class="zh">不是完成品，永远在生长</span><span class="en">Not a finished product — always growing</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 Life (list) ── -->
+<section class="list-section" id="life">
+  <div class="section-label reveal"><span class="zh">04 — 生活</span><span class="en">04 — Life</span></div>
+  <div class="list-items reveal">
+    <a class="list-item" href="my-garden/">
+      <span class="bento-tag green" style="flex-shrink:0"><span class="zh">花园</span><span class="en">Garden</span></span>
+      <span class="list-item-title"><span class="zh">我的花园</span><span class="en">My Garden</span></span>
+      <span class="list-item-meta"><span class="zh">种植日记</span><span class="en">Growing diary</span></span>
+    </a>
+    <a class="list-item" href="coach/index.html">
+      <span class="bento-tag blue" style="flex-shrink:0"><span class="zh">教练</span><span class="en">Coach</span></span>
+      <span class="list-item-title"><span class="zh">教练专区</span><span class="en">Coach Zone</span></span>
+      <span class="list-item-meta"><span class="zh">足球教练资料</span><span class="en">Soccer coaching</span></span>
+    </a>
+    <a class="list-item" href="investment.html">
+      <span class="bento-tag yellow" style="flex-shrink:0"><span class="zh">投资</span><span class="en">Finance</span></span>
+      <span class="list-item-title"><span class="zh">投资分析</span><span class="en">Investment Analysis</span></span>
+      <span class="list-item-meta"><span class="zh">策略与分析</span><span class="en">Strategy & analysis</span></span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank">
+      <span class="bento-tag pink" style="flex-shrink:0"><span class="zh">旅行</span><span class="en">Travel</span></span>
+      <span class="list-item-title"><span class="zh">2026 旅行计划</span><span class="en">2026 Travel Plan</span></span>
+      <span class="list-item-meta"><span class="zh">瑞士 → 巴黎 → 纽约</span><span class="en">Swiss → Paris → NYC</span></span>
+    </a>
+    <a class="list-item" href="naturalization.html">
+      <span class="bento-tag blue" style="flex-shrink:0"><span class="zh">个人</span><span class="en">Personal</span></span>
+      <span class="list-item-title"><span class="zh">入籍准备</span><span class="en">Naturalization Prep</span></span>
+      <span class="list-item-meta"><span class="zh">公民考试</span><span class="en">Citizenship exam</span></span>
+    </a>
+    <a class="list-item" href="worldcup-2026.html">
+      <span class="bento-tag green" style="flex-shrink:0"><span class="zh">体育</span><span class="en">Sports</span></span>
+      <span class="list-item-title"><span class="zh">2026 世界杯</span><span class="en">2026 World Cup</span></span>
+      <span class="list-item-meta">FIFA 2026</span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/health-report/" target="_blank">
+      <span class="bento-tag pink" style="flex-shrink:0"><span class="zh">健康</span><span class="en">Health</span></span>
+      <span class="list-item-title"><span class="zh">健康报告</span><span class="en">Health Report</span></span>
+      <span class="list-item-meta"><span class="zh">健康追踪</span><span class="en">Health tracking</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ── 05 Projects (list) ── -->
+<section class="list-section" id="projects">
+  <div class="section-label reveal"><span class="zh">05 — 项目 & 工具</span><span class="en">05 — Projects & Tools</span></div>
+  <div class="list-items reveal">
+    <a class="list-item" href="https://timememo8210.github.io/polyclaw/" target="_blank">
+      <span class="bento-tag blue" style="flex-shrink:0">APP</span>
+      <span class="list-item-title">PolyClaw</span>
+      <span class="list-item-meta"><span class="zh">多模态投资分析</span><span class="en">Multi-modal investment</span></span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/moji-journal/" target="_blank">
+      <span class="bento-tag yellow" style="flex-shrink:0">APP</span>
+      <span class="list-item-title">Moji Journal</span>
+      <span class="list-item-meta"><span class="zh">表情日记</span><span class="en">Emoji diary</span></span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/travelsnap/" target="_blank">
+      <span class="bento-tag green" style="flex-shrink:0">APP</span>
+      <span class="list-item-title">TravelSnap</span>
+      <span class="list-item-meta"><span class="zh">旅行相册</span><span class="en">Travel album</span></span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/家人-War-Game/" target="_blank">
+      <span class="bento-tag pink" style="flex-shrink:0"><span class="zh">游戏</span><span class="en">Game</span></span>
+      <span class="list-item-title">家人 War Game</span>
+      <span class="list-item-meta"><span class="zh">记忆战争</span><span class="en">Memory war</span></span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank">
+      <span class="bento-tag pink" style="flex-shrink:0"><span class="zh">游戏</span><span class="en">Game</span></span>
+      <span class="list-item-title">家人 World Conquest</span>
+      <span class="list-item-meta"><span class="zh">世界征服</span><span class="en">World conquest</span></span>
+    </a>
+    <a class="list-item" href="prolynk.html">
+      <span class="bento-tag blue" style="flex-shrink:0"><span class="zh">项目</span><span class="en">Project</span></span>
+      <span class="list-item-title">ProLynk</span>
+      <span class="list-item-meta"><span class="zh">QA测试报告</span><span class="en">QA test reports</span></span>
+    </a>
+    <a class="list-item" href="https://timememo8210.github.io/app-ideas/" target="_blank">
+      <span class="bento-tag yellow" style="flex-shrink:0"><span class="zh">想法</span><span class="en">Ideas</span></span>
+      <span class="list-item-title"><span class="zh">App 创意</span><span class="en">App Ideas</span></span>
+      <span class="list-item-meta"><span class="zh">产品创意收集</span><span class="en">Product ideation</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ── 06 Thoughts ── -->
+<section class="list-section">
+  <div class="section-label reveal"><span class="zh">06 — 思考专栏</span><span class="en">06 — Thoughts</span></div>
+  <div class="list-items reveal">
+    <a class="list-item" href="thoughts/future-transportation.html">
+      <span class="bento-tag green" style="flex-shrink:0"><span class="zh">思考</span><span class="en">Essay</span></span>
+      <span class="list-item-title"><span class="zh">未来交通</span><span class="en">Future Transportation</span></span>
+      <span class="list-item-meta"><span class="zh">自动驾驶与城市出行</span><span class="en">Autonomous driving & urban mobility</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="footer-inner reveal">
+    <div class="footer-col">
+      Sky Portal — <span class="zh">Sky Portal</span><span class="en">Sky Portal's Digital Space</span><br>
+      <span class="zh">用技术记录思考，用好奇心连接世界</span><span class="en">Recording thoughts through technology, connecting the world through curiosity</span>
+    </div>
+    <div class="footer-col" style="text-align: right;">
+      <span class="zh">设计风格：Editorial Minimalism</span><span class="en">Design: Editorial Minimalism</span><br>
+      <span style="opacity: 0.5;">built with curiosity · 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Day counter
+(function() {
+  const start = new Date(2025, 1, 15);
+  const now = new Date();
+  const days = Math.floor((now - start) / 86400000);
+  document.getElementById('day-count').textContent = days;
+})();
+
+// Language toggle
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  document.body.classList.toggle('lang-en');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

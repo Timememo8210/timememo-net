@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-20 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c1a 0%,#0d3d0d 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股本周收盘</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets (Jun 18 Close)</div>
+<div class="zh poster-data">• 标普500：7,500.58（+1.08%）<br>• 纳斯达克：26,517.93（+1.91%）<br>• 道琼斯：51,564.70（+0.14%）<br>• 罗素2000：2,979.77（+2.12%）</div>
+<div class="en poster-data" style="display:none">• S&P 500: 7,500.58 (+1.08%)<br>• Nasdaq: 26,517.93 (+1.91%)<br>• Dow: 51,564.70 (+0.14%)<br>• Russell 2000: 2,979.77 (+2.12%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#8B0000 0%,#4d0000 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 & 港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK Stocks</div>
+<div class="zh poster-data">• 上证：4,090.48（-0.43%）<br>• 深成指：16,030.70（+0.94%）<br>• 恒指：23,924.81（-1.59%）<br>• 台湾加权：46,465.20（+1.28%）</div>
+<div class="en poster-data" style="display:none">• SSE: 4,090.48 (-0.43%)<br>• SZSE: 16,030.70 (+0.94%)<br>• HSI: 23,924.81 (-1.59%)<br>• TWSE: 46,465.20 (+1.28%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体爆发</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Surge</div>
+<div class="zh poster-data">• Intel +10.6%，18A芯片量产！<br>• 美光 +8.7%，KLAC +8.7%<br>• NVDA $210.69（+2.95%）<br>• SMCI +10.4%，SNDK +11.5%</div>
+<div class="en poster-data" style="display:none">• Intel +10.6%, 18A in production!<br>• Micron +8.7%, KLAC +8.7%<br>• NVDA $210.69 (+2.95%)<br>• SMCI +10.4%, SNDK +11.5%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706 0%,#92400e 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">地缘风险</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Geopolitical Risk</div>
+<div class="zh poster-data">• 伊朗封锁霍尔木兹海峡<br>• 美伊谈判即将开启<br>• 原油 $76.54（+0.91%）<br>• Warsh联储新时代开启</div>
+<div class="en poster-data" style="display:none">• Iran closes Strait of Hormuz<br>• US-Iran talks set to begin<br>• Crude $76.54 (+0.91%)<br>• New Fed Chair Warsh era</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-20 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🔥 <span class="zh">半导体板块 — 本周最大亮点</span><span class="en" style="display:none">🔥 Semiconductors — Weekly Highlight</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Intel暴涨10.6%，18A芯片正式量产</span><span class="en" style="display:none">1. Intel Surges 10.6%, 18A Chips in Production</span></h4>
+<p><span class="zh">Intel收盘报$133.99（+10.64%），创下52周新高$135.48。Intel宣布18A制程芯片已进入量产，恰逢CPU需求回暖。BofA证券上调目标价至$135并给予买入评级。年初至今涨幅高达263%，过去一年涨幅超过523%。Intel代工业务正迎来关键拐点，18A良率提升至65-75%。</span><span class="en" style="display:none">Intel closed at $133.99 (+10.64%), hitting a 52-week high of $135.48. 18A process chips are now in production as CPU demand recovers. BofA upgraded price target to $135 with Buy rating. YTD gain of 263%, 523%+ over the past year. Foundry at a key inflection point with 18A yields at 65-75%.</span></p>
+<p class="src">来源：Yahoo Finance / BofA Securities</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体全面爆发：存储、设备、封装齐涨</span><span class="en" style="display:none">2. Broad Semiconductor Rally: Memory, Equipment, Packaging</span></h4>
+<p><span class="zh">存储芯片领涨：美光MU +8.7%、SanDisk SNDK +11.5%、Western Digital WDC +4.8%。设备商暴涨：KLAC +8.7%、Teradyne TER +7.2%、Onto ON +7.7%。AI芯片强劲：AMD +4.9%、Broadcom AVGO +4.7%、Nvidia NVDA +2.95%。芯片ETF SMH大幅走强，反映市场对AI算力供应链的持续看好。</span><span class="en" style="display:none">Memory stocks led: Micron MU +8.7%, SanDisk SNDK +11.5%, WDC +4.8%. Equipment surged: KLAC +8.7%, TER +7.2%, ON +7.7%. AI chips strong: AMD +4.9%, AVGO +4.7%, NVDA +2.95%. Semiconductor ETF SMH strengthened broadly, reflecting continued bullish sentiment on AI compute supply chain.</span></p>
+<p class="src">来源：Yahoo Finance / S&P 500 Heatmap</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Nvidia市值稳坐5.1万亿，Q1营收816亿</span><span class="en" style="display:none">3. Nvidia Market Cap at $5.1T, Q1 Revenue $81.6B</span></h4>
+<p><span class="zh">Nvidia收盘$210.69（+2.95%），市值5.103万亿美元。Q1 FY27营收达816.1亿美元，利润455.5亿。毛利率62.97%，ROE高达114.29%。过去12个月营收2534.9亿，净利润1596.1亿。分析师平均目标价$298.93，中国华兴证券给予买入评级，目标价$319。NVDA年初至今涨13.11%，跑赢标普500的9.57%。</span><span class="en" style="display:none">Nvidia closed at $210.69 (+2.95%), with a $5.103T market cap. Q1 FY27 revenue reached $81.61B, earnings $45.55B. Gross margin 62.97%, ROE 114.29%. TTM revenue $253.49B, net income $159.61B. Analyst average target $298.93; China Renaissance rates Buy at $319. YTD gain 13.11%, beating S&P 500's 9.57%.</span></p>
+<p class="src">来源：Yahoo Finance / China Renaissance</p>
+</div>
+
+<h2>📈 <span class="zh">核心股票行情（6月18日收盘）</span><span class="en" style="display:none">Key Stocks (Jun 18 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$133.99</div><div class="stock-change up">+10.64%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$210.69</div><div class="stock-change up">+2.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change up">+4.86%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">—</div><div class="stock-change up">+4.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">—</div><div class="stock-change up">+8.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">KLAC</div><div class="stock-price">—</div><div class="stock-change up">+8.73%</div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price">—</div><div class="stock-change up">+11.54%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMCI</div><div class="stock-price">—</div><div class="stock-change up">+10.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">—</div><div class="stock-change up">+6.17%</div></div>
+<div class="stock-item"><div class="stock-ticker">TXN</div><div class="stock-price">—</div><div class="stock-change up">+6.95%</div></div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">CL=F — Crude Oil</div><div id="tv-oil"></div></div>
+</div>
+
+<h2>🌍 <span class="zh">全球宏观 & 地缘政治</span><span class="en" style="display:none">Global Macro & Geopolitics</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 🇮🇷 伊朗再次封锁霍尔木兹海峡，美伊谈判在即</span><span class="en" style="display:none">1. 🇮🇷 Iran Closes Hormuz Again as US-Iran Talks Set to Open</span></h4>
+<p><span class="zh">伊朗宣布霍尔木兹海峡再次关闭，战斗行动升级。与此同时，美伊谈判即将开启。特朗普的伊核协议在美国国内遭遇巨大阻力——来自国会两党、欧洲盟友和中东盟国的反对声浪此起彼伏。但市场似乎对此并不担忧，风险偏好保持高位。原油价格收于$76.54（+0.91%），交易员正在权衡供应中断风险与谈判成功可能性。分析人士警告，若谈判破裂，油价可能飙至$85-$100区间。</span><span class="en" style="display:none">Iran announced the Strait of Hormuz is closed again as fighting flares. Meanwhile, US-Iran talks are set to open. Trump's nuclear deal faces major blowback from Congress, European allies, and Middle East nations — but markets seem unfazed, with risk appetite remaining high. Crude oil settled at $76.54 (+0.91%). Traders weigh supply disruption risk against deal probability. Analysts warn oil could hit $85-$100 if talks collapse.</span></p>
+<p class="src">来源：Bloomberg / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 🏛️ 美联储Warsh时代：新基调，新预期</span><span class="en" style="display:none">2. 🏛️ The Warsh Era at the Fed: A New Vibe</span></h4>
+<p><span class="zh">新任美联储主席Kevin Warsh正在改变中央银行的基调，投资者可能欢迎其中一些变化。Warsh的政策路径与前任有所不同，市场正在重新调整利率预期。房贷利率方面，分析师认为即使伊核协议达成，房贷利率也不会立即回到6%以下——"电梯上去，楼梯下来"，高利率环境可能持续更长时间。这对房地产市场和消费支出构成持续压力。</span><span class="en" style="display:none">New Fed Chair Kevin Warsh is already changing the central bank's vibe. Investors may welcome some changes. Markets are recalibrating rate expectations. On mortgages, analysts say rates won't immediately return below 6% even with an Iran deal — "elevator up and the stairs down." Higher rates may persist longer, pressuring housing and consumer spending.</span></p>
+<p class="src">来源：Yahoo Finance / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 🚀 SpaceX 600亿收购Cursor，太空×AI融合加速</span><span class="en" style="display:none">3. 🚀 SpaceX Acquires Cursor for $60B, Space×AI Convergence</span></h4>
+<p><span class="zh">SpaceX以$600亿估值收购AI编程工具Cursor，标志着太空公司与AI技术的深度融合。这笔交易引发市场对"太空经济+AI"叙事的关注。SpaceX股票（SPCX）当日回调3.56%，反映市场对如此大规模收购的消化。Cursor作为最受欢迎的AI编程助手之一，将为SpaceX的卫星网络和火星计划提供软件工程能力加持。</span><span class="en" style="display:none">SpaceX acquired AI coding tool Cursor at a $60B valuation, marking a deep fusion of space and AI technology. SPCX shares dipped 3.56% as the market digested the massive deal. Cursor, one of the most popular AI coding assistants, will boost SpaceX's software engineering for satellite networks and Mars plans.</span></p>
+<p class="src">来源：Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 🤖 Anthropic vs 华盛顿：AI监管博弈升级</span><span class="en" style="display:none">4. 🤖 Anthropic vs Washington: AI Regulation Battle</span></h4>
+<p><span class="zh">特朗普表示不再视Anthropic为国家安全威胁，这对AI行业是利好信号。但Anthropic与华盛顿的博弈仍在继续，可能对AI行业监管格局产生深远影响。与此同时，Google DeepMind顶级科学家John Jumper宣布跳槽Anthropic，显示Anthropic在人才争夺战中的吸引力。从FAANG到"MANGOS"，华尔街正在寻找下一个"Mag 7"组合，AI公司正在成为核心候选。</span><span class="en" style="display:none">Trump says he no longer views Anthropic as a national security threat — a positive signal for the AI industry. But the Anthropic-Washington standoff continues and could shape AI regulation. Meanwhile, top Google DeepMind scientist John Jumper is leaving for Anthropic, showing the company's talent appeal. Wall Street is hunting for the next "Mag 7" — from FAANG to "MANGOS," with AI companies as core candidates.</span></p>
+<p class="src">来源：Reuters / Yahoo Finance</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">中国市场</span><span class="en" style="display:none">China Markets</span></h2>
+
+<div class="card">
+<h4><span class="zh">A股分化：深强沪弱，港股回调</span><span class="en" style="display:none">A-Shares Mixed: Shenzhen Strong, Shanghai Weak, HK Pulls Back</span></h4>
+<p><span class="zh">6月19日A股分化明显：上证综指收于4,090.48（-0.43%），深成指16,030.70（+0.94%），创业板走势分化。港股恒生指数大幅回调至23,924.81（-1.59%），反映外资获利了结。台湾加权指数表现突出，收于46,465.20（+1.28%），主要受台积电持续走强提振。日经225微涨0.28%至71,250点。整体来看，亚太市场呈现震荡格局，半导体相关板块表现相对坚挺。</span><span class="en" style="display:none">June 19 A-shares were mixed: SSE Composite at 4,090.48 (-0.43%), Shenzhen at 16,030.70 (+0.94%). Hong Kong's Hang Seng pulled back sharply to 23,924.81 (-1.59%) on profit-taking. Taiwan Weighted outperformed at 46,465.20 (+1.28%) driven by TSMC. Nikkei 225 up slightly 0.28% to 71,250. Asia-Pacific markets in a consolidation phase, with semiconductor-related sectors relatively firm.</span></p>
+<p class="src">来源：Yahoo Finance / SSE / SZSE</p>
+</div>
+
+<h2>🔮 <span class="zh">下周市场预判</span><span class="en" style="display:none">Next Week Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">📈 半导体：动能强劲但需警惕获利回吐</span><span class="en" style="display:none">📈 Semiconductors: Strong Momentum, Watch for Profit-Taking</span></h4>
+<p><span class="zh">Intel YTD涨幅已达263%，短期内存在获利回吐风险。但18A量产+AI芯片需求是实打实的基本面支撑，中期看好。关注下周是否有更多18A客户签约消息。NVDA市值5.1万亿，Q1营收816亿，但目标价$298.93意味着还有~42%上行空间。半导体设备股（KLAC、TER、ON）的暴涨暗示资本开支周期正在加速。</span><span class="en" style="display:none">Intel's 263% YTD gain suggests short-term profit-taking risk. But 18A production + AI demand is real fundamental support; medium-term bullish. Watch for new 18A customer announcements. NVDA at $5.1T market cap, Q1 revenue $81.6B; analyst target $298.93 implies ~42% upside. Equipment stock surge (KLAC, TER, ON) signals an accelerating capex cycle.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🛢️ 油价：霍尔木兹海峡是最大不确定性</span><span class="en" style="display:none">🛢️ Oil: Hormuz Is the Biggest Wildcard</span></h4>
+<p><span class="zh">若美伊谈判取得进展，油价可能回落至$70附近，缓解通胀压力。若谈判破裂或冲突升级，油价可能冲击$85-$100，推高通胀预期，对股市构成压力。当前$76.54的价位反映市场对谈判谨慎乐观的预期。房贷利率已受影响——"电梯上，楼梯下"，即使地缘缓和，高利率环境仍将持续。</span><span class="en" style="display:none">If US-Iran talks progress, oil could fall toward $70, easing inflation pressure. If talks collapse or conflict escalates, oil could hit $85-$100, pushing up inflation expectations and pressuring equities. Current $76.54 reflects cautious optimism. Mortgage rates are already affected — "elevator up, stairs down" — higher rates persist even if geopolitics ease.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 大盘：逼近历史高点，广度改善</span><span class="en" style="display:none">📊 Broad Market: Near Record Highs, Improving Breadth</span></h4>
+<p><span class="zh">标普500报7,500.58，距历史高点7,620.90仅1.6%距离。Russell 2000小盘股+2.12%领涨，暗示市场广度正在改善——不再只是"Magnificent 7"独舞。VIX恐慌指数微升至16.78（+2.32%），仍处于低位但需留意。板块方面，半导体和消费板块（RCL +3.7%、DASH +4.7%、KMX +13.1%）表现突出，金融股偏弱（JPM -2.5%、SCHW -3.0%）。</span><span class="en" style="display:none">S&P 500 at 7,500.58, just 1.6% from the record high of 7,620.90. Russell 2000 small-caps led with +2.12%, suggesting improving market breadth — no longer just a "Mag 7" show. VIX edged up to 16.78 (+2.32%), still low but worth monitoring. Semiconductors and consumer (RCL +3.7%, DASH +4.7%, KMX +13.1%) outperformed; financials lagged (JPM -2.5%, SCHW -3.0%).</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚠️ 风险点</span><span class="en" style="display:none">⚠️ Risk Factors</span></h4>
+<p><span class="zh">• 伊核谈判变数：最大地缘风险，影响油价和通胀预期<br>• Warsh联储政策不确定性：新主席的利率路径仍不明朗<br>• AI估值泡沫风险：Anthropic与政府博弈、SpaceX-Cursor巨额收购引发估值质疑<br>• 市场情绪过热：标普逼近高点、VIX低位、Intel YTD 263%——需警惕回调<br>• 中国经济：港股回调1.6%，外资信心仍需观察</span><span class="en" style="display:none">• Iran nuclear talks: biggest geopolitical risk, impacts oil & inflation<br>• Warsh Fed uncertainty: new chair's rate path unclear<br>• AI valuation bubble risk: Anthropic vs government, SpaceX-Cursor $60B deal raises questions<br>• Overheated sentiment: S&P near record, VIX low, Intel +263% YTD — watch for pullback<br>• China economy: HK -1.6%, foreign investor confidence still fragile</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Yahoo Finance, Bloomberg, Reuters, S&P 500 Heatmap, BofA Securities, China Renaissance</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-oil', sym:'NYMEX:CL1!'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

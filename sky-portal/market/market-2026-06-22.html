@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-22 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c1a 0%,#0d3d0d 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股收盘</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Close</div>
+<div class="zh poster-data">• 道指 51,713 (+0.44%)<br>• 标普500 7,461 (-0.53%)<br>• 纳斯达克 -0.27% (SpaceX拖累)<br>• SOX 14,635 (+2.04%) 🔥</div>
+<div class="en poster-data" style="display:none">• Dow 51,713 (+0.44%)<br>• S&P 500 7,461 (-0.53%)<br>• Nasdaq -0.27% (SpaceX drag)<br>• SOX 14,635 (+2.04%) 🔥</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#8B0000 0%,#cc0000 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">SpaceX崩盘</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">SpaceX Crash</div>
+<div class="zh poster-data">• SPCX $154.60 (-16.4%)<br>• 宣布$200亿债券发行<br>• IPO以来最大单日跌幅<br>• 拖累纳斯达克约1.3%</div>
+<div class="en poster-data" style="display:none">• SPCX $154.60 (-16.4%)<br>• $20B bond sale announced<br>• Biggest down day since IPO<br>• Dragged Nasdaq ~1.3%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706 0%,#92400e 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股大爆发！</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China A-Shares Surge!</div>
+<div class="zh poster-data">• 上证 4,163 (+1.78%)<br>• 创业板 +2.52% 历史新高！<br>• 科创50 +1.96% 历史新高！<br>• 成交额 3.74万亿（历史第二）</div>
+<div class="en poster-data" style="display:none">• SSE 4,163 (+1.78%)<br>• ChiNext +2.52% ATH!<br>• STAR 50 +1.96% ATH!<br>• Turnover 3.74T (2nd highest ever)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f 0%,#0d1f3a 100%)">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊和谈推进</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Talks Progress</div>
+<div class="zh poster-data">• "Encouraging progress"信号<br>• 本周继续技术级谈判<br>• 原油暴跌至$74（月跌21%）<br>• 风险偏好持续回升</div>
+<div class="en poster-data" style="display:none">• "Encouraging progress" signals<br>• Tech-level talks continue this week<br>• Oil crashes to $74 (-21% monthly)<br>• Risk sentiment improving</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-22 · <span class="zh">周一 · 美伊和谈推进 + A股天量暴涨 + SpaceX崩盘</span><span class="en" style="display:none">Monday · US-Iran Progress + A-Shares Surge + SpaceX Crash</span> · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>📉 <span class="zh">美股收盘（6月22日）</span><span class="en" style="display:none">US Markets Close (Jun 22)</span></h2>
+<div class="card">
+<h4><span class="zh">指数分化：道指小涨，纳指受SpaceX拖累微跌</span><span class="en" style="display:none">Mixed Close: Dow Up, Nasdaq Dragged by SpaceX</span></h4>
+<p><span class="zh"><b>三大指数 + SOX：</b><br>• 道琼斯：51,712.71（+0.44%，约+225点）<br>• 标普500：7,461（-0.53%）<br>• 纳斯达克：-0.27%（SpaceX单股拖累约1.3%）<br>• 费城半导体（SOX）：14,634.72（🔥+2.04%，+292.94点）<br>• 罗素2000：+2.12% — 小盘股领跑</span><span class="en" style="display:none"><b>Major Indices + SOX:</b><br>• Dow: 51,712.71 (+0.44%, ~+225 pts)<br>• S&P 500: 7,461 (-0.53%)<br>• Nasdaq: -0.27% (SpaceX alone dragged ~1.3%)<br>• PHLX Semiconductor (SOX): 14,634.72 (🔥+2.04%, +292.94 pts)<br>• Russell 2000: +2.12% — Small caps led</span></p>
+<p><span class="zh"><b>市场逻辑：</b>美股呈现明显的"弃成长、追价值"风格。道指和罗素2000上涨，而纳斯达克受SpaceX崩盘拖累。SpaceX占纳斯达克约5%权重，今日暴跌16.4%直接抹去纳指涨幅。但排除SpaceX后，科技股表现并不差——SOX上涨2%，TSM涨1.2%。美伊和谈取得"encouraging progress"，原油月跌21%至$74，通胀预期改善推动周期股和小盘股走强。</span><span class="en" style="display:none"><b>Market Logic:</b> Clear "growth-to-value" rotation. Dow and Russell 2000 up, Nasdaq dragged by SpaceX. SPCX ~5% of Nasdaq weight, fell 16.4%, erasing index gains. Ex-SpaceX, tech was fine — SOX +2%, TSM +1.2%. US-Iran "encouraging progress" sent oil down 21% M/M to $74, boosting cyclicals and small caps on inflation improvement.</span></p>
+<p class="src">来源：WSJ / Yahoo Finance / TheStreet / Trading Economics</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China A-Shares & HK</span></h2>
+<div class="card">
+<h4><span class="zh">A股三大指数集体大涨，创业板科创50齐创历史新高！</span><span class="en" style="display:none">A-Shares Surge Across the Board, ChiNext & STAR 50 Hit ATH!</span></h4>
+<p><span class="zh">• 上证指数：4,163.10（+1.78%）<br>• 深成指：16,372.50（+2.13%）<br>• 创业板指：+2.52% — <b>历史新高！</b><br>• 科创50：+1.96% — <b>历史新高！</b><br>• 全市成交额：<b>3.74万亿</b>（历史第二高，较上一交易日放量4271亿）<br>• 上涨个股：超2900只<br><b>港股：</b><br>• 恒生指数：23,768.52（-0.65%）<br>• 恒生科技：4,549.41（-1.19%）<br>• 国企指数：7,914.74（-0.77%）<br>• 港股成交额：3486亿</span><span class="en" style="display:none">• SSE Composite: 4,163.10 (+1.78%)<br>• SZSE Component: 16,372.50 (+2.13%)<br>• ChiNext: +2.52% — <b>All-Time High!</b><br>• STAR 50: +1.96% — <b>All-Time High!</b><br>• Total Turnover: <b>3.74 trillion CNY</b> (2nd highest ever, +427B vs prior day)<br>• Advancing stocks: 2,900+<br><b>HK:</b><br>• Hang Seng: 23,768.52 (-0.65%)<br>• Hang Seng TECH: 4,549.41 (-1.19%)<br>• H-Shares: 7,914.74 (-0.77%)<br>• HK Turnover: 348.6B</span></p>
+<p><span class="zh"><b>A股分析：</b>大金融板块成为今日最大亮点，申万非银金融指数盘中一度涨超6%。培育钻石、MLCC（多层陶瓷电容器）、玻纤等概念板块爆发。AI硬件方向持续走强。全市3.74万亿的天量成交（历史第二）表明增量资金加速入场，做多情绪极度旺盛。创业板和科创50双双创历史新高，确认了硬科技牛市的延续。<br><b>港股分析：</b>恒指连续回调，与A股形成鲜明对比。外资在港股端持续流出，恒生科技承压。存储概念逆势走强（兆易创新+11%，澜起科技+4%）。</span><span class="en" style="display:none"><b>A-Shares Analysis:</b> Financials led — SW non-bank financial index surged 6% intraday. Synthetic diamonds, MLCC, and fiberglass concepts exploded. AI hardware remained strong. 3.74T turnover (2nd highest ever) signals accelerating inflows and extremely bullish sentiment. ChiNext and STAR 50 both hitting ATH confirms the hard-tech bull market.<br><b>HK Analysis:</b> HSI continued to pull back, contrasting sharply with A-shares. Foreign capital outflows weighted on tech. Memory chip concepts bucked the trend (GigaDevice +11%, Montage +4%).</span></p>
+<p class="src">来源：东方财富 / 证券时报 / 新浪财经 / 京报网 / 央广网 / HSI</p>
+</div>
+
+<h2>📈 <span class="zh">核心股票行情</span><span class="en" style="display:none">Key Stocks</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$208.65</div><div class="stock-change down">-0.97%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$467.67</div><div class="stock-change up">+1.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPCX</div><div class="stock-price">$154.60</div><div class="stock-change down">-16.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">14,635</div><div class="stock-change up">+2.04%</div></div>
+<div class="stock-item"><div class="stock-ticker">RUT</div><div class="stock-price">—</div><div class="stock-change up">+2.12%</div></div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSM — TSMC</div><div id="tv-tsm"></div></div>
+<div class="kline-item"><div class="kline-label">SPCX — SpaceX</div><div id="tv-spcx"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — PHX Semi</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<h2>🔥 <span class="zh">半导体 & AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. SOX逆势上涨2%，半导体跑赢大盘</span><span class="en" style="display:none">1. SOX Up 2%, Semiconductors Outperform</span></h4>
+<p><span class="zh">费城半导体指数（SOX）收盘14,634.72（+2.04%，+292.94点），大幅跑赢标普500和纳斯达克。台积电ADR（TSM）涨1.21%至$467.67，延续上周CoWoS扩产利好的动能。NVDA微跌0.97%至$208.65，属于前期上涨后的正常调整。半导体板块在SpaceX崩盘拖累科技股的背景下逆势走强，说明AI芯片基本面叙事依然强劲。上周Intel-Apple合作（INTC +10.6%）和18A量产消息继续为板块提供支撑。</span><span class="en" style="display:none">PHLX Semiconductor (SOX) closed at 14,634.72 (+2.04%, +292.94 pts), significantly outperforming S&P 500 and Nasdaq. TSMC ADR (TSM) +1.21% to $467.67, continuing CoWoS expansion momentum. NVDA -0.97% to $208.65, normal pullback. Semis rallied even as SpaceX dragged tech, confirming AI chip fundamental strength. Last week's Intel-Apple deal (INTC +10.6%) and 18A production continue to support the sector.</span></p>
+<p class="src">来源：Nasdaq / Yahoo Finance / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. SpaceX宣布$200亿债券发行，股价暴跌16.4%</span><span class="en" style="display:none">2. SpaceX Announces $20B Bond Sale, Stock Crashes 16.4%</span></h4>
+<p><span class="zh">SpaceX（SPCX）宣布发行$200亿美元债券，股价应声暴跌16.4%至$154.60——IPO以来最大单日跌幅。这是SpaceX 6月12日上市以来（发行价$135，首日+19%）的第四次下跌。此前SpaceX刚以$600亿全股票收购AI编程公司Cursor，叠加本次巨额债券融资，市场对其资本开支速度和现金流消耗表示担忧。SpaceX占纳斯达克约5%权重，今日单股即拖累纳指约1.3个百分点。尽管如此，SpaceX同步签署了算力合作协议，AI基础设施布局仍在加速。</span><span class="en" style="display:none">SpaceX (SPCX) announced a $20 billion bond sale, triggering a 16.4% crash to $154.60 — the biggest down day since its June 12 IPO ($135 offer price, +19% debut). This marks the 4th decline since going public. Following the $60B all-stock Cursor acquisition and now massive bond financing, markets worry about capex intensity and cash burn. SPCX ~5% of Nasdaq weight, single-handedly dragged the index ~1.3 points. Still, SpaceX signed computing power deals, AI infrastructure buildout accelerating.</span></p>
+<p class="src">来源：Yahoo Finance / Investopedia / CNBC / Schwab Network</p>
+</div>
+
+<h2>🌍 <span class="zh">地缘政治 · 宏观</span><span class="en" style="display:none">Geopolitics · Macro</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 美伊和谈取得"encouraging progress"，原油暴跌</span><span class="en" style="display:none">1. US-Iran Talks Show "Encouraging Progress", Oil Slumps</span></h4>
+<p><span class="zh">美国与伊朗在瑞士的技术层级会谈取得"encouraging progress"（令人鼓舞的进展），双方同意本周继续技术级讨论。谈判涵盖黎巴嫩局势、霍尔木兹海峡通行机制、伊朗冻结资产解冻等核心议题。受此利好推动，原油价格暴跌——布伦特原油跌至约$74/桶，月跌幅达21%。特朗普此前宣布的14点停火框架和60天零通行费安排仍在执行中。若和谈最终达成永久协议，油价有望进一步下行，大幅改善全球通胀预期。</span><span class="en" style="display:none">US-Iran tech-level talks in Switzerland made "encouraging progress," with both sides agreeing to continue technical discussions this week. Agenda covers Lebanon, Hormuz transit mechanisms, and unfreezing Iranian assets. Oil prices slumped — Brent fell to ~$74/bbl, down 21% over the past month. Trump's 14-point ceasefire framework and 60-day zero transit fee arrangement remain in effect. A permanent deal could send oil lower, significantly improving global inflation expectations.</span></p>
+<p class="src">来源：Al Jazeera / Bloomberg / BBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 黎巴嫩停火脆弱维持，伊朗总统访巴</span><span class="en" style="display:none">2. Lebanon Ceasefire Fragile, Iran President Visits Pakistan</span></h4>
+<p><span class="zh">黎巴嫩停火协议在脆弱中维持，但恐慌情绪仍在蔓延。伊朗总统佩泽什基安将于周二对巴基斯坦进行一日访问，地缘外交活动频繁。中国外交部也就中东和平提出四点主张，表示支持通过对话解决争端。整体来看，中东局势正在从军事冲突向外交博弈阶段过渡，但霍尔木兹海峡的"罗生门"——伊朗称关闭、美方否认——仍是最大不确定性。</span><span class="en" style="display:none">Lebanon ceasefire holds fragilely amid lingering fears. Iran's President Pezeshkian will make a one-day visit to Pakistan on Tuesday. China's foreign ministry proposed four-point Middle East peace plan. Overall, the Middle East is transitioning from military conflict to diplomatic maneuvering, but the Hormuz "Rashomon" — Iran claims closure, US denies — remains the biggest uncertainty.</span></p>
+<p class="src">来源：Al Jazeera / 中国外交部 / Reuters</p>
+</div>
+
+<h2>🔮 <span class="zh">明日/近期预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">✅ 利好因素</span><span class="en" style="display:none">✅ Bullish Factors</span></h4>
+<p><span class="zh">① <b>美伊和谈持续推进</b> — 原油$74月跌21%，若永久协议达成将引发risk-on狂欢<br>② <b>A股天量暴涨</b> — 3.74万亿成交+创业板历史新高，中国硬科技牛市确认<br>③ <b>半导体基本面强劲</b> — SOX +2%跑赢大盘，Intel-Apple合作+18A量产+全球芯片Q1 +79%<br>④ <b>小盘股和价值股走强</b> — 罗素2000 +2.12%，市场广度改善</span><span class="en" style="display:none">① <b>US-Iran talks advancing</b> — Oil at $74, -21% monthly; permanent deal could trigger risk-on rally<br>② <b>A-shares volume surge</b> — 3.74T turnover + ChiNext ATH confirms China hard-tech bull<br>③ <b>Strong semi fundamentals</b> — SOX +2%, Intel-Apple + 18A + global chips Q1 +79%<br>④ <b>Breadth improvement</b> — Russell 2000 +2.12%, small caps and value leading</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚠️ 风险因素</span><span class="en" style="display:none">⚠️ Risk Factors</span></h4>
+<p><span class="zh">① <b>SpaceX连锁效应</b> — $200亿债券发行可能抽走市场流动性，关注对科技股估值压力<br>② <b>A股天量后的分化</b> — 3.74万亿历史第二天量后，短期获利回吐风险上升<br>③ <b>港股弱势</b> — 恒指-0.65%三连跌后，恒生科技-1.19%，外资流出趋势需关注<br>④ <b>霍尔木兹不确定性</b> — "罗生门"仍未解决，谈判破裂将引发油价飙升<br>⑤ <b>Fed Warsh鹰派</b> — 上周FOMC偏鹰，降息预期已被压缩</span><span class="en" style="display:none">① <b>SpaceX chain effect</b> — $20B bond sale may drain liquidity, pressuring tech valuations<br>② <b>Post-volume divergence</b> — After 3.74T record, short-term profit-taking risk rises<br>③ <b>HK weakness</b> — HSI -0.65% 3-day decline, HSTECH -1.19%, foreign outflow continues<br>④ <b>Hormuz uncertainty</b> — "Rashomon" unresolved; deal failure → oil spike<br>⑤ <b>Fed Warsh hawkish</b> — Last FOMC was hawkish, rate-cut expectations compressed</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📌 关键关注点</span><span class="en" style="display:none">📌 Key Watch Points</span></h4>
+<p><span class="zh">• <b>美伊技术级谈判</b>：本周继续——成果决定油价和风险偏好方向<br>• <b>SpaceX $154</b>：债券发行定价和市场接受度，关注对纳指持续拖累<br>• <b>NVDA $208</b>：$200整数关口争夺，半导体风向标<br>• <b>A股天量后走势</b>：3.74万亿成交后是否能持续，还是冲高回落？<br>• <b>恒指24,000</b>：关键支撑位，跌破将引发加速抛售<br>• <b>原油$74</b>：和谈推进 → 继续下行；反复 → $75-80震荡</span><span class="en" style="display:none">• <b>US-Iran tech talks</b>: Continue this week — outcome drives oil and risk sentiment<br>• <b>SpaceX $154</b>: Bond pricing and market reception; watch Nasdaq drag<br>• <b>NVDA $208</b>: $200 round number battle, semi bellwether<br>• <b>A-shares post-volume</b>: Can 3.74T be sustained or will it pull back?<br>• <b>HSI 24,000</b>: Key support; break below triggers accelerated selling<br>• <b>Oil $74</b>: Talks progress → lower; stalling → $75-80 range</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚡ 一句话总结</span><span class="en" style="display:none">⚡ Bottom Line</span></h4>
+<p><span class="zh"><b>A股暴涨+美伊缓和 vs SpaceX崩盘+港股走弱——冰火两重天。</b>美股在SpaceX拖累下表面平淡，但SOX +2%、罗素2000 +2.12%说明市场暗流积极。A股3.74万亿天量暴涨、创业板历史新高，中国硬科技牛市正在加速。维持半导体/AI中长期看好判断，短期注意SpaceX债券发行的流动性虹吸效应。</span><span class="en" style="display:none"><b>A-shares surge + US-Iran easing vs SpaceX crash + HK weakness — fire and ice.</b> US markets look flat on the surface with SpaceX drag, but SOX +2% and Russell 2000 +2.12% reveal bullish undercurrents. China's 3.74T volume surge and ChiNext ATH confirm the hard-tech bull is accelerating. Maintain long-term bullish on semis/AI. Watch SpaceX bond sale liquidity drain in the short term.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：WSJ, Yahoo Finance, TheStreet, Trading Economics, CNBC, Bloomberg, 东方财富, 证券时报, 新浪财经, 京报网, 央广网, Al Jazeera, HSI, Nasdaq, MarketWatch, Investopedia</span><span class="en" style="display:none">Data: WSJ, Yahoo Finance, TheStreet, Trading Economics, CNBC, Bloomberg, EastMoney, STCN, Sina Finance, BJD, CNR, Al Jazeera, HSI, Nasdaq, MarketWatch, Investopedia</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tsm', sym:'NYSE:TSM'},
+  {id:'tv-spcx', sym:'NASDAQ:SPCX'},
+  {id:'tv-sox', sym:'INDEX:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

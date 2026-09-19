@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-08</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#16a34a">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">标普、纳指再创历史新高！</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">S&P 500 & Nasdaq Hit New ATH!</div>
+<div class="zh poster-data">• 标普500 7,399 (+0.84%)，连续6周上涨<br>• 纳指 26,247 (+1.71%)，历史新高<br>• 道指 49,609 (+0.02%)，基本持平</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,399 (+0.84%), 6-week winning streak<br>• Nasdaq 26,247 (+1.71%), new ATH<br>• Dow 49,609 (+0.02%), flat</div>
+</div>
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Burry警告：AI泡沫像1999</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Burry Warns: AI Bubble Like 1999</div>
+<div class="zh poster-data">• SOX半导体本周+10%，2026年+65%<br>• Micron、Sandisk各涨15%+<br>• Michael Burry类比互联网泡沫末期</div>
+<div class="en poster-data" style="display:none">• SOX semis +10% this week, +65% in 2026<br>• Micron, Sandisk each +15%+<br>• Michael Burry draws parallel to dot-com peak</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股高位小幅调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Pull Back Slightly from Highs</div>
+<div class="zh poster-data">• 上证 4,180 (持平)，前日刚逼近4,197前高<br>• 创业板 3,796 (−0.96%)，11年新高后回调<br>• 成交额维持3万亿+</div>
+<div class="en poster-data" style="display:none">• SSE 4,180 (flat), approached 4,197 prior high<br>• ChiNext 3,796 (−0.96%), pullback from 11-yr high<br>• Turnover stays above 3 trillion</div>
+</div>
+<div class="poster-card" style="background:#d97706">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">布伦特原油突破$100</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Brent Crude Above $100</div>
+<div class="zh poster-data">• 美伊冲突持续，霍尔木兹海峡受阻<br>• 美元指数跌至97.9，2月底以来新低<br>• 周末关注美伊谈判进展</div>
+<div class="en poster-data" style="display:none">• US-Iran conflict continues, Hormuz disrupted<br>• Dollar index drops to 97.9, lowest since late Feb<br>• Watch for weekend Iran-US talks progress</div>
+</div>
+</div>
+</div>
+
+<h2>🇺🇸 <span class="zh">美股行情（5月8日收盘）</span><span class="en" style="display:none">US Market (May 8 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,609</div><div class="stock-change up">+0.02%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,399</div><div class="stock-change up">+0.84%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,247</div><div class="stock-change up">+1.71%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">—</div><div class="stock-change up">周+10%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">—</div><div class="stock-change up">+1.8%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 AI驱动标普、纳指再创历史新高，连续6周上涨</span><span class="en" style="display:none">📈 AI Drives S&P & Nasdaq to New ATHs, 6-Week Winning Streak</span></h4>
+<p><span class="zh">周五（5月8日）美股收盘，标普500上涨0.84%至7,399点，纳斯达克上涨1.71%至26,247点，双双再创历史新高，均录得连续第六周上涨——为2024年10月以来最长连涨纪录。道指基本持平（+0.02%）至49,609点。标普500科技板块大涨2.7%，公用事业板块下跌0.9%。标普500年内已涨8%，纳指涨13%。</span><span class="en" style="display:none">On Friday (May 8), the S&P 500 rose 0.84% to 7,399 and Nasdaq gained 1.71% to 26,247, both hitting new record highs and marking six consecutive weekly gains — the longest streak since October 2024. The Dow was essentially flat (+0.02%) at 49,609. S&P 500 tech sector surged 2.7%, while utilities fell 0.9%. The S&P 500 is up 8% YTD, Nasdaq up 13%.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Yahoo Finance / CNBC</span><span class="en" style="display:none">Sources: Reuters / Yahoo Finance / CNBC</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🤖 半导体/AI全面爆发，Burry发泡沫警告</span><span class="en" style="display:none">🤖 Semis/AI Explode, Burry Issues Bubble Warning</span></h4>
+<p><span class="zh">NVIDIA上涨1.8%，存储芯片巨头Micron和Sandisk各暴涨15%以上，受AI数据中心强劲需求驱动。费城半导体指数（SOX）本周累计上涨10%，2026年以来暴涨65%。然而"大空头"Michael Burry在Substack发文警告："感觉像1999-2000年互联网泡沫的最后几个月。所有人都在谈论AI，股票涨不是因为基本面，而是因为一直在涨。"他将SOX指数的涨幅与2000年3月科技泡沫破裂前的走势相比。</span><span class="en" style="display:none">NVIDIA rose 1.8%, while memory chip giants Micron and Sandisk each surged 15%+, driven by strong AI data center demand. The Philadelphia Semiconductor Index (SOX) gained 10% this week and is up 65% in 2026. However, "Big Short" Michael Burry warned on Substack: "Feeling like the last months of the 1999-2000 bubble. Everyone talks about AI all day. Stocks go up because they've been going up. On a two-letter thesis everyone thinks they understand." He compared the SOX rally to the March 2000 tech bubble peak.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Economic Times / Burry Substack</span><span class="en" style="display:none">Sources: Reuters / Economic Times / Burry Substack</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">💼 就业数据超预期，Q1财报季83%超预期</span><span class="en" style="display:none">💼 Jobs Beat Expectations, 83% of Q1 Earnings Top Estimates</span></h4>
+<p><span class="zh">4月非农就业数据超预期，失业率稳定在4.3%，显示劳动力市场韧性。交易员预计美联储将维持3.50-3.75%利率不变至年底。Q1财报季表现强劲：标普500 Q1盈利同比增长近29%，440家已报公司中83%超预期（长期均值约67%），大部分增长由AI相关巨头驱动。</span><span class="en" style="display:none">April non-farm payrolls beat expectations with unemployment steady at 4.3%, showing labor market resilience. Traders expect the Fed to hold rates at 3.50-3.75% through year-end. Q1 earnings season was strong: S&P 500 Q1 earnings grew nearly 29% YoY, with 83% of 440 reported companies topping estimates (long-term average ~67%), largely driven by AI heavyweights.</span></p>
+<p class="src"><span class="zh">来源：Reuters / LSEG I/B/E/S</span><span class="en" style="display:none">Sources: Reuters / LSEG I/B/E/S</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 部分个股大跌</span><span class="en" style="display:none">📉 Notable Declines</span></h4>
+<p><span class="zh"><b>Cloudflare (NET) −24%：</b>宣布裁员20%（约1,100人），Q2营收指引不及预期。<br><b>CoreWeave (CRWV) −11.4%：</b>上调年度资本支出下限，因组件成本上升。<br><b>Expedia (EXPE) −9%：</b>警告中东冲突影响旅游需求。<br><b>Trade Desk (TTD) −1.8%：</b>Q2营收指引低于预期。</span><span class="en" style="display:none"><b>Cloudflare (NET) −24%:</b> Announced 20% workforce cut (~1,100 jobs), Q2 revenue guidance missed.<br><b>CoreWeave (CRWV) −11.4%:</b> Raised lower end of annual capex guidance due to component cost increases.<br><b>Expedia (EXPE) −9%:</b> Warned Middle East conflict hurting travel demand.<br><b>Trade Desk (TTD) −1.8%:</b> Q2 revenue guidance below expectations.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Yahoo Finance</span><span class="en" style="display:none">Sources: Reuters / Yahoo Finance</span></p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情（5月8日收盘）</span><span class="en" style="display:none">A-Shares (May 8 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,180</div><div class="stock-change down">−0.003%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,564</div><div class="stock-change down">−0.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,796</div><div class="stock-change down">−0.96%</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">—</div><div class="stock-change down">−</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">3万亿+</div><div class="stock-change down">缩量</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 高位小幅回调，上证几乎平收</span><span class="en" style="display:none">📊 Slight Pullback from Highs, SSE Flat</span></h4>
+<p><span class="zh">5月8日（周四）A股三大指数小幅下跌。上证指数报4,179.95点，仅下跌0.003%，几乎平收；深成指跌0.50%至15,563.80点；创业板指跌0.96%至3,796.13点，在前一日刚创11年新高后出现正常技术性回调。此前连续两日超百股涨停的火热行情有所降温，但成交额仍维持在3万亿以上的高水平。</span><span class="en" style="display:none">On May 8 (Thursday), A-shares pulled back slightly. SSE closed at 4,179.95, down just 0.003% — essentially flat; SZSE fell 0.50% to 15,563.80; ChiNext dropped 0.96% to 3,796.13, a normal technical pullback after hitting an 11-year high the prior day. The previous two days of 100+ limit-ups cooled somewhat, but turnover remained above 3 trillion yuan.</span></p>
+<p class="src"><span class="zh">来源：新浪财经 / 博时基金 / 证券时报</span><span class="en" style="display:none">Sources: Sina Finance / Bosera Funds / Securities Times</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🔥 本周回顾：节后开门红 + 连续大涨</span><span class="en" style="display:none">🔥 Week Review: Post-Holiday Surge + Consecutive Rallies</span></h4>
+<p><span class="zh"><b>5月6日（周二）：</b>节后首个交易日全面暴涨，上证+1.17%至4,160，深成指+2.33%，创业板+2.75%创11年新高，科创50暴涨+5.47%。芯片股全面爆发，两市成交超3.4万亿。<br><b>5月7日（周三）：</b>涨势延续，上证+0.48%至4,160+，深成指+1.18%，创业板+1.45%再创新高。全市场127只个股涨停，AI算力/CPO/光通信全面爆发。<br><b>5月8日（周四）：</b>高位小幅调整，属正常技术性回调。</span><span class="en" style="display:none"><b>May 6 (Tue):</b> Post-holiday surge — SSE +1.17% to 4,160, SZSE +2.33%, ChiNext +2.75% (11-yr high), STAR 50 +5.47%. Chips exploded, turnover 3.4T+.<br><b>May 7 (Wed):</b> Rally continued — SSE +0.48% to 4,160+, SZSE +1.18%, ChiNext +1.45% new high. 127 limit-ups, AI/CPO/optical comms broke out.<br><b>May 8 (Thu):</b> Slight pullback from highs, normal technical correction.</span></p>
+<p class="src"><span class="zh">来源：证券时报 / 新华网 / 新浪财经</span><span class="en" style="display:none">Sources: Securities Times / Xinhua / Sina Finance</span></p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（5月8日收盘）</span><span class="en" style="display:none">HK Market (May 8 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">26,394</div><div class="stock-change down">−0.87%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">—</div><div class="stock-change down">−</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">—</div><div class="stock-change down">−</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🏦 恒指从前日高位回落</span><span class="en" style="display:none">🏦 HSI Retreats from Previous Day's High</span></h4>
+<p><span class="zh">5月8日恒生指数收于26,394点，下跌0.87%（−233点），从前一交易日26,626的高位回落。港股受中东局势紧张和布伦特原油突破$100影响，市场避险情绪升温。美元走弱至97.9可能为港股提供一定支撑。</span><span class="en" style="display:none">On May 8, the Hang Seng Index closed at 26,394, down 0.87% (−233 pts), pulling back from the prior session's 26,626 close. HK stocks were weighed by Middle East tensions and Brent crude above $100. The weaker dollar at 97.9 may provide some support.</span></p>
+<p class="src"><span class="zh">来源：Trading Economics / Yahoo Finance</span><span class="en" style="display:none">Sources: Trading Economics / Yahoo Finance</span></p>
+</div>
+
+<h2>🔮 <span class="zh">核心驱动与预判</span><span class="en" style="display:none">Key Drivers & Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">1️⃣ AI/半导体 — 跨市场绝对主线，但有泡沫隐忧</span><span class="en" style="display:none">1️⃣ AI/Semis — Absolute Dominant Theme, But Bubble Concerns</span></h4>
+<p><span class="zh">无论美股还是A股，AI和半导体都是最强主线。美股方面：NVDA持续走高，存储芯片（Micron、Sandisk）暴涨，SOX指数季度内涨55%、年内涨65%。A股方面：AI算力、CPO、光通信全面爆发，科创50一度暴涨超9%。但Burry的泡沫警告不容忽视——SOX的涨幅曲线与2000年3月互联网泡沫惊人相似。AI生产力革命的"这次不一样"论调有道理，但市场情绪确实到了狂热阶段。</span><span class="en" style="display:none">AI and semis dominate both US and China markets. In the US: NVDA continues rising, memory chips (Micron, Sandisk) surge, SOX up 55% in Q2, 65% YTD. In A-shares: AI computing, CPO, optical comms break out, STAR 50 surged 9%+ intraday. But Burry's bubble warning shouldn't be ignored — the SOX rally curve is strikingly similar to March 2000 dot-com peak. The "this time is different" narrative (AI productivity revolution) has merit, but market sentiment is clearly in euphoric territory.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Burry Substack / 新浪财经</span><span class="en" style="display:none">Sources: Reuters / Burry Substack / Sina Finance</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2️⃣ 美伊冲突 — 市场最大地缘风险</span><span class="en" style="display:none">2️⃣ US-Iran Conflict — Biggest Geopolitical Risk</span></h4>
+<p><span class="zh">美伊冲突持续，布伦特原油突破$100/桶。霍尔木兹海峡仍受阻，全球能源供应紧张。美国期待伊朗在周五内回应最新和平方案。周末谈判进展将直接影响周一油价和全球市场情绪。好消息是：投资者在AI狂热中似乎已对地缘风险脱敏——油价>$100但美股照涨不误。</span><span class="en" style="display:none">US-Iran conflict continues with Brent crude above $100/barrel. The Strait of Hormuz remains disrupted, tightening global energy supply. The US expects Iran's response to its latest peace proposal on Friday. Weekend developments will directly impact Monday's oil prices and global sentiment. Silver lining: investors seem desensitized to geopolitical risk amid AI euphoria — oil >$100 but US stocks rally regardless.</span></p>
+<p class="src"><span class="zh">来源：Reuters / Trading Economics</span><span class="en" style="display:none">Sources: Reuters / Trading Economics</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3️⃣ 短期预判</span><span class="en" style="display:none">3️⃣ Short-term Outlook</span></h4>
+<p><span class="zh"><b>美股：</b>连涨6周后估值偏高但AI主线极强。周六非交易日，重点关注周末美伊谈判进展——若利好，周一可能冲高；若恶化，油价飙升可能触发回调。Burry的泡沫警告值得留意，但短期内"不要与AI趋势作对"仍是主旋律。<br><b>A股：</b>上证在4,180附近高位小幅调整属正常技术性休整，中长期趋势向好。若下周继续放量，有望突破4,197前高。创业板11年新高后的回调不必过度担忧。<br><b>港股：</b>恒指26,000-26,500区间震荡。中东局势和油价是主要变量，美元走弱提供一定支撑。</span><span class="en" style="display:none"><b>US Stocks:</b> Extended after 6-week rally, valuations rich but AI theme extremely strong. Saturday non-trading — focus on weekend Iran-US talks. Positive news → Monday rally; escalation → oil spike could trigger pullback. Burry's warning worth noting, but "don't fight the AI tape" remains the mantra short-term.<br><b>A-Shares:</b> SSE around 4,180 pullback is normal consolidation, medium-term trend positive. If volume picks up next week, could break 4,197 prior high. ChiNext's post-ATH pullback is not a concern.<br><b>HK:</b> HSI consolidating 26,000-26,500. Middle East/oil is the key variable; weaker dollar provides some support.</span></p>
+<p class="src"><span class="zh">来源：Sky 综合分析</span><span class="en" style="display:none">Sources: Sky Composite Analysis</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSTECH — 恒生科技</div><div id="tv-hstech"></div></div>
+<div class="kline-item"><div class="kline-label">AMD</div><div id="tv-amd"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Reuters, Yahoo Finance, CNBC, 新浪财经, 证券时报, Trading Economics, Burry Substack</span><span class="en" style="display:none">Data sources: Reuters, Yahoo Finance, CNBC, Sina Finance, Securities Times, Trading Economics, Burry Substack</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hstech', sym:'HKEX:HSTECH'},
+  {id:'tv-amd', sym:'NASDAQ:AMD'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

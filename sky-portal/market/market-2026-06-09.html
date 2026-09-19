@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-09</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.stock-label{color:#888;font-size:0.72em;margin-top:4px}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#aaa;border:1px solid rgba(255,255,255,0.15)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{background:rgba(74,222,128,0.08);border-left:3px solid #4ade80;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c2a,#0d3320)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">A股暴力反弹</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares Surge</div>
+<div class="zh poster-data">• 沪指+1.28% 重回4000点<br>• 深成指+3.02% · 创业板+3.93%<br>• 超3300只个股飘红</div>
+<div class="en poster-data" style="display:none">• SSE +1.28% reclaims 4000<br>• SZSE +3.02% · ChiNext +3.93%<br>• 3300+ stocks in the green</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7f1d1d,#450a0a)">
+<div class="poster-icon">🔴</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">美股芯片回落</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chip Rebound Fizzles</div>
+<div class="zh poster-data">• 费城半导体 -1.93%<br>• 纳斯达克 -0.97%<br>• SMH周一+6%后回吐</div>
+<div class="en poster-data" style="display:none">• SOX -1.93%<br>• Nasdaq -0.97%<br>• SMH gives back Mon's +6%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f,#0c1f36)">
+<div class="poster-icon">🕊️</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">美伊谈判突破</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Deal Close</div>
+<div class="zh poster-data">• 特朗普：协议"最后阶段"<br>• 2-3天内可能达成<br>• 油价回落至$89</div>
+<div class="en poster-data" style="display:none">• Trump: "Final stages"<br>• Deal possible in 2-3 days<br>• Oil drops to $89</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#581c87,#2e1065)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">OpenAI提交IPO</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">OpenAI Files IPO</div>
+<div class="zh poster-data">• 秘密提交IPO申请<br>• 估值$8520亿<br>• SpaceX本周五上市</div>
+<div class="en poster-data" style="display:none">• Confidential IPO filing<br>• $852B valuation<br>• SpaceX debuts Friday</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-09 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">50,872</div><div class="stock-change up">+0.17%</div><div class="stock-label">道琼斯</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,386.65</div><div class="stock-change down">-0.26%</div><div class="stock-label">标普500</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">25,678.82</div><div class="stock-change down">-0.97%</div><div class="stock-label">纳斯达克</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,657.81</div><div class="stock-change down">-1.93%</div><div class="stock-label">费城半导体</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">21.51</div><div class="stock-change up">+8.3%</div><div class="stock-label">恐慌指数</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en" style="display:none">China A-Shares Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,010.03</div><div class="stock-change up">+1.28%</div><div class="stock-label">SSE Composite</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,268.71</div><div class="stock-change up">+3.02%</div><div class="stock-label">SZSE Component</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">—</div><div class="stock-change up">+3.93%</div><div class="stock-label">ChiNext</div></div>
+<div class="stock-item"><div class="stock-ticker">科创综指</div><div class="stock-price">—</div><div class="stock-change up">+5.57%</div><div class="stock-label">STAR 50</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">2.6万亿</div><div class="stock-change flat">放量</div><div class="stock-label">两市合计</div></div>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">24,565.90</div><div class="stock-change down">-0.37%</div><div class="stock-label">Hang Seng</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,769.61</div><div class="stock-change up">+0.29%</div><div class="stock-label">HSTECH</div></div>
+<div class="stock-item"><div class="stock-ticker">南向资金</div><div class="stock-price">净卖出86亿</div><div class="stock-change down">流出</div><div class="stock-label">港股通</div></div>
+</div>
+
+<h2>⚡ <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">半导体冲高回落，芯片热潮面临获利了结</span><span class="en" style="display:none">1. Chip Rebound Fizzles as Profit-Taking Kicks In</span></h4>
+<p><span class="zh">费城半导体指数(SOX)在上周五暴跌10%（6年最差）、周一报复性反弹6%后，周二再次下跌1.93%。SMH半导体ETF跌1%，美光(MU)跌1%，博通(AVGO)跌1%。本轮AI芯片行情涨幅过快过猛，投资者开始大规模获利了结。尽管如此，JPMorgan重申Nvidia"增持"评级，BofA上调Oracle目标价至$240（周三财报前），机构中长期依然看多。</span><span class="en" style="display:none">The PHLX Semiconductor Index (SOX) slid 1.93% after Friday's -10% plunge (worst in 6 years) and Monday's +6% bounce. SMH ETF fell 1%, Micron -1%, Broadcom -1%. The AI chip rally has run too far too fast, prompting heavy profit-taking. Still, JPMorgan reiterated Nvidia as "overweight" and BofA raised Oracle's PT to $240 ahead of Wednesday earnings — institutions remain bullish on the medium-to-long term.</span></p>
+<p class="src">来源：CNBC / MarketWatch / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">美伊和谈进入"最后阶段"，油价回落</span><span class="en" style="display:none">2. US-Iran Deal in "Final Stages," Oil Pulls Back</span></h4>
+<p><span class="zh">特朗普周二表示美伊谈判处于"最后阶段"，2-3天内可能达成一项"非常非常好的协议，绝不允许核武器"。伊朗暂停对以色列的军事打击，但警告若以色列继续在黎巴嫩行动将恢复攻击。以色列总理内塔尼亚胡则称冲突"尚未结束"。油价应声回落至$89附近，能源板块承压。霍尔木兹海峡局势仍是市场最大不确定性。</span><span class="en" style="display:none">Trump said Tuesday that US-Iran negotiations are in the "final stages" with a deal possible in 2-3 days — a "very, very good deal that will not in any way allow nuclear weapons." Iran paused strikes on Israel but warned of resumption if Israel continues Lebanon operations. Netanyahu said the conflict is "not yet over." Oil pulled back to ~$89. The Strait of Hormuz remains the market's biggest wildcard.</span></p>
+<p class="src">来源：Bloomberg / CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">OpenAI秘密提交IPO，2026科技IPO超级周期开启</span><span class="en" style="display:none">3. OpenAI Confidentially Files IPO, 2026 Tech IPO Supercycle Begins</span></h4>
+<p><span class="zh">OpenAI已秘密提交IPO申请，估值达$8520亿（3月融资$1220亿后）。这将是史上最受期待的IPO之一。与此同时，竞争对手Anthropic也宣布了上市计划，SpaceX将于本周五（6月12日）正式挂牌。三大AI/科技巨头密集上市，标志着2026年科技IPO超级周期的开启。投资者可通过FPX、IPO等ETF提前布局。</span><span class="en" style="display:none">OpenAI has confidentially filed for an IPO, valued at $852B (after raising $122B in March). This will be one of the most anticipated market debuts in history. Meanwhile, rival Anthropic announced plans to go public, and SpaceX is set to debut this Friday (June 12). Three mega IPOs signal a 2026 tech supercycle. Investors can position via FPX and IPO ETFs.</span></p>
+<p class="src">来源：CNN / CNBC / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4>4️⃣ <span class="zh">A股独立行情：科技股暴力反弹，沪指重回4000点</span><span class="en" style="display:none">4. A-Shares Decouple: Tech Surge, SSE Reclaims 4000</span></h4>
+<p><span class="zh">A股三大指数高开高走集体收涨，沪指涨1.28%报4,010.03点重回4000关口，深成指暴涨3.02%，创业板指大涨3.93%。超3300只个股飘红，成交额超2.6万亿。科技股是最大亮点，AI PC、人形机器人、光通信等概念板块涨幅居前。A股走势与美股脱钩，显示国内资金做多意愿强烈。</span><span class="en" style="display:none">China's three major indices rallied in unison. SSE +1.28% to 4,010.03 (reclaiming 4000), SZSE +3.02%, ChiNext +3.93%. Over 3,300 stocks rose with combined volume exceeding 2.6 trillion yuan. AI PC, humanoid robotics, and optical communication sectors led gains. A-shares decoupled from US markets, signaling strong domestic buying appetite.</span></p>
+<p class="src">来源：新浪财经 / 证券时报 / 京报新闻</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">明日/近期关注要点</span><span class="en" style="display:none">Near-Term Focus</span></h4>
+
+<div class="highlight">
+<span class="zh"><b>🔑 最大变量：美伊谈判进展</b> — 若2-3天内达成协议，将提振全球风险偏好，油价可能跌破$85，能源板块承压但科技和消费受益</span>
+<span class="en" style="display:none"><b>🔑 Key Variable: US-Iran Deal Progress</b> — A deal in 2-3 days would boost global risk appetite, potentially pushing oil below $85. Energy would suffer but tech and consumer sectors would benefit.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>📊 半导体短线整理</b> — SOX连续剧烈波动（周五-10%、周一+6%、周二-1.93%）后进入整理期。关注周三Oracle财报（AI云基础设施需求风向标），若超预期将重新点燃板块情绪</span>
+<span class="en" style="display:none"><b>📊 Semiconductor Consolidation</b> — After extreme volatility (Fri -10%, Mon +6%, Tue -1.93%), SOX enters a consolidation phase. Watch Oracle earnings Wednesday (AI cloud demand bellwether). A beat could re-ignite the sector.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>🇨🇳 A股独立行情持续</b> — 创业板+4%、深成指+3%的强势表现显示国内资金面充裕。关注周三A股能否延续反弹，以及恒指24,000点支撑</span>
+<span class="en" style="display:none"><b>🇨🇳 A-Shares Independence</b> — ChiNext +4% and SZSE +3% show ample domestic liquidity. Watch for A-share follow-through Wednesday and HSI support at 24,000.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>🚀 SpaceX IPO周五登场</b> — 本周最大事件之一，将测试市场对巨型IPO的胃口。结合OpenAI和Anthropic的上市计划，6月将成为2026年IPO市场的高潮</span>
+<span class="en" style="display:none"><b>🚀 SpaceX IPO Friday</b> — One of the week's biggest events, testing market appetite for mega IPOs. Combined with OpenAI and Anthropic, June marks the climax of the 2026 IPO market.</span>
+</div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — PHLX Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">HSTECH — 恒生科技</div><div id="tv-hstech"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span> · Sky Portal · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, Bloomberg, Yahoo Finance, MarketWatch, Sina Finance, Securities Times</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-hstech', sym:'HKEX:HSTECH'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

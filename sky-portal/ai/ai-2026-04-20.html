@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI · 2026-04-20 — AI六大处理器全景对比</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#22d3ee;font-size:1.6em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:6px}
+.source-bar{text-align:center;margin-bottom:24px;font-size:0.85em}
+.source-bar a{color:#22d3ee;text-decoration:none}
+.section{margin-bottom:28px}
+.section-title{color:#22d3ee;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#22d3ee;text-decoration:none}
+.card .highlight{color:#22d3ee;font-weight:600}
+.card .pro{color:#4ade80}
+.card .con{color:#f87171}
+.table-wrap{overflow-x:auto;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:0.9em}
+th{background:#1a1a1a;color:#22d3ee;padding:10px 12px;text-align:left;border-bottom:1px solid #2a2a2a}
+td{padding:10px 12px;border-bottom:1px solid #1a1a1a;color:#ccc}
+tr:hover{background:#1a1a1a}
+.tag{display:inline-block;background:rgba(34,211,238,0.1);color:#22d3ee;font-size:0.75em;padding:2px 8px;border-radius:4px;margin-right:4px}
+.quote{background:#1a1a1a;border-left:3px solid #22d3ee;border-radius:0 12px 12px 0;padding:16px 22px;margin-bottom:14px;font-style:italic;color:#bbb}
+.quote .author{color:#22d3ee;font-style:normal;font-size:0.85em;margin-top:6px}
+.insight{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.insight h3{color:#f0a040;font-size:1.05em;margin-bottom:8px}
+.insight p{color:#ccc;font-size:0.92em}
+.img-wrap{text-align:center;margin-bottom:20px}
+.img-wrap img{max-width:100%;border-radius:12px;border:1px solid #2a2a2a}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#22d3ee;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px} th,td{padding:8px;font-size:0.82em}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 AI #002</h1>
+<div class="subtitle">2026-04-20 · 星期一</div>
+<div class="source-bar">📊 信息图 · 来源：March 2026 · 类型：处理器架构科普</div>
+
+<!-- 原图 -->
+<div class="img-wrap">
+<img src="images/processor-comparison.png" alt="CPU vs GPU vs TPU vs NPU vs LPU vs DPU 对比图" loading="lazy">
+</div>
+
+<!-- 概述 -->
+<div class="section">
+<div class="section-title">📋 概述</div>
+<div class="card">
+<h3>现代AI的六大处理器</h3>
+<p>这张信息图以笔记本/活页风格，清晰对比了驱动现代AI的六种处理器：CPU、GPU、TPU、NPU、LPU、DPU。每种处理器都展示了工作流、优缺点和适用场景。对理解AI硬件生态全貌非常有帮助。</p>
+</div>
+</div>
+
+<!-- 逐个解析 -->
+<div class="section">
+<div class="section-title">🔑 六大处理器详解</div>
+
+<div class="card">
+<h3>1️⃣ CPU — "The Backbone" 通用处理器</h3>
+<p><strong>定位：</strong>通用 · 串行处理 · 调度编排</p>
+<p><strong>工作流：</strong>用户请求 → CPU调度 → 路由到正确处理器 → 管理I/O → 返回结果</p>
+<p class="pro">✓ 什么任务都能跑 · ✓ 单线程性能最强 · ✓ 跑操作系统和编排</p>
+<p class="con">✗ 并行数学运算慢 · ✗ 无法训练大模型 · ✗ AI吞吐量低</p>
+<p><span class="highlight">关键认知：CPU不是被替代，而是成为AI系统的"指挥官"——负责调度其他专用芯片。</span></p>
+</div>
+
+<div class="card">
+<h3>2️⃣ GPU — "NVIDIA Dominates" 并行计算之王</h3>
+<p><strong>定位：</strong>并行 · CUDA核心 · 训练</p>
+<p><strong>工作流：</strong>加载模型 → 分配到16,896个核心并行执行 → 矩阵乘法 → 反向传播 → 更新权重</p>
+<p class="pro">✓ 大规模并行 · ✓ 训练+推理都能做 · ✓ 庞大生态（CUDA）</p>
+<p class="con">✗ 700W功耗 · ✗ 贵（H100 $30K+） · ✗ 小任务杀鸡用牛刀</p>
+<p><span class="highlight">现状：NVIDIA通过CUDA生态建立了几乎不可撼动的护城河。AMD/Intel的GPU仍在追赶。</span></p>
+</div>
+
+<div class="card">
+<h3>3️⃣ TPU — "Google's Weapon" 张量专用</h3>
+<p><strong>定位：</strong>脉动阵列 · Google · 张量运算</p>
+<p><strong>工作流：</strong>加载模型 → 脉动阵列处理（数据锁步流动） → 片上矩阵运算 → Pod扩展到9,216个TPU → 训练完成</p>
+<p class="pro">✓ 比GPU便宜2倍 · ✓ 能效比高2-3倍 · ✓ 单Pod可扩展到9,216个</p>
+<p class="con">✗ 只能在Google Cloud用 · ✗ 灵活性不如GPU · ✗ 框架支持有限</p>
+<p><span class="highlight">核心优势：脉动阵列（Systolic Array）架构专为矩阵运算优化，大规模训练时性价比碾压GPU。但Google把它锁在自己的云里。</span></p>
+</div>
+
+<div class="card">
+<h3>4️⃣ NPU — "AI in Your Pocket" 边缘推理</h3>
+<p><strong>定位：</strong>边缘AI · 端侧 · 低功耗</p>
+<p><strong>工作流：</strong>用户输入 → 端侧NPU激活（无需云） → INT8/INT4量化 → 毫秒级推理 → 即时响应</p>
+<p class="pro">✓ 个位数瓦特功耗 · ✗ 无云延迟（5ms） · ✗ 数据留在设备上</p>
+<p class="con">✗ 只能推理不能训练 · ✗ 模型大小受限 · ✗ 精度不如GPU</p>
+<p><span class="highlight">趋势：Apple M系列芯片的Neural Engine、高通Hexagon NPU都在这个赛道。未来每台手机/笔记本都有NPU。</span></p>
+</div>
+
+<div class="card">
+<h3>5️⃣ LPU — "Fastest Alive" 极速推理</h3>
+<p><strong>定位：</strong>Groq · SRAM · 确定性推理</p>
+<p><strong>工作流：</strong>Prompt输入 → 权重从片上SRAM加载（230MB/芯片，零缓存未命中） → 确定性执行 → 241 tokens/sec → ~1秒500词</p>
+<p class="pro">✓ 最快推理速度（241 t/s） · ✗ 零缓存未命中 · ✗ 确定性执行</p>
+<p class="con">✗ 只能推理 · ✗ 单芯片内存有限 · ✗ 需要数百芯片互联</p>
+<p><span class="highlight">Groq的创新：放弃传统缓存层次，全部用SRAM存权重，消除内存带宽瓶颈。代价是每芯片只能存230MB，需要大量芯片并联。</span></p>
+</div>
+
+<div class="card">
+<h3>6️⃣ DPU — "Invisible Layer" 基础设施</h3>
+<p><strong>定位：</strong>SmartNIC · 卸载 · 基础设施</p>
+<p><strong>工作流：</strong>网络流量 → DPU在硬件层拦截（从CPU卸载） → 加密+防火墙 → 存储I/O路由 → CPU释放给AI工作负载</p>
+<p class="pro">✓ 释放CPU给应用 · ✗ 硬件级安全 · ✗ 400Gb/s网络</p>
+<p class="con">✗ 不面向终端/消费者 · ✗ 配置复杂 · ✗ 场景小众</p>
+<p><span class="highlight">价值：在万卡GPU集群中，DPU负责网络、存储、安全卸载，让GPU专注算力。NVIDIA的BlueField DPU就是这个赛道。</span></p>
+</div>
+</div>
+
+<!-- 选择指南 -->
+<div class="section">
+<div class="section-title">🎯 何时用哪个？</div>
+<div class="table-wrap">
+<table>
+<tr><th>处理器</th><th>最佳场景</th><th>关键指标</th></tr>
+<tr><td>CPU</td><td>编排与预处理</td><td>灵活性、通用性</td></tr>
+<tr><td>GPU</td><td>训练与深度学习</td><td>并行度、生态</td></tr>
+<tr><td>TPU</td><td>Google级张量工作负载</td><td>性价比、能效</td></tr>
+<tr><td>NPU</td><td>边缘/移动端推理</td><td>功耗、延迟</td></tr>
+<tr><td>LPU</td><td>实时LLM推理</td><td>吞吐量、确定性</td></tr>
+<tr><td>DPU</td><td>数据中心基础设施</td><td>网络带宽、卸载</td></tr>
+</table>
+</div>
+<div class="quote">
+"选择处理器的核心维度：延迟、并行度、功耗、成本、规模。没有最好的处理器，只有最合适的。"
+</div>
+</div>
+
+<!-- 行业洞察 -->
+<div class="section">
+<div class="section-title">🔬 Sky的行业补充</div>
+
+<div class="card">
+<h3>处理器格局的本质：专用化 vs 通用化</h3>
+<p>AI处理器的发展方向是<span class="highlight">越来越专用化</span>。GPU本是为图形设计，后来"碰巧"适合AI训练；TPU/LPU/NPU则是为AI量身定制的。专用芯片的代价是灵活性下降——这就是为什么CPU永远不会消失，它是整个系统的"操作系统"。</p>
+</div>
+
+<div class="card">
+<h3>对Sky Portal的行业关联</h3>
+<p>在半导体行业中，这个趋势意味着：<span class="highlight">未来的芯片设计不再是"一颗芯片打天下"，而是异构集成（Heterogeneous Integration）</span>。Intel的Ponte Vecchio、AMD的MI300都在走Chiplet路线，把不同功能的Die封装在一起。这跟之前每日科技讲的Chiplet/3D封装趋势完全吻合。</p>
+<p>另一个观察：<span class="highlight">NVIDIA的统治力不仅来自GPU硬件，更来自CUDA软件生态</span>——这就像当年Intel的x86生态。TPU/LPU想要挑战，不仅要硬件强，还要建软件生态。</p>
+</div>
+</div>
+
+<!-- Sky Portal的思考 -->
+<div class="section">
+<div class="section-title">💭 Sky Portal的思考</div>
+<div class="insight">
+<h3>📝 待补充</h3>
+<p>Sky Portal，看到这张图有什么想法？比如：</p>
+<p>• 作为半导体从业者，这六大处理器你最有体感的是哪个？</p>
+<p>• 异构集成在你所在的产品线上是怎么体现的？</p>
+<p>• 你觉得未来会不会出现第七种专用处理器？</p>
+</div>
+</div>
+
+</div>
+<div class="footer">
+<p>☁️ Sky Portal · <a href="index.html">← AI 目录</a> · <a href="/sky-portal/">返回主页</a></p>
+</div>
+</body>
+</html>

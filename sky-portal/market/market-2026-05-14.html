@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-14</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.prediction-box{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:18px 20px;margin:20px 0}
+.prediction-box h3{color:#4ade80;margin-bottom:10px}
+.prediction-box ul{padding-left:20px}
+.prediction-box li{margin-bottom:8px;font-size:0.92em}
+.highlight{color:#4ade80;font-weight:600}
+.warning{color:#f87171;font-weight:600}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#15803d 0%,#4ade80 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股三指数齐创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Triple ATH for US Markets</div>
+<div class="zh poster-data">• 标普500 +0.77% → 7,501（首次站上7500）<br>• 纳指 +0.88% → 26,635（历史新高）<br>• 道指 +0.75% → 50,063（重返5万）</div>
+<div class="en poster-data" style="display:none">• S&P 500 +0.77% → 7,501 (first close above 7,500)<br>• Nasdaq +0.88% → 26,635 (ATH)<br>• Dow +0.75% → 50,063 (reclaims 50K)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#ef4444 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股回调 港股下跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China/HK Pull Back</div>
+<div class="zh poster-data">• 上证 -1.52% → 4,178<br>• 创业板 -2.16% → 失守4000<br>• 恒指 5/15: -0.89% → 26,154</div>
+<div class="en poster-data" style="display:none">• Shanghai -1.52% → 4,178<br>• ChiNext -2.16% → below 4,000<br>• HSI 5/15: -0.89% → 26,154</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 100%)">
+<div class="poster-icon">🤝</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">Trump-Xi峰会第二天</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Trump-Xi Summit Day 2</div>
+<div class="zh poster-data">• 双方同意霍尔木兹海峡保持开放<br>• 习近平警告台湾为潜在冲突引爆点<br>• 峰会周五收官</div>
+<div class="en poster-data" style="display:none">• Both sides agree Strait of Hormuz must stay open<br>• Xi warns Taiwan as potential flashpoint<br>• Summit concludes Friday</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#ea580c 0%,#f97316 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI持续狂飙</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Rally Continues</div>
+<div class="zh poster-data">• 英伟达 +4.39%，7天累涨20%<br>• Cerebras IPO首日上市<br>• SpaceX下周披露IPO招股书</div>
+<div class="en poster-data" style="display:none">• NVIDIA +4.39%, 7-day gain 20%<br>• Cerebras IPO debut<br>• SpaceX prospectus could land next week</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-14 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘（5月14日周四）</span><span class="en" style="display:none">US Market Close (May 14, Thu)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,501</div><div class="stock-change up">+0.77%</div></div>
+<div class="stock-item"><div class="stock-ticker">Nasdaq</div><div class="stock-price">26,635</div><div class="stock-change up">+0.88%</div></div>
+<div class="stock-item"><div class="stock-ticker">Dow Jones</div><div class="stock-price">50,063</div><div class="stock-change up">+0.75%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX (费半)</div><div class="stock-price">12,109</div><div class="stock-change up">+0.76%</div></div>
+<div class="stock-item"><div class="stock-ticker">Russell 2K</div><div class="stock-price">2,863</div><div class="stock-change up">+0.67%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">标普500首破7500，道指重返5万，纳指同创新高</span><span class="en" style="display:none">S&P 500 Breaks 7,500 for First Time, Dow Reclaims 50K, Nasdaq ATH</span></h4>
+<p><span class="zh">美股三大指数周四全线收涨，标普500上涨0.77%至7,501.24点首次站上7500关口，纳斯达克综合指数涨0.88%至26,635.22点，道琼斯工业平均指数涨0.75%至50,063.46点——这是自伊朗战争爆发以来道指首次收盘站上50,000点。三大指数均创历史新高，标普和纳指已连续第七周上涨。Cisco Systems财报超预期成为当日最大推手，AI需求持续驱动科技股走强。</span><span class="en" style="display:none">All three major US indexes closed higher Thursday. S&P 500 rose 0.77% to 7,501.24, breaking above 7,500 for the first time. Nasdaq gained 0.88% to 26,635.22. The Dow climbed 0.75% to 50,063.46 — its first close above 50,000 since the Iran war began. All three set new all-time highs. The S&P 500 and Nasdaq are on pace for their 7th straight week of gains. Cisco Systems' earnings beat was the day's biggest catalyst, with AI demand continuing to power tech stocks.</span></p>
+<p class="src">来源：CNBC / WDRB (AP) / WSJ / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">英伟达7天累涨20%，市值逼近6万亿美元</span><span class="en" style="display:none">NVIDIA Gains 20% in 7 Days, Market Cap Nears $6 Trillion</span></h4>
+<p><span class="zh">英伟达股价周四继续上涨4.39%，收报$235.74，盘中一度触及$236.54。过去7个交易日累计涨幅达20%，市值逼近6万亿美元大关。英伟达的持续走强源于AI芯片需求的爆炸性增长，以及黄仁勋随Trump访华释放的合作信号。英伟达今年以来的涨幅已超过14%，而费城半导体指数年内累涨超过70%。</span><span class="en" style="display:none">NVIDIA rose another 4.39% on Thursday, closing at $235.74 after touching $236.54 intraday. The stock has surged 20% over the past 7 trading days, with market cap approaching $6 trillion. The rally is driven by explosive AI chip demand and signals from Jensen Huang's China visit with Trump. NVIDIA is up over 14% YTD, while the Philadelphia Semiconductor Index has surged more than 70% year-to-date.</span></p>
+<p class="src">来源：CNBC / 东方财富 / MarketWatch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">Cerebras IPO首日上市，AI芯片新玩家入场</span><span class="en" style="display:none">Cerebras Makes IPO Debut, New AI Chip Player Enters the Market</span></h4>
+<p><span class="zh">AI芯片公司Cerebras Systems周四正式在公开市场交易，首日表现引人注目。盘后股价上涨5%，显示投资者对AI芯片赛道的持续热情。Cerebras以其超大规模晶圆级芯片（WSE）闻名，是NVIDIA在AI训练领域的直接竞争对手。其上市进一步验证了AI芯片市场的巨大空间和多元化竞争格局。</span><span class="en" style="display:none">AI chip company Cerebras Systems made its public market debut on Thursday. Shares rose 5% in after-hours trading, reflecting continued investor appetite for AI chip stocks. Cerebras is known for its wafer-scale engine (WSE) chips and competes directly with NVIDIA in AI training. The IPO further validates the massive AI chip market and its increasingly competitive landscape.</span></p>
+<p class="src">来源：CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">市场分化隐忧：涨势集中科技巨头，大盘广度不足</span><span class="en" style="display:none">Market Breadth Concern: Rally Concentrated in Mega-Cap Tech</span></h4>
+<p><span class="zh">Truist Advisory Services首席投资官Keith Lerner警告："市场广度扩展已经失败，整体市场实际上在落后最大的科技公司。" 这一分化现象越来越令投资者担忧——标普500和纳指屡创新高的同时，小盘股（Russell 2000本周仅涨0.1%）和传统板块明显滞后，暗示涨势可能脆弱。然而AI主线短期仍看不到熄火迹象。</span><span class="en" style="display:none">Truist Advisory Services CIO Keith Lerner warned: "The broadening trade has really fizzled out. The overall market is lagging the largest tech companies." This divergence is increasingly worrying — while the S&P 500 and Nasdaq keep hitting records, small caps (Russell 2000 up just 0.1% this week) and traditional sectors lag significantly, suggesting a fragile rally. However, the AI theme shows no signs of fading in the near term.</span></p>
+<p class="src">来源：CNBC Closing Bell: Overtime</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股收盘（5月14日北京时间）</span><span class="en" style="display:none">China A-Shares Close (May 14, Beijing)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-price">4,178</div><div class="stock-change down">-1.52%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-price">~15,742</div><div class="stock-change down">-2.14%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板指</div><div class="stock-price">&lt;4,000</div><div class="stock-change down">-2.16%</div></div>
+<div class="stock-item"><div class="stock-ticker">沪深300</div><div class="stock-price">—</div><div class="stock-change down">跌</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">3万亿+</div><div class="stock-change up">连续7日</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股高开低走大幅回调，创业板失守4000点</span><span class="en" style="display:none">A-Shares Sell Off Sharply, ChiNext Drops Below 4,000</span></h4>
+<p><span class="zh">A股周四（北京时间5月14日）高开低走，全线下挫。上证指数收跌1.52%报4,177.92点，深证成指跌2.14%，创业板指跌2.16%失守4000点整数关口。万得全A指数跌2.03%。不过成交额连续7个交易日突破3万亿元，显示市场活跃度依然很高。此前创业板指刚在5月13日创历史新高突破4000点，今日的回调属于快速获利回吐。</span><span class="en" style="display:none">A-shares sold off sharply on Thursday (Beijing time May 14), opening higher but closing significantly lower. Shanghai fell 1.52% to 4,177.92, Shenzhen dropped 2.14%, and ChiNext lost 2.16%, falling back below the 4,000 level. The Wind All A index fell 2.03%. However, trading volume exceeded 3 trillion yuan for the 7th consecutive session, showing continued market activity. The ChiNext had just broken above 4,000 to a new all-time high on May 13, making this a quick profit-taking pullback.</span></p>
+<p class="src">来源：中天期货 / 新浪财经 / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股此前连创新高：5月11日沪指创10年新高，总市值破120万亿</span><span class="en" style="display:none">A-Shares Hit 10-Year Highs Earlier: Market Cap Tops 120 Trillion</span></h4>
+<p><span class="zh">尽管今日回调，A股近期表现依然强劲。5月11日上证指数创近11年新高，创业板指创历史新高，A股总市值首次突破120万亿元。5月13日创业板指继续攀升至4,038点。深圳有26家企业市值超千亿。本轮A股牛市的核心驱动力包括：政策刺激、科技板块AI概念、以及中美关系缓和预期。</span><span class="en" style="display:none">Despite today's pullback, A-shares have been remarkably strong recently. On May 11, Shanghai hit an 11-year high, ChiNext set a new ATH, and total A-share market cap broke 120 trillion yuan for the first time. On May 13, ChiNext continued climbing to 4,038. Shenzhen has 26 companies with market caps over 100 billion. Key drivers include policy stimulus, AI-themed tech, and US-China thaw expectations.</span></p>
+<p class="src">来源：深圳新闻网 / 中国证券报 / 中国新闻网</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股（5月15日北京时间）</span><span class="en" style="display:none">Hong Kong Market (May 15)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒生指数</div><div class="stock-price">26,154</div><div class="stock-change down">-0.89%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">5,094</div><div class="stock-change down">偏弱</div></div>
+<div class="stock-item"><div class="stock-ticker">中芯国际</div><div class="stock-price">↑</div><div class="stock-change up">+6.2%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股回落，投资者等待Trump-Xi峰会最终结果</span><span class="en" style="display:none">HK Pulls Back as Investors Await Final Trump-Xi Summit Outcome</span></h4>
+<p><span class="zh">恒生指数周四（5/14）收平后，周五（5/15）下跌0.89%至26,154点。尽管隔夜美股创历史新高，港股投资者在Trump-Xi峰会最终结果出炉前保持谨慎。金融和科技板块普遍走弱，腾讯跌0.3%，快手跌0.2%。但中芯国际逆势大涨6.2%，成为当日最亮眼个股，受半导体板块整体强势驱动。毛戈平化妆品跌5.5%，CARsgen跌6.5%。</span><span class="en" style="display:none">The Hang Seng fell 0.89% to 26,154 on Friday after ending flat on Thursday. Despite Wall Street's record highs overnight, HK investors stayed cautious ahead of the Trump-Xi summit's final outcomes. Financial and tech shares were broadly weak, with Tencent -0.3% and Kuaishou -0.2%. However, SMIC bucked the trend surging 6.2%, the standout of the day, driven by the overall semiconductor strength. Mao Geping Cosmetics fell 5.5%, CARsgen -6.5%.</span></p>
+<p class="src">来源：Trading Economics / CNBC Asia</p>
+</div>
+
+<h2>⚡ <span class="zh">半导体/AI重点</span><span class="en" style="display:none">Semiconductor / AI Focus</span></h2>
+
+<div class="card">
+<h4><span class="zh">费城半导体指数年内涨70%+，25天滚动涨幅创2000年以来最强</span><span class="en" style="display:none">SOX Up 70%+ YTD, 25-Day Rolling Gain Strongest Since 2000</span></h4>
+<p><span class="zh">费城半导体指数（SOX）周四收于12,108.81点，年内累计涨幅已超过70%。据道琼斯市场数据，SOX近期录得自2000年3月9日以来最强劲的25天滚动表现，期间累计上涨超过50%。对互联网泡沫亲历者而言，这个日期意义深远——2000年3月9日正是上一次半导体板块如此狂飙的时间点，之后不久互联网泡沫就破裂了。"大空头"Michael Burry已宣布做空美股半导体板块，认为当前涨势缺乏基本面支撑。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) closed at 12,108.81 Thursday, up more than 70% YTD. Per Dow Jones Market Data, SOX recorded its strongest 25-day rolling performance since March 9, 2000, surging over 50% in that period. For dot-com bubble veterans, the date is significant — March 9, 2000 was the last time semis rallied this hard, right before the bubble burst. "Big Short" Michael Burry has announced he's shorting the semiconductor sector, arguing the rally lacks fundamental support.</span></p>
+<p class="src">来源：华尔街见闻 / 东方财富 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">Cisco财报超预期，AI需求成核心增长引擎</span><span class="en" style="display:none">Cisco Earnings Beat, AI Demand Becomes Core Growth Engine</span></h4>
+<p><span class="zh">Cisco Systems成为周四美股上涨的最大推手。公司发布Q3财报超出分析师预期，并上调全年业绩指引。Cisco管理层特别强调了来自AI和其他企业客户的强劲需求。在周四常规交易中，Cisco领涨道指成分股。此前一天Cisco盘后已大涨19%，今日涨势延续。Cisco正在从传统网络硬件向软件和AI服务转型，这一策略获得市场高度认可。</span><span class="en" style="display:none">Cisco Systems was Thursday's biggest market catalyst. The company posted Q3 earnings that beat analyst expectations and raised full-year guidance. Management highlighted strong demand from AI and enterprise customers. Cisco led Dow components in Thursday's regular session, building on a 19% after-hours surge the previous day. Cisco is transitioning from traditional networking hardware to software and AI services — a pivot the market is increasingly rewarding.</span></p>
+<p class="src">来源：CNBC / AP / WDRB</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">SpaceX最早下周披露IPO招股书</span><span class="en" style="display:none">SpaceX IPO Prospectus Could Land as Soon as Next Week</span></h4>
+<p><span class="zh">据CNBC独家报道，SpaceX计划最早在下周公开其IPO招股书。该公司已于4月秘密提交上市申请。SpaceX的上市将是近年来最受瞩目的IPO之一，预计将引发太空概念股和科技板块的新一轮关注。马斯克同时参加Trump访华之行，市场关注其在中国市场的布局。</span><span class="en" style="display:none">SpaceX plans to disclose its IPO prospectus as soon as next week, according to CNBC. The company confidentially filed for an IPO in April. The SpaceX listing will be one of the most anticipated IPOs in years, likely triggering renewed interest in space and tech stocks. Musk is also part of Trump's China delegation, with the market watching for his China market strategy.</span></p>
+<p class="src">来源：CNBC</p>
+</div>
+
+<h2>🛢️ <span class="zh">商品与宏观</span><span class="en" style="display:none">Commodities & Macro</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">Brent Oil</div><div class="stock-price">$106.96</div><div class="stock-change up">+1.17%</div></div>
+<div class="stock-item"><div class="stock-ticker">Gold</div><div class="stock-price">$4,615</div><div class="stock-change up">+1.34%</div></div>
+<div class="stock-item"><div class="stock-ticker">US 10Y</div><div class="stock-price">4.516%</div><div class="stock-change down">+5.7bp</div></div>
+<div class="stock-item"><div class="stock-ticker">EUR/USD</div><div class="stock-price">1.1649</div><div class="stock-change up">+0.18%</div></div>
+<div class="stock-item"><div class="stock-ticker">USD/CNY</div><div class="stock-price">6.798</div><div class="stock-change up">+0.17%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">油价逼近$107，霍尔木兹海峡局势紧张</span><span class="en" style="display:none">Oil Nears $107, Strait of Hormuz Tensions Rise</span></h4>
+<p><span class="zh">布伦特原油期货收于$106.96/桶，上涨1.17%，逼近$107关口。油价本周持续走高，主要受霍尔木兹海峡周边紧张局势推动。中美峰会中双方同意维护海峡开放，但实际执行的不确定性仍然推高油价。高油价引发通胀担忧——美国10年期国债收益率升至4.516%，上涨5.7个基点。黄金同步上涨1.34%至$4,615，避险情绪与通胀预期并存。</span><span class="en" style="display:none">Brent crude closed at $106.96/barrel, up 1.17%, nearing the $107 mark. Oil has been rising all week on Strait of Hormuz tensions. Both US and China agreed to keep the Strait open at the summit, but execution uncertainty keeps prices elevated. High oil stokes inflation concerns — the US 10-year yield rose to 4.516%, up 5.7bp. Gold also rose 1.34% to $4,615, reflecting a mix of safe-haven demand and inflation expectations.</span></p>
+<p class="src">来源：Reuters / LSEG</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">亚太市场周五多数下跌，韩国Kospi从8,000点回落</span><span class="en" style="display:none">Asia-Pacific Mostly Lower Friday; Kospi Retreats from 8,000</span></h4>
+<p><span class="zh">亚太市场周五多数走弱。韩国Kospi从8,000点历史高位回落，下跌1.35%。日经225跌0.9%。澳大利亚ASX 200跌0.25%。三星电子跌1%（劳资谈判影响）。投资者在Trump-Xi峰会最终结果出炉前普遍谨慎。韩国Kosdaq跌2%。</span><span class="en" style="display:none">Asia-Pacific markets were mostly lower Friday. South Korea's Kospi fell 1.35%, retreating from a record above 8,000. Japan's Nikkei 225 lost 0.9%. Australia's ASX 200 fell 0.25%. Samsung Electronics dropped 1% on labor union issues. Investors broadly cautious ahead of the final Trump-Xi summit outcome. Korea's Kosdaq dropped 2%.</span></p>
+<p class="src">来源：CNBC Asia / Reuters</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="prediction-box">
+<h3>📋 <span class="zh">明日/近期关注要点</span><span class="en" style="display:none">Key Points to Watch</span></h3>
+<ul>
+<li><span class="zh"><b>Trump-Xi峰会周五收官：</b>最终联合声明是本周最大变量。如释放积极信号（半导体合作、关税减免），A股港股下周可能强劲反弹；如措辞模糊或无实质成果，A股创业板4000点保卫战将更加艰难。</span><span class="en" style="display:none"><b>Trump-Xi summit concludes Friday:</b> The final joint statement is the week's biggest variable. Positive signals (semiconductor cooperation, tariff relief) could trigger a sharp China/HK rally next week; vague language or no concrete results would make ChiNext's 4,000 defense much harder.</span></li>
+<li><span class="zh"><b>AI/半导体仍是美股最强主线：</b>标普500连续7周上涨，AI驱动不可阻挡。但费半年内涨70%+，25天涨50%的历史级表现令人警觉——上一次是2000年3月互联网泡沫顶部。Burry已做空。<span class="warning">追高风险极大。</span></span><span class="en" style="display:none"><b>AI/Semis remain the strongest US theme:</b> S&P 500 up 7 straight weeks, AI momentum unstoppable. But SOX up 70%+ YTD and 50% in 25 days — the last time was March 2000 at the dot-com peak. Burry is already short. <span class="warning">Chase risk is extremely high.</span></span></li>
+<li><span class="zh"><b>A股创业板4000点争夺战：</b>创业板5/13刚创新高突破4000，5/14即回落。4000点整数关口是短期心理支撑位。如果峰会利好，周一有望收复；如果利空，可能进一步回调至3,800支撑区。</span><span class="en" style="display:none"><b>ChiNext 4,000 battle:</b> ChiNext just broke above 4,000 to a new ATH on 5/13, then fell back on 5/14. The 4,000 level is a key psychological support. Summit positives could see recapture Monday; negatives could push to 3,800 support.</span></li>
+<li><span class="zh"><b>SpaceX IPO下周可能披露招股书：</b>这是继Cerebras之后又一个重磅IPO，预计将带动太空概念和科技IPO板块。</span><span class="en" style="display:none"><b>SpaceX IPO prospectus could drop next week:</b> Following Cerebras, this is another blockbuster IPO expected to energize space and tech IPO sectors.</span></li>
+<li><span class="zh"><b><span class="warning">风险提示：</span></b>霍尔木兹海峡局势 + 油价$107 是最大地缘风险。美国10年期国债收益率4.516%，高利率环境持续压制传统板块估值。市场广度收窄，涨势集中在少数科技巨头。</span><span class="en" style="display:none"><b><span class="warning">Risk Alert:</span></b> Strait of Hormuz tensions + $107 oil are the biggest geopolitical risks. US 10Y at 4.516%, high rates continue to pressure traditional sector valuations. Market breadth is narrowing, with gains concentrated in a handful of mega-cap tech names.</span></li>
+</ul>
+</div>
+
+<div class="card">
+<h4><span class="zh">📊 本周涨跌幅汇总</span><span class="en" style="display:none">📊 Weekly Performance Summary</span></h4>
+<p><span class="zh">
+<b>美股（截至周四收盘）：</b><br>
+• 标普500: 本周 +1.38%（连续第7周上涨）<br>
+• 纳指: 本周 +1.48%（连续第7周上涨）<br>
+• 道指: 本周 +0.92%（近7周第6周上涨）<br>
+• 费半SOX: 本周约 +8.2%<br><br>
+<b>A股/港股：</b><br>
+• 上证: 本周先涨后跌，周四-1.52%大幅回调<br>
+• 创业板: 本周创新高后回落，4000点拉锯<br>
+• 恒指: 周五-0.89%，全周偏弱
+</span><span class="en" style="display:none">
+<b>US Markets (through Thursday):</b><br>
+• S&P 500: Week +1.38% (7th straight positive week)<br>
+• Nasdaq: Week +1.48% (7th straight positive week)<br>
+• Dow: Week +0.92% (6th positive week in 7)<br>
+• SOX: Week ~+8.2%<br><br>
+<b>China/HK:</b><br>
+• Shanghai: Rose then fell sharply, Thu -1.52%<br>
+• ChiNext: ATH then pullback, 4,000 tug-of-war<br>
+• HSI: Fri -0.89%, weak for the week
+</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, WSJ, Reuters, AP, WDRB, Trading Economics, 新浪财经, 东方财富, 中天期货</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-07-31</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(148,163,184,0.15);color:#94a3b8;border:1px solid rgba(148,163,184,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{color:#4ade80;font-weight:600}
+.danger{color:#f87171;font-weight:600}
+.divider{border:none;border-top:1px solid #2a2a2a;margin:20px 0}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#16a34a,#15803d)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">亚马逊财报炸裂</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Amazon Earnings Blowout</div>
+<div class="zh poster-data">• AMZN +15.3% AWS超预期<br>• MSFT +8% 同样强劲<br>• 三大指数周涨1%+</div>
+<div class="en poster-data" style="display:none">• AMZN +15.3% AWS beats<br>• MSFT +8% also strong<br>• All 3 indices +1%+ weekly</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626,#991b1b)">
+<div class="poster-icon">🍎</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">苹果财报失色</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Apple Disappoints</div>
+<div class="zh poster-data">• AAPL -7.4% 蒸发$3580亿<br>• iPhone增速放缓<br>• 营收$1094亿创新高但不够</div>
+<div class="en poster-data" style="display:none">• AAPL -7.4% $358B wiped<br>• iPhone growth slows<br>• Revenue $109.4B record but insufficient</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">
+<div class="poster-icon">🇰🇷</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">韩国KOSPI暴涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">KOSPI Surges</div>
+<div class="zh poster-data">• KOSPI +17.9% 历史性暴涨<br>• SK海力士 +27%<br>• 三星电子大幅飙升</div>
+<div class="en poster-data" style="display:none">• KOSPI +17.9% historic surge<br>• SK Hynix +27%<br>• Samsung massive gains</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">
+<div class="poster-icon">🏦</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美联储按兵不动</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Fed Holds Steady</div>
+<div class="zh poster-data">• 利率维持3.50%-3.75%<br>• 有异议票引发波动<br>• 周三大跌后V型反弹</div>
+<div class="en poster-data" style="display:none">• Rates at 3.50%-3.75%<br>• Dissent sparks volatility<br>• V-shape recovery after Wed crash</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-31 · Sky Portal Daily Market · <a href="index.html">行情索引</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘</span><span class="en" style="display:none">US Market Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">道指 DJI</div><div class="stock-price">52,485</div><div class="stock-change up">+0.53%</div></div>
+<div class="stock-item"><div class="stock-ticker">标普 S&P</div><div class="stock-price">7,490</div><div class="stock-change up">+0.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">纳斯达克</div><div class="stock-price">25,374</div><div class="stock-change up">+1.00%</div></div>
+<div class="stock-item"><div class="stock-ticker">费半 SOX</div><div class="stock-price">11,311</div><div class="stock-change flat">+0.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">15.99</div><div class="stock-change up">-6.44%</div></div>
+</div>
+
+<p style="margin:8px 0;color:#888;font-size:0.85em"><span class="zh">📌 周线：三大指数均涨1%+，道指周涨537点。7月整体表现：标普微跌，纳指小幅收跌。</span><span class="en" style="display:none">📌 Week: All 3 indices up 1%+, Dow +537 pts. July overall: S&P slightly down, Nasdaq marginally lower.</span></p>
+
+<div class="card">
+<h4><span class="zh">🔴 财报冰火两重天：亚马逊暴涨 vs 苹果暴跌</span><span class="en" style="display:none">🔴 Earnings Divergence: Amazon Surges vs Apple Plunges</span></h4>
+<p><span class="zh"><span class="highlight">亚马逊(AMZN) +15.3%</span> — AWS营收和AI云服务增速超预期，市场将其视为AI基础设施投资回报的证明。苹果(AAPL) <span class="danger">-7.4%</span> — 虽然Q3营收$1094亿创新高(+16%)，EPS $2.02(+29%)，但iPhone增速放缓令投资者失望，单日市值蒸发$3580亿。微软(MSFT) +8%同样受财报提振。Big Tech分化的表现主导了当日市场走势。</span><span class="en" style="display:none"><span class="highlight">Amazon (AMZN) +15.3%</span> — AWS revenue and AI cloud growth beat expectations, seen as proof of AI infrastructure ROI. Apple (AAPL) <span class="danger">-7.4%</span> — Despite record Q3 revenue $109.4B (+16%), EPS $2.02 (+29%), iPhone growth slowdown disappointed investors, wiping $358B in market cap. Microsoft (MSFT) +8% also boosted by earnings. Big Tech divergence drove the day.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：WSJ / CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🏦 美联储周三维持利率不变，异议票引发波动</span><span class="en" style="display:none">🏦 Fed Holds Rates Wednesday, Dissent Sparks Volatility</span></h4>
+<p><span class="zh">美联储在7月FOMC会议后维持利率在3.50%-3.75%区间不变，这是连续第五次按兵不动。但委员会内出现异议票，显示内部对利率路径存在分歧。主席Warsh面临市场对通胀粘性的担忧。决议公布后市场剧烈反应：周三大盘暴跌2%+（标普-1.52%，纳指-1.74%，道指-2.19%），但随后连续两天反弹收复失地。</span><span class="en" style="display:none">The Fed kept rates at 3.50%-3.75% for the fifth consecutive meeting. Dissenting votes revealed internal disagreement on rate path. Chair Warsh faced concerns about sticky inflation. Markets reacted sharply: Wednesday's crash (S&P -1.52%, Nasdaq -1.74%, Dow -2.19%) was followed by two consecutive days of recovery.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：CNBC / Reuters / CNN Business</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 费半指数盘中冲高后大幅回落</span><span class="en" style="display:none">📈 SOX Rallies Then Fades Sharply</span></h4>
+<p><span class="zh">费城半导体指数(SOX)盘中一度冲高至11,885，但午后大幅回落，最终收于11,311（+0.07%），几乎平盘。韩国KOSPI暴涨+17.9%带动亚太半导体情绪，SK海力士(+27%)、三星电子大幅上涨，但美股半导体板块未能延续涨势。分析认为，苹果iPhone增速放缓的信号间接影响了半导体供应链预期。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) surged to 11,885 intraday but faded sharply, closing at 11,311 (+0.07%), nearly flat. Korea's KOSPI exploded +17.9%, lifting APAC semiconductor sentiment with SK Hynix (+27%) and Samsung surging, but US chip stocks couldn't hold gains. Apple's iPhone slowdown signals indirectly weighed on semiconductor supply chain expectations.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：Yahoo Finance / MarketWatch / Reuters</p>
+</div>
+
+<hr class="divider">
+
+<h2>🇨🇳 <span class="zh">A股收盘</span><span class="en" style="display:none">A-Share Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-price">3,832</div><div class="stock-change up">+0.72%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-price">~13,579</div><div class="stock-change up">+2.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板指</div><div class="stock-price">~2,775</div><div class="stock-change up">+3.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">—</div><div class="stock-change up">+3.00%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🔥 AI应用端全线爆发，存储芯片午后跳水</span><span class="en" style="display:none">🔥 AI Applications Explode, Memory Chips Dive PM</span></h4>
+<p><span class="zh">A股三大指数集体收涨。早盘科技股集体大涨，科创50一度涨超8%，创业板指涨超6%。AI应用端全线爆发，存储芯片和算力产业链早盘强劲反攻。兆易创新涨逾14%，澜起科技涨超10%。但午后存储芯片板块尾盘跳水，涨幅显著收窄。全天量能明显放大，显示市场做多情绪回暖。</span><span class="en" style="display:none">All three A-share indices rose. Tech stocks surged at open, STAR50一度 up 8%+, ChiNext up 6%+. AI applications exploded across the board. Memory chips and computing chain rallied strongly AM, with GigaDevice +14%, Montage +10%. However, memory chips dove at the close, erasing gains. Volume expanded significantly, showing warming sentiment.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：东方财富 / 财联社 / 新华财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📉 7月惨淡收官：三指数月线全跌</span><span class="en" style="display:none">📉 Brutal July: All Indices Down Monthly</span></h4>
+<p><span class="zh">截至7月31日收盘，<span class="danger">上证指数本月跌6.4%</span>，<span class="danger">深成指月跌16.2%</span>，<span class="danger">创业板指月跌25.3%</span>，科创50月跌28.1%。科技股7月经历了深度调整，半导体、存储芯片、PCB等前期强势赛道全线走弱。7月收官日的反弹或为超跌修复的信号。</span><span class="en" style="display:none">As of July 31 close, <span class="danger">SSE -6.4% MoM</span>, <span class="danger">SZSE -16.2% MoM</span>, <span class="danger">ChiNext -25.3% MoM</span>, STAR50 -28.1% MoM. Tech stocks suffered deep corrections in July, with semiconductors, memory chips, and PCB sectors all weakening. The July 31 rally may signal oversold bounce.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：东方财富 / 新华财经</p>
+</div>
+
+<hr class="divider">
+
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒生指数</div><div class="stock-price">25,884</div><div class="stock-change up">+0.10%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,868</div><div class="stock-change up">+1.34%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生中国企业</div><div class="stock-price">8,639</div><div class="stock-change flat">+0.06%</div></div>
+</div>
+
+<p style="margin:8px 0;font-size:0.9em"><span class="zh">港股科技股表现优于大盘，存储概念股走强，但午后涨幅有所收窄。南向资金持续流入。全天成交活跃。</span><span class="en" style="display:none">HK tech outperformed the broader market. Memory concept stocks gained but PM fades. Southbound capital continued flowing in. Active turnover throughout.</span></p>
+
+<hr class="divider">
+
+<h2>🌏 <span class="zh">全球市场 & 商品</span><span class="en" style="display:none">Global Markets & Commodities</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">日经225</div><div class="stock-price">64,362</div><div class="stock-change up">+4.03%</div></div>
+<div class="stock-item"><div class="stock-ticker">KOSPI</div><div class="stock-price">6,595</div><div class="stock-change up">+17.91%</div></div>
+<div class="stock-item"><div class="stock-ticker">DAX</div><div class="stock-price">25,629</div><div class="stock-change up">+0.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">FTSE</div><div class="stock-price">10,868</div><div class="stock-change down">-0.27%</div></div>
+<div class="stock-item"><div class="stock-ticker">原油 WTI</div><div class="stock-price">$86.80</div><div class="stock-change up">+3.84%</div></div>
+<div class="stock-item"><div class="stock-ticker">布油 Brent</div><div class="stock-price">$90.12</div><div class="stock-change up">+1.22%</div></div>
+<div class="stock-item"><div class="stock-ticker">黄金</div><div class="stock-price">$4,099</div><div class="stock-change down">-1.49%</div></div>
+<div class="stock-item"><div class="stock-ticker">10Y美债</div><div class="stock-price">4.745%</div><div class="stock-change down">+8.2bp</div></div>
+<div class="stock-item"><div class="stock-ticker">30Y美债</div><div class="stock-price">5.28%</div><div class="stock-change down">+7bp</div></div>
+<div class="stock-item"><div class="stock-ticker">美元指数</div><div class="stock-price">99.80</div><div class="stock-change flat">-0.11%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🤯 韩国KOSPI暴涨+17.9%，历史罕见</span><span class="en" style="display:none">🤯 KOSPI Surges +17.9%, Historically Rare</span></h4>
+<p><span class="zh">韩国KOSPI指数单日暴涨17.91%，从5,593点飙升至6,595点，日涨幅创历史纪录之一。SK海力士暴涨27%，三星电子大幅飙升。此前两日KOSPI曾经历暴跌熔断（-11%），今日的大幅反弹可能与政策干预、空头回补及半导体行业基本面利好有关。日经225同步上涨4.03%。</span><span class="en" style="display:none">Korea's KOSPI surged 17.91% in a single day, rocketing from 5,593 to 6,595 — one of the largest daily gains on record. SK Hynix +27%, Samsung massive rally. After two days of circuit-breaker crashes (-11%), the rebound may be driven by policy intervention, short covering, and semiconductor fundamentals. Nikkei 225 gained 4.03% in sympathy.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：Yahoo Finance / 东方财富</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🛢️ 原油飙升、黄金回落</span><span class="en" style="display:none">🛢️ Oil Surges, Gold Retreats</span></h4>
+<p><span class="zh">WTI原油大涨3.84%至$86.80，布油$90.12(+1.22%)。油价连续上涨与地缘政治紧张和供应担忧相关。黄金下跌1.49%至$4,099，白银跌2.10%至$57.78。10年期美债收益率上升8.2bp至4.745%，30年期至5.28%，债市继续承压。</span><span class="en" style="display:none">WTI crude surged 3.84% to $86.80, Brent $90.12 (+1.22%). Oil's gains linked to geopolitical tensions and supply concerns. Gold fell 1.49% to $4,099, silver -2.10% to $57.78. 10Y Treasury yield rose 8.2bp to 4.745%, 30Y to 5.28%, bond market under pressure.</span></p>
+<p class="src"><span class="zh">来源</span><span class="en" style="display:none">Source</span>：Yahoo Finance</p>
+</div>
+
+<hr class="divider">
+
+<h2>🎯 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Big Tech财报冰火两重天</span><span class="en" style="display:none">1. Big Tech Earnings Divergence</span></h4>
+<p><span class="zh">亚马逊+微软超预期提振AI基础设施投资信心，市场将Amazon AWS视为AI商业化的成功标杆。相反，苹果iPhone增速放缓被解读为消费者需求疲软的信号，拖累整个科技权重板块。综合来看，正向因素占优，推动纳指周涨1%+。</span><span class="en" style="display:none">Amazon + Microsoft beat expectations, bolstering AI infrastructure investment confidence. Amazon's AWS is seen as a successful benchmark for AI commercialization. Conversely, Apple's iPhone slowdown signals softening consumer demand, dragging the tech-heavy sector. Net positive: Nasdaq up 1%+ for the week.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美联储利率按兵不动但有异议</span><span class="en" style="display:none">2. Fed Holds Rates With Dissent</span></h4>
+<p><span class="zh">利率3.50%-3.75%维持不变为第五次按兵不动，但异议票的出现表明鹰派立场仍强。周三大跌后市场快速消化并反弹，显示基本面韧性。VIX降至15.99(-6.44%)，恐慌情绪明显缓和。</span><span class="en" style="display:none">Rates at 3.50%-3.75% unchanged for the 5th meeting, but dissenting votes signal hawkish sentiment remains strong. Markets quickly digested the Wednesday crash and rebounded, showing fundamental resilience. VIX dropped to 15.99 (-6.44%), fear clearly easing.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 全球芯片板块异动</span><span class="en" style="display:none">3. Global Semiconductor Volatility</span></h4>
+<p><span class="zh">韩国KOSPI暴涨17.9%，SK海力士和三星的暴涨带动亚太科技股情绪。A股AI应用端全线爆发，科创50一度涨超8%。但美股费半指数盘中冲高11,885后大幅回落至11,311，显示半导体板块多空分歧加大。</span><span class="en" style="display:none">KOSPI surged 17.9% with SK Hynix and Samsung driving APAC tech sentiment. A-share AI applications exploded, STAR50 hit 8%+. But US SOX faded from 11,885 to 11,311, showing growing semiconductor sector divergence between bulls and bears.</span></p>
+</div>
+
+<hr class="divider">
+
+<h2>🔮 <span class="zh">市场走向预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">📈 美股：标普有望挑战7500</span><span class="en" style="display:none">📈 US: S&P Eyeing 7,500</span></h4>
+<p><span class="zh">7月虽然动荡，但三大指数周线收红。8月关注点：下周非农数据、通胀预期、更多Big Tech财报（Meta、Qualcomm等）。费半指数短期可能震荡整固，需观察韩国半导体暴涨是否能持续传导。整体偏乐观，但需警惕债收益率继续上升的压力。</span><span class="en" style="display:none">Despite July's turbulence, all three indices closed the week green. August focus: next week's nonfarm payrolls, inflation expectations, more Big Tech earnings (Meta, Qualcomm, etc.). SOX may consolidate short-term; watch if Korea's semiconductor surge transmits sustainably. Overall cautiously bullish, but watch for rising bond yields.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🇨🇳 A股：超跌反弹需量能配合</span><span class="en" style="display:none">🇨🇳 China: Oversold Bounce Needs Volume</span></h4>
+<p><span class="zh">7月惨淡收官后，科技成长板块有望迎来超跌反弹。今日AI应用端全线爆发和科创50大涨3%是积极信号，但存储芯片尾盘跳水提醒投资者谨慎。关键在于反弹能否持续并放量。深成指月跌16.2%、创业板月跌25%的背景下，技术性反弹空间较大。</span><span class="en" style="display:none">After July's brutal close, tech growth sectors may see oversold bounces. Today's AI application explosion and STAR50 +3% are positive signals, but memory chip PM dive warns caution. Key is whether the rally sustains with volume. With SZSE -16.2% MoM and ChiNext -25% MoM, technical bounce room is large.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚠️ 关注风险</span><span class="en" style="display:none">⚠️ Risks to Watch</span></h4>
+<p><span class="zh">• 美债收益率持续上行（10Y 4.745%，30Y 5.28%）对估值压力<br>• 地缘政治风险（中东局势、美韩关系）<br>• 韩国KOSPI暴涨暴跌的异常波动需关注是否与政策变化有关<br>• 下周非农数据可能影响美联储降息预期</span><span class="en" style="display:none">• Bond yields rising (10Y 4.745%, 30Y 5.28%) pressuring valuations<br>• Geopolitical risks (Middle East, US-Korea relations)<br>• Korea KOSPI's extreme volatility needs monitoring for policy changes<br>• Next week's NFP may shift Fed rate cut expectations</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">行情索引</a> · <a href="../index.html">返回首页</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Yahoo Finance, WSJ, CNBC, Reuters, 东方财富, 财联社, 新华财经</span><span class="en" style="display:none">Sources: Yahoo Finance, WSJ, CNBC, Reuters, EastMoney, CLS, Xinhua Finance</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+</body>
+</html>

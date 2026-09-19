@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-03</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#4ade80">
+<div class="poster-icon">🚨</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股休市</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Closed</div>
+<div class="zh poster-data">• 美国独立日假期<br>• 7月6日恢复正常交易</div>
+<div class="en poster-data" style="display:none">• Independence Day Holiday<br>• Trading resumes July 6</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI半导体</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Semiconductors</div>
+<div class="zh poster-data">• 全球半导体营收逼近$1万亿<br>• AI芯片占比达三分之一</div>
+<div class="en poster-data" style="display:none">• Semiconductors near $1T<br>• AI chips hit 1/3 share</div>
+</div>
+<div class="poster-card" style="background:#0d9488">
+<div class="poster-icon">💰</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">货币政策</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Monetary Policy</div>
+<div class="zh poster-data">• 全球"多速并行"新阶段<br>• 亚洲通胀保持低水平</div>
+<div class="en poster-data" style="display:none">• Multi-speed global policy<br>• Asia inflation low</div>
+</div>
+<div class="poster-card" style="background:#6366f1">
+<div class="poster-icon">🌐</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">地缘政治</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Geopolitics</div>
+<div class="zh poster-data">• 中东局势持续紧张<br>• 能源供应链承压</div>
+<div class="en poster-data" style="display:none">• Middle East tensions<br>• Energy supply pressure</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-03 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>🚨 <span class="zh">美股休市公告</span><span class="en" style="display:none">US Market Holiday Notice</span></h2>
+
+<div class="card">
+<h4><span class="zh">今日（7月3日）为美国独立日假期，美股休市一天</span><span class="en" style="display:none">Today (July 3) is US Independence Day Holiday</span></h4>
+<p><span class="zh">美国股市因独立日假期今日（7月3日，周五）休市一天，正常交易将于7月6日（周一）恢复。芝商所(CME)旗下贵金属、能源、外汇、美债、股指期货合约交易提前于北京时间7月4日01:00结束。</span><span class="en" style="display:none">US markets closed for Independence Day holiday. Normal trading resumes Monday, July 6. CME futures ended early July 4 01:00 Beijing time.</span></p>
+<p class="src">来源：新浪财经 / Firstrade</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体与AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 全球半导体市场加速向AI驱动转型</span><span class="en" style="display:none">1. Global Semiconductor Market Accelerates AI-Driven Transformation</span></h4>
+<p><span class="zh">WSTS预测2026年半导体行业营收将逼近1万亿美元，其中AI相关芯片销售额占比将在2025年达三分之一，并有望在2029年突破更高比例。慕尼黑上海电子展（7月1-3日）展示了AI硬件新动能，帝奥微带来围绕AI应用的高性能信号链芯片和高效率电源管理芯片产品线。</span><span class="en" style="display:none">WSTS predicts 2026 semiconductor revenue to approach $1T, with AI chips accounting for one-third of sales by 2025. Munich Shanghai Electronics Expo (July 1-3) showcased AI hardware innovation.</span></p>
+<p class="src">来源：新浪财经 / 中国新闻网</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI芯片新品发布：微软平头哥各显神通</span><span class="en" style="display:none">2. AI Chip Launches: Microsoft and Alibaba Lead Innovation</span></h4>
+<p><span class="zh">微软公司发布AI芯片Maia 200，可推动实现更深层推理和多步骤智能体功能。阿里巴巴旗下半导体公司平头哥发布AI芯片"真武810E"，该芯片面向人工智能训练与推理，采用自研并行计算架构。阿里在2026阿里云峰会上推出真武M890芯片，面向AI训练与推理工作负载。</span><span class="en" style="display:none">Microsoft released AI chip Maia 200 for deep reasoning and multi-step agents. Alibaba's T-Head launched AI chip "Zhenwu 810E" with self-developed parallel computing architecture. Zhenwu M890 was unveiled at Alibaba Cloud Summit for AI training/inference.</span></p>
+<p class="src">来源：新华社 / 新浪科技</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 2026年半导体十大趋势：AI计算与定制芯片爆发</span><span class="en" style="display:none">3. Top 10 Semiconductor Trends for 2026</span></h4>
+<p><span class="zh">行业分析师预测2026年半导体行业将呈现十大趋势，包括：AI计算与定制芯片爆发式增长、芯粒与3D IC技术成熟、先进封装需求旺盛、量子计算加速发展、车规芯片标准升级等。Rebellions提供领域专用AI处理器，SEMIFIVE提供定制化芯片平台，推动行业细分领域创新。</span><span class="en" style="display:none">Analysts predict top 10 trends: explosive AI/custom chip growth, 3D IC maturity, strong advanced packaging demand, quantum computing acceleration, automotive chip upgrades. Rebellions offers domain-specific AI processors, SEMIFIVE provides customization platforms.</span></p>
+<p class="src">来源：上海情报服务平台 / Deloitte</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 英伟达供应链压力：AI芯片封装成新瓶颈</span><span class="en" style="display:none">4. NVIDIA's Supply Chain: Packaging Becomes New Bottleneck</span></h4>
+<p><span class="zh">随着AI芯片需求激增，先进封装已成为比晶圆制造更紧迫的瓶颈。英伟达等客户正与台积电、Intel等代工厂商密切合作，加速CoWoS、Foveros等先进封装技术产能扩充。分析师警告2027年后可能出现产能过剩风险，当前仍处于供需紧张状态。</span><span class="en" style="display:none">With surging AI demand, advanced packaging is now a tighter bottleneck than wafer fabrication. NVIDIA and others are collaborating with TSMC, Intel to expand CoWoS, Foveros capacity. Overcapacity risk post-2027, but still supply-constrained now.</span></p>
+<p class="src">来源：CNBC / Reuters / 财联社</p>
+</div>
+
+<h2>💰 <span class="zh">经济政策动态</span><span class="en" style="display:none">Economic Policy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 全球货币政策进入"多速并行"新阶段</span><span class="en" style="display:none">1. Global Monetary Policy Enters "Multi-Speed" Era</span></h4>
+<p><span class="zh">全球货币政策从之前的"同向宽松"转向路径、节奏各异的"多速并行"格局。2025年末，主要发达经济体货币政策显著分化，欧元区经济展现较强韧性，通胀保持基本稳定；而其他经济体面临不同挑战。中国适度宽松的货币政策可能有两个主要发力点：降息和降准。</span><span class="en" style="display:none">Global monetary policy has shifted from synchronized easing to "multi-speed" diverse paths. Major economies show significant divergence by end-2025. Eurozone shows resilience with stable inflation; China considers further rate cuts and RRR cuts.</span></p>
+<p class="src">来源：证券时报 / 中国人民银行</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 2026年亚洲通胀保持低水平稳定</span><span class="en" style="display:none">2. Asian Inflation Remains Low and Stable in 2026</span></h4>
+<p><span class="zh">多家机构预计，在能源、食品价格稳定，亚洲货币强劲以及部分国家通缩压力等因素作用下，2026年亚洲整体通胀将保持低水平和稳定，但会略高于2025年。主要央行将继续根据自身经济和物价情况灵活调整货币政策，密切关注全球贸易政策、地缘政治风险等不确定性因素。</span><span class="en" style="display:none">Multiple institutions predict Asia's inflation will remain low and stable in 2026, slightly higher than 2025, due to stable energy/food prices, strong Asian currencies, and deflationary pressures. Central banks will adjust policies based on local conditions.</span></p>
+<p class="src">来源：IMF / 前海国际事务研究院</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中美贸易关系动态与影响</span><span class="en" style="display:none">3. US-China Trade Relations: Developments & Impact</span></h4>
+<p><span class="zh">美国总统特朗普于2026年5月13日至15日对中国进行国事访问，这是继2025年10月釜山之后再次面对面会晤。贸易方面，美国零售、建筑、制造业等关键部门岗位减少，反映了关税壁垒和经济放缓对实体产业的冲击。中国"十五五"规划开局之年寻求稳定外部环境。</span><span class="en" style="display:none">US President Trump visited China May 13-15, second meeting since October 2025. US retail/construction/manufacturing jobs fell, reflecting tariff impacts on industry. China's "15th Five-Year Plan" seeks stable external environment.</span></p>
+<p class="src">来源：复旦大学国际问题研究院 / 新华社</p>
+</div>
+
+<h2>🌐 <span class="zh">地缘政治与风险</span><span class="en" style="display:none">Geopolitical Risks</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 中东局势持续紧张，影响能源供应链</span><span class="en" style="display:none">1. Middle East Tensions Impact Energy Supply Chain</span></h4>
+<p><span class="zh">中东地区因"伊朗战争"引发能源短缺，荷姆兹海峡封锁重创供应链。联合国机构警告刚果（金）埃博拉疫情持续扩散，存在跨境传播风险。全球地缘政治格局呈现结构两极化，西方裂痕显现，各国加强经济活动引导，包括国内经济和跨境经济关系。</span><span class="en" style="display:none">Middle East tensions from "Iran war" causing energy shortages, Strait of Hormuz blockade disrupting supply chains. UN warns about Ebola spread risk in Congo. Global geopolitical landscape shows bipolarization with Western divisions.</span></p>
+<p class="src">来源：联合国新闻 / EY战略报告</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 全球地缘政经格局变化与机遇</span><span class="en" style="display:none">2. Global Geopolitical-Economic Changes</span></h4>
+<p><span class="zh">2026年地缘策略展望显示，拉丁美洲至少有七场国家选举，拉美和非洲作为关键矿产地，其地缘政治和地缘经济的重要性日益提升。印度与德国、阿联酋在关键矿产领域合作加强，全球供应链重构加速，发展中国家在资源方面的战略价值凸显。</span><span class="en" style="display:none">2026 geopolitical outlook shows at least seven elections in Latin America. Latin America and Africa gain importance as key mineral suppliers. India strengthens cooperation with Germany and UAE on critical minerals, global supply chain restructuring accelerates.</span></p>
+<p class="src">来源：前海国际事务研究院 / EY</p>
+</div>
+
+<h2>🔮 <span class="zh">下周市场预判</span><span class="en" style="display:none">Next Week Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 机会关注</span><span class="en" style="display:none">1. Opportunities to Watch</span></h4>
+<p><span class="zh">**AI半导体板块**：AI芯片、数据中心、算力基础设施需求持续旺盛，建议逢低布局产业链优质标的。<br>**科技创新**：人工智能应用、云计算、大数据等赛道受益于企业数字化转型加速。<br>**新能源**：清洁能源、储能技术迎来政策支持和技术突破双重驱动。</span><span class="en" style="display:none">**AI Semiconductor Sector**: AI chips, data centers, computing infrastructure demand strong; consider buying quality stocks on dips. **Tech Innovation**: AI applications, cloud computing, big data benefit from digital transformation acceleration. **Clean Energy**: Policy support and technological breakthroughs drive growth.</span></p>
+<p class="src">来源：汇丰银行 / 德勤</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 风险提示</span><span class="en" style="display:none">2. Risk Warnings</span></h4>
+<p><span class="zh">**地缘政治风险**：中东局势、贸易摩擦等地缘政治事件可能引发市场波动。<br>**通胀压力**：能源价格波动、供应链中断等因素可能带来通胀不确定性。<br>**政策不确定性**：各国货币政策分化，政策转向可能影响市场预期。</span><span class="en" style="display:none">**Geopolitical Risks**: Middle East tensions, trade friction may cause market volatility. **Inflation Pressure**: Energy price fluctuations, supply chain disruptions could create inflation uncertainty. **Policy Uncertainty**: Divergent monetary policies may impact market expectations.</span></p>
+<p class="src">来源：国际在线 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 操作建议</span><span class="en" style="display:none">3. Trading Recommendations</span></h4>
+<p><span class="zh">**持仓策略**：保持适度仓位，关注结构性机会，避免盲目追高。<br>**逢低布局**：AI产业链优质标的估值合理，可分批建仓。<br> **风险对冲**：适度配置黄金、国债等避险资产，降低组合波动性。<br>**密切跟踪**：关注周一美股开盘反应，留意重要经济数据和地缘政治新闻。</span><span class="en" style="display:none">**Position Strategy**: Maintain appropriate positions, focus on structural opportunities, avoid chasing gains. **Buy on Dips**: AI quality stocks at reasonable valuations, consider dollar-cost averaging. **Risk Hedging**: Allocate to gold, treasuries to reduce portfolio volatility. **Monitor Closely**: Watch US market opening Monday, track key economic data and geopolitical news.</span></p>
+<p class="src">来源：Sky Portal Research</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, Sina Finance, UN News, Deloitte, HSBC, EY</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

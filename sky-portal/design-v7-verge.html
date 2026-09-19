@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Sky Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #131313;
+  --bg-card: #1a1a1a;
+  --mint: #3cffd0;
+  --purple: #5200ff;
+  --yellow: #ffe14d;
+  --pink: #ff3db5;
+  --orange: #ff6b2b;
+  --white: #ffffff;
+  --gray: #888888;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-mint: rgba(60, 255, 208, 0.4);
+  --border-purple: rgba(82, 0, 255, 0.5);
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Giant Display Font */
+.display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: rgba(19, 19, 19, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+
+.nav-logo span {
+  color: var(--mint);
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  border-radius: 24px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--mint);
+  border-color: var(--border-mint);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 32px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(82, 0, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--mint);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--mint);
+}
+
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(56px, 10vw, 107px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -4px;
+  margin-bottom: 32px;
+}
+
+.hero h1 .highlight {
+  color: var(--mint);
+}
+
+.hero-desc {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 520px;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.hero-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 48px;
+}
+
+.hero-counter span {
+  color: var(--mint);
+  font-weight: 700;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 32px;
+  border: 1px solid var(--mint);
+  background: transparent;
+  color: var(--mint);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.hero-cta:hover {
+  background: var(--mint);
+  color: var(--bg);
+}
+
+/* Story Cards - Full Saturation Blocks */
+.stories {
+  padding: 80px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stories-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.stories-more {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--mint);
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--border-mint);
+  transition: all 0.2s;
+}
+
+.stories-more:hover {
+  background: var(--mint);
+  color: var(--bg);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.story-card {
+  border-radius: 24px;
+  padding: 32px;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+}
+
+.story-card.mint { background: var(--mint); color: var(--bg); }
+.story-card.purple { background: var(--purple); color: var(--white); border-color: var(--border-purple); }
+.story-card.yellow { background: var(--yellow); color: var(--bg); }
+.story-card.pink { background: var(--pink); color: var(--white); }
+.story-card.orange { background: var(--orange); color: var(--white); }
+.story-card.dark { background: var(--bg-card); color: var(--white); border: 1px solid var(--border); }
+
+.story-card.dark:hover { border-color: var(--border-mint); }
+
+.story-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.story-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.story-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: 16px;
+}
+
+/* Timeline / StoryStream */
+.timeline {
+  padding: 80px 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline-header {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 40px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-left: 1px dashed var(--border-mint);
+  margin-left: 60px;
+  padding-left: 24px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 28px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.timeline-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray);
+  padding-top: 4px;
+}
+
+.timeline-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.timeline-content p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+.timeline-content .tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border-mint);
+  color: var(--mint);
+}
+
+/* Footer */
+footer {
+  padding: 64px 32px;
+  border-top: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer-brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.footer-brand span {
+  color: var(--mint);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.footer-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--white);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--mint);
+}
+
+.footer-bottom {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 12px 16px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .hero {
+    padding: 100px 20px 60px;
+  }
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+  .stories {
+    padding: 48px 16px;
+  }
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+  .timeline {
+    padding: 48px 16px;
+  }
+  .timeline-item {
+    grid-template-columns: 1fr;
+    margin-left: 20px;
+  }
+  .timeline-time {
+    margin-bottom: -16px;
+  }
+  footer {
+    padding: 48px 16px;
+  }
+  .footer-nav {
+    gap: 24px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">SKY<span>:</span>PORTAL</div>
+  <ul class="nav-links">
+    <li><a href="#ai">AI研究</a></li>
+    <li><a href="#invest">投资分析</a></li>
+    <li><a href="#intel">Intel</a></li>
+    <li><a href="#coach">教练</a></li>
+    <li><a href="#garden">花园</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn" onclick="toggleLang()">EN / 中</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-tag">Personal Digital Space · 2026</div>
+  <h1>Sky Portal的<br><span class="highlight">数字空间</span></h1>
+  <p class="hero-desc">AI研究、半导体投资、生活探索——一个人的科技媒体实验</p>
+  <p class="hero-counter">DAY <span id="dayCount">0</span> OF EXPLORATION</p>
+  <a href="#stories" class="hero-cta">进入空间 →</a>
+</section>
+
+<!-- Story Cards -->
+<section class="stories" id="stories">
+  <div class="stories-header">
+    <h2 class="stories-title">最新专题</h2>
+    <a href="#" class="stories-more">VIEW ALL</a>
+  </div>
+  <div class="story-grid">
+    <div class="story-card mint" id="ai">
+      <div>
+        <div class="story-tag">AI · 生活</div>
+        <h3 class="story-title">AI 生活实验</h3>
+      </div>
+      <div class="story-meta">智能家居 · 个人助理 · 效率工具</div>
+    </div>
+    <div class="story-card purple">
+      <div>
+        <div class="story-tag">AI · 工业</div>
+        <h3 class="story-title">CVD 优化</h3>
+      </div>
+      <div class="story-meta">机器学习 × 半导体制造</div>
+    </div>
+    <div class="story-card dark" id="intel">
+      <div>
+        <div class="story-tag">Research</div>
+        <h3 class="story-title">Intel × Tesla Terafab</h3>
+      </div>
+      <div class="story-meta">超级工厂技术路线分析</div>
+    </div>
+    <div class="story-card yellow" id="invest">
+      <div>
+        <div class="story-tag">Investment</div>
+        <h3 class="story-title">投资分析</h3>
+      </div>
+      <div class="story-meta">半导体 · 市场趋势 · 机会追踪</div>
+    </div>
+    <div class="story-card pink" id="coach">
+      <div>
+        <div class="story-tag">Coach</div>
+        <h3 class="story-title">芒格课程</h3>
+      </div>
+      <div class="story-meta">多元思维模型 · 投资哲学</div>
+    </div>
+    <div class="story-card dark" id="garden">
+      <div>
+        <div class="story-tag">Life</div>
+        <h3 class="story-title">我的花园</h3>
+      </div>
+      <div class="story-meta">Portland · 四季记录</div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="timeline">
+  <h2 class="timeline-header">StoryStream</h2>
+
+  <div class="timeline-item">
+    <div class="timeline-time">2026.05</div>
+    <div class="timeline-content">
+      <h3>AI 生活系统升级</h3>
+      <p>全屋智能控制系统 v3.0 部署，集成 Claude 语音助手</p>
+      <span class="tag">ai-life</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-time">2026.04</div>
+    <div class="timeline-content">
+      <h3>Intel Terafab 报告发布</h3>
+      <p>完成 Intel × Tesla 超级工厂合作可行性深度分析</p>
+      <span class="tag">research</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-time">2026.03</div>
+    <div class="timeline-content">
+      <h3>CVD 优化模型 v2</h3>
+      <p>第二代工艺参数预测模型上线，准确率提升 12%</p>
+      <span class="tag">ai-industry</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-time">2026.02</div>
+    <div class="timeline-content">
+      <h3>Sky Portal 启动</h3>
+      <p>个人数字空间正式上线，开始系统化记录探索历程</p>
+      <span class="tag">milestone</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-time">2026.02</div>
+    <div class="timeline-content">
+      <h3>入籍申请启动</h3>
+      <p>美国公民入籍申请正式提交</p>
+      <span class="tag">life</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">SKY<span>:</span>PORTAL</div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <h4>研究</h4>
+        <a href="#ai">AI研究</a>
+        <a href="#intel">Intel新闻</a>
+        <a href="#">CVD优化</a>
+      </div>
+      <div class="footer-col">
+        <h4>投资</h4>
+        <a href="#invest">投资分析</a>
+        <a href="#">市场研究</a>
+      </div>
+      <div class="footer-col">
+        <h4>生活</h4>
+        <a href="#coach">教练专区</a>
+        <a href="#garden">我的花园</a>
+        <a href="#">入籍进度</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 SKY:PORTAL · BUILT BY Sky Portal</span>
+    <span id="footerDays"></span>
+  </div>
+</footer>
+
+<script>
+// Day counter
+function updateDays() {
+  const start = new Date(2026, 1, 15);
+  const now = new Date();
+  const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  document.getElementById('dayCount').textContent = diff;
+  document.getElementById('footerDays').textContent = `DAY ${diff}`;
+}
+updateDays();
+
+// Language toggle
+let isEn = false;
+function toggleLang() {
+  isEn = !isEn;
+  document.querySelector('.lang-btn').textContent = isEn ? '中 / EN' : 'EN / 中';
+}
+</script>
+</body>
+</html>

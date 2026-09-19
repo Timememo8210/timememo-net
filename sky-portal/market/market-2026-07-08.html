@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 Daily Market — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --sidebar-bg: #0f0f18;
+  --content-bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #4ade80;
+  --accent-glow: rgba(74,222,128,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  height: 100vh; overflow: hidden;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+}
+
+/* ── Lang Toggle ── */
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.lang-toggle button {
+  padding: 4px 12px; border: none; background: transparent;
+  color: var(--text-dim); font-size: 0.72rem; cursor: pointer;
+  transition: all 0.25s; font-family: inherit;
+}
+.lang-toggle button.active { background: var(--accent); color: #000; }
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-header h1 {
+  font-size: 1.15em; font-weight: 700;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 8px;
+}
+.sidebar-header .home-link {
+  font-size: 0.78em; color: var(--text-dim);
+  text-decoration: none; margin-top: 6px; display: block;
+}
+.sidebar-header .home-link:hover { color: var(--accent); }
+.sidebar-nav {
+  flex: 1; overflow-y: auto; padding: 12px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.month-group { margin-bottom: 4px; }
+.month-label {
+  padding: 6px 20px; font-size: 0.75em;
+  color: var(--text-dim); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.report-link {
+  display: block; padding: 8px 20px;
+  text-decoration: none; color: var(--text);
+  font-size: 0.85em; transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.report-link:hover {
+  background: var(--card); border-left-color: var(--accent);
+}
+.report-link .date { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+.report-link .tag {
+  font-size: 0.72em; padding: 2px 6px;
+  border-radius: 4px; margin-left: 6px;
+}
+.tag-us { background: rgba(74,222,128,0.15); color: #4ade80; }
+.tag-cn { background: rgba(251,146,60,0.15); color: #fb923c; }
+.tag-both { background: rgba(96,165,250,0.15); color: #60a5fa; }
+.tag-weekend { background: rgba(168,85,247,0.15); color: #a855f7; }
+
+/* ── Content ── */
+.content {
+  overflow-y: auto; padding: 40px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.welcome {
+  text-align: center; padding: 80px 20px;
+}
+.welcome .icon { font-size: 4em; margin-bottom: 16px; }
+.welcome h2 { font-size: 1.5em; color: var(--accent); }
+.welcome p { color: var(--text-dim); margin-top: 8px; font-size: 0.95em; }
+
+/* ── Daily Market Specific Styles ── */
+h1 { text-align: center; color: var(--accent); font-size: 1.8em; margin-bottom: 4px; }
+.subtitle { text-align: center; color: var(--text-dim); font-size: 0.9em; margin-bottom: 28px; }
+h2 { color: var(--accent); font-size: 1.3em; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { color: var(--accent); margin: 16px 0 10px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+.card h4 { color: #fff; font-size: 1.05em; margin-bottom: 8px; }
+.card p { margin-bottom: 6px; font-size: 0.92em; }
+.card .src { color: var(--text-dim); font-size: 0.8em; margin-top: 6px; }
+.stock-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; margin: 16px 0; }
+.stock-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 10px; text-align: center; }
+.stock-ticker { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); font-size: 0.95em; }
+.stock-price { color: #fff; font-size: 1.1em; font-weight: 600; margin: 6px 0 4px; }
+.stock-change { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.82em; padding: 3px 10px; border-radius: 5px; display: inline-block; }
+.up { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+.down { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.kline-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px; }
+.kline-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8em; font-weight: 600; color: var(--accent); text-align: center; margin-bottom: 4px; letter-spacing: 0.03em; }
+.weather-box { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+.weather-stat { background: var(--card); border-radius: 10px; padding: 12px 18px; flex: 1; min-width: 100px; text-align: center; }
+.weather-val { font-size: 1.5em; font-weight: 700; color: #fff; }
+.weather-label { font-size: 0.8em; color: var(--text-dim); margin-top: 2px; }
+.news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.news-item:last-child { border-bottom: none; }
+.poster-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.poster-card { border-radius: 12px; padding: 20px 24px; color: #fff; }
+.poster-icon { font-size: 2em; margin-bottom: 8px; }
+.poster-data { margin-top: 10px; font-size: 0.9em; opacity: 0.9; line-height: 1.6; }
+.footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85em; }
+.footer a { color: var(--accent); text-decoration: none; }
+button#btn-zh, button#btn-en { padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; border: 1px solid var(--border); }
+button#btn-zh { background: var(--card); color: var(--text); }
+button#btn-en { background: transparent; color: var(--text-dim); }
+@media(max-width:768px) { .stock-grid { grid-template-columns: repeat(2,1fr); } .kline-grid { grid-template-columns: 1fr; } .poster-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="lang-zh">
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>📊 每日行情</h1>
+      <a href="../index.html" class="home-link">← 返回 Sky Portal</a>
+      <div class="lang-toggle">
+        <button class="active" onclick="document.body.className='lang-zh';localStorage.setItem('lang','zh')">中文</button>
+        <button onclick="document.body.className='lang-en';localStorage.setItem('lang','en')">EN</button>
+      </div>
+    </div>
+    <div class="sidebar-nav" id="report-list">
+      <div class="month-group">
+        <div class="month-label">2026-07</div>
+        <a href="market-2026-07-04.html" class="report-link">
+          <span class="date">07-04</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">美股休市日 · AI芯片将破1万亿 · 半导体指数+47% · 欧央行降息至2% · 地缘政治风险上升</div>
+        </a>
+        <a href="market-2026-07-07.html" class="report-link">
+          <span class="date">07-07</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">美股三大指数齐涨 道指首破53000点 · OpenAI+AMD 6GW GPU合作 · 半导体板块分化 · 港股科技反弹</div>
+        </a>
+        <a href="market-2026-07-06.html" class="report-link">
+          <span class="date">07-06</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">道指历史新高+0.29%突破53000点 · SOX+22.9%半导体反弹 · 科创50逆势+1.04% · 港科+0.94%特朗普喊单戴尔</div>
+        </a>
+        <a href="market-2026-07-05.html" class="report-link">
+          <span class="date">07-05</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">全球央行政策转向 · AI终端创新元年 · 存储芯片涨价100% · 半导体市场将破9754亿</div>
+        </a>
+        <a href="market-2026-07-03.html" class="report-link">
+          <span class="date">07-03</span>
+          <span class="tag tag-weekend">休市</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">独立日休市 · AI半导体万亿趋势 · 多速并行货币政策 · 中东局势紧张 · 下周关注超跌反弹</div>
+        </a>
+        <a href="market-2026-07-02.html" class="report-link">
+          <span class="date">07-02</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">美股集体收跌半导暴跌-6.27% · A股分化港股强势 · 科技股分化 · 获利回吐为主 · AI产业链分化</div>
+        </a>
+        <a href="market-2026-07-01.html" class="report-link">
+          <span class="date">07-01</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">美股调整半导暴跌-6.27% · A股平稳 · 费半-6.27% · AI降温 · 港股休市 · 地缘政治紧张</div>
+        </a>
+        <a href="market-2026-07-08.html" class="report-link">
+          <span class="date">07-08</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">美伊冲突升级油价飙升 · 美股普跌道指-1.14% · A股全面调整 · 半导体板块分化 · 地缘政治风险主导</div>
+        </a>
+      </div>
+      <div class="month-group">
+        <div class="month-label">2026-06</div>
+        <a href="market-2026-06-30.html" class="report-link">
+          <span class="date">06-30</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">道指 ATH+0.59% · 标普7440 · 纳指+2.07% · 费半+近4% · A股全面上涨 · 科创50历史新高</div>
+        </a>
+        <a href="market-2026-06-29.html" class="report-link">
+          <span class="date">06-29</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">道指创新高+0.59% · 标普首破7600点 · 费半暴跌-5.29% · A股稳健上涨 · AI芯片投资情绪退潮</div>
+        </a>
+        <a href="market-2026-06-27.html" class="report-link">
+          <span class="date">06-27</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">周末版 · 全球科技抛售周！SOX周跌12%+ · 标普纳指连跌5日 · KOSPI暴跌10.5% · MU从$1255大幅回落 · 创业板-4.07% · 下周关注超跌反弹</div>
+        </a>
+        <a href="market-2026-06-26.html" class="report-link">
+          <span class="date">06-26</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">霍尔木兹冲突升级！美军反击伊朗 · 费半SOX暴跌-5.29% · MU-6.63% · 创业板-4.07% · 恒科-3.41% · 大盘韧性尚存</div>
+        </a>
+        <a href="market-2026-06-25.html" class="report-link">
+          <span class="date">06-25</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">美光炸裂！MU+15.7% Q3营收+346% · Apple暴跌-6%涨价反噬 · SOX反弹+3.59% · 创业板+2.84%科创50+3.8%双新高 · 恒指-1.43%</div>
+        </a>
+        <a href="market-2026-06-24.html" class="report-link">
+          <span class="date">06-24</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">芯片大屠杀！费半SOX暴跌-7%+ · 纳指-2.2% · 标普-1.4% · 道指-0.1% · AI泡沫恐慌蔓延 · 半导体获利回吐</div>
+        </a>
+        <a href="market-2026-06-23.html" class="report-link">
+          <span class="date">06-23</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">芯片大屠杀！费半SOX暴跌-7.87% · 纳指-2.2% · 标普-1.4% · 道指-0.1% · 创业板-3.84% · 恒科-3.30% · AI泡沫恐慌蔓延 · BTC $62K</div>
+        </a>
+        <a href="market-2026-06-22.html" class="report-link">
+          <span class="date">06-22</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">A股天量3.74万亿暴涨！创业板+科创50双新高 · SpaceX崩盘-16.4%($200亿债券) · SOX+2.04% · 美伊和谈推进油价$74 · 道指+0.44% 纳指-0.27%</div>
+        </a>
+        <a href="market-2026-06-21.html" class="report-link">
+          <span class="date">06-21</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">周日版 · 美伊瑞士谈判关键48h · SOX+6.42%反弹 · Intel+10.6% Apple合作 · 霍尔木兹罗生门 · BTC $64K · 下周震荡等消息</div>
+        </a>
+        <a href="market-2026-06-20.html" class="report-link">
+          <span class="date">06-20</span>
+          <span class="tag tag-both">US+CN</span>
+          <div style="font-size:0.78em;color:var(--text-dim);margin-top:2px;">周六版 · 半导体全面爆发INTC+10.6% · 18A量产 · MU+8.7% · NVDA+2.95% · 伊朗再封霍尔木兹 · SpaceX 600亿收购Cursor · Warsh联储新时代</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="welcome">
+      <div class="icon">📊</div>
+      <h2><span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h2>
+      <p><span class="zh">美股 · A股 · 港股 — 每天晚上9点自动更新</span><span class="en" style="display:none">US · China · HK — Updated daily at 9 PM</span></p>
+      <p style="margin-top:16px;font-size:0.85em;color:var(--text-dim);">
+        <span class="zh">由 Sky ☁️ 自动生成 · <a href="../index.html" style="color:var(--accent);">返回首页</a></span>
+        <span class="en" style="display:none">Auto-generated by Sky ☁️ · <a href="../index.html" style="color:var(--accent);">Home</a></span>
+      </p>
+    </div>
+
+    <h1>📊 每日行情</h1>
+    <p class="subtitle">2026-07-08 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+    <h2>🇺🇸 美股市场</h2>
+    <div class="card">
+      <h4>7月8日收盘数据</h4>
+      <p>• 道琼斯工业平均指数：52,348.39点 (-576.76, -1.14%)</p>
+      <p>• 标普500指数：7,482.71点 (-21.14, -0.28%)</p>
+      <p>• 纳斯达克综合指数：25,870.65点 (+51.96, +0.20%)</p>
+      <p>• 费城半导体指数：12,574.97点 (+297.75, +2.42%)</p>
+      <p class="src">来源：CNN Markets, Yahoo Finance</p>
+    </div>
+
+    <h2>🇨🇳 A股市场</h2>
+    <div class="card">
+      <h4>7月8日收盘数据</h4>
+      <p>• 上证指数：3970.88点 (-0.49%)</p>
+      <p>• 深证成指：-1.87%</p>
+      <p>• 创业板指：-1.70%</p>
+      <p>• 沪深两市成交额：2.58万亿元</p>
+      <p class="src">来源：东方财富, 腾讯证券</p>
+    </div>
+
+    <h2>🔥 核心驱动因素</h2>
+    <div class="card">
+      <h4>美伊冲突升级，市场避险情绪升温</h4>
+      <p>• 特朗普宣布与伊朗临时停火正式结束，美国对伊朗发动打击</p>
+      <p>• 美国同时阻止伊朗石油销售，国际油价大幅飙升</p>
+      <p>• 市场担忧通胀压力加大，风险资产普遍承压</p>
+      <p class="src">来源：WSJ, Reuters</p>
+    </div>
+
+    <div class="card">
+      <h4>半导体板块分化，AI硬件承压</h4>
+      <p>• 半导体板块前期涨幅过大，面临技术性调整</p>
+      <p>• Meta消息影响下，AI硬件股普遍走弱</p>
+      <p>• 被动元件、半导体材料等细分领域仍有资金流入</p>
+      <p class="src">来源：TechCrunch, 中国证券网</p>
+    </div>
+
+    <h2>📈 重点板块与个股</h2>
+    <div class="stock-grid">
+      <div class="stock-item">
+        <div class="stock-ticker">INTC</div>
+        <div class="stock-price">$62.38</div>
+        <div class="stock-change down">-1.8%</div>
+      </div>
+      <div class="stock-item">
+        <div class="stock-ticker">TSM</div>
+        <div class="stock-price">$370.60</div>
+        <div class="stock-change down">-0.6%</div>
+      </div>
+      <div class="stock-item">
+        <div class="stock-ticker">NVDA</div>
+        <div class="stock-price">$188.75</div>
+        <div class="stock-change down">-2.6%</div>
+      </div>
+      <div class="stock-item">
+        <div class="stock-ticker">AMD</div>
+        <div class="stock-price">$245.04</div>
+        <div class="stock-change down">-1.2%</div>
+      </div>
+      <div class="stock-item">
+        <div class="stock-ticker">ASML</div>
+        <div class="stock-price">$1,478.28</div>
+        <div class="stock-change down">-0.4%</div>
+      </div>
+    </div>
+
+    <h2>🔮 市场预判</h2>
+    <div class="card">
+      <h4>短期市场展望</h4>
+      <p>• 短期市场或延续震荡格局，重点关注地缘政治局势发展</p>
+      <p>• 油价波动仍是最大不确定因素，将影响通胀预期和货币政策</p>
+      <p>• 半导体板块调整后有望迎来分化机会，关注细分赛道龙头</p>
+      <p class="src">来源：Sky Portal 分析</p>
+    </div>
+
+    <h2>🌟 今日海报</h2>
+    <div class="poster-grid">
+      <div class="poster-card" style="background:#d92d20">
+        <div class="poster-icon">🔥</div>
+        <div class="zh" style="font-size:1.4em;font-weight:700">美伊冲突升级</div>
+        <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Escalation</div>
+        <div class="zh poster-data">• 特朗普宣布停火结束<br>• 美国发动打击行动<br>• 石油销售被阻止</div>
+        <div class="en poster-data" style="display:none">• Trump ends ceasefire<br>• US strikes Iran<br>• Oil sales blocked</div>
+      </div>
+      <div class="poster-card" style="background:#4ade80">
+        <div class="poster-icon">📊</div>
+        <div class="zh" style="font-size:1.4em;font-weight:700">股市表现</div>
+        <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Market Performance</div>
+        <div class="zh poster-data">• 道指跌1.14%<br>• 标普跌0.28%<br>• 纳指微涨0.20%</div>
+        <div class="en poster-data" style="display:none">• Dow -1.14%<br>• S&P -0.28%<br>• Nasdaq +0.20%</div>
+      </div>
+      <div class="poster-card" style="background:#8b5cf6">
+        <div class="poster-icon">💹</div>
+        <div class="zh" style="font-size:1.4em;font-weight:700">半导体</div>
+        <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors</div>
+        <div class="zh poster-data">• SOX指数+2.42%<br>• AI硬件股普遍承压<br>• 分化行情持续</div>
+        <div class="en poster-data" style="display:none">• SOX +2.42%<br>• AI hardware pressured<br>• Continues divergence</div>
+      </div>
+      <div class="poster-card" style="background:#f59e0b">
+        <div class="poster-icon">⚡</div>
+        <div class="zh" style="font-size:1.4em;font-weight:700">明日焦点</div>
+        <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Tomorrow's Focus</div>
+        <div class="zh poster-data">• 关注地缘政治发展<br>• 油价走势追踪<br>• 半导体分化机会</div>
+        <div class="en poster-data" style="display:none">• Watch geo politics<br>• Oil price tracking<br>• Semi divergence play</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+      <p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, ESPN, BBC Sport, NBA.com, FIFA, NWS, OregonLive, Anthropic, NYT</p>
+    </div>
+
+  </div>
+</div>
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+(function(){
+  var l=localStorage.getItem('lang');
+  if(l==='en') document.body.className='lang-en';
+})();
+</script>
+</body>
+</html>

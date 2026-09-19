@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-04-30</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(250,204,21,0.15);color:#facc15;border:1px solid rgba(250,204,21,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{color:#4ade80;font-weight:600}
+.highlight-red{color:#f87171;font-weight:600}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:600;margin-left:4px}
+.tag-green{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.tag-red{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.tag-blue{background:rgba(96,165,250,0.15);color:#60a5fa;border:1px solid rgba(96,165,250,0.3)}
+.tag-orange{background:rgba(251,146,60,0.15);color:#fb923c;border:1px solid rgba(251,146,60,0.3)}
+.month-box{background:#141418;border:1px solid #2a2a2a;border-radius:10px;padding:16px 20px;margin:16px 0}
+.month-box h3{color:#4ade80;margin:0 0 10px}
+.month-stat{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #1a1a1a}
+.month-stat:last-child{border-bottom:none}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#15803d 0%,#22c55e 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">美股四月完美收官</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Wall Street's Best Month Since 2020</div>
+<div class="zh poster-data">• 道指 <span class="highlight">+790</span> (+1.62%) → 49,652<br>• 标普 <span class="highlight">+1.02%</span> → 7,209 🔥首次站上7200<br>• 纳指 <span class="highlight">+0.89%</span> → 24,892 📈新高</div>
+<div class="en poster-data" style="display:none">• Dow <span class="highlight">+790</span> (+1.62%) → 49,652<br>• S&P <span class="highlight">+1.02%</span> → 7,209 🔥First above 7,200<br>• Nasdaq <span class="highlight">+0.89%</span> → 24,892 📈ATH</div>
+</div>
+<div class="poster-card" style="background:#b91c1c">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">油价四年新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil at 4-Year High</div>
+<div class="zh poster-data">• Brent冲至 <span class="highlight-red">$126</span> 后回落$114<br>• 特朗普考虑对伊朗新军事行动<br>• 中东紧张局势持续升级</div>
+<div class="en poster-data" style="display:none">• Brent spiked to <span class="highlight-red">$126</span>, settled $114<br>• Trump mulls new Iran military options<br>• Middle East tensions escalating</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">Mag7财报引爆AI狂潮</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Mag7 Earnings Fuel AI Surge</div>
+<div class="zh poster-data">• Alphabet云收入暴增63% +10%<br>• AI资本支出合计$7250亿/年<br>• 高通+12.6%，恩智浦+25%</div>
+<div class="en poster-data" style="display:none">• Alphabet cloud +63%, stock +10%<br>• Combined AI capex outlook $725B/yr<br>• Qualcomm +12.6%, NXP +25%</div>
+</div>
+<div class="poster-card" style="background:#0369a1">
+<div class="zh" style="font-size:1.3em;font-weight:700">📊 经济数据 & 美联储</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">📊 Econ Data & Fed</div>
+<div class="poster-icon">🏛️</div>
+<div class="zh poster-data">• 核心PCE <span class="highlight-red">3.2%</span> · 总体PCE 3.5%<br>• 美联储维持利率 3.50-3.75%<br>• 初请失业金18.9万（超预期）</div>
+<div class="en poster-data" style="display:none">• Core PCE <span class="highlight-red">3.2%</span> · Headline 3.5%<br>• Fed holds at 3.50-3.75%<br>• Jobless claims 189K (beat)</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-04-30 · <span class="zh">美股四月收官 — 2020年以来最强月</span><span class="en" style="display:none">April Finale — Best Month Since 2020</span> · <a href="index.html" style="color:#4ade80"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<!-- ═══════════════ 四月总结 ═══════════════ -->
+<h2>📈 <span class="zh">四月月度总结</span><span class="en" style="display:none">April Monthly Summary</span></h2>
+
+<div class="month-box">
+<h3>🇺🇸 <span class="zh">美股 — 2020年以来最佳月</span><span class="en" style="display:none">US Stocks — Best Month Since 2020</span></h3>
+<div class="month-stat"><span><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></span><span class="highlight">+10.4%</span></div>
+<div class="month-stat"><span><span class="zh">纳斯达克</span><span class="en" style="display:none">Nasdaq</span></span><span class="highlight">+15.3%</span></div>
+<div class="month-stat"><span><span class="zh">道琼斯</span><span class="en" style="display:none">Dow Jones</span></span><span class="highlight">+7.1%</span></div>
+<div class="month-stat"><span><span class="zh">费城半导体</span><span class="en" style="display:none">SOX</span></span><span class="highlight">+38.4%</span> <span class="tag tag-green">2000年以来最佳</span></div>
+<div class="month-stat"><span><span class="zh">信息技术板块</span><span class="en" style="display:none">Info Tech Sector</span></span><span>+17.4%</span></div>
+<div class="month-stat"><span><span class="zh">通信服务板块</span><span class="en" style="display:none">Comm Services Sector</span></span><span class="highlight">+18.4%</span> <span class="tag tag-green">月度最强</span></div>
+<div class="month-stat"><span><span class="zh">能源板块</span><span class="en" style="display:none">Energy Sector</span></span><span class="highlight-red">-3.5%</span> <span class="tag tag-red">月度最弱</span></div>
+</div>
+
+<div class="month-box">
+<h3>🇨🇳 <span class="zh">A股 — 四月集体收涨</span><span class="en" style="display:none">A-Shares — April All Green</span></h3>
+<div class="month-stat"><span><span class="zh">上证指数</span><span class="en" style="display:none">Shanghai</span></span><span class="highlight">站上4100</span></div>
+<div class="month-stat"><span><span class="zh">创业板指</span><span class="en" style="display:none">ChiNext</span></span><span class="highlight">+15%</span> <span class="tag tag-green">十年新高</span></div>
+<div class="month-stat"><span><span class="zh">科创50</span><span class="en" style="display:none">STAR 50</span></span><span class="highlight">+25%+</span> <span class="tag tag-green">月度最强</span></div>
+</div>
+
+<!-- ═══════════════ 美股收盘 ═══════════════ -->
+<h2>🇺🇸 <span class="zh">美股收盘（4月30日）</span><span class="en" style="display:none">US Markets Close (Apr 30)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">道指</span><span class="en" style="display:none">DJI</span></div><div class="stock-price">49,652</div><div class="stock-change up">+790 (+1.62%)</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">标普500</span><span class="en" style="display:none">S&P 500</span></div><div class="stock-price">7,209</div><div class="stock-change up">+73 (+1.02%)</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">纳指</span><span class="en" style="display:none">Nasdaq</span></div><div class="stock-price">24,892</div><div class="stock-change up">+219 (+0.89%)</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">费半</span><span class="en" style="display:none">SOX</span></div><div class="stock-price">10,507</div><div class="stock-change up">+2.35%</div></div>
+<div class="stock-item"><div class="stock-ticker">Brent</div><div class="stock-price">$114.01</div><div class="stock-change up">+6%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🇺🇸 道指暴涨790点，标普首次站上7200，纳指再创历史新高</span><span class="en" style="display:none">🇺🇸 Dow Surges 790 Pts, S&P First Above 7,200, Nasdaq ATH</span></h4>
+<p><span class="zh">美股周四（4月30日）全线收高，完美收官四月。道指大涨790点或1.62%，报49,652点；标普500涨1.02%至7,209点，<b>历史首次站上7200关口</b>；纳指涨0.89%至24,892点，连续刷新历史新高。三大指数均录得2020年以来最佳月度表现。强劲的财报季和AI投资狂潮抵消了油价飙升和通胀压力的负面影响。</span><span class="en" style="display:none">US stocks rallied across the board on Thursday, capping April in style. The Dow surged 790 points (+1.62%) to 49,652; S&P 500 gained 1.02% to 7,209, <b>its first close above 7,200</b>; Nasdaq rose 0.89% to 24,892, another record close. All three indexes posted their best monthly performance since 2020. A strong earnings season and AI investment boom offset rising oil prices and inflation concerns.</span></p>
+<p class="src"><span class="zh">来源：CNBC / Reuters / Yahoo Finance</span><span class="en" style="display:none">Source: CNBC / Reuters / Yahoo Finance</span></p>
+</div>
+
+<!-- ═══════════════ Mag7财报 ═══════════════ -->
+<h2>🤖 <span class="zh">Mag7财报 & AI资本支出</span><span class="en" style="display:none">Mag7 Earnings & AI Capex</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Alphabet云收入暴增63%，全年AI投资上调至$1900亿</span><span class="en" style="display:none">1. Alphabet Cloud Revenue +63%, AI Capex Raised to $190B</span></h4>
+<p><span class="zh">Alphabet财报大超预期，Google Cloud收入同比增长63%，AI基础设施需求推动云业务高速增长。公司宣布将2026年全年资本支出指引从原先水平上调至<b>$1800-1900亿</b>，主要用于AI数据中心建设。股价当日大涨10%，有望冲击全球市值第一。CEO Sundar Pichai表示"AI monetization才刚刚开始"。</span><span class="en" style="display:none">Alphabet smashed estimates with Google Cloud revenue surging 63% YoY, driven by AI infrastructure demand. The company raised 2026 capex guidance to <b>$180-190B</b>, primarily for AI data centers. Stock jumped 10%, potentially becoming the world's most valuable company. CEO Pichai says "AI monetization is just beginning."</span></p>
+<p class="src"><span class="zh">来源：CNBC / Yahoo Finance / Fortune</span><span class="en" style="display:none">Source: CNBC / Yahoo Finance / Fortune</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 四大科技巨头合计AI投资展望达$7250亿/年</span><span class="en" style="display:none">2. Big Four AI Capex Outlook Reaches $725B/Year</span></h4>
+<p><span class="zh">Microsoft、Meta、Amazon和Alphabet周三盘后集中发布财报，四家公司2026年AI资本支出展望合计高达<b>$7250亿</b>。Meta将全年资本支出指引上调至$1250-1450亿，超出市场预期。Microsoft和Amazon的云业务继续保持强劲增长。尽管部分个股盘后下跌（投资者担心巨额支出对利润的挤压），但市场解读为AI需求持续强劲的信号。</span><span class="en" style="display:none">Microsoft, Meta, Amazon and Alphabet reported earnings after Wednesday's close. Combined 2026 AI capex outlook totals a staggering <b>$725B</b>. Meta raised capex guidance to $125-145B. Microsoft and Amazon cloud businesses remain strong. Despite some post-earnings dips, the market sees sustained AI demand.</span></p>
+<p class="src"><span class="zh">来源：Fortune / FT / NBC News / Motley Fool</span><span class="en" style="display:none">Source: Fortune / FT / NBC News / Motley Fool</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Apple盘后财报超预期，但iPhone收入连续两次不及预期</span><span class="en" style="display:none">3. Apple Beats Estimates After-Hours, But iPhone Revenue Misses Again</span></h4>
+<p><span class="zh">Apple盘后发布财报，EPS $2.01，营收$1111.8亿，双双超出预期。但iPhone收入连续两个季度中的第二次低于华尔街预期，引发对硬件增长持续性的担忧。这是Tim Cook宣布继任者Jeff Ternus后的首份财报。盘后股价涨约3%。</span><span class="en" style="display:none">Apple reported after-hours: EPS $2.01, revenue $111.18B, both beating estimates. But iPhone revenue missed for the 2nd time in 3 quarters, raising hardware growth concerns. First earnings since announcing Jeff Ternus as Cook's successor. Stock +3% after-hours.</span></p>
+<p class="src"><span class="zh">来源：CNBC / Yahoo Finance</span><span class="en" style="display:none">Source: CNBC / Yahoo Finance</span></p>
+</div>
+
+<!-- ═══════════════ 半导体 ═══════════════ -->
+<h2>🔬 <span class="zh">半导体板块</span><span class="en" style="display:none">Semiconductors</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">Intel</div><div class="stock-change up">+12%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">Qualcomm</div><div class="stock-change up">+12.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">NXPI</div><div class="stock-price">NXP</div><div class="stock-change up">+25%</div></div>
+<div class="stock-item"><div class="stock-ticker">STX</div><div class="stock-price">Seagate</div><div class="stock-change up">+11%</div></div>
+<div class="stock-item"><div class="stock-ticker">GOOG</div><div class="stock-price">Alphabet</div><div class="stock-change up">+10%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">🔥 高通财报超预期飙涨12.6%，CEO暗示进军数据中心芯片</span><span class="en" style="display:none">🔥 Qualcomm Surges 12.6% on Earnings Beat, CEO Hints at Data Center Chips</span></h4>
+<p><span class="zh">高通Q2财报超预期，调整后EPS $2.65（超预期9美分），营收$106亿符合预期。汽车芯片业务大幅增长成为亮点。CEO Cristiano Amon暗示公司正开发数据中心AI芯片，与Nvidia和AMD直接竞争。盘后一度涨超16%，次日开盘涨12.6%。高通同时提高了季度股息。</span><span class="en" style="display:none">Qualcomm Q2 beat: adjusted EPS $2.65 (beat by 9c), revenue $10.6B in line. Automotive chips surged. CEO Amon hinted at data center AI chip development to compete with Nvidia and AMD. Shares initially spiked 16% after-hours, opened +12.6%. Raised quarterly dividend.</span></p>
+<p class="src"><span class="zh">来源：CNBC / Barron's / TipRanks / Seeking Alpha</span><span class="en" style="display:none">Source: CNBC / Barron's / TipRanks / Seeking Alpha</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚡ 恩智浦暴涨25%，英特尔续创新高市值破4700亿</span><span class="en" style="display:none">⚡ NXP Surges 25%, Intel ATH, Market Cap $470B+</span></h4>
+<p><span class="zh">恩智浦半导体财报后暴涨超25%，成为当日最大赢家之一。英特尔延续强势再涨超12%创历史新高，市值突破4700亿美元，2026年累计涨幅已达119-124%。费城半导体指数涨2.35%，四月累计暴涨38.4%，为2000年以来最佳月度表现。希捷科技涨超11%，闪迪涨超6%，存储芯片板块强势。</span><span class="en" style="display:none">NXP surged 25%+ post-earnings, the day's biggest winner. Intel continued its rally +12% to new highs, market cap above $470B, up 119-124% YTD. SOX +2.35%, up 38.4% in April — best since 2000. Seagate +11%, SanDisk +6%, storage chips strong.</span></p>
+<p class="src"><span class="zh">来源：南方财经 / MarketWatch / WSJ</span><span class="en" style="display:none">Source: MarketWatch / WSJ / Yahoo Finance</span></p>
+</div>
+
+<!-- ═══════════════ 油价 & 地缘 ═══════════════ -->
+<h2>🛢️ <span class="zh">油价 & 地缘政治</span><span class="en" style="display:none">Oil & Geopolitics</span></h2>
+
+<div class="card">
+<h4><span class="zh">Brent冲破$126后回落$114 — 特朗普考虑对伊朗新军事行动</span><span class="en" style="display:none">Brent Spikes Past $126 Then Settles $114 — Trump Considers New Iran Action</span></h4>
+<p><span class="zh">油价周四剧烈波动。Axios报道称特朗普正在审阅对伊朗的新军事选项方案，Brent原油6月合约一度飙升至<b>$126.41/桶</b>（2022年以来最高），随后回落至$114.01收盘。油价飙升源于：1）美伊核谈判陷入僵局；2）伊朗油轮封锁持续；3）霍尔木兹海峡通行受限。虽然能源股当日受益上涨，但高油价正在挤压全球制造业和消费端，对港股和A股形成明显压力。</span><span class="en" style="display:none">Oil prices were extremely volatile Thursday. An Axios report that Trump is reviewing new military options against Iran sent Brent crude to <b>$126.41/barrel</b> (highest since 2022) before settling at $114.01. Drivers: 1) Iran nuclear talks stalled; 2) Iranian tanker blockade continues; 3) Strait of Hormuz restricted. While energy stocks benefited, high oil is squeezing global manufacturing and consumers, pressuring HK and A-shares.</span></p>
+<p class="src"><span class="zh">来源：MarketWatch / BBC / Al Jazeera / CNBC</span><span class="en" style="display:none">Source: MarketWatch / BBC / Al Jazeera / CNBC</span></p>
+</div>
+
+<!-- ═══════════════ 宏观经济 ═══════════════ -->
+<h2>🏛️ <span class="zh">宏观经济 & 美联储</span><span class="en" style="display:none">Macro Economy & Fed</span></h2>
+
+<div class="card">
+<h4><span class="zh">PCE通胀升温至3.5%，美联储维持利率不变</span><span class="en" style="display:none">PCE Inflation Rises to 3.5%, Fed Holds Rates</span></h4>
+<p><span class="zh">周四公布的PCE数据显示：<b>核心PCE同比3.2%</b>（前值3.0%），总体PCE同比3.5%，3月环比涨0.7%。Q1 GDP仅增长2%，不及预期。初请失业金降至18.9万（预期21.5万，前值21.5万），劳动力市场依然紧俏。美联储在周三FOMC会议上决定维持利率3.50-3.75%不变，主席Powell强调需要看到通胀持续回落才会降息。通胀与增长的两难局面令美联储政策空间进一步收窄。</span><span class="en" style="display:none">Thursday's PCE data: <b>Core PCE 3.2% YoY</b> (prev 3.0%), headline 3.5%, March MoM +0.7%. Q1 GDP grew just 2%, below expectations. Initial jobless claims fell to 189K (vs 215K expected), showing a tight labor market. The Fed held rates at 3.50-3.75% after Wednesday's FOMC meeting. Chair Powell emphasized needing sustained inflation decline before cutting. The inflation-growth dilemma narrows the Fed's policy space.</span></p>
+<p class="src"><span class="zh">来源：CNBC / BEA / Forbes / Reuters</span><span class="en" style="display:none">Source: CNBC / BEA / Forbes / Reuters</span></p>
+</div>
+
+<!-- ═══════════════ A股 ═══════════════ -->
+<h2>🇨🇳 <span class="zh">A股（4月30日收盘）</span><span class="en" style="display:none">A-Shares (Apr 30 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">上证</span><span class="en" style="display:none">SSE</span></div><div class="stock-price">4,112</div><div class="stock-change up">+0.11%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">深成指</span><span class="en" style="display:none">SZSE</span></div><div class="stock-price">—</div><div class="stock-change down">-0.09%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">创业板</span><span class="en" style="display:none">ChiNext</span></div><div class="stock-price">—</div><div class="stock-change down">-0.27%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">科创50</span><span class="en" style="display:none">STAR50</span></div><div class="stock-price">—</div><div class="stock-change up">+5.19%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">成交</span><span class="en" style="display:none">Volume</span></div><div class="stock-price">2.76万亿</div><div class="stock-change flat">持平</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">四月收官：科创50月涨超25%，创业板创十年新高</span><span class="en" style="display:none">April Finale: STAR 50 +25%+, ChiNext Decade High</span></h4>
+<p><span class="zh">A股4月30日交易收官，当日指数小幅波动，上证微涨0.11%至4,112点站稳4100上方，科创50大涨5.19%成为当日最强指数。全月来看，科创50涨幅超25%领跑全场，创业板指月涨超15%突破2015年6月3日高点，创十年新高。热点集中在半导体、AI硬件和新能源板块，宁德时代等多只个股创历史新高。成交额维持在2.76万亿高位。</span><span class="en" style="display:none">A-shares closed April trading with small moves on the day. Shanghai +0.11% to 4,112, holding above 4,100. STAR 50 surged 5.19% as the strongest index. For the month, STAR 50 rose 25%+, ChiNext +15% breaking 2015 highs for a decade record. Hot sectors: semiconductors, AI hardware, and new energy. CATL and others hit ATH. Volume steady at 2.76 trillion yuan.</span></p>
+<p class="src"><span class="zh">来源：央广网 / 新浪财经 / 证券时报</span><span class="en" style="display:none">Source: CNR / Sina Finance / Securities Times</span></p>
+</div>
+
+<!-- ═══════════════ 港股 ═══════════════ -->
+<h2>🇭🇰 <span class="zh">港股（4月30日收盘）</span><span class="en" style="display:none">HK Stocks (Apr 30 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒指</span><span class="en" style="display:none">HSI</span></div><div class="stock-price">25,777</div><div class="stock-change down">-1.28%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">恒生科技</span><span class="en" style="display:none">HSTECH</span></div><div class="stock-price">4,871</div><div class="stock-change down">-0.79%</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">月涨</span><span class="en" style="display:none">Month</span></div><div class="stock-price">恒指+3%</div><div class="stock-change up">月涨</div></div>
+<div class="stock-item"><div class="stock-ticker"><span class="zh">月涨</span><span class="en" style="display:none">Month</span></div><div class="stock-price">科技+4%</div><div class="stock-change up">月涨</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股日内回调，油价高企拖累市场情绪</span><span class="en" style="display:none">HK Stocks Pull Back on Elevated Oil Prices</span></h4>
+<p><span class="zh">港股4月30日三大指数集体收跌，恒指跌1.28%至25,777点，恒生科技跌0.79%至4,871点。主要受Brent油价一度冲至$126拖累，投资者对全球经济增长前景感到担忧。但四月全月来看，三大指数均收涨：恒指月涨超3%，恒生科技月涨超4%，国企指数月涨超3%。南向资金4月30日港股通全天成交1211亿港元。</span><span class="en" style="display:none">HK stocks closed lower across the board. HSI -1.28% at 25,777, HSTECH -0.79% at 4,871, dragged down by Brent spiking to $126 and growth concerns. However, April was positive: HSI +3%+, HSTECH +4%+, HSI China Enterprises +3%+. Southbound turnover was HK$121.1B on April 30.</span></p>
+<p class="src"><span class="zh">来源：新浪财经 / 华盛通 / 东方财富</span><span class="en" style="display:none">Source: Sina Finance / Futunn / East Money</span></p>
+</div>
+
+<!-- ═══════════════ 预判 ═══════════════ -->
+<h2>🔮 <span class="zh">走势预判 & 关注重点</span><span class="en" style="display:none">Outlook & Key Focus</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期（1-2周）：偏多但有回调压力</span><span class="en" style="display:none">Short-term (1-2 Weeks): Bullish with Pullback Risk</span></h4>
+<p><span class="zh">
+<b>📊 整体判断：</b>牛市格局未变，但五月可能进入震荡消化期。<br><br>
+<b>⚠️ 油价是最大变数：</b>Brent一度冲至$126，若中东局势进一步升级（美伊谈判彻底破裂或军事行动扩大），可能再次冲击$130+。高油价将压制全球风险偏好，特别影响港股和制造业密集的A股。<br><br>
+<b>🤖 AI投资狂潮短期不会停：</b>四大科技巨头$7250亿的AI支出展望为半导体板块提供强力支撑。但如此巨额支出能否转化为实际利润是Q2-Q3需要验证的关键问题。<br><br>
+<b>📉 半导体板块极度超买：</b>费半四月涨38.4%，SOX相对200日均线的偏离程度为2000年6月以来最高。Barclays策略师提示短期可能需要"喘口气"，追高需谨慎。<br><br>
+<b>🇨🇳 A股关注点：</b>五一假期后开盘，关注科创板块能否延续四月强势。半导体/AI硬件仍是最强主线，但高位震荡可能加剧。<br><br>
+<b>📅 下周关注：</b><br>
+• 周五 ISM Manufacturing PMI<br>
+• Apple盘后财报消化<br>
+• 下周非农就业数据（5月2日）<br>
+• Chevron/Exxon财报<br>
+• 中东局势进一步发展
+</span><span class="en" style="display:none">
+<b>📊 Overall:</b> Bullish trend intact, but May may see consolidation.<br><br>
+<b>⚠️ Oil is the biggest wildcard:</b> Brent hit $126. Further escalation (Iran talks collapse, military action) could push $130+. High oil pressures risk appetite, especially HK and A-share manufacturing.<br><br>
+<b>🤖 AI capex boom continues:</b> $725B combined outlook supports semis. But converting spend to profit is the key Q2-Q3 test.<br><br>
+<b>📉 Semis extremely overbought:</b> SOX +38.4% in April, highest deviation from 200DMA since June 2000. Barclays warns of potential "breather." Chase with caution.<br><br>
+<b>🇨🇳 A-shares:</b> Post-May Day holiday open — watch if STAR/semis maintain momentum. AI hardware remains the strongest theme but volatility may increase.<br><br>
+<b>📅 Next Week:</b><br>
+• Friday ISM Manufacturing PMI<br>
+• Apple earnings digestion<br>
+• Non-farm payrolls (May 2)<br>
+• Chevron/Exxon earnings<br>
+• Middle East developments
+</span></p>
+<p class="src"><span class="zh">来源：Barclays / CNBC / MarketWatch</span><span class="en" style="display:none">Source: Barclays / CNBC / MarketWatch</span></p>
+</div>
+
+<!-- ═══════════════ K线图 ═══════════════ -->
+<h2>📈 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h2>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">FXI — China Large-Cap</div><div id="tv-fxi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span> · Generated by Sky ☁️ · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：CNBC, Reuters, Yahoo Finance, Sina Finance, 央广网, MarketWatch, WSJ</span><span class="en" style="display:none">Sources: CNBC, Reuters, Yahoo Finance, Sina Finance, MarketWatch, WSJ</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-fxi', sym:'NYSE:FXI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

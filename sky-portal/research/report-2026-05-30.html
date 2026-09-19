@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日研报 2026-05-30 | Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;max-width:900px;margin:0 auto;padding:24px 16px}
+a{color:#f0a040;text-decoration:none}
+a:hover{text-decoration:underline}
+h1{color:#f0a040;font-size:1.5em;margin-bottom:4px}
+h2{color:#f0a040;font-size:1.25em;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid #2a2a2a}
+h3{color:#fff;font-size:1.05em;margin:18px 0 8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:20px;margin-bottom:16px}
+.tag-up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.tag-down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:12px;text-align:center}
+.stock-item .sym{color:#fff;font-weight:700;font-size:1.1em}
+.stock-item .price{color:#ccc;font-size:1.05em;margin:4px 0}
+.source{font-size:0.85em;color:#888;margin-top:6px}
+.footer{text-align:center;margin-top:32px;padding:16px;border-top:1px solid #2a2a2a;color:#888;font-size:0.9em}
+.poster{max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.lang-btn{background:#333;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em}
+.lang-btn.active{background:#555;color:#fff}
+.lang-btn-right{text-align:right;margin-bottom:8px}
+.zh{display:block}.en{display:none}
+.sports-card{background:#1a1a1a;border:1px solid rgba(76,175,80,0.3);border-radius:12px;padding:20px;margin-bottom:16px}
+.sports-card h3{color:#4CAF50}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#f0a040;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.kline-grid{grid-template-columns:1fr !important}.poster-grid{grid-template-columns:1fr !important}.stock-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div class="poster">
+<div class="lang-btn-right">
+<button onclick="switchLang('zh')" id="btn-zh" class="lang-btn active">中文</button>
+<button onclick="switchLang('en')" id="btn-en" class="lang-btn">EN</button>
+</div>
+<div class="poster-grid">
+
+<!-- 半导体与AI -->
+<div class="poster-card" style="background:#d92d20">
+<div style="font-size:2em;margin-bottom:8px">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+<div class="zh" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 三星与台积电应对AI热潮中的劳工紧张局势<br>• AI芯片初创公司2026年融资超$16亿</div>
+<div class="en" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Samsung & TSMC navigate labor tensions amid AI boom<br>• AI chip startups raise over $1.6B in early 2026</div>
+</div>
+
+<!-- 巴萨 -->
+<div class="poster-card" style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%)">
+<div style="font-size:2em;margin-bottom:8px">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+<div class="zh" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthony Gordon €8000万签约5年，即将亮相<br>• 巴萨准备正式报价Julián Álvarez</div>
+<div class="en" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthony Gordon €80M, 5-year deal close to completion<br>• Barça preparing first official bid for Julián Álvarez</div>
+</div>
+
+<!-- 体育赛事 -->
+<div class="poster-card" style="background:#e08c0b">
+<div style="font-size:2em;margin-bottom:8px">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+<div class="zh" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• NBA西决G7！马刺vs雷霆，胜者战尼克斯<br>• 世界杯倒计时12天！Messi/C罗最后一舞</div>
+<div class="en" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• NBA West Finals G7! Spurs vs Thunder<br>• World Cup in 12 days! Messi & Ronaldo's last dance</div>
+</div>
+
+<!-- AI动态 -->
+<div class="poster-card" style="background:#10a37f">
+<div style="font-size:2em;margin-bottom:8px">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+<div class="en" style="font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+<div class="zh" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthropic发布Claude Opus 4.8，编码/推理全面升级<br>• OpenAI重组押注Agent未来，估值持续攀升</div>
+<div class="en" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthropic releases Claude Opus 4.8 with major upgrades<br>• OpenAI restructures to bet on Agent future</div>
+</div>
+
+</div>
+</div>
+
+<script>
+function switchLang(lang){
+document.querySelectorAll('.zh').forEach(el=>el.style.display=lang==='zh'?'block':'none');
+document.querySelectorAll('.en').forEach(el=>el.style.display=lang==='en'?'block':'none');
+document.getElementById('btn-zh').classList.toggle('active',lang==='zh');
+document.getElementById('btn-en').classList.toggle('active',lang==='en');
+}
+</script>
+
+<h1>📡 每日研报 · 2026-05-30（周五）</h1>
+<p style="color:#888;font-size:0.9em">Updated: May 30, 2026 · Portland, OR</p>
+
+<!-- 板块1：半导体与AI -->
+<h2>🔬 半导体与AI</h2>
+
+<div class="card">
+<h3>Samsung & TSMC应对AI热潮中的劳工紧张局势</h3>
+<p>三星和台积电在AI芯片需求暴增的背景下，面临严重的劳动力短缺问题。两大代工厂正在积极招募技术人才以满足产能扩张需求。</p>
+<p class="source">来源：Distill Intelligence · May 29, 2026</p>
+</div>
+
+<div class="card">
+<h3>AI芯片初创公司2026年融资超$16亿</h3>
+<p>2026年初至今，AI芯片初创公司已完成超过16亿美元融资，五家公司成为最受关注的半导体硬件投资标的。数据中心延迟问题仍是供应链瓶颈。</p>
+<p class="source">来源：Semiconductors Insight · May 2026</p>
+</div>
+
+<div class="card">
+<h3>黄仁勋：中国将向美国AI芯片开放市场</h3>
+<p>NVIDIA CEO黄仁勋表示，中国将开放市场接受美国AI芯片。此前他曾将中国定位为NVIDIA 500亿美元的市场机会，尽管公司年初仍维持对华零销售预期。</p>
+<p class="source">来源：Straits Times · May 29, 2026</p>
+</div>
+
+<div class="card">
+<h3>Intel股价暴跌5.14%，分析师仍看好长期前景</h3>
+<p>Intel股价今日大跌5.14%至$114.68，过去五日累计下跌16%。但分析师纷纷上调目标价至$140，Citi预测2030年AI CPU市场将达$1310亿，Intel占据重要份额。2026年至今Intel仍累计上涨约190%。</p>
+<p class="source">来源：Yahoo Finance, Zacks · May 29, 2026</p>
+</div>
+
+<div class="card">
+<h3>美国继续收紧对华芯片设备出口管制</h3>
+<p>美国商务部下令芯片设备公司暂停部分对华出货，华虹半导体在沪股价下跌4.29%。限制范围覆盖7nm及更先进制程的AI芯片。</p>
+<p class="source">来源：Yahoo Finance · May 2026</p>
+</div>
+
+<!-- 板块2：股票 -->
+<h2>📈 半导体股票（5/29 收盘）</h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="sym">INTC</div>
+<div class="price">$114.68</div>
+<span class="tag-down">-5.14%</span>
+</div>
+<div class="stock-item">
+<div class="sym">TSM</div>
+<div class="price">$418.45</div>
+<span class="tag-down">-1.51%</span>
+</div>
+<div class="stock-item">
+<div class="sym">NVDA</div>
+<div class="price">$211.14</div>
+<span class="tag-down">-1.45%</span>
+</div>
+<div class="stock-item">
+<div class="sym">AMD</div>
+<div class="price">$522.00</div>
+<span class="tag-up">+4.61%</span>
+</div>
+<div class="stock-item">
+<div class="sym">ASML</div>
+<div class="price">$1,612.76</div>
+<span class="tag-up">+0.44%</span>
+</div>
+<div class="stock-item">
+<div class="sym">MU</div>
+<div class="price">$971.00</div>
+<span class="tag-up">+5.14%</span>
+</div>
+<div class="stock-item">
+<div class="sym">AVGO</div>
+<div class="price">$446.77</div>
+<span class="tag-up">+4.73%</span>
+</div>
+<div class="stock-item">
+<div class="sym">QCOM</div>
+<div class="price">$251.02</div>
+<span class="tag-up">+3.18%</span>
+</div>
+<div class="stock-item">
+<div class="sym">TSLA</div>
+<div class="price">$435.79</div>
+<span class="tag-down">-0.33%</span>
+</div>
+<div class="stock-item">
+<div class="sym">SMH</div>
+<div class="price">$598.93</div>
+<span class="tag-down">-0.15%</span>
+</div>
+</div>
+
+<!-- K线图 -->
+<div style="margin-top:24px">
+<h3 style="color:#f0a040;margin-bottom:12px">📊 K线图</h3>
+<div class="kline-grid">
+
+<div class="kline-item">
+<div class="kline-label">INTC — Intel</div>
+<div class="tradingview-widget-container"><div id="tradingview_chart_1"></div></div>
+</div>
+
+<div class="kline-item">
+<div class="kline-label">NVDA — NVIDIA</div>
+<div class="tradingview-widget-container"><div id="tradingview_chart_2"></div></div>
+</div>
+
+<div class="kline-item">
+<div class="kline-label">TSLA — Tesla</div>
+<div class="tradingview-widget-container"><div id="tradingview_chart_3"></div></div>
+</div>
+
+<div class="kline-item">
+<div class="kline-label">SMH — Semiconductor ETF</div>
+<div class="tradingview-widget-container"><div id="tradingview_chart_4"></div></div>
+</div>
+
+<div class="kline-item">
+<div class="kline-label">SPY — S&P 500</div>
+<div class="tradingview-widget-container"><div id="tradingview_chart_5"></div></div>
+</div>
+
+<div class="kline-item">
+<div class="kline-label">000001 — 上证指数</div>
+<div class="tradingview-widget-container"><div id="tradingview_chart_6"></div></div>
+</div>
+
+</div>
+</div>
+
+<!-- 板块3：巴萨 -->
+<h2>⚽ FC Barcelona</h2>
+
+<div class="card">
+<h3>Anthony Gordon €8000万签约5年即将完成</h3>
+<p>据多家媒体报道，巴萨已与Newcastle达成€8000万（含附加条款可达€8100万）协议，签下英格兰前锋Anthony Gordon，合同5年。Gordon已完成体检，即将正式亮相诺坎普。</p>
+<p class="source">来源：Football Espana, Goal.com · May 27-29, 2026</p>
+</div>
+
+<div class="card">
+<h3>巴萨准备正式报价Julián Álvarez</h3>
+<p>在Gordon交易接近完成后，巴萨立即转向下一个目标。据Fabrizio Romano报道，巴萨正在准备对马竞前锋Julián Álvarez的首次正式报价，同时也在推进Bernardo Silva的转会谈判。</p>
+<p class="source">来源：Bavarian Football Works, Romano · May 28-29, 2026</p>
+</div>
+
+<div class="card">
+<h3>巴萨即将完成夏季首笔出售（€1100万）</h3>
+<p>巴萨正接近完成今夏首笔出售交易，预计转会费约€1100万，为引援腾出薪资空间。俱乐部计划今夏完成2-3笔重磅签约，首要目标是世界级中锋，作为Lewandowski的长期接班人。</p>
+<p class="source">来源：Barca Universal · May 29, 2026</p>
+</div>
+
+<!-- 板块4：NBA季后赛 -->
+<h2>🏟️ NBA季后赛</h2>
+
+<div class="sports-card">
+<h3>🏀 西部决赛G7今天开打！马刺 vs 雷霆</h3>
+<p><strong>系列赛比分：3-3</strong></p>
+<p>马刺在G6以118-91大胜雷霆，Wembanyama砍下28分10篮板，将系列赛拖入抢七。今天（5/30）的G7将决定谁与尼克斯争夺NBA总冠军。这是2026年季后赛第5个抢七，追平NBA历史纪录。</p>
+<p style="margin-top:8px"><strong>东部决赛：纽约尼克斯 4-0 横扫克利夫兰骑士</strong></p>
+<p>尼克斯自1999年以来首次重返NBA总决赛。Karl-Anthony Towns在G4砍下19分14篮板，率队130-93大胜完成横扫。</p>
+<p class="source">来源：NBA.com, CBS Sports, ESPN · May 29-30, 2026</p>
+</div>
+
+<!-- 板块4b：世界杯 -->
+<h2>⚽ 2026世界杯（6/11开赛！）</h2>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">🗓️ 倒计时12天！6月11日墨西哥城开幕</h3>
+<p><strong>赛程：</strong>小组赛6/11-6/27 → 32强6/28-7/3 → 16强7/4-7/7 → 1/4决赛7/9-7/12 → 半决赛7/14-7/15 → 季军赛7/18 → 决赛7/19（新泽西）</p>
+<p style="margin-top:4px"><strong>48支球队 · 16座城市 · 104场比赛</strong></p>
+</div>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">🇦🇷 阿根廷 — 卫冕冠军，Messi第六次出征！</h3>
+<p><strong>预计首发（4-3-3）：</strong>Emi Martínez; Molina, Lisandro Martínez, Romero, Tagliafico; De Paul, Mac Allister, Enzo Fernández; <strong>Messi</strong>, Lautaro Martínez, Julián Álvarez</p>
+<p style="margin-top:4px">Messi（38岁）宣布这将是他最后一届世界杯。阿根廷分在Group J，与奥地利、阿尔及利亚、约旦同组。据Kalshi赔率，阿根廷是第三大夺冠热门。</p>
+<p class="source">来源：Goal.com, FIFA · May 29, 2026</p>
+</div>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">🇫🇷 法国 — Mbappé领衔，Group I头名热门</h3>
+<p>法国已公布最终26人名单。Mbappé（皇马）依然是绝对核心，同组对手为伊拉克、挪威（Haaland！）和塞内加尔（Mané）。Deschamps继续执教，目标连续三届大赛进决赛。</p>
+<p class="source">来源：FIFA.com · May 14, 2026</p>
+</div>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">🇧🇷 巴西 — Ancelotti挂帅，Vinicius Jr + Rodrygo双箭头</h3>
+<p>名帅Carlo Ancelotti首次执教国家队！巴西5/18公布最终名单，Vinicius Jr（皇马）和Rodrygo领衔攻击线。Group C与摩洛哥、苏格兰、海地同组，出线无悬念。</p>
+<p class="source">来源：Wikipedia, Sky Sports · May 18, 2026</p>
+</div>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">🇺🇸 美国 — Pochettino执教，Pulisic当核心</h3>
+<p>5/26在纽约公布最终名单！Pochettino执掌教鞭，Christian Pulisic（AC米兰）为核心。Group D与巴拉圭、澳大利亚、土耳其同组。揭幕战6/12在SoFi体育场（英格尔伍德）对阵巴拉圭。</p>
+<p class="source">来源：FIFA.com, Yahoo Sports · May 26, 2026</p>
+</div>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰 · 🇩🇪 德国 · 🇪🇸 西班牙 · 🇵🇹 葡萄牙</h3>
+<p><strong>英格兰</strong>（Group L）：Kane领衔，同组克罗地亚、加纳、巴拿马</p>
+<p><strong>德国</strong>（Group E）：Nagelsmann执教，同组厄瓜多尔、科特迪瓦、库拉索</p>
+<p><strong>西班牙</strong>（Group H）：Lamine Yamal（18岁）成最大看点，同组乌拉圭、沙特、佛得角</p>
+<p><strong>葡萄牙</strong>（Group K）：Cristiano Ronaldo（41岁）最后一舞！同组哥伦比亚、乌兹别克斯坦、刚果民主共和国</p>
+<p class="source">来源：Sky Sports, Wikipedia · May 2026</p>
+</div>
+
+<div class="card" style="border-color:rgba(76,175,80,0.3)">
+<h3 style="color:#4CAF50">📋 名单公布进度</h3>
+<p><strong>已公布最终名单：</strong>阿根廷、法国、巴西、德国、英格兰、西班牙、葡萄牙、荷兰、瑞士、日本、韩国、苏格兰、摩洛哥、南非、美国、加拿大等16+支球队</p>
+<p><strong>待公布（6/1截止）：</strong>墨西哥、捷克、巴拉圭、澳大利亚、厄瓜多尔、土耳其等</p>
+<p style="margin-top:4px;color:#f87171">⚠️ 意大利连续三届无缘世界杯（附加赛点球1-4负波黑）</p>
+<p class="source">来源：FIFA, BBC · May 2026</p>
+</div>
+
+<!-- 板块5：Portland -->
+<h2>🌲 Portland 本地</h2>
+
+<div class="card">
+<h3>天气预报 · 5/30（周六）</h3>
+<p>多云转晴，最高 <strong>66°F</strong>（19°C），最低 <strong>45°F</strong>（7°C）。降水概率18%，风速8mph。本周热浪已过，周末气温回落至舒适区间。</p>
+<p class="source">来源：WeatherShogun, AccuWeather</p>
+</div>
+
+<div class="card">
+<h3>Jefferson High School破土动工改造</h3>
+<p>Jefferson高中于5月29日举行了数百万美元级别的校园改造破土仪式，将为波特兰北部的学生提供现代化教学设施。</p>
+<p class="source">来源：KPTV · May 29, 2026</p>
+</div>
+
+<div class="card">
+<h3>俄勒冈新法规：非机动船只需注册</h3>
+<p>2026年起，俄勒冈州要求所有非机动船只（包括皮划艇、桨板等）进行注册，旨在提升水上安全管理和救援效率。</p>
+<p class="source">来源：KPTV · May 29, 2026</p>
+</div>
+
+<!-- 板块6：AI动态 -->
+<h2>🤖 AI 动态</h2>
+
+<div class="card">
+<h3>Anthropic发布Claude Opus 4.8</h3>
+<p>Anthropic正式发布Claude Opus 4.8，在编码能力、Agent技能、推理和实用知识方面全面升级。此前Anthropic估值已达$9650亿，超越OpenAI成为最有价值的AI公司。</p>
+<p class="source">来源：CodingToken, AI Tools Recap · May 29, 2026</p>
+</div>
+
+<div class="card">
+<h3>OpenAI重组押注Agent未来</h3>
+<p>OpenAI正在进行重大组织架构重组，将战略重心转向AI Agent。公司认为Agent是AI下一个关键发展阶段，将彻底改变工作流程和自动化方式。</p>
+<p class="source">来源：Reuters, TLDL · May 2026</p>
+</div>
+
+<div class="card">
+<h3>DeepSeek v4、Kimi K2.6等多模型密集更新</h3>
+<p>5月AI模型发布密集：DeepSeek推出v4版本，Kimi发布K2.6编码模型，OpenAI推出GPT-5.5。Google也在I/O大会后持续发布新功能和集成。</p>
+<p class="source">来源：TLDL, AI News May 2026</p>
+</div>
+
+<div class="card">
+<h3>Anthropic推出Claude for Small Business</h3>
+<p>Anthropic面向中小企业推出Claude for Small Business版本，内置连接器和预制工作流，降低AI工具的使用门槛，让小公司也能享受企业级AI助手。</p>
+<p class="source">来源：Prompt Injection · May 2026</p>
+</div>
+
+<!-- 页脚 -->
+<div class="footer">
+<p><a href="index.html">📋 All Reports</a> · Generated by <a href="https://github.com/Timememo8210/sky-portal">Sky Portal</a></p>
+<p style="margin-top:4px">Sky ☁️ · 晓波的每日研报</p>
+</div>
+
+<!-- TradingView Widget Script -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script>
+new TradingView.widget({"container_id":"tradingview_chart_1","autosize":true,"symbol":"NASDAQ:INTC","interval":"D","chartType":"candles","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRange":"1W","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"height":180,"chartOnly":true,"locale":"zh_CN"});
+new TradingView.widget({"container_id":"tradingview_chart_2","autosize":true,"symbol":"NASDAQ:NVDA","interval":"D","chartType":"candles","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRange":"1W","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"height":180,"chartOnly":true,"locale":"zh_CN"});
+new TradingView.widget({"container_id":"tradingview_chart_3","autosize":true,"symbol":"NASDAQ:TSLA","interval":"D","chartType":"candles","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRange":"1W","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"height":180,"chartOnly":true,"locale":"zh_CN"});
+new TradingView.widget({"container_id":"tradingview_chart_4","autosize":true,"symbol":"NASDAQ:SMH","interval":"D","chartType":"candles","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRange":"1W","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"height":180,"chartOnly":true,"locale":"zh_CN"});
+new TradingView.widget({"container_id":"tradingview_chart_5","autosize":true,"symbol":"AMEX:SPY","interval":"D","chartType":"candles","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRange":"1W","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"height":180,"chartOnly":true,"locale":"zh_CN"});
+new TradingView.widget({"container_id":"tradingview_chart_6","autosize":true,"symbol":"SSE:000001","interval":"D","chartType":"candles","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRange":"1W","hide_top_toolbar":true,"hide_legend":true,"save_image":false,"height":180,"chartOnly":true,"locale":"zh_CN"});
+</script>
+
+</body>
+</html>

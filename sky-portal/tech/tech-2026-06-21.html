@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-21</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card h3 a{color:#f0a040;text-decoration:none}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.8em;margin-top:8px}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-21 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 Backside Power Delivery（背面供电）？</h3>
+<p>想象一栋房子：传统芯片把"电线"（供电网络）和"家具"（逻辑晶体管信号线）全挤在同一个楼层——晶圆正面。随着制程微缩，供电线和信号线抢空间，互相干扰，电阻飙升。</p>
+<p><strong>背面供电（BSPDN）</strong>的思路很简单：把供电网络搬到晶圆<strong>背面</strong>，正面只留信号线。相当于给房子加了一层地下室专门走管道，楼上空间瞬间宽敞。</p>
+<p>这带来三个好处：① 供电电阻大幅降低，IR Drop 改善；② 正面信号层布线空间释放，可以放更多晶体管；③ 电源噪声和信号串扰物理隔离。</p>
+<p>Intel 的 PowerVia（2023年量产）是业界首个背面供电方案；TSMC 的 TSMC A16 节点也将采用类似技术（SCPN）。背面供电被认为是 2nm 及以下节点的<strong>必选项</strong>——没有它，继续微缩的功耗收益会被供电瓶颈吃掉。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>SK hynix 向主要客户出货 HBM4E 样品</h3>
+<p>SK hynix 宣布已向主要客户发送下一代 AI 内存 <strong>HBM4E</strong> 的样品。作为 HBM 系列的最新一代，HBM4E 预计在带宽和能效上进一步突破，瞄准 AI 训练和推理中日益增长的内存墙问题。这标志着 HBM 技术迭代速度加快——从 HBM3E 到 HBM4E 的过渡周期正在缩短。</p>
+<p>来源：<a href="https://www.semiconductor-digest.com/" target="_blank">Semiconductor Digest</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>imec 启动铁电存储器研究，瞄准低电压高密度</h3>
+<p>在 2026 年 IEEE/JSAP VLSI 技术与电路研讨会上，比利时微电子研究中心 <strong>imec</strong> 发表了铁电存储器（FeRAM）的两项关键进展：铁电电容器和铁电场效晶体管（FeFET）。这两种方案分别针对低电压运作和高密度内存集成，有望成为下一代嵌入式存储技术，替代传统 Flash 和 SRAM，在 AI 边缘设备中尤其有前景。</p>
+<p>来源：<a href="https://technews.tw/2026/06/20/imec-initiates-research-on-ferroelectric-memory/" target="_blank">TechNews 科技新报</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>硅光子技术成为 AI 扩展的关键瓶颈解法</h3>
+<p>随着 AI 数据中心 east-west 流量暴增，铜线互连已逼近"铜墙"（copper wall）——数据中心 scale-up 架构要求每 bit 能耗低于 2 pJ、延迟低于 1μs，传统铜线方案难以企及。Soitec 首席产品官撰文指出，<strong>硅光子（SiPh）</strong>和<strong>共封装光学（CPO）</strong>将光器件移近计算芯片，缩短电路径、降低信号损耗。硅光市场预计以 25-30% 年增速增长，到 2030 年达 100 亿美元规模。</p>
+<p>来源：<a href="https://www.semiconductor-digest.com/why-silicon-photonics-is-critical-to-scaling-ai-efficiently/" target="_blank">Semiconductor Digest</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>Intel 与 Apple 达成芯片合作，Trump 官宣</h3>
+<p>美国总统 Trump 在 Truth Social 发文称，<strong>Apple 已与 Intel 达成合作</strong>，将在美国设计和制造芯片。Intel CEO 陈立武此前在 Podcast 中分享了与 Tesla 的 Terafab 合作经验。若合作落地，意味着 Apple 在台积电之外新增美国本土芯片供应选项，Intel Foundry 获得重量级客户背书。Intel 股价一度大涨 10%。</p>
+<p>来源：<a href="https://finance.technews.tw/2026/06/19/trump-intel/" target="_blank">TechNews 科技新报</a></p>
+<div class="date">2026-06-19</div>
+</div>
+
+<div class="card">
+<h3>Marvell 纳入台积电 A14 制程路线图</h3>
+<p>美国芯片设计大厂 <strong>Marvell</strong> 确认已与台积电接洽，计划采用预计 2028 年量产的 <strong>A14 先进制程</strong>打造新一代产品。Marvell COO Chris Koopmans 表示，公司押注 AI 数据中心对高速传输技术的庞大需求。这是台积电 A14 节点首次公开获得头部设计公司客户承诺。</p>
+<p>来源：<a href="https://finance.technews.tw/2026/06/20/marvell-incorporates-tsmcs-a14-advanced-process-into-its-roadmap/" target="_blank">TechNews 科技新报</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>Intel 与 UMC 联盟，联手攻坚 12nm 与 3nm</h3>
+<p>Intel 与台湾晶圆代工大厂<strong>联电（UMC）</strong>展开深度合作，聚焦 12nm 与 3nm 制程节点，生产基地预计落在 Intel 亚利桑那州 Fab 52。这一跨界联盟意味着 Intel Foundry 借助 UMC 的成熟代工经验加速爬坡，UMC 则借此重返先进制程赛道。</p>
+<p>来源：<a href="https://finance.technews.tw/2026/06/20/umc-to-join-forces-with-intel-to-return-to-advanced-manufacturing-processes/" target="_blank">TechNews 科技新报</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>PCB 价格暴涨 40%：中东冲突冲击半导体供应链</h3>
+<p>继内存和 SSD 涨价后，<strong>电路板（PCB）</strong>成为下一个价格飙升的核心元件。沙特 Jubail 的一家陶氏化学/沙特阿美合资工厂供应全球 70% 的高纯度 PPE 树脂，因中东冲突停产并遭导弹袭击。高盛报告称 3-4 月间 PCB 价格已涨 40%，环氧树脂原料交货期从 3 周延长到 15 周。替代树脂需要重新设计电路板并重新认证，短期内无解。</p>
+<p>来源：<a href="https://www.solidot.org/story?sid=84625" target="_blank">Solidot</a></p>
+<div class="date">2026-06-19</div>
+</div>
+
+<div class="card">
+<h3>ASML 强烈驳斥美国商务部 EUV 流入中国的指控</h3>
+<p>美国商务部长 Lutnick 在私下会晤 ASML 高层时质疑，可能有一台高端 <strong>EUV 光刻机</strong>已流入中国并在运行。ASML 随后强烈否认，称严格遵守所有出口管制法规。若指控属实，将意味着美国主导的半导体出口管制出现重大破口。此事加剧了美荷之间在设备出口管制上的紧张关系。</p>
+<p>来源：<a href="https://finance.technews.tw/2026/06/20/asml-strongly-refutes-washingtons-accusations/" target="_blank">TechNews 科技新报</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>IBM Nighthawk 量子处理器通过量子色动力学和网络安全基准验证</h3>
+<p>IBM 的 <strong>Nighthawk</strong> 量子处理器通过两项独立研究验证：一是在<strong>量子色动力学（QCD）</strong>模拟中有效重现粒子物理计算；二是在网络安全工作负载优化中表现出色。这两项由 IBM Quantum Network 研究人员完成的研究表明，Nighthawk 在真实世界应用场景中已具备实用级能力，标志着量子计算从实验室走向产业应用的重要一步。</p>
+<p>来源：<a href="https://quantumcomputingreport.com/ibm-nighthawk-processor-validated-in-quantum-chromodynamics-and-cybersecurity-benchmarks/" target="_blank">Quantum Computing Report</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>Duke 大学与 IonQ 实现远程原子量子比特三方纠缠</h3>
+<p>Duke 大学与 IonQ 团队成功在<strong>三节点量子网络</strong>中演示了远程原子量子比特的分布式三方纠缠。这一突破无需本地双比特门或后选择，通过光子互连连接独立处理节点，为模块化量子计算奠定了基础。实验还违反了 Mermin 不等式，关闭了探测漏洞，验证了量子非局域性。这是迈向量子互联网的关键里程碑。</p>
+<p>来源：<a href="https://quantumcomputingreport.com/duke-university-and-ionq-demonstrate-tripartite-entanglement-of-remote-atomic-qubits/" target="_blank">Quantum Computing Report</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+<div class="card">
+<h3>INNOSPACE 与 Norma 合作开发太空量子计算基础设施</h3>
+<p>韩国商业航天公司 <strong>INNOSPACE</strong> 与 Norma 达成合作，共同开发<strong>太空量子计算基础设施</strong>。计划将量子处理器部署在卫星/航天器上，利用太空的极低温和辐射隔离环境降低量子退相干。这是"太空量子"赛道的最新进展——多个团队正在探索在轨道环境中运行量子计算机的可行性。</p>
+<p>来源：<a href="https://quantumcomputingreport.com/innospace-and-norma-partner-to-develop-space-based-quantum-computing-infrastructure/" target="_blank">Quantum Computing Report</a></p>
+<div class="date">2026-06-20</div>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+</div>
+</div>
+</body>
+</html>

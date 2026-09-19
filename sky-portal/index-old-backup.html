@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal ☁️ — Sky Portal</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --accent-glow: rgba(108,138,255,0.15);
+    --green: #4ade80;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+    --purple: #a78bfa;
+    --red: #f87171;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  body.lang-zh .en { display:none !important; }
+  body.lang-en .zh { display:none !important; }
+
+  .lang-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display: flex;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+  }
+  .lang-toggle button {
+    padding: 6px 14px; border: none; background: transparent;
+    color: var(--text-dim); font-size: 0.78rem; cursor: pointer;
+    transition: all 0.25s; font-family: inherit;
+  }
+  .lang-toggle button.active { background: var(--accent); color: #fff; }
+
+  .hero { text-align: center; padding: 60px 20px 20px; position: relative; }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero h1 { font-size: 2.8em; font-weight: 700; letter-spacing: -0.02em; position: relative; z-index: 1; }
+  .hero p { color: var(--text-dim); font-size: 1.1em; margin-top: 12px; position: relative; z-index: 1; }
+  .stats-bar { display: flex; justify-content: center; gap: 32px; margin-top: 24px; position: relative; z-index: 1; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 1.8em; font-weight: 700; color: var(--accent); display: block; }
+  .stat-label { font-size: 0.8em; color: var(--text-dim); margin-top: 2px; display: block; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }
+  .section-title { font-size: 1.3em; font-weight: 600; margin: 40px 0 16px; display: flex; align-items: center; gap: 10px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px; text-decoration: none; color: var(--text);
+    transition: all 0.25s ease; display: flex; flex-direction: column; gap: 8px;
+    position: relative; overflow: hidden;
+  }
+  .card:hover { background: var(--card-hover); border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(108,138,255,0.1); }
+  .card .icon { font-size: 2em; margin-bottom: 4px; }
+  .card .title { font-size: 1.15em; font-weight: 600; }
+  .card .desc { color: var(--text-dim); font-size: 0.9em; line-height: 1.5; }
+  .card .meta { color: var(--text-dim); font-size: 0.78em; margin-top: auto; padding-top: 8px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.72em; font-weight: 500; }
+  .badge-latest { background: rgba(74,222,128,0.15); color: var(--green); }
+  .badge-active { background: rgba(34,211,238,0.15); color: var(--cyan); }
+  .badge-archive { background: rgba(136,136,160,0.15); color: var(--text-dim); }
+  .badge-progress { background: rgba(251,146,60,0.15); color: var(--orange); }
+  .badge-legal { background: rgba(248,113,113,0.15); color: var(--red); }
+  .card-nolink { cursor: default; }
+  .card-nolink:hover { transform: none; border-color: var(--border); box-shadow: none; }
+  .timeline { margin-top: 8px; padding: 0; list-style: none; }
+  .timeline li { padding: 5px 0; font-size: 0.82em; color: var(--text-dim); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+  .timeline li:last-child { border-bottom: none; }
+  .timeline a { color: var(--accent); text-decoration: none; }
+  .timeline a:hover { text-decoration: underline; }
+  .footer { text-align: center; padding: 40px 20px; color: var(--text-dim); font-size: 0.85em; border-top: 1px solid var(--border); }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2em; }
+    .cards { grid-template-columns: 1fr; }
+    .hero { padding: 40px 20px 15px; }
+    .stats-bar { gap: 20px; }
+    .stat-num { font-size: 1.4em; }
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="lang-toggle">
+  <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="hero">
+  <h1>☁️ Sky Portal</h1>
+  <p><span class="zh">Sky Portal — 所有项目，一站入口</span><span class="en">Sky Portal — All Projects, One Portal</span></p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">11</div><div class="stat-label"><span class="zh">已发布网站</span><span class="en">Published</span></div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label"><span class="zh">进行中项目</span><span class="en">Active</span></div></div>
+    <div class="stat"><div class="stat-num">48</div><div class="stat-label"><span class="zh">天 · 从2/15起</span><span class="en">Days · Since 2/15</span></div></div>
+  </div>
+</div>
+
+<div class="container">
+<!-- 📡 Daily Research Banner -->
+<a href="research/index.html" class="research-banner" style="
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(135deg, rgba(240,160,64,0.12), rgba(240,160,64,0.04));
+  border: 1px solid rgba(240,160,64,0.25);
+  border-radius: 16px; padding: 20px 24px;
+  text-decoration: none; color: var(--text);
+  margin-bottom: 24px; margin-top: 20px;
+  transition: all 0.25s ease;
+  position: relative; overflow: hidden;
+" onmouseover="this.style.borderColor='rgba(240,160,64,0.5)';this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.borderColor='rgba(240,160,64,0.25)';this.style.transform='none'">
+  <div style="font-size:2.2em;flex-shrink:0;">📡</div>
+  <div style="flex:1;">
+    <div style="font-size:1.1em;font-weight:700;color:#f0a040;"><span class="zh">每日研报</span><span class="en">Daily Briefing</span></div>
+    <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+      <span class="zh">半导体 · 股票 · 巴萨 · Portland · AI工具 — 每日自动更新</span><span class="en">Semiconductors · Stocks · Barça · Portland · AI — Daily auto-update</span>
+    </div>
+  </div>
+  <div style="color:#f0a040;font-size:1.2em;">→</div>
+</a>
+
+<!-- 🔬 Daily Tech Banner -->
+<a href="tech/index.html" class="tech-banner" style="
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(135deg, rgba(240,160,64,0.12), rgba(240,160,64,0.04));
+  border: 1px solid rgba(240,160,64,0.25);
+  border-radius: 16px; padding: 20px 24px;
+  text-decoration: none; color: var(--text);
+  margin-bottom: 24px;
+  transition: all 0.25s ease;
+  position: relative; overflow: hidden;
+" onmouseover="this.style.borderColor='rgba(240,160,64,0.5)';this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.borderColor='rgba(240,160,64,0.25)';this.style.transform='none'">
+  <div style="font-size:2.2em;flex-shrink:0;">🔬</div>
+  <div style="flex:1;">
+    <div style="font-size:1.1em;font-weight:700;color:#f0a040;"><span class="zh">每日科技</span><span class="en">Daily Tech</span></div>
+    <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+      <span class="zh">芯片架构 · 技术突破 · 产业动态 · 量子计算 — 每日自动更新</span><span class="en">Chip Architecture · Tech Breakthroughs · Industry · Quantum — Daily Auto-Update</span>
+    </div>
+  </div>
+  <div style="color:#f0a040;font-size:1.2em;">→</div>
+</a>
+
+<!-- 🧠 AI Banner -->
+<a href="ai/index.html" class="ai-hdmfl-banner" style="
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(34,211,238,0.04));
+  border: 1px solid rgba(34,211,238,0.25);
+  border-radius: 16px; padding: 20px 24px;
+  text-decoration: none; color: var(--text);
+  margin-bottom: 24px;
+  transition: all 0.25s ease;
+  position: relative; overflow: hidden;
+" onmouseover="this.style.borderColor='rgba(34,211,238,0.5)';this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.borderColor='rgba(34,211,238,0.25)';this.style.transform='none'">
+  <div style="font-size:2.2em;flex-shrink:0;">🧠</div>
+  <div style="flex:1;">
+    <div style="font-size:1.1em;font-weight:700;color:#22d3ee;"><span class="zh">AI</span><span class="en">AI</span></div>
+    <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+      <span class="zh">AI访谈档案 · 访谈总结 · 行业洞察 · 个人感悟 — 持续生长的知识体系</span><span class="en">AI访谈档案 · 访谈总结 · 行业洞察 · 个人感悟</span>
+    </div>
+  </div>
+  <div style="color:#22d3ee;font-size:1.2em;">→</div>
+</a>
+
+<!-- 📊 Daily Market Banner -->
+<a href="market/index.html" class="market-banner" style="
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(135deg, rgba(74,222,128,0.12), rgba(74,222,128,0.04));
+  border: 1px solid rgba(74,222,128,0.25);
+  border-radius: 16px; padding: 20px 24px;
+  text-decoration: none; color: var(--text);
+  margin-bottom: 24px;
+  transition: all 0.25s ease;
+  position: relative; overflow: hidden;
+" onmouseover="this.style.borderColor='rgba(74,222,128,0.5)';this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.borderColor='rgba(74,222,128,0.25)';this.style.transform='none'">
+  <div style="font-size:2.2em;flex-shrink:0;">📊</div>
+  <div style="flex:1;">
+    <div style="font-size:1.1em;font-weight:700;color:#4ade80;">
+      <span class="zh">每日行情</span><span class="en">Daily Market</span>
+    </div>
+    <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+      <span class="zh">美股 · A股 · 港股 — 每晚9点自动分析</span>
+      <span class="en">US · China · HK — Nightly analysis at 9 PM</span>
+    </div>
+  </div>
+  <div style="color:#4ade80;font-size:1.2em;">→</div>
+</a>
+
+
+<!-- 🧬 Weekly Science Banner -->
+<a href="science/index.html" class="science-banner" style="
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(34,211,238,0.04));
+  border: 1px solid rgba(34,211,238,0.25);
+  border-radius: 16px; padding: 20px 24px;
+  text-decoration: none; color: var(--text);
+  margin-bottom: 24px;
+  transition: all 0.25s ease;
+  position: relative; overflow: hidden;
+" onmouseover="this.style.borderColor='rgba(34,211,238,0.5)';this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.borderColor='rgba(34,211,238,0.25)';this.style.transform='none'">
+  <div style="font-size:2.2em;flex-shrink:0;">🧬</div>
+  <div style="flex:1;">
+    <div style="font-size:1.1em;font-weight:700;color:#22d3ee;"><span class="zh">每周科学前沿</span><span class="en">Weekly Science Digest</span></div>
+    <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+      <span class="zh">Science · Nature · Cell · PNAS — 每周三精选3篇前沿论文</span><span class="en">Science · Nature · Cell · PNAS — 3 top papers every Wednesday</span>
+    </div>
+  </div>
+  <div style="color:#22d3ee;font-size:1.2em;">→</div>
+</a>
+<!-- ⚙ Prompt Hub Banner -->
+<a href="prompts/index.html" class="prompt-banner" style="
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(135deg, rgba(108,138,255,0.12), rgba(108,138,255,0.04));
+  border: 1px solid rgba(108,138,255,0.25);
+  border-radius: 16px; padding: 16px 24px;
+  text-decoration: none; color: var(--text);
+  margin-bottom: 24px;
+  transition: all 0.25s ease;
+" onmouseover="this.style.borderColor='rgba(108,138,255,0.5)';this.style.transform='translateY(-2px)'"
+   onmouseout="this.style.borderColor='rgba(108,138,255,0.25)';this.style.transform='none'">
+  <div style="font-size:1.8em;flex-shrink:0;">⚙</div>
+  <div style="flex:1;">
+    <div style="font-size:1em;font-weight:700;color:#6c8aff;"><span class="zh">Prompt 库</span><span class="en">Prompt Hub</span></div>
+    <div style="font-size:0.82em;color:var(--text-dim);margin-top:3px;">
+      <span class="zh">定时任务指令集合 · Cowork 自动读取执行</span>
+      <span class="en">Scheduled task prompts · Auto-read by Cowork</span>
+    </div>
+  </div>
+  <div style="color:#6c8aff;font-size:1.2em;">→</div>
+</a>
+
+
+  <!-- My Garden Banner -->
+  <a href="my-garden/" style="
+    display:flex; align-items:center; gap:16px;
+    background: linear-gradient(135deg, rgba(244,114,182,0.12), rgba(167,139,250,0.05));
+    border: 1px solid rgba(244,114,182,0.25);
+    border-radius: 16px; padding: 20px 24px;
+    text-decoration: none; color: var(--text);
+    margin-bottom: 24px;
+    transition: all 0.25s ease;
+  " onmouseover="this.style.borderColor='rgba(244,114,182,0.5)';this.style.transform='translateY(-2px)'"
+     onmouseout="this.style.borderColor='rgba(244,114,182,0.25)';this.style.transform='none'">
+    <div style="font-size:2.2em;flex-shrink:0;">🌸</div>
+    <div style="flex:1;">
+      <div style="font-size:1.1em;font-weight:700;color:#f472b6;">我的花园 My Garden</div>
+      <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+        绣球 · 杜鹃 · 月季 · 六倍利 · 玉兰 · 红枫 — Portland Spring 2026
+      </div>
+    </div>
+    <div style="color:#f472b6;font-size:1.2em;">→</div>
+  </a>
+
+  <!-- Car Decision Banner -->
+  <a href="car-decision.html" style="
+    display:flex; align-items:center; gap:16px;
+    background: linear-gradient(135deg, rgba(248,113,113,0.12), rgba(248,113,113,0.04));
+    border: 1px solid rgba(248,113,113,0.25);
+    border-radius: 16px; padding: 20px 24px;
+    text-decoration: none; color: var(--text);
+    margin-bottom: 24px; margin-top: 20px;
+    transition: all 0.25s ease;
+  " onmouseover="this.style.borderColor='rgba(248,113,113,0.5)';this.style.transform='translateY(-2px)'"
+     onmouseout="this.style.borderColor='rgba(248,113,113,0.25)';this.style.transform='none'">
+    <div style="font-size:2.2em;flex-shrink:0;">🚗</div>
+    <div style="flex:1;">
+      <div style="font-size:1.1em;font-weight:700;color:#f87171;"><span class="zh">换车决策分析</span><span class="en">Car Decision Analysis</span></div>
+      <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+        <span class="zh">Odyssey 卖 vs Lease vs Turo租 — 三年省$26,000+</span>
+        <span class="en">Sell vs Lease vs Turo — Save $26,000+ over 3 years</span>
+      </div>
+    </div>
+    <div style="color:#f87171;font-size:1.2em;">→</div>
+  </a>
+
+  <div class="section-title"><span>🧩</span> <span class="zh">Sky 技能全家福</span><span class="en">Sky Skills</span></div>
+  <div class="cards">
+    <a class="card" href="skills.html">
+      <div class="icon">☁️</div>
+      <div class="title"><span class="zh">Sky 技能全家福</span><span class="en">Sky Skills Collection</span></div>
+      <div class="desc"><span class="zh">30+ 技能一览：沟通、操控、邮件、搜索、创作、自动化、记忆、进化 — 持续更新中</span><span class="en">30+ skills: communication, control, email, search, creation, automation, memory, evolution — continuously updated</span></div>
+      <div class="badge" style="background:rgba(108,138,255,0.15);color:#6c8aff;">🆕 <span class="zh">新页面</span><span class="en">New</span></div>
+    </a>
+  </div>
+
+  <!-- 入籍 Banner -->
+  <a href="naturalization.html" style="
+    display:flex; align-items:center; gap:16px;
+    background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.04));
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 16px; padding: 20px 24px;
+    text-decoration: none; color: var(--text);
+    margin-bottom: 24px;
+    transition: all 0.25s ease;
+  " onmouseover="this.style.borderColor='rgba(251,191,36,0.5)';this.style.transform='translateY(-2px)'"
+     onmouseout="this.style.borderColor='rgba(251,191,36,0.25)';this.style.transform='none'">
+    <div style="font-size:2.2em;flex-shrink:0;">🇺🇸</div>
+    <div style="flex:1;">
+      <div style="font-size:1.1em;font-weight:700;color:#fbbf24;"><span class="zh">入籍规划 (N-400)</span><span class="en">Naturalization (N-400)</span></div>
+      <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+        <span class="zh">决策分析 · 时间线 · 材料清单 · 税务影响 · 退籍税 · 双持风险评估 — 2026年9月递交</span>
+        <span class="en">Decision Analysis · Timeline · Documents · Tax Impact · Exit Tax · Dual-passport Risk — Filing Sep 2026</span>
+      </div>
+    </div>
+    <div style="color:#fbbf24;font-size:1.2em;">→</div>
+  </a>
+
+  <!-- 私人教练 Banner -->
+  <a href="coach/index.html" style="
+    display:flex; align-items:center; gap:16px;
+    background: linear-gradient(135deg, rgba(244,114,182,0.12), rgba(167,139,250,0.05));
+    border: 1px solid rgba(244,114,182,0.25);
+    border-radius: 16px; padding: 20px 24px;
+    text-decoration: none; color: var(--text);
+    margin-bottom: 24px;
+    transition: all 0.25s ease;
+  " onmouseover="this.style.borderColor='rgba(244,114,182,0.5)';this.style.transform='translateY(-2px)'"
+     onmouseout="this.style.borderColor='rgba(244,114,182,0.25)';this.style.transform='none'">
+    <div style="font-size:2.2em;flex-shrink:0;">🧠</div>
+    <div style="flex:1;">
+      <div style="font-size:1.1em;font-weight:700;color:#f472b6;">私人教练</div>
+      <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+        芒格误判心理学 · 每日一课 — 11/25 课已完成，认知升级从每天一课开始
+      </div>
+    </div>
+    <div style="color:#f472b6;font-size:1.2em;">→</div>
+  </a>
+
+  <div class="section-title"><span>👤</span> <span class="zh">个人</span><span class="en">Personal</span></div>
+  <div class="cards">
+    <a class="card" href="ai-life.html">
+      <div class="icon">🤖</div>
+      <div class="title"><span class="zh">AI 生活实践</span><span class="en">AI in Practice</span></div>
+      <div class="desc"><span class="zh">AI 效能第一手记录 — 含执行简报版(V2)和轻量原版(V1)，双版本对应不同受众</span><span class="en">First-hand AI productivity records — Executive brief (V2) and light original (V1)</span></div>
+      <div class="meta"><span>2026-04-15</span><span class="badge badge-latest"><span class="zh">更新</span><span class="en">Updated</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/xiaobo-homepage/" target="_blank">
+      <div class="icon">🏠</div>
+      <div class="title"><span class="zh">个人主页</span><span class="en">Homepage</span></div>
+      <div class="desc"><span class="zh">个人简介</span><span class="en">— Personal profile</span></div>
+      <div class="meta"><span>2026-02-16</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+  </div>
+
+  <div class="section-title"><span>✈️</span> <span class="zh">旅行计划</span><span class="en">Travel Plans</span></div>
+  <div class="cards">
+    <a class="card" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank">
+      <div class="icon">🌍</div>
+      <div class="title"><span class="zh">2026 暑假欧洲行 v5 (最新)</span><span class="en">2026 Europe Summer v5 (Latest)</span></div>
+      <div class="desc"><span class="zh">基于实际机票的确定版 — 瑞士6天→巴黎5天→纽约3天，4人机票$1,486</span><span class="en">Finalized — Switzerland 6d → Paris 5d → NYC 3d, 4 tickets $1,486</span></div>
+      <div class="meta"><span>2026-03-05</span><span class="badge badge-latest"><span class="zh">最新版</span><span class="en">Latest</span></span></div>
+    </a>
+    <div class="card card-nolink">
+      <div class="icon">📜</div>
+      <div class="title"><span class="zh">旅行计划版本历史</span><span class="en">Version History</span></div>
+      <ul class="timeline">
+        <li><a href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><span class="zh">v5 — 实际机票确定版</span><span class="en">v5 — Finalized with tickets</span></a><span>2026-03-05</span></li>
+        <li><a href="https://timememo8210.github.io/travel-plan-2026/" target="_blank"><span class="zh">v3 — 双方案 Tab 对比版</span><span class="en">v3 — Dual-plan comparison</span></a><span>2026-03-03</span></li>
+        <li><span><span class="zh">v2 — 住宿/交通/套餐对比</span><span class="en">v2 — Hotel/transport comparison</span></span><span>2026-02-17</span></li>
+        <li><span><span class="zh">v1 — 初始方案</span><span class="en">v1 — Initial plan</span></span><span>2026-02-15</span></li>
+      </ul>
+    </div>
+    <a class="card" href="https://timememo8210.github.io/travelsnap/" target="_blank">
+      <div class="icon">📸</div>
+      <div class="title">TravelSnap</div>
+      <div class="desc"><span class="zh">旅行照片记录工具</span><span class="en">Travel photo journal tool</span></div>
+      <div class="meta"><span>2026-02-18</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+  </div>
+
+  <!-- 投资策略 Banner -->
+  <a href="investment.html" style="
+    display:flex; align-items:center; gap:16px;
+    background: linear-gradient(135deg, rgba(74,222,128,0.12), rgba(74,222,128,0.04));
+    border: 1px solid rgba(74,222,128,0.25);
+    border-radius: 16px; padding: 20px 24px;
+    text-decoration: none; color: var(--text);
+    margin-bottom: 24px;
+    transition: all 0.25s ease;
+  " onmouseover="this.style.borderColor='rgba(74,222,128,0.5)';this.style.transform='translateY(-2px)'"
+     onmouseout="this.style.borderColor='rgba(74,222,128,0.25)';this.style.transform='none'">
+    <div style="font-size:2.2em;flex-shrink:0;">💰</div>
+    <div style="flex:1;">
+      <div style="font-size:1.1em;font-weight:700;color:#4ade80;"><span class="zh">投资策略</span><span class="en">Investment Strategy</span></div>
+      <div style="font-size:0.85em;color:var(--text-dim);margin-top:4px;">
+        <span class="zh">RSU → SMH · 529 vs UTMA vs 自己账户 · 资本利得税 · 资产配置</span>
+        <span class="en">RSU → SMH · 529 vs UTMA vs Brokerage · Capital Gains · Asset Allocation</span>
+      </div>
+    </div>
+    <div style="color:#4ade80;font-size:1.2em;">→</div>
+  </a>
+
+  <div class="section-title"><span>🛠️</span> <span class="zh">工具 & 应用</span><span class="en">Tools & Apps</span></div>
+  <div class="cards">
+    <a class="card" href="https://timememo8210.github.io/moji-journal/" target="_blank">
+      <div class="icon">📝</div>
+      <div class="title"><span class="zh">墨记 (Moji Journal)</span><span class="en">Moji Journal (墨记)</span></div>
+      <div class="desc"><span class="zh">极简个人日记 — 黑白卡片式时间线、搜索、图片上传、JSON导出</span><span class="en">Minimal diary — B&W card timeline, search, image upload, JSON export</span></div>
+      <div class="meta"><span>2026-03-01</span><span class="badge badge-progress"><span class="zh">开发中</span><span class="en">In Dev</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/家人-War-Game/" target="_blank">
+      <div class="icon">⚔️</div>
+      <div class="title">家人 Game</div>
+      <div class="desc">时代之战 (War of Ages)<br><span class="zh">回合制战争策略 — 5个年代、5种兵种、AI对手</span><span class="en">Turn-based strategy — 5 eras, 5 unit types, AI opponents</span></div>
+      <div class="meta"><span>2026-04-08</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank">
+      <div class="icon">🌍</div>
+      <div class="title">家人 Game II</div>
+      <div class="desc">世界征服 (World Conquest)<br><span class="zh">实时策略 — 每秒产金、自由调兵、防御工事、工厂系统、精美画面</span><span class="en">Real-time strategy — Gold/sec, partial deployment, fortifications, factories, polished UI</span></div>
+      <div class="meta"><span>2026-04-08</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/polyclaw/" target="_blank">
+      <div class="icon">📊</div>
+      <div class="title"><span class="zh">PolyClaw 仪表盘</span><span class="en">PolyClaw Dashboard</span></div>
+      <div class="desc"><span class="zh">Polymarket 模拟交易 — $10,000模拟盘，信息差交易策略验证</span><span class="en">Polymarket sim — $10K paper account, info-edge strategy testing</span></div>
+      <div class="meta"><span>2026-02-17</span><span class="badge badge-active"><span class="zh">活跃</span><span class="en">Active</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/app-ideas/" target="_blank">
+      <div class="icon">💡</div>
+      <div class="title">App Ideas</div>
+      <div class="desc"><span class="zh">应用创意收集与展示</span><span class="en">App idea collection & showcase</span></div>
+      <div class="meta"><span>2026-02-17</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+    <a class="card" href="https://github.com/Timememo8210/claude-app-memory" target="_blank">
+      <div class="icon">🧠</div>
+      <div class="title"><span class="zh">记忆同步中心</span><span class="en">Memory Sync Hub</span></div>
+      <div class="desc"><span class="zh">Claude App ↔ Cowork ↔ Sky 三端记忆同步桥梁 — 通过 GitHub 私有仓库中转，说"同步记忆"即触发</span><span class="en">Claude App ↔ Cowork ↔ Sky memory bridge — syncs via private GitHub repo, triggered by "sync memory"</span></div>
+      <div class="meta"><span>2026-04-04</span><span class="badge badge-active"><span class="zh">活跃</span><span class="en">Active</span></span></div>
+    </a>
+  </div>
+
+  <div class="section-title"><span>🔬</span> <span class="zh">研究 & 报告</span><span class="en">Research & Reports</span></div>
+  <div class="cards">
+    <a class="card" href="research/intel-tesla-terafab.html" target="_blank">
+      <div class="icon">⚡</div>
+      <div class="title"><span class="zh">Intel × Tesla Terafab 深度调研</span><span class="en">Intel × Tesla Terafab Deep Research</span></div>
+      <div class="desc"><span class="zh">超级半导体制造项目 · 中英双语交互式报告</span><span class="en">Mega Semiconductor Project · Bilingual Interactive Report</span></div>
+      <div class="meta"><span>2026-04-08</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/intel-report/" target="_blank">
+      <div class="icon">🏭</div>
+      <div class="title"><span class="zh">Intel 行业报告</span><span class="en">Intel Industry Report</span></div>
+      <div class="desc"><span class="zh">半导体行业分析报告</span><span class="en">Semiconductor industry analysis</span></div>
+      <div class="meta"><span>2026-02-18</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/zam-research/" target="_blank">
+      <div class="icon">🔍</div>
+      <div class="title">ZAM Research</div>
+      <div class="desc"><span class="zh">研究项目页面</span><span class="en">Research project page</span></div>
+      <div class="meta"><span>2026-02-18</span><span class="badge badge-latest"><span class="zh">在线</span><span class="en">Live</span></span></div>
+    </a>
+    <a class="card" href="https://timememo8210.github.io/health-report/" target="_blank">
+      <div class="icon">🏥</div>
+      <div class="title"><span class="zh">健康数据报告</span><span class="en">Health Data Report</span></div>
+      <div class="desc"><span class="zh">Apple Health 11年数据分析 · 327万条记录</span><span class="en">11 years Apple Health · 3.27M records</span></div>
+      <div class="meta"><span>2026-03-28</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="ai-cvd-optimization.html">
+      <div class="icon">🏭</div>
+      <div class="title"><span class="zh">AI赋能半导体设备优化</span><span class="en">AI-Powered Semiconductor Equipment Optimization</span></div>
+      <div class="desc"><span class="zh">Lam Fabtex/AMAT AIx对标 · 双语 · 数据安全 · 供应链全景 · 实施路线图 · 给决策者的最小启动方案</span><span class="en">Benchmarking Lam Fabtex/AMAT AIx · Bilingual · Data security · Supply chain · Implementation roadmap · Min-viable launch plan</span></div>
+      <div class="meta"><span>2026-04-30</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="semiconductor-equipment-ai.html">
+      <div class="icon">🔐</div>
+      <div class="title"><span class="zh">半导体设备 AI 安全方案调研</span><span class="en">Semiconductor Equipment AI Security Research</span></div>
+      <div class="desc"><span class="zh">企业级AI数据安全方案对比 — NVIDIA/Azure/国内云/开源本地部署，含价格、安全等级、推荐方案</span><span class="en">Enterprise AI data security comparison — NVIDIA/Azure/China cloud/open-source, with pricing and recommendations</span></div>
+      <div class="meta"><span>2026-04-29</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="claude-code-leak.html">
+      <div class="icon">🔓</div>
+      <div class="title"><span class="zh">Claude Code 泄露研究</span><span class="en">Claude Code Leak Analysis</span></div>
+      <div class="desc"><span class="zh">Anthropic 史上最大源代码意外泄露的深度分析 — 512K行源码、隐藏功能、产品战略全曝光</span><span class="en">Anthropic's largest accidental source leak — 512K lines, hidden features, strategy exposed</span></div>
+      <div class="meta"><span>2026-04-03</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="nvidia-report.html">
+      <div class="icon">🟢</div>
+      <div class="title"><span class="zh">NVIDIA Foundry 战略报告 v2.2</span><span class="en">NVIDIA Foundry Strategy v2.2</span></div>
+      <div class="desc"><span class="zh">NVIDIA GPU 晶圆代工战略分析，消费级GPU作为代工合作切入点，RTX 60 N3P 机会窗口分析</span><span class="en">NVIDIA GPU foundry strategy, consumer GPU as entry point, RTX 60 N3P opportunity</span></div>
+      <div class="meta"><span>2026-04-04</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="research/prolynk-market-analysis.html">
+      <div class="icon">🏠</div>
+      <div class="title"><span class="zh">ProLynk & Home Passport 全面竞品调研</span><span class="en">ProLynk & Home Passport Market Analysis</span></div>
+      <div class="desc"><span class="zh">爱尔兰家居维修平台深度分析 — 14个竞品、三大市场、一人公司盈利模型、Home Passport概念验证</span><span class="en">Ireland home repair platform — 14 competitors, 3 markets, solo-founder model, Home Passport validation</span></div>
+      <div class="meta"><span>2026-04-14</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+    <a class="card" href="intel-news-2026.html">
+      <div class="icon">📰</div>
+      <div class="title"><span class="zh">Intel 2026 新闻速览</span><span class="en">Intel 2026 News Briefing</span></div>
+      <div class="desc"><span class="zh">18A量产元年全景：Fab 52投产、$142亿爱尔兰回购、Core Ultra S3上市、领导层重塑、股价突破$48</span><span class="en">18A HVM year: Fab 52 live, $14.2B Ireland buyback, Core Ultra S3, leadership reshuffle, INTC $48</span></div>
+      <div class="meta"><span>2026-04-04</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+  </div>
+
+  <div class="section-title"><span>💭</span> <span class="zh">思考专栏</span><span class="en">Thoughts</span></div>
+  <div class="cards">
+    <a class="card" href="thoughts/future-transportation.html">
+      <div class="icon">🚗</div>
+      <div class="title"><span class="zh">未来交通：自动驾驶如何重塑世界</span><span class="en">Future Transport: How Self-Driving Reshapes the World</span></div>
+      <div class="desc"><span class="zh">从汽车产业升级到整个交通基础设施的范式转变 — 加油站、休息站、停车场、车内时间经济</span><span class="en">Auto industry to infrastructure paradigm shift — gas stations, parking, in-vehicle time economy</span></div>
+      <div class="meta"><span>2026-03-29</span><span class="badge badge-latest">NEW</span></div>
+    </a>
+  </div>
+
+  <div class="section-title"><span>🔥</span> <span class="zh">进行中的项目</span><span class="en">Active Projects</span></div>
+  <div class="cards">
+    <a class="card" href="prolynk.html">
+      <div class="icon">🏠</div>
+      <div class="title">ProLynk <span class="zh">家居维修平台</span><span class="en">Home Repair Platform</span></div>
+      <div class="desc"><span class="zh">与 Daniel Zhu 合作 — 网站测试报告 + 美国启动14天计划 + Oregon LLC 注册方案</span><span class="en">Partnered with Daniel Zhu — Test report + 14-day US launch plan + Oregon LLC setup</span></div>
+      <div class="meta"><span>2026-04-17</span><span class="badge badge-latest">🆕 NEW</span></div>
+    </a>
+    <div class="card card-nolink">
+      <div class="icon">⚖️</div>
+      <div class="title"><span class="zh">Xfinity 消费欺诈诉讼</span><span class="en">Xfinity Consumer Fraud Case</span></div>
+      <div class="desc"><span class="zh">小额法庭起诉 Comcast/Xfinity — 客服系统性欺诈，索赔$2,500。已提交 FCC/Oregon AG/BBB 投诉，法庭材料已准备</span><span class="en">Small claims vs Comcast/Xfinity — systematic fraud, $2,500 claim. FCC/Oregon AG/BBB filed, court docs ready</span></div>
+      <div class="meta"><span class="zh">2026-02-24 起</span><span class="en">Since 2026-02-24</span><span class="badge badge-legal"><span class="zh">诉讼中</span><span class="en">Litigating</span></span></div>
+    </div>
+    <div class="card card-nolink">
+      <div class="icon">🎤</div>
+      <div class="title"><span class="zh">语音克隆 (CosyVoice3)</span><span class="en">Voice Cloning (CosyVoice3)</span></div>
+      <div class="desc"><span class="zh">窦文涛、郭德纲、高晓松、吴宗宪声音克隆 — 云端 HuggingFace API 生成</span><span class="en">Chinese celebrity voice cloning — cloud HuggingFace API</span></div>
+      <div class="meta"><span class="zh">2026-02-22 起</span><span class="en">Since 2026-02-22</span><span class="badge badge-progress"><span class="zh">进行中</span><span class="en">In Progress</span></span></div>
+    </div>
+    <div class="card card-nolink">
+      <div class="icon">📄</div>
+      <div class="title"><span class="zh">家人论文修改</span><span class="en">教授 Paper Editing</span></div>
+      <div class="desc"><span class="zh">国家社科基金申报书活页 —「感通思想」设计哲学研究</span><span class="en">NSSFC application — "Gantong" design philosophy research</span></div>
+      <div class="meta"><span>2026-02-28</span><span class="badge badge-progress"><span class="zh">已交稿</span><span class="en">Submitted</span></span></div>
+    </div>
+    <div class="card card-nolink">
+      <div class="icon">📧</div>
+      <div class="title"><span class="zh">邮箱自动管理</span><span class="en">Email Auto-Management</span></div>
+      <div class="desc"><span class="zh">Hotmail 邮件自动分拣 — VIP过滤、Newsletter归档、促销整理</span><span class="en">Hotmail auto-sorting — VIP filter, newsletter archive, promo cleanup</span></div>
+      <div class="meta"><span class="zh">每日自动运行</span><span class="en">Runs daily</span><span class="badge badge-active"><span class="zh">自动化</span><span class="en">Auto</span></span></div>
+    </div>
+    <div class="card card-nolink">
+      <div class="icon">📰</div>
+      <div class="title"><span class="zh">每日简报推送</span><span class="en">Daily Briefing</span></div>
+      <div class="desc"><span class="zh">每天9点自动推送 — 半导体/股市/巴萨/波特兰/OpenClaw 动态</span><span class="en">9 AM daily — semiconductors / stocks / Barça / Portland / OpenClaw</span></div>
+      <div class="meta"><span>9:00 AM PDT</span><span class="badge badge-active"><span class="zh">自动化</span><span class="en">Auto</span></span></div>
+    </div>
+    <div class="card card-nolink">
+      <div class="icon">🔴</div>
+      <div class="title"><span class="zh">小红书运营</span><span class="en">Xiaohongshu (RED) Ops</span></div>
+      <div class="desc"><span class="zh">通过 MCP 发布小红书笔记 — AI管理/Xfinity维权等内容</span><span class="en">MCP-powered posts — AI management & Xfinity advocacy</span></div>
+      <div class="meta"><span class="zh">2026-02-23 起</span><span class="en">Since 2026-02-23</span><span class="badge badge-progress"><span class="zh">进行中</span><span class="en">In Progress</span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>☁️ Powered by Sky · Built with ❤️ <span class="zh"></span><span class="en"></span></p>
+  <p style="margin-top:8px;"><a href="https://github.com/Timememo8210">GitHub</a> · <span class="zh">最后更新</span><span class="en">Last updated</span> 2026-04-15</p>
+</div>
+
+<script>
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('btn-zh').className=l==='zh'?'active':'';
+  document.getElementById('btn-en').className=l==='en'?'active':'';
+  try{localStorage.setItem('sky-lang',l)}catch(e){}
+}
+try{var s=localStorage.getItem('sky-lang');if(s)setLang(s)}catch(e){}
+</script>
+</body>
+</html>

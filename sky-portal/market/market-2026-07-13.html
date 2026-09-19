@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-13</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#4ade80">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股市场</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets</div>
+<div class="zh poster-data">• 标普500：-0.22%<br>• 道琼斯：+0.26%<br>• 费城半导体：+2.7%</div>
+<div class="en poster-data" style="display:none">• S&P 500: -0.22%<br>• DJIA: +0.26%<br>• SOX: +2.7%</div>
+</div>
+<div class="poster-card" style="background:#10a37f">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">亚太市场</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Asia Pacific</div>
+<div class="zh poster-data">• 上证：-2.06%<br>• 深成指：-3.48%<br>• 恒生科技：+0.96%</div>
+<div class="en poster-data" style="display:none">• SSE: -2.06%<br>• SZSE: -3.48%<br>• HK Tech: +0.96%</div>
+</div>
+<div class="poster-card" style="background:#e08c0b">
+<div class="poster-icon">💡</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI板块分化</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Divergence</div>
+<div class="zh poster-data">• 高盛看好中国AI发展空间<br>• 美股AI板块出现分化<br>• AI Capex见顶争论激烈</div>
+<div class="en poster-data" style="display:none">• Goldman likes China AI potential<br>• US AI sector diverging<br>• AI Capex peak debate</div>
+</div>
+<div class="poster-card" style="background:#d92d20">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体板块</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors</div>
+<div class="zh poster-data">• 芯片股普遍上涨<br>• Arm涨4.6%，英伟达+1.5%<br>• Meta发行250亿美元债券</div>
+<div class="en poster-data" style="display:none">• Chip stocks rise broadly<br>• Arm +4.6%, NVDA +1.5%<br>• Meta issues $25B bonds</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-13 · Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🔬 <span class="zh">半导体与AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 芯片股普遍上涨，费城半导体指数大涨2.7%</span><span class="en" style="display:none">1. Chip Stocks Rally, SOX Index Up 2.7%</span></h4>
+<p><span class="zh">今日芯片股集体上涨，费城半导体指数大涨2.7%。SK海力士美国存托凭证(ADR)上市首日飙升12.8%，再次点燃市场对AI硬件供应链的热情。Arm涨4.6%，英特尔和美光均最高上涨2.9%，英伟达涨1.5%，Meta宣布发行250亿美元债券用于AI基础设施建设。</span><span class="en" style="display:none">Chip stocks rallied broadly with SOX up 2.7%. SK Hynix ADR surged 12.8% on debut, reigniting enthusiasm for AI hardware supply chain. Arm +4.6%, Intel and Micron up ~2.9%, NVDA +1.5%, Meta issued $25B for AI infrastructure.</span></p>
+<p class="src">来源：Moomoo / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI板块出现分化，高盛看好中国AI发展空间</span><span class="en" style="display:none">2. AI Sector Diverging, Goldman Optimistic on China AI</span></h4>
+<p><span class="zh">高盛发布研报称，中国AI板块总市值仅占全球AI总市值的10%，但创造了全球16%的AI相关营收，存在明显的价值洼地。高盛建议做多中国AI，认为其估值扩张潜力巨大。与此同时，美股AI板块出现明显分化，大型科技股与中小型AI公司走势出现背离，市场对AI估值泡沫的担忧上升。</span><span class="en" style="display:none">Goldman report: China AI sector accounts for only 10% of global AI market cap but 16% of AI revenue, creating a clear valuation gap. Goldman recommends long China AI stocks with significant upside potential. US AI sector showing divergence, with big tech vs small AI companies diverging.</span></p>
+<p class="src">来源：高盛 / Sina Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中美科技股估值差距创历史极值，出现显著分化</span><span class="en" style="display:none">3. China-US Tech Valuation Gap at Record High</span></h4>
+<p><span class="zh">分析数据显示，中美科技股市值比已达到历史极值，呈现出显著的市场分化。A股科技板块估值处于相对低位，而美股大型科技股估值高企。高盛指出，中美科技股估值分化反映了投资者对不同市场增长预期的差异，以及对中国AI产业规模化发展的信心不足。</span><span class="en" style="display:none">Data shows China-US tech valuation ratio at all-time high with significant market divergence. Chinese tech stocks trading at relatively low valuations vs high US tech valuations. Goldman notes the divergence reflects different growth expectations and lack of confidence in China's AI scaling potential.</span></p>
+<p class="src">来源：东方财富 / 高盛</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 市场关注AI Capex是否见顶，分歧明显</span><span class="en" style="display:none">4. Market Debating AI Capex Peak, Clear Divergence</span></h4>
+<p><span class="zh">中美科技股大跌后，华尔街对AI Capex(资本支出)是否见顶出现明显分歧。乐观派认为，随着AI产业持续加码，相关公司盈利增长有望继续超预期；谨慎派则认为，当前市场估值扩张的速度明显快于盈利增长速度，如果无法承接如此庞大的估值体系，科技股可能面临估值回调。</span><span class="en" style="display:none">Following recent tech stock declines, Wall Street shows clear divergence on whether AI Capex has peaked. Optimists believe sustained AI investments will drive earnings growth; cautionists see valuations growing faster than earnings, risking tech stock corrections.</span></p>
+<p class="src">来源：中信证券 / STCN</p>
+</div>
+
+<h2>📈 <span class="zh">全球股市行情（7月13日收盘）</span><span class="en" style="display:none">Global Market Close (Jul 13)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SPY</div><div class="stock-price">4,369.23</div><div class="stock-change down">-0.22%</div></div>
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,319.20</div><div class="stock-change up">+0.26%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">26,021.66</div><div class="stock-change down">-1.34%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">4,288.45</div><div class="stock-change up">+2.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">000001</div><div class="stock-price">3,913.79</div><div class="stock-change down">-2.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">399001</div><div class="stock-price">14,522.85</div><div class="stock-change down">-3.48%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24,213.72</div><div class="stock-change up">+0.16%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSTECH</div><div class="stock-price">4,676.43</div><div class="stock-change up">+0.96%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">188.75</div><div class="stock-change up">+1.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">62.38</div><div class="stock-change up">+1.80%</div></div>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — 标普500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">DJI — 道琼斯</div><div id="tv-dji"></div></div>
+<div class="kline-item"><div class="kline-label">IXIC — 纳斯达克</div><div id="tv-ixic"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — 费半导体</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<h2>🌊 <span class="zh">全球市场动态</span><span class="en" style="display:none">Global Market Dynamics</span></h2>
+
+<div class="card">
+<h4><span class="zh">美股AI交易降温，科技股大牛市是否持续引发争议</span><span class="en" style="display:none">US AI Trading Cools, Tech Bull Debate Intensifies</span></h4>
+<p><span class="zh">近期美股AI交易全面降温，大型科技股、芯片、光通信概念股均遭遇猛烈抛售，费城半导体指数暴跌逾10%，单日市值蒸发逾1万亿美元。分析师认为，这一轮调整主要由AI估值过高、流动性收紧预期以及对AI商业化落地的担忧引发。市场正在重新评估AI投资逻辑，从概念炒作转向基本面分析。</span><span class="en" style="display:none">US AI trading has cooled recently, with big tech, chips, and optical comms stocks suffering sharp declines, SOX plunging over 10% with $1T+ market cap wiped out. Analysts attribute this to high AI valuations, liquidity tightening concerns, and doubts about AI commercialization. Market is reassessing AI investment logic from hype-driven to fundamentals.</span></p>
+<p class="src">来源：新浪财经 / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">全球AI龙头股共振下跌，机构关注三个关键信号</span><span class="en" style="display:none">Global AI Leaders Sell-Off, Institutions Watch Three Signals</span></h4>
+<p><span class="zh">分析人士认为，近期全球AI板块共振调整是由于高拥挤度下产业叙事扰动。短期科技股超跌后或有修复，但在拥挤度压力充分消化前，板块可能仍处于高波动状态。机构建议关注三个关键信号：1)AI应用端商业化进展；2)半导体订单能否持续增长；3)投资者风险偏好变化。</span><span class="en" style="display:none">Analysts attribute the global AI sector decline to crowded trade narrative disruption. Tech stocks may recover after oversold, but high volatility may persist until pressure dissipates. Institutions recommend watching three signals: 1) AI application commercialization; 2) Semiconductor order sustainability; 3) Investor risk appetite changes.</span></p>
+<p class="src">来源：中国新闻网 / CRN</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">史上最大IPO，美伊谈判出现重大转机</span><span class="en" style="display:none">Record-Breaking IPO, US-Iran Talks Take Turn</span></h4>
+<p><span class="zh">美股史上最大IPO今日上市，交易比预期更为平稳。该股盘中大部分时间上涨15%至30%，波动幅度并不大。收盘时股价报约161美元/股，上涨19%，跻身美国第六大公司。与此同时，美伊谈判出现重大转机，和平协议的积极信号令避险情绪降温，利好全球科技股表现。</span><span class="en" style="display:none">Today's record IPO traded better than expected, rising 15-30% most of the session with modest volatility. Closed at ~$161 (+19%), becoming US's 6th largest company. Meanwhile, US-Iran talks show positive progress for peace deal, boosting risk appetite and global tech stocks.</span></p>
+<p class="src">来源：证券时报 / Wall Street Journal</p>
+</div>
+
+<h2>🔮 <span class="zh">明日市场展望</span><span class="en" style="display:none">Tomorrow's Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期展望：科技股分化行情或将延续</span><span class="en" style="display:none">Short-Term: Tech Stock Divergence May Continue</span></h4>
+<p><span class="zh">预计半导体/AI板块短期内将继续分化行情。基本面扎实的龙头芯片股有望保持韧性，而纯概念炒作的小型AI公司可能继续面临估值压力。市场将密切关注美联储政策变化和科技巨头财报，这些因素将对科技股走势产生重要影响。</span><span class="en" style="display:none">Semiconductor/AI sector expected to show continued divergence in short term. Fundamentally strong chip leaders may maintain resilience while pure-play small AI stocks face valuation pressure. Market will closely watch Fed policy changes and tech giant earnings for impact on tech stocks.</span></p>
+<p class="src">来源：摩根士丹利 / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">中期展望：中美科技股估值有望收敛</span><span class="en" style="display:none">Medium-Term: China-US Tech Valuation Convergence Expected</span></h4>
+<p><span class="zh">中长期来看，中美科技股估值差距有望逐步收敛。随着中国AI产业规模化发展和应用场景不断丰富，市场将重新评估中国科技股的价值。高盛预计未来6-12个月内，中国AI相关标的将有30-50%的上涨空间。投资者应关注具有核心技术和实质性业务增长的中国科技企业。</span><span class="en" style="display:none">In medium term, China-US tech valuation gap is expected to converge gradually. With China's AI industry scaling and application scenarios expanding, market will revalue Chinese tech stocks. Goldman projects 30-50% upside for China AI-related stocks in next 6-12 months.</span></p>
+<p class="src">来源：高盛 / 海通证券</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">风险提示：地缘政治与政策变化</span><span class="en" style="display:none">Risks: Geopolitics & Policy Changes</span></h4>
+<p><span class="zh">投资者需警惕地缘政治风险和政策变化对市场的影响。美伊关系走向、全球货币政策调整、以及各国对AI监管政策的变化都可能引发市场波动。建议保持适度仓位配置，关注高股息防御性板块，同时适当配置AI产业链中的核心环节。</span><span class="en" style="display:none">Investors should watch geopolitical risks and policy impacts. US-Iran relations, global monetary policy shifts, and AI regulatory changes may trigger market volatility. Maintain moderate allocations with defensive high-dividend stocks while adding core AI supply chain positions.</span></p>
+<p class="src">来源：瑞银 / 中信证券</p>
+</div>
+
+<div class="footer">
+<p>📊 Daily Market Reports · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Moomoo, CNBC, Sina Finance, Reuters, Bloomberg, Goldman Sachs, UBS, CITIC Securities</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-dji', sym:'INDEX:DJI'},
+  {id:'tv-ixic', sym:'NASDAQ:IXIC'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HKEX:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

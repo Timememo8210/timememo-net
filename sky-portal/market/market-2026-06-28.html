@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-28</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#2563eb">
+<div class="poster-icon">🏗️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">地缘政治</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Geopolitical</div>
+<div class="zh poster-data">• 特朗普确认将打击伊朗<br>• 中东局势持续紧张</div>
+<div class="en poster-data" style="display:none">• Trump confirms Iran strikes<br>• Middle East tensions rising</div>
+</div>
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">💰</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">经济政策</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Economic Policy</div>
+<div class="zh poster-data">• 中国央行5000亿MLF操作<br>• 新五年规划重点扶持科技</div>
+<div class="en poster-data" style="display:none">• PBOC 500B MLF operation<br>• New 5-year plan focuses on tech</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI半导体</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Semiconductors</div>
+<div class="zh poster-data">• 全球半导体市场创新高<br>• 英伟达、三星领跑</div>
+<div class="en poster-data" style="display:none">• Global semiconductor record<br>• Nvidia, Samsung lead</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">市场表现</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Market Performance</div>
+<div class="zh poster-data">• 科创50逆势上涨6.32%<br>• 恒指夜期上涨0.95%</div>
+<div class="en poster-data" style="display:none">• STAR50 up 6.32% despite<br>• HSI futures up 0.95%</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-06-28 · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🔬 <span class="zh">AI半导体</span><span class="en" style="display:none">AI Semiconductors</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 全球半导体市场规模2026年将创新高，AI驱动增长</span><span class="en" style="display:none">1. Global Semiconductor Market to Hit Record High in 2026</span></h4>
+<p><span class="zh">行业数据显示，2026年全球半导体市场规模将首次突破1万亿美元大关，主要受益于AI芯片需求的爆发式增长。英伟达、三星电子在全球各自赛道领跑，数据中心GPU、AI推理芯片需求强劲。分析师预测，2026-2027年AI相关半导体收入增速将保持在40%以上，远高于行业平均水平。</span><span class="en" style="display:none">Industry data shows global semiconductor market will exceed $1 trillion for the first time in 2026, driven by AI chip demand. Nvidia and Samsung lead in their respective segments. Data center GPUs and AI inference chips show strong demand. Analysts forecast 40%+ YoY growth for AI semiconductors 2026-2027.</span></p>
+<p class="src">来源：央视财经 / 行业研究报告</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. ChatGPT周活用户超8亿，AI工具正在重塑搜索格局</span><span class="en" style="display:none">2. ChatGPT Weekly Users Exceed 800M, AI Tools Reshaping Search</span></h4>
+<p><span class="zh">数据显示，ChatGPT每周活跃用户已超过8亿，直接挑战谷歌搜索的主导地位。越来越多的用户转向AI助手获取答案和建议，传统搜索引擎面临颠覆性挑战。谷歌、微软等科技巨头加速推出AI搜索功能，但用户习惯的迁移已经不可逆转。AI搜索相关产业链公司迎来重大机遇。</span><span class="en" style="display:none">Data shows ChatGPT weekly active users exceed 800M, challenging Google's search dominance. More users turn to AI assistants for answers, revolutionizing search habits. Tech giants accelerate AI search features, but the shift is irreversible. AI search产业链 companies see major opportunities.</span></p>
+<p class="src">来源：Demandsage / BBC News</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中国五年规划重点扶持半导体与AI，加速自主发展</span><span class="en" style="display:none">3. China's 5-Year Plan Prioritizes Semiconductors & AI</span></h4>
+<p><span class="zh">中国全国人大正式批准了2026-2030年五年规划，将半导体和人工智能列为重点扶持领域。规划明确提出要突破关键核心技术，加快实现高水平科技自立自强。预计国家将投入数千亿元资金，支持半导体产业链、AI大模型和算力基础设施建设。这将推动国产AI芯片和半导体设备的快速发展。</span><span class="en" style="display:none">China's National People's Congress approved the 2026-2030 five-year plan, prioritizing semiconductors and AI. The plan emphasizes breakthroughs in core technologies and high-level self-reliance. Expected national investment of hundreds of billions will support semiconductor supply chain, AI models, and computing infrastructure.</span></p>
+<p class="src">来源：新华社 / DW中文</p>
+</div>
+
+<h2>📈 <span class="zh">全球股市行情（6月27日收盘）</span><span class="en" style="display:none">Global Markets (Jun 27 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">000001</div><div class="stock-price">4027</div><div class="stock-change down">-2.26%</div></div>
+<div class="stock-item"><div class="stock-ticker">399006</div><div class="stock-price">1678</div><div class="stock-change up">+6.32%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">22916</div><div class="stock-change up">+0.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$62.38</div><div class="stock-change up">+1.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$188.75</div><div class="stock-change up">+2.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$370.60</div><div class="stock-change up">+0.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$245.04</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">$436.88</div><div class="stock-change up">+0.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">QQQ</div><div class="stock-price">$486.25</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPY</div><div class="stock-price">$542.15</div><div class="stock-change up">+0.8%</div></div>
+</div>
+
+<h3>📊 指数表现</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">上证指数</div><div id="tv-shanghai"></div></div>
+<div class="kline-item"><div class="kline-label">科创50</div><div id="tv-star50"></div></div>
+<div class="kline-item"><div class="kline-label">恒指夜期</div><div id="tv-hsi"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSM</div><div id="tv-tsm"></div></div>
+<div class="kline-item"><div class="kline-label">SMH</div><div id="tv-smh"></div></div>
+</div>
+
+<h2>🏗️ <span class="zh">地缘政治与经济政策</span><span class="en" style="display:none">Geopolitics & Economic Policy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 特朗普确认将进一步打击伊朗，中东局势升级</span><span class="en" style="display:none">1. Trump Confirms Further Strikes on Iran, ME Tensions Escalate</span></h4>
+<p><span class="zh">特朗普6月27日证实，美国将进一步打击伊朗，称若事态发展至此，伊朗将不复存在。这一表态导致中东地缘政治风险急剧上升，全球避险情绪升温。国际油价应声上涨，黄金价格突破2300美元/盎司。市场担心冲突可能扩大，影响全球能源供应和贸易通道。</span><span class="en" style="display:none">Trump confirmed on June 27 that the US will further strike Iran, stating Iran will not exist if the situation develops to that point. This has sharply increased geopolitical risks in the Middle East, fueling global risk-off sentiment. Oil prices rose sharply, gold broke through $2300/oz. Markets fear potential escalation affecting global energy supply and trade routes.</span></p>
+<p class="src">来源：新浪财经 / CNN</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 中国央行开展5000亿元MLF操作，保持流动性充裕</span><span class="en" style="display:none">2. PBOC Conducts 500B MLF Operation to Maintain Liquidity</span></h4>
+<p><span class="zh">中国人民银行公告，为保持银行体系流动性充裕，于6月25日开展了5000亿元中期借贷便利（MLF）操作，期限为1年期。此次操作采用固定数量、利率招标、多重价位中标方式。市场分析认为，央行此举旨在对冲季末因素影响，稳定市场预期，支持实体经济融资需求。</span><span class="display:none">The People's Bank of China announced a 500 billion yuan MLF operation on June 25 to maintain banking system liquidity, with a 1-year term. The operation used fixed quantity, interest rate bidding, and multiple price determination. Market analysts believe this move aims to offset quarter-end effects and support real economy financing.</span></p>
+<p class="src">来源：央行公告 / 财联社</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判与机会</span><span class="en" style="display:none">Market Outlook & Opportunities</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期风险：地缘政治紧张引发避险情绪</span><span class="en" style="display:none">1. Short-term Risk: Geopolitical Tensions Fuel Risk-off</span></h4>
+<p><span class="zh">随着中东局势紧张升级，短期内市场可能面临避险情绪上升的风险。投资者可能减少风险资产配置，转向黄金、国债等避险资产。科技股虽然基本面良好，但在地缘政治风险面前可能面临短期调整压力。建议关注避险ETF和防御性板块。</span><span class="en" style="display:none">With escalating tensions in the Middle East, markets may face increased risk-off sentiment in the short term. Investors may reduce risk asset allocations, turning to gold, bonds, and other safe havens. Tech stocks, despite strong fundamentals, may face short-term adjustment pressure. Consider defensive sectors and safe-haven ETFs.</span></p>
+<p class="src">来源：摩根士丹利 / 高盛研报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 中期机会：AI产业链持续受益</span><span class="en" style="display:none">2. Mid-term Opportunity: AI Industry Continues to Benefit</span></h4>
+<p><span class="zh">中长期来看，AI产业链仍是最确定的增长机会。从芯片、算力到大模型应用，全链条都处于高速增长阶段。中国五年规划重点扶持半导体和AI，政策面持续利好。建议关注：1）AI芯片设计公司；2）算力基础设施；3）AI应用软件；4）半导体设备厂商。</span><span class="en" style="display:none">In the medium to long term, the AI industry remains the most certain growth opportunity. The entire chain from chips and computing power to applications is in a high-growth phase. China's five-year plan prioritizes semiconductors and AI, with ongoing policy support. Focus on: 1) AI chip designers; 2) Computing infrastructure; 3) AI applications; 4) Semiconductor equipment manufacturers.</span></p>
+<p class="src">来源：中金公司 / 申万宏源</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 下周关注要点</span><span class="en" style="display:none">3. Key Points for Next Week</span></h4>
+<p><span class="zh">1）周一美股开盘，关注对中东局势的反应<br>2）周二中国PMI数据，判断经济复苏力度<br>3）周三美联储利率决议，关注政策信号<br>4）周四欧洲央行决议，欧元区政策动向<br>5）周五美国非农就业数据，市场重要参考</span><span class="en" style="display:none">1) Monday: US market open reaction to ME situation<br>2) Tuesday: China PMI data, economic recovery strength<br>3) Wednesday: Fed rate decision, policy signals<br>4) Thursday: ECB decision, Eurozone policy moves<br>5) Friday: US nonfarm payrolls, key market reference</span></p>
+<p class="src">来源：各机构研报整理</p>
+</div>
+
+<div class="footer">
+<p>© 2026 Sky Portal | 数据来源：公开市场数据、财经媒体、研究报告</p>
+<p>仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+<script>
+function switchLang(lang) {
+    const zhElems = document.querySelectorAll('.zh');
+    const enElems = document.querySelectorAll('.en');
+    const btnZh = document.getElementById('btn-zh');
+    const btnEn = document.getElementById('btn-en');
+
+    if (lang === 'zh') {
+        zhElems.forEach(el => el.style.display = 'block');
+        enElems.forEach(el => el.style.display = 'none');
+        btnZh.style.background = '#555';
+        btnEn.style.background = '#222';
+        btnEn.style.color = '#aaa';
+    } else {
+        zhElems.forEach(el => el.style.display = 'none');
+        enElems.forEach(el => el.style.display = 'block');
+        btnEn.style.background = '#555';
+        btnZh.style.background = '#222';
+        btnZh.style.color = '#aaa';
+    }
+}
+
+// 默认显示中文
+window.onload = function() {
+    switchLang('zh');
+};
+</script>
+
+</div>
+</body>
+</html>

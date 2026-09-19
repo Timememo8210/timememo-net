@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-13 | 每日研报 | Daily Research Report</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0f0f0f; color: #ccc; font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif; line-height: 1.7; max-width: 900px; margin: 0 auto; padding: 20px; }
+h1 { color: #f0a040; font-size: 1.6em; margin: 20px 0 5px; }
+h2 { color: #f0a040; font-size: 1.3em; margin: 30px 0 15px; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
+h3 { color: #fff; font-size: 1.05em; margin: 18px 0 8px; }
+p { margin: 8px 0; font-size: 0.92em; }
+.card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px; margin: 12px 0; }
+.card-sports { background: rgba(76,175,80,0.05); border: 1px solid rgba(76,175,80,0.3); border-radius: 12px; padding: 20px; margin: 12px 0; }
+.card-sports h3 { color: #4CAF50; }
+.source { font-size: 0.8em; color: #888; margin-top: 6px; }
+.stock-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 16px 0; }
+.stock-item { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; text-align: center; }
+.stock-symbol { font-size: 1.1em; font-weight: 700; color: #fff; }
+.stock-price { font-size: 1.3em; font-weight: 700; color: #fff; margin: 6px 0; }
+.stock-change { font-family: 'SF Mono', monospace; font-weight: 600; font-size: 0.82em; padding: 3px 10px; border-radius: 5px; display: inline-block; }
+.up { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.down { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.summary-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px; margin: 12px 0; font-size: 0.9em; }
+footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2a2a; text-align: center; }
+footer a { color: #f0a040; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh" style="background:#333;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+<button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+<div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Intel连涨两日至$124.57，市值突破6260亿<br>• TSMC信号5-15%先进工艺涨价，Intel 18A成关键筹码</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Intel rallies 2nd day to $124.57, market cap exceeds $626B<br>• TSMC signals 5-15% advanced node price hikes; Intel 18A key bargaining chip</div>
+</div>
+<div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthony Gordon签约完成，将与Raphinha竞争左翼<br>• Julian Alvarez：巴萨准备首份正式报价€1.2亿</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthony Gordon signed, to compete with Raphinha for left wing<br>• Alvarez: Barça preparing first formal offer ~€120M</div>
+</div>
+<div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 🏆 NBA G5今晚！Knicks 3-1领先，主场夺冠<br>• ⚽ 世界杯：美国4-1大胜巴拉圭！Balogun梅开二度</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 🏆 NBA Game 5 tonight! Knicks 3-1 up, can clinch at home<br>• ⚽ World Cup: USA routs Paraguay 4-1! Balogun scores twice</div>
+</div>
+<div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• OpenAI准备GPT-5.6（代号Kindle），增强推理+编程<br>• Apple WWDC新LanguageModel协议支持切换Gemini/Claude</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• OpenAI preps GPT-5.6 (codename Kindle), enhanced reasoning+coding<br>• Apple WWDC new LanguageModel protocol supports Gemini/Claude switching</div>
+</div>
+</div>
+</div>
+
+<script>
+function switchLang(lang) {
+document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<h1 class="zh">2026年6月13日 星期五</h1>
+<h1 class="en" style="display:none">Friday, June 13, 2026</h1>
+
+<!-- M365 Copilot -->
+<h2 class="zh">💼 M365 Copilot 专栏</h2>
+<h2 class="en" style="display:none">💼 M365 Copilot</h2>
+
+<div class="card">
+<h3 class="zh">Microsoft六月Patch Tuesday创纪录：200个漏洞修复，Copilot再度宕机</h3>
+<h3 class="en" style="display:none">Microsoft's Record June Patch Tuesday: 200 Vulnerabilities Fixed, Copilot Down Again</h3>
+<p class="zh">微软6月10日发布了历史上最大规模的Patch Tuesday安全更新，修复了200-208个漏洞，其中包括5个已公开披露的零日漏洞和32-39个严重级别漏洞。更令人担忧的是，Copilot AI助手本周再次宕机——这是本月第二次重大故障，与雷暴导致的Azure电力中断有关，影响了北美和欧洲的企业用户。此外，微软在暂停数月后已恢复对M365用户的强制Copilot安装，引发了IT管理员的广泛不满。</p>
+<p class="en" style="display:none">Microsoft released its largest-ever Patch Tuesday on June 10, fixing 200-208 vulnerabilities including 5 publicly disclosed zero-days and 32-39 critical flaws. More alarmingly, Copilot went down again this week — its second major outage this month — tied to Azure power failures from severe thunderstorms, affecting enterprise users across North America and Europe. Separately, Microsoft has resumed forced Copilot installs for M365 users after pausing due to backlash, sparking renewed IT admin frustration.</p>
+<div class="source">来源: Krebs on Security · BleepingComputer · Windows Central · Jun 2026</div>
+</div>
+
+<div class="card">
+<h3 class="zh">Copilot技巧：微软结束Claude Code许可，全面转向自研Copilot模式</h3>
+<h3 class="en" style="display:none">Copilot Tips: Microsoft Ends Claude Code Licenses, Shifts to In-House Model</h3>
+<p class="zh">微软已正式终止向开发人员提供Claude Code许可，转而推动其内部Copilot模型。这一战略举措标志着微软在AI编程市场押注自研路线。同时，微软推出了9项M365 Copilot套件更新，包括重新设计的应用启动器（app launcher）和增强的工作流自动化。对于使用Copilot的企业来说，Pages的AI建议编辑功能仍然是提升长文档审阅效率的最佳工具之一。</p>
+<p class="en" style="display:none">Microsoft has officially ended Claude Code licenses for developers, shifting to its in-house Copilot model. This strategic move signals Microsoft's bet on its own AI coding path. Meanwhile, the company introduced 9 updates to the M365 Copilot suite, including a redesigned app launcher and enhanced workflow automation. For enterprise Copilot users, Pages' AI-suggested edits remain one of the best tools for long document review efficiency.</p>
+<div class="source">来源: Petri · CloudCapsule · Microsoft Learn · Jun 2026</div>
+</div>
+
+<!-- 半导体与AI -->
+<h2 class="zh">🔬 半导体与AI行业</h2>
+<h2 class="en" style="display:none">🔬 Semiconductors & AI</h2>
+
+<div class="card">
+<h3 class="zh">Intel两连涨至$124.57！市值破6260亿，BofA升级评级至Buy目标价$135</h3>
+<h3 class="en" style="display:none">Intel Rallies to $124.57! Market Cap Exceeds $626B, BofA Upgrades to Buy at $135 Target</h3>
+<p class="zh">Intel股价周五继续强势上涨，收于$124.57（+6.51%），两天累计涨幅超过16%。Intel市值已突破6260亿美元。美国银行（BofA Securities）在6月11日将Intel评级从Neutral上调至Buy，目标价从$96大幅提高至$135。Intel的18A先进工艺（全球唯一量产背面供电技术）持续吸引大客户：Google已确认300万AI芯片订单，Apple据报道也与Intel达成了初步芯片代工协议。Intel在Computex 2026上展示了Panther Lake手持设备、52核Nova Lake桌面预览和288核Clearwater Forest服务器，全部基于18A工艺。</p>
+<p class="en" style="display:none">Intel stock continued its strong rally Friday, closing at $124.57 (+6.51%), up over 16% in two days. Market cap now exceeds $626B. Bank of America upgraded Intel from Neutral to Buy on June 11, raising the target from $96 to $135. Intel's 18A process (the only commercial backside power delivery) continues attracting major customers: Google confirmed 3M AI chip orders, and Apple reportedly reached a preliminary foundry agreement. At Computex 2026, Intel showcased Panther Lake handhelds, 52-core Nova Lake desktop preview, and 288-core Clearwater Forest servers — all on 18A.</p>
+<div class="source">来源: Yahoo Finance · BofA Securities · The Information · Reuters · Jun 2026</div>
+</div>
+
+<div class="card">
+<h3 class="zh">TSMC信号5-15%先进工艺涨价，NVIDIA合作加速芯片设计制造</h3>
+<h3 class="en" style="display:none">TSMC Signals 5-15% Advanced Node Price Hikes; NVIDIA Collaboration Accelerates Chip Design</h3>
+<p class="zh">TSMC CEO明确表示，由于通胀上升成本增加和AI需求持续强劲，先进工艺芯片将面临5-15%的涨价。TSMC的CFO告诉BBC，公司不会突然进行"四五倍"的暴涨，但价格调整不可避免。与此同时，NVIDIA与TSMC正合作加速半导体设计和制造流程，利用AI优化生产效率。TSMC的AI产能瓶颈正在给Intel创造多年来的最佳重返先进制程竞赛的机会。分析认为，TSMC首次向外部开放部分先进封装技术，标志着行业格局可能正在重塑。</p>
+<p class="en" style="display:none">TSMC's CEO signaled 5-15% price increases on advanced process chips due to rising inflation costs and strong AI demand. TSMC's CFO told the BBC the company won't implement sudden "fourfold, fivefold" hikes, but price adjustments are inevitable. Meanwhile, NVIDIA and TSMC are collaborating to accelerate semiconductor design and manufacturing using AI-optimized production. TSMC's AI capacity crunch is giving Intel its best opening in years to re-enter the advanced node race. Analysts note TSMC's first external opening of advanced packaging tech signals a reshaping industry landscape.</p>
+<div class="source">来源: Reuters · BBC · Yahoo Finance · Jun 2026</div>
+</div>
+
+<div class="card">
+<h3 class="zh">三星可能为Google制造下一代AI处理器，打破TSMC独家依赖</h3>
+<h3 class="en" style="display:none">Samsung May Build Google's Next-Gen AI Processor, Breaking TSMC Dependency</h3>
+<p class="zh">据新报道，Google正考虑让三星在制造其最先进的AI处理器之一中发挥关键作用，这将打破对TSMC的独家依赖。此前Google已向Intel Foundry下达了300万颗TPU订单。分析人士指出，Google正在实施"多源代工"策略——同时与TSMC、Intel Foundry和Samsung Foundry合作——以降低地缘政治风险和供应链单一依赖。这一趋势如果被更多hyperscaler效仿，将深刻改变全球半导体制造格局。</p>
+<p class="en" style="display:none">Google is reportedly considering Samsung to play a key role in building one of its most advanced AI processors, breaking its exclusive TSMC dependency. Google previously committed 3M TPU units to Intel Foundry. Analysts note Google is implementing a "multi-source foundry" strategy — working with TSMC, Intel Foundry, and Samsung Foundry simultaneously — to reduce geopolitical risk and single-source supply chain dependency. If more hyperscalers follow suit, this will profoundly reshape global semiconductor manufacturing.</p>
+<div class="source">来源: The Information · Yahoo Finance · Jun 2026</div>
+</div>
+
+<!-- 股票 -->
+<h2 class="zh">📈 半导体股票（6月12日收盘 · 周四）</h2>
+<h2 class="en" style="display:none">📈 Semiconductor Stocks (Jun 12 Close · Thursday)</h2>
+
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-symbol">INTC</div>
+<div class="stock-price">$124.57</div>
+<div class="stock-change up">+6.51%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">NVDA</div>
+<div class="stock-price">$205.19</div>
+<div class="stock-change up">+0.16%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">AMD</div>
+<div class="stock-price">$511.57</div>
+<div class="stock-change up">+4.73%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">TSM</div>
+<div class="stock-price">$423.93</div>
+<div class="stock-change up">+0.68%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">ASML</div>
+<div class="stock-price">$1,863.55</div>
+<div class="stock-change down">-1.89%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">MU</div>
+<div class="stock-price">$981.61</div>
+<div class="stock-change down">-1.43%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">AVGO</div>
+<div class="stock-price">$382.07</div>
+<div class="stock-change down">-0.91%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">QCOM</div>
+<div class="stock-price">$211.72</div>
+<div class="stock-change up">+4.32%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">TSLA</div>
+<div class="stock-price">$406.43</div>
+<div class="stock-change up">+1.82%</div>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">SMH</div>
+<div class="stock-price">$619.96</div>
+<div class="stock-change up">+1.72%</div>
+</div>
+</div>
+
+<div class="summary-box">
+<p class="zh"><strong>市场总结：</strong>Intel继续强势上涨+6.51%至$124.57，两天累计涨超16%。AMD涨4.73%至$511.57，QCOM涨4.32%至$211.72。MU回调-1.43%，ASML跌-1.89%，AVGO微跌-0.91%。SMH ETF收$619.96（+1.72%）。市场分化：AI芯片龙头继续走强，但部分板块出现获利了结。</p>
+<p class="en" style="display:none"><strong>Market Summary:</strong> Intel continued its strong rally +6.51% to $124.57, up 16%+ in two days. AMD gained 4.73% to $511.57, QCOM rose 4.32% to $211.72. MU pulled back -1.43%, ASML fell -1.89%, AVGO dipped -0.91%. SMH ETF closed at $619.96 (+1.72%). Market divergence: AI chip leaders strengthen while some segments see profit-taking.</p>
+</div>
+
+<!-- FC Barcelona -->
+<h2 class="zh">⚽ FC Barcelona</h2>
+<h2 class="en" style="display:none">⚽ FC Barcelona</h2>
+
+<div class="card">
+<h3 class="zh">Anthony Gordon签约完成！将与Raphinha直接竞争左翼位置</h3>
+<h3 class="en" style="display:none">Anthony Gordon Signed! Direct Battle with Raphinha for Left Wing</h3>
+<p class="zh">巴萨今夏首签Anthony Gordon的转会已基本完成，只待官方宣布。Gordon将直接与Raphinha在Hansi Flick体系下竞争左边锋位置。英超豪门Arsenal和Liverpool均未提出竞争报价，给了巴萨免费运作空间。Gordon的加盟是巴萨夏窗重组攻击线的重要一步，俱乐部表示夏季转会工作远未结束。巴萨作为新科西甲冠军，计划在今年夏天大规模投入补强阵容。</p>
+<p class="en" style="display:none">Barça's first summer signing Anthony Gordon is essentially complete, pending official announcement. Gordon will compete directly with Raphinha for the left wing position under Hansi Flick. Premier League giants Arsenal and Liverpool did not submit competing offers, giving Barcelona a free run. Gordon's arrival is a key step in Barça's summer attack rebuild, and the club says its summer business is far from over. As the new La Liga champions, Barcelona plans significant investment to strengthen the squad.</p>
+<div class="source">来源: ESPN · Sports Illustrated · Mundo Deportivo · Jun 2026</div>
+</div>
+
+<div class="card">
+<h3 class="zh">Julian Alvarez转会：巴萨准备首份正式报价€1.2亿</h3>
+<h3 class="en" style="display:none">Julian Alvarez Transfer: Barça Preparing First Formal Offer of ~€120M</h3>
+<p class="zh">巴萨正准备向Atlético Madrid提交前锋Julian Alvarez的第一份正式报价，预计约€1.2亿。此前皇马的€1.5亿报价已被马竞断然拒绝。Alvarez本人已与巴萨就个人条款达成一致（五年合同），并对马竞拒绝放人感到沮丧。巴萨也在关注Joao Cancelo（半年租借表现出色）以及世界杯赛场上的中后卫、边锋和前锋人选。Harry Kane仍是Alvarez的备选方案。</p>
+<p class="en" style="display:none">Barcelona is preparing its first formal offer for Atlético Madrid striker Julian Alvarez, expected at ~€120M. Real Madrid's earlier €150M bid was flatly rejected. Alvarez has agreed to personal terms with Barça (5-year contract) and is frustrated with Atlético's refusal. Barça is also tracking Joao Cancelo (impressive half-season loan) and scouting center backs, wingers, and strikers at the World Cup. Harry Kane remains the backup option if Alvarez falls through.</p>
+<div class="source">来源: ESPN · Fabrizio Romano · Mundo Deportivo · Jun 2026</div>
+</div>
+
+<!-- 体育赛事 -->
+<h2 class="zh">🏟️ 体育赛事（世界杯 & NBA）</h2>
+<h2 class="en" style="display:none">🏟️ Sports Events (World Cup & NBA)</h2>
+
+<div class="card-sports">
+<h3 class="zh">🇺🇸 世界杯Day 3：美国4-1大胜巴拉圭！Balogun梅开二度创历史</h3>
+<h3 class="en" style="display:none">🇺🇸 World Cup Day 3: USA Thrashes Paraguay 4-1! Balogun Scores Twice in Historic Win</h3>
+<p class="zh">美国男足在SoFi Stadium（洛杉矶）的世界杯揭幕战中以4-1大胜巴拉圭，这是美国近年来最出色的比赛之一！Folarin Balogun上半场梅开二度，第一球直挂远角上沿，率领美国队打出历史性的上半场。这场胜利让美国队在D组出线形势一片大好——美国队已连续三届世界杯小组出线。Pulisic领衔的年轻阵容展现了极强的攻击力。巴拉圭上次世界杯出线还是2010年（八强）。美国队的新球衣也获得了球员和球迷的一致好评。</p>
+<p class="en" style="display:none">The USMNT routed Paraguay 4-1 in their World Cup opener at SoFi Stadium, LA — one of their best performances in years! Folarin Balogun scored twice in the first half, his second goal flying into the top far corner, leading a historic first half. The victory puts the US in a strong position in Group D — the USMNT has reached the knockout round in each of its last three World Cups. Pulisic's young squad showed exceptional attacking power. Paraguay last advanced from the group in 2010 (quarterfinals). The new US jerseys also drew universal praise from players and fans.</p>
+<div class="source">来源: ESPN · AP News · Sporting News · BBC Sport · Jun 12, 2026</div>
+</div>
+
+<div class="card-sports">
+<h3 class="zh">🏆 NBA Finals G5今晚！Knicks 3-1领先，主场有望夺冠结束系列赛</h3>
+<h3 class="en" style="display:none">🏆 NBA Finals Game 5 Tonight! Knicks Lead 3-1, Can Clinch Title at Home</h3>
+<p class="zh">2026年NBA总决赛第五场今晚（周六）在Madison Square Garden进行！New York Knicks以3-1领先San Antonio Spurs，距离1973年以来首个总冠军仅一步之遥。G4是一场混乱之战，赛后场馆外爆发骚乱，NYPD被迫介入。De'Aaron Fox在G4结束时做出了一个被载入NBA历史的糟糕决定。Wembanyama在G3中展现了统治力。Trump成为首位出席NBA总决赛的在任美国总统（G3）。博彩公司给出Knicks -450的夺冠赔率。Game 5的同分奇缘（same-game parlay）关注OG Anunoby和Stephon Castle的表现。</p>
+<p class="en" style="display:none">Game 5 of the 2026 NBA Finals tips off tonight (Saturday) at Madison Square Garden! The Knicks lead the Spurs 3-1, one win from their first title since 1973. Game 4 was a wild ride with post-game mayhem outside the arena requiring NYPD intervention. De'Aaron Fox made an ignominious NBA history with his end-of-Game-4 decision. Wembanyama dominated Game 3. Trump became the first sitting US president to attend the NBA Finals (Game 3). Oddsmakers have the Knicks at -450 to win the title. Same-game parlay focus is on OG Anunoby and Stephon Castle.</p>
+<div class="source">来源: ESPN · The Athletic · NBA.com · Jun 2026</div>
+</div>
+
+<div class="card-sports">
+<h3 class="zh">🌲 开拓者无选秀权！2026 NBA Draft（6/23-24）前瞻</h3>
+<h3 class="en" style="display:none">🌲 Trail Blazers Have No Draft Picks! 2026 NBA Draft (Jun 23-24) Outlook</h3>
+<p class="zh">Portland Trail Blazers在2026年NBA选秀中（6月23-24日，布鲁克林Barclays Center）没有选秀权——这是多年前两笔交易的结果。开拓者正在寻找新主教练（与Bulls、Mavericks同为目前三支 vacancies 球队之一），同时考虑购买选秀权或通过交易获得2026年签位。Giannis Antetokounmpo的交易情况也可能在选秀前影响开拓者的阵容调整。球队正在重组阵容，试图在2026 offseason找到最佳提升路径。</p>
+<p class="en" style="display:none">The Portland Trail Blazers have no picks in the 2026 NBA Draft (June 23-24, Barclays Center, Brooklyn) — a result of two long-ago trades. The Blazers are searching for a new head coach (one of three vacancies alongside the Bulls and Mavericks), while considering purchasing a draft pick or trading for a 2026 selection. Giannis Antetokounmpo's trade situation could also impact Portland's roster moves before the draft. The team is restructuring its roster, seeking the best path to improvement in the 2026 offseason.</p>
+<div class="source">来源: Oregonian · The Athletic · NBA.com · Jun 2026</div>
+</div>
+
+<!-- Portland 本地 -->
+<h2 class="zh">🌲 Portland 本地</h2>
+<h2 class="en" style="display:none">🌲 Portland Local</h2>
+
+<div class="card">
+<h3 class="zh">⚠️ 热浪来袭！Portland本周末预计接近100°F（38°C），极端高温警告生效</h3>
+<h3 class="en" style="display:none">⚠️ Heat Wave Incoming! Portland Expected Near 100°F This Weekend, Extreme Heat Warning in Effect</h3>
+<p class="zh">Portland地区正迎来今年第一场热浪！国家气象局已发布极端高温警告，周日上午11点至晚上11点生效。周六和周日最高温预计达到mid-to-upper 90s（约35-37°C），周一可能高达100°F（38°C）。这是本季首次热浪，可能打破Portland高温纪录。Multnomah县计划在热浪期间每日举行协调会议，决定是否开放避暑中心。消防部门也警告车主注意车内高温——2025年有31名儿童因车内热射病死亡。周末晴天，下周才有望缓解。</p>
+<p class="en" style="display:none">The Portland area is bracing for its first heat wave of the season! The National Weather Service has issued an extreme heat warning, effective Sunday 11 AM to 11 PM. Saturday and Sunday highs are expected in the mid-to-upper 90s, with Monday potentially reaching 100°F. This is the season's first heat wave and could break Portland records. Multnomah County plans daily coordination calls during the heat to determine cooling center activation. Fire Rescue warns about car temperatures — 31 children died of heatstroke in cars in 2025. Sunny weekend, relief expected next week.</p>
+<div class="source">来源: KOIN · KATU · NWS Portland · The Oregonian · Jun 2026</div>
+</div>
+
+<!-- AI 动态 -->
+<h2 class="zh">🤖 AI 工具/产品动态</h2>
+<h2 class="en" style="display:none">🤖 AI Tools & Product Updates</h2>
+
+<div class="card">
+<h3 class="zh">OpenAI准备GPT-5.6（代号Kindle）：推理、编程、视觉全面升级</h3>
+<h3 class="en" style="display:none">OpenAI Preps GPT-5.6 (Codename Kindle): Enhanced Reasoning, Coding, and Vision</h3>
+<p class="zh">据报道，OpenAI正准备推出GPT-5.6（代号"Kindle"），基于Kindle Alpha checkpoint开发。该模型将在推理能力、agentic workflows和视觉处理方面实现显著提升，旨在增强决策精准度并减少错误输出。目前GPT-5.5 Pro是ChatGPT的最新驱动模型（Pro计划）。与此同时，OpenAI和Anthropic各自发布了论文，警告前沿AI模型正在政府监管到位之前被部署。OpenAI还推出了Daybreak项目——作为Anthropic Project Glasswing的回应，帮助科技公司发现网络防御漏洞。ChatGPT-Siri整合据说因OpenAI-Apple合作纠纷而破裂。</p>
+<p class="en" style="display:none">OpenAI is reportedly preparing GPT-5.6 (codename "Kindle"), built on the Kindle Alpha checkpoint. The model will bring significant improvements in reasoning, agentic workflows, and vision processing, aiming to enhance decision-making precision and reduce erroneous outputs. Currently, GPT-5.5 Pro is the latest model powering ChatGPT (Pro plan). Separately, OpenAI and Anthropic each released papers warning that frontier models are being deployed before government regulation catches up. OpenAI also launched Project Daybreak — responding to Anthropic's Project Glasswing — to help tech companies find cyber defense vulnerabilities. The ChatGPT-Siri integration reportedly broke down due to the OpenAI-Apple partnership dispute.</p>
+<div class="source">来源: Universe of AI · VentureBeat · Forbes · Jun 2026</div>
+</div>
+
+<div class="card">
+<h3 class="zh">Apple WWDC 2026新LanguageModel协议：iOS App可无缝切换Gemini/Claude/GPT</h3>
+<h3 class="en" style="display:none">Apple WWDC 2026 New LanguageModel Protocol: iOS Apps Can Seamlessly Switch Gemini/Claude/GPT</h3>
+<p class="zh">Apple在WWDC 2026上发布的开发者工具已进入实际体验阶段。全新的LanguageModel协议让iOS应用通过Swift Package Manager即可在Google Gemini、Anthropic Claude和Apple Foundation Models之间无缝切换——无需更改任何session code。这标志着Apple在AI模型选择上采取了前所未有的开放策略。与此同时，Anthropic收购了Stainless（前Stripe工程师Alex Rattray创办的API工具公司），该公司被OpenAI和Google广泛使用。Anthropic预计即将完成新一轮融资。Trump签署了行政命令，要求联邦机构在AI模型正式发布前30天进行测试。</p>
+<p class="en" style="display:none">Apple's WWDC 2026 developer tools have entered hands-on mode. The new LanguageModel protocol lets iOS apps seamlessly switch between Google Gemini, Anthropic Claude, and Apple Foundation Models via Swift Package Manager — with no session-code changes needed. This marks Apple's most open AI strategy yet. Meanwhile, Anthropic acquired Stainless (founded by ex-Stripe engineer Alex Rattray), whose API tools are widely used by OpenAI and Google. Anthropic is reportedly closing a new funding round. Trump signed an executive order requiring federal agencies to test AI models 30 days before official release.</p>
+<div class="source">来源: 9to5Mac · TechCrunch · The Information · Jun 2026</div>
+</div>
+
+<footer>
+<p><a href="../index.html">All Reports</a> · <a href="index.html">Research Index</a></p>
+<p style="font-size:0.8em;color:#666;margin-top:8px">Generated by Sky ☁️ · GLM 5.1 · 2026-06-13</p>
+</footer>
+
+</body>
+</html>

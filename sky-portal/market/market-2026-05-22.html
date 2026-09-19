@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-22</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(156,163,175,0.15);color:#9ca3af;border:1px solid rgba(156,163,175,0.3)}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{color:#4ade80;font-weight:600}
+.warn{color:#f87171;font-weight:600}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#166534 0%,#22c55e 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股连涨八周</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks: 8-Week Win Streak</div>
+<div class="zh poster-data">• 道指 50,580 (+0.6%) 🏆 新高<br>• 标普 7,473 (+0.4%)<br>• 纳斯达克 26,344 (+0.2%)<br>• 罗素2000 2,869 (+0.9%)</div>
+<div class="en poster-data" style="display:none">• Dow 50,580 (+0.6%) 🏆 Record<br>• S&P 7,473 (+0.4%)<br>• Nasdaq 26,344 (+0.2%)<br>• Russell 2000 2,869 (+0.9%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#ef4444 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股港股齐涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK Markets Rally</div>
+<div class="zh poster-data">• 上证 4,113 (+0.87%)<br>• 深成指 15,597 (+2.30%) 🔥<br>• 恒指 25,606 (+0.86%)<br>• 北证50 1,327 (+0.26%)</div>
+<div class="en poster-data" style="display:none">• SSE 4,113 (+0.87%)<br>• SZSE 15,597 (+2.30%) 🔥<br>• HSI 25,606 (+0.86%)<br>• BSE50 1,327 (+0.26%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1d4ed8 0%,#3b82f6 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊和谈进展</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Progress</div>
+<div class="zh poster-data">• Rubio称与伊朗协议有"进展"<br>• 布伦特原油本周 -5.24%<br>• 市场风险偏好回升</div>
+<div class="en poster-data" style="display:none">• Rubio cites "progress" on Iran deal<br>• Brent crude -5.24% this week<br>• Risk appetite rebounding</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#b45309 0%,#f59e0b 100%)">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">商品价格隐忧</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Commodity Warning</div>
+<div class="zh poster-data">• CoreCommodity Index年涨31%<br>• 黄金 $4,521/oz<br>• 30年期国债创2007年来新高<br>• 通胀压力持续</div>
+<div class="en poster-data" style="display:none">• CoreCommodity Index +31% YTD<br>• Gold $4,521/oz<br>• 30Y Treasury at 2007 highs<br>• Inflation pressure persists</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-05-22 · Sky Portal Daily Market · <a href="index.html">All Markets</a></p>
+
+<h2>🇺🇸 <span class="zh">美股行情</span><span class="en" style="display:none">US Markets</span></h2>
+
+<div class="card">
+<h4><span class="zh">🔥 道指创历史新高，标普500连涨八周</span><span class="en" style="display:none">🔥 Dow Hits Record, S&P 500 Extends 8-Week Win Streak</span></h4>
+<p><span class="zh">周五美股三大指数全线收涨，道琼斯工业平均指数上涨294点（+0.6%）收于<b>50,579.70</b>，创历史收盘新高。标普500上涨27.75点（+0.4%）至7,473.47，纳斯达克上涨50.87点（+0.2%）至26,343.97。这是标普500自2023年12月以来最长的连续周线上涨纪录。罗素2000小盘股指数表现最强，上涨0.9%。</span><span class="en" style="display:none">All three major US indexes closed higher on Friday. The Dow rose 294 points (+0.6%) to a record <b>50,579.70</b>. The S&P 500 gained 27.75 (+0.4%) to 7,473.47, and the Nasdaq added 50.87 (+0.2%) to 26,343.97. This marks the S&P's longest weekly winning streak since December 2023. Small caps led, with the Russell 2000 up 0.9%.</span></p>
+<p class="src">来源：Seattle PI / Barron's / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📈 本周及年初至今表现</span><span class="en" style="display:none">📈 Weekly & YTD Performance</span></h4>
+<p><span class="zh"><b>本周累计：</b>道指 +2.1% | 标普 +0.9% | 纳斯达克 +0.5% | 罗素2000 +2.7%<br><b>年初至今：</b>道指 +5.2% | 标普 +9.2% | 纳斯达克 +13.3% | 罗素2000 +15.6%</span><span class="en" style="display:none"><b>This Week:</b> Dow +2.1% | S&P +0.9% | Nasdaq +0.5% | Russell 2000 +2.7%<br><b>YTD:</b> Dow +5.2% | S&P +9.2% | Nasdaq +13.3% | Russell 2000 +15.6%</span></p>
+<p class="src">来源：Seattle PI / Dow Jones Market Data</p>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">50,579.70</div><div class="stock-change up">+0.58%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,473.47</div><div class="stock-change up">+0.37%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,343.97</div><div class="stock-change up">+0.19%</div></div>
+<div class="stock-item"><div class="stock-ticker">Russell 2K</div><div class="stock-price">2,869.23</div><div class="stock-change up">+0.90%</div></div>
+<div class="stock-item"><div class="stock-ticker">Nikkei 225</div><div class="stock-price">63,339.07</div><div class="stock-change up">+2.68%</div></div>
+<div class="stock-item"><div class="stock-ticker">STOXX 600</div><div class="stock-price">625.12</div><div class="stock-change up">+0.73%</div></div>
+<div class="stock-item"><div class="stock-ticker">FTSE 100</div><div class="stock-price">10,466.26</div><div class="stock-change up">+0.22%</div></div>
+<div class="stock-item"><div class="stock-ticker">Brent Crude</div><div class="stock-price">$104.25</div><div class="stock-change up">+0.69%</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股</span><span class="en" style="display:none">China & Hong Kong</span></h2>
+
+<div class="card">
+<h4><span class="zh">🚀 深成指暴涨2.3%，A股科技股领涨</span><span class="en" style="display:none">🚀 SZSE Surges 2.3%, Tech Leads</span></h4>
+<p><span class="zh">5月22日A股市场表现强劲，深证成指单日暴涨2.30%至15,597.30点，为近期最大单日涨幅之一。上证指数上涨0.87%收于4,112.90点。港股恒生指数上涨0.86%至25,606点。A股市场情绪明显好转，科技和成长板块是主要推动力。</span><span class="en" style="display:none">Chinese A-shares performed strongly on May 22, with the SZSE Component surging 2.30% to 15,597.30, one of the biggest single-day gains recently. The Shanghai Composite rose 0.87% to 4,112.90. Hong Kong's Hang Seng gained 0.86% to 25,606. Tech and growth sectors led the rally.</span></p>
+<p class="src">来源：同花顺 / 东方财富</p>
+</div>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证指数</div><div class="stock-price">4,112.90</div><div class="stock-change up">+0.87%</div></div>
+<div class="stock-item"><div class="stock-ticker">深证成指</div><div class="stock-price">15,597.30</div><div class="stock-change up">+2.30%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生指数</div><div class="stock-price">25,606.03</div><div class="stock-change up">+0.86%</div></div>
+<div class="stock-item"><div class="stock-ticker">北证50</div><div class="stock-price">1,327.26</div><div class="stock-change up">+0.26%</div></div>
+</div>
+
+<h2>🔑 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1️⃣ 美伊和平谈判取得进展 — 油价回落提振市场</span><span class="en" style="display:none">1️⃣ US-Iran Peace Progress — Oil Drop Boosts Sentiment</span></h4>
+<p><span class="zh">国务卿Marco Rubio周五对记者表示，与伊朗的协议谈判已取得"进展"。本周多个迹象表明美伊战争可能接近尾声，这帮助油价降温。布伦特原油本周暴跌$5.72/桶（-5.24%），降至$104.25。油价回落减轻了通胀担忧，直接提振了股市风险偏好。道指创下历史新高很大程度上受益于这一地缘政治利好。</span><span class="en" style="display:none">Secretary of State Marco Rubio told reporters on Friday there has been "progress" toward an agreement with Iran. Multiple signals this week suggest the war may be nearing an end, helping cool oil prices. Brent crude plunged $5.72/barrel (-5.24%) this week to $104.25. The oil drop eased inflation fears and boosted risk appetite. The Dow's record close was largely driven by this geopolitical catalyst.</span></p>
+<p class="src">来源：Barron's / US State Department</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2️⃣ 财报季表现超预期 — Q1盈利增长为2021年以来最高</span><span class="en" style="display:none">2️⃣ Earnings Beat Expectations — Best Q1 Growth Since 2021</span></h4>
+<p><span class="zh">尽管宏观环境充满挑战，大多数美国上市公司交出了亮眼的财报。FactSet数据显示，2026年Q1企业盈利增长为2021年以来最高。个股方面，Ross Stores、Workday和Zoom Communications均在财报发布后推动股价上涨。强劲的企业基本面为股市提供了坚实支撑，抵消了通胀和利率方面的负面因素。</span><span class="en" style="display:none">Despite a fraught macro environment, most US companies delivered strong earnings. FactSet data shows Q1 2026 earnings growth is the highest since 2021. Individual names like Ross Stores, Workday, and Zoom Communications rallied on earnings beats. Strong corporate fundamentals are providing solid support, offsetting inflation and rate headwinds.</span></p>
+<p class="src">来源：Seattle PI / Barron's / FactSet</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3️⃣ 商品价格暴涨引发警报 — 31%年涨幅为历史信号</span><span class="en" style="display:none">3️⃣ Commodity Surge Raises Red Flags — 31% YTD a Historical Signal</span></h4>
+<p><span class="zh">CoreCommodity Index在2026年已上涨31%，上一次出现如此高的年至今涨幅还是在2022年。当时该指数涨了35%，而标普500全年下跌了18%。Ned Davis Research在周五的报告中警告："历史上商品涨幅如此之快和大通常出现在重要顶部附近，并且还会持续一段时间，这使得这个指标相当看跌。"30年期美国国债收益率本周一度升至2007年以来最高水平。这些因素为当前的乐观氛围蒙上了阴影。</span><span class="en" style="display:none">The CoreCommodity Index is up 31% YTD in 2026. The last time it was up 30%+ through May 22 was 2022, when the index gained 35% and the S&P 500 fell 18%. Ned Davis Research warned: "Prior episodes where commodities have risen this high and fast were near major tops and persisted a while longer, making this quite a bearish indicator." The 30-year Treasury yield hit 2007 highs this week. These factors cast a shadow over current optimism.</span></p>
+<p class="src">来源：Barron's / Ned Davis Research</p>
+</div>
+
+<h2>💰 <span class="zh">大宗商品 & 利率</span><span class="en" style="display:none">Commodities & Rates</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">Gold</div><div class="stock-price">$4,521</div><div class="stock-change flat">—</div></div>
+<div class="stock-item"><div class="stock-ticker">Brent</div><div class="stock-price">$104.25</div><div class="stock-change up">+0.69%</div></div>
+<div class="stock-item"><div class="stock-ticker">Copper</div><div class="stock-price">$1,344.30</div><div class="stock-change up">+0.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">Soybeans</div><div class="stock-price">$1,197.25</div><div class="stock-change up">+0.25%</div></div>
+<div class="stock-item"><div class="stock-ticker">US 10Y</div><div class="stock-price">4.558%</div><div class="stock-change down">-1.4bp</div></div>
+<div class="stock-item"><div class="stock-ticker">DE 10Y</div><div class="stock-price">3.038%</div><div class="stock-change up">+0.3bp</div></div>
+<div class="stock-item"><div class="stock-ticker">UK 10Y</div><div class="stock-price">4.916%</div><div class="stock-change up">+1.5bp</div></div>
+<div class="stock-item"><div class="stock-ticker">EUR/USD</div><div class="stock-price">1.1602</div><div class="stock-change up">+0.14%</div></div>
+</div>
+
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">📈 短期偏多，中期需警惕</span><span class="en" style="display:none">📈 Short-Term Bullish, Medium-Term Caution</span></h4>
+<p><span class="zh"><b>利好因素：</b><br>• 美伊和谈若持续取得进展 → 油价进一步回落 → 缓解通胀 → 美股有望继续走强<br>• 财报季证明企业盈利韧性强劲，基本面支撑股市高位<br>• 小盘股（罗素2000）本周涨2.7%，市场广度改善，不只靠科技巨头<br><br><b>风险因素：</b><br>• 商品价格暴涨（年涨31%）历史上往往出现在大顶附近<br>• 30年期国债收益率创2007年来新高，长期利率上行压力未消<br>• 消费者信心指数跌至历史新低，通胀担忧（伊朗战争）压制家庭预期<br>• 下周关注PCE通胀数据，若超预期可能重新引发加息预期</span><span class="en" style="display:none"><b>Bullish Factors:</b><br>• US-Iran progress → oil decline → inflation ease → stocks could extend gains<br>• Earnings season proves strong corporate fundamentals support highs<br>• Russell 2000 up 2.7% this week shows broadening participation beyond mega-caps<br><br><b>Risk Factors:</b><br>• Commodity surge (+31% YTD) historically appears near major tops<br>• 30Y Treasury yields at 2007 highs, long-term rate pressure persists<br>• Consumer sentiment at record lows, inflation from Iran war weighs on households<br>• Watch PCE data next week — a miss could revive rate hike fears</span></p>
+<p class="src">来源：综合分析</p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — Nasdaq 100</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">DIA — Dow Jones</div><div id="tv-dia"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">FXI — China Large-Cap</div><div id="tv-fxi"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Markets</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Reuters, Barron's, Seattle PI, Yahoo Finance, 同花顺, 东方财富, FactSet, Ned Davis Research</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-dia', sym:'AMEX:DIA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-fxi', sym:'NASDAQ:FXI'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

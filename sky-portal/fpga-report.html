@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPGA 产业深度研报 | FPGA Industry Deep Dive — Sky Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --ink: #1a1f36;
+    --ink-light: #4a5568;
+    --ink-dim: #8892a8;
+    --border: #e2e8f0;
+    --border-light: #edf2f7;
+    --accent: #2563eb;
+    --accent-light: #eff4ff;
+    --accent-dark: #1d4ed8;
+    --teal: #0891b2;
+    --teal-light: #e0f7fa;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --orange: #ea580c;
+    --orange-light: #fff7ed;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --purple: #7c3aed;
+    --purple-light: #f3e8ff;
+    --amber: #d97706;
+    --amber-light: #fffbeb;
+    --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.7; overflow-x: hidden;
+  }
+  body.lang-zh .en { display: none !important; }
+  body.lang-en .zh { display: none !important; }
+
+  .lang-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    display: flex; background: rgba(15,23,42,0.9); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden;
+  }
+  .lang-toggle button {
+    padding: 6px 16px; border: none; background: transparent;
+    color: rgba(255,255,255,0.5); font-size: 0.78rem; cursor: pointer;
+    transition: all 0.25s; font-family: inherit; font-weight: 500;
+  }
+  .lang-toggle button.active { background: var(--accent); color: #fff; }
+
+  .back-link {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; background: rgba(15,23,42,0.9); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 100px;
+    color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem;
+    font-weight: 500; transition: all 0.3s;
+  }
+  .back-link:hover { background: var(--accent); color: #fff; }
+
+  /* HERO */
+  .hero {
+    background: var(--gradient-hero);
+    padding: 100px 40px 60px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 25% 50%, rgba(37,99,235,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 75% 30%, rgba(8,145,178,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+    background: linear-gradient(transparent, var(--bg));
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 18px; border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 24px; position: relative; z-index: 2;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; background: #60a5fa; border-radius: 50%; animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .hero h1 {
+    font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #fff; line-height: 1.2; margin-bottom: 16px;
+    position: relative; z-index: 2;
+  }
+  .hero h1 .accent { color: #60a5fa; }
+  .hero-sub {
+    color: rgba(255,255,255,0.55); font-size: 1rem; font-weight: 300;
+    max-width: 700px; margin: 0 auto; position: relative; z-index: 2;
+  }
+
+  /* LAYOUT */
+  .layout {
+    display: grid; grid-template-columns: 230px 1fr;
+    max-width: 1400px; margin: -40px auto 0; padding: 0 24px 60px;
+    gap: 32px; position: relative; z-index: 3;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: sticky; top: 80px; align-self: start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    box-shadow: var(--shadow-sm); max-height: calc(100vh - 100px); overflow-y: auto;
+  }
+  .sidebar h3 {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-dim); margin-bottom: 12px; font-weight: 600;
+  }
+  .sidebar a {
+    display: block; padding: 7px 12px; margin: 2px 0;
+    font-size: 0.8rem; color: var(--ink-light);
+    text-decoration: none; border-radius: 6px;
+    transition: all 0.2s; font-weight: 450;
+    border-left: 2px solid transparent;
+  }
+  .sidebar a:hover { background: var(--accent-light); color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.active { background: var(--accent-light); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+  .sidebar .divider { height: 1px; background: var(--border-light); margin: 10px 0; }
+
+  /* CONTENT */
+  .content { min-width: 0; }
+  .section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px;
+    margin-bottom: 24px; box-shadow: var(--shadow-sm);
+    scroll-margin-top: 80px;
+  }
+  .section h2 {
+    font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--border-light);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section h2 .icon {
+    width: 32px; height: 32px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+  }
+  .section h3 { font-size: 1.02rem; font-weight: 600; margin: 20px 0 10px; color: var(--ink); }
+  .section p { font-size: 0.9rem; color: var(--ink-light); margin-bottom: 12px; }
+  .section ul { padding-left: 20px; margin-bottom: 12px; }
+  .section li { font-size: 0.88rem; color: var(--ink-light); margin-bottom: 4px; }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  thead { background: #f8fafc; }
+  th {
+    text-align: left; padding: 10px 14px; font-weight: 600;
+    color: var(--ink); border-bottom: 2px solid var(--border);
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 14px; border-bottom: 1px solid var(--border-light);
+    color: var(--ink-light); vertical-align: top;
+  }
+  tbody tr:hover { background: #f8fafc; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block; padding: 2px 10px; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600; white-space: nowrap;
+  }
+  .tag-blue { background: var(--accent-light); color: var(--accent); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-red { background: var(--red-light); color: var(--red); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+
+  /* STAT CARDS */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 16px 0; }
+  .stat-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 16px; text-align: center;
+  }
+  .stat-card .number { font-size: 1.6rem; font-weight: 800; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+  .stat-card .label { font-size: 0.73rem; color: var(--ink-dim); margin-top: 4px; font-weight: 500; }
+
+  /* CALLOUT */
+  .callout {
+    padding: 16px 20px; border-radius: var(--radius-sm);
+    margin: 16px 0; font-size: 0.88rem; line-height: 1.6;
+    border-left: 4px solid;
+  }
+  .callout-blue { background: var(--accent-light); border-color: var(--accent); }
+  .callout-orange { background: var(--orange-light); border-color: var(--orange); }
+  .callout-green { background: var(--green-light); border-color: var(--green); }
+  .callout-red { background: var(--red-light); border-color: var(--red); }
+
+  /* PROGRESS BAR */
+  .progress-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; font-size: 0.82rem; }
+  .progress-label { width: 100px; font-weight: 500; flex-shrink: 0; }
+  .progress-bar { flex: 1; height: 22px; background: var(--border-light); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.7rem; font-weight: 600; }
+  .fill-amd { background: linear-gradient(90deg, #dc2626, #f87171); }
+  .fill-intel { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+  .fill-lattice { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+  .fill-microchip { background: linear-gradient(90deg, #0891b2, #67e8f9); }
+  .fill-other { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+
+  /* SOURCE */
+  .source {
+    font-size: 0.72rem; color: var(--ink-dim); margin-top: 8px;
+    padding-top: 8px; border-top: 1px solid var(--border-light); font-style: italic;
+  }
+  .source a { color: var(--accent); text-decoration: none; }
+  .source a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center; padding: 40px 24px; color: var(--ink-dim);
+    font-size: 0.82rem; border-top: 1px solid var(--border);
+    max-width: 1400px; margin: 0 auto;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 80px 20px 50px; }
+    .layout { padding: 0 12px 40px; }
+    .section { padding: 20px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<a href="index.html" class="back-link">&larr; Sky Portal</a>
+
+<div class="lang-toggle">
+  <button class="active" onclick="document.body.className='lang-zh';this.classList.add('active');this.nextElementSibling.classList.remove('active')">中文</button>
+  <button onclick="document.body.className='lang-en';this.classList.add('active');this.previousElementSibling.classList.remove('active')">EN</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> INDUSTRY RESEARCH &middot; 2026</div>
+  <h1>
+    <span class="zh">FPGA 可编程逻辑 <span class="accent">产业深度研报</span></span>
+    <span class="en">FPGA Programmable Logic <span class="accent">Industry Deep Dive</span></span>
+  </h1>
+  <div class="hero-sub">
+    <span class="zh">AMD/Xilinx &middot; Intel/Altera &middot; 国防军工 &middot; 技术规格 &middot; 制程节点 &middot; 竞争格局 &middot; 未来路线</span>
+    <span class="en">AMD/Xilinx &middot; Intel/Altera &middot; Defense &amp; Aerospace &middot; Specs &middot; Process Nodes &middot; Competition &middot; Roadmap</span>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <h3><span class="zh">目录导航</span><span class="en">Navigation</span></h3>
+  <a href="#fundamentals" style="color:var(--orange);font-weight:600;"><span class="zh">从零理解芯片</span><span class="en">Chip Fundamentals</span></a>
+  <a href="#intro"><span class="zh">什么是FPGA</span><span class="en">What is FPGA</span></a>
+  <a href="#howwork"><span class="zh">编程原理</span><span class="en">How Programming Works</span></a>
+  <div class="divider"></div>
+  <a href="#overview"><span class="zh">市场概况</span><span class="en">Market Overview</span></a>
+  <a href="#players"><span class="zh">竞争格局</span><span class="en">Competitive Landscape</span></a>
+  <a href="#amd"><span class="zh">AMD / Xilinx 详解</span><span class="en">AMD / Xilinx Deep Dive</span></a>
+  <a href="#altera"><span class="zh">Intel / Altera 详解</span><span class="en">Intel / Altera Deep Dive</span></a>
+  <div class="divider"></div>
+  <a href="#defense"><span class="zh">国防军工应用</span><span class="en">Defense &amp; Aerospace</span></a>
+  <a href="#specs"><span class="zh">技术规格对比</span><span class="en">Technical Specifications</span></a>
+  <a href="#process"><span class="zh">制程节点与代工</span><span class="en">Process Nodes &amp; Foundry</span></a>
+  <div class="divider"></div>
+  <a href="#reliability"><span class="zh">可靠性要求</span><span class="en">Reliability Requirements</span></a>
+  <a href="#die"><span class="zh">芯片尺寸与晶圆</span><span class="en">Die Size &amp; Wafer</span></a>
+  <a href="#wafer"><span class="zh">晶圆需求量估算</span><span class="en">Wafer Demand Estimates</span></a>
+  <a href="#roadmap"><span class="zh">下一代路线图</span><span class="en">Next-Gen Roadmap</span></a>
+  <a href="#sources"><span class="zh">数据来源</span><span class="en">Sources</span></a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+<!-- 0. FUNDAMENTALS — Understanding Chips from Scratch -->
+<div class="section" id="fundamentals">
+  <h2>
+    <span class="icon" style="background:var(--orange-light);color:var(--orange);">&#x1F3EB;</span>
+    <span class="zh">从零理解：芯片到底在干什么？</span><span class="en">From Zero: What Does a Chip Actually Do?</span>
+  </h2>
+
+  <p>
+    <span class="zh">要真正理解 FPGA，我们需要先退一步，搞清楚<strong>芯片世界里最基本的事情</strong>——然后你会发现 FPGA 的独特之处自然就浮出水面了。</span>
+    <span class="en">To truly understand FPGAs, we need to step back and grasp <strong>the most basic things in the chip world</strong> — then FPGA's uniqueness will emerge naturally.</span>
+  </p>
+
+  <h3><span class="zh">第一层：所有芯片的"原子"——逻辑门</span><span class="en">Layer 1: The "Atom" of All Chips — Logic Gates</span></h3>
+  <p>
+    <span class="zh">不管是 CPU、GPU 还是 FPGA，<strong>所有数字芯片的最底层都是同一样东西：晶体管组成的逻辑门</strong>。</span>
+    <span class="en">Whether CPU, GPU, or FPGA, <strong>every digital chip is built from the same foundation: logic gates made of transistors</strong>.</span>
+  </p>
+  <p>
+    <span class="zh">逻辑门就干三件事：</span>
+    <span class="en">A logic gate does exactly three things:</span>
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">逻辑门</span><span class="en">Gate</span></th>
+        <th><span class="zh">做什么</span><span class="en">What It Does</span></th>
+        <th><span class="zh">生活类比</span><span class="en">Real-Life Analogy</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AND</strong></td><td><span class="zh">两个输入都是 1 才输出 1</span><span class="en">Outputs 1 only if BOTH inputs are 1</span></td><td><span class="zh">保险箱需要两把钥匙同时转</span><span class="en">Safe needs two keys turned simultaneously</span></td></tr>
+      <tr><td><strong>OR</strong></td><td><span class="zh">任一输入是 1 就输出 1</span><span class="en">Outputs 1 if EITHER input is 1</span></td><td><span class="zh">门铃——前门或后门都能响</span><span class="en">Doorbell — front or back door both ring it</span></td></tr>
+      <tr><td><strong>NOT</strong></td><td><span class="zh">输入取反</span><span class="en">Inverts input</span></td><td><span class="zh">开关——开变关，关变开</span><span class="en">Light switch — on becomes off, off becomes on</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    <span class="zh"><strong>关键事实</strong>：用这三种门的组合，你可以搭出任何数字计算电路——加法器、乘法器、存储器、视频解码器，一切。一颗现代芯片里有几十亿到上千亿个这样的门。区别在于：<em>这些门是怎么连在一起的</em>。</span>
+    <span class="en"><strong>Key fact</strong>: By combining these three gates, you can build ANY digital circuit — adders, multipliers, memory, video decoders, everything. A modern chip has billions to hundreds of billions of gates. The difference lies in: <em>how these gates are wired together</em>.</span>
+  </p>
+
+  <h3><span class="zh">第二层：四种芯片，四种"接线方式"</span><span class="en">Layer 2: Four Chip Types, Four Wiring Philosophies</span></h3>
+
+  <p>
+    <span class="zh">我用一个<strong>餐厅的比喻</strong>来解释。想象你需要做饭：</span>
+    <span class="en">Let me use a <strong>restaurant analogy</strong>. Imagine you need to prepare meals:</span>
+  </p>
+
+  <div class="table-wrap">
+  <table style="font-size:0.88rem;">
+    <thead>
+      <tr>
+        <th></th>
+        <th>ASIC</th>
+        <th>CPU</th>
+        <th>GPU</th>
+        <th>FPGA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">餐厅类比</span><span class="en">Restaurant Analogy</span></strong></td>
+        <td>
+          <span class="zh"><strong>流水线工厂</strong><br>专门做一种菜。烤鸭工厂只烤鸭，做得最快最好，但改做汉堡？推倒重建整条线。</span>
+          <span class="en"><strong>Assembly line factory</strong><br>Makes one dish. A duck factory only roasts duck — fastest and best, but want burgers? Tear down the whole line.</span>
+        </td>
+        <td>
+          <span class="zh"><strong>全能大厨</strong><br>一个人，一次做一道菜，但什么菜都会做。给他菜谱（程序），他按步骤来。速度不快，但万能。</span>
+          <span class="en"><strong>Master chef</strong><br>One person, one dish at a time, but can cook anything. Give him a recipe (program), he follows steps. Not fastest, but universal.</span>
+        </td>
+        <td>
+          <span class="zh"><strong>1000 个切菜工</strong><br>每个人只会一个简单动作（切、搅、烤），但 1000 人同时干，速度惊人。适合重复动作。</span>
+          <span class="en"><strong>1000 prep cooks</strong><br>Each does one simple action (chop, stir, grill), but 1000 doing it simultaneously is blazing fast. Great for repetitive work.</span>
+        </td>
+        <td>
+          <span class="zh"><strong>万能厨房</strong><br>厨房里有各种设备和管道接头，你可以<strong>重新连接管道</strong>，把它变成烤鸭厨房、汉堡厨房、或者日料厨房。换菜单？重新接管道就行。</span>
+          <span class="en"><strong>Rewireable kitchen</strong><br>Kitchen has all equipment and pipe connectors. You <strong>reconnect the pipes</strong> to turn it into a duck kitchen, burger kitchen, or sushi kitchen. New menu? Rewire the pipes.</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">技术本质</span><span class="en">Technical Reality</span></strong></td>
+        <td><span class="zh">电路在工厂光刻时<strong>永久固化</strong></span><span class="en">Circuit <strong>permanently fixed</strong> at fabrication</span></td>
+        <td><span class="zh">固定的电路 + <strong>按指令逐步执行</strong></span><span class="en">Fixed circuit + <strong>step-by-step instructions</strong></span></td>
+        <td><span class="zh">固定的电路 + <strong>海量并行执行</strong>同一指令</span><span class="en">Fixed circuit + <strong>massively parallel</strong> same instruction</span></td>
+        <td><span class="zh">电路在用户手里<strong>可重新配置</strong></span><span class="en">Circuit <strong>reconfigurable</strong> in user's hands</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">执行模式</span><span class="en">Execution Model</span></strong></td>
+        <td><span class="zh">数据流过固定电路<br>（没有"指令"概念）</span><span class="en">Data flows through fixed circuit<br>(no "instruction" concept)</span></td>
+        <td><span class="zh">取指→解码→执行→写回<br>一条一条来</span><span class="en">Fetch→Decode→Execute→Write<br>one by one</span></td>
+        <td><span class="zh">同一指令同时喂给<br>数千个核心</span><span class="en">Same instruction fed to<br>thousands of cores simultaneously</span></td>
+        <td><span class="zh">数据流过<strong>你设计的</strong>电路<br>（也没有"指令"概念）</span><span class="en">Data flows through <strong>your custom</strong> circuit<br>(also no "instruction" concept)</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">速度</span><span class="en">Speed</span></strong></td>
+        <td style="color:var(--green);font-weight:600;"><span class="zh">最快</span><span class="en">Fastest</span></td>
+        <td><span class="zh">慢（串行瓶颈）</span><span class="en">Slow (serial bottleneck)</span></td>
+        <td><span class="zh">看任务——并行任务极快</span><span class="en">Depends — parallel tasks very fast</span></td>
+        <td><span class="zh">接近 ASIC 速度</span><span class="en">Near-ASIC speed</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">灵活性</span><span class="en">Flexibility</span></strong></td>
+        <td style="color:var(--red);"><span class="zh">零——出厂即固化</span><span class="en">Zero — fixed at factory</span></td>
+        <td style="color:var(--green);font-weight:600;"><span class="zh">最高——换软件就行</span><span class="en">Highest — just change software</span></td>
+        <td><span class="zh">中——受限于并行模型</span><span class="en">Medium — limited to parallel patterns</span></td>
+        <td style="color:var(--green);"><span class="zh">高——重配置电路</span><span class="en">High — reconfigure circuit</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>最关键的区别：CPU/GPU 是"软件定义功能"，FPGA/ASIC 是"硬件即功能"。</strong><br><br>CPU 运行程序时，是一个固定的电路在<em>一步步读取并执行你的指令</em>。无论你写什么程序，底层的电路都是一样的——区别在于指令不同。<br><br>FPGA 没有"指令"的概念。你做的不是写程序，而是<strong>设计一个电路</strong>。配置完成后，FPGA 内部的电路<em>就变成了你设计的那个样子</em>——数据直接流过这个电路，中间没有"取指→解码→执行"的过程。这就是为什么 FPGA 能接近 ASIC 的速度：<strong>它本质上就是一个定制电路，只不过这个电路可以擦掉重画</strong>。</span>
+    <span class="en"><strong>The key distinction: CPU/GPU are "software-defined," while FPGA/ASIC are "hardware IS the function."</strong><br><br>When a CPU runs a program, a fixed circuit <em>reads and executes your instructions step by step</em>. No matter what program you write, the underlying circuit is the same — only the instructions differ.<br><br>FPGA has no concept of "instructions." You don't write a program — you <strong>design a circuit</strong>. Once configured, the FPGA's internal wiring <em>becomes the circuit you designed</em> — data flows directly through it with no fetch-decode-execute overhead. That's why FPGAs approach ASIC speed: <strong>it IS a custom circuit, except this circuit can be erased and redrawn</strong>.</span>
+  </div>
+
+  <h3><span class="zh">第三层：FPGA 的优势和代价</span><span class="en">Layer 3: FPGA's Strengths and Trade-offs</span></h3>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">维度</span><span class="en">Dimension</span></th>
+        <th><span class="zh">FPGA 的优势</span><span class="en">FPGA Advantage</span></th>
+        <th><span class="zh">FPGA 的代价</span><span class="en">FPGA Trade-off</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">可编程性</span><span class="en">Programmability</span></strong></td>
+        <td style="color:var(--green);">
+          <span class="zh">出厂后还能改功能。军事装备可以战场升级雷达算法，不用拆芯片</span>
+          <span class="en">Function changeable after deployment. Military systems can upgrade radar algorithms in the field</span>
+        </td>
+        <td>
+          <span class="zh">开发难度高——需要硬件设计思维，不是写代码那么简单</span>
+          <span class="en">High development difficulty — requires hardware design thinking, not simple coding</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">面积 / 效率</span><span class="en">Area / Efficiency</span></strong></td>
+        <td>
+          <span class="zh">比 CPU/GPU 做同样功能面积更小、功耗更低</span>
+          <span class="en">Smaller area and lower power than CPU/GPU for the same function</span>
+        </td>
+        <td style="color:var(--red);">
+          <span class="zh"><strong>比同功能 ASIC 大 10-40 倍</strong>。因为"可编程"需要额外的 SRAM 开关和布线资源，这些都占面积</span>
+          <span class="en"><strong>10-40x larger than equivalent ASIC</strong>. "Programmability" requires extra SRAM switches and routing — all consuming die area</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">速度</span><span class="en">Speed</span></strong></td>
+        <td>
+          <span class="zh">确定性延迟（可以精确到每个时钟周期）——适合雷达、5G、高频交易</span>
+          <span class="en">Deterministic latency (precise to every clock cycle) — ideal for radar, 5G, HFT</span>
+        </td>
+        <td style="color:var(--red);">
+          <span class="zh"><strong>主频比 ASIC 低 3-10 倍</strong>（FPGA ~500MHz vs ASIC 可达 3GHz+）。信号经过可编程开关有额外延迟</span>
+          <span class="en"><strong>Clock speed 3-10x lower than ASIC</strong> (FPGA ~500MHz vs ASIC 3GHz+). Signals through programmable switches add delay</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">成本</span><span class="en">Cost</span></strong></td>
+        <td style="color:var(--green);">
+          <span class="zh"><strong>NRE = $0</strong>。不用花 $5M-$500M 做掩膜版。量小的时候绝对划算</span>
+          <span class="en"><strong>NRE = $0</strong>. No $5M-$500M mask costs. Absolutely cost-effective at low volumes</span>
+        </td>
+        <td style="color:var(--red);">
+          <span class="zh"><strong>单价贵</strong>。同功能 ASIC 量产后可能 $5/片，FPGA 可能 $500/片</span>
+          <span class="en"><strong>High unit cost</strong>. Same function ASIC at volume: $5/chip; FPGA: $500/chip</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">功耗</span><span class="en">Power</span></strong></td>
+        <td>
+          <span class="zh">比 CPU 做同样工作功耗低得多</span>
+          <span class="en">Much lower power than CPU for the same workload</span>
+        </td>
+        <td>
+          <span class="zh">比 ASIC 功耗高 2-5 倍（可编程互连的漏电流）</span>
+          <span class="en">2-5x higher power than ASIC (programmable interconnect leakage)</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">上市速度</span><span class="en">Time-to-Market</span></strong></td>
+        <td style="color:var(--green);font-weight:600;">
+          <span class="zh"><strong>数周到数月</strong>。写完 HDL，综合，烧录，就能用</span>
+          <span class="en"><strong>Weeks to months</strong>. Write HDL, synthesize, program, done</span>
+        </td>
+        <td>
+          <span class="zh">ASIC 需要 12-24 个月流片周期</span>
+          <span class="en">ASIC requires 12-24 month tape-out cycle</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">第四层：为什么军方特别爱 FPGA？</span><span class="en">Layer 4: Why Does the Military Love FPGAs?</span></h3>
+
+  <p>
+    <span class="zh">军事/航天是 FPGA 最大的高利润市场。这不是偶然——FPGA 的特性几乎是为国防需求定制的：</span>
+    <span class="en">Military/aerospace is FPGA's highest-margin market. This isn't coincidental — FPGA's characteristics are almost tailor-made for defense:</span>
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">军方需求</span><span class="en">Military Need</span></th>
+        <th><span class="zh">为什么 FPGA 是最佳答案</span><span class="en">Why FPGA Is the Best Answer</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">小批量</span><span class="en">Low Volume</span></strong></td>
+        <td><span class="zh">一个武器型号可能只需要 200 颗芯片。为 200 颗做 ASIC 掩膜版？疯了。FPGA 的 NRE=$0 完美匹配。</span><span class="en">A weapons program might need only 200 chips. Design an ASIC mask for 200 units? Insane. FPGA's NRE=$0 is a perfect fit.</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">战场升级</span><span class="en">Field Upgrades</span></strong></td>
+        <td><span class="zh">敌方换了新的雷达干扰方式？不用把飞机运回工厂——更新 FPGA 的配置文件就行。<strong>F-35 的雷达就是这么升级的。</strong></span><span class="en">Enemy deploys new radar jamming? No need to ship the aircraft home — update the FPGA config. <strong>That's how the F-35 radar gets upgraded.</strong></span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">确定性延迟</span><span class="en">Deterministic Latency</span></strong></td>
+        <td><span class="zh">雷达信号处理需要纳秒级精确时序。CPU 有缓存未命中、中断、操作系统调度——延迟不可预测。FPGA 是纯硬件电路，每个时钟周期做什么完全确定。</span><span class="en">Radar signal processing needs nanosecond-precise timing. CPUs have cache misses, interrupts, OS scheduling — unpredictable latency. FPGA is pure hardware circuit, deterministic every clock cycle.</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">抗辐射</span><span class="en">Radiation Hardness</span></strong></td>
+        <td><span class="zh">卫星在太空会被宇宙射线轰击（单粒子翻转 SEU）。反熔丝 FPGA 天生免疫——电路是物理烧通的金属连接，宇宙射线翻转不了。SRAM FPGA 则用三模冗余（TMR）对抗。</span><span class="en">Satellites get bombarded by cosmic rays (Single Event Upset). Antifuse FPGAs are naturally immune — circuits are physically fused metal connections that cosmic rays can't flip. SRAM FPGAs use Triple Modular Redundancy (TMR).</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">供应链安全</span><span class="en">Supply Chain Security</span></strong></td>
+        <td><span class="zh">FPGA 的功能由配置文件（bitstream）定义，不是芯片本身。即使芯片被截获，没有 bitstream 就是一块空白硅片。bitstream 可以加密。</span><span class="en">FPGA's function is defined by the bitstream, not the chip itself. Even if the chip is intercepted, without the bitstream it's a blank piece of silicon. Bitstreams can be encrypted.</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">极端温度</span><span class="en">Extreme Temperature</span></strong></td>
+        <td><span class="zh">军规 FPGA 工作范围 -55&deg;C 到 +125&deg;C（MIL-STD-883）。商用芯片通常只保证 0-70&deg;C。</span><span class="en">Military-grade FPGAs operate from -55&deg;C to +125&deg;C (MIL-STD-883). Commercial chips typically only guarantee 0-70&deg;C.</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">总结：FPGA 的定位</span><span class="en">Summary: FPGA's Position</span></h3>
+
+  <p>
+    <span class="zh">FPGA 不是 CPU 的替代品，也不是 ASIC 的替代品——它填补的是一个独特的生态位：</span>
+    <span class="en">FPGA doesn't replace CPUs or ASICs — it fills a unique ecological niche:</span>
+  </p>
+
+  <div style="background:var(--accent-light);padding:24px;border-radius:var(--radius);margin:16px 0;font-size:0.92rem;line-height:1.8;">
+    <span class="zh">
+      <strong>量不够大</strong>，ASIC 的 NRE 摊不下来？→ 用 FPGA<br>
+      <strong>需要改功能</strong>，ASIC 改不了？→ 用 FPGA<br>
+      <strong>CPU 太慢</strong>，需要硬件级并行？→ 用 FPGA<br>
+      <strong>要求确定性延迟</strong>，CPU/GPU 做不到？→ 用 FPGA<br>
+      <strong>需要抗辐射</strong>，商用芯片不行？→ 用 FPGA<br><br>
+      <em>但如果你量大到百万级、功能确定不变 → ASIC 更好</em><br>
+      <em>如果你的任务是通用计算或 AI 训练 → CPU/GPU 更好</em>
+    </span>
+    <span class="en">
+      <strong>Volume too low</strong> to amortize ASIC NRE? → Use FPGA<br>
+      <strong>Need to change function</strong> that ASIC can't? → Use FPGA<br>
+      <strong>CPU too slow</strong>, need hardware-level parallelism? → Use FPGA<br>
+      <strong>Need deterministic latency</strong> that CPU/GPU can't deliver? → Use FPGA<br>
+      <strong>Need radiation hardness</strong> that commercial chips lack? → Use FPGA<br><br>
+      <em>But if volume reaches millions and function is fixed → ASIC wins</em><br>
+      <em>If the task is general computing or AI training → CPU/GPU wins</em>
+    </span>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>一句话总结：</strong>FPGA 是一块可以擦掉重画的定制电路板。它比 CPU 快（因为没有取指解码的开销），比 ASIC 灵活（因为可以重新配置），比 GPU 更精确（因为没有调度抖动）。代价是：面积比等效 ASIC 大 10-40 倍，主频低 3-10 倍，单价贵 100 倍。但对于量小、要求灵活、需要确定性延迟的场景——尤其是军事和航天——这些代价完全值得。</span>
+    <span class="en"><strong>One-line summary:</strong> FPGA is a custom circuit board that can be erased and redrawn. Faster than CPU (no fetch-decode overhead), more flexible than ASIC (reconfigurable), more precise than GPU (no scheduling jitter). The price: 10-40x more area, 3-10x lower clock speed, 100x higher unit cost than equivalent ASIC. But for low-volume, flexible, deterministic-latency scenarios — especially military and aerospace — these trade-offs are absolutely worth it.</span>
+  </div>
+</div>
+
+<!-- 0a. WHAT IS FPGA -->
+<div class="section" id="intro">
+  <h2>
+    <span class="icon" style="background:var(--green-light);color:var(--green);">&#x1F4A1;</span>
+    <span class="zh">什么是 FPGA — 全面技术概览</span><span class="en">What is FPGA — Comprehensive Technology Overview</span>
+  </h2>
+
+  <p>
+    <span class="zh"><strong>FPGA（Field-Programmable Gate Array，现场可编程门阵列）</strong>是一种半导体芯片，出厂时内部逻辑功能是"空白"的，由用户在"现场"（field）通过加载配置文件来定义芯片要执行的逻辑。这与传统ASIC（出厂即固化功能，不可更改）形成鲜明对比。</span>
+    <span class="en"><strong>FPGA (Field-Programmable Gate Array)</strong> is a semiconductor chip that ships with "blank" logic — the user defines the chip's function "in the field" by loading a configuration bitstream. This contrasts with ASICs, where functionality is permanently fixed at fabrication.</span>
+  </p>
+
+  <h3><span class="zh">FPGA 的核心组成</span><span class="en">Core FPGA Components</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">组件</span><span class="en">Component</span></th>
+        <th><span class="zh">英文</span><span class="en">Full Name</span></th>
+        <th><span class="zh">功能</span><span class="en">Function</span></th>
+        <th><span class="zh">类比</span><span class="en">Analogy</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CLB</strong></td>
+        <td>Configurable Logic Block</td>
+        <td><span class="zh">包含LUT + 触发器 + MUX，实现任意组合/时序逻辑</span><span class="en">Contains LUT + flip-flops + MUX, implements any combinational/sequential logic</span></td>
+        <td><span class="zh">乐高积木块</span><span class="en">LEGO bricks</span></td>
+      </tr>
+      <tr>
+        <td><strong>LUT</strong></td>
+        <td>Look-Up Table</td>
+        <td><span class="zh">CLB的核心。6输入LUT = 64-bit SRAM存储任意6变量布尔函数的真值表</span><span class="en">Heart of CLB. 6-input LUT = 64-bit SRAM storing any 6-variable Boolean truth table</span></td>
+        <td><span class="zh">字典查表</span><span class="en">Dictionary lookup</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">可编程互连</span><span class="en">Routing</span></strong></td>
+        <td>Programmable Interconnect</td>
+        <td><span class="zh">SRAM控制的开关矩阵，连接CLB、IOB、BRAM</span><span class="en">SRAM-controlled switch matrices connecting CLBs, IOBs, BRAMs</span></td>
+        <td><span class="zh">可重新布线的高速公路网</span><span class="en">Rewireable highway network</span></td>
+      </tr>
+      <tr>
+        <td><strong>IOB</strong></td>
+        <td>I/O Block</td>
+        <td><span class="zh">芯片边缘，连接外部引脚，支持多种电压/协议</span><span class="en">Chip periphery, connects external pins, supports multiple voltage/protocol standards</span></td>
+        <td><span class="zh">港口/码头</span><span class="en">Port / dock</span></td>
+      </tr>
+      <tr>
+        <td><strong>BRAM</strong></td>
+        <td>Block RAM</td>
+        <td><span class="zh">片上分布式SRAM，用于数据缓存和FIFO</span><span class="en">On-chip distributed SRAM for data buffering and FIFOs</span></td>
+        <td><span class="zh">仓库</span><span class="en">Warehouse</span></td>
+      </tr>
+      <tr>
+        <td><strong>DSP</strong></td>
+        <td>DSP Slice</td>
+        <td><span class="zh">硬化乘法累加器，用于信号处理和AI计算</span><span class="en">Hardened multiply-accumulate units for DSP and AI compute</span></td>
+        <td><span class="zh">专用计算器</span><span class="en">Dedicated calculator</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">收发器</span><span class="en">Transceiver</span></strong></td>
+        <td>SerDes / GTY / GTM</td>
+        <td><span class="zh">高速串行I/O，支持PCIe/Ethernet/光通信</span><span class="en">High-speed serial I/O for PCIe/Ethernet/optics</span></td>
+        <td><span class="zh">高速铁路站</span><span class="en">High-speed rail station</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">FPGA vs ASIC vs GPU — 一图看懂</span><span class="en">FPGA vs ASIC vs GPU — At a Glance</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>FPGA</th>
+        <th>ASIC</th>
+        <th>GPU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">可编程</span><span class="en">Programmable</span></strong></td>
+        <td style="color:var(--green);font-weight:700;"><span class="zh">无限次可重编程</span><span class="en">Infinitely reprogrammable</span></td>
+        <td style="color:var(--red);"><span class="zh">出厂固化，不可更改</span><span class="en">Fixed at fabrication</span></td>
+        <td><span class="zh">软件可编程（指令集）</span><span class="en">Software-programmable (ISA)</span></td>
+      </tr>
+      <tr>
+        <td><strong>NRE</strong></td>
+        <td style="color:var(--green);">$0</td>
+        <td style="color:var(--red);">$5M ~ $500M</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">量产成本</span><span class="en">Unit Cost</span></strong></td>
+        <td><span class="zh">高（$5~$50K）</span><span class="en">High ($5~$50K)</span></td>
+        <td><span class="zh">最低（量产摊薄）</span><span class="en">Lowest (amortized)</span></td>
+        <td><span class="zh">中</span><span class="en">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">延迟</span><span class="en">Latency</span></strong></td>
+        <td style="color:var(--green);"><span class="zh">确定性、最低（硬件并行）</span><span class="en">Deterministic, lowest (HW parallel)</span></td>
+        <td><span class="zh">最低</span><span class="en">Lowest</span></td>
+        <td><span class="zh">中（调度开销）</span><span class="en">Medium (scheduling overhead)</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">适合场景</span><span class="en">Best For</span></strong></td>
+        <td><span class="zh">原型/小批量/军工/需迭代</span><span class="en">Prototyping/low-vol/defense/iterative</span></td>
+        <td><span class="zh">百万级量产</span><span class="en">Million-unit production</span></td>
+        <td><span class="zh">AI训练/通用并行计算</span><span class="en">AI training/general parallel</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://digitalsystemdesign.in/fpga-basic-overview/">FPGA Basic Overview — Digital System Design</a> &middot;
+    <a href="https://fpgainsights.com/fpga/overview-of-lookup-tables-lut-in-fpga-design/">FPGA Insights — LUT Overview</a>
+  </div>
+</div>
+
+<!-- 0b. HOW PROGRAMMING WORKS -->
+<div class="section" id="howwork">
+  <h2>
+    <span class="icon" style="background:var(--purple-light);color:var(--purple);">&#x1F527;</span>
+    <span class="zh">FPGA编程原理 — "可编程"到底怎么实现的？</span><span class="en">How FPGA Programming Works — What Makes It "Programmable"?</span>
+  </h2>
+
+  <p>
+    <span class="zh">FPGA的"可编程"不是软件层面的——而是<strong>硬件层面改变芯片内部的电路连接</strong>。三种主流技术实现方式各有千秋：</span>
+    <span class="en">FPGA "programmability" is NOT software-level — it <strong>physically reconfigures the chip's internal circuit connections at the hardware level</strong>. Three main technologies exist:</span>
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">编程技术</span><span class="en">Technology</span></th>
+        <th><span class="zh">原理</span><span class="en">Mechanism</span></th>
+        <th><span class="zh">可重复编程？</span><span class="en">Reprogrammable?</span></th>
+        <th><span class="zh">掉电保持？</span><span class="en">Non-Volatile?</span></th>
+        <th><span class="zh">代表厂商</span><span class="en">Vendors</span></th>
+        <th><span class="zh">典型应用</span><span class="en">Typical Use</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--accent-light);">
+        <td><strong>SRAM</strong></td>
+        <td><span class="zh">用SRAM单元（6管存储器）控制LUT真值表和互连开关。上电时从外部Flash加载配置比特流</span><span class="en">SRAM cells (6T memory) control LUT truth tables and routing switches. Bitstream loaded from external flash at power-up</span></td>
+        <td style="color:var(--green);font-weight:700;"><span class="zh">无限次</span><span class="en">Unlimited</span></td>
+        <td style="color:var(--red);"><span class="zh">否 — 掉电丢失，需重新加载</span><span class="en">No — lost at power-off, reload needed</span></td>
+        <td><strong>AMD/Xilinx, Intel/Altera</strong></td>
+        <td><span class="zh">数据中心/通信/AI/军工（主流90%+）</span><span class="en">DC/Telecom/AI/Defense (90%+ of market)</span></td>
+      </tr>
+      <tr>
+        <td><strong>Flash</strong></td>
+        <td><span class="zh">用浮栅Flash晶体管代替SRAM作为编程单元。类似Flash存储器的写入原理</span><span class="en">Floating-gate flash transistors replace SRAM as programming elements. Similar to flash memory write principle</span></td>
+        <td style="color:var(--green);"><span class="zh">可多次（~1000次）</span><span class="en">Yes (~1000 cycles)</span></td>
+        <td style="color:var(--green);font-weight:700;"><span class="zh">是 — 上电即用</span><span class="en">Yes — instant-on</span></td>
+        <td><strong>Microchip, Lattice</strong></td>
+        <td><span class="zh">低功耗/安全/汽车/航天</span><span class="en">Low-power/security/auto/space</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">反熔丝 (Antifuse)</span><span class="en">Antifuse</span></strong></td>
+        <td><span class="zh">金属层间有绝缘层，高压击穿后形成永久导通。类似"烧断"但反过来——是"烧通"</span><span class="en">Insulating layer between metal layers is permanently broken down by high voltage, forming a conductive path. Like "burning" — but in reverse: "burning through"</span></td>
+        <td style="color:var(--red);font-weight:700;"><span class="zh">一次性 (OTP) — 不可逆</span><span class="en">One-Time (OTP) — irreversible</span></td>
+        <td style="color:var(--green);font-weight:700;"><span class="zh">是 — 永久保持</span><span class="en">Yes — permanent</span></td>
+        <td><span class="zh">Microchip (原Actel/Microsemi)</span><span class="en">Microchip (formerly Actel/Microsemi)</span></td>
+        <td><span class="zh">航天/军工抗辐射（SEU免疫）</span><span class="en">Space/defense rad-hard (SEU immune)</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">SRAM编程的详细过程（主流技术）</span><span class="en">SRAM Programming in Detail (Mainstream)</span></h3>
+  <p>
+    <span class="zh">以AMD/Xilinx为例，SRAM-based FPGA的编程/配置过程如下：</span>
+    <span class="en">Using AMD/Xilinx as an example, SRAM-based FPGA configuration works as follows:</span>
+  </p>
+  <ol style="padding-left:20px;margin-bottom:12px;">
+    <li style="font-size:0.88rem;color:var(--ink-light);margin-bottom:6px;">
+      <span class="zh"><strong>设计阶段：</strong>工程师用HDL（Verilog/VHDL）写逻辑 → 综合工具将其转化为LUT映射和布线方案 → 生成<strong>比特流文件（bitstream）</strong>，通常几MB到几十MB</span>
+      <span class="en"><strong>Design phase:</strong> Engineer writes logic in HDL (Verilog/VHDL) → synthesis tool maps it to LUTs and routing → generates a <strong>bitstream file</strong>, typically several MB to tens of MB</span>
+    </li>
+    <li style="font-size:0.88rem;color:var(--ink-light);margin-bottom:6px;">
+      <span class="zh"><strong>存储：</strong>bitstream存放在板上的外部SPI Flash中</span>
+      <span class="en"><strong>Storage:</strong> Bitstream is stored in an external SPI flash chip on the board</span>
+    </li>
+    <li style="font-size:0.88rem;color:var(--ink-light);margin-bottom:6px;">
+      <span class="zh"><strong>上电加载：</strong>FPGA上电后，自动从Flash读取bitstream，将配置数据写入片上数百万个SRAM单元（几十毫秒到几百毫秒）</span>
+      <span class="en"><strong>Power-up load:</strong> On power-up, FPGA automatically reads bitstream from flash and writes configuration data into millions of on-chip SRAM cells (tens to hundreds of ms)</span>
+    </li>
+    <li style="font-size:0.88rem;color:var(--ink-light);margin-bottom:6px;">
+      <span class="zh"><strong>运行：</strong>每个SRAM单元的0/1值决定了：① 每个LUT存储的真值表内容 ② 互连矩阵中每个开关的通/断状态 ③ I/O引脚的电压标准和方向</span>
+      <span class="en"><strong>Operation:</strong> Each SRAM cell's 0/1 value determines: ① Truth table content of each LUT ② On/off state of each routing switch ③ I/O pin voltage standard and direction</span>
+    </li>
+    <li style="font-size:0.88rem;color:var(--ink-light);margin-bottom:6px;">
+      <span class="zh"><strong>重编程：</strong>要改功能？更新Flash中的bitstream文件，重新上电或触发重配置即可。甚至支持<strong>部分重配置（Partial Reconfiguration）</strong>——运行中只改变芯片的一部分逻辑</span>
+      <span class="en"><strong>Reprogram:</strong> Need a different function? Update the bitstream in flash, power-cycle or trigger reconfiguration. Even supports <strong>Partial Reconfiguration</strong> — changing only part of the chip while the rest keeps running</span>
+    </li>
+  </ol>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>回答核心问题：不是"烧"的，不是一次性的。</strong> 主流FPGA（AMD/Xilinx、Intel/Altera）使用SRAM技术，<strong>可以无限次重新编程</strong>。每次掉电后需要重新加载配置，但这也意味着你可以随时更改芯片功能。只有老式的<strong>反熔丝FPGA</strong>（Actel）才是一次性的——高压击穿金属间绝缘层形成永久连接，不可逆。Flash-based FPGA（Microchip PolarFire）则介于两者之间：可重编程约1000次，且掉电不丢失。</span>
+    <span class="en"><strong>The key answer: It's NOT "burned," and it's NOT one-time.</strong> Mainstream FPGAs (AMD/Xilinx, Intel/Altera) use SRAM technology — <strong>infinitely reprogrammable</strong>. Configuration is lost at power-off but can be changed anytime. Only legacy <strong>antifuse FPGAs</strong> (Actel) are one-time — high voltage permanently breaks through insulation between metal layers, irreversible. Flash-based FPGAs (Microchip PolarFire) sit in between: reprogrammable ~1000 times and non-volatile.</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.ariat-tech.com/blog/exploring-fpga-programmability-from-antifuse-to-sram-technologies.html">Ariat Tech — FPGA Programmability</a> &middot;
+    <a href="https://www.edn.com/a-comparison-of-space-grade-fpgas-part-1/">EDN — Space-Grade FPGAs Compared</a> &middot;
+    <a href="https://www.allaboutcircuits.com/technical-articles/purpose-and-internal-functionality-of-fpga-look-up-tables/">AllAboutCircuits — LUT Internals</a> &middot;
+    <a href="https://www.fpgakey.com/technology/details/fpga-programmable-technology">FPGAKey — Programming Technologies</a>
+  </div>
+</div>
+
+<!-- 1. MARKET OVERVIEW -->
+<div class="section" id="overview">
+  <h2>
+    <span class="icon" style="background:var(--accent-light);color:var(--accent);">&#x1F4CA;</span>
+    <span class="zh">FPGA 全球市场概况</span><span class="en">FPGA Global Market Overview</span>
+  </h2>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="number">$13.8B</div>
+      <div class="label"><span class="zh">2025年市场规模</span><span class="en">2025 Market Size</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="number">$15.2B</div>
+      <div class="label"><span class="zh">2026年预测</span><span class="en">2026 Forecast</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="number">$25.7B</div>
+      <div class="label"><span class="zh">2031年预测</span><span class="en">2031 Forecast</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="number">11.7%</div>
+      <div class="label">CAGR (2025&rarr;2031)</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">$3.2B</div>
+      <div class="label"><span class="zh">军工航天市场 (2032)</span><span class="en">Def &amp; Aero (2032)</span></div>
+    </div>
+  </div>
+
+  <p>
+    <span class="zh">FPGA（现场可编程门阵列）是一种可在出厂后由用户配置逻辑功能的半导体器件。与ASIC不同，FPGA无需流片即可实现定制功能，适合<strong>小批量、高可靠性、快速迭代</strong>的应用场景。全球FPGA市场2025年约$138亿，预计2031年达$257亿。其中<strong>国防航天</strong>是增速最快的细分市场，2024年约$10.9亿，CAGR 17%，预计2032年突破$32亿。</span>
+    <span class="en">FPGAs (Field-Programmable Gate Arrays) are semiconductor devices whose logic can be configured by users after manufacturing. Unlike ASICs, FPGAs require no fabrication to implement custom functions, ideal for <strong>low-volume, high-reliability, rapid-iteration</strong> use cases. The global FPGA market was ~$13.8B in 2025, projected to reach $25.7B by 2031. <strong>Defense &amp; Aerospace</strong> is the fastest-growing segment with 17% CAGR, from $1.09B in 2024 to $3.2B by 2032.</span>
+  </p>
+
+  <h3><span class="zh">主要下游应用</span><span class="en">Key End Markets</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">应用领域</span><span class="en">Segment</span></th>
+        <th><span class="zh">占比</span><span class="en">Share</span></th>
+        <th><span class="zh">典型用途</span><span class="en">Typical Uses</span></th>
+        <th>CAGR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh">通信 &amp; 数据中心</span><span class="en">Telecom &amp; Data Center</span></td>
+        <td>~35%</td>
+        <td><span class="zh">5G基站、网络加速、SmartNIC</span><span class="en">5G base stations, network accel, SmartNIC</span></td>
+        <td>~10%</td>
+      </tr>
+      <tr>
+        <td><span class="zh">国防 &amp; 航天</span><span class="en">Defense &amp; Aerospace</span></td>
+        <td>~20%</td>
+        <td><span class="zh">雷达、电子战、导弹、卫星</span><span class="en">Radar, EW, missiles, satellites</span></td>
+        <td style="color:var(--red);font-weight:700;">17%</td>
+      </tr>
+      <tr>
+        <td><span class="zh">工业 &amp; 汽车</span><span class="en">Industrial &amp; Auto</span></td>
+        <td>~20%</td>
+        <td><span class="zh">机器视觉、ADAS、工控</span><span class="en">Machine vision, ADAS, automation</span></td>
+        <td>~12%</td>
+      </tr>
+      <tr>
+        <td><span class="zh">AI &amp; 计算加速</span><span class="en">AI &amp; Compute Accel</span></td>
+        <td>~10%</td>
+        <td><span class="zh">AI推理、SoC仿真/原型</span><span class="en">AI inference, SoC emulation/prototyping</span></td>
+        <td style="color:var(--green);font-weight:700;">~18%</td>
+      </tr>
+      <tr>
+        <td><span class="zh">消费电子 &amp; 其他</span><span class="en">Consumer &amp; Other</span></td>
+        <td>~15%</td>
+        <td><span class="zh">广播视频、医疗成像、测试</span><span class="en">Broadcast video, medical imaging, test</span></td>
+        <td>~6%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.marketsandmarkets.com/Market-Reports/fpga-market-194123367.html">MarketsandMarkets FPGA Report</a> &middot;
+    <a href="https://www.precedenceresearch.com/field-programmable-gate-array-market">Precedence Research FPGA Market</a> &middot;
+    <a href="https://www.mordorintelligence.com/industry-reports/field-programmable-gate-array-fpga-market">Mordor Intelligence</a>
+  </div>
+</div>
+
+<!-- 2. COMPETITIVE LANDSCAPE -->
+<div class="section" id="players">
+  <h2>
+    <span class="icon" style="background:var(--red-light);color:var(--red);">&#x1F3ED;</span>
+    <span class="zh">竞争格局 — 五大玩家</span><span class="en">Competitive Landscape — Five Key Players</span>
+  </h2>
+
+  <h3><span class="zh">高端FPGA市场份额 (2025)</span><span class="en">High-End FPGA Market Share (2025)</span></h3>
+
+  <div class="progress-row">
+    <span class="progress-label">AMD (Xilinx)</span>
+    <div class="progress-bar"><div class="progress-fill fill-amd" style="width:52%">~52%</div></div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Intel (Altera)</span>
+    <div class="progress-bar"><div class="progress-fill fill-intel" style="width:33%">~33%</div></div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Lattice</span>
+    <div class="progress-bar"><div class="progress-fill fill-lattice" style="width:6%">~6%</div></div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Microchip</span>
+    <div class="progress-bar"><div class="progress-fill fill-microchip" style="width:5%">~5%</div></div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label"><span class="zh">其他</span><span class="en">Others</span></span>
+    <div class="progress-bar"><div class="progress-fill fill-other" style="width:4%">~4%</div></div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>AMD (Xilinx)</th>
+        <th>Intel (Altera)</th>
+        <th>Lattice</th>
+        <th>Microchip</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">收购/关系</span><span class="en">Acquisition</span></strong></td>
+        <td><span class="zh">2022年AMD以$350亿收购Xilinx</span><span class="en">AMD acquired Xilinx for $35B in 2022</span></td>
+        <td><span class="zh">2025年Intel以$44.6亿出售51%股权给Silver Lake，独立运营</span><span class="en">Intel sold 51% to Silver Lake for $4.46B in 2025, now independent</span></td>
+        <td><span class="zh">独立上市公司 (LSCC)</span><span class="en">Independent public (LSCC)</span></td>
+        <td><span class="zh">2018年收购Microsemi</span><span class="en">Acquired Microsemi in 2018</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">营收 (FY2025)</span><span class="en">Revenue (FY2025)</span></strong></td>
+        <td>~$4.5B</td>
+        <td>$1.54B</td>
+        <td>~$530M</td>
+        <td><span class="zh">~$350M (FPGA部分)</span><span class="en">~$350M (FPGA segment)</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">核心产品线</span><span class="en">Key Products</span></strong></td>
+        <td>Versal (AI Core / Premium / HBM / RF), Kintex, Artix, Zynq, Alveo</td>
+        <td>Agilex 7/5, Stratix 10, Cyclone, eASIC</td>
+        <td>Nexus 2, CertusPro-NX, MachXO5-NX</td>
+        <td>PolarFire, IGLOO2, SmartFusion2, RTG4 (rad-hard)</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">定位</span><span class="en">Focus</span></strong></td>
+        <td><span class="zh">全谱：数据中心/AI/军工/通信/汽车</span><span class="en">Full spectrum: DC/AI/Defense/Telecom/Auto</span></td>
+        <td><span class="zh">数据中心/通信/嵌入式</span><span class="en">Data center/Telecom/Embedded</span></td>
+        <td><span class="zh">低功耗边缘AI/工业/汽车</span><span class="en">Low-power edge AI/Industrial/Auto</span></td>
+        <td><span class="zh">中端/军工航天/抗辐射</span><span class="en">Mid-range/Defense/Rad-hard</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">制程</span><span class="en">Process</span></strong></td>
+        <td>TSMC 7nm (Versal), 6nm (Gen 2)</td>
+        <td>Intel 7 (Agilex 7), Intel 5 (Agilex 5)</td>
+        <td>Samsung 28nm FD-SOI (Nexus)</td>
+        <td>28nm (PolarFire), 65nm (Rad-hard)</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">军工认证</span><span class="en">Mil-Grade</span></strong></td>
+        <td><span class="tag tag-red">XQ / XQR</span> MIL-STD-883 / QML</td>
+        <td><span class="tag tag-blue">Mil-Temp</span> -55&deg;C ~ +125&deg;C</td>
+        <td><span class="tag tag-purple"><span class="zh">有限</span><span class="en">Limited</span></span></td>
+        <td><span class="tag tag-green">RTG4 / RT PolarFire</span> QML Class Q</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>AMD + Xilinx 合并效应：</strong>AMD在2022年以$350亿完成收购后，Xilinx FPGA产品线与AMD EPYC CPU、Instinct GPU形成了"异构计算"协同。Alveo加速卡已集成至AMD数据中心生态，Versal ACAP（自适应计算加速平台）是目前最先进的FPGA架构。</span>
+    <span class="en"><strong>AMD + Xilinx Synergy:</strong> After AMD's $35B acquisition in 2022, Xilinx FPGAs form a "heterogeneous compute" synergy with AMD EPYC CPUs and Instinct GPUs. Alveo accelerator cards are integrated into AMD's data center ecosystem, and Versal ACAP (Adaptive Compute Acceleration Platform) is the most advanced FPGA architecture today.</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://pcbsync.com/xilinx/">PCBSync — AMD Xilinx Complete Guide</a> &middot;
+    <a href="https://www.tomshardware.com/tech-industry/intel-sells-51-percent-of-altera-fpga-business-to-silver-lake-for-usd4-46-billion">Tom's Hardware — Altera Sale</a> &middot;
+    <a href="https://www.intelmarketresearch.com/high-end-fpga-market-22568">High-End FPGA Market Outlook</a>
+  </div>
+</div>
+
+<!-- 3. AMD / XILINX DEEP DIVE -->
+<div class="section" id="amd">
+  <h2>
+    <span class="icon" style="background:var(--red-light);color:var(--red);">&#x1F534;</span>
+    <span class="zh">AMD / Xilinx 详解</span><span class="en">AMD / Xilinx Deep Dive</span>
+  </h2>
+
+  <h3><span class="zh">产品线全景</span><span class="en">Product Portfolio</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">产品系列</span><span class="en">Family</span></th>
+        <th><span class="zh">定位</span><span class="en">Segment</span></th>
+        <th><span class="zh">逻辑单元</span><span class="en">Logic Cells</span></th>
+        <th><span class="zh">制程</span><span class="en">Process</span></th>
+        <th><span class="zh">特色</span><span class="en">Key Feature</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--accent-light);">
+        <td><strong>Versal Premium VP1902</strong></td>
+        <td><span class="zh">旗舰/仿真</span><span class="en">Flagship/Emulation</span></td>
+        <td style="color:var(--accent);font-weight:700;">18.5M</td>
+        <td>TSMC 7nm</td>
+        <td><span class="zh">全球最大FPGA，4 chiplet，112G PAM4</span><span class="en">World's largest FPGA, 4 chiplets, 112G PAM4</span></td>
+      </tr>
+      <tr>
+        <td><strong>Versal AI Core</strong></td>
+        <td><span class="zh">AI加速</span><span class="en">AI Acceleration</span></td>
+        <td>900K ~ 3.7M</td>
+        <td>TSMC 7nm</td>
+        <td><span class="zh">AI Engine阵列，400个AI核心</span><span class="en">AI Engine array, 400 AI cores</span></td>
+      </tr>
+      <tr>
+        <td><strong>Versal Premium</strong></td>
+        <td><span class="zh">网络/数据中心</span><span class="en">Networking/DC</span></td>
+        <td>350K ~ 9M</td>
+        <td>TSMC 7nm</td>
+        <td><span class="zh">112G PAM4收发器，PCIe Gen5</span><span class="en">112G PAM4 transceivers, PCIe Gen5</span></td>
+      </tr>
+      <tr>
+        <td><strong>Versal HBM</strong></td>
+        <td><span class="zh">高带宽计算</span><span class="en">High-BW Compute</span></td>
+        <td>~1.9M</td>
+        <td>TSMC 7nm</td>
+        <td><span class="zh">集成HBM2e，460 GB/s带宽</span><span class="en">Integrated HBM2e, 460 GB/s bandwidth</span></td>
+      </tr>
+      <tr>
+        <td><strong>Versal RF</strong></td>
+        <td><span class="zh">射频/军事雷达</span><span class="en">RF / Military Radar</span></td>
+        <td>~500K</td>
+        <td>TSMC 7nm</td>
+        <td><span class="zh">集成RF-ADC/DAC，直接射频采样</span><span class="en">Integrated RF-ADC/DAC, direct RF sampling</span></td>
+      </tr>
+      <tr>
+        <td><strong>Versal Gen 2</strong></td>
+        <td><span class="zh">下一代</span><span class="en">Next-gen</span></td>
+        <td>643K ~ 1.5M</td>
+        <td style="color:var(--accent);font-weight:700;">TSMC 6nm (N6)</td>
+        <td><span class="zh">2026 H1样品；升级版AI Edge</span><span class="en">H1 2026 samples; upgraded AI Edge</span></td>
+      </tr>
+      <tr>
+        <td><strong>Kintex UltraScale+</strong></td>
+        <td><span class="zh">中高端</span><span class="en">Mid-High</span></td>
+        <td>356K ~ 1.1M</td>
+        <td>TSMC 16nm</td>
+        <td><span class="zh">性价比优，军工/通信主力</span><span class="en">Best value; defense/telecom workhorse</span></td>
+      </tr>
+      <tr>
+        <td><strong>Artix UltraScale+</strong></td>
+        <td><span class="zh">低功耗入门</span><span class="en">Low-power entry</span></td>
+        <td>~200K</td>
+        <td>TSMC 16nm</td>
+        <td><span class="zh">最低功耗UltraScale+</span><span class="en">Lowest power UltraScale+</span></td>
+      </tr>
+      <tr>
+        <td><strong>Zynq MPSoC/RFSoC</strong></td>
+        <td><span class="zh">异构SoC</span><span class="en">Heterogeneous SoC</span></td>
+        <td>~930K</td>
+        <td>TSMC 16nm</td>
+        <td><span class="zh">Arm A53 + FPGA + RF；电子战/5G</span><span class="en">Arm A53 + FPGA + RF; EW/5G</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-orange">
+    <span class="zh"><strong>VP1902 = 全球最大FPGA：</strong>18.5M逻辑单元，~740亿晶体管，4个FPGA fabric chiplet通过NoC互连，封装在同一interposer上。支持160个高速收发器（32个112Gbps PAM4 + 128个32.75Gbps），16个PCIe Gen5。主要用于大型SoC仿真和原型验证，单芯片价格估计$50,000+。</span>
+    <span class="en"><strong>VP1902 = World's Largest FPGA:</strong> 18.5M logic cells, ~74B transistors, 4 FPGA fabric chiplets interconnected via NoC on one interposer. 160 high-speed transceivers (32x 112Gbps PAM4 + 128x 32.75Gbps), 16x PCIe Gen5. Primarily for large SoC emulation/prototyping, estimated $50,000+ per chip.</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html">AMD Versal Product Page</a> &middot;
+    <a href="https://www.servethehome.com/amd-vp1902-is-leviathan-fpga-doubling-the-previous-gen-largest-fpga/">ServeTheHome — VP1902</a> &middot;
+    <a href="https://www.eejournal.com/article/amd-rocks-with-new-versal-gen-2-ai-edge-soc-fpgas/">EEJournal — Versal Gen 2</a>
+  </div>
+</div>
+
+<!-- 4. INTEL / ALTERA -->
+<div class="section" id="altera">
+  <h2>
+    <span class="icon" style="background:var(--accent-light);color:var(--accent);">&#x1F535;</span>
+    <span class="zh">Intel / Altera 详解</span><span class="en">Intel / Altera Deep Dive</span>
+  </h2>
+
+  <p>
+    <span class="zh">Intel于2015年以$167亿收购Altera，但FPGA业务一直未达预期。2024年Altera营收$15.4亿，亏损$6.15亿。2025年Intel将51%股权以$44.6亿出售给Silver Lake，Altera重新独立运营，估值$87.5亿。</span>
+    <span class="en">Intel acquired Altera for $16.7B in 2015, but the FPGA business underperformed. In 2024, Altera posted $1.54B revenue with a $615M loss. In 2025, Intel sold 51% to Silver Lake for $4.46B, re-establishing Altera as an independent company valued at $8.75B.</span>
+  </p>
+
+  <h3><span class="zh">Altera 产品线</span><span class="en">Altera Product Portfolio</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">产品系列</span><span class="en">Family</span></th>
+        <th><span class="zh">定位</span><span class="en">Segment</span></th>
+        <th><span class="zh">逻辑单元</span><span class="en">Logic Elements</span></th>
+        <th><span class="zh">制程</span><span class="en">Process</span></th>
+        <th><span class="zh">特色</span><span class="en">Key Feature</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Agilex 7 (F / I / M / R)</strong></td>
+        <td><span class="zh">高端</span><span class="en">High-end</span></td>
+        <td>~500K ~ 4.4M ALMs</td>
+        <td>Intel 7 (10nm ESF)</td>
+        <td><span class="zh">Hyperflex 2，CXL，PCIe Gen5</span><span class="en">Hyperflex 2, CXL, PCIe Gen5</span></td>
+      </tr>
+      <tr>
+        <td><strong>Agilex 5 (E / D)</strong></td>
+        <td><span class="zh">中端</span><span class="en">Mid-range</span></td>
+        <td>~50K ~ 620K ALMs</td>
+        <td>Intel 5</td>
+        <td><span class="zh">嵌入式/边缘AI；Arm硬核</span><span class="en">Embedded/Edge AI; Arm hard core</span></td>
+      </tr>
+      <tr>
+        <td><strong>Stratix 10</strong></td>
+        <td><span class="zh">旗舰（前代）</span><span class="en">Flagship (previous gen)</span></td>
+        <td>~10.2M LEs</td>
+        <td>Intel 14nm</td>
+        <td><span class="zh">最高58.4 Gbps收发器</span><span class="en">Up to 58.4 Gbps transceivers</span></td>
+      </tr>
+      <tr>
+        <td><strong>Cyclone V / 10</strong></td>
+        <td><span class="zh">低成本</span><span class="en">Low-cost</span></td>
+        <td>~25K ~ 301K LEs</td>
+        <td>28nm / 20nm</td>
+        <td><span class="zh">成本优化，量产型</span><span class="en">Cost-optimized, volume production</span></td>
+      </tr>
+      <tr>
+        <td><strong>eASIC</strong></td>
+        <td><span class="zh">结构化ASIC</span><span class="en">Structured ASIC</span></td>
+        <td>—</td>
+        <td><span class="zh">多节点</span><span class="en">Multi-node</span></td>
+        <td><span class="zh">FPGA原型 → ASIC量产桥梁</span><span class="en">FPGA prototype → ASIC bridge</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-red">
+    <span class="zh"><strong>Altera的困境：</strong>自2013年选择Intel代工后，Altera在制程推进上持续落后于Xilinx/AMD。原因是Intel工厂优先给CPU排产，FPGA排在后面。而TSMC对任何愿意付费的客户开放最新制程。这导致Agilex系列在制程上始终比Versal落后约1代。独立后，Altera是否会转投TSMC是业界最大的悬念之一。</span>
+    <span class="en"><strong>Altera's Dilemma:</strong> Since choosing Intel foundry in 2013, Altera has consistently lagged Xilinx/AMD on process nodes — Intel prioritizes CPUs over FPGAs. TSMC, by contrast, offers latest nodes to any paying customer. This put Agilex about one generation behind Versal. Post-independence, whether Altera switches to TSMC is one of the biggest industry questions.</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.eetimes.com/the-state-of-the-fpga-union-is-uncertain/">EE Times — State of FPGA Union</a> &middot;
+    <a href="https://finance.yahoo.com/news/intel-targets-lower-spending-altera-091000351.html">Yahoo Finance — Intel Altera Sale</a> &middot;
+    <a href="https://www.microchipusa.com/manufacturer-articles/-fpga-platforms-in-2025-comparing-agilex-5-e-series-versal-gen-2-and-nexus-2">MicrochipUSA — FPGA Platforms 2025</a>
+  </div>
+</div>
+
+<!-- 5. DEFENSE & AEROSPACE -->
+<div class="section" id="defense">
+  <h2>
+    <span class="icon" style="background:var(--green-light);color:var(--green);">&#x1F6E1;</span>
+    <span class="zh">国防军工应用 — 核心市场</span><span class="en">Defense &amp; Aerospace — Core Market</span>
+  </h2>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="number">$1.09B</div>
+      <div class="label"><span class="zh">2024年军用FPGA市场</span><span class="en">2024 Military FPGA Market</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="number">$3.2B</div>
+      <div class="label"><span class="zh">2032年预测</span><span class="en">2032 Forecast</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="number">17%</div>
+      <div class="label">CAGR</div>
+    </div>
+  </div>
+
+  <h3><span class="zh">FPGA在军工中的具体应用</span><span class="en">FPGA Military Applications</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">应用领域</span><span class="en">Application</span></th>
+        <th><span class="zh">最终产品</span><span class="en">End Products</span></th>
+        <th><span class="zh">典型FPGA</span><span class="en">Typical FPGA</span></th>
+        <th><span class="zh">关键需求</span><span class="en">Key Requirements</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">雷达系统</span><span class="en">Radar Systems</span></strong></td>
+        <td><span class="zh">AESA雷达 (F-35, F-22)、地面防空雷达、舰载雷达</span><span class="en">AESA radar (F-35, F-22), ground-based air defense, naval radar</span></td>
+        <td>Versal RF, Zynq RFSoC, Kintex UltraScale+</td>
+        <td><span class="zh">实时DSP、高采样率、低延迟</span><span class="en">Real-time DSP, high sample rate, low latency</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">电子战 (EW)</span><span class="en">Electronic Warfare</span></strong></td>
+        <td><span class="zh">威胁探测、信号干扰、频谱监控（如AN/ALQ-99）</span><span class="en">Threat detection, jamming, spectrum monitoring (e.g. AN/ALQ-99)</span></td>
+        <td>Versal AI Core, Zynq RFSoC</td>
+        <td><span class="zh">宽带频谱处理、可重配置、低功耗</span><span class="en">Wideband spectrum, reconfigurable, low power</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">导弹与弹药</span><span class="en">Missiles &amp; Munitions</span></strong></td>
+        <td><span class="zh">制导系统、引信、弹载计算（如JDAM、AIM-120）</span><span class="en">Guidance, fuzing, on-board compute (JDAM, AIM-120)</span></td>
+        <td>Artix, Spartan, Kintex (XQ grade)</td>
+        <td><span class="zh">极端温度、抗冲击、小尺寸、低成本</span><span class="en">Extreme temp, shock-resistant, small form, low cost</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">卫星通信</span><span class="en">Satellite Communications</span></strong></td>
+        <td><span class="zh">LEO/GEO通信卫星、GPS接收机、星载处理</span><span class="en">LEO/GEO satellites, GPS receivers, on-board processing</span></td>
+        <td>Kintex XQR (rad-hard), RT PolarFire</td>
+        <td><span class="zh">抗辐射 (SEU/TID)、在轨重编程、长寿命</span><span class="en">Radiation tolerance (SEU/TID), in-orbit reprogramming, longevity</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">军事航空电子</span><span class="en">Military Avionics</span></strong></td>
+        <td><span class="zh">飞行管理、传感器融合、座舱显示</span><span class="en">Flight management, sensor fusion, cockpit displays</span></td>
+        <td>Versal ACAP, Zynq (XQ grade)</td>
+        <td><span class="zh">DO-254认证、实时性、安全性</span><span class="en">DO-254 certification, real-time, safety</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">ISR (情报/监视/侦察)</span><span class="en">ISR (Intel/Surveillance/Recon)</span></strong></td>
+        <td><span class="zh">无人机载荷、光电/红外传感、信号情报</span><span class="en">UAV payloads, EO/IR sensors, SIGINT</span></td>
+        <td>Versal Premium, Zynq MPSoC</td>
+        <td><span class="zh">高吞吐量图像处理、边缘AI推理</span><span class="en">High-throughput image processing, edge AI inference</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">主要军工客户</span><span class="en">Key Defense Customers</span></h3>
+  <p>
+    <span class="zh">Lockheed Martin (F-35雷达)、Raytheon/RTX (爱国者、AESA)、Northrop Grumman (B-21)、Boeing (F-15EX/卫星)、L3Harris (电子战)、General Dynamics (舰载系统)、BAE Systems、Thales、以及美国国防部 (DoD) 直接采购和NASA。</span>
+    <span class="en">Lockheed Martin (F-35 radar), Raytheon/RTX (Patriot, AESA), Northrop Grumman (B-21), Boeing (F-15EX/satellites), L3Harris (EW), General Dynamics (naval systems), BAE Systems, Thales, plus direct procurement by U.S. DoD and NASA.</span>
+  </p>
+
+  <div class="callout callout-green">
+    <span class="zh"><strong>为什么军工偏爱FPGA？</strong> (1) <strong>可重编程</strong>：雷达/电子战需要快速适应新威胁波形 (2) <strong>长生命周期</strong>：军事平台服役20-30年，FPGA可在原硬件上升级算法 (3) <strong>供应安全</strong>：ASIC需要百万级量产才经济，军用量小（通常数千~数万颗），FPGA成本合理 (4) <strong>安全性</strong>：Xilinx第4代Defense-Grade安全架构支持加密比特流和防篡改。</span>
+    <span class="en"><strong>Why does defense love FPGAs?</strong> (1) <strong>Reprogrammable</strong>: Radar/EW must quickly adapt to new threat waveforms (2) <strong>Long lifecycle</strong>: Military platforms serve 20-30 years; FPGAs can upgrade algorithms on existing hardware (3) <strong>Supply economics</strong>: ASICs need million-unit volumes; military volumes are 1K-10K units — FPGAs are cost-effective (4) <strong>Security</strong>: Xilinx 4th-gen Defense-Grade architecture supports encrypted bitstreams and tamper resistance.</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://semiconductorinsight.com/blog/amds-xilinx-versal-acaps-set-to-transform-military-avionics-with-ai-acceleration/">Semiconductor Insight — Versal ACAP Military Avionics</a> &middot;
+    <a href="https://www.xilinx.com/applications/aerospace-and-defense/missiles-and-munitions.html">AMD — Aerospace &amp; Defense Solutions</a> &middot;
+    <a href="https://militaryembedded.com/radar-ew/signal-processing/fourth-gen-secure-architecture-for-defense-grade-fpgas-and-socs-released-by-xilinx">MilEmbedded — 4th Gen Defense Architecture</a>
+  </div>
+</div>
+
+<!-- 6. TECHNICAL SPECIFICATIONS -->
+<div class="section" id="specs">
+  <h2>
+    <span class="icon" style="background:var(--teal-light);color:var(--teal);">&#x1F4D0;</span>
+    <span class="zh">主流FPGA平台技术规格对比 (2025-2026)</span><span class="en">FPGA Platform Specs Comparison (2025-2026)</span>
+  </h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">规格</span><span class="en">Spec</span></th>
+        <th>AMD Versal Premium</th>
+        <th>AMD Versal Gen 2</th>
+        <th>Altera Agilex 7</th>
+        <th>Altera Agilex 5</th>
+        <th>Lattice Nexus 2</th>
+        <th>Microchip PolarFire</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">制程</span><span class="en">Process</span></strong></td>
+        <td>TSMC 7nm</td>
+        <td style="color:var(--accent);font-weight:700;">TSMC 6nm</td>
+        <td>Intel 7</td>
+        <td>Intel 5</td>
+        <td>Samsung 28nm FD-SOI</td>
+        <td>28nm</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">最大逻辑</span><span class="en">Max Logic</span></strong></td>
+        <td>18.5M cells</td>
+        <td>1.5M LUTs</td>
+        <td>4.4M ALMs</td>
+        <td>620K ALMs</td>
+        <td>200K LUTs</td>
+        <td>481K LEs</td>
+      </tr>
+      <tr>
+        <td><strong>DSP</strong></td>
+        <td>14,128</td>
+        <td>7,616</td>
+        <td>11,520</td>
+        <td>3,564</td>
+        <td>816</td>
+        <td>1,480</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">收发器速率</span><span class="en">Transceiver</span></strong></td>
+        <td>112G PAM4 / 32.75G NRZ</td>
+        <td>32G NRZ</td>
+        <td>116G PAM4</td>
+        <td>28.3G</td>
+        <td>12.5G</td>
+        <td>12.7G</td>
+      </tr>
+      <tr>
+        <td><strong>PCIe</strong></td>
+        <td>Gen5 x16</td>
+        <td>Gen5</td>
+        <td>Gen5 x16, CXL 1.1</td>
+        <td>Gen4 x8</td>
+        <td>Gen3 x4</td>
+        <td>Gen2 x4</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">片上处理器</span><span class="en">On-chip CPU</span></strong></td>
+        <td>Arm A72 dual-core</td>
+        <td>Arm A78AE</td>
+        <td>Arm A53 quad-core</td>
+        <td>Arm A76 / A55</td>
+        <td>RISC-V</td>
+        <td>RISC-V</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">典型功耗</span><span class="en">Typical Power</span></strong></td>
+        <td>30-100W</td>
+        <td>10-40W</td>
+        <td>30-75W</td>
+        <td>5-30W</td>
+        <td>0.1-2W</td>
+        <td>1-5W</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">军工版本</span><span class="en">Mil-Grade</span></strong></td>
+        <td><span class="tag tag-red">XQ</span></td>
+        <td><span class="zh">规划中</span><span class="en">Planned</span></td>
+        <td><span class="tag tag-blue">Mil-Temp</span></td>
+        <td><span class="tag tag-blue">Mil-Temp</span></td>
+        <td>&mdash;</td>
+        <td><span class="tag tag-green">RT PolarFire</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal/premium-series.html">AMD Versal Premium</a> &middot;
+    <a href="https://www.microchipusa.com/manufacturer-articles/-fpga-platforms-in-2025-comparing-agilex-5-e-series-versal-gen-2-and-nexus-2">FPGA Platforms 2025 Comparison</a>
+  </div>
+</div>
+
+<!-- 7. PROCESS NODE & FOUNDRY -->
+<div class="section" id="process">
+  <h2>
+    <span class="icon" style="background:var(--amber-light);color:var(--amber);">&#x2699;</span>
+    <span class="zh">制程节点与代工厂</span><span class="en">Process Nodes &amp; Foundry</span>
+  </h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">厂商</span><span class="en">Vendor</span></th>
+        <th><span class="zh">当前旗舰制程</span><span class="en">Current Flagship</span></th>
+        <th><span class="zh">代工厂</span><span class="en">Foundry</span></th>
+        <th><span class="zh">下一代制程</span><span class="en">Next-Gen Node</span></th>
+        <th><span class="zh">时间线</span><span class="en">Timeline</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>AMD (Xilinx)</strong></td>
+        <td>TSMC N7 (Versal)</td>
+        <td>TSMC</td>
+        <td style="color:var(--accent);font-weight:700;">TSMC N6 (Versal Gen 2)</td>
+        <td>2026 H1 <span class="zh">样品</span><span class="en">samples</span></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><span class="zh">TSMC N5/N4 (未确认)</span><span class="en">TSMC N5/N4 (unconfirmed)</span></td>
+        <td>2027-2028?</td>
+      </tr>
+      <tr>
+        <td><strong>Altera</strong></td>
+        <td>Intel 7 (Agilex 7)</td>
+        <td>Intel Foundry</td>
+        <td>Intel 5 (Agilex 5)</td>
+        <td><span class="zh">量产中</span><span class="en">In production</span></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><span class="zh">Intel或TSMC?</span><span class="en">Intel or TSMC?</span></td>
+        <td><span class="zh">Intel 4 / Intel 3 / TSMC?</span><span class="en">Intel 4 / Intel 3 / TSMC?</span></td>
+        <td>2027+</td>
+      </tr>
+      <tr>
+        <td><strong>Lattice</strong></td>
+        <td>Samsung 28nm FD-SOI</td>
+        <td>Samsung</td>
+        <td><span class="zh">Samsung 更先进节点</span><span class="en">Samsung advanced node</span></td>
+        <td>2026 (Nexus 2)</td>
+      </tr>
+      <tr>
+        <td><strong>Microchip</strong></td>
+        <td>28nm (PolarFire)</td>
+        <td><span class="zh">多家 (UMC/Global)</span><span class="en">Multi (UMC/Global)</span></td>
+        <td><span class="zh">16nm (传闻)</span><span class="en">16nm (rumored)</span></td>
+        <td>TBD</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>FPGA为何追不上手机/GPU的制程？</strong> FPGA的可编程逻辑天然面积大、利用率低（典型利用率仅60-80%），晶体管密度无法像GPU那样充分利用先进制程的密度优势。FPGA需要大量I/O和片上RAM，对制程的要求更偏向<strong>低功耗、高速I/O、宽金属层</strong>，而非纯密度。因此FPGA通常比GPU/CPU落后1-2代制程。</span>
+    <span class="en"><strong>Why do FPGAs lag GPU/CPU on process nodes?</strong> FPGA programmable logic inherently wastes area (typical utilization ~60-80%), so transistor density gains from advanced nodes aren't fully leveraged. FPGAs need massive I/O and on-chip RAM, prioritizing <strong>low power, high-speed I/O, and wide metal layers</strong> over raw density. FPGAs typically trail GPUs/CPUs by 1-2 process generations.</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.eejournal.com/article/amd-tweaks-versal-premium-fpgas-to-produce-next-generation-devices/">EEJournal — Versal Gen 2 N6</a> &middot;
+    <a href="https://www.eetasia.com/embeddednews-the-future-of-the-fpga-industry-is-murky/">EE Times Asia — Future of FPGA Industry</a>
+  </div>
+</div>
+
+<!-- 8. RELIABILITY -->
+<div class="section" id="reliability">
+  <h2>
+    <span class="icon" style="background:var(--orange-light);color:var(--orange);">&#x26A0;</span>
+    <span class="zh">军用FPGA可靠性与抗辐射深度解析</span><span class="en">Military FPGA Reliability &amp; Radiation Hardening Deep Dive</span>
+  </h2>
+
+  <h3><span class="zh">基本可靠性要求</span><span class="en">Basic Reliability Requirements</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">标准/要求</span><span class="en">Standard</span></th>
+        <th><span class="zh">参数</span><span class="en">Parameter</span></th>
+        <th><span class="zh">规格</span><span class="en">Specification</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">温度范围</span><span class="en">Temperature Range</span></strong></td>
+        <td>MIL-STD-883 Class B</td>
+        <td><strong>-55&deg;C ~ +125&deg;C</strong></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">动态老化</span><span class="en">Burn-in</span></strong></td>
+        <td>MIL-STD-883 Class B</td>
+        <td>125&deg;C/160h <span class="zh">或</span><span class="en">or</span> 150&deg;C/80h</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">认证体系</span><span class="en">Qualification</span></strong></td>
+        <td>QML (Qualified Manufacturers List)</td>
+        <td><span class="zh">Class Q (航天) / Class V (最高等级)</span><span class="en">Class Q (space) / Class V (highest grade)</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">航空认证</span><span class="en">Avionics Cert</span></strong></td>
+        <td>DO-254 (Level A-D)</td>
+        <td><span class="zh">机载电子硬件设计保证</span><span class="en">Airborne electronic hardware design assurance</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">加密安全</span><span class="en">Crypto Security</span></strong></td>
+        <td>Xilinx 4th Gen Defense Arch</td>
+        <td><span class="zh">AES-256加密比特流、防篡改、PUF认证</span><span class="en">AES-256 encrypted bitstream, anti-tamper, PUF authentication</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">使用寿命</span><span class="en">Service Life</span></strong></td>
+        <td><span class="zh">军事平台要求</span><span class="en">Military platform requirement</span></td>
+        <td><strong>20-30 <span class="zh">年</span><span class="en">years</span></strong></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============ TID DEEP DIVE ============ -->
+  <h3><span class="zh">抗辐射深度解析 ①：总剂量 TID — 慢性"中毒"</span><span class="en">Radiation Deep Dive ①: Total Ionizing Dose (TID) — Chronic "Poisoning"</span></h3>
+
+  <p>
+    <span class="zh"><strong>TID 是什么？</strong>想象你在太阳底下暴晒——不是被一颗子弹打中，而是日积月累的紫外线损伤。TID 就是芯片在辐射环境中累积吸收的总电离辐射剂量，单位是 rad(Si) 或 krad(Si)。</span>
+    <span class="en"><strong>What is TID?</strong> Think of sun exposure — not a single bullet hit, but cumulative UV damage over years. TID is the total ionizing radiation dose accumulated by a chip in a radiation environment, measured in rad(Si) or krad(Si).</span>
+  </p>
+
+  <p>
+    <span class="zh"><strong>TID 对芯片做了什么？</strong>电离辐射在晶体管的栅极氧化层中积累正电荷陷阱。随着剂量增加：</span>
+    <span class="en"><strong>What does TID do to chips?</strong> Ionizing radiation accumulates positive charge traps in transistor gate oxide. As dose increases:</span>
+  </p>
+  <ul style="margin:8px 0 16px 20px;font-size:0.88rem;color:var(--ink-light);">
+    <li><span class="zh">晶体管的阈值电压漂移 → 逻辑翻转变慢甚至失效</span><span class="en">Transistor threshold voltage shifts → logic switching slows or fails</span></li>
+    <li><span class="zh">漏电流增大 → 功耗飙升、信号干扰</span><span class="en">Leakage current increases → power surges, signal interference</span></li>
+    <li><span class="zh">最终导致芯片参数超标直至完全失效</span><span class="en">Eventually chip parameters exceed limits until total failure</span></li>
+  </ul>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">TID 等级</span><span class="en">TID Level</span></th>
+        <th><span class="zh">对应环境</span><span class="en">Environment</span></th>
+        <th><span class="zh">典型任务</span><span class="en">Typical Mission</span></th>
+        <th><span class="zh">代表芯片</span><span class="en">Example Chips</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>25 krad</strong></td>
+        <td><span class="zh">低轨道 (LEO) 3-5 年任务</span><span class="en">Low Earth Orbit (LEO) 3-5 year mission</span></td>
+        <td><span class="zh">对地观测卫星、空间站实验</span><span class="en">Earth observation, ISS experiments</span></td>
+        <td>XQRKU060 (min)</td>
+      </tr>
+      <tr>
+        <td><strong>100 krad</strong></td>
+        <td><span class="zh">中/高轨道 (MEO/GEO) 15+ 年</span><span class="en">MEO/GEO orbit 15+ years</span></td>
+        <td><span class="zh">通信卫星、导航卫星 (GPS)</span><span class="en">Communication satellites, GPS</span></td>
+        <td>XQRKU060, RT PolarFire</td>
+      </tr>
+      <tr style="background:var(--red-light);">
+        <td><strong>300 krad+</strong></td>
+        <td><span class="zh">深空探测、核环境</span><span class="en">Deep space, nuclear environments</span></td>
+        <td><span class="zh">木星探测、核反应堆监控</span><span class="en">Jupiter probes, nuclear reactor monitoring</span></td>
+        <td>RTAX (antifuse), 专用 ASIC</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>制程瓶颈 #1：为什么 TID 和制程节点密切相关？</strong><br><br>更先进的制程（7nm, 5nm）栅极氧化层更薄，电荷陷阱密度反而降低了——这一点<em>有利于</em> TID 耐受。但同时，更小的晶体管工作电压更低（0.7V vs 老工艺的 1.2V），热载流子效应和界面态更复杂，需要专门优化。<br><br>目前航天级 FPGA 的制程瓶颈在 <strong>20nm</strong>（AMD XQRKU060 是 20nm，已是最先进的航天 FPGA）。商用 FPGA 已到 7nm/6nm，但航天认证落后 2-3 代，因为每个制程节点需要 3-5 年的辐射测试和认证周期。</span>
+    <span class="en"><strong>Process Bottleneck #1: Why TID is closely tied to process node</strong><br><br>Advanced nodes (7nm, 5nm) have thinner gate oxides with lower charge trap density — this actually <em>helps</em> TID tolerance. But smaller transistors run at lower voltages (0.7V vs 1.2V in older nodes), with more complex hot carrier and interface state effects requiring specialized optimization.<br><br>Current space-grade FPGA process bottleneck is <strong>20nm</strong> (AMD XQRKU060 at 20nm is the most advanced space FPGA). Commercial FPGAs are at 7nm/6nm, but space qualification lags by 2-3 generations because each node needs 3-5 years of radiation testing and qualification.</span>
+  </div>
+
+  <!-- ============ SEE DEEP DIVE ============ -->
+  <h3><span class="zh">抗辐射深度解析 ②：单粒子效应 SEE — 瞬间"狙击"</span><span class="en">Radiation Deep Dive ②: Single Event Effects (SEE) — Instant "Sniper Hit"</span></h3>
+
+  <p>
+    <span class="zh">如果 TID 是慢性中毒，<strong>SEE 就是被狙击手打了一枪</strong>——一颗高能粒子（宇宙射线中的重离子、质子、中子）穿过芯片，沿途产生大量电荷，瞬间改变电路状态。</span>
+    <span class="en">If TID is chronic poisoning, <strong>SEE is a sniper shot</strong> — a single high-energy particle (heavy ion, proton, or neutron from cosmic rays) penetrates the chip, generating a trail of charge that instantly alters circuit state.</span>
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">效应类型</span><span class="en">Effect Type</span></th>
+        <th><span class="zh">全称</span><span class="en">Full Name</span></th>
+        <th><span class="zh">会发生什么</span><span class="en">What Happens</span></th>
+        <th><span class="zh">严重程度</span><span class="en">Severity</span></th>
+        <th><span class="zh">可恢复？</span><span class="en">Recoverable?</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SEU</strong></td>
+        <td>Single Event Upset</td>
+        <td><span class="zh">SRAM 单元中一个 bit 从 0 翻成 1（或反之）。对 FPGA 极其危险——因为配置存储器就是 SRAM，一个 bit 翻转可能改变整个电路的连接方式</span><span class="en">One bit in an SRAM cell flips from 0 to 1 (or vice versa). Extremely dangerous for FPGAs — configuration memory IS SRAM, so one bit flip can rewire the entire circuit</span></td>
+        <td style="color:var(--orange);font-weight:600;"><span class="zh">高</span><span class="en">High</span></td>
+        <td style="color:var(--green);"><span class="zh">是 — 重写正确值即可</span><span class="en">Yes — rewrite correct value</span></td>
+      </tr>
+      <tr>
+        <td><strong>MBU</strong></td>
+        <td>Multi-Bit Upset</td>
+        <td><span class="zh">一颗粒子同时翻转多个相邻 bit。在先进制程中更常见（因为晶体管间距更小）</span><span class="en">One particle flips multiple adjacent bits. More common in advanced nodes (smaller transistor pitch)</span></td>
+        <td style="color:var(--red);font-weight:600;"><span class="zh">很高</span><span class="en">Very High</span></td>
+        <td><span class="zh">困难 — 可能超出 EDAC 纠错能力</span><span class="en">Difficult — may exceed EDAC correction</span></td>
+      </tr>
+      <tr>
+        <td><strong>SET</strong></td>
+        <td>Single Event Transient</td>
+        <td><span class="zh">组合逻辑中产生一个毛刺脉冲，如果被时钟沿采样就变成永久错误</span><span class="en">A glitch pulse in combinational logic; becomes permanent error if sampled by a clock edge</span></td>
+        <td style="color:var(--orange);"><span class="zh">中</span><span class="en">Medium</span></td>
+        <td><span class="zh">是 — 脉冲过后自动消失（除非被锁存）</span><span class="en">Yes — pulse dissipates (unless latched)</span></td>
+      </tr>
+      <tr style="background:var(--red-light);">
+        <td><strong>SEL</strong></td>
+        <td>Single Event Latchup</td>
+        <td><span class="zh"><strong>最危险。</strong>粒子触发 CMOS 中的寄生 PNPN 闩锁结构 → 形成低阻短路通路 → 大电流 → 如果不立即断电，芯片会烧毁</span><span class="en"><strong>Most dangerous.</strong> Particle triggers parasitic PNPN latchup in CMOS → forms low-resistance short → large current → chip burns if power not cut immediately</span></td>
+        <td style="color:var(--red);font-weight:600;"><span class="zh">致命</span><span class="en">Fatal</span></td>
+        <td style="color:var(--red);"><span class="zh">需要断电重启；可能永久损坏</span><span class="en">Requires power cycle; may cause permanent damage</span></td>
+      </tr>
+      <tr>
+        <td><strong>SEFI</strong></td>
+        <td>Single Event Functional Interrupt</td>
+        <td><span class="zh">全局控制逻辑（时钟管理、配置控制器）被打乱，整个 FPGA 停摆</span><span class="en">Global control logic (clock mgr, config controller) disrupted, entire FPGA halts</span></td>
+        <td style="color:var(--red);font-weight:600;"><span class="zh">致命</span><span class="en">Fatal</span></td>
+        <td><span class="zh">需要完全重配置</span><span class="en">Requires full reconfiguration</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>制程瓶颈 #2：为什么先进制程让 SEU 更难对付？</strong><br><br>制程越先进，晶体管越小，每个存储节点上的电荷量（<strong>临界电荷 Q<sub>crit</sub></strong>）越少。一颗宇宙射线粒子沉积的电荷更容易超过 Q<sub>crit</sub>，翻转 bit 的概率更高。<br><br>具体数据：28nm FDS-OI 工艺（Lattice Nexus）的 FIT 率约 1（每十亿小时 1 次故障）。普通 28nm SRAM FPGA 的 FIT 率约 100。先进到 7nm/5nm 后，如果不做特殊设计，SEU 率会更高。<br><br><strong>这就是为什么航天 FPGA 制程落后商用 2-3 代。</strong>不是做不出来，而是要确保每个新制程在辐射环境下的 SEU 率可控，需要大量测试（用粒子加速器模拟太空辐射）和专门的抗辐射电路设计。</span>
+    <span class="en"><strong>Process Bottleneck #2: Why advanced nodes make SEU harder to handle</strong><br><br>Smaller transistors mean less charge per storage node (<strong>critical charge Q<sub>crit</sub></strong>). A single cosmic ray particle deposits enough charge to exceed Q<sub>crit</sub> more easily, increasing bit-flip probability.<br><br>Data point: 28nm FDS-OI (Lattice Nexus) achieves FIT rate of ~1 (1 failure per billion hours). Standard 28nm SRAM FPGA has FIT rate ~100. At 7nm/5nm without special design, SEU rates would be even higher.<br><br><strong>This is why space FPGAs lag commercial by 2-3 generations.</strong> Not because they can't be built, but because every new node's SEU rate must be proven controllable through extensive testing (particle accelerators simulating space radiation) and specialized rad-hard circuit design.</span>
+  </div>
+
+  <!-- ============ MITIGATION TECHNIQUES ============ -->
+  <h3><span class="zh">如何对抗辐射？六大设计技术</span><span class="en">How to Fight Radiation: Six Design Techniques</span></h3>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">技术</span><span class="en">Technique</span></th>
+        <th><span class="zh">原理</span><span class="en">Principle</span></th>
+        <th><span class="zh">代价</span><span class="en">Cost</span></th>
+        <th><span class="zh">对抗什么</span><span class="en">Mitigates</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--accent-light);">
+        <td><strong>TMR<br><span style="font-size:0.72rem;color:var(--ink-dim);">Triple Modular Redundancy</span></strong></td>
+        <td>
+          <span class="zh">把每个关键逻辑电路<strong>复制三份</strong>，输出通过"投票器"（2-out-of-3 majority voter）决定正确值。即使一份被宇宙射线翻转了，另外两份投票胜出。<br><br><strong>类比：</strong>三个法官同时判案。一个法官被贿赂了？没关系，另外两个的判决生效。</span>
+          <span class="en">Every critical logic circuit is <strong>triplicated</strong>. Outputs go through a "voter" (2-out-of-3 majority). Even if one copy gets flipped by cosmic rays, the other two win the vote.<br><br><strong>Analogy:</strong> Three judges ruling simultaneously. One judge bribed? No problem — the other two's verdict stands.</span>
+        </td>
+        <td style="color:var(--red);">
+          <span class="zh"><strong>面积 &times;3, 功耗 &times;3</strong><br>一颗芯片只能用 1/3 的逻辑资源</span>
+          <span class="en"><strong>Area &times;3, power &times;3</strong><br>Only 1/3 of chip logic usable</span>
+        </td>
+        <td>SEU, SET</td>
+      </tr>
+      <tr>
+        <td><strong>EDAC<br><span style="font-size:0.72rem;color:var(--ink-dim);">Error Detection &amp; Correction</span></strong></td>
+        <td>
+          <span class="zh">在存储器（BRAM、配置SRAM）中加入纠错码。<strong>SEC-DED</strong>（单 bit 纠错 + 双 bit 检测）最常用。每 32/64 bit 数据附加 7-8 bit 校验码。<br><br><strong>类比：</strong>快递包裹加了防损泡沫。一处破损能自动修好，两处破损能报警。</span>
+          <span class="en">Adds error-correcting codes to memory (BRAM, config SRAM). <strong>SEC-DED</strong> (Single Error Correct + Double Error Detect) is most common. Adds 7-8 parity bits per 32/64 data bits.<br><br><strong>Analogy:</strong> Bubble wrap on a package. One dent auto-repaired, two dents trigger an alarm.</span>
+        </td>
+        <td>
+          <span class="zh">面积 +15-25%<br>存储效率降低</span>
+          <span class="en">+15-25% area<br>Reduced storage efficiency</span>
+        </td>
+        <td>SEU (memory)</td>
+      </tr>
+      <tr style="background:var(--accent-light);">
+        <td><strong><span class="zh">配置刷新<br><span style="font-size:0.72rem;color:var(--ink-dim);">Scrubbing</span></span><span class="en">Config Scrubbing</span></strong></td>
+        <td>
+          <span class="zh">FPGA 运行时，后台持续读取配置 SRAM 并与正确值比对。发现翻转的 bit 立即改回来。<strong>不影响正在运行的电路</strong>——相当于在飞机飞行中修引擎。<br><br>AMD XQRKU060 内置硬化 scrubbing 引擎，全芯片配置扫描一轮约 100ms。</span>
+          <span class="en">While FPGA runs, a background process continuously reads config SRAM and compares against golden values. Flipped bits are corrected immediately — <strong>without disrupting the running circuit</strong>. Like fixing an engine mid-flight.<br><br>AMD XQRKU060 has a hardened scrubbing engine that scans all config bits in ~100ms.</span>
+        </td>
+        <td>
+          <span class="zh">少量带宽和功耗<br>需要外部 golden copy</span>
+          <span class="en">Minor bandwidth/power<br>Needs external golden copy</span>
+        </td>
+        <td>SEU (config)</td>
+      </tr>
+      <tr>
+        <td><strong>RHBD<br><span style="font-size:0.72rem;color:var(--ink-dim);">Rad-Hard By Design</span></strong></td>
+        <td>
+          <span class="zh">在电路设计层面加固。AMD XQRKU060 使用<strong>超过 40 种专利电路设计和版图技术</strong>降低 SEU 截面积。例如：加大存储节点电容、增加反馈路径、物理分离互补节点使单粒子无法同时打到两个节点。</span>
+          <span class="en">Hardening at circuit design level. AMD XQRKU060 uses <strong>40+ proprietary patented circuit and layout techniques</strong> to reduce SEU cross-section. Examples: enlarged storage node capacitance, additional feedback paths, physical separation of complementary nodes so a single particle can't hit both.</span>
+        </td>
+        <td>
+          <span class="zh">面积 +20-50%<br>速度降低</span>
+          <span class="en">+20-50% area<br>Speed reduction</span>
+        </td>
+        <td>SEU, SEL, SET</td>
+      </tr>
+      <tr style="background:var(--accent-light);">
+        <td><strong>RHBP<br><span style="font-size:0.72rem;color:var(--ink-dim);">Rad-Hard By Process</span></strong></td>
+        <td>
+          <span class="zh">在晶圆制造层面加固：<br>&bull; <strong>SOI（绝缘体上硅）</strong>：晶体管下方有一层氧化物绝缘层，截断闩锁电流通路 → SEL 完全免疫<br>&bull; <strong>加厚栅氧化层</strong>：减缓 TID 电荷积累<br>&bull; <strong>特殊掺杂</strong>：降低寄生效应</span>
+          <span class="en">Hardening at fabrication level:<br>&bull; <strong>SOI (Silicon on Insulator)</strong>: oxide layer below transistors cuts off latchup current path → SEL completely immune<br>&bull; <strong>Thicker gate oxide</strong>: slows TID charge accumulation<br>&bull; <strong>Special doping profiles</strong>: reduces parasitic effects</span>
+        </td>
+        <td>
+          <span class="zh">晶圆成本 +50-200%<br>制程选择受限</span>
+          <span class="en">Wafer cost +50-200%<br>Limited process options</span>
+        </td>
+        <td>SEL, TID</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">反熔丝</span><span class="en">Antifuse</span></strong></td>
+        <td>
+          <span class="zh">配置存储不用 SRAM，而是用物理烧通的金属连接。宇宙射线无法翻转一根已经烧通的导线——这提供了<strong>天然 SEU 免疫</strong>。<br><br>代价：一次性编程（OTP），不可更改。Microchip RTAX 系列用的就是这种技术。</span>
+          <span class="en">Configuration storage uses physically fused metal connections instead of SRAM. Cosmic rays can't flip a fused wire — this provides <strong>natural SEU immunity</strong>.<br><br>Trade-off: One-time programmable (OTP), irreversible. Microchip RTAX series uses this technology.</span>
+        </td>
+        <td style="color:var(--red);">
+          <span class="zh"><strong>不可重编程</strong><br>制程落后（150nm）</span>
+          <span class="en"><strong>Not reprogrammable</strong><br>Old process (150nm)</span>
+        </td>
+        <td><span class="zh">SEU 完全免疫</span><span class="en">SEU fully immune</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============ THREE ARCHITECTURES COMPARED ============ -->
+  <h3><span class="zh">三种抗辐射架构对决</span><span class="en">Three Radiation Architectures Compared</span></h3>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th><span class="zh">SRAM + TMR + Scrubbing<br><span style="font-weight:400;font-size:0.72rem;">（AMD XQRKU060）</span></span><span class="en">SRAM + TMR + Scrubbing<br><span style="font-weight:400;font-size:0.72rem;">(AMD XQRKU060)</span></span></th>
+        <th><span class="zh">Flash<br><span style="font-weight:400;font-size:0.72rem;">（Microchip RT PolarFire）</span></span><span class="en">Flash<br><span style="font-weight:400;font-size:0.72rem;">(Microchip RT PolarFire)</span></span></th>
+        <th><span class="zh">反熔丝<br><span style="font-weight:400;font-size:0.72rem;">（Microchip RTAX）</span></span><span class="en">Antifuse<br><span style="font-weight:400;font-size:0.72rem;">(Microchip RTAX)</span></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh">制程</span><span class="en">Process</span></strong></td>
+        <td>20nm</td>
+        <td>28nm</td>
+        <td>150nm</td>
+      </tr>
+      <tr>
+        <td><strong>TID</strong></td>
+        <td>100 krad</td>
+        <td>100 krad</td>
+        <td>300 krad+</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">SEU 配置</span><span class="en">SEU Config</span></strong></td>
+        <td><span class="zh">易受攻击 → TMR + Scrubbing 弥补</span><span class="en">Vulnerable → TMR + Scrubbing mitigate</span></td>
+        <td><span class="zh">Flash 本身比 SRAM 抗 SEU 强 100x</span><span class="en">Flash inherently 100x more SEU-resistant than SRAM</span></td>
+        <td style="color:var(--green);font-weight:600;"><span class="zh">完全免疫</span><span class="en">Fully immune</span></td>
+      </tr>
+      <tr>
+        <td><strong>SEL</strong></td>
+        <td><span class="zh">免疫 (LET &gt;80 MeV)</span><span class="en">Immune (LET &gt;80 MeV)</span></td>
+        <td><span class="zh">免疫</span><span class="en">Immune</span></td>
+        <td><span class="zh">免疫</span><span class="en">Immune</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">可重编程</span><span class="en">Reprogrammable</span></strong></td>
+        <td style="color:var(--green);font-weight:600;"><span class="zh">无限次（在轨可更新）</span><span class="en">Unlimited (in-orbit updates)</span></td>
+        <td><span class="zh">~1000 次</span><span class="en">~1000 cycles</span></td>
+        <td style="color:var(--red);"><span class="zh">一次性</span><span class="en">One-time</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">逻辑容量</span><span class="en">Logic Capacity</span></strong></td>
+        <td style="color:var(--green);font-weight:600;"><span class="zh">最大（726K LUT）</span><span class="en">Largest (726K LUT)</span></td>
+        <td><span class="zh">中（500K LE）</span><span class="en">Medium (500K LE)</span></td>
+        <td style="color:var(--red);"><span class="zh">最小（4M gates）</span><span class="en">Smallest (4M gates)</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">功耗</span><span class="en">Power</span></strong></td>
+        <td><span class="zh">高（SRAM 漏电 + TMR 3x）</span><span class="en">High (SRAM leakage + TMR 3x)</span></td>
+        <td style="color:var(--green);font-weight:600;"><span class="zh">最低</span><span class="en">Lowest</span></td>
+        <td><span class="zh">低</span><span class="en">Low</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh">典型用途</span><span class="en">Typical Use</span></strong></td>
+        <td><span class="zh">大型卫星、空间站、军用通信</span><span class="en">Large satellites, space stations, mil comms</span></td>
+        <td><span class="zh">小卫星、CubeSat、汽车</span><span class="en">SmallSats, CubeSat, automotive</span></td>
+        <td><span class="zh">深空探测、核环境、关键控制</span><span class="en">Deep space, nuclear, critical control</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    <span class="zh"><strong>最关键的要求排序：</strong> (1) 可靠性 &gt; (2) 安全性 &gt; (3) 长期供应保证 &gt; (4) 性能 &gt; (5) 功耗 &gt; (6) 成本。军用FPGA不追求最高速度，而是追求在极端环境下的<strong>确定性行为和零失效率</strong>。</span>
+    <span class="en"><strong>Priority ranking:</strong> (1) Reliability &gt; (2) Security &gt; (3) Long-term supply assurance &gt; (4) Performance &gt; (5) Power &gt; (6) Cost. Military FPGAs don't chase maximum speed — they demand <strong>deterministic behavior and zero field failures</strong> under extreme conditions.</span>
+  </p>
+
+  <div class="callout callout-blue">
+    <span class="zh"><strong>总结：FPGA 抗辐射的核心矛盾</strong><br><br>FPGA 的灵魂是"可编程"——但可编程的核心机制（SRAM 配置存储）恰恰是辐射最容易攻击的目标。这就像造了一扇万能钥匙能开的门，然后发现宇宙射线就是一把万能钥匙。<br><br>解决方案只有三条路：<br>1. <strong>冗余弥补</strong>（TMR + EDAC + Scrubbing）— 接受 SRAM 会被翻转，但靠冗余纠错。代价：面积 &times;3，功耗 &times;3<br>2. <strong>换存储介质</strong>（Flash / 反熔丝）— 从根源消除问题。代价：不可或有限重编程<br>3. <strong>两者结合</strong> — 现代航天 FPGA 的主流做法</span>
+    <span class="en"><strong>Summary: The core paradox of FPGA radiation hardening</strong><br><br>FPGA's soul is "programmability" — but the core mechanism (SRAM config storage) is exactly what radiation attacks most easily. It's like building a door that any master key can open, then discovering cosmic rays ARE master keys.<br><br>Only three paths:<br>1. <strong>Redundancy compensation</strong> (TMR + EDAC + Scrubbing) — accept SRAM will flip, correct with redundancy. Cost: 3x area, 3x power<br>2. <strong>Change storage medium</strong> (Flash / Antifuse) — eliminate the problem at source. Cost: non/limited reprogrammability<br>3. <strong>Combine both</strong> — the mainstream approach for modern space FPGAs</span>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://pcbsync.com/xilinx-rad-hard-fpgas/">PCBSync — Xilinx Rad-Hard FPGAs Guide</a> &middot;
+    <a href="https://www.edn.com/a-comparison-of-space-grade-fpgas-part-1/">EDN — Space-Grade FPGAs Compared</a> &middot;
+    <a href="https://docs.amd.com/v/u/en-US/wp523-xqrku060">AMD — XQRKU060 White Paper</a> &middot;
+    <a href="https://militaryembedded.com/comms/satellites/rad-hard-vast-improvements-space-exploration">MilEmbedded — Rad-Hard SRAM FPGAs</a> &middot;
+    <a href="https://www.sciencedirect.com/science/article/abs/pii/S0026269224000880">ScienceDirect — Recent Advances in FPGA Radiation</a> &middot;
+    <a href="https://www.microchip.com/en-us/products/fpgas-and-plds/reliability">Microchip — FPGA Reliability</a>
+  </div>
+</div>
+
+<!-- 9. DIE SIZE & YIELD -->
+<div class="section" id="die">
+  <h2>
+    <span class="icon" style="background:var(--purple-light);color:var(--purple);">&#x1F9E9;</span>
+    <span class="zh">芯片尺寸、晶圆产出与产量</span><span class="en">Die Size, Wafer Yield &amp; Volume</span>
+  </h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">产品</span><span class="en">Product</span></th>
+        <th><span class="zh">制程</span><span class="en">Process</span></th>
+        <th><span class="zh">晶体管数</span><span class="en">Transistors</span></th>
+        <th><span class="zh">Die面积 (est.)</span><span class="en">Die Area (est.)</span></th>
+        <th><span class="zh">12&Prime;晶圆产出 (est.)</span><span class="en">Dies/Wafer (est.)</span></th>
+        <th><span class="zh">封装</span><span class="en">Package</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--purple-light);">
+        <td colspan="6"><strong><span class="zh">AMD / Xilinx — 旗舰与高端</span><span class="en">AMD / Xilinx — Flagship &amp; High-End</span></strong></td>
+      </tr>
+      <tr>
+        <td><strong>Versal VP1902</strong></td>
+        <td>7nm</td>
+        <td>~74B</td>
+        <td><span class="zh">4 chiplet × ~350mm² 每片</span><span class="en">4 chiplets × ~350mm² each</span></td>
+        <td><span class="zh">~80 chiplet/wafer</span><span class="en">~80 chiplets/wafer</span></td>
+        <td><span class="zh">CoWoS interposer 2×2; 封装 ~70×70mm</span><span class="en">CoWoS interposer 2×2; pkg ~70×70mm</span></td>
+      </tr>
+      <tr>
+        <td><strong>Versal AI Core VC1902</strong></td>
+        <td>7nm</td>
+        <td>37B</td>
+        <td>~800mm²</td>
+        <td>~55</td>
+        <td>35×35mm FCBGA-2112</td>
+      </tr>
+      <tr>
+        <td><strong>Versal Prime VM1802</strong></td>
+        <td>7nm</td>
+        <td>~20B</td>
+        <td>~500mm²</td>
+        <td>~95</td>
+        <td>35×35mm FCBGA</td>
+      </tr>
+      <tr>
+        <td><strong>Versal AI Edge VE2802</strong></td>
+        <td>7nm</td>
+        <td>~10B</td>
+        <td>~250mm²</td>
+        <td>~180</td>
+        <td>23×23mm FCBGA</td>
+      </tr>
+      <tr style="background:var(--purple-light);">
+        <td colspan="6"><strong><span class="zh">AMD / Xilinx — 中端与低端</span><span class="en">AMD / Xilinx — Mid-Range &amp; Low-End</span></strong></td>
+      </tr>
+      <tr>
+        <td><strong>Kintex UltraScale+ KU15P</strong></td>
+        <td>16nm</td>
+        <td>~15B</td>
+        <td>~500mm²</td>
+        <td>~100</td>
+        <td>35×35mm BGA</td>
+      </tr>
+      <tr>
+        <td><strong>Zynq UltraScale+ ZU19EG</strong></td>
+        <td>16nm</td>
+        <td>~12B</td>
+        <td>~400mm²</td>
+        <td>~120</td>
+        <td>31×31mm FCBGA</td>
+      </tr>
+      <tr>
+        <td><strong>Kintex-7 K325T</strong></td>
+        <td>28nm</td>
+        <td>~5B</td>
+        <td>~150mm²</td>
+        <td>~350</td>
+        <td>23×23mm BGA</td>
+      </tr>
+      <tr>
+        <td><strong>Artix-7 A200T</strong></td>
+        <td>28nm</td>
+        <td>~3B</td>
+        <td>~80mm²</td>
+        <td>~650</td>
+        <td>19×19mm BGA</td>
+      </tr>
+      <tr>
+        <td><strong>Artix-7 35T</strong></td>
+        <td>28nm</td>
+        <td>~1B</td>
+        <td>~30mm²</td>
+        <td>~2,000</td>
+        <td>15×15mm CSG324</td>
+      </tr>
+      <tr>
+        <td><strong>Spartan-7 S6</strong></td>
+        <td>28nm</td>
+        <td>~0.3B</td>
+        <td>~10mm²</td>
+        <td>~5,000</td>
+        <td>8×8mm FTGB196</td>
+      </tr>
+      <tr style="background:var(--teal-light);">
+        <td colspan="6"><strong><span class="zh">Intel Altera</span><span class="en">Intel Altera</span></strong></td>
+      </tr>
+      <tr>
+        <td><strong>Agilex 7 F-Series (largest)</strong></td>
+        <td>Intel 7</td>
+        <td>~30B</td>
+        <td>~700mm²</td>
+        <td>~65</td>
+        <td>FBGA-2397</td>
+      </tr>
+      <tr>
+        <td><strong>Agilex 5 E-Series (mid)</strong></td>
+        <td>Intel 5</td>
+        <td>~8B</td>
+        <td>~200mm²</td>
+        <td>~200</td>
+        <td>FBGA-780</td>
+      </tr>
+      <tr>
+        <td><strong>Cyclone 10 GX</strong></td>
+        <td>20nm</td>
+        <td>~2B</td>
+        <td>~60mm²</td>
+        <td>~800</td>
+        <td>FBGA-484</td>
+      </tr>
+      <tr style="background:var(--green-light);">
+        <td colspan="6"><strong><span class="zh">Lattice Semiconductor</span><span class="en">Lattice Semiconductor</span></strong></td>
+      </tr>
+      <tr>
+        <td><strong>Avant-G (largest)</strong></td>
+        <td>Samsung 28nm</td>
+        <td>~2B</td>
+        <td>~50mm²</td>
+        <td>~1,000</td>
+        <td>CSFBGA-289</td>
+      </tr>
+      <tr>
+        <td><strong>Nexus (CertusPro-NX)</strong></td>
+        <td>Samsung 28nm</td>
+        <td>~1B</td>
+        <td>~15mm²</td>
+        <td>~3,500</td>
+        <td>6×6mm BGA</td>
+      </tr>
+      <tr style="background:var(--orange-light);">
+        <td colspan="6"><strong><span class="zh">Microchip (Microsemi)</span><span class="en">Microchip (Microsemi)</span></strong></td>
+      </tr>
+      <tr>
+        <td><strong>PolarFire MPF500T</strong></td>
+        <td>28nm</td>
+        <td>~5B</td>
+        <td>~120mm²</td>
+        <td>~400</td>
+        <td>FCSG896</td>
+      </tr>
+      <tr>
+        <td><strong>RTAX4000 (rad-hard)</strong></td>
+        <td>150nm antifuse</td>
+        <td>~0.2B</td>
+        <td>~50mm²</td>
+        <td>~700</td>
+        <td><span class="zh">陶瓷 CCGA</span><span class="en">Ceramic CCGA</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">年产量需求估算</span><span class="en">Annual Volume Estimates</span></h3>
+  <p>
+    <span class="zh">FPGA整体年产量远低于CPU/GPU/DRAM。整个FPGA市场约$138亿/年，平均单价从$5（低端Spartan/Cyclone）到$50,000+（VP1902旗舰），典型军用中高端FPGA单价$500-$5,000。</span>
+    <span class="en">FPGA annual volume is far lower than CPU/GPU/DRAM. The entire FPGA market is ~$13.8B/year, with ASPs from $5 (low-end Spartan/Cyclone) to $50,000+ (VP1902 flagship). Typical military mid/high-end FPGAs are $500-$5,000 each.</span>
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">市场</span><span class="en">Segment</span></th>
+        <th><span class="zh">年需求量 (est.)</span><span class="en">Annual Volume (est.)</span></th>
+        <th><span class="zh">单价范围</span><span class="en">ASP Range</span></th>
+        <th><span class="zh">备注</span><span class="en">Notes</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh">低端消费/工业</span><span class="en">Low-end Consumer/Industrial</span></td>
+        <td><span class="zh">数亿颗</span><span class="en">Hundreds of millions</span></td>
+        <td>$1 ~ $30</td>
+        <td>Artix, Spartan, Cyclone, Lattice</td>
+      </tr>
+      <tr>
+        <td><span class="zh">中端通信/数据中心</span><span class="en">Mid-range Telecom/DC</span></td>
+        <td><span class="zh">数百万颗</span><span class="en">Millions</span></td>
+        <td>$100 ~ $2,000</td>
+        <td>Kintex, Agilex 5, PolarFire</td>
+      </tr>
+      <tr>
+        <td><span class="zh">高端AI/旗舰</span><span class="en">High-end AI/Flagship</span></td>
+        <td><span class="zh">数万~十万颗</span><span class="en">Tens of thousands</span></td>
+        <td>$2,000 ~ $50,000+</td>
+        <td>Versal Premium, Agilex 7</td>
+      </tr>
+      <tr style="background:var(--green-light);">
+        <td><strong><span class="zh">军用/航天</span><span class="en">Military/Space</span></strong></td>
+        <td><strong><span class="zh">数千~数万颗</span><span class="en">Thousands to tens of K</span></strong></td>
+        <td><strong>$500 ~ $20,000</strong></td>
+        <td><span class="zh">XQ/XQR版本；单个武器型号~几百颗</span><span class="en">XQ/XQR grade; ~100s per weapon program</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://www.microchipusa.com/industry-news/amd-unveils-revolutionary-vp1902">MicrochipUSA — VP1902</a> &middot;
+    <a href="https://www.cnx-software.com/2023/06/28/amd-versal-premium-vp1902-fpga-soc-provides-18-5m-logic-cells-for-soc-emulation-and-prototyping/">CNX Software — VP1902</a>
+  </div>
+</div>
+
+<!-- 9.5 WAFER DEMAND ESTIMATES -->
+<div class="section" id="wafer">
+  <h2>
+    <span class="icon" style="background:var(--amber-light);color:var(--amber);">&#x1F3ED;</span>
+    <span class="zh">各厂商晶圆需求量估算</span><span class="en">Wafer Demand Estimates by Vendor</span>
+  </h2>
+
+  <div class="callout" style="border-left-color:var(--amber);">
+    <p><strong><span class="zh">⚠️ 估算说明</span><span class="en">⚠️ Estimation Methodology</span></strong></p>
+    <p>
+      <span class="zh">以下数据基于各公司公开财报收入、产品均价（ASP）和晶圆产出率（dies/wafer）反算。FPGA 产品线跨越多个制程节点和价格段，实际晶圆分配属高度机密信息，此处仅为量级估算，用"≈"和"est."标注。</span>
+      <span class="en">The following estimates are derived from public financial reports (revenue), estimated ASPs, and dies-per-wafer yields. Actual wafer allocations are highly confidential; these are order-of-magnitude estimates marked with "≈" and "est."</span>
+    </p>
+  </div>
+
+  <h3><span class="zh">估算方法</span><span class="en">Methodology</span></h3>
+  <p>
+    <span class="zh"><strong>晶圆需求 = 收入 ÷ 平均单价 ÷ 每片晶圆产出数</strong>。每片 12 英寸晶圆面积约 70,686 mm²，实际可用面积约 90%（边缘损耗）。产出数 = 可用面积 ÷ Die 面积 × 良率（假设 80-95%）。</span>
+    <span class="en"><strong>Wafer demand = Revenue ÷ ASP ÷ Dies per wafer</strong>. Each 300mm wafer has ~70,686 mm² total area, ~90% usable. Dies/wafer = usable area ÷ die area × yield (assumed 80-95%).</span>
+  </p>
+
+  <h3><span class="zh">① AMD / Xilinx — TSMC 代工</span><span class="en">① AMD / Xilinx — TSMC Foundry</span></h3>
+  <p>
+    <span class="zh">AMD 嵌入式部门 FY2025 收入 $35 亿，其中 FPGA（原 Xilinx）约占 60%，即 ~$21 亿。</span>
+    <span class="en">AMD Embedded segment FY2025 revenue was $3.5B; FPGA (ex-Xilinx) is ~60% = ~$2.1B.</span>
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">制程节点</span><span class="en">Process Node</span></th>
+        <th><span class="zh">代表产品</span><span class="en">Key Products</span></th>
+        <th><span class="zh">收入占比 (est.)</span><span class="en">Revenue Share (est.)</span></th>
+        <th><span class="zh">推算收入</span><span class="en">Est. Revenue</span></th>
+        <th><span class="zh">平均单价 (est.)</span><span class="en">Avg ASP (est.)</span></th>
+        <th><span class="zh">推算出货量</span><span class="en">Est. Units</span></th>
+        <th><span class="zh">每片产出</span><span class="en">Dies/Wafer</span></th>
+        <th><span class="zh">年晶圆需求 (est.)</span><span class="en">Annual Wafers (est.)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>TSMC 7nm</strong></td>
+        <td>Versal AI Core/Prime/Premium</td>
+        <td>≈30%</td>
+        <td>$630M</td>
+        <td>$2,000 ~ $8,000</td>
+        <td>≈150K ~ 300K</td>
+        <td>55 ~ 80</td>
+        <td style="color:var(--accent);font-weight:700;">≈3,000 ~ 5,000</td>
+      </tr>
+      <tr>
+        <td><strong>TSMC 16nm</strong></td>
+        <td>Kintex/Zynq UltraScale+</td>
+        <td>≈40%</td>
+        <td>$840M</td>
+        <td>$100 ~ $500</td>
+        <td>≈2M ~ 8M</td>
+        <td>100 ~ 200</td>
+        <td style="color:var(--accent);font-weight:700;">≈15,000 ~ 50,000</td>
+      </tr>
+      <tr>
+        <td><strong>TSMC 28nm</strong></td>
+        <td>Artix-7, Spartan-7</td>
+        <td>≈30%</td>
+        <td>$630M</td>
+        <td>$5 ~ $30</td>
+        <td>≈20M ~ 100M</td>
+        <td>1,000 ~ 2,000</td>
+        <td style="color:var(--accent);font-weight:700;">≈15,000 ~ 60,000</td>
+      </tr>
+      <tr style="background:var(--accent-light);font-weight:700;">
+        <td colspan="7"><span class="zh">AMD FPGA 晶圆总需求</span><span class="en">AMD FPGA Total Wafer Demand</span></td>
+        <td style="color:var(--accent);">≈35,000 ~ 115,000 片/年</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">② Intel Altera — Intel 自有晶圆厂</span><span class="en">② Intel Altera — Intel Internal Fabs</span></h3>
+  <p>
+    <span class="zh">Altera FY2024 收入 $15.4 亿，2025 上半年 $8.16 亿（年化 ~$16 亿）。使用 Intel 自有晶圆厂，无需外购产能。</span>
+    <span class="en">Altera FY2024 revenue was $1.54B; H1 2025 was $816M (annualized ~$1.6B). Uses Intel internal fabs — no external foundry needed.</span>
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">制程节点</span><span class="en">Process Node</span></th>
+        <th><span class="zh">代表产品</span><span class="en">Key Products</span></th>
+        <th><span class="zh">收入占比 (est.)</span><span class="en">Revenue Share (est.)</span></th>
+        <th><span class="zh">推算收入</span><span class="en">Est. Revenue</span></th>
+        <th><span class="zh">平均单价 (est.)</span><span class="en">Avg ASP (est.)</span></th>
+        <th><span class="zh">推算出货量</span><span class="en">Est. Units</span></th>
+        <th><span class="zh">每片产出</span><span class="en">Dies/Wafer</span></th>
+        <th><span class="zh">年晶圆需求 (est.)</span><span class="en">Annual Wafers (est.)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Intel 7 (10nm)</strong></td>
+        <td>Agilex 7</td>
+        <td>≈25%</td>
+        <td>$400M</td>
+        <td>$1,000 ~ $5,000</td>
+        <td>≈80K ~ 400K</td>
+        <td>60 ~ 100</td>
+        <td style="color:var(--teal);font-weight:700;">≈1,000 ~ 5,000</td>
+      </tr>
+      <tr>
+        <td><strong>Intel 5 (7nm)</strong></td>
+        <td>Agilex 5</td>
+        <td>≈35%</td>
+        <td>$560M</td>
+        <td>$50 ~ $300</td>
+        <td>≈2M ~ 10M</td>
+        <td>120 ~ 200</td>
+        <td style="color:var(--teal);font-weight:700;">≈10,000 ~ 50,000</td>
+      </tr>
+      <tr>
+        <td><strong>20nm / 28nm</strong></td>
+        <td>Cyclone V/10, Stratix V legacy</td>
+        <td>≈40%</td>
+        <td>$640M</td>
+        <td>$10 ~ $50</td>
+        <td>≈12M ~ 60M</td>
+        <td>800 ~ 1,500</td>
+        <td style="color:var(--teal);font-weight:700;">≈10,000 ~ 50,000</td>
+      </tr>
+      <tr style="background:var(--teal-light);font-weight:700;">
+        <td colspan="7"><span class="zh">Altera 晶圆总需求</span><span class="en">Altera Total Wafer Demand</span></td>
+        <td style="color:var(--teal);">≈20,000 ~ 100,000 片/年</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">③ Lattice Semiconductor — Samsung / TSMC 代工</span><span class="en">③ Lattice Semiconductor — Samsung / TSMC Foundry</span></h3>
+  <p>
+    <span class="zh">Lattice FY2025 收入 $5.23 亿。专注小型低功耗 FPGA，芯片面积小、单价低、出货量大。主要使用 Samsung 28nm。</span>
+    <span class="en">Lattice FY2025 revenue was $523M. Focuses on small, low-power FPGAs with small die sizes, low ASPs, and high volumes. Primarily Samsung 28nm.</span>
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">制程节点</span><span class="en">Process Node</span></th>
+        <th><span class="zh">代表产品</span><span class="en">Key Products</span></th>
+        <th><span class="zh">平均单价 (est.)</span><span class="en">Avg ASP (est.)</span></th>
+        <th><span class="zh">推算出货量</span><span class="en">Est. Units</span></th>
+        <th><span class="zh">每片产出</span><span class="en">Dies/Wafer</span></th>
+        <th><span class="zh">年晶圆需求 (est.)</span><span class="en">Annual Wafers (est.)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Samsung 28nm</strong></td>
+        <td>Nexus, Avant, CertusPro, MachXO3/5</td>
+        <td>$3 ~ $15</td>
+        <td>≈35M ~ 150M</td>
+        <td>1,500 ~ 3,000</td>
+        <td style="color:var(--green);font-weight:700;">≈15,000 ~ 60,000 片/年</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">④ Microchip (Microsemi) — TSMC / 自有晶圆厂</span><span class="en">④ Microchip (Microsemi) — TSMC / Internal Fab</span></h3>
+  <p>
+    <span class="zh">Microchip FPGA 部门（原 Microsemi）估算年收入 ~$3.5 亿。专注航天/国防市场，含反熔丝和 Flash FPGA。部分产品使用自有晶圆厂。</span>
+    <span class="en">Microchip FPGA division (ex-Microsemi) estimated revenue ~$350M. Focused on aerospace/defense with antifuse and flash FPGAs. Some products use internal fabs.</span>
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">制程节点</span><span class="en">Process Node</span></th>
+        <th><span class="zh">代表产品</span><span class="en">Key Products</span></th>
+        <th><span class="zh">平均单价 (est.)</span><span class="en">Avg ASP (est.)</span></th>
+        <th><span class="zh">推算出货量</span><span class="en">Est. Units</span></th>
+        <th><span class="zh">每片产出</span><span class="en">Dies/Wafer</span></th>
+        <th><span class="zh">年晶圆需求 (est.)</span><span class="en">Annual Wafers (est.)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>28nm (TSMC / 自有)</strong></td>
+        <td>PolarFire, PolarFire SoC, RTAX, RT ProASIC3</td>
+        <td>$15 ~ $200</td>
+        <td>≈2M ~ 20M</td>
+        <td>500 ~ 1,500</td>
+        <td style="color:var(--orange);font-weight:700;">≈2,000 ~ 25,000 片/年</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">行业总览：FPGA 全球晶圆需求汇总</span><span class="en">Industry Summary: Global FPGA Wafer Demand</span></h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">厂商</span><span class="en">Vendor</span></th>
+        <th><span class="zh">FPGA 收入 (est.)</span><span class="en">FPGA Revenue (est.)</span></th>
+        <th><span class="zh">主要代工</span><span class="en">Primary Foundry</span></th>
+        <th><span class="zh">年晶圆需求 (est.)</span><span class="en">Annual Wafers (est.)</span></th>
+        <th><span class="zh">占 TSMC 月产能比</span><span class="en">vs TSMC Monthly Capacity</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>AMD / Xilinx</strong></td>
+        <td>~$2.1B</td>
+        <td>TSMC</td>
+        <td style="font-weight:700;">≈35K ~ 115K</td>
+        <td>< 0.5%</td>
+      </tr>
+      <tr>
+        <td><strong>Intel Altera</strong></td>
+        <td>~$1.6B</td>
+        <td>Intel Fabs</td>
+        <td style="font-weight:700;">≈20K ~ 100K</td>
+        <td><span class="zh">自有产能</span><span class="en">Internal</span></td>
+      </tr>
+      <tr>
+        <td><strong>Lattice</strong></td>
+        <td>$523M</td>
+        <td>Samsung</td>
+        <td style="font-weight:700;">≈15K ~ 60K</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><strong>Microchip</strong></td>
+        <td>~$350M</td>
+        <td>TSMC + <span class="zh">自有</span><span class="en">Internal</span></td>
+        <td style="font-weight:700;">≈2K ~ 25K</td>
+        <td>< 0.1%</td>
+      </tr>
+      <tr style="background:var(--amber-light);font-weight:700;">
+        <td><span class="zh">全行业合计</span><span class="en">Industry Total</span></td>
+        <td>~$4.6B</td>
+        <td>—</td>
+        <td style="color:var(--amber);">≈70K ~ 300K 片/年</td>
+        <td>< 1%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout" style="border-left-color:var(--red);">
+    <p>
+      <span class="zh"><strong>关键结论：</strong>全球 FPGA 行业年晶圆需求量仅 7 ~ 30 万片（12 英寸），不到 TSMC 单月产能（~200 万片/月）的 1%。这解释了为什么 FPGA 在晶圆厂优先级低于手机 AP、GPU、AI 芯片等大批量客户。FPGA 的价值在于高单价和长生命周期，而非晶圆消耗量。</span>
+      <span class="en"><strong>Key Insight:</strong> The entire global FPGA industry consumes only 70K ~ 300K 12-inch wafers/year — less than 1% of TSMC's monthly capacity (~2M wafers/month). This explains why FPGAs have lower priority at foundries compared to mobile AP, GPU, and AI chip customers. FPGA value lies in high ASPs and long product lifecycles, not wafer volume.</span>
+    </p>
+  </div>
+
+  <div class="source">
+    Sources: <a href="https://ir.amd.com/news-events/press-releases/detail/1247/amd-reports-first-quarter-2025-financial-results">AMD FY2025 Earnings</a> &middot;
+    <a href="https://newsroom.intel.com/corporate/intel-partner-deal-news-april2025">Intel Altera Silver Lake Deal</a> &middot;
+    <a href="https://www.businesswire.com/news/home/20260210022695/en/">Lattice FY2025 Earnings</a> &middot;
+    <span class="zh">晶圆需求量为基于公开收入数据的估算值</span><span class="en">Wafer demand figures are estimates based on public revenue data</span>
+  </div>
+</div>
+
+<!-- 10. NEXT-GEN ROADMAP -->
+<div class="section" id="roadmap">
+  <h2>
+    <span class="icon" style="background:var(--teal-light);color:var(--teal);">&#x1F52D;</span>
+    <span class="zh">下一代路线图 (2026-2030)</span><span class="en">Next-Gen Roadmap (2026-2030)</span>
+  </h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh">时间</span><span class="en">Timeline</span></th>
+        <th>AMD (Xilinx)</th>
+        <th>Altera</th>
+        <th>Lattice</th>
+        <th>Microchip</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>2026</strong></td>
+        <td><span class="zh">Versal Gen 2 (N6) 样品；AI Edge增强</span><span class="en">Versal Gen 2 (N6) samples; AI Edge enhanced</span></td>
+        <td><span class="zh">Agilex 5 全面量产；独立运营首年</span><span class="en">Agilex 5 full ramp; first year independent</span></td>
+        <td><span class="zh">Nexus 2 量产；"Year of Nexus"</span><span class="en">Nexus 2 production; "Year of Nexus"</span></td>
+        <td><span class="zh">PolarFire 2 (传闻16nm)</span><span class="en">PolarFire 2 (rumored 16nm)</span></td>
+      </tr>
+      <tr>
+        <td><strong>2027</strong></td>
+        <td><span class="zh">Versal Gen 2 量产；下一代ACAP架构定义</span><span class="en">Versal Gen 2 production; next-gen ACAP definition</span></td>
+        <td><span class="zh">下一代Agilex (N5/TSMC?)</span><span class="en">Next-gen Agilex (N5/TSMC?)</span></td>
+        <td><span class="zh">更大容量Nexus</span><span class="en">Larger Nexus devices</span></td>
+        <td><span class="zh">PolarFire继续迭代</span><span class="en">PolarFire iteration</span></td>
+      </tr>
+      <tr style="background:var(--accent-light);">
+        <td><strong>2028-2030</strong></td>
+        <td><span class="zh"><strong>TSMC N4/N3?</strong> AI/FPGA融合架构；chiplet 2.0</span><span class="en"><strong>TSMC N4/N3?</strong> AI/FPGA convergence; chiplet 2.0</span></td>
+        <td><span class="zh"><strong>代工选择成关键</strong>；可能IPO</span><span class="en"><strong>Foundry choice decisive</strong>; potential IPO</span></td>
+        <td><span class="zh">可能升级到14nm/7nm</span><span class="en">Potential 14nm/7nm upgrade</span></td>
+        <td><span class="zh">RT PolarFire下一代</span><span class="en">Next-gen RT PolarFire</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3><span class="zh">关键技术趋势</span><span class="en">Key Technology Trends</span></h3>
+  <ul>
+    <li><span class="zh"><strong>Chiplet化</strong>：VP1902已使用4-chiplet架构。未来FPGA将进一步模块化，不同功能（逻辑、DSP、AI、I/O）分别用最适合的制程制造</span><span class="en"><strong>Chiplet architecture</strong>: VP1902 already uses 4-chiplet design. Future FPGAs will further modularize logic, DSP, AI, and I/O across optimal process nodes</span></li>
+    <li><span class="zh"><strong>AI集成加深</strong>：Versal ACAP的AI Engine已证明FPGA+AI的可行性。下一代将集成更多专用AI加速单元</span><span class="en"><strong>Deeper AI integration</strong>: Versal ACAP's AI Engine proved FPGA+AI viability. Next-gen will integrate more dedicated AI accelerator blocks</span></li>
+    <li><span class="zh"><strong>RISC-V替代Arm</strong>：Lattice和Microchip已采用RISC-V硬核。开源ISA降低授权成本，对军工供应安全也有好处</span><span class="en"><strong>RISC-V replacing Arm</strong>: Lattice and Microchip already use RISC-V hard cores. Open ISA reduces licensing cost and improves defense supply security</span></li>
+    <li><span class="zh"><strong>eFPGA IP</strong>：QuickLogic等公司提供可嵌入ASIC的FPGA IP核，实现ASIC量产 + FPGA灵活性的结合</span><span class="en"><strong>eFPGA IP</strong>: QuickLogic and others offer FPGA IP blocks embeddable into ASICs, combining ASIC volume economics with FPGA flexibility</span></li>
+    <li><span class="zh"><strong>制程追赶</strong>：AMD的Versal Gen 2转向N6是第一步，业界预计2028-2030年高端FPGA将进入5nm/3nm时代</span><span class="en"><strong>Process catch-up</strong>: AMD's Versal Gen 2 moving to N6 is step one; industry expects high-end FPGAs to reach 5nm/3nm by 2028-2030</span></li>
+    <li><span class="zh"><strong>国产替代</strong>：中国高云半导体（Gowin）、紫光同创、安路科技等在28nm以上节点追赶，但高端受制裁限制，与AMD/Altera差距仍在2-3代</span><span class="en"><strong>China domestic</strong>: Gowin, UNISOC FPGA, Anlogic etc. competing at 28nm+ nodes, but high-end constrained by sanctions — still 2-3 generations behind AMD/Altera</span></li>
+  </ul>
+
+  <div class="source">
+    Sources: <a href="https://www.fpgakey.com/technology/details/fpga-industry-trends-news-2025-altera-amd-lattice">FPGAKey — FPGA Renaissance 2025</a> &middot;
+    <a href="https://www.eejournal.com/article/amd-rocks-with-new-versal-gen-2-ai-edge-soc-fpgas/">EEJournal — Versal Gen 2</a>
+  </div>
+</div>
+
+<!-- 11. SOURCES -->
+<div class="section" id="sources">
+  <h2>
+    <span class="icon" style="background:var(--bg);color:var(--ink-dim);">&#x1F4CE;</span>
+    <span class="zh">主要数据来源</span><span class="en">Key Data Sources</span>
+  </h2>
+  <ul style="font-size:0.82rem;line-height:2;">
+    <li><a href="https://www.marketsandmarkets.com/Market-Reports/fpga-market-194123367.html">MarketsandMarkets — FPGA Market Report 2025-2030</a></li>
+    <li><a href="https://www.precedenceresearch.com/field-programmable-gate-array-market">Precedence Research — FPGA Market Size to $27.4B by 2035</a></li>
+    <li><a href="https://www.mordorintelligence.com/industry-reports/field-programmable-gate-array-fpga-market">Mordor Intelligence — FPGA Market 2025-2031</a></li>
+    <li><a href="https://pcbsync.com/xilinx/">PCBSync — AMD Xilinx Complete Guide 2026</a></li>
+    <li><a href="https://www.tomshardware.com/tech-industry/intel-sells-51-percent-of-altera-fpga-business-to-silver-lake-for-usd4-46-billion">Tom's Hardware — Intel Sells 51% of Altera</a></li>
+    <li><a href="https://www.servethehome.com/amd-vp1902-is-leviathan-fpga-doubling-the-previous-gen-largest-fpga/">ServeTheHome — AMD VP1902 Leviathan FPGA</a></li>
+    <li><a href="https://www.microchipusa.com/manufacturer-articles/-fpga-platforms-in-2025-comparing-agilex-5-e-series-versal-gen-2-and-nexus-2">MicrochipUSA — FPGA Platforms 2025 Comparison</a></li>
+    <li><a href="https://semiconductorinsight.com/blog/amds-xilinx-versal-acaps-set-to-transform-military-avionics-with-ai-acceleration/">Semiconductor Insight — Versal ACAP Military Avionics</a></li>
+    <li><a href="https://www.xilinx.com/applications/aerospace-and-defense/missiles-and-munitions.html">AMD — Aerospace & Defense Applications</a></li>
+    <li><a href="https://www.eetimes.com/the-state-of-the-fpga-union-is-uncertain/">EE Times — State of the FPGA Union</a></li>
+    <li><a href="https://www.fpgakey.com/technology/details/fpga-industry-trends-news-2025-altera-amd-lattice">FPGAKey — FPGA Industry Trends 2025</a></li>
+    <li><a href="https://www.microchip.com/en-us/products/fpgas-and-plds/radiation-tolerant-fpgas">Microchip — Radiation-Tolerant FPGAs</a></li>
+  </ul>
+</div>
+
+</main>
+</div>
+
+<div class="footer">
+  <span class="zh">FPGA 产业深度研报 &middot; 数据截至 2026年5月 &middot; 重大决策请结合最新一手数据验证</span>
+  <span class="en">FPGA Industry Deep Dive &middot; Data as of May 2026 &middot; Verify with primary sources for critical decisions</span>
+  <br><br>
+  <a href="index.html">&#x2601; Sky Portal</a> &middot;
+  <span class="zh">页面创建 2026-05-20</span>
+  <span class="en">Page created 2026-05-20</span>
+</div>
+
+<!-- SIDEBAR SCROLL SPY -->
+<script>
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.sidebar a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector('.sidebar a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

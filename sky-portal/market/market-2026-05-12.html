@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-12</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#aaa;border:1px solid rgba(255,255,255,0.15)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1e3a5f 0%,#2d5a87 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股回调</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Pullback</div>
+<div class="zh poster-data">• 道指 49,662 +0.11%（微涨）<br>• 标普500 7,401 -0.16%<br>• 纳斯达克 26,088 -0.71%</div>
+<div class="en poster-data" style="display:none">• Dow 49,662 +0.11%<br>• S&P 500 7,401 -0.16%<br>• Nasdaq 26,088 -0.71%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7f1d1d 0%,#b91c1c 100%)">
+<div class="poster-icon">🔻</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">芯片股暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chip Selloff</div>
+<div class="zh poster-data">• 费半SOX 11,717 -3.01% 🔻<br>• 高通 -11% 领跌<br>• Q2累计涨55%后获利回吐</div>
+<div class="en poster-data" style="display:none">• SOX 11,717 -3.01% 🔻<br>• Qualcomm -11% leads decline<br>• Profit-taking after Q2 +55%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#78350f 0%,#b45309 100%)">
+<div class="poster-icon">📊</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">CPI超预期</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Hot CPI</div>
+<div class="zh poster-data">• 美国4月CPI超预期<br>• 通胀升温 → 降息预期推迟<br>• 避险情绪上升</div>
+<div class="en poster-data" style="display:none">• Apr CPI above expectations<br>• Inflation heats up → rate cuts delayed<br>• Risk-off sentiment rises</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#064e3b 0%,#059669 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 & 港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares & HK</div>
+<div class="zh poster-data">• 上证 4,214 (+0.06%)<br>• 恒指 26,347 (-0.22%)<br>• 恒生科技 -0.70%</div>
+<div class="en poster-data" style="display:none">• SSE 4,214 (+0.06%)<br>• HSI 26,347 (-0.22%)<br>• Hang Seng Tech -0.70%</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-12 · Sky Portal Daily Market · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘（5月12日周二）</span><span class="en" style="display:none">US Market Close (Tue, May 12)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DOW</div><div class="stock-price">49,662</div><div class="stock-change up">+0.11%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,401</div><div class="stock-change down">-0.16%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,088</div><div class="stock-change down">-0.71%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">11,717</div><div class="stock-change down">-3.01%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$220.78</div><div class="stock-change up">+0.61%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">1. 芯片股遭集体抛售，费半指数暴跌3%</span><span class="en" style="display:none">1. Chip Stocks Selloff, SOX Plunges 3%</span></h4>
+<p><span class="zh">费城半导体指数（SOX）收盘报11,717点，暴跌363点（-3.01%），为近期强劲涨势以来最大单日跌幅。高通暴跌约11%领跌，存储芯片板块同样承压。本轮半导体行情Q2已累计涨幅达55%，技术指标发出严重超买信号。散户在高位蜂拥而入引发华尔街担忧，多家机构警告泡沫风险。</span><span class="en" style="display:none">The Philadelphia Semiconductor Index (SOX) closed at 11,717, plunging 363 points (-3.01%), its largest single-day decline in the current rally. Qualcomm led losses with an ~11% drop; memory chips also under pressure. SOX had surged 55% in Q2 alone, with technical indicators flashing severe overbought signals. Retail investors piling in at highs has Wall Street worried, with multiple firms warning of bubble risks.</span></p>
+<p class="src">来源：Yahoo Finance / 21财经 / 华尔街见闻</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美国4月CPI超预期，美联储降息预期推迟</span><span class="en" style="display:none">2. April CPI Above Expectations, Rate Cut Expectations Delayed</span></h4>
+<p><span class="zh">美国4月消费者物价指数（CPI）数据超预期，显示通胀依然顽固。Cleveland联储主席Beth Hammack表示，她听到越来越多企业反映"通胀心态"正在形成。通胀升温直接打击了市场对美联储今年降息次数的预期，利率敏感型资产承压。美元指数走强，债券收益率上行。</span><span class="en" style="display:none">US April CPI data came in above expectations, showing stubborn inflation. Cleveland Fed President Beth Hammack said she hears growing concerns from businesses about an "inflationary mindset" taking hold. Hot inflation directly hit market expectations for Fed rate cuts this year. Rate-sensitive assets came under pressure, dollar firmed, and bond yields rose.</span></p>
+<p class="src">来源：Economic Times / 华尔街见闻 / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 中东局势反复，油价剧烈波动</span><span class="en" style="display:none">3. Middle East Uncertainty, Wild Oil Price Swings</span></h4>
+<p><span class="zh">美伊和谈前景不明朗，停火协议虽有框架但最关键问题悬而未决。伊朗法尔斯通讯社报道Bandar Abbas附近传出爆炸声，油价盘后飙涨。Brent原油一度突破$100/桶，盘中剧烈震荡。Trump威胁欧盟须在7月4日前履行贸易协议否则加征关税，进一步增加市场不确定性。</span><span class="en" style="display:none">US-Iran peace talks remain uncertain — a framework exists but key issues unresolved. Iran's Fars reported explosions near Bandar Abbas, sending oil prices surging after-hours. Brent briefly topped $100/barrel with wild intraday swings. Trump threatened EU with higher tariffs by July 4 if trade deal not fulfilled, adding to uncertainty.</span></p>
+<p class="src">来源：新浪财经 / Economic Times / BBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. NVIDIA逆势微涨，盘中再创历史新高</span><span class="en" style="display:none">4. NVIDIA Defies Selloff, New Intraday ATH</span></h4>
+<p><span class="zh">NVIDIA收报$220.78（+0.61%），盘中触及$222.30刷新历史新高，市值超过$5.4万亿美元——已超过英国整个股票市场的总市值。尽管芯片板块遭抛售，NVIDIA凭借AI算力垄断地位展现出相对韧性。但盘后走势需关注，若随板块继续回调则可能拖累整个科技板块。</span><span class="en" style="display:none">NVIDIA closed at $220.78 (+0.61%), hitting $222.30 intraday for a fresh all-time high. Market cap surpassed $5.4 trillion — exceeding the entire UK stock market. Despite the chip selloff, NVIDIA showed relative resilience thanks to its AI compute monopoly. After-hours movement warrants attention; further pullback could drag the entire tech sector.</span></p>
+<p class="src">来源：Google Finance / Perplexity / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">5. 板块分化：医药消费逆势上涨</span><span class="en" style="display:none">5. Sector Divergence: Healthcare & Consumer Staples Up</span></h4>
+<p><span class="zh">板块表现严重分化。芯片ETF跌3.15%，美国光伏跌2.20%，AI机器人跌1.43%。防御型板块逆势走强：标普医药+1.94%，必选消费+1.29%。道指之所以能勉强收红，正是受益于防御型成分股的支撑。资金明显从高风险科技板块流向防御性资产，典型的risk-off交易模式。</span><span class="en" style="display:none">Sharp sector divergence. Chip ETF -3.15%, US Solar -2.20%, AI/Robotics -1.43%. Defensive sectors strengthened: Healthcare +1.94%, Consumer Staples +1.29%. The Dow managed to close green thanks to defensive components. Capital clearly rotated from high-risk tech to defensive assets — a classic risk-off pattern.</span></p>
+<p class="src">来源：华尔街见闻 / Bloomberg</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股（5月12日）</span><span class="en" style="display:none">A-Shares & HK (May 12)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,214</div><div class="stock-change flat">+0.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">上证50</div><div class="stock-price">3,044</div><div class="stock-change flat">+0.06%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">26,347</div><div class="stock-change down">-0.22%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">-</div><div class="stock-change down">-0.70%</div></div>
+<div class="stock-item"><div class="stock-ticker">金龙中国</div><div class="stock-price">-</div><div class="stock-change down">-0.70%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股高位震荡，港股受芯片拖累</span><span class="en" style="display:none">A-Shares Flat at Highs, HK Dragged by Chips</span></h4>
+<p><span class="zh">上证指数收报4,214点（+0.06%），在4,200点关口上方窄幅震荡。港股方面，恒指跌0.22%报26,347点，恒生科技指数跌0.70%。芯片股明显回调：华虹半导体跌超3%，上海复旦跌近3%，爱芯元智跌近4%。锂电池板块同样走弱，中创新航跌超预期。A股相对独立于美股波动，但港股受美股芯片股拖累明显。</span><span class="en" style="display:none">SSE Composite closed at 4,214 (+0.06%), trading in a narrow range above 4,200. Hang Seng Index fell 0.22% to 26,347, while Hang Seng Tech dropped 0.70%. Chip stocks retreated: Hua Hong -3%+, SMIC/Shanghai Fudan -3%, Axera -4%. Lithium battery sector also weakened. A-shares remained relatively independent from US volatility, but HK was clearly dragged down by the US chip selloff.</span></p>
+<p class="src">来源：东方财富 / 英为财情 / 新浪财经</p>
+</div>
+
+<h2>🔮 <span class="zh">明日/近期预判</span><span class="en" style="display:none">Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">关键看点</span><span class="en" style="display:none">Key Things to Watch</span></h4>
+<p><span class="zh">
+<strong>1. 半导体回调深度：</strong>费半SOX在12,000点关口遇阻回落至11,700，若跌破11,000则可能引发更深回调。Q2已涨55%的估值需要消化，短期震荡为主。<br><br>
+<strong>2. 中东局势是最大变数：</strong>美伊若达成临时停火 → 风险偏好回升，油价回落；若谈判破裂/冲突升级 → 油价冲高（Brent可能重回$110+），全球股市承压。<br><br>
+<strong>3. CPI后续影响：</strong>通胀数据将影响本周剩余交易日的情绪。若更多联储官员释放鹰派信号，市场可能进一步承压。关注本周后续经济数据。<br><br>
+<strong>4. A股走势独立：</strong>上证4,200点支撑较强，关注国内政策面动态。港股则需看美股芯片股脸色。
+</span><span class="en" style="display:none">
+<strong>1. Semiconductor Pullback Depth:</strong> SOX rejected at 12,000, fell to 11,700. If 11,000 breaks, deeper correction possible. Q2's 55% gain needs digestion — expect short-term choppiness.<br><br>
+<strong>2. Middle East = Biggest Wildcard:</strong> US-Iran ceasefire → risk-on, oil drops. Negotiations fail/escalate → oil surges (Brent possibly $110+), global equities under pressure.<br><br>
+<strong>3. CPI Aftermath:</strong> Inflation data will color sentiment for the rest of the week. More hawkish Fed speakers could add pressure. Watch upcoming economic releases.<br><br>
+<strong>4. A-Shares Independent:</strong> SSE 4,200 support is solid. Watch domestic policy. HK remains tied to US chip sentiment.
+</span></p>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — 半导体ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">QQQ — 纳斯达克</div><div id="tv-qqq"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">全部行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Yahoo Finance, WSJ, MarketWatch, Reuters, 东方财富, 华尔街见闻, 新浪财经, Bloomberg</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-qqq', sym:'NASDAQ:QQQ'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

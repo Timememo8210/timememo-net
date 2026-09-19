@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-21 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c1a 0%,#0d3d0d 100%)">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">上周收盘（6/18）</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Last Close (Jun 18)</div>
+<div class="zh poster-data">• 标普500：7,500.58（+1.08%）<br>• 纳斯达克：26,517.93（+1.91%）<br>• 道琼斯：51,564.70（+0.14%）<br>• SOX：14,341.78（🔥+6.42%）</div>
+<div class="en poster-data" style="display:none">• S&P 500: 7,500.58 (+1.08%)<br>• Nasdaq: 26,517.93 (+1.91%)<br>• Dow: 51,564.70 (+0.14%)<br>• SOX: 14,341.78 (🔥+6.42%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#8B0000 0%,#4d0000 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 & 港股</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK Stocks</div>
+<div class="zh poster-data">• 上证：4,090.48（-0.43%）<br>• 深成指：16,030.70（+0.94%）<br>• 恒指：23,924.81（-1.59%）三连跌<br>• 恒生科技：4,604.35（-1.39%）</div>
+<div class="en poster-data" style="display:none">• SSE: 4,090.48 (-0.43%)<br>• SZSE: 16,030.70 (+0.94%)<br>• HSI: 23,924.81 (-1.59%) 3-day loss<br>• HSTECH: 4,604.35 (-1.39%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体爆发</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Surge</div>
+<div class="zh poster-data">• Intel +10.6%，Apple合作+18A量产！<br>• NVDA $210.69（+2.95%）<br>• SOX单日+6.42%反弹<br>• 全球芯片Q1 $298.5B，全年预计$1.5T</div>
+<div class="en poster-data" style="display:none">• Intel +10.6%, Apple deal + 18A production!<br>• NVDA $210.69 (+2.95%)<br>• SOX +6.42% bounce<br>• Global chips Q1 $298.5B, $1.5T full year</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#d97706 0%,#92400e 100%)">
+<div class="poster-icon">🌍</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊谈判关键48h</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Talks Critical 48h</div>
+<div class="zh poster-data">• 6/21瑞士技术层级会谈开启<br>• 霍尔木兹"罗生门"：伊朗称关闭，美方否认<br>• Trump：60天零通行费<br>• 黎巴嫩战火持续，布伦特~$80</div>
+<div class="en poster-data" style="display:none">• Jun 21 Switzerland tech-level talks<br>• Hormuz "Rashomon": Iran says closed, US denies<br>• Trump: 60-day zero transit fees<br>• Lebanon fighting, Brent ~$80</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-21 · <span class="zh">周日版 · 周末综述与下周展望</span><span class="en" style="display:none">Sunday Edition · Weekend Recap & Week Ahead</span> · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>📉 <span class="zh">美股上周收盘（6月18日周四）</span><span class="en" style="display:none">US Markets Last Close (Thu Jun 18)</span></h2>
+<div class="card">
+<h4><span class="zh">6/19（周五）Juneteenth假日休市，本周最后交易日为6/18</span><span class="en" style="display:none">Juneteenth holiday Friday; last trading day was Thursday Jun 18</span></h4>
+<p><span class="zh"><b>三大指数 + SOX：</b><br>• 标普500：7,500.58（+1.08%，+80.48点）<br>• 纳斯达克：26,517.93（+1.91%）<br>• 道琼斯：51,564.70（+0.14%，+72.15点）<br>• 费城半导体（SOX）：14,341.78（🔥+6.42%，+864.71点）<br>• 罗素2000：2,979.77（+2.12%）</span><span class="en" style="display:none"><b>Major Indices + SOX:</b><br>• S&P 500: 7,500.58 (+1.08%, +80.48 pts)<br>• Nasdaq: 26,517.93 (+1.91%)<br>• Dow: 51,564.70 (+0.14%, +72.15 pts)<br>• PHLX Semiconductor (SOX): 14,341.78 (🔥+6.42%, +864.71 pts)<br>• Russell 2000: 2,979.77 (+2.12%)</span></p>
+<p><span class="zh"><b>周线回顾：</b>本周美股先抑后扬。周初Fed主席Warsh首次FOMC放鹰（道指-1.0%，标普-1.21%），周中Intel-Apple合作消息引爆半导体反弹，SOX单日+6.42%。纳指全周收涨，但标普/道指周线微跌。</span><span class="en" style="display:none"><b>Weekly Recap:</b> Markets sold off early on Fed Chair Warsh's hawkish debut (Dow -1.0%, S&P -1.21% Monday), then surged mid-week on Intel-Apple deal news. SOX +6.42% single-day bounce. Nasdaq finished the week positive; S&P/Dow slightly down weekly.</span></p>
+<p class="src">来源：Yahoo Finance / CNBC / Nasdaq</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股（6月18日）</span><span class="en" style="display:none">China A-Shares & HK (Jun 18)</span></h2>
+<div class="card">
+<h4><span class="zh">A股分化，港股三连跌</span><span class="en" style="display:none">A-Shares Mixed, HK 3-Day Decline</span></h4>
+<p><span class="zh">• 上证指数：4,090.48（-0.43%，-17.60点）<br>• 深成指：16,030.70（+0.94%）<br>• 创业板：延续强势（前一交易日+2.05%创新高后微调）<br>• 恒生指数：23,924.81（-1.59%）三连跌<br>• 恒生科技：4,604.35（-1.39%）<br>• 台湾加权：46,465.20（+1.28%）台积电领涨</span><span class="en" style="display:none">• SSE Composite: 4,090.48 (-0.43%, -17.60 pts)<br>• SZSE Component: 16,030.70 (+0.94%)<br>• ChiNext: Strong (slight pullback after +2.05% ATH)<br>• Hang Seng: 23,924.81 (-1.59%) 3-day decline<br>• Hang Seng TECH: 4,604.35 (-1.39%)<br>• Taiwan Weighted: 46,465.20 (+1.28%) TSMC led</span></p>
+<p><span class="zh"><b>分析：</b>上证在4000点关口反复拉锯，创业板和科创50在硬科技政策利好下保持强势。港股受地缘政治不确定性拖累，外资连续流出。台股受台积电CoWoS扩产利好创高。</span><span class="en" style="display:none"><b>Analysis:</b> SSE defending 4,000 support; ChiNext/STAR 50 strong on hard-tech policy. HK weighed by geopolitical uncertainty and capital outflows. Taiwan market boosted by TSMC CoWoS expansion.</span></p>
+<p class="src">来源：Trading Economics / Yahoo Finance / HSI</p>
+</div>
+
+<h2>📈 <span class="zh">核心股票行情（6/18收盘）</span><span class="en" style="display:none">Key Stocks (Jun 18 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$134.16</div><div class="stock-change up">+10.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$210.69</div><div class="stock-change up">+2.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$370+</div><div class="stock-change up">↑</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">—</div><div class="stock-change up">+8.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMCI</div><div class="stock-price">—</div><div class="stock-change up">+10.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price">—</div><div class="stock-change up">+11.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">KLAC</div><div class="stock-price">—</div><div class="stock-change up">+8.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">—</div><div class="stock-change up">↑</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">14,342</div><div class="stock-change up">+6.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPACE</div><div class="stock-price">—</div><div class="stock-change up">↑</div></div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — PHX Semi</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<h2>🔥 <span class="zh">半导体 & AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. Intel与Apple达成芯片合作，18A-P进入量产 — 股价暴涨10.6%</span><span class="en" style="display:none">1. Intel-Apple Chip Deal, 18A-P in Production — Stock Surges 10.6%</span></h4>
+<p><span class="zh">Trump宣布Intel将与Apple合作设计和生产半导体芯片。Intel的18A-P工艺已进入量产阶段，良率提升至65-75%。Fab 52月产能目标为年底1,000-5,000片晶圆，2026年扩至15,000片。Apple此前已有初步合作意向，此次官方确认标志着Intel在先进制程上对台积电形成有效竞争。Intel收盘$134.16，涨10.6%。</span><span class="en" style="display:none">Trump announced Intel will partner with Apple on chip design and production. 18A-P process now in production with 65-75% yields. Fab 52 targeting 1,000-5,000 wafers/month by year-end, scaling to 15,000 in 2026. Official confirmation of Apple deal marks Intel as effective competitor to TSMC in advanced nodes. INTC closed at $134.16, +10.6%.</span></p>
+<p class="src">来源：Bloomberg / CNBC / Business Insider</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. SpaceX $600亿收购Cursor，AI算力叙事再升温</span><span class="en" style="display:none">2. SpaceX Acquires Cursor for $60B, AI Narrative Accelerates</span></h4>
+<p><span class="zh">SpaceX以全股票方式收购AI编程创业公司Cursor，估值$600亿。Cursor将成为SpaceX全资子公司，配合其Colossus超级计算机布局AI基础设施。这笔交易进一步强化了"AI算力需求无限"的市场叙事，对NVDA、AMD等芯片公司形成估值支撑。SpaceX上市首日（6/12）市值达$2.1万亿，已超越微软和亚马逊。</span><span class="en" style="display:none">SpaceX acquired AI coding startup Cursor for $60 billion in all-stock deal. Cursor becomes wholly owned subsidiary, pairing with Colossus supercomputer for AI infrastructure. Reinforces "infinite AI compute demand" narrative, supporting NVDA/AMD valuations. SpaceX IPO debut (Jun 12) reached $2.1T market cap, surpassing Microsoft and Amazon.</span></p>
+<p class="src">来源：NYT / Forbes / AP News</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 全球半导体Q1销售$298.5亿，2026全年预计突破$1.5万亿</span><span class="en" style="display:none">3. Global Semiconductor Q1 Sales $298.5B, 2026 Forecast $1.5T+</span></h4>
+<p><span class="zh">SIA（美国半导体行业协会）报告：Q1 2026全球芯片销售达$298.5亿，同比增长约79%。3月单月销售$99.5亿，同比增79.2%。SIA预测2026全年销售将突破$1.5万亿，比此前预期的$1万亿提前4年达成。AI芯片需求是核心驱动力，存储芯片（HBM）和逻辑芯片（GPU）贡献最大增量。</span><span class="en" style="display:none">SIA reports Q1 2026 global chip sales of $298.5B, ~79% YoY growth. March alone hit $99.5B (+79.2% YoY). 2026 full-year forecast revised to $1.5T+, reaching the milestone 4 years earlier than expected. AI chip demand is the core driver, with HBM memory and GPU logic contributing the largest gains.</span></p>
+<p class="src">来源：Semiconductor Industry Association / Yahoo Finance</p>
+</div>
+
+<h2>🌍 <span class="zh">地缘政治 · 美伊谈判</span><span class="en" style="display:none">Geopolitics · US-Iran Talks</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 美伊瑞士技术层级会谈今日开启 — 关键48小时</span><span class="en" style="display:none">1. US-Iran Tech-Level Talks Begin Today in Switzerland — Critical 48 Hours</span></h4>
+<p><span class="zh">6月20日巴基斯坦外交部宣布，根据美伊谅解备忘录后续安排，技术层级会谈于6月21日在瑞士举行。伊朗谈判代表团已抵达苏黎世，前往比尔根山会谈地点。美国副总统万斯也已启程赴瑞士。此次会谈将讨论霍尔木兹海峡通行机制、60天停火期执行细节、以及后续永久协议框架。<b>这是本周市场最大不确定性因素。</b></span><span class="en" style="display:none">Pakistan's foreign ministry announced June 20 that tech-level talks will be held June 21 in Switzerland, following the US-Iran MOU. Iran's delegation arrived in Zurich, heading to Bürgenberg. VP Vance en route. Agenda includes Hormuz transit mechanisms, 60-day ceasefire execution, and framework for permanent deal. <b>This is the market's biggest uncertainty this week.</b></span></p>
+<p class="src">来源：央视新闻 / 南方财经网 / 新浪财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 霍尔木兹海峡现"罗生门" — 伊朗称关闭，美方否认</span><span class="en" style="display:none">2. Hormuz "Rashomon" — Iran Says Closed, US Denies</span></h4>
+<p><span class="zh">就在美伊即将展开新一轮谈判之际，霍尔木兹海峡通行再现矛盾信号。伊朗武装部队宣布海峡已关闭，但美国副总统万斯表示"没有看到海峡已关闭的证据"，相信停火安排能够持续。Trump在社媒发文称，停火60天内霍尔木兹海峡将不收取任何通行费，60天后也不收费——但若协议未能达成，美国或将收取通行费以补偿中东驻军成本。</span><span class="en" style="display:none">On the eve of new talks, contradictory signals emerged. Iran's military declared the strait closed, but VP Vance said "no evidence of closure" and expressed confidence in the ceasefire. Trump posted that Hormuz will charge zero transit fees during the 60-day ceasefire and beyond — but if the deal fails, the US may charge fees to compensate for Middle East military costs.</span></p>
+<p class="src">来源：央视新闻 / 新浪军事 / CNN</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 黎巴嫩战火持续，中东全面冲突风险未消</span><span class="en" style="display:none">3. Lebanon Fighting Continues, Regional Conflict Risk Persists</span></h4>
+<p><span class="zh">以色列对黎巴嫩的空袭持续，6/19以来已造成4000+人死亡。6/19 Trump宣布以色列与真主党在美国、卡塔尔和伊朗斡旋下达成停火，但地面行动仍在继续。黎巴嫩冲突与美伊谈判高度联动——若黎巴嫩战火重燃，可能波及美伊谈判进程。油价因此居高不下，布伦特原油在$80附近波动。</span><span class="en" style="display:none">Israeli airstrikes on Lebanon continue, 4,000+ killed since March. On June 19, Trump announced a Israel-Hezbollah truce brokered by US, Qatar, and Iran — but ground operations continue. Lebanon conflict is tightly linked to US-Iran negotiations. If fighting reignites, it could derail talks. Oil remains elevated, Brent near $80.</span></p>
+<p class="src">来源：Al Jazeera / Wikipedia / The Guardian</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 油价与加密市场周末动态</span><span class="en" style="display:none">4. Oil & Crypto Weekend Movements</span></h4>
+<p><span class="zh">• 布伦特原油：~$80/桶（+0.9%），纽约原油涨近1%<br>• 黄金：$4,155/盎司（-1.3%），白银失守$65<br>• BTC：~$64,000（周末拉涨，SOL +6%，ETH +2%）<br>• 24h加密爆仓：超7万人<br>• 美股期货（周日晚）：道指/纳指 -0.23%，标普 -0.19%</span><span class="en" style="display:none">• Brent Crude: ~$80/bbl (+0.9%), WTI +1%<br>• Gold: $4,155/oz (-1.3%), Silver below $65<br>• BTC: ~$64,000 (weekend rally, SOL +6%, ETH +2%)<br>• 24h crypto liquidations: 70,000+<br>• US futures (Sun eve): Dow/Nasdaq -0.23%, S&P -0.19%</span></p>
+<p class="src">来源：南方财经网 / Trading Economics / Macrotrends</p>
+</div>
+
+<h2>🔮 <span class="zh">下周预判（6/22-26）</span><span class="en" style="display:none">Week Ahead Outlook (Jun 22-26)</span></h2>
+
+<div class="card">
+<h4><span class="zh">✅ 利好因素</span><span class="en" style="display:none">✅ Bullish Factors</span></h4>
+<p><span class="zh">① <b>半导体基本面强劲</b> — Intel/Apple合作 + 18A量产 + 全球芯片Q1增79%，板块景气度无虞<br>② <b>美伊和谈推进中</b> — 若瑞士会谈取得实质进展，油价下行将利好通胀预期和风险偏好<br>③ <b>AI叙事持续升温</b> — SpaceX-Cursor $600亿交易强化AI基础设施投资逻辑<br>④ <b>纳指技术面强势</b> — 26,500附近企稳，若突破前高将打开新空间</span><span class="en" style="display:none">① <b>Strong semi fundamentals</b> — Intel/Apple + 18A + global chips Q1 +79%<br>② <b>US-Iran talks progressing</b> — Progress → lower oil → better inflation expectations<br>③ <b>AI narrative accelerating</b> — SpaceX-Cursor $60B reinforces AI infra investment logic<br>④ <b>Nasdaq technically strong</b> — Holding 26,500; breakout above ATH opens new upside</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚠️ 风险因素</span><span class="en" style="display:none">⚠️ Risk Factors</span></h4>
+<p><span class="zh">① <b>霍尔木兹"罗生门"</b> — 谈判破裂将导致油价飙升、市场剧震，这是尾部风险<br>② <b>黎巴嫩战火重燃</b> — 中东全面冲突风险未消除，随时可能升级<br>③ <b>Fed主席Warsh鹰派</b> — 上周FOMC放鹰压制了市场对降息的预期<br>④ <b>美股期货已微跌</b> — 周日晚间-0.2%，周一开盘情绪谨慎<br>⑤ <b>港股三连跌</b> — 外资流出趋势需关注，恒指24,000支撑位关键</span><span class="en" style="display:none">① <b>Hormuz "Rashomon"</b> — Deal failure → oil spike → market shock (tail risk)<br>② <b>Lebanon reignition</b> — Regional escalation risk persists<br>③ <b>Fed Chair Warsh hawkish</b> — FOMC dampened rate-cut expectations<br>④ <b>US futures already soft</b> — Sunday eve -0.2%, cautious Monday open<br>⑤ <b>HK 3-day decline</b> — Foreign capital outflow; HSI 24,000 key support</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">📌 关键关注点</span><span class="en" style="display:none">📌 Key Watch Points</span></h4>
+<p><span class="zh">• <b>周一开盘</b>：关注美伊瑞士会谈结果——利好 → 风险资产上涨；利空 → 避险升温<br>• <b>NVDA $210</b>：能否守住是半导体板块风向标<br>• <b>上证4000点</b>：保卫战 + 恒指24,000支撑<br>• <b>原油$80</b>：霍尔木兹实际通行情况决定方向<br>• <b>Fed官员讲话</b>：关注下周是否有Fed官员就利率路径发声</span><span class="en" style="display:none">• <b>Monday open</b>: US-Iran Switzerland talks outcome — positive → risk-on; negative → risk-off<br>• <b>NVDA $210</b>: Key level for semiconductor sector sentiment<br>• <b>SSE 4,000</b>: Defense + HSI 24,000 support<br>• <b>Oil $80</b>: Actual Hormuz traffic determines direction<br>• <b>Fed speakers</b>: Watch for any officials commenting on rate path</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">⚡ 一句话总结</span><span class="en" style="display:none">⚡ Bottom Line</span></h4>
+<p><span class="zh"><b>半导体基本面无虞，地缘风险悬而未决。</b>本周市场大概率震荡等待美伊谈判结果。谈判顺利 → 风险偏好回升，成长股占优；谈判破裂 → 油价飙升，避险情绪升温。建议关注周一开盘对周末消息面的反应，控制仓位，不宜追高。</span><span class="en" style="display:none"><b>Semi fundamentals solid; geopolitical risk unresolved.</b> Markets likely to oscillate awaiting US-Iran talks outcome. Success → risk-on, growth outperforms; failure → oil spike, risk-off. Watch Monday's open for weekend news reaction. Manage position sizing, avoid chasing.</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：CNBC, Reuters, Yahoo Finance, Bloomberg, 央视新闻, 南方财经网, Al Jazeera, SIA, Trading Economics, Macrotrends</span><span class="en" style="display:none">Data: CNBC, Reuters, Yahoo Finance, Bloomberg, CCTV, SFCCN, Al Jazeera, SIA, Trading Economics, Macrotrends</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-sox', sym:'INDEX:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

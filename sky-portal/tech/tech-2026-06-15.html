@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-15</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.82em;margin-top:8px;text-align:right}
+.card .source{color:#888;font-size:0.85em;font-style:italic}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-15 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>CXL（Compute Express Link）是什么？为什么数据中心需要它？</h3>
+<p>想象一个办公室：CPU 是老板，GPU 是设计团队，内存是档案柜。传统架构里，每个人都有自己的档案柜，想借别人的资料？得走走廊（PCIe），慢且拥挤。</p>
+<p><strong>CXL 就是修了一条高速通道</strong>，让 CPU、GPU、FPGA 和内存可以"共享"一个池子。</p>
+<p>核心技术叫 <strong>Cache Coherence（缓存一致性）</strong>：多个处理器看到的内存数据是一致的——老板和设计团队看的是同一份档案，谁改了对方立刻知道。这比传统的 PCIe（只管传输、不管一致性）高效得多。</p>
+<p>CXL 三种类型：① CXL.io（类似 PCIe，基本 I/O）；② CXL.cache（让加速器共享 CPU 的缓存）；③ CXL.mem（让 CPU 共享远端内存——这就是"内存池化"的基础）。</p>
+<p>为什么重要？AI 推理服务器经常遇到一个问题：GPU 只有 80GB 显存，但模型需要 200GB。没有 CXL，你得把数据来回搬运；有了 CXL，GPU 可以直接访问 CPU 侧的大内存，延迟只有几百纳秒。台积电、三星、SK 海力士都在推 CXL 内存扩展卡，预计 2027 年市场规模超 150 亿美元。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>🔧 Microsoft 与 Quantinuum 量子纠错成果登上 Nature</h3>
+<p>微软量子团队与 Quantinuum 联合宣布，在 <strong>Quantinuum H2 离子阱量子计算机</strong>上实现了量子纠错技术的重大突破。通过将微软的量子比特虚拟化系统应用于 Quantinuum 的硬件，研究团队成功创建了具有<strong>极低逻辑错误率</strong>的逻辑量子比特，计算错误率最多降低了 <strong>11 倍</strong>。</p>
+<p>这项成果已在同行评审期刊 <em>Nature</em> 上正式发表，标志着量子计算从"能跑"到"跑得准"的关键一步。微软表示，这验证了在离子阱架构上实现可扩展容错量子计算的可行性。</p>
+<p><a href="https://thequantuminsider.com/2026/06/13/microsoft-and-quantinuum-report-on-major-gains-in-quantum-error-correction/">→ The Quantum Insider 报道</a> · <a href="https://www.quantinuum.com/press-releases/quantinuum-and-microsoft-announce-new-era-in-quantum-computing-with-breakthrough-demonstration-of-reliable-qubits">→ Quantinuum 官方</a></p>
+<p class="source">来源：The Quantum Insider / Quantinuum / Nature</p>
+<p class="date">2026-06-13</p>
+</div>
+
+<div class="card">
+<h3>⚙️ TSMC 2nm 产能持续扩张，2026-2027 年目标月产 10 万片晶圆</h3>
+<p>台积电 2nm 工艺（N2）自 2025 年 Q4 量产以来，正全力扩张产能。据 TrendForce 和 Digitimes 报道，新竹 Fab 20 和台南 Fab 22 两大厂区的 2nm 产能已被预订一空，<strong>2026 年底目标月产 10 万片晶圆</strong>，2027 年复合年增长率达 <strong>70%</strong>。</p>
+<p>2nm 晶圆报价约 <strong>3 万美元/片</strong>（较 3nm 涨约 50%），苹果和英伟达是最大客户。三星以 2 万美元/片的低价策略争夺订单，但良率仍落后台积电。</p>
+<p>同时台积电在台湾加速兴建最多 <strong>10 座新晶圆厂</strong>，覆盖 2nm、1.4nm（A14）及先进封装产能。</p>
+<p><a href="https://www.digitimes.com/news/a20260416PD240/tsmc-production-capacity-3nm-capacity-expansion.html">→ Digitimes</a> · <a href="https://www.taipeitimes.com/News/front/archives/2026/04/29/2003856422">→ Taipei Times</a></p>
+<p class="source">来源：Digitimes / Taipei Times / TrendForce</p>
+<p class="date">2026-06-10</p>
+</div>
+
+<div class="card">
+<h3>💡 QuEra 与洛斯阿拉莫斯国家实验室发布新型容错量子架构</h3>
+<p>中性原子量子计算公司 QuEra Computing 联合洛斯阿拉莫斯国家实验室（LANL），在 <em>PRX Quantum</em> 发表了一种全新量子计算架构。该架构<strong>将早期容错量子模拟的资源需求降低了数个数量级</strong>。</p>
+<p>研究团队利用多达 <strong>448 个中性原子</strong>的可重构阵列，实现了通用容错量子处理的所有关键模块。这是向大规模量子计算实用化迈出的重要一步，因为降低资源开销意味着可以用更少的物理量子比特实现相同的逻辑计算。</p>
+<p><a href="https://www.quera.com/press-releases/quera-computing-and-los-alamos-national-laboratory-publish-new-quantum-architecture-that-cuts-resource-requirements-for-early-fault-tolerant-quantum-simulation-by-orders-of-magnitude">→ QuEra 官方公告</a></p>
+<p class="source">来源：QuEra Computing / PRX Quantum / arXiv</p>
+<p class="date">2026-06-01</p>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>💰 2026 年半导体创业公司融资已超 107 亿美元</h3>
+<p>据 Crunchbase 统计，<strong>2026 年至今</strong>，投资者已向半导体赛道注入约 <strong>107 亿美元</strong>（种子轮到 Pre-IPO）。逻辑芯片（AI 加速器）是最热门赛道，Cerebras、Groq、MatX、Ayar Labs 等公司获得大额融资。</p>
+<p>其中 <strong>Cerebras Systems</strong> 以 55.5 亿美元 IPO 成为 2026 年最大科技 IPO，上市首日涨幅近 70%。Cerebras 2025 年营收 5.1 亿美元，与 OpenAI 签订了多年期大单。分析机构指出，AI 芯片创业公司的估值正在被重塑。</p>
+<p>与此同时，AMD 股价 2026 年年初至今涨幅超 130%，大幅跑赢半导体板块均值。</p>
+<p><a href="https://news.crunchbase.com/semiconductors-and-5g/chip-startup-funding-2026-cerebras-matx-ayar-labs-ipos-nvda/">→ Crunchbase News</a> · <a href="https://newmarketpitch.com/blogs/news/semiconductor-funding-analysis">→ New Market Pitch</a></p>
+<p class="source">来源：Crunchbase / New Market Pitch</p>
+<p class="date">2026-06-12</p>
+</div>
+
+<div class="card">
+<h3>🌐 英特尔 Computex 2026 发布 Xeon 6+ 及全栈 AI 策略</h3>
+<p>英特尔 CEO Lip-Bu Tan 在 Computex 2026 发表主题演讲，宣布 <strong>Xeon 6+ 处理器</strong>面向 AI 推理数据中心优化，并展示从芯片到机架级的全栈 AI 解决方案。定位为"推理时代的 CPU"。</p>
+<p>同时发布的还有面向手持游戏的 <strong>Arc G3 芯片</strong>（基于 Panther 架构），以及与合作伙伴的混合推理（CPU+GPU）方案。英特尔的策略重点放在"开放生态系统"上，与 NVIDIA 的封闭路线形成差异化。</p>
+<p><a href="https://newsroom.intel.com/artificial-intelligence/intel-announces-new-ai-innovations-at-computex">→ Intel 新闻室</a> · <a href="https://futurumgroup.com/insights/intels-computex-keynote-reframes-an-iconic-company-as-a-silicon-to-systems-ai-lab/">→ Futurum Group 分析</a></p>
+<p class="source">来源：Intel Newsroom / Futurum Group / ServeTheHome</p>
+<p class="date">2026-06-02</p>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>🔬 微软与 Quantinuum：逻辑量子比特错误率改善 800 倍</h3>
+<p>微软量子团队与 Quantinuum 持续深化合作，在最新的 <em>Nature</em> 论文中报告：通过微软的量子比特虚拟化系统叠加 Quantinuum 的离子阱硬件，<strong>逻辑量子比特错误率比物理量子比特改善了 800 倍</strong>。这意味着使用更多物理比特编码一个逻辑比特时，错误率不是持平——而是在持续下降。</p>
+<p>这是"低于阈值"（below threshold）运行的直接证据，即增加更多量子比特确实能降低整体错误率，而非引入更多噪声。这一结论对可扩展容错量子计算至关重要。</p>
+<p><a href="https://quantumcomputingreport.com/microsoft-and-quantinuum-publish-peer-reviewed-quantum-error-correction-data-in-nature/">→ Quantum Computing Report</a> · <a href="https://www.hpcwire.com/off-the-wire/microsofts-application-of-error-correction-to-trapped-ion-qubits-published-in-nature/">→ HPCwire</a></p>
+<p class="source">来源：Quantum Computing Report / HPCwire / Nature</p>
+<p class="date">2026-06-12</p>
+</div>
+
+<div class="card">
+<h3>📅 即将举办：IEEE Quantum Week 2026 与 Quantum.Tech World 大会</h3>
+<p>量子计算社区迎来密集活动期：<strong>IEEE Quantum Week 2026</strong>（QCE）将聚焦将量子研究转化为实际应用，特别是生成式 AI 与分布式量子计算的融合。<strong>Quantum.Tech World 2026</strong>（6月25-26日，波士顿）则侧重企业级量子+AI+HPC 部署。</p>
+<p>此外，<strong>IQT Nordics 2026</strong>（6月22-24日，奥斯陆）和 <strong>Optica Quantum 2.0 Summit</strong>（6月16-17日）也将在本月举办，产业界对量子技术的投资和商业化讨论持续升温。</p>
+<p><a href="https://qce.quantum.ieee.org/2026/">→ IEEE QCE 2026</a> · <a href="https://www.alphaevents.com/events-quantumtechus">→ Quantum.Tech World</a></p>
+<p class="source">来源：IEEE / Quantum.Tech / Optica</p>
+<p class="date">2026-06-14</p>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+</div>
+</div>
+</body>
+</html>

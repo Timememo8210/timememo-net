@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Sky Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* === Swiss Minimal — Full Content Version === */
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FAFAF8;
+  --text: #111111;
+  --text-2: #666666;
+  --text-3: #AAAAAA;
+  --accent: #E63B2E;
+  --line: #E0E0E0;
+  --line-light: #F0F0F0;
+  --font: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  --sidebar-w: 200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.lang-zh .en { display: none !important; }
+body.lang-en .zh { display: none !important; }
+
+/* Background photo rotator */
+.bg-rotator {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.bg-rotator .bg-slide {
+  position: absolute;
+  top: -5%; left: -5%; right: -5%; bottom: -5%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+.bg-rotator .bg-slide.active { opacity: 1; }
+.bg-rotator .bg-slide:nth-child(odd) { animation: kb1 30s ease-in-out infinite alternate; }
+.bg-rotator .bg-slide:nth-child(even) { animation: kb2 30s ease-in-out infinite alternate; }
+@keyframes kb1 { 0%{transform:scale(1) translate(0,0)} 100%{transform:scale(1.08) translate(-1%,-0.5%)} }
+@keyframes kb2 { 0%{transform:scale(1.05) translate(-0.5%,0)} 100%{transform:scale(1) translate(0.5%,-1%)} }
+/* White overlay: 0.82 = enough to see photos but text stays readable */
+.bg-rotator::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.82);
+  z-index: 1;
+}
+
+/* ── Layout ── */
+.layout { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w);
+  border-right: 2px solid var(--text);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s;
+}
+.side-top {
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.side-top h1 {
+  font-size: 1.2em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.side-top h1 span { color: var(--accent); }
+.side-top .sub {
+  font-size: 0.68em;
+  color: var(--text-3);
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+.side-nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
+.side-group { margin-bottom: 16px; }
+.side-group-label {
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--text);
+  padding: 6px 8px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.side-group-label:hover { color: var(--accent); }
+.side-group-label .arrow {
+  font-size: 0.7em;
+  transition: transform 0.2s;
+  color: var(--text-3);
+}
+.side-group.open .arrow { transform: rotate(90deg); }
+.side-links {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s;
+}
+.side-group.open .side-links { max-height: 500px; }
+.side-links a {
+  display: block;
+  padding: 5px 8px 5px 20px;
+  font-size: 0.76em;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: all 0.1s;
+  line-height: 1.5;
+}
+.side-links a:hover { color: var(--accent); padding-left: 24px; }
+
+.side-bottom {
+  padding: 16px 12px;
+  border-top: 1px solid var(--line);
+}
+.lang-toggle {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.lang-btn {
+  flex: 1;
+  padding: 5px 0;
+  border: none;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lang-btn.active {
+  background: var(--text);
+  color: #fff;
+}
+
+/* ── Main Content ── */
+.main {
+  flex: 1;
+  margin-left: var(--sidebar-w);
+  max-width: 860px;
+}
+
+/* ── Header Bar ── */
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 2px solid var(--text);
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 50;
+}
+.head-left {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.02em;
+}
+.head-right {
+  display: flex;
+  gap: 20px;
+}
+.head-right a {
+  font-size: 0.78em;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-2);
+  transition: color 0.15s;
+}
+.head-right a:hover { color: var(--accent); }
+
+/* ── Page Content ── */
+.page { padding: 0 48px; }
+
+/* ── Hero ── */
+.hero { padding: 64px 0 48px; }
+.hero h2 {
+  font-size: 3.6em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.hero h2 em { font-style: normal; color: var(--accent); }
+.hero p {
+  font-size: 0.95em;
+  color: var(--text-2);
+  max-width: 400px;
+  font-weight: 300;
+}
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.hero-stat .val {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.hero-stat .lbl {
+  font-size: 0.65em;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Featured ── */
+.feat {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.feat-tag {
+  font-size: 0.62em;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+.feat h3 {
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 10px 0 8px;
+}
+.feat p { font-size: 0.88em; color: var(--text-2); font-weight: 300; }
+.feat a {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 1px;
+}
+.feat a:hover { color: var(--text); border-color: var(--text); }
+
+/* ── Section ── */
+.sec { padding: 40px 0; border-bottom: 1px solid var(--line); }
+.sec-head {
+  margin-bottom: 20px;
+}
+.sec-info h3 {
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.sec-head[data-color="blue"] .sec-info h3 { color: #2563EB; }
+.sec-head[data-color="violet"] .sec-info h3 { color: #7C3AED; }
+.sec-head[data-color="green"] .sec-info h3 { color: #16A34A; }
+.sec-head[data-color="amber"] .sec-info h3 { color: #D97706; }
+.sec-info p { font-size: 0.78em; color: var(--text-2); margin-top: 4px; }
+
+/* ── Sub-section ── */
+.subsec { margin-bottom: 24px; }
+.subsec-title {
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line-light);
+}
+
+/* ── Text Links (the core, zero cards) ── */
+.tl { display: flex; flex-direction: column; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 24px 1fr auto auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line-light);
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.1s;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-item:hover { padding-left: 6px; }
+.tl-item:hover .tl-name { color: var(--accent); }
+.tl-ico { font-size: 0.85em; opacity: 0.7; }
+.tl-name { font-weight: 600; font-size: 0.9em; transition: color 0.1s; }
+.tl-desc { font-size: 0.72em; color: var(--text-2); text-align: right; max-width: 200px; }
+.tl-tag {
+  font-size: 0.6em;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+/* For items without links */
+.tl-static { cursor: default; }
+.tl-static:hover { padding-left: 0; }
+.tl-static:hover .tl-name { color: var(--text); }
+
+/* ── Footer ── */
+.foot {
+  padding: 28px 48px;
+  border-top: 2px solid var(--text);
+  margin-top: 32px;
+}
+.foot p { font-size: 0.7em; color: var(--text-3); }
+.foot a { color: var(--accent); text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+
+/* ── Mobile hamburger ── */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 200;
+  width: 36px; height: 36px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+  z-index: 90;
+}
+.overlay.show { display: block; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .tl-item { grid-template-columns: 22px 1fr auto; }
+  .tl-desc { display: none; }
+}
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 16px rgba(0,0,0,0.08); }
+  .main { margin-left: 0; }
+  .head { padding: 16px 20px; padding-left: 56px; }
+  .page { padding: 0 20px; }
+  .foot { padding: 24px 20px; }
+  .hero { padding: 40px 0 32px; }
+  .hero h2 { font-size: 2.6em; }
+  .sec-info h3 { font-size: 1.4em; }
+}
+@media (max-width: 480px) {
+  .hero h2 { font-size: 2em; }
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
+  .head-right { display: none; }
+  .sec-info h3 { font-size: 1.2em; }
+}
+/* Landscape phone */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { padding: 24px 0 16px; }
+  .hero h2 { font-size: 2em; }
+  .sec { padding: 24px 0; }
+  .sec-info h3 { font-size: 1.2em; }
+  .feat h3 { font-size: 1.5em; }
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- Background Photo Rotator -->
+<div class="bg-rotator">
+  <div class="bg-slide active"></div>
+  <div class="bg-slide"></div>
+</div>
+
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<div class="layout">
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar" id="sidebar">
+  <div class="side-top">
+    <h1>SKY<span>.</span></h1>
+    <div class="sub"><span class="zh">Sky Portal</span><span class="en">Sky Portal's Digital Space</span></div>
+  </div>
+  <nav class="side-nav">
+    <div class="side-group open">
+      <div class="side-group-label" onclick="toggleGroup(this)">
+        <span class="zh">每日更新</span><span class="en">Daily</span>
+        <span class="arrow">▸</span>
+      </div>
+      <div class="side-links">
+        <a href="#daily"><span class="zh">研报 · 科技 · 行情</span><span class="en">Briefing · Tech · Market</span></a>
+      </div>
+    </div>
+    <div class="side-group open">
+      <div class="side-group-label" onclick="toggleGroup(this)">
+        <span class="zh">研究</span><span class="en">Research</span>
+        <span class="arrow">▸</span>
+      </div>
+      <div class="side-links">
+        <a href="#research-semi"><span class="zh">半导体 & 行业</span><span class="en">Semiconductor</span></a>
+        <a href="#research-ai"><span class="zh">AI & 技术</span><span class="en">AI & Tech</span></a>
+        <a href="#research-thoughts"><span class="zh">思考专栏</span><span class="en">Thoughts</span></a>
+      </div>
+    </div>
+    <div class="side-group open">
+      <div class="side-group-label" onclick="toggleGroup(this)">
+        <span class="zh">生活</span><span class="en">Life</span>
+        <span class="arrow">▸</span>
+      </div>
+      <div class="side-links">
+        <a href="#life-personal"><span class="zh">个人</span><span class="en">Personal</span></a>
+        <a href="#life-travel"><span class="zh">旅行</span><span class="en">Travel</span></a>
+        <a href="#life-finance"><span class="zh">投资理财</span><span class="en">Finance</span></a>
+      </div>
+    </div>
+    <div class="side-group open">
+      <div class="side-group-label" onclick="toggleGroup(this)">
+        <span class="zh">项目 & 工具</span><span class="en">Projects & Tools</span>
+        <span class="arrow">▸</span>
+      </div>
+      <div class="side-links">
+        <a href="#pt-tools"><span class="zh">工具 & 游戏</span><span class="en">Tools & Games</span></a>
+        <a href="#pt-active"><span class="zh">进行中项目</span><span class="en">Active Projects</span></a>
+      </div>
+    </div>
+  </nav>
+  <div class="side-bottom">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ── Main ── -->
+<main class="main">
+
+  <div class="head">
+    <div class="head-left">Sky Portal</div>
+    <div class="head-right">
+      <a href="#daily"><span class="zh">每日</span><span class="en">Daily</span></a>
+      <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+      <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+      <a href="#projects"><span class="zh">项目</span><span class="en">Projects</span></a>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <div class="hero">
+      <h2><span class="zh">数字<em>空间</em></span><span class="en">Digital <em>Space</em></span></h2>
+      <p><span class="zh">研究 · 工具 · 记录 — Sky AI 驱动的个人知识库</span><span class="en">Research · Tools · Records — Powered by Sky AI</span></p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="val">11</div><div class="lbl"><span class="zh">已发布</span><span class="en">Published</span></div></div>
+        <div class="hero-stat"><div class="val">5</div><div class="lbl"><span class="zh">进行中</span><span class="en">Active</span></div></div>
+        <div class="hero-stat"><div class="val" id="day-count">—</div><div class="lbl"><span class="zh">天</span><span class="en">Days</span></div></div>
+      </div>
+    </div>
+
+    <!-- ═══ 01. Daily ═══ -->
+    <div class="sec" id="daily">
+      <div class="sec-head" data-color="blue">
+        <div class="sec-info">
+          <h3><span class="zh">每日更新</span><span class="en">Daily Updates</span></h3>
+          <p><span class="zh">自动化的日常信息流</span><span class="en">Automated daily information flow</span></p>
+        </div>
+      </div>
+      <div class="tl">
+        <a class="tl-item" href="research/index.html"><span class="tl-ico">📡</span><span class="tl-name"><span class="zh">每日研报</span><span class="en">Daily Briefing</span></span><span class="tl-desc"><span class="zh">半导体 · 股票 · 巴萨 · Portland</span><span class="en">Semi · Stocks · Barça · Portland</span></span><span class="tl-tag">Auto</span></a>
+        <a class="tl-item" href="tech/index.html"><span class="tl-ico">🔬</span><span class="tl-name"><span class="zh">每日科技</span><span class="en">Daily Tech</span></span><span class="tl-desc"><span class="zh">芯片 · 突破 · 产业</span><span class="en">Chip · Breakthrough · Industry</span></span><span class="tl-tag">Auto</span></a>
+        <a class="tl-item" href="market/index.html"><span class="tl-ico">📊</span><span class="tl-name"><span class="zh">每日行情</span><span class="en">Daily Market</span></span><span class="tl-desc"><span class="zh">美股 · A股 · 港股</span><span class="en">US · China · HK</span></span><span class="tl-tag">9PM</span></a>
+        <a class="tl-item" href="science/index.html"><span class="tl-ico">🧬</span><span class="tl-name"><span class="zh">每周科学前沿</span><span class="en">Weekly Science</span></span><span class="tl-desc">Science · Nature · Cell</span><span class="tl-tag">Wed</span></a>
+        <a class="tl-item" href="prompts/index.html"><span class="tl-ico">⚙</span><span class="tl-name"><span class="zh">Prompt 库</span><span class="en">Prompt Hub</span></span><span class="tl-desc"><span class="zh">定时任务指令集</span><span class="en">Scheduled prompts</span></span><span class="tl-tag">Manual</span></a>
+      </div>
+    </div>
+
+    <!-- ═══ 02. Research ═══ -->
+    <div class="sec" id="research">
+      <div class="sec-head" data-color="violet">
+        <div class="sec-info">
+          <h3><span class="zh">研究</span><span class="en">Research</span></h3>
+          <p><span class="zh">半导体与AI的深度思考</span><span class="en">Deep insights on semiconductors & AI</span></p>
+        </div>
+      </div>
+
+      <div class="subsec" id="research-semi">
+        <div class="subsec-title"><span class="zh">半导体 & 行业</span><span class="en">Semiconductor & Industry</span></div>
+        <div class="tl">
+          <a class="tl-item" href="research/intel-tesla-terafab.html"><span class="tl-ico">⚡</span><span class="tl-name">Intel × Tesla Terafab</span><span class="tl-desc"><span class="zh">$200-250亿超级半导体制造项目</span><span class="en">$20-25B mega fab project</span></span><span class="tl-tag">New</span></a>
+          <a class="tl-item" href="ai-cvd-optimization.html"><span class="tl-ico">🏭</span><span class="tl-name"><span class="zh">AI赋能半导体设备优化</span><span class="en">AI-Powered Equipment</span></span><span class="tl-desc">Lam / AMAT AIx</span><span class="tl-tag">New</span></a>
+          <a class="tl-item" href="semiconductor-equipment-ai.html"><span class="tl-ico">🔐</span><span class="tl-name"><span class="zh">半导体设备 AI 安全方案</span><span class="en">AI Security</span></span><span class="tl-desc"><span class="zh">NVIDIA / Azure / 开源</span><span class="en">NVIDIA / Azure / OSS</span></span><span class="tl-tag">New</span></a>
+          <a class="tl-item" href="nvidia-report.html"><span class="tl-ico">🟢</span><span class="tl-name"><span class="zh">NVIDIA Foundry 战略</span><span class="en">NVIDIA Foundry Strategy</span></span><span class="tl-desc"><span class="zh">GPU晶圆代工 · RTX 60</span><span class="en">GPU foundry · RTX 60</span></span><span class="tl-tag">v2.2</span></a>
+          <a class="tl-item" href="intel-news-2026.html"><span class="tl-ico">📰</span><span class="tl-name"><span class="zh">Intel 2026 新闻速览</span><span class="en">Intel 2026 News</span></span><span class="tl-desc"><span class="zh">18A量产 · Fab 52</span><span class="en">18A HVM · Fab 52</span></span><span class="tl-tag">2026</span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/intel-report/" target="_blank"><span class="tl-ico">🏭</span><span class="tl-name"><span class="zh">Intel 行业报告</span><span class="en">Intel Industry Report</span></span><span class="tl-desc"><span class="zh">半导体行业分析</span><span class="en">Industry analysis</span></span><span class="tl-tag">Live</span></a>
+        </div>
+      </div>
+
+      <div class="subsec" id="research-ai">
+        <div class="subsec-title"><span class="zh">AI & 技术</span><span class="en">AI & Tech</span></div>
+        <div class="tl">
+          <a class="tl-item" href="ai/index.html"><span class="tl-ico">🧠</span><span class="tl-name"><span class="zh">AI 访谈档案</span><span class="en">AI Interview Archive</span></span><span class="tl-desc"><span class="zh">访谈 · 洞察 · 感悟</span><span class="en">Interviews · Insights</span></span><span class="tl-tag">Active</span></a>
+          <a class="tl-item" href="ai-life.html"><span class="tl-ico">🤖</span><span class="tl-name"><span class="zh">AI 生活实践</span><span class="en">AI in Practice</span></span><span class="tl-desc"><span class="zh">效能记录 V1+V2</span><span class="en">Productivity V1+V2</span></span><span class="tl-tag">Updated</span></a>
+          <a class="tl-item" href="claude-code-leak.html"><span class="tl-ico">🔓</span><span class="tl-name"><span class="zh">Claude Code 泄露研究</span><span class="en">Claude Code Leak</span></span><span class="tl-desc"><span class="zh">512K行源码分析</span><span class="en">512K lines analysis</span></span><span class="tl-tag">Research</span></a>
+          <a class="tl-item" href="skills.html"><span class="tl-ico">☁️</span><span class="tl-name"><span class="zh">Sky 技能全家福</span><span class="en">Sky Skills</span></span><span class="tl-desc"><span class="zh">30+ 技能一览</span><span class="en">30+ skills overview</span></span><span class="tl-tag">30+</span></a>
+          <a class="tl-item" href="https://github.com/Timememo8210/claude-app-memory" target="_blank"><span class="tl-ico">🔗</span><span class="tl-name"><span class="zh">记忆同步中心</span><span class="en">Memory Sync Hub</span></span><span class="tl-desc"><span class="zh">三端同步</span><span class="en">Triple sync</span></span><span class="tl-tag">Active</span></a>
+        </div>
+      </div>
+
+      <div class="subsec" id="research-thoughts">
+        <div class="subsec-title"><span class="zh">思考专栏</span><span class="en">Thoughts</span></div>
+        <div class="tl">
+          <a class="tl-item" href="thoughts/future-transportation.html"><span class="tl-ico">🚗</span><span class="tl-name"><span class="zh">未来交通：自动驾驶如何重塑世界</span><span class="en">Future Transport</span></span><span class="tl-desc"><span class="zh">范式转变思考</span><span class="en">Paradigm shift</span></span><span class="tl-tag">Essay</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 03. Life ═══ -->
+    <div class="sec" id="life">
+      <div class="sec-head" data-color="green">
+        <div class="sec-info">
+          <h3><span class="zh">生活</span><span class="en">Life</span></h3>
+          <p><span class="zh">个人与家庭</span><span class="en">Personal & Family</span></p>
+        </div>
+      </div>
+
+      <div class="subsec" id="life-personal">
+        <div class="subsec-title"><span class="zh">个人</span><span class="en">Personal</span></div>
+        <div class="tl">
+          <a class="tl-item" href="https://timememo8210.github.io/xiaobo-homepage/" target="_blank"><span class="tl-ico">🏠</span><span class="tl-name"><span class="zh">个人主页</span><span class="en">Homepage</span></span><span class="tl-desc"><span class="zh">Semiconductors · AI</span><span class="en">Semiconductors · AI</span></span><span class="tl-tag">Live</span></a>
+          <a class="tl-item" href="my-garden/"><span class="tl-ico">🌸</span><span class="tl-name"><span class="zh">我的花园</span><span class="en">My Garden</span></span><span class="tl-desc"><span class="zh">绣球 · 杜鹃 · 月季</span><span class="en">Hydrangeas · Roses</span></span><span class="tl-tag">2026</span></a>
+          <a class="tl-item" href="naturalization.html"><span class="tl-ico">🇺🇸</span><span class="tl-name"><span class="zh">入籍规划 (N-400)</span><span class="en">Naturalization</span></span><span class="tl-desc"><span class="zh">决策 · 时间线 · 税务</span><span class="en">Decision · Tax</span></span><span class="tl-tag"><span class="zh">准备中</span><span class="en">Preparing</span></span></a>
+          <a class="tl-item" href="coach/index.html"><span class="tl-ico">📚</span><span class="tl-name"><span class="zh">私人教练</span><span class="en">Personal Coach</span></span><span class="tl-desc"><span class="zh">芒格误判心理学 13/25</span><span class="en">Munger 13/25</span></span><span class="tl-tag"><span class="zh">进行中</span><span class="en">In Progress</span></span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/health-report/" target="_blank"><span class="tl-ico">🏥</span><span class="tl-name"><span class="zh">健康数据报告</span><span class="en">Health Report</span></span><span class="tl-desc"><span class="zh">11年 · 327万条</span><span class="en">11yrs · 3.27M</span></span><span class="tl-tag">New</span></a>
+        </div>
+      </div>
+
+      <div class="subsec" id="life-travel">
+        <div class="subsec-title"><span class="zh">旅行</span><span class="en">Travel</span></div>
+        <div class="tl">
+          <a class="tl-item" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><span class="tl-ico">🌍</span><span class="tl-name"><span class="zh">2026 暑假欧洲行 v5</span><span class="en">Europe Summer v5</span></span><span class="tl-desc"><span class="zh">瑞士→巴黎→纽约</span><span class="en">Swiss→Paris→NYC</span></span><span class="tl-tag">Latest</span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/travelsnap/" target="_blank"><span class="tl-ico">📸</span><span class="tl-name">TravelSnap</span><span class="tl-desc"><span class="zh">旅行照片记录</span><span class="en">Photo journal</span></span><span class="tl-tag">Live</span></a>
+        </div>
+      </div>
+
+      <div class="subsec" id="life-finance">
+        <div class="subsec-title"><span class="zh">投资理财</span><span class="en">Finance</span></div>
+        <div class="tl">
+          <a class="tl-item" href="investment.html"><span class="tl-ico">💰</span><span class="tl-name"><span class="zh">投资策略</span><span class="en">Investment Strategy</span></span><span class="tl-desc">RSU · 529 · SMH</span><span class="tl-tag">2026</span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/polyclaw/" target="_blank"><span class="tl-ico">📊</span><span class="tl-name"><span class="zh">PolyClaw 仪表盘</span><span class="en">PolyClaw Dashboard</span></span><span class="tl-desc">$10K Polymarket</span><span class="tl-tag">Active</span></a>
+          <a class="tl-item" href="car-decision.html"><span class="tl-ico">🚗</span><span class="tl-name"><span class="zh">换车决策分析</span><span class="en">Car Decision</span></span><span class="tl-desc"><span class="zh">三年省$26K+</span><span class="en">Save $26K+</span></span><span class="tl-tag">2026</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 04. Projects ═══ -->
+    <div class="sec" id="projects">
+      <div class="sec-head" data-color="amber">
+        <div class="sec-info">
+          <h3><span class="zh">项目 & 工具</span><span class="en">Projects & Tools</span></h3>
+          <p><span class="zh">自动化、游戏、创业</span><span class="en">Automation, Games, Startups</span></p>
+        </div>
+      </div>
+
+      <div class="subsec" id="pt-tools">
+        <div class="subsec-title"><span class="zh">工具 & 游戏</span><span class="en">Tools & Games</span></div>
+        <div class="tl">
+          <a class="tl-item" href="https://timememo8210.github.io/moji-journal/" target="_blank"><span class="tl-ico">📝</span><span class="tl-name"><span class="zh">墨记 Moji Journal</span><span class="en">Moji Journal</span></span><span class="tl-desc"><span class="zh">极简日记</span><span class="en">Minimal diary</span></span><span class="tl-tag">Dev</span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/家人-War-Game/" target="_blank"><span class="tl-ico">⚔️</span><span class="tl-name"><span class="zh">时代之战 家人 I</span><span class="en">War of Ages</span></span><span class="tl-desc"><span class="zh">回合制 · 5个年代</span><span class="en">Turn-based · 5 eras</span></span><span class="tl-tag">Live</span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank"><span class="tl-ico">🌍</span><span class="tl-name"><span class="zh">世界征服 家人 II</span><span class="en">World Conquest</span></span><span class="tl-desc"><span class="zh">实时策略 · 工厂</span><span class="en">RTS · Factories</span></span><span class="tl-tag">Live</span></a>
+          <a class="tl-item" href="https://timememo8210.github.io/app-ideas/" target="_blank"><span class="tl-ico">💡</span><span class="tl-name">App Ideas</span><span class="tl-desc"><span class="zh">应用创意收集</span><span class="en">Idea collection</span></span><span class="tl-tag">Live</span></a>
+        </div>
+      </div>
+
+      <div class="subsec" id="pt-active">
+        <div class="subsec-title"><span class="zh">进行中项目</span><span class="en">Active Projects</span></div>
+        <div class="tl">
+          <a class="tl-item" href="prolynk.html"><span class="tl-ico">🏠</span><span class="tl-name">ProLynk <span class="zh">家居维修</span><span class="en">Home Repair</span></span><span class="tl-desc"><span class="zh">Oregon LLC</span><span class="en">Oregon LLC</span></span><span class="tl-tag">New</span></a>
+          <a class="tl-item" href="research/prolynk-market-analysis.html"><span class="tl-ico">📈</span><span class="tl-name"><span class="zh">ProLynk 竞品调研</span><span class="en">ProLynk Market Analysis</span></span><span class="tl-desc"><span class="zh">14竞品 · 三大市场</span><span class="en">14 competitors</span></span><span class="tl-tag">2026</span></a>
+          <div class="tl-item tl-static"><span class="tl-ico">⚖️</span><span class="tl-name"><span class="zh">Xfinity 消费欺诈诉讼</span><span class="en">Xfinity Fraud Case</span></span><span class="tl-desc"><span class="zh">$2,500 · FCC/AG/BBB</span><span class="en">$2,500 · FCC/AG/BBB</span></span><span class="tl-tag"><span class="zh">诉讼中</span><span class="en">Litigating</span></span></div>
+          <div class="tl-item tl-static"><span class="tl-ico">🎤</span><span class="tl-name"><span class="zh">语音克隆 CosyVoice3</span><span class="en">Voice Cloning</span></span><span class="tl-desc"><span class="zh">名人声音克隆</span><span class="en">Celebrity voices</span></span><span class="tl-tag"><span class="zh">进行中</span><span class="en">In Progress</span></span></div>
+          <div class="tl-item tl-static"><span class="tl-ico">📄</span><span class="tl-name"><span class="zh">家人论文</span><span class="en">教授 Paper</span></span><span class="tl-desc"><span class="zh">国家社科基金</span><span class="en">NSSFC</span></span><span class="tl-tag"><span class="zh">已交稿</span><span class="en">Submitted</span></span></div>
+          <div class="tl-item tl-static"><span class="tl-ico">📧</span><span class="tl-name"><span class="zh">邮箱自动管理</span><span class="en">Email Auto-Management</span></span><span class="tl-desc">Hotmail VIP/Newsletter</span><span class="tl-tag">Auto</span></div>
+          <div class="tl-item tl-static"><span class="tl-ico">🔴</span><span class="tl-name"><span class="zh">小红书运营</span><span class="en">Xiaohongshu Ops</span></span><span class="tl-desc">MCP · AI</span><span class="tl-tag"><span class="zh">进行中</span><span class="en">In Progress</span></span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <p>Sky Portal · <a href="https://github.com/Timememo8210">GitHub</a> · <span class="zh">更新于</span><span class="en">Updated</span> 2026-05-01</p>
+  </div>
+
+</main>
+</div>
+
+<script>
+function setLang(l) {
+  document.body.className = 'lang-' + l;
+  document.getElementById('btn-zh').className = l === 'zh' ? 'lang-btn active' : 'lang-btn';
+  document.getElementById('btn-en').className = l === 'en' ? 'lang-btn active' : 'lang-btn';
+  try { localStorage.setItem('sky-lang', l) } catch(e) {}
+}
+try { var s = localStorage.getItem('sky-lang'); if (s) setLang(s) } catch(e) {}
+
+(function() {
+  var start = new Date(2026, 1, 15);
+  var days = Math.floor((new Date() - start) / 86400000);
+  var el = document.getElementById('day-count');
+  if (el && days > 0) el.textContent = days;
+})();
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+
+function toggleGroup(el) {
+  el.parentElement.classList.toggle('open');
+}
+
+document.querySelectorAll('.side-links a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+  });
+});
+
+// Background photo rotator
+(function() {
+  var photos = [];
+  for (var i = 1; i <= 11; i++) {
+    photos.push('images/backgrounds/bg' + String(i).padStart(2, '0') + '.jpg');
+  }
+  var slides = document.querySelectorAll('.bg-slide');
+  if (!slides.length) return;
+  var current = Math.floor(Math.random() * photos.length);
+  var activeIdx = 0;
+  slides[0].style.backgroundImage = 'url(' + photos[current] + ')';
+  function preload(url) { var img = new Image(); img.src = url; }
+  setInterval(function() {
+    var next = Math.floor(Math.random() * photos.length);
+    var nextIdx = activeIdx === 0 ? 1 : 0;
+    preload(photos[next]);
+    slides[nextIdx].style.backgroundImage = 'url(' + photos[next] + ')';
+    slides[activeIdx].classList.remove('active');
+    slides[nextIdx].classList.add('active');
+    activeIdx = nextIdx;
+    current = next;
+  }, 30000);
+})();
+</script>
+</body>
+</html>

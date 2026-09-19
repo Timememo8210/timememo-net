@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>2026 Smith Rock 周末独行攻略 - Sky Portal</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --paper: #fff8ec;
+  --paper-2: #f7ead7;
+  --paper-3: #ffe8bf;
+  --ink: #171512;
+  --muted: #665f55;
+  --faint: #978b7a;
+  --line: #d8c6aa;
+  --cactus: #1f6f50;
+  --river: #1e7898;
+  --lava: #e8532e;
+  --sun: #ffb936;
+  --violet: #5f49b6;
+  --sky: #d9eef6;
+  --mint: #d7ead7;
+  --rose: #ffd9c9;
+  --night: #24201c;
+  --white: #fffdf7;
+  --shadow: 0 18px 42px rgba(54, 39, 22, 0.12);
+  --serif: "Newsreader", Georgia, serif;
+  --display: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background:
+    linear-gradient(90deg, rgba(31,111,80,0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(232,83,46,0.08), transparent 34%),
+    var(--paper);
+  background-size: 44px 44px, auto, auto;
+  color: var(--ink);
+  line-height: 1.62;
+  letter-spacing: 0;
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 22px;
+  background: rgba(255, 248, 236, 0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(216, 198, 170, 0.72);
+}
+
+.brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.96rem;
+}
+
+.brand span { color: var(--lava); }
+
+.navlinks {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.navlinks a {
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.navlinks a:hover {
+  color: var(--ink);
+  background: var(--paper-3);
+}
+
+.hero {
+  min-height: 78vh;
+  display: grid;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(23,21,18,0.12), rgba(23,21,18,0.8)),
+    url("https://upload.wikimedia.org/wikipedia/commons/5/5d/Smith_Rock_and_the_Crooked_River.jpg");
+  background-position: center 44%;
+  background-size: cover;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,185,54,0.15), transparent 40%),
+    linear-gradient(180deg, transparent 72%, var(--paper) 100%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 118px 0 76px;
+  color: #fffdf7;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.84rem;
+  background: var(--sun);
+  color: var(--night);
+  padding: 7px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 4.65rem;
+  line-height: 0.94;
+  margin: 0;
+  max-width: 780px;
+  letter-spacing: 0;
+}
+
+.hero p {
+  max-width: 620px;
+  font-size: 1.08rem;
+  margin: 22px 0 0;
+  color: rgba(255,253,247,0.86);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  border: 1px solid rgba(255,253,247,0.5);
+  color: #fffdf7;
+  border-radius: 999px;
+  padding: 10px 15px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.btn.primary {
+  background: #fffdf7;
+  border-color: #fffdf7;
+  color: var(--night);
+}
+
+.section {
+  padding: 62px 20px;
+}
+
+.section.alt { background: var(--paper-2); }
+.section.dark {
+  background:
+    linear-gradient(135deg, rgba(31,111,80,0.25), transparent 34%),
+    var(--night);
+  color: var(--white);
+}
+
+.wrap {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.section-title {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 28px;
+}
+
+.dark .section-title { border-color: rgba(255,253,247,0.62); }
+
+.section-title h2 {
+  font-family: var(--display);
+  font-size: 1.65rem;
+  margin: 0;
+}
+
+.section-title p {
+  margin: 0;
+  max-width: 460px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.dark .section-title p { color: rgba(255,253,247,0.7); }
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  background: rgba(255,253,247,0.7);
+}
+
+.metric {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+  min-height: 112px;
+}
+
+.metric:last-child { border-right: 0; }
+
+.metric strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 2.15rem;
+  line-height: 1;
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.84rem;
+  margin-top: 10px;
+}
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+}
+
+.decision {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.decision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 14px;
+  padding: 22px;
+  background: var(--mint);
+}
+
+.decision:nth-child(2) .decision-header { background: var(--sky); }
+
+.decision h3 {
+  font-family: var(--display);
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.pill {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.decision-body {
+  padding: 20px 22px 22px;
+}
+
+.decision-body p { margin: 0 0 14px; color: var(--muted); }
+
+.ticks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 9px;
+}
+
+.ticks li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 8px;
+  font-size: 0.94rem;
+}
+
+.ticks li::before {
+  content: "✓";
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  background: var(--sun);
+  color: var(--night);
+  border-radius: 50%;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.charge-board {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 18px;
+}
+
+.route-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.route-leg,
+.charger,
+.hike,
+.hotel,
+.warning,
+.source-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.route-leg {
+  display: grid;
+  grid-template-columns: 72px 1fr 92px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+}
+
+.route-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--lava);
+  line-height: 1;
+}
+
+.route-leg h4,
+.charger h4,
+.hike h4,
+.hotel h4 {
+  font-family: var(--display);
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.route-leg p,
+.charger p,
+.hike p,
+.hotel p,
+.warning p,
+.source-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.route-meta {
+  text-align: right;
+  font-family: var(--display);
+  font-weight: 700;
+  color: var(--cactus);
+  font-size: 0.92rem;
+}
+
+.charger-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.charger {
+  padding: 16px;
+  min-height: 150px;
+  display: grid;
+  align-content: space-between;
+}
+
+.charger strong {
+  color: var(--river);
+  font-family: var(--display);
+}
+
+.reliability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.reliability-card,
+.bend-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  padding: 18px;
+}
+
+.reliability-card h3,
+.bend-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--display);
+  font-size: 1rem;
+}
+
+.reliability-card strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--lava);
+  margin-bottom: 8px;
+}
+
+.reliability-card p,
+.bend-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bend-board {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.bend-card.feature {
+  background: var(--night);
+  color: var(--white);
+}
+
+.bend-card.feature p { color: rgba(255,253,247,0.78); }
+
+.bend-card .mini-kicker {
+  display: inline-flex;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: var(--sun);
+  color: var(--night);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.74rem;
+}
+
+.bend-options {
+  display: grid;
+  gap: 12px;
+}
+
+.bend-option {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: rgba(255,253,247,0.72);
+}
+
+.bend-option h4 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 0.98rem;
+}
+
+.bend-option p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.tagline {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tag {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  background: rgba(255,248,236,0.58);
+}
+
+.map-shell {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  align-items: stretch;
+}
+
+#map {
+  height: 650px;
+  border: 2px solid var(--night);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.map-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.map-note {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  padding: 16px;
+}
+
+.map-note h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 1rem;
+}
+
+.map-note p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.map-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.map-list button {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 8px;
+  padding: 11px 12px;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.map-list button:hover {
+  border-color: var(--lava);
+  background: var(--rose);
+}
+
+.leaflet-popup-content-wrapper { border-radius: 8px; }
+.leaflet-popup-content { font-family: var(--sans); line-height: 1.5; }
+.leaflet-popup-content h3 { margin: 0 0 4px; font-size: 0.98rem; }
+.leaflet-popup-content p { margin: 0; color: #665f55; }
+
+.marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  font-size: 14px;
+}
+.marker.drive { background: var(--lava); }
+.marker.charge { background: var(--cactus); }
+.marker.hike { background: var(--river); }
+.marker.stay { background: var(--violet); }
+.marker.food { background: var(--sun); color: var(--night); }
+
+.hike-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.hike {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.hike-img {
+  height: 150px;
+  background: var(--paper-3);
+  overflow: hidden;
+}
+
+.hike-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hike-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hike-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.hike-stats span {
+  border-top: 2px solid var(--line);
+  padding-top: 7px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.hike a {
+  margin-top: auto;
+  color: var(--river);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.86rem;
+}
+
+.timeline {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.time-row {
+  display: grid;
+  grid-template-columns: 112px 1fr 180px;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.time {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--lava);
+}
+
+.time-row h3 {
+  font-family: var(--display);
+  margin: 0 0 5px;
+  font-size: 1.02rem;
+}
+
+.time-row p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.time-chip {
+  justify-self: end;
+  font-family: var(--display);
+  font-weight: 700;
+  color: var(--cactus);
+  font-size: 0.9rem;
+}
+
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.hotel {
+  padding: 18px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hotel .hotel-score {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  background: var(--sky);
+  font-family: var(--display);
+  font-weight: 700;
+}
+
+.hotel:nth-child(2) .hotel-score { background: var(--mint); }
+.hotel:nth-child(3) .hotel-score { background: var(--paper-3); }
+.hotel:nth-child(4) .hotel-score { background: var(--rose); }
+
+.hotel a,
+.source-card a {
+  margin-top: auto;
+  color: var(--river);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.safety-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.warning {
+  padding: 18px;
+  background: rgba(255,253,247,0.08);
+  border-color: rgba(255,253,247,0.3);
+  color: var(--white);
+}
+
+.warning h3 {
+  margin: 0 0 8px;
+  font-family: var(--display);
+  font-size: 1rem;
+}
+
+.warning p { color: rgba(255,253,247,0.76); }
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  gap: 7px;
+}
+
+.checklist li {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
+  color: rgba(255,253,247,0.86);
+  font-size: 0.9rem;
+}
+
+.checklist li::before {
+  content: "•";
+  color: var(--sun);
+  font-weight: 700;
+}
+
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.source-card {
+  padding: 16px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.source-card h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 0.98rem;
+}
+
+.footer {
+  padding: 30px 20px 46px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.footer a { color: var(--river); text-decoration: none; font-weight: 700; }
+
+@media (max-width: 980px) {
+  .hero h1 { font-size: 3.5rem; }
+  .metric-strip,
+  .decision-grid,
+  .charge-board,
+  .reliability-grid,
+  .bend-board,
+  .map-shell,
+  .hike-grid,
+  .hotel-grid,
+  .safety-grid,
+  .source-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .map-shell { align-items: start; }
+  #map { height: 520px; }
+  .map-panel { grid-column: 1 / -1; }
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    position: static;
+    align-items: start;
+    flex-direction: column;
+    padding: 12px 16px;
+  }
+  .navlinks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 360px;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+  .navlinks a {
+    text-align: center;
+    padding: 6px 4px;
+  }
+  .hero { min-height: 70vh; }
+  .hero-content {
+    width: 360px;
+    max-width: calc(100% - 40px);
+    margin: 0 20px;
+    padding: 72px 0 56px;
+  }
+  .hero h1 {
+    font-size: 2.35rem;
+    overflow-wrap: anywhere;
+  }
+  .hero h1 span { display: block; }
+  .hero p {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+  }
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: min(100%, 320px);
+  }
+  .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+  .wrap {
+    width: 360px;
+    max-width: calc(100% - 32px);
+    margin: 0 16px;
+  }
+  .section { padding: 42px 16px; }
+  .section-title { display: block; }
+  .section-title p {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+  }
+  .metric-strip,
+  .decision-grid,
+  .charge-board,
+  .charger-grid,
+  .reliability-grid,
+  .bend-board,
+  .map-shell,
+  .hike-grid,
+  .hotel-grid,
+  .safety-grid,
+  .source-grid {
+    grid-template-columns: 1fr;
+  }
+  .metric { border-right: 0; border-bottom: 1px solid var(--line); }
+  .metric:last-child { border-bottom: 0; }
+  .route-leg,
+  .time-row {
+    grid-template-columns: 1fr;
+  }
+  .route-meta,
+  .time-chip {
+    justify-self: start;
+    text-align: left;
+  }
+  #map { height: 420px; }
+}
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="brand">Sky Portal <span>Travel</span></div>
+  <div class="navlinks">
+    <a href="index.html">返回首页</a>
+    <a href="#plan">结论</a>
+    <a href="#charging">充电</a>
+    <a href="#map-section">地图</a>
+    <a href="#hikes">徒步</a>
+    <a href="#bend">Bend</a>
+    <a href="#stay">住宿</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <div class="kicker">2026 Summer Solo Drive</div>
+    <h1><span>Smith Rock</span> <span>周末独行攻略</span></h1>
+    <p>从 Portland 出发，Tesla Model X / Model Y，按“充电必须有余量、Misery Ridge 不硬扛、Bend 只在值得时加”的标准做的一日往返 + 住一晚双方案。</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#map-section">看标注地图</a>
+      <a class="btn" href="https://www.google.com/maps/dir/Portland,+OR/Sandy+Tesla+Supercharger/Madras+Tesla+Supercharger/Smith+Rock+State+Park" target="_blank" rel="noopener">Google Maps 路线</a>
+      <a class="btn" href="https://tripcheck.com/Pages/Road-Conditions?curRegion=0" target="_blank" rel="noopener">TripCheck 路况</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="plan">
+    <div class="wrap">
+      <div class="metric-strip">
+        <div class="metric"><strong>Sat</strong><span>最推荐周六一日往返，周日完整恢复</span></div>
+        <div class="metric"><strong>145</strong><span>Portland 到 Smith Rock 单程约 140-150 miles</span></div>
+        <div class="metric"><strong>250</strong><span>Madras / Redmond Supercharger 最高 250 kW</span></div>
+        <div class="metric"><strong>3.6</strong><span>Misery Ridge + River Loop 是核心路线</span></div>
+      </div>
+
+      <div class="section-title" style="margin-top:42px;">
+        <h2>先说结论</h2>
+        <p>这里正式名字是 Smith Rock State Park，不是 National Park。对你来说它更像一个“开车近、视觉强、充电稳”的高质量周末目的地。</p>
+      </div>
+
+      <div class="decision-grid">
+        <article class="decision">
+          <div class="decision-header">
+            <h3>方案 A - 周六当天往返</h3>
+            <span class="pill">推荐</span>
+          </div>
+          <div class="decision-body">
+            <p>适合你说的“早上 5-6 点出发、上午完成硬 trail、下午回、周日完整恢复”。核心做 Misery Ridge + River Loop；太热就降级成 Crooked River。</p>
+            <ul class="ticks">
+              <li>Madras 是主充电点，Redmond 是最近备份，Bend 是南侧兜底。</li>
+              <li>Misery Ridge 要在上午做，不要下午晒到最热时才开爬。</li>
+              <li>不喝酒、不恋战，下午离园，晚上 8:30-9:30 回 Portland。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="decision">
+          <div class="decision-header">
+            <h3>方案 B - 住 Bend 一晚</h3>
+            <span class="pill">想喝酒才值</span>
+          </div>
+          <div class="decision-body">
+            <p>Bend 离 Smith Rock 约 30-45 分钟，不远。但一个人旅行时，它不是必加项。只有你想在 Bend 坐一坐、喝一杯、不想疲劳夜驾，才值得住一晚。</p>
+            <ul class="ticks">
+              <li>走完 Misery Ridge 后去 Bend，晚上 Old Mill / Downtown 轻松吃饭。</li>
+              <li>喝酒就不要当天开回 Portland，直接住 Bend。</li>
+              <li>第二天只做 Deschutes River Trail / Pilot Butte 这种轻项目。</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="charging">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Tesla 充电策略</h2>
+        <p>可靠性优先，不追求极限续航。车机导航仍然是出发当天最终依据，因为它会看温度、海拔、车速和实时占用。</p>
+      </div>
+
+      <div class="charge-board">
+        <div class="route-stack">
+          <div class="route-leg">
+            <div class="route-num">01</div>
+            <div>
+              <h4>Portland -> Madras Supercharger</h4>
+              <p>走 US-26 / US-97。出门前家充到 90-100%。如果车机显示到 Madras 低于 20%，先在 Sandy 补 10 分钟。</p>
+            </div>
+            <div class="route-meta">约 120 mi<br>2.5-3 h</div>
+          </div>
+          <div class="route-leg">
+            <div class="route-num">02</div>
+            <div>
+              <h4>Madras -> Smith Rock</h4>
+              <p>Madras 充到至少 75-85% 再去公园。公园内没有你应该依赖的快充，停车后安心徒步。</p>
+            </div>
+            <div class="route-meta">约 21 mi<br>25-35 min</div>
+          </div>
+          <div class="route-leg">
+            <div class="route-num">03</div>
+            <div>
+              <h4>Smith Rock -> Madras -> Portland</h4>
+              <p>离园后直接回 Madras，吃点东西同时充到 70-80%。这样翻回 Mt. Hood 方向不会有续航焦虑。</p>
+            </div>
+            <div class="route-meta">约 142 mi<br>3-3.5 h</div>
+          </div>
+          <div class="route-leg">
+            <div class="route-num">+</div>
+            <div>
+              <h4>如果住一晚：Redmond Supercharger</h4>
+              <p>Redmond 离 Smith Rock 最近，且有 250 kW。入住前或退房后补电，比依赖酒店慢充稳。</p>
+            </div>
+            <div class="route-meta">约 11 mi<br>15-20 min</div>
+          </div>
+        </div>
+
+        <div class="charger-grid">
+          <article class="charger">
+            <div>
+              <h4>Sandy, OR</h4>
+              <p><strong>8 stalls · 150 kW · 24/7</strong><br>Fred Meyer, 16625 SE 362nd Dr. 适合做 Portland 出城后的保险补电。</p>
+            </div>
+            <div class="tagline"><span class="tag">备用</span><span class="tag">US-26</span></div>
+          </article>
+          <article class="charger">
+            <div>
+              <h4>Madras, OR</h4>
+              <p><strong>8 stalls · 250 kW · 24/7</strong><br>Palisades Shopping Center, 1537 NE Hwy 97。当天往返的主充电点。</p>
+            </div>
+            <div class="tagline"><span class="tag">主节点</span><span class="tag">离园 21 mi</span></div>
+          </article>
+          <article class="charger">
+            <div>
+              <h4>Redmond, OR</h4>
+              <p><strong>8 stalls · 250 kW · 24/7</strong><br>Grocery Outlet, 1565 SW Odem Medo Rd。住 Redmond 时最方便。</p>
+            </div>
+            <div class="tagline"><span class="tag">住宿节点</span><span class="tag">离园 11 mi</span></div>
+          </article>
+          <article class="charger">
+            <div>
+              <h4>Bend, OR</h4>
+              <p><strong>8 stalls · 250 kW · 24/7</strong><br>SpringHill Suites, 551 SW Industrial Way。只有顺路玩 Bend 时才用。</p>
+            </div>
+            <div class="tagline"><span class="tag">可选</span><span class="tag">不必绕</span></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="reliability-grid" aria-label="Model X charging reliability notes">
+        <article class="reliability-card">
+          <strong>不用赌</strong>
+          <h3>Model X 单段没压力，往返别硬撑</h3>
+          <p>Portland 到 Smith Rock 单程约 140-150 miles。Model X 跑过去没问题，但山区、高速、空调和温度会吃掉余量，所以不要设计成“不充电往返”。</p>
+        </article>
+        <article class="reliability-card">
+          <strong>无园内超充</strong>
+          <h3>公园附近有两个靠谱节点</h3>
+          <p>Smith Rock 内没有 Supercharger。北侧 Madras 是主节点，南侧 Redmond 离公园最近；两个都是 8 stalls、最高 250 kW、24/7。</p>
+        </article>
+        <article class="reliability-card">
+          <strong>低风险</strong>
+          <h3>真正风险是排队和低电量进山</h3>
+          <p>出发前 90-100%，到 Madras 低于 40% 就补到 75-85%。回程低于 55-60% 就在 Madras 或 Redmond 再补，不靠 FSD 硬赶夜路。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="map-section">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>路线与景点地图</h2>
+        <p>地图标的是“规划用点位”，精确导航请交给 Tesla 车机或 Google Maps。蓝线是公园内建议徒步，橙线是车程骨架。</p>
+      </div>
+      <div class="map-shell">
+        <div id="map" aria-label="Smith Rock route map"></div>
+        <aside class="map-panel">
+          <div class="map-note">
+            <h3>地图怎么读</h3>
+            <p>绿色是充电，蓝色是徒步点，紫色是住宿，橙色是开车节点。点下面按钮会把地图移到对应位置。</p>
+          </div>
+          <ul class="map-list">
+            <li><button data-focus="madras">Madras Supercharger - 主充电点</button></li>
+            <li><button data-focus="park">Smith Rock 停车 / Welcome Center</button></li>
+            <li><button data-focus="rim">Rim Rock Viewpoint - 最省力必看</button></li>
+            <li><button data-focus="river">Crooked River Footbridge - 徒步起点</button></li>
+            <li><button data-focus="monkey">Monkey Face - 经典地标</button></li>
+            <li><button data-focus="redmond">Redmond Supercharger - 住一晚节点</button></li>
+            <li><button data-focus="bendcharger">Bend Supercharger - Bend 兜底补电</button></li>
+            <li><button data-focus="oldmill">Old Mill District - Bend 晚上放松</button></li>
+          </ul>
+          <div class="map-note">
+            <h3>距离换算</h3>
+            <p>Portland 到 Smith Rock 约 140-150 miles；Smith Rock 到 Redmond 约 11 miles；Smith Rock 到 Madras 约 21 miles；Smith Rock 到 Bend 约 30-45 分钟。</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="hikes">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>必玩徒步项目</h2>
+        <p>一个人去，不建议把所有路线都硬塞。Misery Ridge 是最有代表性的硬路线，但暑期要早走、带水、别在最热时段硬上。</p>
+      </div>
+
+      <div class="hike-grid">
+        <article class="hike">
+          <div class="hike-img"><img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Crooked_River_at_Smith_Rock_State_Park_in_Oregon_1.jpg" alt="Crooked River at Smith Rock"></div>
+          <div class="hike-body">
+            <h4>Rim Rock Trail</h4>
+            <p>最轻松的全景入口。停车后先走这个，快速确认光线、天气和体力状态。</p>
+            <div class="hike-stats"><span>1.0 mi</span><span>19 ft</span><span>18-30m</span></div>
+            <a href="https://www.alltrails.com/trail/us/oregon/rim-rock-trail--2" target="_blank" rel="noopener">AllTrails 路线</a>
+          </div>
+        </article>
+
+        <article class="hike">
+          <div class="hike-img"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Smith_Rock_and_the_Crooked_River.jpg" alt="Smith Rock and Crooked River"></div>
+          <div class="hike-body">
+            <h4>Crooked River Trail</h4>
+            <p>最适合独行的主线。沿河看岩壁、攀岩者和 Monkey Face 方向，随时可折返。</p>
+            <div class="hike-stats"><span>4.4 mi</span><span>328 ft</span><span>1.5-2h</span></div>
+            <a href="https://www.alltrails.com/trail/us/oregon/crooked-river-trail" target="_blank" rel="noopener">AllTrails 路线</a>
+          </div>
+        </article>
+
+        <article class="hike">
+          <div class="hike-img"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Monkey_Face_-_Smith_Rock%2C_Oregon.jpg" alt="Monkey Face at Smith Rock"></div>
+          <div class="hike-body">
+            <h4>Misery Ridge + River Loop</h4>
+            <p>Smith Rock 的英雄路线。短但陡、碎石多、暴晒强；沿线可看 Monkey Face。夏天只建议早上做，蛇类可能出现，别离开步道。</p>
+            <div class="hike-stats"><span>3.6 mi</span><span>908 ft</span><span>2-2.5h</span></div>
+            <a href="https://www.alltrails.com/trail/us/oregon/misery-ridge-and-river-trail--2" target="_blank" rel="noopener">AllTrails 路线</a>
+          </div>
+        </article>
+
+        <article class="hike">
+          <div class="hike-img"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Smith_Rock_and_the_Crooked_River.jpg" alt="Smith Rock canyon view"></div>
+          <div class="hike-body">
+            <h4>Wolf Tree Trail</h4>
+            <p>如果不想爬 Misery Ridge，用它做 Crooked River 的延伸。视野好，强度更可控。</p>
+            <div class="hike-stats"><span>2.7 mi</span><span>410 ft</span><span>1-1.5h</span></div>
+            <a href="https://www.alltrails.com/trail/us/oregon/wolf-tree-trail" target="_blank" rel="noopener">AllTrails 路线</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bend">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Bend 要不要加？</h2>
+        <p>Smith Rock 到 Bend 约 30-45 分钟。对一个人来说，Bend 是“想放松才加”，不是必玩清单。</p>
+      </div>
+
+      <div class="bend-board">
+        <article class="bend-card feature">
+          <span class="mini-kicker">My verdict</span>
+          <h3>默认当天回；想喝酒才住 Bend</h3>
+          <p>你的旅行习惯更像 Quiet Lake 那种高效率打法：早出发、完成核心 trail、下午撤、周日恢复。Smith Rock 也适合这样。Bend 值得加的唯一强理由，是你走完 Misery Ridge 后想在 Old Mill / Downtown 坐一坐、喝一杯、不要再夜驾。</p>
+        </article>
+
+        <div class="bend-options">
+          <article class="bend-option">
+            <h4>最适合你：周六当天来回</h4>
+            <p>05:45-06:15 出发，09:00 前后 Madras 补电，10:00 前开始 Misery Ridge + River Loop，下午 3-4 点离园，Madras 再补电，晚上回 Portland。紧凑但不拖泥带水。</p>
+          </article>
+          <article class="bend-option">
+            <h4>想小度假：Smith Rock 后住 Bend</h4>
+            <p>下午从 Smith Rock 开 30-45 分钟到 Bend，先去 Bend Supercharger 或酒店，晚上 Old Mill / Downtown 吃饭喝一杯。第二天只走 Deschutes River Trail Old Mill Reach 或 Pilot Butte，午后回 Portland。</p>
+          </article>
+          <article class="bend-option">
+            <h4>不推荐：硬 trail + Bend 喝酒 + 当晚回</h4>
+            <p>Misery Ridge 晒完以后身体会疲劳。Bend 如果只是“顺便看一下”会让当天变长；如果喝酒，再开 3 小时回 Portland 不值得。</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>周六一日往返时间表</h2>
+        <p>这个版本保留周日完整休息，并把 Misery Ridge 放在上午。所有时间按 Portland 市区出发估算，住在西边或南边就相应前后调整。</p>
+      </div>
+
+      <div class="timeline">
+        <div class="time-row">
+          <div class="time">05:45</div>
+          <div>
+            <h3>出发前检查 / 早走避晒</h3>
+            <p>车充到 90-100%，水 2-3 L，帽子、防晒、轻外套、实体停车卡/信用卡。打开 Tesla 导航到 Madras Supercharger。</p>
+          </div>
+          <div class="time-chip">Home -> US-26</div>
+        </div>
+        <div class="time-row">
+          <div class="time">09:00</div>
+          <div>
+            <h3>Madras 主充电</h3>
+            <p>20-30 分钟。补到 75-85% 再去公园。这里是全程最关键的可靠性节点，也是上厕所、买冷饮、看天气的点。</p>
+          </div>
+          <div class="time-chip">250 kW</div>
+        </div>
+        <div class="time-row">
+          <div class="time">09:50</div>
+          <div>
+            <h3>到 Smith Rock 停车</h3>
+            <p>买 day-use parking permit。先看温度：如果已经很热，Misery Ridge 降级；如果还凉快，直接下 Chute 到 Footbridge 开始爬。</p>
+          </div>
+          <div class="time-chip">Permit</div>
+        </div>
+        <div class="time-row">
+          <div class="time">10:15</div>
+          <div>
+            <h3>Misery Ridge + River Loop</h3>
+            <p>核心路线。短、陡、晒，但最有代表性。目标 2-2.5 小时完成；别在碎石坡赶速度，沿河段留意蛇和脚下。</p>
+          </div>
+          <div class="time-chip">3.6 mi hard</div>
+        </div>
+        <div class="time-row">
+          <div class="time">12:45</div>
+          <div>
+            <h3>降温 / 午饭 / Rim Rock</h3>
+            <p>回到停车区后先休息。还有体力就走 Rim Rock 轻松全景；已经热或累，就不要再加 Wolf Tree。</p>
+          </div>
+          <div class="time-chip">Easy reset</div>
+        </div>
+        <div class="time-row">
+          <div class="time">15:00</div>
+          <div>
+            <h3>做决定：回家还是 Bend</h3>
+            <p>不喝酒、只想完成核心 trail：直接回 Madras 充电回 Portland。想在 Bend 喝一杯、坐一坐：去 Bend 住一晚，不要再开夜车回家。</p>
+          </div>
+          <div class="time-chip">Fork point</div>
+        </div>
+        <div class="time-row">
+          <div class="time">16:30</div>
+          <div>
+            <h3>离园回 Madras</h3>
+            <p>当天回 Portland 的话，不要拖到天黑。回 Madras 充电 + 吃东西，顺便让身体降温。</p>
+          </div>
+          <div class="time-chip">21 mi</div>
+        </div>
+        <div class="time-row">
+          <div class="time">20:30</div>
+          <div>
+            <h3>回 Portland</h3>
+            <p>目标是晚上 8:30-9:30 到家。周日不再安排长途，可以睡醒、洗车、补觉。</p>
+          </div>
+          <div class="time-chip">Sunday rest</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="stay">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>如果住一晚</h2>
+        <p>住宿不再按“离公园最近”排序，而按你的场景排：想喝酒放松就 Bend；只想第二天再进 Smith Rock 才 Redmond；Bivy 不适合你这次的轻松目标。</p>
+      </div>
+
+      <div class="hotel-grid">
+        <article class="hotel">
+          <div class="hotel-score">1</div>
+          <h4>Bend / Old Mill</h4>
+          <p>如果走完 Misery Ridge 后想喝个小酒、坐一坐，住 Bend 最合理。晚上不要再开回 Portland；第二天只做轻松河边散步。</p>
+          <a href="https://traveloregon.com/things-to-do/oregon-attractions/shopping/the-old-mill-district/" target="_blank" rel="noopener">Old Mill District</a>
+        </article>
+        <article class="hotel">
+          <div class="hotel-score">2</div>
+          <h4>SCP Redmond Hotel</h4>
+          <p>如果想周五住近一点、周六清晨进 Smith Rock，Redmond 最平衡。离公园近，离 Redmond Supercharger 也近。</p>
+          <a href="https://scphotel.com/redmond/" target="_blank" rel="noopener">酒店官网</a>
+        </article>
+        <article class="hotel">
+          <div class="hotel-score">3</div>
+          <h4>Redmond 普通连锁酒店</h4>
+          <p>如果只是睡觉恢复，选靠 US-97 / Redmond Supercharger 的连锁酒店。重点是停车方便、退房后补电方便。</p>
+          <a href="https://www.google.com/maps/search/hotels+near+1565+SW+Odem+Medo+Rd+Redmond+OR" target="_blank" rel="noopener">地图搜索</a>
+        </article>
+        <article class="hotel">
+          <div class="hotel-score">4</div>
+          <h4>Smith Rock Bivy</h4>
+          <p>只适合你想帐篷露营。First-come first-served，无预订；禁止睡车、RV、明火。这次一个人不建议优先选。</p>
+          <a href="https://www.smithrock.com/campground-bivy" target="_blank" rel="noopener">Bivy 规则</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="safety">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>自动驾驶与安全边界</h2>
+        <p>把 FSD / Autopilot 当作减负工具，不当作“自己开过去”。这条路线有山路、施工、两车道、强光和公园停车场。</p>
+      </div>
+
+      <div class="safety-grid">
+        <article class="warning">
+          <h3>Tesla 使用策略</h3>
+          <p>Tesla 官方说明：Autopilot / FSD (Supervised) 需要主动驾驶员监督，不会让车辆变成完全自动驾驶。实操上，高速巡航可用；进出城、施工、山路急弯、停车场、景区道路建议人工接管。</p>
+          <ul class="checklist">
+            <li>出发前更新地图和车机软件，但不要在出发当天临时升级。</li>
+            <li>US-26 山区和 Warm Springs 到 Madras 段保持手在方向盘上。</li>
+            <li>如果晚上回程犯困，不靠 FSD 硬撑，先在 Madras / Sandy 休息。</li>
+          </ul>
+        </article>
+        <article class="warning">
+          <h3>公园与徒步规则</h3>
+          <p>Smith Rock 暑期高温可接近 100°F；day-use 时间为日出前 30 分钟到日落后 30 分钟。2026 年 7 月 31 日前仍有猛禽繁殖季限制，Canyon Trail 要控制噪音和人数，drone 禁止。</p>
+          <ul class="checklist">
+            <li>水至少 2 L，做 Misery Ridge 带 3 L 更稳。</li>
+            <li>不要离开标记步道，碎石坡下坡很容易滑，高沙漠也可能遇到蛇。</li>
+            <li>停车费当天买，Oregon State Parks day-use permit 不是国家公园年票。</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sources">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>资料来源</h2>
+        <p>页面数据更新于 2026-06-08。出发前一天再查 Tesla 车机、TripCheck 和天气。</p>
+      </div>
+      <div class="source-grid">
+        <article class="source-card">
+          <h3>Smith Rock 官方信息</h3>
+          <p>开放时间、停车 permit、Bivy、2026 猛禽季限制。</p>
+          <a href="https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=36" target="_blank" rel="noopener">Oregon State Parks</a>
+        </article>
+        <article class="source-card">
+          <h3>路线与徒步数据</h3>
+          <p>Rim Rock、Crooked River、Misery Ridge、Wolf Tree 的距离、爬升、耗时。</p>
+          <a href="https://www.alltrails.com/parks/us/oregon/smith-rock-state-park" target="_blank" rel="noopener">AllTrails</a>
+        </article>
+        <article class="source-card">
+          <h3>Tesla 充电点</h3>
+          <p>Sandy、Madras、Redmond、Bend Supercharger 的功率、地址和 24/7 状态。</p>
+          <a href="https://www.tesla.com/findus?filters=supercharger" target="_blank" rel="noopener">Tesla Find Us</a>
+        </article>
+        <article class="source-card">
+          <h3>Bend 加餐判断</h3>
+          <p>Smith Rock 到 Bend 车程、Old Mill District、Deschutes River Trail Old Mill Reach。</p>
+          <a href="https://www.bendparksandrec.org/trail/deschutes-river-trail-old-mill-reach/" target="_blank" rel="noopener">Bend Parks</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  Smith Rock 2026 Weekend Solo Guide · Sky Portal ·
+  Photos: Wikimedia Commons contributors Max Schwarz, Jeffhollett, Brandt Kurowski ·
+  <a href="index.html">Back to Sky Portal</a>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const places = {
+  portland: { name: "Portland", type: "drive", lat: 45.5152, lng: -122.6784, icon: "P", text: "出发城市。实际以你的家庭住址为准。" },
+  sandy: { name: "Sandy Supercharger", type: "charge", lat: 45.4027381, lng: -122.2924728, icon: "⚡", text: "8 stalls, up to 150 kW, 24/7. 备用补电。" },
+  madras: { name: "Madras Supercharger", type: "charge", lat: 44.614095, lng: -121.134935, icon: "⚡", text: "8 stalls, up to 250 kW, 24/7. 当天往返主节点。" },
+  park: { name: "Smith Rock Welcome Center / Parking", type: "hike", lat: 44.3670405, lng: -121.141421, icon: "S", text: "停车、买 permit、开始 Rim Rock / Chute Trail。" },
+  rim: { name: "Rim Rock Viewpoint", type: "hike", lat: 44.3679, lng: -121.1406, icon: "◎", text: "轻松全景点，适合先拍照和观察天气。" },
+  river: { name: "Crooked River Footbridge", type: "hike", lat: 44.3663, lng: -121.1395, icon: "≋", text: "下到河边后的分岔点。沿河走最稳。" },
+  misery: { name: "Misery Ridge", type: "hike", lat: 44.3651, lng: -121.1355, icon: "△", text: "硬爬升路线。夏天只建议早上做。" },
+  monkey: { name: "Monkey Face", type: "hike", lat: 44.3634, lng: -121.1512, icon: "M", text: "Smith Rock 经典岩柱，Misery Ridge / River Trail 可看到。" },
+  redmond: { name: "Redmond Supercharger", type: "charge", lat: 44.253578, lng: -121.1860501, icon: "⚡", text: "8 stalls, up to 250 kW, 24/7. 住一晚最佳补电点。" },
+  bendcharger: { name: "Bend Supercharger", type: "charge", lat: 44.0499391, lng: -121.3153121, icon: "⚡", text: "8 stalls, up to 250 kW, 24/7. 只有顺路去 Bend 或住 Bend 时需要。" },
+  scp: { name: "SCP Redmond Hotel", type: "stay", lat: 44.2741, lng: -121.1736, icon: "H", text: "Redmond downtown 住宿推荐，适合一人周末。" },
+  oldmill: { name: "Old Mill District", type: "food", lat: 44.0476, lng: -121.3155, icon: "B", text: "住 Bend 时晚饭、河边散步、喝一杯的轻松区域。" },
+  pilot: { name: "Pilot Butte", type: "food", lat: 44.0582, lng: -121.2835, icon: "B", text: "如果住 Bend，可做轻松观景加餐。" }
+};
+
+function markerIcon(place) {
+  return L.divIcon({
+    className: "",
+    html: `<div class="marker ${place.type}">${place.icon}</div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [0, -18]
+  });
+}
+
+const map = L.map("map", { scrollWheelZoom: false, zoomControl: true });
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const markers = {};
+Object.entries(places).forEach(([key, place]) => {
+  const marker = L.marker([place.lat, place.lng], { icon: markerIcon(place) })
+    .addTo(map)
+    .bindPopup(`<h3>${place.name}</h3><p>${place.text}</p>`);
+  markers[key] = marker;
+});
+
+const driveRoute = [
+  [places.portland.lat, places.portland.lng],
+  [places.sandy.lat, places.sandy.lng],
+  [45.304, -121.754],
+  [44.868, -121.438],
+  [places.madras.lat, places.madras.lng],
+  [places.park.lat, places.park.lng],
+  [places.redmond.lat, places.redmond.lng],
+  [places.bendcharger.lat, places.bendcharger.lng]
+];
+
+const hikeRoute = [
+  [places.park.lat, places.park.lng],
+  [places.rim.lat, places.rim.lng],
+  [places.river.lat, places.river.lng],
+  [places.misery.lat, places.misery.lng],
+  [places.monkey.lat, places.monkey.lng],
+  [44.3607, -121.1475],
+  [44.3627, -121.1414],
+  [places.river.lat, places.river.lng],
+  [places.park.lat, places.park.lng]
+];
+
+L.polyline(driveRoute, { color: "#e8532e", weight: 4, opacity: 0.88, dashArray: "10 8" }).addTo(map);
+L.polyline(hikeRoute, { color: "#1e7898", weight: 5, opacity: 0.9 }).addTo(map);
+
+const bounds = L.latLngBounds(Object.values(places).map(place => [place.lat, place.lng]));
+map.fitBounds(bounds.pad(0.12));
+
+document.querySelectorAll("[data-focus]").forEach(button => {
+  button.addEventListener("click", () => {
+    const key = button.getAttribute("data-focus");
+    const place = places[key];
+    if (!place) return;
+    map.setView([place.lat, place.lng], key === "madras" || key === "redmond" ? 12 : 15, { animate: true });
+    markers[key].openPopup();
+  });
+});
+</script>
+</body>
+</html>

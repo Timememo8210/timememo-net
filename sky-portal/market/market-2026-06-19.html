@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-19 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(156,163,175,0.15);color:#9ca3af;border:1px solid rgba(156,163,175,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.holiday-banner{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:10px;padding:12px 20px;text-align:center;margin-bottom:24px;font-size:0.9em;color:#4ade80}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div class="holiday-banner">
+🔕 <span class="zh">今日美股因 Juneteenth（六月节）休市 · 本周行情总结</span>
+<span class="en" style="display:none">US Markets closed for Juneteenth holiday · Weekly summary</span>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a5c1a 0%,#2d8f2d 100%)">
+<div class="poster-icon">🕊️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊停火正式签署</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Ceasefire Signed</div>
+<div class="zh poster-data">• 6/18签署14点谅解备忘录<br>• 60天停火，霍尔木兹海峡复航<br>• 地缘风险大幅下降</div>
+<div class="en poster-data" style="display:none">• 14-point MOU signed June 18<br>• 60-day ceasefire, Hormuz reopened<br>• Geopolitical risk sharply lower</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#004D98 0%,#0066CC 100%)">
+<div class="poster-icon">🏦</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美联储Warsh首秀</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Fed Chair Warsh Debut</div>
+<div class="zh poster-data">• 利率维持3.50-3.75%，12-0全票<br>• 点阵图暗示可能加息<br>• 2026年不降息，鹰派立场</div>
+<div class="en poster-data" style="display:none">• Rate held at 3.50-3.75%, 12-0 vote<br>• Dot plot signals possible hike<br>• No cuts in 2026, hawkish stance</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#8B6914 0%,#B8860B 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">油价暴跌21%</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Oil Plummets 21%</div>
+<div class="zh poster-data">• 布伦特原油跌至$77附近<br>• 月跌幅超21%<br>• 霍尔木兹复航，供应恢复</div>
+<div class="en poster-data" style="display:none">• Brent crude near $77<br>• Monthly drop exceeds 21%<br>• Hormuz reopening restores supply</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#581c87 0%,#7c2d92 100%)">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI/半导体持续强势</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI/Semis Stay Strong</div>
+<div class="zh poster-data">• 费半SOX 14,341 · 近历史新高<br>• NVDA $210.69 · 本周+3.8%<br>• AVGO $411.35 · 近52周新高</div>
+<div class="en poster-data" style="display:none">• SOX 14,341 · Near ATH<br>• NVDA $210.69 · Week +3.8%<br>• AVGO $411.35 · Near 52wk high</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-19 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股本周总结（6/15-6/18收盘）</span><span class="en" style="display:none">US Weekly Summary (Jun 15-18 Close)</span></h2>
+
+<div class="card">
+<h4><span class="zh">📊 三大指数周度表现</span><span class="en" style="display:none">📊 Weekly Index Performance</span></h4>
+<p><span class="zh">
+<b>标普500</b>：收于 ~7,500 · <b style="color:#4ade80">本周 +0.9%</b><br>
+<b>纳斯达克</b>：收于 26,517.93 · <b style="color:#4ade80">本周 +2.4%</b>（6/18单日 +1.91%）<br>
+<b>道琼斯</b>：收于 ~51,500 · 周中剧烈波动（6/16创新高后6/17跌507点）<br>
+<b>费城半导体（SOX）</b>：14,341.78 · 接近历史高位14,461.79
+</span><span class="en" style="display:none">
+<b>S&P 500</b>: ~7,500 · <b style="color:#4ade80">Week +0.9%</b><br>
+<b>Nasdaq</b>: 26,517.93 · <b style="color:#4ade80">Week +2.4%</b> (Jun 18 +1.91%)<br>
+<b>Dow Jones</b>: ~51,500 · Volatile week (new high Jun 16, -507pts Jun 17)<br>
+<b>PHLX Semiconductor (SOX)</b>: 14,341.78 · Near ATH 14,461.79
+</span></p>
+<p class="src"><span class="zh">来源：Yahoo Finance / Investopedia / WSJ</span><span class="en" style="display:none">Source: Yahoo Finance / Investopedia / WSJ</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🏦 美联储6月FOMC：Warsh时代开启</span><span class="en" style="display:none">🏦 June FOMC: The Warsh Era Begins</span></h4>
+<p><span class="zh">6月16-17日FOMC会议是新主席Kevin Warsh主持的首次会议。结果：<br>
+• <b>利率不变</b>：联邦基金利率维持3.50-3.75%，12-0全票通过<br>
+• <b>鹰派信号</b>：点阵图暗示可能有加息，2026年不再预期降息<br>
+• <b>市场反应</b>：6/17标普跌1.21%、道指跌507点，但6/18因美伊停火签署大幅反弹<br>
+• Warsh在新闻发布会上表现出明显的通胀鹰派倾向，认为"通胀仍有上行风险"
+</span><span class="en" style="display:none">
+June 16-17 FOMC was new Chair Kevin Warsh's debut. Results:<br>
+• <b>Rates unchanged</b>: Fed funds rate at 3.50-3.75%, 12-0 unanimous<br>
+• <b>Hawkish signal</b>: Dot plot hints at possible hike, no cuts expected in 2026<br>
+• <b>Market reaction</b>: Jun 17 S&P -1.21%, Dow -507pts, but Jun 18 rallied on Iran ceasefire<br>
+• Warsh struck a clearly hawkish tone, citing "upside inflation risks"
+</span></p>
+<p class="src"><span class="zh">来源：CNN / NYT / CNBC / Barron's</span><span class="en" style="display:none">Source: CNN / NYT / CNBC / Barron's</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🕊️ 美伊停火：14点谅解备忘录</span><span class="en" style="display:none">🕊️ US-Iran Ceasefire: 14-Point MOU</span></h4>
+<p><span class="zh">6月18日，美国总统特朗普与伊朗总统佩泽希齐扬正式签署谅解备忘录：<br>
+• <b>60天停火</b>：立即生效，可延期<br>
+• <b>霍尔木兹海峡复航</b>：全球20%的石油运输恢复通畅<br>
+• <b>伊朗承诺暂停铀浓缩</b>，美国同意解除部分制裁并解冻数十亿美元资产<br>
+• <b>以色列表示不满</b>：内塔尼亚胡批评协议"过于软弱"<br>
+• 这是自2026年2月美伊战争爆发以来最重要的外交突破
+</span><span class="en" style="display:none">
+June 18: Presidents Trump and Pezeshkian officially signed the MOU:<br>
+• <b>60-day ceasefire</b>: Effective immediately, extendable<br>
+• <b>Hormuz reopened</b>: 20% of global oil transport resumes<br>
+• <b>Iran suspends uranium enrichment</b>; US lifts some sanctions, unfreezes billions<br>
+• <b>Israel displeased</b>: Netanyahu calls the deal "too soft"<br>
+• Biggest diplomatic breakthrough since the US-Iran war began in Feb 2026
+</span></p>
+<p class="src"><span class="zh">来源：Al Jazeera / NPR / ABC / Axios</span><span class="en" style="display:none">Source: Al Jazeera / NPR / ABC / Axios</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🛢️ 油价暴跌：地缘溢价消退</span><span class="en" style="display:none">🛢️ Oil Plummets: Geopolitical Premium Fades</span></h4>
+<p><span class="zh">布伦特原油跌至$77附近，本月跌幅超过21%：<br>
+• 霍尔木兹海峡复航预期导致油价连续两周下跌<br>
+• 战前油价约$60，战争期间一度飙升至$120+<br>
+• 目前仍比战前高约25%，但回落速度超预期<br>
+• 油价下跌有利通胀预期，但OPEC警告不要低估供应恢复时间
+</span><span class="en" style="display:none">
+Brent crude near $77, monthly drop exceeds 21%:<br>
+• Hormuz reopening expectations drove two weeks of declines<br>
+• Pre-war ~$60, peaked above $120 during conflict<br>
+• Still ~25% above pre-war levels, but falling faster than expected<br>
+• Lower oil helps inflation outlook, but OPEC warns recovery will take time
+</span></p>
+<p class="src"><span class="zh">来源：The Guardian / Al Jazeera / Trading Economics</span><span class="en" style="display:none">Source: The Guardian / Al Jazeera / Trading Economics</span></p>
+</div>
+
+<h2>🔬 <span class="zh">半导体/AI个股（6/18收盘）</span><span class="en" style="display:none">Semiconductor/AI Stocks (Jun 18 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$210.69</div><div class="stock-change up">+2.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$411.35</div><div class="stock-change up">+4.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">~$540</div><div class="stock-change up">+1.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">~$260</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">~$134</div><div class="stock-change flat">平稳</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">~$1,500</div><div class="stock-change up">+0.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">~$425</div><div class="stock-change up">+1.1%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">~$130</div><div class="stock-change up">+0.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">14,341</div><div class="stock-change up">+6.42%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">~$360</div><div class="stock-change up">+1.5%</div></div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">AVGO — Broadcom</div><div id="tv-avgo"></div></div>
+<div class="kline-item"><div class="kline-label">TSLA — Tesla</div><div id="tv-tsla"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 & 港股（6/19收盘）</span><span class="en" style="display:none">China & HK Stocks (Jun 19 Close)</span></h2>
+
+<div class="card">
+<h4><span class="zh">🇨🇳 A股：深强沪弱</span><span class="en" style="display:none">🇨🇳 A-Shares: Shenzhen Outperforms</span></h4>
+<p><span class="zh">
+<b>上证指数</b>：4,090（-0.43%）· 4000点支撑稳固<br>
+<b>深成指</b>：16,030（+0.94%）· 创近一月新高<br>
+<b>创业板</b>：走势分化，成长股轮动<br>
+市场风格从价值股向成长股切换，科技板块受到AI产业链持续景气提振。外资在美伊停火后风险偏好提升，北向资金净流入。
+</span><span class="en" style="display:none">
+<b>Shanghai Composite</b>: 4,090 (-0.43%) · 4,000 support holds<br>
+<b>Shenzhen Component</b>: 16,030 (+0.94%) · 1-month high<br>
+<b>ChiNext</b>: Mixed, growth rotation<br>
+Style rotation from value to growth. Tech boosted by AI supply chain strength. Foreign inflows increased post-Iran ceasefire.
+</span></p>
+<p class="src"><span class="zh">来源：Trading Economics / SSE</span><span class="en" style="display:none">Source: Trading Economics / SSE</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">🇭🇰 港股：小幅收涨</span><span class="en" style="display:none">🇭🇰 Hong Kong: Slight Gains</span></h4>
+<p><span class="zh">
+<b>恒生指数</b>：24,403（+0.37%）<br>
+<b>恒生科技</b>：4,666（+0.18%）<br>
+<b>恒生国企</b>：8,179（+0.73%）<br>
+港交所因6月19日公众假期部分休市，MSCI及货币衍生品正常交易。美伊停火提振亚太风险偏好，但Warsh鹰派立场对估值形成压制。
+</span><span class="en" style="display:none">
+<b>HSI</b>: 24,403 (+0.37%)<br>
+<b>HSTECH</b>: 4,666 (+0.18%)<br>
+<b>HSCEI</b>: 8,179 (+0.73%)<br>
+HKEX partially closed for holiday; MSCI and FX derivatives open. Iran ceasefire boosted APAC risk appetite, but Warsh's hawkish stance caps valuations.
+</span></p>
+<p class="src"><span class="zh">来源：HSI.com.hk / SCMP / Xinhua</span><span class="en" style="display:none">Source: HSI.com.hk / SCMP / Xinhua</span></p>
+</div>
+
+<h2>🔮 <span class="zh">下周预判</span><span class="en" style="display:none">Outlook for Next Week</span></h2>
+
+<div class="card">
+<h4><span class="zh">📈 整体偏乐观，关注数据验证</span><span class="en" style="display:none">📈 Cautiously Bullish, Watch Data</span></h4>
+<p><span class="zh">
+<b>利好因素：</b><br>
+• 美伊停火消除最大地缘风险，风险偏好持续回升<br>
+• 油价下跌→通胀预期改善→消费板块受益<br>
+• AI/半导体资本支出周期持续，SOX指数接近历史新高<br>
+• 下周美股恢复交易，预计补涨行情<br><br>
+<b>风险点：</b><br>
+• Warsh鹰派立场：若GDP/PCE数据强劲，加息预期升温<br>
+• 美伊停火仅为60天窗口，谈判仍有不确定性<br>
+• 以色列对协议不满，可能出现 spoilers<br>
+• 油价已快速回落，OPEC+可能干预<br><br>
+<b>重点关注：</b><br>
+• 下周美国GDP和PCE通胀数据<br>
+• NVDA财报后的AI产业链订单情况<br>
+• 霍尔木兹海峡实际复航进度<br>
+• A股4000点保卫战能否持续
+</span><span class="en" style="display:none">
+<b>Positives:</b><br>
+• Iran ceasefire removes biggest geopolitical risk<br>
+• Lower oil → better inflation → consumer tailwind<br>
+• AI/semi capex cycle continues, SOX near ATH<br>
+• US markets resume Monday, catch-up rally expected<br><br>
+<b>Risks:</b><br>
+• Warsh hawkish: Strong GDP/PCE could fuel hike expectations<br>
+• Ceasefire is only 60 days; negotiations uncertain<br>
+• Israel unhappy with deal, potential spoilers<br>
+• Oil fell fast; OPEC+ may intervene<br><br>
+<b>Watch next week:</b><br>
+• US GDP and PCE inflation data<br>
+• Post-NVDA earnings AI supply chain orders<br>
+• Hormuz Strait actual reopening progress<br>
+• A-share 4,000 support test
+</span></p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html"><span class="zh">所有报告</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444"><span class="zh">数据来源：Yahoo Finance, Reuters, CNBC, Investopedia, Al Jazeera, Trading Economics, HSI, NYT, CNN</span><span class="en" style="display:none">Sources: Yahoo Finance, Reuters, CNBC, Investopedia, Al Jazeera, Trading Economics, HSI, NYT, CNN</span></p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-avgo', sym:'NASDAQ:AVGO'},
+  {id:'tv-tsla', sym:'NASDAQ:TSLA'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

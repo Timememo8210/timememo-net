@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Sky Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #FFFFFF;
+  --black: #171a20;
+  --gray-light: #393c41;
+  --gray-mid: #5c5e62;
+  --electric-blue: #3E6AE1;
+  --transition: 0.33s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation - Frosted Glass */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition: var(--transition);
+}
+
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.nav-logo {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--black);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray-light);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--black);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lang-toggle {
+  font-size: 13px;
+  color: var(--gray-mid);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.lang-toggle:hover {
+  color: var(--black);
+}
+
+/* Full-viewport Sections */
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+/* Hero */
+.hero {
+  background: var(--white);
+  padding-top: 0;
+}
+
+.hero-title {
+  font-size: clamp(40px, 7vw, 56px);
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  margin-bottom: 40px;
+}
+
+.hero-counter {
+  font-size: 14px;
+  color: var(--gray-mid);
+  margin-bottom: 48px;
+}
+
+.hero-counter span {
+  font-weight: 600;
+  color: var(--black);
+}
+
+.cta-primary {
+  display: inline-block;
+  padding: 12px 56px;
+  background: var(--electric-blue);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.cta-primary:hover {
+  background: #2d56c4;
+  transform: scale(1.02);
+}
+
+.cta-secondary {
+  display: inline-block;
+  padding: 12px 56px;
+  background: transparent;
+  color: var(--gray-light);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  transition: color var(--transition);
+  margin-left: 16px;
+}
+
+.cta-secondary:hover {
+  color: var(--black);
+}
+
+/* Section Titles */
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray-mid);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+
+.section-desc {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--gray-mid);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+/* Content Cards - Minimal */
+.card-row {
+  display: flex;
+  gap: 24px;
+  max-width: 1000px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
+  text-align: left;
+  padding: 32px 0;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.card-text {
+  font-size: 14px;
+  color: var(--gray-mid);
+  line-height: 1.6;
+}
+
+/* Section Backgrounds - alternating */
+.section-alt {
+  background: #f4f4f4;
+}
+
+/* Bottom Fixed Bar */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 40px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  z-index: 999;
+  transform: translateY(100%);
+  transition: transform var(--transition);
+}
+
+.bottom-bar.visible {
+  transform: translateY(0);
+}
+
+.bottom-bar-text {
+  font-size: 14px;
+  color: var(--gray-mid);
+}
+
+.bottom-bar-btn {
+  padding: 10px 32px;
+  background: var(--electric-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.bottom-bar-btn:hover {
+  background: #2d56c4;
+}
+
+/* Footer */
+footer {
+  padding: 60px 40px;
+  text-align: center;
+  background: var(--white);
+  margin-bottom: 60px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--gray-mid);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--black);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--gray-mid);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 12px 20px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .section {
+    padding: 60px 20px;
+  }
+  .card-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    max-width: 100%;
+    padding: 24px 0;
+  }
+  .bottom-bar {
+    padding: 12px 20px;
+  }
+  footer {
+    padding: 40px 20px;
+  }
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-logo">Sky Portal</div>
+  <ul class="nav-links">
+    <li><a href="#ai">AI研究</a></li>
+    <li><a href="#investment">投资分析</a></li>
+    <li><a href="#intel">Intel新闻</a></li>
+    <li><a href="#coach">教练专区</a></li>
+    <li><a href="#garden">我的花园</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-toggle" onclick="toggleLang()">EN / 中</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="section hero">
+  <h1 class="hero-title fade-in">Sky Portal</h1>
+  <p class="hero-subtitle fade-in">Sky Portal的私人数字空间</p>
+  <p class="hero-counter fade-in">持续探索 <span id="dayCount">0</span> 天</p>
+  <div class="fade-in">
+    <a href="#ai" class="cta-primary">开始探索</a>
+    <a href="#about" class="cta-secondary">了解更多</a>
+  </div>
+</section>
+
+<!-- AI Section -->
+<section class="section" id="ai">
+  <p class="section-label fade-in">AI Research</p>
+  <h2 class="section-title fade-in">AI 专区</h2>
+  <p class="section-desc fade-in">用人工智能重新定义生活方式与工作效率</p>
+  <div class="card-row">
+    <div class="card fade-in">
+      <div class="card-icon">🧠</div>
+      <h3 class="card-title">AI 生活</h3>
+      <p class="card-text">将 AI 融入日常生活的每一个细节，从智能家居到个人助理</p>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon">⚡</div>
+      <h3 class="card-title">CVD 优化</h3>
+      <p class="card-text">基于 AI 的化学气相沉积工艺参数优化与预测模型</p>
+    </div>
+  </div>
+</section>
+
+<!-- Research Section -->
+<section class="section section-alt" id="research">
+  <p class="section-label fade-in">Research</p>
+  <h2 class="section-title fade-in">深度研究</h2>
+  <p class="section-desc fade-in">半导体行业前沿洞察与深度分析</p>
+  <div class="card-row">
+    <div class="card fade-in">
+      <div class="card-icon">🔬</div>
+      <h3 class="card-title">Intel × Tesla Terafab</h3>
+      <p class="card-text">下一代超级工厂的合作模式与技术路线分析报告</p>
+    </div>
+  </div>
+</section>
+
+<!-- Investment Section -->
+<section class="section" id="investment">
+  <p class="section-label fade-in">Investment</p>
+  <h2 class="section-title fade-in">投资分析</h2>
+  <p class="section-desc fade-in">数据驱动的投资决策框架</p>
+  <div class="card-row">
+    <div class="card fade-in">
+      <div class="card-icon">📊</div>
+      <h3 class="card-title">市场研究</h3>
+      <p class="card-text">全球半导体市场趋势与投资机会追踪</p>
+    </div>
+  </div>
+</section>
+
+<!-- Coach Section -->
+<section class="section section-alt" id="coach">
+  <p class="section-label fade-in">Coach</p>
+  <h2 class="section-title fade-in">教练专区</h2>
+  <p class="section-desc fade-in">终身学习，持续进化</p>
+  <div class="card-row">
+    <div class="card fade-in">
+      <div class="card-icon">📚</div>
+      <h3 class="card-title">芒格课程</h3>
+      <p class="card-text">查理·芒格的多元思维模型与投资哲学深度学习</p>
+    </div>
+  </div>
+</section>
+
+<!-- Garden Section -->
+<section class="section" id="garden">
+  <p class="section-label fade-in">Life</p>
+  <h2 class="section-title fade-in">我的花园</h2>
+  <p class="section-desc fade-in">在数字世界之外，培育真实的生活</p>
+  <div class="card-row">
+    <div class="card fade-in">
+      <div class="card-icon">🌱</div>
+      <h3 class="card-title">花园日志</h3>
+      <p class="card-text">Portland 后院花园的四季变化记录</p>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon">🇺🇸</div>
+      <h3 class="card-title">入籍之路</h3>
+      <p class="card-text">美国公民入籍准备与进度追踪</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-links">
+    <a href="#ai">AI研究</a>
+    <a href="#investment">投资分析</a>
+    <a href="#intel">Intel新闻</a>
+    <a href="#coach">教练专区</a>
+    <a href="#garden">我的花园</a>
+  </div>
+  <p class="footer-copy">© 2026 Sky Portal. Built by Sky Portal.</p>
+</footer>
+
+<!-- Bottom Bar -->
+<div class="bottom-bar" id="bottomBar">
+  <span class="bottom-bar-text">有问题？随时与 AI 助手对话</span>
+  <button class="bottom-bar-btn">Ask a Question</button>
+</div>
+
+<script>
+// Day counter from Feb 15, 2026
+function updateDayCount() {
+  const start = new Date(2026, 1, 15);
+  const now = new Date();
+  const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  document.getElementById('dayCount').textContent = diff;
+}
+updateDayCount();
+
+// Scroll nav style
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Bottom bar visibility
+const bottomBar = document.getElementById('bottomBar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > window.innerHeight * 0.5) {
+    bottomBar.classList.add('visible');
+  } else {
+    bottomBar.classList.remove('visible');
+  }
+});
+
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Language toggle
+let isEn = false;
+function toggleLang() {
+  isEn = !isEn;
+  document.querySelector('.lang-toggle').textContent = isEn ? '中文 / EN' : 'EN / 中';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧬 每周科学前沿 Weekly Science — Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --sidebar-bg: #0f0f18;
+  --content-bg: #0a0a0f;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e8;
+  --text-dim: #6b6b80;
+  --accent: #22d3ee;
+  --accent-glow: rgba(34,211,238,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  height: 100vh; overflow: hidden;
+}
+body.lang-zh .en { display:none !important; }
+body.lang-en .zh { display:none !important; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+}
+
+/* ── Lang Toggle ── */
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.lang-toggle button {
+  padding: 4px 12px; border: none; background: transparent;
+  color: var(--text-dim); font-size: 0.72rem; cursor: pointer;
+  transition: all 0.25s; font-family: inherit;
+}
+.lang-toggle button.active { background: var(--accent); color: #000; }
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-header h1 {
+  font-size: 1.15em; font-weight: 700;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 8px;
+}
+.sidebar-header .home-link {
+  font-size: 0.78em; color: var(--text-dim);
+  text-decoration: none; margin-top: 6px; display: block;
+}
+.sidebar-header .home-link:hover { color: var(--accent); }
+.sidebar-header .sub-desc {
+  font-size: 0.75em; color: var(--text-dim); margin-top: 4px; line-height: 1.4;
+}
+.sidebar-nav {
+  flex: 1; overflow-y: auto; padding: 12px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.month-group { margin-bottom: 4px; }
+.month-label {
+  font-size: 0.72em; font-weight: 600;
+  color: var(--text-dim); text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 20px 4px;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer; user-select: none;
+  display: flex; align-items: center; gap: 6px;
+}
+.month-label::before {
+  content: '▸'; font-size: 0.8em;
+  transition: transform 0.2s;
+}
+.month-group.open .month-label::before { transform: rotate(90deg); }
+.month-dates { display: none; }
+.month-group.open .month-dates { display: block; }
+.date-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 20px 8px 28px;
+  cursor: pointer; transition: all 0.15s;
+  border-left: 3px solid transparent;
+  font-size: 0.88em;
+}
+.date-item:hover { background: var(--card-hover); }
+.date-item.active {
+  background: var(--accent-glow);
+  border-left-color: var(--accent);
+  color: var(--accent); font-weight: 500;
+}
+.date-item .day {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1em; font-weight: 600;
+  width: 28px; text-align: center;
+}
+.date-item .weekday { font-size: 0.78em; color: var(--text-dim); }
+.date-item.active .weekday { color: var(--accent); opacity: 0.7; }
+.badge-new {
+  font-size: 0.6em; background: var(--accent);
+  color: #000; padding: 1px 5px; border-radius: 3px;
+  font-weight: 700; margin-left: auto;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+/* ── Content ── */
+.content-area { display: flex; flex-direction: column; overflow: hidden; }
+.content-toolbar {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.02);
+}
+.content-toolbar .current-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em; color: var(--accent); font-weight: 600;
+}
+.content-toolbar .nav-btn {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text-dim); padding: 4px 10px;
+  border-radius: 6px; cursor: pointer; font-size: 0.82em;
+  transition: all 0.15s;
+}
+.content-toolbar .nav-btn:hover { background: var(--card-hover); color: var(--text); }
+.content-toolbar .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.report-frame { flex: 1; border: none; width: 100%; background: var(--content-bg); }
+.empty-state {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: var(--text-dim); gap: 12px;
+}
+.empty-state .icon { font-size: 3em; opacity: 0.3; }
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .sidebar { height: auto; max-height: 45vh; border-right: none; border-bottom: 1px solid var(--border); }
+  .sidebar-nav { max-height: 35vh; }
+}
+</style>
+</head>
+<body class="lang-zh">
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>🧬 <span class="zh">每周科学前沿</span><span class="en">Weekly Science</span></h1>
+      <a class="home-link" href="../index.html"><span class="zh">← 返回 Sky Portal</span><span class="en">← Back to Sky Portal</span></a>
+      <div class="sub-desc">
+        <span class="zh">Science · Nature · Cell · PNAS — 每周三精选3篇</span>
+        <span class="en">Science · Nature · Cell · PNAS — 3 picks every Wednesday</span>
+      </div>
+      <div class="lang-toggle">
+        <button id="btnZh" class="active" onclick="setLang('zh')">中文</button>
+        <button id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+    <nav class="sidebar-nav" id="nav"></nav>
+  </aside>
+  <main class="content-area">
+    <div class="content-toolbar">
+      <button class="nav-btn" id="prevBtn" onclick="navigateWeek(-1)"><span class="zh">◀ 上一周</span><span class="en">◀ Prev Week</span></button>
+      <span class="current-date" id="currentDate">—</span>
+      <button class="nav-btn" id="nextBtn" onclick="navigateWeek(1)"><span class="zh">下一周 ▶</span><span class="en">Next Week ▶</span></button>
+    </div>
+    <iframe class="report-frame" id="reportFrame"></iframe>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <div class="icon">🧬</div>
+      <p><span class="zh">选择左侧日期查看科学精选</span><span class="en">Select a date to view science digest</span></p>
+    </div>
+  </main>
+</div>
+
+<script>
+const REPORTS = [
+  "2026-09-02",
+  "2026-08-26",
+  "2026-07-08",
+  "2026-07-01",
+  "2026-06-24",
+  "2026-06-17","2026-06-10","2026-06-03","2026-05-27", '2026-05-20',
+  '2026-05-13',
+  '2026-05-06',
+  '2026-04-22',
+  '2026-04-15'
+];
+
+const MONTHS_ZH = ['','1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+const MONTHS_EN = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+let currentIndex = -1;
+let currentLang = 'zh';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.body.className = 'lang-' + lang;
+  document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
+  document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+  localStorage.setItem('science-lang', lang);
+  buildNav();
+  if (currentIndex >= 0) loadReport(currentIndex);
+  setTimeout(() => {
+    const frame = document.getElementById('reportFrame');
+    if (frame && frame.contentWindow && frame.contentWindow.switchLang) {
+      frame.contentWindow.switchLang(lang);
+    }
+  }, 500);
+}
+
+function buildNav() {
+  const months = {};
+  REPORTS.forEach(d => {
+    const key = d.substring(0, 7);
+    if (!months[key]) months[key] = [];
+    months[key].push(d);
+  });
+
+  const nav = document.getElementById('nav');
+  nav.innerHTML = '';
+  const sortedMonths = Object.keys(months).sort().reverse();
+
+  if (sortedMonths.length === 0) {
+    nav.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-dim);font-size:0.85em"><span class="zh">暂无内容，每周三更新</span><span class="en">No content yet, updates every Wednesday</span></div>';
+    return;
+  }
+
+  sortedMonths.forEach((monthKey, mi) => {
+    const [y, m] = monthKey.split('-');
+    const group = document.createElement('div');
+    group.className = 'month-group' + (mi === 0 ? ' open' : '');
+
+    const label = document.createElement('div');
+    label.className = 'month-label';
+    if (currentLang === 'zh') {
+      label.textContent = `${y} 年 ${parseInt(m)} 月`;
+    } else {
+      label.textContent = `${MONTHS_EN[parseInt(m)]} ${y}`;
+    }
+    label.onclick = () => group.classList.toggle('open');
+    group.appendChild(label);
+
+    const dates = document.createElement('div');
+    dates.className = 'month-dates';
+
+    months[monthKey].sort().reverse().forEach(dateStr => {
+      const dt = new Date(dateStr + 'T12:00:00');
+      const day = dt.getDate();
+      const wd = dt.getDay();
+      const weekdayZh = '周' + ['日','一','二','三','四','五','六'][wd];
+      const weekdayEn = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][wd];
+      const isLatest = dateStr === REPORTS[0];
+      const idx = REPORTS.indexOf(dateStr);
+
+      const item = document.createElement('div');
+      item.className = 'date-item' + (idx === currentIndex ? ' active' : '');
+      item.dataset.index = idx;
+      item.innerHTML = `
+        <span class="day">${day}</span>
+        <span class="weekday">${currentLang === 'zh' ? weekdayZh : weekdayEn}</span>
+        ${isLatest ? '<span class="badge-new">NEW</span>' : ''}
+      `;
+      item.onclick = () => loadReport(idx);
+      dates.appendChild(item);
+    });
+
+    group.appendChild(dates);
+    nav.appendChild(group);
+  });
+}
+
+function loadReport(index) {
+  if (index < 0 || index >= REPORTS.length) return;
+  currentIndex = index;
+  const dateStr = REPORTS[index];
+  document.getElementById('reportFrame').src = `science-${dateStr}.html`;
+  document.getElementById('reportFrame').style.display = 'block';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('currentDate').textContent = dateStr;
+  document.getElementById('prevBtn').disabled = (index === 0);
+  document.getElementById('nextBtn').disabled = (index === REPORTS.length - 1);
+  document.querySelectorAll('.date-item').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.index) === index);
+  });
+}
+
+function navigateWeek(delta) { loadReport(currentIndex + delta); }
+
+// Init
+const saved = localStorage.getItem('science-lang');
+if (saved) currentLang = saved;
+document.body.className = 'lang-' + currentLang;
+document.getElementById('btn' + (currentLang === 'zh' ? 'Zh' : 'En')).classList.add('active');
+document.getElementById('btn' + (currentLang === 'zh' ? 'En' : 'Zh')).classList.remove('active');
+buildNav();
+if (REPORTS.length > 0) loadReport(0);
+</script>
+</body>
+</html>

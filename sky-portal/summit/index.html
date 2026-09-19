@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Project SUMMIT — AI Strategy &amp; Adoption Hub</title>
+<style>
+  :root{
+    --ink-deep:#0B1B2B;
+    --ink:#13293D;
+    --ink-soft:#4A5D70;
+    --paper:#F5F7F9;
+    --card:#FFFFFF;
+    --teal:#178F81;
+    --teal-deep:#0E6B61;
+    --teal-wash:#E3F2F0;
+    --amber:#B97A1F;
+    --amber-wash:#F7EDDD;
+    --slate:#5A7186;
+    --slate-wash:#E8EEF3;
+    --line:#D9E1E8;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","Consolas",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --sidebar-w:248px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:24px}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+  body{
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.65;
+    font-size:16px;
+  }
+
+  /* ── Sidebar ─────────────────────────────── */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
+    background:var(--ink-deep);color:#C7D5E0;
+    display:flex;flex-direction:column;
+    padding:26px 0 18px;z-index:60;
+    transition:transform .25s ease;
+  }
+  .brand{padding:0 22px 20px;border-bottom:1px solid rgba(255,255,255,.09)}
+  .brand .peak{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:#7FA8A0;text-transform:uppercase}
+  .brand h1{font-size:21px;font-weight:800;letter-spacing:-.01em;color:#fff;margin-top:6px}
+  .brand p{font-size:12px;color:#8AA0B2;margin-top:4px;line-height:1.45}
+  .nav{flex:1;overflow-y:auto;padding:14px 12px}
+  .nav-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6E8496;padding:14px 12px 6px}
+  .nav a{
+    display:flex;align-items:center;gap:8px;
+    padding:7px 12px;border-radius:7px;
+    color:#C7D5E0;text-decoration:none;font-size:13.5px;
+    border-left:2px solid transparent;
+  }
+  .nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav a.active{background:rgba(23,143,129,.18);color:#fff;border-left-color:var(--teal)}
+  .nav a .tag{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;padding:1px 6px;border-radius:99px}
+  .tag.short{background:rgba(23,143,129,.25);color:#8FDACF}
+  .tag.mid{background:rgba(185,122,31,.25);color:#EAC58A}
+  .tag.long{background:rgba(199,213,224,.16);color:#AFC2D1}
+  .side-foot{padding:14px 22px 0;border-top:1px solid rgba(255,255,255,.09);font-size:12px}
+  .side-foot a{color:#8AA0B2;text-decoration:none}
+  .side-foot a:hover{color:#fff}
+
+  /* ── Mobile chrome ───────────────────────── */
+  .hamburger{
+    display:none;position:fixed;top:14px;left:14px;z-index:80;
+    width:42px;height:42px;border:1px solid var(--line);border-radius:10px;
+    background:var(--card);color:var(--ink);font-size:19px;cursor:pointer;
+    box-shadow:0 2px 8px rgba(11,27,43,.10);
+  }
+  .overlay{display:none;position:fixed;inset:0;background:rgba(11,27,43,.45);z-index:55}
+  body.nav-open .overlay{display:block}
+
+  /* ── Main column ─────────────────────────── */
+  .main{margin-left:var(--sidebar-w);padding:44px 48px 80px;max-width:calc(var(--sidebar-w) + 900px)}
+  section{margin-bottom:64px;scroll-margin-top:20px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px}
+  h2{font-size:26px;font-weight:800;letter-spacing:-.015em;margin-bottom:8px}
+  .lede{color:var(--ink-soft);max-width:640px;margin-bottom:22px}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(160deg,var(--ink-deep) 0%,#122E42 70%,#153A4A 100%);
+    color:#EAF1F5;border-radius:16px;padding:46px 44px 40px;margin-bottom:56px;
+    position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-30px;bottom:-8px;width:340px;height:150px;
+    background:
+      linear-gradient(135deg,transparent 49.6%,rgba(127,168,160,.28) 50%) no-repeat 0 100%/120px 150px,
+      linear-gradient(135deg,transparent 49.6%,rgba(127,168,160,.16) 50%) no-repeat 90px 100%/250px 110px;
+    pointer-events:none;
+  }
+  .hero .eyebrow{color:#7FC8BC}
+  .hero h2{font-size:clamp(26px,4.2vw,38px);line-height:1.18;color:#fff;max-width:620px}
+  .hero p{color:#B9CBD8;max-width:600px;margin-top:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+  .chip{
+    font-size:12.5px;font-weight:600;color:#DFF3EF;
+    border:1px solid rgba(127,200,188,.45);border-radius:99px;padding:6px 13px;
+    background:rgba(23,143,129,.14);
+  }
+  .roadmap{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:26px;position:relative;z-index:1}
+  .rm{
+    font-family:var(--mono);font-size:12px;color:#DFF3EF;
+    border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:7px 12px;
+    background:rgba(255,255,255,.06);
+  }
+  .rm b{display:block;font-size:13px;letter-spacing:.06em}
+  .rm span{color:#9FB4C4;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  .rm-arrow{color:#7FC8BC;font-size:15px}
+
+  /* Pillar cards */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pillar{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px 20px 14px}
+  .pillar .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--teal-deep);text-transform:uppercase}
+  .pillar h3{font-size:17.5px;font-weight:750;margin:7px 0 6px}
+  .pillar p{font-size:13.8px;color:var(--ink-soft)}
+
+  /* Accordions */
+  details{background:var(--card);border:1px solid var(--line);border-radius:11px;margin-top:10px;overflow:hidden}
+  summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;
+    padding:14px 18px;font-weight:650;font-size:15px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary .chev{margin-left:auto;color:var(--ink-soft);transition:transform .2s ease;font-size:12px;flex-shrink:0}
+  details[open] summary .chev{transform:rotate(90deg)}
+  details[open] summary{border-bottom:1px dashed var(--line)}
+  .d-body{padding:14px 18px 18px;font-size:14.5px;color:var(--ink)}
+  .d-body p+p{margin-top:10px}
+  .d-body ul{margin:8px 0 4px 18px}
+  .d-body li{margin:5px 0}
+  summary:focus-visible,.nav a:focus-visible,a:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:6px}
+
+  /* Program headers */
+  .ws-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .ws-head h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .ws-head .sub{color:var(--ink-soft);font-size:14px}
+  .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .badge.short{background:var(--teal-wash);color:var(--teal-deep)}
+  .badge.mid{background:var(--amber-wash);color:var(--amber)}
+  .badge.long{background:var(--slate-wash);color:var(--slate)}
+  .badge.tc{background:var(--ink-deep);color:#9FD9CF}
+
+  /* Signature: the ladder */
+  .ladder{margin-top:18px}
+  .step{--rise:0px;margin-left:var(--rise)}
+  .step summary{gap:14px}
+  .camp{
+    font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;
+    background:var(--ink-deep);color:#9FD9CF;border-radius:6px;padding:4px 9px;flex-shrink:0;
+  }
+  .step .fx{display:block;font-weight:400;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+  @media (min-width:900px){
+    .step:nth-child(2){--rise:44px}
+    .step:nth-child(3){--rise:88px}
+    .step:nth-child(4){--rise:132px}
+    .step:nth-child(5){--rise:176px}
+    .step{max-width:calc(100% - var(--rise))}
+  }
+  .ladder-note{font-family:var(--mono);font-size:12px;color:var(--teal-deep);margin-top:16px}
+
+  /* Curriculum rungs */
+  .rungs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  .rung{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 12px}
+  .rung .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--teal-deep);text-transform:uppercase}
+  .rung h4{font-size:15.5px;font-weight:750;margin:6px 0 4px}
+  .rung p{font-size:13.2px;color:var(--ink-soft)}
+
+  /* Catalog table */
+  .tbl{width:100%;min-width:560px;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+  .tbl th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);background:#EEF2F5}
+  .tbl td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl .nm{font-weight:700;white-space:nowrap}
+  .tbl-wrap{overflow-x:auto;border-radius:12px}
+
+  /* Footer */
+  .prov{
+    border-top:1px solid var(--line);padding-top:22px;color:var(--ink-soft);
+    font-size:12.5px;max-width:680px;
+  }
+  .prov strong{color:var(--ink)}
+
+  /* ── Responsive ──────────────────────────── */
+  @media (max-width:820px){
+    .rm-arrow{display:none}
+    .roadmap{flex-direction:column;align-items:stretch}
+    .sidebar{transform:translateX(-100%)}
+    body.nav-open .sidebar{transform:translateX(0)}
+    .hamburger{display:block}
+    .main{margin-left:0;padding:76px 20px 60px}
+    .hero{padding:30px 24px 28px}
+    .pillars,.rungs{grid-template-columns:1fr}
+    h2{font-size:23px}
+  }
+</style>
+</head>
+<body>
+
+<button class="hamburger" id="hbtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+<div class="overlay" id="ovl"></div>
+
+<aside class="sidebar" id="sidebar" aria-label="Section navigation">
+  <div class="brand">
+    <div class="peak">Field Guide</div>
+    <h1>Project SUMMIT</h1>
+    <p>AI strategy &amp; adoption for semiconductor manufacturing</p>
+  </div>
+  <nav class="nav">
+    <a href="#overview" class="active">Overview</a>
+    <div class="nav-label">Programs</div>
+    <a href="#titan">TITAN · Foundation <span class="tag short">Short</span></a>
+    <a href="#atlas">ATLAS · Yield Intel <span class="tag mid">Mid</span></a>
+    <a href="#skyline">SKYLINE · Platform <span class="tag long">Long</span></a>
+    <div class="nav-label">Training Center</div>
+    <a href="#basecamp">BASECAMP Hub</a>
+    <a href="#ladder">The Prompt Ladder</a>
+    <a href="#agent">Model vs. Agent</a>
+    <div class="nav-label">Reference</div>
+    <a href="#catalog">Deliverables Catalog</a>
+  </nav>
+  <div class="side-foot">
+    <a href="showcase.html" style="display:block;margin-bottom:7px">✨ Showcase version</a>
+    <a href="../index.html">← Sky Portal</a>
+  </div>
+</aside>
+
+<main class="main">
+
+  <!-- ── Overview ── -->
+  <section id="overview">
+    <div class="hero">
+      <div class="eyebrow">Project SUMMIT · Strategy Hub</div>
+      <h2>Answers that hit the mark. Work that reads your mind.</h2>
+      <p>One page that holds the whole map: three programs on one road — near, mid, and long term — and a training center that walks everyone to the trailhead.</p>
+      <div class="roadmap" aria-label="Program roadmap">
+        <span class="rm"><b>TITAN</b><span>Short term · foundation &amp; first agents</span></span>
+        <span class="rm-arrow">→</span>
+        <span class="rm"><b>ATLAS</b><span>Mid term · yield &amp; variation</span></span>
+        <span class="rm-arrow">→</span>
+        <span class="rm"><b>SKYLINE</b><span>Long term · autonomous platform</span></span>
+      </div>
+      <p style="margin:14px 0 0;font-size:.95rem;color:var(--ink-soft)">One road, one shifting axis — <strong style="color:var(--teal-deep)">Direct &rarr; Discover &rarr; Delegate</strong>. You direct TITAN&#39;s agents; ATLAS discovers for you; SKYLINE takes the goal and runs.</p>
+      <div class="chips">
+        <span class="chip">People decide, AI watches</span>
+        <span class="chip">AI is the index, you are the judge</span>
+        <span class="chip">Build now, iterate later</span>
+        <span class="chip">Lead people to the trailhead</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TITAN ── -->
+  <section id="titan">
+    <div class="eyebrow">Program 1 of 3</div>
+    <div class="ws-head">
+      <h3>TITAN</h3><span class="sub">Foundation &amp; First Agents</span><span class="badge short">Short term</span>
+    </div>
+    <p class="lede">The ground floor: what AI costs, what it returns, the data it stands on — and the first working agents that start paying the rent from day one.</p>
+
+    <details>
+      <summary>The stance — you direct, AI executes <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>Every task starts with a human instruction: you assign, the agent executes, you review. AI is your hands — real leverage, but the initiative stays entirely with you. The next two programs move exactly that line.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The cost model — four views of the same ledger <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <ul>
+          <li><strong>Quarterly adoption ramp</strong> — spend and savings modeled as usage actually grows.</li>
+          <li><strong>High-adoption scenario</strong> — the stress test: what happens if it works better than planned.</li>
+          <li><strong>Local GPU vs. hosted API economics</strong> — the build-vs-buy line, priced honestly.</li>
+          <li><strong>ROI verification</strong> — a closed loop that measures returned hours after deployment.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>The data thesis — AI amplifies fragmentation <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>AI does not dissolve fragmented data; it multiplies the cost of it. Every agent that touches a messy landscape produces answers with messy provenance. That is the strategic case for laying the data foundation first — before the shinier layers stack on top of it.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>First-wave agents — meetings, knowledge, time <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>The first agents target the daily drains — where the time goes, and how we get it back:</p>
+        <ul>
+          <li><strong>Meeting-preparation agent</strong> — briefs you before you walk in: history, open questions, who committed to what.</li>
+          <li><strong>Meeting-record agents</strong> — decisions, actions with owners, open questions and risks, verifiable down to the timestamp (the prompt patterns behind them are taught in BASECAMP).</li>
+          <li><strong>Technology-knowledge agents</strong> — answer from the group's own accumulated know-how instead of a hundred scattered folders.</li>
+        </ul>
+        <p>The routing rule that frames them all: <strong>right channel, right job</strong> — meetings for decisions, documents for depth, messages for speed. Agents take over the record-keeping in between.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ── ATLAS ── -->
+  <section id="atlas">
+    <div class="eyebrow">Program 2 of 3</div>
+    <div class="ws-head">
+      <h3>ATLAS</h3><span class="sub">Yield &amp; Variation Intelligence</span><span class="badge mid">Mid term</span>
+    </div>
+    <p class="lede">How AI turns the yield-and-variation problem from a hunt through fragmented data into an indexed space where engineers spend their time judging, not gathering.</p>
+
+    <details>
+      <summary>The story arc — twelve moves from problem to ask <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>Problem → Proof → Our Move → How It Works → The Method → Where the Time Goes → What We Keep → One Layer Out → Deployment → Benchmarks → The Ask → Summary &amp; Next Steps.</p>
+        <p>Each move is one slide, one idea, one conclusion-as-title — built so the argument survives even if a reader only sees the headlines.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The stance — AI points, engineers judge <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>ATLAS treats AI as an indexer over the variation space: it surfaces candidate signals, correlations, and anomalies with traceable evidence. Engineers keep what matters most — the judgment call and the sign-off on every disposition.</p>
+        <p>The payoff is time reallocation: hours move from data wrangling and cross-referencing to root-cause thinking.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The shift — it works while you sleep <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>TITAN agents wait for instructions; ATLAS agents watch the systems around the clock. Yield and variation signals that would take weeks to hunt down surface on their own — findings you did not ask for, on your desk by morning.</p>
+        <p>The teaching turns two-way: you still train it, and it starts showing you patterns you did not know to look for. AI stops being only your hands and becomes your eyes.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What we keep — the non-negotiables <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <ul>
+          <li>Human sign-off on every disposition. No exceptions.</li>
+          <li>Traceable evidence behind every AI-surfaced lead — auditable in seconds.</li>
+          <li>Deployment is phased, benchmarked, and reversible.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ── SKYLINE ── -->
+  <section id="skyline">
+    <div class="eyebrow">Program 3 of 3</div>
+    <div class="ws-head">
+      <h3>SKYLINE</h3><span class="sub">Autonomous Agent Platform</span><span class="badge long">Long term</span>
+    </div>
+    <p class="lede">Where the road leads: a plant where agents are first-class actors — one hero picture, three pillars underneath it.</p>
+
+    <details>
+      <summary>Hero + three pillars <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <ul>
+          <li><strong>The virtual plant</strong> — a living mirror of the line, where questions get asked and tested before any real metal moves.</li>
+          <li><strong>Agent-native platform</strong> — workflows designed for agents as first-class actors, with permission boundaries built in.</li>
+          <li><strong>Agents talk to agents</strong> — coordination moves machine-to-machine. You set the goal and judge the outcome; agents research the method, execute, and iterate on their own. The hand-holding ends here.</li>
+        </ul>
+        <p>Prerequisite: the connected data layer, opened to agent access — no open data, no SKYLINE.</p>
+        <p>Design rule: build for launch-time frontier capability, and skip what the models will absorb on their own.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ── BASECAMP Training Center ── -->
+  <section id="basecamp">
+    <div class="eyebrow">Training Center</div>
+    <div class="ws-head">
+      <h3>BASECAMP</h3><span class="sub">Where everyone learns to climb</span><span class="badge tc">Training Center</span>
+    </div>
+    <p class="lede">Not a program — the school that serves all three. Every training asset lives here, from first contact with AI to building your own agent. The trainer's job is to lead people to the trailhead; many will climb past the guide, and that is the intended outcome.</p>
+
+    <div class="rungs">
+      <div class="rung">
+        <div class="k">Rung 1</div>
+        <h4>AI basics</h4>
+        <p>What a model is, what it's good for, where it fails — the mental map before the first prompt.</p>
+      </div>
+      <div class="rung">
+        <div class="k">Rung 2</div>
+        <h4>Applying AI</h4>
+        <p>Prompt patterns for real daily work — the Meeting Prompt Ladder below is the flagship example.</p>
+      </div>
+      <div class="rung">
+        <div class="k">Rung 3</div>
+        <h4>Building agents</h4>
+        <p>From a good prompt to a working agent: identity, tools, data access, boundaries, deliverable.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Session #01 — the hands-on pack <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <ul>
+          <li>A 27-slide hands-on session built around real workflows, not demos.</li>
+          <li>Three short training videos for asynchronous ramp-up.</li>
+          <li><strong>NORTHWIND</strong> — a fully fictional practice dataset, engineered so every exercise has a known answer key: exactly 2 decisions, 5 actions (one deliberately left <em>UNOWNED</em>), 3 open questions, and 1 risk.</li>
+        </ul>
+        <p>Fictional data means everyone can practice fearlessly — nothing real is ever at stake.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>One-Minute AI — the video series in the making <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>Short video walkthroughs — one to two minutes each, a new episode every two weeks — showing real Copilot moves you can copy the same day. Episodes accumulate here as they ship.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ── Prompt Ladder ── -->
+  <section id="ladder">
+    <div class="eyebrow">Training Center · Playbook</div>
+    <h2>The Meeting Prompt Ladder</h2>
+    <p class="lede">Five camps, one climb: the same transcript, asked better each time. Each camp is a prompt pattern you can run today — and the training ground for TITAN's meeting agents.</p>
+
+    <div class="ladder">
+      <details class="step">
+        <summary><span class="camp">CAMP 5</span><span>Baseline summary<span class="fx">Effect: you stop rereading transcripts.</span></span><span class="chev">▶</span></summary>
+        <div class="d-body"><p>Ask for a faithful summary of what was discussed. The floor, not the goal — but it already ends the era of scrubbing through recordings to remember what happened.</p></div>
+      </details>
+      <details class="step">
+        <summary><span class="camp">CAMP 6–7</span><span>Restructured by topic<span class="fx">Effect: the meeting becomes a checklist.</span></span><span class="chev">▶</span></summary>
+        <div class="d-body"><p>Reorganize the meeting into <strong>Decisions / Actions with owners / Open questions / Risks</strong> — and flag any action without an owner as <strong>[UNOWNED]</strong>. Unowned actions are where follow-through goes to die; naming them is half the cure.</p></div>
+      </details>
+      <details class="step">
+        <summary><span class="camp">CAMP 8</span><span>Verifiable output<span class="fx">Effect: every claim audits in seconds.</span></span><span class="chev">▶</span></summary>
+        <div class="d-body"><p>Every item now carries verbatim quotes and timestamps; anything inferred is explicitly marked as inference. Trust is no longer asked for — it is checkable.</p></div>
+      </details>
+      <details class="step">
+        <summary><span class="camp">CAMP 9</span><span>History-aware<span class="fx">Effect: you see the story, not the snapshot.</span></span><span class="chev">▶</span></summary>
+        <div class="d-body"><p>Run against the meeting <em>series</em>: track how positions shifted across sessions and which questions keep returning unresolved. Recurring unresolved questions are the project's real risk register.</p></div>
+      </details>
+      <details class="step">
+        <summary><span class="camp">CAMP +1</span><span>Meeting dynamics<span class="fx">Effect: you sense the room you weren't in.</span></span><span class="chev">▶</span></summary>
+        <div class="d-body"><p>Timestamped signals only, no verdicts: heated exchanges, dropped questions, who went quiet, soft yeses. The AI indexes the moments; reading them is your job. <strong>AI is the index — you are the judge.</strong></p></div>
+      </details>
+    </div>
+    <p class="ladder-note">▲ Each camp is one prompt away from the last. Start at 5; climb when the output earns it.</p>
+  </section>
+
+  <!-- ── Model vs Agent ── -->
+  <section id="agent">
+    <div class="eyebrow">Training Center · Rung 3 Primer</div>
+    <h2>Model vs. Agent — the one-line version</h2>
+    <p class="lede">A model answers. An agent acts.</p>
+    <details>
+      <summary>What turns a model into an agent <span class="chev">▶</span></summary>
+      <div class="d-body">
+        <p>An agent is a model plus five things: an identity and rules, a toolbox, data access, permission boundaries, and a defined deliverable. It then runs a closed loop:</p>
+        <p><strong>goal → plan → act with tools → observe → iterate → deliver.</strong></p>
+        <p>That loop is the whole magic — and the permission boundaries are the whole safety story. Nothing an agent does should exceed what its human would sign off on.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ── Catalog ── -->
+  <section id="catalog">
+    <div class="eyebrow">Reference</div>
+    <h2>Deliverables Catalog</h2>
+    <p class="lede">Everything the program family has shipped or is building, grouped by where it belongs. All of it is living material — versions move, git history keeps the trail.</p>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Deliverable</th><th>Belongs to</th><th>Focus</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">SUMMIT strategy deck</td><td>Umbrella</td><td>The umbrella narrative — the whole road in one deck</td><td>Deck</td></tr>
+        <tr><td class="nm">TITAN deck + cost model</td><td>TITAN</td><td>Economics, data foundation, first-wave agents</td><td>Deck + model</td></tr>
+        <tr><td class="nm">Meetings · time recovery</td><td>TITAN</td><td>Where the time goes; right channel, right job</td><td>Deck · 17 slides</td></tr>
+        <tr><td class="nm">ATLAS deck</td><td>ATLAS</td><td>Yield &amp; variation intelligence</td><td>Deck · 14 slides</td></tr>
+        <tr><td class="nm">SKYLINE deck</td><td>SKYLINE</td><td>Autonomous agent platform vision</td><td>Deck</td></tr>
+        <tr><td class="nm">BASECAMP Session #01</td><td>BASECAMP</td><td>Hands-on training + NORTHWIND practice pack</td><td>Deck · 27 slides + 3 videos + dataset</td></tr>
+        <tr><td class="nm">One-Minute AI</td><td>BASECAMP</td><td>Sixty-second video answers, one question each</td><td>Video series</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ── Provenance ── -->
+  <section id="prov">
+    <div class="prov">
+      <p><strong>Provenance.</strong> All contents on this page are original frameworks, public information, or fictional practice data (the NORTHWIND scenario and everyone in it are invented). No proprietary or internal information is stored on this site.</p>
+      <p style="margin-top:8px">Last updated: July 27, 2026 · <a href="../index.html" style="color:var(--teal-deep)">← Back to Sky Portal</a></p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var body=document.body,
+      btn=document.getElementById('hbtn'),
+      ovl=document.getElementById('ovl'),
+      links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+
+  function closeNav(){body.classList.remove('nav-open');btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(){
+    var open=body.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  ovl.addEventListener('click',closeNav);
+  links.forEach(function(a){a.addEventListener('click',closeNav);});
+
+  // Scrollspy
+  var map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  if('IntersectionObserver' in window){
+    var current=null;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id=e.target.id;
+          if(map[id]&&current!==id){
+            links.forEach(function(a){a.classList.remove('active');});
+            map[id].classList.add('active');
+            current=id;
+          }
+        }
+      });
+    },{rootMargin:'-30% 0px -60% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>

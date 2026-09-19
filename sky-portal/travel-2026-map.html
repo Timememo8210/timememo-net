@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>2026夏日独行 · 地图攻略</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+:root {
+  --bg: #FEFCF8; --bg-warm: #FFF9F0; --ink: #1E1E1C;
+  --ink-light: #4A4A46; --secondary: #7A7A72; --tertiary: #B0AEA5;
+  --rule: #E2DED6; --forest: #2D5A3D; --ocean: #1B6B93;
+  --sunset: #D4622B; --gold: #C49A2A; --berry: #9B2335;
+  --lavender: #7B68AE; --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'DM Mono', 'SF Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); }
+
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(254,252,248,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); padding: 10px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-weight: 700; font-size: 1rem; }
+.nav-brand span { color: var(--sunset); }
+.nav-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn {
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.03em; padding: 5px 12px; border-radius: 100px;
+  border: 1px solid var(--rule); background: transparent;
+  color: var(--secondary); cursor: pointer; transition: all 200ms;
+}
+.filter-btn:hover, .filter-btn.active { border-color: var(--ink); color: var(--ink); background: var(--bg-warm); }
+.filter-btn.active-all { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* Map */
+#map { width: 100%; height: 65vh; min-height: 450px; border-bottom: 2px solid var(--ink); }
+
+/* Legend */
+.legend {
+  position: absolute; bottom: 20px; right: 20px; z-index: 1000;
+  background: rgba(254,252,248,0.95); backdrop-filter: blur(8px);
+  border: 1px solid var(--rule); border-radius: 8px;
+  padding: 12px 16px; font-size: 0.75rem;
+}
+.legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.legend-dot {
+  width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0;
+}
+
+/* Route Info Panel */
+.route-panel {
+  max-width: 1100px; margin: 0 auto; padding: 0 20px;
+}
+.route-header {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 24px 0 14px; border-bottom: 2px solid var(--ink);
+}
+.route-header h2 {
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.route-header .subtitle { font-size: 0.72rem; color: var(--secondary); }
+
+/* Leg cards */
+.legs { display: flex; flex-direction: column; }
+.leg {
+  display: grid; grid-template-columns: 140px 1fr 100px;
+  border-bottom: 1px solid var(--rule); padding: 14px 0; gap: 16px;
+  align-items: start;
+}
+.leg-from {
+  font-weight: 600; font-size: 0.85rem; line-height: 1.3;
+}
+.leg-from .leg-tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.55rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: 3px; margin-top: 3px;
+}
+.tag-scenic { background: #E8F0F8; color: var(--ocean); }
+.tag-hotel { background: #F3EEF8; color: var(--lavender); }
+.tag-charge { background: #E8F8F0; color: #1A8B5A; }
+.tag-home { background: #FFF3E8; color: var(--sunset); }
+.leg-detail { font-size: 0.82rem; line-height: 1.65; color: var(--ink-light); }
+.leg-detail strong { color: var(--ink); }
+.leg-dist {
+  text-align: right; font-family: var(--mono); font-size: 0.72rem;
+  color: var(--secondary); line-height: 1.5;
+}
+.leg-dist .dist-num { font-size: 1rem; font-weight: 500; color: var(--ink); }
+
+/* Day separator */
+.day-sep {
+  background: var(--bg-warm); padding: 8px 14px; border-radius: 6px;
+  font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.06em; color: var(--sunset);
+  margin: 6px 0; display: flex; align-items: center; gap: 8px;
+}
+.day-sep::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--sunset); }
+
+/* POI Summary Grid */
+.poi-section {
+  max-width: 1100px; margin: 0 auto; padding: 0 20px;
+}
+.poi-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px; padding-bottom: 32px;
+}
+.poi-card {
+  border: 1px solid var(--rule); border-radius: 6px;
+  padding: 14px 16px; display: flex; gap: 12px; align-items: start;
+  transition: all 200ms; cursor: pointer;
+}
+.poi-card:hover { border-color: var(--forest); background: var(--bg-warm); }
+.poi-icon {
+  width: 36px; height: 36px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.poi-icon.icon-scenic { background: #E8F0F8; }
+.poi-icon.icon-hotel { background: #F3EEF8; }
+.poi-icon.icon-charge { background: #E8F8F0; }
+.poi-icon.icon-home { background: #FFF3E8; }
+.poi-icon.icon-food { background: #FFF8E8; }
+.poi-text h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; }
+.poi-text p { font-size: 0.75rem; color: var(--ink-light); line-height: 1.5; }
+.poi-text .poi-meta {
+  font-family: var(--mono); font-size: 0.58rem; color: var(--tertiary);
+  letter-spacing: 0.04em; margin-top: 3px;
+}
+
+/* Footer */
+.footer {
+  max-width: 1100px; margin: 0 auto; padding: 20px;
+  border-top: 2px solid var(--ink); margin-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand { font-size: 0.85rem; color: var(--secondary); }
+.footer-meta {
+  font-family: var(--mono); font-size: 0.55rem;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--tertiary);
+}
+
+/* Custom marker */
+.custom-marker {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; line-height: 1;
+}
+.marker-scenic { background: var(--ocean); }
+.marker-hotel { background: var(--lavender); }
+.marker-charge { background: #1A8B5A; }
+.marker-home { background: var(--sunset); }
+.marker-food { background: var(--gold); }
+
+/* Popup */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px; font-family: var(--sans);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.leaflet-popup-content { margin: 12px 16px; font-size: 0.82rem; line-height: 1.6; }
+.leaflet-popup-content h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+.leaflet-popup-content .popup-tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.55rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: 3px; margin-right: 4px; margin-bottom: 4px;
+}
+.popup-info { color: var(--ink-light); font-size: 0.78rem; margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .leg { grid-template-columns: 1fr; }
+  .leg-dist { text-align: left; }
+  #map { height: 50vh; }
+  .nav-filters { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Sky <span>Travel Map</span></div>
+  <div class="nav-filters">
+    <button class="filter-btn active-all" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="scenic">🏔️ 景点</button>
+    <button class="filter-btn" data-filter="hotel">🏨 住宿</button>
+    <button class="filter-btn" data-filter="charge">⚡ 充电</button>
+    <button class="filter-btn" data-filter="food">🍽️ 餐饮</button>
+  </div>
+</nav>
+
+<div id="map"></div>
+
+<div class="route-panel">
+  <div class="route-header">
+    <h2>路线详情</h2>
+    <span class="subtitle">4天3晚 · 波特兰 → Olympic NP → 波特兰 · 总计 ~550mi</span>
+  </div>
+  <div class="legs" id="route-legs"></div>
+</div>
+
+<div class="poi-section">
+  <div class="route-header">
+    <h2>全部标注点</h2>
+    <span class="subtitle" id="poi-count"></span>
+  </div>
+  <div class="poi-grid" id="poi-grid"></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">Sky Travel · 2026</div>
+  <div class="footer-meta">Updated 2026-05-25 · Leaflet + OpenStreetMap</div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── POI Data ──
+const pois = [
+  // Day 1
+  { id: 'pdx', name: '🏠 波特兰家', lat: 45.5152, lng: -122.6784, type: 'home',
+    info: '出发地，家充满电 320mi 续航', detail: '特斯拉家充，电费约$12' },
+  { id: 'sea', name: '✈️ 西雅图 SEA 机场', lat: 47.4502, lng: -122.3088, type: 'home',
+    info: '送孩子登机，周四上午', detail: 'PDX→SEA 175mi · 约3h' },
+  { id: 'centralia', name: '⚡ Centralia Supercharger', lat: 46.7163, lng: -122.9543, type: 'charge',
+    info: 'I-5上最重要的补电站', detail: '250kW V3 · 补15min加150mi · ~$10' },
+  { id: 'edmonds', name: '⛴️ Edmonds 轮渡码头', lat: 47.8106, lng: -122.3551, type: 'scenic',
+    info: 'Edmonds → Kingston 轮渡', detail: '含车$18.50 · 30min · 每1h一班' },
+  { id: 'kingston', name: '⛴️ Kingston 轮渡码头', lat: 47.7947, lng: -122.4944, type: 'scenic',
+    info: '到达Olympic半岛', detail: '轮渡下船后沿US-101北上' },
+  { id: 'pa', name: '📍 Port Angeles', lat: 48.1181, lng: -123.4307, type: 'hotel',
+    info: '公园北入口小镇，D1/D3/D4住宿地', detail: '有餐厅、超市、CCS公共充电桩' },
+  { id: 'hurricane', name: '🏔️ Hurricane Ridge', lat: 47.9694, lng: -123.4983, type: 'scenic',
+    info: '海拔5242ft高山草甸，6月野花盛开', detail: 'Hurricane Hill Trail 3.2mi · 2h · 轻松' },
+  { id: 'nextdoor', name: '🍽️ Next Door Gastropub', lat: 48.1178, lng: -123.4316, type: 'food',
+    info: 'Port Angeles推荐餐厅', detail: '美式简餐 $12-18 · 评分4.5' },
+  { id: 'qualityinn', name: '🏨 Quality Inn PA', lat: 48.1102, lng: -123.4298, type: 'hotel',
+    info: 'Port Angeles推荐住宿', detail: '$75-110/晚 · 离NP入口近 · 可能有Tesla Destination Charger' },
+  { id: 'greathouse', name: '🏨 Great House Motel', lat: 48.1156, lng: -123.4324, type: 'hotel',
+    info: 'Port Angeles经济住宿', detail: '$50-70/晚 · 最便宜选择' },
+  { id: 'pa-charge', name: '⚡ PA 公共充电站', lat: 48.1185, lng: -123.4289, type: 'charge',
+    info: 'Port Angeles市区CCS快充', detail: 'CCS DC 50kW · 1-2h充满 · 需转接头' },
+
+  // Day 2
+  { id: 'lakecrescent', name: '🌊 Lake Crescent', lat: 48.0917, lng: -123.8083, type: 'scenic',
+    info: '碧蓝冰川湖，美到不真实', detail: 'Marymere Falls Trail 1.8mi · 1h · 轻松' },
+  { id: 'hoh', name: '🌿 Hoh Rain Forest', lat: 47.8608, lng: -124.0947, type: 'scenic',
+    info: '北美最大温带雨林，苔藓世界', detail: 'Hall of Mosses 0.8mi · 40min + Hoh River Trail 至5mi · 3h' },
+  { id: 'rialto', name: '🌅 Rialto Beach', lat: 47.9175, lng: -124.6353, type: 'scenic',
+    info: '太平洋海岸，日落绝美', detail: '沙滩漫步 + Hole-in-the-Wall海蚀洞 · 日落约9pm' },
+  { id: 'forks', name: '📍 Forks', lat: 47.9503, lng: -124.3866, type: 'hotel',
+    info: 'D2住宿地，靠近海滩和雨林', detail: '小镇有超市和餐厅' },
+  { id: 'forksmotel', name: '🏨 The Forks Motel', lat: 47.9508, lng: -124.3852, type: 'hotel',
+    info: 'Forks推荐住宿', detail: '$60-90/晚 · 免费WiFi · 性价比最高' },
+  { id: 'moracamp', name: '🏕️ Mora Campground', lat: 47.9322, lng: -124.5831, type: 'hotel',
+    info: 'Rialto Beach旁营地', detail: '$24/晚 · recreation.gov预约 · 海浪声伴眠' },
+  { id: 'sapporo', name: '🍽️ Sapporo 日料', lat: 47.9501, lng: -124.3882, type: 'food',
+    info: 'Forks日式简餐', detail: '$10-15 · 公园附近少有的热食选择' },
+
+  // Day 3
+  { id: 'solduc', name: '💧 Sol Duc Falls', lat: 47.9664, lng: -123.9297, type: 'scenic',
+    info: '三叉瀑布，最上镜的瀑布之一', detail: 'Sol Duc Falls Trail 1.6mi · 1h · 轻松' },
+  { id: 'solduchotspring', name: '♨️ Sol Duc Hot Springs', lat: 47.9700, lng: -123.9250, type: 'scenic',
+    info: '天然温泉池，徒步后泡一泡', detail: '门票约$15 · 5月中-9月开放' },
+  { id: 'shishi', name: '🏖️ Shi Shi Beach', lat: 48.2733, lng: -124.6822, type: 'scenic',
+    info: '太平洋最壮观海岸线，海蚀柱群', detail: '4mi往返 · 4h · 中等 · Makah许可$10 · 需查潮汐' },
+  { id: 'secondbeach', name: '🏖️ Second Beach', lat: 47.8986, lng: -124.6053, type: 'scenic',
+    info: 'Shi Shi的轻松替代', detail: '1.4mi往返 · 1.5h · 轻松 · 同样壮观' },
+
+  // Day 4
+  { id: 'dungeness', name: '🦅 Dungeness Spit', lat: 48.1811, lng: -123.1078, type: 'scenic',
+    info: '5.5英里天然沙洲伸入海峡', detail: '走至灯塔5.5mi·4h 或走一半2.5mi·2h · 海豹海鸥' },
+
+  // Olympia SC
+  { id: 'olympia-sc', name: '⚡ Olympia Supercharger', lat: 47.0379, lng: -122.9007, type: 'charge',
+    info: '回程备选补电站', detail: '250kW V3 · 约$8-12' },
+];
+
+// ── Route legs (with real distances/times) ──
+const routeLegs = [
+  { day: 'D1 · 周四 6/11', from: '波特兰', to: '西雅图SEA机场', dist: '175 mi', time: '3h', via: 'I-5 N', notes: '家充满电出发，续航320mi' },
+  { day: null, from: 'SEA机场', to: 'Edmonds轮渡', dist: '15 mi', time: '30min', via: 'I-5 N → WA-104', notes: '轮渡$18.50含车' },
+  { day: null, from: 'Kingston轮渡', to: 'Port Angeles', dist: '55 mi', time: '1h', via: 'US-101 N', notes: '' },
+  { day: null, from: 'Port Angeles', to: 'Hurricane Ridge', dist: '17 mi', time: '30min', via: 'Hurricane Ridge Rd', notes: '上山盘山路，FSD需手动' },
+  { day: null, from: 'Hurricane Ridge', to: 'Port Angeles', dist: '17 mi', time: '30min', via: '下山原路返回', notes: '回PA入住+晚餐' },
+  { day: 'D2 · 周五 6/12', from: 'Port Angeles', to: 'Lake Crescent', dist: '20 mi', time: '25min', via: 'US-101 W', notes: 'Marymere Falls徒步' },
+  { day: null, from: 'Lake Crescent', to: 'Hoh Rain Forest', dist: '40 mi', time: '50min', via: 'US-101 S → Upper Hoh Rd', notes: '雨林深度徒步' },
+  { day: null, from: 'Hoh Rain Forest', to: 'Rialto Beach', dist: '30 mi', time: '40min', via: 'US-101 → Mora Rd', notes: '赶日落9pm' },
+  { day: null, from: 'Rialto Beach', to: 'Forks', dist: '12 mi', time: '20min', via: 'Mora Rd → US-101', notes: '入住Forks Motel或Mora营地' },
+  { day: 'D3 · 周六 6/13', from: 'Forks', to: 'Sol Duc Falls', dist: '28 mi', time: '40min', via: 'US-101 E → Sol Duc Rd', notes: '瀑布+温泉' },
+  { day: null, from: 'Sol Duc', to: 'Shi Shi Beach', dist: '55 mi', time: '1h10min', via: 'US-101 N → Cape Flattery Rd', notes: '需Makah许可$10' },
+  { day: null, from: 'Shi Shi Beach', to: 'Port Angeles', dist: '60 mi', time: '1h15min', via: 'US-101 S', notes: '回PA入住' },
+  { day: 'D4 · 周日 6/14', from: 'Port Angeles', to: 'Dungeness Spit', dist: '6 mi', time: '12min', via: 'US-101 E → Marine Dr', notes: '沙洲徒步' },
+  { day: null, from: 'Dungeness', to: 'Port Angeles', dist: '6 mi', time: '12min', via: '回PA午餐', notes: '' },
+  { day: null, from: 'Port Angeles', to: 'Edmonds（轮渡）', dist: '70 mi', time: '1h20min', via: 'US-101 E → WA-104', notes: '轮渡回东岸' },
+  { day: null, from: 'Kingston', to: 'Centralia补电', dist: '95 mi', time: '1h30min', via: 'I-5 S', notes: '⚡ Supercharger补电15min' },
+  { day: null, from: 'Centralia', to: '波特兰', dist: '100 mi', time: '1h30min', via: 'I-5 S', notes: '到家！' },
+];
+
+// ── Initialize Map ──
+const map = L.map('map', { zoomControl: true }).setView([47.7, -123.6], 8);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; OpenStreetMap &copy; CARTO',
+  maxZoom: 18
+}).addTo(map);
+
+// ── Marker Colors ──
+const typeColors = {
+  scenic: '#1B6B93', hotel: '#7B68AE', charge: '#1A8B5A',
+  home: '#D4622B', food: '#C49A2A'
+};
+const typeLabels = {
+  scenic: '🏔️ 景点', hotel: '🏨 住宿', charge: '⚡ 充电',
+  home: '🏠 起点/终点', food: '🍽️ 餐饮'
+};
+const typeNames = { scenic: 'scenic', hotel: 'hotel', charge: 'charge', home: 'home', food: 'food' };
+
+// ── Create Markers ──
+const markers = {};
+const markerGroup = L.featureGroup();
+
+pois.forEach(poi => {
+  const color = typeColors[poi.type];
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="custom-marker" style="background:${color}">${poi.name.charAt(poi.name.indexOf(' ') + 1) || poi.name.charAt(0)}</div>`,
+    iconSize: [28, 28], iconAnchor: [14, 14]
+  });
+
+  const marker = L.marker([poi.lat, poi.lng], { icon })
+    .bindPopup(`
+      <h3>${poi.name}</h3>
+      <span class="popup-tag" style="background:${color}20; color:${color}">${typeLabels[poi.type]}</span>
+      <div class="popup-info">${poi.info}</div>
+      <div class="popup-info" style="color:#7A7A72; font-size:0.72rem; margin-top:4px">${poi.detail}</div>
+    `)
+    .addTo(markerGroup);
+
+  markers[poi.id] = marker;
+});
+
+markerGroup.addTo(map);
+map.fitBounds(markerGroup.getBounds().pad(0.1));
+
+// ── Route Lines (day by day) ──
+const dayRoutes = {
+  'D1': { color: '#D4622B', coords: [
+    [45.5152,-122.6784],[47.4502,-122.3088],[47.8106,-122.3551],[47.7947,-122.4944],
+    [48.1181,-123.4307],[47.9694,-123.4983],[48.1181,-123.4307]
+  ]},
+  'D2': { color: '#1B6B93', coords: [
+    [48.1181,-123.4307],[48.0917,-123.8083],[47.8608,-124.0947],
+    [47.9175,-124.6353],[47.9503,-124.3866]
+  ]},
+  'D3': { color: '#2D5A3D', coords: [
+    [47.9503,-124.3866],[47.9664,-123.9297],[48.2733,-124.6822],[48.1181,-123.4307]
+  ]},
+  'D4': { color: '#C49A2A', coords: [
+    [48.1181,-123.4307],[48.1811,-123.1078],[48.1181,-123.4307],
+    [47.8106,-122.3551],[46.7163,-122.9543],[45.5152,-122.6784]
+  ]}
+};
+
+Object.entries(dayRoutes).forEach(([day, route]) => {
+  L.polyline(route.coords, {
+    color: route.color, weight: 3.5, opacity: 0.7,
+    dashArray: day === 'D4' ? '8, 6' : null
+  }).addTo(map).bindPopup(`<strong>${day} 路线</strong>`);
+});
+
+// ── Legend ──
+const legend = L.control({ position: 'bottomleft' });
+legend.onAdd = () => {
+  const div = L.DomUtil.create('div', 'legend');
+  div.innerHTML = `
+    <div class="legend-item"><div class="legend-dot" style="background:#D4622B"></div>D1 周四</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1B6B93"></div>D2 周五</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2D5A3D"></div>D3 周六</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#C49A2A"></div>D4 周日</div>
+    <hr style="border:none;border-top:1px solid #E2DED6;margin:4px 0">
+    <div class="legend-item"><div class="legend-dot" style="background:#1B6B93"></div>景点</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7B68AE"></div>住宿</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1A8B5A"></div>充电</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#D4622B"></div>起点/终点</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#C49A2A"></div>餐饮</div>
+  `;
+  return div;
+};
+legend.addTo(map);
+
+// ── Filter Buttons ──
+let currentFilter = 'all';
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-all'));
+    btn.classList.add('active-all');
+    currentFilter = btn.dataset.filter;
+    filterMarkers(currentFilter);
+  });
+});
+
+function filterMarkers(filter) {
+  pois.forEach(poi => {
+    const marker = markers[poi.id];
+    if (filter === 'all' || poi.type === filter) {
+      marker.addTo(map);
+    } else {
+      map.removeLayer(marker);
+    }
+  });
+}
+
+// ── Render Route Legs ──
+const legsContainer = document.getElementById('route-legs');
+let currentDay = null;
+
+routeLegs.forEach(leg => {
+  if (leg.day && leg.day !== currentDay) {
+    currentDay = leg.day;
+    legsContainer.innerHTML += `<div class="day-sep">${currentDay}</div>`;
+  }
+  legsContainer.innerHTML += `
+    <div class="leg">
+      <div class="leg-from">${leg.from}<br><span class="leg-tag tag-scenic">→</span></div>
+      <div class="leg-detail"><strong>${leg.to}</strong> · ${leg.via}${leg.notes ? '<br>' + leg.notes : ''}</div>
+      <div class="leg-dist"><span class="dist-num">${leg.dist}</span><br>${leg.time}</div>
+    </div>
+  `;
+});
+
+// ── Render POI Grid ──
+const poiGrid = document.getElementById('poi-grid');
+document.getElementById('poi-count').textContent = `共 ${pois.length} 个标注点`;
+
+const typeOrder = ['home', 'scenic', 'hotel', 'charge', 'food'];
+const sortedPois = [...pois].sort((a, b) => typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type));
+
+sortedPois.forEach(poi => {
+  const iconClass = `icon-${poi.type}`;
+  poiGrid.innerHTML += `
+    <div class="poi-card" data-type="${poi.type}" onclick="flyTo('${poi.id}')">
+      <div class="poi-icon ${iconClass}">${typeLabels[poi.type].split(' ')[0]}</div>
+      <div class="poi-text">
+        <h4>${poi.name.replace(/^[^\s]+\s/, '')}</h4>
+        <p>${poi.info}</p>
+        <div class="poi-meta">${poi.detail}</div>
+      </div>
+    </div>
+  `;
+});
+
+function flyTo(id) {
+  const poi = pois.find(p => p.id === id);
+  if (poi) {
+    map.flyTo([poi.lat, poi.lng], 13, { duration: 1 });
+    markers[poi.id].openPopup();
+  }
+}
+</script>
+</body>
+</html>

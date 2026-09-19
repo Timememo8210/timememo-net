@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>墨记 Web — 你的网页空间</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf9f7;--bg-deep:#f2f0ec;--card:#fff;--text:#1c1917;--text-muted:#78716c;--accent:#ea580c;--accent-light:#fed7aa;--accent-dark:#c2410c;--border:#e7e5e4;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);--shadow-lg:0 4px 24px rgba(0,0,0,.08);--radius:12px;--fd:'Playfair Display',Georgia,serif;--fb:'Source Sans 3',-apple-system,sans-serif;--fm:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:#fff}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;background:rgba(250,249,247,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--fd);font-size:1.5rem;font-weight:900;letter-spacing:-.02em}.logo span{color:var(--accent)}
+.links{display:flex;gap:2rem;align-items:center;list-style:none}
+.links a{color:var(--text-muted);text-decoration:none;font-size:.9rem;font-weight:600;transition:color .2s}.links a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.4rem;border-radius:999px;font-family:var(--fb);font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.bp{background:var(--accent);color:#fff}.bp:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(234,88,12,.3)}
+.bg{background:transparent;color:var(--text);border:1.5px solid var(--border)}.bg:hover{border-color:var(--accent);color:var(--accent)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(234,88,12,.08) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(234,88,12,.05) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(254,215,170,.15) 0%,transparent 60%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;background:var(--accent-light);color:var(--accent-dark);border-radius:999px;font-size:.8rem;font-weight:600;margin-bottom:2rem;opacity:0;animation:fu .6s ease .1s forwards}
+.hero h1{font-family:var(--fd);font-size:clamp(3rem,8vw,6.5rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;max-width:900px;margin-bottom:1.5rem;opacity:0;animation:fu .6s ease .2s forwards}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hsub{font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--text-muted);max-width:600px;margin-bottom:3rem;font-weight:300;opacity:0;animation:fu .6s ease .35s forwards}
+.hact{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fu .6s ease .5s forwards}
+.hact .btn{padding:.8rem 2rem;font-size:1rem}
+.sec{max-width:1200px;margin:0 auto;padding:4rem 2rem 8rem}
+.sl{font-family:var(--fm);font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:1rem;text-align:center}
+.st{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:700;text-align:center;margin-bottom:3rem;letter-spacing:-.02em}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1.5rem;align-items:center;margin-bottom:6rem;padding:0 1rem}
+.fs{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:var(--shadow);transition:all .3s;opacity:0;animation:fu .6s ease forwards}
+.fs:nth-child(1){animation-delay:.6s}.fs:nth-child(3){animation-delay:.8s}.fs:nth-child(5){animation-delay:1s}
+.fs:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.fi{font-size:2.5rem;margin-bottom:1rem}
+.fs h3{font-family:var(--fd);font-size:1.2rem;margin-bottom:.5rem}
+.fs p{font-size:.85rem;color:var(--text-muted)}
+.fa{font-size:1.5rem;color:var(--accent);opacity:0;animation:fi .4s ease forwards}.fa:nth-child(2){animation-delay:.7s}.fa:nth-child(4){animation-delay:.9s}
+.idemo{max-width:640px;margin:4rem auto;background:var(--card);border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:border-color .3s}
+.idemo:hover,.idemo:focus-within{border-color:var(--accent)}
+.ih{padding:1rem 1.5rem;background:var(--bg-deep);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.ih span{font-size:.85rem;font-weight:600}
+.itabs{display:flex;gap:.5rem}
+.it{padding:.3rem .8rem;border-radius:999px;font-size:.75rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text-muted);transition:all .2s;font-family:var(--fb)}
+.it.act{background:var(--accent);color:#fff}
+.ia{padding:1.5rem}
+textarea{width:100%;min-height:120px;border:none;font-family:var(--fb);font-size:1rem;line-height:1.7;color:var(--text);background:transparent;resize:none;outline:none}textarea::placeholder{color:#ccc}
+.if{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.if .hint{font-size:.75rem;color:var(--text-muted)}
+.gp{max-width:640px;margin:2rem auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden;display:none}
+.gp.vis{display:block;animation:fu .6s ease forwards}
+.gph{padding:2rem 2rem 0}.gph h3{font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.gph .meta{font-size:.8rem;color:var(--text-muted);display:flex;gap:1rem}
+.gpb{padding:1.5rem 2rem 2rem;line-height:1.8;color:#44403c}.gpb p{margin-bottom:.8rem}
+.gpf{padding:1rem 2rem;background:var(--bg-deep);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+.gpf .url{font-family:var(--fm);font-size:.75rem;color:var(--accent)}
+.gpf .views{font-size:.75rem;color:var(--text-muted)}
+.tmpls{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:4rem}
+.tc{border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s;cursor:pointer}
+.tc:hover{border-color:var(--accent);transform:scale(1.02)}
+.tc.act{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-light)}
+.tch{padding:1rem 1.5rem;background:var(--bg-deep);display:flex;justify-content:space-between;align-items:center}
+.tch h4{font-size:.9rem;font-weight:700}
+.tcb{padding:1.5rem;min-height:250px;background:#fff;font-size:.8rem;line-height:1.8}
+.tcb h5{font-family:var(--fd);font-size:1.1rem;margin-bottom:.5rem}
+.tcb p{color:var(--text-muted);margin-bottom:.5rem}
+.dv{width:60px;height:3px;background:var(--accent);border-radius:2px;margin:1rem 0}
+.blk{background:var(--bg);padding:.8rem;border-radius:8px;margin-bottom:.5rem;font-family:var(--fm);font-size:.7rem}
+.comp{max-width:800px;margin:0 auto 4rem}
+.cr{display:grid;grid-template-columns:120px 1fr 1fr;border-bottom:1px solid var(--border)}
+.cr.hd{font-weight:700;background:var(--bg-deep)}
+.cr .c{padding:.8rem 1.5rem;font-size:.85rem;border-right:1px solid var(--border)}.cr .c:last-child{border-right:none}
+.hl{color:var(--accent);font-weight:600}
+.cta{text-align:center;padding:8rem 2rem;position:relative}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(234,88,12,.06) 0%,transparent 50%);pointer-events:none}
+.cta h2{font-family:var(--fd);font-size:clamp(2rem,5vw,3.5rem);font-weight:900;margin-bottom:1rem;letter-spacing:-.02em}
+.cta p{color:var(--text-muted);font-size:1.1rem;margin-bottom:2rem;font-weight:300}
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.8rem}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:#fff;padding:.8rem 1.5rem;border-radius:999px;font-size:.85rem;font-weight:600;z-index:200;transition:transform .3s ease;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@media(max-width:768px){.flow{grid-template-columns:1fr;gap:1rem}.fa{transform:rotate(90deg)}.tmpls{grid-template-columns:1fr}.cr{grid-template-columns:80px 1fr 1fr}.cr .c{padding:.5rem .8rem;font-size:.75rem}.links{gap:1rem}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">墨记<span>Web</span></div>
+  <ul class="links">
+    <li><a href="ai-web-html.html">AI Web HTML 主页</a></li>
+    <li><a href="index.html">Sky Portal</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="badge">✨ 每条内容 = 一个完整网页</div>
+  <h1>说出来，<em>AI</em>帮你变成网页</h1>
+  <p class="hsub">不是一张图，不是一个视频，而是一个丰富的、可互动的网页。你的知识库、信息库、个人空间——三位一体。</p>
+  <div class="hact">
+    <button class="btn bp" onclick="si()">🎤 开始创作</button>
+    <button class="btn bg" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">看看效果 ↓</button>
+  </div>
+</section>
+
+<section class="sec" id="demo">
+  <div class="sl">How it works</div>
+  <h2 class="st">三步完成创作</h2>
+  <div class="flow">
+    <div class="fs"><div class="fi">🎤</div><h3>说 或 写</h3><p>30秒语音或几行文字</p></div>
+    <div class="fa">→</div>
+    <div class="fs"><div class="fi">🤖</div><h3>AI 生成</h3><p>自动整理成结构化网页</p></div>
+    <div class="fa">→</div>
+    <div class="fs"><div class="fi">🌐</div><h3>发布分享</h3><p>一键获得可分享链接</p></div>
+  </div>
+
+  <div class="idemo" id="idemo">
+    <div class="ih">
+      <span>✏️ 创作区</span>
+      <div class="itabs">
+        <button class="it act" onclick="stab(this)">文字</button>
+        <button class="it" onclick="stab(this)">语音</button>
+      </div>
+    </div>
+    <div class="ia">
+      <textarea id="ui" placeholder="随便说点什么…&#10;&#10;比如：今天学了一个新概念叫"注意力稀缺理论"，这个时代最稀缺的不是时间而是注意力。自动驾驶和AI解放了我的注意力，让我每天都有更多时间思考…"></textarea>
+    </div>
+    <div class="if">
+      <span class="hint">💡 越详细越好，AI会帮你整理</span>
+      <button class="btn bp" onclick="gen()">✨ 生成网页</button>
+    </div>
+  </div>
+
+  <div class="gp" id="gp">
+    <div class="gph"><h3 id="gt"></h3><div class="meta"><span id="gd"></span><span id="gta"></span></div></div>
+    <div class="gpb" id="gb"></div>
+    <div class="gpf"><span class="url">🔗 mojiweb.app/s/k7x9m2</span><span class="views">👁 0 次浏览</span></div>
+  </div>
+</section>
+
+<section class="sec" id="templates">
+  <div class="sl">Templates</div>
+  <h2 class="st">三种模板，覆盖日常场景</h2>
+  <div class="tmpls">
+    <div class="tc act" onclick="stmp(this)">
+      <div class="tch"><h4>📝 日记 / 感悟</h4><span style="font-size:.75rem;color:var(--text-muted)">默认</span></div>
+      <div class="tcb"><div class="dv"></div><h5>标题自动生成</h5><p>正文内容，AI自动排版，段落分明…</p><p>支持<strong>加粗</strong>、<em>斜体</em>等格式</p><p style="color:var(--accent);font-style:italic;font-size:.75rem;margin-top:1rem">— 写于 2026年5月10日</p></div>
+    </div>
+    <div class="tc" onclick="stmp(this)">
+      <div class="tch"><h4>🔍 知识笔记</h4></div>
+      <div class="tcb"><div class="dv"></div><h5>概念标题</h5><p><strong>核心要点：</strong></p><div class="blk">• 要点一：…<br>• 要点二：…<br>• 要点三：…</div><p><strong>我的理解：</strong></p><p style="color:var(--text-muted)">个人感悟和思考…</p></div>
+    </div>
+    <div class="tc" onclick="stmp(this)">
+      <div class="tch"><h4>📊 项目展示</h4></div>
+      <div class="tcb"><div class="dv"></div><h5>项目名称</h5><div class="blk" style="background:var(--accent-light);color:var(--accent-dark)">🏷️ 标签一 &nbsp;🏷️ 标签二 &nbsp;🏷️ 标签三</div><p><strong>项目简介：</strong></p><p>一段描述文字…</p><div class="blk">→ 查看详情</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="compare">
+  <div class="sl">Why different</div>
+  <h2 class="st">和现有产品的区别</h2>
+  <div class="comp">
+    <div class="cr hd"><div class="c">维度</div><div class="c">小红书 / 抖音</div><div class="c hl">墨记 Web</div></div>
+    <div class="cr"><div class="c" style="font-weight:600">内容形态</div><div class="c">单一媒体（图/视频）</div><div class="c hl">完整网页（无限丰富）</div></div>
+    <div class="cr"><div class="c" style="font-weight:600">创作门槛</div><div class="c">需要拍摄/剪辑</div><div class="c hl">说一句话就搞定</div></div>
+    <div class="cr"><div class="c" style="font-weight:600">AI参与度</div><div class="c">辅助（滤镜/推荐）</div><div class="c hl">核心（自动生成内容）</div></div>
+    <div class="cr"><div class="c" style="font-weight:600">信息密度</div><div class="c">低（15秒-3分钟）</div><div class="c hl">高（网页可无限展开）</div></div>
+    <div class="cr"><div class="c" style="font-weight:600">可搜索性</div><div class="c">平台内搜索</div><div class="c hl">开放网页，搜索引擎可索引</div></div>
+    <div class="cr"><div class="c" style="font-weight:600">数据归属</div><div class="c">平台所有</div><div class="c hl">用户自己的网页</div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>你的想法值得一个<br><em style="color:var(--accent);font-style:italic">完整的网页</em></h2>
+  <p>不是一张图，不是一个短视频。是一个属于你的、丰富的、可互动的网页。</p>
+  <button class="btn bp" onclick="si()" style="padding:1rem 3rem;font-size:1.1rem">✨ 立即体验</button>
+</section>
+
+<footer><p>墨记 Web — MVP Prototype v0.1</p><p style="margin-top:.5rem">由 Sky 为晓波打造 · 2026</p></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+function si(){document.getElementById('idemo').scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('ui').focus()}
+function stab(el){document.querySelectorAll('.it').forEach(t=>t.classList.remove('act'));el.classList.add('act')}
+function stmp(el){document.querySelectorAll('.tc').forEach(c=>c.classList.remove('act'));el.classList.add('act')}
+
+const D=[
+{t:'注意力稀缺理论：这个时代最缺的不是时间',ta:'#认知升级 #注意力 #AI时代',b:'<p>今天突然想明白一件事：<strong>这个时代最稀缺的不是时间，是注意力。</strong></p><p>下班后不想动，不是懒。是白天注意力被耗尽了。</p><p>自动驾驶+FSD+AI助手，本质不是省时间——是<strong>买回注意力和认知带宽</strong>。我现在每天在车上的一个小时变成了纯思考时间。</p><p>核心洞察：AI不应该让每个人都变成AI，而是<strong>AI变成每个人</strong>。</p>'},
+{t:'芒格误判心理学：奖励超级反应倾向',ta:'#芒格 #心理学 #投资',b:'<p><strong>核心概念：</strong>人们会对激励做出超乎寻常的反应，好的坏的都算。</p><p><strong>三个例子：</strong></p><p>1. 外科医生倾向建议手术——因为手术有收入，观察没有</p><p>2. 销售佣金制度导致过度推销</p><p>3. 联邦快递把计件改计时后效率暴跌</p><p><strong>我的思考：</strong>设计系统时先想清楚激励机制。方向错了，所有道德说教都是空话。</p>'},
+{t:'Intel 18A 制程：EUV光刻的关键突破',ta:'#半导体 #Intel #18A',b:'<p><strong>什么是18A？</strong>Intel 18埃米制程（1.8nm级别），找回制程领先地位的关键节点。</p><p><strong>核心技术路径：</strong></p><p>• 高NA EUV光刻 — NA从0.33提升到0.55</p><p>• RibbonFET — GAA晶体管架构</p><p>• PowerVia — 背面供电技术</p><p><strong>我的判断：</strong>18A量产成功，Intel将重新成为制程领导者。关键在良率爬坡速度。</p>'}
+];
+
+function gen(){
+  const p=document.getElementById('gp');
+  const d=D[Math.floor(Math.random()*D.length)];
+  document.getElementById('gt').textContent=d.t;
+  document.getElementById('gd').textContent='2026年5月10日';
+  document.getElementById('gta').textContent=d.ta;
+  document.getElementById('gb').innerHTML=d.b;
+  p.classList.add('vis');
+  setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'center'}),100);
+  const t=document.getElementById('toast');t.textContent='✨ 网页已生成！链接已复制到剪贴板';t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+</script>
+</body>
+</html>

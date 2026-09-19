@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* === Zero-card design: pure typography + whitespace + lines === */
+:root {
+  --bg: #FAFAF8;
+  --text: #0C0C0C;
+  --text-2: #5C5C5C;
+  --text-3: #9C9C9C;
+  --accent: #C23C2A;
+  --line: #D4D0C8;
+  --font-serif: 'Instrument Serif', 'Noto Sans SC', Georgia, serif;
+  --font-sans: 'Noto Sans SC', -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Top Rule ── */
+.top-rule {
+  height: 3px;
+  background: var(--text);
+}
+
+/* ── Header ── */
+.header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header-left h1 {
+  font-family: var(--font-serif);
+  font-size: 2em;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.header-left .sub {
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  color: var(--text-3);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.header-nav {
+  display: flex;
+  gap: 24px;
+}
+.header-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  text-decoration: none;
+  color: var(--text-2);
+  letter-spacing: 0.03em;
+  padding-bottom: 2px;
+  transition: color 0.15s;
+}
+.header-nav a:hover { color: var(--accent); }
+
+/* ── Thin divider ── */
+.divider {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.divider hr {
+  border: none;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ── Content Area ── */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero Section ── */
+.hero {
+  padding: 64px 0 56px;
+}
+.hero-text {
+  font-family: var(--font-serif);
+  font-size: 3.4em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  max-width: 680px;
+}
+.hero-text em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-desc {
+  margin-top: 20px;
+  color: var(--text-2);
+  font-size: 0.95em;
+  max-width: 420px;
+  line-height: 1.8;
+}
+
+/* ── Stats Row (no boxes, just text) ── */
+.stats-row {
+  display: flex;
+  gap: 48px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+.stat-item .value {
+  font-family: var(--font-serif);
+  font-size: 2.2em;
+  line-height: 1;
+  color: var(--text);
+}
+.stat-item .label {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  color: var(--text-3);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Section ── */
+.section {
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 28px;
+}
+
+/* ── Link List (NO CARDS!) ── */
+.link-list {
+  list-style: none;
+}
+.link-item {
+  display: grid;
+  grid-template-columns: 32px 1fr auto auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.15s;
+}
+.link-item:last-child { border-bottom: none; }
+.link-item:hover { color: var(--accent); }
+.link-item:hover .link-arrow { opacity: 1; transform: translateX(0); }
+.link-icon {
+  font-size: 0.9em;
+  width: 32px;
+  text-align: center;
+}
+.link-title {
+  font-family: var(--font-serif);
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.3;
+}
+.link-desc {
+  font-size: 0.82em;
+  color: var(--text-2);
+  text-align: right;
+  max-width: 240px;
+}
+.link-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.link-arrow {
+  font-family: var(--font-sans);
+  font-size: 0.8em;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+/* ── Featured (full-width text block, no box) ── */
+.featured {
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+}
+.featured-label {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+.featured h3 {
+  font-family: var(--font-serif);
+  font-size: 2em;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.featured p {
+  color: var(--text-2);
+  font-size: 0.9em;
+  max-width: 500px;
+}
+.featured-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: all 0.15s;
+}
+.featured-link:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+/* ── Pull Quote ── */
+.quote {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 8px 0;
+}
+.quote p {
+  font-family: var(--font-serif);
+  font-size: 1.5em;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text-2);
+  max-width: 580px;
+}
+.quote cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.65em;
+  color: var(--text-3);
+  margin-top: 12px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Footer ── */
+.footer {
+  padding: 40px 0;
+  border-top: 3px solid var(--text);
+  margin-top: 48px;
+}
+.footer p {
+  font-family: var(--font-mono);
+  font-size: 0.68em;
+  color: var(--text-3);
+  letter-spacing: 0.1em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .header { padding: 24px 16px 0; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .hero { padding: 40px 0 32px; }
+  .hero-text { font-size: 2.4em; }
+  .page { padding: 0 16px; }
+  .divider { padding: 0 16px; }
+  .link-item { grid-template-columns: 28px 1fr auto; }
+  .link-desc { display: none; }
+  .stats-row { gap: 24px; }
+}
+
+/* ── Stagger ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.section { animation: fadeIn 0.4s ease both; }
+.section:nth-child(2) { animation-delay: 0.05s; }
+.section:nth-child(3) { animation-delay: 0.1s; }
+.section:nth-child(4) { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<div class="top-rule"></div>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Sky Portal</h1>
+    <div class="sub">Sky Portal's Digital Space · Research · Tools · Records</div>
+  </div>
+  <div class="header-nav">
+    <a href="#daily">Daily</a>
+    <a href="#research">Research</a>
+    <a href="#life">Life</a>
+    <a href="#tools">Tools</a>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-text">研究，工具，记录。<br>一个人的<em>数字空间</em>。</div>
+    <div class="hero-desc">由 Sky AI 驱动的个人知识库。半导体行业洞察、自动化研报、投资笔记、生活记录——一切都在这里。</div>
+    <div class="stats-row">
+      <div class="stat-item"><span class="value">11</span><span class="label">Published</span></div>
+      <div class="stat-item"><span class="value">5</span><span class="label">Active</span></div>
+      <div class="stat-item"><span class="value">76</span><span class="label">Days</span></div>
+    </div>
+  </div>
+
+  <!-- Featured -->
+  <div class="featured">
+    <div class="featured-label">⚡ Featured Report</div>
+    <h3>Intel × Tesla Terafab</h3>
+    <p>$200-250亿芯片超级工厂项目深度调研。来自半导体行业内部的持续追踪与分析。</p>
+    <a class="featured-link" href="research/intel-tesla-terafab.html">阅读完整报告 →</a>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote">
+    <p>「半导体研发本质上全是数据，AI将彻底重构研发流程。」</p>
+    <cite>— Sky Portal，2026</cite>
+  </div>
+
+  <!-- Daily -->
+  <div class="section" id="daily">
+    <div class="section-label">01 — 每日更新</div>
+    <div class="link-list">
+      <a class="link-item" href="research/index.html">
+        <span class="link-icon">📡</span>
+        <span class="link-title">每日研报</span>
+        <span class="link-desc">半导体 · 股票 · 巴萨 · Portland</span>
+        <span class="link-tag">自动 · 每日</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="tech/index.html">
+        <span class="link-icon">🔬</span>
+        <span class="link-title">每日科技</span>
+        <span class="link-desc">芯片架构 · 技术突破 · 产业动态</span>
+        <span class="link-tag">自动 · 每日</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="market/index.html">
+        <span class="link-icon">📊</span>
+        <span class="link-title">每日行情</span>
+        <span class="link-desc">美股 · A股 · 港股</span>
+        <span class="link-tag">自动 · 9PM</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="science/index.html">
+        <span class="link-icon">🧬</span>
+        <span class="link-title">每周科学前沿</span>
+        <span class="link-desc">Science · Nature · Cell · PNAS</span>
+        <span class="link-tag">自动 · 周三</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="prompts/index.html">
+        <span class="link-icon">⚙</span>
+        <span class="link-title">Prompt 库</span>
+        <span class="link-desc">定时任务指令集</span>
+        <span class="link-tag">手动</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Research -->
+  <div class="section" id="research">
+    <div class="section-label">02 — 研究</div>
+    <div class="link-list">
+      <a class="link-item" href="research/intel-tesla-terafab.html">
+        <span class="link-icon">🏭</span>
+        <span class="link-title">Intel × Tesla Terafab</span>
+        <span class="link-desc">$200-250亿芯片超级工厂调研</span>
+        <span class="link-tag">进行中</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="nvidia-report.html">
+        <span class="link-icon">💚</span>
+        <span class="link-title">NVIDIA 深度报告</span>
+        <span class="link-desc">GPU龙头财报与AI算力展望</span>
+        <span class="link-tag">已完成</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="ai-life.html">
+        <span class="link-icon">🤖</span>
+        <span class="link-title">AI 与生活</span>
+        <span class="link-desc">AI时代个人工作流实践</span>
+        <span class="link-tag">持续更新</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="semiconductor-equipment-ai.html">
+        <span class="link-icon">🔬</span>
+        <span class="link-title">半导体设备 × AI</span>
+        <span class="link-desc">设备端AI应用与智能化趋势</span>
+        <span class="link-tag">专题</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Life -->
+  <div class="section" id="life">
+    <div class="section-label">03 — 生活</div>
+    <div class="link-list">
+      <a class="link-item" href="naturalization.html">
+        <span class="link-icon">🇺🇸</span>
+        <span class="link-title">入籍指南</span>
+        <span class="link-desc">N-400全流程记录</span>
+        <span class="link-tag">2026</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="travel.html">
+        <span class="link-icon">✈️</span>
+        <span class="link-title">旅行计划</span>
+        <span class="link-desc">PDX↔NKG · 2026夏</span>
+        <span class="link-tag">计划中</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="investment.html">
+        <span class="link-icon">💰</span>
+        <span class="link-title">投资理财</span>
+        <span class="link-desc">个人投资笔记</span>
+        <span class="link-tag">长期</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="section" id="tools">
+    <div class="section-label">04 — 项目 & 工具</div>
+    <div class="link-list">
+      <a class="link-item" href="coach/munger.html">
+        <span class="link-icon">📚</span>
+        <span class="link-title">芒格误判心理学</span>
+        <span class="link-desc">每日一课 · 25条 · 13/25</span>
+        <span class="link-tag">每日推送</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="skills.html">
+        <span class="link-icon">⚡</span>
+        <span class="link-title">OpenClaw Skills</span>
+        <span class="link-desc">AI技能集 · 自动化工作流</span>
+        <span class="link-tag">运行中</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="my-garden/index.html">
+        <span class="link-icon">🌻</span>
+        <span class="link-title">My Garden</span>
+        <span class="link-desc">花园记录</span>
+        <span class="link-tag">生活</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="page">
+  <div class="footer">
+    <p>Sky Portal · Sky Portal · Powered by OpenClaw ☁️</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-05-28</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date{color:#666;font-size:0.8em;margin-top:8px;text-align:right}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-05-28 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 CXL？为什么数据中心需要它？</h3>
+<p>CXL（Compute Express Link）是一种高速互连协议，跑在 PCIe 物理通道上，但比普通 PCIe 多了一项超能力：<b>缓存一致性</b>（Cache Coherence）。</p>
+<p>打比方：想象 CPU 和 GPU 是两个厨师，共用一个冰箱（内存）。没有 CXL 时，厨师A把食材放进冰箱后，得大喊一声"我放好了"——厨师B才知道。有了 CXL，冰箱自动同步，两个厨师打开冰箱看到的永远是最新状态。</p>
+<p>为什么数据中心特别需要？因为 AI 训练时 GPU 和 CPU 频繁交换海量数据。传统方式每次都要"复制一份"，又慢又费电。CXL 让 CPU、GPU、DPU 共享同一池内存（CXL Memory Pooling），省掉了来回搬运的步骤。</p>
+<p>2026年，CXL 3.0 规范已支持多层级交换（Switching），一台服务器可以挂几 TB 的 CXL 扩展内存。Intel、AMD、ARM 全线支持。对于 AI 推理场景，CXL 意味着更大的 KV Cache 空间和更低的推理延迟——直接关系到你的大模型响应速度。</p>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3>🏢 Imec 首次实现 3D CCD 内存架构——兼得 DRAM 速度与 NAND 密度</h3>
+<p>比利时微电子研究中心 Imec 在 2026 IEEE International Memory Workshop 上展示了全球首个 <b>3D CCD（电荷耦合器件）内存架构</b>。该器件使用 IGZO 通道，在实验室条件下电荷传输速度超过 4 GHz，并采用 3D NAND Flash 工艺堆叠，实现超越传统 DRAM 的位密度。</p>
+<p>关键意义：AI 推理需要大量高速缓存（如 KV Cache），传统 DRAM 太贵，NAND 太慢。3D CCD 填补了两者之间的空白，未来可作为 CXL Buffer Memory，大幅降低 AI 数据中心的内存成本。</p>
+<p>来源：<a href="https://www.imec-int.com/en/press/imec-demonstrates-first-3d-implementation-charge-coupled-device-ai-memory-applications" target="_blank">Imec 官方新闻稿</a></p>
+<div class="date">2026-05-12</div>
+</div>
+
+<div class="card">
+<h3>🧊 NVIDIA Rubin GPU 面临延迟风险，供应链调整持续</h3>
+<p>TrendForce 最新报告指出，NVIDIA 下一代 <b>Rubin 架构</b>因 HBM4 供应不足和设计修改，可能面临出货延迟。原计划 2026 下半年量产，目前 Rubin 预计仅占 NVIDIA 2026 年高端 GPU 出货量的 22%，Blackwell 架构仍将占超 70%。</p>
+<p>Rubin 的首次 tape-out 时间推迟到 9-10 月，这意味着量产爬坡要到 2027 年初。这对数据中心扩产节奏和 AMD MI400 系列的市场窗口都有重要影响。</p>
+<p>来源：<a href="https://www.trendforce.com/presscenter/news/20260408-13003.html" target="_blank">TrendForce</a> · <a href="https://www.theregister.com/on-prem/2026/04/08/supply-chain-challenges-risk-delaying-nvidias-rubin-gpus/5229207" target="_blank">The Register</a></p>
+<div class="date">2026-04-08（持续更新中）</div>
+</div>
+
+<div class="card">
+<h3>🎮 NVIDIA 大幅削减消费级 GPU 产量 30-40%</h3>
+<p>据 Board Channels 报道，NVIDIA 计划在 2026 上半年将 GeForce RTX 50 系列产量削减 <b>30-40%</b>。主要原因是 DRAM 和 NAND 价格飞涨挤占了利润空间，而 AI 数据中心 GPU 的利润远高于消费级产品。RTX 5070 和 5060 Ti 将是首批受影响的型号。</p>
+<p>这反映了半导体行业的一个残酷现实：AI 芯片虽然只占总出货量的 0.2%，却贡献了约 50% 的行业收入。游戏 GPU 正在被边缘化。</p>
+<p>来源：<a href="https://www.techpowerup.com/344177/nvidia-plans-to-reduce-rtx-50-production-by-up-to-40-in-early-2026" target="_blank">TechPowerUp</a></p>
+<div class="date">2026-05</div>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3>💰 全球半导体 Q1 销售额达 $2985 亿，同比增长 79%，直奔万亿美元</h3>
+<p>据 SIA（美国半导体行业协会）引用 WSTS 数据，<b>2026 年 Q1 全球半导体销售额为 $2985 亿</b>，环比增长 25%，同比增长 79.2%。其中 3 月单月销售额 $995 亿，创历史新高。WSTS 预测 2026 全年市场规模将达到 $9750 亿，逼近万亿大关。</p>
+<p>专用芯片（Application-Specific）同比增长 35.2%，达到 $1090 亿，AI 算力需求是核心驱动力。按此增速，半导体行业将在 2027 年突破万亿美元。</p>
+<p>来源：<a href="https://www.semiconductors.org/global-semiconductor-sales-increase-25-from-q4-2025-to-q1-2026/" target="_blank">SIA</a> · <a href="https://www.wsts.org/76/Recent-News-Release" target="_blank">WSTS</a></p>
+<div class="date">2026-05</div>
+</div>
+
+<div class="card">
+<h3>🤝 Samsung 与 Intel 探索晶圆代工联盟，联手追赶 TSMC</h3>
+<p>据韩媒 MK 独家报道，Samsung 与 Intel 正在探讨组建<b>"晶圆代工联盟"</b>（Foundry Alliance），合作领域覆盖先进封装、玻璃基板（Glass Substrate）等技术。Samsung 有意投资 Intel 的封装业务线，以整合双方优势对抗 TSMC 的绝对主导地位。</p>
+<p>背景：TSMC 2025 年代工市占已达 66%，Samsung 和 Intel 均在先进制程上进展不顺。合作可让 Samsung 获得Intel 的先进封装能力（Foveros/EMIB），Intel 则获得更多代工客户。但反垄断审查和跨文化整合是重大挑战。</p>
+<p>来源：<a href="https://electronics360.globalspec.com/article/21612/are-intel-and-samsung-exploring-a-foundry-alliance" target="_blank">Electronics360</a> · <a href="https://semiwiki.com/forum/threads/samsung-electronics-and-intel-explore-a-foundry-alliance-joining-forces-on-everything-from-packaging-to-glass-substrates-to-catch-up-with-tsmc.23494/" target="_blank">SemiWiki</a></p>
+<div class="date">2026-05-26</div>
+</div>
+
+<div class="card">
+<h3>🇨🇳 寒武纪 Q1 营收 $4.23 亿，同比增长 160%，目标年产 50 万片 AI 芯片</h3>
+<p>中国 AI 芯片龙头寒武纪（Cambricon）发布 Q1 2026 财报：<b>营收 28.85 亿元（约 $4.23 亿），同比增长 159.6%</b>，净利润几乎翻三倍。公司宣布 2026 年目标产量 50 万片 AI 芯片，并首次自 2020 年 IPO 以来派发股息。</p>
+<p>寒武纪被称为"中国小英伟达"，其增长反映了中国在 AI 算力国产替代上的加速推进。但与 NVIDIA 数据中心年收入 $1937 亿相比，体量差距仍然巨大。</p>
+<p>来源：<a href="https://finance.yahoo.com/sectors/technology/articles/chinese-gpu-maker-cambricons-q1-103000723.html" target="_blank">Yahoo Finance</a> · <a href="https://www.tomshardware.com/tech-industry/semiconductors/cambricon-targets-500000-ai-chips-in-2026-as-china-accelerates-domestic-hardware-push" target="_blank">Tom's Hardware</a></p>
+<div class="date">2026-04-29</div>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3>🌊 D-Wave 实现可扩展量子计算控制芯片突破</h3>
+<p>D-Wave 在其年度用户大会 Qubits 2026 上宣布了<b>门模型量子计算的重大突破</b>——成功展示了可扩展的片上低温控制（Scalable On-Chip Cryogenic Control）。这意味着量子计算的控制电路可以直接集成在极低温芯片内部，大幅减少了传统方案需要的室温到低温布线数量。</p>
+<p>同时 D-Wave 还发布了新一代混合求解器（Hybrid Solver），允许客户在退火量子计算和门模型量子计算之间灵活切换。D-Wave 是目前唯一同时运营退火和门模型两种量子计算路线的公司。</p>
+<p>来源：<a href="https://www.dwavequantum.com/company/newsroom/press-release/d-wave-announces-advancements-in-annealing-and-gate-model-quantum-computing-technologies/" target="_blank">D-Wave 官方</a> · <a href="https://www.fastcompany.com/91469364/d-wave-quantum-computing-first-major-breakthrough-of-2026-scalable-technology" target="_blank">Fast Company</a></p>
+<div class="date">2026-01-27（技术影响持续至 2026-05）</div>
+</div>
+
+<div class="card">
+<h3>💡 Xanadu Q1 营收增长 300%，光量子计算走向商业化</h3>
+<p>加拿大光量子计算公司 <b>Xanadu</b>（Nasdaq: XNDU）发布 Q1 2026 财报：营收 $280 万，同比增长 300%，超出分析师预期的 $110 万。净亏损 $2060 万，但手持现金 $2.725 亿。公司已登录 Nasdaq/TSX，成为全球首家上市的光量子计算公司。</p>
+<p>Xanadu 的核心技术是光子量子计算（Photonic Quantum Computing），相比超导量子（IBM、Google）可在室温下运行部分组件。公司正在参与 DARPA 量子基准测试计划，并讨论最多约 $5000 万的额外融资。</p>
+<p>来源：<a href="https://investors.xanadu.ai/news-releases/news-release-details/xanadu-announces-first-quarter-2026-results" target="_blank">Xanadu IR</a> · <a href="https://thequantuminsider.com/2026/05/16/xanadu-reports-revenue-jump-in-first-quarterly-earnings-report/" target="_blank">The Quantum Insider</a></p>
+<div class="date">2026-05-14</div>
+</div>
+
+<div class="card">
+<h3>🔐 量子计算逼近 RSA 加密威胁，新研究大幅降低破解所需量子比特数</h3>
+<p>Quanta Magazine 报道，两个独立研究团队分别展示了<b>显著降低破解常用加密算法所需量子比特数和时间</b>的方法。这意味着量子计算机对现有网络安全体系的威胁比此前预期来得更早。</p>
+<p>这些进展与 NIST 推进后量子密码学（PQC）标准化的努力形成紧迫呼应。企业需要提前规划加密基础设施的迁移时间表。</p>
+<p>来源：<a href="https://www.quantamagazine.org/new-advances-bring-the-era-of-quantum-computers-closer-than-ever-20260403/" target="_blank">Quanta Magazine</a></p>
+<div class="date">2026-04-03</div>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p style="margin-top:8px;font-size:0.78em;color:#555">新闻来源均标注在每条末尾 · 仅收录 48h 内新闻（知识板块除外）</p>
+</div>
+</div>
+</body>
+</html>

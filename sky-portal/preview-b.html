@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — 方案B：暗色科技风</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06060f;
+    --bg-card: rgba(255,255,255,0.03);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --text: #e8e8ef;
+    --text-secondary: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.25);
+    --cyan: #00e5ff;
+    --cyan-dim: rgba(0,229,255,0.15);
+    --magenta: #ff2d78;
+    --magenta-dim: rgba(255,45,120,0.12);
+    --green: #00ff88;
+    --green-dim: rgba(0,255,136,0.1);
+    --gold: #ffd700;
+    --gold-dim: rgba(255,215,0,0.1);
+    --purple: #a855f7;
+    --purple-dim: rgba(168,85,247,0.12);
+    --font-body: 'Noto Sans SC', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --radius: 16px;
+    --glow-cyan: 0 0 30px rgba(0,229,255,0.15);
+    --glow-magenta: 0 0 30px rgba(255,45,120,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Animated Background ── */
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .bg-glow {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .bg-glow-1 {
+    width: 600px; height: 600px;
+    top: -200px; right: -100px;
+    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite alternate;
+  }
+  .bg-glow-2 {
+    width: 500px; height: 500px;
+    bottom: -150px; left: -100px;
+    background: radial-gradient(circle, rgba(255,45,120,0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 25s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.1); }
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* ── Top Bar ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6,6,15,0.8);
+  }
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .topbar-logo .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    box-shadow: var(--glow-cyan);
+  }
+  .topbar-logo h1 {
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .topbar-logo h1 span { color: var(--cyan); }
+  .topbar-nav {
+    display: flex;
+    gap: 8px;
+  }
+  .topbar-nav a {
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .topbar-nav a:hover {
+    color: var(--cyan);
+    background: var(--cyan-dim);
+    border-color: rgba(0,229,255,0.2);
+  }
+
+  /* ── Main ── */
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 0.68em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .hero h2 {
+    font-size: 3.2em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero h2 .gradient {
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── Stats ── */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 48px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-item .value {
+    font-family: var(--font-mono);
+    font-size: 2.4em;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(0,229,255,0.3);
+  }
+  .stat-item .label {
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+
+  /* ── Section ── */
+  .section {
+    padding: 56px 0;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .section-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+  .section-title .dot--magenta { background: var(--magenta); box-shadow: 0 0 10px var(--magenta); }
+  .section-title .dot--green { background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .section-title .dot--gold { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .section-title .dot--purple { background: var(--purple); box-shadow: 0 0 10px var(--purple); }
+  .section-title h3 {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* ── Cards Grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .card:hover::before { opacity: 1; }
+  .card-icon {
+    font-size: 1.6em;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+  .card-title {
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .card-desc {
+    font-size: 0.82em;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .card-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    padding: 3px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .card-tag--cyan { background: var(--cyan-dim); color: var(--cyan); }
+  .card-tag--magenta { background: var(--magenta-dim); color: var(--magenta); }
+  .card-tag--green { background: var(--green-dim); color: var(--green); }
+  .card-tag--gold { background: var(--gold-dim); color: var(--gold); }
+  .card-tag--purple { background: var(--purple-dim); color: var(--purple); }
+  .card-time {
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    color: var(--text-dim);
+  }
+
+  /* ── Featured Card (full-width) ── */
+  .featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+    position: relative;
+  }
+  .featured:hover {
+    border-color: rgba(0,229,255,0.2);
+    box-shadow: var(--glow-cyan);
+  }
+  .featured-visual {
+    background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(255,45,120,0.05));
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .featured-visual::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 20%; bottom: 20%;
+    width: 1px;
+    background: linear-gradient(transparent, var(--border), transparent);
+  }
+  .featured-visual .label {
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+  .featured-visual h4 {
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .featured-visual p {
+    color: var(--text-secondary);
+    font-size: 0.88em;
+  }
+  .featured-info {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  .featured-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .featured-stat:last-child { border-bottom: none; }
+  .featured-stat .fs-label {
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .featured-stat .fs-value {
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--cyan);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .footer p {
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .footer .line {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    margin: 0 auto 16px;
+    border-radius: 1px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .topbar { padding: 16px 20px; }
+    .topbar-nav { display: none; }
+    .main { padding: 0 20px; }
+    .hero { padding: 48px 0 40px; }
+    .hero h2 { font-size: 2.2em; }
+    .stats { flex-wrap: wrap; gap: 24px; }
+    .grid { grid-template-columns: 1fr; }
+    .featured { grid-template-columns: 1fr; }
+    .featured-visual::after { display: none; }
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.8s ease-out both; }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.3s; }
+  .section:nth-child(4) { animation-delay: 0.45s; }
+  .section:nth-child(5) { animation-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+
+<div class="content">
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar-logo">
+      <div class="logo-icon">☁️</div>
+      <h1><span>Sky</span> Portal</h1>
+    </div>
+    <nav class="topbar-nav">
+      <a href="#daily">每日更新</a>
+      <a href="#research">研究</a>
+      <a href="#life">生活</a>
+      <a href="#projects">项目</a>
+      <a href="#coach">教练</a>
+    </nav>
+  </header>
+
+  <div class="main">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-label">// Digital Space</div>
+      <h2>Sky Portal的<span class="gradient">数字空间</span></h2>
+      <p>研究 · 工具 · 记录 — 由 Sky AI 驱动的个人知识库</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="value">11</div>
+          <div class="label">已发布</div>
+        </div>
+        <div class="stat-item">
+          <div class="value">5</div>
+          <div class="label">进行中</div>
+        </div>
+        <div class="stat-item">
+          <div class="value" id="day-count">76</div>
+          <div class="label">天运行</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured -->
+    <div class="section">
+      <a class="featured" href="research/intel-tesla-terafab.html">
+        <div class="featured-visual">
+          <div class="label">⚡ Featured Report</div>
+          <h4>Intel × Tesla<br>Terafab 深度调研</h4>
+          <p>$200-250亿芯片超级工厂项目<br>半导体行业内部深度分析</p>
+        </div>
+        <div class="featured-info">
+          <div class="featured-stat">
+            <span class="fs-label">状态</span>
+            <span class="fs-value">活跃</span>
+          </div>
+          <div class="featured-stat">
+            <span class="fs-label">更新频率</span>
+            <span class="fs-value">每周</span>
+          </div>
+          <div class="featured-stat">
+            <span class="fs-label">报告</span>
+            <span class="fs-value">完整</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Daily -->
+    <div class="section" id="daily">
+      <div class="section-title">
+        <div class="dot"></div>
+        <h3>每日更新</h3>
+      </div>
+      <div class="grid">
+        <a class="card" href="research/index.html">
+          <span class="card-icon">📡</span>
+          <div class="card-title">每日研报</div>
+          <div class="card-desc">半导体 · 股票 · 巴萨 · Portland · AI工具</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--cyan">自动</span>
+            <span class="card-time">每日</span>
+          </div>
+        </a>
+        <a class="card" href="tech/index.html">
+          <span class="card-icon">🔬</span>
+          <div class="card-title">每日科技</div>
+          <div class="card-desc">芯片架构 · 技术突破 · 产业动态</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--cyan">自动</span>
+            <span class="card-time">每日</span>
+          </div>
+        </a>
+        <a class="card" href="market/index.html">
+          <span class="card-icon">📊</span>
+          <div class="card-title">每日行情</div>
+          <div class="card-desc">美股 · A股 · 港股 — 每晚九点分析</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--cyan">自动</span>
+            <span class="card-time">9 PM</span>
+          </div>
+        </a>
+        <a class="card" href="science/index.html">
+          <span class="card-icon">🧬</span>
+          <div class="card-title">每周科学前沿</div>
+          <div class="card-desc">Science · Nature · Cell · PNAS 精选</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--green">自动</span>
+            <span class="card-time">每周三</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Research -->
+    <div class="section" id="research">
+      <div class="section-title">
+        <div class="dot dot--magenta"></div>
+        <h3>研究专栏</h3>
+      </div>
+      <div class="grid">
+        <a class="card" href="research/intel-tesla-terafab.html">
+          <span class="card-icon">🏭</span>
+          <div class="card-title">Intel × Tesla Terafab</div>
+          <div class="card-desc">$200-250亿芯片超级工厂深度调研</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--magenta">进行中</span>
+            <span class="card-time">自动更新</span>
+          </div>
+        </a>
+        <a class="card" href="nvidia-report.html">
+          <span class="card-icon">💚</span>
+          <div class="card-title">NVIDIA 深度报告</div>
+          <div class="card-desc">GPU龙头财报分析与AI算力展望</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--green">完成</span>
+            <span class="card-time">2026-04</span>
+          </div>
+        </a>
+        <a class="card" href="ai-life.html">
+          <span class="card-icon">🤖</span>
+          <div class="card-title">AI 与生活</div>
+          <div class="card-desc">AI时代的个人工作流与数字生活</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--gold">思考</span>
+            <span class="card-time">持续</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Life -->
+    <div class="section" id="life">
+      <div class="section-title">
+        <div class="dot dot--green"></div>
+        <h3>生活</h3>
+      </div>
+      <div class="grid">
+        <a class="card" href="naturalization.html">
+          <span class="card-icon">🇺🇸</span>
+          <div class="card-title">入籍指南</div>
+          <div class="card-desc">N-400全流程记录与时间线追踪</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--purple">进行中</span>
+            <span class="card-time">2026</span>
+          </div>
+        </a>
+        <a class="card" href="travel.html">
+          <span class="card-icon">✈️</span>
+          <div class="card-title">旅行计划</div>
+          <div class="card-desc">2026夏季 · PDX↔NKG</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--gold">计划中</span>
+            <span class="card-time">2026夏</span>
+          </div>
+        </a>
+        <a class="card" href="investment.html">
+          <span class="card-icon">💰</span>
+          <div class="card-title">投资理财</div>
+          <div class="card-desc">个人投资笔记与市场观察</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--green">持续</span>
+            <span class="card-time">长期</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section" id="projects">
+      <div class="section-title">
+        <div class="dot dot--gold"></div>
+        <h3>项目 & 工具</h3>
+      </div>
+      <div class="grid">
+        <a class="card" href="coach/munger.html">
+          <span class="card-icon">📚</span>
+          <div class="card-title">芒格误判心理学</div>
+          <div class="card-desc">每日一课 · 25条原则 · 进度 13/25</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--cyan">每日推送</span>
+            <span class="card-time">13/25</span>
+          </div>
+        </a>
+        <a class="card" href="skills.html">
+          <span class="card-icon">⚡</span>
+          <div class="card-title">OpenClaw Skills</div>
+          <div class="card-desc">AI助手技能集 · 自动化工作流</div>
+          <div class="card-meta">
+            <span class="card-tag card-tag--gold">工具</span>
+            <span class="card-time">运行中</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="line"></div>
+    <p>Sky Portal · Powered by OpenClaw ☁️</p>
+  </footer>
+
+</div>
+</body>
+</html>

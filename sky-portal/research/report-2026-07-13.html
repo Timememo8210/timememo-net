@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📡 每日研报 2026-07-13 — Sky Portal</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif;
+  background: #0f0f0f; color: #ccc;
+  line-height: 1.7; max-width: 900px; margin: 0 auto; padding: 24px 16px;
+}
+h1 { color: #f0a040; font-size: 1.8em; margin-bottom: 8px; }
+h2 { color: #f0a040; font-size: 1.3em; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a; }
+h3 { color: #fff; font-size: 1.05em; margin: 20px 0 8px; }
+a { color: #58a6ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.card {
+  background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px;
+  padding: 20px; margin-bottom: 16px;
+}
+.news-item { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #222; }
+.news-item:last-child { border-bottom: none; }
+.news-title { color: #fff; font-weight: 600; font-size: 1em; margin-bottom: 6px; }
+.news-summary { color: #aaa; font-size: 0.9em; line-height: 1.6; }
+.news-source { color: #666; font-size: 0.8em; margin-top: 4px; }
+.stock-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+.stock-table th { text-align: left; color: #888; font-size: 0.8em; padding: 8px 12px; border-bottom: 1px solid #2a2a2a; text-transform: uppercase; letter-spacing: 0.05em; }
+.stock-table td { padding: 10px 12px; border-bottom: 1px solid #1a1a1a; color: #ccc; }
+.stock-ticker { font-family: 'SF Mono', monospace; font-weight: 600; color: #fff; }
+.stock-price { font-family: 'SF Mono', monospace; color: #ccc; }
+.tag {
+  font-family: 'SF Mono', monospace; font-weight: 600; font-size: 0.82em;
+  padding: 3px 10px; border-radius: 5px; display: inline-block;
+}
+.tag-up { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.tag-down { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2a2a; color: #666; font-size: 0.85em; }
+.footer a { color: #f0a040; }
+.tech-card { background: #1a1a1a; border: 1px solid rgba(240,160,64,0.2); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.barca-card { background: #1a1a1a; border: 1px solid rgba(0,77,152,0.3); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.sports-card { background: #1a1a1a; border: 1px solid rgba(76,175,80,0.3); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.portland-card { background: #1a1a1a; border: 1px solid rgba(34,139,87,0.3); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.ai-card { background: #1a1a1a; border: 1px solid rgba(16,163,127,0.3); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.copilot-card { background: #1a1a1a; border: 1px solid rgba(0,120,212,0.3); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh" style="background:#555;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+<button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+<div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• NVIDIA据悉将2028年芯片生产转移至Intel<br>• Google向Intel下单300万+ TPU，挑战TSMC主导地位</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• NVIDIA reportedly shifting 2028 chip production to Intel<br>• Google orders 3M+ TPUs from Intel, challenging TSMC</div>
+</div>
+<div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 2026/27赛季季前训练7月13日正式开始<br>• 接近签下Karim Adeyemi，已与Club Brugge达成Bisiwu转会协议</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 2026/27 preseason starts July 13<br>• Closing in on Adeyemi; Bisiwu deal agreed with Club Brugge</div>
+</div>
+<div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 开拓者交易获得Ja Morant，结束四年季后赛荒<br>• Damian Lillard回归波特兰</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Blazers trade for Ja Morant, end 4-year playoff drought<br>• Damian Lillard returns to Portland</div>
+</div>
+<div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• OpenAI发布GPT-5.6，迄今最强模型<br>• Anthropic推出Claude Science科学工作台</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• OpenAI launched GPT-5.6, strongest model yet<br>• Anthropic introduced Claude Science workbench</div>
+</div>
+</div>
+</div>
+
+<script>
+function switchLang(lang) {
+document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<h1>📡 每日研报 <span class="zh">2026年7月13日（周一）</span><span class="en" style="display:none">July 13, 2026 (Monday)</span></h1>
+<p style="color:#666;font-size:0.85em;margin-bottom:24px"><span class="zh">股价数据截至2026年7月10日（周五）收盘</span><span class="en" style="display:none">Stock prices as of July 10, 2026 (Friday) close</span></p>
+
+<!-- 板块1: M365 Copilot -->
+<h2>💼 <span class="zh">M365 Copilot 专栏</span><span class="en" style="display:none">M365 Copilot</span></h2>
+<div class="copilot-card">
+<div class="news-item">
+<div class="news-title"><span class="zh">Copilot Cowork正式GA，7月40+项更新领头</span><span class="en" style="display:none">Copilot Cowork Goes GA, Leading 40+ July Updates</span></div>
+<div class="news-summary"><span class="zh">Microsoft 365 Copilot Cowork已正式发布（GA），成为7月40+项Copilot更新的头条。Copilot Cowork允许用户协调多步骤工作流，标志着Copilot从起草和总结工具向任务协调平台的转变。此外，Copilot Notebooks将扩展至Copilot Basic用户，数据安全态势代理也已上线。</span><span class="en" style="display:none">Copilot Cowork has reached general availability, headlining a month with 40+ Microsoft 365 Copilot updates. Copilot Cowork enables users to coordinate multi-step workflows, marking a shift from drafting/summarizing to task coordination. Copilot Notebooks are also extending to Copilot Basic users, and the Data Security Posture Agent is now available.</span></div>
+<div class="news-source">来源: <a href="https://www.youtube.com/watch?v=hFlBYtI7q7o">YouTube - Microsoft 365 Copilot Updates July 2026</a> · <a href="https://supersimple365.com/whats-new-in-microsoft-365-and-copilot-july-2026/">SuperSimple365</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">Copilot Skills for PowerPoint：可复用的演示文稿技能</span><span class="en" style="display:none">Copilot Skills for PowerPoint: Reusable Presentation Skills</span></div>
+<div class="news-summary"><span class="zh">用户现在可以在PowerPoint中创建和复用Copilot Skills，将常用指令保存为技能模板，用于重复性演示文稿任务。这大大减少了创建标准化演示的时间。此外，6月发布的更新还包括Microsoft 365 Copilot应用的Apple CarPlay支持和焕新设计。</span><span class="en" style="display:none">Users can now create and reuse Copilot Skills in PowerPoint, saving common instructions as skill templates for repeatable presentation tasks. This significantly reduces time for standardized presentations. June updates also included Apple CarPlay support and a refreshed design for the M365 Copilot app.</span></div>
+<div class="news-source">来源: <a href="https://techcommunity.microsoft.com/blog/microsoft365copilotblog/what%25E2%2580%2599s-new-in-microsoft-365-copilot--june-2026/4529572">Microsoft Tech Community</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">Microsoft 365定价更新7月1日生效</span><span class="en" style="display:none">Microsoft 365 Pricing Updates Start July 1, 2026</span></div>
+<div class="news-summary"><span class="zh">Microsoft于7月1日开始推行定价更新，Copilot for Security向符合条件的E5/E7客户提供。组织应确认许可变更并评估AI功能采用情况。新的Copilot Chat增强功能和AI活动可见性也已部署，帮助企业安全部署AI。</span><span class="en" style="display:none">Microsoft started rolling out pricing updates on July 1, with Copilot for Security offered to eligible E5/E7 customers. Organizations should confirm licensing changes and assess AI feature adoption. New Copilot Chat enhancements and AI activity visibility are also deployed to help enterprises deploy AI securely.</span></div>
+<div class="news-source">来源: <a href="https://blog.teamascend.com/blog/microsoft-365-pricing-updates-start-july-1-2026">Team Ascend Blog</a> · <a href="https://www.cisilion.com/news-blog/microsoft-product-enhancements-july-2026/">Cisilion</a></div>
+</div>
+</div>
+
+<!-- 板块2: 半导体与AI -->
+<h2>🔬 <span class="zh">半导体与AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+<div class="tech-card">
+<div class="news-item">
+<div class="news-title"><span class="zh">NVIDIA据悉将2028年芯片生产转移至Intel</span><span class="en" style="display:none">NVIDIA Reportedly Shifting 2028 Chip Production to Intel</span></div>
+<div class="news-summary"><span class="zh">据The Information报道，NVIDIA正计划将部分2028年芯片生产从TSMC转移至Intel Foundry。这一举动可能重塑全球代工格局。与此同时，TSMC警告NVIDIA和Broadcom先进封装产能紧张，AI芯片需求激增导致产能瓶颈。TSMC正寻求NVIDIA、AMD、Broadcom和高通投资合资企业运营Intel代工部门。</span><span class="en" style="display:none">According to The Information, NVIDIA is planning to shift some 2028 chip production from TSMC to Intel Foundry. This move could reshape the global foundry landscape. Meanwhile, TSMC has warned NVIDIA and Broadcom about advanced packaging capacity constraints as AI chip demand surges. TSMC is seeking NVIDIA, AMD, Broadcom, and Qualcomm to invest in a joint venture to run Intel's foundry division.</span></div>
+<div class="news-source">来源: <a href="https://www.reddit.com/r/hardware/comments/1qpk09u/exclusive_nvidia_to_reportedly_shift_2028_chip/">Reddit r/hardware</a> · <a href="https://www.tomshardware.com/tech-industry/nvidia-and-intel-tout-chips-built-in-america-but-every-arizona-made-blackwell-die-is-still-packaged-in-taiwan">Tom's Hardware</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">Google向Intel下单300万+ TPU，挑战TSMC主导地位</span><span class="en" style="display:none">Google Orders 3M+ TPUs from Intel, Challenging TSMC Dominance</span></div>
+<div class="news-summary"><span class="zh">据The Information报道，Google已向Intel下达超过300万个Tensor Processing Unit（TPU）的制造订单。这是Intel Foundry获得的最大订单之一，标志着Intel在挑战TSMC代工主导地位方面取得重大突破。Intel正大力扩建其代工产能，包括亚利桑那州的新工厂。</span><span class="en" style="display:none">Google has placed an order with Intel to manufacture more than 3 million Tensor Processing Units (TPUs), according to The Information. This is one of the largest orders for Intel Foundry, marking a significant breakthrough in challenging TSMC's foundry dominance. Intel is aggressively expanding its foundry capacity, including new fabs in Arizona.</span></div>
+<div class="news-source">来源: <a href="https://hothardware.com/news/intel-foundry-challenges-tsmc-dominance-report">Hot Hardware</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">Foxconn休斯顿工厂生产GB300，Wistron组装NVIDIA AI系统</span><span class="en" style="display:none">Foxconn Builds Houston Factory for GB300, Wistron Assembles NVIDIA AI Systems</span></div>
+<div class="news-summary"><span class="zh">Foxconn正在休斯顿建设工厂，用于生产NVIDIA GB300托盘模块。Wistron将在新工厂组装和测试NVIDIA AI系统。NVIDIA和Intel都在推动美国本土芯片供应链，但亚利桑那州制造的Blackwell芯片仍需在台湾进行封装。这凸显了先进封装环节的地理集中风险。</span><span class="en" style="display:none">Foxconn is building a Houston factory to produce NVIDIA GB300 tray modules, while Wistron will assemble and test NVIDIA AI systems at a new facility. NVIDIA and Intel are both pushing for a homegrown US chip supply chain, but Arizona-made Blackwell dies still need to be packaged in Taiwan. This highlights the geographic concentration risk in advanced packaging.</span></div>
+<div class="news-source">来源: <a href="https://www.tomshardware.com/tech-industry/nvidia-and-intel-tout-chips-built-in-america-but-every-arizona-made-blackwell-die-is-still-packaged-in-taiwan">Tom's Hardware</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">2026年AI芯片大战：NVIDIA增长65%，TSMC营收1224亿</span><span class="en" style="display:none">AI Chip Wars 2026: NVIDIA Grows 65%, TSMC Revenue $122.4B</span></div>
+<div class="news-summary"><span class="zh">2026年AI芯片市场持续爆发，TSMC营收增长36%至1224亿美元，NVIDIA增长65%，AMD和TSMC各增长34%以上。AMD营收达81亿美元，TSMC约80亿美元。NVIDIA和AMD正加大全球AI基础设施投资，Intel和Samsung则 securing大型新代工和存储制造订单。</span><span class="en" style="display:none">The AI chip market continues to boom in 2026, with TSMC revenue growing 36% to $122.4B, NVIDIA growing 65%, and AMD and TSMC each growing over 34%. AMD revenue reached $8.1B and TSMC approximately $8.0B. NVIDIA and AMD are ramping up global AI infrastructure investments, while Intel and Samsung secure major new foundry and memory manufacturing deals.</span></div>
+<div class="news-source">来源: <a href="https://trendxinsights.com/blogs/ai-chip-wars-2026-deep-dive/">Trend Insights</a> · <a href="https://www.linkedin.com/posts/distillintelligence_semiconductors-ai-chips-weekly-briefing-activity-7471113201208745985-AJNZ">Distill on LinkedIn</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">TSMC亚利桑那二号工厂延迟至2027-2028年</span><span class="en" style="display:none">TSMC Delays Arizona Second Fab to 2027-2028</span></div>
+<div class="news-summary"><span class="zh">TSMC已将其亚利桑那州第一座工厂从2024年延迟至2025年，第二座工厂从2026年推迟至2027或2028年， citing劳动力短缺和激励问题。CHIPS Act提供527亿美元补贴，但建设和投产进度仍面临挑战。这可能影响美国本土芯片产能的扩张节奏。</span><span class="en" style="display:none">TSMC has delayed its first Arizona fab from 2024 to 2025 and its second fab from 2026 to 2027 or 2028, citing labor shortages and incentive issues. The CHIPS Act provides $52.7B in subsidies, but construction and ramp-up still face challenges. This could impact the pace of US domestic chip capacity expansion.</span></div>
+<div class="news-source">来源: <a href="https://enkiai.com/ai-infrastructure/semiconductor-intel-tsmc-chips-act/">EnkiAI</a></div>
+</div>
+</div>
+
+<!-- 半导体股票 -->
+<h2>📈 <span class="zh">半导体股票</span><span class="en" style="display:none">Semiconductor Stocks</span></h2>
+<div class="card">
+<table class="stock-table">
+<thead>
+<tr><th>Ticker</th><th><span class="zh">价格</span><span class="en" style="display:none">Price</span></th><th><span class="zh">涨跌幅</span><span class="en" style="display:none">Change</span></th></tr>
+</thead>
+<tbody>
+<tr><td class="stock-ticker">INTC</td><td class="stock-price">$109.84</td><td><span class="tag tag-down">-2.40%</span></td></tr>
+<tr><td class="stock-ticker">TSM</td><td class="stock-price">$434.11</td><td><span class="tag tag-down">-0.65%</span></td></tr>
+<tr><td class="stock-ticker">NVDA</td><td class="stock-price">$210.96</td><td><span class="tag tag-up">+4.03%</span></td></tr>
+<tr><td class="stock-ticker">AMD</td><td class="stock-price">$557.89</td><td><span class="tag tag-up">+2.04%</span></td></tr>
+<tr><td class="stock-ticker">ASML</td><td class="stock-price">$1,769.32</td><td><span class="tag tag-down">-4.00%</span></td></tr>
+<tr><td class="stock-ticker">MU</td><td class="stock-price">$979.30</td><td><span class="tag tag-down">-1.24%</span></td></tr>
+<tr><td class="stock-ticker">AVGO</td><td class="stock-price">$399.97</td><td><span class="tag tag-down">-0.28%</span></td></tr>
+<tr><td class="stock-ticker">QCOM</td><td class="stock-price">$189.16</td><td><span class="tag tag-down">-1.02%</span></td></tr>
+<tr><td class="stock-ticker">TSLA</td><td class="stock-price">$407.76</td><td><span class="tag tag-up">+0.30%</span></td></tr>
+<tr><td class="stock-ticker">SMH</td><td class="stock-price">$611.03</td><td><span class="tag tag-up">+0.54%</span></td></tr>
+</tbody>
+</table>
+<p style="color:#666;font-size:0.8em;margin-top:8px"><span class="zh">数据来源: Yahoo Finance · 截至2026年7月10日收盘</span><span class="en" style="display:none">Source: Yahoo Finance · As of July 10, 2026 close</span></p>
+</div>
+
+<!-- 板块3: FC Barcelona -->
+<h2>⚽ <span class="zh">FC Barcelona</span><span class="en" style="display:none">FC Barcelona</span></h2>
+<div class="barca-card">
+<div class="news-item">
+<div class="news-title"><span class="zh">2026/27赛季季前训练7月13日正式开始</span><span class="en" style="display:none">2026/27 Preseason Starts July 13</span></div>
+<div class="news-summary"><span class="zh">Hansi Flick的球队将于7月13日回归训练基地开始季前备战。非世界杯参赛球员率先归队，训练营将于7月27日前往英格兰。巴萨官方Instagram已发布"Pre-season officially starts here"的帖子。这是Flick执教巴萨的第二个赛季，球迷对新赛季充满期待。</span><span class="en" style="display:none">Hansi Flick's side returns to the training ground on July 13 to begin preseason preparation. Non-World Cup participants report first, with a training camp in England starting July 27. Barça's official Instagram posted "Pre-season officially starts here." This is Flick's second season in charge, and fans are excited for the new campaign.</span></div>
+<div class="news-source">来源: <a href="https://www.fcbarcelona.com/en/news/4514482/barca-202627-preseason-to-start-on-july-13">FC Barcelona Official</a> · <a href="https://www.reddit.com/r/Barca/comments/1uv3rjz/hansi_flick_has_arrived_for_the_first_day_of/">Reddit r/Barca</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">接近签下Karim Adeyemi，与多特蒙德谈判取得突破</span><span class="en" style="display:none">Closing in on Karim Adeyemi, Breakthrough in Dortmund Talks</span></div>
+<div class="news-summary"><span class="zh">据ESPN消息人士确认，巴萨与多特蒙德就Karim Adeyemi的转会谈判取得突破性进展。巴萨希望在Lewandowski离队后补强攻击线。Adeyemi的速度和多面性符合Flick的战术需求。此外，巴萨已与Club Brugge就Jesse Bisiwu的转会达成全面协议。</span><span class="en" style="display:none">According to ESPN sources, Barcelona have made a breakthrough in negotiations with Borussia Dortmund for Karim Adeyemi. Barça aims to strengthen the attack after Lewandowski's departure. Adeyemi's pace and versatility fit Flick's tactical needs. Additionally, a full agreement has been reached with Club Brugge for Jesse Bisiwu's transfer.</span></div>
+<div class="news-source">来源: <a href="https://sports.yahoo.com/articles/fc-barcelona-news-11-july-090000971.html">Yahoo Sports</a> · <a href="https://www.instagram.com/p/DaqGwK-EWzM/">Instagram - Sacha Tavolieri</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">Lewandowski加盟芝加哥火焰，巴萨瞄准Álvarez</span><span class="en" style="display:none">Lewandowski Joins Chicago Fire, Barça Targets Álvarez</span></div>
+<div class="news-summary"><span class="zh">Robert Lewandowski已选择芝加哥火焰作为下一站，结束巴萨生涯。巴萨急需签下一名中锋替代者，目标包括Álvarez。主席Laporta确认巴萨已恢复1:1规则，财务状况显著改善，为引援提供了更大空间。Marc Casadó被推荐至AC米兰。</span><span class="en" style="display:none">Robert Lewandowski has chosen Chicago Fire as his next destination, ending his Barcelona career. Barça urgently needs a center forward replacement, with Álvarez as a target. President Laporta confirmed Barça has returned to the 1:1 rule, with significantly improved finances providing more room for transfers. Marc Casadó has been offered to AC Milan.</span></div>
+<div class="news-source">来源: <a href="https://www.barcablaugranes.com/barcelona-news/125511/fc-barcelona-news-3-july-2026-barca-return-to-11-rule-dominant-spain-advance-world-cup-round-of-16">Barca Blaugranes</a></div>
+</div>
+</div>
+
+<!-- 板块4: 体育赛事 -->
+<h2>🏟️ <span class="zh">体育赛事</span><span class="en" style="display:none">Sports Events</span></h2>
+<div class="sports-card">
+<div class="news-item">
+<div class="news-title"><span class="zh">Ja Morant被交易至波特兰开拓者</span><span class="en" style="display:none">Ja Morant Traded to Portland Trail Blazers</span></div>
+<div class="news-summary"><span class="zh">据ESPN的Shams Charania报道，孟菲斯灰熊将Ja Morant交易至波特兰开拓者，换取Jerami Grant和Kris Murray。Morant整个职业生涯都在灰熊度过，此次转会标志着开拓者后场的重大升级。开拓者采用保守策略获取这一"折价资产"，显示他们仍在长期建设而非即战力模式。Morant已于7月11日出席开拓者媒体见面会。</span><span class="en" style="display:none">According to ESPN's Shams Charania, the Memphis Grizzlies traded Ja Morant to the Portland Trail Blazers for Jerami Grant and Kris Murray. Morant spent his entire career with the Grizzlies. This trade marks a significant backcourt upgrade for the Blazers, who took a conservative approach to acquire a "distressed asset," showing they're still playing the long game rather than trying to win now. Morant appeared at Blazers media availability on July 11.</span></div>
+<div class="news-source">来源: <a href="https://sports.yahoo.com/nba/live/nba-free-agency-2026-grizzlies-reportedly-trade-ja-morant-to-trail-blazers-james-harden-declines-option-while-negotiating-with-cavs-lebron-james-lakers-decision-looms-182955882.html">Yahoo Sports / ESPN</a> · <a href="https://ripcityproject.com/">Rip City Project</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">开拓者42胜40负结束赛季，西部第8闯入季后赛</span><span class="en" style="display:none">Blazers Finish 42-40, 8th in West, Reach Playoffs</span></div>
+<div class="news-summary"><span class="zh">波特兰开拓者以42胜40负的战绩结束2025-26赛季常规赛，排名西部第8，结束了长达四年的季后赛荒。Damian Lillard回归球队，但首轮即遭淘汰。教练组经历变动，Chauncey Billups（0-1）和Tiago Splitter（42-39）分别执教。夏季联赛中，奥兰多魔术在加时赛中击败开拓者。</span><span class="en" style="display:none">The Portland Trail Blazers finished the 2025-26 regular season 42-40, 8th in the Western Conference, snapping a four-year playoff drought. Damian Lillard returned to the team, but they were eliminated in the first round. The coaching staff saw changes with Chauncey Billups (0-1) and Tiago Splitter (42-39). In Summer League, the Orlando Magic beat the Blazers in overtime.</span></div>
+<div class="news-source">来源: <a href="https://www.basketball-reference.com/teams/POR/2026_transactions.html">Basketball Reference</a> · <a href="https://www.nba.com/news/key-dates">NBA.com</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">2026 NBA自由市场：Harden拒绝选项，与骑士谈判</span><span class="en" style="display:none">2026 NBA Free Agency: Harden Declines Option, Negotiates with Cavs</span></div>
+<div class="news-summary"><span class="zh">2026年NBA自由市场热闹非凡。James Harden拒绝球员选项，正与克利夫兰骑士谈判。LeBron James的湖人决定也备受关注。Ja Morant交易至开拓者是本次自由市场最大的交易之一，多项重磅交易和签约正在推进中。</span><span class="en" style="display:none">The 2026 NBA free agency is bustling. James Harden has declined his player option and is negotiating with the Cleveland Cavaliers. LeBron James's Lakers decision is also drawing significant attention. The Ja Morant trade to the Blazers is one of the biggest moves of this free agency period, with multiple blockbuster trades and signings in progress.</span></div>
+<div class="news-source">来源: <a href="https://sports.yahoo.com/nba/live/nba-free-agency-2026-grizzlies-reportedly-trade-ja-morant-to-trail-blazers-james-harden-declines-option-while-negotiating-with-cavs-lebron-james-lakers-decision-looms-182955882.html">Yahoo Sports NBA</a></div>
+</div>
+</div>
+
+<!-- 板块5: Portland本地 -->
+<h2>🌲 <span class="zh">Portland 本地</span><span class="en" style="display:none">Portland Local</span></h2>
+<div class="portland-card">
+<div class="news-item">
+<div class="news-title"><span class="zh">NOAA发布太平洋西北部夏季天气展望：更暖更干</span><span class="en" style="display:none">NOAA Releases Sizzling Summer Weather Outlook for PNW</span></div>
+<div class="news-summary"><span class="zh">NOAA发布的夏季天气展望显示，太平洋西北部6-8月将比正常年份更干燥、更温暖。El Niño条件近期已形成，预计将影响整个夏季的天气模式。AccuWeather预测波特兰7月日间最高温在76°F至92°F之间，夜间最低温55°F至66°F，降水低于正常水平。</span><span class="en" style="display:none">NOAA's summer outlook shows the Pacific Northwest will be drier and warmer than normal for June-August. El Niño conditions have recently developed and are expected to influence summer weather patterns. AccuWeather forecasts Portland July daily highs between 76°F and 92°F, with overnight lows of 55°F to 66°F, and below-normal precipitation.</span></div>
+<div class="news-source">来源: <a href="https://www.koin.com/weather/noaa-releases-sizzling-summer-weather-outlook-for-pnw/">KOIN Portland</a> · <a href="https://www.accuweather.com/en/us/portland/97209/july-weather/350473">AccuWeather</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">波特兰独立日周末天气晴好，高温约80°F</span><span class="en" style="display:none">Portland's July Fourth Weekend Bright, Highs Around 80°F</span></div>
+<div class="news-summary"><span class="zh">独立日周末波特兰天气晴好，周五最高温约80°F，下午风速可达5 mph。整体预报显示本周剩余时间天气干燥凉爽，适合户外活动。KGW气象团队持续关注太平洋西北部天气变化，提醒居民注意防晒和补水。</span><span class="en" style="display:none">Portland enjoyed bright weather over the July Fourth weekend, with Friday highs around 80°F and afternoon winds up to 5 mph. The overall forecast shows dry and cooler conditions for the rest of the week, suitable for outdoor activities. The KGW weather team continues to monitor Pacific Northwest conditions, reminding residents about sun protection and hydration.</span></div>
+<div class="news-source">来源: <a href="https://www.oregonlive.com/weather/2026/07/portlands-july-fourth-weekend-forecast-gets-off-to-a-bright-start.html">Oregon Live</a> · <a href="https://www.kgw.com/video/weather/forecast/kgw-forecast-11-pm-tuesday-july-7-2026-2026/283-cecc284e-e107-4b5f-92fc-be281b24204c">KGW</a></div>
+</div>
+</div>
+
+<!-- 板块6: AI动态 -->
+<h2>🤖 <span class="zh">AI 工具/产品动态</span><span class="en" style="display:none">AI Tools & Product Updates</span></h2>
+<div class="ai-card">
+<div class="news-item">
+<div class="news-title"><span class="zh">OpenAI发布GPT-5.6：迄今最强模型</span><span class="en" style="display:none">OpenAI Launches GPT-5.6: Strongest Model Yet</span></div>
+<div class="news-summary"><span class="zh">OpenAI于7月10日正式发布GPT-5.6，称其为"加速AI研究的前沿智能"。GPT-5.6包含Sol、Terra和Luna三个变体，此前因美国政府关切而延迟发布，在与美国商务部官员会面后获准推出。在OpenAI内部，研究人员已在开发循环中使用GPT-5.6进行诊断和分析。OpenAI在编程领域的优势正在重塑AI竞争格局。</span><span class="en" style="display:none">OpenAI officially launched GPT-5.6 on July 10, calling it "frontier intelligence that scales with your ambition." GPT-5.6 includes Sol, Terra, and Luna variants, previously delayed due to US government concerns and released after meetings with Commerce Department officials. Inside OpenAI, researchers are already using GPT-5.6 across the development loop for diagnosis and analysis. OpenAI's coding dominance is reshaping the AI competitive landscape.</span></div>
+<div class="news-source">来源: <a href="https://openai.com/index/gpt-5-6/">OpenAI Official</a> · <a href="https://www.reuters.com/world/china/major-ai-models-glance-2026-07-08/">Reuters</a> · <a href="https://www.marketingprofs.com/opinions/2026/55247/ai-update-july-10-2026-ai-news-and-views-from-the-past-week">MarketingProfs</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">Anthropic推出Claude Science科学工作台</span><span class="en" style="display:none">Anthropic Launches Claude Science Workbench</span></div>
+<div class="news-summary"><span class="zh">Anthropic于6月30日推出Claude Science，这是一个AI科学工作台，集成了60多个科学数据库、计算工具和分析功能。该产品旨在与OpenAI和Google在科学AI领域竞争。此外，Anthropic还在2026年从OpenAI、Google、Microsoft和xAI挖角了多位高管，为即将到来的IPO做准备。</span><span class="en" style="display:none">Anthropic launched Claude Science on June 30, an AI workbench integrating 60+ scientific databases, computing tools, and analytics capabilities. The product aims to compete with OpenAI and Google in the science AI space. Additionally, Anthropic has hired executives from OpenAI, Google, Microsoft, and xAI in 2026, preparing for an upcoming IPO.</span></div>
+<div class="news-source">来源: <a href="https://memeburn.com/claude-science-launches-as-anthropic-takes-on-openai-and-google-in-ai-for-science/">Memeburn</a> · <a href="https://www.crn.com/news/ai/2026/anthropic-s-5-huge-hires-from-openai-google-microsoft-and-xai-in-2026">CRN</a></div>
+</div>
+<div class="news-item">
+<div class="news-title"><span class="zh">AI三强格局：Google领先整体，OpenAI势头最猛</span><span class="en" style="display:none">AI Big Three: Google Leads Overall, OpenAI Has Best Momentum</span></div>
+<div class="news-summary"><span class="zh">据MindStudio分析，Google在AI整体实力上领先，但势头评分仅3/10。OpenAI获得完美的10/10势头评分，主要得益于编程领域的主导地位。Anthropic也在稳步追赶。三家公司在医疗AI领域均推出产品，跟随ChatGPT Health的步伐。2026年AI竞争的焦点正从模型能力转向应用生态。</span><span class="en" style="display:none">According to MindStudio analysis, Google leads in overall AI strength but scores only 3/10 on momentum. OpenAI gets a perfect 10/10 momentum score, mainly due to its dominance in coding. Anthropic is also steadily catching up. All three companies have launched healthcare AI products, following ChatGPT Health. The 2026 AI competition is shifting from model capabilities to application ecosystems.</span></div>
+<div class="news-source">来源: <a href="https://www.mindstudio.ai/blog/google-vs-openai-vs-anthropic-momentum-2026-narrative">MindStudio</a> · <a href="https://www.digitalhealth.net/2026/01/anthropic-and-google-follow-chatgpt-to-launch-healthcare-ai/">Digital Health</a></div>
+</div>
+</div>
+
+<div class="footer">
+<p><a href="index.html">📁 <span class="zh">所有研报</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px">Generated by Sky · 2026-07-13 · <span class="zh">模型: GLM 5.2</span><span class="en" style="display:none">Model: GLM 5.2</span></p>
+</div>
+
+</body>
+</html>

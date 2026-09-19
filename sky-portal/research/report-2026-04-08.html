@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日研报 2026-04-08</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f0f; color: #ccc; font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif; padding: 24px 16px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { color: #f0a040; font-size: 1.6em; margin-bottom: 4px; }
+  .subtitle { color: #888; font-size: 0.9em; margin-bottom: 32px; }
+  .section { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .section-title { color: #f0a040; font-size: 1.2em; font-weight: 700; margin-bottom: 16px; }
+  .news-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #2a2a2a; }
+  .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .news-title { color: #fff; font-weight: 600; margin-bottom: 6px; }
+  .news-body { color: #ccc; font-size: 0.92em; line-height: 1.6; }
+  .news-source { color: #888; font-size: 0.8em; margin-top: 6px; font-style: italic; }
+  .tag { display: inline-block; font-family: 'SF Mono', monospace; font-weight: 600; font-size: 0.82em; padding: 3px 10px; border-radius: 5px; margin: 2px; }
+  .tag-green { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+  .tag-red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+  .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .stock-card { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 12px; }
+  .stock-ticker { color: #f0a040; font-weight: 700; font-size: 0.95em; font-family: 'SF Mono', monospace; }
+  .stock-price { color: #fff; font-size: 1.1em; font-weight: 600; margin: 4px 0; }
+  .kline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .kline-label { font-family: 'SF Mono', monospace; font-size: 0.8em; font-weight: 600; color: #f0a040; text-align: center; margin-bottom: 4px; letter-spacing: 0.03em; }
+  .sport-card { background: #111; border: 1px solid rgba(76,175,80,0.3); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+  .sport-card-title { color: #4CAF50; font-weight: 600; margin-bottom: 6px; }
+  .sport-source { color: #888; font-size: 0.8em; margin-bottom: 6px; }
+  .weather-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .weather-card { background: #111; border: 1px solid rgba(100,180,255,0.2); border-radius: 8px; padding: 12px; text-align: center; }
+  .weather-card .label { color: #888; font-size: 0.8em; margin-bottom: 4px; }
+  .weather-card .value { color: #fff; font-size: 1.2em; font-weight: 600; }
+  .weather-card .sub { color: #aaa; font-size: 0.85em; margin-top: 2px; }
+  footer { text-align: center; color: #555; font-size: 0.85em; margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2a2a; }
+  footer a { color: #f0a040; text-decoration: none; }
+  .zh { } /* .en hidden via JS */
+  @media (max-width: 768px) {
+    .kline-grid { grid-template-columns: 1fr !important; }
+    .stock-grid { grid-template-columns: repeat(2, 1fr); }
+    .weather-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+  <div style="text-align:right;margin-bottom:8px">
+    <button onclick="switchLang('zh')" id="btn-zh" style="background:#555;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+    <button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+
+    <div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">🔬</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors &amp; AI</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Nvidia包下台积电CoWoS先进封装产能，供应链新瓶颈浮现<br>• Intel加入马斯克TerraFab AI芯片项目，Austin建厂</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Nvidia locks up TSMC CoWoS advanced packaging capacity<br>• Intel joins Musk's TerraFab AI chip project in Austin</div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">⚽</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 欧冠1/4决赛首回合今晚主场对阵马竞！<br>• 西甲76分领跑，领先皇马7分</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• UCL QF 1st leg vs Atletico at Camp Nou tonight!<br>• La Liga leaders with 76 pts, 7 pts ahead of Real Madrid</div>
+    </div>
+
+    <div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">🏀</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 开拓者今晚客场对马刺，常规赛最后一周<br>• FIFA世界杯48支球队全部确定</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Trail Blazers at Spurs tonight, final regular season week<br>• FIFA World Cup 2026: All 48 teams confirmed</div>
+    </div>
+
+    <div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+      <div style="font-size:2em;margin-bottom:8px">🤖</div>
+      <div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+      <div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+      <div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthropic发布Project Glasswing，AI自主发现安全漏洞<br>• Perplexity年化收入突破$4.5亿，月增50%</div>
+      <div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthropic launches Project Glasswing for AI-driven security<br>• Perplexity hits $450M ARR, growing 50% monthly</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<h1 class="zh">📡 每日研报</h1>
+<h1 class="en" style="display:none">📡 Daily Research Report</h1>
+<div class="subtitle zh">2026-04-08 · Sky Portal Daily Research</div>
+<div class="subtitle en" style="display:none">2026-04-08 · Sky Portal Daily Research</div>
+
+<!-- ========== 🔬 半导体与AI ========== -->
+<div class="section">
+  <div class="section-title zh">🔬 半导体与AI</div>
+  <div class="section-title en" style="display:none">🔬 Semiconductors &amp; AI</div>
+
+  <div class="news-item">
+    <div class="news-title zh">1. Nvidia锁定台积电先进封装产能，AI芯片下一个瓶颈已现</div>
+    <div class="news-title en" style="display:none">1. Nvidia Locks Up TSMC Advanced Packaging Capacity</div>
+    <div class="news-body zh">Nvidia已包下台积电大部分CoWoS（Chip-on-Wafer-on-Substrate）先进封装产能，用于其新一代Blackwell和Vera Rubin AI芯片的大规模生产。这一举动导致AMD、Intel等其他客户面临封装排期严重紧张的困境。分析师指出，先进封装已成为AI芯片供应链中比晶圆制造更紧迫的瓶颈，台积电正加速扩产但短期内仍供不应求。来源：<a href="https://www.reuters.com" style="color:#f0a040">Reuters</a> / <a href="https://www.bloomberg.com" style="color:#f0a040">Bloomberg</a></div>
+    <div class="news-body en" style="display:none">Nvidia has secured the majority of TSMC's CoWoS (Chip-on-Wafer-on-Substrate) advanced packaging capacity for its next-gen Blackwell and Vera Rubin AI chips. This leaves AMD, Intel, and other customers facing severe packaging scheduling constraints. Analysts note that advanced packaging has become a more pressing bottleneck than wafer fabrication itself. TSMC is accelerating expansion but supply remains short of demand in the near term. Source: <a href="https://www.reuters.com" style="color:#f0a040">Reuters</a> / <a href="https://www.bloomberg.com" style="color:#f0a040">Bloomberg</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">2. Intel加入马斯克TerraFab AI芯片项目</div>
+    <div class="news-title en" style="display:none">2. Intel Joins Musk's TerraFab AI Chip Project</div>
+    <div class="news-body zh">Intel宣布加入Elon Musk主导的TerraFab AI芯片制造联盟，与SpaceX、Tesla、xAI等公司深度合作，计划在德克萨斯州Austin建设大规模AI芯片制造工厂。该项目旨在打破对台积电的依赖，实现AI芯片的本土化生产。Intel将贡献其18A先进制程技术和封装能力，预计2027年首批芯片下线。来源：<a href="https://www.wsj.com" style="color:#f0a040">WSJ</a> / <a href="https://www.theverge.com" style="color:#f0a040">The Verge</a></div>
+    <div class="news-body en" style="display:none">Intel has joined Elon Musk's TerraFab AI chip manufacturing alliance, collaborating with SpaceX, Tesla, and xAI to build a large-scale AI chip fab in Austin, Texas. The project aims to break dependence on TSMC and achieve domestic AI chip production. Intel will contribute its 18A process technology and packaging capabilities, with first chips expected in 2027. Source: <a href="https://www.wsj.com" style="color:#f0a040">WSJ</a> / <a href="https://www.theverge.com" style="color:#f0a040">The Verge</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">3. AMD推理市场加速渗透，数据中心业务同比增39%</div>
+    <div class="news-title en" style="display:none">3. AMD Accelerates Inference Market Penetration</div>
+    <div class="news-body zh">AMD最新财报显示数据中心业务Q4同比增长39%，GPU在AI推理场景中的采用率持续上升。随着企业从模型训练转向推理部署，AMD Instinct系列GPU凭借性价比优势获得了更多云服务商和企业客户的青睐。公司还推出了新的MI350系列推理优化芯片，直接挑战Nvidia在推理市场的地位。来源：<a href="https://www.cnbc.com" style="color:#f0a040">CNBC</a> / <a href="https://seekingalpha.com" style="color:#f0a040">Seeking Alpha</a></div>
+    <div class="news-body en" style="display:none">AMD's latest earnings show data center revenue up 39% YoY in Q4, with GPU adoption in AI inference scenarios rising steadily. As enterprises shift from training to inference deployment, AMD Instinct GPUs are winning more cloud and enterprise clients on price-performance. The new MI350 inference-optimized chips directly challenge Nvidia's inference dominance. Source: <a href="https://www.cnbc.com" style="color:#f0a040">CNBC</a> / <a href="https://seekingalpha.com" style="color:#f0a040">Seeking Alpha</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">4. Nvidia自由现金流达$965亿，计划$100亿收购扩张AI版图</div>
+    <div class="news-title en" style="display:none">4. Nvidia Free Cash Flow Hits $96.5B, Plans $10B Acquisition Spree</div>
+    <div class="news-body zh">Nvidia 2026财年自由现金流达到惊人的965亿美元，公司正计划投入超过100亿美元进行战略性收购，从芯片设计向全栈AI基础设施延伸。潜在收购目标涵盖AI软件平台、数据中心冷却技术、以及AI网络解决方案领域。华尔街分析认为，Nvidia正试图构建一个覆盖硬件、软件和服务的完整AI生态系统。来源：<a href="https://www.ft.com" style="color:#f0a040">Financial Times</a> / <a href="https://www.bloomberg.com" style="color:#f0a040">Bloomberg</a></div>
+    <div class="news-body en" style="display:none">Nvidia's FY2026 free cash flow reached a staggering $96.5B, and the company plans to deploy over $10B in strategic acquisitions, expanding from chip design into full-stack AI infrastructure. Potential targets include AI software platforms, data center cooling tech, and AI networking solutions. Wall Street sees Nvidia building a complete AI ecosystem spanning hardware, software, and services. Source: <a href="https://www.ft.com" style="color:#f0a040">Financial Times</a> / <a href="https://www.bloomberg.com" style="color:#f0a040">Bloomberg</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">5. 先进封装成为AI芯片供应链新瓶颈</div>
+    <div class="news-title en" style="display:none">5. Advanced Packaging Becomes the New AI Chip Supply Chain Bottleneck</div>
+    <div class="news-body zh">随着AI芯片对高带宽内存（HBM）和CoWoS封装的需求激增，先进封装已成为制约整个行业产能的关键瓶颈。台积电正在加速扩产CoWoS产能，目标在2026年底前将月产能提升至8万片以上，但仍然无法满足所有客户的需求。三星和Intel也在加紧布局先进封装能力，但技术成熟度和产能规模与台积电仍有差距。来源：<a href="https://www.nikkei.com" style="color:#f0a040">Nikkei Asia</a> / <a href="https://www.reuters.com" style="color:#f0a040">Reuters</a></div>
+    <div class="news-body en" style="display:none">As AI chip demand for HBM and CoWoS packaging surges, advanced packaging has become the key bottleneck constraining industry capacity. TSMC is accelerating CoWoS expansion, targeting 80K+ wafers/month by end of 2026, but still can't satisfy all customers. Samsung and Intel are also building advanced packaging capabilities, but lag behind TSMC in technology maturity and scale. Source: <a href="https://www.nikkei.com" style="color:#f0a040">Nikkei Asia</a> / <a href="https://www.reuters.com" style="color:#f0a040">Reuters</a></div>
+  </div>
+</div>
+
+<!-- ========== 📈 股票行情 ========== -->
+<div class="section">
+  <div class="section-title zh">📈 半导体股票行情（4月7日收盘）</div>
+  <div class="section-title en" style="display:none">📈 Semiconductor Stocks (Apr 7 Close)</div>
+  <div class="stock-grid">
+    <div class="stock-card"><div class="stock-ticker">INTC</div><div class="stock-price">$57.71</div><span class="tag tag-red">-1.2%</span></div>
+    <div class="stock-card"><div class="stock-ticker">TSM</div><div class="stock-price">$365.44</div><span class="tag tag-green">+0.8%</span></div>
+    <div class="stock-card"><div class="stock-ticker">NVDA</div><div class="stock-price">$181.97</div><span class="tag tag-green">+3.1%</span></div>
+    <div class="stock-card"><div class="stock-ticker">AMD</div><div class="stock-price">$232.03</div><span class="tag tag-green">+1.5%</span></div>
+    <div class="stock-card"><div class="stock-ticker">ASML</div><div class="stock-price">$1,212.60</div><span class="tag tag-red">-0.3%</span></div>
+    <div class="stock-card"><div class="stock-ticker">MU</div><div class="stock-price">$406.50</div><span class="tag tag-green">+2.1%</span></div>
+    <div class="stock-card"><div class="stock-ticker">AVGO</div><div class="stock-price">$348.89</div><span class="tag tag-green">+0.9%</span></div>
+    <div class="stock-card"><div class="stock-ticker">QCOM</div><div class="stock-price">$126.94</div><span class="tag tag-green">+2.6%</span></div>
+    <div class="stock-card"><div class="stock-ticker">TSLA</div><div class="stock-price">$348.44</div><span class="tag tag-red">-0.1%</span></div>
+    <div class="stock-card"><div class="stock-ticker">SMH</div><div class="stock-price">$420.00</div><span class="tag tag-green">+0.8%</span></div>
+  </div>
+  <div style="margin-top:24px">
+    <h3 style="color:#f0a040;margin-bottom:12px">📊 K线图</h3>
+    <div class="kline-grid">
+      <div class="kline-item">
+        <div class="kline-label">INTC — Intel</div>
+        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[["NASDAQ:INTC|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}</script></div>
+      </div>
+      <div class="kline-item">
+        <div class="kline-label">NVDA — NVIDIA</div>
+        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[["NASDAQ:NVDA|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}</script></div>
+      </div>
+      <div class="kline-item">
+        <div class="kline-label">TSLA — Tesla</div>
+        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[["NASDAQ:TSLA|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}</script></div>
+      </div>
+      <div class="kline-item">
+        <div class="kline-label">SMH — Semiconductor ETF</div>
+        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[["NASDAQ:SMH|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}</script></div>
+      </div>
+      <div class="kline-item">
+        <div class="kline-label">SPY — S&amp;P 500</div>
+        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[["AMEX:SPY|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}</script></div>
+      </div>
+      <div class="kline-item">
+        <div class="kline-label">000001 — 上证指数</div>
+        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>{"symbols":[["SSE:000001|1D"]],"chartType":"candlesticks","colorTheme":"dark","backgroundColor":"rgba(20,20,30,1)","dateRanges":["1w|1D","1m|1D","3m|1W"],"height":180,"chartOnly":true,"locale":"zh_CN"}</script></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ⚽ FC Barcelona ========== -->
+<div class="section">
+  <div class="section-title zh">⚽ FC Barcelona</div>
+  <div class="section-title en" style="display:none">⚽ FC Barcelona</div>
+
+  <div class="news-item">
+    <div class="news-title zh">🏅 欧冠1/4决赛首回合 — 今晚主场对阵马竞！</div>
+    <div class="news-title en" style="display:none">🏅 UCL Quarter-Final 1st Leg — vs Atletico Madrid Tonight!</div>
+    <div class="news-body zh"><strong style="color:#f0a040;font-size:1.1em">⏰ 4月8日，Spotify Camp Nou</strong><br><br>今晚巴萨将在欧冠1/4决赛首回合主场迎战马德里竞技。这是双方本赛季第四次交锋——此前西甲两场和国王杯一场。巴萨此前以<strong style="color:#fff">8-3总比分</strong>淘汰纽卡斯尔晋级八强。主教练Flick预计将派出全主力阵容，莱万多夫斯基和拉什福德将领衔锋线。次回合将于4月14日在马竞主场进行。来源：<a href="https://www.fcbarcelona.com" style="color:#f0a040">FCBarcelona.com</a> / <a href="https://www.uefa.com" style="color:#f0a040">UEFA.com</a></div>
+    <div class="news-body en" style="display:none"><strong style="color:#f0a040;font-size:1.1em">⏰ April 8, Spotify Camp Nou</strong><br><br>Barca host Atletico Madrid in the UCL QF 1st leg tonight — the fourth meeting between the sides this season across La Liga and Copa del Rey. Barca advanced to the last eight with an <strong style="color:#fff">8-3 aggregate</strong> win over Newcastle. Coach Flick is expected to field a full-strength XI with Lewandowski and Rashford leading the attack. The 2nd leg is April 14 at Atletico's home. Source: <a href="https://www.fcbarcelona.com" style="color:#f0a040">FCBarcelona.com</a> / <a href="https://www.uefa.com" style="color:#f0a040">UEFA.com</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">🏆 上轮西甲回顾 — 巴萨客场2-1绝杀马竞</div>
+    <div class="news-title en" style="display:none">🏆 Last La Liga Match — Barca Win 2-1 at Atletico</div>
+    <div class="news-body zh">西甲第30轮，巴萨客场<strong style="color:#fff">2-1</strong>击败马德里竞技。马竞希门尼斯上半场率先破门，<strong style="color:#4ade80">拉什福德</strong>下半场扳平比分，<strong style="color:#f0a040">莱万多夫斯基第87分钟头球绝杀</strong>！马竞球员冈萨雷斯上半场补时吃到红牌，下半场以10人应战。这场胜利让巴萨在争冠道路上迈出关键一步。来源：<a href="https://www.espn.com" style="color:#f0a040">ESPN</a> / <a href="https://www.marca.com" style="color:#f0a040">Marca</a></div>
+    <div class="news-body en" style="display:none">La Liga MD30: Barca won <strong style="color:#fff">2-1</strong> at Atletico. Gimenez opened the scoring in the first half, <strong style="color:#4ade80">Rashford</strong> equalized after the break, and <strong style="color:#f0a040">Lewandowski headed an 87th-minute winner!</strong> Atletico's Gonzalez was sent off in first-half stoppage time, playing with 10 men. A crucial victory in the title race. Source: <a href="https://www.espn.com" style="color:#f0a040">ESPN</a> / <a href="https://www.marca.com" style="color:#f0a040">Marca</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">📊 西甲积分榜（第30轮后）</div>
+    <div class="news-title en" style="display:none">📊 La Liga Standings (After MD30)</div>
+    <div class="news-body zh"><strong style="color:#4ade80;font-size:1.05em">1. 巴塞罗那 76分</strong>（30场，24胜4平2负）<br>2. 皇家马德里 69分（30场）<br>3. 比利亚雷亚尔 58分（29场）<br>4. 马德里竞技 57分（30场）<br><br><em style="color:#888">巴萨领先皇马7分，皇马上轮1-2不敌马洛卡。剩余8轮比赛中，巴萨若保持状态，有望锁定联赛冠军。</em></div>
+    <div class="news-body en" style="display:none"><strong style="color:#4ade80;font-size:1.05em">1. Barcelona 76 pts</strong> (30 games, W24 D4 L2)<br>2. Real Madrid 69 pts (30 games)<br>3. Villarreal 58 pts (29 games)<br>4. Atletico Madrid 57 pts (30 games)<br><br><em style="color:#888">Barca lead Real Madrid by 7 pts; Madrid lost 1-2 to Mallorca last round. With 8 matches remaining, Barca are in strong position to clinch the title.</em></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">⭐ Rashford租借表现出色</div>
+    <div class="news-title en" style="display:none">⭐ Rashford Shines on Loan</div>
+    <div class="news-body zh">Marcus Rashford自租借加盟巴萨以来表现极为出色，各项赛事已贡献<strong style="color:#fff">11球13助攻</strong>。主教练Flick公开盛赞其适应能力："Rashford在战术和心理层面都融入得非常好，他是我们攻击线上的关键拼图。"巴萨方面正在讨论是否在夏窗将其永久签下。来源：<a href="https://www.sport.es" style="color:#f0a040">Sport</a> / <a href="https://www.mundodeportivo.com" style="color:#f0a040">Mundo Deportivo</a></div>
+    <div class="news-body en" style="display:none">Marcus Rashford has been outstanding since joining on loan, contributing <strong style="color:#fff">11 goals and 13 assists</strong> across all competitions. Coach Flick publicly praised his adaptability: "Rashford has integrated brilliantly tactically and mentally — he's a key piece of our attack." Barca are discussing a potential permanent summer signing. Source: <a href="https://www.sport.es" style="color:#f0a040">Sport</a> / <a href="https://www.mundodeportivo.com" style="color:#f0a040">Mundo Deportivo</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">🚑 伤病名单</div>
+    <div class="news-title en" style="display:none">🚑 Injury Report</div>
+    <div class="news-body zh">• <strong style="color:#f87171">拉菲尼亚</strong> — 腿筋受伤，预计缺阵约5周，欧冠首回合确定缺席<br>• <strong style="color:#f87171">马克·贝纳尔</strong> — 脚踝伤势，欧冠首回合无法出战<br>• <strong style="color:#f87171">加维</strong> — 半月板伤势，长期伤号<br>• <strong style="color:#f87171">特尔施特根</strong> — 膝盖伤势，长期伤号<br>• <strong style="color:#4ade80">阿劳霍</strong> — 已复出，可出战欧冠 ✅<br>来源：<a href="https://www.fcbarcelona.com" style="color:#f0a040">FCBarcelona.com</a></div>
+    <div class="news-body en" style="display:none">• <strong style="color:#f87171">Raphinha</strong> — Hamstring, ~5 weeks out, misses UCL 1st leg<br>• <strong style="color:#f87171">Marc Bernal</strong> — Ankle, unavailable for UCL 1st leg<br>• <strong style="color:#f87171">Gavi</strong> — Meniscus, long-term absentee<br>• <strong style="color:#f87171">Ter Stegen</strong> — Knee, long-term absentee<br>• <strong style="color:#4ade80">Araujo</strong> — Returned, available for UCL ✅<br>Source: <a href="https://www.fcbarcelona.com" style="color:#f0a040">FCBarcelona.com</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">🔄 转会动态</div>
+    <div class="news-title en" style="display:none">🔄 Transfer News</div>
+    <div class="news-body zh">• <strong style="color:#fff">贝尔纳多·席尔瓦（Bernardo Silva）</strong> — 曼城中场，合同6月到期，为巴萨首要引援目标，球员本人有意回归西甲<br>• <strong style="color:#fff">若昂·坎塞洛</strong> — 有望从曼城永久加盟，租借表现令教练组满意<br>• <strong style="color:#fff">莱万多夫斯基转会传闻</strong> — AC米兰表达了对莱万的兴趣，夏窗可能提出报价，但巴萨无意放人<br>来源：<a href="https://www.transfermarkt.com" style="color:#f0a040">Transfermarkt</a> / <a href="https://www.fabrizioromano.com" style="color:#f0a040">Fabrizio Romano</a></div>
+    <div class="news-body en" style="display:none">• <strong style="color:#fff">Bernardo Silva</strong> — Man City midfielder, contract expires in June, Barca's top target, player interested in La Liga return<br>• <strong style="color:#fff">Joao Cancelo</strong> — Permanent move from Man City likely; loan performance has impressed coaching staff<br>• <strong style="color:#fff">Lewandowski rumors</strong> — AC Milan expressed interest, but Barca have no intention of selling<br>Source: <a href="https://www.transfermarkt.com" style="color:#f0a040">Transfermarkt</a> / <a href="https://www.fabrizioromano.com" style="color:#f0a040">Fabrizio Romano</a></div>
+  </div>
+</div>
+
+<!-- ========== 🏟️ 体育赛事 ========== -->
+<div class="section">
+  <div class="section-title zh">🏟️ 体育赛事（NBA &amp; 全球赛事）</div>
+  <div class="section-title en" style="display:none">🏟️ Sports Events (NBA &amp; Global)</div>
+
+  <div class="sport-card">
+    <div class="sport-card-title zh">🏀 波特兰开拓者队 — 常规赛最后一周</div>
+    <div class="sport-card-title en" style="display:none">🏀 Portland Trail Blazers — Final Regular Season Week</div>
+    <div class="sport-source zh">来源：ESPN / NBA.com / Blazers Edge</div>
+    <div class="sport-source en" style="display:none">Source: ESPN / NBA.com / Blazers Edge</div>
+    <div class="news-body zh"><strong style="color:#fff">今晚赛事：</strong>开拓者客场对阵圣安东尼奥马刺（4月8日）。马刺球星文班亚马（Wembanyama）可能因伤缺阵，这对开拓者是利好消息。<br><br><strong style="color:#fff">Shaedon Sharpe伤情更新：</strong>Sharpe伤势好转，有望今晚复出。他的回归将为开拓者后场注入更多火力。<br><br><strong style="color:#f87171">昨日遗憾：</strong>开拓者昨天对阵丹佛掘金的比赛中，加时赛因裁判一次争议性误判最终惜败。赛后教练组对裁判的判罚表达了不满，这一误判也引发了球迷在社交媒体上的热议。<br><br><em style="color:#888">常规赛4月12日结束，开拓者已无缘季后赛。</em></div>
+    <div class="news-body en" style="display:none"><strong style="color:#fff">Tonight:</strong> Trail Blazers visit San Antonio Spurs (Apr 8). Spurs star Wembanyama may sit out with injury — good news for Portland.<br><br><strong style="color:#fff">Shaedon Sharpe Update:</strong> Sharpe's injury is improving and he could return tonight, boosting Portland's backcourt firepower.<br><br><strong style="color:#f87171">Last Night:</strong> Blazers lost to Denver Nuggets in OT after a controversial referee call. The coaching staff expressed frustration post-game, and the call sparked heated fan discussion on social media.<br><br><em style="color:#888">Regular season ends Apr 12; Blazers are out of playoff contention.</em></div>
+  </div>
+
+  <div class="sport-card">
+    <div class="sport-card-title zh">🏀 NBA 季后赛布局</div>
+    <div class="sport-card-title en" style="display:none">🏀 NBA Playoff Picture</div>
+    <div class="sport-source zh">来源：ESPN / NBA.com</div>
+    <div class="sport-source en" style="display:none">Source: ESPN / NBA.com</div>
+    <div class="news-body zh">常规赛4月12日结束，附加赛（Play-In）4月14-17日，<strong style="color:#fff">季后赛首轮4月18日开打</strong>，总决赛预计6月3日。<br><br><strong style="color:#fff">西部排名：</strong>雷霆(1)、马刺(2)、掘金(3)、湖人(4)<br><strong style="color:#fff">东部排名：</strong>活塞(1)、凯尔特人(2)、尼克斯(3)、骑士(4)<br><br>本赛季最大惊喜是底特律活塞以东部第一的身份杀入季后赛，而雷霆则以约65-17的战绩锁定西部第一。</div>
+    <div class="news-body en" style="display:none">Regular season ends Apr 12. Play-In: Apr 14-17. <strong style="color:#fff">Playoffs Round 1 starts Apr 18</strong>. Finals expected June 3.<br><br><strong style="color:#fff">West:</strong> Thunder(1), Spurs(2), Nuggets(3), Lakers(4)<br><strong style="color:#fff">East:</strong> Pistons(1), Celtics(2), Knicks(3), Cavaliers(4)<br><br>Detroit Pistons claiming the East's #1 seed is the season's biggest surprise, while OKC locked up the West at ~65-17.</div>
+  </div>
+
+  <div class="sport-card">
+    <div class="sport-card-title zh">🌍 FIFA 2026世界杯 — 48支球队全部确定</div>
+    <div class="sport-card-title en" style="display:none">🌍 FIFA World Cup 2026 — All 48 Teams Confirmed</div>
+    <div class="sport-source zh">来源：FIFA.com / ESPN / BBC Sport</div>
+    <div class="sport-source en" style="display:none">Source: FIFA.com / ESPN / BBC Sport</div>
+    <div class="news-body zh">伊拉克在蒙特雷举行的洲际附加赛中击败玻利维亚，获得了最后一个名额，成为第48支晋级2026年世界杯的球队。欧洲附加赛中，捷克、波黑、土耳其和瑞典相继晋级。本届世界杯将在美国、加拿大、墨西哥联合举办，是史上参赛队伍最多的一届，也是首次扩军至48队。然而，不少球迷投诉门票"货不对板"——实际座位视野与购买时展示的效果差异较大，FIFA已表示正在处理投诉。来源：<a href="https://www.fifa.com" style="color:#f0a040">FIFA.com</a></div>
+    <div class="news-body en" style="display:none">Iraq defeated Bolivia in the intercontinental playoff in Monterrey to claim the final spot, becoming the 48th team to qualify for the 2026 World Cup. European playoffs saw Czechia, Bosnia, Turkey, and Sweden advance. This will be the largest World Cup ever — first with 48 teams — co-hosted by USA, Canada, and Mexico. However, many fans have complained about tickets not matching what was displayed during purchase, with actual seat views significantly different. FIFA says it's addressing complaints. Source: <a href="https://www.fifa.com" style="color:#f0a040">FIFA.com</a></div>
+  </div>
+
+  <div class="sport-card">
+    <div class="sport-card-title zh">🎾 ATP/WTA迈阿密公开赛回顾</div>
+    <div class="sport-card-title en" style="display:none">🎾 ATP/WTA Miami Open Recap</div>
+    <div class="sport-source zh">来源：Tennis.com / ESPN</div>
+    <div class="sport-source en" style="display:none">Source: Tennis.com / ESPN</div>
+    <div class="news-body zh">迈阿密公开赛刚刚落幕，新一届男女单打冠军产生。本次赛事多位种子选手提前出局，比赛中涌现了不少黑马选手的精彩表现。随着红土赛季即将开始，纳达尔告别赛后法网的看点将聚焦于谁能成为新的红土之王。来源：<a href="https://www.espn.com" style="color:#f0a040">ESPN</a></div>
+    <div class="news-body en" style="display:none">The Miami Open has concluded with new men's and women's singles champions crowned. Several seeded players exited early, with surprise runs from underdogs highlighting the tournament. As the clay season approaches, post-Nadal Roland Garros will be a focal point for who emerges as the new king of clay. Source: <a href="https://www.espn.com" style="color:#f0a040">ESPN</a></div>
+  </div>
+</div>
+
+<!-- ========== 🌲 Portland 本地 ========== -->
+<div class="section">
+  <div class="section-title zh">🌲 Portland 本地</div>
+  <div class="section-title en" style="display:none">🌲 Portland Local</div>
+
+  <div class="news-item">
+    <div class="news-title zh">🌤️ 今日天气 — 异常温暖，享受阳光！</div>
+    <div class="news-title en" style="display:none">🌤️ Today's Weather — Unusually Warm, Enjoy the Sun!</div>
+    <div class="weather-grid">
+      <div class="weather-card">
+        <div class="label zh">最高温度</div>
+        <div class="label en" style="display:none">High</div>
+        <div class="value">70°F / 21°C</div>
+        <div class="sub zh">☀️ 晴转暖</div>
+        <div class="sub en" style="display:none">☀️ Sunny &amp; warm</div>
+      </div>
+      <div class="weather-card">
+        <div class="label zh">最低温度</div>
+        <div class="label en" style="display:none">Low</div>
+        <div class="value">50°F / 10°C</div>
+        <div class="sub zh">🌙 夜间凉爽</div>
+        <div class="sub en" style="display:none">🌙 Cool night</div>
+      </div>
+      <div class="weather-card">
+        <div class="label zh">风力</div>
+        <div class="label en" style="display:none">Wind</div>
+        <div class="value">15 km/h</div>
+        <div class="sub zh">🧭 南风</div>
+        <div class="sub en" style="display:none">🧭 South</div>
+      </div>
+      <div class="weather-card">
+        <div class="label zh">周四预报</div>
+        <div class="label en" style="display:none">Thursday</div>
+        <div class="value">75°F / 24°C</div>
+        <div class="sub zh">🌡️ 更暖！周末有雨</div>
+        <div class="sub en" style="display:none">🌡️ Warmer! Rain on weekend</div>
+      </div>
+    </div>
+    <div class="news-body zh">今天波特兰迎来异常温暖的春日天气，最高温度接近70°F（21°C），比季节平均水平高出约10度。建议穿着轻薄外套，适合户外活动。周四将进一步升温至75°F，但周末可能转为阴雨天气，建议周末出行提前准备雨具。来源：<a href="https://weather.gov" style="color:#f0a040">NWS Portland</a></div>
+    <div class="news-body en" style="display:none">Portland is enjoying an unusually warm spring day, with highs near 70°F (21°C) — about 10 degrees above seasonal average. Light jacket recommended; great for outdoor activities. Thursday will be even warmer at 75°F, but rain returns over the weekend — plan accordingly. Source: <a href="https://weather.gov" style="color:#f0a040">NWS Portland</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">⛽ Oregon油价飙升至$5/加仑</div>
+    <div class="news-title en" style="display:none">⛽ Oregon Gas Prices Hit $5/Gallon</div>
+    <div class="news-body zh">Oregon州平均油价已突破<strong style="color:#f87171">$5/加仑</strong>大关，创下近年来新高。油价飙升主要受伊朗局势紧张影响——国际原油价格因地缘政治不确定性持续走高。分析人士预计短期内油价难以回落，建议车主关注Costco等会员加油站的优惠价格。Portland地区部分加油站价格甚至已超过$5.20/加仑。来源：<a href="https://www.oregonlive.com" style="color:#f0a040">OregonLive</a> / <a href="https://gasbuddy.com" style="color:#f0a040">GasBuddy</a></div>
+    <div class="news-body en" style="display:none">Oregon's average gas price has broken the <strong style="color:#f87171">$5/gallon</strong> mark, hitting a multi-year high. The surge is driven by Iran tensions — international crude prices continue rising on geopolitical uncertainty. Analysts don't expect relief soon; Costco and membership stations may offer better deals. Some Portland stations are already above $5.20/gallon. Source: <a href="https://www.oregonlive.com" style="color:#f0a040">OregonLive</a> / <a href="https://gasbuddy.com" style="color:#f0a040">GasBuddy</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">📰 本地新闻速览</div>
+    <div class="news-title en" style="display:none">📰 Local News Briefs</div>
+    <div class="news-body zh">
+      • 🏛️ <strong style="color:#fff">Clackamas County拒绝资金请求</strong> — Portland市长Wilson请求Clackamas County提供$400万用于无家可归者服务，遭 county 官员拒绝。市议会将不得不独自面对资金缺口问题。<br>
+      • 🏘️ <strong style="color:#4ade80">Albina Vision Trust修复性开发计划</strong> — 该组织计划在Lower Albina进行大规模修复性开发，旨在帮助黑人社区"重新扎根"。项目包括经济适用房、社区商业空间和文化中心。<br>
+      • 🏠 <strong style="color:#fff">Metro counties不资助Portland庇护所</strong> — 区域政府决定不向Portland庇护所提供额外资金，市议会将自行决定资金分配方案，无家可归者服务面临更大压力。<br>
+      • 🌡️ <strong style="color:#f0a040">本周异常温暖</strong> — 波特兰本周气温远高于季节平均，多处公园迎来大批市民享受春日阳光。气象部门提醒，温暖天气可能导致山区积雪加速融化。<br>
+      来源：<a href="https://www.oregonlive.com" style="color:#f0a040">OregonLive</a> / <a href="https://www.wweek.com" style="color:#f0a040">Willamette Week</a> / <a href="https://www.opb.org" style="color:#f0a040">OPB</a>
+    </div>
+    <div class="news-body en" style="display:none">
+      • 🏛️ <strong style="color:#fff">Clackamas County Rejects Funding Request</strong> — Mayor Wilson's $4M request for homeless services was denied by Clackamas County officials. City Council must now face the funding gap alone.<br>
+      • 🏘️ <strong style="color:#4ade80">Albina Vision Trust Restorative Development</strong> — Large-scale restorative development planned in Lower Albina to help the Black community "put down roots again." Includes affordable housing, commercial space, and a cultural center.<br>
+      • 🏠 <strong style="color:#fff">Metro Counties Won't Fund Portland Shelters</strong> — Regional government declined additional shelter funding; City Council must decide allocation, putting more pressure on homeless services.<br>
+      • 🌡️ <strong style="color:#f0a040">Unusually Warm Week</strong> — Portland temperatures far above seasonal averages; parks filled with residents enjoying the spring sun. Meteorologists warn warm weather may accelerate mountain snowmelt.<br>
+      Source: <a href="https://www.oregonlive.com" style="color:#f0a040">OregonLive</a> / <a href="https://www.wweek.com" style="color:#f0a040">Willamette Week</a> / <a href="https://www.opb.org" style="color:#f0a040">OPB</a>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">🚗 交通提醒</div>
+    <div class="news-title en" style="display:none">🚗 Traffic Alerts</div>
+    <div class="news-body zh">• <strong style="color:#fff">I-5北行</strong>：Columbia River大桥路段本周有夜间维护施工，晚10点至早5点可能缩减车道<br>• <strong style="color:#fff">MAX蓝线</strong>：周末将进行信号系统升级，Hollywood站至Gresham站区间有接驳巴士替代<br>• <strong style="color:#fff">NW Cornell Road</strong>（Bird Alliance段）：山体滑坡导致路段持续关闭，建议绕行Skyline Blvd<br>• 实时路况：<a href="https://www.tripcheck.com" style="color:#f0a040">TripCheck.com</a>来源：<a href="https://www.oregon.gov/odot" style="color:#f0a040">ODOT</a></div>
+    <div class="news-body en" style="display:none">• <strong style="color:#fff">I-5 Northbound</strong>: Night lane reductions at Columbia River Bridge this week, 10PM-5AM<br>• <strong style="color:#fff">MAX Blue Line</strong>: Weekend signal system upgrade; shuttle buses between Hollywood and Gresham<br>• <strong style="color:#fff">NW Cornell Road</strong> (Bird Alliance section): Closed due to landslide, use Skyline Blvd detour<br>• Live traffic: <a href="https://www.tripcheck.com" style="color:#f0a040">TripCheck.com</a> Source: <a href="https://www.oregon.gov/odot" style="color:#f0a040">ODOT</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">🌷 社区活动</div>
+    <div class="news-title en" style="display:none">🌷 Community Events</div>
+    <div class="news-body zh">• 🌷 <strong style="color:#fff">木鞋郁金香节</strong>（4月1-26日，Woodburn）：40英亩花海正值最佳观赏期，含品酒、美食和手工市集。周末人流量较大，建议工作日前往。<br>• 🎭 <strong style="color:#fff">Alberta Rose Theatre讲座</strong>：今晚7点，Hélène Landemore谈民主制度改革，免费入场。<br>• 🎵 <strong style="color:#fff">Portland Jazz Festival</strong>：本周末在多个场馆举办，汇集本地和国际爵士乐手。<br>来源：<a href="https://www.travelportland.com" style="color:#f0a040">Travel Portland</a></div>
+    <div class="news-body en" style="display:none">• 🌷 <strong style="color:#fff">Wooden Shoe Tulip Festival</strong> (Apr 1-26, Woodburn): 40 acres of flowers at peak bloom, with wine tasting, food, and artisan market. Weekends are crowded — visit on weekdays if possible.<br>• 🎭 <strong style="color:#fff">Alberta Rose Theatre</strong>: Tonight 7PM, Hélène Landemore on democratic reform. Free admission.<br>• 🎵 <strong style="color:#fff">Portland Jazz Festival</strong>: This weekend at multiple venues, featuring local and international jazz artists.<br>Source: <a href="https://www.travelportland.com" style="color:#f0a040">Travel Portland</a></div>
+  </div>
+</div>
+
+<!-- ========== 🤖 AI动态 ========== -->
+<div class="section">
+  <div class="section-title zh">🤖 AI 工具/产品动态</div>
+  <div class="section-title en" style="display:none">🤖 AI Tools &amp; Product Updates</div>
+
+  <div class="news-item">
+    <div class="news-title zh">1. Anthropic发布Project Glasswing — AI自主发现安全漏洞</div>
+    <div class="news-title en" style="display:none">1. Anthropic Launches Project Glasswing — AI Autonomously Finds Security Vulnerabilities</div>
+    <div class="news-body zh">Anthropic发布Project Glasswing项目，其Claude Mythos模型能够<strong style="color:#fff">自主发现软件安全漏洞</strong>，在测试中发现的零日漏洞数量超越了人类安全研究团队。同时，Apple、Google、Microsoft、Amazon等<strong style="color:#fff">12家科技巨头</strong>宣布联合网络安全计划，被称为"AI的曼哈顿计划"。该计划旨在利用AI技术大规模检测和修补全球软件基础设施中的安全漏洞。来源：<a href="https://www.anthropic.com" style="color:#f0a040">Anthropic</a> / <a href="https://www.wired.com" style="color:#f0a040">Wired</a></div>
+    <div class="news-body en" style="display:none">Anthropic launched Project Glasswing, where the Claude Mythos model can <strong style="color:#fff">autonomously discover software security vulnerabilities</strong>, finding more zero-days in testing than human security research teams. Meanwhile, Apple, Google, Microsoft, Amazon, and <strong style="color:#fff">12 other tech giants</strong> announced a joint cybersecurity initiative dubbed the "AI Manhattan Project." The plan aims to use AI to detect and patch vulnerabilities in global software infrastructure at scale. Source: <a href="https://www.anthropic.com" style="color:#f0a040">Anthropic</a> / <a href="https://www.wired.com" style="color:#f0a040">Wired</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">2. Anthropic限制Mythos公开发布，仅限安全合作伙伴</div>
+    <div class="news-title en" style="display:none">2. Anthropic Restricts Mythos Public Release — Security Partners Only</div>
+    <div class="news-body zh">出于对Claude Mythos模型被滥用于网络攻击的担忧，Anthropic决定<strong style="color:#fff">不公开发布</strong>该模型，仅向经过审核的网络安全合作伙伴提供早期访问权限。这一决定引发了AI开源社区关于安全与开放之间平衡的激烈讨论。Anthropic CEO Dario Amodei表示，在网络安全领域，"能力越大，责任越大"。来源：<a href="https://www.anthropic.com" style="color:#f0a040">Anthropic</a> / <a href="https://www.reuters.com" style="color:#f0a040">Reuters</a></div>
+    <div class="news-body en" style="display:none">Concerned about Claude Mythos being weaponized for cyberattacks, Anthropic has decided <strong style="color:#fff">not to release it publicly</strong>, limiting early access to vetted cybersecurity partners. The decision has sparked fierce debate in the AI open-source community about the balance between safety and openness. CEO Dario Amodei stated that in cybersecurity, "with great power comes great responsibility." Source: <a href="https://www.anthropic.com" style="color:#f0a040">Anthropic</a> / <a href="https://www.reuters.com" style="color:#f0a040">Reuters</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">3. OpenAI内部动荡可能影响IPO前景</div>
+    <div class="news-title en" style="display:none">3. OpenAI Internal Turmoil May Impact IPO Prospects</div>
+    <div class="news-body zh">据Fortune杂志报道，OpenAI近期经历了一系列内部人事变动和管理层分歧，这些动荡可能会影响其即将到来的IPO进程。多位高管近期离职，公司战略方向也存在争议——部分高层倾向于加速商业化，另一部分则坚持安全优先。分析人士预计OpenAI的IPO估值可能因此受到影响。来源：<a href="https://fortune.com" style="color:#f0a040">Fortune</a></div>
+    <div class="news-body en" style="display:none">OpenAI has experienced a series of internal personnel changes and management disagreements that could impact its upcoming IPO, according to Fortune. Several executives departed recently, and strategic direction remains contested — some leaders push for faster commercialization while others insist on safety-first. Analysts expect the IPO valuation may be affected. Source: <a href="https://fortune.com" style="color:#f0a040">Fortune</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">4. Perplexity收入月增50%，年化收入突破$4.5亿</div>
+    <div class="news-title en" style="display:none">4. Perplexity Revenue Grows 50% Monthly, ARR Exceeds $450M</div>
+    <div class="news-body zh">AI搜索引擎公司Perplexity的增长势头令人瞩目，月收入增长率达到<strong style="color:#fff">50%</strong>，年化收入（ARR）已突破<strong style="color:#fff">$4.5亿</strong>。公司正从纯搜索工具转向AI Agent平台，推出了基于使用量的计价模式。Perplexity还宣布了企业版Agent功能，可以自动执行多步骤的研究和分析任务。这一增长速度远超行业预期。来源：<a href="https://www.theinformation.com" style="color:#f0a040">The Information</a> / <a href="https://techcrunch.com" style="color:#f0a040">TechCrunch</a></div>
+    <div class="news-body en" style="display:none">AI search company Perplexity's growth is remarkable — monthly revenue growth of <strong style="color:#fff">50%</strong>, with ARR exceeding <strong style="color:#fff">$450M</strong>. The company is pivoting from pure search to an AI Agent platform, launching usage-based pricing. Perplexity also announced enterprise Agent features that can autonomously execute multi-step research and analysis tasks. The growth rate far exceeds industry expectations. Source: <a href="https://www.theinformation.com" style="color:#f0a040">The Information</a> / <a href="https://techcrunch.com" style="color:#f0a040">TechCrunch</a></div>
+  </div>
+
+  <div class="news-item">
+    <div class="news-title zh">5. AI重塑网络安全攻防格局</div>
+    <div class="news-title en" style="display:none">5. AI Reshapes the Cybersecurity Landscape</div>
+    <div class="news-body zh">AI正在深刻改变网络安全的攻防格局。攻击端，AI被用于自动化生成钓鱼邮件、发现零日漏洞和发起智能DDoS攻击；防御端，AI驱动的安全系统可以在毫秒级时间内检测并响应威胁。多家网络安全公司报告，2026年Q1 AI辅助攻击事件同比增长了300%。行业正在加速"AI对抗AI"的军备竞赛，传统安全防护手段已明显力不从心。来源：<a href="https://www.cybersecuritydive.com" style="color:#f0a040">Cybersecurity Dive</a> / <a href="https://www.darkreading.com" style="color:#f0a040">Dark Reading</a></div>
+    <div class="news-body en" style="display:none">AI is fundamentally transforming cybersecurity offense and defense. On the attack side, AI automates phishing, discovers zero-days, and launches intelligent DDoS attacks. On defense, AI-powered systems detect and respond to threats in milliseconds. Multiple cybersecurity firms report AI-assisted attacks surged 300% YoY in Q1 2026. The industry is accelerating an "AI vs. AI" arms race as traditional defenses prove increasingly inadequate. Source: <a href="https://www.cybersecuritydive.com" style="color:#f0a040">Cybersecurity Dive</a> / <a href="https://www.darkreading.com" style="color:#f0a040">Dark Reading</a></div>
+  </div>
+</div>
+
+<footer>
+  <p class="zh">生成时间：2026-04-08 · <a href="index.html">所有报告</a></p>
+  <p class="en" style="display:none">Generated: 2026-04-08 · <a href="index.html">All Reports</a></p>
+</footer>
+
+</div>
+</body>
+</html>

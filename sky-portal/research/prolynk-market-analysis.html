@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProLynk 竞品调研与可行性分析 | Market Analysis Report</title>
+<style>
+:root {
+  --bg: #0b0e14;
+  --bg2: #111620;
+  --bg3: #161c28;
+  --card: rgba(255,255,255,0.03);
+  --card-hover: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.07);
+  --text: #e0e4ec;
+  --text-dim: #7a8599;
+  --blue: #3b9eff;
+  --blue-glow: rgba(59,158,255,0.2);
+  --green: #4ade80;
+  --green-glow: rgba(74,222,128,0.15);
+  --orange: #fb923c;
+  --yellow: #facc15;
+  --red: #f87171;
+  --purple: #a78bfa;
+  --cyan: #22d3ee;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
+body.lang-zh .en{display:none!important;}
+body.lang-en .zh{display:none!important;}
+a{color:var(--blue);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+.lang-toggle{position:fixed;top:62px;right:16px;z-index:9999;display:flex;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:100px;overflow:hidden;backdrop-filter:blur(12px);}
+.lang-toggle button{padding:6px 14px;border:none;background:transparent;color:var(--text-dim);font-size:.78rem;cursor:pointer;transition:all .25s;font-family:inherit;}
+.lang-toggle button.active{background:var(--blue);color:#fff;}
+
+.back-top{position:fixed;bottom:24px;right:24px;z-index:9999;width:44px;height:44px;border-radius:50%;background:var(--green);color:#0b0e14;border:none;font-size:1.2rem;cursor:pointer;opacity:0;transition:opacity .3s,transform .3s;transform:translateY(10px);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--green-glow);font-weight:700;}
+.back-top.show{opacity:1;transform:translateY(0);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:9998;background:rgba(11,14,20,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 20px;}
+nav .logo{font-weight:700;font-size:.9rem;white-space:nowrap;background:linear-gradient(135deg,var(--blue),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-right:24px;}
+nav .nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none;}
+nav .nav-links::-webkit-scrollbar{display:none;}
+nav a{padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;color:var(--text-dim);white-space:nowrap;transition:all .2s;}
+nav a:hover,nav a.active{color:#fff;background:rgba(255,255,255,0.08);text-decoration:none;}
+
+main{max-width:1000px;margin:0 auto;padding:72px 20px 60px;}
+
+.hero{text-align:center;padding:60px 0 40px;}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(135deg,var(--blue) 0%,#fff 40%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;}
+.hero .subtitle{color:var(--text-dim);font-size:.95rem;margin-bottom:8px;}
+.hero .date-badge{display:inline-block;padding:4px 16px;border-radius:100px;background:var(--card);border:1px solid var(--border);font-size:.78rem;color:var(--text-dim);margin-top:8px;}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:32px 0;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all .3s;}
+.stat-card:hover{background:var(--card-hover);transform:translateY(-2px);}
+.stat-card .value{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
+.stat-card .label{font-size:.78rem;color:var(--text-dim);}
+.stat-card.blue .value{color:var(--blue);}
+.stat-card.green .value{color:var(--green);}
+.stat-card.orange .value{color:var(--orange);}
+.stat-card.yellow .value{color:var(--yellow);}
+.stat-card.red .value{color:var(--red);}
+.stat-card.cyan .value{color:var(--cyan);}
+.stat-card.purple .value{color:var(--purple);}
+
+.section{margin:60px 0;}
+.section-title{font-size:1.4rem;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.subsection{margin:36px 0;}
+.subsection-title{font-size:1.1rem;font-weight:600;margin-bottom:16px;color:var(--blue);display:flex;align-items:center;gap:8px;}
+
+.findings-box{background:linear-gradient(135deg,rgba(59,158,255,0.08),rgba(74,222,128,0.06));border:1px solid rgba(59,158,255,0.15);border-radius:var(--radius);padding:24px;margin:20px 0;}
+.findings-box ul{padding-left:20px;margin:0;}
+.findings-box li{margin-bottom:8px;font-size:.9rem;}
+.findings-box li strong{color:var(--green);}
+
+.insight-box{background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(34,211,238,0.05));border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:16px 20px;margin:16px 0;font-size:.9rem;}
+.insight-box strong{color:var(--green);}
+
+.warn-box{background:linear-gradient(135deg,rgba(248,113,113,0.08),rgba(251,146,60,0.05));border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:16px 20px;margin:16px 0;font-size:.9rem;}
+.warn-box strong{color:var(--orange);}
+
+.table-wrap{overflow-x:auto;margin:16px 0;border-radius:var(--radius);border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;}
+th{background:var(--bg2);color:var(--text-dim);font-weight:600;padding:10px 14px;text-align:left;white-space:nowrap;}
+td{padding:10px 14px;border-top:1px solid var(--border);}
+tbody tr:nth-child(even) td{background:rgba(255,255,255,0.015);}
+tr:hover td{background:rgba(255,255,255,0.04)!important;}
+.highlight-cell{color:var(--green);font-weight:600;}
+.warn-cell{color:var(--orange);font-weight:600;}
+.bad-cell{color:var(--red);font-weight:600;}
+.blue-cell{color:var(--blue);font-weight:600;}
+
+.competitor-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin:20px 0;transition:all .3s;}
+.competitor-card:hover{background:var(--card-hover);border-color:rgba(59,158,255,0.15);}
+.competitor-card h4{font-size:1.05rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.competitor-card h4 .country-tag{font-size:.68rem;padding:2px 8px;border-radius:100px;background:rgba(59,158,255,0.15);color:var(--blue);font-weight:500;}
+.competitor-card .pain-points{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.12);border-radius:var(--radius-sm);padding:12px 16px;margin-top:12px;font-size:.82rem;}
+.competitor-card .pain-points strong{color:var(--red);display:block;margin-bottom:6px;}
+.competitor-card .source{font-size:.72rem;color:var(--text-dim);margin-top:10px;}
+.competitor-card .source a{color:var(--cyan);}
+
+.bar-chart{margin:24px 0;}
+.bar-row{display:flex;align-items:center;margin-bottom:10px;gap:12px;}
+.bar-label{width:180px;min-width:120px;font-size:.8rem;text-align:right;flex-shrink:0;}
+.bar-track{flex:1;height:26px;background:var(--card);border-radius:6px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:.7rem;font-weight:600;color:#fff;min-width:fit-content;transition:width 1s ease;}
+.bar-fill.blue-bar{background:linear-gradient(90deg,var(--blue),#5bb8ff);}
+.bar-fill.green-bar{background:linear-gradient(90deg,#22c55e,var(--green));}
+.bar-fill.orange-bar{background:linear-gradient(90deg,#ea580c,var(--orange));}
+.bar-fill.red-bar{background:linear-gradient(90deg,#dc2626,var(--red));}
+.bar-fill.purple-bar{background:linear-gradient(90deg,#7c3aed,var(--purple));}
+.bar-value{font-size:.8rem;font-weight:600;min-width:70px;}
+
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0;}
+.scenario-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+.scenario-card h5{font-size:.9rem;font-weight:600;margin-bottom:12px;color:var(--cyan);}
+.scenario-card .result{font-size:1.2rem;font-weight:700;color:var(--green);margin-top:8px;}
+
+.assessment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0;}
+.assessment-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;}
+.assessment-item .stars{font-size:1.1rem;margin-bottom:4px;}
+.assessment-item .dim-label{font-size:.78rem;color:var(--text-dim);margin-bottom:2px;}
+.assessment-item .dim-note{font-size:.7rem;color:var(--text-dim);}
+
+.strategy-timeline{position:relative;padding-left:32px;}
+.strategy-timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(var(--blue),var(--green),var(--cyan));opacity:.4;}
+.st-item{position:relative;margin-bottom:20px;}
+.st-item .dot{position:absolute;left:-32px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--blue);z-index:1;}
+.st-item .dot.g{background:var(--green);}
+.st-item .dot.c{background:var(--cyan);}
+.st-phase{font-size:.78rem;color:var(--blue);font-weight:600;}
+.st-title{font-weight:600;margin:2px 0;}
+.st-detail{font-size:.85rem;color:var(--text-dim);}
+
+.sources-list{column-count:1;}
+.sources-list li{font-size:.78rem;color:var(--text-dim);margin-bottom:4px;break-inside:avoid;}
+.sources-list li a{color:var(--cyan);}
+
+@media(max-width:640px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .bar-label{width:100px;min-width:80px;font-size:.72rem;}
+  .scenario-grid{grid-template-columns:1fr;}
+  .assessment-grid{grid-template-columns:repeat(2,1fr);}
+  nav .logo{font-size:.8rem;margin-right:12px;}
+  .lang-toggle{top:58px;right:8px;}
+  .lang-toggle button{padding:5px 10px;font-size:.7rem;}
+}
+
+@media print{
+  nav,.lang-toggle,.back-top{display:none;}
+  body{background:#fff;color:#111;}
+  main{padding-top:20px;}
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- Lang Toggle -->
+<div class="lang-toggle">
+  <button class="active" onclick="setLang('zh')">中文</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<!-- Back to Top -->
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" id="backTop">↑</button>
+
+<!-- Nav -->
+<nav>
+  <div class="logo">ProLynk Market Analysis</div>
+  <div class="nav-links">
+    <a href="#summary">摘要</a>
+    <a href="#competition">竞品</a>
+    <a href="#market-size">市场</a>
+    <a href="#profit-model">盈利</a>
+    <a href="#risks">风险</a>
+    <a href="#home-passport">Home Passport</a>
+    <a href="#conclusion">结论</a>
+    <a href="#sources">来源</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>ProLynk 全面竞品调研与可行性分析</h1>
+  <div class="subtitle">
+    <span class="zh">爱尔兰家居维修服务平台 + Home Passport 房屋数字护照</span>
+    <span class="en">Ireland Home Repair Platform + Home Passport Digital Building ID</span>
+  </div>
+  <div class="date-badge">2026年4月14日 · Sky (AI Market Analyst)</div>
+</section>
+
+<!-- Key Stats -->
+<div class="stats-grid">
+  <div class="stat-card blue">
+    <div class="value">6.5%</div>
+    <div class="label">爱尔兰建筑业年增长率</div>
+  </div>
+  <div class="stat-card orange">
+    <div class="value">~111K</div>
+    <div class="label">爱尔兰建筑工人缺口</div>
+  </div>
+  <div class="stat-card green">
+    <div class="value">60%</div>
+    <div class="label">住房建于1979年法规之前</div>
+  </div>
+  <div class="stat-card purple">
+    <div class="value">$9,316亿</div>
+    <div class="label">全球家居改善市场(2025)</div>
+  </div>
+  <div class="stat-card cyan">
+    <div class="value">15.2%</div>
+    <div class="label">在线家居服务CAGR</div>
+  </div>
+  <div class="stat-card yellow">
+    <div class="value">€2-4K</div>
+    <div class="label">月运营成本(1-2人+AI)</div>
+  </div>
+</div>
+
+<!-- Section 1: Executive Summary -->
+<section class="section" id="summary">
+  <h2 class="section-title">
+    <span class="zh">一、执行摘要</span>
+    <span class="en">1. Executive Summary</span>
+  </h2>
+  <div class="findings-box">
+    <ul>
+      <li><strong>市场机会真实存在：</strong>爱尔兰建筑行业2025年增长6.5%，住房维修/翻新市场活跃，60%的住房建于1979年建筑法规之前，维修需求巨大。爱尔兰面临约10万建筑工人的严重短缺，供需矛盾尖锐。</li>
+      <li><strong>竞争格局：</strong>爱尔兰本土竞品薄弱，OnlineTradesmen.ie是主要对手但产品老旧。英美头部平台（Checkatrade、Angi、Thumbtack）规模庞大但Pro端怨声载道，留有差异化空间。</li>
+      <li><strong>"Home Passport"概念有政策东风：</strong>欧盟"Renovation Wave"战略推动数字建筑护照，但面向C端homeowner的维护记录平台仍是蓝海。</li>
+      <li><strong>最大风险：</strong>双边市场冷启动、跳单（disintermediation）、Pro端留存率低、1-2人团队运营承载力。</li>
+      <li><strong>盈利可行性：</strong>基于1-2人+AI模型，月运营成本€2,000-4,000，盈亏平衡需约300-500个付费Pro，第一年中性场景收入约€30,000-60,000。</li>
+    </ul>
+  </div>
+  <div class="insight-box">
+    <strong>结论：</strong>项目可行但需极度聚焦——建议先在爱尔兰单一城市（都柏林）做深度验证，以Home Passport为钩子吸引homeowner端，用免费+增值模式降低Pro端准入门槛。
+  </div>
+</section>
+
+<!-- Section 2: Competition -->
+<section class="section" id="competition">
+  <h2 class="section-title">
+    <span class="zh">二、三大市场竞品深度分析</span>
+    <span class="en">2. Competitive Landscape Analysis</span>
+  </h2>
+
+  <!-- 2.1 Ireland -->
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">2.1 爱尔兰市场</span>
+      <span class="en">2.1 Ireland Market</span>
+    </h3>
+
+    <div class="competitor-card">
+      <h4>OnlineTradesmen.ie <span class="country-tag">🇮🇪 IE</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">成立时间</td><td>18+年（约2006-2007年）</td></tr>
+        <tr><td style="color:var(--text-dim)">定位</td><td>爱尔兰最大的家居维修撮合平台</td></tr>
+        <tr><td style="color:var(--text-dim)">用户规模</td><td>连接140万+房主与15,000+认证手艺人；累计处理150万+项目</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>订阅制，标准月费 <span class="highlight-cell">€9.99</span>（不含VAT）；另有高级JobFlow计划</td></tr>
+        <tr><td style="color:var(--text-dim)">Homeowner端</td><td>完全免费发布需求，获取报价</td></tr>
+        <tr><td style="color:var(--text-dim)">TrustPilot</td><td>评分一般；正面：快速专业；负面：lead质量差</td></tr>
+        <tr><td style="color:var(--text-dim)">融资/营收</td><td>未公开，推测为小型家族式企业</td></tr>
+      </table></div>
+      <div class="pain-points">
+        <strong>⚠️ Pro端反馈（Reddit/TrustPilot）：</strong>
+        "每月€9.99很便宜，但lead质量参差不齐" · "平台18年没怎么变过" · "€20M+/月的job leads听起来多，但分到每个手艺人头上不多"
+      </div>
+      <div class="pain-points" style="background:rgba(251,146,60,0.06);border-color:rgba(251,146,60,0.12)">
+        <strong style="color:var(--orange)">弱点：</strong>
+        产品老旧、UI/UX过时、缺乏创新功能（即时通讯、智能匹配）、无Home Passport概念
+      </div>
+      <div class="source">来源: <a href="https://www.onlinetradesmen.ie/" target="_blank">onlinetradesmen.ie</a> · <a href="https://www.trustpilot.com/review/www.onlinetradesmen.ie" target="_blank">TrustPilot</a></div>
+    </div>
+
+    <div class="subsection-title" style="margin-top:24px;">
+      <span class="zh">其他爱尔兰平台</span>
+      <span class="en">Other Irish Platforms</span>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>平台</th><th>特点</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>tradesmen.ie</td><td>较小规模平台，价格透明度好</td><td>活跃</td></tr>
+        <tr><td>FixYourStreet.ie</td><td>政府支持的公共服务报告平台（非商业）</td><td>公共服务</td></tr>
+        <tr><td>TrustedTradesman.ie</td><td>聚焦CIRI注册认证的可靠builder搜索</td><td>小型</td></tr>
+        <tr><td>Facebook本地群组</td><td>爱尔兰最主要的手艺人发现渠道</td><td>非平台</td></tr>
+        <tr><td>Boards.ie</td><td>老牌论坛，有tradesperson讨论区</td><td>衰退中</td></tr>
+      </tbody>
+    </table></div>
+    <div class="insight-box">
+      <strong>关键洞察：</strong>爱尔兰市场最大的"竞品"是 <strong>Facebook本地群组 + 口碑推荐</strong>，而非正式平台。Reddit用户普遍推荐"在Facebook群组里问"或"让邻居推荐"。
+    </div>
+  </div>
+
+  <!-- 2.2 UK -->
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">2.2 英国市场</span>
+      <span class="en">2.2 UK Market</span>
+    </h3>
+
+    <div class="competitor-card">
+      <h4>Checkatrade <span class="country-tag">🇬🇧 UK</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">成立时间</td><td>1998年</td></tr>
+        <tr><td style="color:var(--text-dim)">年营收</td><td>~$59.2M（约£47M）</td></tr>
+        <tr><td style="color:var(--text-dim)">TrustPilot</td><td>⭐ 4.6/5（78,666条评价）</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>月费 <span class="warn-cell">£90-£140 + VAT</span>；取决于地区和trade类型</td></tr>
+        <tr><td style="color:var(--text-dim)">Homeowner端</td><td>免费</td></tr>
+        <tr><td style="color:var(--text-dim)">功能</td><td>背景审查、评价系统、Priced Services（2025年秋新增）、保证计划</td></tr>
+      </table></div>
+      <div class="pain-points">
+        <strong>⚠️ Pro端痛点（Reddit r/DIYUK, r/ukelectricians）：</strong>
+        "Checkatrade要价£150/月只给我4个leads" · "4个月付了近£500会员费，只赚了£80" · "大部分leads都是比价格的，根本没有真正的工作意图" · "评价系统容易被操纵"
+      </div>
+      <div class="source">来源: <a href="https://www.checkatrade.com/blog/trade/grow-business/checkatrade-membership-roi/" target="_blank">Checkatrade ROI</a> · <a href="https://www.reddit.com/r/ukelectricians/comments/1j4emrs/checkatrade_wanting_150_a_month_for_4_leads/" target="_blank">Reddit</a></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>Rated People <span class="country-tag">🇬🇧 UK</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">定位</td><td>英国第二大tradesperson撮合平台</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>月费£20-35 + VAT + 单lead费用 <span class="warn-cell">£15-£75/lead</span></td></tr>
+        <tr><td style="color:var(--text-dim)">模式</td><td>混合：订阅 + 按lead付费；新推出"Unlimited"无限leads月度订阅</td></tr>
+      </table></div>
+      <div class="pain-points">
+        <strong>⚠️ Pro端痛点（Screwfix论坛）：</strong>
+        "lead价格从£15到£75不等，退款政策极其严格" · "无限leads听起来好，但很多leads质量很差"
+      </div>
+      <div class="source">来源: <a href="https://www.ratedpeople.com/" target="_blank">Rated People</a> · <a href="https://community.screwfix.com/threads/rated-people.200594/" target="_blank">Screwfix</a></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>MyBuilder <span class="country-tag">🇬🇧 UK</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">Pro端定价</td><td>按lead付费，不收订阅费；lead费用£3-£50</td></tr>
+        <tr><td style="color:var(--text-dim)">模式</td><td>纯按lead付费</td></tr>
+        <tr><td style="color:var(--text-dim)">弱点</td><td>价格竞争激烈，利润被压缩</td></tr>
+      </table></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>Bark.com <span class="country-tag">🌐 Global</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">覆盖</td><td>全球，UK为主要市场之一</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>Credits制，每个lead约 <span class="warn-cell">€12-40+</span>（2025年8月后涨价明显）</td></tr>
+      </table></div>
+      <div class="pain-points">
+        <strong>⚠️ Pro端痛点：</strong>
+        "2025年底lead价格翻倍" · "花了€40+回复一个lead，客户根本没雇佣" · "有人做到$1M收入，但需要大量筛选"
+      </div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>TrustATrader <span class="country-tag">🇬🇧 UK</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">定位</td><td>类似Checkatrade但更小型</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>订阅制，低于Checkatrade</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- 2.3 US -->
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">2.3 美国市场</span>
+      <span class="en">2.3 US Market</span>
+    </h3>
+
+    <div class="competitor-card">
+      <h4>Angi (HomeAdvisor / Angie's List) <span class="country-tag">🇺🇸 US</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">母公司</td><td>2025年3月从IAC分拆独立上市（NASDAQ: ANGI）</td></tr>
+        <tr><td style="color:var(--text-dim)">2025年营收</td><td>~$1,764.4M（全年，持续下降）</td></tr>
+        <tr><td style="color:var(--text-dim)">Q4 2025营收</td><td>$240.8M（同比下降10%）</td></tr>
+        <tr><td style="color:var(--text-dim)">市值</td><td>~$329M（2025年底）</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>年会员费$287.99 + 单lead费用 <span class="bad-cell">$15-$85/lead</span>（部分市场$100+）</td></tr>
+        <tr><td style="color:var(--text-dim)">每单获客成本</td><td class="bad-cell">$1,400+/新客户</td></tr>
+      </table></div>
+      <div class="pain-points">
+        <strong>⚠️ 重大监管事件：</strong>
+        2023年FTC罚款：HomeAdvisor被要求支付最高$7.2M，因"欺骗性营销leads质量"
+      </div>
+      <div class="pain-points">
+        <strong>⚠️ Pro端痛点：</strong>
+        "推销12个月合约+提前终止费陷阱" · "Lead退款政策是骗局" · "大部分leads是欺诈性的" · "一个contractor被发了$9,000的leads账单" · "花了$1,400才获得一个真正的新客户"
+      </div>
+      <div class="source">来源: <a href="https://www.ftc.gov/news-events/news/press-releases/2023/01/ftc-order-requires-homeadvisor-pay-72-million-stop-deceptively-marketing-its-leads-home-improvement" target="_blank">FTC</a> · <a href="https://ir.angi.com/static-files/a90e25f5-b2c4-480a-aaea-86f20a928ca6" target="_blank">Angi IR</a> · <a href="https://www.reddit.com/r/Contractor/comments/1qeofqv/angi_tried_to_sell_me_high_demand_leads_i_checked/" target="_blank">Reddit</a></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>Thumbtack <span class="country-tag">🇺🇸 US</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">总融资</td><td>$772M+（8轮，34个投资方）</td></tr>
+        <tr><td style="color:var(--text-dim)">估值</td><td>$3.2B（2021年最新一轮）</td></tr>
+        <tr><td style="color:var(--text-dim)">2024年营收</td><td>~$400M</td></tr>
+        <tr><td style="color:var(--text-dim)">员工</td><td>~1,600人</td></tr>
+        <tr><td style="color:var(--text-dim)">Pro端定价</td><td>按lead付费，<span class="warn-cell">$10-$200/lead</span>（家居维修$10-50，活动策划$20-100）</td></tr>
+        <tr><td style="color:var(--text-dim)">成本转化</td><td>$38/lead → $238/成交job</td></tr>
+      </table></div>
+      <div class="pain-points">
+        <strong>⚠️ Pro端痛点：</strong>
+        "lead价格从$7涨到$80，没有经过同意" · "一个job多个Pro都付钱买同一个lead" · "30%转化率是乐观估计"
+      </div>
+      <div class="source">来源: <a href="https://press.thumbtack.com/announcements/thumbtack-secures-275-million-investment-at-3-2-billion-valuation/" target="_blank">Thumbtack Press</a> · <a href="https://7ten.marketing/how-much-does-thumbtack-charge-for-leads/" target="_blank">7ten Marketing</a></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>TaskRabbit (IKEA旗下) <span class="country-tag">🇺🇸 US</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">母公司</td><td>2017年被IKEA收购</td></tr>
+        <tr><td style="color:var(--text-dim)">2025年营收</td><td>~$75M</td></tr>
+        <tr><td style="color:var(--text-dim)">2024年完成</td><td>160万+任务</td></tr>
+        <tr><td style="color:var(--text-dim)">模式</td><td>佣金制——从Tasker收入中抽成</td></tr>
+        <tr><td style="color:var(--text-dim)">定位</td><td>偏向轻量级任务（组装、搬家、清洁），非专业维修</td></tr>
+      </table></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>Porch <span class="country-tag">🇺🇸 US</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">2025年营收</td><td>$418.9M（含保险业务）</td></tr>
+        <tr><td style="color:var(--text-dim)">毛利率</td><td class="highlight-cell">82%</td></tr>
+        <tr><td style="color:var(--text-dim)">调整EBITDA</td><td>$77M（2025全年，同比增长11倍）</td></tr>
+        <tr><td style="color:var(--text-dim)">融资</td><td>$128.65M（12轮），2020年通过SPAC上市</td></tr>
+        <tr><td style="color:var(--text-dim)">模式</td><td>混合——保险 + home services平台 + B2B软件</td></tr>
+      </table></div>
+      <div class="source">来源: <a href="https://ir.porchgroup.com/investors/news/news-details/2026/Porch-Group-Reports-Fourth-Quarter-2025-Results/default.aspx" target="_blank">Porch IR</a></div>
+    </div>
+
+    <div class="competitor-card">
+      <h4>Houzz <span class="country-tag">🇺🇸 US</span></h4>
+      <div class="table-wrap"><table>
+        <tr><td style="width:140px;color:var(--text-dim)">定位</td><td>家居设计灵感 + 专业人士目录</td></tr>
+        <tr><td style="color:var(--text-dim)">融资</td><td>$600M+，估值约$40亿（高峰期）</td></tr>
+        <tr><td style="color:var(--text-dim)">特点</td><td>偏装修设计，非日常维修；更像Pinterest for Homes</td></tr>
+        <tr><td style="color:var(--text-dim)">2025年状况</td><td>行业收入整体下滑</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- Pricing Comparison -->
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">2.4 竞品定价模式汇总对比</span>
+      <span class="en">2.4 Pricing Model Comparison</span>
+    </h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>平台</th><th>国家</th><th>定价模式</th><th>Pro端月费（约）</th><th>Lead单价</th><th>Homeowner端</th></tr></thead>
+      <tbody>
+        <tr><td>OnlineTradesmen.ie</td><td>IE</td><td>订阅制</td><td>€9.99+VAT</td><td>无</td><td>免费</td></tr>
+        <tr><td>Checkatrade</td><td>UK</td><td>订阅制</td><td class="warn-cell">£90-140+VAT</td><td>无（含在订阅中）</td><td>免费</td></tr>
+        <tr><td>Rated People</td><td>UK</td><td>混合</td><td>£20-35+VAT</td><td>£15-75/lead</td><td>免费</td></tr>
+        <tr><td>MyBuilder</td><td>UK</td><td>按lead付费</td><td>无</td><td>£3-50/lead</td><td>免费</td></tr>
+        <tr><td>Bark.com</td><td>UK/全球</td><td>Credits制</td><td>无</td><td>€12-40+/credit</td><td>免费</td></tr>
+        <tr><td>Angi</td><td>US</td><td>混合</td><td>$287.99/年</td><td class="bad-cell">$15-85/lead</td><td>免费部分功能</td></tr>
+        <tr><td>Thumbtack</td><td>US</td><td>按lead付费</td><td>无</td><td>$10-200/lead</td><td>免费</td></tr>
+        <tr><td>TaskRabbit</td><td>US</td><td>佣金制</td><td>无</td><td>从收入抽成</td><td>服务费</td></tr>
+        <tr><td>Porch</td><td>US</td><td>混合</td><td>多种</td><td>不透明</td><td>免费</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- Section 3: Market Size -->
+<section class="section" id="market-size">
+  <h2 class="section-title">
+    <span class="zh">三、市场规模数据汇总</span>
+    <span class="en">3. Market Size Data</span>
+  </h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.1 全球市场 / Global</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>指标</th><th>数据</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td>全球家居改善市场（2025）</td><td class="highlight-cell">$9,316亿</td><td>GM Insights</td></tr>
+        <tr><td>全球家居改善市场CAGR</td><td class="blue-cell">4.1%（2026-2035）</td><td>GM Insights</td></tr>
+        <tr><td>全球在线按需家居服务市场（2022）</td><td>$43亿</td><td>Grand View Research</td></tr>
+        <tr><td>全球在线按需家居服务市场（2030预测）</td><td class="highlight-cell">$148亿</td><td>Grand View Research</td></tr>
+        <tr><td>在线按需家居服务CAGR</td><td class="highlight-cell">15.2%</td><td>OpenPR</td></tr>
+        <tr><td>全球家居服务市场CAGR（2025-2033）</td><td class="blue-cell">9.2%</td><td>DataHorizon</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.2 美国市场 / US</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>指标</th><th>数据</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td>美国家居服务市场（2023）</td><td>$5,200亿</td><td>MarkSpark Solutions</td></tr>
+        <tr><td>美国家居服务市场（2026预测）</td><td class="highlight-cell">$8,420亿</td><td>Mordor Intelligence</td></tr>
+        <tr><td>美国家居改善市场（2024）</td><td>$5,740亿</td><td>Adapt Digital</td></tr>
+        <tr><td>美国家居改善市场年增长率</td><td class="blue-cell">~3.5%</td><td>Adapt Digital</td></tr>
+        <tr><td>美国总可寻址市场（2025）</td><td>$6,570亿</td><td>Postful.ai</td></tr>
+        <tr><td>Handyman服务市场（2025）</td><td>$4,120亿</td><td>TechSci Research</td></tr>
+        <tr><td>Handyman服务市场CAGR</td><td class="highlight-cell">15.83%（至2031）</td><td>TechSci Research</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.3 英国市场 / UK</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>指标</th><th>数据</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td>英国家居改善市场（2024）</td><td>£112亿</td><td>Hillarys/Aviva</td></tr>
+        <tr><td>英国家居改善市场（2033预测）</td><td>£167亿</td><td>Hillarys</td></tr>
+        <tr><td>英国家居改善市场CAGR</td><td class="blue-cell">~4-4.5%</td><td>IMARC/Credence</td></tr>
+        <tr><td>700万UK homeowner计划翻新，平均预算</td><td>£14,000+</td><td>Aviva 2025</td></tr>
+        <tr><td>英国DIY零售市场（2025）</td><td>£130亿+</td><td>Mintel</td></tr>
+        <tr><td>英国建筑业（2025）</td><td>£1,686亿</td><td>BusinessWire</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.4 爱尔兰市场 / Ireland</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>指标</th><th>数据</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td>爱尔兰建筑业（2024）</td><td>€111亿</td><td>Yahoo Finance</td></tr>
+        <tr><td>爱尔兰建筑业（2029预测）</td><td class="highlight-cell">€154亿</td><td>Yahoo Finance</td></tr>
+        <tr><td>爱尔兰建筑业增长率（2025）</td><td class="highlight-cell">6.5%</td><td>Yahoo Finance</td></tr>
+        <tr><td>爱尔兰Facility Management市场（2025）</td><td>$20.5亿</td><td>Mordor Intelligence</td></tr>
+        <tr><td>爱尔兰硬件/家居改善零售（2026）</td><td>€19亿</td><td>IBISWorld</td></tr>
+        <tr><td>爱尔兰homeowner疫情期间花费（2020-21）</td><td>€110亿+，平均每户€7,343</td><td>Aviva Ireland</td></tr>
+        <tr><td>爱尔兰家居用品支出预测（2028）</td><td>~€110亿</td><td>ReportLinker</td></tr>
+        <tr><td>欧洲家居改善市场（2025）</td><td>$1,167亿</td><td>MarketDataForecast</td></tr>
+        <tr><td>欧洲家居改善市场（2033预测）</td><td>$1,642亿</td><td>MarketDataForecast</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.5 爱尔兰供需缺口 / Ireland Supply-Demand Gap</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>指标</th><th>数据</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td>爱尔兰建筑工人缺口</td><td class="bad-cell">95,000-111,000人（至2030年）</td><td>Irish Times/PwC</td></tr>
+        <tr><td>每年需新增建筑工人</td><td>~25,000人</td><td>Irish Times</td></tr>
+        <tr><td>爱尔兰住房目标</td><td>50,000套/年（远未达到）</td><td>Government/ESRI</td></tr>
+        <tr><td>2025年10月前新开工住房</td><td>23,599套</td><td>Irish Examiner</td></tr>
+        <tr><td>60%住房建于1979年建筑法规之前</td><td class="warn-cell">—</td><td>TU Dublin/PassiveHouse Plus</td></tr>
+      </tbody>
+    </table></div>
+    <div class="insight-box">
+      <strong>关键洞察：</strong>爱尔兰住房存量老旧（60%建于能效法规之前）+ 严重的技术工人短缺 = 维修/翻新需求旺盛但供给不足，数字化平台有优化匹配效率的巨大空间。
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Profit Model -->
+<section class="section" id="profit-model">
+  <h2 class="section-title">
+    <span class="zh">四、一人公司盈利模型</span>
+    <span class="en">4. Solo Founder Profit Model</span>
+  </h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">4.1 月度运营成本估算</span>
+      <span class="en">4.1 Monthly Operating Costs</span>
+    </h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>成本项</th><th>金额（€/月）</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>服务器/云托管</td><td>50-150</td><td>Vercel/Supabase/基础云服务</td></tr>
+        <tr><td>域名+SSL</td><td>5</td><td>年度摊销</td></tr>
+        <tr><td>AI工具订阅</td><td>100-300</td><td>Claude/GPT-4/Cursor等</td></tr>
+        <tr><td>邮件服务</td><td>20-50</td><td>SendGrid/Resend</td></tr>
+        <tr><td>营销/广告</td><td>200-1,000</td><td>初期Facebook/Google Ads</td></tr>
+        <tr><td>支付处理</td><td>变动</td><td>Stripe 1.4%+€0.25（EU）</td></tr>
+        <tr><td>法律/会计</td><td>100-200</td><td>注册公司、年度报表</td></tr>
+        <tr><td>杂项</td><td>50-100</td><td>工具订阅等</td></tr>
+        <tr><td><strong>总计（保守）</strong></td><td class="highlight-cell"><strong>€525-800/月</strong></td><td></td></tr>
+        <tr><td><strong>总计（含广告）</strong></td><td class="warn-cell"><strong>€1,000-2,000/月</strong></td><td></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">4.2-4.3 不同Pro数量下的月收入预测</span>
+      <span class="en">4.2-4.3 Revenue Projections</span>
+    </h3>
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <h5>场景A：低价订阅（€29/月/Pro）</h5>
+        <div class="table-wrap"><table>
+          <thead><tr><th>注册Pro</th><th>付费Pro(12%)</th><th>月收入</th><th>年收入</th></tr></thead>
+          <tbody>
+            <tr><td>100</td><td>12</td><td>€348</td><td>€4,176</td></tr>
+            <tr><td>500</td><td>60</td><td>€1,740</td><td>€20,880</td></tr>
+            <tr><td>1,000</td><td>120</td><td>€3,480</td><td>€41,760</td></tr>
+            <tr><td>2,000</td><td>240</td><td class="highlight-cell">€6,960</td><td class="highlight-cell">€83,520</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="scenario-card">
+        <h5>场景B：中价订阅（€49/月/Pro）</h5>
+        <div class="table-wrap"><table>
+          <thead><tr><th>注册Pro</th><th>付费Pro(12%)</th><th>月收入</th><th>年收入</th></tr></thead>
+          <tbody>
+            <tr><td>100</td><td>12</td><td>€588</td><td>€7,056</td></tr>
+            <tr><td>500</td><td>60</td><td>€2,940</td><td>€35,280</td></tr>
+            <tr><td>1,000</td><td>120</td><td>€5,880</td><td>€70,560</td></tr>
+            <tr><td>2,000</td><td>240</td><td class="highlight-cell">€11,760</td><td class="highlight-cell">€141,120</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="scenario-card">
+        <h5>场景C：混合（€29/月 + 5%佣金，每Pro月均成交€2,000）</h5>
+        <div class="table-wrap"><table>
+          <thead><tr><th>注册Pro</th><th>付费Pro</th><th>订阅收入</th><th>佣金收入</th><th>月总收入</th></tr></thead>
+          <tbody>
+            <tr><td>100</td><td>12</td><td>€348</td><td>€1,200</td><td>€1,548</td></tr>
+            <tr><td>500</td><td>60</td><td>€1,740</td><td>€6,000</td><td>€7,740</td></tr>
+            <tr><td>1,000</td><td>120</td><td>€3,480</td><td>€12,000</td><td class="highlight-cell">€15,480</td></tr>
+            <tr><td>2,000</td><td>240</td><td>€6,960</td><td>€24,000</td><td class="highlight-cell">€30,960</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">4.4 盈亏平衡分析</span>
+      <span class="en">4.4 Break-even Analysis</span>
+    </h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>模式</th><th>月成本</th><th>盈亏平衡所需付费Pro</th><th>盈亏平衡所需注册Pro</th></tr></thead>
+      <tbody>
+        <tr><td>低价订阅（€29）</td><td>€1,500</td><td>52个</td><td>~433个</td></tr>
+        <tr><td>中价订阅（€49）</td><td>€1,500</td><td class="highlight-cell">31个</td><td class="highlight-cell">~258个</td></tr>
+        <tr><td>混合模式</td><td>€2,000</td><td class="highlight-cell">~20个（含佣金）</td><td class="highlight-cell">~167个</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">4.5 第一年收入预测</span>
+      <span class="en">4.5 Year 1 Revenue Forecast</span>
+    </h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>场景</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>全年</th></tr></thead>
+      <tbody>
+        <tr><td>悲观（100注册Pro年末）</td><td>€500</td><td>€1,000</td><td>€1,500</td><td>€2,000</td><td>€5,000</td></tr>
+        <tr><td>中性（300注册Pro年末）</td><td>€500</td><td>€2,000</td><td>€4,000</td><td>€6,000</td><td class="warn-cell">€12,500</td></tr>
+        <tr><td>乐观（1000注册Pro年末）</td><td>€1,000</td><td>€5,000</td><td>€10,000</td><td>€15,000</td><td class="highlight-cell">€31,000</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">4.6 模式对比</span>
+      <span class="en">4.6 Model Comparison</span>
+    </h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>维度</th><th>纯订阅</th><th>纯佣金</th><th>混合模式</th></tr></thead>
+      <tbody>
+        <tr><td>收入可预测性</td><td>⭐⭐⭐ 高</td><td>⭐ 低</td><td>⭐⭐ 中</td></tr>
+        <tr><td>Pro端接受度</td><td>⭐⭐⭐ 高（固定成本）</td><td>⭐⭐ 中（按结果付费）</td><td>⭐⭐ 中</td></tr>
+        <tr><td>跳单风险</td><td class="highlight-cell">低</td><td class="bad-cell">极高</td><td class="warn-cell">中</td></tr>
+        <tr><td>运营复杂度</td><td>⭐ 低</td><td>⭐⭐⭐ 高（需追踪成交）</td><td>⭐⭐ 中</td></tr>
+        <tr><td>扩展性</td><td>⭐⭐ 受限于Pro数量</td><td>⭐⭐⭐ 随GMV增长</td><td>⭐⭐⭐</td></tr>
+        <tr><td>推荐度</td><td class="highlight-cell">✅ 初期首选</td><td class="bad-cell">❌ 避免</td><td class="warn-cell">🔄 成熟后可引入</td></tr>
+      </tbody>
+    </table></div>
+    <div class="insight-box">
+      <strong>结论：</strong>初期应采用<strong>纯订阅模式</strong>，简化运营（1-2人无法追踪线下成交），成熟后可引入增值服务或可选佣金模块。
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Risks -->
+<section class="section" id="risks">
+  <h2 class="section-title">
+    <span class="zh">五、风险与未考虑到的问题</span>
+    <span class="en">5. Risks & Challenges</span>
+  </h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">5.1 双边市场冷启动问题</h3>
+    <div class="warn-box">
+      9/10的市场平台在达到临界规模前就失败了。—— a16z研究
+    </div>
+    <p style="margin:12px 0;font-size:.9rem;color:var(--text-dim)">
+      <strong style="color:var(--text)">推荐策略：</strong>
+    </p>
+    <ol style="padding-left:20px;font-size:.9rem;margin-bottom:16px;">
+      <li style="margin-bottom:8px"><strong style="color:var(--green)">"原子网络"策略</strong> — 先在一个社区建立密度</li>
+      <li style="margin-bottom:8px"><strong style="color:var(--green)">补贴供应端</strong> — 前100个Pro免费使用6个月</li>
+      <li style="margin-bottom:8px"><strong style="color:var(--green)">Home Passport作为钩子</strong> — 先吸引homeowner（"免费管理你的房屋记录"），再通过需求吸引Pro</li>
+      <li><strong style="color:var(--green)">与当地builder merchant合作</strong>（如Woodies、Chadwicks）做线下推广</li>
+    </ol>
+    <div style="font-size:.72rem;color:var(--text-dim)">来源: <a href="https://a16z.com/books/the-cold-start-problem/" target="_blank" style="color:var(--cyan)">a16z</a> · <a href="https://andrewchen.com/how-to-solve-the-cold-start-problem-for-social-products/" target="_blank" style="color:var(--cyan)">Andrew Chen</a></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">5.2 跳单（Disintermediation）问题</h3>
+    <div class="table-wrap"><table>
+      <tr><td style="width:200px;color:var(--text-dim)">跳单率</td><td class="bad-cell">20-40%（INFORMS 2025研究）</td></tr>
+      <tr><td style="color:var(--text-dim)">根本原因</td><td>Homeowner和Pro有强烈动机绕过平台（避免佣金）</td></tr>
+    </table></div>
+    <p style="margin:12px 0;font-size:.9rem;"><strong>应对策略：</strong></p>
+    <ol style="padding-left:20px;font-size:.9rem;">
+      <li style="margin-bottom:6px">订阅制比佣金制跳单风险低（Pro已付费，无额外佣金）</li>
+      <li style="margin-bottom:6px">提供不可替代的价值（保险保障、纠纷调解、Home Passport记录）</li>
+      <li style="margin-bottom:6px">限制联系方式直到交易确认</li>
+      <li>建立忠诚度机制（评价积累、信誉资产）</li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">5.3 Pro端真实痛点</h3>
+    <div class="findings-box">
+      <ul>
+        <li><strong style="color:var(--red)">Lead质量差</strong> — "花了钱买的leads，客户只是随便问问"</li>
+        <li><strong style="color:var(--red)">价格战</strong> — 平台让多个Pro竞争同一job，压低利润</li>
+        <li><strong style="color:var(--red)">虚假leads</strong> — Angi的FTC罚款证明这不是个别现象</li>
+        <li><strong style="color:var(--red)">高额月费不值</strong> — Checkatrade £150/月给4个leads</li>
+        <li><strong style="color:var(--red)">评价系统被操纵</strong> — 大公司刷评，小Pro被埋没</li>
+        <li><strong style="color:var(--red)">缺乏长期关系</strong> — 平台抢走了homeowner关系</li>
+      </ul>
+    </div>
+    <div class="insight-box" style="margin-top:12px;">
+      <strong>ProLynk的差异化机会：</strong>Home Passport让Pro的维护记录成为"作品集"（离开平台就失去）· 更透明的lead定价 · AI辅助报价工具 · 聚焦爱尔兰本地
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">5.4 法律/保险/资质要求</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>地区</th><th>关键要求</th></tr></thead>
+      <tbody>
+        <tr><td>🇮🇪 爱尔兰</td><td><strong>CIRI注册：</strong>2025年底起，所有builder和建筑trade必须注册（法律要求）；公众责任险通常€6.5M覆盖；ProLynk需验证CIRI注册和保险有效性</td></tr>
+        <tr><td>🇬🇧 英国</td><td>TrustMark认证、Gas Safe注册（燃气工）、Part P（电工）等；不同trade有不同法定认证要求</td></tr>
+        <tr><td>🇺🇸 美国</td><td>各州不同，handyman通常无需执照但plumber/electrician需要；各州contractor license要求差异大</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">5.5 失败案例教训</h3>
+    <div class="findings-box">
+      <ul>
+        <li><strong style="color:var(--red)">过度扩张</strong> — 还没在一个城市验证就急着铺多个市场</li>
+        <li><strong style="color:var(--red)">补贴换增长</strong> — 烧钱获取的用户留存率低</li>
+        <li><strong style="color:var(--red)">忽视供应端体验</strong> — 只关注homeowner端，Pro端流失率高</li>
+        <li><strong style="color:var(--red)">佣金模式下的跳单</strong> — 追踪不了线下交易</li>
+        <li><strong style="color:var(--red)">低估信任壁垒</strong> — 家居维修涉及家庭安全，信任建立极慢</li>
+        <li><strong style="color:var(--red)">无法控制服务质量</strong> — 差体验归咎于平台</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">5.6 1-2人团队的特殊风险</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>风险</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="warn-cell">客服承载力</td><td>日活超500将成瓶颈（AI可部分缓解）</td></tr>
+        <tr><td class="warn-cell">法律纠纷</td><td>涉及财产损坏或人身伤害时，平台责任界定</td></tr>
+        <tr><td class="warn-cell">数据隐私</td><td>GDPR合规需投入</td></tr>
+        <tr><td class="warn-cell">技术债务</td><td>快速迭代导致代码质量下降</td></tr>
+        <tr><td class="warn-cell">创始人倦怠</td><td>一人承担所有角色的压力</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- Section 6: Home Passport -->
+<section class="section" id="home-passport">
+  <h2 class="section-title">
+    <span class="zh">六、Home Passport概念验证</span>
+    <span class="en">6. Home Passport Concept Validation</span>
+  </h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">6.1 欧盟政策背景</h3>
+    <div class="findings-box">
+      <p style="margin-bottom:8px;">欧盟"Renovation Wave"战略（2020年发布，持续推动中）：</p>
+      <ul>
+        <li><strong>数字建筑日志（Digital Building Logbooks）</strong> — 欧委会将引入</li>
+        <li><strong>建筑翻新护照（BRP）</strong> — 已在修订后的EPBD中正式确立</li>
+        <li><strong>目标：</strong>到2030年翻新率翻倍，3500万栋建筑深度翻新</li>
+        <li><strong>BRP核心：</strong>当前能效表现、分阶段翻新路线图、能效改进记录</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">6.2 现有竞品</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>产品</th><th>定位</th><th>融资</th><th>规模</th></tr></thead>
+      <tbody>
+        <tr><td>HomeZada (US)</td><td>全生命周期家居管理</td><td>$2.95M（Seed）</td><td>年收&lt;$5M</td></tr>
+        <tr><td>HomeKeep (US)</td><td>预防性家居维护</td><td>被ECI Solutions收购</td><td>企业级</td></tr>
+        <tr><td>PropertyGuard</td><td>家居维护追踪+AI</td><td>小型</td><td>新兴</td></tr>
+        <tr><td>HomeLedger</td><td>数字化维护记录</td><td>小型</td><td>新兴</td></tr>
+        <tr><td>Flat (HomeCare)</td><td>白标家居管理平台</td><td>小型</td><td>新兴</td></tr>
+        <tr><td>iBRoad (EU)</td><td>欧盟资助的BRP概念验证</td><td>EU Horizon 2020</td><td>研究项目</td></tr>
+      </tbody>
+    </table></div>
+    <div class="insight-box">
+      <strong>关键发现：</strong>面向homeowner的维护记录app都是小公司（HomeZada融资仅$2.95M）· 欧盟BRP聚焦能效翻新，非日常维护 · <strong>没有平台将"维修服务撮合"和"房屋数字档案"结合在一起</strong> · Home Passport独特定位：既是服务记录（像医疗档案），又是Pro的"作品集"
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">6.3 Home Passport壁垒分析</h3>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">数据网络效应</div>
+        <div class="bar-track"><div class="bar-fill green-bar" style="width:75%">⭐⭐⭐</div></div>
+        <div class="bar-value">高</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Pro作品集绑定</div>
+        <div class="bar-track"><div class="bar-fill green-bar" style="width:75%">⭐⭐⭐</div></div>
+        <div class="bar-value">高</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">时间积累</div>
+        <div class="bar-track"><div class="bar-fill green-bar" style="width:75%">⭐⭐⭐</div></div>
+        <div class="bar-value">高</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">交易成本</div>
+        <div class="bar-track"><div class="bar-fill blue-bar" style="width:50%">⭐⭐</div></div>
+        <div class="bar-value">中</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">政策/合规</div>
+        <div class="bar-track"><div class="bar-fill blue-bar" style="width:50%">⭐⭐</div></div>
+        <div class="bar-value">中</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">技术壁垒</div>
+        <div class="bar-track"><div class="bar-fill red-bar" style="width:25%">⭐</div></div>
+        <div class="bar-value">低</div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <strong>最大的壁垒是时间 + 数据积累</strong> —— 一旦homeowner在ProLynk上建立了3年的房屋维护档案，迁移成本极高。
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">6.4 Home Passport变现路径</h3>
+    <ol style="padding-left:20px;font-size:.9rem;">
+      <li style="margin-bottom:6px"><strong>Homeowner免费基础版</strong>（维护日历、记录存储）</li>
+      <li style="margin-bottom:6px"><strong>Homeowner付费版</strong>（€5-9/月）— AI维护建议、BER追踪、保险文档管理</li>
+      <li style="margin-bottom:6px"><strong>Home Passport报告</strong>（€19-49/次）— 房屋出售时生成完整维护报告（类似Carfax）</li>
+      <li style="margin-bottom:6px"><strong>Pro端增值</strong> — 维护记录自动关联到Pro档案（作品集）</li>
+      <li><strong>B2B</strong> — 向estate agent、保险公司出售房屋维护数据</li>
+    </ol>
+  </div>
+</section>
+
+<!-- Section 7: Conclusion -->
+<section class="section" id="conclusion">
+  <h2 class="section-title">
+    <span class="zh">七、结论与建议</span>
+    <span class="en">7. Conclusions & Recommendations</span>
+  </h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">
+      <span class="zh">7.1 战略路线图</span>
+      <span class="en">7.1 Strategic Roadmap</span>
+    </h3>
+    <div class="strategy-timeline">
+      <div class="st-item">
+        <div class="dot"></div>
+        <div class="st-phase">Month 1-3 · 验证期</div>
+        <div class="st-title">50个注册Pro + 200个homeowner</div>
+        <div class="st-detail">都柏林3-5个区密集推广；Home Passport MVP</div>
+      </div>
+      <div class="st-item">
+        <div class="dot g"></div>
+        <div class="st-phase">Month 4-9 · 增长期</div>
+        <div class="st-title">300注册Pro + 1000 homeowner</div>
+        <div class="st-detail">SEO内容营销；Pro推荐奖励；本地媒体PR</div>
+      </div>
+      <div class="st-item">
+        <div class="dot c"></div>
+        <div class="st-phase">Month 10-18 · 扩展期</div>
+        <div class="st-title">1000注册Pro；实现盈亏平衡</div>
+        <div class="st-detail">覆盖都柏林全域；扩展到Cork/Galway</div>
+      </div>
+      <div class="st-item">
+        <div class="dot" style="background:var(--purple);border-color:var(--purple);"></div>
+        <div class="st-phase" style="color:var(--purple);">Year 2+ · UK扩展</div>
+        <div class="st-title">进入英国市场</div>
+        <div class="st-detail">复制爱尔兰模式；聚焦一个城市（如Bristol）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">7.2 核心竞争优势建议</h3>
+    <ol style="padding-left:20px;font-size:.9rem;">
+      <li style="margin-bottom:6px"><strong style="color:var(--green)">Home Passport作为核心差异化</strong> — OnlineTradesmen没有的</li>
+      <li style="margin-bottom:6px"><strong style="color:var(--green)">AI辅助报价/匹配</strong> — 利用AI弥补1-2人团队的服务能力</li>
+      <li style="margin-bottom:6px"><strong style="color:var(--green)">爱尔兰本地优势</strong> — 了解CIRI、本地法规、文化</li>
+      <li style="margin-bottom:6px"><strong style="color:var(--green)">Pro友好定价</strong> — 低于Checkatrade但高于OnlineTradesmen的性价比</li>
+      <li><strong style="color:var(--green)">信誉可携带性</strong> — Pro的Home Passport作品集绑定了平台黏性</li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">7.3 必须避免的错误</h3>
+    <div class="findings-box">
+      <ul>
+        <li><strong style="color:var(--red)">❌ 过早扩展到英国/美国</strong></li>
+        <li><strong style="color:var(--red)">❌ 采用佣金模式</strong>（跳单风险 + 追踪成本）</li>
+        <li><strong style="color:var(--red)">❌ 忽视Pro端体验</strong>（只关注homeowner）</li>
+        <li><strong style="color:var(--red)">❌ 过度依赖付费广告获客</strong></li>
+        <li><strong style="color:var(--red)">❌ 没有做CIRI/保险验证就上线</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">7.4 最终评估</h3>
+    <div class="assessment-grid">
+      <div class="assessment-item">
+        <div class="dim-label">市场机会</div>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <div class="dim-note">爱尔兰供需缺口大，竞品弱</div>
+      </div>
+      <div class="assessment-item">
+        <div class="dim-label">竞争强度</div>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="dim-note">本土弱但UK/US巨头有威胁</div>
+      </div>
+      <div class="assessment-item">
+        <div class="dim-label">差异化可行性</div>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <div class="dim-note">Home Passport概念独特</div>
+      </div>
+      <div class="assessment-item">
+        <div class="dim-label">1-2人运营可行性</div>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="dim-note">可行但需极度精简</div>
+      </div>
+      <div class="assessment-item">
+        <div class="dim-label">盈利潜力</div>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="dim-note">初期收入有限，天花板可观</div>
+      </div>
+      <div class="assessment-item">
+        <div class="dim-label">风险等级</div>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="dim-note">冷启动+跳单+规模化</div>
+      </div>
+    </div>
+    <div class="insight-box" style="margin-top:16px;">
+      <strong>总评：</strong>ProLynk在爱尔兰市场有真实的窗口期。OnlineTradesmen的产品老化、英国巨头尚未深耕爱尔兰、EU政策推动数字建筑护照——三重利好叠加。关键在于能否在12-18个月内建立足够密度的都柏林本地网络，并用Home Passport构建数据壁垒。
+    </div>
+  </div>
+</section>
+
+<!-- Section 8: Sources -->
+<section class="section" id="sources">
+  <h2 class="section-title">
+    <span class="zh">八、数据来源汇总</span>
+    <span class="en">8. Data Sources</span>
+  </h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">竞品数据</h3>
+    <ol class="sources-list">
+      <li><a href="https://www.onlinetradesmen.ie/" target="_blank">OnlineTradesmen.ie</a></li>
+      <li><a href="https://www.checkatrade.com/blog/trade/grow-business/checkatrade-membership-roi/" target="_blank">Checkatrade Membership ROI</a></li>
+      <li><a href="https://www.trustpilot.com/review/www.checkatrade.com" target="_blank">Checkatrade TrustPilot</a> — 4.6/5, 78,666条评价</li>
+      <li><a href="https://www.reddit.com/r/ukelectricians/comments/1j4emrs/checkatrade_wanting_150_a_month_for_4_leads/" target="_blank">Reddit: Checkatrade £150/month for 4 leads</a></li>
+      <li><a href="https://www.reddit.com/r/DIYUK/comments/11r4rjk/are_sites_like_checkatrade_really_that_bad/" target="_blank">Reddit: Are sites like Checkatrade really that bad?</a></li>
+      <li><a href="https://www.europeanbusinessreview.com/best-tradesman-website-costs/" target="_blank">European Business Review: Best Tradesman Website Costs</a></li>
+      <li><a href="https://tradespeopleonline.com/rated-people-review/" target="_blank">Rated People Review — tradespeopleonline.com</a></li>
+      <li><a href="https://community.screwfix.com/threads/rated-people.200594/" target="_blank">Screwfix Forum: Rated People</a></li>
+      <li><a href="https://www.trustpilot.com/review/bark.com" target="_blank">Bark.com TrustPilot</a></li>
+      <li><a href="https://www.ftc.gov/news-events/news/press-releases/2023/01/ftc-order-requires-homeadvisor-pay-72-million-stop-deceptively-marketing-its-leads-home-improvement" target="_blank">FTC: HomeAdvisor $7.2M Penalty</a></li>
+      <li><a href="https://ir.angi.com/static-files/af4b2655-6627-482c-9f63-2e8a0fe5d5b0" target="_blank">Angi Q4 2025 Shareholder Letter</a></li>
+      <li><a href="https://ir.angi.com/static-files/a90e25f5-b2c4-480a-aaea-86f20a928ca6" target="_blank">Angi Q4 2025 Results</a></li>
+      <li><a href="https://www.reddit.com/r/Contractor/comments/1qeofqv/angi_tried_to_sell_me_high_demand_leads_i_checked/" target="_blank">Reddit: Angi tried to sell me 'high demand' leads</a></li>
+      <li><a href="https://www.bbb.org/us/in/indianapolis/profile/contractor-referral/angi-0382-3041007/complaints" target="_blank">Angi BBB Complaints</a></li>
+      <li><a href="https://hookagency.com/blog/angi-leads-reviews/" target="_blank">Hook Agency: Angi Leads Reviews</a></li>
+      <li><a href="https://press.thumbtack.com/announcements/thumbtack-secures-275-million-investment-at-3-2-billion-valuation/" target="_blank">Thumbtack $3.2B Valuation</a></li>
+      <li><a href="https://7ten.marketing/how-much-does-thumbtack-charge-for-leads/" target="_blank">7ten Marketing: Thumbtack Lead Costs</a></li>
+      <li><a href="https://www.reddit.com/r/Thumbtack/comments/1cqhbe0/newbie_how_much_does_a_lead_cost/" target="_blank">Reddit: Thumbtack lead costs</a></li>
+      <li><a href="https://oyelabs.com/taskrabbit-business-model/" target="_blank">TaskRabbit Revenue — OyeLabs</a></li>
+      <li><a href="https://ir.porchgroup.com/investors/news/news-details/2026/Porch-Group-Reports-Fourth-Quarter-2025-Results/default.aspx" target="_blank">Porch Q4 2025 Results</a></li>
+      <li><a href="https://www.houzz.com/magazine/2025-u-s-houzz-state-of-the-industry-stsetivw-vs~180175249" target="_blank">Houzz 2025 State of Industry</a></li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">市场规模数据</h3>
+    <ol class="sources-list" start="22">
+      <li><a href="https://www.gminsights.com/industry-analysis/home-improvement-market" target="_blank">GM Insights: Home Improvement Market</a></li>
+      <li><a href="https://www.grandviewresearch.com/horizon/outlook/online-on-demand-home-services-market-size/global" target="_blank">Grand View Research: Online On-demand Home Services</a></li>
+      <li><a href="https://www.mordorintelligence.com/industry-reports/us-home-service-market" target="_blank">Mordor Intelligence: US Home Service Market</a></li>
+      <li><a href="https://www.hillarys.co.uk/static/home-renovation-statistics/" target="_blank">Hillarys: UK Home Renovation Statistics</a></li>
+      <li><a href="https://www.aviva.com/newsroom/news-releases/2025/02/seven-million-uk-homeowners-plan-to-renovate-with-average-budget-of-14000-pounds-in-next-two-years/" target="_blank">Aviva: 7M UK homeowners plan renovation</a></li>
+      <li><a href="https://www.ibisworld.com/ireland/industry-statistics/hardware-home-improvement-stores/3022/" target="_blank">IBISWorld: Ireland Hardware & Home Improvement</a></li>
+      <li><a href="https://www.aviva.com/newsroom/news-releases/2021/07/irish-homeowners-spend-over-11-billion-on-home-improvements-during-the-pandemic/" target="_blank">Aviva Ireland: €11B spent on home improvements</a></li>
+      <li><a href="https://finance.yahoo.com/news/ireland-construction-industry-report-2025-124400406.html" target="_blank">Yahoo Finance: Ireland Construction 2025</a></li>
+      <li><a href="https://www.marketdataforecast.com/market-reports/europe-home-improvement-market" target="_blank">MarketDataForecast: Europe Home Improvement</a></li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">供需/政策数据</h3>
+    <ol class="sources-list" start="31">
+      <li><a href="https://www.irishtimes.com/business/2026/02/26/construction-sector-needs-up-to-111000-more-workers-to-hit-housing-targets/" target="_blank">Irish Times: 111,000 construction workers needed</a></li>
+      <li><a href="https://arrow.tudublin.ie/cgi/viewcontent.cgi?article=1035&context=engschcivart" target="_blank">TU Dublin: 50% housing stock pre-regulations</a></li>
+      <li><a href="https://passivehouseplus.ie/articles/energy-performance-of-buildings-directive/laughing-stock" target="_blank">PassiveHouse Plus: 60% housing stock pre-regulations</a></li>
+      <li><a href="https://cclrecruitment.ie/2025/09/30/the-growing-shortage-of-construction-workers-in-ireland/" target="_blank">CCL Recruitment: Ireland construction shortage</a></li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Home Passport/EU政策</h3>
+    <ol class="sources-list" start="35">
+      <li><a href="https://build-up.ec.europa.eu/en/resources-and-tools/articles/how-renovation-passports-empower-europes-renovation-wave" target="_blank">EU BuildUp: Renovation Passports</a></li>
+      <li><a href="https://www.bpie.eu/wp-content/uploads/2024/09/iBRoad2EPC-D5-5-EU-roadmap-for-uptake-of-iBRoad2EPC-schemes-2024-07-BPIE-1.pdf" target="_blank">BPIE: iBRoad2EPC EU Roadmap</a></li>
+      <li><a href="https://link.springer.com/article/10.1007/s11831-026-10528-4" target="_blank">Springer: Building Renovation Passports Systematic Review</a></li>
+      <li><a href="https://www.homezada.com/" target="_blank">HomeZada</a></li>
+      <li><a href="https://www.crunchbase.com/organization/homezada" target="_blank">Crunchbase: HomeZada $2.1M funding</a></li>
+      <li><a href="https://www.ecisolutions.com/products/homekeep/" target="_blank">HomeKeep by ECI Solutions</a></li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">市场策略/风险</h3>
+    <ol class="sources-list" start="41">
+      <li><a href="https://a16z.com/books/the-cold-start-problem/" target="_blank">a16z: The Cold Start Problem</a></li>
+      <li><a href="https://andrewchen.com/how-to-solve-the-cold-start-problem-for-social-products/" target="_blank">Andrew Chen: Cold Start Problem</a></li>
+      <li><a href="https://pubsonline.informs.org/doi/10.1287/opre.2025.2046" target="_blank">INFORMS: Platform Disintermediation</a></li>
+      <li><a href="https://online.hbs.edu/blog/post/disintermediation" target="_blank">Harvard Business School: Disintermediation Risk</a></li>
+      <li><a href="https://www.reddit.com/r/startups/comments/1mn489m/my_marketplace_is_losing_customers_to_offplatform/" target="_blank">Reddit r/startups: Marketplace losing customers</a></li>
+      <li><a href="https://www.reddit.com/r/CasualIreland/comments/1kbb6yb/tradesmen_websites/" target="_blank">Reddit r/CasualIreland: Tradesmen websites</a></li>
+      <li><a href="https://www.reddit.com/r/SaaS/comments/1muz5bq/solo_founder_20k_mrr_zero_ads_zero_employees/" target="_blank">Reddit r/SaaS: Solo founder $20k MRR</a></li>
+      <li><a href="https://www.techsciresearch.com/report/handyman-services-market/26742.html" target="_blank">TechSci Research: Handyman Services Market</a></li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">法律/合规</h3>
+    <ol class="sources-list" start="49">
+      <li><a href="https://www.onlinetradesmen.ie/Blog/trade-professionals-ciri-registration.aspx" target="_blank">CIRI Registration — OnlineTradesmen.ie</a></li>
+      <li><a href="https://www.pinsentmasons.com/out-law/guides/construction-ireland-statutory-obligations" target="_blank">Pinsent Masons: Construction in Ireland statutory obligations</a></li>
+    </ol>
+  </div>
+
+  <div style="margin-top:40px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);font-size:.78rem;color:var(--text-dim);">
+    <strong style="color:var(--text);">免责声明：</strong>本报告基于公开可获取的数据和搜索结果编制。部分数据为不同机构估算值，可能存在口径差异。标注为"估算"的数据基于行业惯例和合理推断，不构成投资建议。建议在实际决策前进行更深入的一手调研。
+  </div>
+</section>
+
+</main>
+
+<script>
+// Language toggle
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-toggle button.' + (lang === 'zh' ? '' : '')).classList.add('active');
+  // Fix: select correct button
+  const btns = document.querySelectorAll('.lang-toggle button');
+  btns.forEach(b => { b.classList.remove('active'); });
+  if (lang === 'zh') btns[0].classList.add('active');
+  else btns[1].classList.add('active');
+}
+
+// Back to top
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  if (window.scrollY > 400) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+</script>
+
+</body>
+</html>

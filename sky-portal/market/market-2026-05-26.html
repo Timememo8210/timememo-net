@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-05-26 — 华为韬定律引爆半导体</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e8;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#6b6b80;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08)}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#6b6b80;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.06);color:#888;border:1px solid rgba(255,255,255,0.1)}
+.news-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);color:#444;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{background:rgba(74,222,128,0.1);border-left:3px solid #4ade80;padding:12px 16px;border-radius:8px;margin:12px 0}
+.tag{display:inline-block;font-size:0.72em;padding:2px 8px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.tag-red{background:rgba(239,68,68,0.15);color:#f87171}
+.tag-green{background:rgba(34,197,94,0.15);color:#4ade80}
+.tag-blue{background:rgba(96,165,250,0.15);color:#60a5fa}
+.tag-yellow{background:rgba(251,191,36,0.15);color:#fbbf24}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626,#991b1b)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股再创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Hit Fresh Records</div>
+<div class="zh poster-data">• 标普500 7,519.12 📈 +0.61%（年内第19次新高）<br>• 纳斯达克 26,656.18 📈 +1.19%（历史新高）<br>• 道指 50,461.68 📉 -0.23%</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,519.12 +0.61% (19th record of 2026)<br>• Nasdaq 26,656.18 +1.19% (all-time high)<br>• Dow 50,461.68 -0.23%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">华为"韬定律"引爆半导体</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Huawei "τ-Law" Ignites Chips</div>
+<div class="zh poster-data">• IEEE ISCAS大会正式发表<br>• 科创50单日涨5.88%，逾30股涨停<br>• 中芯国际涨18.78%</div>
+<div class="en poster-data" style="display:none">• Published at IEEE ISCAS 2026<br>• STAR 50 +5.88%, 30+ chip stocks limit-up<br>• SMIC +18.78%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1d4ed8,#1e3a5f)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股 港股分化</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Shares & HK Mixed</div>
+<div class="zh poster-data">• 上证 4,145.37 📉 -0.17%<br>• 创业板指 📈 +0.54%（收盘新高）<br>• 恒生科技 4,946.88 📈 +1.59%</div>
+<div class="en poster-data" style="display:none">• Shanghai 4,145.37 -0.17%<br>• ChiNext +0.54% (record close)<br>• Hang Seng Tech 4,946.88 +1.59%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#b45309,#78350f)">
+<div class="poster-icon">🇮🇷</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊和谈进展</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Peace Talks Progress</div>
+<div class="zh poster-data">• 接近达成停战协议<br>• Rubio：还需"几天"延长停火<br>• 霍尔木兹海峡或重开</div>
+<div class="en poster-data" style="display:none">• Ceasefire deal close<br>• Rubio: "a few more days"<br>• Strait of Hormuz may reopen</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-05-26 Tuesday · Sky Portal Daily Market · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股行情（5/26 收盘）</span><span class="en" style="display:none">US Markets (May 26 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">50,461.68</div><div class="stock-change down">-0.23%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,519.12</div><div class="stock-change up">+0.61%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,656.18</div><div class="stock-change up">+1.19%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">~12,708</div><div class="stock-change up">+~5.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">Russell 2K</div><div class="stock-price">—</div><div class="stock-change flat">New Record</div></div>
+</div>
+
+<div class="highlight">
+<span class="zh">📌 标普500录得2026年第19次收盘历史新高。纳斯达克同步创新高，盘中最高26,725点。道指受UnitedHealth和Chevron拖累微跌。Memorial Day长周末后首个交易日，市场风险偏好强劲回升。</span>
+<span class="en" style="display:none">📌 S&P 500 logged its 19th record close of 2026. Nasdaq also set a fresh ATH (intraday 26,725). Dow lagged on UnitedHealth & Chevron weakness. Strong risk appetite after Memorial Day weekend.</span>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股行情（5/26 收盘）</span><span class="en" style="display:none">A-Shares (May 26 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,145.37</div><div class="stock-change down">-0.17%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,876.16</div><div class="stock-change up">+0.12%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">—</div><div class="stock-change up">+0.54%</div></div>
+<div class="stock-item"><div class="stock-ticker">科创50</div><div class="stock-price">—</div><div class="stock-change up">+~3%</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">3.24万亿</div><div class="stock-change flat">CNY</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股探底回升，创业板指创收盘历史新高</span><span class="en" style="display:none">A-Shares Bounce Back, ChiNext at Record Close</span></h4>
+<p><span class="zh">A股三大指数早盘低开，临近尾盘深证成指和创业板指双双翻红。创业板指涨0.54%创收盘历史新高。科创50在华为"韬定律"催化下延续强势，半导体板块上演深V行情，逾30只半导体股涨停或涨超10%。成交额3.24万亿，较前一交易日继续放大。板块方面，贵金属、工业金属涨幅居前，航天军工、电源设备偏弱。</span><span class="en" style="display:none">A-shares opened lower but recovered. ChiNext +0.54% for a new record close. STAR 50 extended gains on Huawei "τ-Law" catalyst with 30+ semiconductor stocks hitting limit-up. Volume: 3.24T CNY. Precious metals and industrial metals led; aerospace and power equipment lagged.</span></p>
+<p class="src">来源：东方财富 / 新浪财经 / 财联社</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股行情（5/26 收盘）</span><span class="en" style="display:none">Hong Kong (May 26 Close)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">25,599.45</div><div class="stock-change down">-0.03%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,946.88</div><div class="stock-change up">+1.59%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">港股分化：恒指平收，科技指数受华为概念提振</span><span class="en" style="display:none">HK Mixed: HSI Flat, Tech Index Boosted by Huawei</span></h4>
+<p><span class="zh">港股三大指数涨跌不一。恒生指数微跌0.03%报25,599点，成交4.08亿股。恒生科技指数涨1.59%报4,947点，连涨三日。华为"韬定律"效应持续发酵，中芯国际、华虹半导体等芯片股大幅走强。恒指自2025年10月高点已回调超24%，市场期待"AI化重估"带来新动力。</span><span class="en" style="display:none">HK markets mixed. HSI -0.03% at 25,599, volume 408M shares. Hang Seng Tech +1.59% at 4,947, up 3 consecutive days. Huawei "τ-Law" fueled SMIC, Hua Hong and other chip stocks. HSI down 24%+ from Oct 2025 peak, awaiting "AI-ification" re-rating.</span></p>
+<p class="src">来源：东方财富 / 英为财情 / 证券时报</p>
+</div>
+
+<h2>🔬 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 华为"韬(τ)定律"正式发表，半导体产业迎新范式</span><span class="en" style="display:none">1. Huawei Publishes "τ-Law" — New Paradigm for Semiconductors</span></h4>
+<p><span class="zh">华为董事、半导体业务部总裁何庭波在2026年IEEE国际电路与系统研讨会（ISCAS）上发表主题演讲，正式提出"韬定律"——后摩尔时代半导体发展的新原则。韬定律的核心：当几何缩微放缓、成本指数级上升时，通过"逻辑折叠"等架构创新实现晶体管密度与系统性能的持续突破。华为基于韬定律已成功设计并量产381款芯片，覆盖千行百业。将于2026年秋季面世的麒麟芯片率先采用"逻辑折叠"技术。消息引爆A股和港股半导体板块，科创50创历史新高，中芯国际涨18.78%，逾30只芯片股涨停。</span><span class="en" style="display:none">Huawei board member He Tingbo unveiled the "τ-Law" at IEEE ISCAS 2026 — a new principle for the post-Moore era. As geometric scaling slows and costs surge exponentially, "logical folding" and other architectural innovations continue to advance transistor density and system performance. Huawei has already designed and mass-produced 381 chips based on τ-Law. The upcoming Kirin chip (Fall 2026) adopts "logical folding." This catalyzed a massive rally in A-share and HK chip stocks, with STAR 50 at all-time highs and SMIC +18.78%.</span></p>
+<p class="src">来源：华为官网 / 央视财经 / 新浪财经 / 21财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美光科技领涨，内存芯片股飙升推动SOX暴涨</span><span class="en" style="display:none">2. Micron Leads Memory-Chip Rally, SOX Surges</span></h4>
+<p><span class="zh">美光科技（Micron）领涨美股半导体板块，推动费城半导体指数（SOX）单日暴涨约5.5%至约12,708点。SOX 52周涨幅已达85%，年初至今涨约57%。全球AI算力需求持续推动存储芯片涨价周期，DRAM/NAND供需紧张格局延续至2027年。三星和SK海力士扩产谨慎，优先保障高毛利AI芯片产能。市场预期存储芯片涨价将在Q3加速。</span><span class="en" style="display:none">Micron Technology led US semiconductor stocks higher, pushing the PHLX Semiconductor Index (SOX) up ~5.5% to ~12,708. The SOX's 52-week gain has reached 85%, YTD +57%. AI compute demand continues to drive memory chip pricing higher, with DRAM/NAND tightness extending into 2027. Samsung and SK Hynix expanding cautiously, prioritizing high-margin AI chips. Memory price acceleration expected in Q3.</span></p>
+<p class="src">来源：MarketWatch / MacroMicro / 英为财情</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 美伊和谈进展：接近达成停战协议</span><span class="en" style="display:none">3. US-Iran Peace Talks: Ceasefire Deal Close</span></h4>
+<p><span class="zh">美国与伊朗接近达成停战协议，国务卿Marco Rubio表示可能还需"几天"延长停火并重新开放霍尔木兹海峡。市场对中东局势缓持乐观态度，油价回落，全球风险偏好回升。日经225、韩国综指均创新高，亚太市场整体向好。恒指市场人士认为5月有机会挑战27,000点。</span><span class="en" style="display:none">The US and Iran are close to a ceasefire deal. Secretary of State Rubio said it could take "a few more days" to extend the cease-fire and reopen the Strait of Hormuz. Markets are optimistic about Middle East de-escalation — oil prices pulled back, global risk appetite improved. Nikkei 225 and KOSPI hit new highs. Some analysts see HSI testing 27,000 in May.</span></p>
+<p class="src">来源：MarketWatch / Now News / Reuters</p>
+</div>
+
+<h2>🔮 <span class="zh">市场展望</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">看多因素 <span class="tag tag-green">Bullish</span></span><span class="en" style="display:none">Bullish Factors <span class="tag tag-green">Bullish</span></span></h4>
+<p><span class="zh">
+• 半导体/AI主线持续强化：A股科创50连创新高，美股SOX年内涨85%，全球AI算力需求驱动存储芯片涨价周期延续<br>
+• 美伊和谈若正式落地，将进一步提振全球风险偏好，油价回落利好消费和科技<br>
+• 标普500连续数周上涨，牛市格局未改，纳指突破26,000后打开上行空间<br>
+• A股成交额连续多日破3万亿，市场流动性充裕
+</span><span class="en" style="display:none">
+• Semiconductor/AI theme strengthening: STAR 50 at ATH, SOX +85% in 52 weeks, memory chip pricing cycle extends<br>
+• US-Iran deal could further boost risk appetite; lower oil benefits consumption & tech<br>
+• S&P 500 multi-week win streak, bull market intact; Nasdaq above 26,000 opens upside<br>
+• A-share volume consistently above 3T CNY, ample liquidity
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">关注风险 <span class="tag tag-red">Risks</span></span><span class="en" style="display:none">Key Risks <span class="tag tag-red">Risks</span></span></h4>
+<p><span class="zh">
+• A股半导体短期涨幅过大（板块区间最大涨幅超60%），需警惕获利回吐和板块轮动<br>
+• 美股道指滞涨（传统行业承压），市场分化加剧，科技股集中度风险上升<br>
+• 美联储新主席Warsh政策取向偏鹰派，加息概率高于降息<br>
+• 美伊和谈仍有不确定性，若谈判破裂可能引发油价飙升
+</span><span class="en" style="display:none">
+• A-share chip stocks overheated (sector +60%+ from lows), profit-taking risk high<br>
+• Dow lagging (traditional sectors under pressure), tech concentration risk rising<br>
+• New Fed Chair Warsh leans hawkish; hike odds priced above cuts<br>
+• US-Iran deal uncertainty — failed talks could spike oil prices
+</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">💡 关注方向</span><span class="en" style="display:none">💡 Focus Areas</span></h4>
+<p><span class="zh">
+• 半导体设备/材料（华为韬定律受益链）<br>
+• AI算力与存储芯片（美光/海力士涨价周期）<br>
+• 美伊和谈进展（能源、航运、航空板块）<br>
+• A股科创50及相关ETF（半导体+AI高Beta标的）
+</span><span class="en" style="display:none">
+• Semiconductor equipment/materials (Huawei τ-Law beneficiaries)<br>
+• AI compute & memory chips (Micron/Hynix pricing cycle)<br>
+• US-Iran peace deal progress (energy, shipping, airlines)<br>
+• STAR 50 & related ETFs (high-beta semiconductor + AI plays)
+</span></p>
+</div>
+
+<h2>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h2>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">MU — Micron</div><div id="tv-mu"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semi ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Philadelphia Semi</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: MarketWatch, WSJ, Yahoo Finance, 东方财富, 新浪财经, 财联社, 英为财情, MacroMicro, 华为官网</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-mu', sym:'NASDAQ:MU'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

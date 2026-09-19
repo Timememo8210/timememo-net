@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日研报 2026-05-08 | Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.6em;margin-bottom:8px}
+h2{color:#f0a040;font-size:1.3em;margin:32px 0 16px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+h3{color:#fff;font-size:1.05em;margin:20px 0 10px}
+.date{color:#888;font-size:0.9em;margin-bottom:24px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:20px 24px;margin-bottom:16px}
+.source{color:#888;font-size:0.8em;margin-top:10px;font-style:italic}
+.lang-btn{background:#333;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em}
+.lang-btn.active{background:#555;color:#fff}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-card .icon{font-size:2em;margin-bottom:8px}
+.poster-card .title{font-size:1.4em;font-weight:700;line-height:1.2}
+.poster-card .subtitle{font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px}
+.poster-card .data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 16px;text-align:center}
+.stock-item .ticker{color:#fff;font-weight:700;font-size:1em}
+.stock-item .price{color:#ccc;font-size:1.2em;font-weight:600;margin:4px 0}
+.stock-tag{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.tag-up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.tag-down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.tag-flat{background:rgba(148,163,184,0.15);color:#94a3b8;border:1px solid rgba(148,163,184,0.3)}
+.sports-card{background:#1a1a1a;border:1px solid rgba(76,175,80,0.3);border-radius:12px;padding:20px 24px;margin-bottom:16px}
+.sports-card h3{color:#4CAF50}
+footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:0.85em;border-top:1px solid #2a2a2a}
+footer a{color:#f0a040;text-decoration:none}
+@media(max-width:600px){.poster-grid{grid-template-columns:1fr}.stock-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px">
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh" class="lang-btn active">中文</button>
+<button onclick="switchLang('en')" id="btn-en" class="lang-btn">EN</button>
+</div>
+<div class="poster-grid">
+<div class="poster-card" style="background:#d92d20">
+<div class="icon">🔬</div>
+<div class="zh">
+  <div class="title">半导体与AI</div>
+  <div class="data">• Apple正与Intel/Samsung谈判，探索TSMC以外备用芯片方案<br>• AMD CEO Lisa Su称AI Agent正驱动巨大计算需求</div>
+</div>
+<div class="en" style="display:none">
+  <div class="subtitle">Semiconductors & AI</div>
+  <div class="data">• Apple explores Intel/Samsung as TSMC backup chipmakers<br>• AMD CEO: AI agents driving tremendous compute demand</div>
+</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%)">
+<div class="icon">⚽</div>
+<div class="zh">
+  <div class="title">FC Barcelona</div>
+  <div class="data">• 5月10日国家德比，巴萨只需1分即可夺冠<br>• 皇马Valverde训练场冲突受伤缺阵，Puyol提醒巴萨保持专注</div>
+</div>
+<div class="en" style="display:none">
+  <div class="subtitle">FC Barcelona</div>
+  <div class="data">• El Clasico May 10, Barca need just 1 point for title<br>• Real's Valverde out after training clash with Tchouameni</div>
+</div>
+</div>
+<div class="poster-card" style="background:#e08c0b">
+<div class="icon">🏀</div>
+<div class="zh">
+  <div class="title">体育赛事</div>
+  <div class="data">• 活塞107-97骑士，半决赛2-0领先<br>• 雷霆125-107湖人，西半2-0领先</div>
+</div>
+<div class="en" style="display:none">
+  <div class="subtitle">Sports Events</div>
+  <div class="data">• Pistons 107-97 Cavs, East semis 2-0 lead<br>• Thunder 125-107 Lakers, West semis 2-0 lead</div>
+</div>
+</div>
+<div class="poster-card" style="background:#10a37f">
+<div class="icon">🤖</div>
+<div class="zh">
+  <div class="title">AI 动态</div>
+  <div class="data">• OpenAI Codex推出Chrome扩展，可操控浏览器完成任务<br>• Cloudflare裁员1100人，称AI使用增长600%</div>
+</div>
+<div class="en" style="display:none">
+  <div class="subtitle">AI Updates</div>
+  <div class="data">• OpenAI Codex launches Chrome extension for browser control<br>• Cloudflare lays off 1,100 as AI usage surges 600%</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+function switchLang(lang){
+document.querySelectorAll('.zh').forEach(function(el){el.style.display=lang==='zh'?'':'none'});
+document.querySelectorAll('.en').forEach(function(el){el.style.display=lang==='en'?'':'none'});
+document.getElementById('btn-zh').className='lang-btn'+(lang==='zh'?' active':'');
+document.getElementById('btn-en').className='lang-btn'+(lang==='en'?' active':'');
+}
+</script>
+
+<h1>📡 每日研报</h1>
+<div class="date zh">2026-05-08（周五） · 数据截至 2026-05-07 收盘 · 股价数据来源：StockAnalysis</div>
+<div class="date en" style="display:none">2026-05-08 (Friday) · Data as of 2026-05-07 close · Stock data: StockAnalysis</div>
+
+<!-- 板块1: M365 Copilot -->
+<h2>💼 M365 Copilot 专栏</h2>
+
+<div class="card">
+<h3 class="zh">Edge for Business加入Copilot上下文提示，一键总结网页内容</h3>
+<h3 class="en" style="display:none">Edge for Business adds Copilot contextual nudges for page summaries</h3>
+<p class="zh">Microsoft 365 Copilot 5月5日发布更新，Edge for Business新增上下文提示功能，当用户浏览网页时自动建议通过Copilot Chat总结当前页面内容。用户只需点击提示即可获得页面摘要，还能针对内容进行追问。这一功能旨在帮助团队更快消费和分享网络信息，提升研究和决策效率。更新还包含PostgreSQL连接器预览版，让企业能将更多数据源接入Copilot生态。</p>
+<p class="en" style="display:none">Microsoft 365 Copilot's May 5 update introduces contextual nudges in Edge for Business, automatically suggesting page summarization via Copilot Chat. Users can click the prompt to get an instant summary and ask follow-up questions. The update also includes a PostgreSQL connector preview for enterprise data integration.</p>
+<div class="source">Source: Microsoft Learn Release Notes, Microsoft Tech Community</div>
+</div>
+
+<div class="card">
+<h3 class="zh">Viva Glint新增AI驱动的员工调查洞察Copilot Highlights</h3>
+<h3 class="en" style="display:none">Viva Glint adds AI-powered Copilot Highlights for survey insights</h3>
+<p class="zh">Copilot in Viva Glint现在可以在Team Summary和Executive Summary报告中自动生成AI摘要，帮助管理者快速了解员工调查中的优势、机会和趋势。此外，4月更新包含41项Copilot改进：三个全新生产力Agent、Copilot唤醒词功能、以及按Copilot体验分类的聊天历史记录。Copilot Cowork插件功能也已上线，团队协作效率进一步提升。</p>
+<p class="en" style="display:none">Copilot in Viva Glint now auto-generates AI summaries in Team/Executive Summary reports, highlighting strengths, opportunities, and trends. April's 41 updates include three new productivity agents, a wake word feature, and experience-specific chat history. Copilot Cowork with plugins is also now available.</p>
+<div class="source">Source: Microsoft Tech Community, A Guide to Cloud</div>
+</div>
+
+<div class="card">
+<h3 class="zh">💡 实用技巧：用Copilot Notebook管理多来源研究笔记</h3>
+<h3 class="en" style="display:none">💡 Tip: Use Copilot Notebooks to manage multi-source research notes</h3>
+<p class="zh">4月更新中Copilot Notebooks功能大幅增强，支持将网页、文档、邮件等多种来源的内容整合到同一个Notebook中，让Copilot基于这些上下文回答问题。适合做项目调研、竞品分析等需要综合多来源信息的场景。</p>
+<p class="en" style="display:none">April's update significantly enhanced Copilot Notebooks, allowing users to consolidate content from web pages, documents, and emails into a single notebook for contextual AI Q&A. Ideal for project research and competitive analysis.</p>
+<div class="source">Source: Microsoft Tech Community, Your 365 Coach</div>
+</div>
+
+<!-- 板块2: 半导体与AI -->
+<h2>🔬 半导体与AI</h2>
+
+<div class="card">
+<h3 class="zh">Apple探索Intel/Samsung作为TSMC备用芯片制造商</h3>
+<h3 class="en" style="display:none">Apple Explores Intel and Samsung as TSMC Backup Chipmakers</h3>
+<p class="zh">据Bloomberg和CNBC报道，Apple已与Intel和Samsung展开试探性谈判，探讨使用两家公司的处理器用于美国市场的设备。此举旨在为长期合作伙伴TSMC寻找备选方案，反映美国科技巨头对芯片供应链多元化的迫切需求。消息传出后Intel股价跳涨至历史新高。Intel过去一年涨幅达248%，远超TSMC的149%和NVIDIA的106%。Apple此举可能与美国政府推动芯片本土制造的政策方向一致。</p>
+<p class="en" style="display:none">Apple has held exploratory talks with Intel and Samsung about using their processors for US devices, Bloomberg and CNBC report. This move seeks alternatives to long-time partner TSMC, reflecting the growing urgency for chip supply chain diversification. Intel shares surged to another all-time high on the news, with a 248% gain over the past year.</p>
+<div class="source">Source: Bloomberg, CNBC, Schwab Network</div>
+</div>
+
+<div class="card">
+<h3 class="zh">AMD CEO Lisa Su：AI Agent正驱动巨大的计算需求周期</h3>
+<h3 class="en" style="display:none">AMD CEO Lisa Su: AI Agents Driving Tremendous Compute Demand</h3>
+<p class="zh">AMD CEO Lisa Su在CNBC采访中表示"AI的实际应用增速比6个月前的预期更快"，AI Agent正在驱动巨大的计算需求。此前AMD发布Q1财报营收$103亿（+38%），数据中心收入暴涨57%。多家分析师讨论CPU在AI工作负载中的回归，以及AMD的集成CPU-GPU方案如何与NVIDIA竞争。AMD股价持续在历史高位附近，盘中触及52周新高$437.68。</p>
+<p class="en" style="display:none">AMD CEO Lisa Su told CNBC that AI utility is increasing faster than anticipated six months ago, with AI agents driving tremendous compute demand. Following Q1 revenue of $10.3B (+38%) and 57% data center growth, analysts discuss the resurgence of CPUs in AI workloads and AMD's integrated CPU-GPU approach vs. NVIDIA.</p>
+<div class="source">Source: CNBC, Bloomberg Technology, Schwab Network</div>
+</div>
+
+<div class="card">
+<h3 class="zh">NVIDIA市值稳守$5万亿，5月20日财报前市场高度关注</h3>
+<h3 class="en" style="display:none">NVIDIA Holds $5T Market Cap Ahead of May 20 Earnings</h3>
+<p class="zh">NVIDIA 5月7日收盘$211.50（+1.77%），市值维持在$5.14万亿。费半指数SMH当日小幅回调-1.76%至$540.10，显示板块在连续大涨后出现获利回吐。TSMC将2026年营收增长预期上调至30%以上，NVIDIA即将在5月20日发布财报，市场高度关注AI基础设施支出指引。分析师一致评级Strong Buy，目标价$270.73（+28%）。</p>
+<p class="en" style="display:none">NVIDIA closed at $211.50 (+1.77%) on May 7, maintaining a $5.14T market cap. SMH pulled back -1.76% to $540.10 amid profit-taking after consecutive rallies. TSMC raised 2026 revenue guidance to 30%+ growth. All eyes are on NVIDIA's May 20 earnings for AI infrastructure spending guidance. Consensus: Strong Buy, target $270.73 (+28%).</p>
+<div class="source">Source: StockAnalysis, Yahoo Finance, Zacks</div>
+</div>
+
+<!-- 板块2b: 半导体股票 -->
+<h2>📈 半导体股票</h2>
+<div class="stock-grid">
+<div class="stock-item">
+  <div class="ticker">NVDA</div>
+  <div class="price">$211.50</div>
+  <span class="stock-tag tag-up">+1.77%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">TSM</div>
+  <div class="price">$414.15</div>
+  <span class="stock-tag tag-down">-1.28%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">ASML</div>
+  <div class="price">$1,516.60</div>
+  <span class="stock-tag tag-down">-1.82%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">AMD</div>
+  <div class="price">$430.57</div>
+  <span class="stock-tag tag-up">+4.51%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">INTC</div>
+  <div class="price">$164.82</div>
+  <span class="stock-tag tag-up">+1.43%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">MU</div>
+  <div class="price">$646.63</div>
+  <span class="stock-tag tag-down">-2.99%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">AVGO</div>
+  <div class="price">$412.56</div>
+  <span class="stock-tag tag-down">-3.03%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">QCOM</div>
+  <div class="price">$202.55</div>
+  <span class="stock-tag tag-up">+5.18%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">TSLA</div>
+  <div class="price">$395.80</div>
+  <span class="stock-tag tag-up">+1.65%</span>
+</div>
+<div class="stock-item">
+  <div class="ticker">SMH</div>
+  <div class="price">$540.10</div>
+  <span class="stock-tag tag-down">-1.76%</span>
+</div>
+</div>
+<div class="source zh">Source: StockAnalysis · 截至 2026-05-07 收盘</div>
+<div class="source en" style="display:none">Source: StockAnalysis · As of 2026-05-07 close</div>
+
+<!-- 板块3: 巴萨 -->
+<h2>⚽ FC Barcelona</h2>
+
+<div class="card">
+<h3 class="zh">国家德比倒计时2天：巴萨只需1分即可加冕，Flick即将续约</h3>
+<h3 class="en" style="display:none">El Clasico Countdown: Barca Need 1 Point for Title, Flick to Extend</h3>
+<p class="zh">巴萨将在5月10日（周日）坐镇Spotify Camp Nou迎战皇马，这是1148天后国家德比重回诺坎普。巴萨目前以88分高居榜首，领先第二名皇马11分，只需1分即可锁定2025-26赛季西甲冠军。据ESPN报道，主帅Hansi Flick即将与巴萨签下新合同，其经纪人Pini Zahavi已与主席Laporta会面敲定细节。Gavi表示"我们必须付出200%"，Kounde誓言"全力以赴赢得国家德比和联赛"。Lamine Yamal虽仍在单独训练无法上场，但在赛前发布视频为队友打气。</p>
+<p class="en" style="display:none">Barcelona host Real Madrid at Spotify Camp Nou on May 10, 1148 days after the last Clasico there. With 88 points and an 11-point lead, Barca need just 1 point to clinch the title. ESPN reports Hansi Flick is close to signing a contract extension after agent Pini Zahavi met with president Laporta. Gavi says "we must give 200%," while Kounde vows to "give everything." Lamine Yamal posted encouragement despite being unable to play.</p>
+<div class="source">Source: FC Barcelona Official, Barca Blaugranes, ESPN</div>
+</div>
+
+<div class="card">
+<h3 class="zh">皇马Valverde训练场冲突受伤缺阵，Mbappe请愿书病毒式传播</h3>
+<h3 class="en" style="display:none">Real's Valverde Out After Training Clash, Mbappe Petition Goes Viral</h3>
+<p class="zh">皇马内部动荡加剧。Fede Valverde被确认在训练场上与队友Tchouameni发生冲突后导致头部外伤，将缺阵10-14天，铁定缺席国家德比。皇马已对两名球员启动纪律处分程序。与此同时，一份要求Mbappe离开皇马的请愿书在网络上病毒式传播，反映出球迷对法国巨星表现的不满。巴萨传奇Puyol提醒球员"保持专注，不要被皇马的混乱新闻分散注意力"。</p>
+<p class="en" style="display:none">Real Madrid's internal turmoil deepens. Fede Valverde was ruled out for 10-14 days with a head injury after an alleged training ground altercation with Tchouameni. The club opened disciplinary proceedings against both players. Meanwhile, a petition calling for Mbappe to leave the club went viral. Barca legend Puyol warned players to "stay focused" amid Real's chaos.</p>
+<div class="source">Source: Barca Blaugranes, ESPN, Real Madrid Official</div>
+</div>
+
+<div class="card">
+<h3 class="zh">转会市场：巴萨需出售核心球员筹集€1亿引援资金</h3>
+<h3 class="en" style="display:none">Transfer Market: Barca Must Sell Key Players to Fund €100M Summer Window</h3>
+<p class="zh">据ESPN报道，巴萨必须在今夏通过出售重要球员筹集约€1亿引援资金，Ferran Torres、Kounde甚至Raphinha都可能被牺牲。主帅Flick已提交引援清单，切尔西后卫Wesley Fofana和PSG边锋Bradley Barcola在关注名单上。同时，Ansu Fati确认将继续留在摩纳哥，Marc Casado谈及未来计划时暗示可能离队。巴萨女足5-0大胜Levante，Claudia Pina梅开二度达到一线队100球里程碑。</p>
+<p class="en" style="display:none">ESPN reports Barca must raise ~€100M through player sales this summer, with Ferran Torres, Kounde, or even Raphinha potentially sacrificed. Flick has submitted his transfer wishlist, with Chelsea's Fofana and PSG's Barcola on the radar. Ansu Fati confirms Monaco stay. Barca Women won 5-0 vs Levante, with Claudia Pina reaching 100 goals.</p>
+<div class="source">Source: ESPN, Barca Blaugranes, FC Barcelona Official</div>
+</div>
+
+<!-- 板块4: 体育赛事 -->
+<h2>🏟️ 体育赛事</h2>
+
+<div class="sports-card">
+<h3 class="zh">🏀 NBA半决赛G2：活塞107-97再胜骑士，雷霆125-107大胜湖人</h3>
+<h3 class="en" style="display:none">🏀 NBA Semifinals G2: Pistons 107-97 Cavs, Thunder 125-107 Lakers</h3>
+<p class="zh">5月7日NBA季后赛半决赛继续。东部头号种子底特律活塞在主场107-97再胜克利夫兰骑士，系列赛2-0领先。Cade Cunningham命中关键后撤步三分锁定胜局。西部方面，俄克拉荷马城雷霆主场125-107大胜洛杉矶湖人，同样取得2-0领先。LeBron James的队友Redick赛后抱怨"LeBron得到了我见过任何球星中最差的哨子"。NBA历史上0-2落后的球队翻盘概率仅约7%。5月9日将迎来尼克斯vs76人G3（费城主场）。</p>
+<p class="en" style="display:none">May 7 NBA playoff action: Top-seed Pistons beat Cavs 107-97 for a 2-0 East semis lead, with Cade Cunningham hitting a clutch step-back 3. In the West, OKC dominated the Lakers 125-107, also taking a 2-0 series lead. Redick complained about LeBron's "worst whistle of any star." Only ~7% of teams recover from 0-2 deficits. Knicks vs 76ers Game 3 heads to Philly on May 9.</p>
+<div class="source">Source: ESPN, NBA.com, The Athletic</div>
+</div>
+
+<div class="sports-card">
+<h3 class="zh">🏀 开拓者休赛期：锁定Tiago Splitter为主帅，瞄准大牌交易</h3>
+<h3 class="en" style="display:none">🏀 Blazers Offseason: Target Tiago Splitter as Coach, Eye Major Trades</h3>
+<p class="zh">开拓者首轮被马刺淘汰后已进入休赛期模式。据报道球队正在锁定马刺助教Tiago Splitter作为新任主教练人选。GM Joe Cronin面临巨大压力，需要利用充足的薪资空间追逐Giannis Antetokounmpo或Anthony Davis级别的超级巨星。Deni Avdija本赛季成长为全明星球员，Shaedon Sharpe交易价值持续讨论中。球队还需要解决Jrue Holiday的去留问题，以及应对联盟正在讨论的选秀抽签改革方案。</p>
+<p class="en" style="display:none">Portland entered the offseason after a first-round exit vs San Antonio. Reports indicate they're targeting Spurs assistant Tiago Splitter as head coach. GM Joe Cronin faces pressure to use cap space on a superstar like Giannis or Anthony Davis. Deni Avdija broke out as an All-Star, while Shaedon Sharpe's trade value is debated. Jrue Holiday's future and draft lottery reform add to the offseason complexity.</p>
+<div class="source">Source: BlazersEdge, Bleacher Report, ESPN</div>
+</div>
+
+<div class="sports-card">
+<h3 class="zh">⚽ FIFA世界杯2026倒计时5周，美国队备战进入关键期</h3>
+<h3 class="en" style="display:none">⚽ FIFA World Cup 2026: 5 Weeks Out, US Team Enters Crucial Prep Phase</h3>
+<p class="zh">2026年FIFA世界杯（美加墨合办）将于6月11日开幕，距离开幕仅剩约5周。卫冕冠军阿根廷、巴西、法国、西班牙等传统强队均已晋级。四届冠军意大利在附加赛中被波黑淘汰震惊足坛。东道主美国队自动获得参赛资格，目前正在积极备战。洲际附加赛将在墨西哥举行，争夺最后两个名额。赛事将在美国11个城市、加拿大2个城市和墨西哥3个城市举行。</p>
+<p class="en" style="display:none">The 2026 FIFA World Cup (US/Canada/Mexico) kicks off June 11, just 5 weeks away. Defending champions Argentina, Brazil, France, Spain and other traditional powers have qualified. Four-time winners Italy were shockingly eliminated by Bosnia in playoffs. Hosts USA auto-qualify and are in active preparation. Inter-continental playoffs in Mexico will determine the final 2 spots. Matches across 11 US cities, 2 Canadian cities, and 3 Mexican cities.</p>
+<div class="source">Source: FIFA.com, BBC Sport, ESPN</div>
+</div>
+
+<!-- 板块5: Portland本地 -->
+<h2>🌲 Portland 本地</h2>
+
+<div class="card">
+<h3 class="zh">Portland天气：周五多云转晴约69°F，异常温暖干燥持续至下周</h3>
+<h3 class="en" style="display:none">Portland Weather: Friday Partly Sunny ~69°F, Unusually Warm & Dry Pattern Continues</h3>
+<p class="zh">波特兰周五（5月8日）以多云开场，午后逐渐转晴，最高气温约69°F（20°C），当前温度52°F。风力微弱，西南风3-6 mph。日出5:48 AM，日落8:26 PM，日照时间继续延长。KPTV气象预报确认，这个异常温暖干燥的天气模式将持续5-7天，周末虽有云层但预计保持干燥。下周初气温将升至约80°F（27°C）。预报显示下周后期可能出现久违的凉爽阵雨天气。</p>
+<p class="en" style="display:none">Portland Friday starts mostly cloudy, turning partly sunny with a high of ~69°F (20°C), currently 52°F. Light SW winds 3-6 mph. Sunrise 5:48 AM, sunset 8:26 PM. KPTV confirms the unusually warm and dry pattern continues for 5-7 more days. Weekend looks dry despite more clouds. Temperatures climb to ~80°F (27°C) early next week. Hints of a long-awaited cooler/showery pattern late next week.</p>
+<div class="source">Source: KPTV FOX 12, National Weather Service Portland</div>
+</div>
+
+<div class="card">
+<h3 class="zh">周末活动：Doggie Dash Portland周六登场</h3>
+<h3 class="en" style="display:none">Weekend Event: Doggie Dash Portland This Saturday</h3>
+<p class="zh">周六（5月9日）Portland将举办年度Doggie Dash活动，这是当地最受欢迎的宠物公益活动之一。加上预报的干燥晴好天气，非常适合户外活动。本周Portland气温持续偏高于历史平均，5月日均高温在62-80°F之间，加州以外的西海岸地区普遍干旱，户外活动需注意防火。Moda Center的Tom Dundon离开TKO/WWE的事件持续引发本地体育界关注。</p>
+<p class="en" style="display:none">Saturday May 9 brings the annual Doggie Dash Portland, one of the city's most popular pet charity events. Combined with dry, clear weather, it's ideal for outdoor activities. Portland temperatures remain above historical averages for May (62-80°F range). West Coast remains droughty outside California — fire safety awareness needed for outdoor activities. Moda Center's Tom Dundon departure from TKO/WWE continues to make local sports headlines.</p>
+<div class="source">Source: KPTV FOX 12, BlazersEdge, OregonLive</div>
+</div>
+
+<!-- 板块6: AI动态 -->
+<h2>🤖 AI 工具/产品动态</h2>
+
+<div class="card">
+<h3 class="zh">OpenAI Codex推出Chrome扩展，可操控浏览器完成网页任务</h3>
+<h3 class="en" style="display:none">OpenAI Codex Launches Chrome Extension for Browser Control</h3>
+<p class="zh">OpenAI于5月7日推出Codex Chrome扩展插件，让Codex能够直接操控用户的Chrome浏览器，在已登录的网站和应用中完成工作。扩展在独立的"任务专用"标签组中运行，不会干扰用户的活跃标签。这标志着Codex从编程工具向全能AI Agent平台的进一步进化——它现在可以在你的Gmail、GitHub、Jira等工具中自动执行操作。需要安装Chrome插件才能使用。</p>
+<p class="en" style="display:none">OpenAI launched a Codex Chrome extension on May 7, enabling Codex to control the user's Chrome browser and complete tasks on signed-in websites and apps. The extension works in task-specific tab groups, keeping active tabs undisturbed. This marks Codex's evolution from a coding tool to a full AI agent platform — now capable of automating actions in Gmail, GitHub, Jira, and more.</p>
+<div class="source">Source: The Verge, Chrome Web Store</div>
+</div>
+
+<div class="card">
+<h3 class="zh">Cloudflare裁员1,100人，称AI使用量暴增600%</h3>
+<h3 class="en" style="display:none">Cloudflare Lays Off 1,100 Workers as AI Usage Surges 600%</h3>
+<p class="zh">Cloudflare宣布裁员1,100名员工，同时表示公司内部AI使用量增长了600%。CEO Matthew Prince强调"这不是成本削减或个人绩效评估，而是关于在Agentic AI时代重新定义世界级高增长公司的运营方式"。这一举措反映了AI工具在企业内部替代传统工作角色的趋势正在加速。Cloudflare是全球最大的CDN和网络安全服务提供商之一。</p>
+<p class="en" style="display:none">Cloudflare announced 1,100 layoffs while reporting 600% internal AI usage growth. CEO Matthew Prince stated this is "not a cost-cutting exercise... but about defining how a world-class company operates in the agentic AI era." The move reflects accelerating AI tool adoption replacing traditional work roles. Cloudflare is one of the world's largest CDN and cybersecurity providers.</p>
+<div class="source">Source: The Verge, Cloudflare</div>
+</div>
+
+<div class="card">
+<h3 class="zh">Gmail"帮我写"功能升级：AI学习你的语气风格个性化邮件</h3>
+<h3 class="en" style="display:none">Gmail's "Help Me Write" Gets Personalized Tone & Style</h3>
+<p class="zh">Google正在为Gmail的"帮我写"AI工具推出个性化功能，让它能够根据用户过去的写作风格生成更贴近个人语气的邮件草稿。根据提示词不同，工具还能从Google Drive和Gmail中提取相关上下文。此外，Mozilla分享了Firefox浏览器中由Claude Mythos Preview发现的271个安全漏洞的更多细节，显示出AI在安全审计中的巨大潜力。Golden Globes也更新了规则，允许AI用于技术或化妆增强（如减龄），但表演奖必须主要由人类完成。</p>
+<p class="en" style="display:none">Google is rolling out a personalized tone feature for Gmail's "Help me write" AI tool, generating emails that match the user's writing style. It can also pull context from Google Drive and Gmail. Mozilla shared details on 271 Firefox bugs found by Claude Mythos Preview, showcasing AI's security audit potential. The Golden Globes updated rules allowing AI for technical/cosmetic enhancements, but acting awards must be "primarily derived from the credited performer."</p>
+<div class="source">Source: Google Workspace Blog, The Verge, Mozilla</div>
+</div>
+
+<footer>
+<a href="index.html">📊 All Reports</a> · Generated by Sky ☁️ · — GLM 5.1
+</footer>
+
+</div>
+</body>
+</html>

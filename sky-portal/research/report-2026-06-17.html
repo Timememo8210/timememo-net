@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-17 | 每日研报 | Daily Research Report</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;margin:24px 0 8px;text-align:center}
+h2{color:#f0a040;font-size:1.3em;margin:28px 0 12px;border-bottom:1px solid #2a2a2a;padding-bottom:6px}
+h3{color:#fff;font-size:1.05em;margin:18px 0 8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.card p{margin-bottom:8px}
+.card .source{font-size:0.82em;color:#888;margin-top:8px}
+.tag{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block;min-width:70px;text-align:center}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:12px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:14px;text-align:center}
+.stock-symbol{font-family:'SF Mono',monospace;font-weight:700;font-size:1.1em;color:#fff}
+.stock-price{font-size:1.2em;color:#fff;margin:4px 0}
+.zh{display:block}
+.en{display:none}
+footer{text-align:center;margin:32px 0;color:#666;font-size:0.85em}
+footer a{color:#f0a040;text-decoration:none}
+@media(max-width:600px){.stock-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- 海报区域 -->
+<div id="poster" style="max-width:900px;margin:0 auto 32px;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif">
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh" style="background:#555;color:#fff;border:1px solid #555;padding:4px 12px;border-radius:4px;cursor:pointer;margin-right:6px;font-size:0.85em">中文</button>
+<button onclick="switchLang('en')" id="btn-en" style="background:#222;color:#aaa;border:1px solid #444;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em">EN</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+<div style="background:#d92d20;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">半导体与AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Semiconductors & AI</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• NVIDIA传将2028年部分产能转向Intel代工<br>• 半导体板块全面大跌，SMH -4.81%</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• NVIDIA reported shifting 2028 production to Intel Foundry<br>• Semiconductor sector selloff, SMH -4.81%</div>
+</div>
+<div style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%);border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">FC Barcelona</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">FC Barcelona</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Rashford转会巴萨基本告吹，曼联要价£4000万<br>• Bernardo Silva交易接近完成，自由身加盟</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Rashford's Barça move collapses, United demands £40M<br>• Bernardo Silva deal nearing completion on free transfer</div>
+</div>
+<div style="background:#e08c0b;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">体育赛事</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">Sports Events</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• 🐐 Messi世界杯帽子戏法！阿根廷3-0阿尔及利亚<br>• 🏆 Knicks冠军游行本周四曼哈顿百老汇</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Messi WC hat-trick! Argentina 3-0 Algeria<br>• Knicks championship parade Thursday, Manhattan Broadway</div>
+</div>
+<div style="background:#10a37f;border-radius:12px;padding:20px 24px;color:#fff">
+<div style="font-size:2em;margin-bottom:8px">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700;line-height:1.2">AI 动态</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9;margin-top:4px">AI Updates</div>
+<div class="zh poster-data" style="margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthropic发布Claude Fable 5，首个Mythos级公开模型<br>• OpenAI Academy新课程上线，AI医疗诊断三家齐发</div>
+<div class="en poster-data" style="display:none;margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6">• Anthropic launches Claude Fable 5, first public Mythos-class model<br>• OpenAI Academy launches; AI medical diagnostics race heats up</div>
+</div>
+</div>
+</div>
+<script>
+function switchLang(lang){
+document.querySelectorAll('.zh').forEach(el=>el.style.display=lang==='zh'?'block':'none');
+document.querySelectorAll('.en').forEach(el=>el.style.display=lang==='en'?'block':'none');
+document.getElementById('btn-zh').style.background=lang==='zh'?'#555':'#333';
+document.getElementById('btn-zh').style.color=lang==='zh'?'#fff':'#aaa';
+document.getElementById('btn-en').style.background=lang==='en'?'#555':'#222';
+document.getElementById('btn-en').style.color=lang==='en'?'#fff':'#aaa';
+}
+</script>
+
+<h1>📡 每日研报</h1>
+<p style="text-align:center;color:#888;margin-bottom:24px">2026-06-17 (Wednesday) · Portland, OR</p>
+
+<!-- M365 Copilot -->
+<h2>💼 M365 Copilot 专栏</h2>
+<div class="card">
+<h3>M365 Copilot六月大更新：新AI模型、应用重新设计、 licensing变更</h3>
+<p class="zh">微软六月为M365 Copilot带来了重磅更新：Copilot应用界面全面重新设计，Notebooks功能增强（含AI音频概述和项目式组织），Apple CarPlay支持上线。模型方面，Anthropic Claude Opus 4.8和GPT-5.5 Instant已集成进Copilot Chat。管理员现在可以在 admin center 中启用Anthropic或xAI作为模型提供商。Copilot Cowork功能也带来了企业级长时复杂任务处理能力。</p>
+<p class="en">Microsoft's June update brings major changes: refreshed Copilot app design, enhanced Notebooks (with AI audio overviews and project-based organization), and Apple CarPlay support. Claude Opus 4.8 and GPT-5.5 Instant are now integrated. Admins can enable Anthropic or xAI as model providers. Copilot Cowork brings enterprise-ready AI for long-running complex work.</p>
+<p class="source">Source: Microsoft Tech Community · Microsoft Learn · SuperSimple365 · Jun 2026 · <a href="https://techcommunity.microsoft.com/blog/microsoft365copilotblog/what%25E2%2580%2599s-new-in-microsoft-365-copilot--may-2026/4522010" style="color:#f0a040">link</a></p>
+</div>
+<div class="card">
+<h3>⚠️ M365 Copilot许可变更：Word/Excel/PPT中Copilot功能需付费许可</h3>
+<p class="zh">重要的商业变更：Word、Excel、PowerPoint和OneNote中的Copilot功能现在仅对拥有Copilot许可的用户开放。未获得许可的用户仍可通过M365 Copilot应用或网页版使用Copilot Chat，Outlook例外。微软同时推出新促销：300+许可证三年期承诺可享85折。M365价格将于7月1日上涨，6月30日前续约可锁定当前费率一年。</p>
+<p class="en">Important commercial change: Copilot features in Word, Excel, PowerPoint, and OneNote now require a Copilot license. Unlicensed users can still use Copilot Chat via the app or web. New promotion: 15% off three-year commitments for 300+ licenses. M365 prices increase July 1; renew by June 30 to lock current rates.</p>
+<p class="source">Source: Seton Hall IT · Windows Forum · AppDirect · Microsoft Licensing · Jun 2026 · <a href="https://www.shu.edu/technology/news/m365-june-2026-updates.html" style="color:#f0a040">link</a></p>
+</div>
+
+<!-- 半导体 -->
+<h2>🔬 半导体与AI行业</h2>
+<div class="card">
+<h3>Apple与NVIDIA拟将2028年部分产能转向Intel代工，行业格局加速重塑</h3>
+<p class="zh">据Digitimes报道，Apple和NVIDIA正考虑在2028年前将部分芯片生产转移到Intel代工。Intel新CEO Lip-Bu Tan内部已将重心从18A工艺转向14A工艺，预计14A将在2026上半年达到PDK 1.0版本。此前NVIDIA已投资Intel 5%股份（$50亿）并测试了Intel 18A工艺，但据报道NVIDIA已暂停18A测试。Apple正在等待Intel 18A-P PDK 1.0发布。如果成行，这将是Intel代工史上最大的外部客户订单，也将重塑美国半导体制造版图。</p>
+<p class="en">Apple and NVIDIA are considering shifting part of their chip production to Intel Foundry by 2028. Intel's new CEO Tan is pivoting focus from 18A to 14A process. NVIDIA previously invested $5B in Intel but reportedly paused 18A testing. If realized, this would be Intel's largest external foundry win and reshape US semiconductor manufacturing.</p>
+<p class="source">Source: Digitimes · Bits-Chips · Yole Group · TechPowerUp · Jun 2026 · <a href="https://bits-chips.com/article/report-apple-and-nvidia-looking-at-partial-production-shift-to-intel/" style="color:#f0a040">link</a></p>
+</div>
+<div class="card">
+<h3>半导体板块全面下跌：SMH ETF -4.81%，Intel领跌-8.45%</h3>
+<p class="zh">6月16日（周二），半导体板块遭遇大面积抛售。SMH ETF下跌4.81%至$616.00，跌破多个技术支撑位。Intel暴跌8.45%至$117.05，此前该股已连续多日上涨，YTD涨幅仍达217%。AMD跌7.30%，MU跌6.18%（6/24财报前获利了结），ASML跌4.69%。仅TSLA（-1.58%）和NVDA（-2.37%）跌幅较小。市场分析认为，这是经过近几周大涨后的正常回调，AI基建投资基本面依然强劲。</p>
+<p class="en">June 16 semiconductor sector selloff: SMH ETF -4.81% to $616.00. Intel led losses at -8.45% to $117.05 after extended rally (YTD still +217%). AMD -7.30%, MU -6.18% (profit-taking ahead of 6/24 earnings), ASML -4.69%. TSLA (-1.58%) and NVDA (-2.37%) held up better. Seen as a normal pullback after recent massive gains; AI infrastructure fundamentals remain strong.</p>
+<p class="source">Source: Yahoo Finance · MarketWatch · VanEck · Jun 2026</p>
+</div>
+<div class="card">
+<h3>AI芯片市场2026格局：NVIDIA $2159亿营收领跑，TSMC CoWoS产能仍紧</h3>
+<p class="zh">最新行业数据显示，AI芯片市场2026年营收格局：NVIDIA $2159亿、TSMC $1224亿、Broadcom $639亿、Intel $529亿、AMD $346亿，合计$4897亿。NVIDIA预计将占全球CoWoS先进封装需求的60%，Broadcom和AMD占26%。TSMC和Intel的AI产能瓶颈仍是华尔街关注的焦点——多家大客户（Google 300万颗TPU、Apple、NVIDIA）都在争夺代工产能，多源化趋势加速。</p>
+<p class="en">2026 AI chip market revenue: NVIDIA $215.9B, TSMC $122.4B, Broadcom $63.9B, Intel $52.9B, AMD $34.6B — total $489.7B. NVIDIA expected to account for 60% of global CoWoS demand. TSMC and Intel capacity remains the bottleneck as Google (3M TPUs), Apple, NVIDIA all compete for foundry capacity. Multi-sourcing trend accelerating.</p>
+<p class="source">Source: TrendX Insights · Distill Intelligence · Go Markets · Jun 2026 · <a href="https://trendxinsights.com/blogs/ai-chip-wars-2026-deep-dive/" style="color:#f0a040">link</a></p>
+</div>
+
+<!-- 股票 -->
+<h2>📈 半导体股票（6月16日收盘）</h2>
+<p style="color:#888;font-size:0.9em;margin-bottom:12px">注：6/16为周二交易日，半导体板块全面回调。Intel -8.45%领跌，但YTD仍+217%。</p>
+<div class="stock-grid">
+<div class="stock-item">
+<div class="stock-symbol">INTC</div>
+<div class="stock-price">$117.05</div>
+<span class="tag down">-8.45%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">NVDA</div>
+<div class="stock-price">$207.41</div>
+<span class="tag down">-2.37%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">AMD</div>
+<div class="stock-price">$507.29</div>
+<span class="tag down">-7.30%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">TSM</div>
+<div class="stock-price">$425.83</div>
+<span class="tag down">-3.53%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">ASML</div>
+<div class="stock-price">$1,803.89</div>
+<span class="tag down">-4.69%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">MU</div>
+<div class="stock-price">$1,020.76</div>
+<span class="tag down">-6.18%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">AVGO</div>
+<div class="stock-price">$376.71</div>
+<span class="tag down">-4.37%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">QCOM</div>
+<div class="stock-price">$214.07</div>
+<span class="tag down">-3.05%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">TSLA</div>
+<div class="stock-price">$404.66</div>
+<span class="tag down">-1.58%</span>
+</div>
+<div class="stock-item">
+<div class="stock-symbol">SMH</div>
+<div class="stock-price">$616.00</div>
+<span class="tag down">-4.81%</span>
+</div>
+</div>
+<p style="color:#888;font-size:0.88em;margin-top:12px">市场总结：周二（6/16）半导体板块全面下跌，结束近期连涨。Intel在触及$132.75高点后回落至$117（仍远高于分析师平均目标$93.97）。MU在6/24财报前下跌6.18%。本周关注美联储利率决议和MU财报。盘前交易显示部分股票已有反弹迹象。</p>
+
+<!-- 巴萨 -->
+<h2>⚽ FC Barcelona</h2>
+<div class="card">
+<h3>Rashford转会巴萨基本告吹：曼联要价£4000万，Bernardo Silva接近加盟</h3>
+<p class="zh">巴萨的Rashford转会梦基本结束。曼联对Rashford设置了£4000万解约条款（对利物浦和曼联以外的俱乐部有效），巴萨无法负担。与此同时，Bernardo Silva的交易"已接近完成"——据Mundo Deportivo报道，Silva与曼城的合同6月30日到期后将以自由身加盟巴萨。但Sky Sports报道指出，如果签下Bernardo Silva，Rashford的转会就彻底没有空间了。球员将在世界杯后做出最终决定。Rashford在巴萨的租借期表现出色，Ansu Fati则不想放弃回归机会。</p>
+<p class="en">Rashford's Barcelona dream all but over. United demands £40M release clause. Meanwhile, Bernardo Silva deal is "advanced" per Mundo Deportivo — Silva becomes a free agent June 30 and is expected to join Barça. Signing Silva would end any room for Rashford. Player will decide after World Cup. Ansu Fati also wants to return.</p>
+<p class="source">Source: BarcaBlaugranes · TNT Sports · Football Transfers · Sky Sports · Jun 2026 · <a href="https://www.barcablaugranes.com/fc-barcelona-transfer-rumors-news/121916/bernardo-silva-or-marcus-rashford-barcelona-facing-transfer-dilemma" style="color:#f0a040">link</a></p>
+</div>
+<div class="card">
+<h3>巴萨转会摘要：Anthony Gordon接近完成，Junior Kroupi进入谈判</h3>
+<p class="zh">除Bernardo Silva外，Anthony Gordon转会（约€8000万）基本完成。巴萨同时开始与€1亿的Junior Kroupi展开谈判，Hansi Flick的梦想签约Jamal Musiala（合同2026到期）仍在推进。Ansu Fati转会Monaco只差最后细节。Lewandowski飞赴芝加哥接近签约Chicago Fire。Deco表示后卫位置是引援优先级。Rashford的巴萨选项已过期，曼联已确认"advanced talks"但条件无法满足。</p>
+<p class="en">Anthony Gordon transfer (~€80M) nearly complete. Barça also negotiating for Junior Kroupi (€100M). Flick's dream signing Musiala still being pursued. Ansu Fati to Monaco nearly done. Lewandowski close to Chicago Fire. Deco says fullback is priority. Rashford option expired.</p>
+<p class="source">Source: SPORT · ESPN · Friends of Barca · TEAMtalk · Jun 2026 · <a href="https://friendsofbarca.com/news/rashford-exit-confirmed-bernardo-to-madrid-and-messi-s-world-cup-magic-june-17-2026" style="color:#f0a040">link</a></p>
+</div>
+
+<!-- 体育 -->
+<h2>🏟️ 体育赛事（世界杯 & NBA）</h2>
+<div class="card" style="border-color:rgba(76,175,80,0.3);background:rgba(76,175,80,0.02)">
+<h3 style="color:#4CAF50">⚽ 梅西世界杯帽子戏法！阿根廷3-0阿尔及利亚开启卫冕之路</h3>
+<p class="zh">🐐 历史性时刻！38岁的Messi在堪萨斯城Arrowhead体育场打入个人世界杯首个帽子戏法，追平Klose保持的男子世界杯16球历史纪录。卫冕冠军阿根廷3-0完胜阿尔及利亚，开启2026世界杯J组征程。这是Messi的第二个世界杯帽子戏法，也是自2022决赛后的首场世界杯比赛。Argentina作为卫冕冠军展现了强大统治力。</p>
+<p class="en">HISTORIC! Messi, 38, scored his first World Cup hat-trick in Kansas City, equaling Klose's record of 16 WC goals. Argentina dominated Algeria 3-0 in their Group J opener. Second WC hat-trick for Messi and first match since the 2022 final.</p>
+<p class="source">Source: ESPN · NYT Athletic · France24 · FIFA · Jun 2026 · <a href="https://www.espn.com/soccer/match/_/gameId/760433/algeria-argentina" style="color:#4CAF50">link</a></p>
+</div>
+<div class="card" style="border-color:rgba(76,175,80,0.3);background:rgba(76,175,80,0.02)">
+<h3 style="color:#4CAF50">⚽ 世界杯Day 5-6其他赛果：法国3-1塞内加尔，Mbappe梅开二度</h3>
+<p class="zh">法国队3-1击败塞内加尔，Mbappe打入两球展现冠军相。澳大利亚vs土耳其、奥地利vs约旦等比赛也在进行中。本届世界杯进入小组赛第二轮，已有多个冷门结果（西班牙0-0佛得角、比利时1-1埃及）。FIFA官方数据显示，2026世界杯收视率创历史新高。</p>
+<p class="en">France beat Senegal 3-1 with Mbappe brace. Australia vs Türkiye, Austria vs Jordan matches underway. Tournament has seen major upsets (Spain 0-0 Cape Verde, Belgium 1-1 Egypt). 2026 WC viewership hitting record highs.</p>
+<p class="source">Source: BBC Sport · FOX Sports · ESPN · Yahoo Sports · Jun 2026</p>
+</div>
+<div class="card" style="border-color:rgba(76,175,80,0.3);background:rgba(76,175,80,0.02)">
+<h3 style="color:#4CAF50">🏆 Knicks冠军游行本周四！百老汇ticker-tape parade定档6/18</h3>
+<p class="zh">纽约市长Zohran Mamdani正式宣布：本周四（6月18日）上午10点，曼哈顿百老汇将举行纽约Knicks队史首次ticker-tape游行。游行从Battery Park出发沿百老汇至City Hall，随后在City Hall举行庆典仪式。Knicks在总决赛Game 5以94-90击败Spurs，总比分4-1夺冠，终结53年冠军荒。Jalen Brunson当选总决赛MVP。Wembanyama虽败犹荣，季后赛总计505分225篮板。NBA Draft将于6/23-24举行，奇才获得状元签。</p>
+<p class="en">NYC Mayor Mamdani announces Thursday June 18 ticker-tape parade on Broadway — first in Knicks history. Route: Battery Park to City Hall, 10 AM. Knicks won Game 5 94-90 vs Spurs, 4-1 series, ending 53-year drought. Brunson = Finals MVP. NBA Draft June 23-24, Wizards have #1 pick.</p>
+<p class="source">Source: NBA.com · Bleacher Report · NY Times Athletic · NBC NY · Jun 2026 · <a href="https://www.nba.com/news/mayor-zohran-mamdani-announces-ticker-tape-parade-and-city-hall-ceremony-to-celebrate-knicks-championship" style="color:#4CAF50">link</a></p>
+</div>
+<div class="card" style="border-color:rgba(76,175,80,0.3);background:rgba(76,175,80,0.02)">
+<h3 style="color:#4CAF50">🏀 Trail Blazers：2026选秀无签位，休赛期操作空间有限</h3>
+<p class="zh">波特兰开拓者队在6月23-24日的NBA选秀中没有任何签位——这是多年来早期交易的结果。球队正在评估是否通过交易获取选秀权。新老板Tom Dundon带领下，球队阵容有潜力但三分命中率排联盟第28位，需要补强。Giannis Antetokounmpo的交易传闻也在升温，但骑士据说不太可能追逐他。</p>
+<p class="en">Portland Trail Blazers have NO picks in the June 23-24 NBA Draft due to past trades. Team evaluating whether to trade in. Under new owner Dundon, roster shows promise but ranked 28th in 3PT%. Giannis trade rumors heating up but Cavs unlikely to pursue.</p>
+<p class="source">Source: Oregon Live · Blazers Edge · ESPN · Yahoo Sports · Jun 2026 · <a href="https://www.oregonlive.com/blazers/2026/05/a-quiet-june-the-portland-trail-blazers-have-no-picks-in-the-2026-nba-draft.html" style="color:#4CAF50">link</a></p>
+</div>
+
+<!-- Portland -->
+<h2>🌲 Portland 本地</h2>
+<div class="card">
+<h3>热浪消退！Portland回归正常温度，本周最高79-83°F</h3>
+<p class="zh">好消息：上周末的热浪已经过去。周日（6/15）创下96°F高温（打破6/14历史纪录89°F），但今天起气温回归正常。本周预报：周三79°F→周四83°F→周五89°F→周末再升至接近90°F。6月平均最高温为74-78°F，上周热浪属异常天气。夜间最低温在52-61°F之间，天气以晴为主，偶有云层。AccuWeather数据显示6月日高温在71-95°F之间波动。</p>
+<p class="en">Heat wave over! Sunday hit a record 96°F (broke previous June 14 record of 89°F), but temperatures normalizing. This week: Wed 79°F → Thu 83°F → Fri 89°F → weekend near 90°F. June average high is 74-78°F; last weekend's heat was anomalous. Mostly sunny with occasional clouds.</p>
+<p class="source">Source: KPTV Fox 12 · AccuWeather · NWS Portland · WeatherSpark · Jun 2026</p>
+</div>
+<div class="card">
+<h3>Portland本地新闻摘要</h3>
+<p class="zh">• 🌤️ 天气：热浪消退，本周回归80°F左右正常温度，周末再升<br>• 🏀 开拓者：2026选秀无签位，休赛期可能通过交易补强<br>• 🌡️ NOAA夏季展望：太平洋西北地区夏季预测偏热<br>• ⚽ 世界杯观赛：Portland各酒吧和公共场地热映世界杯赛事<br>• 🏘️ St. Johns社区持续推进枪支暴力预防计划</p>
+<p class="en">• Weather: Heat wave subsides, back to ~80°F, rising to 90°F weekend<br>• Trail Blazers: No draft picks, may trade for selections<br>• NOAA: PNW summer forecast predicts above-average heat<br>• World Cup viewing: Portland bars and public venues showing matches<br>• St. Johns community continues gun violence prevention programs</p>
+<p class="source">Source: KPTV · KOIN · NWS Portland · NOAA · Oregon Live · Jun 2026</p>
+</div>
+
+<!-- AI -->
+<h2>🤖 AI 工具/产品动态</h2>
+<div class="card">
+<h3>Anthropic发布Claude Fable 5：首个公开版Mythos级模型，含安全护栏</h3>
+<p class="zh">Anthropic于6月初正式发布Claude Fable 5和Claude Mythos 5两个新模型。Fable 5是首个面向公众的Mythos级模型，内置安全分类器可拒绝危险请求；Mythos 5则不包含这些分类器，仅限受限使用。据BBC报道，Fable 5曾因安全担忧被短暂暂停。在benchmark对比中，Fable 5对标OpenAI GPT-5.5和Google Gemini 3.1 Pro。图像理解测试显示，Fable 5和GPT-5.5在图像问题解决上显著优于上代模型。API定价约为Opus 4.8的2倍。</p>
+<p class="en">Anthropic launched Claude Fable 5 and Mythos 5. Fable 5 is the first public Mythos-class model with built-in safety classifiers; Mythos 5 lacks them and is restricted. Fable 5 briefly suspended over safety concerns per BBC. Benchmarks target GPT-5.5 and Gemini 3.1 Pro. Image understanding significantly improved. API pricing ~2x Opus 4.8.</p>
+<p class="source">Source: BBC · Anthropic · Understanding AI · TrueFoundry · TechCrunch · Jun 2026 · <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" style="color:#f0a040">link</a></p>
+</div>
+<div class="card">
+<h3>AI医疗诊断竞赛：OpenAI、Google、Anthropic七天內相继推出医疗AI工具</h3>
+<p class="zh">AI医疗诊断赛道升温——OpenAI、Google和Anthropic在短短七天内相继发布了医疗AI诊断工具，但目前没有一个获得临床使用许可。这标志着AI从通用工具向垂直行业渗透的加速。与此同时，OpenAI上线了Academy课程平台，帮助企业实现AI采用。Google和Microsoft正在挑战Anthropic和OpenAI在AI编程领域的领先地位——Google Gemini和Microsoft Copilot在编程模型上快速追赶Claude Code。桌面AI产品方面，Google和OpenAI也在追赶Claude的桌面端护城河。</p>
+<p class="en">Medical AI race heats up — OpenAI, Google, and Anthropic launched medical diagnostics tools within 7 days, none clinically cleared. OpenAI launched Academy courses. Google and Microsoft challenging Anthropic/OpenAI in AI coding tools. Desktop AI products ramping up from Google and OpenAI to challenge Claude's moat.</p>
+<p class="source">Source: AI News · OpenAI · CNBC · The New Stack · MarketingProfs · Jun 2026 · <a href="https://www.artificialintelligence-news.com/news/medical-ai-diagnostics-openai-google-anthropic/" style="color:#f0a040">link</a></p>
+</div>
+
+<footer>
+<p>📡 Sky's Daily Research Report · 2026-06-17 · Generated by GLM 5.2</p>
+<p><a href="../index.html">Home</a> · <a href="index.html">All Reports</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-20</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#f87171">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股小幅调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Market Pullback</div>
+<div class="zh poster-data">• 道指跌0.59%报52242点<br>• 标普跌0.19%报7498点<br>• 纳指微跌0.05%报26212点</div>
+<div class="en poster-data" style="display:none">• Dow down 0.59% to 52242<br>• S&P down 0.19% to 7498<br>• Nasdaq down 0.05% to 26212</div>
+</div>
+<div class="poster-card" style="background:#4ade80">
+<div class="poster-icon">🇭🇰</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">港股强势反弹</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">HK Market Surge</div>
+<div class="zh poster-data">• 恒指涨2.07%报24562点<br>• 恒生科技指数涨2.91%<br>• 光通讯、存储半导体活跃</div>
+<div class="en poster-data" style="display:none">• Hang Seng up 2.07% to 24562<br>• Tech Index up 2.91%<br>• Optical comms, storage chips active</div>
+</div>
+<div class="poster-card" style="background:#f87171">
+<div class="poster-icon">🔧</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI半导体调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Semis Correction</div>
+<div class="zh poster-data">• 费半进入技术性熊市<br>• AMD暴跌9.49%<br>• 美光跌3.84%，存储担忧</div>
+<div class="en poster-data" style="display:none">• SOX enters bear market<br>• AMD crashes -9.49%<br>• MU -3.84%, storage concerns</div>
+</div>
+<div class="poster-card" style="background:#60a5fa">
+<div class="poster-icon">🔮</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">市场展望</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Market Outlook</div>
+<div class="zh poster-data">• 短期震荡调整<br>• 关注AI需求变化<br>• 半导体超跌反弹机会</div>
+<div class="en poster-data" style="display:none">• Short-term consolidation<br>• Watch AI demand changes<br>• Semiconductor bounce opportunity</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-20 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股市场分析</span><span class="en" style="display:none">US Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 美股三大指数小幅收跌，AI板块遭遇获利回吐</span><span class="en" style="display:none">1. US Indices Slide, AI Faces Profit-Taking</span></h4>
+<p><span class="zh">道琼斯工业平均指数下跌0.59%，报52242点；标普500指数下跌0.19%，报7498点；纳斯达克综合指数微跌0.05%，报26212点。市场出现明显分化，AI和半导体板块遭遇猛烈抛售，AMD暴跌9.49%，美光科技下跌3.84%，反映出投资者对AI商业化落地预期降温。</span><span class="en" style="display:none">Dow Jones down 0.59% to 52242; S&P 500 down 0.19% to 7498; Nasdaq down 0.05% to 26212. Market shows clear divergence with AI and semiconductor sectors facing heavy selling. AMD crashes -9.49%, Micron down 3.84%, reflecting cooling AI commercialization expectations.</span></p>
+<p class="src">来源：腾讯新闻 / 同花顺财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 费城半导体指数进入技术性熊市，行业面临估值回调</span><span class="en" style="display:none">2. SOX Enters Technical Bear Market, Industry Faces Valuation Adjustment</span></h4>
+<p><span class="zh">费城半导体指数较6月高点下跌逾20%，正式进入技术性熊市。上半年半导体板块普遍大涨逾80%，导致估值过高。机构已下调AI服务器订单预期，高估值股票在当前环境下容易出现获利回吐。市场对AI商业化进程的担忧加剧，短期内行业面临调整压力。</span><span class="en" style="display:none">Philadelphia Semiconductor Index down over 20% from June highs, officially entering a technical bear market. Semiconductor sector up over 80% in H1 led to excessive valuations. Institutions have lowered AI server order expectations, high-growth stocks prone to profit-taking in current environment. Concerns about AI commercialization intensify.</span></p>
+<p class="src">来源：华尔街见闻 / 经济观察网</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 降息预期仍然存在但有所减弱，市场寻找新的平衡</span><span class="en" style="display:none">3. Rate Cut Expectations Persist but Weaken, Market Seeks New Balance</span></h4>
+<p><span class="zh">尽管美联储点阵图显示仍预计2026年将再降息一次，但近期数据显示降息预期有所减弱。美国10年期国债收益率上升，对成长股形成压力。能源板块表现优异，成为投资者避险选择。市场正在寻找新的平衡点，从AI炒作转向更稳健的价值投资。</span><span class="en" style="display:none">Though Fed dot plot still expects one rate cut in 2026, recent data shows expectations have weakened. 10-year Treasury yields rise, pressuring growth stocks. Energy sector performs well as a safe haven. Market seeks new balance, shifting from AI hype to more stable value investing.</span></p>
+<p class="src">来源：Bloomberg / Reuters</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股市场分析</span><span class="en" style="display:none">Hong Kong Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 港股强势反弹，科技领涨全场</span><span class="en" style="display:none">1. HK Market Rally, Tech Leads</span></h4>
+<p><span class="zh">香港恒生指数上涨2.07%，报24562点；恒生科技指数大涨2.91%，表现优于其他主要股指。科技股普遍上涨，光通讯、存储半导体股多数活跃，显示投资者对科技股的信心回升。南向资金持续流入，为港股提供基本面支撑。</span><span class="en" style="display:none">Hang Seng Index up 2.07% to 24562; Hang Seng Tech Index up 2.91%, outperforming other major indices. Tech stocks generally rise with optical communications and storage semiconductor stocks showing strong activity, reflecting renewed investor confidence in tech. Southbound flows continue providing fundamental support.</span></p>
+<p class="src">来源：新浪财经 / AASTOCKS</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块在港股相对抗跌，资金结构性配置</span><span class="en" style="display:none">2. Semi Sector Resilient in HK, Structural Capital Allocation</span></h4>
+<p><span class="zh">虽然美股半导体板块遭遇重挫，但港股相关个股表现相对抗跌。存储概念股回暖，兆易创新等个股受到资金关注。港股市场呈现出明显的结构性特征，资金从美股AI概念股向港股科技股转移，形成轮动效应。</span><span class="en" style="display:none">While US semiconductor sector faces heavy selling, related HK stocks show relative resilience. Memory concept stocks recover with stocks like GigaDevice attracting capital. HK market shows clear structural characteristics, capital shifting from US AI concept stocks to HK tech stocks, creating rotation effect.</span></p>
+<p class="src">来源：大智慧 / 东方财富</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股市场分析</span><span class="en" style="display:none">A-Share Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 上证指数在3800点附近震荡，市场情绪谨慎</span><span class="en" style="display:none">1. SSE Around 3800, Market Cautious</span></h4>
+<p><span class="zh">上证指数在3791-3831点区间震荡，显示市场在关键位置获得支撑。大小盘股表现分化，大盘股集中的上证50、沪深300指数相对抗跌，而小微盘股指数表现疲软。投资者情绪谨慎，观望情绪较浓。</span><span en style="display:none">Shanghai Composite oscillates between 3791-3831, showing support at key levels. Performance diverges between large-cap and small-cap stocks, with SSE 50 and CSI 300 relatively resilient while micro-cap indices lag. Investor sentiment cautious with heavy观望.</span></p>
+<p class="src">来源：雅虎财经 / 财经网</p>
+</div>
+
+<h2>🔬 <span class="zh">半导体与AI板块分析</span><span class="en" style="display:none">Semiconductors & AI Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. AI商业化预期降温，行业进入调整期</span><span class="en" style="display:none">1. AI Commercialization Expectations Cool, Industry Enters Adjustment</span></h4>
+<p><span class="zh">AI板块遭遇明显调整，核心原因是对AI商业化落地进度预期降温。投资者开始理性评估AI技术的实际应用场景和盈利模式，前期过度炒作的估值面临回调。机构已下调AI服务器订单预期，反映行业进入理性调整阶段。</span><span class="en" style="display:none">AI sector faces significant correction due to cooling expectations about AI commercialization progress. Investors begin rational evaluation of AI technology's practical applications and profit models, with overvalued valuations facing adjustment. Institutions have lowered AI server order expectations.</span></p>
+<p class="src">来源：年代向钱看 / 投资TALK</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体产业链估值分化，龙头相对抗跌</span><span class="en" style="display:none">2. Semi Chain Valuation Divergence, Leaders Relatively Resilient</span></h4>
+<p><span class="zh">半导体产业链出现明显分化，龙头企业和细分领域龙头相对抗跌，而中小型AI公司面临更大调整压力。存储芯片、光通讯等细分领域表现较好，反映产业链结构性机会仍然存在。行业长期发展逻辑未变，短期调整为长期投资提供机会。</span><span class="en" style="display:none">Semiconductor industry shows clear divergence, leading enterprises and segment leaders relatively resilient while smaller AI companies face greater adjustment pressure. Memory chips, optical communications and other segments perform well, reflecting structural opportunities remain in the industry chain.</span></p>
+<p class="src">来源：YouTube财经分析 / Wind</p>
+</div>
+
+<h2>📊 <span class="zh">股票行情（7月20日收盘）</span><span class="en" style="display:none">Stock Quotes (Jul 20 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52242</div><div class="stock-change down">-0.59%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPX</div><div class="stock-price">7498</div><div class="stock-change down">-0.19%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">26212</div><div class="stock-change down">-0.05%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24562</div><div class="stock-change up">+2.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSCEI</div><div class="stock-price">4543</div><div class="stock-change up">+2.91%</div></div>
+<div class="stock-item"><div class="stock-ticker">000001.SS</div><div class="stock-price">3831</div><div class="stock-change down">-0.12%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$178.31</div><div class="stock-change down">-9.49%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$874.28</div><div class="stock-change down">-3.84%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$475.20</div><div class="stock-change down">-1.25%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">3850</div><div class="stock-change down">-1.8%</div></div>
+</div>
+
+<h2>💡 <span class="zh">市场展望与投资策略</span><span class="en" style="display:none">Market Outlook & Strategy</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 短期市场预判</span><span class="en" style="display:none">1. Short-term Market Outlook</span></h4>
+<p><span class="zh">短期内市场将延续震荡调整趋势，主要驱动因素包括：AI板块估值回调、半导体行业进入调整期、地缘政治风险升温。投资者需要关注AI商业化进展、半导体需求变化以及政策面动向，这些因素可能影响市场走势。</span><span class="en" style="display:none">The market is expected to continue consolidation in the short term, driven by: AI valuation correction, semiconductor industry adjustment, and rising geopolitical risks. Investors should monitor AI commercialization progress, semiconductor demand changes, and policy developments.</span></p>
+<p class="src">来源：中金公司 / 国泰君安</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 中长期投资建议</span><span class="en" style="display:none">2. Long-term Investment Recommendations</span></h4>
+<p><span class="zh">长期来看，建议关注具备核心技术的优质企业，特别是：1）AI产业链中的龙头公司，技术壁垒高，抗风险能力强；2）半导体细分领域龙头，在调整期中更具韧性；3）港股科技股，估值相对合理，南向资金持续流入。投资者应关注企业的基本面和长期成长性。</span><span class="en" style="display:none">For long-term investments, focus on quality enterprises with core technologies: 1) AI industry leaders with high barriers to entry and strong risk resistance; 2) Semiconductor segment leaders more resilient during adjustments; 3) HK tech stocks with reasonable valuations and continuous southbound inflows.</span></p>
+<p class="src">来源：瑞银 / 美林美银</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 风险提示</span><span class="en" style="display:none">3. Risk Warnings</span></h4>
+<p><span class="zh">投资者需要关注以下风险因素：AI技术发展可能低于预期，商业化进度放缓；半导体行业产能过剩风险；地缘政治紧张局势加剧可能引发市场波动；美联储降息节奏可能推迟。建议投资者根据自身风险承受能力合理配置资产，控制仓位。</span><span class="en" style="display:none">Key risk factors: AI technology development may lag expectations with slower commercialization; semiconductor industry overcapacity risks; intensified geopolitical tensions may cause market volatility; Fed rate cut timing may be delayed. Investors should allocate assets based on risk tolerance and control positions.</span></p>
+<p class="src">来源：高盛 / 摩根士丹利</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Tencent News, Sina Finance, AAStocks, Wall Street Journal, Bloomberg, Reuters, Wind, UBS, Morgan Stanley</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

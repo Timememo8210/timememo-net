@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Style 1: Apple Scroll</title>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root { --text:#1d1d1f; --text2:#86868b; --bg:#fff; --accent:#0071e3; --font:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.08)}
+.nav-inner{max-width:1000px;margin:0 auto;padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:1em;font-weight:700;letter-spacing:-0.02em;text-decoration:none;color:var(--text)}
+.nav-links{display:flex;gap:20px}
+.nav-links a{font-size:0.82em;color:var(--text2);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+
+/* Hero — Apple style large */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,113,227,0.08) 0%,transparent 60%);pointer-events:none}
+.hero h1{font-size:4.5em;font-weight:700;letter-spacing:-0.04em;line-height:1.05;opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
+.hero h1.show{opacity:1;transform:translateY(0)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{font-size:1.2em;color:var(--text2);margin-top:16px;font-weight:300;opacity:0;transform:translateY(30px);transition:all 1s 0.15s cubic-bezier(0.16,1,0.3,1)}
+.hero p.show{opacity:1;transform:translateY(0)}
+.hero-cta{margin-top:28px;display:flex;gap:16px;opacity:0;transform:translateY(20px);transition:all 0.8s 0.3s cubic-bezier(0.16,1,0.3,1)}
+.hero-cta.show{opacity:1;transform:translateY(0)}
+.btn{padding:12px 28px;border-radius:980px;font-size:0.9em;font-weight:500;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#0077ED}
+.btn-secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn-secondary:hover{background:rgba(0,113,227,0.06)}
+
+/* Stats — Apple floating cards */
+.stats{display:flex;gap:24px;justify-content:center;margin-top:60px;opacity:0;transform:translateY(30px);transition:all 1s 0.5s cubic-bezier(0.16,1,0.3,1)}
+.stats.show{opacity:1;transform:translateY(0)}
+.stat{text-align:center;padding:24px 32px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border-radius:20px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 4px 24px rgba(0,0,0,0.04)}
+.stat .num{font-size:2.8em;font-weight:700;color:var(--accent);letter-spacing:-0.03em;display:block}
+.stat .lbl{font-size:0.78em;color:var(--text2);font-weight:500}
+
+/* Scroll indicator */
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeInUp 0.8s 1.5s ease both}
+.scroll-hint span{display:block;width:24px;height:40px;border:2px solid var(--text2);border-radius:12px;position:relative}
+.scroll-hint span::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--text2);border-radius:2px;animation:scrollDot 2s infinite}
+@keyframes scrollDot{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(14px)}}
+
+/* Sections — scroll-reveal */
+.sec{padding:100px 24px;max-width:1000px;margin:0 auto}
+.sec-header{margin-bottom:48px;opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+.sec-header.visible{opacity:1;transform:translateY(0)}
+.sec-header h2{font-size:2.8em;font-weight:700;letter-spacing:-0.03em;line-height:1.1}
+.sec-header p{color:var(--text2);font-size:1.05em;margin-top:8px;font-weight:300}
+
+/* Apple-style grid items */
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.item{padding:28px;border-radius:20px;background:#f5f5f7;text-decoration:none;color:var(--text);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);opacity:0;transform:translateY(30px) scale(0.96);display:flex;flex-direction:column;gap:8px}
+.item.visible{opacity:1;transform:translateY(0) scale(1)}
+.item:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.item .emoji{font-size:2em;margin-bottom:4px}
+.item .name{font-size:1.1em;font-weight:600}
+.item .desc{font-size:0.85em;color:var(--text2);line-height:1.5;flex:1}
+.item .tag{font-size:0.7em;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em}
+.item:hover .tag{text-decoration:underline}
+
+/* Footer */
+.foot{text-align:center;padding:48px 24px;border-top:1px solid rgba(0,0,0,0.06);color:var(--text2);font-size:0.82em}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero h1{font-size:2.8em}
+  .stats{flex-direction:column;align-items:center}
+  .sec{padding:64px 20px}
+  .sec-header h2{font-size:2em}
+  .items{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">☁️ Sky Portal</a>
+    <div class="nav-links">
+      <a href="#daily"><span class="zh">每日更新</span><span class="en">Daily</span></a>
+      <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+      <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+      <a href="#tools"><span class="zh">项目</span><span class="en">Projects</span></a>
+      <a href="#" onclick="setLang('en')">EN</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <h1><span class="zh">你的数字</span><span class="en">Your Digital</span><em><span class="zh">空间。</span><span class="en">Space.</span></em></h1>
+  <p><span class="zh">研究 · 工具 · 记录 — 由 Sky AI 驱动</span><span class="en">Research · Tools · Records — Powered by Sky AI</span></p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#daily"><span class="zh">开始探索</span><span class="en">Explore</span></a>
+    <a class="btn btn-secondary" href="#research"><span class="zh">查看研究</span><span class="en">Research</span></a>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="num">11</span><span class="lbl"><span class="zh">已发布</span><span class="en">Published</span></span></div>
+    <div class="stat"><span class="num">5</span><span class="lbl"><span class="zh">进行中</span><span class="en">Active</span></span></div>
+    <div class="stat"><span class="num">76</span><span class="lbl"><span class="zh">天</span><span class="en">Days</span></span></div>
+  </div>
+  <div class="scroll-hint"><span></span></div>
+</div>
+
+<div class="sec" id="daily">
+  <div class="sec-header">
+    <h2><span class="zh">每日更新</span><span class="en">Daily Updates</span></h2>
+    <p><span class="zh">自动化的日常信息流</span><span class="en">Automated daily information flow</span></p>
+  </div>
+  <div class="items">
+    <a class="item" href="research/index.html"><span class="emoji">📡</span><span class="name"><span class="zh">每日研报</span><span class="en">Daily Briefing</span></span><span class="desc"><span class="zh">半导体 · 股票 · 巴萨 · Portland</span><span class="en">Semi · Stocks · Barça</span></span><span class="tag">Auto · Daily</span></a>
+    <a class="item" href="tech/index.html"><span class="emoji">🔬</span><span class="name"><span class="zh">每日科技</span><span class="en">Daily Tech</span></span><span class="desc"><span class="zh">芯片架构 · 技术突破</span><span class="en">Chip architecture · Breakthroughs</span></span><span class="tag">Auto · Daily</span></a>
+    <a class="item" href="market/index.html"><span class="emoji">📊</span><span class="name"><span class="zh">每日行情</span><span class="en">Daily Market</span></span><span class="desc"><span class="zh">美股 · A股 · 港股</span><span class="en">US · China · HK</span></span><span class="tag">Auto · 9PM</span></a>
+    <a class="item" href="science/index.html"><span class="emoji">🧬</span><span class="name"><span class="zh">每周科学</span><span class="en">Weekly Science</span></span><span class="desc">Science · Nature · Cell</span><span class="tag">Auto · Wed</span></a>
+  </div>
+</div>
+
+<div class="sec" id="research">
+  <div class="sec-header">
+    <h2><span class="zh">研究</span><span class="en">Research</span></h2>
+    <p><span class="zh">半导体与AI的深度思考</span><span class="en">Deep insights on semiconductors & AI</span></p>
+  </div>
+  <div class="items">
+    <a class="item" href="research/intel-tesla-terafab.html"><span class="emoji">⚡</span><span class="name">Intel × Tesla Terafab</span><span class="desc"><span class="zh">$200-250亿超级半导体制造</span><span class="en">$20-25B mega fab project</span></span><span class="tag">New</span></a>
+    <a class="item" href="ai-cvd-optimization.html"><span class="emoji">🏭</span><span class="name"><span class="zh">AI赋能半导体设备</span><span class="en">AI-Powered Equipment</span></span><span class="desc">Lam / AMAT AIx</span><span class="tag">New</span></a>
+    <a class="item" href="nvidia-report.html"><span class="emoji">🟢</span><span class="name"><span class="zh">NVIDIA Foundry</span><span class="en">NVIDIA Foundry</span></span><span class="desc"><span class="zh">GPU晶圆代工战略</span><span class="en">GPU foundry strategy</span></span><span class="tag">v2.2</span></a>
+    <a class="item" href="ai-life.html"><span class="emoji">🤖</span><span class="name"><span class="zh">AI 生活实践</span><span class="en">AI in Practice</span></span><span class="desc"><span class="zh">效能记录 V1+V2</span><span class="en">Productivity V1+V2</span></span><span class="tag">Updated</span></a>
+    <a class="item" href="claude-code-leak.html"><span class="emoji">🔓</span><span class="name"><span class="zh">Claude Code 泄露</span><span class="en">Claude Code Leak</span></span><span class="desc"><span class="zh">512K行源码分析</span><span class="en">512K lines analysis</span></span><span class="tag">Research</span></a>
+    <a class="item" href="skills.html"><span class="emoji">☁️</span><span class="name"><span class="zh">Sky 技能全家福</span><span class="en">Sky Skills</span></span><span class="desc"><span class="zh">30+ 技能一览</span><span class="en">30+ skills overview</span></span><span class="tag">30+</span></a>
+  </div>
+</div>
+
+<div class="sec" id="life">
+  <div class="sec-header">
+    <h2><span class="zh">生活</span><span class="en">Life</span></h2>
+    <p><span class="zh">个人与家庭</span><span class="en">Personal & Family</span></p>
+  </div>
+  <div class="items">
+    <a class="item" href="naturalization.html"><span class="emoji">🇺🇸</span><span class="name"><span class="zh">入籍规划</span><span class="en">Naturalization</span></span><span class="desc"><span class="zh">N-400 · 9月递交</span><span class="en">N-400 · Sep 2026</span></span><span class="tag">Preparing</span></a>
+    <a class="item" href="coach/index.html"><span class="emoji">📚</span><span class="name"><span class="zh">私人教练</span><span class="en">Personal Coach</span></span><span class="desc"><span class="zh">芒格误判 13/25</span><span class="en">Munger 13/25</span></span><span class="tag">In Progress</span></a>
+    <a class="item" href="my-garden/"><span class="emoji">🌸</span><span class="name"><span class="zh">我的花园</span><span class="en">My Garden</span></span><span class="desc"><span class="zh">绣球 · 杜鹃 · 月季</span><span class="en">Portland 2026</span></span><span class="tag">2026</span></a>
+    <a class="item" href="investment.html"><span class="emoji">💰</span><span class="name"><span class="zh">投资策略</span><span class="en">Investment</span></span><span class="desc">RSU · 529 · SMH</span><span class="tag">2026</span></a>
+    <a class="item" href="car-decision.html"><span class="emoji">🚗</span><span class="name"><span class="zh">换车决策</span><span class="en">Car Decision</span></span><span class="desc"><span class="zh">三年省$26K+</span><span class="en">Save $26K+</span></span><span class="tag">2026</span></a>
+  </div>
+</div>
+
+<div class="sec" id="tools">
+  <div class="sec-header">
+    <h2><span class="zh">项目 & 工具</span><span class="en">Projects & Tools</span></h2>
+    <p><span class="zh">自动化、游戏、创业</span><span class="en">Automation, Games, Startups</span></p>
+  </div>
+  <div class="items">
+    <a class="item" href="prolynk.html"><span class="emoji">🏠</span><span class="name">ProLynk</span><span class="desc"><span class="zh">家居维修 · Oregon LLC</span><span class="en">Home Repair · Oregon</span></span><span class="tag">New</span></a>
+    <a class="item" href="https://timememo8210.github.io/家人-War-Game/" target="_blank"><span class="emoji">⚔️</span><span class="name"><span class="zh">时代之战</span><span class="en">War of Ages</span></span><span class="desc"><span class="zh">回合制策略</span><span class="en">Turn-based strategy</span></span><span class="tag">Game</span></a>
+    <a class="item" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank"><span class="emoji">🌍</span><span class="name"><span class="zh">世界征服</span><span class="en">World Conquest</span></span><span class="desc"><span class="zh">实时策略</span><span class="en">RTS</span></span><span class="tag">Game</span></a>
+    <a class="item" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><span class="emoji">🌍</span><span class="name"><span class="zh">2026欧洲行</span><span class="en">Europe 2026</span></span><span class="desc"><span class="zh">瑞士→巴黎→纽约</span><span class="en">Swiss→Paris→NYC</span></span><span class="tag">Travel</span></a>
+  </div>
+</div>
+
+<div class="foot"><p>Sky Portal · <span class="zh">Sky Portal</span><span class="en">Sky Portal's Digital Space</span> · OpenClaw ☁️</p></div>
+
+<script>
+// Scroll reveal
+function reveal(){
+  var els=document.querySelectorAll('.hero h1,.hero p,.hero-cta,.stats,.sec-header,.item');
+  els.forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.88){el.classList.add('visible');el.classList.add('show')}
+  });
+}
+window.addEventListener('scroll',reveal);
+window.addEventListener('load',function(){setTimeout(reveal,100)});
+function setLang(l){document.body.className='lang-'+l}
+</script>
+</body>
+</html>

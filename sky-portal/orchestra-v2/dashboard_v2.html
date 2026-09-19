@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchestra v2 Dashboard</title>
+<style>
+  :root {
+    --bg: #f7f5ef;
+    --panel: #fffdf8;
+    --ink: #1b1f23;
+    --muted: #5f6873;
+    --line: #ded8cc;
+    --line-strong: #b9afa0;
+    --blue: #235a97;
+    --blue-soft: #e7f0fb;
+    --green: #167a5b;
+    --green-soft: #e4f6ee;
+    --red: #b4232c;
+    --red-soft: #fae8ea;
+    --gold: #9b6a16;
+    --gold-soft: #fff2cf;
+    --violet: #6554c0;
+    --violet-soft: #eeeafd;
+    --shadow: 0 12px 30px rgba(31, 35, 40, 0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(247, 245, 239, 0.92);
+    backdrop-filter: blur(16px);
+  }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .brand strong {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+  .brand span {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  body.en .zh { display: none !important; }
+  body.zh .en { display: none !important; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .lang-switch {
+    display: flex;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .lang-switch button {
+    border: 0;
+    padding: 5px 10px;
+    font: inherit;
+    font-size: 0.76rem;
+    cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+  }
+  .lang-switch button.active {
+    background: var(--ink);
+    color: #fff;
+  }
+  main {
+    display: grid;
+    grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+    gap: 18px;
+    padding: 18px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  section {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  .control-panel {
+    align-self: start;
+    position: sticky;
+    top: 76px;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  h1, h2, h3 {
+    margin: 0;
+    letter-spacing: 0;
+  }
+  h1 { font-size: 1rem; }
+  h2 { font-size: 0.92rem; }
+  h3 { font-size: 0.84rem; }
+  form {
+    padding: 16px;
+    display: grid;
+    gap: 14px;
+  }
+  label {
+    display: grid;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+  textarea,
+  input,
+  select {
+    width: 100%;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.9rem;
+    padding: 9px 10px;
+    outline: none;
+  }
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  textarea:focus,
+  input:focus,
+  select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px var(--blue-soft);
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .segmented {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .segmented button {
+    border: 0;
+    padding: 9px 10px;
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+  }
+  .segmented button.active {
+    background: var(--ink);
+    color: #fff;
+  }
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  button.primary,
+  button.secondary {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button.primary { background: var(--blue); color: #fff; }
+  button.secondary { background: #fff; color: var(--ink); border-color: var(--line-strong); }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .content {
+    display: grid;
+    gap: 18px;
+  }
+  .status-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .metric {
+    background: var(--panel);
+    padding: 14px 16px;
+    min-height: 76px;
+  }
+  .metric span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .metric strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+  }
+  .board {
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+  }
+  .agents {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .agent {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 12px;
+    min-height: 160px;
+    display: grid;
+    gap: 8px;
+  }
+  .agent-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .agent-id {
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+  .agent-task {
+    color: var(--muted);
+    font-size: 0.82rem;
+    max-height: 56px;
+    overflow: hidden;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .pill.running, .pill.reviewing, .pill.starting { background: var(--blue-soft); color: var(--blue); }
+  .pill.done, .pill.passed, .pill.complete { background: var(--green-soft); color: var(--green); }
+  .pill.failed, .pill.blocked, .pill.needs_iteration { background: var(--red-soft); color: var(--red); }
+  .pill.pending, .pill.queued, .pill.idle { background: var(--gold-soft); color: var(--gold); }
+  .bar {
+    height: 8px;
+    border-radius: 999px;
+    background: #ece7dc;
+    overflow: hidden;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--violet);
+    transition: width 0.2s ease;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem;
+    background: #f0ece3;
+    padding: 1px 5px;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+  .empty {
+    color: var(--muted);
+    padding: 8px 0;
+    font-size: 0.86rem;
+  }
+  .log-list {
+    display: grid;
+    gap: 8px;
+    max-height: 280px;
+    overflow: auto;
+  }
+  .log-line {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+  }
+  .log-line time {
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.76rem;
+  }
+  .error {
+    display: none;
+    margin: 0 16px 16px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: var(--red-soft);
+    color: var(--red);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    .control-panel { position: static; }
+    .status-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    header { align-items: flex-start; flex-direction: column; }
+    main { padding: 12px; }
+    .grid-2, .actions, .status-row { grid-template-columns: 1fr; }
+    .log-line { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="zh">
+<header>
+  <div class="brand">
+    <strong>Orchestra v2</strong>
+    <span><span class="zh">主控写状态，子 Agent 写报告，模型和数量可选</span><span class="en">Coordinator-owned state, worker-owned reports, selectable models</span></span>
+  </div>
+  <div class="header-right">
+    <div class="lang-switch">
+      <button type="button" class="active" data-lang="zh">中</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <span class="pill idle" id="topStatus">idle</span>
+  </div>
+</header>
+
+<main>
+  <section class="control-panel">
+    <div class="section-head">
+      <h1><span class="zh">运行设置</span><span class="en">Run Setup</span></h1>
+      <a href="./ORCHESTRATION_PROTOCOL.md" target="_blank"><span class="zh">协议</span><span class="en">Protocol</span></a>
+    </div>
+    <form id="runForm">
+      <label>
+        <span><span class="zh">任务</span><span class="en">Task</span></span>
+        <textarea id="task" required>改进这个项目：运行前可以选择主控、子 Agent、Review 模型和子 Agent 数量；Agent 之间用追加式消息沟通；共享任务状态只由主控更新。</textarea>
+      </label>
+      <label>
+        <span><span class="zh">目标代码目录</span><span class="en">Target directory</span></span>
+        <input id="targetDir" value="." required>
+      </label>
+      <div class="grid-2">
+        <label>
+          <span><span class="zh">主控 / 规划模型</span><span class="en">Planner</span></span>
+          <select id="plannerModel"></select>
+        </label>
+        <label>
+          <span><span class="zh">审查模型</span><span class="en">Reviewer</span></span>
+          <select id="reviewerModel"></select>
+        </label>
+      </div>
+      <label>
+        <span><span class="zh">默认子 Agent 模型</span><span class="en">Default worker</span></span>
+        <select id="workerModel"></select>
+      </label>
+      <div class="grid-2">
+        <label>
+          <span><span class="zh">子 Agent 数量</span><span class="en">Workers</span></span>
+          <input id="workerCount" type="number" min="1" max="12" value="4">
+        </label>
+        <label>
+          <span><span class="zh">轮询秒数</span><span class="en">Poll seconds</span></span>
+          <input id="interval" type="number" min="2" max="300" value="20">
+        </label>
+      </div>
+      <div class="grid-2">
+        <label>
+          <span><span class="zh">最多迭代轮数</span><span class="en">Max rounds</span></span>
+          <input id="maxRounds" type="number" min="1" max="10" value="3">
+        </label>
+        <label>
+          <span><span class="zh">代码隔离方式</span><span class="en">Isolation</span></span>
+          <input id="isolationValue" type="hidden" value="worktree">
+          <span class="segmented" aria-label="Isolation mode">
+            <button type="button" class="active" data-isolation="worktree">Worktree</button>
+            <button type="button" data-isolation="shared">Shared</button>
+          </span>
+        </label>
+      </div>
+      <label>
+        <span><span class="zh">每个子 Agent 单独指定模型</span><span class="en">Per-worker models</span></span>
+        <input id="workerModels" placeholder="可选，用逗号分隔：codex, glm-5.1, opus">
+      </label>
+      <div class="actions">
+        <button class="primary" id="startButton" type="submit"><span class="zh">开始</span><span class="en">Start</span></button>
+        <button class="secondary" id="stopButton" type="button"><span class="zh">停止</span><span class="en">Stop</span></button>
+      </div>
+    </form>
+    <div class="error" id="errorBox"></div>
+  </section>
+
+  <div class="content">
+    <div class="status-row">
+      <div class="metric"><span><span class="zh">运行 ID</span><span class="en">Run</span></span><strong id="runId">none</strong></div>
+      <div class="metric"><span><span class="zh">阶段</span><span class="en">Phase</span></span><strong id="phase">idle</strong></div>
+      <div class="metric"><span><span class="zh">Agent 数量</span><span class="en">Agents</span></span><strong id="agentCount">0</strong></div>
+      <div class="metric"><span><span class="zh">更新时间</span><span class="en">Updated</span></span><strong id="updatedAt">-</strong></div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="zh">Agent 进度</span><span class="en">Agents</span></h2>
+        <span class="pill pending" id="reviewStatus">review pending</span>
+      </div>
+      <div class="board">
+        <div class="agents" id="agents"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="zh">消息邮箱</span><span class="en">Mailbox</span></h2>
+        <span id="mailboxCount" class="pill pending">0</span>
+      </div>
+      <div class="board">
+        <table>
+          <thead><tr><th><span class="zh">文件</span><span class="en">File</span></th><th><span class="zh">预览</span><span class="en">Preview</span></th><th><span class="zh">时间</span><span class="en">Time</span></th></tr></thead>
+          <tbody id="mailbox"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="zh">警告</span><span class="en">Warnings</span></h2>
+        <span id="warningCount" class="pill pending">0</span>
+      </div>
+      <div class="board">
+        <table>
+          <thead><tr><th><span class="zh">时间</span><span class="en">Time</span></th><th><span class="zh">消息</span><span class="en">Message</span></th></tr></thead>
+          <tbody id="warnings"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="zh">日志</span><span class="en">Log</span></h2>
+      </div>
+      <div class="board">
+        <div class="log-list" id="logs"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let models = {};
+let currentLang = 'zh';
+let staticPreview = false;
+const FALLBACK_MODELS = {
+  opus: { label: 'Claude Opus', labelZh: 'Claude Opus' },
+  sonnet: { label: 'Claude Sonnet', labelZh: 'Claude Sonnet' },
+  'glm-5.1': { label: 'GLM 5.1 via ACP', labelZh: 'GLM 5.1（通过 ACP）' },
+  codex: { label: 'Codex', labelZh: 'Codex' },
+  'codex-all-apps': { label: 'Codex all-apps profile', labelZh: 'Codex all-apps 配置' },
+  noop: { label: 'No-op simulator', labelZh: 'No-op 测试模拟器' }
+};
+
+const COPY = {
+  staticPreview: {
+    zh: '静态预览模式。要真正运行 Agent，请在配置齐全的机器上执行 ./start_v2.sh。',
+    en: 'Static preview mode. Run ./start_v2.sh on the configured machine to enable the API.'
+  },
+  couldNotStart: { zh: '无法启动运行。', en: 'Could not start run.' },
+  couldNotStop: { zh: '无法停止运行。', en: 'Could not stop run.' },
+  noAgents: { zh: '暂无运行中的 Agent。', en: 'No active agents.' },
+  none: { zh: '无', en: 'None' },
+  noLogs: { zh: '暂无日志。', en: 'No log lines.' },
+  review: { zh: '审查', en: 'review' },
+  placeholder: {
+    zh: '可选，用逗号分隔：codex, glm-5.1, opus',
+    en: 'Optional comma list: codex, glm-5.1, opus'
+  }
+};
+
+function t(key) {
+  return COPY[key][currentLang];
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.body.className = lang;
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.lang === lang);
+  });
+  $('workerModels').placeholder = t('placeholder');
+  if (staticPreview) setError(t('staticPreview'));
+  populateModelSelects();
+  poll();
+}
+
+function pillClass(status) {
+  return `pill ${String(status || 'pending').replace(/[^a-z0-9_-]/gi, '_')}`;
+}
+
+function setError(message) {
+  const box = $('errorBox');
+  box.style.display = message ? 'block' : 'none';
+  box.textContent = message || '';
+}
+
+function option(label, value) {
+  const node = document.createElement('option');
+  node.value = value;
+  node.textContent = label;
+  return node;
+}
+
+function populateModelSelects() {
+  const selected = {
+    plannerModel: $('plannerModel').value || 'opus',
+    workerModel: $('workerModel').value || 'glm-5.1',
+    reviewerModel: $('reviewerModel').value || 'codex'
+  };
+  const selects = [$('plannerModel'), $('workerModel'), $('reviewerModel')];
+  selects.forEach((select) => {
+    select.textContent = '';
+    Object.entries(models).forEach(([key, value]) => {
+      const label = currentLang === 'zh' ? (value.labelZh || value.label || key) : (value.label || key);
+      select.appendChild(option(`${label} (${key})`, key));
+    });
+    select.value = selected[select.id] && models[selected[select.id]]
+      ? selected[select.id]
+      : Object.keys(models)[0];
+  });
+}
+
+async function loadModels() {
+  try {
+    const res = await fetch('/api/models');
+    if (!res.ok) throw new Error('API unavailable');
+    const data = await res.json();
+    models = data.models || FALLBACK_MODELS;
+    staticPreview = false;
+  } catch (error) {
+    models = FALLBACK_MODELS;
+    staticPreview = true;
+    setError(t('staticPreview'));
+  }
+  populateModelSelects();
+  $('plannerModel').value = models.opus ? 'opus' : Object.keys(models)[0];
+  $('workerModel').value = models['glm-5.1'] ? 'glm-5.1' : Object.keys(models)[0];
+  $('reviewerModel').value = models.codex ? 'codex' : Object.keys(models)[0];
+}
+
+async function startRun(event) {
+  event.preventDefault();
+  setError('');
+  if (staticPreview) {
+    setError(t('staticPreview'));
+    return;
+  }
+  const payload = {
+    task: $('task').value,
+    target_dir: $('targetDir').value,
+    planner_model: $('plannerModel').value,
+    worker_model: $('workerModel').value,
+    reviewer_model: $('reviewerModel').value,
+    worker_count: Number($('workerCount').value),
+    monitor_interval_seconds: Number($('interval').value),
+    max_rounds: Number($('maxRounds').value),
+    isolation: $('isolationValue').value,
+    worker_models: $('workerModels').value.split(',').map((item) => item.trim()).filter(Boolean)
+  };
+  const res = await fetch('/api/start', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    setError(data.error || t('couldNotStart'));
+    return;
+  }
+  render(data);
+}
+
+async function stopRun() {
+  setError('');
+  if (staticPreview) {
+    setError(t('staticPreview'));
+    return;
+  }
+  const res = await fetch('/api/stop', { method: 'POST' });
+  const data = await res.json();
+  if (!res.ok) setError(data.error || t('couldNotStop'));
+  render(data);
+}
+
+async function poll() {
+  if (staticPreview) return;
+  try {
+    const res = await fetch('/api/state');
+    if (!res.ok) return;
+    render(await res.json());
+  } catch (error) {
+    if (!Object.keys(models).length) setError(String(error));
+  }
+}
+
+function render(state) {
+  const status = state.status || 'idle';
+  $('topStatus').className = pillClass(status);
+  $('topStatus').textContent = status;
+  $('runId').textContent = state.run_id || 'none';
+  $('phase').textContent = state.phase || 'idle';
+  $('updatedAt').textContent = state.updated_at || '-';
+
+  const agents = Object.values(state.agents || {});
+  $('agentCount').textContent = String(agents.length);
+  $('agents').innerHTML = agents.length ? agents.map(renderAgent).join('') : `<div class="empty">${t('noAgents')}</div>`;
+
+  const review = state.review || {};
+  $('reviewStatus').className = pillClass(review.status || 'pending');
+  $('reviewStatus').textContent = `${t('review')} ${review.status || 'pending'}`;
+
+  renderRows('mailbox', state.mailbox || [], (item) => `
+    <tr><td><code>${escapeHtml(item.file || '')}</code></td><td>${escapeHtml(item.preview || '')}</td><td>${escapeHtml(item.at || '')}</td></tr>
+  `);
+  $('mailboxCount').textContent = String((state.mailbox || []).length);
+
+  renderRows('warnings', state.warnings || [], (item) => `
+    <tr><td>${escapeHtml(item.at || '')}</td><td>${escapeHtml(item.message || '')}</td></tr>
+  `);
+  $('warningCount').textContent = String((state.warnings || []).length);
+
+  const logs = (state.logs || []).slice(-80).reverse();
+  $('logs').innerHTML = logs.length ? logs.map((item) => `
+    <div class="log-line"><time>${escapeHtml(item.at || '')}</time><div>${escapeHtml(item.message || '')}</div></div>
+  `).join('') : `<div class="empty">${t('noLogs')}</div>`;
+}
+
+function renderAgent(agent) {
+  const progress = Math.max(0, Math.min(100, Number(agent.progress || 0)));
+  return `
+    <article class="agent">
+      <div class="agent-top">
+        <div>
+          <div class="agent-id">${escapeHtml(agent.id || '')}</div>
+          <code>${escapeHtml(agent.model || '')}</code>
+        </div>
+        <span class="${pillClass(agent.status || 'pending')}">${escapeHtml(agent.status || 'pending')}</span>
+      </div>
+      <div class="agent-task">${escapeHtml(agent.task || '')}</div>
+      <div class="bar"><span style="width:${progress}%"></span></div>
+      <div>${escapeHtml(agent.summary || '')}</div>
+      <code>${escapeHtml(agent.workdir || '')}</code>
+    </article>
+  `;
+}
+
+function renderRows(targetId, rows, renderer) {
+  const target = $(targetId);
+  target.innerHTML = rows.length ? rows.slice(-20).reverse().map(renderer).join('') : `<tr><td colspan="3" class="empty">${t('none')}</td></tr>`;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+document.querySelectorAll('[data-isolation]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-isolation]').forEach((item) => item.classList.remove('active'));
+    button.classList.add('active');
+    $('isolationValue').value = button.dataset.isolation;
+  });
+});
+
+document.querySelectorAll('[data-lang]').forEach((button) => {
+  button.addEventListener('click', () => setLang(button.dataset.lang));
+});
+
+$('runForm').addEventListener('submit', startRun);
+$('stopButton').addEventListener('click', stopRun);
+
+loadModels().then(() => {
+  render({ status: 'idle', phase: 'idle', updated_at: '-', agents: {}, review: {}, mailbox: [], warnings: [], logs: [] });
+  poll();
+});
+setInterval(poll, 3000);
+</script>
+</body>
+</html>

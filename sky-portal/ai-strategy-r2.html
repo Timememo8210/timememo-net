@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Strategy R2 | AI 转型内部报告 | Sky Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3f5f1;
+  --paper: #fffefa;
+  --ink: #151918;
+  --muted: #66716d;
+  --line: #d9ded6;
+  --line-strong: #202724;
+  --green: #0d6b57;
+  --green-soft: #dceee8;
+  --blue: #1e5aa8;
+  --blue-soft: #dde8f8;
+  --amber: #b5651d;
+  --amber-soft: #f4e3cf;
+  --red: #b83b2e;
+  --red-soft: #f5ded9;
+  --violet: #5d4c93;
+  --violet-soft: #e6e1f2;
+  --shadow: 0 24px 80px rgba(20, 28, 26, 0.12);
+  --font: "Noto Sans SC", "IBM Plex Sans", sans-serif;
+  --font-latin: "IBM Plex Sans", "Noto Sans SC", sans-serif;
+  --side-width: 254px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(21,25,24,0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(21,25,24,0.035) 1px, transparent 1px),
+    radial-gradient(circle at 16% 10%, rgba(13,107,87,0.13), transparent 28%),
+    radial-gradient(circle at 90% 30%, rgba(30,90,168,0.12), transparent 32%),
+    linear-gradient(180deg, #f7f8f4 0%, var(--bg) 100%);
+  background-size: 38px 38px, 38px 38px, auto, auto, auto;
+  line-height: 1.65;
+}
+
+a { color: inherit; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px clamp(16px, 4vw, 56px);
+  background: rgba(255,254,250,0.88);
+  border-bottom: 1px solid rgba(32,39,36,0.12);
+  backdrop-filter: blur(16px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-latin);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  font-size: 0.8rem;
+}
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.menu-toggle {
+  display: none;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(255,254,250,0.82);
+  color: var(--ink);
+  font: 900 1rem var(--font-latin);
+  cursor: pointer;
+}
+.lang-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255,254,250,0.82);
+}
+.lang-switch button {
+  min-width: 58px;
+  min-height: 32px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 800 0.72rem var(--font-latin);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.lang-switch button + button { border-left: 1px solid var(--line-strong); }
+body.lang-zh .lang-switch button[data-lang="zh"],
+body.lang-en .lang-switch button[data-lang="en"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+body.lang-zh .en-content,
+body.lang-zh .en-inline,
+body.lang-en .zh-content,
+body.lang-en .zh-inline {
+  display: none !important;
+}
+.chip-link,
+.print-btn {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: rgba(255,254,250,0.72);
+  color: var(--ink);
+  text-decoration: none;
+  font: 700 0.74rem var(--font-latin);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+.print-btn:hover,
+.chip-link:hover { background: var(--ink); color: var(--paper); }
+.side-nav {
+  position: fixed;
+  top: 59px;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+  width: var(--side-width);
+  padding: 18px 16px 28px;
+  border-right: 1px solid rgba(32,39,36,0.14);
+  background: rgba(255,254,250,0.91);
+  backdrop-filter: blur(18px);
+  overflow-y: auto;
+}
+.side-kicker {
+  margin: 2px 0 14px;
+  color: var(--green);
+  font: 900 0.68rem var(--font-latin);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.side-nav nav {
+  display: grid;
+  gap: 7px;
+}
+.side-nav a {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+.side-nav a:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--ink);
+}
+.side-nav a.active {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 700;
+}
+.side-nav a.primary {
+  color: var(--ink);
+  font-weight: 900;
+}
+.nav-overlay {
+  display: none;
+}
+
+.hero {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  padding: clamp(42px, 8vw, 92px) clamp(18px, 5vw, 72px);
+}
+.hero-main {
+  max-width: 900px;
+}
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  color: var(--green);
+  font: 700 0.78rem var(--font-latin);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.kicker::before {
+  content: "";
+  width: 38px;
+  height: 2px;
+  background: var(--green);
+}
+h1 {
+  margin: 0;
+  max-width: 880px;
+  font-size: clamp(2.6rem, 8vw, 6.9rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+.hero.en-content h1 {
+  max-width: 760px;
+  font-size: clamp(2.6rem, 5.8vw, 5.35rem);
+}
+.subtitle {
+  max-width: 720px;
+  margin: 26px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+}
+.hero-card {
+  border: 1px solid var(--line-strong);
+  background: rgba(255,254,250,0.9);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.hero-card h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+.position-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.position-list li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.num {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--green);
+  font: 700 0.75rem var(--font-latin);
+  background: var(--green-soft);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: rgba(255,254,250,0.76);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.report {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 48px) 80px;
+}
+.hero,
+.report,
+footer {
+  margin-left: var(--side-width);
+}
+.toc {
+  position: sticky;
+  top: 62px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0 18px;
+  margin-bottom: 8px;
+  scrollbar-width: none;
+}
+.toc::-webkit-scrollbar { display: none; }
+.toc a {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: rgba(255,254,250,0.9);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+.toc a:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+.toc { display: none; }
+
+.slide {
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: clamp(18px, 4vw, 48px);
+  align-items: start;
+  margin: 0 0 30px;
+  padding: clamp(24px, 5vw, 56px);
+  border: 1px solid rgba(32,39,36,0.18);
+  background: rgba(255,254,250,0.9);
+  box-shadow: 0 18px 60px rgba(20,28,26,0.08);
+  scroll-margin-top: 132px;
+}
+.slide-number {
+  position: sticky;
+  top: 140px;
+  font: 900 clamp(2.2rem, 6vw, 5rem) var(--font-latin);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--line-strong);
+}
+.slide-content {
+  min-width: 0;
+}
+.eyebrow {
+  margin-bottom: 14px;
+  color: var(--green);
+  font: 700 0.78rem var(--font-latin);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.slide h2 {
+  margin: 0;
+  max-width: 850px;
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+.lead {
+  max-width: 850px;
+  margin: 22px 0 28px;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+}
+.callout {
+  max-width: 900px;
+  border-left: 5px solid var(--green);
+  background: var(--green-soft);
+  padding: 18px 20px;
+  margin: 22px 0;
+  font-size: clamp(1.08rem, 1.7vw, 1.3rem);
+  font-weight: 800;
+  line-height: 1.45;
+}
+.exec-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 18px;
+  margin: 24px 0;
+}
+.exec-punch {
+  border: 1px solid var(--line-strong);
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(22px, 4vw, 36px);
+}
+.exec-punch b {
+  display: block;
+  font: 900 clamp(2.2rem, 6vw, 4.8rem) var(--font-latin);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+.exec-punch span {
+  display: block;
+  margin-top: 16px;
+  color: rgba(255,254,250,0.78);
+  font-size: clamp(1rem, 1.7vw, 1.18rem);
+}
+.exec-stack {
+  display: grid;
+  gap: 10px;
+}
+.exec-line {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.7);
+  padding: 15px;
+}
+.exec-line b {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.05rem;
+}
+.exec-line span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.takeaway {
+  margin-top: 22px;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(135deg, rgba(13,107,87,0.15), rgba(181,101,29,0.13));
+  border-left: 7px solid var(--amber);
+  padding: clamp(20px, 3.3vw, 32px);
+  font-size: clamp(1.42rem, 3vw, 2.28rem);
+  line-height: 1.16;
+  font-weight: 900;
+}
+.agent-map {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.agent-tile {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 15px;
+}
+.agent-tile small {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green);
+  font: 900 0.7rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.agent-tile h3 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+}
+.agent-tile p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.thesis-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 26px 0 18px;
+}
+.thesis-card {
+  position: relative;
+  min-height: 180px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  padding: 20px 20px 22px;
+  overflow: hidden;
+}
+.thesis-card::after {
+  content: attr(data-mark);
+  position: absolute;
+  right: 14px;
+  bottom: -20px;
+  color: rgba(21,25,24,0.06);
+  font: 900 6rem var(--font-latin);
+  line-height: 1;
+}
+.thesis-card small {
+  display: inline-flex;
+  margin-bottom: 22px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: var(--green);
+  background: var(--green-soft);
+  font: 700 0.72rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.thesis-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 8px;
+  font-size: clamp(1.35rem, 3vw, 2.1rem);
+  line-height: 1.12;
+}
+.thesis-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.wing-line {
+  max-width: 900px;
+  margin: 16px 0 26px;
+  padding: 14px 18px;
+  border: 1px dashed rgba(32,39,36,0.32);
+  color: var(--ink);
+  background: rgba(255,254,250,0.58);
+  font-weight: 600;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.panel {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.55);
+  padding: 18px;
+  min-width: 0;
+}
+.panel h3 {
+  margin: 0 0 9px;
+  font-size: 1.02rem;
+}
+.panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.panel strong { color: var(--ink); }
+.blue { border-top: 5px solid var(--blue); }
+.amber { border-top: 5px solid var(--amber); }
+.red { border-top: 5px solid var(--red); }
+.violet { border-top: 5px solid var(--violet); }
+.green { border-top: 5px solid var(--green); }
+
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 28px;
+}
+.step {
+  position: relative;
+  min-height: 210px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+}
+.step::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 42px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+  background: #fff;
+  transform: rotate(45deg);
+  z-index: 2;
+}
+.step:last-child::after { display: none; }
+.step small {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font: 700 0.7rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.step h3 {
+  margin: 0 0 8px;
+  font-size: 1.18rem;
+}
+.step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.step.current {
+  background: var(--blue-soft);
+  border-color: var(--blue);
+}
+.step.next {
+  background: var(--amber-soft);
+  border-color: var(--amber);
+}
+.step.future {
+  background: var(--violet-soft);
+  border-color: var(--violet);
+}
+
+.status-board {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 20px;
+}
+.scorebox {
+  border: 1px solid var(--line-strong);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 22px;
+}
+.scorebox .big {
+  display: block;
+  font: 900 clamp(2.5rem, 7vw, 5.6rem) var(--font-latin);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.scorebox p {
+  margin: 16px 0 0;
+  color: rgba(255,254,250,0.72);
+}
+.status-list {
+  display: grid;
+  gap: 12px;
+}
+.status-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.status-item b {
+  font-size: 0.92rem;
+}
+.status-item span {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.history-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 26px 0 24px;
+}
+.history-node {
+  position: relative;
+  min-height: 190px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.66);
+}
+.history-node::after {
+  content: "";
+  position: absolute;
+  top: 32px;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+  background: var(--paper);
+  transform: rotate(45deg);
+  z-index: 2;
+}
+.history-node:last-child::after { display: none; }
+.history-node small {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font: 700 0.68rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.history-node h3 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+}
+.history-node p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+.history-node.ai {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+.foundation-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 18px;
+  margin-top: 20px;
+}
+.foundation-card {
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  padding: 20px;
+}
+.foundation-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+.foundation-card p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+.foundation-card ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+.foundation-card li { margin: 7px 0; }
+.truth-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.truth-pill {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.7);
+  padding: 12px;
+}
+.truth-pill b {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+.truth-pill span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.roadmap {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+.roadmap-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+.phase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 800;
+  text-align: center;
+}
+.target,
+.proof {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.58);
+  padding: 18px;
+}
+.target h3,
+.proof h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.target p,
+.proof p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+.metric {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.metric b {
+  display: block;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.metric span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.evidence-card {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.7);
+  padding: 18px;
+}
+.evidence-card small {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--green);
+  font: 700 0.72rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.evidence-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+}
+.evidence-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.evidence-card a { color: var(--blue); }
+.priority-stack {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+.agent-card {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr) 230px;
+  gap: 18px;
+  align-items: stretch;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  padding: 18px;
+}
+.agent-rank {
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  font: 900 2rem var(--font-latin);
+}
+.agent-main h3 {
+  margin: 0 0 8px;
+  font-size: 1.28rem;
+}
+.agent-main p {
+  margin: 0;
+  color: var(--muted);
+}
+.agent-guard {
+  border-left: 4px solid var(--green);
+  background: var(--green-soft);
+  padding: 12px 14px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.ownership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+.owner-card {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 14px;
+}
+.owner-card b {
+  display: block;
+  margin-bottom: 6px;
+}
+.owner-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.rules-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.rule-chip {
+  border: 1px solid var(--line);
+  background: rgba(255,254,250,0.72);
+  padding: 13px;
+  font-size: 0.9rem;
+}
+.rule-chip b {
+  display: block;
+  margin-bottom: 5px;
+}
+.trust-statement {
+  margin: 24px 0;
+  border: 1px solid var(--line-strong);
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(20px, 4vw, 34px);
+}
+.trust-statement h3 {
+  margin: 0 0 12px;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+.trust-statement p {
+  margin: 0;
+  color: rgba(255,254,250,0.82);
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+}
+.scenario-stack {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+.scenario-card {
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  padding: 20px;
+}
+.scenario-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.scenario-head h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.scenario-head span {
+  color: var(--green);
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+.timegrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.timebox {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 14px;
+}
+.timebox b {
+  display: block;
+  margin-bottom: 7px;
+}
+.timebox p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.scenario-summary {
+  margin-top: 14px;
+  padding: 16px 18px;
+  background: var(--green-soft);
+  border-left: 4px solid var(--green);
+  font-weight: 900;
+  font-size: clamp(1.08rem, 1.8vw, 1.38rem);
+  line-height: 1.32;
+}
+.horizon-table {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+.horizon-row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 180px;
+  gap: 12px;
+  align-items: stretch;
+}
+.horizon-label {
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 900;
+  text-align: center;
+}
+.horizon-content,
+.horizon-talk {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 14px;
+  color: var(--muted);
+}
+.horizon-content b,
+.horizon-talk b {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.roi-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  margin: 24px 0;
+}
+.roi-big {
+  border: 1px solid var(--line-strong);
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(20px, 4vw, 34px);
+}
+.roi-big b {
+  display: block;
+  font: 900 clamp(2.4rem, 7vw, 5.2rem) var(--font-latin);
+  line-height: 0.9;
+}
+.roi-big span {
+  display: block;
+  margin-top: 14px;
+  color: rgba(255,254,250,0.78);
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
+}
+.roi-kpis {
+  display: grid;
+  gap: 10px;
+}
+.roi-kpi {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.72);
+  padding: 16px;
+}
+.roi-kpi b {
+  display: block;
+  margin-bottom: 6px;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1;
+}
+.roi-kpi span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.workflow-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+.workflow-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr 0.8fr 0.75fr 0.75fr;
+  gap: 8px;
+  align-items: stretch;
+}
+.workflow-row.header > div {
+  background: var(--ink);
+  color: var(--paper);
+  font: 800 0.78rem var(--font-latin);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.workflow-row > div {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 12px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.workflow-row > div:first-child {
+  color: var(--ink);
+  font-weight: 800;
+}
+.math-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+.math-card {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 16px;
+}
+.math-card small {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green);
+  font: 800 0.72rem var(--font-latin);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.math-card b {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.22rem;
+}
+.math-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.cost-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.cost-stage {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+  padding: 16px;
+}
+.cost-stage h3 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+}
+.cost-stage p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.cost-stage b { color: var(--ink); }
+
+.next-block {
+  margin-top: 26px;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(135deg, rgba(13,107,87,0.12), rgba(181,101,29,0.12));
+  padding: 24px;
+}
+.next-block h3 { margin: 0 0 12px; }
+.next-block ol {
+  margin: 0;
+  padding-left: 22px;
+}
+.next-block li { margin: 8px 0; }
+.source-note {
+  margin-top: 34px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.source-note a { color: var(--blue); }
+
+footer {
+  padding: 36px 18px 60px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .slide { grid-template-columns: 1fr; min-height: auto; }
+  .slide-number { position: static; }
+  .ladder { grid-template-columns: 1fr; }
+  .step::after { display: none; }
+  .status-board { grid-template-columns: 1fr; }
+  .roadmap-row { grid-template-columns: 1fr; }
+  .foundation-grid,
+  .evidence-grid,
+  .ownership-grid,
+  .agent-card,
+  .timegrid,
+  .horizon-row,
+  .history-flow,
+  .roi-hero,
+  .workflow-row,
+  .math-grid,
+  .cost-stage-grid,
+  .exec-grid,
+  .agent-map { grid-template-columns: 1fr; }
+  .scenario-head { flex-direction: column; gap: 4px; }
+  .history-node::after { display: none; }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .menu-toggle { display: grid; }
+  .side-nav {
+    top: 0;
+    width: min(86vw, 320px);
+    transform: translateX(-105%);
+    transition: transform 0.22s ease;
+    box-shadow: 18px 0 60px rgba(20,28,26,0.18);
+  }
+  body.nav-open .side-nav { transform: translateX(0); }
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: rgba(21,25,24,0.22);
+    backdrop-filter: blur(2px);
+  }
+  body.nav-open .nav-overlay { display: block; }
+  .topbar {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .top-actions {
+    display: grid;
+    grid-template-columns: 34px auto minmax(0, 1fr);
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: start;
+  }
+  .menu-toggle { grid-column: 1; }
+  .lang-switch { grid-column: 2; }
+  .chip-link[href^="#executive-summary"] {
+    grid-column: 3;
+    justify-self: start;
+  }
+  .chip-link[href="./ai-strategy.html"] {
+    grid-column: 2 / span 2;
+    justify-self: start;
+  }
+  .print-btn { display: none; }
+  .lang-switch button { min-width: 50px; }
+  .chip-link,
+  .print-btn {
+    padding: 7px 10px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+  .hero { padding-top: 34px; }
+  .hero,
+  .report,
+  footer { margin-left: 0; }
+  .grid-2,
+  .thesis-pair,
+  .truth-strip,
+  .rules-row,
+  .metric-strip { grid-template-columns: 1fr; }
+  .status-item { grid-template-columns: 1fr; gap: 4px; }
+  .slide { padding: 22px; scroll-margin-top: 16px; }
+  .toc { position: static; }
+}
+
+@media print {
+  body { background: #fff; }
+  .topbar,
+  .side-nav,
+  .nav-overlay,
+  .toc,
+  footer { display: none; }
+  .hero,
+  .report,
+  footer { margin-left: 0; }
+  .hero,
+  .slide {
+    min-height: auto;
+    page-break-after: always;
+    box-shadow: none;
+  }
+}
+</style>
+</head>
+<body class="lang-zh">
+<header class="topbar">
+  <a class="brand" href="./index.html"><span class="brand-mark">S</span> Sky Portal</a>
+  <div class="top-actions">
+    <button class="menu-toggle" type="button" onclick="toggleMenu()" aria-label="Open navigation">☰</button>
+    <div class="lang-switch" aria-label="Language">
+      <button type="button" data-lang="zh" onclick="setLang('zh')">中文</button>
+      <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="chip-link zh-inline" href="#executive-summary">摘要</a>
+    <a class="chip-link en-inline" href="#executive-summary-en">Summary</a>
+    <a class="chip-link zh-inline" href="./ai-strategy.html">原策略页</a>
+    <a class="chip-link en-inline" href="./ai-strategy.html">Original Strategy</a>
+    <button class="print-btn" onclick="window.print()"><span class="zh-inline">打印 / PDF</span><span class="en-inline">Print / PDF</span></button>
+  </div>
+</header>
+<div class="nav-overlay" onclick="toggleMenu(false)"></div>
+<aside class="side-nav" aria-label="AI strategy navigation">
+  <div class="zh-inline">
+    <div class="side-kicker">素材池导航</div>
+    <nav>
+      <a class="primary" href="#executive-summary" onclick="toggleMenu(false)">00 执行摘要</a>
+      <a href="#why" onclick="toggleMenu(false)">01 为什么做 AI</a>
+      <a href="#evolution" onclick="toggleMenu(false)">02 能力阶段</a>
+      <a href="#current" onclick="toggleMenu(false)">03 我们的位置</a>
+      <a href="#data-foundation" onclick="toggleMenu(false)">04 数据基础 / SSOT</a>
+      <a href="#roadmap" onclick="toggleMenu(false)">05 路线图</a>
+      <a href="#actions" onclick="toggleMenu(false)">06 推广采用</a>
+      <a href="#governance" onclick="toggleMenu(false)">07 数字分身</a>
+      <a href="#workstyle" onclick="toggleMenu(false)">08 工作方式</a>
+      <a href="#narrative" onclick="toggleMenu(false)">09 讲法提炼</a>
+      <a href="#roi-memo" onclick="toggleMenu(false)">10 成本测算</a>
+    </nav>
+  </div>
+  <div class="en-inline">
+    <div class="side-kicker">Source Navigation</div>
+    <nav>
+      <a class="primary" href="#executive-summary-en" onclick="toggleMenu(false)">00 Executive Summary</a>
+      <a href="#why-en" onclick="toggleMenu(false)">01 Why AI</a>
+      <a href="#evolution-en" onclick="toggleMenu(false)">02 Capability</a>
+      <a href="#current-en" onclick="toggleMenu(false)">03 Current Position</a>
+      <a href="#data-foundation-en" onclick="toggleMenu(false)">04 Data / SSOT</a>
+      <a href="#roadmap-en" onclick="toggleMenu(false)">05 Roadmap</a>
+      <a href="#actions-en" onclick="toggleMenu(false)">06 Adoption</a>
+      <a href="#governance-en" onclick="toggleMenu(false)">07 Digital Agents</a>
+      <a href="#workstyle-en" onclick="toggleMenu(false)">08 Workstyle</a>
+      <a href="#narrative-en" onclick="toggleMenu(false)">09 Narrative</a>
+      <a href="#roi-memo-en" onclick="toggleMenu(false)">10 ROI</a>
+    </nav>
+  </div>
+</aside>
+
+<section class="hero zh-content" id="top">
+  <div class="hero-main">
+    <div class="kicker">R2 草稿 · 内部报告</div>
+    <h1>AI 转型<br>先用起来</h1>
+    <p class="subtitle">
+      先把回答做实，再把行动做稳，最后接数据、上验证。
+    </p>
+    <div class="hero-meta">
+      <span class="meta-pill">版本：R2 草稿</span>
+      <span class="meta-pill">范围：数字世界 AI 优先</span>
+      <span class="meta-pill">形式：素材池 → 4-5 页精炼</span>
+      <span class="meta-pill">日期：2026-06-06</span>
+    </div>
+  </div>
+  <aside class="hero-card">
+    <h2>核心判断</h2>
+    <ul class="position-list">
+      <li><span class="num">1</span><span>更快：已有工作压缩到分钟级。</span></li>
+      <li><span class="num">2</span><span>更强：个人即可跨越职能边界。</span></li>
+      <li><span class="num">3</span><span>当下：从回答走向数字行动。</span></li>
+      <li><span class="num">4</span><span>边界：物理世界须验证、审计、人负责。</span></li>
+    </ul>
+  </aside>
+</section>
+
+<section class="hero en-content" id="top-en">
+  <div class="hero-main">
+    <div class="kicker">R2 draft · bilingual source</div>
+    <h1>AI Transformation<br>Use It First</h1>
+    <p class="subtitle">
+      Master the answers. Govern the actions. Then wire data and validate.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-pill">Version: R2 bilingual source</span>
+      <span class="meta-pill">Scope: digital-first AI</span>
+      <span class="meta-pill">Role: source page → executive deck</span>
+      <span class="meta-pill">Updated: 2026-06-06</span>
+    </div>
+  </div>
+  <aside class="hero-card">
+    <h2>Core Thesis</h2>
+    <ul class="position-list">
+      <li><span class="num">1</span><span>Faster: collapse known work into minutes.</span></li>
+      <li><span class="num">2</span><span>Stronger: one person, cross-functional reach.</span></li>
+      <li><span class="num">3</span><span>Now: move from answers to digital action.</span></li>
+      <li><span class="num">4</span><span>Boundary: physical-world AI requires validation, audit, human ownership.</span></li>
+    </ul>
+  </aside>
+</section>
+
+<main class="report zh-content">
+  <nav class="toc" aria-label="Report sections">
+    <a href="#executive-summary">00 摘要</a>
+    <a href="#why">01 为什么</a>
+    <a href="#evolution">02 能力阶段</a>
+    <a href="#current">03 我们的位置</a>
+    <a href="#data-foundation">04 数据基础</a>
+    <a href="#roadmap">05 路线图</a>
+    <a href="#actions">06 组织行动</a>
+    <a href="#governance">07 落地治理</a>
+    <a href="#workstyle">08 工作方式</a>
+    <a href="#narrative">09 讲法提炼</a>
+    <a href="#roi-memo">10 成本测算</a>
+  </nav>
+
+  <section class="slide" id="executive-summary">
+    <div class="slide-number">00</div>
+    <div class="slide-content">
+      <div class="eyebrow">执行摘要</div>
+      <h2>先问对问题，答案能追溯，再让 AI 替你执行。</h2>
+      <p class="lead">
+        转型第一步不是买工具，是改习惯：敢问、会问、答案必须溯源。中期让 agent 处理低风险数字事务；长期接入数据、建立 SSOT，进入受控工程问题解决。
+      </p>
+      <div class="exec-grid">
+        <div class="exec-punch">
+          <b>答案 → 行动 → 解决问题</b>
+          <span>正从”回答问题”迈入”数字行动”。窗口已开，胜负取决于采用率、数据质量和信任。</span>
+        </div>
+        <div class="exec-stack">
+          <div class="exec-line"><b>外部在加速</b><span>TSMC 用 NVIDIA 加速制程仿真与计算光刻；Samsung 与 NVIDIA 建 AI factory、digital twin 和制造优化。</span></div>
+          <div class="exec-line"><b>内部先拿价值</b><span>从 M365 已授权数据起步：会议、邮件、文档、recap、培训材料。</span></div>
+          <div class="exec-line"><b>底线是可信</b><span>无来源不给答案；信息冲突列来源让人判断；关键 spec 必须回到 SSOT。</span></div>
+        </div>
+      </div>
+
+      <div class="agent-map">
+        <article class="agent-tile">
+          <small>现在</small>
+          <h3>Knowledge Check</h3>
+          <p>最快落地。基于 M365 Copilot 回答常见问题，回答必须标注出处。</p>
+        </article>
+        <article class="agent-tile">
+          <small>近期</small>
+          <h3>Logistics Executor</h3>
+          <p>排会、follow-up、状态更新等低风险数字执行，先人工确认再放行。</p>
+        </article>
+        <article class="agent-tile">
+          <small>中期</small>
+          <h3>Product / Customer Agent</h3>
+          <p>打通客户、产品、项目与制造信息，加速同步和准备。</p>
+        </article>
+        <article class="agent-tile">
+          <small>长期</small>
+          <h3>Yield / ET Analyst</h3>
+          <p>接入良率、ET、spec、flow 与分析工具，进入受控工程问题解决。</p>
+        </article>
+      </div>
+
+      <div class="takeaway">
+        一句话：先交付一个可用、可信、答案可追溯的 Knowledge Check Agent，在真实工作流中迭代，再逐步扩展到 Logistics、Product/Customer、Yield/ET。
+      </div>
+      <p class="source-note">
+        外部信号：NVIDIA 2025 报道 TSMC、Cadence、KLA、Siemens、Synopsys 采用 Blackwell / CUDA-X 推进 EDA、计算光刻与制程仿真；Samsung 与 NVIDIA 同年宣布建设 AI factory，覆盖制造、digital twin、预测性维护与物流优化。<a href="https://blogs.nvidia.com/blog/semiconductor-industry-electronic-design-automation-blackwell-cuda-x/">TSMC / NVIDIA source</a> · <a href="https://nvidianews.nvidia.com/news/samsung-ai-factory">Samsung / NVIDIA source</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="slide" id="why">
+    <div class="slide-number">01</div>
+    <div class="slide-content">
+      <div class="eyebrow">为什么做 AI</div>
+      <h2>更快，也更强。</h2>
+      <p class="lead">
+        AI 做两件事：已有工作提速，原本做不到的事变得可做。结论简单：AI 不替代人，而是放大人。
+      </p>
+      <div class="thesis-pair">
+        <article class="thesis-card" data-mark="01">
+          <small>Acceleration</small>
+          <h3>已有工作提速</h3>
+          <p>搜索、总结、写代码、准备报告、整理会议、分析资料——几小时甚至几天的数字工作压缩到分钟。</p>
+        </article>
+        <article class="thesis-card" data-mark="02">
+          <small>Expansion</small>
+          <h3>打开新可能</h3>
+          <p>一个人同时获得研究、编程、编辑、数据分析和项目管理的部分能力，跨越原有专业边界。</p>
+        </article>
+      </div>
+      <div class="wing-line">
+        AI 不是替代品，是左膀右臂——让人飞得更快、更远。
+      </div>
+      <div class="callout">
+        互联网时代，工具帮我们找信息；AI 时代，工具帮我们形成答案、采取行动，直到解决问题。
+      </div>
+      <div class="grid-3">
+        <article class="panel green">
+          <h3>信息过载</h3>
+          <p>邮件、会议、文档、报表、工艺记录和历史案例散在多个系统，靠人搜索和记忆越来越慢。</p>
+        </article>
+        <article class=”panel blue”>
+          <h3>问题更复杂</h3>
+          <p>先进制程变量高度耦合，单点经验不足以支撑稳定判断，需要系统化提问与跨数据源分析。</p>
+        </article>
+        <article class=”panel amber”>
+          <h3>窗口正在打开</h3>
+          <p>外部工具已证明”回答”和”行动”可行，大企业仍在早期，先建使用能力即是机会。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="evolution">
+    <div class="slide-number">02</div>
+    <div class="slide-content">
+      <div class="eyebrow">能力演进</div>
+      <h2>信息 → 答案 → 行动。</h2>
+      <p class="lead">
+        数字世界里，AI 已能稳定回答问题，并开始执行代码、文档、邮件和数据整理等动作。边界同样清晰：尚不能普遍解决端到端问题，物理世界更需验证、审计与人工负责。
+      </p>
+      <div class="ladder">
+        <article class="step">
+          <small>Internet era</small>
+          <h3>提供信息</h3>
+          <p>搜索引擎、数据库、Wiki 和报表把信息交给人，判断和行动由人完成。</p>
+        </article>
+        <article class="step current">
+          <small>Now</small>
+          <h3>回答问题</h3>
+          <p>LLM、RAG 和企业 Copilot 把分散信息整合为答案——当前企业最应先做扎实的阶段。</p>
+        </article>
+        <article class="step next">
+          <small>Emerging</small>
+          <h3>采取行动</h3>
+          <p>Agent 在数字系统中写代码、整理文档、生成报告、触发流程，但仍需权限、审计和人工确认。</p>
+        </article>
+        <article class="step future">
+          <small>Next</small>
+          <h3>解决问题</h3>
+          <p>AI 拆解目标、选工具、验证结果并迭代方案。少数数字场景已有案例，企业端仍需建设。</p>
+        </article>
+        <article class="step future">
+          <small>AGI direction</small>
+          <h3>自我优化</h3>
+          <p>AI 从成败中持续改进方法论，参与研发优化。这是长期愿景。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="current">
+    <div class="slide-number">03</div>
+    <div class="slide-content">
+      <div class="eyebrow">当前位置</div>
+      <h2>还在早期：会问，还没用透。</h2>
+      <p class="lead">
+        M365 已提供合规入口：邮件、会议、文档、recap、协同数据，足以启动早期 agent。短板同样明确：使用率低，模型和工具链受限，工厂数据尚未安全接入。
+      </p>
+      <div class="status-board">
+        <div class="scorebox">
+          <span class="big">6-12M</span>
+          <p>企业应用通常落后外部前沿 6-12 个月。不是坏消息——行业仍在早期，窗口仍在。</p>
+        </div>
+        <div class="status-list">
+          <div class="status-item">
+            <b>使用率</b>
+            <span>多数人偶尔问 AI，提问频率和质量尚未形成团队习惯。</span>
+          </div>
+          <div class="status-item">
+            <b>工具限制</b>
+            <span>外部顶级模型和 agent 工具强大，但内部不能自由使用。</span>
+          </div>
+          <div class="status-item">
+            <b>内部能力</b>
+            <span>内部平台是起点，模型能力、工具链和上下文接入仍需增强。</span>
+          </div>
+          <div class="status-item">
+            <b>数据边界</b>
+            <span>AI 主要接触工程外围信息，尚未系统接入关键工厂数据。</span>
+          </div>
+          <div class="status-item">
+            <b>机会点</b>
+            <span>M365 已足以支撑会议、邮件、文档、知识提取、报告生成与协作 agent。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="data-foundation">
+    <div class="slide-number">04</div>
+    <div class="slide-content">
+      <div class="eyebrow">数据基础</div>
+      <h2>无可信数据，无可信 AI。</h2>
+      <p class="lead">
+        信息入口从书到图书馆、搜索引擎，再到 AI 直接给答案。公司内部很多数据仍像分散的图书馆。AI 要成为统一入口，前提是数据可访问、可连接、可信、可追溯。
+      </p>
+
+      <div class="history-flow">
+        <article class="history-node">
+          <small>Literacy</small>
+          <h3>少数人读书</h3>
+          <p>信息入口在少数识字者手中，识字本身即是竞争力。</p>
+        </article>
+        <article class="history-node">
+          <small>Books</small>
+          <h3>百科全书</h3>
+          <p>信息系统化记录，入口仍有限，知识集中在少数藏书与少数人手中。</p>
+        </article>
+        <article class="history-node">
+          <small>Library</small>
+          <h3>图书馆</h3>
+          <p>大量信息集中存放，但检索成本高，需跑多处、翻多份资料。</p>
+        </article>
+        <article class="history-node">
+          <small>Internet</small>
+          <h3>互联网搜索</h3>
+          <p>全球数字信息打通，搜索引擎给相关材料，但不直接给判断。</p>
+        </article>
+        <article class="history-node ai">
+          <small>AI</small>
+          <h3>连接并回答</h3>
+          <p>AI 不只找信息，而是理解信息间关系，直接面向问题给答案。</p>
+        </article>
+      </div>
+
+      <div class="foundation-grid">
+        <article class="foundation-card">
+          <h3>数据不是没有，是未连接</h3>
+          <p>
+            工程数据、spec、process flow、实验记录和历史问题都在，但散落不同系统。过去是数字化问题，现在是 AI 能否工作的前提。
+          </p>
+          <ul>
+            <li>先让关键数据数字化、可读取、可搜索。</li>
+            <li>再打通数据关系，让 AI 理解跨系统上下文。</li>
+            <li>最后让 AI 成为统一接口：搜索、汇总、关联、解释、发现异常。</li>
+          </ul>
+        </article>
+        <article class="foundation-card">
+          <h3>关键数字必须唯一</h3>
+          <p>
+            AI 可广泛读取信息，但 process flow、工艺 spec、ET spec 不能模糊——差 0.1 nm 就可能改变判断。必须有 single source of truth。
+          </p>
+          <ul>
+            <li>同一时刻，一个关键 spec 只有一个权威来源。</li>
+            <li>AI 必须引用权威源，不能在冲突系统间平均或猜测。</li>
+            <li>SSOT 不只是 IT 项目，是 AI 进入严肃工程判断的前提。</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="truth-strip">
+        <div class="truth-pill"><b>可访问</b><span>AI 能读取核心数据，而非仅限外围文档。</span></div>
+        <div class="truth-pill"><b>可连接</b><span>数据源间有关系、上下文和统一 ID。</span></div>
+        <div class="truth-pill"><b>唯一正确</b><span>关键 spec 和 flow 有唯一权威来源。</span></div>
+        <div class="truth-pill"><b>可追溯</b><span>每个答案可回溯到数据源、版本和时间点。</span></div>
+      </div>
+
+      <div class="callout">
+        工程师的起点很简单：搜索、汇总、对比、找相关性。数据打通、SSOT 打牢，AI 才能发现人看不到的关联。
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="roadmap">
+    <div class="slide-number">05</div>
+    <div class="slide-content">
+      <div class="eyebrow">路线图</div>
+      <h2>6 月打基础，3 年解问题，5 年做研发。</h2>
+      <p class=”lead”>
+        不从”全自动 AI 工厂”开始。先让团队会问、会用、会验证；再做可审计数字行动；最后接关键数据与验证机制，解决受控工程问题。
+      </p>
+      <div class="roadmap">
+        <div class="roadmap-row">
+          <div class="phase">0-6 个月</div>
+          <div class="target">
+            <h3>目标：把回答做好</h3>
+            <p>建团队级 prompt 模板、问题库、案例库和 Copilot 使用流程，让每个人在日常分析、会议准备、文档总结和代码辅助中用上 AI。</p>
+          </div>
+          <div class="proof">
+            <h3>验收：使用率与答案质量</h3>
+            <p>看周活跃用户、有效问题数、节省时间、答案引用可信度——不是看部署了几个工具。</p>
+          </div>
+        </div>
+        <div class="roadmap-row">
+          <div class="phase">6-12 个月</div>
+          <div class="target">
+            <h3>目标：从答案走向行动</h3>
+            <p>AI 自动整理行动项、生成 follow-up、准备 review 包、更新知识库、跑固定分析脚本、建轻量 agent workflow。</p>
+          </div>
+          <div class="proof">
+            <h3>验收：可审计行动闭环</h3>
+            <p>每个 action 有触发条件、数据来源、人工确认和日志。先做低风险数字任务，不碰物理控制。</p>
+          </div>
+        </div>
+        <div class="roadmap-row">
+          <div class="phase">1-3 年</div>
+          <div class="target">
+            <h3>目标：解决重复工程问题</h3>
+            <p>围绕良率异常、defect pattern、process drift、review preparation 等场景，把数据、历史案例、推理与验证串起来。</p>
+          </div>
+          <div class="proof">
+            <h3>验收：从建议到验证</h3>
+            <p>AI 提出候选根因、推荐检查顺序、调用分析工具，通过历史对比或小规模验证降低不确定性。</p>
+          </div>
+        </div>
+        <div class="roadmap-row">
+          <div class="phase">3-5 年</div>
+          <div class="target">
+            <h3>目标：参与研发与优化</h3>
+            <p>受控范围内让 AI 参与 DOE 设计、工艺窗口分析、参数敏感性研究、知识沉淀与 R&D-to-HVM 转移。</p>
+          </div>
+          <div class="proof">
+            <h3>验收：人机共同进步</h3>
+            <p>成功案例系统记录，失败案例进反例库，AI 和团队都从反馈中改进。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="actions">
+    <div class="slide-number">06</div>
+    <div class="slide-content">
+      <div class="eyebrow">推广采用</div>
+      <h2>从个人会用，到团队默认用。</h2>
+      <p class=”lead”>
+        靠少数人自发尝试不会形成转型。把场景、边界、规则、习惯和度量嵌入流程，让”先问 AI”成为团队默认动作。
+      </p>
+      <div class="grid-2">
+        <article class="panel green">
+          <h3>建”AI 问题库”</h3>
+          <p>收集团队高频问题、领导常问问题和优秀工程师分析路径。重点不是存答案，而是存好的提问方式和判断框架。</p>
+        </article>
+        <article class=”panel blue”>
+          <h3>建”可用场景清单”</h3>
+          <p>先覆盖低风险高频任务：会议总结、邮件归纳、代码解释、debug 思路、报告草稿、图表说明、review checklist。</p>
+        </article>
+        <article class=”panel amber”>
+          <h3>划”安全边界”</h3>
+          <p>明确哪些数据可进企业 AI、哪些只能本地处理、哪些场景必须人工确认。规则越清晰，推广越顺畅。</p>
+        </article>
+        <article class=”panel violet”>
+          <h3>跑”行动型 Agent 试点”</h3>
+          <p>选 2-3 个数字工作流让 AI 从回答走向行动：自动准备会议包、整理 follow-up、更新知识库。</p>
+        </article>
+      </div>
+      <div class="metric-strip">
+        <div class="metric"><b>1-2</b><span>每周推 1-2 条一句话 tips，能直接照着试。</span></div>
+        <div class="metric"><b>3-5</b><span>跟踪 3-5 个高频工作流，看 AI 是否真正进入流程。</span></div>
+        <div class="metric"><b>Case</b><span>记录真实案例：原来多久、现在多久、答案是否附出处。</span></div>
+        <div class="metric"><b>Quality</b><span>看是否被采用、返工是否减少、准备质量是否提升。</span></div>
+      </div>
+      <div class="callout">
+        衡量要轻。别用”50% 工作必须用 AI”、prompt 数、token 数或固定时长做 KPI——那只会制造逆反和刷指标。只看一件事：具体工作有没有变快、变准、变好。
+      </div>
+      <div class="rules-row">
+        <div class="rule-chip"><b>别量</b>token、prompt、强制时长和比例。</div>
+        <div class="rule-chip"><b>要量</b>任务覆盖、来源质量、准备时间、返工率。</div>
+        <div class="rule-chip"><b>轻推</b>每周 1-2 条 tips，能复制、能立刻试。</div>
+        <div class="rule-chip"><b>自然拉动</b>展示真实省时案例，让团队自愿先问 AI。</div>
+      </div>
+      <div class="next-block">
+        <h3>待补充内容</h3>
+        <ol>
+          <li>加入台积电、三星、NVIDIA、EDA/设备厂商在 AI 制造与研发方面的公开案例。</li>
+          <li>整理一页工具矩阵：内部有什么、市场有什么、哪些能安全用、哪些不能用。</li>
+          <li>压成 4-5 页 PPT：每页一个核心句、三条支撑、一个行动建议。</li>
+        </ol>
+      </div>
+      <p class="source-note">
+        参考基础：<a href="./ai-strategy.html">原 AI Strategy 页面</a>五阶段能力演进与短中长期框架。R2 保留原页不动，仅整理新增汇报思路。
+      </p>
+    </div>
+  </section>
+
+  <section class="slide" id="governance">
+    <div class="slide-number">07</div>
+    <div class="slide-content">
+      <div class="eyebrow">数字分身</div>
+      <h2>不是一个万能分身，是一组分工明确的 agent。</h2>
+      <p class=”lead”>
+        “数字分身”是一套分工系统：查知识、做执行、看客户/产品、分析良率/ET。先交付能用的，再接数据，最后进入问题解决。
+      </p>
+
+      <div class="evidence-grid">
+        <article class="evidence-card">
+          <small>企业 AI 现实</small>
+          <h3>失败多卡在集成与规模化</h3>
+          <p>MIT NANDA 2025 报告指出：多数企业 GenAI pilot 未产生可衡量 P&L 影响，核心问题在 workflow integration 和落地执行差距，而非模型本身。<a href="https://nanda.media.mit.edu/ai_report_2025.pdf">source</a></p>
+        </article>
+        <article class="evidence-card">
+          <small>人 / 流程 / 政治</small>
+          <h3>AI 战略也是组织设计</h3>
+          <p>HBS AI Institute 强调 AI ROI 取决于 people、processes、politics——需处理员工顾虑、重建流程和管理权力变化。<a href="https://aiinstitute.hbs.edu/the-people-processes-and-politics-of-ai-roi/">source</a></p>
+        </article>
+        <article class="evidence-card">
+          <small>已授权边界</small>
+          <h3>M365 是最现实合规入口</h3>
+          <p>Copilot 通过 Microsoft Graph 按用户权限访问邮件、文件、聊天、会议等组织数据，并提供 citations 供核验。<a href="https://support.microsoft.com/en-us/Microsoft-365-Copilot/what-information-does-copilot-use-to-answer-my-prompt">source</a></p>
+        </article>
+      </div>
+
+      <div class="callout">
+        起点要小，边界要硬。守住 M365 / Copilot 已授权数据，不碰生产控制，不替代人的判断。Agent 先做助手，再做执行，最后进工程分析。
+      </div>
+
+      <div class="priority-stack">
+        <article class="agent-card">
+          <div class="agent-rank">1</div>
+          <div class="agent-main">
+            <h3>Knowledge Check</h3>
+            <p>现在即可做。基于 M365 可访问的邮件、会议、文档、培训材料和 share drive 回答常见问题，每个答案必须标注出处。</p>
+          </div>
+          <div class="agent-guard">先做这个：阻力最低、见效最快、建立信任。</div>
+        </article>
+        <article class="agent-card">
+          <div class="agent-rank">2</div>
+          <div class="agent-main">
+            <h3>Logistics Executor</h3>
+            <p>低风险数字执行：排会、整理 follow-up、更新状态、准备 review 包、提醒 owner。动作可审计，关键步骤人确认。</p>
+          </div>
+          <div class="agent-guard">需流程接口和权限边界；先给建议，再半自动执行。</div>
+        </article>
+        <article class="agent-card">
+          <div class="agent-rank">3</div>
+          <div class="agent-main">
+            <h3>Product / Customer Agent</h3>
+            <p>打通客户、产品、项目、lot、制造状态与沟通记录，用于 meeting prep、状态同步和风险预警。</p>
+          </div>
+          <div class="agent-guard">需客户/产品/制造数据接口，短期不能强求。</div>
+        </article>
+        <article class="agent-card">
+          <div class="agent-rank">4</div>
+          <div class="agent-main">
+            <h3>Yield / ET Analyst</h3>
+            <p>长期目标。接入良率、ET、inline spec、process flow 与分析工具，帮找相关性、候选根因和 split plan。</p>
+          </div>
+          <div class="agent-guard">须依赖 SSOT、数据治理和人工验证，不能让 AI 猜关键数字。</div>
+        </article>
+      </div>
+
+      <div class="ownership-grid">
+        <div class="owner-card"><b>Yield / MTS inline spec</b><span>Owner: Integration。负责 spec 定义、版本、例外和引用路径。</span></div>
+        <div class="owner-card"><b>Reliability 数据</b><span>Owner: Reliability team。负责数据口径、测试条件与历史案例。</span></div>
+        <div class="owner-card"><b>Logistics / planning</b><span>Owner: Planning / Manufacturing。负责排程、产能、物流状态与变更记录。</span></div>
+      </div>
+
+      <div class="rules-row">
+        <div class="rule-chip"><b>Trust</b>附出处、可追溯、允许说"不知道"。</div>
+        <div class="rule-chip"><b>Boundary</b>只用已授权数据，不越权。</div>
+        <div class="rule-chip"><b>Ownership</b>每个知识库有人对准确性负责。</div>
+        <div class="rule-chip"><b>KPI</b>看任务覆盖率和 30 秒附出处答案，不看 prompt 数。</div>
+      </div>
+
+      <div class="next-block">
+        <h3>落地顺序</h3>
+        <ol>
+          <li>先做 Knowledge Check：从现有项目和 M365 数据起步。</li>
+          <li>再做 Logistics：建议变成可确认、可审计的数字行动。</li>
+          <li>然后做 Product / Customer：打通项目状态与客户上下文。</li>
+          <li>最后做 Yield / ET：数据接口、SSOT 和验证机制就绪后进入工程分析。</li>
+        </ol>
+      </div>
+
+      <p class="source-note">
+        本页为工作草稿：外部研究仅作方向性依据，正式报告需替换为公司可引用来源和合规表述。
+      </p>
+    </div>
+  </section>
+
+  <section class="slide" id="workstyle">
+    <div class="slide-number">08</div>
+    <div class="slide-content">
+      <div class="eyebrow">工作方式演进</div>
+      <h2>别喊变革，先让会短下来。</h2>
+      <p class=”lead”>
+        AI 会改变对齐方式、会议形态和知识流动。但成果出现前，不要包装成”组织架构调整”。正确的讲法：降低同步成本，让人把时间花在判断上。
+      </p>
+
+      <div class="evidence-grid">
+        <article class="evidence-card">
+          <small>Agent 编排</small>
+          <h3>人定方向，agent 跑流程</h3>
+          <p>微软已将 agents、workflows 与 Teams/M365 深度集成。落点不是无人组织，而是人做判断，agent 做数据汇总和例行协调。<a href="https://learn.microsoft.com/en-us/copilot/agents">source</a></p>
+        </article>
+        <article class="evidence-card">
+          <small>MCP + A2A</small>
+          <h3>纵向接数据，横向接 agent</h3>
+          <p>MCP 连接 agent 与工具/数据库；A2A 提供 agent 间通信协议。”部门 agent 接自己数据，再与其他部门 agent 对齐”——正是这两层的落地场景。<a href=”https://modelcontextprotocol.io/specification/2025-06-18/server/tools”>MCP</a> · <a href=”https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/”>A2A</a></p>
+        </article>
+        <article class="evidence-card">
+          <small>人工监督</small>
+          <h3>信息可自动对齐，责任不能自动消失</h3>
+          <p>企业 agent 治理正从逐条审批走向人设边界与升级路径。Agent 可交换信息，但决策问责必须落在人头上。<a href="https://cmr.berkeley.edu/assets/documents/pdf/2026-03-governing-the-agentic-enterprise-a-new-operating-model-for-autonomous-ai-at-scale.pdf">source</a></p>
+        </article>
+      </div>
+
+      <div class="callout">
+        让变革被看见，不要先宣布变革。一个会变短、一次对齐变快、一个问题 30 秒附出处回答——结果说话。
+      </div>
+
+      <div class="foundation-grid">
+        <article class="foundation-card">
+          <h3>会议从状态汇报变成判断会</h3>
+          <p>
+            多数会议成本在时间，低效在重复听状态。第一步：会前 agent 汇总状态、风险和决策点，会上只留判断与拍板。
+          </p>
+          <ul>
+            <li>会前：agent 汇总状态与证据，发 pre-read。</li>
+            <li>会中：只讨论机器解决不了的判断问题。</li>
+            <li>会后：agent 生成 action items、owner 和 deadline。</li>
+          </ul>
+        </article>
+        <article class="foundation-card">
+          <h3>系统终将同时服务人和 AI——但现在别这么讲</h3>
+          <p>
+            长期方向：系统既提供人用的 UI，也要提供 AI 可读取、可调用、可审计的接口。汇报时讲”让数据被授权 agent 安全访问和追溯”，而非”系统为 AI 重新设计”。
+          </p>
+          <ul>
+            <li>对人：界面清晰，流程可执行。</li>
+            <li>对 AI：API、权限、版本、provenance 清晰。</li>
+            <li>对组织：不越权、不黑箱、可追责。</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="ownership-grid">
+        <div class="owner-card"><b>现在就做，大声讲</b><span>Knowledge Check Agent；会前状态摘要；30 秒附出处答案；数据可访问可追溯。</span></div>
+        <div class="owner-card"><b>能做，低调讲</b><span>异步对齐、跨部门 agent 辅助协调、meeting prep、减少 status meeting。</span></div>
+        <div class="owner-card"><b>先存档，暂不讲</b><span>数字分身代理沟通、agent 间跨部门谈判、系统为 AI 重构、组织架构调整。</span></div>
+      </div>
+
+      <div class="rules-row">
+        <div class="rule-chip"><b>对上讲</b>会议成本、知识检索、数据安全访问。</div>
+        <div class="rule-chip"><b>不要讲</b>替代、重组、数字分身谈判。</div>
+        <div class="rule-chip"><b>先证明</b>一两个场景见效，结果说话。</div>
+        <div class="rule-chip"><b>永远保留</b>人做判断，人负责，agent 做加速。</div>
+      </div>
+
+      <div class="next-block">
+        <h3>对上汇报的安全措辞</h3>
+        <ol>
+          <li>”先把状态会的会前准备自动化，让会议时间用在判断和决策上。”</li>
+          <li>”先在一个技术域试点，常见问题 30 秒内附出处回答。”</li>
+          <li>”不改组织架构，在现有权限和流程内减少重复沟通成本。”</li>
+          <li>”agent 对齐信息，判断、批准和责任仍在人。”</li>
+        </ol>
+      </div>
+
+      <p class="source-note">
+        个人 roadmap 草稿。对外汇报压缩为三件事：会议成本、knowledge agent、数据安全访问。其余作长期方向存档。
+      </p>
+    </div>
+  </section>
+
+  <section class="slide" id="narrative">
+    <div class="slide-number">09</div>
+    <div class="slide-content">
+      <div class="eyebrow">讲法提炼</div>
+      <h2>昨天、今天、明天：用场景讲 AI。</h2>
+      <p class=”lead”>
+        不从概念起步，从每天的痛点出发：约会议、被追问数据、周报同步。听众先看到自己的工作，再看到 AI 把”我去做”变成”我确认”，最后变成”信息自己流到面前”。
+      </p>
+
+      <div class="trust-statement">
+        <h3>人的价值：AI 传递信息，建立不了信任。</h3>
+        <p>
+          客户愿意合作，不只因为这次数据好，而是相信下次数据不好时你也会全力以赴。信任来自长期关系和责任承担。AI 处理信息，人承担判断、关系和信任。
+        </p>
+      </div>
+
+      <div class="scenario-stack">
+        <article class="scenario-card">
+          <div class="scenario-head">
+            <h3>场景一：定会议</h3>
+            <span>低风险开场，高共鸣</span>
+          </div>
+          <div class="timegrid">
+            <div class=”timebox”><b>昨天</b><p>打开 Outlook，手动找空档、找会议室，一个个试。</p></div>
+            <div class=”timebox”><b>今天</b><p>语音说”约下周三 30 分钟会议并订房间”，系统给选项，人点确认。</p></div>
+            <div class=”timebox”><b>明天</b><p>双方 agent 直接协商时间和资源，人只收到”已约好”。</p></div>
+          </div>
+          <div class=”scenario-summary”>从”我去安排”到”我去确认”，再到”我被告知”。</div>
+        </article>
+
+        <article class="scenario-card">
+          <div class="scenario-head">
+            <h3>场景二：开会被追问数据</h3>
+            <span>工程师核心痛点，重点讲</span>
+          </div>
+          <div class="timegrid">
+            <div class="timebox"><b>昨天</b><p>reviewer 连环追问：厚了多少片、还能厚多久、是否影响交货、单 part 还是全部。准备到的能答，没准备到的回去查，下次再说。</p></div>
+            <div class="timebox"><b>今天/短期</b><p>Meeting Prep Agent 会前给出 Top 5 高概率问题；能答的附答案，不能答的指出找谁、查哪个系统。</p></div>
+            <div class="timebox"><b>中长期</b><p>会上临时问题由 agent 实时检索附出处回答；进一步，agent 准备 split plan 和候选方案，人当场拍板。</p></div>
+          </div>
+          <div class=”scenario-summary”>从”发生 → 追查 → 下次再答 → 再排实验”，压缩成”当场答、当场判、当场定”。</div>
+        </article>
+
+        <article class="scenario-card">
+          <div class="scenario-head">
+            <h3>场景三：周报 / 信息同步</h3>
+            <span>用已落地的事收尾——最有说服力</span>
+          </div>
+          <div class="timegrid">
+            <div class="timebox"><b>昨天</b><p>开大量会，手记 minutes，PM 凭记忆或手动整理成表格再沟通。</p></div>
+            <div class="timebox"><b>今天</b><p>固定格式 Excel，Copilot 每周读 recap，不改原表，加一列本周更新，变动标蓝。</p></div>
+            <div class="timebox"><b>明天</b><p>会后 agent 自动按客户、项目分类更新，人只维护想看的视图。</p></div>
+          </div>
+          <div class=”scenario-summary”>从”人追信息、整理信息”变成”信息自己流到你面前”。</div>
+        </article>
+      </div>
+
+      <div class="horizon-table">
+        <div class="horizon-row">
+          <div class="horizon-label">短期</div>
+          <div class="horizon-content"><b>能做的内容</b>Meeting Prep Agent；Copilot 周报整理；会前问题预判；附出处答案。</div>
+          <div class="horizon-talk"><b>对上能讲</b>重点讲，附已有成果。</div>
+        </div>
+        <div class="horizon-row">
+          <div class="horizon-label">中期</div>
+          <div class=”horizon-content”><b>能做的内容</b>各部门维护知识库和 agent 接口，owner 对准确性负责。</div>
+          <div class=”horizon-talk”><b>对上能讲</b>讲成”升级现有 SharePoint / spec owner 机制”，不讲新增负担。</div>
+        </div>
+        <div class="horizon-row">
+          <div class="horizon-label">长期</div>
+          <div class=”horizon-content”><b>能做的内容</b>数据库互联、SSOT、关键数字可追溯、AI 答案有确定性。</div>
+          <div class=”horizon-talk”><b>对上能讲</b>点到为止，讲数据治理与质量，不讲”对 AI 开放所有数据”。</div>
+        </div>
+        <div class="horizon-row">
+          <div class="horizon-label">更远</div>
+          <div class="horizon-content"><b>能做的内容</b>数字分身代理沟通、自我迭代、agent 间自动谈判。</div>
+          <div class="horizon-talk"><b>对上能讲</b>存档，不讲。</div>
+        </div>
+      </div>
+
+      <div class="rules-row">
+        <div class=”rule-chip”><b>提醒一</b>中期 ownership 包装成”升级已有 SharePoint / spec owner”，不是新建没人愿维护的系统。</div>
+        <div class=”rule-chip”><b>提醒二</b>长期讲”SSOT 提供确定性，防错误传播”，不讲”对 AI 开放所有数据”。</div>
+        <div class=”rule-chip”><b>呈现主轴</b>昨天/今天/明天——先讲已能做，再带出未来。</div>
+        <div class=”rule-chip”><b>人的护城河</b>AI 做信息，人做信任、判断、关系、责任。</div>
+      </div>
+
+      <p class="source-note">
+        后续压缩为 4-5 页团队报告时，保留 2-3 个场景和两条措辞红线，长期愿景不要讲早。
+      </p>
+    </div>
+  </section>
+
+  <section class="slide" id="roi-memo">
+    <div class="slide-number">10</div>
+    <div class="slide-content">
+      <div class="eyebrow">成本与提效备忘</div>
+      <h2>花 7 分钟的钱，买回 90 分钟。</h2>
+      <p class="lead">
+        内部测算备忘，不建议原样入 deck。对上只讲三句话：日常快 2-3 倍；每人每年省出约 1.5 个月；$30/月成本，每天省 7 分钟即打平。
+      </p>
+
+      <div class="roi-hero">
+        <div class="roi-big">
+          <b>13x</b>
+          <span>性价比口径：7 分钟成本换 90 分钟收益。具体数字按内部 loaded labor rate 和实际使用数据替换。</span>
+        </div>
+        <div class="roi-kpis">
+          <div class="roi-kpi"><b>2-3x</b><span>日常知识工作平均提速；查找、纪要类可达 5-10x。</span></div>
+          <div class="roi-kpi"><b>~45 days</b><span>每人日省 ~1.5h，折合年省约 45 个工作日。</span></div>
+          <div class="roi-kpi"><b>$30 / month</b><span>$30/人/月保守基线；实际按公司采购价更新。</span></div>
+        </div>
+      </div>
+
+      <div class="workflow-list" aria-label="Workflow assumptions">
+        <div class="workflow-row header">
+          <div>工作流</div><div>原来</div><div>现在</div><div>提速</div><div>节省</div>
+        </div>
+        <div class="workflow-row">
+          <div>信息查找</div><div>翻 share drive / 邮件 / 问人，约 20 分钟</div><div>Copilot 检索总结，约 5 分钟</div><div>3-4x</div><div>~1h / day</div>
+        </div>
+        <div class="workflow-row">
+          <div>邮件</div><div>读、分类、起草，一封约 10 分钟</div><div>AI 摘要 + 起草，约 3 分钟</div><div>2-3x</div><div>~0.5h / day</div>
+        </div>
+        <div class="workflow-row">
+          <div>会议纪要</div><div>看回放、手动整理，一场约 30 分钟</div><div>recap + AI 摘要，约 3-5 分钟</div><div>5-10x</div><div>计入会议</div>
+        </div>
+        <div class="workflow-row">
+          <div>周报 / 状态同步</div><div>手记、人工汇总、更新表格</div><div>Copilot 读 recap，增量更新</div><div>3-4x</div><div>1-2h / week</div>
+        </div>
+        <div class="workflow-row">
+          <div>文档 / PPT / 杂务</div><div>从零写、手动找时段和房间</div><div>AI 起草、语音指令、人确认</div><div>~2x+</div><div>零散节省</div>
+        </div>
+      </div>
+
+      <div class="math-grid">
+        <article class="math-card">
+          <small>Break-even</small>
+          <b>每天 7 分钟打平</b>
+          <p>$30 ÷ 21 天 ÷ $50/h ≈ 7 分钟。$50/h 为测算假设。</p>
+        </article>
+        <article class="math-card">
+          <small>Conservative pilot</small>
+          <b>10 人试点 ROI &gt; 30x</b>
+          <p>成本 ~$5.6K/年；每人日省 1.5h，收益 ~$189K/年，回本不到半个月。</p>
+        </article>
+        <article class="math-card">
+          <small>Safety margin</small>
+          <b>砍到 1/3 仍约 11x</b>
+          <p>即使日省仅 30 分钟，10 人年收益仍 ~$63K，对 $5.6K 投入仍有充足安全垫。</p>
+        </article>
+      </div>
+
+      <div class="evidence-grid">
+        <article class="evidence-card">
+          <small>Enterprise TEI</small>
+          <h3>外部基线偏保守</h3>
+          <p>Forrester TEI 模型：三年 ROI 116%、10 个月回本，假设每人月省 9 小时；$30/人/月 license 口径。<a href="https://tei.forrester.com/go/microsoft/M365Copilot/?lang=en-us">source</a></p>
+        </article>
+        <article class="evidence-card">
+          <small>Teams + Copilot</small>
+          <h3>协作场景区间更高</h3>
+          <p>Forrester Teams + Copilot projected TEI：122%-408% ROI，会议与协作类场景是可量化收益重点。<a href="https://tei.forrester.com/go/Microsoft/TeamsandCopilot/docs/Forrester_TEI_The_Projected_Total_Economic_Impact%E2%84%A2_Of_Microsoft_Teams_With_Microsoft_365_Copilot_vA.pdf">source</a></p>
+        </article>
+        <article class="evidence-card">
+          <small>SMB / public pilot</small>
+          <h3>采用率决定真实回报</h3>
+          <p>Forrester SMB：132%-353% ROI；NHS 试点日省 43 分钟。买 license 不等于收益——推广和案例沉淀才是 ROI 核心。<a href="https://tei.forrester.com/go/microsoft/SMB365Copilot/?lang=en-us">SMB</a> · <a href="https://www.gov.uk/government/news/major-nhs-ai-trial-delivers-unprecedented-time-and-cost-savings">NHS</a></p>
+        </article>
+      </div>
+
+      <div class="cost-stage-grid">
+        <article class="cost-stage">
+          <h3>短期 0-6 月</h3>
+          <p><b>主要成本：</b>Copilot license + 推广培训。纯增量，回本最快，关键是让工程师真的用起来。</p>
+        </article>
+        <article class="cost-stage">
+          <h3>中期 6-18 月</h3>
+          <p><b>主要成本：</b>知识库维护人力 + Copilot Studio。Capacity pack $200/pack/月，非按人头线性增长。<a href="https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/microsoft-copilot-studio-licensing-guide-december-2025-pub.pdf">source</a></p>
+        </article>
+        <article class="cost-stage">
+          <h3>长期 18 月+</h3>
+          <p><b>主要成本：</b>数据打通、SSOT、集成与治理。这笔钱做不做 AI 都迟早要花，本质是质量投资。</p>
+        </article>
+      </div>
+
+      <div class="callout">
+        Deck 一页纸口径：快几倍、省多少、花多少。细节留备忘。模型在变强、token 成本在降，今天的测算应视为下限；但正式汇报一律用今天价格做基线，不写降价预测。
+      </div>
+
+      <p class="source-note">
+        自查口径：工作流用时、日省 1.5h、$50/h 均为内部假设；$30/人/月来自 Forrester TEI 和 Microsoft licensing guide 企业模型。实际价格因 business/enterprise、年度/月度、采购协议而异，最终需替换为公司真实采购价。
+      </p>
+    </div>
+  </section>
+</main>
+
+<main class="report en-content">
+  <nav class="toc" aria-label="Report sections">
+    <a href="#executive-summary-en">00 Summary</a>
+    <a href="#why-en">01 Why</a>
+    <a href="#evolution-en">02 Capability</a>
+    <a href="#current-en">03 Position</a>
+    <a href="#data-foundation-en">04 Data</a>
+    <a href="#roadmap-en">05 Roadmap</a>
+    <a href="#actions-en">06 Adoption</a>
+    <a href="#governance-en">07 Governance</a>
+    <a href="#workstyle-en">08 Workstyle</a>
+    <a href="#narrative-en">09 Narrative</a>
+    <a href="#roi-memo-en">10 ROI</a>
+  </nav>
+
+  <section class="slide" id="executive-summary-en">
+    <div class="slide-number">00</div>
+    <div class="slide-content">
+      <div class="eyebrow">Executive summary</div>
+      <h2>Ask the right questions. Trace every answer. Then let AI execute.</h2>
+      <p class="lead">
+        AI transformation begins as a daily habit, not a procurement event. Ask sharper questions. Demand sourced answers. Let agents handle low-risk digital tasks. Over time, wire data into SSOT and engineering validation for governed problem-solving.
+      </p>
+      <div class="exec-grid">
+        <div class="exec-punch">
+          <b>Answers → Actions → Problems solved</b>
+          <span>We stand at the answers-to-action threshold. The window is open; speed depends on adoption, data readiness, and trust.</span>
+        </div>
+        <div class="exec-stack">
+          <div class="exec-line"><b>The market moves fast</b><span>TSMC accelerates NVIDIA-powered process simulation and computational lithography. Samsung and NVIDIA drive AI factories, digital twins, and manufacturing optimization.</span></div>
+          <div class="exec-line"><b>Start inside the boundary</b><span>Tap the M365-authorized layer first: meetings, email, documents, recaps, training materials, shared files.</span></div>
+          <div class="exec-line"><b>Trust is the gate</b><span>No source, no answer. Surface conflicting sources for human judgment. Critical specs draw from SSOT only.</span></div>
+        </div>
+      </div>
+
+      <div class="agent-map">
+        <article class="agent-tile">
+          <small>Now</small>
+          <h3>Knowledge Check</h3>
+          <p>Deploy first. Built on M365 Copilot. Answers everyday questions with citations.</p>
+        </article>
+        <article class="agent-tile">
+          <small>Near term</small>
+          <h3>Logistics Executor</h3>
+          <p>Schedules, follows up, updates status, executes low-risk digital tasks under human confirmation.</p>
+        </article>
+        <article class="agent-tile">
+          <small>Mid term</small>
+          <h3>Product / Customer Agent</h3>
+          <p>Bridges customer, product, program, and manufacturing context for faster prep and alignment.</p>
+        </article>
+        <article class="agent-tile">
+          <small>Long term</small>
+          <h3>Yield / ET Analyst</h3>
+          <p>Links yield, ET, specs, flows, and analysis tools for governed engineering problem-solving.</p>
+        </article>
+      </div>
+
+      <div class="takeaway">
+        Takeaway: ship one trusted, sourced Knowledge Check Agent first. Iterate on real workflows, then expand into Logistics, Product/Customer, and Yield/ET.
+      </div>
+      <p class="source-note">
+        External signal: NVIDIA reported 2025 adoption of Blackwell / CUDA-X by TSMC, Cadence, KLA, Siemens, and Synopsys for EDA, computational lithography, and process simulation. Samsung and NVIDIA announced an AI factory initiative spanning semiconductor manufacturing, digital twins, predictive maintenance, and logistics optimization. <a href="https://blogs.nvidia.com/blog/semiconductor-industry-electronic-design-automation-blackwell-cuda-x/">TSMC / NVIDIA source</a> · <a href="https://nvidianews.nvidia.com/news/samsung-ai-factory">Samsung / NVIDIA source</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="slide" id="why-en">
+    <div class="slide-number">01</div>
+    <div class="slide-content">
+      <div class="eyebrow">Why AI</div>
+      <h2>AI multiplies people: faster and stronger.</h2>
+      <p class="lead">
+        AI delivers two gains: it compresses known work and unlocks previously unrealistic work. The frame is simple: AI does not replace people. It multiplies them.
+      </p>
+      <div class="thesis-pair">
+        <article class="thesis-card" data-mark="01">
+          <small>Acceleration</small>
+          <h3>Compress existing work</h3>
+          <p>Search, summarize, draft, prep reviews, organize meetings, explain data -- collapse hours of digital work into minutes.</p>
+        </article>
+        <article class="thesis-card" data-mark="02">
+          <small>Expansion</small>
+          <h3>Unlock work that was out of reach</h3>
+          <p>One engineer borrows partial capability from a researcher, programmer, editor, data analyst, and project coordinator simultaneously.</p>
+        </article>
+      </div>
+      <div class="wing-line">
+        Drop "AI replaces people." The right frame: "AI gives people wings" -- a side-by-side partner that expands reach, speed, and leverage.
+      </div>
+      <div class="grid-3">
+        <article class="panel green"><h3>Information overload</h3><p>Email, meetings, reports, specs, process records, and historical cases scatter across systems. Manual memory and search do not scale.</p></article>
+        <article class="panel blue"><h3>Higher complexity</h3><p>Advanced manufacturing and process integration involve coupled variables. Better questioning, synthesis, and cross-source analysis are essential.</p></article>
+        <article class="panel amber"><h3>Open window</h3><p>External tools prove that answering questions and taking digital action work today. Large enterprises remain early -- adoption speed is the differentiator.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="evolution-en">
+    <div class="slide-number">02</div>
+    <div class="slide-content">
+      <div class="eyebrow">Capability evolution</div>
+      <h2>Information. Answers. Action.</h2>
+      <p class="lead">
+        In the digital world, AI already answers questions and begins to act across code, documents, email, and data workflows. The boundary is equally clear: end-to-end problem-solving remains unreliable at scale, especially in the physical world.
+      </p>
+      <div class="ladder">
+        <article class="step"><small>Internet era</small><h3>Provide information</h3><p>Search engines, databases, wikis, and dashboards delivered information. Humans still owned judgment and action.</p></article>
+        <article class="step current"><small>Now</small><h3>Answer questions</h3><p>LLMs, RAG, and enterprise copilots synthesize scattered information into useful answers. This is the stage to nail first.</p></article>
+        <article class="step next"><small>Emerging</small><h3>Take action</h3><p>Agents write code, organize documents, generate reports, and trigger workflow steps -- but require permission, audit trails, and human confirmation.</p></article>
+        <article class="step future"><small>Next</small><h3>Solve problems</h3><p>AI decomposes goals, selects tools, verifies outputs, and iterates. Emerging in select digital domains; not yet an enterprise norm.</p></article>
+        <article class="step future"><small>AGI direction</small><h3>Self-improve</h3><p>AI learns from outcomes, refines its methods, and feeds R&D optimization. A longer-term horizon.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="current-en">
+    <div class="slide-number">03</div>
+    <div class="slide-content">
+      <div class="eyebrow">Current position</div>
+      <h2>Early innings: asking, not yet operating at scale.</h2>
+      <p class="lead">
+        M365 provides a compliant entry point: email, meetings, documents, recaps, collaboration data. Enough for early agents. The gaps: adoption depth, model/tool limits, and safe access to factory-level data.
+      </p>
+      <div class="status-board">
+        <div class="scorebox">
+          <span class="big">6-12M</span>
+          <p>Large enterprises typically lag the external AI frontier by six to twelve months. That gap is a weakness -- and a window.</p>
+        </div>
+        <div class="status-list">
+          <div class="status-item"><b>Usage</b><span>Most people use AI only occasionally. The team lacks a consistent habit of asking sharper questions and validating sourced answers.</span></div>
+          <div class="status-item"><b>Tool limits</b><span>External coding and agent tools are powerful but cannot run freely inside the enterprise boundary.</span></div>
+          <div class="status-item"><b>Internal tools</b><span>Internal platforms offer a starting point, but model strength, toolchains, and context access need improvement.</span></div>
+          <div class="status-item"><b>Data boundary</b><span>AI touches peripheral engineering information today, not the full factory data foundation.</span></div>
+          <div class="status-item"><b>Opportunity</b><span>M365-accessible data already supports meetings, documents, email, knowledge extraction, and report prep.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="data-foundation-en">
+    <div class="slide-number">04</div>
+    <div class="slide-content">
+      <div class="eyebrow">Data foundation</div>
+      <h2>No trusted data, no trusted AI.</h2>
+      <p class="lead">
+        Information access evolved from books to libraries to search to AI-generated answers. Inside the company, many datasets still behave like isolated libraries. AI becomes the unified interface only when data is readable, connected, trusted, and traceable.
+      </p>
+      <div class="foundation-grid">
+        <article class="foundation-card">
+          <h3>Internal data remains fragmented</h3>
+          <p>Engineering data, specs, process flows, experiment records, and historical issues exist but scatter across systems. This was a digital-transformation challenge before AI; now it is a prerequisite for useful AI.</p>
+          <ul>
+            <li>First: make key data digital, readable, searchable, permissioned.</li>
+            <li>Second: link data sources through context, IDs, ownership, provenance.</li>
+            <li>Third: let AI serve as the interface for search, synthesis, comparison, and anomaly detection.</li>
+          </ul>
+        </article>
+        <article class="foundation-card">
+          <h3>Semiconductor work demands breadth and precision</h3>
+          <p>AI should access broad information, but process flows, process specs, ET specs, and engineering numbers must converge to one correct reference. A 0.1 nm delta can change the call.</p>
+          <ul>
+            <li>Every critical spec needs one authoritative reference at any point in time.</li>
+            <li>AI must cite that source -- not average across conflicting systems.</li>
+            <li>SSOT is not an IT project; it is the foundation for credible engineering judgment with AI.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="truth-strip">
+        <div class="truth-pill"><b>Accessible</b><span>AI reads the right data, not just surrounding documents.</span></div>
+        <div class="truth-pill"><b>Connected</b><span>Sources share context, relationships, ownership, IDs.</span></div>
+        <div class="truth-pill"><b>Authoritative</b><span>Critical specs and flows resolve to one trusted source.</span></div>
+        <div class="truth-pill"><b>Traceable</b><span>Every answer traces back to source, version, and timestamp.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="roadmap-en">
+    <div class="slide-number">05</div>
+    <div class="slide-content">
+      <div class="eyebrow">Roadmap</div>
+      <h2>6 months for answers. 3 years for problems. 5 years for R&D.</h2>
+      <p class="lead">
+        Do not promise a fully autonomous AI factory. Start with usage habits and answer quality. Layer in auditable digital actions. Then connect deeper engineering data and validation loops.
+      </p>
+      <div class="roadmap">
+        <div class="roadmap-row"><div class="phase">0-6 months</div><div class="target"><h3>Make Q&A useful</h3><p>Build prompts, question libraries, example cases, and M365 Copilot workflows for daily analysis, meeting prep, document summaries, code support.</p></div><div class="proof"><h3>Validate usage and quality</h3><p>Track useful scenarios, sourced answers, reduced prep time, and adoption stories -- not tool deployment counts.</p></div></div>
+        <div class="roadmap-row"><div class="phase">6-12 months</div><div class="target"><h3>Move from answers to digital action</h3><p>Let AI prepare meeting packages, summarize action items, draft follow-ups, update knowledge bases, run fixed analysis workflows.</p></div><div class="proof"><h3>Build auditable action loops</h3><p>Every action needs triggers, data sources, human confirmation, logs. Start with low-risk digital tasks.</p></div></div>
+        <div class="roadmap-row"><div class="phase">1-3 years</div><div class="target"><h3>Solve repeated engineering problems</h3><p>Target yield excursions, defect patterns, process drift, review prep, and recurring technical questions.</p></div><div class="proof"><h3>From suggestion to validation</h3><p>AI proposes likely causes, recommends checks, calls analysis tools, and reduces uncertainty through historical comparison or small-scale validation.</p></div></div>
+        <div class="roadmap-row"><div class="phase">3-5 years</div><div class="target"><h3>Contribute to R&D and optimization</h3><p>Deploy AI in DOE planning, process window analysis, parameter sensitivity, knowledge capture, and R&D-to-HVM transfer.</p></div><div class="proof"><h3>Human and AI improve together</h3><p>Successes and failures become institutional learning assets. AI and the team improve together through feedback loops.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="actions-en">
+    <div class="slide-number">06</div>
+    <div class="slide-content">
+      <div class="eyebrow">Operating plan</div>
+      <h2>From personal habit to team default.</h2>
+      <p class="lead">
+        If AI stays a hobby for a few early adopters, nothing changes. Embed scenarios, boundaries, data rules, and lightweight measurement into the workflow.
+      </p>
+      <div class="grid-2">
+        <article class="panel green"><h3>Build an AI question library</h3><p>Capture frequent team questions, leadership questions, and analysis paths from strong engineers. Save good questioning patterns, not just answers.</p></article>
+        <article class="panel blue"><h3>Curate a scenario list</h3><p>Start with low-risk, high-frequency work: meeting summaries, email synthesis, code explanation, debug reasoning, report drafts, chart interpretation, review checklists.</p></article>
+        <article class="panel amber"><h3>Define safety boundaries</h3><p>Clarify which data enters enterprise AI, which stays local, and which actions require human confirmation.</p></article>
+        <article class="panel violet"><h3>Start action-agent pilots</h3><p>Pick two or three digital workflows where AI moves from answers to actions: meeting prep, follow-up generation, knowledge updates.</p></article>
+      </div>
+      <div class="metric-strip">
+        <div class="metric"><b>1-2</b><span>Share one or two practical AI tips weekly. Make them easy to copy and try.</span></div>
+        <div class="metric"><b>3-5</b><span>Track three to five common workflows. Check whether AI actually enters the flow.</span></div>
+        <div class="metric"><b>Case</b><span>Record real examples: time before, time after, whether the answer cited sources.</span></div>
+        <div class="metric"><b>Quality</b><span>Track adoption, rework reduction, and prep quality improvement.</span></div>
+      </div>
+      <div class="callout">
+        Keep measurement light. Do not use forced AI time, token count, prompt count, or “50% of work must use AI” as personal KPIs. That creates resistance and metric gaming. Measure one thing: did specific work get faster, better, or more reliable?
+      </div>
+      <div class="rules-row">
+        <div class="rule-chip"><b>Do not measure</b>tokens, prompts, mandatory AI time, forced usage percentages.</div>
+        <div class="rule-chip"><b>Do measure</b>task coverage, sourced answers, prep time savings, quality gains.</div>
+        <div class="rule-chip"><b>Push gently</b>weekly one-line tips, easy to copy.</div>
+        <div class="rule-chip"><b>Pull naturally</b>real time-saving cases that build the habit of asking AI first.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="governance-en">
+    <div class="slide-number">07</div>
+    <div class="slide-content">
+      <div class="eyebrow">Digital agents</div>
+      <h2>Not one digital twin — a portfolio of agents.</h2>
+      <p class="lead">
+        A "digital double" is not one universal assistant -- it is a portfolio: knowledge check, logistics execution, product/customer context, yield/ET analysis. Ship the usable one first. Connect data next. Tackle problem-solving last.
+      </p>
+      <div class="priority-stack">
+        <article class="agent-card"><div class="agent-rank">1</div><div class="agent-main"><h3>Knowledge Check</h3><p>Deploy now. Tap M365-accessible email, meetings, documents, training materials, and shared files to answer common questions with citations.</p></div><div class="agent-guard">Low resistance. Fast value. Builds trust.</div></article>
+        <article class="agent-card"><div class="agent-rank">2</div><div class="agent-main"><h3>Logistics Executor</h3><p>Own low-risk digital execution: scheduling, follow-ups, status updates, review packages, owner reminders.</p></div><div class="agent-guard">Requires workflow interfaces, permissions, logs, human confirmation.</div></article>
+        <article class="agent-card"><div class="agent-rank">3</div><div class="agent-main"><h3>Product / Customer Agent</h3><p>Bridge customer, product, program, lot, and manufacturing context for faster prep, alignment, and risk visibility.</p></div><div class="agent-guard">Requires product/customer/manufacturing data access. Not a quick win.</div></article>
+        <article class="agent-card"><div class="agent-rank">4</div><div class="agent-main"><h3>Yield / ET Analyst</h3><p>Long-term agent. Link yield, ET, inline specs, process flows, and analysis tools to surface correlations, likely causes, and split plans.</p></div><div class="agent-guard">Demands SSOT, data governance, human validation. Zero guessing on critical numbers.</div></article>
+      </div>
+      <div class="rules-row">
+        <div class="rule-chip"><b>Trust</b>sourced, traceable, free to say "I don't know."</div>
+        <div class="rule-chip"><b>Boundary</b>authorized data only.</div>
+        <div class="rule-chip"><b>Ownership</b>every knowledge base has a named owner.</div>
+        <div class="rule-chip"><b>KPI</b>task coverage and sourced-answer speed, not prompt count.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="workstyle-en">
+    <div class="slide-number">08</div>
+    <div class="slide-content">
+      <div class="eyebrow">Workstyle evolution</div>
+      <h2>Skip the org-change memo. Shorten the meeting first.</h2>
+      <p class="lead">
+        AI will reshape meetings, alignment, system design, and knowledge flow. Before visible wins, do not call it org redesign. Call it lower meeting cost, better pre-reads, and more time for judgment.
+      </p>
+      <div class="foundation-grid">
+        <article class="foundation-card">
+          <h3>Meetings become decision forums</h3>
+          <p>Most meetings burn time on status. A knowledge agent summarizes status, risks, open questions, and decisions before the meeting. The meeting itself focuses on judgment, conflict resolution, and decisions.</p>
+          <ul><li>Before: agent assembles status and evidence.</li><li>During: people debate judgment calls.</li><li>After: agent drafts actions, owners, deadlines, follow-ups.</li></ul>
+        </article>
+        <article class="foundation-card">
+          <h3>Systems must eventually serve people and AI</h3>
+          <p>Long term, systems need human UI and AI-readable, callable, auditable interfaces. Frame this for leadership as safe data access, citation, and traceability -- not as redesigning the org for AI.</p>
+          <ul><li>People: clear UI, clean workflow.</li><li>AI: APIs, permissions, versions, provenance, event logs.</li><li>Org: no privilege bypass, clear accountability.</li></ul>
+        </article>
+      </div>
+      <div class="rules-row">
+        <div class="rule-chip"><b>Say</b>meeting cost, knowledge search, safe data access.</div>
+        <div class="rule-chip"><b>Avoid</b>replacement, restructuring, agents negotiating on behalf of people.</div>
+        <div class="rule-chip"><b>Prove first</b>one or two useful workflows.</div>
+        <div class="rule-chip"><b>Keep human role</b>people judge, people own decisions. Agents accelerate.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="narrative-en">
+    <div class="slide-number">09</div>
+    <div class="slide-content">
+      <div class="eyebrow">Narrative compression</div>
+      <h2>Yesterday. Today. Tomorrow.</h2>
+      <p class="lead">
+        Start with daily pain: scheduling meetings, fielding unexpected data questions, preparing weekly updates. People see their own work first. Then they see the shift: "I do it" to "I confirm it" to "it flows to me."
+      </p>
+      <div class="trust-statement">
+        <h3>Human value: AI moves information. It cannot build trust.</h3>
+        <p>Customers trust us not because this run looks good. They trust us because when the data turns bad, we still fight to make it right. AI handles information. People carry judgment, relationships, accountability, and trust.</p>
+      </div>
+      <div class="scenario-stack">
+        <article class="scenario-card"><div class="scenario-head"><h3>Scenario 1: scheduling meetings</h3><span>Low-risk opener</span></div><div class="timegrid"><div class="timebox"><b>Yesterday</b><p>Search Outlook manually, hunt for free slots, find a room, try options one by one.</p></div><div class="timebox"><b>Today</b><p>Copilot proposes times and rooms; a person confirms.</p></div><div class="timebox"><b>Tomorrow</b><p>Agents coordinate time and resources; the person gets notified.</p></div></div><div class="scenario-summary">From "I arrange it" to "I confirm it" to "I am informed."</div></article>
+        <article class="scenario-card"><div class="scenario-head"><h3>Scenario 2: data questions in meetings</h3><span>Engineering pain point</span></div><div class="timegrid"><div class="timebox"><b>Yesterday</b><p>No prepared answer means going back, checking, and answering next time.</p></div><div class="timebox"><b>Today</b><p>A meeting-prep agent predicts top questions and points to answers, systems, or owners.</p></div><div class="timebox"><b>Tomorrow</b><p>Live retrieval serves sourced answers; later prepares split plans and candidate solutions.</p></div></div><div class="scenario-summary">Collapse "ask, check, answer next time, plan experiment" into "answer, judge, decide now."</div></article>
+        <article class="scenario-card"><div class="scenario-head"><h3>Scenario 3: weekly updates</h3><span>Already happening</span></div><div class="timegrid"><div class="timebox"><b>Yesterday</b><p>Multiple meetings, manual minutes, manual status-table updates.</p></div><div class="timebox"><b>Today</b><p>Copilot reads meeting recaps, adds a weekly update column without touching the base table.</p></div><div class="timebox"><b>Tomorrow</b><p>Agents update customer, project, and other views automatically after every meeting.</p></div></div><div class="scenario-summary">Information flows to the person -- not the person chasing information.</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="roi-memo-en">
+    <div class="slide-number">10</div>
+    <div class="slide-content">
+      <div class="eyebrow">Cost vs. productivity memo</div>
+      <h2>Seven minutes to break even. Ninety minutes is the prize.</h2>
+      <p class="lead">
+        Internal working memo, not deck copy. The leadership version fits three lines: daily work runs 2-3x faster; each engineer saves roughly 1.5 months per year; at $30/user/month, seven minutes per day breaks even.
+      </p>
+      <div class="roi-hero">
+        <div class="roi-big"><b>13x</b><span>Simple value frame: pay for seven minutes, recoup ninety. Swap assumptions for your loaded labor rate and real usage data when available.</span></div>
+        <div class="roi-kpis">
+          <div class="roi-kpi"><b>2-3x</b><span>Average acceleration for daily knowledge work. Search and recap tasks hit 5-10x.</span></div>
+          <div class="roi-kpi"><b>~45 days</b><span>~1.5 hours saved per day equals roughly 45-47 workdays per year.</span></div>
+          <div class="roi-kpi"><b>$30 / month</b><span>Working baseline; replace with actual company pricing.</span></div>
+        </div>
+      </div>
+      <div class="math-grid">
+        <article class="math-card"><small>Break-even</small><b>7 minutes per day</b><p>$30 / 21 days / $50/hr equals roughly seven minutes. $50/hr is a modeling assumption only.</p></article>
+        <article class="math-card"><small>10-person pilot</small><b>ROI &gt; 30x</b><p>~$5.6K annual cost vs. ~$189K annual productivity value at 1.5 hours saved per person per day.</p></article>
+        <article class="math-card"><small>Safety margin</small><b>Still ~11x at one-third</b><p>Cut savings to 30 min/day and the 10-person annual value still reaches ~$63K vs. $5.6K cost.</p></article>
+      </div>
+      <div class="cost-stage-grid">
+        <article class="cost-stage"><h3>Short term: 0-6 months</h3><p><b>Main cost:</b> Copilot licenses plus enablement. The real challenge: getting engineers to actually use it.</p></article>
+        <article class="cost-stage"><h3>Mid term: 6-18 months</h3><p><b>Main cost:</b> Knowledge-base maintenance and Copilot Studio. The larger cost is ownership time, not software.</p></article>
+        <article class="cost-stage"><h3>Long term: 18 months+</h3><p><b>Main cost:</b> Data integration, SSOT, governance, higher model capacity. A quality and governance investment the org needs regardless.</p></article>
+      </div>
+      <p class="source-note">
+        Working assumptions: workflow times, 1.5h/day savings, $50/hr labor cost are internal estimates. External sanity checks: Forrester TEI studies, NHS Copilot trial results, Microsoft Copilot Studio licensing guidance. Use today's price as baseline; treat model improvement and falling token costs as qualitative upside, not a quantified forecast.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="zh-inline">AI Strategy R2 · Sky Portal · 双语素材总页</span>
+  <span class="en-inline">AI Strategy R2 · Sky Portal · Bilingual source page</span>
+</footer>
+<script>
+function toggleMenu(force) {
+  var next = typeof force === 'boolean' ? force : !document.body.classList.contains('nav-open');
+  document.body.classList.toggle('nav-open', next);
+}
+function setLang(lang) {
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  toggleMenu(false);
+  try { localStorage.setItem('ai-strategy-r2-lang', lang); } catch (e) {}
+}
+try {
+  var savedLang = localStorage.getItem('ai-strategy-r2-lang');
+  if (savedLang === 'en') setLang('en');
+} catch (e) {}
+</script>
+</body>
+</html>

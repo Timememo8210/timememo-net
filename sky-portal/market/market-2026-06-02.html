@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-02</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.highlight{color:#4ade80;font-weight:600}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#1a7a3a 0%,#0d5a28 100%)">
+<div class="poster-icon">🇺🇸</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股三指齐创新高</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets: All-Time Highs</div>
+<div class="zh poster-data">• 道指 <span class="highlight">51,307</span> (+0.45%)<br>• 标普 <span class="highlight">7,609</span> (+0.13%) 首次站上7600<br>• 纳指 <span class="highlight">27,093</span> (+0.03%)</div>
+<div class="en poster-data" style="display:none">• Dow <span class="highlight">51,307</span> (+0.45%)<br>• S&P <span class="highlight">7,609</span> (+0.13%) first close above 7600<br>• Nasdaq <span class="highlight">27,093</span> (+0.03%)</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#b45309 0%,#92400e 100%)">
+<div class="poster-icon">🔥</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">芯片股暴涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chips on Fire</div>
+<div class="zh poster-data">• 费城半导体指数 <span class="highlight">+5.87%</span> 创历史新高<br>• Marvell <span class="highlight">+32.5%</span> 盘后再涨10%+<br>• 黄仁勋点名"下一个万亿公司"</div>
+<div class="en poster-data" style="display:none">• SOX <span class="highlight">+5.87%</span> all-time high<br>• Marvell <span class="highlight">+32.5%</span> +10% after-hours<br>• Jensen names "next trillion-dollar company"</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美伊局势升温</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US-Iran Tensions</div>
+<div class="zh poster-data">• 伊朗威胁封锁霍尔木兹海峡<br>• 美军在阿拉伯湾击瘫油轮<br>• 油价 $90-$94 区间波动</div>
+<div class="en poster-data" style="display:none">• Iran threatens Hormuz Strait blockade<br>• US disables tanker in Arabian Gulf<br>• Oil $90-$94 range</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#5b21b6 100%)">
+<div class="poster-icon">🇨🇳</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股港股大涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China & HK Rally</div>
+<div class="zh poster-data">• 创业板指 <span class="highlight">+2.66%</span> CPO/PCB爆发<br>• 恒指 <span class="highlight">+2.52%</span> 科技股领涨<br>• 美团/腾讯涨近8%</div>
+<div class="en poster-data" style="display:none">• ChiNext <span class="highlight">+2.66%</span> CPO/PCB surge<br>• Hang Seng <span class="highlight">+2.52%</span> tech-led<br>• Meituan/Tencent +~8%</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-02 · Sky Portal Market Daily · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘 — 三大指数齐创新高</span><span class="en" style="display:none">US Market Close — Triple All-Time Highs</span></h2>
+
+<div class="card">
+<h4><span class="zh">标普500九连涨，追平1995年以来最长连涨纪录</span><span class="en" style="display:none">S&P 500 Nine-Day Win Streak Matches 1995 Record</span></h4>
+<p><span class="zh">周二美股三大指数全线收涨，道指涨0.45%报51,307.79点，标普500涨0.13%报7,609.90点（首次站上7,600关口），纳指涨0.03%报27,093.90点。三大指数均创下历史收盘新高。标普500连续第九个交易日上涨，追平1995年以来最长连涨纪录。</span><span class="en" style="display:none">All three major indexes closed higher Tuesday. Dow +0.45% at 51,307.79, S&P 500 +0.13% at 7,609.90 (first close above 7,600), Nasdaq +0.03% at 27,093.90. All set new closing records. S&P 500's 9-day win streak matches the longest since 1995.</span></p>
+<p class="src">来源：CNBC / Reuters / Sina Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">黄仁勋COMPUTEX演讲点燃Marvell，芯片板块全面爆发</span><span class="en" style="display:none">Jensen's COMPUTEX Keynote Ignites Marvell, Chips Surge</span></h4>
+<p><span class="zh">英伟达CEO黄仁勋在COMPUTEX 2026上表示Marvell Technology有望成为"下一个万亿美元市值公司"。他解释："当你把一个计算问题分解成许多部分，并分布到整个数据中心时，连接性是必不可少的。这就是Marvell如此重要的原因。"Marvell盘中暴涨32.52%，盘后继续拉升一度涨超13%。费城半导体指数大涨5.87%，再创历史新高。</span><span class="en" style="display:none">NVIDIA CEO Jensen Huang said at COMPUTEX 2026 that Marvell Technology could become "the next trillion-dollar company." He explained: "When you decompose a computing problem into many parts distributed across the data center, connectivity is essential. That's why Marvell is so important." MRVL surged 32.52% with another 13%+ after-hours. SOX index jumped 5.87% to a new all-time high.</span></p>
+<p class="src">来源：Investopedia / 证券时报 / CNBC</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">GOOGL融资800亿建AI，市场解读为利空</span><span class="en" style="display:none">GOOGL Raises $80B for AI, Market Reads as Negative</span></h4>
+<p><span class="zh">Alphabet宣布通过售股筹集800亿美元用于AI基础设施建设，其中包括伯克希尔·哈撒韦的100亿美元投资。但Vital Knowledge分析师Adam Crisafulli表示"最终是利空的"，质疑"如果资本主义历史上最伟大的商业模式都无法靠自身运营来为AI提供资金，那还有谁能做到？"GOOGL跌3.9%，微软跌超4%，亚马逊跌近2%。</span><span class="en" style="display:none">Alphabet announced an $80B stock sale for AI infrastructure, including $10B from Berkshire Hathaway. Vital Knowledge's Adam Crisafulli called it "ultimately bearish," asking "if the greatest business model in the history of capitalism can't fund AI internally, who can?" GOOGL fell 3.9%, MSFT -4%+, AMZN -2%.</span></p>
+<p class="src">来源：Sina Finance / CNBC / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">慧与科技飙涨近20%，业绩超预期</span><span class="en" style="display:none">HPE Surges ~20% on Earnings Beat</span></h4>
+<p><span class="zh">慧与科技（HPE）股价飙升近20%，此前公司对本季度发布了乐观展望并上调全年业绩指引，远超华尔街预期。HPE第二季度业绩创下自2018年以来最大盈利超预期幅度。</span><span class="en" style="display:none">Hewlett Packard Enterprise surged ~20% after issuing an optimistic quarterly outlook and raising full-year guidance, far exceeding Wall Street expectations. HPE's Q2 marked the biggest earnings beat since 2018.</span></p>
+<p class="src">来源：Sina Finance / Investopedia</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">美伊局势升温 — 伊朗威胁封锁霍尔木兹海峡</span><span class="en" style="display:none">US-Iran Escalation — Hormuz Strait Blockade Threat</span></h4>
+<p><span class="zh">伊朗官方媒体称谈判代表将停止与美方交换信息，并表示将采取行动全面封锁霍尔木兹海峡。美军中央司令部称在阿拉伯湾对一艘驶向伊朗的油轮采取行动使其失去动力，这是自4月13日封锁措施以来第6艘被击瘫的商业船只。特朗普表示"根本不在乎"谈判是否破裂，但后续称谈判"正以快速步伐继续进行"。油价在$90-$94区间波动。</span><span class="en" style="display:none">Iranian state media said negotiators would stop exchanging messages with the US and would move to fully block the Strait of Hormuz. US Central Command disabled a tanker headed for Iran — the 6th vessel since the April 13 blockade. Trump said he "doesn't care" if talks collapse, then later said negotiations "continue at a rapid pace." Oil traded in the $90-$94 range.</span></p>
+<p class="src">来源：证券时报 / Sina Finance / Reuters</p>
+</div>
+
+<h2>📈 <span class="zh">美股主要个股行情</span><span class="en" style="display:none">US Stock Movers</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">MRVL</div><div class="stock-price">Marvell</div><div class="stock-change up">+32.52%</div></div>
+<div class="stock-item"><div class="stock-ticker">HPE</div><div class="stock-price">慧与</div><div class="stock-change up">+~20%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">Broadcom</div><div class="stock-change up">+4.7%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMAT</div><div class="stock-price">应用材料</div><div class="stock-change up">+~7%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">高通</div><div class="stock-change up">+5%+</div></div>
+<div class="stock-item"><div class="stock-ticker">TXN</div><div class="stock-price">德州仪器</div><div class="stock-change up">+5%+</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">阿斯麦</div><div class="stock-change up">+4%+</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">美光</div><div class="stock-change up">+2.76%</div></div>
+<div class="stock-item"><div class="stock-ticker">AAPL</div><div class="stock-price">苹果</div><div class="stock-change up">+~3%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">特斯拉</div><div class="stock-change up">+~2%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">英伟达</div><div class="stock-change down">-0.69%</div></div>
+<div class="stock-item"><div class="stock-ticker">GOOGL</div><div class="stock-price">Alphabet</div><div class="stock-change down">-3.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">MSFT</div><div class="stock-price">微软</div><div class="stock-change down">-4%+</div></div>
+<div class="stock-item"><div class="stock-ticker">AMZN</div><div class="stock-price">亚马逊</div><div class="stock-change down">-~2%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">费城半导体</div><div class="stock-change up">+5.87%</div></div>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股（6/3收盘）— 科技股强势反弹</span><span class="en" style="display:none">A-Shares (Jun 3 Close) — Tech Rebound</span></h2>
+
+<div class="card">
+<h4><span class="zh">创业板指大涨2.66%，CPO/PCB概念爆发</span><span class="en" style="display:none">ChiNext +2.66%, CPO/PCB Concepts Surge</span></h4>
+<p><span class="zh">6月3日A股主要指数从一个月低点反弹，科技股引领复苏。上证指数涨0.43%报4,075.10点，深证成指涨1.63%报15,591.13点，创业板指涨2.66%报4,055.87点。涨幅主要由AI相关公司强劲表现推动，CPO（光电共封装）和PCB（印制电路板）概念板块全面爆发，与美股半导体暴涨形成共振。</span><span class="en" style="display:none">China's A-shares rebounded from one-month lows with tech leading the recovery. Shanghai Composite +0.43% at 4,075.10, Shenzhen Component +1.63% at 15,591.13, ChiNext +2.66% at 4,055.87. Gains driven by AI-related companies, with CPO (co-packaged optics) and PCB (printed circuit board) concepts surging — resonating with the US chip rally.</span></p>
+<p class="src">来源：东方财富 / Trading Economics / 证券时报</p>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股（6/2收盘）— 科技股领涨大市</span><span class="en" style="display:none">Hong Kong (Jun 2 Close) — Tech Leads Rally</span></h2>
+
+<div class="card">
+<h4><span class="zh">恒指涨2.52%，美团腾讯涨近8%</span><span class="en" style="display:none">HSI +2.52%, Meituan & Tencent +~8%</span></h4>
+<p><span class="zh">港股6月2日大幅上涨，恒生指数收报26,038.32点，涨2.52%。恒生科技指数午盘涨3.48%。权重科技股表现亮眼：美团、腾讯控股涨近8%，阿里巴巴涨超5%，京东涨4%，百度涨近3%。中概股方面，纳斯达克中国金龙指数涨1.83%，理想汽车涨超6%，阿里巴巴涨超4%。</span><span class="en" style="display:none">HK stocks surged on June 2. Hang Seng Index closed at 26,038.32 (+2.52%). Hang Seng Tech Index +3.48% at midday. Heavyweight tech stocks led: Meituan & Tencent +~8%, Alibaba +5%+, JD +4%, Baidu +~3%. US-listed Chinese stocks: Nasdaq Golden Dragon China Index +1.83%, Li Auto +6%+, Alibaba +4%+.</span></p>
+<p class="src">来源：新浪财经 / Investing.com / Yahoo Finance</p>
+</div>
+
+<h2>🔍 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 黄仁勋COMPUTEX 2026演讲 — AI连接性叙事升级</span><span class="en" style="display:none">1. Jensen's COMPUTEX 2026 — AI Connectivity Narrative Upgrade</span></h4>
+<p><span class="zh">黄仁勋在COMPUTEX上将Marvell定位为AI数据中心连接性的核心供应商，点燃了整个半导体板块。"实用型AI已经到来"的论断将投资焦点从纯算力（GPU）扩展到数据中心互连、网络和定制芯片（ASIC）领域。这一叙事升级直接带动了Broadcom、应用材料、高通等全面上涨。</span><span class="en" style="display:none">Jensen positioned Marvell as the core AI data center connectivity provider at COMPUTEX, igniting the entire semiconductor sector. The "practical AI has arrived" thesis expanded investment focus from pure compute (GPU) to data center interconnect, networking, and custom chips (ASIC). This narrative upgrade drove Broadcom, Applied Materials, Qualcomm and others higher across the board.</span></p>
+<p class="src">来源：CNBC / 证券时报</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 美伊地缘风险 — 霍尔木兹海峡成焦点</span><span class="en" style="display:none">2. US-Iran Geopolitical Risk — Hormuz Strait in Focus</span></h4>
+<p><span class="zh">伊朗宣布将停止与美方信息交换并威胁封锁霍尔木兹海峡，全球约20%石油运输经过该水道。美军在阿拉伯湾击瘫第6艘油轮。尽管特朗普态度反复，地缘紧张情绪推升油价至$90-$94区间。能源股受益上涨（斯伦贝谢+3%+），航空股全线下跌（美国航空-3%，美联航-2%+）。这是当前市场最大不确定性来源。</span><span class="en" style="display:none">Iran announced it would stop exchanging messages and threatened to block the Strait of Hormuz, through which ~20% of global oil flows. US forces disabled the 6th tanker. Despite Trump's mixed signals, tensions pushed oil to $90-$94. Energy stocks gained (Schlumberger +3%+), airlines fell across the board (American -3%, United -2%+). This is the market's biggest uncertainty driver.</span></p>
+<p class="src">来源：央视新闻 / 证券时报 / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. GOOGL $800亿融资 — AI军备竞赛白热化</span><span class="en" style="display:none">3. GOOGL $80B Raise — AI Arms Race Intensifies</span></h4>
+<p><span class="zh">Alphabet通过售股筹集800亿美元用于AI基础设施（含巴菲特100亿），但市场解读为"连最强的公司都无法靠内部现金流支撑AI投入"，GOOGL跌3.9%。这一事件揭示科技巨头在AI军备竞赛中的资金压力正在加剧，但同时也意味着AI基础设施投资规模将远超预期——对半导体板块是长期利好。</span><span class="en" style="display:none">Alphabet raised $80B via stock sale for AI infrastructure (including Buffett's $10B), but the market read it as "even the strongest company can't fund AI internally," sending GOOGL -3.9%. This reveals intensifying funding pressure in the AI arms race, but also means AI infrastructure investment will far exceed expectations — long-term bullish for semiconductors.</span></p>
+<p class="src">来源：Sina Finance / Vital Knowledge</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">短期（本周）</span><span class="en" style="display:none">Short-Term (This Week)</span></h4>
+<p><span class="zh"><b>美股：</b>AI+半导体主线未变，但标普九连涨后短期有获利了结压力。窄幅领涨格局引发"过度集中"担忧（Mercer Advisors）。美伊谈判走向是本周最大变量——若谈判破裂油价飙升，可能打断芯片股独立行情。<br><b>A股：</b>美股芯片暴涨有望继续传导至A股半导体/CPO概念。创业板指+2.66%的强势反弹显示资金正回流科技成长板块。<br><b>港股：</b>恒指+2.52%确认底部支撑，美团/腾讯等权重股资金流入明显。关注恒生科技指数能否突破前高。</span><span class="en" style="display:none"><b>US:</b> AI+chip thesis intact, but after 9-day S&P win streak, profit-taking risk elevated. Narrow leadership raises "over-concentration" concerns (Mercer Advisors). US-Iran talks are the week's biggest variable — if they collapse and oil spikes, it could interrupt the chip rally.<br><b>A-Shares:</b> US chip surge likely continues to feed into A-share semiconductor/CPO concepts. ChiNext's +2.66% rebound shows capital rotating back to tech growth.<br><b>HK:</b> HSI +2.52% confirms bottom support. Heavyweight flows into Meituan/Tencent are notable. Watch if Hang Seng Tech can break previous highs.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">关注风险</span><span class="en" style="display:none">Key Risks</span></h4>
+<p><span class="zh">• 美伊谈判破裂 → 油价飙升 → 通胀预期升温 → 打断科技股行情<br>• 标普窄幅领涨 → 市场宽度不足 → 调整风险积累<br>• 老虎证券6/12起暂停境内新开仓 → 中概券商股承压，跨境资金流向变化<br>• GOOGL融资事件 → 科技巨头AI投入资金压力 → 盈利质量担忧</span><span class="en" style="display:none">• US-Iran breakdown → oil spike → inflation → disrupts tech rally<br>• Narrow S&P leadership → poor breadth → correction risk building<br>• Tiger Brokers suspends new positions from Jun 12 → China概念券商 pressure, cross-border flow shifts<br>• GOOGL capital raise → big tech AI funding pressure → earnings quality concerns</span></p>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">MRVL — Marvell</div><div id="tv-mrvl"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Daily · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, Sina Finance, 证券时报, Investopedia, Yahoo Finance, Trading Economics, 东方财富</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-mrvl', sym:'NASDAQ:MRVL'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

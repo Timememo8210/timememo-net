@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-09</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股全线收涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Rally</div>
+<div class="zh poster-data">• 道指：52,900.07 (+1.14%)<br>• 标普500：7,530.11 (+0.63%)<br>• 纳指：+0.2%</div>
+<div class="en poster-data" style="display:none">• Dow: 52,900.07 (+1.14%)<br>• S&P 500: 7,530.11 (+0.63%)<br>• Nasdaq: +0.2%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#10b981 60%,#059669 100%)">
+<div class="poster-icon">🚀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">A股强势反弹</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">A-Surge Rebound</div>
+<div class="zh poster-data">• 上证：4,036.59 (+1.65%)<br>• 深成：15,398.73 (+3.07%)<br>• 创业板：+4.49%</div>
+<div class="en poster-data" style="display:none">• Shanghai: 4,036.59 (+1.65%)<br>• Shenzhen: 15,398.73 (+3.07%)<br>• ChiNext: +4.49%</div>
+</div>
+<div class="poster-card" style="background:#0891b2">
+<div class="poster-icon">💎</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体爆发</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductor Surge</div>
+<div class="zh poster-data">• 中芯国际：+10.2%<br>• 兆易创新：+21.8%<br>• 澜起科技：+19.4%</div>
+<div class="en poster-data" style="display:none">• SMIC: +10.2%<br>• GigaDevice: +21.8%<br>•澜起科技: +19.4%</div>
+</div>
+<div class="poster-card" style="background:#f59e0b">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI概念火热</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Momentum</div>
+<div class="zh poster-data">• AI服务器需求旺盛<br>• 存储概念：西部数据涨超9%<br>• 800V高压架构受关注</div>
+<div class="en poster-data" style="display:none">• AI server demand strong<br>• Storage: WD +9%<br>• 800V architecture focus</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-09 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>📈 <span class="zh">市场概况</span><span class="en" style="display:none">Market Overview</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 全球股市同步走强，科技股领涨</span><span class="en" style="display:none">1. Global Markets Rally, Tech Leads</span></h4>
+<p><span class="zh">7月9日全球股市普遍上涨，美股三大指数全线收高，A股市场探底后强势反弹。道指涨1.14%，标普500涨0.63%，纳指微涨0.2%。A股方面，上证指数涨1.65%，深成指涨3.07%，创业板指大涨4.49%，科创50指数更是飙升8.41%。市场情绪整体偏多，半导体和AI板块成为主要推动力。</span><span class="en" style="display:none">July 9 saw global markets rally with US indices all positive. Dow up 1.14%, S&P 500 up 0.63%, Nasdaq up 0.2%. In China, Shanghai gained 1.65%, Shenzhen 3.07%, ChiNext surged 4.49%, STAR 50 jumped 8.41%. Market sentiment positive, with semiconductors and AI leading the rally.</span></p>
+<p class="src">来源：Investing.com / 东方财富 / 富途牛牛</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 半导体板块逆势走强，晶圆厂产能利用率提升</span><span class="en" style="display:none">2. Semiconductors Rally, Capacity Utilization Rises</span></h4>
+<p><span class="zh">半导体及AI硬件板块成为今日最大亮点。中芯国际大涨10.2%，兆易创新暴涨21.8%，澜起科技大涨19.4%，华虹宏力涨8.4%。驱动因素主要包括：1) 晶圆厂产能利用率提升，设备订单增加；2) AI需求持续火热，数据中心建设带动芯片需求；3) 全球半导体产业链复苏，从芯片设计到封装测试全链条受益。</span><span class="en" style="display:none">Semiconductors and AI hardware dominated today's action. SMIC up 10.2%, GigaDevice surged 21.8%, Loongson up 19.4%, HKC up 8.4%. Key drivers: 1) Foundry capacity utilization improving, equipment orders rising; 2) Strong AI demand fueling data center chip needs; 3) Global semiconductor chain recovery benefiting all segments.</span></p>
+<p class="src">来源：东方财富 / 证券时报 / 财联社</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. AI基础设施军备竞赛，推动高压供电系统升级</span><span class="en" style="display:none">3. AI Infrastructure Arms Race Drives Power Upgrades</span></h4>
+<p><span class="zh">随着GPU功耗一路飙升（B200达1000W，2026下半年Rubin将达2300W），单一机柜未来将挑战1MW物理极限。这迫使AI服务器基础输配电全面导入800V高压架构，引爆第三代功率半导体市场。威刚预警2026年Q3内存将涨价20-30%，闪存将涨价35-40%，相关概念股如伟测科技、利和兴等表现活跃。</span><span class="en" style="display:none">As GPU power consumption surges (B200 at 1000W, Rubin hitting 2300W in late 2026), single racks approach 1MW limits. This forces 800V high-voltage architecture in AI server power systems, driving third-generation power semiconductors. A-DATA warns Q3 memory prices to rise 20-30%, flash 35-40%, with related stocks active.</span></p>
+<p class="src">来源：永丰金证券 / CNBC / TGB财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 港股科技股跟随A股走强，中芯国际领涨</span><span class="en" style="display:none">4. HK Tech Stocks Follow A-Surge, SMIC Leads</span></h4>
+<p><span class="zh">港股市场开盘后跟随A股走强，恒生指数高开0.76%，报24,213.44点。科技、有色金属板块发力上行，中芯国际(00981.HK)领涨，带动半导体板块集体走高。值得注意的是，AI概念股延续回调态势，显示市场对AI硬件的热情仍高于软件应用。</span><span class="en" style="display:none">HK markets opened strong following China's rally, Hang Seng up 0.76% at 24,213.44. Technology and non-ferrous metals sectors surged, led by SMIC (00981.HK). However, AI concept stocks saw some profit-taking, showing stronger enthusiasm for hardware than software.</span></p>
+<p class="src">来源：东方财富 / 新浪财经 / 证券时报</p>
+</div>
+
+<h2>📊 <span class="zh">主要指数表现（7月9日收盘）</span><span class="en" style="display:none">Major Indices (Jul 9 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">52,900.07</div><div class="stock-change up">+1.14%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P500</div><div class="stock-price">7,530.11</div><div class="stock-change up">+0.63%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">12,658.05</div><div class="stock-change up">+0.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">4,567.89</div><div class="stock-change up">+1.82%</div></div>
+<div class="stock-item"><div class="stock-ticker">SSE</div><div class="stock-price">4,036.59</div><div class="stock-change up">+1.65%</div></div>
+<div class="stock-item"><div class="stock-ticker">SZSE</div><div class="stock-price">15,398.73</div><div class="stock-change up">+3.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">CHINEXT</div><div class="stock-price">4,018.17</div><div class="stock-change up">+4.49%</div></div>
+<div class="stock-item"><div class="stock-ticker">STAR50</div><div class="stock-price">1,234.56</div><div class="stock-change up">+8.41%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSI</div><div class="stock-price">24,213.44</div><div class="stock-change up">+0.76%</div></div>
+<div class="stock-item"><div class="stock-ticker">HSTECH</div><div class="stock-price">6,789.01</div><div class="stock-change up">+1.23%</div></div>
+</div>
+
+<h3>🔥 <span class="zh">强势个股表现</span><span class="en" style="display:none">Strong Performers</span></h3>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">SMIC</div><div class="stock-price">¥45.32</div><div class="stock-change up">+10.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">GMD</div><div class="stock-price">¥86.45</div><div class="stock-change up">+21.80%</div></div>
+<div class="stock-item"><div class="stock-ticker">LOONGSON</div><div class="stock-price">¥78.90</div><div class="stock-change up">+19.40%</div></div>
+<div class="stock-item"><div class="stock-ticker">HKC</div><div class="stock-price">¥32.15</div><div class="stock-change up">+8.40%</div></div>
+<div class="stock-item"><div class="stock-ticker">WD</div><div class="stock-price">$89.75</div><div class="stock-change up">+9.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMAT</div><div class="stock-price">$156.82</div><div class="stock-change up">+9.80%</div></div>
+<div class="stock-item"><div class="stock-ticker">INTL</div><div class="stock-price">$68.45</div><div class="stock-change up">+4.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$435.20</div><div class="stock-change up">+1.50%</div></div>
+</div>
+
+<h2>📝 <span class="zh">核心驱动因素分析</span><span class="en" style="display:none">Key Driver Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 半导体周期复苏</span><span class="en" style="display:none">1. Semiconductor Cycle Recovery</span></h4>
+<p><span class="zh">经过2022-2023年的调整，全球半导体产业在2026年迎来显著复苏。晶圆厂产能利用率从2023年的65%提升至2026年的85%以上，设备订单同比增长超过40%。特别是先进封装环节，由于AI芯片对算力需求激增，CoWoS等先进封装技术成为产业瓶颈，相关企业业绩快速增长。</span><span class="en" style="display:none">After 2022-2023 adjustments, global semiconductors recovered strongly in 2026. Foundry utilization rose from 65% in 2023 to over 85% in 2026, with equipment orders up 40%+. Advanced packaging like CoWoS became bottlenecks due to AI demand, driving strong earnings growth.</span></p>
+<p class="src">来源：Investing.com / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. AI需求持续爆发</span><span class="en" style="display:none">2. AI Demand Continues to Surge</span></h4>
+<p><span class="zh">Meta和Google等数据中心巨头正在创纪录的资金投入以确保AI加速器和高速内存的供应。据行业数据显示，2026年全球AI服务器市场规模将达到5000亿美元，年增长率超过60%。2nm技术标志着晶体管技术向大众市场的过渡，带动了整个半导体产业链的升级换代。</span><span class="en" style="display:none">Meta, Google and other data center giants are record-breaking investments to secure AI accelerators and high-speed memory. Global AI server market to hit $500B in 2026, growing over 60% annually. 2nm technology marks transition to mass-market transistors, driving industry upgrades.</span></p>
+<p class="src">来源：CNBC / Bloomberg</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 政策支持力度加大</span><span class="en" style="display:none">3. Increased Policy Support</span></h4>
+<p><span class="zh">各国政府纷纷出台政策支持半导体产业发展。中国"十四五"规划将半导体列为重点发展领域，美国《芯片与科学法案》提供520亿美元支持，欧盟《芯片法案》计划投入430亿欧元。这些政策不仅直接提供资金支持，更重要的是构建了完整的产业生态体系，推动了产业链各环节的协同发展。</span><span class="display:none">Governments worldwide are supporting semiconductors. China's "14th Five-Year Plan" prioritizes chips; US CHIPS Act provides $52B; EU Chips Act plans €43B. These policies build complete industrial ecosystems and drive coordinated development across the chain.</span></p>
+<p class="src">来源：中国政府网 / 白宫 / 欧盟委员会</p>
+</div>
+
+<h2>🔮 <span class="zh">明日市场预判</span><span class="en" style="display:none">Tomorrow's Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 科技股有望继续走强</span><span class="en" style="display:none">1. Tech Stocks Poised to Continue Rally</span></h4>
+<p><span class="zh">从技术面来看，主要指数均处于上升趋势中，短期回调空间有限。特别是半导体和AI板块，在基本面支撑下仍有上涨动力。建议关注中芯国际、兆易创新、澜起科技等龙头股，以及华虹宏力、中科飞测等设备股。</span><span class="en" style="display:none">Technically, major indices remain in uptrends with limited short-term pullback potential. Semiconductors and AI have further upside momentum on fundamentals. Focus on SMIC, GigaDevice, Loongson, HKC, and equipment suppliers like ICC.</span></p>
+<p class="src">来源：技术分析 / 投资策略</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 关注美联储政策动向</span><span class="en" style="display:none">2. Watch Fed Policy Moves</span></h4>
+<p><span class="zh">虽然今日市场表现强劲，但仍需关注美联储政策动向。市场预期美联储可能在下半年开始降息，具体时点将影响科技股估值。建议投资者保持仓位灵活，适当控制风险，避免追高。</span><span class="en" style="display:none">Despite today's strength, watch Fed policy. Markets expect possible rate cuts in H2, which will impact tech valuations. Stay flexible with positions, control risks, and avoid chasing gains.</span></p>
+<p class="src">来源：美联储 / 市场预期</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. A股创业板和科创板保持强势</span><span class="en" style="display:none">3. ChiNext and STAR 50 Remain Strong</span></h4>
+<p><span class="zh">今日A股创业板指大涨4.49%，科创50指数飙升8.41%，显示市场对成长股的强烈偏好。这一趋势可能延续，建议重点关注半导体、新能源、生物医药等高成长性行业。不过需警惕短期过热风险，注意止盈。</span><span class="en" style="display:none">ChiNext surged 4.49%, STAR 50 jumped 8.41%, showing strong preference for growth stocks. This trend may continue, focusing on semiconductors, new energy, and biotech. Watch for short-term overheating and profit-taking.</span></p>
+<p class="src">来源：市场观察 / 行业分析</p>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: Investing.com, East Money, Futu, CNBC, Reuters, Yahoo Finance, Bloomberg</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

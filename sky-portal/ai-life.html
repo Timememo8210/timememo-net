@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 生活实践 | Sky Portal</title>
+<style>
+  :root {
+    --bg: #0a0f1a;
+    --card: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --accent: #6c8aff;
+    --gold: #c8a96e;
+    --text: #e8eaf0;
+    --text-dim: rgba(255,255,255,0.45);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 3rem 2rem;
+  }
+  .back {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--text-dim); text-decoration: none;
+    font-size: 0.82rem; margin-bottom: 2.5rem;
+    transition: color .15s;
+  }
+  .back:hover { color: var(--accent); }
+  .header { margin-bottom: 2.5rem; }
+  .header-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+  }
+  .header h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .header p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; max-width: 520px; }
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem; max-width: 800px;
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem 1.8rem;
+    text-decoration: none; color: var(--text);
+    display: flex; flex-direction: column; gap: 0.8rem;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  .card:hover {
+    background: var(--card-hover); border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .card-badge {
+    display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 700;
+    padding: 2px 8px; border-radius: 3px;
+    background: rgba(108,138,255,0.15); color: var(--accent);
+    align-self: flex-start;
+  }
+  .card-badge.gold {
+    background: rgba(200,169,110,0.15); color: var(--gold);
+  }
+  .card-title { font-size: 1.1rem; font-weight: 700; }
+  .card-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.65; }
+  .card-meta {
+    font-size: 0.75rem; color: var(--text-dim);
+    border-top: 1px solid var(--border); padding-top: 0.7rem;
+    display: flex; justify-content: space-between;
+  }
+  .card-arrow { color: var(--accent); font-size: 0.9rem; align-self: center; }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← Sky Portal</a>
+
+<div class="header">
+  <div class="header-eyebrow">AI 生活实践 · AI in Practice</div>
+  <h1>AI 效能实践记录</h1>
+  <p>基于 2025 年 2 月起的第一线使用记录，记录 AI 工具在真实生活与工作场景中的效能表现。</p>
+</div>
+
+<div class="cards">
+  <a class="card" href="https://timememo8210.github.io/ai-showcase/v2.html" target="_blank">
+    <div class="card-badge gold">V2 · 执行简报版</div>
+    <div class="card-title">AI 协作实践路径</div>
+    <div class="card-desc">执行简报格式，适合对话 VP / 决策层。含完整案例量化数据、方法论框架、风险分析、三阶段落地路径。</div>
+    <div class="card-meta">
+      <span>2026-04-15 · 持续更新</span>
+      <span>推荐版本 →</span>
+    </div>
+  </a>
+  <a class="card" href="https://timememo8210.github.io/ai-showcase/" target="_blank">
+    <div class="card-badge">V1 · 轻量原版</div>
+    <div class="card-title">我的 AI 实践之路</div>
+    <div class="card-desc">轻量个人博客风格，适合快速分享。含三个核心案例、四项提效秘诀、行业展望，双语切换。</div>
+    <div class="card-meta">
+      <span>2026-03 · 原始版本</span>
+      <span>查看 →</span>
+    </div>
+  </a>
+</div>
+
+</body>
+</html>

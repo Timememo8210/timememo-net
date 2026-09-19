@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日研报 2026-04-12</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#f0a040;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#f0a040;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#f0a040;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#f0a040;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#f0a040;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#d92d20">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体与AI</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors & AI</div>
+<div class="zh poster-data">• TSMC Q1营收同比增35%<br>• Intel与Google/Amazon洽谈封装合作</div>
+<div class="en poster-data" style="display:none">• TSMC Q1 revenue up 35% YoY<br>• Intel in talks with Google & Amazon</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#004D98 60%,#A50044 100%)">
+<div class="poster-icon">⚽</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">FC Barcelona</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">FC Barcelona</div>
+<div class="zh poster-data">• 欧冠首回合0-2负马竞<br>• 西甲76分领跑，领先皇马7分</div>
+<div class="en poster-data" style="display:none">• CL 1st leg: Lost 0-2 to Atlético<br>• La Liga leaders, 76 pts, 7 ahead</div>
+</div>
+<div class="poster-card" style="background:#e08c0b">
+<div class="poster-icon">🏀</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">体育赛事</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Sports Events</div>
+<div class="zh poster-data">• 开拓者收官战对国王，争第8种子<br>• NBA附加赛4月14日开始</div>
+<div class="en poster-data" style="display:none">• Blazers finale vs Kings for 8th seed<br>• NBA Play-In starts April 14</div>
+</div>
+<div class="poster-card" style="background:#10a37f">
+<div class="poster-icon">🤖</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI 动态</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Updates</div>
+<div class="zh poster-data">• Anthropic Mythos因安全风险限发<br>• 年化收入突破$300亿</div>
+<div class="en poster-data" style="display:none">• Mythos restricted for security risks<br>• ARR surpasses $30B</div>
+</div>
+</div>
+</div>
+
+<h1>📡 每日研报</h1>
+<p class="subtitle">2026-04-12 · Sky Portal Daily Research · <a href="index.html">All Reports</a></p>
+
+<h2>🔬 <span class="zh">半导体与AI</span><span class="en" style="display:none">Semiconductors & AI</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. TSMC Q1营收同比暴增35%，CoWoS先进封装产能持续扩张</span><span class="en" style="display:none">1. TSMC Q1 Revenue Surges 35% YoY, CoWoS Capacity Expands</span></h4>
+<p><span class="zh">台积电2026年第一季度营收同比增长约35%，主要受AI芯片需求驱动，其中CoWoS先进封装业务增速高达80%。台积电计划将CoWoS月产能从目前的约7.5万片提升至年底的12-13万片，但分析师预计仍无法满足所有客户需求。CoWoS封装营收有望达到年化150-180亿美元，毛利率高达65-70%，成为台积电利润增长的新引擎。</span><span class="en" style="display:none">TSMC reported ~35% YoY revenue growth for Q1 2026, driven by AI demand with CoWoS packaging revenue growing 80%. Monthly CoWoS capacity will expand from ~75k to 120-130k wafers by year-end. CoWoS revenue could reach $15-18B annually at 65-70% gross margins.</span></p>
+<p class="src">来源：Distill Intelligence / Seeking Alpha</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Nvidia锁定台积电CoWoS大部分产能，其他客户面临排期紧张</span><span class="en" style="display:none">2. Nvidia Locks Up Majority of TSMC CoWoS Capacity</span></h4>
+<p><span class="zh">Nvidia已包下台积电大部分CoWoS先进封装产能，用于新一代Blackwell和Vera Rubin AI芯片生产。AMD、Intel等其他客户面临封装排期严重紧张局面。先进封装已成为AI芯片供应链中比晶圆制造更紧迫的瓶颈。台积电和Intel正加速在美国建设封装产线以缓解产能压力。</span><span class="en" style="display:none">Nvidia booked the majority of TSMC's CoWoS capacity for next-gen Blackwell and Vera Rubin chips. AMD and Intel face severe scheduling constraints. Advanced packaging is now a tighter bottleneck than wafer fabrication. TSMC and Intel are accelerating US packaging lines.</span></p>
+<p class="src">来源：CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Intel与Google、Amazon洽谈先进封装合作，代工业务迎来转机</span><span class="en" style="display:none">3. Intel in Advanced Packaging Talks with Google & Amazon</span></h4>
+<p><span class="zh">Intel正与Google和Amazon就为其定制AI处理器提供先进封装服务进行积极谈判。Intel新墨西哥州封装工厂正推进Foveros和EMIB技术产能建设。18A制程良率已提升至65-75%，代工业务正迎来关键拐点。若交易达成，将标志着Intel在先进封装领域对台积电形成有效竞争。</span><span class="en" style="display:none">Intel is in active talks with Google and Amazon for advanced packaging of their custom AI processors. New Mexico facility ramping Foveros/EMIB. 18A yields at 65-75%, foundry at inflection point. Could challenge TSMC in packaging.</span></p>
+<p class="src">来源：Tom's Hardware / WIRED / Yahoo Finance</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. 先进封装成AI芯片供应链新焦点，全球三大厂商竞相扩产</span><span class="en" style="display:none">4. Advanced Packaging: New Bottleneck, Giants Race to Expand</span></h4>
+<p><span class="zh">TSMC、三星和Intel共承诺投入数百亿美元扩产先进封装产能。TSMC目标2026年底月产能达12.5万片，年增长率超70%。三星和Intel也在加紧布局，但技术成熟度仍落后于台积电。分析师警告2027年后可能出现产能过剩风险。</span><span class="en" style="display:none">TSMC, Samsung, Intel committing tens of billions to expand packaging. TSMC targets 125k wafers/month by late 2026 (70%+ growth). Samsung and Intel lag in maturity. Overcapacity risk post-2027.</span></p>
+<p class="src">来源：Nikkei Asia / Reuters</p>
+</div>
+
+<h2>📈 <span class="zh">半导体股票行情（4月11日收盘）</span><span class="en" style="display:none">Semiconductor Stocks (Apr 11 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">INTC</div><div class="stock-price">$62.38</div><div class="stock-change up">+1.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSM</div><div class="stock-price">$370.60</div><div class="stock-change up">+0.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">$188.75</div><div class="stock-change up">+2.6%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$245.04</div><div class="stock-change up">+1.2%</div></div>
+<div class="stock-item"><div class="stock-ticker">ASML</div><div class="stock-price">$1,478.28</div><div class="stock-change down">-0.4%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$420.59</div><div class="stock-change up">+1.5%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$371.55</div><div class="stock-change up">+0.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">QCOM</div><div class="stock-price">$128.01</div><div class="stock-change up">+0.9%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">$349.00</div><div class="stock-change down">-0.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">SMH</div><div class="stock-price">$436.88</div><div class="stock-change up">+0.7%</div></div>
+</div>
+
+<h3>📊 K线图</h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">INTC — Intel</div><div id="tv-intc"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">TSLA — Tesla</div><div id="tv-tsla"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+</div>
+
+<h2>⚽ FC Barcelona</h2>
+<div class="card">
+<h4>🏅 <span class="zh">欧冠1/4决赛首回合 — 巴萨0-2不敌马竞</span><span class="en" style="display:none">🏅 CL QF 1st Leg — Barcelona 0-2 Atlético</span></h4>
+<p><span class="zh">4月8日在Spotify Camp Nou，巴萨在欧冠1/4决赛首回合0-2负于马德里竞技。Julián Álvarez和Alexander Sørloth分别为马竞建功，巴萨比赛中被罚下一人以10人应战。次回合4月14日在马竞主场Metropolitano球场进行，巴萨面临严峻翻盘考验。</span><span class="en" style="display:none">April 8 at Camp Nou, Barcelona lost 0-2 to Atlético in CL quarter-final first leg. Álvarez and Sørloth scored; Barça reduced to 10 men. Second leg April 14 at the Metropolitano.</span></p>
+<p class="src">来源：ESPN / BBC Sport</p>
+</div>
+<div class="card">
+<h4>📊 <span class="zh">西甲积分榜（第30轮后）</span><span class="en" style="display:none">📊 La Liga Standings (After MD 30)</span></h4>
+<p><span class="zh">1. 巴塞罗那 76分（25胜1平4负，进80球）<br>2. 皇家马德里 69分<br>3. 比利亚雷亚尔 58分<br>4. 马德里竞技 57分<br>巴萨领先皇马7分，剩余8轮有望锁定冠军。</span><span class="en" style="display:none">1. Barcelona 76pts (25W 1D 4L, GF80) · 2. Real Madrid 69pts · 3. Villarreal 58pts · 4. Atlético 57pts · Barça lead by 7pts with 8 rounds left.</span></p>
+<p class="src">来源：ESPN / Marca</p>
+</div>
+<div class="card">
+<h4>⭐ <span class="zh">Rashford租借持续高光</span><span class="en" style="display:none">⭐ Rashford Shines on Loan</span></h4>
+<p><span class="zh">Marcus Rashford各项赛事已贡献11球13助攻。Flick称其为"攻击线上的关键拼图"，巴萨正讨论夏窗永久转会。但欧冠首回合失利敲响警钟，次回合需要更强火力翻盘。</span><span class="en" style="display:none">Rashford: 11 goals, 13 assists across all competitions. Flick calls him "a key piece of our attack." Barcelona discussing permanent deal. CL loss is a wake-up call.</span></p>
+<p class="src">来源：Sport / Mundo Deportivo</p>
+</div>
+<div class="card">
+<h4>🚑 <span class="zh">伤病与转会</span><span class="en" style="display:none">🚑 Injuries & Transfers</span></h4>
+<p><span class="zh">伤病：拉菲尼亚（腿筋，约5周）、贝纳尔（脚踝）、加维（半月板）、特尔施特根（膝盖）。阿劳霍已复出✅<br>转会：贝尔纳多·席尔瓦（曼城，合同6月到期，首要目标）；坎塞洛有望永久加盟</span><span class="en" style="display:none">Injuries: Raphinha (hamstring, ~5 wks), Baldé (ankle), Gavi (meniscus), ter Stegen (knee). Araújo returned ✅<br>Transfers: Bernardo Silva (City, expiring June) top target; Cancelo permanent deal possible</span></p>
+<p class="src">来源：FCBarcelona.com / Transfermarkt</p>
+</div>
+
+<h2>🏟️ <span class="zh">体育赛事</span><span class="en" style="display:none">Sports Events</span></h2>
+<div class="card">
+<h4>🏀 <span class="zh">波特兰开拓者 — 常规赛收官日！</span><span class="en" style="display:none">🏀 Portland Trail Blazers — Regular Season Finale!</span></h4>
+<p><span class="zh"><b>上场比赛（4/10）：</b>开拓者主场116-97大胜快船！Deni Avdija爆发砍下35分，新秀Donovan Clingan贡献18分13篮板。这场关键胜利让开拓者占据西部第8种子附加赛的有利位置。<br><b>4/8 vs马刺：</b>De'Aaron Fox砍25分带领残阵马刺112-101击败开拓者。<br><b>之前 vs湖人：</b>开拓者132-116大胜湖人，Shaedon Sharpe拿下全队最高25分4助攻。<br><b>今日收官战：</b>客场对阵萨克拉门托国王，将决定最终附加赛种子排位。</span><span class="en" style="display:none"><b>Last game (4/10):</b> Blazers dominated Clippers 116-97! Avdija erupted for 35 pts, Clingan 18/13. Key win for 8th seed positioning.<br><b>4/8 vs Spurs:</b> Fox's 25 pts led short-handed Spurs past Blazers 112-101.<br><b>vs Lakers:</b> Blazers won 132-116, Sharpe with 25 pts/4 ast.<br><b>Today:</b> Finale at Sacramento Kings — determines final play-in seeding.</span></p>
+<p class="src">来源：ESPN / NBA.com / CBS Sports</p>
+</div>
+<div class="card">
+<h4>🏀 <span class="zh">NBA季后赛形势</span><span class="en" style="display:none">🏀 NBA Playoff Picture</span></h4>
+<p><span class="zh">常规赛今日收官，附加赛4月14-17日，季后赛首轮4月18日开打。<b>西部：</b>雷霆(1)、马刺(2)、掘金(3)、湖人(4)。<b>东部：</b>活塞(1)、凯尔特人(2)、尼克斯(3)、骑士(4)。底特律活塞以东部第一杀入季后赛成为本赛季最大惊喜。</span><span class="en" style="display:none">Regular season ends today. Play-In April 14-17, playoffs start April 18.<b>West:</b> Thunder(1), Spurs(2), Nuggets(3), Lakers(4). <b>East:</b> Pistons(1), Celtics(2), Knicks(3), Cavaliers(4). Detroit as #1 seed is the season's biggest surprise.</span></p>
+<p class="src">来源：NBA.com / ESPN / Yahoo Sports</p>
+</div>
+<div class="card">
+<h4>🌍 <span class="zh">2026 FIFA世界杯 — 门票争议持续</span><span class="en" style="display:none">🌍 FIFA World Cup 2026 — Ticket Controversy</span></h4>
+<p><span class="zh">48支球队已全部确定，赛事6月11日开幕，决赛7月19日在MetLife球场举行。大量球迷投诉实际座位视野与购买时展示差异巨大，FIFA已表示正在处理投诉。门票$60-$10,990不等。</span><span class="en" style="display:none">All 48 teams confirmed. Opens June 11, final July 19 at MetLife. Fans complain seat views differ from what was shown. FIFA addressing complaints. Tickets $60-$10,990.</span></p>
+<p class="src">来源：FIFA.com / ESPN / The Athletic</p>
+</div>
+
+<h2>🌲 <span class="zh">Portland 本地</span><span class="en" style="display:none">Portland Local</span></h2>
+<div class="card">
+<h4>🌤️ <span class="zh">今日天气</span><span class="en" style="display:none">🌤️ Today's Weather</span></h4>
+<div class="weather-box">
+<div class="weather-stat"><div class="weather-val">59°F</div><div class="weather-label"><span class="zh">最高 / 15°C</span><span class="en" style="display:none">High / 15°C</span></div></div>
+<div class="weather-stat"><div class="weather-val">46°F</div><div class="weather-label"><span class="zh">最低 / 8°C</span><span class="en" style="display:none">Low / 8°C</span></div></div>
+<div class="weather-stat"><div class="weather-val">💨 17km/h</div><div class="weather-label"><span class="zh">西北风</span><span class="en" style="display:none">NW Wind</span></div></div>
+<div class="weather-stat"><div class="weather-val">47%</div><div class="weather-label"><span class="zh">湿度</span><span class="en" style="display:none">Humidity</span></div></div>
+</div>
+<p><span class="zh">复活节异常温暖天气过后，本周末回归凉爽春日。多云为主，气温接近季节平均水平。适合轻薄外套出行，晚间较凉建议加衣。</span><span class="en" style="display:none">After a warm Easter, the weekend returns to typical spring weather. Mostly cloudy, near seasonal averages. Light jacket recommended; cooler evenings.</span></p>
+<p class="src">来源：NWS Portland / AccuWeather</p>
+</div>
+<div class="card">
+<h4>📰 <span class="zh">本地新闻</span><span class="en" style="display:none">📰 Local News</span></h4>
+<div class="news-item">🏘️ <span class="zh"><b>周边County拒绝资助Portland庇护所</b> — Clackamas和Washington County均拒绝提供无家可归者庇护所资金。市长Wilson此前请求$400万援助遭拒。</span><span class="en" style="display:none"><b>Counties Refuse Shelter Funding</b> — Clackamas and Washington Counties rejected Portland's $4M homeless shelter funding request.</span></div>
+<div class="news-item">🏛️ <span class="zh"><b>无家可归数据争议</b> — Multnomah County数据显示人数增加，但市长Wilson认为新开夜间庇护所改变了统计口径，数据存在缺陷。</span><span class="en" style="display:none"><b>Homelessness Data Dispute</b> — Multnomah County shows rising numbers, but Mayor Wilson says new overnight shelters skewed the counting methodology.</span></div>
+<div class="news-item">🏠 <span class="zh"><b>公共住房安全隐患</b> — 报道揭露Portland部分公共住房存在维护不善问题。两个庇护所即将关闭，裁员176人。</span><span class="en" style="display:none"><b>Public Housing Concerns</b> — Reports reveal maintenance issues in public housing. Two shelters closing, 176 layoffs.</span></div>
+<div class="news-item">🌤️ <span class="zh"><b>温暖复活节或破纪录</b> — 上周复活节温暖程度可能创下Portland历史纪录。</span><span class="en" style="display:none"><b>Record Warm Easter</b> — Last week's Easter warmth may have set Portland records.</span></div>
+<p class="src">来源：OregonLive / OPB / KGW</p>
+</div>
+<div class="card">
+<h4>🚗 <span class="zh">交通提醒</span><span class="en" style="display:none">🚗 Traffic</span></h4>
+<div class="news-item"><span class="zh">• I-5 Columbia River大桥：夜间维护施工，晚10点至早5点可能缩减车道<br>• NW Cornell Road：山体滑坡持续关闭，绕行Skyline Blvd<br>• 实时路况：<a href="https://www.tripcheck.com">TripCheck.com</a></span><span class="en" style="display:none">• I-5 Columbia River Bridge: Night lane closures 10PM-5AM<br>• NW Cornell Road: Landslide closure continues<br>• Real-time: <a href="https://www.tripcheck.com">TripCheck.com</a></span></div>
+<p class="src">来源：ODOT</p>
+</div>
+<div class="card">
+<h4>🌷 <span class="zh">社区活动</span><span class="en" style="display:none">🌷 Community Events</span></h4>
+<div class="news-item">🎬 <span class="zh"><b>Portland Panorama电影节（4月9-19日）</b> — 11天独立电影节进行中，展映圣丹斯首映和太平洋西北作品。</span><span class="en" style="display:none"><b>Portland Panorama Film Fest (Apr 9-19)</b> — 11-day indie festival with Sundance premieres and PNW productions.</span></div>
+<div class="news-item">🌷 <span class="zh"><b>木鞋郁金香节（4月1-26日，Woodburn）</b> — 40英亩花海正值最佳观赏期，含品酒、美食和手工市集。</span><span class="en" style="display:none"><b>Wooden Shoe Tulip Fest (Apr 1-26, Woodburn)</b> — 40 acres at peak bloom with wine tasting and artisan market.</span></div>
+<div class="news-item">🌍 <span class="zh"><b>多元文化节</b> — 阿拉伯音乐、本地摊商、手绘纹身、儿童活动等春季庆典。</span><span class="en" style="display:none"><b>Multicultural Festivals</b> — Arabic music, vendors, henna art, kids' activities across Portland.</span></div>
+<p class="src">来源：OregonLive / Travel Portland</p>
+</div>
+
+<h2>🤖 <span class="zh">AI 工具/产品动态</span><span class="en" style="display:none">AI Tools & Products</span></h2>
+<div class="card">
+<h4><span class="zh">1. Anthropic Mythos模型因网络安全风险限制公开发布</span><span class="en" style="display:none">1. Anthropic Restricts Mythos Over Cybersecurity Risks</span></h4>
+<p><span class="zh">Anthropic宣布Claude Mythos在网络安全领域展现"能力飞跃"，能自主发现大量零日漏洞，但因滥用风险决定不公开发布，仅向审核通过的安全合作伙伴提供。CEO Dario Amodei称这是"网络安全的分水岭时刻"。Project Glasswing项目同步推出，联合Apple、Google等12家科技巨头构建AI驱动的安全防线。</span><span class="en" style="display:none">Anthropic announced Claude Mythos shows a "step change" in cybersecurity, autonomously finding thousands of zero-day flaws. Due to misuse risks, only available to vetted security partners. CEO Amodei called it a "cybersecurity reckoning." Project Glasswing launches with Apple, Google, and 10 other tech giants.</span></p>
+<p class="src">来源：New York Times / Fortune / Anthropic</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. Anthropic年化收入突破$300亿，三倍增长</span><span class="en" style="display:none">2. Anthropic ARR Surpasses $30B, Tripled</span></h4>
+<p><span class="zh">Anthropic宣布其年化收入从去年的$90亿增长至超过$300亿，增幅超200%。这一惊人的增长速度反映了企业客户对AI工具的旺盛需求。Anthropic正从纯AI模型提供商向企业级AI解决方案平台转型，其企业版功能覆盖法律、金融、网络安全等多个垂直领域。</span><span class="en" style="display:none">Anthropic's ARR jumped from $9B to over $30B, a 200%+ increase. This explosive growth reflects strong enterprise demand for AI tools. Anthropic is evolving from a model provider to an enterprise AI solutions platform across legal, finance, and cybersecurity verticals.</span></p>
+<p class="src">来源：New York Times / Business Insider</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. Google推出Veo 3.1 Lite，降低AI视频生成门槛</span><span class="en" style="display:none">3. Google Launches Veo 3.1 Lite for Affordable AI Video</span></h4>
+<p><span class="zh">Google推出了Veo 3.1 Lite视频生成模型，以更低成本实现高质量AI视频生成。该版本针对中小型创作者和企业用户优化，在保持生成质量的同时大幅降低了计算需求。Google继续在AI多模态领域与OpenAI的Sora展开竞争，视频生成赛道日趋激烈。</span><span class="en" style="display:none">Google launched Veo 3.1 Lite, making AI video generation more affordable. Optimized for creators and SMBs, it maintains quality while reducing compute requirements. Google continues competing with OpenAI's Sora in the increasingly crowded AI video space.</span></p>
+<p class="src">来源：MarketingProfs / TechCrunch</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">4. AI安全与开放的博弈持续升温</span><span class="en" style="display:none">4. AI Safety vs Openness Debate Intensifies</span></h4>
+<p><span class="zh">Anthropic限制Mythos发布引发AI开源社区关于安全与开放之间平衡的激烈讨论。与此同时，CRN分析认为Claude Mythos虽强大但不会"重塑网络安全"——现有安全工具和流程仍在防御体系中发挥核心作用。行业正处于"AI对抗AI"的军备竞赛中，2026年Q1 AI辅助攻击事件同比增长300%。</span><span class="en" style="display:none">Anthropic's Mythos restriction sparked debate in the AI open-source community about safety vs. openness. CRN analysis argues Mythos won't "reshape cybersecurity" alone — existing tools remain core to defense. The industry is in an "AI vs AI" arms race, with AI-assisted attacks up 300% YoY in Q1 2026.</span></p>
+<p class="src">来源：CRN / Cybersecurity Dive / Dark Reading</p>
+</div>
+
+<div class="footer">
+<p>📡 Sky Portal Daily Research · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, ESPN, BBC Sport, NBA.com, FIFA, NWS, OregonLive, Anthropic, NYT</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-intc', sym:'NASDAQ:INTC'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-tsla', sym:'NASDAQ:TSLA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-06-10</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.stock-label{color:#888;font-size:0.72em;margin-top:4px}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.flat{background:rgba(255,255,255,0.08);color:#aaa;border:1px solid rgba(255,255,255,0.15)}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.highlight{background:rgba(74,222,128,0.08);border-left:3px solid #4ade80;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.highlight-warn{background:rgba(239,68,68,0.08);border-left:3px solid #f87171;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#7f1d1d,#450a0a)">
+<div class="poster-icon">🔴</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">美股全线重挫</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Stocks Plunge</div>
+<div class="zh poster-data">• 道指暴跌953点（-1.87%）<br>• 标普500 -1.95% · 纳指 -2%<br>• 费城半导体 -3.57%</div>
+<div class="en poster-data" style="display:none">• Dow crashes 953 pts (-1.87%)<br>• S&P 500 -1.95% · Nasdaq -2%<br>• PHLX Semiconductor -3.57%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#991b1b,#600000)">
+<div class="poster-icon">⚠️</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">伊朗战争升级</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Iran War Escalation</div>
+<div class="zh poster-data">• 美暗示对伊朗更多打击<br>• VIX飙升，恐慌蔓延<br>• 地缘风险急剧升温</div>
+<div class="en poster-data" style="display:none">• US signals more Iran strikes<br>• VIX surges, panic spreads<br>• Geopolitical risk spikes</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#1a3a5c,#0c1f36)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">A股缩量调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China A-Shares Pull Back</div>
+<div class="zh poster-data">• 沪指失守4000（-0.42%）<br>• 深成指 -2.06% · 创业板 -2.70%<br>• 成交额缩至2.64万亿</div>
+<div class="en poster-data" style="display:none">• SSE below 4000 (-0.42%)<br>• SZSE -2.06% · ChiNext -2.70%<br>• Volume shrinks to ¥2.64T</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#4a1d6e,#2e1065)">
+<div class="poster-icon">🔧</div>
+<div class="zh" style="font-size:1.3em;font-weight:700">半导体持续暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Chip Bloodbath Continues</span></div>
+<div class="zh poster-data">• SOX五日累跌超12%<br>• Broadcom财报后连跌<br>• NVDA/AMD/AVGO全线下挫</div>
+<div class="en poster-data" style="display:none">• SOX -12%+ in 5 sessions<br>• Broadcom post-earnings slump<br>• NVDA/AMD/AVGO all sharply lower</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-06-10 · Sky Portal Daily Market · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘（6月10日周三）</span><span class="en" style="display:none">US Market Close (Wed, Jun 10)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">49,919</div><div class="stock-change down">-1.87%</div><div class="stock-label">道琼斯</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,243</div><div class="stock-change down">-1.95%</div><div class="stock-label">标普500</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">—</div><div class="stock-change down">-2.0%</div><div class="stock-label">纳斯达克</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12,206</div><div class="stock-change down">-3.57%</div><div class="stock-label">费城半导体</div></div>
+<div class="stock-item"><div class="stock-ticker">VIX</div><div class="stock-price">飙升</div><div class="stock-change down">+恐慌</div><div class="stock-label">恐慌指数</div></div>
+</div>
+
+<div class="highlight-warn">
+<span class="zh"><b>⚠️ 重大风险事件</b> — 道指暴跌超950点，VIX恐慌指数飙升。美国暗示将对伊朗发动更多军事打击，战争恐慌主导市场情绪。投资者全线抛售风险资产，资金涌入国债和黄金避险。</span>
+<span class="en" style="display:none"><b>⚠️ Major Risk Event</b> — The Dow plunged 950+ points and VIX spiked as the US signaled more military strikes against Iran. War fears dominated market sentiment. Investors dumped risk assets across the board, fleeing to Treasuries and gold.</span>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股收盘（6月10日）</span><span class="en" style="display:none">China A-Shares Close (Jun 10)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">3,993.23</div><div class="stock-change down">-0.42%</div><div class="stock-label">SSE Composite</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">—</div><div class="stock-change down">-2.06%</div><div class="stock-label">SZSE Component</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">—</div><div class="stock-change down">-2.70%</div><div class="stock-label">ChiNext</div></div>
+<div class="stock-item"><div class="stock-ticker">成交额</div><div class="stock-price">2.64万亿</div><div class="stock-change flat">缩量</div><div class="stock-label">两市合计</div></div>
+</div>
+
+<h2>🇭🇰 <span class="zh">港股收盘</span><span class="en" style="display:none">Hong Kong Close</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">恒指</div><div class="stock-price">24,408</div><div class="stock-change flat">平盘</div><div class="stock-label">Hang Seng</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,724.79</div><div class="stock-change down">-0.94%</div><div class="stock-label">HSTECH</div></div>
+</div>
+
+<h2>⚡ <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4>1️⃣ <span class="zh">伊朗战争升级，美国暗示更多军事打击</span><span class="en" style="display:none">1. Iran War Escalates as US Signals More Strikes</span></h4>
+<p><span class="zh">美国官员暗示将对伊朗发动更多军事打击，地缘风险急剧升温。道指盘中一度暴跌超950点，Cboe VIX恐慌指数飙升。此前市场寄望于美伊和谈达成协议，但最新信号表明冲突可能进一步扩大。霍尔木兹海峡局势紧张，油价走势成为市场最大不确定性。投资者全面转向避险模式，抛售股票等风险资产。</span><span class="en" style="display:none">US officials signaled more military strikes against Iran, sending geopolitical risk soaring. The Dow plunged 950+ points intraday and the Cboe VIX spiked. Markets had hoped for a US-Iran deal, but latest signals suggest further escalation. The Strait of Hormuz remains a critical flashpoint. Oil price movements are the market's biggest uncertainty. Investors shifted to full risk-off mode, dumping equities.</span></p>
+<p class="src">来源：247 Wall St / TheStreet / Investopedia / Fortune</p>
+</div>
+
+<div class="card">
+<h4>2️⃣ <span class="zh">半导体持续崩盘，SOX五日累跌超12%</span><span class="en" style="display:none">2. Chip Bloodbath Continues, SOX Down 12%+ in 5 Days</span></h4>
+<p><span class="zh">费城半导体指数（SOX）暴跌3.57%，收于12,206点。从6月5日高点13,264算起，SOX短短五个交易日累计跌幅超过12%。本轮暴跌始于Broadcom财报后AI芯片指引不及预期（尽管营收暴增48%至$222亿、AI芯片收入飙升143%至$108亿），随后蔓延至整个半导体板块。Nvidia、AMD、Intel全线重挫，战争恐慌进一步加剧抛售。CNBC称这场半导体"暴胀式反弹"终于逆转，VIX时隔数周终于追上其他波动率指标。</span><span class="en" style="display:none">The PHLX Semiconductor Index (SOX) crashed 3.57% to close at 12,206. From its June 5 peak of 13,264, SOX has plunged 12%+ in just five sessions. The selloff began with Broadcom's soft AI chip outlook (despite revenue surging 48% to $22.2B and AI chip revenue up 143% to $10.8B), then spread across the sector. Nvidia, AMD, and Intel all fell sharply, with war fears amplifying the selling. CNBC noted the "crash-up" in chip stocks finally reversed, and the VIX caught up with other volatility measures.</span></p>
+<p class="src">来源：CNBC / Yahoo Finance / Kavout / TradingView / 247 Wall St</p>
+</div>
+
+<div class="card">
+<h4>3️⃣ <span class="zh">A股冲高回落，创业板从4200高点大幅回调</span><span class="en" style="display:none">3. A-Shares Pull Back, ChiNext Retreats from 4200 Peak</span></h4>
+<p><span class="zh">A股三大指数集体收跌，沪指跌0.42%报3,993.23点再度失守4000关口，深成指跌2.06%，创业板指跌2.70%。上周创业板刚刚历史性突破4200点，如今已回调至约3800区间。市场全天成交额约2.64万亿元，较前一交易日的放量上涨明显缩量，显示资金追高意愿减弱。大金融板块护盘是沪指跌幅较小的主要原因，但科技成长股普遍承压。</span><span class="en" style="display:none">China's three major indices all closed lower. SSE fell 0.42% to 3,993.23, dropping below 4,000 again. SZSE lost 2.06% and ChiNext fell 2.70%. ChiNext had just broken 4,200 last week but has since pulled back to around 3,800. Daily volume dropped to ¥2.64 trillion from the prior session's surge, showing reduced buying enthusiasm. Financial sector support limited SSE losses, but tech/growth stocks broadly declined.</span></p>
+<p class="src">来源：东方财富 / 同花顺 / 证券时报</p>
+</div>
+
+<div class="card">
+<h4>4️⃣ <span class="zh">风险偏好全面收缩，全球市场进入防御模式</span><span class="en" style="display:none">4. Global Risk-Off: Markets Enter Defensive Mode</span></h4>
+<p><span class="zh">伊朗战争升级叠加半导体暴跌，全球风险偏好急剧收缩。从美股到A股，从纳斯达克到创业板，成长股集体承压。VIX恐慌指数飙升至近期高位，显示市场对未来走势的不确定性显著增加。资金从高风险资产流向国债、黄金等传统避险工具。此前由AI和科技驱动的市场乐观情绪正面临双重打击——地缘政治恶化和科技板块估值回调。</span><span class="en" style="display:none">Iran escalation combined with the chip selloff triggered a global risk-off. From US to China, Nasdaq to ChiNext, growth stocks are under pressure. VIX surged to recent highs, reflecting sharply elevated uncertainty. Capital rotated from risk assets to Treasuries and gold. The AI/tech-driven market euphoria faces a double whammy: worsening geopolitics and tech valuation correction.</span></p>
+<p class="src">来源：Bloomberg / Fortune / Investopedia</p>
+</div>
+
+<h2>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">明日/近期关注要点</span><span class="en" style="display:none">Near-Term Focus</span></h4>
+
+<div class="highlight-warn">
+<span class="zh"><b>🔑 最大变量：伊朗局势</b> — 市场短期走势完全取决于伊朗战争走向。任何停火/谈判信号都可能触发强劲反弹；反之，若冲突扩大至霍尔木兹海峡，油价将飙升，全球股市将进一步承压。当前处于"信息真空期"，波动率将持续高位。</span>
+<span class="en" style="display:none"><b>🔑 Key Variable: Iran Situation</b> — Short-term direction hinges entirely on the Iran war. Any ceasefire/negotiation signal could trigger a sharp rally; conversely, if the conflict spreads to the Strait of Hormuz, oil would surge and global stocks would face further pressure. We're in an "information vacuum" with volatility staying elevated.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>📊 半导体超卖区间</b> — SOX从13,264跌至12,206（-8%），五日累跌超12%，已进入技术性超卖区间。若地缘局势出现缓和信号，半导体板块可能迎来报复性技术反弹。关注NVDA约$205附近支撑、SOX 12,000整数关口。但若战争恶化，SOX可能下探11,800甚至更低。</span>
+<span class="en" style="display:none"><b>📊 Semiconductor Oversold</b> — SOX dropped from 13,264 to 12,206 (-8%), down 12%+ in 5 days — technically oversold. If geopolitics improve, a sharp technical bounce is possible. Watch NVDA ~$205 support and SOX 12,000 round level. If war worsens, SOX could test 11,800 or lower.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>🇨🇳 A股关注3800支撑</b> — 创业板从4200高点回落至约3800区间，400点回调幅度达10%左右。如果3800支撑失守，可能进一步下探3600。沪指4000点关口争夺仍是焦点。缩量调整显示观望情绪浓厚，等待外部风险明朗化。</span>
+<span class="en" style="display:none"><b>🇨🇳 Watch ChiNext 3800 Support</b> — ChiNext has pulled back ~10% from its 4200 peak to around 3800. If 3800 breaks, 3600 is next. The SSE 4000 battle remains the focal point. Shrinking volume shows cautious sentiment, waiting for external clarity.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>🚀 SpaceX IPO明日（6/12）登场</b> — SpaceX将于周五正式挂牌，这将是测试市场对巨型IPO胃口的关键时刻。在当前避险情绪下，IPO表现可能受到影响。结合OpenAI和Anthropic的上市计划，IPO超级周期面临地缘政治逆风。</span>
+<span class="en" style="display:none"><b>🚀 SpaceX IPO Tomorrow (Jun 12)</b> — SpaceX debuts Friday, a key test of mega-IPO appetite. Current risk-off sentiment could weigh on performance. Combined with OpenAI and Anthropic, the IPO supercycle faces geopolitical headwinds.</span>
+</div>
+
+<div class="highlight">
+<span class="zh"><b>💡 操作建议</b> — 谨慎观望为主，等待伊朗局势明朗。不宜追空（超卖可能反弹），也不宜抄底（战争风险未定价）。控制仓位，保持充足现金，关注黄金和国债作为对冲。</span>
+<span class="en" style="display:none"><b>💡 Strategy</b> — Stay cautious and wait for Iran clarity. Don't chase shorts (oversold bounce risk) or bottom-fish (war risk unpriced). Control position sizing, maintain cash reserves, and watch gold/Treasuries as hedges.</span>
+</div>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SMH — Semiconductor ETF</div><div id="tv-smh"></div></div>
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — PHLX Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">HSTECH — 恒生科技</div><div id="tv-hstech"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span> · Sky Portal · Generated by Sky AI · <a href="index.html"><span class="zh">所有行情</span><span class="en" style="display:none">All Reports</span></a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, Reuters, Bloomberg, Yahoo Finance, MarketWatch, Investopedia, 247 Wall St, 东方财富, 同花顺, 证券时报</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-smh', sym:'NASDAQ:SMH'},
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-hstech', sym:'HKEX:HSTECH'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

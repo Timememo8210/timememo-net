@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<title>ProLynk 网站测试报告 — Bug & UX 问题清单</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; line-height: 1.6; font-size: 13px; }
+  .page { page-break-after: always; min-height: 90vh; padding: 10px 0; }
+  .page:last-child { page-break-after: avoid; }
+  h1 { font-size: 22px; margin-bottom: 8px; }
+  h2 { font-size: 16px; color: #333; margin-bottom: 12px; border-bottom: 2px solid #3b82f6; padding-bottom: 4px; }
+  h3 { font-size: 14px; color: #555; margin: 10px 0 6px; }
+  .meta { color: #666; font-size: 11px; margin-bottom: 20px; }
+  .summary { background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 12px 0; }
+  .bug { border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; margin: 16px 0; }
+  .bug-id { display: inline-block; background: #3b82f6; color: #fff; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-right: 6px; }
+  .severity { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+  .sev-critical { background: #fecaca; color: #991b1b; }
+  .sev-high { background: #fed7aa; color: #9a3412; }
+  .sev-medium { background: #fef08a; color: #854d0e; }
+  .sev-low { background: #d1fae5; color: #065f46; }
+  .screenshot { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin: 8px 0; text-align: center; }
+  .screenshot img { max-width: 100%; max-height: 350px; border-radius: 4px; border: 1px solid #e5e7eb; }
+  .arrow { color: #ef4444; font-weight: bold; font-size: 16px; }
+  .desc { margin: 6px 0; }
+  .field { margin: 4px 0; }
+  .field-label { font-weight: 600; color: #374151; }
+  .fix-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 10px; margin-top: 8px; }
+  .fix-box .label { color: #166534; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th, td { border: 1px solid #e5e7eb; padding: 6px 10px; text-align: left; font-size: 12px; }
+  th { background: #f3f4f6; font-weight: 600; }
+  .score { font-size: 48px; font-weight: 700; text-align: center; }
+  .score-good { color: #22c55e; }
+  .score-wrap { text-align: center; margin: 20px 0; }
+  .footer { text-align: center; color: #9ca3af; font-size: 10px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
+</style>
+</head>
+<body>
+
+<!-- Page 1: Cover & Summary -->
+<div class="page">
+  <h1>🔍 ProLynk 网站测试报告</h1>
+  <div class="meta">
+    测试日期：2026-04-18<br>
+    测试环境：lynksync.ie（Engineering Environment）<br>
+    测试账号：timememo8210@gmail.com（Homeowner）<br>
+    测试人：Sky (AI QA Tester)<br>
+    测试范围：注册流程、登录流程、首页、Pro注册、整体UX
+  </div>
+
+  <div class="score-wrap">
+    <div class="score score-good">7.5/10</div>
+    <div>工程调试版整体评分</div>
+  </div>
+
+  <div class="summary">
+    <h2>📊 测试摘要</h2>
+    <table>
+      <tr><th>项目</th><th>结果</th></tr>
+      <tr><td>发现Bug数量</td><td>5个</td></tr>
+      <tr><td>Critical</td><td>1个</td></tr>
+      <tr><td>High</td><td>1个</td></tr>
+      <tr><td>Medium</td><td>2个</td></tr>
+      <tr><td>Low</td><td>1个</td></tr>
+      <tr><td>Homeowner注册</td><td>✅ 成功（需邮箱确认）</td></tr>
+      <tr><td>Pro注册</td><td>❌ 无法测试（需登录）</td></tr>
+      <tr><td>登录</td><td>⚠️ 需先确认邮箱</td></tr>
+    </table>
+  </div>
+
+  <h2>✅ 做得好的地方</h2>
+  <ul style="margin-left:20px; margin-top:8px;">
+    <li>整体设计干净清爽，配色舒适</li>
+    <li>服务分类丰富（18个类别）</li>
+    <li>搜索框 + Eircode定位功能</li>
+    <li>Before & After 对比滑块很酷</li>
+    <li>Smart Quote 示例展示直观</li>
+    <li>项目进度追踪清晰</li>
+    <li>Cookie consent、ToS、Privacy Policy 齐全</li>
+    <li>支持Google一键登录</li>
+    <li>密码强度实时验证反馈</li>
+    <li>注册后邮件确认流程规范</li>
+  </ul>
+</div>
+
+<!-- Page 2: Bug #1 — Signup link redirects to Tesla -->
+<div class="page">
+  <div class="bug">
+    <h2><span class="bug-id">BUG-01</span> Signup链接跳转到Tesla网站 <span class="severity sev-critical">🔴 CRITICAL</span></h2>
+
+    <div class="desc">
+      <div class="field"><span class="field-label">发现位置：</span>Login页面 → "Don't have an account? Sign up" 链接</div>
+      <div class="field"><span class="field-label">复现步骤：</span></div>
+      <ol style="margin-left:20px; margin-top:4px;">
+        <li>打开 https://lynksync.ie/login</li>
+        <li>点击底部 "Sign up" 链接</li>
+        <li>页面跳转到 https://www.tesla.com/modely/design#overview</li>
+      </ol>
+      <div class="field"><span class="field-label">预期行为：</span>跳转到 /signup 注册页面</div>
+      <div class="field"><span class="field-label">实际行为：</span>跳转到Tesla Model Y配置页面</div>
+      <div class="field"><span class="field-label">影响范围：</span>所有从登录页进入的新用户都无法注册，完全阻断注册流程</div>
+    </div>
+
+    <div class="screenshot">
+      <div style="color:#666;font-size:11px;margin-bottom:4px;">📸 Login页面 — "Sign up" 链接位置</div>
+      <img src="file:///tmp/prolynk-08-login-result.png" alt="Login page showing Sign up link">
+      <div><span class="arrow">↑</span> 底部 "Sign up" 链接点击后跳转到Tesla网站</div>
+    </div>
+
+    <div class="fix-box">
+      <div class="label">🔧 修复建议</div>
+      <div class="desc">
+        检查Login页面 "Sign up" 链接的 href 属性。应该指向 <code>/signup</code>，但实际指向了Tesla的URL。<br>
+        <strong>修复难度：</strong>⭐ 极低（1分钟）— 修改一个href属性<br>
+        <strong>Sky能否帮助：</strong>✅ 可以（如果有代码访问权限）<br>
+        <strong>建议代码：</strong><code>&lt;a href="/signup"&gt;Sign up&lt;/a&gt;</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page 3: Bug #2 — Pro registration requires login -->
+<div class="page">
+  <div class="bug">
+    <h2><span class="bug-id">BUG-02</span> Pro注册流程要求先登录 <span class="severity sev-high">🟠 HIGH</span></h2>
+
+    <div class="desc">
+      <div class="field"><span class="field-label">发现位置：</span>/pro-registration 页面</div>
+      <div class="field"><span class="field-label">复现步骤：</span></div>
+      <ol style="margin-left:20px; margin-top:4px;">
+        <li>未登录状态下访问 https://lynksync.ie/pro-registration</li>
+        <li>页面自动跳转到 /login 登录页面</li>
+      </ol>
+      <div class="field"><span class="field-label">预期行为：</span>新Pro用户应能直接进入注册流程，无需先有账号</div>
+      <div class="field"><span class="field-label">实际行为：</span>未登录用户被重定向到登录页，无法注册</div>
+      <div class="field"><span class="field-label">影响范围：</span>所有新Pro用户被完全阻断，无法加入平台</div>
+    </div>
+
+    <div class="screenshot">
+      <div style="color:#666;font-size:11px;margin-bottom:4px;">📸 /pro-registration 被重定向到 /login</div>
+      <img src="file:///tmp/prolynk-08-login-result.png" alt="Redirect to login">
+      <div><span class="arrow">↑</span> 直接访问 /pro-registration 被踢回登录页</div>
+    </div>
+
+    <div class="fix-box">
+      <div class="label">🔧 修复建议</div>
+      <div class="desc">
+        移除 /pro-registration 路由的认证守卫（auth guard），允许未登录用户访问。<br>
+        或者：在 /join-as-pro 招募页面的 "Get Started" 按钮直接链接到一个不需要登录的Pro注册表单。<br>
+        <strong>修复难度：</strong>⭐⭐ 低（10-30分钟）— 调整路由权限<br>
+        <strong>Sky能否帮助：</strong>⚠️ 需要看代码框架（Next.js/React Router）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page 4: Bug #3 — "I am a Homeowner/Pro" selection unclear -->
+<div class="page">
+  <div class="bug">
+    <h2><span class="bug-id">BUG-03</span> 注册页角色选择不够直观 <span class="severity sev-medium">🟡 MEDIUM</span></h2>
+
+    <div class="desc">
+      <div class="field"><span class="field-label">发现位置：</span>/signup 注册页面</div>
+      <div class="field"><span class="field-label">问题描述：</span></div>
+      <p>"I am a Homeowner" 和 "I am a Service Pro" 两个按钮在注册表单中不够突出，用户可能不理解这两个按钮的作用——是切换注册类型？还是只做标记？点击后没有明显反馈，用户不知道自己选了哪个。</p>
+      <div class="field"><span class="field-label">影响：</span>用户可能跳过这一步，注册角色不明确</div>
+    </div>
+
+    <div class="screenshot">
+      <div style="color:#666;font-size:11px;margin-bottom:4px;">📸 注册页 — 角色选择按钮位置</div>
+      <img src="file:///tmp/prolynk-03-filled-form.png" alt="Signup form with role selection">
+      <div><span class="arrow">↑</span> "I am a Homeowner" 和 "I am a Service Pro" 按钮不够突出</div>
+    </div>
+
+    <div class="fix-box">
+      <div class="label">🔧 修复建议</div>
+      <div class="desc">
+        1. 添加选中状态视觉反馈（如高亮边框、背景色变化）<br>
+        2. 将两个按钮做成更明显的卡片式选择<br>
+        3. 添加说明文字："请选择您的角色"<br>
+        4. 默认不选中任何一个，强制用户选择<br>
+        <strong>修复难度：</strong>⭐⭐ 低（30分钟-1小时）— UI调整<br>
+        <strong>Sky能否帮助：</strong>✅ 可以协助设计
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page 5: Bug #4 — Email confirmation required but no easy way to resend -->
+<div class="page">
+  <div class="bug">
+    <h2><span class="bug-id">BUG-04</span> 邮箱确认后登录报错提示不够友好 <span class="severity sev-medium">🟡 MEDIUM</span></h2>
+
+    <div class="desc">
+      <div class="field"><span class="field-label">发现位置：</span>/login 登录页面</div>
+      <div class="field"><span class="field-label">复现步骤：</span></div>
+      <ol style="margin-left:20px; margin-top:4px;">
+        <li>注册后未确认邮箱</li>
+        <li>尝试登录</li>
+        <li>页面显示 "Email not confirmed" 红色提示</li>
+      </ol>
+      <div class="field"><span class="field-label">问题：</span>错误信息只是一个红色文字"Email not confirmed"，没有说明如何解决（如"请检查您的邮箱"或提供重新发送确认链接的按钮）</div>
+    </div>
+
+    <div class="screenshot">
+      <div style="color:#666;font-size:11px;margin-bottom:4px;">📸 登录页 — "Email not confirmed" 错误提示</div>
+      <img src="file:///tmp/prolynk-08-login-result.png" alt="Email not confirmed error">
+      <div><span class="arrow">↑</span> 红色错误提示 "Email not confirmed" — 缺少引导用户下一步操作</div>
+    </div>
+
+    <div class="fix-box">
+      <div class="label">🔧 修复建议</div>
+      <div class="desc">
+        1. 改为更友好的提示："请先确认您的邮箱。我们已发送确认链接到 timememo8210@gmail.com"<br>
+        2. 添加 "重新发送确认邮件" 按钮<br>
+        3. 添加 "更改邮箱" 选项<br>
+        <strong>修复难度：</strong>⭐⭐ 低（30分钟）— 前端文案 + 按钮逻辑<br>
+        <strong>Sky能否帮助：</strong>✅ 可以
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page 6: Bug #5 — Home Passport missing -->
+<div class="page">
+  <div class="bug">
+    <h2><span class="bug-id">OBS-01</span> Home Passport功能未在页面上体现 <span class="severity sev-low">🟢 LOW (功能缺失)</span></h2>
+
+    <div class="desc">
+      <div class="field"><span class="field-label">发现位置：</span>全站</div>
+      <div class="field"><span class="field-label">描述：</span>Home Passport（房屋数字护照）是ProLynk的核心差异化功能，但在当前网站上完全没有体现。首页、注册流程、Pro个人主页等页面均未提及此功能。</div>
+      <div class="field"><span class="field-label">影响：</span>用户无法了解ProLynk的独特价值主张</div>
+    </div>
+
+    <div class="fix-box">
+      <div class="label">🔧 建议</div>
+      <div class="desc">
+        这是功能开发优先级问题，不是bug。建议：<br>
+        1. 在首页添加Home Passport概念介绍区块<br>
+        2. 在Homeowner注册后引导创建房屋档案<br>
+        3. 在Pro端展示维护记录关联到Home Passport<br>
+        <strong>开发难度：</strong>⭐⭐⭐⭐ 高（需要完整功能模块）<br>
+        <strong>Sky能否帮助：</strong>⚠️ 可以做UI设计和文案，但核心功能需合作方开发<br>
+        <strong>建议优先级：</strong>第二阶段功能，先让基础平台跑起来
+      </div>
+    </div>
+  </div>
+
+  <h2>📋 修复优先级总览</h2>
+  <table>
+    <tr><th>Bug ID</th><th>问题</th><th>严重性</th><th>修复难度</th><th>Sky能帮？</th><th>预估时间</th></tr>
+    <tr><td>BUG-01</td><td>Signup链接跳Tesla</td><td>🔴 Critical</td><td>⭐ 极低</td><td>✅</td><td>1分钟</td></tr>
+    <tr><td>BUG-02</td><td>Pro注册需登录</td><td>🟠 High</td><td>⭐⭐ 低</td><td>⚠️</td><td>30分钟</td></tr>
+    <tr><td>BUG-03</td><td>角色选择不直观</td><td>🟡 Medium</td><td>⭐⭐ 低</td><td>✅</td><td>1小时</td></tr>
+    <tr><td>BUG-04</td><td>确认邮件提示差</td><td>🟡 Medium</td><td>⭐⭐ 低</td><td>✅</td><td>30分钟</td></tr>
+    <tr><td>OBS-01</td><td>Home Passport缺失</td><td>🟢 Low</td><td>⭐⭐⭐⭐ 高</td><td>⚠️</td><td>Phase 2</td></tr>
+  </table>
+
+  <div class="summary" style="margin-top:16px;">
+    <h3>🎯 总体结论</h3>
+    <p><strong>核心Bug修复时间：约2小时</strong>（BUG-01到BUG-04全部修复）</p>
+    <p>最关键的BUG-01只需改一行代码，修复后新用户注册流程就能跑通。</p>
+    <p>建议让Daniel先修BUG-01和BUG-02，这两个是阻断性的。BUG-03和BUG-04是体验优化，可以后续迭代。</p>
+  </div>
+
+  <div class="footer">
+    ProLynk QA Report · Generated by Sky · 2026-04-18<br>
+    工程调试版测试 · lynksync.ie · All screenshots captured during live testing
+  </div>
+</div>
+
+</body>
+</html>

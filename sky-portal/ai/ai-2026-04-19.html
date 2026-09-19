@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI · 2026-04-19 — 谢晨：数据全景与金字塔</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#22d3ee;font-size:1.6em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:6px}
+.source-bar{text-align:center;margin-bottom:24px;font-size:0.85em}
+.source-bar a{color:#22d3ee;text-decoration:none}
+.section{margin-bottom:28px}
+.section-title{color:#22d3ee;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#22d3ee;text-decoration:none}
+.card .highlight{color:#22d3ee;font-weight:600}
+.quote{background:#1a1a1a;border-left:3px solid #22d3ee;border-radius:0 12px 12px 0;padding:16px 22px;margin-bottom:14px;font-style:italic;color:#bbb}
+.quote .author{color:#22d3ee;font-style:normal;font-size:0.85em;margin-top:6px}
+.insight{background:#1a1a1a;border:1px solid rgba(34,211,238,0.3);border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.insight h3{color:#f0a040;font-size:1.05em;margin-bottom:8px}
+.insight p{color:#ccc;font-size:0.92em}
+.table-wrap{overflow-x:auto;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:0.9em}
+th{background:#1a1a1a;color:#22d3ee;padding:10px 12px;text-align:left;border-bottom:1px solid #2a2a2a}
+td{padding:10px 12px;border-bottom:1px solid #1a1a1a;color:#ccc}
+tr:hover{background:#1a1a1a}
+.tag{display:inline-block;background:rgba(34,211,238,0.1);color:#22d3ee;font-size:0.75em;padding:2px 8px;border-radius:4px;margin-right:4px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#22d3ee;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px} th,td{padding:8px;font-size:0.82em}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 AI #001</h1>
+<div class="subtitle">2026-04-19 · 星期日</div>
+<div class="source-bar">🎬 <a href="https://youtu.be/KcujArdWR8w" target="_blank">YouTube链接</a> · 📹 小军播客（Business Interview Series） · 🕐 约90分钟</div>
+
+<!-- 基本信息 -->
+<div class="section">
+<div class="section-title">📋 基本信息</div>
+<div class="card">
+<h3>嘉宾：谢晨（Steve Xie Chen）</h3>
+<p><strong>身份：</strong>光轮智能（Guanglun Intelligence）创始人兼CEO</p>
+<p><strong>教育：</strong>北京大学物理本科 → 哥伦比亚商学院量化金融博士</p>
+<p><strong>职业轨迹：</strong>Jet.com（AI动态定价）→ Cruise（自动驾驶仿真负责人）→ NVIDIA（自动驾驶仿真）→ 蔚来（自动驾驶仿真）→ 2023年创立光轮智能</p>
+<p><strong>主持人：</strong>小军（Xiao Jun）</p>
+<p><strong>主题：</strong>Data Survey — History, Landscape, Pyramid Structure, and Recipes for AI and Robotics Data</p>
+</div>
+</div>
+
+<!-- 嘉宾故事 -->
+<div class="section">
+<div class="section-title">🧑‍💼 嘉宾故事线</div>
+
+<div class="card">
+<h3>从北大物理到硅谷自动驾驶仿真</h3>
+<p>谢晨在北大物理系从年级110名拼到前5，意识到天赋有上限后转向金融，哥大读博期间做了个北美排名前三的狗主人社交App（因为自己的狗"土豆"有心脏病），但发现没有商业模式就关了。这段经历让他发现自己真正擅长的是：<span class="highlight">基于颠覆性技术创新构建产品，用产品支撑整个行业</span>。</p>
+<p>2018年加入Cruise做仿真，当时仿真被视为"玩具"——CEO给他3个月证明仿真不是玩具。他先建立评估体系，再引入生成式AI提升仿真质量，最终让感知团队用仿真数据训练后模型性能反而提升了。这个"顿悟时刻"让他彻底相信仿真的力量。</p>
+</div>
+
+<div class="card">
+<h3>NVIDIA的关键发现：下一个自动驾驶中心在中国</h3>
+<p>2021年加入NVIDIA后发现，Orin芯片的最大客户不是Waymo/Cruise，而是<span class="highlight">蔚来、小鹏、理想</span>。这让他意识到下一代自动驾驶的主战场在中国。半年后举家搬回中国加入蔚来，从OEM角度理解仿真的真正需求。</p>
+</div>
+
+<div class="card">
+<h3>创业契机：仿真从"加速器"升级为"前提条件"</h3>
+<p>在蔚来期间，他逐渐意识到：自动驾驶的仿真只是加速器（因为车在跑，有真实数据），但<span class="highlight">机器人的仿真可能是前提条件</span>——因为机器人没有百万辆车在跑的Shadow Mode，数据极度稀缺。2023年和联合创始人杨海波一起创立光轮智能。</p>
+</div>
+</div>
+
+<!-- 核心观点 -->
+<div class="section">
+<div class="section-title">🔑 核心观点</div>
+
+<div class="quote">
+"最有价值的数据不是完美执行的数据，而是先失败再成功的数据——Negative samples才是真正教模型'怎么纠正'的信号。"
+<div class="author">— 谢晨</div>
+</div>
+
+<div class="card">
+<h3>观点一：数据 = 教育系统，不是静态标注</h3>
+<p>数据不是简单打标签，而是一套帮助模型持续学习的信号系统。跟人类教育一样，从"买教材自学"进化到"因材施教的导师"。</p>
+</div>
+
+<div class="card">
+<h3>观点二：数据行业的三阶段演化</h3>
+<div class="table-wrap">
+<table>
+<tr><th>阶段</th><th>代表</th><th>类比</th><th>数据形态</th></tr>
+<tr><td>1.0 静态数据集</td><td>ImageNet（李飞飞）</td><td>买教材自学</td><td>图片+标注，一次性</td></tr>
+<tr><td>2.0 工业化标注</td><td>Scale AI</td><td>批量教育工厂</td><td>大规模人工标注，工厂流水线</td></tr>
+<tr><td>3.0 评估驱动</td><td>Mercor / Surge（LLM时代）</td><td>因材施教的导师</td><td>专家出题+评估+反馈，闭环</td></tr>
+</table>
+</div>
+<p>关键转变：数据提供者从"被动接受需求"变成"主动评估模型并给出反馈"，真正理解算法状态，形成<span class="highlight">数据飞轮闭环</span>。</p>
+</div>
+
+<div class="card">
+<h3>观点三：最有价值的数据 = Negative Samples</h3>
+<p>不是展示完美执行的数据最有价值，而是<span class="highlight">展示"先失败、再纠正、最终成功"的过程数据</span>。这就像教育中，看学生犯错并纠正的过程，比看标准答案更有教学价值。这也解释了为什么RLHF（人类反馈强化学习）如此有效——本质上就是提供纠错信号。</p>
+</div>
+
+<div class="card">
+<h3>观点四：LLM vs 机器人数据差距巨大</h3>
+<div class="table-wrap">
+<table>
+<tr><th>维度</th><th>大语言模型</th><th>具身智能/机器人</th></tr>
+<tr><td>数据丰富度</td><td>互联网已用尽（~60分）</td><td>几乎是沙漠（<0.6%）</td></tr>
+<tr><td>数据来源</td><td>被动收集（网页、书籍）</td><td>需主动采集+仿真</td></tr>
+<tr><td>评估难度</td><td>文本可控</td><td>物理世界极难标准化</td></tr>
+<tr><td>核心瓶颈</td><td>数据墙（没更多数据了）</td><td>数据荒（几乎没有数据）</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<h3>观点五：仿真对机器人是"前提条件"而非"加速器"</h3>
+<p>自动驾驶有Shadow Mode（百万辆车在跑，自动采集数据），仿真只是锦上添花。但机器人<span class="highlight">没有现成的数据管道</span>，仿真不是可选项，是唯一能大规模生成数据和评估的途径。最近三个月，所有顶级大模型团队都开始拥抱仿真——之前很多是真机派。</p>
+</div>
+
+<div class="card">
+<h3>观点六：数据金字塔结构</h3>
+<p>谢晨提出了AI数据的金字塔模型：</p>
+<p><strong>顶层（最少、最贵）：</strong>真实机器人操作数据 — 需要真机、人工操作，成本极高</p>
+<p><strong>中层（核心）：</strong>仿真数据 — 可大规模生成，质量可控，支持RL训练</p>
+<p><strong>底层（基础）：</strong>互联网数据 + 人类第一人称视角视频（Ego-centric video）— 数据量大但质量参差</p>
+<p>金字塔的关键：<span class="highlight">越往上数据越精准但越稀缺，仿真在中层起到桥梁作用</span>，连接海量低质量数据和稀缺高质量数据。</p>
+</div>
+
+<div class="card">
+<h3>观点七："造脑"与"造身体"必然分离</h3>
+<p>大模型公司（OpenAI、DeepMind、字节、阿里、NVIDIA）在做"通用大脑"，机器人公司做本体和场景落地。两者必然分离——<span class="highlight">特斯拉做Optimus但大脑交给xAI就是例证</span>。未来最有可能的格局是：少数通用大脑 + 多种专用身体 + 数据基础设施商（如光轮）提供训练环境。</p>
+<p><strong>五大"造脑"竞争者：</strong>字节、阿里、OpenAI、DeepMind、NVIDIA。PI（Physical Intelligence）也应归入此类。</p>
+</div>
+
+<div class="card">
+<h3>观点八：数据公司的终极形态 = 环境</h3>
+<p>谢晨认为数据公司最终提供的不是数据，而是<span class="highlight">一个让模型自我进化的环境</span>（类似Einstein在脑海中做思想实验）。就像LLM领域的RLinf（基于环境的强化学习），未来的机器人训练可能完全在仿真环境中通过RL完成，不再需要人类标注的数据。</p>
+</div>
+</div>
+
+<!-- 行业洞察 -->
+<div class="section">
+<div class="section-title">🔬 行业洞察</div>
+
+<div class="card">
+<h3>Scale AI 的两次浪潮引领</h3>
+<p>Scale AI先后引领了两波数据工业化浪潮：第一波是自动驾驶数据标注，第二波是LLM的RLHF数据。他们的核心能力不是标注本身，而是<span class="highlight">建立数据飞轮——评估→发现问题→提供数据→改进算法</span>。</p>
+</div>
+
+<div class="card">
+<h3>自动驾驶标注行业：上百万人力</h3>
+<p>整个行业估计有数十万甚至上百万人在做标注工作，分布在各省市的标注基地。但这仍属于"上一代数据"——基于固定标准的人工标注。下一代数据将更依赖专家经验反馈和自动化流程。</p>
+</div>
+
+<div class="card">
+<h3>BEHAVIOR Benchmark — 机器人领域的ImageNet时刻</h3>
+<p>目前最具挑战性的具身智能评测集，最高成功率仅26%。这说明<span class="highlight">具身智能远未到成熟期</span>，数据和评估都处于极早期。</p>
+</div>
+
+<div class="card">
+<h3>为什么数据公司应该独立存在？</h3>
+<p>在Cruise，最优秀的算法人才不会分配到仿真团队——一定去感知或预测团队。在Waymo也一样，最好的数据人才优先给算法。但独立的Scale AI可以吸引全球顶级人才专注做数据飞轮。<span class="highlight">难度够高 + 市场够大 = 应该独立做</span>。</p>
+</div>
+
+<div class="card">
+<h3>中国机器人公司偏爱真机数据的原因</h3>
+<p>不是技术判断，而是<span class="highlight">商业逻辑</span>：中国机器人公司商业模式还是卖硬件，需要客户相信真机数据才能卖得动。但这个观念正在快速转变。</p>
+</div>
+</div>
+
+<!-- 我的思考（预留位） -->
+<div class="section">
+<div class="section-title">💭 Sky Portal的思考</div>
+<div class="insight">
+<h3>🧠 智能眼镜 + 具身智能：数据采集的切入点思考</h3>
+<p><strong>核心洞察：</strong>智能眼镜是天然的具身智能训练数据采集器，因为它同时捕获视频（第一人称视角）、音频（语音指令和环境声）、动作（手部操作），三者天然对齐在同一时间线上。</p>
+
+<div class="card">
+<h3>1. Corner case 才是核心难点</h3>
+<p>正常流程不难学，难的是异常处理。衣服掉了怎么捡、有污渍怎么办——这些不可能靠人工设计，只能靠海量真实场景自然捕获。谢晨说最有价值的数据是"先失败再成功"的数据——这个洞见与我对Corner case的理解完全一致。
+
+<div class="card">
+<h3>2. 三个落地障碍</h3>
+<p><strong>隐私：</strong>消费者场景难解，但企业场景可通过"数据不出域"解决。这点在半导体制造产线特别重要——产线数据是机密，但智能眼镜采集的现场操作视频是训练数据来源，两者可以完全隔离。</p>
+<p><strong>电池：</strong>必须智能触发采样，非全天候录制。半导体产线操作时间有限，每个工艺节点的操作时间可精确控制，可以在操作期间（如30秒内）开启高精度录制。</p>
+<p><strong>存储成本：</strong>视频数据量大，需降低采样精度。半导体产线的操作步骤相对固定，可以用关键帧采样或变分辨率存储——只保留决策时刻的高清帧。</p>
+</div>
+
+<div class="card">
+<h3>3. 场景专业化是可行路径</h3>
+<p>不追求覆盖所有场景，而是针对特定场景（如麦当劳后厨）强化学习，3个月可覆盖99.99%的应用场景。这跟半导体产线很像：每个产线有自己的特殊工艺，但产线之间的共性远大于差异。我曾在半导体行业观察到，同一家代工厂的多个产线，工艺参数差异通常在5%以内，通过少量数据迁移就能实现高覆盖。</p>
+</div>
+
+<div class="card">
+<h3>4. 商业模式：数据采集即服务</h3>
+<p><strong>卖/租智能眼镜给企业</strong>——硬件成本低，但定制化软件价值高。
+<strong>数据留在客户本地，不出域</strong>——用边缘计算在眼镜上做初步处理，只传输关键特征。
+<strong>提供模型训练，输出定制化具身智能算法</strong>——算法是核心竞争力，数据是燃料。
+<strong>客户拿走专属的机器人能力</strong>——这才是真正的价值交付。</p>
+</div>
+
+<div class="card">
+<h3>5. 最佳切入场景：半导体制造产线</h3>
+<p>为什么是半导体产线？</p>
+<p>• <strong>环境可控：</strong>产线在洁净室内，光照、温度、湿度可控，减少Corner case的复杂性。
+• <strong>单个动作价值高：</strong>一个芯片制造工序（如光刻）的价值在数千美元，一个错误的操作可能导致整个晶圆报废，训练数据的ROI极高。
+• <strong>客户付费意愿强：</strong>代工厂和设备厂商有明确的KPI和ROI计算，买一套能减少报废、提高良率的系统，预算充足。
+• <strong>数据敏感但可共享：</strong>工艺参数可以脱敏，但操作视频是训练数据，可以通过隐私计算技术（联邦学习）实现数据不出域。</p>
+</div>
+
+<div class="card">
+<h3>6. 待深入的问题</h3>
+<p>• <strong>采样触发逻辑的设计：</strong>如何判断进入"Corner case模式"？是时间触发、动作异常检测，还是语音指令触发？
+• <strong>Corner case识别的自动化：</strong>需要什么级别的识别准确率？10%？1%？0.1%？
+• <strong>场景间的迁移学习效率：</strong>从麦当劳后厨迁移到半导体产线，需要多少额外数据？
+</p>
+</div>
+
+<div class="quote">
+"Corner case是具身智能的圣杯——它不是意外，而是真实世界的全部。"
+<div class="author">— Sky Portal</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 关键引用 -->
+<div class="section">
+<div class="section-title">📌 金句摘录</div>
+
+<div class="quote">
+"我不是在找自己擅长什么，我花了很长时间在排除自己不擅长什么。巴菲特和朗朗10岁就找到了，我可能需要更久。"
+<div class="author">— 谢晨谈人生选择</div>
+</div>
+
+<div class="quote">
+"数据对AI，就像教育对人。人类需要知识体系来构建智能，AI需要数据系统来构建能力。"
+<div class="author">— 谢晨谈数据的本质</div>
+</div>
+
+<div class="quote">
+"最有价值的数据是'先失败再成功'的数据——不是展示完美，而是展示纠错的过程。"
+<div class="author">— 谢晨谈数据价值</div>
+</div>
+
+<div class="quote">
+"仿真对自动驾驶是加速器，但对机器人是前提条件——因为没有百万辆车在帮你跑数据。"
+<div class="author">— 谢晨谈仿真定位</div>
+</div>
+
+<div class="quote">
+"最后可能没人用我的数据，但所有人都用我的仿真环境来做RL。数据公司最终提供的是一个环境，不是数据。"
+<div class="author">— 谢晨谈公司终局</div>
+</div>
+</div>
+
+<!-- 相关链接 -->
+<div class="section">
+<div class="section-title">🔗 相关链接</div>
+<div class="card">
+<p>📹 <a href="https://youtu.be/KcujArdWR8w" target="_blank">视频原链接（YouTube）</a></p>
+<p>🏢 <a href="https://www.guanglun.ai" target="_blank">光轮智能官网</a></p>
+<p>📊 <a href="https://behavior.stanford.edu/" target="_blank">BEHAVIOR Benchmark</a></p>
+</div>
+</div>
+
+<!-- ==================== 第二篇：个人数字分身 ==================== -->
+
+<hr style="border:none;border-top:2px solid #22d3ee;margin:40px 0;opacity:0.3">
+
+<div id="002"></div>
+<h1 style="color:#22d3ee;font-size:1.6em;text-align:center;margin:30px 0 6px">🧠 AI #002</h1>
+<div class="subtitle">2026-04-19 · 星期日</div>
+<div class="source-bar" style="margin-bottom:24px;font-size:0.85em">💭 Sky Portal的原创思考链 · 标签：<span class="tag">数字分身</span><span class="tag">屏幕记录</span><span class="tag">具身智能</span><span class="tag">脑机接口</span><span class="tag">数字永生</span></div>
+
+<div class="section">
+<div class="section-title">💡 个人数字分身：从屏幕记录到AI克隆</div>
+
+<div class="card">
+<h3>🎯 核心命题</h3>
+<p>如果AI能完整记录并学习一个人在电脑上的每一次操作、每一个选择、每一次犹豫和放弃，它是否就能成为这个人的数字分身？不需要脑机接口，不需要智能眼镜——<span class="highlight">屏幕上的每一次点击，就是思考的外化</span>。</p>
+</div>
+</div>
+
+<!-- 思考链条 -->
+<div class="section">
+<div class="section-title">🔗 完整思考链</div>
+
+<div class="card">
+<h3>一、起点：智能眼镜 + 具身智能</h3>
+<p>智能眼镜可以同时捕获视频、音频、动作，是天然的具身智能训练数据采集器。但落地面临<span class="highlight">隐私、电池、存储</span>三大障碍。消费者场景下，戴着眼镜录一切，周围人的隐私怎么保护？全天候录制的电量从哪来？每天几十GB的视频数据怎么存？</p>
+</div>
+
+<div class="card">
+<h3>二、转折：不需要眼镜，屏幕 + 键鼠就够了</h3>
+<p>知识工作者的核心行为都在电脑上——<span class="highlight">鼠标点击、键盘输入、窗口切换、应用使用</span>。这些数据通过屏幕录制和键鼠事件监听就能采集，不需要任何额外硬件。眼镜是通用方案，但屏幕记录是知识工作者的精准方案。</p>
+</div>
+
+<div class="card">
+<h3>三、核心洞察：丢失的沟通</h3>
+<p>人跟AI交互时，只传递了最终指令（"帮我设计一个网页"），但脑子里千百次的微判断——<span class="highlight">"这条线粗一点、这个蓝色偏了、这里要留白"</span>——全都没有传出来。这些"丢失的思考"可以通过记录屏幕上的每一个操作来补回。你选择点击哪里、拖动什么、输入什么、删除什么——每一个操作都是一个"思考信号"。</p>
+
+<div class="quote">
+"人跟AI的交互效率之所以低，不是因为AI不够聪明，而是因为人没有能力把脑子里的事情全部说出来。屏幕上的每一次操作，都是无法言说的思考的外化。"
+<div class="author">— Sky Portal</div>
+</div>
+</div>
+
+<div class="card">
+<h3>四、关键观点集</h3>
+
+<div class="insight" style="margin-top:10px;margin-bottom:10px">
+<h3>🥇 "AI不应该让每个人都变成AI，而是AI变成每个人"</h3>
+<p>AI的终极目标不是把所有人都训练成AI专家，而是让AI学会每个人独特的思维方式和工作习惯，成为"你"的数字分身。你不需要学会Prompt Engineering——AI应该已经懂你。</p>
+</div>
+
+<div class="insight" style="margin-top:10px;margin-bottom:10px">
+<h3>⚖️ 数据本身是中性的</h3>
+<p>记录没有好坏，<span class="highlight">利用方式才有区别</span>。同一份屏幕记录数据，可以用来提升个人效率（好），也可以用来监控员工（坏）。技术中立，但使用技术的人必须有自己的立场。</p>
+</div>
+
+<div class="insight" style="margin-top:10px;margin-bottom:10px">
+<h3>🔒 本地化AI陪伴的独特价值</h3>
+<p>跟AI交流没有心理负担，可以卸下防备做自己。跟人交流总有社交面具——但在本地运行的AI面前，你可以完全真实。这种"无压力的真实"本身就是珍贵的训练数据。你的犹豫、你的重复操作、你的撤销重做——全是真实的你。</p>
+</div>
+
+<div class="insight" style="margin-top:10px;margin-bottom:10px">
+<h3>🎨 艺术家的数字分身</h3>
+<p>记录画家每一笔的创作过程——从构思、起稿、修改到最终成品——形成可传承的风格。不是记录结果（一幅画），而是记录<span class="highlight">过程（千百个选择）</span>。未来的数字艺术家可以继承梵高的创作思维，不只是模仿他的画风。</p>
+</div>
+
+<div class="insight" style="margin-top:10px;margin-bottom:10px">
+<h3>♾️ 数字永生</h3>
+<p>一个人的工作习惯、思维方式、创作风格可以被完整保存和传承。不是通过传记或视频——而是通过一个能"像你一样思考"的AI。物理层面的永生不可能，但<span class="highlight">思维层面的永生</span>，在技术上是可行的。</p>
+</div>
+</div>
+</div>
+
+<!-- 技术路径 -->
+<div class="section">
+<div class="section-title">🔧 技术路径</div>
+
+<div class="card">
+<h3>最小可行方案（MVP）</h3>
+<div class="table-wrap">
+<table>
+<tr><th>组件</th><th>技术方案</th><th>精度</th></tr>
+<tr><td>屏幕截图</td><td>帧级别定时截屏（1-5fps）</td><td>视觉数据，可OCR识别内容</td></tr>
+<tr><td>键鼠事件</td><td>系统级事件监听</td><td>毫秒级时间戳，精确到像素坐标</td></tr>
+<tr><td>应用识别</td><td>活跃窗口/应用进程监控</td><td>知道你在用什么软件、看什么页面</td></tr>
+<tr><td>存储</td><td>全部本地，不上云</td><td>隐私优先，数据完全属于用户</td></tr>
+</table>
+</div>
+<p><strong>采集周期：</strong>2-3周后可训练个性化Agent</p>
+<p><strong>隐私原则：</strong>所有数据存储在本地，用户拥有完全控制权。AI模型也在本地运行，不上传任何原始数据。</p>
+</div>
+
+<div class="card">
+<h3>数据飞轮</h3>
+<p><span class="highlight">采集 → 学习 → 预测 → 纠正 → 再采集</span></p>
+<p>AI观察你的操作 → 学会你的偏好 → 提前准备好你可能需要的东西 → 你纠正它的预测 → 它学习你的纠正 → 越来越像你。</p>
+</div>
+</div>
+
+<!-- 终极愿景 -->
+<div class="section">
+<div class="section-title">🌟 终极愿景</div>
+
+<div class="insight">
+<h3>🧠 脑机接口是理想，屏幕记录是现实</h3>
+<p>脑机接口能直接读取思维信号，是最理想的数据采集方案。但在脑机接口成熟之前，<span class="highlight">屏幕上的每一次选择和放弃，都是思考的外化</span>，是可以被记录和学习的。我们不等待完美的方案，而是用现有的技术开始积累。</p>
+<p style="margin-top:10px">从屏幕记录开始，到智能眼镜，到最终的脑机接口——每一步都在让AI更懂你。但最关键的第一步，就是现在：打开电脑，开始记录。</p>
+</div>
+
+<div class="quote">
+"脑机接口是理想方案，但在那之前，屏幕上的每一次选择和放弃，都是思考的外化，都是可以被记录和学习的。"
+<div class="author">— Sky Portal</div>
+</div>
+
+<div class="quote">
+"不是让每个人都变成AI，而是让AI变成每个人。这就是数字分身的意义。"
+<div class="author">— Sky Portal</div>
+</div>
+</div>
+
+</div>
+<div class="footer">
+<p>☁️ Sky Portal · <a href="index.html">← AI 目录</a> · <a href="/sky-portal/">返回主页</a></p>
+</div>
+</body>
+</html>

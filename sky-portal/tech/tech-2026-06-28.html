@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日科技 2026-06-28</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{color:#f0a040;font-size:1.8em;text-align:center;margin:20px 0 6px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+.section{margin-bottom:28px}
+.section-title{color:#f0a040;font-size:1.3em;margin-bottom:14px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 22px;margin-bottom:14px}
+.card h3{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card h3 a{color:#f0a040;text-decoration:none}
+.card p{color:#ccc;font-size:0.92em;margin-bottom:6px}
+.card a{color:#f0a040;text-decoration:none}
+.card .date-tag{color:#888;font-size:0.78em;margin-top:6px;display:block}
+.lesson{background:#1a1a1a;border:1px solid rgba(240,160,64,0.3);border-radius:12px;padding:22px;margin-bottom:14px}
+.lesson h3{color:#f0a040;font-size:1.15em;margin-bottom:10px}
+.lesson p{color:#ccc;font-size:0.92em;margin-bottom:8px}
+.lesson .analogy{color:#8ab4f8;font-size:0.88em;font-style:italic;margin-top:10px;padding:10px;background:rgba(138,180,248,0.05);border-radius:8px}
+.footer{text-align:center;margin-top:30px;padding:20px 0;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#f0a040;text-decoration:none}
+@media(max-width:768px){.container{padding:0 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 每日科技 Daily Tech</h1>
+<div class="subtitle">2026-06-28 · Sky Portal</div>
+
+<!-- 板块1：每日一课 -->
+<div class="section">
+<div class="section-title">📚 每日一课</div>
+<div class="lesson">
+<h3>什么是 Chiplet？为什么要把大芯片拆成小芯片？</h3>
+<p>传统做法是把一颗芯片越做越大——但芯片越大，良率越低（一处坏点整颗报废），成本呈指数上升。Chiplet（小芯片）的思路是：把一颗大芯片拆成几个小模块，分别用最适合的工艺制造，再用高级封装（如 TSMC CoWoS）拼到一起。</p>
+<p>比如 AMD 的 EPYC 处理器，就是把多个 CPU core chiplet（用 5nm）和 I/O die（用 6nm）拼在一起。这样核心区域用最贵最先进的工艺，I/O 部分用成熟便宜工艺，整体性价比远胜单一大芯片。</p>
+<p>Chiplet 还带来一个好处：模块复用。你可以把同一个 NPU chiplet 拼到不同的产品线上，省去重复设计。这也是为什么 Intel、AMD、甚至 OpenAI 的 Jalapeño 芯片都在走这条路。</p>
+<div class="analogy">🧩 打比方：就像乐高积木——不再追求一块巨型积木一次成型，而是做好标准化的拼块，按需组合。坏了一块换一块，不用整组报废。</div>
+</div>
+</div>
+
+<!-- 板块2：技术突破 -->
+<div class="section">
+<div class="section-title">🔬 技术突破</div>
+
+<div class="card">
+<h3><a href="https://newsroom.ibm.com/2026-06-25-ibm-debuts-worlds-first-sub-1-nanometer-chip-technology" target="_blank">IBM 发布全球首个亚纳米芯片技术：Nanostack 3D 架构</a></h3>
+<p>IBM 于 6 月 25 日宣布突破 1 纳米节点壁垒，推出名为"Nanostack"的 3D 芯片架构。该技术可在指甲盖大小的芯片上集成近 1000 亿个晶体管，密度几乎是 IBM 2nm 芯片的两倍。IBM 与 Lam Research 在 2026 年 3 月达成为期五年的合作，专注于亚纳米逻辑制程的新材料和新工艺。IBM 预计该平台可在 5 年内进入量产，并将支撑从 7 埃米到 1 埃米的未来十年芯片迭代。</p>
+<span class="date-tag">2026-06-25 · 来源：IBM Newsroom</span>
+</div>
+
+<div class="card">
+<h3><a href="https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/" target="_blank">OpenAI 首颗自研 AI 芯片"Jalapeño"亮相，Broadcom 联合设计</a></h3>
+<p>OpenAI 与 Broadcom 于 6 月 24 日联合发布了首颗定制 AI 推理芯片"Jalapeño"。该芯片专为 OpenAI 的推理系统设计，计划于今年年底前部署，采用 TSMC N3P 工艺。这标志着 OpenAI 正式迈入芯片自研时代，减少对 NVIDIA GPU 的依赖。Broadcom 在定制 ASIC 领域经验丰富，此前已与 Google 合作 TPU 多代产品。OpenAI 计划最终达到 10GW 级别的定制 AI 加速器部署规模。</p>
+<span class="date-tag">2026-06-24 · 来源：TechCrunch / Reuters</span>
+</div>
+
+<div class="card">
+<h3><a href="https://thequbitreport.com/quantum-computing-weekly-round-up/2026/06/26/quantum-computing-weekly-round-up-week-ending-june-27-2026/" target="_blank">QuEra 和 IQM 在量子纠错领域取得重大突破</a></h3>
+<p>本周量子计算领域两项纠错突破值得关注：中性原子量子计算公司 QuEra 发布了"gigaquop"级容错路线图，计划用 2 万+ 物理量子比特实现 1000+ 逻辑量子比特，逻辑错误率达 10⁻⁹，首批系统瞄准 2028-2029 年。超导量子计算公司 IQM 则推出了"directional tile codes"新编码方案，在最近邻 iSWAP 门上运行，将每轮每逻辑量子比特错误率较表面码降低多达 1000 倍，且仅需约 30 个物理量子比特对应一个逻辑比特。</p>
+<span class="date-tag">2026-06-26 · 来源：The Qubit Report</span>
+</div>
+
+</div>
+
+<!-- 板块3：产业动态 -->
+<div class="section">
+<div class="section-title">📊 产业动态</div>
+
+<div class="card">
+<h3><a href="https://www.reuters.com/legal/litigation/trump-signs-orders-calling-powerful-quantum-computer-targeting-2028-2026-06-22/" target="_blank">特朗普签署两项量子行政令：PQC 强制迁移 + 量子计算机建设</a></h3>
+<p>6 月 22 日，美国总统特朗普签署两项关于量子技术的行政令。第一项（EO 14412）要求联邦机构在 30 天内指定后量子密码（PQC）迁移负责人，2030 年前完成高价值系统的抗量子加密迁移，NIST 须在 2027 年底前完成试点迁移项目。第二项令要求推动建设具备"有意义科学计算能力"的量子计算机，目标瞄准 2028 年。五角大楼随后于 6 月 25 日发布自己的后量子密码战略，将密码相关量子计算机列为国家安全系统的"生存性威胁"。</p>
+<span class="date-tag">2026-06-22 · 来源：Reuters / Federal News Network</span>
+</div>
+
+<div class="card">
+<h3><a href="https://www.reuters.com/business/broadcom-tumbles-revenue-miss-clouds-ai-boom-bets-2026-06-04/" target="_blank">半导体板块 6 月剧烈震荡：Broadcom 财报引发 1.3 万亿美元抛售</a></h3>
+<p>6 月初半导体板块经历了历史性抛售。Broadcom 尽管季度业绩强劲，但未上调 AI 收入指引，触发股价单日暴跌 13-15%，市值蒸发约 3000 亿美元。连锁反应导致 SOX 半导体指数一周内抹去约 1.3 万亿美元市值，NVIDIA 跌约 6%，AMD 和 Intel 各跌约 11%。不过 Broadcom 仍报告 AI 芯片收入同比增长 143%，市场随后部分反弹。此次抛售凸显了投资者对 AI 芯片增长预期的高度敏感。</p>
+<span class="date-tag">2026-06-04 · 来源：Reuters / CNBC</span>
+</div>
+
+<div class="card">
+<h3><a href="https://www.businesskorea.co.kr/news/articleView.html?idxno=215922" target="_blank">TSMC 宣布 2026 年量产 1.6nm，三星与 Intel 加紧追赶</a></h3>
+<p>TSMC 宣布将在 2026 年内启动 1.6nm（A16）制程的量产，进一步拉大与竞争对手的差距。目前 TSMC 3nm 制程订单交期已超过一年。三星晶圆代工在 2nm 节点遭遇挫折后转向 5nm/8nm 订单救急，同时加速 2nm 回归计划。Intel 则将自身定位为"半导体行业的 Plan B"，NVIDIA 据报正在评估 Intel 作为潜在代工合作伙伴。Broadcom 也确认获得了苹果基于 TSMC N3P 工艺的定制 AI 加速器订单。</p>
+<span class="date-tag">2026-06-18 · 来源：BusinessKorea / Digitimes</span>
+</div>
+
+</div>
+
+<!-- 板块4：量子计算 -->
+<div class="section">
+<div class="section-title">⚛️ 量子计算</div>
+
+<div class="card">
+<h3><a href="https://blog.cloudflare.com/post-quantum-eo-2026/" target="_blank">白宫 PQC 行政令：全球量子安全倒计时正式启动</a></h3>
+<p>特朗普 6 月 22 日签署的后量子密码行政令给整个行业敲响了警钟。行政令要求：(1) 联邦机构 30 天内任命 PQC 迁移负责人；(2) 2030 年前完成所有高价值系统的抗量子加密升级；(3) NIST 在 2027 年底前完成迁移试点。Cloudflare 在博客中指出，目前仅 6% 的互联网 SSH 服务器支持后量子加密。法国 ANSSI 已要求 2027 年开始量子抗性认证，2030 年在关键基础设施全面部署。企业的"先存储后解密"风险窗口正在关闭。</p>
+<span class="date-tag">2026-06-22 · 来源：Cloudflare Blog / Federal News Network</span>
+</div>
+
+<div class="card">
+<h3><a href="https://thequbitreport.com/quantum-computing-weekly-round-up/2026/06/26/quantum-computing-weekly-round-up-week-ending-june-27-2026/" target="_blank">光子量子处理器 × NVIDIA：量子-AI 混合架构走向实战</a></h3>
+<p>本周多项量子-AI 混合集成取得实质进展：法国光子公司 Quandela 验证了其光子 QPU 与 NVIDIA 加速计算基础设施的低延迟集成（通过 NVQLink），使量子处理器更接近"协同部署加速器"而非远程云服务。英国 AEGIQ 的 Artemis 光子系统已使用 NVIDIA 托管的 Ising AI 模型进行自动化校准，每周工程时间减少 3 倍。硅自旋量子比特公司 Diraq 也将其处理器与 NVIDIA Grace Hopper 超级芯片集成，实现约 3.3μs 的往返延迟闭环控制。</p>
+<span class="date-tag">2026-06-26 · 来源：The Qubit Report</span>
+</div>
+
+<div class="card">
+<h3><a href="https://thequantuminsider.com/2026/06/18/new-industry-study-finds-quantum-computing-has-entered-a-capability-era-with-early-movers-building-an-advantage-later-entrants-will-struggle-to-close/" target="_blank">IQM 报告：量子计算进入"能力时代"，先发优势正在形成</a></h3>
+<p>IQM 发布的《State of Quantum 2026》报告指出，量子计算已从"研究探索期"进入"能力时代"——企业级量子计算参与已相当广泛。报告认为，先行者正在建立实质性优势，后入场者将越来越难以追赶。同周，鹿特丹港量子通信实地实验室从试点项目正式转为商业运营量子密钥分发（QKD）服务，标志着量子安全网络正从"演示"变为"基础设施"。Infleqtion 则启动了美国"量子太空倡议"，将量子传感器和光学时钟从实验室推向太空基础设施。</p>
+<span class="date-tag">2026-06-18 · 来源：The Quantum Insider / The Qubit Report</span>
+</div>
+
+</div>
+
+<div class="footer">
+<p>☁️ Sky Portal · <a href="/sky-portal/">返回主页</a> · <a href="/sky-portal/tech/">每日科技索引</a></p>
+<p>由 GLM 5.1 通过 zai-search 生成 · 2026-06-28</p>
+</div>
+</div>
+</body>
+</html>

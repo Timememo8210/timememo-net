@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 每日行情 2026-07-07</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.weather-box{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.weather-stat{background:#222;border-radius:10px;padding:12px 18px;flex:1;min-width:100px;text-align:center}
+.weather-val{font-size:1.5em;font-weight:700;color:#fff}
+.weather-label{font-size:0.8em;color:#888;margin-top:2px}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:#1e3a8a">
+<div class="poster-icon">📈</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">美股三大指数齐涨</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">US Markets Rally</div>
+<div class="zh poster-data">• 道指涨0.29%，首破53000点<br>• 纳指涨1.12%，标普涨0.72%</div>
+<div class="en poster-data" style="display:none">• DJIA +0.29%, 53000 milestone<br>• NASDAQ +1.12%, SP500 +0.72%</div>
+</div>
+<div class="poster-card" style="background:#7c3aed">
+<div class="poster-icon">🔬</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">半导体板块分化</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Semiconductors Mixed</div>
+<div class="zh poster-data">• 西部数据涨7%，希捷涨5.86%<br>• AMD涨超6%，博通持续上涨</div>
+<div class="en poster-data" style="display:none">• WDC +7%, STX +5.86%<br>• AMD +6%, AVGO continues rally</div>
+</div>
+<div class="poster-card" style="background:#059669">
+<div class="poster-icon">⚡</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">AI算力合作</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">AI Partnership</div>
+<div class="zh poster-data">• OpenAI与AMD达成6GW GPU合作<br>• AMD盘前涨超35%</div>
+<div class="en poster-data" style="display:none">• OpenAI+AMD 6GW GPU deal<br>• AMD pre-market +35%</div>
+</div>
+<div class="poster-card" style="background:#dc2626">
+<div class="poster-icon">🌏</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中港市场调整</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">China Markets Down</div>
+<div class="zh poster-data">• 上证跌1.26%，深成指跌1.24%<br>• 港股科技股反弹，恒生科技涨0.94%</div>
+<div class="en poster-data" style="display:none">• SSE -1.26%, SZSE -1.24%<br>• HK tech rebound +0.94%</div>
+</div>
+</div>
+</div>
+
+<h1>📊 每日行情</h1>
+<p class="subtitle">2026-07-07 · Sky Portal Market Analysis · <a href="index.html">All Reports</a></p>
+
+<h2>📈 <span class="zh">美股市场分析</span><span class="en" style="display:none">US Market Analysis</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 三大指数集体收涨，道指首破53000点创历史新高</span><span class="en" style="display:none">1. All Three Major Indices Rise, DJIA Hits 53000</span></h4>
+<p><span class="zh">7月7日，美股三大指数集体收涨。道琼斯工业指数涨0.29%，报53055.91点，首次突破53000点大关，创下历史新高。纳斯达克综合指数涨1.12%，标普500指数涨0.72%。市场情绪乐观，投资者对经济前景保持信心，科技股领涨大盘。</span><span class="en" style="display:none">July 7 saw all three major US indices rise. The Dow Jones gained 0.29% to 53055.91, breaking 53000 for the first time. NASDAQ rose 1.12%, and S&P 500 added 0.72%. Tech stocks led the rally as investor confidence in the economy remained strong.</span></p>
+<p class="src">来源：证券时报 / 21财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 特斯拉、AMD领涨科技股，AI相关表现亮眼</span><span class="en" style="display:none">2. Tesla & Lead Tech Rally, AI Stocks Shine</span></h4>
+<p><span class="zh">热门科技股多数上涨，特斯拉(TSLA)涨超6%，AMD涨超6%，博通(Broadcom)股价也表现强劲。市场对AI相关股票的需求持续升温，特别是OpenAI与AMD宣布达成合作协议后，AMD盘前股价暴涨35%。Meta、谷歌涨超2%，苹果涨1.31%，亚马逊涨0.61%。SpaceX略有下跌0.98%。</span><span class="en" style="display:none">Major tech stocks gained ground with Tesla up >6%, AMD up >6%, and Broadcom also strong. AI-related stocks saw continued demand, especially after OpenAI and AMD announced a partnership, sending AMD pre-market up 35%. Meta and Google rose >2%, Apple +1.31%, Amazon +0.61%.</span></p>
+<p class="src">来源：新浪财经 / 飞象网</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 芯片股分化，存储芯片回暖</span><span class="en" style="display:none">3. Chip Stocks Mixed, Storage Chips Recover</span></h4>
+<p><span class="zh">半导体板块整体表现分化。存储芯片方面，西部数据(WDC)涨超7%，希捷科技(STX)涨5.86%，美光科技(MU)涨逾1%。闪迪(WDC)微跌0.03%。费城半导体指数(SOX)走势震荡，反映市场对芯片行业短期走势的分歧。AI算力需求持续推动高端芯片需求，但投资者对高估值个股获利了结情绪也在上升。</span><span class="en" style="display:none">The semiconductor sector showed mixed performance. Storage chips recovered with WDC up >7%, STX +5.86%, MU +1%. WD down 0.03%. The Philadelphia Semiconductor Index was volatile, reflecting market分歧 on chip stocks. AI demand continues driving high-end chip demand, but profit-taking sentiment on high-valuation stocks is rising.</span></p>
+<p class="src">来源：金融界 / 东方财富</p>
+</div>
+
+<h2>🌏 <span class="zh">中港市场表现</span><span class="en" style="display:none">China & Hong Kong Markets</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. A股市场调整，超4300只个股飘绿</span><span class="en" style="display:none">1. A-Share Market Correction, >4300 Stocks Down</span></h4>
+<p><span class="zh">7月7日，A股市场整体调整。截至收盘，上证指数跌1.26%，深证成指跌1.24%，创业板指跌0.94%，科创50指数微涨0.28%。全市场超4300只个股飘绿，两市成交额约2.58万亿元，较前一交易日明显缩量。金融股相对抗跌，显示资金在市场调整时寻求防御性配置。</span><span class="en" style="display:none">July 7 saw a correction in A-shares. The SSE Index fell 1.26%, SZSE Index 1.24%, ChiNext Index 0.94%, while STAR 50 rose 0.28%. Over 4300 stocks declined on lower turnover of ~2.58 trillion yuan. Financial stocks showed relative strength as investors sought defensive positions during the correction.</span></p>
+<p class="src">来源：证券时报 / 21财经</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 港股科技股反弹，恒生科技指数上涨</span><span class="en" style="display:none">2. HK Tech Stocks Rebound, HSTECH Rises</span></h4>
+<p><span class="zh">港股市场在科技股带领下呈现反弹态势。恒生指数反弹，恒生科技指数上涨0.94%，报收4541点。腾讯控股(00700.HK)上涨4.8%，创新药概念走强，中国生物制药涨6.5%。港股市场在连跌近9个月后迎来久违的连续反弹，投资者对中国科技公司的估值修复预期升温。</span><span class="en" style="display:none">Hong Kong's tech stocks led a rebound. The Hang Seng Index rose with the HSTECH Index up 0.94% to 4541 points. Tencent Holdings gained 4.8%, while innovative pharmaceuticals strengthened with Sino Biopharmaceutical up 6.5%. After nearly 9 months of declines, HK tech stocks saw a much-needed rally as valuation recovery expectations grew.</span></p>
+<p class="src">来源：东方财富 / 中华香港内地指数</p>
+</div>
+
+<h2>🔍 <span class="zh">核心驱动因素</span><span class="en" style="display:none">Key Drivers</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. OpenAI与AMD达成6GW GPU算力合作协议</span><span class="en" style="display:none">1. OpenAI+AMD 6GW GPU Partnership</span></h4>
+<p><span class="zh">OpenAI和AMD在官网宣布达成合作协议，将合作部署总计6吉瓦的AMD GPU算力。这一重大合作推动AMD股价盘前暴涨35%，竞争对手英伟达(NVDA)股价下跌1.4%。这标志着AI基础设施领域的重要布局，AMD在AI算力市场的竞争地位得到显著提升。</span><span class="en" style="display:none">OpenAI and AMD announced a partnership for 6GW of AMD GPU compute capacity. This sent AMD pre-market up 35%, while competitor NVIDIA fell 1.4%. This marks a major development in AI infrastructure, significantly enhancing AMD's competitive position in the AI compute market.</span></p>
+<p class="src">来源：财联社 / Moomoo</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 存储芯片需求回暖，半年涨幅惊人</span><span class="en" style="display:none">2. Storage Chip Demand Recovers, Stunning Gains</span></h4>
+<p><span class="zh">存储芯片行业需求持续回暖。闪迪(WDC)上半年累计涨幅达857.84%，成为本轮AI半导体行情最极致的受益者之一。伯恩斯坦将闪迪目标价从1700美元大幅上调至3000美元，高盛将目标价从1200美元上调至2200美元。高盛还将希捷科技目标价从700美元上调至960美元，将西部数据目标价从400美元上调至650美元。</span><span class="en" style="display:none">Storage chip demand continues to recover. WD has gained 857.84% in the first half, becoming one of the biggest beneficiaries of the AI semiconductor boom. Bernstein raised WD's target from $1700 to $3000, Goldman Sachs from $1200 to $2200. GS also raised STX from $700 to $960 and WDC from $400 to $650.</span></p>
+<p class="src">来源：金融界 / 雪球</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. 市场对AI技术落地信心增强</span><span class="en" style="display:none">3. Confidence in AI Technology Implementation</span></h4>
+<p><span class="zh">市场对AI技术从概念走向实际应用的信心持续增强。多家券商分析认为，当前AI行情未至典型泡沫阶段，全球高景气资产稀缺，科技板块成交中枢上移具有内在合理性。花旗银行表示，AI基础建设带来的盈利增长有望推动标普500指数在2026年突破8000点大关，将年终目标上调至8100点。</span><span class="en" style="display:none">Market confidence in AI moving from concept to real-world implementation continues to strengthen. Multiple brokerages believe the current AI rally is not a typical bubble, as high-growth assets remain scarce globally. Citigroup expects AI infrastructure-driven profits to push S&P 500 above 8000 in 2026, raising year-end target to 8100.</span></p>
+<p class="src">来源：21财经 / 华尔街见闻</p>
+</div>
+
+<h2>📊 <span class="zh">热门股票行情（7月7日收盘）</span><span class="en" style="display:none">Hot Stocks (Jul 7 Close)</span></h2>
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">53055.91</div><div class="stock-change up">+0.29%</div></div>
+<div class="stock-item"><div class="stock-ticker">IXIC</div><div class="stock-price">25808.97</div><div class="stock-change up">+1.12%</div></div>
+<div class="stock-item"><div class="stock-ticker">SPX</div><div class="stock-price">7467.39</div><div class="stock-change up">+0.72%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">12228.2</div><div class="stock-change down">-5.21%</div></div>
+<div class="stock-item"><div class="stock-ticker">TSLA</div><div class="stock-price">$349.00</div><div class="stock-change up">+6.69%</div></div>
+<div class="stock-item"><div class="stock-ticker">AMD</div><div class="stock-price">$245.04</div><div class="stock-change up">+6.60%</div></div>
+<div class="stock-item"><div class="stock-ticker">WDC</div><div class="stock-price">$65.43</div><div class="stock-change up">+7.00%</div></div>
+<div class="stock-item"><div class="stock-ticker">STX</div><div class="stock-price">$58.92</div><div class="stock-change up">+5.86%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">$1000.50</div><div class="stock-change up">+1.50%</div></div>
+<div class="stock-item"><div class="stock-ticker">AVGO</div><div class="stock-price">$371.55</div><div class="stock-change up">+0.80%</div></div>
+</div>
+
+<h3>🔮 <span class="zh">市场预判</span><span class="en" style="display:none">Market Outlook</span></h3>
+
+<div class="card">
+<h4><span class="zh">短期展望：震荡加剧，分化明显</span><span class="en" style="display:none">Short-term: Increased Volatility, Clear Divergence</span></h4>
+<p><span class="zh">短期内市场可能延续震荡走势，科技股内部分化加剧。经过上半年大幅上涨后，部分高估值个股面临技术性调整压力。费城半导体指数近期波动加大，反映投资者对芯片行业短期走势的分歧。建议关注业绩确定性较高的标的，以及受益于AI实际落地的产业链环节。</span><span class="en" style="display:none">The market may see continued short-term volatility with increasing divergence among tech stocks. After strong gains in H1, some high-valuation stocks face technical correction pressure. The Philadelphia Semiconductor Index's recent volatility reflects investor分歧 on chip stocks. Focus on companies with solid earnings and AI implementation beneficiaries.</span></p>
+<p class="src">来源：TradingKey / 雪球</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">中长期展望：AI产业链持续受益</span><span class="en" style="display:none">Long-term: AI Industry Chain Continues to Benefit</span></h4>
+<p><span class="zh">中长期来看，AI产业链将继续受益于技术落地和产业升级。2026年全球半导体市场规模有望跃升至1.51万亿美元，同比增速89.9%，创下20年最高增速。先进封装、高带宽内存、AI芯片等细分领域将持续高景气。建议关注具备技术壁垒和产能优势的核心企业，以及在AI应用层有明确商业模式的创新公司。</span><span class="en" style="display:none">Looking long-term, the AI industry chain will continue to benefit from technology implementation and industrial upgrading. Global semiconductor market size could reach $1.51T in 2026, up 89.9% YoY, the highest growth rate in 20 years. Advanced packaging, HBM, AI chips and other segments will maintain high景气. Focus on companies with technical barriers, capacity advantages, and clear business models in AI applications.</span></p>
+<p class="src">来源：雪球 / 21财经</p>
+</div>
+
+<h3>⚠️ <span class="zh">风险提示</span><span class="en" style="display:none">Risk Warning</span></h3>
+
+<div class="card">
+<h4><span class="zh">主要风险因素</span><span class="en" style="display:none">Key Risk Factors</span></h4>
+<div class="news-item">🔥 <span class="zh"><b>高估值回调风险</b> — 半导体板块经过上半年大幅上涨后，部分个股估值已处于历史高位，存在技术性回调压力</span><span class="en" style="display:none"><b>High Valuation Correction Risk</b> — After strong H1 gains, some semiconductor stocks are at historical highs with technical correction pressure</span></div>
+<div class="news-item">⚡ <span class="zh"><b>业绩兑现压力</b> — 投资者对AI相关公司的盈利预期已经较高，若二季度业绩不及预期，可能引发市场调整</span><span class="en" style="display:none"><b>Earnings Pressure</b> — High AI company profit expectations; disappointing Q2 earnings could trigger market correction</span></div>
+<div class="news-item">🌍 <span class="zh"><b>地缘政治风险</b> — 中东局势持续紧张，可能影响全球供应链和能源价格，对半导体行业产生间接影响</span><span class="en" style="display:none"><b>Geopolitical Risk</b> — Ongoing Middle East tensions may affect global supply chains and energy prices</span></div>
+<div class="news-item">🏭 <span class="zh"><b>产能过剩风险</b> — 2027年后半导体行业可能出现产能过剩，特别是先进封装领域</span><span class="en" style="display:none"><b>Overcapacity Risk</b> — Semiconductor industry may face overcapacity after 2027, especially in advanced packaging</span></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Market Analysis · Generated by Sky AI · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: 新浪财经, 21财经, 财联社, 金融界, 东方财富, 雪球</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+</body>
+</html>

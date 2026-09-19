@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日行情 2026-05-18 — Sky Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#ccc;font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif;line-height:1.7;padding:20px 16px}
+.wrap{max-width:900px;margin:0 auto}
+h1{text-align:center;color:#4ade80;font-size:1.8em;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:0.9em;margin-bottom:28px}
+h2{color:#4ade80;font-size:1.3em;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a}
+h3{color:#4ade80;margin:16px 0 10px}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card h4{color:#fff;font-size:1.05em;margin-bottom:8px}
+.card p{margin-bottom:6px;font-size:0.92em}
+.card .src{color:#888;font-size:0.8em;margin-top:6px}
+.stock-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.stock-item{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 10px;text-align:center}
+.stock-ticker{font-family:'SF Mono',monospace;font-weight:700;color:#4ade80;font-size:0.95em}
+.stock-price{color:#fff;font-size:1.1em;font-weight:600;margin:6px 0 4px}
+.stock-change{font-family:'SF Mono',monospace;font-weight:600;font-size:0.82em;padding:3px 10px;border-radius:5px;display:inline-block}
+.up{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3)}
+.down{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+.news-item{padding:10px 0;border-bottom:1px solid #222}
+.news-item:last-child{border-bottom:none}
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.poster-card{border-radius:12px;padding:20px 24px;color:#fff}
+.poster-icon{font-size:2em;margin-bottom:8px}
+.poster-data{margin-top:10px;font-size:0.9em;opacity:0.9;line-height:1.6}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a;color:#666;font-size:0.85em}
+.footer a{color:#4ade80;text-decoration:none}
+button#btn-zh,button#btn-en{padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85em;border:1px solid #555}
+button#btn-zh{background:#333;color:#fff}
+button#btn-en{background:#222;color:#aaa}
+.kline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.kline-label{font-family:'SF Mono',monospace;font-size:0.8em;font-weight:600;color:#4ade80;text-align:center;margin-bottom:4px;letter-spacing:0.03em}
+@media(max-width:768px){.stock-grid{grid-template-columns:repeat(2,1fr)}.kline-grid{grid-template-columns:1fr}.poster-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="text-align:right;margin-bottom:8px">
+<button onclick="switchLang('zh')" id="btn-zh">中文</button>
+<button onclick="switchLang('en')" id="btn-en">EN</button>
+</div>
+
+<div id="poster">
+<div class="poster-grid">
+<div class="poster-card" style="background:linear-gradient(135deg,#dc2626 0%,#991b1b 100%)">
+<div class="poster-icon">💾</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">存储芯片集体暴跌</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Memory Chip Bloodbath</div>
+<div class="zh poster-data">• 希捷CEO称新工厂"耗时太长"<br>• 希捷 -7% · 美光 -6% · 闪迪 -5.3%<br>• SOX费半指数重挫 -2.47%</div>
+<div class="en poster-data" style="display:none">• Seagate CEO: new fabs "take too long"<br>• STX -7% · MU -6% · SNDK -5.3%<br>• SOX index plunges -2.47%</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#ea580c 0%,#c2410c 100%)">
+<div class="poster-icon">🛢️</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">中东紧张 · 油价$108+</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Middle East Tension · Oil $108+</div>
+<div class="zh poster-data">• WTI $108.66 · Brent $112.10<br>• 特朗普暂缓攻击伊朗（应海湾国家请求）<br>• 美伊谈判"正在进行中"</div>
+<div class="en poster-data" style="display:none">• WTI $108.66 · Brent $112.10<br>• Trump holds off Iran attack at Gulf states' request<br>• "Serious negotiations underway"</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#7c3aed 0%,#5b21b6 100%)">
+<div class="poster-icon">📉</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">标普/纳指连跌两日</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">S&P/Nasdaq Back-to-Back Losses</div>
+<div class="zh poster-data">• 标普 7,403 (-0.07%)<br>• 纳指 26,091 (-0.51%)<br>• 道指独涨 +0.32% 至 49,686</div>
+<div class="en poster-data" style="display:none">• S&P 500 7,403 (-0.07%)<br>• Nasdaq 26,091 (-0.51%)<br>• Dow alone +0.32% to 49,686</div>
+</div>
+<div class="poster-card" style="background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%)">
+<div class="poster-icon">💹</div>
+<div class="zh" style="font-size:1.4em;font-weight:700">全球债市抛售持续</div>
+<div class="en" style="display:none;font-size:1.1em;font-weight:600;opacity:0.9">Global Bond Selloff Continues</div>
+<div class="zh poster-data">• 美30年期国债收益率创一年新高<br>• 英国30年期Gilt至90年代末以来最高<br>• 日本长债收益率同步攀升</div>
+<div class="en poster-data" style="display:none">• US 30Y Treasury yield at 1-year high<br>• UK 30Y Gilt yields highest since late 1990s<br>• Japan long bond yields also climbing</div>
+</div>
+</div>
+</div>
+
+<h1>📊 <span class="zh">每日行情</span><span class="en" style="display:none">Daily Market</span></h1>
+<p class="subtitle">2026-05-18 · Monday · US Market Open · <a href="index.html">All Reports</a></p>
+
+<h2>🇺🇸 <span class="zh">美股收盘（5/18周一）</span><span class="en" style="display:none">US Market Close (Mon May 18)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">DJI</div><div class="stock-price">49,686</div><div class="stock-change up">+0.32%</div></div>
+<div class="stock-item"><div class="stock-ticker">S&P 500</div><div class="stock-price">7,403</div><div class="stock-change down">-0.07%</div></div>
+<div class="stock-item"><div class="stock-ticker">NASDAQ</div><div class="stock-price">26,091</div><div class="stock-change down">-0.51%</div></div>
+<div class="stock-item"><div class="stock-ticker">SOX</div><div class="stock-price">11,303</div><div class="stock-change down">-2.47%</div></div>
+<div class="stock-item"><div class="stock-ticker">WTI</div><div class="stock-price">$108.66</div><div class="stock-change up">+3.0%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">美股涨跌不一，科技股承压，道指独涨</span><span class="en" style="display:none">Mixed Close: Tech Pressured, Dow Alone Higher</span></h4>
+<p><span class="zh"><b>周一（5/18）</b>：道琼斯指数收于49,686（+160点，+0.32%），标普500收于7,403（-0.07%），纳斯达克收于26,091（-0.51%）。标普和纳指连续第二个交易日下跌，结束了此前的连续创新高行情。科技股是表现最差的板块，半导体领跌。道指受益于防御性板块和能源股上涨而独涨。NextEra Energy宣布收购Dominion Energy（+9%），帮助道指保持正收益。</span><span class="en" style="display:none"><b>Monday (5/18)</b>: Dow closed at 49,686 (+160 pts, +0.32%), S&P 500 at 7,403 (-0.07%), Nasdaq at 26,091 (-0.51%). Both S&P and Nasdaq posted back-to-back losses, ending their streak of record highs. Tech was the worst-performing sector, led lower by semiconductors. The Dow benefited from defensive and energy stock gains. NextEra Energy announced acquisition of Dominion Energy (+9%), helping the Dow stay positive.</span></p>
+<p class="src">来源：CNBC / MarketWatch / Sina Finance</p>
+</div>
+
+<h2>💾 <span class="zh">存储芯片板块重挫</span><span class="en" style="display:none">Memory Chip Sector Plunges</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">STX</div><div class="stock-price">希捷</div><div class="stock-change down">-7.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">MU</div><div class="stock-price">美光</div><div class="stock-change down">-6.0%</div></div>
+<div class="stock-item"><div class="stock-ticker">SNDK</div><div class="stock-price">闪迪</div><div class="stock-change down">-5.3%</div></div>
+<div class="stock-item"><div class="stock-ticker">WDC</div><div class="stock-price">西数</div><div class="stock-change down">-4.8%</div></div>
+<div class="stock-item"><div class="stock-ticker">NVDA</div><div class="stock-price">英伟达</div><div class="stock-change down">-1.0%</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">1. 希捷CEO言论引发存储行业恐慌性抛售</span><span class="en" style="display:none">1. Seagate CEO's Comments Trigger Memory Sector Panic</span></h4>
+<p><span class="zh">希捷科技CEO Dave Mosley在摩根大通技术大会上表示，新建工厂"耗时太长"（take too long），引发市场对存储芯片行业产能不足的严重担忧。希捷暴跌近7%，拖累整个存储板块。美光 -6%、闪迪 -5.3%、西部数据 -4.8%。此前存储芯片板块在AI需求驱动下经历了数月暴涨，市场将CEO言论解读为行业可能无法满足AI服务器对存储的爆发式需求——这既是短期供给约束，也暗示产能瓶颈可能持续更久。</span><span class="en" style="display:none">Seagate CEO Dave Mosley said at a JPMorgan conference that new factories would "take too long," sparking serious concerns about memory chip industry capacity constraints. Seagate plunged nearly 7%, dragging the entire memory sector down. MU -6%, SNDK -5.3%, WDC -4.8%. The memory sector had been on a months-long surge driven by AI demand. The market interpreted the CEO's comments as suggesting the industry can't meet exploding AI server memory demand — both a near-term supply constraint and a signal that bottlenecks may persist longer.</span></p>
+<p class="src">来源：CNBC / AASTOCKS / Wall Street CN</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. SOX费城半导体指数重挫2.47%，终结连涨</span><span class="en" style="display:none">2. SOX Semiconductor Index Plunges 2.47%, Streak Ends</span></h4>
+<p><span class="zh">费城半导体指数（SOX）收于11,303点，下跌286点（-2.47%），创下近期最大单日跌幅之一。这是继上周五SOX大跌4%（周线首次转跌）后的延续下跌。上周SOX创下自2000年以来最强25日涨幅（自3月底暴涨64%），当前正经历快速获利回吐。NVIDIA和Broadcom各跌约1%，AMD也受到拖累。尽管如此，Bernstein看好台积电（TSM），认为其相对SOX折价20%，是"AI领域最值得信赖的复合增长标的"。</span><span class="en" style="display:none">The PHLX Semiconductor Index (SOX) closed at 11,303, down 286 points (-2.47%), one of the largest single-day drops recently. This extends Friday's 4% selloff (first weekly loss). SOX had posted the strongest 25-day gain since 2000 (+64% since March 30), and is now undergoing rapid profit-taking. NVIDIA and Broadcom each fell ~1%, with AMD also dragged lower. Despite the selloff, Bernstein is bullish on TSMC, which trades at a ~20% discount to SOX, calling it "the most trustworthy compounder in the AI space."</span></p>
+<p class="src">来源：Google Finance / CNBC / Charles Schwab</p>
+</div>
+
+<h2>🌍 <span class="zh">全球宏观</span><span class="en" style="display:none">Global Macro</span></h2>
+
+<div class="card">
+<h4><span class="zh">1. 中东局势：特朗普暂缓对伊攻击，油价维持高位</span><span class="en" style="display:none">1. Middle East: Trump Holds Off Iran Attack, Oil Stays High</span></h4>
+<p><span class="zh">美伊冲突持续升级。WTI原油收于$108.66/桶（+3%），Brent原油收于$112.10/桶（+2%）。特朗普周一在Truth Social宣布暂缓原定周二的对伊攻击计划，应卡塔尔、沙特和阿联酋领导人请求。三国领导人表示"认真谈判正在进行中"，可能达成对美"非常可接受"的协议。但前一天（周日）特朗普仍警告伊朗"必须赶紧行动，否则什么都不会剩下"。市场对中东局势高度紧张——霍尔木兹海峡的走向仍是关键变量。WEBs Investments CEO Ben Fulton称高油价是"分水岭问题"，看不到被抵消的可能。</span><span class="en" style="display:none">The US-Iran conflict continues to escalate. WTI crude settled at $108.66/bbl (+3%), Brent at $112.10/bbl (+2%). Trump announced Monday on Truth Social he's holding off a planned Tuesday attack on Iran, at the request of Qatar, Saudi Arabia, and UAE leaders. The three nations' leaders said "serious negotiations are now taking place" that could lead to a deal "very acceptable" to the US. But on Sunday, Trump warned Iran to "get moving" or "there won't be anything left." Markets remain highly tense about the Middle East — the Strait of Hormuz remains the key variable. WEBs Investments CEO Ben Fulton called elevated oil prices a "watershed" issue that he doesn't see being offset.</span></p>
+<p class="src">来源：CNBC / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">2. 全球债券抛售持续，收益率飙升</span><span class="en" style="display:none">2. Global Bond Selloff Continues, Yields Surge</span></h4>
+<p><span class="zh">全球主权债券市场遭遇持续抛售。美国30年期国债收益率创约一年新高。英国30年期Gilt收益率攀升至90年代末以来最高水平，日本长期国债收益率同步走高。上周五的收益率飙升已导致纳斯达克100指数暴跌1.5%（3月27日以来最差单日表现）。高利率环境持续压制科技股估值——尤其是此前连续创新高的成长型股票。本周市场将关注FOMC会议纪要及多位美联储官员讲话。通胀数据使美联储近期降息几乎不可能。</span><span class="en" style="display:none">Global sovereign bond markets face continued selling pressure. The US 30-year Treasury yield hit its highest level in about a year. UK 30-year Gilt yields climbed to levels not seen since the late 1990s, with Japanese long bond yields also rising. Friday's yield spike already caused the Nasdaq-100 to plunge 1.5% (worst day since March 27). The high-rate environment continues to pressure tech valuations — especially growth stocks that had been hitting consecutive record highs. This week's focus: FOMC minutes and multiple Fed speakers. Inflation data makes a near-term Fed rate cut virtually impossible.</span></p>
+<p class="src">来源：CNBC / Charles Schwab / Reuters</p>
+</div>
+
+<div class="card">
+<h4><span class="zh">3. NextEra Energy收购Dominion Energy，公用事业并购潮</span><span class="en" style="display:none">3. NextEra Acquires Dominion — Utilities M&A Wave</span></h4>
+<p><span class="zh">NextEra Energy宣布以全股票交易方式收购Dominion Energy，合并后将创建全球最大受监管电力公用事业公司。消息公布后Dominion股价暴涨9%以上，NextEra下跌约5%。这笔交易反映了电力行业对AI数据中心用电需求激增的战略响应——数据中心正成为电力需求增长的最大驱动力之一。Bernstein看好台积电、Deutsche Bank上调Digital Realty Trust目标价至$220（数据中心REITs受益）。</span><span class="en" style="display:none">NextEra Energy announced an all-stock acquisition of Dominion Energy, creating the world's largest regulated electric utility. Dominion surged 9%+ on the news while NextEra fell ~5%. The deal reflects the power industry's strategic response to surging electricity demand from AI data centers — data centers are becoming the single largest driver of power demand growth. Bernstein is bullish on TSMC; Deutsche Bank raised Digital Realty Trust's price target to $220 (data center REITs benefiting).</span></p>
+<p class="src">来源：CNBC / Deutsche Bank</p>
+</div>
+
+<h2>🇨🇳 <span class="zh">A股 / 港股（5/18周一）</span><span class="en" style="display:none">China A-Shares / HK (Mon May 18)</span></h2>
+
+<div class="stock-grid">
+<div class="stock-item"><div class="stock-ticker">上证</div><div class="stock-price">4,132</div><div class="stock-change down">-0.09%</div></div>
+<div class="stock-item"><div class="stock-ticker">深成指</div><div class="stock-price">15,530</div><div class="stock-change down">-0.20%</div></div>
+<div class="stock-item"><div class="stock-ticker">创业板</div><div class="stock-price">3,915</div><div class="stock-change down">-0.36%</div></div>
+<div class="stock-item"><div class="stock-ticker">恒生科技</div><div class="stock-price">4,845</div><div class="stock-change down">-1.95%</div></div>
+<div class="stock-item"><div class="stock-ticker">成交</div><div class="stock-price">672亿</div><div class="stock-change down">缩量</div></div>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股小幅震荡，港股科技股回调</span><span class="en" style="display:none">A-Shares Flat, HK Tech Pulls Back</span></h4>
+<p><span class="zh"><b>A股</b>：周一三大指数涨跌互现但幅度极小，上证收于4,132（-0.09%），深成指15,530（-0.20%），创业板3,915（-0.36%）。市场呈现窄幅震荡格局，成交缩量。此前创业板上周首破4,000创历史新高后回落，目前处于高位整理阶段。中美峰会后缺乏具体细节令投资者感到失望，延续上周五的回调态势。市场在4,100-4,250区间等待方向选择。</span><span class="en" style="display:none"><b>A-Shares</b>: Monday's three major indexes were mixed but with tiny moves. Shanghai at 4,132 (-0.09%), Shenzhen 15,530 (-0.20%), ChiNext 3,915 (-0.36%). Narrow range trading with shrinking volume. ChiNext had broken 4,000 ATH last week before pulling back; currently in high-level consolidation. Investors were disappointed by the lack of concrete details after the Trump-Xi summit, extending Friday's pullback. Market awaits directional breakout in the 4,100-4,250 range.</span></p>
+<p><span class="zh"><b>港股</b>：恒生科技指数收于4,845（-1.95%），成交673亿港元。港股大型科技股近日表现明显弱于A股科技股。恒指也录得下跌。中美峰会"卖事实"效应持续，港股反弹动能减弱。</span><span class="en" style="display:none"><b>Hong Kong</b>: Hang Seng Tech closed at 4,845 (-1.95%) on 67.3B HKD turnover. HK large-cap tech stocks have notably underperformed A-share tech recently. HSI also declined. The "sell the news" effect from the Trump-Xi summit continues, with HK rally momentum fading.</span></p>
+<p class="src">来源：东方财富 / Trading Economics / 新浪财经</p>
+</div>
+
+<h2>🔮 <span class="zh">走势预判</span><span class="en" style="display:none">Market Outlook</span></h2>
+
+<div class="card">
+<h4><span class="zh">美股：进入"heavy range trade"区间</span><span class="en" style="display:none">US Market: Entering "Heavy Range Trade"</span></h4>
+<p><span class="zh"><b>短期偏谨慎</b>：标普和纳指连续两日下跌，科技股和半导体明显承压。中东局势不确定性（美伊谈判进展）+ 高油价（$108+）+ 全球债券收益率攀升形成三重夹击。WEBs Investments CEO Fulton表示，没有中东积极进展（尤其是霍尔木兹海峡），市场将进入"沉重区间交易"。"我能看到人们开始很快锁定利润。"</span><span class="en" style="display:none"><b>Short-term cautious</b>: S&P and Nasdaq down for two straight sessions, with tech and semis clearly under pressure. Middle East uncertainty (US-Iran talks) + high oil ($108+) + rising global bond yields form a triple threat. WEBs Investments CEO Fulton said without positive Middle East developments (especially the Strait of Hormuz), stocks are in for a "heavy range trade." "I could see people starting to protect profits pretty quick."</span></p>
+<p><span class="zh"><b>半导体关注点</b>：存储芯片从暴涨到暴跌，短期波动剧烈。但AI需求基本面未改变——美光、希捷此前因AI需求创历史新高。Bernstein看好台积电（相对SOX折价20%），认为Intel/三星不构成根本性威胁。真正的关键仍在5月20日NVIDIA Q1财报。</span><span class="en" style="display:none"><b>Semi watch</b>: Memory chips went from parabolic surge to sudden crash, with intense short-term volatility. But AI demand fundamentals haven't changed — MU and STX had been hitting ATHs on AI demand. Bernstein is bullish on TSMC (20% discount to SOX), arguing Intel/Samsung don't pose fundamental threats. The real key remains NVIDIA's Q1 earnings on May 20.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">预判场景分析</span><span class="en" style="display:none">Scenario Analysis</span></h4>
+<p><span class="zh"><b>🟢 乐观场景（概率30%）</b>：美伊达成临时协议 → 油价回落至$100以下 → 科技股估值压力缓解 → 市场重拾涨势。NVIDIA 5/20财报超预期则成为新催化剂。</span><span class="en" style="display:none"><b>🟢 Bullish (30%)</b>: US-Iran interim deal → oil drops below $100 → tech valuation pressure eases → market resumes rally. NVIDIA 5/20 earnings beat becomes new catalyst.</span></p>
+<p><span class="zh"><b>🟡 中性场景（概率45%）</b>：市场在当前区间震荡整理1-2周。半导体经历暴涨后的正常回调消化，等待NVIDIA财报定方向。道指/防御板块相对占优。A股在4,100-4,250区间窄幅整理。</span><span class="en" style="display:none"><b>🟡 Neutral (45%)</b>: Market consolidates in current range for 1-2 weeks. Semis undergo normal pullback digestion after parabolic run, awaiting NVIDIA earnings for direction. Dow/defensive sectors relatively outperform. A-shares range-bound in 4,100-4,250.</span></p>
+<p><span class="zh"><b>🔴 悲观场景（概率25%）</b>：中东局势急剧恶化（霍尔木兹封锁升级）→ 油价冲$120+ → 全球通胀预期飙升 → 债券抛售加速 → 科技股大幅回调。NVIDIA财报不及预期则放大跌势。</span><span class="en" style="display:none"><b>🔴 Bearish (25%)</b>: Middle East sharply worsens (Hormuz blockade escalation) → oil spikes to $120+ → global inflation expectations surge → bond selloff accelerates → sharp tech correction. NVIDIA miss amplifies downside.</span></p>
+</div>
+
+<div class="card">
+<h4><span class="zh">A股/港股：等待外部催化</span><span class="en" style="display:none">A-Shares/HK: Awaiting External Catalysts</span></h4>
+<p><span class="zh">A股短期方向取决于：1）NVIDIA财报对AI/半导体情绪的传导；2）中美峰会后续具体政策落地；3）中东局势对油价和通胀的影响。创业板在4,000关口附近整理，中期趋势仍偏多。港股科技股回调幅度较大，但中美关系缓和仍是中期利好。关注半导体材料、光通信（CPO方向）等细分领域。</span><span class="en" style="display:none">A-share short-term direction depends on: 1) NVIDIA earnings impact on AI/semi sentiment; 2) Concrete policy follow-through from Trump-Xi summit; 3) Middle East impact on oil and inflation. ChiNext consolidating around 4,000 with mid-term trend still bullish. HK tech pulled back more sharply, but US-China thaw remains a mid-term positive. Watch semi materials, optical communication (CPO) subsectors.</span></p>
+</div>
+
+<h3>📊 <span class="zh">K线图</span><span class="en" style="display:none">Charts</span></h3>
+<div class="kline-grid">
+<div class="kline-item"><div class="kline-label">SPY — S&P 500</div><div id="tv-spy"></div></div>
+<div class="kline-item"><div class="kline-label">NVDA — NVIDIA</div><div id="tv-nvda"></div></div>
+<div class="kline-item"><div class="kline-label">SOX — Semiconductor</div><div id="tv-sox"></div></div>
+<div class="kline-item"><div class="kline-label">MU — Micron</div><div id="tv-mu"></div></div>
+<div class="kline-item"><div class="kline-label">000001 — 上证指数</div><div id="tv-sse"></div></div>
+<div class="kline-item"><div class="kline-label">HSI — 恒生指数</div><div id="tv-hsi"></div></div>
+</div>
+
+<div class="footer">
+<p>📊 Sky Portal Daily Market · Generated by Sky ☁️ · <a href="index.html">All Reports</a></p>
+<p style="margin-top:8px;font-size:0.75em;color:#444">Data sources: CNBC, MarketWatch, Sina Finance, Reuters, Trading Economics, Charles Schwab, 东方财富</p>
+</div>
+
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.zh').forEach(el => el.style.display = lang === 'zh' ? '' : 'none');
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.getElementById('btn-zh').style.background = lang === 'zh' ? '#555' : '#333';
+  document.getElementById('btn-zh').style.color = lang === 'zh' ? '#fff' : '#aaa';
+  document.getElementById('btn-en').style.background = lang === 'en' ? '#555' : '#222';
+  document.getElementById('btn-en').style.color = lang === 'en' ? '#fff' : '#aaa';
+}
+</script>
+
+<!-- TradingView Widgets -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+var symbols = [
+  {id:'tv-spy', sym:'AMEX:SPY'},
+  {id:'tv-nvda', sym:'NASDAQ:NVDA'},
+  {id:'tv-sox', sym:'NASDAQ:SOX'},
+  {id:'tv-mu', sym:'NASDAQ:MU'},
+  {id:'tv-sse', sym:'SSE:000001'},
+  {id:'tv-hsi', sym:'HSI:HSI'}
+];
+symbols.forEach(function(s){
+  new TradingView.widget({
+    symbol: s.sym, interval: '1D', height: 180, width: '100%',
+    theme: 'dark', style: '1', chart_type: 'candlesticks',
+    hide_top_toolbar: true, hide_legend: true, save_image: false,
+    calendar: false, hide_volume: true,
+    backgroundColor: 'rgba(20,20,30,1)', gridColor: 'rgba(42,42,42,1)',
+    container_id: s.id
+  });
+});
+</script>
+
+</body>
+</html>

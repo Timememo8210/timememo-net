@@ -1,0 +1,65 @@
+{
+  "sample_id": "S01",
+  "expected_category": "Roofing",
+  "source_file": "highland-roofing-sample-invoice.pdf",
+  "source_title": "Highland Roofing Company Sample Invoice",
+  "source_url": "https://www.highlandroofingcompany.com/wp-content/uploads/2020/08/Highland-Roofing-Sample-Invoice.pdf",
+  "model": "gemini-2.5-flash",
+  "status": "ok_text_fallback",
+  "api_status": 200,
+  "method": "pdftotext_then_gemini_text_extraction",
+  "method_note": "Original PDF inline Gemini calls returned repeated 503 high-demand errors; this row used pdftotext text layer plus Gemini structured extraction fallback.",
+  "elapsed_ms": 9908,
+  "extracted": {
+    "documentType": "invoice",
+    "date": "2019-09-12",
+    "property": {
+      "address": "",
+      "unit": "",
+      "city": "",
+      "region": "",
+      "postalCode": "",
+      "country": ""
+    },
+    "vendor": {
+      "name": "Highland Roofing Company - Raleigh",
+      "address": "4310 Deer Creek Lane, Wilmington, NC 28405",
+      "phone": "844 794 8313",
+      "email": "service@highlandroofingcompany.com",
+      "licenseNumber": "NC: 67180 / SC: G115392"
+    },
+    "service": {
+      "projectName": "Roof Leak and Seam Repairs",
+      "workType": "Roofing Repair",
+      "areaOfHome": "Roof",
+      "workPerformed": "Repaired punctures, rips, and tears by cleaning the area, installing new waterproofing membrane, and sealing per industry standards. Removed old caulk/sealant, cleaned the area, and installed new sealant. Cleaned and sealed open seams in the waterproofing membrane per industry standards.",
+      "materials": [
+        "waterproofing membrane",
+        "sealant"
+      ],
+      "laborSummary": "",
+      "warranty": "",
+      "permitNumber": "",
+      "followUpRecommendation": "",
+      "resaleValueNote": "This record demonstrates essential roof maintenance and repairs, indicating the roof's integrity has been addressed.",
+      "valueSignal": "repair"
+    },
+    "items": [
+      {
+        "description": "Roof repairs have been completed per attached documentation - Suite B.",
+        "quantity": 1,
+        "unitPrice": 547.17,
+        "total": 547.17,
+        "kind": "other"
+      }
+    ],
+    "subtotal": 547.17,
+    "tax": 41.04,
+    "total": 588.21,
+    "currency": "USD",
+    "category": "Roofing",
+    "notes": "Invoice #999999AM. Contact Rick Jones at service@highlandroofingcompany.com for questions. Payment terms: Invoices over 30 days past due will be subject to a 1.5% finance charge. MasterCard and Visa are accepted with an additional 3.5% surcharge.",
+    "confidenceScore": 1
+  },
+  "error": ""
+}

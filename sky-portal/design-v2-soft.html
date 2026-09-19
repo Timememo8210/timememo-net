@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Soft Premium</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Tokens ── */
+:root {
+  --canvas: #FDFBF7;
+  --surface: #F5F3EF;
+  --surface-inv: #1C1B18;
+  --ink: #1A1917;
+  --secondary: #7C7A73;
+  --tertiary: #B0ADA5;
+  --border-hair: rgba(0,0,0,0.06);
+  --shadow-soft: 0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
+  --shadow-outer: 0 4px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+  --accent: #3D5AFE;
+  --accent-soft: #E8ECFF;
+  --tag-warm: #F7EDE2;
+  --tag-cool: #E2EDF7;
+  --tag-mint: #E2F7ED;
+  --tag-peach: #F7E2E8;
+  --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --r-outer: 32px;
+  --r-inner: 24px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--canvas);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body.lang-en .zh { display: none !important; }
+body.lang-zh .en { display: none !important; }
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(8px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease), filter 700ms var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ── Ambient blob ── */
+.ambient {
+  position: fixed;
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(61,90,254,0.12) 0%, rgba(61,90,254,0.03) 40%, transparent 70%);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+  animation: blobDrift 25s ease-in-out infinite alternate;
+}
+
+@keyframes blobDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5%, 8%) scale(1.08); }
+  100% { transform: translate(3%, -3%) scale(0.95); }
+}
+
+/* ── Navbar (floating pill) ── */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.navbar-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 6px 20px;
+  background: rgba(253, 251, 247, 0.72);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--border-hair);
+  border-radius: 100px;
+  box-shadow: var(--shadow-outer);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.navbar-links a {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 100px;
+  transition: all 500ms var(--ease);
+  white-space: nowrap;
+}
+
+.navbar-links a:hover {
+  color: var(--ink);
+  background: rgba(0,0,0,0.04);
+}
+
+.lang-btn {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--secondary);
+  background: var(--surface);
+  border: 1px solid var(--border-hair);
+  border-radius: 100px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 500ms var(--ease);
+  margin-left: 4px;
+}
+.lang-btn:hover {
+  color: var(--ink);
+  background: var(--accent-soft);
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 140px 40px 100px;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  background: var(--surface);
+  border: 1px solid var(--border-hair);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.hero h1 span.light {
+  color: var(--tertiary);
+  font-weight: 700;
+}
+
+.hero-lede {
+  max-width: 48ch;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--secondary);
+  font-weight: 400;
+  margin-bottom: 32px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Button-in-button CTA */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 24px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 500ms var(--ease);
+}
+
+.cta-primary:hover {
+  background: #333;
+  transform: translateY(-1px);
+}
+
+.cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: background 500ms var(--ease);
+}
+
+.cta-primary:hover .cta-arrow {
+  background: rgba(255,255,255,0.3);
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-hair);
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 500ms var(--ease);
+}
+
+.cta-ghost:hover {
+  background: var(--surface);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.hero-stat {
+  text-align: left;
+}
+
+.hero-stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--tertiary);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ── Bento Grid (double-bezel) ── */
+.bento-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  background: var(--surface);
+  border: 1px solid var(--border-hair);
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Double-bezel card */
+.bezel-outer {
+  padding: 6px;
+  border: 1px solid var(--border-hair);
+  border-radius: var(--r-outer);
+  box-shadow: var(--shadow-outer);
+  background: var(--canvas);
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  transition: transform 700ms var(--ease), box-shadow 700ms var(--ease);
+}
+
+.bezel-outer:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+.bezel-inner {
+  background: var(--surface);
+  border-radius: var(--r-inner);
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 160px;
+}
+
+.bezel-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.bezel-tag.warm { background: var(--tag-warm); color: #8B6914; }
+.bezel-tag.cool { background: var(--tag-cool); color: #2A5A8B; }
+.bezel-tag.mint { background: var(--tag-mint); color: #2A7A4B; }
+.bezel-tag.peach { background: var(--tag-peach); color: #8B2A4B; }
+
+.bezel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.bezel-desc {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  line-height: 1.5;
+}
+
+.bezel-meta {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--tertiary);
+  margin-top: auto;
+  letter-spacing: 0.05em;
+}
+
+.bezel-outer.wide {
+  grid-column: span 2;
+}
+
+/* ── Logo Marquee ── */
+.marquee-section {
+  position: relative;
+  z-index: 1;
+  padding: 48px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border-hair);
+  border-bottom: 1px solid var(--border-hair);
+  margin-bottom: 80px;
+}
+
+.marquee-label {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tertiary);
+  margin-bottom: 24px;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marqueeScroll 40s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--tertiary);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  transition: color 500ms var(--ease);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.marquee-item:hover {
+  color: var(--ink);
+}
+
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  flex-shrink: 0;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── List Section ── */
+.list-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.list-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.list-bezel {
+  padding: 5px;
+  border: 1px solid var(--border-hair);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  background: var(--canvas);
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  transition: transform 700ms var(--ease), box-shadow 700ms var(--ease);
+}
+
+.list-bezel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+.list-bezel-inner {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.list-bezel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+
+.list-bezel-meta {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--tertiary);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* ── Ending band (inverted) ── */
+.end-band {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-inv);
+  color: rgba(255,255,255,0.85);
+  padding: 80px 40px;
+  margin-top: 40px;
+}
+
+.end-band-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.end-band h2 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.end-band p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 40ch;
+  line-height: 1.6;
+}
+
+.end-band-meta {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 2.4;
+  text-align: right;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .navbar-pill {
+    padding: 6px 12px;
+    gap: 4px;
+  }
+  .navbar-links a { padding: 4px 8px; font-size: 0.65rem; }
+  .navbar-brand { font-size: 0.8rem; margin-right: 4px; }
+  .hero { padding: 120px 20px 60px; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bezel-outer.wide { grid-column: span 1; }
+  .bento-section, .list-section { padding-left: 20px; padding-right: 20px; }
+  .end-band { padding: 48px 20px; }
+  .end-band-inner { flex-direction: column; }
+  .end-band-meta { text-align: left; }
+  .marquee-track { gap: 24px; }
+}
+
+@media (max-width: 480px) {
+  .navbar { top: 12px; }
+  .navbar-links { display: none; }
+  .hero h1 { font-size: 2rem; }
+}
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- Ambient blob -->
+<div class="ambient"></div>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+  <div class="navbar-pill">
+    <a class="navbar-brand" href="index.html">Sky Portal</a>
+    <div class="navbar-links">
+      <a href="#daily"><span class="zh">更新</span><span class="en">Daily</span></a>
+      <a href="#research"><span class="zh">研究</span><span class="en">Research</span></a>
+      <a href="#ai"><span class="zh">AI</span><span class="en">AI</span></a>
+      <a href="#life"><span class="zh">生活</span><span class="en">Life</span></a>
+      <a href="#projects"><span class="zh">项目</span><span class="en">Projects</span></a>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()">EN / 中</button>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero reveal">
+  <div class="hero-eyebrow"><span class="zh">个人数字空间</span><span class="en">Personal Digital Space</span></div>
+  <h1>
+    <span class="zh">Sky Portal的<br>数字花园<span class="light"><br>探索 · 记录 · 成长</span></span>
+    <span class="en">Sky Portal's<br>Digital Garden<span class="light"><br>Explore · Record · Grow</span></span>
+  </h1>
+  <p class="hero-lede">
+    <span class="zh">半导体研究、AI 探索、投资分析、生活记录 — 一个工程师对世界保持好奇的方式。</span>
+    <span class="en">Semiconductor research, AI exploration, investment analysis, and life notes — an engineer's way of staying curious.</span>
+  </p>
+  <div class="hero-ctas">
+    <a class="cta-primary" href="#daily">
+      <span class="zh">开始浏览</span><span class="en">Start Exploring</span>
+      <span class="cta-arrow">&rarr;</span>
+    </a>
+    <a class="cta-ghost" href="#research">
+      <span class="zh">查看研究</span><span class="en">View Research</span>
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">11</span>
+      <span class="hero-stat-label"><span class="zh">已发布</span><span class="en">Published</span></span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label"><span class="zh">进行中</span><span class="en">Active</span></span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="day-count">—</span>
+      <span class="hero-stat-label"><span class="zh">天 · 从 2/15 起</span><span class="en">Days since 2/15</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 01 Daily Updates (Bento double-bezel) ── -->
+<section class="bento-section" id="daily">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">01</span>
+    <span class="section-title"><span class="zh">每日更新</span><span class="en">Daily Updates</span></span>
+  </div>
+  <div class="bento-grid reveal">
+    <a class="bezel-outer wide" href="research/index.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag cool"><span class="zh">研报</span><span class="en">Briefing</span></span>
+        <span class="bezel-title"><span class="zh">每日研报</span><span class="en">Daily Briefing</span></span>
+        <span class="bezel-desc"><span class="zh">半导体 · AI · 市场 · 科技趋势 — 每日自动生成</span><span class="en">Semiconductor · AI · Market · Tech — daily</span></span>
+        <span class="bezel-meta">AUTO-GENERATED</span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="tech/index.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag mint"><span class="zh">科技</span><span class="en">Tech</span></span>
+        <span class="bezel-title"><span class="zh">科技动态</span><span class="en">Tech Feed</span></span>
+        <span class="bezel-desc"><span class="zh">前沿科技新闻追踪</span><span class="en">Cutting-edge tech news</span></span>
+        <span class="bezel-meta">DAILY</span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="market/index.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag warm"><span class="zh">行情</span><span class="en">Market</span></span>
+        <span class="bezel-title"><span class="zh">市场行情</span><span class="en">Market Watch</span></span>
+        <span class="bezel-desc"><span class="zh">全球市场与投资追踪</span><span class="en">Global markets & investment</span></span>
+        <span class="bezel-meta">DAILY</span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="science/index.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag peach"><span class="zh">科学</span><span class="en">Science</span></span>
+        <span class="bezel-title"><span class="zh">科学前沿</span><span class="en">Science Digest</span></span>
+        <span class="bezel-desc"><span class="zh">Science · Nature · Cell · PNAS</span><span class="en">Science · Nature · Cell · PNAS</span></span>
+        <span class="bezel-meta">WEEKLY · WED</span>
+      </div>
+    </a>
+    <a class="bezel-outer wide" href="prompts/index.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag mint"><span class="zh">提示词</span><span class="en">Prompts</span></span>
+        <span class="bezel-title"><span class="zh">提示词库</span><span class="en">Prompt Library</span></span>
+        <span class="bezel-desc"><span class="zh">AI 提示词收藏与管理</span><span class="en">AI prompt collection & management</span></span>
+        <span class="bezel-meta">COLLECTION</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── 02 Research ── -->
+<section class="bento-section" id="research">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">02</span>
+    <span class="section-title"><span class="zh">研究</span><span class="en">Research</span></span>
+  </div>
+  <div class="bento-grid reveal">
+    <a class="bezel-outer" href="ai-cvd-optimization.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag cool">CVD</span>
+        <span class="bezel-title"><span class="zh">AI CVD 优化</span><span class="en">AI CVD Optimization</span></span>
+        <span class="bezel-desc"><span class="zh">AI驱动的CVD工艺参数优化</span><span class="en">AI-driven CVD process optimization</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="semiconductor-equipment-ai.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag cool"><span class="zh">半导体</span><span class="en">Semi</span></span>
+        <span class="bezel-title"><span class="zh">半导体设备 AI</span><span class="en">Semi Equipment AI</span></span>
+        <span class="bezel-desc"><span class="zh">设备智能化与AI应用</span><span class="en">Equipment intelligence & AI</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="nvidia-report.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag warm">NVIDIA</span>
+        <span class="bezel-title"><span class="zh">NVIDIA 深度报告</span><span class="en">NVIDIA Deep Dive</span></span>
+        <span class="bezel-desc"><span class="zh">GPU架构 · 数据中心 · AI芯片</span><span class="en">GPU · Data center · AI chips</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer wide" href="intel-news-2026.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag peach">INTEL</span>
+        <span class="bezel-title"><span class="zh">Intel 新闻追踪</span><span class="en">Intel News Tracker</span></span>
+        <span class="bezel-desc"><span class="zh">Intel 18A · 代工 · 战略转型跟踪</span><span class="en">Intel 18A · Foundry · Strategy pivot</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="cvd-supply-chain.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag mint"><span class="zh">供应链</span><span class="en">Supply</span></span>
+        <span class="bezel-title"><span class="zh">CVD 供应链</span><span class="en">CVD Supply Chain</span></span>
+        <span class="bezel-desc"><span class="zh">关键材料与供应商映射</span><span class="en">Key materials & supplier mapping</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── 03 AI Lab ── -->
+<section class="bento-section" id="ai">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">03</span>
+    <span class="section-title"><span class="zh">AI 专区</span><span class="en">AI Lab</span></span>
+  </div>
+  <div class="bento-grid reveal">
+    <a class="bezel-outer wide" href="ai/index.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag cool">AI</span>
+        <span class="bezel-title"><span class="zh">AI 研究中心</span><span class="en">AI Research Hub</span></span>
+        <span class="bezel-desc"><span class="zh">AI 技术研究、模型对比、应用探索</span><span class="en">AI research, model comparisons, applications</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="ai-life.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag mint"><span class="zh">生活</span><span class="en">Life</span></span>
+        <span class="bezel-title"><span class="zh">AI 与生活</span><span class="en">AI & Life</span></span>
+        <span class="bezel-desc"><span class="zh">AI如何改变我们的日常</span><span class="en">How AI shapes daily lives</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="claude-code-leak.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag peach"><span class="zh">分析</span><span class="en">Analysis</span></span>
+        <span class="bezel-title"><span class="zh">Claude Code 泄露分析</span><span class="en">Claude Code Leak</span></span>
+        <span class="bezel-desc"><span class="zh">系统提示词深度解读</span><span class="en">System prompt deep dive</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer" href="skills.html">
+      <div class="bezel-inner">
+        <span class="bezel-tag warm"><span class="zh">技能</span><span class="en">Skills</span></span>
+        <span class="bezel-title"><span class="zh">AI 技能库</span><span class="en">AI Skill Library</span></span>
+        <span class="bezel-desc"><span class="zh">Claude Code 技能管理</span><span class="en">Skill management</span></span>
+      </div>
+    </a>
+    <a class="bezel-outer wide" href="https://github.com/Timememo8210/claude-app-memory" target="_blank">
+      <div class="bezel-inner">
+        <span class="bezel-tag mint">GITHUB</span>
+        <span class="bezel-title">Claude App Memory</span>
+        <span class="bezel-desc"><span class="zh">AI 应用记忆管理系统 — 开源项目</span><span class="en">AI app memory management — open source</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── Marquee ── -->
+<section class="marquee-section">
+  <div class="marquee-label"><span class="zh">涵盖领域</span><span class="en">Areas of Focus</span></div>
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="zh">半导体</span><span class="en">Semiconductor</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">AI / ML</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">投资分析</span><span class="en">Investment</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">CVD / ALD</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">足球教练</span><span class="en">Soccer Coach</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">旅行</span><span class="en">Travel</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">园艺</span><span class="en">Gardening</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Intel / NVIDIA</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">开源</span><span class="en">Open Source</span></span>
+    <span class="marquee-dot"></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item"><span class="zh">半导体</span><span class="en">Semiconductor</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">AI / ML</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">投资分析</span><span class="en">Investment</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">CVD / ALD</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">足球教练</span><span class="en">Soccer Coach</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">旅行</span><span class="en">Travel</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">园艺</span><span class="en">Gardening</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Intel / NVIDIA</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="zh">开源</span><span class="en">Open Source</span></span>
+    <span class="marquee-dot"></span>
+  </div>
+</section>
+
+<!-- ── 04 Life ── -->
+<section class="list-section" id="life">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">04</span>
+    <span class="section-title"><span class="zh">生活</span><span class="en">Life</span></span>
+  </div>
+  <div class="list-grid reveal">
+    <a class="list-bezel" href="my-garden/">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag mint" style="flex-shrink:0"><span class="zh">花园</span><span class="en">Garden</span></span>
+        <span class="list-bezel-title"><span class="zh">我的花园</span><span class="en">My Garden</span></span>
+        <span class="list-bezel-meta"><span class="zh">种植日记</span><span class="en">Growing diary</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="coach/index.html">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag cool" style="flex-shrink:0"><span class="zh">教练</span><span class="en">Coach</span></span>
+        <span class="list-bezel-title"><span class="zh">教练专区</span><span class="en">Coach Zone</span></span>
+        <span class="list-bezel-meta"><span class="zh">足球教练资料</span><span class="en">Soccer coaching</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="investment.html">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag warm" style="flex-shrink:0"><span class="zh">投资</span><span class="en">Finance</span></span>
+        <span class="list-bezel-title"><span class="zh">投资分析</span><span class="en">Investment Analysis</span></span>
+        <span class="list-bezel-meta"><span class="zh">策略与分析</span><span class="en">Strategy & analysis</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag peach" style="flex-shrink:0"><span class="zh">旅行</span><span class="en">Travel</span></span>
+        <span class="list-bezel-title"><span class="zh">2026 旅行计划</span><span class="en">2026 Travel Plan</span></span>
+        <span class="list-bezel-meta"><span class="zh">瑞士 → 巴黎 → 纽约</span><span class="en">Swiss → Paris → NYC</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="naturalization.html">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag cool" style="flex-shrink:0"><span class="zh">个人</span><span class="en">Personal</span></span>
+        <span class="list-bezel-title"><span class="zh">入籍准备</span><span class="en">Naturalization Prep</span></span>
+        <span class="list-bezel-meta"><span class="zh">公民考试</span><span class="en">Citizenship exam</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="worldcup-2026.html">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag mint" style="flex-shrink:0"><span class="zh">体育</span><span class="en">Sports</span></span>
+        <span class="list-bezel-title"><span class="zh">2026 世界杯</span><span class="en">2026 World Cup</span></span>
+        <span class="list-bezel-meta">FIFA 2026</span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/health-report/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag peach" style="flex-shrink:0"><span class="zh">健康</span><span class="en">Health</span></span>
+        <span class="list-bezel-title"><span class="zh">健康报告</span><span class="en">Health Report</span></span>
+        <span class="list-bezel-meta"><span class="zh">健康追踪</span><span class="en">Health tracking</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── 05 Projects ── -->
+<section class="list-section" id="projects">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">05</span>
+    <span class="section-title"><span class="zh">项目 & 工具</span><span class="en">Projects & Tools</span></span>
+  </div>
+  <div class="list-grid reveal">
+    <a class="list-bezel" href="https://timememo8210.github.io/polyclaw/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag cool" style="flex-shrink:0">APP</span>
+        <span class="list-bezel-title">PolyClaw</span>
+        <span class="list-bezel-meta"><span class="zh">多模态投资分析</span><span class="en">Multi-modal investment</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/moji-journal/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag warm" style="flex-shrink:0">APP</span>
+        <span class="list-bezel-title">Moji Journal</span>
+        <span class="list-bezel-meta"><span class="zh">表情日记</span><span class="en">Emoji diary</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/travelsnap/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag mint" style="flex-shrink:0">APP</span>
+        <span class="list-bezel-title">TravelSnap</span>
+        <span class="list-bezel-meta"><span class="zh">旅行相册</span><span class="en">Travel album</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/家人-War-Game/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag peach" style="flex-shrink:0"><span class="zh">游戏</span><span class="en">Game</span></span>
+        <span class="list-bezel-title">家人 War Game</span>
+        <span class="list-bezel-meta"><span class="zh">记忆战争</span><span class="en">Memory war</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag peach" style="flex-shrink:0"><span class="zh">游戏</span><span class="en">Game</span></span>
+        <span class="list-bezel-title">家人 World Conquest</span>
+        <span class="list-bezel-meta"><span class="zh">世界征服</span><span class="en">World conquest</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="prolynk.html">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag cool" style="flex-shrink:0"><span class="zh">项目</span><span class="en">Project</span></span>
+        <span class="list-bezel-title">ProLynk</span>
+        <span class="list-bezel-meta"><span class="zh">QA测试报告</span><span class="en">QA test reports</span></span>
+      </div>
+    </a>
+    <a class="list-bezel" href="https://timememo8210.github.io/app-ideas/" target="_blank">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag warm" style="flex-shrink:0"><span class="zh">想法</span><span class="en">Ideas</span></span>
+        <span class="list-bezel-title"><span class="zh">App 创意</span><span class="en">App Ideas</span></span>
+        <span class="list-bezel-meta"><span class="zh">产品创意收集</span><span class="en">Product ideation</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── 06 Thoughts ── -->
+<section class="list-section">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">06</span>
+    <span class="section-title"><span class="zh">思考专栏</span><span class="en">Thoughts</span></span>
+  </div>
+  <div class="list-grid reveal">
+    <a class="list-bezel" href="thoughts/future-transportation.html">
+      <div class="list-bezel-inner">
+        <span class="bezel-tag mint" style="flex-shrink:0"><span class="zh">思考</span><span class="en">Essay</span></span>
+        <span class="list-bezel-title"><span class="zh">未来交通</span><span class="en">Future Transportation</span></span>
+        <span class="list-bezel-meta"><span class="zh">自动驾驶与城市出行</span><span class="en">Autonomous driving & urban mobility</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── End Band (inverted) ── -->
+<footer class="end-band">
+  <div class="end-band-inner reveal">
+    <div>
+      <h2><span class="zh">用好奇心<br>连接世界</span><span class="en">Connecting<br>Through Curiosity</span></h2>
+      <p><span class="zh">Sky Portal — Sky Portal。用技术记录思考，用好奇心连接世界。</span><span class="en">Sky Portal — Sky Portal's digital space. Recording thoughts through technology, connecting the world through curiosity.</span></p>
+    </div>
+    <div class="end-band-meta">
+      <span class="zh">设计风格</span><span class="en">Design</span>: Soft Premium<br>
+      Built with curiosity<br>
+      2026
+    </div>
+  </div>
+</footer>
+
+<script>
+// Day counter
+(function() {
+  const start = new Date(2025, 1, 15);
+  const now = new Date();
+  const days = Math.floor((now - start) / 86400000);
+  document.getElementById('day-count').textContent = days;
+})();
+
+// Language toggle
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  document.body.classList.toggle('lang-en');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Portal — Style 2: Linear Dark</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--surface:#141414;--surface2:#1a1a1a;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);--text:#ededed;--text2:rgba(255,255,255,0.5);--text3:rgba(255,255,255,0.25);--accent:#5E6AD2;--green:#4DAF73;--orange:#E2A355;--red:#E5534B;--blue:#539BF5;--purple:#A371F7;--font:'Inter','Noto Sans SC',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body.lang-zh .en{display:none!important}
+body.lang-en .zh{display:none!important}
+
+/* Glow orbs */
+body::before,body::after{content:'';position:fixed;border-radius:50%;pointer-events:none;z-index:0}
+body::before{width:800px;height:800px;top:-300px;left:-200px;background:radial-gradient(circle,rgba(94,106,210,0.08),transparent 60%)}
+body::after{width:600px;height:600px;bottom:-200px;right:-100px;background:radial-gradient(circle,rgba(77,175,115,0.05),transparent 60%)}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.7);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 32px;height:48px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:700;font-size:0.95em;letter-spacing:-0.02em}
+.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:0.82em;color:var(--text2);text-decoration:none;padding:4px 12px;border-radius:6px;transition:all 0.15s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+
+.container{max-width:1100px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+
+/* Hero */
+.hero{padding:120px 0 80px;text-align:center}
+.hero h1{font-size:3.5em;font-weight:700;letter-spacing:-0.04em;line-height:1.05;margin-bottom:12px;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0.6) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--text2);font-size:1.05em;font-weight:400}
+.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:36px}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:2em;font-weight:700;color:var(--accent);letter-spacing:-0.02em}
+.hero-stat .lbl{font-size:0.7em;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em}
+
+/* Sections */
+.sec{padding:56px 0}
+.sec-head{margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.sec-head .dot{width:6px;height:6px;border-radius:50%}
+.dot--purple{background:var(--purple);box-shadow:0 0 8px rgba(163,113,247,0.4)}
+.dot--green{background:var(--green);box-shadow:0 0 8px rgba(77,175,115,0.4)}
+.dot--orange{background:var(--orange);box-shadow:0 0 8px rgba(226,163,85,0.4)}
+.dot--blue{background:var(--blue);box-shadow:0 0 8px rgba(83,155,245,0.4)}
+.sec-head h2{font-size:1.1em;font-weight:600;letter-spacing:-0.01em}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-decoration:none;color:var(--text);transition:all 0.2s;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);opacity:0;transition:opacity 0.3s}
+.card:hover{border-color:var(--border2);background:var(--surface2);transform:translateY(-2px)}
+.card:hover::before{opacity:1}
+.card .emoji{font-size:1.4em}
+.card .name{font-size:0.92em;font-weight:600}
+.card .desc{font-size:0.8em;color:var(--text2);line-height:1.5;flex:1}
+.card .bottom{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.badge{font-size:0.68em;font-weight:600;padding:2px 8px;border-radius:4px}
+.badge--purple{background:rgba(163,113,247,0.12);color:var(--purple)}
+.badge--green{background:rgba(77,175,115,0.12);color:var(--green)}
+.badge--orange{background:rgba(226,163,85,0.12);color:var(--orange)}
+.badge--blue{background:rgba(83,155,245,0.12);color:var(--blue)}
+.card .time{font-size:0.68em;color:var(--text3)}
+
+/* Shimmer animation on hover */
+.card::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.02),transparent);transition:left 0.6s}
+.card:hover::after{left:120%}
+
+.foot{text-align:center;padding:48px 24px;color:var(--text3);font-size:0.75em;border-top:1px solid var(--border);margin-top:32px}
+
+@media(max-width:768px){.hero h1{font-size:2.4em}.grid{grid-template-columns:1fr}.nav-links{display:none}.container{padding:0 16px}.hero{padding:80px 0 48px}}
+</style>
+</head>
+<body class="lang-zh">
+<div class="nav"><div class="nav-inner">
+  <div class="nav-brand">Sky<span>Portal</span></div>
+  <div class="nav-links"><a href="#daily"><span class="zh">每日</span><span class="en">Daily</span></a><a href="#research"><span class="zh">研究</span><span class="en">Research</span></a><a href="#life"><span class="zh">生活</span><span class="en">Life</span></a><a href="#tools"><span class="zh">项目</span><span class="en">Projects</span></a></div>
+</div></div>
+
+<div class="container">
+  <div class="hero">
+    <h1><span class="zh">Sky Portal</span><span class="en">Sky Portal's Digital Space</span></h1>
+    <p><span class="zh">研究 · 工具 · 记录 — Sky AI 驱动</span><span class="en">Research · Tools · Records</span></p>
+    <div class="hero-stats"><div class="hero-stat"><div class="num">11</div><div class="lbl">Published</div></div><div class="hero-stat"><div class="num">5</div><div class="lbl">Active</div></div><div class="hero-stat"><div class="num">76</div><div class="lbl">Days</div></div></div>
+  </div>
+
+  <div class="sec" id="daily"><div class="sec-head"><div class="dot dot--blue"></div><h2><span class="zh">每日更新</span><span class="en">Daily</span></h2></div>
+    <div class="grid">
+      <a class="card" href="research/index.html"><span class="emoji">📡</span><span class="name"><span class="zh">每日研报</span><span class="en">Briefing</span></span><span class="desc"><span class="zh">半导体 · 股票 · Portland</span><span class="en">Semi · Stocks</span></span><div class="bottom"><span class="badge badge--blue">Auto</span><span class="time">Daily</span></div></a>
+      <a class="card" href="tech/index.html"><span class="emoji">🔬</span><span class="name"><span class="zh">每日科技</span><span class="en">Tech</span></span><span class="desc"><span class="zh">芯片 · 突破 · 产业</span><span class="en">Chips · Industry</span></span><div class="bottom"><span class="badge badge--blue">Auto</span><span class="time">Daily</span></div></a>
+      <a class="card" href="market/index.html"><span class="emoji">📊</span><span class="name"><span class="zh">每日行情</span><span class="en">Market</span></span><span class="desc"><span class="zh">美股 · A股 · 港股</span><span class="en">US · CN · HK</span></span><div class="bottom"><span class="badge badge--blue">Auto</span><span class="time">9PM</span></div></a>
+      <a class="card" href="science/index.html"><span class="emoji">🧬</span><span class="name"><span class="zh">每周科学</span><span class="en">Science</span></span><span class="desc">Science · Nature · Cell</span><div class="bottom"><span class="badge badge--green">Auto</span><span class="time">Wed</span></div></a>
+    </div>
+  </div>
+
+  <div class="sec" id="research"><div class="sec-head"><div class="dot dot--purple"></div><h2><span class="zh">研究</span><span class="en">Research</span></h2></div>
+    <div class="grid">
+      <a class="card" href="research/intel-tesla-terafab.html"><span class="emoji">⚡</span><span class="name">Intel × Tesla Terafab</span><span class="desc"><span class="zh">$200-250亿超级制造</span><span class="en">$20-25B mega fab</span></span><div class="bottom"><span class="badge badge--orange">New</span><span class="time">Auto</span></div></a>
+      <a class="card" href="ai-cvd-optimization.html"><span class="emoji">🏭</span><span class="name"><span class="zh">AI赋能半导体</span><span class="en">AI Equipment</span></span><span class="desc">Lam / AMAT AIx</span><div class="bottom"><span class="badge badge--orange">New</span><span class="time">04-30</span></div></a>
+      <a class="card" href="nvidia-report.html"><span class="emoji">🟢</span><span class="name">NVIDIA Foundry</span><span class="desc"><span class="zh">GPU晶圆代工</span><span class="en">GPU foundry</span></span><div class="bottom"><span class="badge badge--green">Done</span><span class="time">v2.2</span></div></a>
+      <a class="card" href="ai-life.html"><span class="emoji">🤖</span><span class="name"><span class="zh">AI 生活</span><span class="en">AI Life</span></span><span class="desc"><span class="zh">效能记录 V1+V2</span><span class="en">Productivity</span></span><div class="bottom"><span class="badge badge--purple">Updated</span><span class="time">Ongoing</span></div></a>
+      <a class="card" href="claude-code-leak.html"><span class="emoji">🔓</span><span class="name">Claude Code Leak</span><span class="desc"><span class="zh">512K行源码</span><span class="en">512K lines</span></span><div class="bottom"><span class="badge badge--purple">Research</span><span class="time">04-03</span></div></a>
+      <a class="card" href="skills.html"><span class="emoji">☁️</span><span class="name"><span class="zh">Sky 技能</span><span class="en">Sky Skills</span></span><span class="desc"><span class="zh">30+ 技能</span><span class="en">30+ skills</span></span><div class="bottom"><span class="badge badge--blue">30+</span><span class="time">Running</span></div></a>
+    </div>
+  </div>
+
+  <div class="sec" id="life"><div class="sec-head"><div class="dot dot--green"></div><h2><span class="zh">生活</span><span class="en">Life</span></h2></div>
+    <div class="grid">
+      <a class="card" href="naturalization.html"><span class="emoji">🇺🇸</span><span class="name"><span class="zh">入籍规划</span><span class="en">N-400</span></span><span class="desc"><span class="zh">9月递交</span><span class="en">Sep 2026</span></span><div class="bottom"><span class="badge badge--orange">Prep</span><span class="time">2026</span></div></a>
+      <a class="card" href="coach/index.html"><span class="emoji">📚</span><span class="name"><span class="zh">私人教练</span><span class="en">Coach</span></span><span class="desc"><span class="zh">芒格 13/25</span><span class="en">Munger 13/25</span></span><div class="bottom"><span class="badge badge--purple">Daily</span><span class="time">13/25</span></div></a>
+      <a class="card" href="my-garden/"><span class="emoji">🌸</span><span class="name"><span class="zh">我的花园</span><span class="en">Garden</span></span><span class="desc"><span class="zh">绣球 · 月季</span><span class="en">Portland</span></span><div class="bottom"><span class="badge badge--green">2026</span><span class="time">Spring</span></div></a>
+      <a class="card" href="investment.html"><span class="emoji">💰</span><span class="name"><span class="zh">投资</span><span class="en">Invest</span></span><span class="desc">RSU · 529 · SMH</span><div class="bottom"><span class="badge badge--green">Ongoing</span><span class="time">Long</span></div></a>
+      <a class="card" href="car-decision.html"><span class="emoji">🚗</span><span class="name"><span class="zh">换车决策</span><span class="en">Car</span></span><span class="desc"><span class="zh">省$26K+</span><span class="en">Save $26K+</span></span><div class="bottom"><span class="badge badge--orange">2026</span><span class="time">Done</span></div></a>
+    </div>
+  </div>
+
+  <div class="sec" id="tools"><div class="sec-head"><div class="dot dot--orange"></div><h2><span class="zh">项目 & 工具</span><span class="en">Projects</span></h2></div>
+    <div class="grid">
+      <a class="card" href="prolynk.html"><span class="emoji">🏠</span><span class="name">ProLynk</span><span class="desc"><span class="zh">家居维修 LLC</span><span class="en">Home Repair</span></span><div class="bottom"><span class="badge badge--orange">New</span><span class="time">Active</span></div></a>
+      <a class="card" href="https://timememo8210.github.io/家人-War-Game/" target="_blank"><span class="emoji">⚔️</span><span class="name"><span class="zh">时代之战</span><span class="en">War of Ages</span></span><span class="desc"><span class="zh">回合制策略</span><span class="en">Turn-based</span></span><div class="bottom"><span class="badge badge--blue">Game</span><span class="time">Live</span></div></a>
+      <a class="card" href="https://timememo8210.github.io/家人-World-Conquest/" target="_blank"><span class="emoji">🌍</span><span class="name"><span class="zh">世界征服</span><span class="en">World Conquest</span></span><span class="desc"><span class="zh">实时策略</span><span class="en">RTS</span></span><div class="bottom"><span class="badge badge--blue">Game</span><span class="time">Live</span></div></a>
+      <a class="card" href="https://timememo8210.github.io/travel-plan-2026-v5/" target="_blank"><span class="emoji">✈️</span><span class="name"><span class="zh">欧洲行</span><span class="en">Europe</span></span><span class="desc"><span class="zh">瑞士→巴黎→纽约</span><span class="en">Swiss→Paris→NYC</span></span><div class="bottom"><span class="badge badge--green">Latest</span><span class="time">v5</span></div></a>
+    </div>
+  </div>
+</div>
+
+<div class="foot">Sky Portal · OpenClaw ☁️</div>
+</body>
+</html>

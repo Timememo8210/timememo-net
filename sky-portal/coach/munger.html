@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>芒格误判心理学 · 每日一课 | Sky Portal</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --accent: #6c8aff;
+    --accent-glow: rgba(108,138,255,0.15);
+    --pink: #f472b6;
+    --orange: #fb923c;
+    --green: #4ade80;
+    --red: #f87171;
+    --cyan: #22d3ee;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  .hero { text-align: center; padding: 50px 20px 20px; position: relative; }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(244,114,182,0.1) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero h1 { font-size: 2.2em; font-weight: 700; position: relative; z-index: 1; }
+  .hero .subtitle { color: var(--text-dim); font-size: 1em; margin-top: 8px; position: relative; z-index: 1; }
+  .hero .stats { display: flex; justify-content: center; gap: 24px; margin-top: 16px; position: relative; z-index: 1; }
+  .hero .stats span { color: var(--text-dim); font-size: 0.85em; }
+  .hero .stats strong { color: var(--pink); }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); text-decoration: none; font-size: 0.9em; margin-bottom: 16px; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+
+  /* 课程列表 */
+  .lesson-list { margin-top: 20px; }
+
+  .lesson-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+  }
+  .lesson-item:hover {
+    border-color: rgba(244,114,182,0.3);
+  }
+  .lesson-item.active {
+    border-color: var(--pink);
+    box-shadow: 0 4px 20px rgba(244,114,182,0.08);
+  }
+
+  .lesson-header {
+    display: flex;
+    align-items: center;
+    padding: 18px 22px;
+    cursor: pointer;
+    gap: 16px;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .lesson-header:hover { background: var(--card-hover); }
+
+  .lesson-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: rgba(244,114,182,0.12);
+    color: var(--pink);
+  }
+  .lesson-title-area { flex: 1; }
+  .lesson-title { font-size: 1.05em; font-weight: 600; }
+  .lesson-title-en { color: var(--text-dim); font-size: 0.82em; margin-top: 2px; }
+  .lesson-date { color: var(--text-dim); font-size: 0.8em; flex-shrink: 0; }
+  .lesson-toggle {
+    color: var(--text-dim);
+    font-size: 1.2em;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .lesson-item.active .lesson-toggle { transform: rotate(90deg); color: var(--pink); }
+
+  /* 课程内容 */
+  .lesson-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .lesson-item.active .lesson-body {
+    max-height: 3000px;
+  }
+  .lesson-content {
+    padding: 0 22px 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  .highlight {
+    background: rgba(251,191,36,0.08);
+    border-left: 4px solid #fbbf24;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 1em;
+    line-height: 1.7;
+  }
+  .highlight strong { color: #fbbf24; }
+
+  .content-section { margin-top: 20px; }
+  .content-section h3 {
+    color: var(--pink);
+    font-size: 1em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .case-box {
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 0;
+  }
+  .case-box h4 { color: var(--cyan); font-size: 0.92em; margin-bottom: 6px; }
+  .case-box p { color: var(--text-dim); font-size: 0.9em; }
+
+  .action-box {
+    background: rgba(74,222,128,0.06);
+    border-left: 4px solid var(--green);
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .action-box h3 { color: var(--green); font-size: 1em; margin-bottom: 6px; }
+
+  .motto-box {
+    text-align: center;
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--pink);
+    padding: 18px;
+    border: 2px solid rgba(244,114,182,0.3);
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+
+  .footer { text-align: center; padding: 30px 20px; color: var(--text-dim); font-size: 0.82em; border-top: 1px solid var(--border); margin-top: 30px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* 展开全部按钮 */
+  .expand-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(244,114,182,0.1);
+    border: 1px solid rgba(244,114,182,0.25);
+    border-radius: 8px;
+    color: var(--pink);
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
+  }
+  .expand-all-btn:hover { background: rgba(244,114,182,0.18); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7em; }
+    .lesson-header { padding: 14px 16px; gap: 12px; }
+    .lesson-date { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <a class="back-link" href="index.html">← 私人教练</a>
+
+  <div class="hero">
+    <h1>📖 芒格误判心理学</h1>
+    <div class="subtitle">每日一课 · 查理·芒格的25条心理倾向原则</div>
+    <div class="stats">
+      <span>已完成 <strong>12</strong>/25 课</span>
+      <span>开课 2026-04-19</span>
+    </div>
+  </div>
+
+  <button class="expand-all-btn" onclick="toggleAll()">📖 展开/收起全部</button>
+
+  <div class="lesson-list">
+
+    <!-- 第1课 -->
+    <div class="lesson-item active" id="lesson-1">
+      <div class="lesson-header" onclick="toggleLesson(1)">
+        <div class="lesson-num">1</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">奖励驱动的偏见</div>
+          <div class="lesson-title-en">Reward/Punishment Superresponse Tendency</div>
+        </div>
+        <div class="lesson-date">4/19</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            芒格说这是最重要的原则，没有之一：<strong>"给我看激励机制，我就能告诉你结果。"</strong>
+          </div>
+          <p>人会根据利益和惩罚来调整自己的行为，而且这种调整是<strong>无意识的、自动的</strong>。你以为自己在做理性判断，其实你在做对你最有利的事。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为它太隐蔽了。你不会对自己说"我这么做是因为对我有利"。你会给自己找一个<strong>看起来正当的理由</strong>，但真正驱动力是利益。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：误判同事的建议</h4>
+              <p>他劝你别接这个项目，说这是烂摊子。但他的激励结构是什么？他跑了就不用跟你竞争这个机会了。<strong>他给你的建议，恰好对他自己最有利。</strong></p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：误判自己的坚持</h4>
+              <p>你说"我要坚持因为这是对的"。但你的激励结构是什么？被认可的快感、做成了地盘变大、权力和利益。你的"坚持"可能不完全是因为正确，也是因为坚持对你有利。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：误判老板的意图</h4>
+              <p>他选你不是因为你最强，是因为选你最安全。你本分、不会威胁他、能扛事。</p>
+            </div>
+          </div>
+
+          <div class="content-section">
+            <h3>🛠️ 纠正方法</h3>
+            <p><strong>每次做判断时，先问自己——"这件事如果换成相反的结果，谁受益？"</strong></p>
+            <ul style="margin:8px 0 8px 20px; color:var(--text-dim); font-size:0.9em;">
+              <li>听别人的建议时 → 先想他的激励结构，再评估建议本身</li>
+              <li>做自己的决策时 → 先承认"我可能被利益驱动了"，再冷静分析</li>
+              <li>别人选择你时 → 问一句"他为什么选我而不是别人？"</li>
+            </ul>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>永远先看激励，再看理由。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>本周找一个你最近做的决定，用"先看激励"重新审视一遍。看看你的判断是否被奖励扭曲了。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第2课 -->
+    <div class="lesson-item" id="lesson-2">
+      <div class="lesson-header" onclick="toggleLesson(2)">
+        <div class="lesson-num">2</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">喜欢/热爱倾向</div>
+          <div class="lesson-title-en">Liking/Loving Tendency</div>
+        </div>
+        <div class="lesson-date">4/20</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人会因为<strong>喜欢一个人或事物</strong>而忽略它的缺点，放大它的优点，甚至扭曲事实来维护这个喜欢。
+          </div>
+          <p>芒格说：人类天生就有"喜欢和热爱"的倾向。这本身不是问题，问题在于——当你喜欢的东西有缺陷时，你的大脑会<strong>主动帮你遮掩</strong>。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为"喜欢"是一种情感，而情感是不讲道理的。你不会觉得自己在美化什么——你会真心觉得它就是好。这种<strong>自我欺骗是无意识的</strong>。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：溺爱孩子的决定</h4>
+              <p>你因为喜欢孩子，不忍心让他受挫折。但你遮住了他需要成长的真相——<strong>你的"爱"可能正在阻碍他</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：对偶像/品牌的盲信</h4>
+              <p>你喜欢某个人或品牌，它出了问题你第一反应是替它解释。你不是在分析，你是在<strong>维护你的喜欢</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：对熟悉方案的偏好</h4>
+              <p>在工作会议上，你倾向于支持自己熟悉的人和方案，不是因为它是最好的，而是因为<strong>你喜欢它</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>当你特别喜欢什么的时候，就是你最危险的时候。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>这周找一个你"特别喜欢"的人或事物，强迫自己写下它的三个缺点。看看你平时是不是一直在忽略它们。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第3课 -->
+    <div class="lesson-item" id="lesson-3">
+      <div class="lesson-header" onclick="toggleLesson(3)">
+        <div class="lesson-num">3</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">讨厌/憎恨倾向</div>
+          <div class="lesson-title-en">Disliking/Hating Tendency</div>
+        </div>
+        <div class="lesson-date">4/21</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人会因为<strong>讨厌一个人或事物</strong>而忽略它的优点，放大它的缺点，甚至扭曲事实来强化这个讨厌。
+          </div>
+          <p>这是"喜欢/热爱倾向"的镜像。当你讨厌什么的时候，你的大脑会自动帮你找证据证明它确实该被讨厌。你会<strong>选择性忽略它的好处</strong>。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为"讨厌"同样是一种强烈的情感。你觉得你在"客观评价"，其实你在<strong>合理化你的厌恶</strong>。更危险的是，讨厌会让你错过有价值的信息。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：因为讨厌一个人而否决他的好建议</h4>
+              <p>会议上你讨厌的同事提出了一个好方案。你的第一反应不是"这方案好不好"，而是<strong>"我不想让他得意"</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：对竞争产品的无视</h4>
+              <p>你讨厌某家公司，所以从不研究它的产品。但你可能错过了它真正领先的地方——<strong>你的讨厌让你封闭了学习通道</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：在人际关系中的偏见</h4>
+              <p>一旦你开始讨厌某人，他做的所有事在你眼里都是错的。你不再能客观判断——<strong>你的判断被情绪绑架了</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>你最讨厌的人身上，可能藏着你最需要学的东西。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>找一个你讨厌的人，认真写下他的三个优点。这很难，但这就是突破讨厌倾向的第一步。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第4课 -->
+    <div class="lesson-item" id="lesson-4">
+      <div class="lesson-header" onclick="toggleLesson(4)">
+        <div class="lesson-num">4</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">避免怀疑倾向</div>
+          <div class="lesson-title-en">Doubt-Avoidance Tendency</div>
+        </div>
+        <div class="lesson-date">4/22</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人的大脑天生<strong>讨厌不确定</strong>。面对疑惑和不确定时，你会急于做出决定来消除不适感——哪怕这个决定是错的。
+          </div>
+          <p>芒格说：人类在进化中形成了快速消除怀疑的本能，因为在远古时代犹豫就意味着死亡。但在现代社会，<strong>这种本能经常导致你过早下结论</strong>。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为"不确定"让你不舒服。你不会承认"我急着做决定是因为我受不了悬念"——你会说服自己"我已经想清楚了"。但事实往往是<strong>你只是想让不确定消失</strong>。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：匆忙做出职业选择</h4>
+              <p>面临两个offer迟迟不能决定，焦虑到极点后你选了一个。你以为是"果断"，其实是<strong>逃避不确定</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：过早对人的判断</h4>
+              <p>初次见面就给人贴标签——"这人不行"。你不是基于充分信息，而是<strong>大脑想快速消除"这人到底怎么样"的不确定</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：投资中的恐慌决策</h4>
+              <p>市场波动时急于买卖，不是因为分析清楚了，而是<strong>受不了"到底会涨还是跌"的不确定</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>当你急着做决定的时候，往往是最不该做决定的时候。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>这周遇到一个让你犹豫的决定，强制自己等24小时再决定。体验一下"与不确定共处"的感觉。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第5课 -->
+    <div class="lesson-item" id="lesson-5">
+      <div class="lesson-header" onclick="toggleLesson(5)">
+        <div class="lesson-num">5</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">避免不一致倾向</div>
+          <div class="lesson-title-en">Inconsistency-Avoidance Tendency</div>
+        </div>
+        <div class="lesson-date">4/23</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人一旦形成了某个观点或习惯，就<strong>本能地抗拒改变</strong>——即使新证据证明你是错的。你的大脑讨厌和自己不一致。
+          </div>
+          <p>芒格指出：这个倾向是人类最强大的认知陷阱之一。它让你<strong>死守第一印象、固守旧习惯、拒绝新方法</strong>，仅仅因为改变意味着承认自己之前是错的。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为改变想法的感觉就像"否定自己"。你的自尊心不允许你轻易说"我错了"——所以你宁愿<strong>扭曲新信息来维护旧观点</strong>，也不愿承认不一致。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：固执己见的项目方向</h4>
+              <p>你选了一个技术路线，即使后来发现另一条路更好，你也会找理由坚持原路——<strong>承认之前的判断有误太难了</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：不改变坏习惯</h4>
+              <p>明知道该改，但就是不改。不是因为新方法不好，而是<strong>改变意味着承认之前的方法是错的</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：对人的第一印象固守</h4>
+              <p>你第一次觉得某人"不太行"，之后即使他做出了好成绩，你也会下意识贬低——<strong>你的第一印象在抗拒更新</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>最危险的不是不知道，而是以为自己知道。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>找一个你坚持了很久的观点，问自己："如果我是错的呢？"试着找三个支持反方的理由。体会一下改变想法的感觉。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第6课 -->
+    <div class="lesson-item" id="lesson-6">
+      <div class="lesson-header" onclick="toggleLesson(6)">
+        <div class="lesson-num">6</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">好奇心倾向</div>
+          <div class="lesson-title-en">Curiosity Tendency</div>
+        </div>
+        <div class="lesson-date">4/24</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            好奇心是人类最宝贵的天赋之一，但<strong>它可以被误导</strong>。你可能在无关紧要的事上极度好奇，却对真正重要的事视而不见。
+          </div>
+          <p>芒格认为好奇心是少数几个<strong>正面倾向</strong>之一。问题是：你的好奇心有没有用在正确的地方？很多人对新手机功能特别好奇，但对自己的认知盲区毫无兴趣。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为好奇心本身是好的——这让你觉得"我在学习"。但如果你只对<strong>舒适区的信息</strong>好奇（新科技、新八卦），却避开<strong>让自己不舒服的真相</strong>（你的弱点、你的偏见），那好奇心就变成了逃避工具。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：沉迷技术细节而忽视大方向</h4>
+              <p>你对新工具、新框架极度好奇，花大量时间研究。但你有没有对<strong>"我到底要解决什么问题"</strong>同样好奇？</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：好奇别人的生活而不审视自己</h4>
+              <p>刷社交媒体时对别人的人生充满好奇，但<strong>从不好奇自己的人生是不是在正确的轨道上</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：学了不用</h4>
+              <p>不断学习新东西（好奇心驱动），但从不去实践。<strong>好奇心变成了收藏癖</strong>——知识存着不用，等于没学。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>好奇心是好东西，前提是你对正确的事情好奇。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>这周把你的好奇心对准一个你一直回避的领域——可能是健康、财务、或者某段关系。问三个你从没问过自己的问题。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第7课 -->
+    <div class="lesson-item" id="lesson-7">
+      <div class="lesson-header" onclick="toggleLesson(7)">
+        <div class="lesson-num">7</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">康德式公平倾向</div>
+          <div class="lesson-title-en">Kantian Fairness Tendency</div>
+        </div>
+        <div class="lesson-date">4/25</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人天生渴望<strong>公平</strong>。当你觉得"这不公平"的时候，你的反应往往比实际损失所应有的反应大得多。
+          </div>
+          <p>芒格借用了康德的"绝对命令"概念：人期望别人怎样待自己，就应该怎样待别人。但问题是——<strong>当你觉得自己受到不公平对待时，你会做出远超理性的反应</strong>，包括报复、消极抵抗、甚至自毁。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为"追求公平"听起来是正义的。你不会觉得"我觉得不公平"是一种偏见——你觉得这是在维护正义。但<strong>很多时候你的"不公平感"只是自我中心的判断</strong>，你只看到了自己没得到的，没看到别人付出的。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：薪资不公平感导致的消极</h4>
+              <p>发现同事工资比你高，即使你其实已经不低了，你的工作动力可能瞬间下降。<strong>不公平感让你惩罚自己</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：家庭关系中的"你欠我的"</h4>
+              <p>你为家庭付出了很多，觉得对方也应该等量回报。但<strong>每个人的付出方式不同</strong>——用你的标准衡量别人，永远觉得不公平。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：为"公平"做不理性的决定</h4>
+              <p>为了"争口气"而放弃了一个本来对自己有利的选择。<strong>你的公平感让你赢得了面子，输掉了实际利益</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>"不公平"三个字，可能是你做过的最昂贵的判断。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>回忆一个你觉得"不公平"的经历，试着从对方的角度重新讲述一遍这个故事。看看你是不是只看到了硬币的一面。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第8课 -->
+    <div class="lesson-item" id="lesson-8">
+      <div class="lesson-header" onclick="toggleLesson(8)">
+        <div class="lesson-num">8</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">嫉妒倾向</div>
+          <div class="lesson-title-en">Envy Tendency</div>
+        </div>
+        <div class="lesson-date">4/26</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            芒格说：<strong>"如果嫉妒是一种运动，人类一定是奥运冠军。"</strong> 嫉妒不是道德问题，它是一种根深蒂固的生物本能。
+          </div>
+          <p>人的幸福极大程度上来自于<strong>相对比较</strong>，而不是绝对水平。你年薪50万，如果邻居年薪100万，你可能很痛苦；但如果邻居年薪30万，你可能很满足。<strong>你的幸福感取决于你和谁比</strong>。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为没人愿意承认自己在嫉妒。你会把它包装成"我不服气"、"这人不配"、"制度有问题"——<strong>各种说法，就是不肯说"我嫉妒了"</strong>。而嫉妒最危险的地方在于它会驱使你做出伤害自己的决定。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：因为同事升职而痛苦</h4>
+              <p>他升职了你没有。你开始怀疑自己的价值，甚至想跳槽。<strong>你忽略了一个事实：他的升职和你的价值没有直接关系</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：被社交媒体操控</h4>
+              <p>看到别人晒豪车、晒旅行，心里不舒服。这种不舒服让你<strong>花更多钱去买自己不需要的东西</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：投资中的攀比</h4>
+              <p>听说朋友炒股赚了100万，你冒着超出自己承受能力的风险去追高。<strong>嫉妒让你忘记了风险</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>嫉妒是无声的窃贼，偷走的不是别人的东西，是你自己的平静。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>这周每次你感到"不舒服"的时候，问自己：这真的是因为我有问题，还是因为我在和别人比？识别嫉妒就是打败它的第一步。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第9课 -->
+    <div class="lesson-item" id="lesson-9">
+      <div class="lesson-header" onclick="toggleLesson(9)">
+        <div class="lesson-num">9</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">回馈倾向</div>
+          <div class="lesson-title-en">Reciprocation Tendency</div>
+        </div>
+        <div class="lesson-date">4/27</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人类天生有<strong>以牙还牙、以恩报恩</strong>的本能。别人对你好，你觉得"欠"了他的；别人对你坏，你觉得必须"还回去"。这种本能可以让人际关系更好，也可以让你被操控。
+          </div>
+          <p>芒格警告：商业世界大量利用回馈倾向来操控你。<strong>免费试用、小礼物、先大后小的让步</strong>——都是为了触发你的"回报义务感"。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为"回报"是一种社会美德，你不觉得它有问题。但问题是<strong>你的回馈往往是不成比例的</strong>——别人给你一颗糖，你可能回报一盒巧克力。你觉得是"客气"，其实你在被操控。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：被销售人员的"善意"绑架</h4>
+              <p>销售给你倒杯水、夸你两句，你就觉得不好意思不买。<strong>一杯水换你几千块</strong>——这就是回馈倾向在作祟。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：在谈判中先让步的陷阱</h4>
+              <p>对方先提一个夸张的要求，然后"让步"到你实际要的范围。你觉得他让步了，你也应该让步——<strong>其实他的让步是假的</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：职场中的"人情债"</h4>
+              <p>同事帮你一个小忙，你记在心里。之后他让你帮忙做一个不合理的任务，你答应了——<strong>因为他"帮过"你</strong>。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>别人对你的好，可能是最贵的陷阱。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>这周当有人对你"示好"的时候，停下来问自己：他的善意是真心，还是在触发我的回馈本能？区分真正的善意和策略性的示好。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第10课 -->
+    <div class="lesson-item" id="lesson-10">
+      <div class="lesson-header" onclick="toggleLesson(10)">
+        <div class="lesson-num">10</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">受简单联想影响的倾向</div>
+          <div class="lesson-title-en">Influence by Mere Association Tendency</div>
+        </div>
+        <div class="lesson-date">4/28</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            你的大脑会把<strong>同时出现的两件事自动关联</strong>——即使它们之间根本没因果关系。这就是为什么广告里总放美女和跑车，因为你的大脑会自动把"美女"的好感转移到"跑车"上。
+          </div>
+          <p>芒格说：简单联想是一种<strong>低级但极其有效的思维捷径</strong>。它让你基于表面关联做判断，而不是基于真正的因果关系。这在商业、政治、日常生活中无处不在。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为联想是<strong>自动的、无意识的</strong>。你不会觉得"我看到苹果logo就觉得它好"是一种偏见——你觉得它就是好。但仔细想想，你的判断有多少是基于实际体验，有多少是基于品牌联想？</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：贵的就是好的</h4>
+              <p>你的大脑把"高价"和"高品质"自动关联了。但很多高价产品只是在卖品牌故事——<strong>价格和品质之间没有必然关系</strong>。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：以貌取人</h4>
+              <p>长得好看的人，你自动觉得他聪明、靠谱、值得信任。<strong>外貌和能力之间没有因果关系</strong>，但你的大脑已经帮你做了关联。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：成功学中的幸存者偏差</h4>
+              <p>看到某人成功了，你就想学他的方法。但你忽略了<strong>成功和他做的方法之间可能没有因果关系</strong>——可能只是运气。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>两个东西同时出现，不代表它们之间有关系。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>这周做一个练习：每当你觉得"这个东西好"的时候，追问一句——"我觉得它好，是因为它真的好，还是因为某些联想让我觉得它好？"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第11课 -->
+    <div class="lesson-item" id="lesson-11">
+      <div class="lesson-header" onclick="toggleLesson(11)">
+        <div class="lesson-num">11</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">简单的避免痛苦的心理否认</div>
+          <div class="lesson-title-en">Simple, Pain-Avoiding Psychological Denial</div>
+        </div>
+        <div class="lesson-date">4/29</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            当现实太痛苦时，你的大脑会<strong>直接扭曲现实</strong>来减轻痛苦。你不是在"骗自己"——你的大脑真的会修改你的认知，让你"看不到"真相。
+          </div>
+          <p>芒格说：这种倾向在最坏的情况下会导致<strong>彻底的自我欺骗</strong>。酗酒者不觉得自己有问题，赌博的人觉得自己下一把一定能翻盘——他们不是在说谎，是他们<strong>真的相信</strong>自己没问题。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>因为心理否认的核心功能就是<strong>让你意识不到它在运作</strong>。如果你知道自己在否认，那就不是否认了。你只有在被别人指出来、或者撞了南墙之后，才可能意识到自己一直在逃避。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：否认健康问题</h4>
+              <p>身体出现了信号，但你说"没事，可能就是最近太忙了"。<strong>你不是在安慰自己，你是在否认现实</strong>，因为接受现实太痛苦了。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：否认关系出了问题</h4>
+              <p>关系明显在恶化，但你说"还好还好"。<strong>你宁愿活在幻觉里也不愿面对痛苦</strong>——但问题不会因为你否认就消失。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：否认职业方向错误</h4>
+              <p>你投入了大量时间在一个错误的方向上，但不愿意承认。<strong>承认错误太痛苦了</strong>，所以你继续投入，越陷越深——这就是"沉没成本"背后的心理否认。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>痛苦不会因为你闭上眼睛就消失。但闭上眼睛，会让你错过所有解决问题的时机。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 行动建议</h3>
+            <p>找一个你一直在逃避面对的问题（健康、关系、财务、职业），今天就写下来。不需要解决它——只需要<strong>承认它的存在</strong>。这比任何行动都更勇敢。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-item" id="lesson-12">
+      <div class="lesson-header" onclick="toggleLesson(12)">
+        <div class="lesson-num">12</div>
+        <div class="lesson-title-area">
+          <div class="lesson-title">过度乐观倾向</div>
+          <div class="lesson-title-en">Excessive Optimism Tendency</div>
+        </div>
+        <div class="lesson-date">4/30</div>
+        <div class="lesson-toggle">▶</div>
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-content">
+          <div class="highlight">
+            人天生倾向于<strong>高估好事发生的概率、低估坏事的可能</strong>。不是"不知道风险"，而是"知道但觉得不会发生在我身上"。芒格说：<strong>聪明人尤其严重</strong>，因为聪明人更善于为乐观找"合理理由"。
+          </div>
+          <p>你以为自己在做理性判断，其实你的大脑在<strong>自动过滤反面证据</strong>，只保留支持"一切顺利"的信息。</p>
+
+          <div class="content-section">
+            <h3>🔍 为什么你容易忽视它？</h3>
+            <p>在职场中，正面信号容易让人过度乐观——项目被看好、技能在提升……这些好消息让你觉得"我在上升"。也许你确实在上升，但乐观倾向会帮你自动过滤掉反面证据。</p>
+          </div>
+
+          <div class="content-section">
+            <h3>💡 生活中的错误案例</h3>
+            <div class="case-box">
+              <h4>案例1：重要项目的"被选中"幻觉</h4>
+              <p>被上级选中负责重要项目，这是好消息。但乐观倾向会让你低估"项目本身的组织风险"——比如资源争夺、中途换方向。你可能在心理上已经把"被选中"等同于"会成功"，这两个不是一回事。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例2：中国背景天花板的"乐观忽视"</h4>
+              <p>你说过中国背景是天花板但"不是不可能突破"。这话理性上没错，但乐观倾向会让你在实际行动中<strong>不够用力地去突破</strong>——因为你已经默认了"也许运气好就行"。真正的突破需要你做那些"不舒服但必要"的政治动作。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例3：项目进度的盲目自信</h4>
+              <p>你正在学习新技术，进度不错。但乐观倾向会让你觉得"按这个速度肯定没问题"，忽略了学习曲线后半段通常更陡峭、项目总有意外的规律。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例4：跟精明同事的关系判断</h4>
+              <p>你清楚他的行事风格，但乐观倾向可能让你觉得"没事，他不至于坑我"。问题是——他可能不会主动坑你，但风向变了他会毫不犹豫地调整站位，而你可能还没准备好应对这种变化。</p>
+            </div>
+            <div class="case-box">
+              <h4>案例5：奶茶外交的可持续性</h4>
+              <p>跟艾米的关系在改善，太好了。但乐观倾向会让你觉得"已经好了，不用再刻意维护了"。青春期的关系修复是持续的，不是一次性的。</p>
+            </div>
+          </div>
+
+          <div class="motto-box">
+            一句话记住它：<br>好消息让你聪明，坏消息让你活下来。两个都要听。
+          </div>
+
+          <div class="action-box">
+            <h3>🎯 纠正方法</h3>
+            <ul style="margin:8px 0 8px 20px; color:var(--text-dim); font-size:0.9em;">
+              <li><strong>每周写"最可能出错的3件事"</strong>：花10分钟，写下当前工作和生活中最可能翻车的3个场景。不是焦虑，是预演。</li>
+              <li><strong>给每个好消息配一个"但是"</strong>：不是泼冷水，是强迫大脑看到完整画面。</li>
+              <li><strong>设置"悲观检查点"</strong>：项目每到一个里程碑，专门花30分钟做一次"假设失败"推演。</li>
+              <li><strong>对同事关系做"压力测试"</strong>：提前想清楚谁会站你，谁会闪。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- lesson-list -->
+
+  <div class="footer">
+    <a href="index.html">← 返回私人教练</a> &nbsp;·&nbsp; <a href="../index.html">Sky Portal</a> &nbsp;·&nbsp; 进度 12/25
+  </div>
+</div>
+
+<script>
+function toggleLesson(n) {
+  const item = document.getElementById('lesson-' + n);
+  item.classList.toggle('active');
+}
+
+function toggleAll() {
+  const items = document.querySelectorAll('.lesson-item');
+  const allActive = [...items].every(i => i.classList.contains('active'));
+  items.forEach(item => {
+    if (allActive) {
+      item.classList.remove('active');
+    } else {
+      item.classList.add('active');
+    }
+  });
+}
+</script>
+
+</body>
+</html>

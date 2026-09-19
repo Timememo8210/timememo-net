@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<script src="/sky-portal/_gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧬 每周科学前沿 2026-04-22</title>
+<style>
+  body { background:#0a0a0f; color:#ccc; font-family:-apple-system,'Helvetica Neue','PingFang SC',sans-serif; margin:0; padding:24px; }
+  body.lang-zh .en { display:none !important; }
+  body.lang-en .zh { display:none !important; }
+  .container { max-width:900px; margin:0 auto; }
+  .header { text-align:center; padding:40px 0 32px; border-bottom:1px solid rgba(34,211,238,0.15); margin-bottom:32px; }
+  .header h1 { font-size:1.8em; color:#22d3ee; margin:0 0 8px; }
+  .header .date { color:#888; font-size:0.9em; }
+  .lang-btns { text-align:right; margin-bottom:16px; }
+  .lang-btns button { background:#1a1a2e; color:#888; border:1px solid rgba(34,211,238,0.2); padding:4px 12px; border-radius:4px; cursor:pointer; font-size:0.8em; margin-left:4px; }
+  .lang-btns button.active { background:rgba(34,211,238,0.2); color:#22d3ee; border-color:#22d3ee; }
+  .paper-card { background:#141420; border:1px solid rgba(34,211,238,0.1); border-radius:16px; padding:28px 32px; margin-bottom:24px; }
+  .paper-card .paper-num { display:inline-block; background:rgba(34,211,238,0.15); color:#22d3ee; font-size:0.75em; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:12px; }
+  .paper-card .field-tag { display:inline-block; background:rgba(167,139,250,0.15); color:#a78bfa; font-size:0.7em; padding:2px 8px; border-radius:4px; margin-left:8px; }
+  .paper-card h2 { font-size:1.3em; color:#fff; margin:8px 0 12px; line-height:1.4; }
+  .paper-card .journal { color:#22d3ee; font-size:0.85em; font-weight:600; }
+  .paper-card .authors { color:#888; font-size:0.82em; margin-top:4px; }
+  .paper-card .abstract { line-height:1.8; margin-top:16px; }
+  .paper-card .key-findings { background:rgba(34,211,238,0.05); border-left:3px solid #22d3ee; padding:16px 20px; margin-top:16px; border-radius:0 8px 8px 0; }
+  .paper-card .key-findings h3 { color:#22d3ee; font-size:0.95em; margin:0 0 8px; }
+  .paper-card .key-findings ul { margin:0; padding-left:20px; }
+  .paper-card .key-findings li { margin-bottom:6px; line-height:1.6; }
+  .paper-card .significance { background:rgba(251,146,60,0.08); border-left:3px solid #fb923c; padding:12px 16px; margin-top:12px; border-radius:0 8px 8px 0; font-size:0.9em; }
+  .paper-card .significance strong { color:#fb923c; }
+  .paper-card .source-link { display:inline-block; margin-top:16px; color:#22d3ee; text-decoration:none; font-size:0.85em; }
+  .paper-card .source-link:hover { text-decoration:underline; }
+  .footer { text-align:center; padding:32px 0; color:#666; font-size:0.85em; border-top:1px solid rgba(34,211,238,0.1); margin-top:40px; }
+  .footer a { color:#22d3ee; text-decoration:none; }
+  @media (max-width:768px) {
+    body { padding:16px; }
+    .paper-card { padding:20px; }
+    .header h1 { font-size:1.4em; }
+  }
+</style>
+</head>
+<body class="lang-zh">
+<!-- 语言切换按钮 -->
+<div class="lang-btns">
+  <button id="btnZh" class="active" onclick="switchLang('zh')">中文</button>
+  <button id="btnEn" onclick="switchLang('en')">EN</button>
+</div>
+
+<div class="container">
+  <div class="header">
+    <h1>🧬 <span class="zh">每周科学前沿</span><span class="en">Weekly Science Digest</span></h1>
+    <div class="date">2026-04-22 · <span class="zh">第2期</span><span class="en">Issue #2</span></div>
+  </div>
+
+  <!-- Paper 1: AI Hallucinations -->
+  <div class="paper-card">
+    <span class="paper-num">Paper #1</span>
+    <span class="field-tag">🤖 AI与计算科学</span>
+    <h2><span class="zh">评估大型语言模型的准确性反而助长了"幻觉"</span><span class="en">Evaluating Large Language Models for Accuracy Incentivizes Hallucinations</span></h2>
+    <div class="journal">Nature · 22 April 2026</div>
+    <div class="authors">Adam Tauman Kalai, Ofir Nachum, Santosh S. Vempala &amp; Edwin Zhang (OpenAI; Georgia Institute of Technology)</div>
+    <div class="abstract">
+      <span class="zh">大型语言模型（LLM）经常会生成看似合理但实际错误的回答，即所谓的"幻觉"（hallucination），这严重限制了其在关键场景中的可靠性。此前的研究提出了多种解释和缓解方案，包括检索增强生成、一致性自验证以及基于人类反馈的强化学习（RLHF），但幻觉问题在当今最先进的模型中依然普遍存在。这项由 OpenAI 和佐治亚理工学院合作完成的研究从理论和实践两个层面揭示了问题的根源：下一个词预测机制和以准确率为核心的评估体系，在无意中奖励了模型的"盲目猜测"行为。研究团队利用学习理论证明，当训练数据中某些事实缺乏足够的重复支撑时（例如罕见细节），模型不可避免地会产生错误；而那些反复出现的规律（如语法结构）则不会出现此问题。更重要的是，当前主流的评估指标（如准确率）系统性地偏向鼓励模型猜测，而非承认不确定性。为此，研究者提出了两项改进建议：一是"开放评分标准"（open-rubric）评估，明确声明错误将如何被惩罚，测试模型是否能在优化准确率的同时根据风险等级调整其"不确定"回答；二是建议在现有评测基准中加入幻觉相关的变体，逆转其鼓励猜测的倾向。这一研究将幻觉问题重新定义为"激励问题"，为构建更可靠的语言模型提供了一条切实可行的路径。</span>
+      <span class="en">Large language models sometimes produce confident, plausible falsehoods ("hallucinations"), limiting their reliability. This study from OpenAI and Georgia Tech reveals how next-word prediction and accuracy-based evaluations inadvertently reward unwarranted guessing. Using learning theory, the authors show that facts lacking repeated support in training data yield unavoidable errors, while recurring regularities (like grammar) do not. Dominant headline metrics like accuracy systematically reward guessing over admitting uncertainty. The authors propose "open-rubric" evaluations that explicitly state how errors are penalized, testing whether models modulate their abstentions to stated stakes. They also suggest using open-rubric variants of existing benchmarks to reverse guessing incentives. Reframing hallucination as an incentive problem opens a practical path toward more reliable language models.</span>
+    </div>
+    <div class="key-findings">
+      <h3>🔬 <span class="zh">核心发现</span><span class="en">Key Findings</span></h3>
+      <ul>
+        <li><span class="zh">下一个词预测的预训练过程会在统计层面制造幻觉压力：训练数据中缺乏重复支撑的事实（如一次性细节）不可避免地导致模型犯错</span><span class="en">Next-word pretraining creates statistical pressure toward hallucination: facts lacking repeated support in training data yield unavoidable errors</span></li>
+        <li><span class="zh">主流评估指标（如准确率）系统性地奖励"盲目猜测"而非承认不确定性，形成了反常的激励机制</span><span class="en">Dominant headline metrics like accuracy systematically reward guessing over admitting uncertainty, creating perverse incentives</span></li>
+        <li><span class="zh">提出"开放评分标准"评估方法，明确声明错误的惩罚方式，促使模型根据风险等级调整"不确定"回答的行为</span><span class="en">Proposes "open-rubric" evaluations that explicitly state how errors are penalized, encouraging models to modulate abstentions based on stated stakes</span></li>
+      </ul>
+    </div>
+    <div class="significance">
+      <strong><span class="zh">💡 为什么重要：</span><span class="en">💡 Why it matters:</span></strong>
+      <span class="zh">这项研究从根本上改变了我们对AI幻觉问题的理解——将问题归因于评估体系的激励缺陷而非模型本身的局限性，为构建更安全可靠的AI系统提供了全新方向。来自OpenAI核心团队的研究更使其具有深远的行业影响力。</span>
+      <span class="en">This study fundamentally reframes AI hallucination as an incentive problem rather than a model limitation, opening a practical path toward more reliable AI. Coming from OpenAI's core team, it carries significant industry influence.</span>
+    </div>
+    <a class="source-link" href="https://www.nature.com/articles/s41586-026-10549-w" target="_blank">📄 <span class="zh">阅读原文</span><span class="en">Read Original</span> →</a>
+  </div>
+
+  <!-- Paper 2: JWST Ice Clouds -->
+  <div class="paper-card">
+    <span class="paper-num">Paper #2</span>
+    <span class="field-tag">🚀 天体物理与空间科学</span>
+    <h2><span class="zh">JWST在类木星系外行星上发现意外的水冰云</span><span class="en">JWST Discovers Unexpected Water-Ice Clouds on a Jupiter-like Exoplanet</span></h2>
+    <div class="journal">The Astrophysical Journal Letters · April 2026</div>
+    <div class="authors">Elisabeth Matthews, Bhavesh Rajpoot, James Mang et al. (Max Planck Institute for Astronomy; University of Texas at Austin)</div>
+    <div class="abstract">
+      <span class="zh">天文学家利用詹姆斯·韦伯太空望远镜（JWST）的中红外仪器MIRI，在类木星系外行星 Epsilon Indi Ab 的大气层中发现了意料之外的水冰云，这一发现对现有的系外行星大气模型构成了重大挑战。Epsilon Indi Ab 是目前已知最接近太阳系木星类比体的系外行星之一，其质量约为木星的7.6倍，但直径与木星相当。该行星围绕恒星 Epsilon Indi A 运行，距离其恒星约4倍于木星到太阳的距离，表面温度估计在200至300开尔文之间（约-70°C至+20°C），比木星的140K略高，多余的温暖被认为源于行星形成时残留的热量。研究团队使用MIRI日冕仪遮挡宿主恒星的强光，在11.3微米波段直接对行星成像，通过对比2024年在10.6微米波段拍摄的图像来估算氨气含量。观测发现，该行星大气中的氨气含量远低于预期。最可能的解释是：厚实但不均匀的水冰云层——类似于地球高空中的卷云——遮挡了氨气的信号。这一发现表明现有的系外行星大气模型需要纳入更复杂的云层模拟。研究也标志着JWST在直接研究太阳系类比行星方面取得了重要里程碑，为未来探测宜居行星奠定了基础。</span>
+      <span class="en">Using JWST's MIRI instrument, astronomers discovered unexpected water-ice clouds in the atmosphere of Epsilon Indi Ab, a Jupiter-analogue exoplanet. The planet has 7.6 Jupiter masses but roughly Jupiter's diameter, orbiting at 4× Jupiter's distance from its star. Its surface temperature (200–300 K) is warmer than Jupiter's 140 K due to residual formation heat. Using MIRI's coronagraph, the team directly imaged the planet at 11.3 μm, comparing with 10.6 μm observations from 2024 to estimate ammonia content. They found far less ammonia than predicted — most likely hidden by thick, patchy water-ice clouds similar to Earth's cirrus clouds. This challenges existing atmospheric models that often exclude cloud simulation and marks a milestone in JWST's direct characterization of solar-system analogue planets.</span>
+    </div>
+    <div class="key-findings">
+      <h3>🔬 <span class="zh">核心发现</span><span class="en">Key Findings</span></h3>
+      <ul>
+        <li><span class="zh">首次在类木星冷系外行星（Epsilon Indi Ab）大气中直接探测到水冰云层，温度范围200–300K</span><span class="en">First direct detection of water-ice clouds in a cold Jupiter-analogue exoplanet atmosphere (200–300 K)</span></li>
+        <li><span class="zh">大气中氨气含量远低于模型预测，被厚实但不均匀的冰云遮挡——类似地球卷云</span><span class="en">Atmospheric ammonia far below model predictions, obscured by thick patchy ice clouds resembling Earth's cirrus</span></li>
+        <li><span class="zh">JWST首次实现对真正太阳系类比行星的详细大气特征分析，为未来寻找宜居星球铺平道路</span><span class="en">JWST achieves first detailed atmospheric characterization of a true solar-system analogue planet, paving the way for habitable-world searches</span></li>
+      </ul>
+    </div>
+    <div class="significance">
+      <strong><span class="zh">💡 为什么重要：</span><span class="en">💡 Why it matters:</span></strong>
+      <span class="zh">这是人类首次在类木星的冷系外行星上直接观测到冰云，表明我们对巨行星大气的理解仍然存在重大空白。这一发现将迫使天文学家重新构建大气模型，也展示了JWST在系外行星直接成像方面的革命性能力。</span>
+      <span class="en">The first direct observation of ice clouds on a cold Jupiter-like exoplanet reveals major gaps in our understanding of giant planet atmospheres and demonstrates JWST's revolutionary direct-imaging capabilities.</span>
+    </div>
+    <a class="source-link" href="https://doi.org/10.3847/2041-8213/ae5823" target="_blank">📄 <span class="zh">阅读原文</span><span class="en">Read Original</span> →</a>
+  </div>
+
+  <!-- Paper 3: OTOF Gene Therapy -->
+  <div class="paper-card">
+    <span class="paper-num">Paper #3</span>
+    <span class="field-tag">🧬 医学与基因治疗</span>
+    <h2><span class="zh">OTOF相关耳聋的多中心基因治疗：最长2.5年随访结果</span><span class="en">Multicentre Gene Therapy for OTOF-related Deafness Followed Up to 2.5 Years</span></h2>
+    <div class="journal">Nature · 22 April 2026</div>
+    <div class="authors">Luoying Jiang, Xiaoting Cheng, Jun Lv, ... Yilai Shu et al. (42 authors, multi-centre trial)</div>
+    <div class="abstract">
+      <span class="zh">OTOF基因突变导致的常染色体隐性耳聋9型（DFNB9）表现为重度至完全性先天耳聋。虽然此前在少数患者中已观察到基因治疗的益处，但其在更广泛年龄范围和更长期随访中的安全性和疗效仍然未知。这项在中国八个中心开展的单一臂临床试验中，42名年龄从0.8岁至32.3岁的参与者接受了携带人类OTOF编码转基因的腺相关病毒1型（AAV1-hOTOF），分为三个载体剂量组，最长随访达2.5年。研究的主要终点为6周内的剂量限制性毒性，次要终点评估疗效和不良事件。结果显示，未观察到剂量限制性毒性；3级不良事件仅包括中性粒细胞计数下降。在AAV1-hOTOF治疗的参与者中，90%恢复了听力：听觉脑干反应阈值从基线的大于97±1 dB nHL逐步改善至1年的54±3 dB、1.5年的51±3 dB、2年的50±3 dB和2.5年的42±5 dB；行为测听从基线的大于96±3 dB改善至2.5年的37±5 dB。0.5至18岁的患者听力改善优于成年人。基线时更多存在的畸变产物耳声发射（DPOAE）或双等位基因非截短OTOF变异体与更好的听力恢复相关。听力恢复的参与者在言语感知方面也表现出逐步改善。AAV1-hOTOF在更广泛的患者群体中展现出良好的耐受性和疗效，治疗效益持续至2.5年。</span>
+      <span class="en">Autosomal recessive deafness 9, caused by OTOF mutations, results in severe-to-complete congenital deafness. This single-arm, multicentre trial at eight Chinese centres enrolled 42 participants (aged 0.8–32.3 years) receiving AAV1-hOTOF gene therapy at three dose groups, with up to 2.5-year follow-up. No dose-limiting toxicities were observed. Hearing was recovered in 90% of treated participants, with ABR thresholds improving from >97±1 dB at baseline to 42±5 dB at 2.5 years, and behavioural audiometry improving from >96±3 dB to 37±5 dB. Participants aged 0.5–18 showed greater improvement than adults. Higher DPOAE presence at baseline or biallelic non-truncated OTOF variants predicted better outcomes. Recovered participants showed gradual speech perception improvement. AAV1-hOTOF demonstrated sustained safety and efficacy across a broad age range for up to 2.5 years.</span>
+    </div>
+    <div class="key-findings">
+      <h3>🔬 <span class="zh">核心发现</span><span class="en">Key Findings</span></h3>
+      <ul>
+        <li><span class="zh">42名患者（0.8–32.3岁）接受AAV1-hOTOF基因治疗，90%恢复听力，随访最长2.5年，疗效持续稳定</span><span class="en">42 patients (0.8–32.3 years) treated with AAV1-hOTOF; 90% achieved hearing recovery with stable improvement over 2.5 years</span></li>
+        <li><span class="zh">听觉阈值从基线>97 dB降至2.5年后的42 dB，行为测听从>96 dB改善至37 dB，儿童患者改善更显著</span><span class="en">Auditory thresholds improved from >97 dB to 42 dB at 2.5 years; behavioural audiometry from >96 dB to 37 dB, with children showing greater gains</span></li>
+        <li><span class="zh">首次确定了疗效预测因子：基线DPOAE的存在和OTOF非截短变异与更好恢复相关</span><span class="en">First identification of outcome predictors: baseline DPOAE presence and non-truncated OTOF variants associated with better recovery</span></li>
+      </ul>
+    </div>
+    <div class="significance">
+      <strong><span class="zh">💡 为什么重要：</span><span class="en">💡 Why it matters:</span></strong>
+      <span class="zh">这是迄今为止规模最大的OTOF基因治疗临床试验，首次证明了基因治疗在从婴幼儿到成人的广泛年龄范围内的安全性和长期疗效，为先天耳聋的基因治疗提供了里程碑式的证据，也为其他遗传性疾病的基因治疗提供了重要参考。</span>
+      <span class="en">The largest OTOF gene therapy trial to date, providing landmark evidence of safety and long-term efficacy across a broad age range from infants to adults — a milestone for congenital deafness treatment and gene therapy at large.</span>
+    </div>
+    <a class="source-link" href="https://www.nature.com/articles/s41586-026-10393-y" target="_blank">📄 <span class="zh">阅读原文</span><span class="en">Read Original</span> →</a>
+  </div>
+
+  <div class="footer">
+    <a href="index.html">🧬 <span class="zh">所有期数</span><span class="en">All Issues</span></a>
+    <span style="margin:0 12px;opacity:0.3">|</span>
+    <a href="../index.html">☁️ Sky Portal</a>
+  </div>
+</div>
+
+<script>
+function switchLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
+  document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+}
+</script>
+</body>
+</html>
