@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="referrer" content="no-referrer">
+  <script src="/sky-portal/access-gate.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12201b">
+  <title>2026 教育与退休税务路线图｜529 · Roth · Mega Backdoor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,500;6..72,650&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #14211c;
+      --muted: #5a6962;
+      --paper: #f3f0e7;
+      --paper-2: #e8e2d5;
+      --panel: #fbf9f3;
+      --forest: #163f32;
+      --forest-2: #245f4b;
+      --copper: #b86435;
+      --amber: #e4ad52;
+      --blue: #315e8d;
+      --red: #9b3d3d;
+      --line: rgba(20, 33, 28, .18);
+      --shadow: 0 20px 60px rgba(20, 33, 28, .10);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 8% 5%, rgba(228, 173, 82, .18), transparent 22rem),
+        radial-gradient(circle at 94% 18%, rgba(49, 94, 141, .11), transparent 26rem),
+        linear-gradient(135deg, var(--paper), #ece7da 52%, #f6f3eb);
+      line-height: 1.72;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .progress { position: fixed; z-index: 80; inset: 0 auto auto 0; width: 0; height: 4px; background: linear-gradient(90deg, var(--copper), var(--amber), #62b996); }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 70;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      min-height: 60px; padding: 10px clamp(18px, 5vw, 68px);
+      border-bottom: 1px solid rgba(20, 33, 28, .14);
+      background: rgba(243, 240, 231, .90);
+      backdrop-filter: blur(18px);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: "IBM Plex Mono", monospace; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+    .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: var(--forest); }
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .top-actions a, .top-actions button { border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--ink); background: rgba(255,255,255,.35); text-decoration: none; cursor: pointer; }
+    .top-actions a:hover, .top-actions button:hover { border-color: var(--forest); background: var(--panel); }
+
+    .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .hero-inner { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: clamp(62px, 9vw, 122px) 0 clamp(50px, 7vw, 86px); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px; color: var(--forest-2); font-family: "IBM Plex Mono", monospace; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 42px; height: 2px; background: var(--copper); }
+    h1, h2, h3 { margin: 0; font-family: "Newsreader", Georgia, serif; line-height: 1.08; }
+    h1 { max-width: 990px; font-size: clamp(3.2rem, 8vw, 7.2rem); font-weight: 650; letter-spacing: -.055em; }
+    h1 em { color: var(--copper); font-style: normal; }
+    .hero-sub { max-width: 780px; margin: 28px 0 0; color: var(--muted); font-size: clamp(1.02rem, 1.7vw, 1.28rem); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; background: rgba(251,249,243,.55); font-family: "IBM Plex Mono", monospace; font-size: .73rem; }
+    .hero-number { position: absolute; right: -2vw; bottom: -8vw; color: rgba(22,63,50,.06); font-family: "Newsreader", serif; font-size: clamp(14rem, 35vw, 32rem); font-weight: 650; line-height: 1; pointer-events: none; }
+
+    .shell { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 72px 0 110px; }
+    .toc { position: sticky; top: 84px; align-self: start; }
+    .toc-label { margin-bottom: 12px; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+    .toc nav { display: grid; }
+    .toc a { padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .88rem; text-decoration: none; }
+    .toc a:hover, .toc a.active { color: var(--copper); }
+    .toc-note { margin-top: 22px; padding: 14px; border-left: 3px solid var(--amber); color: var(--muted); background: rgba(251,249,243,.62); font-size: .78rem; }
+
+    main { min-width: 0; }
+    section { scroll-margin-top: 88px; margin-bottom: 92px; }
+    .section-kicker { margin-bottom: 10px; color: var(--copper); font-family: "IBM Plex Mono", monospace; font-size: .73rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    h2 { font-size: clamp(2.1rem, 5vw, 4rem); letter-spacing: -.035em; }
+    h3 { font-size: 1.45rem; }
+    .lead { max-width: 770px; margin: 18px 0 30px; color: var(--muted); font-size: 1.03rem; }
+
+    .verdict {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px;
+      overflow: hidden; border: 1px solid var(--forest); border-radius: var(--radius); background: var(--forest); box-shadow: var(--shadow);
+    }
+    .verdict-card { min-height: 210px; padding: clamp(24px, 4vw, 38px); background: var(--panel); }
+    .verdict-card.primary { color: #f8f3e9; background: var(--forest); }
+    .verdict-num { display: block; margin-bottom: 34px; color: var(--copper); font-family: "IBM Plex Mono", monospace; font-size: .78rem; font-weight: 600; }
+    .verdict-card.primary .verdict-num { color: var(--amber); }
+    .verdict-card h3 { margin-bottom: 12px; }
+    .verdict-card p { margin: 0; color: var(--muted); }
+    .verdict-card.primary p { color: rgba(248,243,233,.76); }
+
+    .callout { display: grid; grid-template-columns: auto 1fr; gap: 18px; margin: 26px 0; padding: 22px 24px; border: 1px solid var(--line); border-left: 5px solid var(--copper); border-radius: 0 var(--radius) var(--radius) 0; background: var(--panel); }
+    .callout-icon { font-size: 1.5rem; }
+    .callout strong { display: block; margin-bottom: 5px; }
+    .callout p { margin: 0; color: var(--muted); }
+    .callout.warning { border-left-color: var(--red); }
+    .callout.blue { border-left-color: var(--blue); }
+
+    .table-wrap { overflow-x: auto; margin: 26px 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: 0 12px 36px rgba(20,33,28,.06); }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    th, td { padding: 16px 18px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: #f8f3e9; background: var(--forest); font-family: "IBM Plex Mono", monospace; font-size: .74rem; font-weight: 500; letter-spacing: .04em; }
+    td { font-size: .91rem; }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { font-weight: 600; }
+    .good { color: var(--forest-2); font-weight: 700; }
+    .caution { color: var(--red); font-weight: 700; }
+    .small { color: var(--muted); font-size: .78rem; }
+
+    .route-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+    .route { position: relative; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(251,249,243,.72); }
+    .route.recommended { border: 2px solid var(--forest); background: var(--panel); box-shadow: var(--shadow); }
+    .route-badge { display: inline-block; margin-bottom: 22px; padding: 5px 8px; border-radius: 4px; color: #fff; background: var(--forest); font-family: "IBM Plex Mono", monospace; font-size: .66rem; letter-spacing: .06em; }
+    .route h3 { margin-bottom: 10px; }
+    .route p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .equation { display: flex; align-items: stretch; gap: 0; margin: 26px 0; overflow-x: auto; }
+    .eq-box { min-width: 155px; flex: 1; padding: 20px; border: 1px solid var(--line); background: var(--panel); }
+    .eq-box:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .eq-box:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+    .eq-arrow { display: grid; place-items: center; min-width: 50px; color: var(--copper); font-size: 1.5rem; }
+    .eq-label { display: block; margin-bottom: 8px; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: .67rem; text-transform: uppercase; }
+    .eq-box strong { display: block; line-height: 1.35; }
+
+    .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
+    .note-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(251,249,243,.68); }
+    .note-card h3 { margin-bottom: 12px; }
+    .note-card p, .note-card li { color: var(--muted); font-size: .9rem; }
+    .note-card ul { margin: 0; padding-left: 18px; }
+
+    .steps { counter-reset: action; display: grid; gap: 14px; margin-top: 28px; }
+    .step { counter-increment: action; display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .step::before { content: counter(action, decimal-leading-zero); display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; color: #fff; background: var(--forest); font-family: "IBM Plex Mono", monospace; font-size: .75rem; }
+    .step h3 { margin: 2px 0 7px; font-size: 1.2rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    details { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; list-style: none; padding: 18px 42px 18px 0; font-weight: 600; position: relative; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; right: 8px; top: 14px; color: var(--copper); font-family: "Newsreader", serif; font-size: 1.7rem; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: -4px 0 20px; color: var(--muted); }
+
+    .sources { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 22px; padding: 0; list-style: none; }
+    .sources a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--forest-2); font-size: .88rem; text-underline-offset: 3px; }
+    .disclaimer { margin-top: 34px; padding: 22px; border: 1px dashed var(--line); color: var(--muted); background: rgba(255,255,255,.25); font-size: .78rem; }
+
+    footer { padding: 40px 18px 64px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-family: "IBM Plex Mono", monospace; font-size: .72rem; }
+
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .toc nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      .route-grid { grid-template-columns: 1fr; }
+      .hero-number { display: none; }
+    }
+    @media (max-width: 650px) {
+      .topbar { padding-inline: 14px; }
+      .top-actions .print { display: none; }
+      .brand span:last-child { display: none; }
+      .verdict, .split, .sources { grid-template-columns: 1fr; }
+      .toc nav { grid-template-columns: 1fr; }
+      .equation { flex-direction: column; }
+      .eq-box:first-child, .eq-box:last-child { border-radius: 0; }
+      .eq-arrow { min-height: 44px; transform: rotate(90deg); }
+      .step { grid-template-columns: 42px 1fr; padding: 18px; }
+      .step::before { width: 38px; height: 38px; }
+    }
+    @media print {
+      .topbar, .progress, .toc { display: none !important; }
+      body { background: #fff; }
+      .shell { display: block; width: 100%; padding: 30px; }
+      section { break-inside: avoid; margin-bottom: 46px; }
+      .hero-inner { width: 100%; padding: 40px 30px; }
+      .verdict-card, .route, .note-card, .step, .table-wrap { box-shadow: none; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="/sky-portal/"><span class="brand-mark">S</span><span>Sky Portal / Private Research</span></a>
+    <div class="top-actions">
+      <a href="#action">行动清单</a>
+      <button class="print" type="button" onclick="window.print()">打印 / PDF</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">2026 Personal Finance Decision Brief</div>
+      <h1>教育与退休<br><em>税务路线图</em></h1>
+      <p class="hero-sub">把 529、Roth 401(k)、普通 after-tax 401(k)、Roth IRA 和 Mega Backdoor 放到一张图里。先回答“该不该动”，再说明“怎么动”。</p>
+      <div class="hero-meta">
+        <span class="pill">规则核对：2026-10-01</span>
+        <span class="pill">Oregon resident</span>
+        <span class="pill">NY 529 + Fidelity 401(k) + Vanguard Roth IRA</span>
+      </div>
+    </div>
+    <div class="hero-number" aria-hidden="true">26</div>
+  </div>
+
+  <div class="shell">
+    <aside class="toc" aria-label="页面目录">
+      <div class="toc-label">Decision map</div>
+      <nav>
+        <a href="#verdict">先看结论</a>
+        <a href="#state">纽约 vs 俄勒冈 529</a>
+        <a href="#k12">私立高中能不能用</a>
+        <a href="#limits">529 金额与五年规则</a>
+        <a href="#buckets">401(k) 三个税务口袋</a>
+        <a href="#mega">Mega Backdoor</a>
+        <a href="#ira">Vanguard Roth IRA</a>
+        <a href="#action">年内行动清单</a>
+        <a href="#sources">官方来源</a>
+      </nav>
+      <div class="toc-note">本页是决策辅助，不替代 CPA、税务律师或计划管理员对你本人账户的确认。</div>
+    </aside>
+
+    <main>
+      <section id="verdict">
+        <div class="section-kicker">01 / Executive answer</div>
+        <h2>先看结论</h2>
+        <p class="lead">最优先的不是把旧账户全部搬走，而是把“旧钱”和“新钱”分开处理。</p>
+        <div class="verdict">
+          <article class="verdict-card primary">
+            <span class="verdict-num">529 / RECOMMENDED</span>
+            <h3>纽约旧账户保留；俄勒冈用新钱开户</h3>
+            <p>纽约账户搬到外州后仍可继续使用，也不限制孩子去哪个州上学。俄勒冈新账户的主要价值是本州可退税抵免，而不是教育用途更广。</p>
+          </article>
+          <article class="verdict-card">
+            <span class="verdict-num">401(K) / KEY DISTINCTION</span>
+            <h3>Fidelity 的 “after-tax” 不等于 Roth</h3>
+            <p>如果 source 名称真的是 After-Tax / After-Tax Post-2019，本金已纳税，但之后的收益尚未变成免税。需要再做 Roth conversion 才完成 Mega Backdoor。</p>
+          </article>
+          <article class="verdict-card">
+            <span class="verdict-num">LEGACY BALANCE / PAUSE</span>
+            <h3>旧 after-tax 余额先查 basis 和 earnings</h3>
+            <p>不要盲目一次性 convert。已税本金通常不会再交税，历史收益在转换当年通常计入普通收入；先拿到两项数字再决定。</p>
+          </article>
+          <article class="verdict-card">
+            <span class="verdict-num">TAX / REALITY CHECK</span>
+            <h3>没有一种账户让所有钱“从未交税”</h3>
+            <p>Pre-tax 是现在少交、以后交；Roth 是现在交、合格取款不交；529 是税后投入、合格教育支出时收益免税。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="state">
+        <div class="section-kicker">02 / State plan decision</div>
+        <h2>529 每个州确实有区别，<br>但联邦骨架相同</h2>
+        <p class="lead">州别差异主要集中在州税优惠、投资菜单、管理费和本州对某些提款的认定。孩子并不需要去开户州读书。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>比较项</th><th>纽约 NY 529 Direct Plan</th><th>俄勒冈 Embark</th><th>对当前决策的含义</th></tr></thead>
+            <tbody>
+              <tr><td>搬州后能否保留</td><td class="good">可以。可继续持有和投入</td><td>可新开</td><td>不必为了现居 Oregon 强制关闭 NY 账户</td></tr>
+              <tr><td>学校地域限制</td><td>符合资格的全美及部分海外学校</td><td>同样不要求在 Oregon 上学</td><td>开户州不决定孩子去哪里读书</td></tr>
+              <tr><td>州税优惠</td><td>NY 纳税人才有 NY 扣除；不再是 NY 纳税人通常拿不到</td><td class="good">2026 年最高可退税抵免：单身 $190 / 夫妻合报 $380</td><td>Oregon 新钱的核心优势在这里</td></tr>
+              <tr><td>高收入家庭拿满 OR 抵免</td><td>不适用</td><td>若 AGI &gt; $250,000，抵免比例 5%；夫妻合报需投入 $7,600 才达到 $380 上限</td><td>确认报税身份与 AGI 后再定金额</td></tr>
+              <tr><td>大致年费</td><td>Direct Plan 约 0.11%</td><td>多数 enrollment-year 组合约 0.22%–0.24%</td><td>NY Direct 较便宜；$50,000 余额的年费差约 $55–$65</td></tr>
+              <tr><td>投资管理</td><td>Vanguard 管理的低成本组合</td><td>广泛使用 Vanguard 指数基金，也有 enrollment-year / risk / individual 选项</td><td>两边都可做简单的年龄型配置</td></tr>
+              <tr><td>K–12 州税处理</td><td class="caution">NY 将 K–12 学费视为州税上的非合格提款；2026 新扩展项目仍有未定部分</td><td class="caution">联邦可合格，但 Oregon 可能追回与本金相关的旧州税优惠</td><td>私校使用前单独做州税核对</td></tr>
+              <tr><td>最适合的角色</td><td>保留既有低费率资产</td><td>承接新的 Oregon contribution，争取本州抵免</td><td><strong>双账户并存最自然</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-icon">✓</div>
+          <div><strong>建议路线：Keep NY + Open Oregon</strong><p>先确认旧账户是低费率的 <em>Direct Plan</em>，还是费用更高的 Advisor-Guided Plan。若是 Direct Plan 且余额不大，通常没有为了整合而立即 rollover 的必要。</p></div>
+        </div>
+
+        <div class="route-grid">
+          <article class="route recommended">
+            <span class="route-badge">RECOMMENDED</span>
+            <h3>旧 NY 保留，新钱进 OR</h3>
+            <p>保留 NY 的低费率与原始持有期；新账户获取 Oregon 税收抵免。多一个账户，但税务逻辑最清楚。</p>
+          </article>
+          <article class="route">
+            <span class="route-badge">SIMPLE</span>
+            <h3>只继续 NY</h3>
+            <p>账户少、费率低，但作为 Oregon 纳税人通常放弃本州 529 抵免。适合极度重视简化且投入金额很小的情况。</p>
+          </article>
+          <article class="route">
+            <span class="route-badge">CONDITIONAL</span>
+            <h3>把 NY rollover 到 OR</h3>
+            <p>可整合，但要先核对曾经拿过的 NY 扣除、州税 recapture、同一受益人 12 个月一次 rollover 限制及两边费用。不建议没核对就做。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="k12">
+        <div class="section-kicker">03 / Private school</div>
+        <h2>私立高中：联邦层面可以用</h2>
+        <p class="lead">从 2026 年起，同一孩子名下所有 529 合计，每年最多可有 $20,000 用于符合条件的 K–12 支出；包括公立、私立和宗教学校。</p>
+        <div class="split">
+          <article class="note-card">
+            <h3>联邦认可的项目</h3>
+            <ul>
+              <li>学费、课程与教材、书籍及教学材料</li>
+              <li>符合条件的家外辅导或课程</li>
+              <li>标准化考试、AP、大学入学考试费用</li>
+              <li>大学双录取费用</li>
+              <li>残障学生的合格教育治疗</li>
+            </ul>
+          </article>
+          <article class="note-card">
+            <h3>需要额外注意</h3>
+            <ul>
+              <li>$20,000 是每位受益人跨所有 529 的合计，不是每个账户各 $20,000</li>
+              <li>保留学校账单、收据和提款日期；同一年度做费用匹配</li>
+              <li>州税不一定跟随联邦，OR/NY 都有 recapture 风险</li>
+              <li>近期要交的学费不宜放在高波动股票组合里</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div><strong>“联邦免税”不等于“州税完全没后果”</strong><p>Oregon 与 New York 都可能对过去享受过州税优惠的部分做追回。真正提款前，要按使用哪个账户、当年居住州、过去是否拿过抵免/扣除分别核对。</p></div>
+        </div>
+      </section>
+
+      <section id="limits">
+        <div class="section-kicker">04 / Contributions &amp; gifts</div>
+        <h2>“一年三万多”和“五年一起放”<br>其实是赠与税规则</h2>
+        <p class="lead">529 本身没有一个统一的联邦“每年最多只能存多少”的小额上限；人们常说的数字，是年度赠与税免申报额度和 5 年平均选择。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>2026 规则</th><th>单个赠与人 → 单个孩子</th><th>夫妻两人合计 → 单个孩子</th><th>实际含义</th></tr></thead>
+            <tbody>
+              <tr><td>年度赠与税 exclusion</td><td>$19,000</td><td>$38,000</td><td>通常无需动用终身免税额；并非 529 账户的绝对存款上限</td></tr>
+              <tr><td>5 年集中投入 / superfunding</td><td>$95,000</td><td>$190,000</td><td>在 Form 709 上选择按 5 年平均；之后 5 年内对同一孩子的其他赠与会占用额度</td></tr>
+              <tr><td>Oregon 2026 州税抵免</td><td>最高 $190</td><td>最高 $380</td><td>按 AGI 比例计算；这是 credit，不是 deduction</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout blue">
+          <div class="callout-icon">→</div>
+          <div><strong>你的判断是对的：没有必要为了“允许五年一次放”而硬做 superfunding</strong><p>除非有明确的教育资金目标、充足现金流和遗产规划需求。先拿 Oregon 抵免，再按孩子离上学还有几年、预计费用和可承受风险安排投入，更合理。</p></div>
+        </div>
+        <details>
+          <summary>529 投入的是税后钱吗？</summary>
+          <p>是。联邦层面不允许扣除 529 contribution，所以投入前通常已经缴过所得税；账户内收益递延增长，合格教育支出提款时本金与收益都不再计入联邦应税收入。Oregon 的小额抵免是额外州税优惠。</p>
+        </details>
+        <details>
+          <summary>如果孩子不用完，钱会不会锁死？</summary>
+          <p>不一定。可换给合格家庭成员、保留给研究生或未来教育、有限额偿还学生贷款；满足 15 年账户等条件时，还可由受益人做 trustee-to-trustee 转入 Roth IRA，受年度 IRA 限额和 $35,000 终身上限约束。</p>
+        </details>
+      </section>
+
+      <section id="buckets">
+        <div class="section-kicker">05 / Retirement tax buckets</div>
+        <h2>先把 Fidelity 里的三个口袋分清</h2>
+        <p class="lead">“税后”两个字最容易造成误会：Roth 401(k) 和普通 after-tax 401(k) 都是用已纳税工资，但后续收益的税务结果完全不同。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>口袋</th><th>投入时</th><th>增长期间</th><th>取出时</th><th>2026 限额归属</th></tr></thead>
+            <tbody>
+              <tr><td>Pre-tax 401(k)</td><td>通常降低当年联邦/州应税工资</td><td>递延</td><td>本金与收益通常按普通收入纳税</td><td rowspan="2">与 Roth 401(k) 合计 employee elective deferral：$24,500</td></tr>
+              <tr><td>Roth 401(k)</td><td>现在纳税</td><td class="good">免税增长</td><td class="good">满足 5 年 + 59½ 岁等条件时，本金和收益免税</td></tr>
+              <tr><td>After-tax 401(k)<br><span class="small">non-Roth</span></td><td>现在纳税，本金形成 basis</td><td>收益递延，但尚未免税</td><td>本金不重复交税；收益通常按普通收入纳税</td><td>和 employee deferral、employer match 等合计受 $72,000 annual additions 上限约束</td></tr>
+              <tr><td>Roth IRA</td><td>现在纳税；高收入时直接投入受限</td><td class="good">免税增长</td><td class="good">合格取款免税</td><td>2026 IRA 合计 $7,500；50 岁以上 $8,600</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <div class="callout-icon">i</div>
+          <div><strong>直接回答：Roth 401(k) 的收益不是“最后一定要交税”</strong><p>只要成为 qualified distribution——通常需要满足 Roth 401(k) 五年参与期，并在 59½ 岁后、死亡或符合残障条件时提款——本金与收益都免联邦所得税。</p></div>
+        </div>
+        <div class="split">
+          <article class="note-card">
+            <h3>高税率年份的常见优先顺序</h3>
+            <p>先确保拿满 employer match；如果当前联邦 + Oregon 边际税率较高、退休后税率预计更低，通常先把 $24,500 employee deferral 放在 pre-tax 401(k) 更有即时价值，再用 after-tax + 快速 conversion 增加 Roth 空间。</p>
+          </article>
+          <article class="note-card">
+            <h3>何时更偏向 Roth 401(k)</h3>
+            <p>当年收入或税率暂时偏低、预计退休后税率更高、或者希望减少未来应税提款时，可以把部分 elective deferral 放进 Roth。Pre-tax 与 Roth 的 $24,500 限额是共用的，不是各有一份。</p>
+          </article>
+        </div>
+        <p class="small">补充：2026 年 $72,000 是常规 annual additions 上限；50 岁以上 catch-up 通常另算。60–63 岁可能有更高 catch-up。计划本身还可能因合规测试限制 after-tax 比例。</p>
+      </section>
+
+      <section id="mega">
+        <div class="section-kicker">06 / Mega Backdoor Roth</div>
+        <h2>Mega Backdoor 是两步，<br>不是一个新账户</h2>
+        <p class="lead">它的核心是先利用公司 401(k) 的普通 after-tax 容量，再尽快把这部分转进 Roth。Intel 的公开计划文件把 Roth Deferrals、After-Tax Post-2019 和 Roth In-Plan Conversion Account 分开定义，并允许符合规则的 in-plan conversion。</p>
+
+        <div class="equation" aria-label="Mega Backdoor Roth 流程">
+          <div class="eq-box"><span class="eq-label">Step 1</span><strong>工资进入<br>After-tax 401(k)</strong></div>
+          <div class="eq-arrow">→</div>
+          <div class="eq-box"><span class="eq-label">Step 2</span><strong>尽快 / 自动做<br>In-plan Roth conversion</strong></div>
+          <div class="eq-arrow">→</div>
+          <div class="eq-box"><span class="eq-label">Result</span><strong>进入 Roth conversion bucket<br>之后合格增长免税</strong></div>
+        </div>
+
+        <div class="split">
+          <article class="note-card">
+            <h3>未来新投入</h3>
+            <p>如果 Fidelity/Intel 当前提供 automatic 或 daily Roth in-plan conversion，应优先打开。每次 after-tax 刚进账户就转，通常只有很少甚至没有转换前收益，因此当前税单较小。</p>
+          </article>
+          <article class="note-card">
+            <h3>已经积累的旧余额</h3>
+            <p>先向 Fidelity 要两个数字：after-tax basis 与 pre-tax earnings。转换本金通常不重复纳税，转换收益通常计入当年普通收入。金额较大时可分年或与 CPA 讨论。</p>
+          </article>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Conversion 路线</th><th>好处</th><th>主要税务点</th><th>适用情况</th></tr></thead>
+            <tbody>
+              <tr><td>In-plan conversion → Roth 401(k)</td><td>最直接；钱留在 employer plan；未来可自动化</td><td>basis 通常不再征税；转换前 earnings 当年纳税</td><td class="good">优先询问 Fidelity 的路线</td></tr>
+              <tr><td>In-service rollover → Roth IRA</td><td>Vanguard IRA 投资选择通常更广；账户统一</td><td>计划必须允许；若把 earnings 也送进 Roth，会产生应税转换</td><td>希望扩大基金选择、且计划允许 source-specific rollover</td></tr>
+              <tr><td>Basis → Roth IRA；earnings → Traditional IRA / pre-tax plan</td><td>可避免当年就为 earnings 缴税</td><td class="caution">若 earnings 留在 Traditional IRA，可能污染以后 Backdoor Roth 的 pro-rata 计算</td><td>必须先规划 12/31 的 IRA 余额</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div><strong>不要把 “convert” 理解成换基金</strong><p>Conversion 改的是税务口袋，不一定改变投资菜单。要买更多基金，要另看 Intel 计划是否给你 BrokerageLink 或更广的 self-directed brokerage window。</p></div>
+        </div>
+      </section>
+
+      <section id="ira">
+        <div class="section-kicker">07 / Roth IRA</div>
+        <h2>Vanguard Roth IRA 本身<br>不会造成 pro-rata 问题</h2>
+        <p class="lead">真正需要盘点的是每年 12 月 31 日名下所有 Traditional IRA、SEP IRA、SIMPLE IRA 的税前余额。401(k) 余额和 Roth IRA 余额不放进 Form 8606 的 IRA pro-rata 分母。</p>
+        <div class="split">
+          <article class="note-card">
+            <h3>普通 Backdoor Roth IRA</h3>
+            <p>先向 Traditional IRA 做不可抵扣投入，再转换到 Roth IRA，并用 Form 8606 申报。2026 年 IRA 合计限额为 $7,500；50 岁以上 $8,600。</p>
+          </article>
+          <article class="note-card">
+            <h3>2026 直接 Roth 收入门槛</h3>
+            <p>夫妻合报 phase-out 为 $242,000–$252,000；单身/户主为 $153,000–$168,000。超出后通常考虑 Backdoor，但必须先做 pro-rata 检查。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="action">
+        <div class="section-kicker">08 / Year-end checklist</div>
+        <h2>接下来几天，按这个顺序操作</h2>
+        <div class="steps">
+          <article class="step"><div><h3>确认纽约账户类型</h3><p>登录 NY 529，确认是 Direct Plan 还是 Advisor-Guided Plan，记录余额、费用、受益人和过去是否申领过 NY 州税扣除。先不关账户。</p></div></article>
+          <article class="step"><div><h3>开 Oregon Embark，优先用新钱</h3><p>根据 2026 Oregon AGI 和报税身份决定为抵免投入多少。若夫妻合报且 AGI &gt; $250,000，投入 $7,600 可达到 $380 抵免上限；若 AGI 更低，拿满抵免所需投入更少。</p></div></article>
+          <article class="step"><div><h3>选择与使用时间匹配的 529 投资</h3><p>大学仍很远可考虑 enrollment-year 组合；1–3 年内可能付私校的部分，应与长期大学资金分开，使用更保守的短期配置。</p></div></article>
+          <article class="step"><div><h3>在 Fidelity 下载 source breakdown</h3><p>分别记录 Pre-tax、Roth、After-Tax Post-2019、Roth In-Plan Conversion 的余额。特别要拿到 after-tax basis 与 earnings，不能只看总余额。</p></div></article>
+          <article class="step"><div><h3>致电 Fidelity/Intel Service Center</h3><p>询问：① 是否可开 automatic in-plan Roth conversion；② 频率；③ 旧 after-tax basis/earnings；④ 是否可 source-specific in-service rollover；⑤ 是否提供 BrokerageLink。公开联系电话为 (888) 401-7377。</p></div></article>
+          <article class="step"><div><h3>先处理“未来”，再决定“历史”</h3><p>未来 payroll after-tax 若能自动 convert，先设置好；历史 earnings 要不要一次 convert，等拿到数字后再结合今年应税收入决定。</p></div></article>
+          <article class="step"><div><h3>Backdoor Roth 前做 IRA 盘点</h3><p>检查 12/31 是否有 Traditional / SEP / SIMPLE IRA 余额；只有 Vanguard Roth IRA 不会触发 pro-rata。需要时让 CPA 核对 Form 8606。</p></div></article>
+        </div>
+      </section>
+
+      <section id="sources">
+        <div class="section-kicker">09 / Primary sources</div>
+        <h2>官方来源</h2>
+        <p class="lead">规则可能继续变化；实际操作日应再核对计划页面和账户条款。</p>
+        <ul class="sources">
+          <li><a href="https://www.irs.gov/taxtopics/tc313" target="_blank" rel="noopener">IRS Topic 313 — 529 / QTP</a></li>
+          <li><a href="https://www.irs.gov/publications/p970" target="_blank" rel="noopener">IRS Publication 970 — Education tax benefits</a></li>
+          <li><a href="https://www.oregon.gov/dor/programs/individuals/Pages/credits.aspx" target="_blank" rel="noopener">Oregon DOR — Higher education savings credit</a></li>
+          <li><a href="https://embarksavings.com/tax-benefits" target="_blank" rel="noopener">Embark — Oregon 529 tax benefits</a></li>
+          <li><a href="https://embarksavings.com/portfolios" target="_blank" rel="noopener">Embark — Portfolios and fees</a></li>
+          <li><a href="https://www.nysaves.org/faqs/" target="_blank" rel="noopener">NY 529 — Official FAQ</a></li>
+          <li><a href="https://www.nysaves.org/price-and-performance/" target="_blank" rel="noopener">NY 529 — Price and performance</a></li>
+          <li><a href="https://www.nysaves.org/2026-federal-tax-updates/" target="_blank" rel="noopener">NY 529 — 2026 federal tax updates</a></li>
+          <li><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits" target="_blank" rel="noopener">IRS — 2026 401(k) contribution limits</a></li>
+          <li><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-designated-roth-account" target="_blank" rel="noopener">IRS — Designated Roth accounts</a></li>
+          <li><a href="https://www.irs.gov/instructions/i8606" target="_blank" rel="noopener">IRS Form 8606 instructions — pro-rata reporting</a></li>
+          <li><a href="https://www.fidelity.com/learning-center/personal-finance/mega-backdoor-roth" target="_blank" rel="noopener">Fidelity — Mega Backdoor Roth</a></li>
+          <li><a href="https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000179/a09272025ex105.htm" target="_blank" rel="noopener">Intel 401(k) plan document — SEC filing</a></li>
+          <li><a href="https://www.intel.com/content/www/us/en/employee/leaving-intel.html" target="_blank" rel="noopener">Intel — Fidelity Service Center contact</a></li>
+        </ul>
+        <div class="disclaimer"><strong>重要声明：</strong>本页是截至 2026-10-01 的教育性研究，不构成个人税务、法律或投资建议。页面没有读取你的 Fidelity/NY 529/Vanguard 私人账户，也没有执行任何 contribution、conversion、rollover 或基金交易。州税追回、已有 basis、收入门槛和雇主计划可用功能必须按本人资料确认。</div>
+      </section>
+    </main>
+  </div>
+
+  <footer>SKY PORTAL · PRIVATE FINANCIAL RESEARCH · UPDATED 2026-10-01</footer>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const links = [...document.querySelectorAll('.toc a')];
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const sync = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+      let current = sections[0]?.id;
+      sections.forEach(section => { if (section.getBoundingClientRect().top <= 150) current = section.id; });
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
+    };
+    addEventListener('scroll', sync, { passive: true });
+    sync();
+  </script>
+</body>
+</html>
