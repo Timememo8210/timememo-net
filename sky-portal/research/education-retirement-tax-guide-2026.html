@@ -123,6 +123,12 @@
     .route h3 { margin-bottom: 10px; }
     .route p { margin: 0; color: var(--muted); font-size: .9rem; }
 
+    .score-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 28px 0; }
+    .score-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .score-card strong { display: block; margin: 7px 0 3px; color: var(--forest); font-family: "Newsreader", Georgia, serif; font-size: 2.1rem; line-height: 1; }
+    .score-label { color: var(--copper); font-family: "IBM Plex Mono", monospace; font-size: .68rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+    .score-card p { margin: 8px 0 0; color: var(--muted); font-size: .82rem; }
+
     .equation { display: flex; align-items: stretch; gap: 0; margin: 26px 0; overflow-x: auto; }
     .eq-box { min-width: 155px; flex: 1; padding: 20px; border: 1px solid var(--line); background: var(--panel); }
     .eq-box:first-child { border-radius: var(--radius) 0 0 var(--radius); }
@@ -161,6 +167,7 @@
       .toc { position: static; }
       .toc nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
       .route-grid { grid-template-columns: 1fr; }
+      .score-strip { grid-template-columns: 1fr; }
       .hero-number { display: none; }
     }
     @media (max-width: 650px) {
@@ -202,7 +209,7 @@
       <h1>教育与退休<br><em>税务路线图</em></h1>
       <p class="hero-sub">把 529、Roth 401(k)、普通 after-tax 401(k)、Roth IRA 和 Mega Backdoor 放到一张图里。先回答“该不该动”，再说明“怎么动”。</p>
       <div class="hero-meta">
-        <span class="pill">规则核对：2026-10-01</span>
+        <span class="pill">规则与投资数据核对：2026-10-03</span>
         <span class="pill">Oregon resident</span>
         <span class="pill">NY 529 + Fidelity 401(k) + Vanguard Roth IRA</span>
       </div>
@@ -216,6 +223,7 @@
       <nav>
         <a href="#verdict">先看结论</a>
         <a href="#state">纽约 vs 俄勒冈 529</a>
+        <a href="#performance">投资组合收益与 AI</a>
         <a href="#k12">私立高中能不能用</a>
         <a href="#limits">529 金额与五年规则</a>
         <a href="#buckets">401(k) 三个税务口袋</a>
@@ -301,8 +309,78 @@
         </div>
       </section>
 
+      <section id="performance">
+        <div class="section-kicker">03 / Portfolio performance &amp; AI</div>
+        <h2>投资组合确实不同，<br>“哪个州收益更高”却不是固定答案</h2>
+        <p class="lead">决定收益的第一因素是股票、债券、美国、海外和成长股的比例；州只是把这些底层基金装进不同菜单。比较时必须对齐同一截止日、相近股票比例和相近目标入学年，不能拿 100% 美股组合去和临近大学的 enrollment-year 组合比。</p>
+
+        <div class="score-strip" aria-label="529 五年统一口径排名">
+          <article class="score-card"><span class="score-label">Oregon Embark</span><strong>#13</strong><p>五年统一 glidepath 平均年化 6.45%</p></article>
+          <article class="score-card"><span class="score-label">Massachusetts U.Fund</span><strong>#31</strong><p>同一口径平均年化 5.80%</p></article>
+          <article class="score-card"><span class="score-label">New York Direct</span><strong>N/A</strong><p>新 target-enrollment 系列历史不足，并非“表现差”</p></article>
+        </div>
+        <p class="small">来源：Saving for College 的 Q2 2026 五年榜单，数据截至 2026-06-30。该方法把各计划整条年龄 / 入学年份 glidepath 做标准化后比较；历史收益不代表未来。</p>
+
+        <h3 style="margin-top:34px">同一截止日的两个更公平的对照</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>组合（截至 2026-06-30）</th><th>1 年年化</th><th>3 年年化</th><th>5 年年化</th><th>年费</th><th>怎么读</th></tr></thead>
+            <tbody>
+              <tr><td>Oregon Embark 2033</td><td>15.8%</td><td>13.8%</td><td>6.9%</td><td>0.23%</td><td>同目标年份历史上高于 MA；但底层配置并非完全相同</td></tr>
+              <tr><td>Massachusetts 2033 Fidelity Index</td><td>13.72%</td><td>11.90%</td><td>5.57%</td><td>0.12%</td><td>费率更低，但过去五年没有因此自动胜出</td></tr>
+              <tr><td>Oregon U.S. Equity Index</td><td>22.9%</td><td>20.2%</td><td>12.0%</td><td>0.22%</td><td>100% 美国全市场股票；不自动降风险</td></tr>
+              <tr><td>Massachusetts Total Market Index</td><td>22.99%</td><td>20.36%</td><td>12.17%</td><td>0.08%</td><td>同为美国全市场；差距很小，主要接近费率差</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-icon">≈</div>
+          <div><strong>这组数字说明：州名不是 alpha</strong><p>两只美国全市场组合的 1/3/5 年收益几乎贴在一起。若资产配置相同，低费率长期有帮助；但短中期差异更多来自配置比例、再平衡路径和市场风格，而不是哪个州“更会投资”。</p></div>
+        </div>
+
+        <h3 style="margin-top:34px">Oregon 抵免与外州低费率，怎么换算？</h3>
+        <div class="split">
+          <article class="note-card">
+            <h3>先看第一笔 $7,600</h3>
+            <p>若夫妻合报且 AGI 超过 $250,000，向 Oregon 计划合计投入 $7,600 可拿到最高 $380 抵免，相当于这部分钱当年约 5% 的确定收益。为了省每年约 0.1% 的费率而放弃它，通常不划算。</p>
+          </article>
+          <article class="note-card">
+            <h3>再看一次性 $100,000</h3>
+            <p>抵免仍只有 $380，即总额的 0.38%。Oregon target-year 0.23% 与 MA index target-year 0.12% 相差约 $110/年；粗略说，$380 只覆盖约 3.5 年费率差。金额越大、持有越久，低费率越值得比较。</p>
+          </article>
+        </div>
+
+        <div class="callout blue">
+          <div class="callout-icon">→</div>
+          <div><strong>对你最实用的组合：不用为了 Massachusetts 再开第三个州</strong><p>每年先用 Oregon 新账户拿抵免；超过这部分的大额资金，可在 Oregon 的简洁管理与现有 NY Direct 的低费率之间选。你已经有 NY 账户，新增 MA 只为节省 0.03% 左右、或追逐过去收益，通常不值得再增加一套账户和受益人管理。</p></div>
+        </div>
+
+        <h3 style="margin-top:34px">想押 AI，529 里有什么现实选择？</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>选择</th><th>AI / 科技暴露</th><th>费用与风险</th><th>判断</th></tr></thead>
+            <tbody>
+              <tr><td>广泛美国指数<br><span class="small">OR U.S. Equity / MA 500 或 Total Market</span></td><td>S&amp;P 500 本身已有很高科技权重；NVIDIA、Apple、Microsoft、Broadcom 等都是大持仓</td><td>OR 约 0.22%；MA 约 0.08%；100% 股票会大幅波动</td><td class="good">最干净的“参与 AI、但不只押 AI”方式</td></tr>
+              <tr><td>NY Growth Stock Index</td><td>100% Vanguard Growth Index，成长股和大型科技倾向更明显</td><td>0.11%；截至 2026-06-30 的 5 年年化 13.09%，但回撤也会更大</td><td>可作为小比例倾斜；不能和 enrollment-year 收益直接比较</td></tr>
+              <tr><td>Franklin DynaTech 529</td><td>明确投资创新与新技术公司，是少数接近“科技主题”的 529 组合</td><td class="caution">Advisor-sold Class A 总年费约 1.04%，另可能有最高 3.75% 前端销售费；仅 2022 年成立</td><td class="caution">不建议为了 AI 主题把核心学费转过去</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div><strong>AI 判断可能对，但教育资金的时间不够长</strong><p>2031/2033 就要开始用钱，科技板块在五年窗口里完全可能先大跌再恢复。核心资金仍应放 enrollment-year；若你一定要加 AI 倾向，只应拿即使大跌也能继续持有、不会影响学费的少量部分，用 NY Growth Stock Index 或广泛美国指数表达，而不是追高收费的单一科技 529。</p></div>
+        </div>
+
+        <details>
+          <summary>以后去哪里查 529 过去 1/3/5/10 年收益？</summary>
+          <p>先看每个州官方的 Price &amp; Performance 页面，确认回报是否已扣费用、截止日是否相同；跨州比较再看 Saving for College 的 Performance Rankings 与 Portfolio Fee &amp; Performance Lookup。纽约、Fidelity Massachusetts 和 Oregon Treasury Board Book 都公开具体组合数据。</p>
+        </details>
+      </section>
+
       <section id="k12">
-        <div class="section-kicker">03 / Private school</div>
+        <div class="section-kicker">04 / Private school</div>
         <h2>私立高中：联邦层面可以用</h2>
         <p class="lead">从 2026 年起，同一孩子名下所有 529 合计，每年最多可有 $20,000 用于符合条件的 K–12 支出；包括公立、私立和宗教学校。</p>
         <div class="split">
@@ -333,7 +411,7 @@
       </section>
 
       <section id="limits">
-        <div class="section-kicker">04 / Contributions &amp; gifts</div>
+        <div class="section-kicker">05 / Contributions &amp; gifts</div>
         <h2>“一年三万多”和“五年一起放”<br>其实是赠与税规则</h2>
         <p class="lead">529 本身没有一个统一的联邦“每年最多只能存多少”的小额上限；人们常说的数字，是年度赠与税免申报额度和 5 年平均选择。</p>
         <div class="table-wrap">
@@ -361,7 +439,7 @@
       </section>
 
       <section id="buckets">
-        <div class="section-kicker">05 / Retirement tax buckets</div>
+        <div class="section-kicker">06 / Retirement tax buckets</div>
         <h2>先把 Fidelity 里的三个口袋分清</h2>
         <p class="lead">“税后”两个字最容易造成误会：Roth 401(k) 和普通 after-tax 401(k) 都是用已纳税工资，但后续收益的税务结果完全不同。</p>
         <div class="table-wrap">
@@ -393,7 +471,7 @@
       </section>
 
       <section id="mega">
-        <div class="section-kicker">06 / Mega Backdoor Roth</div>
+        <div class="section-kicker">07 / Mega Backdoor Roth</div>
         <h2>Mega Backdoor 是两步，<br>不是一个新账户</h2>
         <p class="lead">它的核心是先利用公司 401(k) 的普通 after-tax 容量，再尽快把这部分转进 Roth。Intel 的公开计划文件把 Roth Deferrals、After-Tax Post-2019 和 Roth In-Plan Conversion Account 分开定义，并允许符合规则的 in-plan conversion。</p>
 
@@ -434,7 +512,7 @@
       </section>
 
       <section id="ira">
-        <div class="section-kicker">07 / Roth IRA</div>
+        <div class="section-kicker">08 / Roth IRA</div>
         <h2>Vanguard Roth IRA 本身<br>不会造成 pro-rata 问题</h2>
         <p class="lead">真正需要盘点的是每年 12 月 31 日名下所有 Traditional IRA、SEP IRA、SIMPLE IRA 的税前余额。401(k) 余额和 Roth IRA 余额不放进 Form 8606 的 IRA pro-rata 分母。</p>
         <div class="split">
@@ -450,12 +528,12 @@
       </section>
 
       <section id="action">
-        <div class="section-kicker">08 / Year-end checklist</div>
+        <div class="section-kicker">09 / Year-end checklist</div>
         <h2>接下来几天，按这个顺序操作</h2>
         <div class="steps">
           <article class="step"><div><h3>确认纽约账户类型</h3><p>登录 NY 529，确认是 Direct Plan 还是 Advisor-Guided Plan，记录余额、费用、受益人和过去是否申领过 NY 州税扣除。先不关账户。</p></div></article>
-          <article class="step"><div><h3>开 Oregon Embark，优先用新钱</h3><p>根据 2026 Oregon AGI 和报税身份决定为抵免投入多少。若夫妻合报且 AGI &gt; $250,000，投入 $7,600 可达到 $380 抵免上限；若 AGI 更低，拿满抵免所需投入更少。</p></div></article>
-          <article class="step"><div><h3>选择与使用时间匹配的 529 投资</h3><p>大学仍很远可考虑 enrollment-year 组合；1–3 年内可能付私校的部分，应与长期大学资金分开，使用更保守的短期配置。</p></div></article>
+          <article class="step"><div><h3>开两个 Oregon Embark，优先用新钱</h3><p>由同一位家长做 owner，为两个孩子分别开账户，便于按预计 2031 / 2033 入学年管理；Oregon 抵免上限按整张税表计算，不会因为开两个账户翻倍。若夫妻合报且 AGI &gt; $250,000，两个账户合计投入 $7,600 可达到 $380 抵免上限。</p></div></article>
+          <article class="step"><div><h3>选择与使用时间匹配的 529 投资</h3><p>核心资金分别使用 2031 / 2033 enrollment-year；1–3 年内可能付私校的部分单独用更保守配置。AI / 科技倾向只放在即使大跌也不会影响学费的小部分，而不是替代核心组合。</p></div></article>
           <article class="step"><div><h3>在 Fidelity 下载 source breakdown</h3><p>分别记录 Pre-tax、Roth、After-Tax Post-2019、Roth In-Plan Conversion 的余额。特别要拿到 after-tax basis 与 earnings，不能只看总余额。</p></div></article>
           <article class="step"><div><h3>致电 Fidelity/Intel Service Center</h3><p>询问：① 是否可开 automatic in-plan Roth conversion；② 频率；③ 旧 after-tax basis/earnings；④ 是否可 source-specific in-service rollover；⑤ 是否提供 BrokerageLink。公开联系电话为 (888) 401-7377。</p></div></article>
           <article class="step"><div><h3>先处理“未来”，再决定“历史”</h3><p>未来 payroll after-tax 若能自动 convert，先设置好；历史 earnings 要不要一次 convert，等拿到数字后再结合今年应税收入决定。</p></div></article>
@@ -464,7 +542,7 @@
       </section>
 
       <section id="sources">
-        <div class="section-kicker">09 / Primary sources</div>
+        <div class="section-kicker">10 / Primary sources</div>
         <h2>官方来源</h2>
         <p class="lead">规则可能继续变化；实际操作日应再核对计划页面和账户条款。</p>
         <ul class="sources">
@@ -473,9 +551,16 @@
           <li><a href="https://www.oregon.gov/dor/programs/individuals/Pages/credits.aspx" target="_blank" rel="noopener">Oregon DOR — Higher education savings credit</a></li>
           <li><a href="https://embarksavings.com/tax-benefits" target="_blank" rel="noopener">Embark — Oregon 529 tax benefits</a></li>
           <li><a href="https://embarksavings.com/portfolios" target="_blank" rel="noopener">Embark — Portfolios and fees</a></li>
+          <li><a href="https://www.oregon.gov/treasury/Upward-Oregon/Pages/Oregon-529-Savings-Board.aspx" target="_blank" rel="noopener">Oregon Treasury — 529 Board books and official performance</a></li>
           <li><a href="https://www.nysaves.org/faqs/" target="_blank" rel="noopener">NY 529 — Official FAQ</a></li>
           <li><a href="https://www.nysaves.org/price-and-performance/" target="_blank" rel="noopener">NY 529 — Price and performance</a></li>
+          <li><a href="https://www.nysaves.org/individual-portfolios/" target="_blank" rel="noopener">NY 529 — Individual portfolios</a></li>
           <li><a href="https://www.nysaves.org/2026-federal-tax-updates/" target="_blank" rel="noopener">NY 529 — 2026 federal tax updates</a></li>
+          <li><a href="https://www.fidelity.com/529-plans/massachusetts" target="_blank" rel="noopener">Massachusetts U.Fund — Options and 2026 fees</a></li>
+          <li><a href="https://fundresearch.fidelity.com/college/plan-performance/quarterly?state=MA" target="_blank" rel="noopener">Massachusetts U.Fund — Official performance</a></li>
+          <li><a href="https://www.savingforcollege.com/529-plans/performance-rankings/five-year" target="_blank" rel="noopener">Saving for College — Q2 2026 five-year rankings</a></li>
+          <li><a href="https://www.savingforcollege.com/portfolio-lookup" target="_blank" rel="noopener">Saving for College — Portfolio fee &amp; performance lookup</a></li>
+          <li><a href="https://www.franklintempleton.com/investments/options/529-portfolios/products/33827/A/franklin-dyna-tech-529-portfolio/FAUEX" target="_blank" rel="noopener">Franklin DynaTech 529 — Strategy, performance and fees</a></li>
           <li><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits" target="_blank" rel="noopener">IRS — 2026 401(k) contribution limits</a></li>
           <li><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-designated-roth-account" target="_blank" rel="noopener">IRS — Designated Roth accounts</a></li>
           <li><a href="https://www.irs.gov/instructions/i8606" target="_blank" rel="noopener">IRS Form 8606 instructions — pro-rata reporting</a></li>
@@ -483,12 +568,12 @@
           <li><a href="https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000179/a09272025ex105.htm" target="_blank" rel="noopener">Intel 401(k) plan document — SEC filing</a></li>
           <li><a href="https://www.intel.com/content/www/us/en/employee/leaving-intel.html" target="_blank" rel="noopener">Intel — Fidelity Service Center contact</a></li>
         </ul>
-        <div class="disclaimer"><strong>重要声明：</strong>本页是截至 2026-10-01 的教育性研究，不构成个人税务、法律或投资建议。页面没有读取你的 Fidelity/NY 529/Vanguard 私人账户，也没有执行任何 contribution、conversion、rollover 或基金交易。州税追回、已有 basis、收入门槛和雇主计划可用功能必须按本人资料确认。</div>
+        <div class="disclaimer"><strong>重要声明：</strong>本页是截至 2026-10-03 的教育性研究，不构成个人税务、法律或投资建议。历史收益不代表未来，跨计划数字只有在截止日、风险和资产配置相近时才有可比性。页面没有读取你的 Fidelity/NY 529/Vanguard 私人账户，也没有执行任何 contribution、conversion、rollover 或基金交易。州税追回、已有 basis、收入门槛和雇主计划可用功能必须按本人资料确认。</div>
       </section>
     </main>
   </div>
 
-  <footer>SKY PORTAL · PRIVATE FINANCIAL RESEARCH · UPDATED 2026-10-01</footer>
+  <footer>SKY PORTAL · PRIVATE FINANCIAL RESEARCH · UPDATED 2026-10-03</footer>
 
   <script>
     const progress = document.querySelector('.progress');
