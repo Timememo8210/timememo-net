@@ -55,6 +55,20 @@ window.HOME_CATALOG = [
     "updated": "2026-10-03",
     "private": true
   },
+{
+  "url": "/prototypes/ai-material/",
+  "category": "design",
+  "title": {
+    "zh": "AI Material · 动效 Demo",
+    "en": "AI Material · Motion Demo"
+  },
+  "description": {
+    "zh": "石墨黑、冰银晶圆与 AI 网络转场。",
+    "en": "Graphite, metallic silicon and an AI network transition."
+  },
+  "updated": "2026-10-03",
+  "private": false
+},
   {
     "url": "/designs/previous/",
     "category": "design",
