@@ -51,6 +51,18 @@
   addEventListener('scroll', fallbackScroll, {passive:true});
   // Entry motion starts immediately, independently of the 3D download.
   document.querySelectorAll('.intro-copy > *').forEach((el,index) => el.animate([{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'translateY(0)'}],{duration:950,delay:index*95+120,easing:'cubic-bezier(.2,.7,.1,1)',fill:'backwards'}));
+  // Cards keep moving on touch screens; pause their art outside the viewport.
+  const artObserver=new IntersectionObserver(entries=>entries.forEach(({target,isIntersecting})=>target.classList.toggle('art-visible',isIntersecting)),{threshold:0});
+  document.querySelectorAll('.project').forEach(card=>{
+    artObserver.observe(card);
+    card.addEventListener('pointermove',event=>{
+      if(event.pointerType!=='mouse')return;
+      const rect=card.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width,y=(event.clientY-rect.top)/rect.height;
+      card.style.setProperty('--card-x',`${x*100}%`);card.style.setProperty('--card-y',`${y*100}%`);
+      card.style.setProperty('--tilt-x',`${(y-.5)*-3}deg`);card.style.setProperty('--tilt-y',`${(x-.5)*3}deg`);
+    },{passive:true});
+    card.addEventListener('pointerleave',()=>{card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg');});
+  });
   const reveal = new IntersectionObserver(entries => entries.forEach(e => {if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:800,easing:'cubic-bezier(.2,.65,.1,1)'});reveal.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.project,.work-heading,.latest-row').forEach(el => reveal.observe(el));
 })();

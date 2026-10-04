@@ -63,10 +63,10 @@ window.HOME_CATALOG = [
     "en": "AI Material · Motion Demo"
   },
   "description": {
-    "zh": "石墨黑、冰银晶圆与 AI 网络转场。",
-    "en": "Graphite, metallic silicon and an AI network transition."
+    "zh": "银灰材质、矢量图标与多层 AI 网络。",
+    "en": "Silver materials, vector icons and layered AI motion."
   },
-  "updated": "2026-10-03",
+  "updated": "2026-10-04",
   "private": false
 },
   {
