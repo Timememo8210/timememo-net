@@ -23,7 +23,6 @@
     if (open) menu.querySelector(`[data-lang="${lang}"]`).focus({preventScroll:true});
   });
   menu.querySelectorAll('button').forEach(el => el.addEventListener('click', () => {setLanguage(el.dataset.lang); trigger.focus({preventScroll:true});}));
-  dock.addEventListener('focusout',e=>{if(!dock.contains(e.relatedTarget))close();});
   document.addEventListener('pointerdown', e => {if (!dock.contains(e.target)) close();});
   document.addEventListener('keydown', e => {if (e.key === 'Escape' && dock.classList.contains('open')) close(true);});
   function updateDock() {
