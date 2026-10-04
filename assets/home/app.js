@@ -8,6 +8,7 @@
   let category='all';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   let motionChoice=store.get('timememo-home-motion',null);
+  if(!['on','off'].includes(motionChoice))motionChoice=null;
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const tr=(z,e)=>lang==='zh'?z:e;
   function translate(root=document){root.querySelectorAll('[data-zh][data-en]').forEach(el=>{el.innerHTML=el.dataset[lang]});root.querySelectorAll('[data-placeholder-zh]').forEach(el=>el.placeholder=el.dataset[lang==='zh'?'placeholderZh':'placeholderEn']);}
@@ -18,10 +19,24 @@
     if(sort==='old')list.sort((a,b)=>a.updated.localeCompare(b.updated));else list.sort((a,b)=>b.updated.localeCompare(a.updated));
     $('#result-count').textContent=tr(`${list.length} 个条目`,`${list.length} entries`);
     $('#catalog-results').innerHTML=list.length?(sort==='group'?Object.entries(names).map(([key,label])=>{const entries=list.filter(p=>p.category===key);return entries.length?`<section class="catalog-group"><h3>${esc(label[lang==='zh'?0:1])} <small>(${entries.length})</small></h3><div>${entries.map(p=>row(p)).join('')}</div></section>`:''}).join(''):`<div class="catalog-group"><h3>${tr(sort==='old'?'最早更新':'最近更新',sort==='old'?'Oldest updates':'Latest updates')}</h3><div>${list.map(p=>row(p)).join('')}</div></div>`):`<p class="empty-state">${tr('没有匹配内容。试试其他关键词，或重置筛选。','No matches. Try another keyword or reset the filters.')}</p>`;
+    window.dispatchEvent(new Event('home-content-change'));
   }
   function history(){const raw=store.get('timememo-home-history',[]);return Array.isArray(raw)?raw.filter(url=>typeof url==='string'&&catalog.some(p=>p.url===url)).slice(0,8):[];}
   function renderHistory(){const recent=history();$('#history-count').textContent=recent.length?`(${recent.length})`:'';$('#history-list').innerHTML=recent.length?recent.map(url=>row(catalog.find(p=>p.url===url),true)).join(''):`<p>${tr('打开一个项目后，会显示在这里。','Open a project to start your list.')}</p>`;$('#clear-history').disabled=!recent.length;}
-  function updateMotion(){const enabled=!reduced.matches&&motionChoice!=='off';document.body.dataset.motion=enabled?'on':'off';document.documentElement.dataset.motion=enabled?'on':'off';$('#motion').textContent=tr(enabled?'暂停动效':'开启动效',enabled?'Pause motion':'Enable motion');$('#motion').setAttribute('aria-pressed',String(!enabled));$('#motion').disabled=reduced.matches;$('#motion').title=reduced.matches?tr('遵循系统减少动态效果设置','Following your system’s reduced motion setting'):'';window.dispatchEvent(new Event('home-motion-change'));}
+  function updateMotion(){
+    // System preference is the default. An explicit choice always wins.
+    const enabled=motionChoice==='on'||(motionChoice!=='off'&&!reduced.matches);
+    const changed=document.body.dataset.motion!==(enabled?'on':'off');
+    document.body.dataset.motion=enabled?'on':'off';
+    document.documentElement.dataset.motion=enabled?'on':'off';
+    const button=$('#motion');
+    button.textContent=tr(enabled?'动效：开':'动效：关',enabled?'Motion: on':'Motion: off');
+    button.setAttribute('aria-pressed',String(enabled));
+    button.setAttribute('aria-label',tr(enabled?'关闭动效':'开启动效',enabled?'Pause motion':'Enable motion'));
+    button.disabled=false;
+    button.title=tr(enabled?'点击暂停全部动效':'点击开启全部动效',enabled?'Pause all animation':'Enable all animation');
+    window.dispatchEvent(new CustomEvent('home-motion-change',{detail:{changed,enabled}}));
+  }
   function setLanguage(next){lang=next;store.set('timememo-home-language',lang);document.documentElement.lang=lang==='zh'?'zh-CN':'en';translate();document.title=tr('陈晓波 · Time Memo','Xiaobo Chen · Time Memo');document.querySelector('meta[name=description]').content=tr('陈晓波 · 半导体研发、制造与商业。研究、项目与学习记录。','Xiaobo Chen. Semiconductor R&D, manufacturing and business. Research, projects and learning.');document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));$('#month').setAttribute('aria-label',tr('更新月份','Updated in'));document.querySelector('.site-header nav').setAttribute('aria-label',tr('主导航','Main navigation'));document.querySelector('.category-tabs').setAttribute('aria-label',tr('分类','Categories'));document.querySelector('.field-controls [role=group]').setAttribute('aria-label',tr('切换晶圆图形','Wafer diagram'));renderCatalog();renderHistory();updateMotion();}
   document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
   $('#motion').addEventListener('click',()=>{motionChoice=document.body.dataset.motion==='on'?'off':'on';store.set('timememo-home-motion',motionChoice);updateMotion()});reduced.addEventListener('change',updateMotion);

@@ -6,7 +6,8 @@ The production homepage is `/index.html`. Its visual reference is the preserved 
 - When publishing a project, add/update the catalog entry and the static fallback links in `#catalog-results`. Update `#recent .recent-list` with the newest substantive content. Keep Sky Portal featured independently.
 - Visible text and accessibility labels must switch together between Chinese and English. New static text uses `data-zh` / `data-en`; catalog entries contain both languages.
 - Recently opened links, chosen language and motion preference are local to the browser. No browsing history is uploaded or synchronized.
-- Wafer animation uses one time-based frame loop, pauses offscreen/when hidden, caps pixel density, and respects reduced motion. Native page scrolling must remain intact.
+- Motion includes wafer rotation/scanning, diagram transitions, staggered entry, scroll parallax, and the Sky Portal orbit. One time-based frame loop composites cached textures, pauses offscreen/when hidden, and caps pixel density. Native page scrolling remains intact.
+- Reduced motion defaults to off; the always-usable motion switch explicitly overrides the system default and remembers the choice. Turning it off must cancel both canvas motion and Web Animations. Verify actual frames and re-enabling, including reduced-motion mode; a changed button label alone is not sufficient.
 - The old homepage is preserved at `/designs/previous/`; `/designs/` contains it plus all ten earlier concepts. Do not overwrite the archive when editing the live homepage.
 - Preserve the homepage's robots/googlebot/referrer policies and all existing access-code gates.
 
