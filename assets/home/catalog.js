@@ -1,4 +1,18 @@
 window.HOME_CATALOG = [
+{
+  "url": "/scholastic-guide/writing/",
+  "category": "learning",
+  "title": {
+    "zh": "Scholastic 写作与获奖范文",
+    "en": "Scholastic: Writing & Winners"
+  },
+  "description": {
+    "zh": "篇幅、提交要求与 2024–2026 获奖作品。",
+    "en": "Length limits, entry rules and 2024–2026 winning work."
+  },
+  "updated": "2026-10-03",
+  "private": false
+},
   {
     "url": "/scholastic-guide/research/",
     "category": "learning",
