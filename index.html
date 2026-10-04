@@ -1,24 +1,25 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="zh-CN" data-motion="on"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#2044d6">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="referrer" content="no-referrer">
-<title>陈晓波 · Time Memo</title><meta name="description" content="陈晓波 · 半导体研发、制造与商业。研究、项目与学习记录。">
+<title>陈晓波 · Time Memo</title><meta name="description" content="陈晓波 · AI 应用先行者。把 AI 用于研究、产品与制造。">
 <link rel="icon" href="/assets/home/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/home/style.css?v=20261003-motion2"><script defer src="/assets/home/catalog.js?v=20261003-motion2"></script><script defer src="/assets/home/app.js?v=20261003-motion2"></script><script defer src="/assets/home/wafer.js?v=20261003-motion2"></script></head><body>
+<link rel="stylesheet" href="/assets/home/style.css?v=20261003-ai3"><script defer src="/assets/home/catalog.js?v=20261003-ai3"></script><script defer src="/assets/home/app.js?v=20261003-ai3"></script><script defer src="/assets/home/wafer.js?v=20261003-ai3"></script></head><body data-motion="on">
 <a data-zh="跳转到目录" data-en="Skip to directory" class="skip" href="#directory">跳转到目录</a>
-<header class="site-header"><a class="wordmark" href="/" aria-label="Time Memo">Time Memo<span class="logo-dot" aria-hidden="true"></span></a><nav aria-label="Main"><a data-zh="最近" data-en="Recent" href="#recent">最近</a><a data-zh="目录" data-en="Directory" href="#directory">目录</a><a data-zh="关于" data-en="About" href="#about">关于</a></nav>
-<div class="preferences"><button id="motion" type="button" aria-pressed="false"><span data-zh="暂停动效" data-en="Pause motion" >暂停动效</span></button>
-<div class="languages" role="group" aria-label="Language"><button data-lang="zh" aria-pressed="true">中文</button><button data-lang="en" aria-pressed="false">EN</button>
+<aside id="language-dock" class="language-dock" data-visible="true" aria-label="语言 / Language">
+<button id="language-toggle" type="button" aria-expanded="false" aria-controls="language-panel" aria-label="切换语言" title="中文 / English"><span aria-hidden="true">文<span class="language-slash">/</span>A</span></button>
+<div id="language-panel" class="language-panel" data-open="false" inert>
+<div class="languages" role="group" aria-label="语言 / Language"><button data-lang="zh" aria-pressed="true">中文</button><button data-lang="en" aria-pressed="false">English</button></div>
 </div>
-</div>
-</header>
+</aside>
 <main>
 <section class="hero" id="top" aria-labelledby="name"><canvas id="wafer" aria-hidden="true"></canvas>
 <div class="hero-inner">
-<div class="hero-name"><h1 id="name"><span>Xiaobo</span><span>Chen</span></h1><p data-zh="半导体研发<br>制造与商业<br>美国 · 波特兰" data-en="SEMICONDUCTOR<br>R&amp;D · MANUFACTURING<br>BASED IN PORTLAND" class="hero-role">半导体研发<br>制造与商业<br>美国 · 波特兰</p>
+<p class="hero-kicker" data-zh="AI 应用先行者" data-en="AI BUILDER">AI 应用先行者</p>
+<div class="hero-name"><h1 id="name" data-zh="<span>陈晓波</span>" data-en="<span>Xiaobo</span><span>Chen</span>"><span>陈晓波</span></h1><p data-zh="人工智能<br>半导体 · 商业<br>美国 · 波特兰" data-en="ARTIFICIAL INTELLIGENCE<br>SEMICONDUCTORS · BUSINESS<br>PORTLAND, OREGON" class="hero-role">人工智能<br>半导体 · 商业<br>美国 · 波特兰</p>
 </div>
 <div class="hero-bottom">
-<div class="hero-note"><p data-zh="陈晓波" data-en="Xiaobo Chen" >陈晓波</p><p data-zh="从 0.25 微米，到 18 埃。" data-en="From 0.25 μm to 18 Å." >从 0.25 微米，到 18 埃。</p><a class="hero-link" href="#recent"><span data-zh="最近更新" data-en="Latest updates" >最近更新</span> <span aria-hidden="true">↘</span></a>
+<div class="hero-note"><p class="hero-statement" data-zh="把 AI 用于研究、产品与制造。" data-en="Building with AI.<br>Research, products &amp; manufacturing.">把 AI 用于研究、产品与制造。</p><a class="hero-credential" href="#education"><span data-zh="康奈尔大学 · 机器学习与 AI 证书" data-en="Cornell · Machine Learning &amp; AI Certificate">康奈尔大学 · 机器学习与 AI 证书</span><span aria-hidden="true">↗</span></a><a class="hero-link" href="#recent"><span data-zh="最近更新" data-en="Latest updates" >最近更新</span> <span aria-hidden="true">↘</span></a>
 </div>
 <div class="field-controls">
 <div class="field-top"><span>01—03</span><span data-zh="芯片实验室" data-en="Silicon Lab" >芯片实验室</span>
@@ -28,7 +29,7 @@
 </div>
 </div>
 </div>
-<div class="hero-foot"><span>0.25 μm <i></i> 18 Å</span><span data-zh="研究 / 项目 / 学习" data-en="RESEARCH / PROJECTS / LEARNING" >研究 / 项目 / 学习</span>
+<div class="hero-foot"><span>0.25 μm <i></i> 18 Å</span><span data-zh="AI / 芯片 / 创造" data-en="AI / SILICON / BUILDING" >AI / 芯片 / 创造</span>
 </div>
 </section>
 <section class="recent section-wrap" id="recent">
@@ -165,8 +166,8 @@
 <div class="about-grid">
 <div class="portrait"><img src="/avatar.jpg" width="500" height="477" alt="陈晓波 · Xiaobo Chen" loading="lazy"><p>陈晓波 / Xiaobo Chen</p>
 </div>
-<div class="about-copy"><h3 data-zh="研发、制造与商业。" data-en="R&amp;D, manufacturing<br>and business." >研发、制造与商业。</h3><p data-zh="二十余年半导体经验，走过中国、德国、新加坡与美国。专注工艺集成、良率提升、技术转移与客户合作。" data-en="Over twenty years in semiconductors across China, Germany, Singapore and the United States. Process integration, yield improvement, technology transfer and customer partnerships." >二十余年半导体经验，走过中国、德国、新加坡与美国。专注工艺集成、良率提升、技术转移与客户合作。</p>
-<div class="expertise"><span data-zh="工艺集成" data-en="Process integration" >工艺集成</span><span data-zh="良率与量产" data-en="Yield &amp; production" >良率与量产</span><span data-zh="AI 应用" data-en="Applied AI" >AI 应用</span>
+<div class="about-copy"><h3 data-zh="以 AI 思考，以实践推进。" data-en="Think with AI.<br>Build what comes next." >以 AI 思考，以实践推进。</h3><p data-zh="把 AI 融入研究、产品探索和制造实践。拥有二十余年半导体经验，走过中国、德国、新加坡与美国，连接工艺、数据与商业。" data-en="Bringing AI into research, product exploration and manufacturing. Over twenty years in semiconductors across China, Germany, Singapore and the United States, connecting process engineering, data and business." >把 AI 融入研究、产品探索和制造实践。拥有二十余年半导体经验，走过中国、德国、新加坡与美国，连接工艺、数据与商业。</p>
+<div class="expertise"><span data-zh="AI 应用" data-en="Applied AI">AI 应用</span><span data-zh="机器学习" data-en="Machine learning">机器学习</span><span data-zh="产品探索" data-en="Product exploration">产品探索</span><span data-zh="半导体制造" data-en="Semiconductor manufacturing">半导体制造</span>
 </div>
 <div class="career" id="experience"><h4 data-zh="职业经历" data-en="Experience">职业经历</h4>
 <div class="company-grid">
@@ -192,7 +193,7 @@
 <div class="education-row">
 <div class="seal"><img src="/assets/home/cornell.png" alt="Cornell University" loading="lazy" width="64" height="64">
 </div>
-<div><h4 data-zh="康奈尔大学" data-en="Cornell University" >康奈尔大学</h4><p data-zh="高级工商管理硕士 · 2021–2023；机器学习与 AI · 2022–2023" data-en="Executive MBA · 2021–2023; Machine Learning &amp; AI · 2022–2023" >高级工商管理硕士 · 2021–2023；机器学习与 AI · 2022–2023</p>
+<div><h4 data-zh="康奈尔大学" data-en="Cornell University" >康奈尔大学</h4><p data-zh="机器学习与 AI 证书<br>高级工商管理硕士 · 2021–2023" data-en="Machine Learning &amp; AI Certificate<br>Executive MBA · 2021–2023" >机器学习与 AI 证书<br>高级工商管理硕士 · 2021–2023</p>
 </div>
 </div>
 <div class="education-row">

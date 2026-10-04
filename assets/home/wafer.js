@@ -113,7 +113,9 @@
 
   function intro() {
     if (!heroVisible || !active()) return;
+    animations.forEach(a => {if (hero.contains(a.effect?.target)) a.cancel();});
     entrance = 0;
+    play(document.querySelector('.hero-kicker'), [{opacity: 0, translate: '-24px 0'}, {opacity: 1, translate: '0 0'}], {duration: 900});
     document.querySelectorAll('.hero h1 span').forEach((el, i) => play(el,
       [{transform: 'translate3d(0,65px,0) rotate(3deg)', opacity: 0, clipPath: 'inset(100% 0 0 0)'},
        {transform: 'translate3d(0,0,0) rotate(0)', opacity: 1, clipPath: 'inset(0 0 0 0)'}],
@@ -250,7 +252,7 @@
   }));
   document.addEventListener('visibilitychange', sync);
   window.addEventListener('pageshow', () => {measure(); sync();});
-  window.addEventListener('home-motion-change', sync);
+  window.addEventListener('home-language-change', () => {measure(); intro(); wake();});
   window.addEventListener('home-content-change', observeContent);
   document.fonts.ready.then(() => {measure(); wake();});
   // All content is visible without JS, with motion disabled, and after an interrupted animation.

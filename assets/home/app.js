@@ -6,9 +6,31 @@
   const names={research:['半导体研究','Semiconductor Research'],ai:['AI 与制造','AI & Manufacturing'],learning:['教育与学习','Education & Learning'],projects:['项目与创意','Projects & Design'],life:['生活与规划','Life & Planning'],portal:['资料库','Archive'],design:['主页方案','Homepage Designs']};
   let lang = store.get('timememo-home-language','zh'); if(!['zh','en'].includes(lang))lang='zh';
   let category='all';
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  let motionChoice=store.get('timememo-home-motion',null);
-  if(!['on','off'].includes(motionChoice))motionChoice=null;
+  // The owner requests continuously enabled motion; ignore the retired saved on/off preference.
+  document.body.dataset.motion='on';
+  document.documentElement.dataset.motion='on';
+  const dock=$('#language-dock'), languageToggle=$('#language-toggle'), languagePanel=$('#language-panel');
+  let languageOpen=false;
+  function toggleLanguagePanel(open, restoreFocus=false){
+    languageOpen=open;
+    languageToggle.setAttribute('aria-expanded',String(open));
+    languagePanel.dataset.open=String(open);
+    languagePanel.inert=!open;
+    if(restoreFocus)languageToggle.focus({preventScroll:true});
+  }
+  function updateLanguageDock(){
+    const visible=scrollY<96;
+    if(!visible&&languageOpen)toggleLanguagePanel(false);
+    dock.dataset.visible=String(visible);
+    dock.inert=!visible;
+    dock.setAttribute('aria-hidden',String(!visible));
+  }
+  languageToggle.addEventListener('click',()=>toggleLanguagePanel(!languageOpen));
+  document.addEventListener('pointerdown',e=>{if(languageOpen&&!dock.contains(e.target))toggleLanguagePanel(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&languageOpen)toggleLanguagePanel(false,true)});
+  dock.addEventListener('focusout',e=>{if(!dock.contains(e.relatedTarget))toggleLanguagePanel(false)});
+  window.addEventListener('scroll',updateLanguageDock,{passive:true});
+  window.addEventListener('pageshow',updateLanguageDock);
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const tr=(z,e)=>lang==='zh'?z:e;
   function translate(root=document){root.querySelectorAll('[data-zh][data-en]').forEach(el=>{el.innerHTML=el.dataset[lang]});root.querySelectorAll('[data-placeholder-zh]').forEach(el=>el.placeholder=el.dataset[lang==='zh'?'placeholderZh':'placeholderEn']);}
@@ -23,28 +45,13 @@
   }
   function history(){const raw=store.get('timememo-home-history',[]);return Array.isArray(raw)?raw.filter(url=>typeof url==='string'&&catalog.some(p=>p.url===url)).slice(0,8):[];}
   function renderHistory(){const recent=history();$('#history-count').textContent=recent.length?`(${recent.length})`:'';$('#history-list').innerHTML=recent.length?recent.map(url=>row(catalog.find(p=>p.url===url),true)).join(''):`<p>${tr('打开一个项目后，会显示在这里。','Open a project to start your list.')}</p>`;$('#clear-history').disabled=!recent.length;}
-  function updateMotion(){
-    // System preference is the default. An explicit choice always wins.
-    const enabled=motionChoice==='on'||(motionChoice!=='off'&&!reduced.matches);
-    const changed=document.body.dataset.motion!==(enabled?'on':'off');
-    document.body.dataset.motion=enabled?'on':'off';
-    document.documentElement.dataset.motion=enabled?'on':'off';
-    const button=$('#motion');
-    button.textContent=tr(enabled?'动效：开':'动效：关',enabled?'Motion: on':'Motion: off');
-    button.setAttribute('aria-pressed',String(enabled));
-    button.setAttribute('aria-label',tr(enabled?'关闭动效':'开启动效',enabled?'Pause motion':'Enable motion'));
-    button.disabled=false;
-    button.title=tr(enabled?'点击暂停全部动效':'点击开启全部动效',enabled?'Pause all animation':'Enable all animation');
-    window.dispatchEvent(new CustomEvent('home-motion-change',{detail:{changed,enabled}}));
-  }
-  function setLanguage(next){lang=next;store.set('timememo-home-language',lang);document.documentElement.lang=lang==='zh'?'zh-CN':'en';translate();document.title=tr('陈晓波 · Time Memo','Xiaobo Chen · Time Memo');document.querySelector('meta[name=description]').content=tr('陈晓波 · 半导体研发、制造与商业。研究、项目与学习记录。','Xiaobo Chen. Semiconductor R&D, manufacturing and business. Research, projects and learning.');document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));$('#month').setAttribute('aria-label',tr('更新月份','Updated in'));document.querySelector('.site-header nav').setAttribute('aria-label',tr('主导航','Main navigation'));document.querySelector('.category-tabs').setAttribute('aria-label',tr('分类','Categories'));document.querySelector('.field-controls [role=group]').setAttribute('aria-label',tr('切换晶圆图形','Wafer diagram'));renderCatalog();renderHistory();updateMotion();}
-  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
-  $('#motion').addEventListener('click',()=>{motionChoice=document.body.dataset.motion==='on'?'off':'on';store.set('timememo-home-motion',motionChoice);updateMotion()});reduced.addEventListener('change',updateMotion);
+  function setLanguage(next){lang=next;store.set('timememo-home-language',lang);document.documentElement.lang=lang==='zh'?'zh-CN':'en';translate();document.title=tr('陈晓波 · Time Memo','Xiaobo Chen · Time Memo');document.querySelector('meta[name=description]').content=tr('陈晓波 · AI 应用先行者。把 AI 用于研究、产品与制造。','Xiaobo Chen. AI builder, bringing AI into research, products and manufacturing.');document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));$('#month').setAttribute('aria-label',tr('更新月份','Updated in'));languageToggle.setAttribute('aria-label',tr('切换语言','Change language'));document.querySelector('.category-tabs').setAttribute('aria-label',tr('分类','Categories'));document.querySelector('.field-controls [role=group]').setAttribute('aria-label',tr('切换晶圆图形','Wafer diagram'));renderCatalog();renderHistory();window.dispatchEvent(new Event('home-language-change'));}
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{setLanguage(b.dataset.lang);toggleLanguagePanel(false,true)}));
   document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;document.querySelectorAll('[data-category]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));renderCatalog()}));
   $('#search').addEventListener('input',renderCatalog);$('#month').addEventListener('input',renderCatalog);$('#sort').addEventListener('change',renderCatalog);
   $('#reset').addEventListener('click',()=>{$('#search').value='';$('#month').value='';$('#sort').value='group';category='all';document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category==='all')));renderCatalog()});
   function record(e){const link=e.target.closest('a[data-track]');if(!link||!catalog.some(p=>p.url===link.dataset.track))return;store.set('timememo-home-history',[link.dataset.track,...history().filter(x=>x!==link.dataset.track)].slice(0,8));}
   document.addEventListener('click',record);document.addEventListener('auxclick',e=>{if(e.button===1)record(e)});
   $('#clear-history').addEventListener('click',()=>{store.set('timememo-home-history',[]);renderHistory()});window.addEventListener('pageshow',renderHistory);window.addEventListener('storage',renderHistory);
-  setLanguage(lang);
+  setLanguage(lang);updateLanguageDock();
 })();
