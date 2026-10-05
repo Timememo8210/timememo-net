@@ -1,5 +1,19 @@
 window.HOME_CATALOG = [
 {
+  "url": "/prototypes/ai-material/full/",
+  "category": "design",
+  "title": {
+    "zh": "AI Material · 完整主页预览",
+    "en": "AI Material · Full Homepage Preview"
+  },
+  "description": {
+    "zh": "墨蓝暖橙、AI 收尾动效与完整内容目录。",
+    "en": "Ink and ember, chip-built AI and the complete directory."
+  },
+  "updated": "2026-10-04",
+  "private": false
+},
+{
   "url": "/prototypes/ai-material/colors/",
   "category": "design",
   "title": {
