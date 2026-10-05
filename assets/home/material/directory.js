@@ -19,18 +19,24 @@
     const entries=catalog.filter(p=>(category==='all'||p.category===category)&&(!month||p.updated.startsWith(month))&&(!query||[p.title.zh,p.title.en,p.description.zh,p.description.en,p.updated,...(categories[p.category]||[])].join(' ').toLocaleLowerCase().includes(query)));
     entries.sort((a,b)=>sort==='old'?a.updated.localeCompare(b.updated):b.updated.localeCompare(a.updated));
     $('#result-count').textContent=tr(`${entries.length} 个条目`,`${entries.length} entries`);
-    $('#catalog-results').innerHTML=entries.length?(sort==='group'?Object.entries(categories).map(([key,label])=>{const group=entries.filter(p=>p.category===key);return group.length?`<section class="catalog-group"><h3>${esc(label[lang()==='zh'?0:1])} <small>${group.length}</small></h3><div>${group.map(p=>row(p)).join('')}</div></section>`:'';}).join(''):`<section class="catalog-group"><h3>${tr(sort==='old'?'最早更新':'最近更新',sort==='old'?'Oldest updates':'Latest updates')}</h3><div>${entries.map(p=>row(p)).join('')}</div></section>`):`<p class="empty-state">${tr('没有匹配内容。换个关键词，或重置筛选。','No matches. Try another keyword or reset the filters.')}</p>`;
+    function panels(items,key,label,index){
+      const count=Math.ceil(items.length/3);
+      return Array.from({length:count},(_,page)=>`<section class="catalog-group" data-tone="${index%3}" data-group="${key}"><div class="catalog-heading"><span class="category-number">${String(index+1).padStart(2,'0')}</span><h3>${esc(label)}</h3><small>${page+1} / ${count}</small></div><div class="catalog-items">${items.slice(page*3,page*3+3).map(p=>row(p)).join('')}</div></section>`).join('');
+    }
+    $('#catalog-results').innerHTML=entries.length?(sort==='group'?Object.entries(categories).map(([key,label],index)=>panels(entries.filter(p=>p.category===key),key,label[lang()==='zh'?0:1],index)).join(''):panels(entries,'date',tr(sort==='old'?'最早更新':'最近更新',sort==='old'?'Oldest updates':'Latest updates'),0)):`<p class="empty-state">${tr('没有匹配内容。换个关键词，或重置筛选。','No matches. Try another keyword or reset the filters.')}</p>`;
+    $('#catalog-results').scrollLeft=0;
+    dispatchEvent(new Event('home-rails-update'));
   }
   function recentHistory(){const raw=storage.get('timememo-home-history',[]);return Array.isArray(raw)?[...new Set(raw.filter(url=>typeof url==='string'&&catalog.some(p=>p.url===url)))].slice(0,8):[];}
   function renderHistory(){const recent=recentHistory();$('#history-count').textContent=recent.length?`(${recent.length})`:'';$('#history-list').innerHTML=recent.length?recent.map(url=>row(catalog.find(p=>p.url===url),true)).join(''):`<p>${tr('打开一个项目后，会显示在这里。','Open a project to start your list.')}</p>`;$('#clear-history').disabled=!recent.length;}
   function renderRecent(){const entries=catalog.filter(p=>!['design','portal'].includes(p.category)).sort((a,b)=>b.updated.localeCompare(a.updated)).slice(0,6);$('.recent-list').innerHTML=entries.map(p=>row(p)).join('');const fresh=$('#fresh-link'),p=entries[0];if(fresh&&p){fresh.href=p.url;fresh.dataset.track=p.url;fresh.querySelector('.fresh-title').textContent=p.title[lang()];fresh.querySelector('.fresh-title').dataset.zh=p.title.zh;fresh.querySelector('.fresh-title').dataset.en=p.title.en;fresh.querySelector('time').textContent=p.updated.replaceAll('-','.');fresh.querySelector('time').dateTime=p.updated;}}
-  function render(){renderRecent();renderCatalog();renderHistory();}
+  function render(){renderRecent();renderCatalog();renderHistory();dispatchEvent(new Event('home-rails-update'));}
   document.querySelectorAll('[data-category]').forEach(button=>button.addEventListener('click',()=>{category=button.dataset.category;document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderCatalog();}));
   $('#search').addEventListener('input',renderCatalog);$('#month').addEventListener('input',renderCatalog);$('#sort').addEventListener('change',renderCatalog);
   $('.filters').addEventListener('submit',e=>e.preventDefault());
   $('#reset').addEventListener('click',()=>{category='all';$('#search').value='';$('#month').value='';$('#sort').value='group';document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category==='all')));renderCatalog();});
-  function record(event){const link=event.target.closest('a[data-track]');if(!link||!catalog.some(p=>p.url===link.dataset.track))return;storage.set('timememo-home-history',[link.dataset.track,...recentHistory().filter(url=>url!==link.dataset.track)].slice(0,8));renderHistory();}
+  function record(event){const link=event.target.closest('a[data-track]');if(!link||!catalog.some(p=>p.url===link.dataset.track))return;storage.set('timememo-home-history',[link.dataset.track,...recentHistory().filter(url=>url!==link.dataset.track)].slice(0,8));renderHistory();dispatchEvent(new Event('home-rails-update'));}
   document.addEventListener('click',record);document.addEventListener('auxclick',e=>{if(e.button===1)record(e);});
-  $('#clear-history').addEventListener('click',()=>{storage.set('timememo-home-history',[]);renderHistory();});
-  addEventListener('home-language',render);addEventListener('pageshow',renderHistory);addEventListener('storage',e=>{if(e.key==='timememo-home-history')renderHistory();});render();
+  $('#clear-history').addEventListener('click',()=>{storage.set('timememo-home-history',[]);renderHistory();dispatchEvent(new Event('home-rails-update'));});
+  addEventListener('home-language',render);addEventListener('pageshow',renderHistory);addEventListener('storage',e=>{if(e.key==='timememo-home-history')renderHistory();dispatchEvent(new Event('home-rails-update'));});render();
 })();

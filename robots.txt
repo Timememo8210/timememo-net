@@ -46,3 +46,26 @@ Disallow: /
 
 User-agent: Amazonbot
 Disallow: /
+
+# Search crawlers must be able to read noindex in HTML.
+# robots.txt is not access control; private files require authenticated hosting.
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+Disallow: /*.pdf
+Disallow: /*.zip
+Disallow: /*.docx
+Disallow: /*.xlsx
+Disallow: /*.pptx
+Disallow: /*.mp4
+Disallow: /*.jpg
+Disallow: /*.jpeg
+Disallow: /*.png
+Disallow: /*.webp
+Disallow: /*.svg
+
+User-agent: Googlebot-Image
+Disallow: /
+
+User-agent: Googlebot-Video
+Disallow: /
