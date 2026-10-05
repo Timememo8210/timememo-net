@@ -1,5 +1,19 @@
 window.HOME_CATALOG = [
 {
+  "url": "/prototypes/ai-material/colors/",
+  "category": "design",
+  "title": {
+    "zh": "主页配色与 AI 收尾",
+    "en": "Homepage Colors & AI Ending"
+  },
+  "description": {
+    "zh": "五套静态配色与芯粒组成 AI 的收尾提案。",
+    "en": "Five static palettes and an AI ending made from chip tiles."
+  },
+  "updated": "2026-10-04",
+  "private": false
+},
+{
   "url": "/scholastic-guide/writing/",
   "category": "learning",
   "title": {
