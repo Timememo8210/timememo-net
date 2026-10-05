@@ -1,60 +1,46 @@
 window.HOME_CATALOG = [
-  {
-    "url": "/designs/silicon-lab-20261004/",
-    "category": "design",
-    "title": {
-      "zh": "上一版主页 · 芯片实验室",
-      "en": "Previous Homepage · Silicon Lab"
-    },
-    "description": {
-      "zh": "钴蓝晶圆版，2026.10.04 完整归档。",
-      "en": "The cobalt wafer homepage, archived in full on 2026.10.04."
-    },
-    "updated": "2026-10-04",
-    "private": false
+{
+  "url": "/prototypes/ai-material/full/",
+  "category": "design",
+  "title": {
+    "zh": "AI Material · 完整主页预览",
+    "en": "AI Material · Full Homepage Preview"
   },
-  {
-    "url": "/prototypes/ai-material/full/",
-    "category": "design",
-    "title": {
-      "zh": "AI Material · 设计定稿",
-      "en": "AI Material · Approved Concept"
-    },
-    "description": {
-      "zh": "正式上线前的完整方案，保留供对照。",
-      "en": "The complete design before launch, preserved for comparison."
-    },
-    "updated": "2026-10-04",
-    "private": false
+  "description": {
+    "zh": "墨蓝暖橙、AI 收尾动效与完整内容目录。",
+    "en": "Ink and ember, chip-built AI and the complete directory."
   },
-  {
-    "url": "/prototypes/ai-material/colors/",
-    "category": "design",
-    "title": {
-      "zh": "主页配色与 AI 收尾",
-      "en": "Homepage Colors & AI Ending"
-    },
-    "description": {
-      "zh": "五套静态配色与芯粒组成 AI 的收尾提案。",
-      "en": "Five static palettes and an AI ending made from chip tiles."
-    },
-    "updated": "2026-10-04",
-    "private": false
+  "updated": "2026-10-04",
+  "private": false
+},
+{
+  "url": "/prototypes/ai-material/colors/",
+  "category": "design",
+  "title": {
+    "zh": "主页配色与 AI 收尾",
+    "en": "Homepage Colors & AI Ending"
   },
-  {
-    "url": "/scholastic-guide/writing/",
-    "category": "learning",
-    "title": {
-      "zh": "Scholastic 写作与获奖范文",
-      "en": "Scholastic: Writing & Winners"
-    },
-    "description": {
-      "zh": "篇幅、提交要求与 2024–2026 获奖作品。",
-      "en": "Length limits, entry rules and 2024–2026 winning work."
-    },
-    "updated": "2026-10-03",
-    "private": false
+  "description": {
+    "zh": "五套静态配色与芯粒组成 AI 的收尾提案。",
+    "en": "Five static palettes and an AI ending made from chip tiles."
   },
+  "updated": "2026-10-04",
+  "private": false
+},
+{
+  "url": "/scholastic-guide/writing/",
+  "category": "learning",
+  "title": {
+    "zh": "Scholastic 写作与获奖范文",
+    "en": "Scholastic: Writing & Winners"
+  },
+  "description": {
+    "zh": "篇幅、提交要求与 2024–2026 获奖作品。",
+    "en": "Length limits, entry rules and 2024–2026 winning work."
+  },
+  "updated": "2026-10-03",
+  "private": false
+},
   {
     "url": "/scholastic-guide/research/",
     "category": "learning",
@@ -97,20 +83,20 @@ window.HOME_CATALOG = [
     "updated": "2026-10-03",
     "private": true
   },
-  {
-    "url": "/prototypes/ai-material/",
-    "category": "design",
-    "title": {
-      "zh": "AI Material · 动效 Demo",
-      "en": "AI Material · Motion Demo"
-    },
-    "description": {
-      "zh": "银灰材质、矢量图标与多层 AI 网络。",
-      "en": "Silver materials, vector icons and layered AI motion."
-    },
-    "updated": "2026-10-04",
-    "private": false
+{
+  "url": "/prototypes/ai-material/",
+  "category": "design",
+  "title": {
+    "zh": "AI Material · 动效 Demo",
+    "en": "AI Material · Motion Demo"
   },
+  "description": {
+    "zh": "银灰材质、矢量图标与多层 AI 网络。",
+    "en": "Silver materials, vector icons and layered AI motion."
+  },
+  "updated": "2026-10-04",
+  "private": false
+},
   {
     "url": "/designs/previous/",
     "category": "design",
@@ -353,14 +339,14 @@ window.HOME_CATALOG = [
     "url": "/designs/",
     "category": "design",
     "title": {
-      "zh": "主页方案与归档",
-      "en": "Homepage Designs & Archive"
+      "zh": "主页设计方案",
+      "en": "Homepage Designs"
     },
     "description": {
-      "zh": "历次主页、10 套原始设计与配色研究。",
-      "en": "Previous homepages, ten original designs and color studies."
+      "zh": "原有 10 套设计与旧版主页。",
+      "en": "Ten concepts and the previous homepage."
     },
-    "updated": "2026-10-04",
+    "updated": "2026-09-06",
     "private": false
   },
   {

@@ -2,7 +2,7 @@
 
 Preview: https://timememo.net/prototypes/ai-material/full/
 
-This is the complete **Ink / Ember** direction requested after the static palette review. It does not replace `/index.html`. Only a bilingual directory entry and design-gallery link are added to the production site.
+This is the complete **Ink / Ember** direction requested after the static palette review. On 2026-10-04 the owner approved promotion. `/index.html` now uses this direction with a more dimensional AI finish and About before the full directory. This route preserves the approved prelaunch design for comparison; its footer links to the current homepage. The former cobalt homepage is preserved separately at `/designs/silicon-lab-20261004/`.
 
 ## Complete page
 

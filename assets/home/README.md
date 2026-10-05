@@ -1,16 +1,17 @@
 # Time Memo homepage
 
-The production homepage is `/index.html`. Its visual reference is the preserved J concept at `/prototypes/lab/`.
+The production homepage is `/index.html`. It uses the approved AI Material Ink / Ember design. Production CSS, scripts, glyph data and vendored Three.js/Manrope live in `/assets/home/material/`. The approved prelaunch design is retained separately at `/prototypes/ai-material/full/`.
 
 - `/assets/home/catalog.js` is the curated directory of canonical project entry points. Each entry has a stable URL, category, Chinese and English title/description, and recorded content update date. Preserve dates when merely changing the homepage layout. Keep research/private material at its existing destination; do not copy protected page bodies into the public homepage.
 - When publishing a project, add/update the catalog entry and the static fallback links in `#catalog-results`. Update `#recent .recent-list` with the newest substantive content. Keep Sky Portal featured independently.
+- Page order: animated introduction → selected work → recent updates → About/career/education → complete directory → footer. Recent work remains easy to reach; professional background comes before the long directory.
 - Visible text and accessibility labels must switch together between Chinese and English. New static text uses `data-zh` / `data-en`; catalog entries contain both languages.
-- Recently opened links and chosen language are local to the browser. No browsing history is uploaded or synchronized.
-- Motion includes wafer rotation/scanning, diagram transitions, staggered entry, scroll parallax, and the Sky Portal orbit. One time-based frame loop composites cached textures, pauses offscreen/when hidden, and caps pixel density. Native page scrolling remains intact.
+- Recently opened links and chosen language are local to the browser, using the existing `timememo-home-history` and `timememo-home-language` keys. An explicit `?lang=zh` or `?lang=en` takes precedence; the approved-preview language is used only if there is no production preference. No browsing history is uploaded or synchronized.
+- Motion uses a wafer → network → chip-built AI sequence. The last phase has a gentle 3D angle, deeper polished chip edges and a slow light sweep. One time-based WebGL frame loop pauses offscreen/when hidden and caps pixel density. Native scrolling remains intact.
 - The owner explicitly requests always-on motion and no motion switch. Ignore the retired timememo-home-motion preference, including saved off values. Keep offscreen/hidden suspension for performance. Verify actual animation frames in both regular and reduced-motion environments.
-- No top header bar: the cobalt hero starts at the document top and fills at least one viewport. The language control slides in from the right at the top, expands on click, closes after selection/outside click/Escape, and hides while scrolling down. Chinese hero name is 陈晓波 on a single line; English is Xiaobo Chen on two lines.
+- No top header bar: the ink-and-ember hero starts at the document top and fills at least one viewport. The language control slides in from the right at the top, expands on click, closes after selection/outside click/Escape, and hides while scrolling down. Chinese hero name is 陈晓波 on a single line; English is Xiaobo Chen on two lines.
 - Lead positioning is AI 应用先行者 / AI Builder, supported by existing projects and the owner-confirmed Cornell Machine Learning & AI certificate. LinkedIn was inaccessible behind its login wall on 2026-10-03; do not claim it was independently verified or invent credential identifiers/dates.
-- The old homepage is preserved at `/designs/previous/`; `/designs/` contains it plus all ten earlier concepts. Do not overwrite the archive when editing the live homepage.
+- The immediately previous cobalt Silicon Lab homepage is frozen at `/designs/silicon-lab-20261004/`, with independent scripts, catalog, styles and portrait. The earlier dark homepage remains at `/designs/previous/`. `/designs/` is the bilingual Designs & Archive library. Never overwrite either archive during live edits.
 - Preserve the homepage's robots/googlebot/referrer policies and all existing access-code gates.
 
 Logo provenance is listed in `logo-sources.txt`. Employment organization names were confirmed by the site owner; no employment dates or specific job titles have been inferred.
