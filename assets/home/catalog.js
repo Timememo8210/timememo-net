@@ -140,6 +140,34 @@ window.HOME_CATALOG = [
     "private": false
   },
   {
+    "url": "/research/tsv-koz-gaa-analog/",
+    "category": "research",
+    "title": {
+      "zh": "TSV KOZ 与 GAA Analog 器件",
+      "en": "TSV Keep-Out Zones & GAA Analog"
+    },
+    "description": {
+      "zh": "3D IC 禁区成因、公开数据与量测方法。",
+      "en": "3D IC keep-out mechanisms, published data and metrology."
+    },
+    "updated": "2026-10-07",
+    "private": false
+  },
+  {
+    "url": "/research/",
+    "category": "research",
+    "title": {
+      "zh": "半导体研究目录",
+      "en": "Semiconductor Research Index"
+    },
+    "description": {
+      "zh": "器件封装、产业代工、公司专题三类。",
+      "en": "Devices, industry and company studies in three tracks."
+    },
+    "updated": "2026-10-07",
+    "private": false
+  },
+  {
     "url": "/research/server-foundry-outlook/",
     "category": "research",
     "title": {

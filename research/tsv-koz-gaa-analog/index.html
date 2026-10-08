@@ -1,0 +1,523 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="referrer" content="no-referrer">
+<title>3D IC 的 TSV KOZ 与 GAA Analog 器件｜TIMEMEMO RESEARCH</title>
+<meta name="description" content="TSV keep-out zone 的成因与公开数据、GAA 工艺下 analog 器件的敏感特性，以及对应的量测方法。基于公开文献，2026 年 10 月。">
+<link rel="icon" href="/assets/home/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fcfbf7;--white:#fff;--ink:#183437;--text:#283f42;--muted:#52696b;--rule:#d3ddda;--teal:#166b61;--mint:#edf4f0;--axis:#7f9792;--grid:#c9d5d1;--accent:#2563c9;--warn:#c9821b;--tint:#e3e9e6}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans','Noto Sans SC',sans-serif;font-size:16px;line-height:1.85}
+a{color:var(--teal);text-underline-offset:4px}a:focus-visible,.table-scroll:focus-visible{outline:3px solid #bc7c27;outline-offset:4px}
+.skip{position:fixed;top:-80px;left:20px;z-index:100;background:#fff;padding:12px}.skip:focus{top:8px}
+.top{height:72px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 4.3vw;background:var(--paper);position:sticky;top:0;z-index:10}
+.brand{text-decoration:none;font-weight:700;letter-spacing:.12em;color:var(--ink);font-size:16px}.brand>span{font-size:11px;letter-spacing:.16em;border-left:1px solid #8aa39c;margin-left:15px;padding-left:16px;font-weight:500}
+.top nav{display:flex;gap:22px;font-size:13px}.top nav a{color:var(--ink)}
+.hero{max-width:1400px;margin:auto;padding:56px 4.3vw 0}.eyebrow{color:var(--teal);font-size:12px;font-weight:600;letter-spacing:.14em}
+h1{font-family:Georgia,'Noto Sans SC',serif;font-size:clamp(34px,4.4vw,64px);letter-spacing:-.025em;line-height:1.2;font-weight:600;color:var(--ink);margin:24px 0 22px}
+.dek{max-width:860px;font-size:19px;line-height:1.8;color:var(--muted);margin:0 0 40px}
+.hero-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:11px;letter-spacing:.06em;border-top:2px solid var(--ink);padding:16px 0}
+.layout{max-width:1400px;margin:auto;padding:0 4.3vw;display:grid;grid-template-columns:170px minmax(0,1fr);gap:56px}
+.contents{position:sticky;top:100px;align-self:start;padding:34px 0;display:flex;flex-direction:column;gap:6px}
+.contents>span{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-bottom:6px}
+.contents a{text-decoration:none;color:var(--ink);font-size:13px;line-height:1.5;display:flex;gap:10px}.contents small{color:var(--muted);font-size:10px;padding-top:2px}
+main{min-width:0;max-width:980px;padding:24px 0 80px}
+h2{font-size:27px;line-height:1.35;color:var(--ink);margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--rule)}
+h3{font-size:18px;color:var(--ink);margin:34px 0 10px}p,li{max-width:820px}
+.table-scroll{overflow-x:auto;margin:20px 0 14px;border:1px solid var(--rule);border-radius:6px;background:var(--white)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px;line-height:1.65}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--rule)}th{background:var(--mint);color:var(--ink);font-weight:600;white-space:nowrap}tr:last-child td{border-bottom:0}
+.diagram{margin:22px 0 12px;padding:16px;border:1px solid var(--rule);border-radius:6px;background:var(--white)}.diagram svg{display:block;width:100%;height:auto}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--teal);padding:4px 0 4px 14px;margin:30px 0 0}
+footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}.contents{display:none}.top nav{display:none}.dek{font-size:17px}h2{font-size:23px}}
+@media print{.top,.contents{display:none}.layout{display:block}body{font-size:12px}}
+</style></head><body>
+<a class="skip" href="#main">跳至正文</a>
+<header class="top"><a class="brand" href="/research/">TIMEMEMO <span>RESEARCH</span></a><nav aria-label="站内导航"><a href="/research/">半导体研究</a><a href="/#directory">全部内容</a></nav></header>
+<div class="hero"><div class="eyebrow">器件与先进封装 / 2026.10.07</div>
+<h1>3D IC 的 TSV KOZ<br>与 GAA Analog 器件</h1>
+<p class="dek">KOZ 不是一个固定的禁区半径。它由热机械应力、衬底噪声耦合、TSV 对走线的耦合和 Cu pumping 四种机制分别决定，前段器件和后段金属的规则不同；analog 的判据比 digital 严一个量级，KOZ 通常是 digital 的 3 倍以上。</p>
+<div class="hero-bottom"><span>范围：TSV KOZ · GAA ANALOG · 量测方法</span><span>33 项来源 · 基于公开文献</span></div></div>
+<div class="layout"><nav class="contents" aria-label="报告目录"><span>报告目录</span><a href="#mechanisms"><small>01</small>KOZ 由什么决定</a><a href="#cross-section"><small>02</small>TSV 剖面上的影响区</a><a href="#data"><small>03</small>公开数据里的 KOZ 量级</a><a href="#structures"><small>04</small>不同 3D 结构下的差别</a><a href="#gaa-analog"><small>05</small>GAA 下 analog 器件要关注的特性</a><a href="#metrology"><small>06</small>量测方法</a><a href="#approach"><small>07</small>建议的做法</a><a href="#gaps"><small>08</small>公开资料没有覆盖的点</a><a href="#sources"><small>09</small>Sources</a></nav>
+<main id="main"><h2 id="mechanisms">KOZ 由什么决定</h2>
+<p>KOZ 的本意是 TSV 周围不放有源器件的区域，针对的是前段；后段金属并不整体禁用，只是 TSV 正上方和紧邻处有单独的 via 与走线规则。KOZ 的大小也不是工艺常数，而是由机制、器件类型和允许的漂移量共同决定。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>机制</th>
+<th>物理来源</th>
+<th>影响对象</th>
+<th>作用范围</th>
+<th>常用对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>热机械应力</td>
+<td>Cu 与 Si 的 CTE 相差约 7 倍（16.7 对 2.3 ppm/°C），退火后冷却留下残余应力</td>
+<td>前段：迁移率、Id、gm；在匹配对上表现为系统失配</td>
+<td>单根 TSV 近似按 1/r² 衰减，数 µm 到十几 µm；阵列叠加后更远</td>
+<td>缩小 TSV 直径；阵列 pitch/直径大于 5；器件相对 TSV 方位对称</td>
+</tr>
+<tr>
+<td>衬底噪声耦合</td>
+<td>TSV、liner、Si 构成 MOS 电容，TSV 上的信号经衬底调制器件的 body 和 drain</td>
+<td>前段：analog 的噪声和电流调制</td>
+<td>衰减比应力慢；planar 器件按 2% 判据约 28 µm</td>
+<td>就近接地的 substrate contact（28 µm 降到约 8 µm）；guard ring（100 MHz 下约 −17 dB）；厚 liner（100 MHz 下约 −20 dB）</td>
+</tr>
+<tr>
+<td>TSV 对走线的耦合</td>
+<td>TSV 与邻近金属线之间的电容</td>
+<td>后段：敏感走线的噪声和延时</td>
+<td>主要在 10 µm 内，20 µm 外可忽略</td>
+<td>布线层单独设 KOZ；接地的 guard ring 走线</td>
+</tr>
+<tr>
+<td>Cu pumping</td>
+<td>高温下 Cu 沿轴向挤出，TSV 顶面呈穹顶状，顶起上方各层</td>
+<td>后段：V0 应力空洞、M1 dishing、介质开裂和分层</td>
+<td>TSV 正上方及顶角附近</td>
+<td>TSV 正上方若干层不放 via；缩小直径</td>
+</tr>
+</tbody>
+</table></div>
+<p>来源：<a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010 报道</a>、<a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo 等 IEDM 2013</a>、<a href="https://www.academia.edu/145707794/Effect_of_Thermal_Stresses_on_Carrier_Mobility_and_Keep_Out_Zone_Around_Through_Silicon_Vias_for_3_D_Integration" target="_blank" rel="noopener noreferrer">Lu 等 TDMR 2012</a>、<a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack 等 ECTC 2015</a>、<a href="https://koasas.kaist.ac.kr/handle/10203/98712?mode=full" target="_blank" rel="noopener noreferrer">Cho 等 CPMT 2011</a>、<a href="https://e3da.csce.uark.edu/pub/doc/2014/Y.Peng-Conf.ACM.DAC-2014.pdf" target="_blank" rel="noopener noreferrer">Peng 等 DAC 2014</a>、<a href="https://patents.google.com/patent/US10199315" target="_blank" rel="noopener noreferrer">GlobalFoundries 专利 US10199315</a>。</p>
+<h3>Analog 的 KOZ 为什么更大</h3>
+<ul>
+<li><strong>判据严一个量级。</strong> imec 对 digital 用 5% 的 Id 变化，对 analog 用 0.5%。按 1/r² 衰减，判据收紧 10 倍，KOZ 半径约为原来的 3 倍，面积约为 10 倍。</li>
+<li><strong>长沟道器件更敏感。</strong> 短沟道器件受接入电阻和短沟道效应限制，电流对迁移率变化不敏感；analog 常用的长 L 器件正好相反。</li>
+<li><strong>匹配看的是梯度而不是绝对值。</strong> TSV 周围径向是拉应力、切向是压应力，大小相近、符号相反。同一对器件相对 TSV 的方位不同，电流会一个增大、一个减小。</li>
+</ul>
+<h3>KOZ 不是定值的另外两个原因</h3>
+<ul>
+<li><strong>阵列叠加。</strong> pitch/直径小于 5 时相邻 TSV 的应力场相互作用。imec 在 TSV 矩阵旁得到的 analog KOZ 为 20–200 µm，取决于矩阵里 TSV 的数量。</li>
+<li><strong>随寿命和个体变化。</strong> NIST 用同步辐射 X 射线测得：1000 次热循环后，Cu TSV 内的主应力和剪应力约为初始的 5 倍；相邻两根 TSV 的静水应力也因微结构不同而相差约 50%（99±30 对 151±37 MPa）。两篇都建议 KOZ 规则把这些变化算进去。来源：<a href="https://www.nist.gov/publications/x-ray-micro-beam-diffraction-measurement-effect-thermal-cycling-stress-cu-tsv" target="_blank" rel="noopener noreferrer">Okoro 等 ECTC 2014</a>、<a href="https://www.nist.gov/publications/non-destructive-measurement-residual-stresses-copper-through-silicon-vias-using" target="_blank" rel="noopener noreferrer">Okoro 等 TED 2014</a>。</li>
+</ul>
+<h2 id="cross-section">TSV 剖面上的影响区</h2>
+<figure class="diagram"><svg viewBox="0 0 760 424" role="img" aria-label="TSV 周围有四类影响区，前段和后段分别受限" font-size="11.5" font-family="inherit">
+<defs><marker id="tsv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--warn)"/></marker></defs>
+<text x="24" y="30" font-size="15" font-weight="600" fill="var(--ink)">TSV 周围有四类影响区，前段和后段分别受限</text>
+<text x="24" y="52" fill="var(--muted)">via-middle Cu TSV 剖面示意，不按比例</text>
+<rect x="40" y="76" width="680" height="120" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="52" y="96" font-weight="600" fill="var(--ink)">后段金属层</text>
+<rect x="40" y="216" width="680" height="184" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="52" y="388" font-weight="600" fill="var(--ink)">Si 衬底</text>
+<rect x="40" y="196" width="680" height="20" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<rect x='172' y='196' width='180' height='20' fill='var(--warn)' fill-opacity='0.14'/><rect x='408' y='196' width='180' height='20' fill='var(--warn)' fill-opacity='0.14'/><rect x='292' y='196' width='60' height='20' fill='var(--warn)' fill-opacity='0.3'/><rect x='408' y='196' width='60' height='20' fill='var(--warn)' fill-opacity='0.3'/>
+<text x="52" y="210" font-weight="600" fill="var(--ink)">前段</text>
+<rect x='110' y='199' width='40' height='14' rx='2' fill='none' stroke='var(--axis)' stroke-width='1.25'/><rect x='221' y='199' width='40' height='14' rx='2' fill='none' stroke='var(--axis)' stroke-width='1.25'/><rect x='650' y='199' width='40' height='14' rx='2' fill='none' stroke='var(--axis)' stroke-width='1.25'/>
+<rect x="348" y="196" width="64" height="204" fill="none" stroke="var(--axis)" stroke-width="1"/>
+<rect x="352" y="196" width="56" height="204" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)" stroke-width="2"/>
+<rect x="344" y="184" width="72" height="12" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="380" y="254" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Cu TSV</text>
+<rect x="352" y="96" width="56" height="88" fill="var(--warn)" fill-opacity="0.3" stroke="var(--warn)" stroke-width="1.25" stroke-dasharray="4 3"/>
+<text x="424" y="112" fill="var(--ink)">Cu pumping：TSV 正上方</text>
+<text x="424" y="128" fill="var(--ink)">若干层不放 via</text>
+<rect x="240" y="184" width="80" height="10" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<line x1="320" y1="189" x2="344" y2="189" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="328" y="156" text-anchor="end" fill="var(--ink)">TSV 与邻近走线的耦合电容</text>
+<text x="328" y="172" text-anchor="end" fill="var(--ink)">主要在 10 µm 内</text>
+<path d="M292 216V262M172 216V302" fill="none" stroke="var(--grid)"/>
+<path d="M292 258H346M292 254V262M346 254V262M172 298H346M172 294V302M346 294V302" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="344" y="276" text-anchor="end" fill="var(--ink)">应力 KOZ，digital 判据 5%</text>
+<text x="344" y="316" text-anchor="end" fill="var(--ink)">应力 KOZ，analog 判据 0.5%，半径约 3 倍</text>
+<text x="130" y="232" text-anchor="middle" fill="var(--muted)">analog 器件</text>
+<text x="241" y="232" text-anchor="middle" fill="var(--muted)">digital 器件</text>
+<path d="M412 330C560 330 670 310 670 222" fill="none" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#tsv-arrow)"/>
+<rect x="596" y="199" width="20" height="14" rx="2" fill="var(--tint)" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="624" y="188" text-anchor="end" fill="var(--muted)">接地的 substrate contact</text>
+<text x="640" y="188" fill="var(--muted)">analog 器件</text>
+<text x="430" y="362" fill="var(--ink)">衬底噪声耦合：TSV 信号经 liner 和衬底</text>
+<text x="430" y="378" fill="var(--ink)">到达器件的 body 和 drain</text>
+</svg></figure>
+<p>前段的应力 KOZ 按判据分两档，analog 一档更宽，digital 器件可以放进 analog 的禁区。后段只在 TSV 正上方和紧邻的走线处受限。噪声耦合走衬底，靠就近接地的 substrate contact 截断。</p>
+<h2 id="data">公开数据里的 KOZ 量级</h2>
+<p>公开数据里 analog 的 KOZ 从约 6 µm（FinFET 配 3 µm TSV）到 200 µm（planar 配 5 µm TSV 矩阵），跨两个量级。差别主要来自 TSV 直径、沟道长度、阵列规模和判据。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>研究</th>
+<th>器件</th>
+<th>TSV（直径 × 深度）</th>
+<th>判据</th>
+<th>KOZ</th>
+<th>数据性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack 等 ECTC 2015</a></td>
+<td>65 nm planar nMOS、32 nm nFinFET</td>
+<td>5 × 50 µm</td>
+<td>Id 变化 2%，应力加耦合</td>
+<td>planar 约 28 µm；就近接地后约 8 µm</td>
+<td>S 参数实测加 TCAD</td>
+</tr>
+<tr>
+<td><a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo 等 IEDM 2013</a></td>
+<td>10 nm 节点 bulk FinFET，L = 20 nm，PMOS</td>
+<td>3 µm，深宽比 1:17</td>
+<td>Id 5%；Id 0.5%</td>
+<td>1.8 µm；5.6 µm（距 TSV 中心）</td>
+<td>5 µm TSV 硅片数据校准后用 TCAD 外推</td>
+</tr>
+<tr>
+<td><a href="https://www.academia.edu/145707794/Effect_of_Thermal_Stresses_on_Carrier_Mobility_and_Keep_Out_Zone_Around_Through_Silicon_Vias_for_3_D_Integration" target="_blank" rel="noopener noreferrer">Lu 等 TDMR 2012</a></td>
+<td>体硅，n 型、[100] 沟道</td>
+<td>5 × 200 µm；50 × 200 µm</td>
+<td>迁移率 5%</td>
+<td>约 7 µm；约 60 µm</td>
+<td>三维 FEA</td>
+</tr>
+<tr>
+<td><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010</a></td>
+<td>planar HKMG，5 × 10 µm² 的 DAC 器件</td>
+<td>5.2 × 40 µm</td>
+<td>Idsat 0.5%（analog）；digital</td>
+<td>单根 20 µm，矩阵 20–200 µm；digital 6–20 µm</td>
+<td>DAC 测试电路实测加 FEM 和 micro-Raman</td>
+</tr>
+</tbody>
+</table></div>
+<p>另有一篇 <a href="https://ieeexplore.ieee.org/document/8421432/" target="_blank" rel="noopener noreferrer">14 nm FinFET 的 TSV 可靠性研究</a>（只读到摘要）：在 5 µm KOZ 处，薄栅氧和厚栅氧的 NFET、PFET 的 Idsat 都未见可测影响，FEOL、BEOL 和 ESD 可靠性也无显著变化。</p>
+<h3>判据收紧时 KOZ 怎么变</h3>
+<p>Guo 等给出一个简化关系：单根 TSV 的 KOZ 半径等于 K/δId 的平方根，其中 K 是由 TSV 工艺和器件应力响应决定的品质因子。他们在 5 µm TSV、L = 900 nm 的长沟道 FinFET 上得到 K 约为 110（n 型）和 130（p 型）%·µm²。下表是用这两个 K 值算出的半径，距离指 TSV 中心到器件中心；5% 和 0.5% 是论文用的判据，1% 和 0.1% 是补充的示例。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>允许的 Id 变化</th>
+<th>n 型 KOZ 半径（µm）</th>
+<th>p 型 KOZ 半径（µm）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5%（digital）</td>
+<td>4.7</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>1%</td>
+<td>10.5</td>
+<td>11.4</td>
+</tr>
+<tr>
+<td>0.5%（analog）</td>
+<td>14.8</td>
+<td>16.1</td>
+</tr>
+<tr>
+<td>0.1%（精密匹配）</td>
+<td>33.2</td>
+<td>36.1</td>
+</tr>
+</tbody>
+</table></div>
+<p>这组数只对孤立的单根 TSV 成立，阵列旁会更大。同一模型下 KOZ 面积与 TSV 直径的平方成正比，5 µm 缩到 3 µm 面积约减小到三分之一。</p>
+<h3>GAA 器件的情况</h3>
+<p>针对 nanosheet 的公开结果目前是 TCAD，没有找到硅片数据。<a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong 等 IEEE Access 2021</a>（只读到摘要）对比了 sub-5 nm 的 NSFET 与 FinFET，结论有三条：</p>
+<ul>
+<li>TSV 应力引起的 Ion 变化，NSFET 比 FinFET 大，主要来自沟道长度方向的应力分量。</li>
+<li>器件放在 KOZ 之外时，应力影响可忽略。</li>
+<li>噪声耦合按 analog 判据（耦合电流小于 Ion 的 0.5%）衡量时，常规结构不达标；作者建议在 S/D 下方加 bottom oxide 并用不掺杂的 punch-through stopper。</li>
+</ul>
+<h2 id="structures">不同 3D 结构下的差别</h2>
+<p>TSV 从微米级缩到纳米级后，局部应力 KOZ 随直径平方缩小，但减薄、背面金属和失去衬底带来的全局效应变成主要问题。所以在 GAA 加背面供电的工艺上，只看 TSV 周围的禁区是不够的。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>典型尺寸</th>
+<th>对器件的影响</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Via-middle Cu TSV</td>
+<td>直径 3–5 µm，深约 40–50 µm</td>
+<td>经历 420 °C 退火和多道 350–400 °C 的 BEOL 工序，残余应力和迁移率变化最大；Cu pumping 使 M1 变薄，电阻升高约 35%</td>
+<td><a href="https://www.academia.edu/15694992/Analysis_of_Copper_Plasticity_Impact_in_TSV_middle_and_Backside_TSV_last_Fabrication_Processes" target="_blank" rel="noopener noreferrer">Guo 等 ECTC 2015</a></td>
+</tr>
+<tr>
+<td>背面 via-last TSV</td>
+<td>同上量级</td>
+<td>只经历一次到 300 °C 的升降温，残余应力和 KOZ 都更小，pumping 不明显；可用约 3 µm 厚的聚合物 liner，耦合再降约 20 dB</td>
+<td>同上；<a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack 等 ECTC 2015</a></td>
+</tr>
+<tr>
+<td>Nano-TSV（背面供电）</td>
+<td>直径小于 1 µm，用 W 填充；Si 减薄到 20–370 nm</td>
+<td>imec 在 Lg ≥ 20 nm 的 FinFET 上实测：除 pMOS 驱动电流略降外无负面影响，nMOS 迁移率最多提高 15%。漂移来自整片减薄和背面工艺，而不是某根 TSV 的局部禁区</td>
+<td><a href="https://www.imec-int.com/en/articles/imec-demonstrates-critical-building-blocks-backside-power-delivery-network" target="_blank" rel="noopener noreferrer">imec VLSI 2021</a>；<a href="https://semiengineering.com/whats-next-for-tsvs/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>背面直接接触</td>
+<td>报道称 Si 减薄到 100 nm 以下，直接接触方案约剩 10 nm</td>
+<td>Lam 的虚拟工艺研究显示，背面直连方案给 GAA 沟道增加的应力明显高于正面连接，直接改变迁移率和驱动电流</td>
+<td><a href="https://semiengineering.com/backside-power-delivery-nears-production/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>基片上的 pass-through TSV</td>
+<td>未公开</td>
+<td>公开的 3DIC 基片工艺资料只列出 pass-through TSV、die-to-die TSV 和 hybrid bonding 接口，没有尺寸和 KOZ 数值，要以 PDK 为准</td>
+<td><a href="https://www.intel.com/content/www/us/en/foundry/process/18a.html" target="_blank" rel="noopener noreferrer">Intel 18A 工艺页面</a></td>
+</tr>
+<tr>
+<td>Microbump 加 underfill</td>
+<td>摘要未给出</td>
+<td>背面 microbump 的应力穿过减薄的 Si 作用到器件，imec 测到 FET 电流漂移超过 40%。bump 下方同样需要禁区</td>
+<td><a href="https://independent.academia.edu/ChoiMunkang" target="_blank" rel="noopener noreferrer">Ivankovic 等 3DIC 2011（摘要）</a></td>
+</tr>
+</tbody>
+</table></div>
+<h3>减薄本身带来的两个全局代价</h3>
+<ul>
+<li><strong>散热变差。</strong> Si 的热导率约 140 W/(m·K)，SiO₂ 约 1.4。衬底被减薄或去掉后横向散热变差，imec 仿真得到背面供电的峰值温度比正面供电高约 14 °C；另一组仿真显示 Si 薄于 300 nm 后自热明显加重。来源：<a href="https://semiengineering.com/backside-power-delivery-creates-fab-tool-thermal-dissipation-barriers/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a>。</li>
+<li><strong>依赖衬底的器件变弱。</strong> imec 把 Si 从 700 µm 减薄到 300 nm 后，ESD 器件的失效电流 It2 下降 20–40%，其中 STI 二极管在 100 ns TLP 下下降约 36%。来源：<a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec，IEDM 2023 结果</a>。</li>
+</ul>
+<h2 id="gaa-analog">GAA 下 analog 器件要关注的特性</h2>
+<p>从公开数据看，GAA 本身对 analog 是利好：增益更高，1/f 噪声更低，对衬底噪声更不敏感。要重点盯的是四件事：应力响应与 FinFET 不同、自热更重、依赖衬底的器件在减薄后变弱、版图相关效应更强。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>GAA 下的公开结论</th>
+<th>叠加 3D 后要注意</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应力响应</td>
+<td>Nanosheet 的导电面以 (100) 为主，空穴迁移率在这个面上较低；sheet 越宽，(110) 侧面的贡献越大。TCAD 显示 TSV 应力引起的 Ion 变化，NSFET 大于 FinFET</td>
+<td>FinFET 的 KOZ 数据不能直接沿用。TSV 应力还要叠加背面金属、背面接触和整片减薄带来的应力</td>
+<td><a href="https://www.mdpi.com/2079-9292/11/21/3589" target="_blank" rel="noopener noreferrer">Mukesh 与 Zhang 2022</a>；<a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong 等 2021（摘要）</a></td>
+</tr>
+<tr>
+<td>匹配</td>
+<td>随机失配的来源是线边缘粗糙度、栅边缘粗糙度、功函数金属沉积不均匀和随机掺杂涨落；sheet 厚度由外延决定，均匀性好。另有研究指出各层 sheet 之间金属厚度的差异会带来明显的 VT 涨落</td>
+<td>TSV 应力场有梯度，而且方位不同符号相反，会叠加成系统失配。这一项不随器件面积增大而平均掉</td>
+<td><a href="https://www.mdpi.com/2079-9292/11/21/3589" target="_blank" rel="noopener noreferrer">Mukesh 与 Zhang 2022</a>；<a href="https://www.researchgate.net/publication/335194719_Threshold_Voltage_Variability_in_Nanosheet_GAA_Transistors" target="_blank" rel="noopener noreferrer">TED 2019（摘要）</a></td>
+</tr>
+<tr>
+<td>增益与效率</td>
+<td>imec 的双层 nanosheet nMOS 本征增益约 46 dB，同条件下 FinFET 约 34 dB；增益随 L 增大，到 200 °C 变化很小。gm/ID 在弱反型最高，fT 在强反型最高，折中点在反型系数约 10 处。存在明确的零温度系数偏置点</td>
+<td>应力改变迁移率，偏置点、gm 和电流镜比例随之漂移，增益本身受影响较小</td>
+<td><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen 等 JICS 2022</a></td>
+</tr>
+<tr>
+<td>低频噪声</td>
+<td>1/f 噪声由载流子数涨落主导，也就是栅氧陷阱的俘获与释放；归一化后的噪声水平优于 FinFET 和其他结构。功函数金属的选择会改变陷阱密度</td>
+<td>自热抬高沟道温度，热噪声随之上升；TSV 的衬底耦合是另一条噪声注入路径</td>
+<td><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen 等 JICS 2022</a></td>
+</tr>
+<tr>
+<td>自热</td>
+<td>堆叠结构散热困难：sheet 层数越多、越宽，温升越高，层间温差越大。沟道长度小于 10 nm 时温升可超过 100 K。按自热修正后，HCD 寿命终点的 Idsat 漂移会变化 10–35%</td>
+<td>Si 薄于 300 nm 后自热加重，仿真显示背面供电的峰值温度比正面供电高约 14 °C。匹配对上的温度梯度会直接变成失配（这一句是推断）</td>
+<td><a href="https://www.mdpi.com/2072-666X/16/3/311" target="_blank" rel="noopener noreferrer">Zhou 2025</a>；<a href="https://semiengineering.com/backside-power-delivery-creates-fab-tool-thermal-dissipation-barriers/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>依赖衬底的器件</td>
+<td>ESD 二极管和 GGNMOS 靠厚衬底泄放电流和散热。Si 减薄到 300 nm 后 It2 下降 20–40%；STI 二极管最差，gated 二极管较轻，靠沟道导通的 power-rail clamp 受影响最小</td>
+<td>imec 提出把阳极移到背面的垂直二极管，版图面积减少 67%，电流更均匀</td>
+<td><a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec 2024</a>；<a href="https://www.esda.org/news/gaa-technology-navigating-future-esd-challenges-in-mass-production-1/" target="_blank" rel="noopener noreferrer">ESDA 2025</a></td>
+</tr>
+<tr>
+<td>衬底噪声隔离</td>
+<td>FinFET 的体跨导很小，TSV 到器件的耦合在 1 GHz 比 planar 低约 20 dB，在 40 GHz 低 4–8 dB，剩下的主要是到 drain 的电容耦合。TCAD 显示 NSFET 的 back-bias 耦合比 FinFET 更小</td>
+<td>Bottom dielectric isolation 能切断 sheet 下方的寄生通道，隔离最好。快沿信号 TSV 仍要远离高阻节点</td>
+<td><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack 等 ECTC 2015</a>；<a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong 等 2021（摘要）</a></td>
+</tr>
+<tr>
+<td>寄生与版图相关效应</td>
+<td>Nanosheet 的 LDE 必须进入 analog 仿真。Synopsys 的基准显示，忽略先进节点的 LDE 时串联电阻误差可达 140%，总电容误差可达 25%（厂商数据，未经独立验证）</td>
+<td>TSV 对 10 µm 内的走线有额外耦合电容，要进寄生提取</td>
+<td><a href="https://www.synopsys.com/blogs/chip-design/overcoming-analog-circuit-design-challenges-at-advanced-semiconductor-nodes.html" target="_blank" rel="noopener noreferrer">Synopsys</a>；<a href="https://e3da.csce.uark.edu/pub/doc/2014/Y.Peng-Conf.ACM.DAC-2014.pdf" target="_blank" rel="noopener noreferrer">Peng 等 DAC 2014</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>imec 的 analog 数据来自 sub-7 nm 研究器件（双层 sheet，L 为 28–200 nm），不是量产 PDK 器件，数值只能看趋势。</p>
+<h2 id="metrology">量测方法</h2>
+<p>定 KOZ 最可靠的依据是器件电学响应，不是应力图。应力计量用来校准仿真，器件和电路级的测试结构用来定规则。</p>
+<h3>应力与形变</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>量什么</th>
+<th>能力</th>
+<th>局限</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Micro-Raman</td>
+<td>TSV 周围 Si 近表面的应力分布</td>
+<td>光斑约 0.8 µm，探测深度约 200 nm（442 nm 激光），分辨约 10 MPa；实验室可做</td>
+<td>只能得到径向与切向应力之和，分不开单个分量；紧靠 TSV 界面处信号变差；需要一个假定无应力的参考点</td>
+<td><a href="https://sites.utexas.edu/ruihuang/files/2021/03/JAP10.pdf" target="_blank" rel="noopener noreferrer">Ryu 等 JAP 2012</a></td>
+</tr>
+<tr>
+<td>同步辐射 X 射线微衍射</td>
+<td>Cu TSV 内部和周围 Si 的应力</td>
+<td>完整应力张量，可分深度；能穿透数百 µm 的 Si，不用切片；可以在 150 °C 下原位测</td>
+<td>要排同步辐射机时，不适合常规监控</td>
+<td><a href="https://www.nist.gov/publications/non-destructive-measurement-residual-stresses-copper-through-silicon-vias-using" target="_blank" rel="noopener noreferrer">Okoro 等 TED 2014</a>；<a href="https://bakirlab.ece.gatech.edu/papers/Experimental%20stress%20characterization%20and%20numerical%20simulation%20for%20copper%20pumping%20analysis%20of%20through%20silicon%20vias%20(Invited).pdf" target="_blank" rel="noopener noreferrer">Liu 等 CPMT 2016</a></td>
+</tr>
+<tr>
+<td>TEM 纳米束或旋进电子衍射</td>
+<td>沟道和 S/D 内部的应变</td>
+<td>nm 级空间分辨，应变精度优于 0.1%</td>
+<td>破坏性；imec 在已释放的 GAA 纳米线上专门报告过这种方法的困难和局限</td>
+<td><a href="http://static.asminternational.org/EDFA/201908/27/" target="_blank" rel="noopener noreferrer">EDFA 2019</a>；<a href="https://imec-publications.be/entities/publication/16247de4-20a9-4d33-9073-8badaabcbf55/full" target="_blank" rel="noopener noreferrer">Favia 等 IMC19 2018</a></td>
+</tr>
+<tr>
+<td>Cu pumping 高度与 M1 电阻</td>
+<td>TSV 顶面及其上介质层的凸起；TSV 上方 M1 的电阻变化</td>
+<td>直接对应后段风险；M1 电阻可在线电测</td>
+<td>只反映轴向挤出，不反映前段应力</td>
+<td><a href="https://bakirlab.ece.gatech.edu/papers/Experimental%20stress%20characterization%20and%20numerical%20simulation%20for%20copper%20pumping%20analysis%20of%20through%20silicon%20vias%20(Invited).pdf" target="_blank" rel="noopener noreferrer">Liu 等 CPMT 2016</a>；<a href="https://www.academia.edu/15694992/Analysis_of_Copper_Plasticity_Impact_in_TSV_middle_and_Backside_TSV_last_Fabrication_Processes" target="_blank" rel="noopener noreferrer">Guo 等 ECTC 2015</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Raman 有一个容易被忽略的问题：它只给出径向与切向应力之和，而这两个分量大小相近、符号相反，大部分相互抵消。所以 Raman 图上数值小，不代表器件感受到的单个应力分量小（这是根据测量原理做的判断）。</p>
+<h3>器件与电路</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>量什么</th>
+<th>做法要点</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>距离阶梯测试结构</td>
+<td>Idsat 随到 TSV 距离的变化</td>
+<td>同一器件放在多个距离上（imec 用 1.7–20.7 µm），并做单根、成排、矩阵几种 TSV 排布；拟合出品质因子 K</td>
+<td><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010</a>；<a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo 等 IEDM 2013</a></td>
+</tr>
+<tr>
+<td>四点弯曲</td>
+<td>器件本身的压阻系数</td>
+<td>对晶圆条施加已知单轴应力，测电流变化。得到系数后可以脱离 TSV 预测任意版图，也能验证 TCAD</td>
+<td><a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo 等 IEDM 2013</a></td>
+</tr>
+<tr>
+<td>DAC 或电流源阵列</td>
+<td>电路级的电流失配</td>
+<td>imec 用 45 nm 的 DAC 测试芯片把 0.5% 的变化分辨出来；适合直接用 analog 的判据定 KOZ</td>
+<td><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010</a>；<a href="https://semiengineering.com/stressing-over-3d/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>TSV 旁的 well 电阻</td>
+<td>邻近效应的灵敏度</td>
+<td>Sony 在 6 µm pitch 的 TSV 旁放 Si well 电阻来测</td>
+<td><a href="https://semiengineering.com/whats-next-for-tsvs/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>双端口 S 参数</td>
+<td>TSV 到器件的噪声耦合</td>
+<td>VNA 测 TSV 到 drain，最高 40 GHz；扫 TSV 偏压（−15 到 10 V）和器件开关状态；对比 substrate contact 的距离</td>
+<td><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack 等 ECTC 2015</a></td>
+</tr>
+<tr>
+<td>TSV 的 C-V</td>
+<td>liner 电容与耗尽行为</td>
+<td>TSV、liner、Si 是 MOS 结构，电容随 TSV 电压变化；TSV 在地电位时电容最大，是耦合的最坏情况</td>
+<td><a href="https://e3da.csce.uark.edu/pub/doc/2013/Y.Peng-Conf.IEEE.ICCAD-2013.pdf" target="_blank" rel="noopener noreferrer">Peng 等 ICCAD 2013</a></td>
+</tr>
+<tr>
+<td>低频噪声</td>
+<td>1/f 噪声谱与栅氧陷阱密度</td>
+<td>片上测试，参数分析仪加低频噪声分析仪，每片至少 5 个器件；用归一化电流噪声与 (gm/ID)² 的关系判断机制，用 10 Hz 处的输入参考噪声提取陷阱密度</td>
+<td><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen 等 JICS 2022</a></td>
+</tr>
+<tr>
+<td>栅电阻测温</td>
+<td>自热温升与热阻</td>
+<td>四端栅结构；先在控温台上标定栅金属的电阻温度系数，再用几十 mV 的探测电压在工作状态下读温度。测到的是栅金属的平均温度，可能低于沟道峰值</td>
+<td><a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932168" target="_blank" rel="noopener noreferrer">NIST</a>（方法说明以 GaN HEMT 为例）</td>
+</tr>
+<tr>
+<td>TLP 与 VF-TLP</td>
+<td>ESD 器件的失效电流 It2</td>
+<td>100 ns TLP 对应 HBM，VF-TLP 对应 CDM；对比减薄前后</td>
+<td><a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec 2024</a></td>
+</tr>
+<tr>
+<td>TSV 旁的可靠性测试</td>
+<td>BTI、HCI、栅氧击穿；后段 TDDB、EM、SM</td>
+<td>在 25 °C 和 125 °C 下做电压斜坡和恒压应力，并为 TSV 上方的低层金属和 via 设计专门结构</td>
+<td><a href="https://ieeexplore.ieee.org/document/8421432/" target="_blank" rel="noopener noreferrer">14 nm FinFET 研究（摘要）</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>自热量测还有一点要注意：有<a href="https://www.sciencedirect.com/science/article/abs/pii/S0038110125001200" target="_blank" rel="noopener noreferrer">文献</a>（只读到摘要）指出，先进器件的热时间常数太小，脉冲 IV 和 AC 电导法已不够准，适用的是栅电阻法和 RF 法；同时四端栅结构本身会改变散热路径和串联电阻，提取时要把版图差异考虑进去。</p>
+<h2 id="approach">建议的做法</h2>
+<p>以下是基于上面文献给出的建议，不是某一篇文献的结论。核心思路是：用器件自己的应力响应加距离阶梯数据拟合出 K，再按每类电路允许的漂移量反推 KOZ。</p>
+<ol>
+<li><strong>把 KOZ 拆成三条规则分别定。</strong> 前段应力 KOZ 按器件类别给（digital、一般 analog、精密匹配）；噪声 KOZ 按 TSV 类型给，快沿信号 TSV 比电源和地 TSV 严；后段的 via 与走线规则单列。</li>
+<li><strong>先测 GAA analog 器件自己的压阻系数。</strong> 用四点弯曲，覆盖 n 和 p、长短 L、不同 sheet 宽度。导电晶面和 FinFET 不同，系数不能沿用。</li>
+<li><strong>用距离阶梯结构拟合 K。</strong> TSV 排布覆盖单根、成排和产品实际 pitch 的阵列；器件方位覆盖沟道指向 TSV 和垂直于 TSV 两种；参考器件放在距阵列 200 µm 以外。</li>
+<li><strong>匹配对单独验证。</strong> 把匹配对做成相对 TSV 等距同方位和不对称两种摆法，比较平均偏移。样本量要足够把系统偏移从随机失配里分出来。</li>
+<li><strong>条件覆盖温度、寿命和封装。</strong> 应力大小取决于与无应力参考温度的温差，所以要测高低温；热循环后复测；堆叠和封装后再测一次，因为 microbump 的影响可以比 TSV 还大。</li>
+<li><strong>噪声耦合用 S 参数结构定。</strong> 分组对比 substrate contact 距离、有无 guard ring、有无 bottom dielectric isolation。</li>
+<li><strong>依赖衬底的器件列为单独的验证项。</strong> ESD 二极管和 GGNMOS 用 TLP 对比减薄前后；bandgap 用的二极管或 BJT、well 电阻也做同样的对比。</li>
+<li><strong>关键 analog 器件加四端栅结构测自热。</strong> 对比减薄前后和堆叠前后的热阻。</li>
+</ol>
+<h3>KOZ 判据怎么定</h3>
+<p>从电路指标倒推。先确定某类电路能分给 TSV 的系统失配预算，比如电流镜允许 0.5% 的电流偏差；再用实测的 K 算出单根 TSV 的半径；阵列旁按叠加效应放大，并留出热循环和个体差异的余量。对精密匹配电路，对称摆放比单纯拉大距离更省面积。</p>
+<h2 id="gaps">公开资料没有覆盖的点</h2>
+<p>下面几项在公开文献里没有找到数据，需要以 PDK 或实测为准。</p>
+<ul>
+<li><strong>GAA 器件在 TSV 旁的硅片数据。</strong> 找到的只有 TCAD 结果；实测数据最新到 FinFET。</li>
+<li><strong>Pass-through TSV 和 die-to-die TSV 的尺寸与 KOZ 数值。</strong> 公开的工艺页面没有给出。</li>
+<li><strong>Hybrid bonding pad 对前段器件的影响。</strong> 没有找到公开的 KOZ 数据。</li>
+<li><strong>Bandgap 用的二极管和 BJT、温度传感器、well 电阻在衬底减薄后的变化。</strong> 公开数据只覆盖 ESD 器件。这几类器件同样依赖衬底，推断会有类似的退化，但没有数据支持。</li>
+<li><strong>背面直连给 GAA 沟道增加应力的结论。</strong> 来自 Lam 的虚拟工艺仿真，不是硅片结果。</li>
+</ul>
+<h2 id="sources">Sources</h2>
+<p>已打开原文或记录页的：</p>
+<ul>
+<li><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">IEDM 2010：imec 的 TSV 应力研究报道</a>，Semiconductor Digest</li>
+<li><a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo 等，Copper through silicon via induced keep out zone for 10nm node bulk FinFET CMOS technology</a>，IEDM 2013</li>
+<li><a href="https://www.academia.edu/15694992/Analysis_of_Copper_Plasticity_Impact_in_TSV_middle_and_Backside_TSV_last_Fabrication_Processes" target="_blank" rel="noopener noreferrer">Guo 等，Analysis of Copper Plasticity Impact in TSV-middle and Backside TSV-last Fabrication Processes</a>，ECTC 2015</li>
+<li><a href="https://www.academia.edu/145707794/Effect_of_Thermal_Stresses_on_Carrier_Mobility_and_Keep_Out_Zone_Around_Through_Silicon_Vias_for_3_D_Integration" target="_blank" rel="noopener noreferrer">Lu 等，Effect of Thermal Stresses on Carrier Mobility and Keep-Out Zone Around Through-Silicon Vias</a>，IEEE TDMR 2012</li>
+<li><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack 等，Noise coupling between TSVs and active devices: Planar nMOSFETs vs. nFinFETs</a>，ECTC 2015</li>
+<li><a href="https://koasas.kaist.ac.kr/handle/10203/98712?mode=full" target="_blank" rel="noopener noreferrer">Cho 等，Modeling and Analysis of TSV Noise Coupling and Suppression Using a Guard Ring</a>，IEEE CPMT 2011</li>
+<li><a href="https://e3da.csce.uark.edu/pub/doc/2014/Y.Peng-Conf.ACM.DAC-2014.pdf" target="_blank" rel="noopener noreferrer">Peng 等，TSV-to-Wire Coupling</a>，DAC 2014；<a href="https://e3da.csce.uark.edu/pub/doc/2013/Y.Peng-Conf.IEEE.ICCAD-2013.pdf" target="_blank" rel="noopener noreferrer">Peng 等，TSV-to-TSV Coupling</a>，ICCAD 2013</li>
+<li><a href="https://patents.google.com/patent/US10199315" target="_blank" rel="noopener noreferrer">GlobalFoundries，Post zero via layer keep out zone over through silicon via reducing BEOL pumping effects</a>，US10199315</li>
+<li><a href="https://www.nist.gov/publications/x-ray-micro-beam-diffraction-measurement-effect-thermal-cycling-stress-cu-tsv" target="_blank" rel="noopener noreferrer">Okoro 等，X-Ray Micro-Beam Diffraction Measurement of the Effect of Thermal Cycling on Stress in Cu TSV</a>，ECTC 2014；<a href="https://www.nist.gov/publications/non-destructive-measurement-residual-stresses-copper-through-silicon-vias-using" target="_blank" rel="noopener noreferrer">Okoro 等，Non-destructive Measurement of the Residual Stresses in Copper TSVs</a>，IEEE TED 2014</li>
+<li><a href="https://sites.utexas.edu/ruihuang/files/2021/03/JAP10.pdf" target="_blank" rel="noopener noreferrer">Ryu 等，Micro-Raman spectroscopy and analysis of near-surface stresses in silicon around TSVs</a>，JAP 2012</li>
+<li><a href="https://bakirlab.ece.gatech.edu/papers/Experimental%20stress%20characterization%20and%20numerical%20simulation%20for%20copper%20pumping%20analysis%20of%20through%20silicon%20vias%20(Invited).pdf" target="_blank" rel="noopener noreferrer">Liu 等，Experimental stress characterization and numerical simulation for copper pumping analysis of TSVs</a>，IEEE CPMT 2016</li>
+<li><a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec，How to protect advanced CMOS technologies with thin Si substrates against ESD events</a>，2024</li>
+<li><a href="https://www.imec-int.com/en/articles/imec-demonstrates-critical-building-blocks-backside-power-delivery-network" target="_blank" rel="noopener noreferrer">imec，Critical building blocks for a backside power delivery network</a>，2021</li>
+<li><a href="https://www.esda.org/news/gaa-technology-navigating-future-esd-challenges-in-mass-production-1/" target="_blank" rel="noopener noreferrer">Chen，GAA Technology: Navigating Future ESD Challenges in Mass Production</a>，ESDA 2025</li>
+<li><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen 等，Performance Perspective of Gate-All-Around Double Nanosheet CMOS Beyond High-Speed Logic Applications</a>，JICS 2022</li>
+<li><a href="https://www.mdpi.com/2079-9292/11/21/3589" target="_blank" rel="noopener noreferrer">Mukesh 与 Zhang，A Review of the Gate-All-Around Nanosheet FET Process Opportunities</a>，Electronics 2022</li>
+<li><a href="https://www.mdpi.com/2072-666X/16/3/311" target="_blank" rel="noopener noreferrer">Zhou，An Overview of Hot Carrier Degradation on Gate-All-Around Nanosheet Transistors</a>，Micromachines 2025</li>
+<li>Semiconductor Engineering：<a href="https://semiengineering.com/whats-next-for-tsvs/" target="_blank" rel="noopener noreferrer">What's Next For Through-Silicon Vias</a>、<a href="https://semiengineering.com/backside-power-delivery-nears-production/" target="_blank" rel="noopener noreferrer">Backside Power Delivery Nears Production</a>、<a href="https://semiengineering.com/backside-power-delivery-creates-fab-tool-thermal-dissipation-barriers/" target="_blank" rel="noopener noreferrer">Backside Power Delivery Creates Fab Tool, Thermal Dissipation Barriers</a>、<a href="https://semiengineering.com/stressing-over-3d/" target="_blank" rel="noopener noreferrer">Stressing Over 3D</a></li>
+<li><a href="https://www.intel.com/content/www/us/en/foundry/process/18a.html" target="_blank" rel="noopener noreferrer">Intel 18A 工艺页面</a></li>
+<li><a href="https://www.synopsys.com/blogs/chip-design/overcoming-analog-circuit-design-challenges-at-advanced-semiconductor-nodes.html" target="_blank" rel="noopener noreferrer">Synopsys，Overcoming Analog Circuit Design Challenges at Advanced Semiconductor Nodes</a></li>
+<li><a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932168" target="_blank" rel="noopener noreferrer">NIST，Gate resistance thermometry: An electrical thermal characterization technique</a></li>
+<li><a href="http://static.asminternational.org/EDFA/201908/27/" target="_blank" rel="noopener noreferrer">EDFA 2019 年 8 月刊，旋进电子衍射应变测量</a></li>
+</ul>
+<p>原文无法打开、只读到摘要或题录的：</p>
+<ul>
+<li><a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong 等，Analysis of TSV-Induced Mechanical Stress and Electrical Noise Coupling in Sub 5-nm Node Nanosheet FETs</a>，IEEE Access 2021</li>
+<li><a href="https://ieeexplore.ieee.org/document/8421432/" target="_blank" rel="noopener noreferrer">Comprehensive 3D TSV Reliability Study on 14nm FINFET Technology with Thinned Wafers</a>，IEEE</li>
+<li><a href="https://imec-publications.be/handle/20.500.12860/20852" target="_blank" rel="noopener noreferrer">Ivankovic 等，Analysis of microbump induced stress effects in 3D stacked IC technologies</a>，3DIC 2011</li>
+<li><a href="https://www.researchgate.net/publication/335194719_Threshold_Voltage_Variability_in_Nanosheet_GAA_Transistors" target="_blank" rel="noopener noreferrer">Threshold Voltage Variability in Nanosheet GAA Transistors</a>，IEEE TED 2019</li>
+<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0038110125001200" target="_blank" rel="noopener noreferrer">Impact of Device Layout on Self-Heating Extraction in MOSFETs</a>，Solid-State Electronics 2025</li>
+<li><a href="https://imec-publications.be/entities/publication/16247de4-20a9-4d33-9073-8badaabcbf55/full" target="_blank" rel="noopener noreferrer">Favia 等，Nanobeam diffraction strain analysis of released Ge gate-all-around nano-wires</a>，IMC19 2018</li>
+</ul>
+<p class="note">本文只使用公开文献、公开文章和专利。器件与工艺数值来自各文献的研究器件，量产工艺请以对应 PDK 为准。标注“推断”或“建议”的部分是整理者的判断。</p>
+</main></div>
+<footer><span>TIMEMEMO RESEARCH · 2026.10.07</span><a href="/research/">返回半导体研究</a></footer>
+</body></html>
