@@ -1,24 +1,26 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="referrer" content="no-referrer">
-<title>3D IC 的 TSV KOZ 与 GAA Analog 器件｜TIMEMEMO RESEARCH</title>
-<meta name="description" content="TSV keep-out zone 的成因与公开数据、GAA 工艺下 analog 器件的敏感特性，以及对应的量测方法。基于公开文献，2026 年 10 月。">
+<title>3D IC 的 TSV KOZ 与 GAA Analog 器件 · TSV Keep-Out Zones & GAA Analog｜TIMEMEMO RESEARCH</title>
+<meta name="description" content="TSV keep-out zones, GAA analog device behavior and measurement methods, from public literature. 双语研究笔记，2026 年 10 月。">
 <link rel="icon" href="/assets/home/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--paper:#fcfbf7;--white:#fff;--ink:#183437;--text:#283f42;--muted:#52696b;--rule:#d3ddda;--teal:#166b61;--mint:#edf4f0;--axis:#7f9792;--grid:#c9d5d1;--accent:#2563c9;--warn:#c9821b;--tint:#e3e9e6}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}
 body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans','Noto Sans SC',sans-serif;font-size:16px;line-height:1.85}
-a{color:var(--teal);text-underline-offset:4px}a:focus-visible,.table-scroll:focus-visible{outline:3px solid #bc7c27;outline-offset:4px}
+body[data-language=zh] .en,body[data-language=en] .zh{display:none!important}
+a{color:var(--teal);text-underline-offset:4px}a:focus-visible,button:focus-visible,.table-scroll:focus-visible{outline:3px solid #bc7c27;outline-offset:4px}
 .skip{position:fixed;top:-80px;left:20px;z-index:100;background:#fff;padding:12px}.skip:focus{top:8px}
 .top{height:72px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 4.3vw;background:var(--paper);position:sticky;top:0;z-index:10}
 .brand{text-decoration:none;font-weight:700;letter-spacing:.12em;color:var(--ink);font-size:16px}.brand>span{font-size:11px;letter-spacing:.16em;border-left:1px solid #8aa39c;margin-left:15px;padding-left:16px;font-weight:500}
-.top nav{display:flex;gap:22px;font-size:13px}.top nav a{color:var(--ink)}
+.controls{display:flex;align-items:center;gap:22px;font-size:13px}.controls>a{color:var(--ink)}
+.languages{display:flex;border:1px solid #a9bdb6;border-radius:4px;padding:3px;gap:2px}.languages button{border:0;background:transparent;padding:4px 12px;font:inherit;font-size:13px;border-radius:2px;color:var(--ink);cursor:pointer}.languages button[aria-pressed=true]{background:var(--ink);color:#fff}
 .hero{max-width:1400px;margin:auto;padding:56px 4.3vw 0}.eyebrow{color:var(--teal);font-size:12px;font-weight:600;letter-spacing:.14em}
 h1{font-family:Georgia,'Noto Sans SC',serif;font-size:clamp(34px,4.4vw,64px);letter-spacing:-.025em;line-height:1.2;font-weight:600;color:var(--ink);margin:24px 0 22px}
 .dek{max-width:860px;font-size:19px;line-height:1.8;color:var(--muted);margin:0 0 40px}
 .hero-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:11px;letter-spacing:.06em;border-top:2px solid var(--ink);padding:16px 0}
 .layout{max-width:1400px;margin:auto;padding:0 4.3vw;display:grid;grid-template-columns:170px minmax(0,1fr);gap:56px}
-.contents{position:sticky;top:100px;align-self:start;padding:34px 0;display:flex;flex-direction:column;gap:6px}
-.contents>span{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-bottom:6px}
+.contents{position:sticky;top:100px;align-self:start;padding:34px 0}.contents>div{display:flex;flex-direction:column;gap:6px}
+.contents .label{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-bottom:12px;display:block}
 .contents a{text-decoration:none;color:var(--ink);font-size:13px;line-height:1.5;display:flex;gap:10px}.contents small{color:var(--muted);font-size:10px;padding-top:2px}
 main{min-width:0;max-width:980px;padding:24px 0 80px}
 h2{font-size:27px;line-height:1.35;color:var(--ink);margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--rule)}
@@ -29,17 +31,17 @@ th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px sol
 .diagram{margin:22px 0 12px;padding:16px;border:1px solid var(--rule);border-radius:6px;background:var(--white)}.diagram svg{display:block;width:100%;height:auto}
 .note{font-size:13px;color:var(--muted);border-left:3px solid var(--teal);padding:4px 0 4px 14px;margin:30px 0 0}
 footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}.contents{display:none}.top nav{display:none}.dek{font-size:17px}h2{font-size:23px}}
+@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}.contents{display:none}.controls>a{display:none}.dek{font-size:17px}h2{font-size:23px}}
 @media print{.top,.contents{display:none}.layout{display:block}body{font-size:12px}}
-</style></head><body>
-<a class="skip" href="#main">跳至正文</a>
-<header class="top"><a class="brand" href="/research/">TIMEMEMO <span>RESEARCH</span></a><nav aria-label="站内导航"><a href="/research/">半导体研究</a><a href="/#directory">全部内容</a></nav></header>
-<div class="hero"><div class="eyebrow">器件与先进封装 / 2026.10.07</div>
-<h1>3D IC 的 TSV KOZ<br>与 GAA Analog 器件</h1>
-<p class="dek">KOZ 不是一个固定的禁区半径。它由热机械应力、衬底噪声耦合、TSV 对走线的耦合和 Cu pumping 四种机制分别决定，前段器件和后段金属的规则不同；analog 的判据比 digital 严一个量级，KOZ 通常是 digital 的 3 倍以上。</p>
-<div class="hero-bottom"><span>范围：TSV KOZ · GAA ANALOG · 量测方法</span><span>33 项来源 · 基于公开文献</span></div></div>
-<div class="layout"><nav class="contents" aria-label="报告目录"><span>报告目录</span><a href="#mechanisms"><small>01</small>KOZ 由什么决定</a><a href="#cross-section"><small>02</small>TSV 剖面上的影响区</a><a href="#data"><small>03</small>公开数据里的 KOZ 量级</a><a href="#structures"><small>04</small>不同 3D 结构下的差别</a><a href="#gaa-analog"><small>05</small>GAA 下 analog 器件要关注的特性</a><a href="#metrology"><small>06</small>量测方法</a><a href="#approach"><small>07</small>建议的做法</a><a href="#gaps"><small>08</small>公开资料没有覆盖的点</a><a href="#sources"><small>09</small>Sources</a></nav>
-<main id="main"><h2 id="mechanisms">KOZ 由什么决定</h2>
+</style></head><body data-language="zh">
+<a class="skip" href="#main"><span><span class="zh" lang="zh-CN">跳至正文</span><span class="en" lang="en">Skip to report</span></span></a>
+<header class="top"><a class="brand" href="/research/">TIMEMEMO <span>RESEARCH</span></a><div class="controls"><a href="/research/"><span><span class="zh" lang="zh-CN">半导体研究</span><span class="en" lang="en">Semiconductor research</span></span></a><a href="/#directory"><span><span class="zh" lang="zh-CN">全部内容</span><span class="en" lang="en">All entries</span></span></a><div class="languages" role="group" aria-label="Language"><button id="langZh" type="button" aria-pressed="true">中文</button><button id="langEn" type="button" aria-pressed="false">EN</button></div></div></header>
+<div class="hero"><div class="eyebrow"><span><span class="zh" lang="zh-CN">器件与先进封装</span><span class="en" lang="en">DEVICES &amp; ADVANCED PACKAGING</span></span> / 2026.10.07</div>
+<h1><span class="zh" lang="zh-CN">3D IC 的 TSV KOZ<br>与 GAA Analog 器件</span><span class="en" lang="en">TSV keep-out zones<br>&amp; GAA analog devices</span></h1>
+<p class="dek"><span class="zh" lang="zh-CN">KOZ 不是一个固定的禁区半径。它由热机械应力、衬底噪声耦合、TSV 对走线的耦合和 Cu pumping 四种机制分别决定，前段器件和后段金属的规则不同；analog 的判据比 digital 严一个量级，KOZ 通常是 digital 的 3 倍以上。</span><span class="en" lang="en">A keep-out zone is not one fixed radius. Thermo-mechanical stress, substrate noise coupling, TSV-to-wire coupling and Cu pumping each set their own limits, with different rules for front-end devices and back-end metal. Analog criteria are ten times tighter than digital, so analog KOZs are usually at least three times larger.</span></p>
+<div class="hero-bottom"><span><span class="zh" lang="zh-CN">范围：TSV KOZ · GAA ANALOG · 量测方法</span><span class="en" lang="en">SCOPE: TSV KOZ · GAA ANALOG · METROLOGY</span></span><span><span class="zh" lang="zh-CN">33 项来源 · 基于公开文献</span><span class="en" lang="en">33 SOURCES · PUBLIC LITERATURE</span></span></div></div>
+<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">报告目录</span><a href="#mechanisms"><small>01</small>KOZ 由什么决定</a><a href="#cross-section"><small>02</small>TSV 剖面上的影响区</a><a href="#data"><small>03</small>公开数据里的 KOZ 量级</a><a href="#structures"><small>04</small>不同 3D 结构下的差别</a><a href="#gaa-analog"><small>05</small>GAA 下 analog 器件要关注的特性</a><a href="#metrology"><small>06</small>量测方法</a><a href="#approach"><small>07</small>建议的做法</a><a href="#gaps"><small>08</small>公开资料没有覆盖的点</a><a href="#sources"><small>09</small>Sources</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#mechanisms-en"><small>01</small>What sets the KOZ</a><a href="#cross-section-en"><small>02</small>Zones in a TSV cross-section</a><a href="#data-en"><small>03</small>KOZ sizes in published data</a><a href="#structures-en"><small>04</small>How 3D structures differ</a><a href="#gaa-analog-en"><small>05</small>Analog device behavior in GAA</a><a href="#metrology-en"><small>06</small>Measurement methods</a><a href="#approach-en"><small>07</small>Recommended approach</a><a href="#gaps-en"><small>08</small>Gaps in public data</a><a href="#sources-en"><small>09</small>Sources</a></div></nav>
+<main id="main"><div class="zh" lang="zh-CN"><h2 id="mechanisms">KOZ 由什么决定</h2>
 <p>KOZ 的本意是 TSV 周围不放有源器件的区域，针对的是前段；后段金属并不整体禁用，只是 TSV 正上方和紧邻处有单独的 via 与走线规则。KOZ 的大小也不是工艺常数，而是由机制、器件类型和允许的漂移量共同决定。</p>
 <div class="table-scroll" tabindex="0"><table>
 <thead>
@@ -96,7 +98,7 @@ footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:
 </ul>
 <h2 id="cross-section">TSV 剖面上的影响区</h2>
 <figure class="diagram"><svg viewBox="0 0 760 424" role="img" aria-label="TSV 周围有四类影响区，前段和后段分别受限" font-size="11.5" font-family="inherit">
-<defs><marker id="tsv-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--warn)"/></marker></defs>
+<defs><marker id="tsv-arrow-zh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--warn)"/></marker></defs>
 <text x="24" y="30" font-size="15" font-weight="600" fill="var(--ink)">TSV 周围有四类影响区，前段和后段分别受限</text>
 <text x="24" y="52" fill="var(--muted)">via-middle Cu TSV 剖面示意，不按比例</text>
 <rect x="40" y="76" width="680" height="120" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
@@ -124,7 +126,7 @@ footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:
 <text x="344" y="316" text-anchor="end" fill="var(--ink)">应力 KOZ，analog 判据 0.5%，半径约 3 倍</text>
 <text x="130" y="232" text-anchor="middle" fill="var(--muted)">analog 器件</text>
 <text x="241" y="232" text-anchor="middle" fill="var(--muted)">digital 器件</text>
-<path d="M412 330C560 330 670 310 670 222" fill="none" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#tsv-arrow)"/>
+<path d="M412 330C560 330 670 310 670 222" fill="none" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#tsv-arrow-zh)"/>
 <rect x="596" y="199" width="20" height="14" rx="2" fill="var(--tint)" stroke="var(--axis)" stroke-width="1.25"/>
 <text x="624" y="188" text-anchor="end" fill="var(--muted)">接地的 substrate contact</text>
 <text x="640" y="188" fill="var(--muted)">analog 器件</text>
@@ -516,8 +518,493 @@ footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:
 <li><a href="https://www.researchgate.net/publication/335194719_Threshold_Voltage_Variability_in_Nanosheet_GAA_Transistors" target="_blank" rel="noopener noreferrer">Threshold Voltage Variability in Nanosheet GAA Transistors</a>，IEEE TED 2019</li>
 <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0038110125001200" target="_blank" rel="noopener noreferrer">Impact of Device Layout on Self-Heating Extraction in MOSFETs</a>，Solid-State Electronics 2025</li>
 <li><a href="https://imec-publications.be/entities/publication/16247de4-20a9-4d33-9073-8badaabcbf55/full" target="_blank" rel="noopener noreferrer">Favia 等，Nanobeam diffraction strain analysis of released Ge gate-all-around nano-wires</a>，IMC19 2018</li>
+</ul></div><div class="en" lang="en"><h2 id="mechanisms-en">What sets the KOZ</h2>
+<p>A keep-out zone is the area around a TSV where no active devices are placed, so it applies to the front end. Back-end metal is not banned wholesale; only the area directly above the TSV and its immediate neighborhood carry separate via and routing rules. The size of a KOZ is not a process constant either: it depends on the mechanism, the device type and how much drift the circuit can tolerate.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mechanism</th>
+<th>Physical origin</th>
+<th>What it affects</th>
+<th>Range</th>
+<th>Common mitigations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thermo-mechanical stress</td>
+<td>Cu and Si CTE differ by about 7× (16.7 vs 2.3 ppm/°C); cooling after anneal leaves residual stress</td>
+<td>Front end: mobility, Id, gm; shows up as systematic mismatch in matched pairs</td>
+<td>Roughly 1/r² decay for a single TSV, a few µm to over 10 µm; farther once arrays superpose</td>
+<td>Smaller TSV diameter; array pitch/diameter above 5; place devices symmetrically relative to the TSV</td>
+</tr>
+<tr>
+<td>Substrate noise coupling</td>
+<td>TSV, liner and Si form a MOS capacitor; signals on the TSV modulate device body and drain through the substrate</td>
+<td>Front end: analog noise and current modulation</td>
+<td>Decays more slowly than stress; about 28 µm for planar devices at a 2% criterion</td>
+<td>Nearby grounded substrate contact (28 µm down to about 8 µm); guard ring (about −17 dB at 100 MHz); thick liner (about −20 dB at 100 MHz)</td>
+</tr>
+<tr>
+<td>TSV-to-wire coupling</td>
+<td>Capacitance between the TSV and nearby metal lines</td>
+<td>Back end: noise and delay on sensitive routes</td>
+<td>Mostly within 10 µm; negligible beyond 20 µm</td>
+<td>Routing-layer KOZ; grounded guard-ring wires</td>
+</tr>
+<tr>
+<td>Cu pumping</td>
+<td>At high temperature Cu extrudes axially, domes the TSV top and pushes up the layers above</td>
+<td>Back end: V0 stress voiding, M1 dishing, dielectric cracking and delamination</td>
+<td>Directly above the TSV and near its top corners</td>
+<td>No vias in several layers directly above the TSV; smaller diameter</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010 coverage</a>, <a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo et al. IEDM 2013</a>, <a href="https://www.academia.edu/145707794/Effect_of_Thermal_Stresses_on_Carrier_Mobility_and_Keep_Out_Zone_Around_Through_Silicon_Vias_for_3_D_Integration" target="_blank" rel="noopener noreferrer">Lu et al. TDMR 2012</a>, <a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack et al. ECTC 2015</a>, <a href="https://koasas.kaist.ac.kr/handle/10203/98712?mode=full" target="_blank" rel="noopener noreferrer">Cho et al. CPMT 2011</a>, <a href="https://e3da.csce.uark.edu/pub/doc/2014/Y.Peng-Conf.ACM.DAC-2014.pdf" target="_blank" rel="noopener noreferrer">Peng et al. DAC 2014</a>, <a href="https://patents.google.com/patent/US10199315" target="_blank" rel="noopener noreferrer">GlobalFoundries patent US10199315</a>.</p>
+<h3>Why the analog KOZ is larger</h3>
+<ul>
+<li><strong>The criterion is ten times tighter.</strong> imec uses a 5% Id change for digital and 0.5% for analog. With 1/r² decay, a 10× tighter criterion gives a radius about 3× larger and an area about 10× larger.</li>
+<li><strong>Long-channel devices are more sensitive.</strong> In short-channel devices, access resistance and short-channel effects make current less sensitive to mobility; the long-L devices common in analog behave the opposite way.</li>
+<li><strong>Matching depends on the gradient, not the absolute value.</strong> Around a TSV the radial stress is tensile and the tangential stress is compressive, similar in magnitude and opposite in sign. If the two devices of a pair sit at different orientations to the TSV, one current goes up while the other goes down.</li>
 </ul>
-<p class="note">本文只使用公开文献、公开文章和专利。器件与工艺数值来自各文献的研究器件，量产工艺请以对应 PDK 为准。标注“推断”或“建议”的部分是整理者的判断。</p>
+<h3>Two more reasons the KOZ is not a fixed number</h3>
+<ul>
+<li><strong>Array superposition.</strong> Below a pitch/diameter ratio of 5, stress fields of neighboring TSVs interact. Next to TSV arrays, imec found analog KOZs of 20–200 µm depending on how many TSVs the array held.</li>
+<li><strong>Change over lifetime and from via to via.</strong> NIST synchrotron X-ray measurements show principal and shear stress in Cu TSVs about 5× higher after 1,000 thermal cycles, and hydrostatic stress differing by about 50% between two neighboring TSVs (99±30 vs 151±37 MPa) because of microstructure. Both papers recommend building these variations into KOZ rules. Sources: <a href="https://www.nist.gov/publications/x-ray-micro-beam-diffraction-measurement-effect-thermal-cycling-stress-cu-tsv" target="_blank" rel="noopener noreferrer">Okoro et al. ECTC 2014</a>, <a href="https://www.nist.gov/publications/non-destructive-measurement-residual-stresses-copper-through-silicon-vias-using" target="_blank" rel="noopener noreferrer">Okoro et al. TED 2014</a>.</li>
+</ul>
+<h2 id="cross-section-en">Zones in a TSV cross-section</h2>
+<figure class="diagram"><svg viewBox="0 0 760 424" role="img" aria-label="Four zones of influence around a TSV, front end and back end" font-size="11.5" font-family="inherit">
+<defs><marker id="tsv-arrow-en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--warn)"/></marker></defs>
+<text x="24" y="30" font-size="15" font-weight="600" fill="var(--ink)">Four zones of influence around a TSV, front end and back end</text>
+<text x="24" y="52" fill="var(--muted)">Via-middle Cu TSV cross-section, not to scale</text>
+<rect x="40" y="76" width="680" height="120" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="52" y="96" font-weight="600" fill="var(--ink)">Back-end metal</text>
+<rect x="40" y="216" width="680" height="184" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="52" y="388" font-weight="600" fill="var(--ink)">Si substrate</text>
+<rect x="40" y="196" width="680" height="20" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<rect x='172' y='196' width='180' height='20' fill='var(--warn)' fill-opacity='0.14'/><rect x='408' y='196' width='180' height='20' fill='var(--warn)' fill-opacity='0.14'/><rect x='292' y='196' width='60' height='20' fill='var(--warn)' fill-opacity='0.3'/><rect x='408' y='196' width='60' height='20' fill='var(--warn)' fill-opacity='0.3'/>
+<text x="52" y="210" font-weight="600" fill="var(--ink)">FEOL</text>
+<rect x='110' y='199' width='40' height='14' rx='2' fill='none' stroke='var(--axis)' stroke-width='1.25'/><rect x='221' y='199' width='40' height='14' rx='2' fill='none' stroke='var(--axis)' stroke-width='1.25'/><rect x='650' y='199' width='40' height='14' rx='2' fill='none' stroke='var(--axis)' stroke-width='1.25'/>
+<rect x="348" y="196" width="64" height="204" fill="none" stroke="var(--axis)" stroke-width="1"/>
+<rect x="352" y="196" width="56" height="204" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)" stroke-width="2"/>
+<rect x="344" y="184" width="72" height="12" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="380" y="254" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Cu TSV</text>
+<rect x="352" y="96" width="56" height="88" fill="var(--warn)" fill-opacity="0.3" stroke="var(--warn)" stroke-width="1.25" stroke-dasharray="4 3"/>
+<text x="424" y="112" fill="var(--ink)">Cu pumping: no vias in</text>
+<text x="424" y="128" fill="var(--ink)">several layers above the TSV</text>
+<rect x="240" y="184" width="80" height="10" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<line x1="320" y1="189" x2="344" y2="189" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="328" y="156" text-anchor="end" fill="var(--ink)">TSV-to-wire coupling</text>
+<text x="328" y="172" text-anchor="end" fill="var(--ink)">mostly within 10 µm</text>
+<path d="M292 216V262M172 216V302" fill="none" stroke="var(--grid)"/>
+<path d="M292 258H346M292 254V262M346 254V262M172 298H346M172 294V302M346 294V302" fill="none" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="344" y="276" text-anchor="end" fill="var(--ink)">Stress KOZ, digital 5%</text>
+<text x="344" y="316" text-anchor="end" fill="var(--ink)">Stress KOZ, analog 0.5%, ~3× radius</text>
+<text x="130" y="232" text-anchor="middle" fill="var(--muted)">analog device</text>
+<text x="241" y="232" text-anchor="middle" fill="var(--muted)">digital device</text>
+<path d="M412 330C560 330 670 310 670 222" fill="none" stroke="var(--warn)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#tsv-arrow-en)"/>
+<rect x="596" y="199" width="20" height="14" rx="2" fill="var(--tint)" stroke="var(--axis)" stroke-width="1.25"/>
+<text x="624" y="188" text-anchor="end" fill="var(--muted)">grounded substrate contact</text>
+<text x="640" y="188" fill="var(--muted)">analog device</text>
+<text x="430" y="362" fill="var(--ink)">Substrate noise: TSV signal couples through</text>
+<text x="430" y="378" fill="var(--ink)">liner and Si into device body and drain</text>
+</svg></figure>
+<p>The front-end stress KOZ comes in two tiers set by the criterion; the analog tier is wider, and digital devices may sit inside the analog zone. The back end is restricted only directly above the TSV and on nearby routes. Noise couples through the substrate and is cut off by a nearby grounded substrate contact.</p>
+<h2 id="data-en">KOZ sizes in published data</h2>
+<p>Published analog KOZs range from about 6 µm (FinFET with a 3 µm TSV) to 200 µm (planar devices next to a 5 µm TSV array), two orders of magnitude. TSV diameter, channel length, array size and the criterion explain most of the spread.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Study</th>
+<th>Devices</th>
+<th>TSV (diameter × depth)</th>
+<th>Criterion</th>
+<th>KOZ</th>
+<th>Type of data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack et al. ECTC 2015</a></td>
+<td>65 nm planar nMOS, 32 nm nFinFET</td>
+<td>5 × 50 µm</td>
+<td>2% Id change, stress plus coupling</td>
+<td>Planar about 28 µm; about 8 µm with a nearby ground</td>
+<td>Measured S-parameters plus TCAD</td>
+</tr>
+<tr>
+<td><a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo et al. IEDM 2013</a></td>
+<td>10 nm node bulk FinFET, L = 20 nm, PMOS</td>
+<td>3 µm, aspect ratio 1:17</td>
+<td>Id 5%; Id 0.5%</td>
+<td>1.8 µm; 5.6 µm (from TSV center)</td>
+<td>TCAD extrapolation calibrated on 5 µm TSV silicon</td>
+</tr>
+<tr>
+<td><a href="https://www.academia.edu/145707794/Effect_of_Thermal_Stresses_on_Carrier_Mobility_and_Keep_Out_Zone_Around_Through_Silicon_Vias_for_3_D_Integration" target="_blank" rel="noopener noreferrer">Lu et al. TDMR 2012</a></td>
+<td>Bulk Si, n-type, [100] channel</td>
+<td>5 × 200 µm; 50 × 200 µm</td>
+<td>5% mobility</td>
+<td>About 7 µm; about 60 µm</td>
+<td>3D FEA</td>
+</tr>
+<tr>
+<td><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010</a></td>
+<td>Planar HKMG, 5 × 10 µm² DAC devices</td>
+<td>5.2 × 40 µm</td>
+<td>Idsat 0.5% (analog); digital</td>
+<td>20 µm single, 20–200 µm array; digital 6–20 µm</td>
+<td>DAC test circuits plus FEM and micro-Raman</td>
+</tr>
+</tbody>
+</table></div>
+<p>A <a href="https://ieeexplore.ieee.org/document/8421432/" target="_blank" rel="noopener noreferrer">14 nm FinFET TSV reliability study</a> (abstract only) found no measurable Idsat impact on thin- and thick-oxide NFETs and PFETs at a 5 µm KOZ, and no significant change in FEOL, BEOL or ESD reliability.</p>
+<h3>How the KOZ grows as the criterion tightens</h3>
+<p>Guo et al. give a simplified relation: the KOZ radius of a single TSV is the square root of K/δId, where K is a figure of merit set by the TSV process and the device's stress response. On a 5 µm TSV and L = 900 nm long-channel FinFETs, they measured K of about 110 (n-type) and 130 (p-type) %·µm². The table below applies those K values; distances run from TSV center to device center. 5% and 0.5% are the paper's criteria; 1% and 0.1% are added examples.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Allowed Id change</th>
+<th>n-type KOZ radius (µm)</th>
+<th>p-type KOZ radius (µm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5% (digital)</td>
+<td>4.7</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>1%</td>
+<td>10.5</td>
+<td>11.4</td>
+</tr>
+<tr>
+<td>0.5% (analog)</td>
+<td>14.8</td>
+<td>16.1</td>
+</tr>
+<tr>
+<td>0.1% (precision matching)</td>
+<td>33.2</td>
+<td>36.1</td>
+</tr>
+</tbody>
+</table></div>
+<p>These numbers hold only for an isolated TSV; next to arrays the zone is larger. In the same model, KOZ area scales with the square of TSV diameter, so going from 5 µm to 3 µm cuts the area to about a third.</p>
+<h3>GAA devices</h3>
+<p>Published nanosheet results are TCAD so far; no silicon data was found. <a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong et al. IEEE Access 2021</a> (abstract only) compared sub-5 nm NSFETs with FinFETs and reached three conclusions:</p>
+<ul>
+<li>TSV stress shifts Ion more in NSFETs than in FinFETs, mainly through the stress component along the channel length.</li>
+<li>Outside the KOZ, the stress impact is negligible.</li>
+<li>Judged by an analog criterion (coupling current below 0.5% of Ion), conventional structures fail on noise coupling; the authors recommend a bottom oxide under source/drain and an undoped punch-through stopper.</li>
+</ul>
+<h2 id="structures-en">How 3D structures differ</h2>
+<p>As TSVs shrink from micrometers to nanometers, the local stress KOZ shrinks with the square of the diameter, but global effects from thinning, backside metal and the loss of the substrate take over. On a GAA process with backside power, looking only at zones around TSVs is not enough.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Structure</th>
+<th>Typical size</th>
+<th>Effect on devices</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Via-middle Cu TSV</td>
+<td>3–5 µm diameter, about 40–50 µm deep</td>
+<td>Sees a 420 °C anneal and several 350–400 °C BEOL steps, so residual stress and mobility shift are largest; Cu pumping thins M1 and raises its resistance by about 35%</td>
+<td><a href="https://www.academia.edu/15694992/Analysis_of_Copper_Plasticity_Impact_in_TSV_middle_and_Backside_TSV_last_Fabrication_Processes" target="_blank" rel="noopener noreferrer">Guo et al. ECTC 2015</a></td>
+</tr>
+<tr>
+<td>Backside via-last TSV</td>
+<td>Same order</td>
+<td>Sees a single ramp to 300 °C, so residual stress and KOZ are smaller and pumping is insignificant; a ~3 µm polymer liner cuts coupling by about another 20 dB</td>
+<td>Same; <a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack et al. ECTC 2015</a></td>
+</tr>
+<tr>
+<td>Nano-TSV (backside power)</td>
+<td>Under 1 µm diameter, W fill; Si thinned to 20–370 nm</td>
+<td>imec measured FinFETs with Lg ≥ 20 nm: no negative impact apart from a slight pMOS drive-current loss, and up to 15% higher nMOS mobility. The shift comes from wafer-level thinning and backside processing, not from a local zone around one TSV</td>
+<td><a href="https://www.imec-int.com/en/articles/imec-demonstrates-critical-building-blocks-backside-power-delivery-network" target="_blank" rel="noopener noreferrer">imec VLSI 2021</a>; <a href="https://semiengineering.com/whats-next-for-tsvs/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>Direct backside contact</td>
+<td>Reported Si thinning below 100 nm, about 10 nm left for direct contact</td>
+<td>A Lam virtual-fabrication study found backside direct connection adds noticeably more stress to GAA channels than frontside connection, directly changing mobility and drive current</td>
+<td><a href="https://semiengineering.com/backside-power-delivery-nears-production/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>Pass-through TSV in a base die</td>
+<td>Not published</td>
+<td>Public process pages for 3DIC base dies list pass-through TSVs, die-to-die TSVs and hybrid bonding interfaces without sizes or KOZ values; the PDK is the reference</td>
+<td><a href="https://www.intel.com/content/www/us/en/foundry/process/18a.html" target="_blank" rel="noopener noreferrer">Intel 18A process page</a></td>
+</tr>
+<tr>
+<td>Microbumps plus underfill</td>
+<td>Not given in the abstract</td>
+<td>Stress from backside microbumps passes through the thinned Si to the devices; imec measured FET current shifts above 40%. Bumps need keep-out zones too</td>
+<td><a href="https://independent.academia.edu/ChoiMunkang" target="_blank" rel="noopener noreferrer">Ivankovic et al. 3DIC 2011 (abstract)</a></td>
+</tr>
+</tbody>
+</table></div>
+<h3>Two global costs of thinning</h3>
+<ul>
+<li><strong>Worse heat spreading.</strong> Si conducts about 140 W/(m·K), SiO₂ about 1.4. Thinning or removing the substrate reduces lateral spreading; imec simulations put backside-power peak temperature about 14 °C above frontside power, and another simulation shows self-heating rising sharply below 300 nm of Si. Source: <a href="https://semiengineering.com/backside-power-delivery-creates-fab-tool-thermal-dissipation-barriers/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a>.</li>
+<li><strong>Weaker substrate-dependent devices.</strong> When imec thinned Si from 700 µm to 300 nm, ESD failure current It2 dropped 20–40%, with STI diodes down about 36% under 100 ns TLP. Source: <a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec, IEDM 2023 results</a>.</li>
+</ul>
+<h2 id="gaa-analog-en">Analog device behavior in GAA</h2>
+<p>Published data says GAA itself helps analog: higher gain, lower 1/f noise, less sensitivity to substrate noise. Four things need watching: a stress response unlike FinFET, heavier self-heating, weaker substrate-dependent devices after thinning, and stronger layout-dependent effects.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Published GAA findings</th>
+<th>What to watch with 3D</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stress response</td>
+<td>Nanosheet conduction is dominated by (100) surfaces, where hole mobility is lower; wider sheets add more (110) sidewall contribution. TCAD shows TSV stress shifts Ion more in NSFETs than in FinFETs</td>
+<td>FinFET KOZ data cannot be reused directly. TSV stress adds to stress from backside metal, backside contacts and wafer thinning</td>
+<td><a href="https://www.mdpi.com/2079-9292/11/21/3589" target="_blank" rel="noopener noreferrer">Mukesh &amp; Zhang 2022</a>; <a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong et al. 2021 (abstract)</a></td>
+</tr>
+<tr>
+<td>Matching</td>
+<td>Random mismatch comes from line-edge roughness, gate-edge roughness, non-uniform work-function metal deposition and random dopants; sheet thickness is set by epitaxy and is uniform. Another study reports notable VT variation from metal thickness differences between sheets</td>
+<td>The TSV stress field has a gradient and flips sign with orientation, adding systematic mismatch that does not average out with larger device area</td>
+<td><a href="https://www.mdpi.com/2079-9292/11/21/3589" target="_blank" rel="noopener noreferrer">Mukesh &amp; Zhang 2022</a>; <a href="https://www.researchgate.net/publication/335194719_Threshold_Voltage_Variability_in_Nanosheet_GAA_Transistors" target="_blank" rel="noopener noreferrer">TED 2019 (abstract)</a></td>
+</tr>
+<tr>
+<td>Gain and efficiency</td>
+<td>imec double-nanosheet nMOS reach about 46 dB intrinsic gain versus about 34 dB for FinFETs under similar conditions; gain rises with L and barely changes up to 200 °C. gm/ID peaks in weak inversion and fT in strong inversion, with the best trade-off near an inversion coefficient of 10. A clear zero-temperature-coefficient bias point exists</td>
+<td>Stress shifts mobility, so bias points, gm and current-mirror ratios drift; gain itself changes little</td>
+<td><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen et al. JICS 2022</a></td>
+</tr>
+<tr>
+<td>Low-frequency noise</td>
+<td>1/f noise is dominated by carrier-number fluctuation, i.e. trapping and release in gate-oxide traps; normalized noise beats FinFETs and other architectures. Work-function metal choice changes trap density</td>
+<td>Self-heating raises channel temperature and thermal noise; TSV substrate coupling is another noise injection path</td>
+<td><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen et al. JICS 2022</a></td>
+</tr>
+<tr>
+<td>Self-heating</td>
+<td>Stacked sheets dissipate heat poorly: more and wider sheets mean higher temperature rise and larger sheet-to-sheet gradients. Below 10 nm channel length the rise can exceed 100 K. Correcting for self-heating changes end-of-life HCD Idsat shift by 10–35%</td>
+<td>Self-heating worsens below 300 nm of Si; simulations put backside-power peak temperature about 14 °C above frontside power. A temperature gradient across a matched pair turns directly into mismatch (this last point is an inference)</td>
+<td><a href="https://www.mdpi.com/2072-666X/16/3/311" target="_blank" rel="noopener noreferrer">Zhou 2025</a>; <a href="https://semiengineering.com/backside-power-delivery-creates-fab-tool-thermal-dissipation-barriers/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>Substrate-dependent devices</td>
+<td>ESD diodes and GGNMOS rely on a thick substrate to conduct current and spread heat. At 300 nm of Si, It2 drops 20–40%; STI diodes suffer most, gated diodes less, and channel-conducting power-rail clamps least</td>
+<td>imec proposes vertical diodes with the anode moved to the backside, cutting layout area by 67% with more uniform current</td>
+<td><a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec 2024</a>; <a href="https://www.esda.org/news/gaa-technology-navigating-future-esd-challenges-in-mass-production-1/" target="_blank" rel="noopener noreferrer">ESDA 2025</a></td>
+</tr>
+<tr>
+<td>Substrate noise isolation</td>
+<td>FinFET body transconductance is small, so TSV-to-device coupling is about 20 dB lower than planar at 1 GHz and 4–8 dB lower at 40 GHz; what remains is mostly capacitive coupling to the drain. TCAD shows even less back-bias coupling for NSFETs than FinFETs</td>
+<td>Bottom dielectric isolation cuts the parasitic channel under the sheets and isolates best. Fast-edge signal TSVs should still stay away from high-impedance nodes</td>
+<td><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack et al. ECTC 2015</a>; <a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong et al. 2021 (abstract)</a></td>
+</tr>
+<tr>
+<td>Parasitics and layout-dependent effects</td>
+<td>Nanosheet LDEs must be included in analog simulation. Synopsys benchmarks report up to 140% series-resistance error and 25% total-capacitance error when advanced-node LDEs are ignored (vendor data, not independently verified)</td>
+<td>TSVs add coupling capacitance to routes within 10 µm, which belongs in parasitic extraction</td>
+<td><a href="https://www.synopsys.com/blogs/chip-design/overcoming-analog-circuit-design-challenges-at-advanced-semiconductor-nodes.html" target="_blank" rel="noopener noreferrer">Synopsys</a>; <a href="https://e3da.csce.uark.edu/pub/doc/2014/Y.Peng-Conf.ACM.DAC-2014.pdf" target="_blank" rel="noopener noreferrer">Peng et al. DAC 2014</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>imec's analog data comes from sub-7 nm research devices (two sheets, L of 28–200 nm), not production PDK devices, so the numbers indicate trends only.</p>
+<h2 id="metrology-en">Measurement methods</h2>
+<p>The most reliable basis for a KOZ is the device's electrical response, not a stress map. Stress metrology calibrates simulation; device- and circuit-level test structures set the rules.</p>
+<h3>Stress and deformation</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it measures</th>
+<th>Capability</th>
+<th>Limits</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Micro-Raman</td>
+<td>Near-surface stress in Si around the TSV</td>
+<td>About 0.8 µm spot, about 200 nm probe depth (442 nm laser), about 10 MPa resolution; lab tool</td>
+<td>Gives only the sum of radial and tangential stress, not individual components; signal degrades next to the TSV interface; needs a reference point assumed stress-free</td>
+<td><a href="https://sites.utexas.edu/ruihuang/files/2021/03/JAP10.pdf" target="_blank" rel="noopener noreferrer">Ryu et al. JAP 2012</a></td>
+</tr>
+<tr>
+<td>Synchrotron X-ray microdiffraction</td>
+<td>Stress inside Cu TSVs and the surrounding Si</td>
+<td>Full stress tensor, depth-resolved; penetrates hundreds of µm of Si without cross-sectioning; in-situ at 150 °C</td>
+<td>Needs synchrotron beam time; not for routine monitoring</td>
+<td><a href="https://www.nist.gov/publications/non-destructive-measurement-residual-stresses-copper-through-silicon-vias-using" target="_blank" rel="noopener noreferrer">Okoro et al. TED 2014</a>; <a href="https://bakirlab.ece.gatech.edu/papers/Experimental%20stress%20characterization%20and%20numerical%20simulation%20for%20copper%20pumping%20analysis%20of%20through%20silicon%20vias%20(Invited).pdf" target="_blank" rel="noopener noreferrer">Liu et al. CPMT 2016</a></td>
+</tr>
+<tr>
+<td>TEM nanobeam or precession electron diffraction</td>
+<td>Strain inside channels and source/drain</td>
+<td>nm spatial resolution, strain precision better than 0.1%</td>
+<td>Destructive; imec has reported specific difficulties and limits on released GAA nanowires</td>
+<td><a href="http://static.asminternational.org/EDFA/201908/27/" target="_blank" rel="noopener noreferrer">EDFA 2019</a>; <a href="https://imec-publications.be/entities/publication/16247de4-20a9-4d33-9073-8badaabcbf55/full" target="_blank" rel="noopener noreferrer">Favia et al. IMC19 2018</a></td>
+</tr>
+<tr>
+<td>Cu pumping height and M1 resistance</td>
+<td>Protrusion of the TSV top and the dielectric above it; resistance change of M1 over the TSV</td>
+<td>Maps directly to back-end risk; M1 resistance can be measured inline</td>
+<td>Captures axial extrusion only, not front-end stress</td>
+<td><a href="https://bakirlab.ece.gatech.edu/papers/Experimental%20stress%20characterization%20and%20numerical%20simulation%20for%20copper%20pumping%20analysis%20of%20through%20silicon%20vias%20(Invited).pdf" target="_blank" rel="noopener noreferrer">Liu et al. CPMT 2016</a>; <a href="https://www.academia.edu/15694992/Analysis_of_Copper_Plasticity_Impact_in_TSV_middle_and_Backside_TSV_last_Fabrication_Processes" target="_blank" rel="noopener noreferrer">Guo et al. ECTC 2015</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>One easily missed problem with Raman: it reports only the sum of radial and tangential stress, and these two components are similar in size and opposite in sign, so they largely cancel. A quiet Raman map does not mean the individual stress components seen by devices are small (a judgment based on the measurement principle).</p>
+<h3>Devices and circuits</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it measures</th>
+<th>Key practice</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Distance-ladder test structures</td>
+<td>Idsat versus distance to the TSV</td>
+<td>Place the same device at several distances (imec used 1.7–20.7 µm), with single, row and array TSV layouts; fit the figure of merit K</td>
+<td><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010</a>; <a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo et al. IEDM 2013</a></td>
+</tr>
+<tr>
+<td>Four-point bending</td>
+<td>The device's own piezoresistive coefficients</td>
+<td>Apply known uniaxial stress to wafer strips and measure current change. The coefficients then predict any layout without TSVs and validate TCAD</td>
+<td><a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo et al. IEDM 2013</a></td>
+</tr>
+<tr>
+<td>DAC or current-source arrays</td>
+<td>Circuit-level current mismatch</td>
+<td>imec resolved 0.5% changes with a 45 nm DAC test chip; suited to setting KOZs directly with analog criteria</td>
+<td><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">imec IEDM 2010</a>; <a href="https://semiengineering.com/stressing-over-3d/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>Well resistors next to TSVs</td>
+<td>Sensitivity to proximity effects</td>
+<td>Sony placed Si well resistors next to 6 µm-pitch TSVs</td>
+<td><a href="https://semiengineering.com/whats-next-for-tsvs/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a></td>
+</tr>
+<tr>
+<td>Two-port S-parameters</td>
+<td>TSV-to-device noise coupling</td>
+<td>VNA from TSV to drain up to 40 GHz; sweep TSV bias (−15 to 10 V) and device on/off state; compare substrate-contact distances</td>
+<td><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack et al. ECTC 2015</a></td>
+</tr>
+<tr>
+<td>TSV C-V</td>
+<td>Liner capacitance and depletion</td>
+<td>TSV, liner and Si form a MOS structure whose capacitance varies with TSV voltage; capacitance peaks with the TSV at ground, the worst case for coupling</td>
+<td><a href="https://e3da.csce.uark.edu/pub/doc/2013/Y.Peng-Conf.IEEE.ICCAD-2013.pdf" target="_blank" rel="noopener noreferrer">Peng et al. ICCAD 2013</a></td>
+</tr>
+<tr>
+<td>Low-frequency noise</td>
+<td>1/f spectra and gate-oxide trap density</td>
+<td>On-wafer, with a parameter analyzer and low-frequency noise analyzer, at least 5 devices per wafer; identify the mechanism from normalized current noise versus (gm/ID)², and extract trap density from input-referred noise at 10 Hz</td>
+<td><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen et al. JICS 2022</a></td>
+</tr>
+<tr>
+<td>Gate resistance thermometry</td>
+<td>Self-heating temperature rise and thermal resistance</td>
+<td>Four-terminal gate structures; calibrate the gate metal's temperature coefficient of resistance on a temperature-controlled chuck, then read temperature in operation with a probe voltage of tens of mV. It reports the average gate-metal temperature, which can be below the channel peak</td>
+<td><a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932168" target="_blank" rel="noopener noreferrer">NIST</a> (method described on GaN HEMTs)</td>
+</tr>
+<tr>
+<td>TLP and VF-TLP</td>
+<td>ESD failure current It2</td>
+<td>100 ns TLP corresponds to HBM, VF-TLP to CDM; compare before and after thinning</td>
+<td><a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec 2024</a></td>
+</tr>
+<tr>
+<td>Reliability tests near TSVs</td>
+<td>BTI, HCI, gate-oxide breakdown; back-end TDDB, EM, SM</td>
+<td>Voltage-ramp and constant-voltage stress at 25 °C and 125 °C, with dedicated structures for low metal and via levels above the TSV</td>
+<td><a href="https://ieeexplore.ieee.org/document/8421432/" target="_blank" rel="noopener noreferrer">14 nm FinFET study (abstract)</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>One more caution on self-heating: a <a href="https://www.sciencedirect.com/science/article/abs/pii/S0038110125001200" target="_blank" rel="noopener noreferrer">paper</a> (abstract only) notes that thermal time constants of advanced devices are too short for pulsed-IV and AC-conductance methods, leaving gate-resistance and RF methods; four-terminal gate structures also change heat paths and series resistance, so layout differences must be accounted for in extraction.</p>
+<h2 id="approach-en">Recommended approach</h2>
+<p>These recommendations build on the literature above; they are not the conclusion of any single paper. The core idea: fit K from the device's own stress response plus distance-ladder data, then derive the KOZ from the drift each circuit class can tolerate.</p>
+<ol>
+<li><strong>Split the KOZ into three rules.</strong> Set the front-end stress KOZ by device class (digital, general analog, precision matching); set the noise KOZ by TSV type, stricter for fast-edge signal TSVs than for power and ground; keep back-end via and routing rules separate.</li>
+<li><strong>Measure piezoresistive coefficients on GAA analog devices first.</strong> Use four-point bending across n and p, short and long L, and several sheet widths. Conduction surfaces differ from FinFET, so FinFET coefficients do not carry over.</li>
+<li><strong>Fit K with distance-ladder structures.</strong> Cover single TSVs, rows and arrays at the product pitch; cover channels pointing toward and perpendicular to the TSV; put reference devices more than 200 µm from any array.</li>
+<li><strong>Verify matched pairs separately.</strong> Lay out pairs both equidistant with the same orientation to the TSV and asymmetric, and compare mean offsets. Use enough samples to separate systematic offset from random mismatch.</li>
+<li><strong>Cover temperature, lifetime and packaging.</strong> Stress scales with the difference from the stress-free reference temperature, so measure hot and cold; re-measure after thermal cycling; measure again after stacking and packaging, since microbump effects can exceed those of TSVs.</li>
+<li><strong>Set noise rules with S-parameter structures.</strong> Split on substrate-contact distance, with and without guard rings, and with and without bottom dielectric isolation.</li>
+<li><strong>Treat substrate-dependent devices as a separate check.</strong> Compare ESD diodes and GGNMOS with TLP before and after thinning; do the same for bandgap diodes or BJTs and well resistors.</li>
+<li><strong>Add four-terminal gate structures to key analog devices to measure self-heating.</strong> Compare thermal resistance before and after thinning and stacking.</li>
+</ol>
+<h3>Setting the KOZ criterion</h3>
+<p>Work back from circuit specs. First decide how much systematic mismatch a circuit class can give to TSVs, for example 0.5% current error in a current mirror; then compute the single-TSV radius from measured K; enlarge it for array superposition and add margin for thermal cycling and via-to-via variation. For precision matching, symmetric placement saves more area than simply moving farther away.</p>
+<h2 id="gaps-en">Gaps in public data</h2>
+<p>No public data was found for the following; the PDK or your own measurements are the reference.</p>
+<ul>
+<li><strong>Silicon data for GAA devices near TSVs.</strong> Only TCAD results were found; measured data stops at FinFET.</li>
+<li><strong>Sizes and KOZ values for pass-through and die-to-die TSVs.</strong> Public process pages do not give them.</li>
+<li><strong>Impact of hybrid bonding pads on front-end devices.</strong> No public KOZ data was found.</li>
+<li><strong>How bandgap diodes and BJTs, temperature sensors and well resistors change after substrate thinning.</strong> Public data covers ESD devices only. These devices also depend on the substrate, so similar degradation is likely, but no data supports it.</li>
+<li><strong>The finding that backside direct connection adds stress to GAA channels.</strong> It comes from Lam's virtual-fabrication simulation, not silicon.</li>
+</ul>
+<h2 id="sources-en">Sources</h2>
+<p>Original page or record opened:</p>
+<ul>
+<li><a href="https://sst.semiconductor-digest.com/?p=32057" target="_blank" rel="noopener noreferrer">IEDM 2010: coverage of imec's TSV stress study</a>, Semiconductor Digest</li>
+<li><a href="https://www.academia.edu/23122166/Copper_through_silicon_via_induced_keep_out_zone_for_10nm_node_bulk_FinFET_CMOS_technology" target="_blank" rel="noopener noreferrer">Guo et al., Copper through silicon via induced keep out zone for 10nm node bulk FinFET CMOS technology</a>, IEDM 2013</li>
+<li><a href="https://www.academia.edu/15694992/Analysis_of_Copper_Plasticity_Impact_in_TSV_middle_and_Backside_TSV_last_Fabrication_Processes" target="_blank" rel="noopener noreferrer">Guo et al., Analysis of Copper Plasticity Impact in TSV-middle and Backside TSV-last Fabrication Processes</a>, ECTC 2015</li>
+<li><a href="https://www.academia.edu/145707794/Effect_of_Thermal_Stresses_on_Carrier_Mobility_and_Keep_Out_Zone_Around_Through_Silicon_Vias_for_3_D_Integration" target="_blank" rel="noopener noreferrer">Lu et al., Effect of Thermal Stresses on Carrier Mobility and Keep-Out Zone Around Through-Silicon Vias</a>, IEEE TDMR 2012</li>
+<li><a href="https://www.academia.edu/80886885/Noise_coupling_between_TSVs_and_active_devices_Planar_nMOSFETs_vs_nFinFETs" target="_blank" rel="noopener noreferrer">Rack et al., Noise coupling between TSVs and active devices: Planar nMOSFETs vs. nFinFETs</a>, ECTC 2015</li>
+<li><a href="https://koasas.kaist.ac.kr/handle/10203/98712?mode=full" target="_blank" rel="noopener noreferrer">Cho et al., Modeling and Analysis of TSV Noise Coupling and Suppression Using a Guard Ring</a>, IEEE CPMT 2011</li>
+<li><a href="https://e3da.csce.uark.edu/pub/doc/2014/Y.Peng-Conf.ACM.DAC-2014.pdf" target="_blank" rel="noopener noreferrer">Peng et al., TSV-to-Wire Coupling</a>, DAC 2014; <a href="https://e3da.csce.uark.edu/pub/doc/2013/Y.Peng-Conf.IEEE.ICCAD-2013.pdf" target="_blank" rel="noopener noreferrer">Peng et al., TSV-to-TSV Coupling</a>, ICCAD 2013</li>
+<li><a href="https://patents.google.com/patent/US10199315" target="_blank" rel="noopener noreferrer">GlobalFoundries, Post zero via layer keep out zone over through silicon via reducing BEOL pumping effects</a>, US10199315</li>
+<li><a href="https://www.nist.gov/publications/x-ray-micro-beam-diffraction-measurement-effect-thermal-cycling-stress-cu-tsv" target="_blank" rel="noopener noreferrer">Okoro et al., X-Ray Micro-Beam Diffraction Measurement of the Effect of Thermal Cycling on Stress in Cu TSV</a>, ECTC 2014; <a href="https://www.nist.gov/publications/non-destructive-measurement-residual-stresses-copper-through-silicon-vias-using" target="_blank" rel="noopener noreferrer">Okoro et al., Non-destructive Measurement of the Residual Stresses in Copper TSVs</a>, IEEE TED 2014</li>
+<li><a href="https://sites.utexas.edu/ruihuang/files/2021/03/JAP10.pdf" target="_blank" rel="noopener noreferrer">Ryu et al., Micro-Raman spectroscopy and analysis of near-surface stresses in silicon around TSVs</a>, JAP 2012</li>
+<li><a href="https://bakirlab.ece.gatech.edu/papers/Experimental%20stress%20characterization%20and%20numerical%20simulation%20for%20copper%20pumping%20analysis%20of%20through%20silicon%20vias%20(Invited).pdf" target="_blank" rel="noopener noreferrer">Liu et al., Experimental stress characterization and numerical simulation for copper pumping analysis of TSVs</a>, IEEE CPMT 2016</li>
+<li><a href="https://www.imec-int.com/en/articles/how-protect-advanced-cmos-technologies-thin-si-substrates-against-esd-events" target="_blank" rel="noopener noreferrer">imec, How to protect advanced CMOS technologies with thin Si substrates against ESD events</a>, 2024</li>
+<li><a href="https://www.imec-int.com/en/articles/imec-demonstrates-critical-building-blocks-backside-power-delivery-network" target="_blank" rel="noopener noreferrer">imec, Critical building blocks for a backside power delivery network</a>, 2021</li>
+<li><a href="https://www.esda.org/news/gaa-technology-navigating-future-esd-challenges-in-mass-production-1/" target="_blank" rel="noopener noreferrer">Chen, GAA Technology: Navigating Future ESD Challenges in Mass Production</a>, ESDA 2025</li>
+<li><a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">Simoen et al., Performance Perspective of Gate-All-Around Double Nanosheet CMOS Beyond High-Speed Logic Applications</a>, JICS 2022</li>
+<li><a href="https://www.mdpi.com/2079-9292/11/21/3589" target="_blank" rel="noopener noreferrer">Mukesh &amp; Zhang, A Review of the Gate-All-Around Nanosheet FET Process Opportunities</a>, Electronics 2022</li>
+<li><a href="https://www.mdpi.com/2072-666X/16/3/311" target="_blank" rel="noopener noreferrer">Zhou, An Overview of Hot Carrier Degradation on Gate-All-Around Nanosheet Transistors</a>, Micromachines 2025</li>
+<li>Semiconductor Engineering: <a href="https://semiengineering.com/whats-next-for-tsvs/" target="_blank" rel="noopener noreferrer">What's Next For Through-Silicon Vias</a>, <a href="https://semiengineering.com/backside-power-delivery-nears-production/" target="_blank" rel="noopener noreferrer">Backside Power Delivery Nears Production</a>, <a href="https://semiengineering.com/backside-power-delivery-creates-fab-tool-thermal-dissipation-barriers/" target="_blank" rel="noopener noreferrer">Backside Power Delivery Creates Fab Tool, Thermal Dissipation Barriers</a>, <a href="https://semiengineering.com/stressing-over-3d/" target="_blank" rel="noopener noreferrer">Stressing Over 3D</a></li>
+<li><a href="https://www.intel.com/content/www/us/en/foundry/process/18a.html" target="_blank" rel="noopener noreferrer">Intel 18A process page</a></li>
+<li><a href="https://www.synopsys.com/blogs/chip-design/overcoming-analog-circuit-design-challenges-at-advanced-semiconductor-nodes.html" target="_blank" rel="noopener noreferrer">Synopsys, Overcoming Analog Circuit Design Challenges at Advanced Semiconductor Nodes</a></li>
+<li><a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932168" target="_blank" rel="noopener noreferrer">NIST, Gate resistance thermometry: An electrical thermal characterization technique</a></li>
+<li><a href="http://static.asminternational.org/EDFA/201908/27/" target="_blank" rel="noopener noreferrer">EDFA, August 2019, precession electron diffraction strain measurement</a></li>
+</ul>
+<p>Original not accessible; abstract or record only:</p>
+<ul>
+<li><a href="https://ieeexplore.ieee.org/document/9333571" target="_blank" rel="noopener noreferrer">Jeong et al., Analysis of TSV-Induced Mechanical Stress and Electrical Noise Coupling in Sub 5-nm Node Nanosheet FETs</a>, IEEE Access 2021</li>
+<li><a href="https://ieeexplore.ieee.org/document/8421432/" target="_blank" rel="noopener noreferrer">Comprehensive 3D TSV Reliability Study on 14nm FINFET Technology with Thinned Wafers</a>, IEEE</li>
+<li><a href="https://imec-publications.be/handle/20.500.12860/20852" target="_blank" rel="noopener noreferrer">Ivankovic et al., Analysis of microbump induced stress effects in 3D stacked IC technologies</a>, 3DIC 2011</li>
+<li><a href="https://www.researchgate.net/publication/335194719_Threshold_Voltage_Variability_in_Nanosheet_GAA_Transistors" target="_blank" rel="noopener noreferrer">Threshold Voltage Variability in Nanosheet GAA Transistors</a>, IEEE TED 2019</li>
+<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0038110125001200" target="_blank" rel="noopener noreferrer">Impact of Device Layout on Self-Heating Extraction in MOSFETs</a>, Solid-State Electronics 2025</li>
+<li><a href="https://imec-publications.be/entities/publication/16247de4-20a9-4d33-9073-8badaabcbf55/full" target="_blank" rel="noopener noreferrer">Favia et al., Nanobeam diffraction strain analysis of released Ge gate-all-around nano-wires</a>, IMC19 2018</li>
+</ul></div>
+<p class="note"><span class="zh" lang="zh-CN">本文只使用公开文献、公开文章和专利。器件与工艺数值来自各文献的研究器件，量产工艺请以对应 PDK 为准。标注“推断”或“建议”的部分是整理者的判断。</span><span class="en" lang="en">This note uses only public papers, articles and patents. Device and process numbers come from each paper's research devices; for production processes the relevant PDK is the reference. Items marked as inference or recommendation are the author's judgment.</span></p>
 </main></div>
-<footer><span>TIMEMEMO RESEARCH · 2026.10.07</span><a href="/research/">返回半导体研究</a></footer>
+<footer><span><span class="zh" lang="zh-CN">TIMEMEMO RESEARCH · 2026.10.07</span><span class="en" lang="en">TIMEMEMO RESEARCH · 2026.10.07</span></span><a href="/research/"><span><span class="zh" lang="zh-CN">返回半导体研究</span><span class="en" lang="en">Back to semiconductor research</span></span></a></footer>
+<script>
+(function(){var b=document.body,z=document.getElementById('langZh'),n=document.getElementById('langEn');
+function set(l){b.dataset.language=l;document.documentElement.lang=l==='zh'?'zh-CN':'en';z.setAttribute('aria-pressed',String(l==='zh'));n.setAttribute('aria-pressed',String(l==='en'));try{localStorage.setItem('timememo-home-language',JSON.stringify(l))}catch(e){}}
+var q=new URLSearchParams(location.search).get('lang'),s=null;try{s=JSON.parse(localStorage.getItem('timememo-home-language'))}catch(e){}
+set(q==='en'||q==='zh'?q:(s==='en'?'en':'zh'));
+z.onclick=function(){set('zh')};n.onclick=function(){set('en')};
+document.querySelectorAll('.contents a').forEach(function(a){a.addEventListener('click',function(){})});})();
+</script>
 </body></html>
