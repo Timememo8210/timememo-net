@@ -140,6 +140,34 @@ window.HOME_CATALOG = [
     "private": false
   },
   {
+    "url": "/research/analog-devices/",
+    "category": "research",
+    "title": {
+      "zh": "模拟器件学习指南",
+      "en": "Analog Devices Guide"
+    },
+    "description": {
+      "zh": "指标、增益、噪声失配与 GAA 模拟器件。",
+      "en": "Metrics, gain, noise, mismatch and GAA analog."
+    },
+    "updated": "2026-10-09",
+    "private": false
+  },
+  {
+    "url": "/research/analog-devices/plan/",
+    "category": "research",
+    "title": {
+      "zh": "7 天模拟器件学习计划",
+      "en": "7-Day Analog Study Plan"
+    },
+    "description": {
+      "zh": "每天的目标、材料、练习和自测。",
+      "en": "Daily goals, materials, exercises and self-tests."
+    },
+    "updated": "2026-10-09",
+    "private": false
+  },
+  {
     "url": "/research/tsv-koz-gaa-analog/",
     "category": "research",
     "title": {

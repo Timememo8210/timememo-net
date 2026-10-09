@@ -1,0 +1,416 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="referrer" content="no-referrer">
+<title>7 天模拟器件学习计划 · 7-Day Analog Device Study Plan｜TIMEMEMO RESEARCH</title><meta name="description" content="A 7-day, 2–3 hours/day study plan for analog device metrics, gm/ID, gain, noise, matching and nanosheet/GAA analog."><link rel="icon" href="/assets/home/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet"><style>:root{--paper:#fcfbf7;--white:#fff;--ink:#183437;--text:#283f42;--muted:#52696b;--rule:#d3ddda;--teal:#166b61;--mint:#edf4f0;--sand:#f6f1e6}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans','Noto Sans SC',sans-serif;font-size:16px;line-height:1.85}
+body[data-language=zh] .en,body[data-language=en] .zh{display:none!important}
+a{color:var(--teal);text-underline-offset:4px}a:focus-visible,button:focus-visible,summary:focus-visible,.table-scroll:focus-visible{outline:3px solid #bc7c27;outline-offset:4px}
+.skip{position:fixed;top:-80px;left:20px;z-index:100;background:#fff;padding:12px}.skip:focus{top:8px}
+.top{height:72px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 4.3vw;background:var(--paper);position:sticky;top:0;z-index:10}
+.brand{text-decoration:none;font-weight:700;letter-spacing:.12em;color:var(--ink);font-size:16px;white-space:nowrap}.brand>span{font-size:11px;letter-spacing:.16em;border-left:1px solid #8aa39c;margin-left:15px;padding-left:16px;font-weight:500}
+.controls{display:flex;align-items:center;gap:20px;font-size:13px}.controls>a{color:var(--ink)}
+.languages{display:flex;border:1px solid #a9bdb6;border-radius:4px;padding:3px;gap:2px}.languages button{border:0;background:transparent;padding:4px 12px;font:inherit;font-size:13px;border-radius:2px;color:var(--ink);cursor:pointer}.languages button[aria-pressed=true]{background:var(--ink);color:#fff}
+.hero{max-width:1400px;margin:auto;padding:52px 4.3vw 0}.eyebrow{color:var(--teal);font-size:12px;font-weight:600;letter-spacing:.14em}
+h1{font-family:Georgia,'Noto Sans SC',serif;font-size:clamp(32px,4.2vw,60px);letter-spacing:-.02em;line-height:1.2;font-weight:600;color:var(--ink);margin:22px 0 20px}
+.dek{max-width:900px;font-size:18px;line-height:1.8;color:var(--muted);margin:0 0 30px}.dek p{margin:0 0 12px}
+.hero-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;border-top:2px solid var(--ink);padding:14px 0}
+.hint{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.tools{display:flex;gap:10px;flex-wrap:wrap}.btn{border:1px solid #a9bdb6;background:var(--white);color:var(--ink);border-radius:999px;padding:6px 16px;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.layout{max-width:1400px;margin:auto;padding:0 4.3vw;display:grid;grid-template-columns:190px minmax(0,1fr);gap:52px}
+.contents{position:sticky;top:96px;align-self:start;padding:30px 0;max-height:calc(100vh - 110px);overflow:auto}.contents>div{display:flex;flex-direction:column;gap:7px}
+.contents .label{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-bottom:10px;display:block}
+.contents a{text-decoration:none;color:var(--ink);font-size:13px;line-height:1.5;display:flex;gap:10px}.contents small{color:var(--muted);font-size:10px;padding-top:2px;min-width:16px}
+main{min-width:0;max-width:1000px;padding:10px 0 80px}
+.sec{padding-top:26px;margin-top:34px;border-top:1px solid var(--rule)}
+h2{font-size:25px;line-height:1.4;color:var(--ink);margin:0 0 14px}
+.intro>p:first-child{font-size:17px}.intro p,.intro li{max-width:860px}
+.intro ul{background:var(--mint);border-radius:8px;padding:14px 18px 14px 36px;margin:14px 0}
+details.sub{border:1px solid var(--rule);border-radius:8px;background:var(--white);margin:10px 0}
+details.sub>summary{cursor:pointer;list-style:none;padding:13px 18px 13px 44px;font-weight:600;color:var(--ink);position:relative;line-height:1.5}
+details.sub>summary::-webkit-details-marker{display:none}
+details.sub>summary::before{content:'+';position:absolute;left:16px;top:10px;width:20px;height:20px;border:1px solid #a9bdb6;border-radius:4px;text-align:center;line-height:18px;font-weight:500;color:var(--teal)}
+details.sub[open]>summary::before{content:'−'}details.sub[open]>summary{border-bottom:1px solid var(--rule)}
+.sub-body{padding:6px 20px 14px}.sub-body p,.sub-body li{max-width:860px}
+h3,h4{color:var(--ink)}
+.table-scroll{overflow-x:auto;margin:16px 0 12px;border:1px solid var(--rule);border-radius:6px;background:var(--white)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px;line-height:1.65}
+th,td{text-align:left;vertical-align:top;padding:10px 13px;border-bottom:1px solid var(--rule)}th{background:var(--mint);color:var(--ink);font-weight:600}tr:last-child td{border-bottom:0}
+code{background:var(--sand);padding:1px 5px;border-radius:3px;font-size:.92em}
+li.check{list-style:none;position:relative;margin-left:-20px;padding-left:28px}li.check .box{position:absolute;left:0;top:7px;width:15px;height:15px;border:1.5px solid var(--teal);border-radius:3px}
+.callout{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:10px;padding:22px 24px;margin:40px 0 0}.callout h2{color:#fff;margin:0 0 4px;font-size:22px}.callout p{margin:0;color:#cfe0db}.callout .btn{background:#fff}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:18px 0 6px}
+.day{display:block;text-decoration:none;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;color:var(--text)}.day small{color:var(--teal);font-weight:600;letter-spacing:.08em;font-size:11px}.day b{display:block;color:var(--ink);font-size:15px;line-height:1.45;margin-top:4px}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--teal);padding:4px 0 4px 14px;margin:36px 0 0}
+footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}.contents{display:none}.controls>a{display:none}.dek{font-size:16px}h2{font-size:21px}.sub-body{padding:4px 14px 12px}details.sub>summary{padding-right:12px}}
+@media print{.top,.contents,.tools{display:none}.layout{display:block}details.sub{border:0}details.sub>.sub-body{display:block}}</style></head><body data-language="zh">
+<a class="skip" href="#main"><span><span class="zh" lang="zh-CN">跳至正文</span><span class="en" lang="en">Skip to content</span></span></a><header class="top"><a class="brand" href="/research/">TIMEMEMO <span>RESEARCH</span></a><div class="controls"><a href="/research/"><span><span class="zh" lang="zh-CN">半导体研究</span><span class="en" lang="en">Semiconductor research</span></span></a><a href="../"><span><span class="zh" lang="zh-CN">指南正文</span><span class="en" lang="en">The guide</span></span></a><div class="languages" role="group" aria-label="Language"><button id="langZh" type="button" aria-pressed="true">中文</button><button id="langEn" type="button" aria-pressed="false">EN</button></div></div></header>
+<div class="hero"><div class="eyebrow"><span><span class="zh" lang="zh-CN">模拟器件学习指南 · 配套计划</span><span class="en" lang="en">ANALOG DEVICES GUIDE · COMPANION PLAN</span></span> / 2026.10.09</div>
+<h1><span class="zh" lang="zh-CN">7 天学习计划</span><span class="en" lang="en">7-day study plan</span></h1>
+<div class="hero-bottom"><span class="hint"><span class="zh" lang="zh-CN">点日期卡片跳到当天；每天的目标、材料、练习和自测都在折叠块里。</span><span class="en" lang="en">Tap a day card to jump to it; each day's goal, materials, exercise and self-test sit in its block.</span></span><div class="tools"><button class="btn" type="button" data-expand><span><span class="zh" lang="zh-CN">展开全部 7 天</span><span class="en" lang="en">Expand all days</span></span></button><button class="btn" type="button" data-collapse><span><span class="zh" lang="zh-CN">收起全部</span><span class="en" lang="en">Collapse all</span></span></button><a class="btn primary" href="../"><span><span class="zh" lang="zh-CN">← 回到指南正文</span><span class="en" lang="en">← Back to the guide</span></span></a></div></div></div>
+<div class="layout" style="grid-template-columns:minmax(0,1fr)"><main id="main" style="max-width:1000px"><div class="zh" lang="zh-CN"><section class="sec" id="p"><h2>7 天学习计划</h2><div class="intro"><p><strong>这是一个每天 2–3 小时、从全局到细节再到前沿的 7 天冲刺。目标是建立"模拟器件指标地图"，能亲手生成并解读 gm/ID 曲线，并能就 GAA 工艺向模拟团队提出正确的问题。</strong></p>
+<p>要点：</p>
+<ul>
+<li>第 1–2 天：画地图，掌握 gm/ID 和反型系数这套语言。</li>
+<li>第 3–5 天：依次深入增益与速度、噪声、失配与版图，每天配一个仿真或计算练习。</li>
+<li>第 6 天：前沿，从平面到 FinFET 再到 GAA，以及 forksheet、CFET 和背面供电。</li>
+<li>第 7 天：综合、讲给别人听，并规划后续几周。</li>
+<li>每天的通用节奏：开头 10 分钟检索前几天的内容，中间读和做，结尾 15–20 分钟凭记忆写自测题；在第 1、2、4、7 天做间隔重测。</li>
+</ul>
+<p><strong>适用对象与前提</strong>：学习者已熟悉 MOSFET 器件物理和逻辑工艺，不喜欢线性通读。计划依据的学习科学是检索练习、间隔复习、先行组织者和专家逆转效应（<a href="https://doi.org/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer">Dunlosky 2013</a>；<a href="https://doi.org/10.1111/j.1467-9280.2008.02209.x" target="_blank" rel="noopener noreferrer">Cepeda 2008</a>；<a href="https://doi.org/10.1037/h0046669" target="_blank" rel="noopener noreferrer">Ausubel 1960</a>；<a href="https://doi.org/10.1207/S15326985EP3801_4" target="_blank" rel="noopener noreferrer">Kalyuga 2003</a>）。所有工具都免费：<a href="https://github.com/iic-jku/IIC-OSIC-TOOLS" target="_blank" rel="noopener noreferrer">IIC-OSIC-TOOLS</a>、<a href="https://github.com/bmurmann/Book-on-gm-ID-design" target="_blank" rel="noopener noreferrer">Murmann gm/ID starter kit</a>、<a href="https://github.com/dreoilin/pygmid" target="_blank" rel="noopener noreferrer">pygmid</a>。开放 PDK 是 130–180 nm 平面工艺，只能用来看曲线形状和权衡关系，绝对数值不能迁移到先进节点。各项活动的时长是经验估计。</p></div><div class="days"><a class="day" href="#p-1"><small>第 1 天</small><b>画出模拟器件的指标地图</b></a><a class="day" href="#p-2"><small>第 2 天</small><b>掌握 gm/ID 与反型系数这套语言</b></a><a class="day" href="#p-3"><small>第 3 天</small><b>增益、输出电阻、速度，以及没有长沟道时怎么办</b></a><a class="day" href="#p-4"><small>第 4 天</small><b>噪声，从陷阱物理到统计噪声角落</b></a><a class="day" href="#p-5"><small>第 5 天</small><b>失配与版图，Pelgrom 定律与"相同环境"</b></a><a class="day" href="#p-6"><small>第 6 天</small><b>前沿，从 FinFET 到 nanosheet，再到 forksheet、CFET 和背面供电</b></a><a class="day" href="#p-7"><small>第 7 天</small><b>综合、讲给别人听、规划下一步</b></a></div><details class="sub" id="p-1" open><summary>第 1 天：画出模拟器件的指标地图</summary><div class="sub-body"><p><strong>目标</strong>：在读任何东西之前先建立全局框架，弄清模拟与逻辑在评价方式上的根本不同，并装好工具。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>Razavi, <em>Design of Analog CMOS Integrated Circuits</em>, 2nd ed.：第 1 章和第 2、17 章的标题与小节标题，只浏览（<a href="https://www.mheducation.com/highered/product/design-of-analog-cmos-integrated-circuits-razavi.html" target="_blank" rel="noopener noreferrer">McGraw-Hill</a>）。</li>
+<li>Enz, Chicco, Pezzotta, "Nanoscale MOSFET Modeling Part 1: The Simplified EKV Model"（<a href="https://doi.org/10.1109/MSSC.2017.2712318" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>Palermo 的 gm/ID 讲义（<a href="https://people.engr.tamu.edu/spalermo/ecen474/lecture07_ee474_gmid.pdf" target="_blank" rel="noopener noreferrer">TAMU PDF</a>），只看图。</li>
+<li>Mudanai et al., "Halo Doping: Physical Effects and Compact Modeling"（<a href="https://briefs.techconnect.org/papers/halo-doping-physical-effects-and-compact-modeling/" target="_blank" rel="noopener noreferrer">页面</a>），这是把逻辑工艺接到模拟的第一座桥。</li>
+</ul>
+<p><strong>时间安排</strong>：预测试和画图 30 分钟 → Enz Part 1 约 60 分钟 → 浏览 Palermo 和 Mudanai 20 分钟 → 安装 IIC-OSIC-TOOLS Docker 30 分钟 → 写自测题 15 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li>读书前，凭记忆在一页纸上画出 gm、gds、gm/ID、gm/gds、fT、Cgg、AVT、1/f 噪声、热噪声、LDE 之间的关系，这是概念图 v1，答不出的地方留问号。</li>
+<li>拉取 IIC-OSIC-TOOLS 镜像，确认 Xschem 和 ngspice 能启动。</li>
+<li>用三句话写出"halo 为什么伤害长沟模拟器件"。</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出逻辑的 3 个 FoM 和模拟的 4 个核心 FoM，并说明区别在哪里（评价点、L 范围、统计性）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能写出 fT = gm/(2πCgg) 和 gm/gds ≈ (gm/ID)·VEA。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出弱反型、中等反型、强反型的 IC 范围，以及 gm/ID 的理论上限 1/(n·UT)。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释"长沟 DIBL"从哪里来。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>概念图 v1 已拍照存档，第 7 天要用。</li>
+</ul></div></details><details class="sub" id="p-2"><summary>第 2 天：掌握 gm/ID 与反型系数这套语言</summary><div class="sub-body"><p><strong>目标</strong>：会用 lookup table 思维读器件曲线，理解中等反型为什么是模拟的"甜点"。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>Enz, Chicco, Pezzotta, Part 2: "Using the Inversion Coefficient as the Primary Design Parameter"（<a href="https://doi.org/10.1109/MSSC.2017.2745838" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>Silveira, Flandre, Jespers 1996，gm/ID 方法的起源，只看图（<a href="https://doi.org/10.1109/4.535416" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>Murmann starter kit 的 README 和 <code>lookup_examples.ipynb</code>（<a href="https://github.com/bmurmann/Book-on-gm-ID-design" target="_blank" rel="noopener noreferrer">GitHub</a>）。</li>
+<li>可选：Pretl 课程中的 sizing（gm/ID）章节（<a href="https://iic-jku.github.io/analog-circuit-design/" target="_blank" rel="noopener noreferrer">课程网站</a>）。</li>
+</ul>
+<p><strong>时间安排</strong>：重测第 1 天题目 10 分钟 → 读 Part 2 约 50 分钟 → 动手 70 分钟 → 写自测题和一页解释 20 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li><strong>先预测，再画</strong>：在纸上画出你认为的 gm/ID 对 ID/W、gm/gds 对 gm/ID、fT 对 gm/ID 曲线，各取 3–4 个 L。</li>
+<li>在 <code>ihp-sg13g2</code> 或 <code>sky130</code> 文件夹中运行 techsweep，或直接加载附带的 .mat 文件，用 pygmid 画出这三组曲线，与预测对比。</li>
+<li>复算 Palermo 的例子：给定 gm/ID 和 ID，查表得到 ID/W，算出 W 和 fT。</li>
+<li>写一页"为什么中等反型是模拟的甜点"，读者设定为逻辑工艺同事。</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释 gm/ID 曲线为什么在一阶近似下与 W 无关，以及这对设计有什么好处。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出提高 gm/ID 的代价（fT 下降、器件变大）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能从 lookup table 走完 gm → gm/ID → ID → ID/W → W 这一流程。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 L 增大时 fT 和 gm/gds 各往哪个方向变。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>第 1 天的自测题能全部答对。</li>
+</ul></div></details><details class="sub" id="p-3"><summary>第 3 天：增益、输出电阻、速度，以及没有长沟道时怎么办</summary><div class="sub-body"><p><strong>目标</strong>：理解本征增益的物理来源，掌握先进节点中长沟道替代方案的原理、代价和表征方法。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>Razavi 第 2 章（沟道长度调制）和第 17 章（DIBL、速度饱和），只读第 1 天概念图上标了问号的小节。</li>
+<li>Fulde et al. 2007，FinFET 与体硅的模拟对比，开放获取（<a href="https://d-nb.info/1149772921/34" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+<li>Waller, "All about stacked MOSFETs in analog layout"（<a href="https://www.edn.com/all-about-stacked-mosfets-in-analog-layout/" target="_blank" rel="noopener noreferrer">EDN 2021</a>）。</li>
+<li>Intel 22FFL 的模拟和 I/O 器件数据（<a href="https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/3" target="_blank" rel="noopener noreferrer">WikiChip</a>）。</li>
+<li>Galup-Montoro et al. CICC 2007，器件串联的模型一致性（<a href="https://lci.ufsc.br/pdf/18-6.pdf" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+</ul>
+<p><strong>时间安排</strong>：交错重测第 1–2 天 10 分钟 → 阅读 60 分钟 → 动手 60 分钟 → 自测 20 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li>用 lookup table 画出固定 gm/ID（如 12 S/A）下 gm/gds 对 L 的曲线，以及 gds 对 VDS 的曲线，找出增益最佳的 VDS 窗口。</li>
+<li><strong>估算</strong>：已知 DIBL 系数 η = 46 mV/V（Fulde 原型），由 gds ≈ η·gm 推出本征增益上限（约 22），再与 22FFL 的 GM×Rout 47–60 和 GF 14 nm 的 40/34 对比，解释差别从哪里来。</li>
+<li>在 ngspice 中把 4 个最小 L 器件串联，与一个 4L 单器件比较 gm、gds 和 gm/gds，观察内部节点的电压分布。</li>
+<li>填一张替代方案表，列为"方法 | 原理 | 优点 | 代价 | 怎么表征"，行包括叠栅、宽松 pitch 器件、I/O 器件、低反型、cascode、gain boosting、数字校准、chiplet 分割。</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释 VEA 为什么大致随 L 增长，DIBL 为什么限制增益上限。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 FinFET 相对体硅在增益上的收益（2–10×）和代价（gm 最多低 30%、寄生、自热）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出叠栅不完全等价于长沟道的至少两个原因。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 I/O 器件用作增益器件时的代价（fT 低、面积大）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释为什么自热时 DC gds 不等于 AC gds，以及怎么测。</li>
+</ul></div></details><details class="sub" id="p-4"><summary>第 4 天：噪声，从陷阱物理到统计噪声角落</summary><div class="sub-body"><p><strong>目标</strong>：会诊断 1/f 噪声的机理，会从数据中提取 N_OT 和 α_SC，理解 RTN 的统计本质和热噪声 γ 的短沟增大。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>Razavi 第 7 章，热噪声和 1/f 部分。</li>
+<li>Hung, Ko, Hu, Cheng 1990，统一 flicker 模型（<a href="https://doi.org/10.1109/16.47770" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>Claeys et al. 2004，工艺模块与低频噪声（<a href="https://doi.org/10.1149/1.1683633" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>C.-Y. Chen 的 Stanford 博士论文，只读 CNF/Hooge 诊断和 RTN 相关章节（<a href="https://stacks.stanford.edu/file/druid:pf645xz5659/cy_thesis-augmented.pdf" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+<li>Simoen et al. JICS 2022，√S_VG 对 V_GT 的提取方法（<a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+<li>RTN 尾部数据（<a href="https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm" target="_blank" rel="noopener noreferrer">VLSI 2009 3B-3</a>）；测量设备（<a href="https://compass.formfactor.com/wp-content/uploads/2020-Arnaldo-Sans-1f-Noise-Challenges-and-Solutions.pdf" target="_blank" rel="noopener noreferrer">Keysight/FormFactor 2020</a>）。</li>
+</ul>
+<p><strong>时间安排</strong>：重测第 2 天内容（间隔）10 分钟 → 阅读 70 分钟 → 动手 50 分钟 → 写讲解和自测题 20 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li>运行 Murmann starter kit 中 gf180 的 <code>noisetest_nfet_03v3.sch</code>，或用 ngspice 的 <code>.noise</code> 扫描，提取 flicker 角频率与 gm/ID、W·L 的关系。</li>
+<li><strong>数据练习</strong>：用 GF 的数据（S_VG·WL：14 nm FinFET 为 17/35，28 nm 平面为 171/106 fV²·µm²/Hz，见 <a href="https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications" target="_blank" rel="noopener noreferrer">Singh/GF</a>）分别算出 n 和 p 的改善倍数，并写出两种假设解释 pFET 为何反超 nFET。</li>
+<li>写一份 1/f 测量方案：偏置点、电流点数、频段、样本量、报告格式，并说明为什么要报告对数正态 σ。</li>
+<li>讲解题："哪些栅叠层和界面工艺旋钮会改变 Kf？"写一页。</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>能用两张图区分载流子数涨落（ΔN）和迁移率涨落（Δμ）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 √S_VG 对 V_GT 直线的截距和斜率各代表什么。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释低频噪声为什么探测到更深的陷阱，以及这对 high-k 叠层意味着什么。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 RTN 分布的特征（长尾、ΔVth 可超过 70 mV），以及设计上的应对。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能写出长沟热噪声公式（γ = 2/3），并说明 γ 在短沟中为什么增大。</li>
+</ul></div></details><details class="sub" id="p-5"><summary>第 5 天：失配与版图，Pelgrom 定律与"相同环境"</summary><div class="sub-body"><p><strong>目标</strong>：掌握 Pelgrom 定律及其工程含义（失配、速度、功耗的权衡），理解 FinFET/GAA 中的新失配来源，熟悉 LDE 和匹配版图规则。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>Pelgrom, Duinmaijer, Welbers 1989（<a href="https://doi.org/10.1109/JSSC.1989.572629" target="_blank" rel="noopener noreferrer">DOI</a>），看图和距离项。</li>
+<li>Kinget 2005，"Device mismatch and tradeoffs"（<a href="https://doi.org/10.1109/JSSC.2005.848021" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>Pelgrom 2013 讲稿，各元件的匹配系数（<a href="https://indico.cern.ch/event/228972/contributions/1539553/attachments/378475/526400/TWEPP24sept2013Print.pdf" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+<li>Razavi 第 14、19 章。</li>
+<li>IBM，fin 角度与匹配（<a href="https://research.ibm.com/publications/transistor-matching-and-fin-angle-variation-in-finfet-technology" target="_blank" rel="noopener noreferrer">页面</a>）。</li>
+<li>LDE 概述（<a href="https://www.eenewseurope.com/en/layout-dependent-effects-in-analog-design" target="_blank" rel="noopener noreferrer">eeNews Europe</a>）；FinFET 匹配版图（<a href="https://www.asicnorth.com/blog/part-two-finfet-back-end-layout-analog-techniques-and-design-tools/" target="_blank" rel="noopener noreferrer">ASIC North</a>）。</li>
+<li>Tuinhout ICMTS 2003，相邻版图效应测试结构（<a href="https://doi.org/10.1109/icmts.2003.1197465" target="_blank" rel="noopener noreferrer">DOI</a>）；Simicic 2015 阵列（<a href="https://lirias.kuleuven.be/bitstream/123456789/525000/2/IIRW2015_OA.pdf" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+</ul>
+<p><strong>时间安排</strong>：交错重测第 3–4 天 10 分钟 → 阅读 70 分钟 → 计算和设计练习 50 分钟 → 自测 20 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li><strong>计算</strong>：设 AVT = 3.5 mV·µm（65 nm 值），按差分对定义 σ(ΔVT) = AVT/√(WL)，求 σ = 1 mV 所需的 WL（12.25 µm²）。再假设 AVT 减半，求所需面积和输入电容各缩小多少倍（4 倍）。最后用"失配能量"约 70 kT 的论点，说明为什么失配最终是功耗问题。</li>
+<li>换用单管 σ 的定义（相差 √2），重算一遍，体会读 PDK 前必须先确认定义。</li>
+<li>为一个 FinFET 差分对设计匹配版图草图：共质心、dummy gate、连续扩散、统一 fin 分组、上方不走线、guard ring。逐条标注每个措施对付的是哪种 LDE。</li>
+<li>设计一个 AVT 提取实验：几何种类、每种的样本量、Kelvin 连接、相邻差分、probit 图和置信区间。</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>能写出 Pelgrom 定律，并说明单管和差分对定义的区别。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释为什么未掺杂沟道改善了 AVT，但 FinFET 在实践中未必优于平面（MGG、fin 角度、LER）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 nanosheet 中 LER 和 MGG 哪个更重要，并说明证据类型（TCAD）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能列出至少 4 种 LDE（WPE、LOD、OSE/PSE、扩散断）及其缓解措施。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释为什么 gm/ID 越高，VT 失配在电流失配中占比越大。</li>
+</ul></div></details><details class="sub" id="p-6"><summary>第 6 天：前沿，从 FinFET 到 nanosheet，再到 forksheet、CFET 和背面供电</summary><div class="sub-body"><p><strong>目标</strong>：形成一张"平面 → FinFET → GAA"的模拟指标对照表，分清研究器件、TCAD 和量产数据，列出需要向内部数据要答案的问题。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>Subramanian/Parvais TED 2006（<a href="https://doi.org/10.1109/ted.2006.885649" target="_blank" rel="noopener noreferrer">DOI</a>），或 Parvais VLSI-TSA 2009（<a href="https://doi.org/10.1109/vtsa.2009.5159300" target="_blank" rel="noopener noreferrer">DOI</a>），二选一。</li>
+<li>Yoon et al. 2020，5 nm FinFET 与 NSFET 的模拟/RF 设计指南，开放获取（<a href="https://doi.org/10.1109/access.2020.3031870" target="_blank" rel="noopener noreferrer">DOI</a>）。</li>
+<li>Asanovski et al. imec 2026，nanosheet 1/f 噪声（<a href="https://arxiv.org/abs/2609.08674" target="_blank" rel="noopener noreferrer">arXiv</a>）。</li>
+<li>Simoen et al. JICS 2022，nanosheet 的增益、gm/ID 和温度（<a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">PDF</a>）。</li>
+<li>TSMC GAA 设计考量（<a href="https://semiwiki.com/semiconductor-manufacturers/tsmc/300986-tsmc-design-considerations-for-gate-all-around-gaa-technology/" target="_blank" rel="noopener noreferrer">SemiWiki</a>）；"Wrestling With Analog At 3nm"（<a href="https://semiengineering.com/wrestling-with-analog-at-3nm/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a>）。</li>
+<li>Intel 18A 技术简报（<a href="https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf" target="_blank" rel="noopener noreferrer">PDF</a>）；imec BSPDN（<a href="https://imec-int.com/en/articles/backside-power-delivery-options-dtco-study" target="_blank" rel="noopener noreferrer">文章</a>）；imec forksheet（<a href="https://www.eetimes.com/vlsi-2025-outer-wall-forksheet-bridges-nanosheet-and-cfet-architectures/" target="_blank" rel="noopener noreferrer">EE Times</a>）。</li>
+<li>可选：Liu IEDM 2021 统计 flicker 建模（<a href="https://doi.org/10.1109/iedm19574.2021.9720680" target="_blank" rel="noopener noreferrer">DOI</a>）；nanoHUB-U Nanotransistors（<a href="https://nanohub.org/courses/NT" target="_blank" rel="noopener noreferrer">课程</a>）。</li>
+</ul>
+<p><strong>时间安排</strong>：重测第 4 天内容（间隔）10 分钟 → 阅读 90 分钟 → 整理对照表 40 分钟 → 自测 15 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li>填写对照表。列为平面、FinFET、nanosheet、forksheet/CFET；行为宽度粒度、本征增益、gm/ID 峰值、fT/fmax、Cgd/寄生、1/f 噪声、AVT 主导来源、LDE、自热、可用 L、I/O 器件、无源器件。每格注明证据类型（研究器件、量产、TCAD、厂商、观点），找不到的写"无公开数据"。</li>
+<li>如果能拿到 BSIM-CMG 或内部 GAA 模型，用第 2–3 天的脚本生成同样的 gm/ID 曲线，与开放 PDK 的平面曲线对比形状。</li>
+<li>写一份"背面供电对模拟的 10 个问题"清单，例如：衬底减薄后 guard ring 还有效吗？电感 Q 值如何变化？热阻对 gds 频散有什么影响？</li>
+<li>用一段话回答："为什么 imec 认为 GAA 不增加 1/f 噪声？这个结论的适用范围有多大？"</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>能区分"宽度物理上连续"和"PDK 中是离散菜单"（Intel W1–W3P、TSMC NanoFlex）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出 imec nanosheet 约 46 dB 增益这一数据的局限（研究器件、跨论文比较）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能列出 GAA 的 5 个模拟问题：寄生 C/R、sub-sheet 漏电、自热、PMOS 迁移率、无源器件不缩小。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能解释 TCAD 中 sheet 加宽使 fT 上升而 fmax 下降的原因（栅电阻和寄生）。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出背面供电对模拟有公开数据的收益（压降、MIM、热阻改进）和公开空白（隔离、guard ring）。</li>
+</ul></div></details><details class="sub" id="p-7"><summary>第 7 天：综合、讲给别人听、规划下一步</summary><div class="sub-body"><p><strong>目标</strong>：闭卷检验一周所学，把知识整理成能讲给别人的材料，并把未解决的问题转成后续行动。</p>
+<p><strong>材料</strong>：</p>
+<ul>
+<li>第 1 天的概念图 v1、一周的自测卡片和各天的一页讲解。</li>
+<li>第 6 天的对照表和问题清单。</li>
+<li>后续规划参考：Jespers &amp; Murmann 完整的定尺寸示例（<a href="https://doi.org/10.1017/9781108125840" target="_blank" rel="noopener noreferrer">DOI</a>，<a href="https://github.com/bmurmann/Book-on-gm-ID-design" target="_blank" rel="noopener noreferrer">GitHub</a>）；Pretl 课程的 OTA 实验（<a href="https://iic-jku.github.io/analog-circuit-design/" target="_blank" rel="noopener noreferrer">课程网站</a>）；Binkley 的反型系数专著（<a href="https://doi.org/10.1002/9780470033715" target="_blank" rel="noopener noreferrer">DOI</a>）；Murmann EE628（<a href="https://github.com/bmurmann/EE628" target="_blank" rel="noopener noreferrer">GitHub</a>）。</li>
+</ul>
+<p><strong>时间安排</strong>：闭卷交错综合测验 40 分钟 → 重画概念图 v2 并与 v1 对比 30 分钟 → 写简报或讲稿 60 分钟 → 规划第 2–4 周 20 分钟。</p>
+<p><strong>动手练习</strong>：</p>
+<ol>
+<li><strong>闭卷综合测验</strong>：从一周的卡片中随机抽 20 题，增益、噪声、失配、GAA 混在一起，记录错题。</li>
+<li><strong>概念图 v2</strong>：凭记忆重画，与 v1 对比，标出新增的节点和连线。</li>
+<li><strong>讲给别人听</strong>：写一份 2 页简报或 15 分钟讲稿，题为"模拟设计需要 GAA 工艺提供什么"。结构为：评价方式的转变 → 工艺旋钮与模拟指标的映射 → 长沟道替代 → 噪声和失配 → GAA、背面供电、3D 的机会与空白 → 想向内部数据要的 5 个答案。</li>
+<li><strong>规划后续</strong>：第 2 周用 Jespers &amp; Murmann 示例完成一个 OTA 的 gm/ID 定尺寸；第 3 周跟 Pretl 课程做 cascode 和偏置实验；第 4 周针对内部 GAA 器件做一次 AVT、1/f、gds 频散的数据复盘。</li>
+</ol>
+<p><strong>自测清单</strong>：</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>闭卷综合测验正确率达到 80% 以上，错题已加入卡片继续间隔复习。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>概念图 v2 至少新增 10 个有意义的连线，例如 EOT → AVT、EOT → S_VG。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能在 2 分钟内向逻辑工艺同事讲清"模拟看什么、为什么"。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>能说出至少 3 种长沟道替代方案，以及各自如何表征。</li>
+<li class="check"><span class="box" aria-hidden="true"></span>已列出需要从 PDK 或内部表征获取的数据清单：AVT、Aβ、S_VG·WL 分布、gm/gds–L、Rg、Rth、BSPDN 隔离。</li>
+</ul></div></details></section></div><div class="en" lang="en"><section class="sec" id="p-en"><h2>7-day study plan</h2><div class="intro"><p><strong>This is a 7-day sprint of 2–3 hours per day that moves from the big picture to the details and then to the frontier. The goal is to build an "analog device metrics map", to generate and interpret gm/ID curves yourself, and to ask the analog team the right questions about the GAA process.</strong></p>
+<p>Key points:</p>
+<ul>
+<li>Day 1–2: Draw the map and learn the gm/ID and inversion coefficient language.</li>
+<li>Day 3–5: Go deep on gain and speed, noise, and mismatch and layout in turn, with one simulation or calculation exercise each day.</li>
+<li>Day 6: The frontier: planar to FinFET to GAA, plus forksheet, CFET and backside power delivery.</li>
+<li>Day 7: Synthesize, explain it to others, and plan the following weeks.</li>
+<li>Common daily rhythm: open with 10 minutes of retrieval on earlier days, read and practice in the middle, and close with 15–20 minutes writing self-test questions from memory; do spaced retesting on Day 1, 2, 4 and 7.</li>
+</ul>
+<p><strong>Audience and prerequisites</strong>: The learner already knows MOSFET device physics and logic process technology and dislikes linear cover-to-cover reading. The plan is based on the learning-science principles of retrieval practice, spaced review, advance organizers and the expertise reversal effect (<a href="https://doi.org/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer">Dunlosky 2013</a>; <a href="https://doi.org/10.1111/j.1467-9280.2008.02209.x" target="_blank" rel="noopener noreferrer">Cepeda 2008</a>; <a href="https://doi.org/10.1037/h0046669" target="_blank" rel="noopener noreferrer">Ausubel 1960</a>; <a href="https://doi.org/10.1207/S15326985EP3801_4" target="_blank" rel="noopener noreferrer">Kalyuga 2003</a>). All tools are free: <a href="https://github.com/iic-jku/IIC-OSIC-TOOLS" target="_blank" rel="noopener noreferrer">IIC-OSIC-TOOLS</a>, <a href="https://github.com/bmurmann/Book-on-gm-ID-design" target="_blank" rel="noopener noreferrer">Murmann gm/ID starter kit</a>, <a href="https://github.com/dreoilin/pygmid" target="_blank" rel="noopener noreferrer">pygmid</a>. The open PDKs are 130–180 nm planar processes. Use them only to see curve shapes and trade-offs; their absolute values do not transfer to advanced nodes. Activity durations are rough estimates.</p></div><div class="days"><a class="day" href="#p-en-1"><small>DAY 1</small><b>Draw the analog device metrics map</b></a><a class="day" href="#p-en-2"><small>DAY 2</small><b>Learn the gm/ID and inversion coefficient language</b></a><a class="day" href="#p-en-3"><small>DAY 3</small><b>Gain, output resistance, speed, and what to do without a long channel</b></a><a class="day" href="#p-en-4"><small>DAY 4</small><b>Noise, from trap physics to statistical noise corners</b></a><a class="day" href="#p-en-5"><small>DAY 5</small><b>Mismatch and layout, Pelgrom's law and the "same environment"</b></a><a class="day" href="#p-en-6"><small>DAY 6</small><b>The frontier, from FinFET to nanosheet, then forksheet, CFET and backside power delivery</b></a><a class="day" href="#p-en-7"><small>DAY 7</small><b>Synthesize, explain it to others, plan next steps</b></a></div><details class="sub" id="p-en-1" open><summary>Day 1: Draw the analog device metrics map</summary><div class="sub-body"><p><strong>Goal</strong>: Build the overall framework before reading anything, understand how analog and logic are evaluated in fundamentally different ways, and install the tools.</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Razavi, <em>Design of Analog CMOS Integrated Circuits</em>, 2nd ed.: Chapter 1, plus the chapter and section headings of Chapters 2 and 17; skim only (<a href="https://www.mheducation.com/highered/product/design-of-analog-cmos-integrated-circuits-razavi.html" target="_blank" rel="noopener noreferrer">McGraw-Hill</a>).</li>
+<li>Enz, Chicco, Pezzotta, "Nanoscale MOSFET Modeling Part 1: The Simplified EKV Model" (<a href="https://doi.org/10.1109/MSSC.2017.2712318" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>Palermo's gm/ID lecture notes (<a href="https://people.engr.tamu.edu/spalermo/ecen474/lecture07_ee474_gmid.pdf" target="_blank" rel="noopener noreferrer">TAMU PDF</a>); look at the figures only.</li>
+<li>Mudanai et al., "Halo Doping: Physical Effects and Compact Modeling" (<a href="https://briefs.techconnect.org/papers/halo-doping-physical-effects-and-compact-modeling/" target="_blank" rel="noopener noreferrer">page</a>). This is the first bridge from logic process technology to analog.</li>
+</ul>
+<p><strong>Schedule</strong>: Pre-test and mapping 30 min → Enz Part 1 about 60 min → skim Palermo and Mudanai 20 min → install the IIC-OSIC-TOOLS Docker image 30 min → write self-test questions 15 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li>Before reading, draw from memory on one sheet the relationships among gm, gds, gm/ID, gm/gds, fT, Cgg, AVT, 1/f noise, thermal noise and LDE. This is concept map v1. Put question marks where you cannot answer.</li>
+<li>Pull the IIC-OSIC-TOOLS image and confirm that Xschem and ngspice launch.</li>
+<li>Write in three sentences "why halo hurts long-channel analog devices".</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Can name the 3 logic FoMs and the 4 core analog FoMs and explain how they differ (evaluation point, L range, statistical nature).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can write fT = gm/(2πCgg) and gm/gds ≈ (gm/ID)·VEA.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the IC ranges for weak, moderate and strong inversion, and the theoretical gm/ID limit 1/(n·UT).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain where "long-channel DIBL" comes from.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Concept map v1 has been photographed and archived for use on Day 7.</li>
+</ul></div></details><details class="sub" id="p-en-2"><summary>Day 2: Learn the gm/ID and inversion coefficient language</summary><div class="sub-body"><p><strong>Goal</strong>: Read device curves with a lookup-table mindset and understand why moderate inversion is the analog "sweet spot".</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Enz, Chicco, Pezzotta, Part 2: "Using the Inversion Coefficient as the Primary Design Parameter" (<a href="https://doi.org/10.1109/MSSC.2017.2745838" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>Silveira, Flandre, Jespers 1996, the origin of the gm/ID method; look at the figures only (<a href="https://doi.org/10.1109/4.535416" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>The README and <code>lookup_examples.ipynb</code> in the Murmann starter kit (<a href="https://github.com/bmurmann/Book-on-gm-ID-design" target="_blank" rel="noopener noreferrer">GitHub</a>).</li>
+<li>Optional: the sizing (gm/ID) section of the Pretl course (<a href="https://iic-jku.github.io/analog-circuit-design/" target="_blank" rel="noopener noreferrer">course site</a>).</li>
+</ul>
+<p><strong>Schedule</strong>: Retest Day 1 questions 10 min → read Part 2 about 50 min → hands-on 70 min → write self-test questions and a one-page explanation 20 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li><strong>Predict first, then plot</strong>: On paper, sketch what you expect for gm/ID vs. ID/W, gm/gds vs. gm/ID and fT vs. gm/ID, each for 3–4 values of L.</li>
+<li>Run techsweep in the <code>ihp-sg13g2</code> or <code>sky130</code> folder, or load the bundled .mat file directly, plot the three sets of curves with pygmid, and compare them with your predictions.</li>
+<li>Rework Palermo's example: given gm/ID and ID, look up ID/W and compute W and fT.</li>
+<li>Write one page on "why moderate inversion is the analog sweet spot", aimed at a logic process colleague.</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why gm/ID curves are independent of W to first order, and why this helps design.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the cost of raising gm/ID (lower fT, larger device).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can walk through the lookup-table flow gm → gm/ID → ID → ID/W → W.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state which way fT and gm/gds each move as L increases.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can answer all Day 1 self-test questions correctly.</li>
+</ul></div></details><details class="sub" id="p-en-3"><summary>Day 3: Gain, output resistance, speed, and what to do without a long channel</summary><div class="sub-body"><p><strong>Goal</strong>: Understand the physical origin of intrinsic gain, and learn the principles, costs and characterization methods of long-channel alternatives at advanced nodes.</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Razavi Chapter 2 (channel-length modulation) and Chapter 17 (DIBL, velocity saturation); read only the sections marked with question marks on the Day 1 concept map.</li>
+<li>Fulde et al. 2007, analog comparison of FinFET and bulk, open access (<a href="https://d-nb.info/1149772921/34" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+<li>Waller, "All about stacked MOSFETs in analog layout" (<a href="https://www.edn.com/all-about-stacked-mosfets-in-analog-layout/" target="_blank" rel="noopener noreferrer">EDN 2021</a>).</li>
+<li>Intel 22FFL analog and I/O device data (<a href="https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/3" target="_blank" rel="noopener noreferrer">WikiChip</a>).</li>
+<li>Galup-Montoro et al. CICC 2007, model consistency for series-connected devices (<a href="https://lci.ufsc.br/pdf/18-6.pdf" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+</ul>
+<p><strong>Schedule</strong>: Interleaved retest of Day 1–2 10 min → reading 60 min → hands-on 60 min → self-test 20 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li>Using the lookup table, plot gm/gds vs. L at fixed gm/ID (e.g., 12 S/A) and gds vs. VDS, and find the VDS window with the best gain.</li>
+<li><strong>Estimate</strong>: Given a DIBL coefficient η = 46 mV/V (Fulde prototype), derive the intrinsic gain limit from gds ≈ η·gm (about 22). Then compare it with the 22FFL GM×Rout of 47–60 and the GF 14 nm values of 40/34, and explain where the difference comes from.</li>
+<li>In ngspice, connect 4 minimum-L devices in series and compare gm, gds and gm/gds with a single 4L device. Observe the voltage distribution on the internal nodes.</li>
+<li>Fill in a table of alternatives with columns "Method | Principle | Pros | Costs | How to characterize". Rows: stacked gates, relaxed-pitch devices, I/O devices, lower inversion, cascode, gain boosting, digital calibration, chiplet partitioning.</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why VEA grows roughly with L and why DIBL caps the gain.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the gain benefit of FinFET over bulk (2–10×) and its costs (up to 30% lower gm, parasitics, self-heating).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can give at least two reasons why stacked gates are not fully equivalent to a long channel.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the costs of using I/O devices as gain devices (low fT, large area).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why DC gds differs from AC gds under self-heating, and how to measure it.</li>
+</ul></div></details><details class="sub" id="p-en-4"><summary>Day 4: Noise, from trap physics to statistical noise corners</summary><div class="sub-body"><p><strong>Goal</strong>: Diagnose 1/f noise mechanisms, extract N_OT and α_SC from data, and understand the statistical nature of RTN and the short-channel increase in thermal noise γ.</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Razavi Chapter 7, the thermal noise and 1/f sections.</li>
+<li>Hung, Ko, Hu, Cheng 1990, unified flicker model (<a href="https://doi.org/10.1109/16.47770" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>Claeys et al. 2004, process modules and low-frequency noise (<a href="https://doi.org/10.1149/1.1683633" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>C.-Y. Chen's Stanford PhD dissertation; read only the CNF/Hooge diagnosis and RTN chapters (<a href="https://stacks.stanford.edu/file/druid:pf645xz5659/cy_thesis-augmented.pdf" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+<li>Simoen et al. JICS 2022, the √S_VG vs. V_GT extraction method (<a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+<li>RTN tail data (<a href="https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm" target="_blank" rel="noopener noreferrer">VLSI 2009 3B-3</a>); measurement equipment (<a href="https://compass.formfactor.com/wp-content/uploads/2020-Arnaldo-Sans-1f-Noise-Challenges-and-Solutions.pdf" target="_blank" rel="noopener noreferrer">Keysight/FormFactor 2020</a>).</li>
+</ul>
+<p><strong>Schedule</strong>: Retest Day 2 content (spaced) 10 min → reading 70 min → hands-on 50 min → write explanation and self-test questions 20 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li>Run the gf180 <code>noisetest_nfet_03v3.sch</code> in the Murmann starter kit, or use an ngspice <code>.noise</code> sweep, and extract how the flicker corner frequency depends on gm/ID and W·L.</li>
+<li><strong>Data exercise</strong>: Using GF data (S_VG·WL: 17/35 for 14 nm FinFET and 171/106 fV²·µm²/Hz for 28 nm planar, see <a href="https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications" target="_blank" rel="noopener noreferrer">Singh/GF</a>), compute the improvement factor for n and p separately, and write two hypotheses for why pFET overtakes nFET.</li>
+<li>Write a 1/f measurement plan: bias points, number of current points, frequency band, sample size and report format, and explain why the lognormal σ should be reported.</li>
+<li>Explanation task: write one page on "Which gate stack and interface process knobs change Kf?"</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Can distinguish carrier number fluctuation (ΔN) from mobility fluctuation (Δμ) using two plots.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state what the intercept and slope of the √S_VG vs. V_GT line each represent.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why low-frequency noise probes deeper traps, and what this means for high-k stacks.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the features of the RTN distribution (long tail, ΔVth can exceed 70 mV) and the design responses.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can write the long-channel thermal noise formula (γ = 2/3) and explain why γ increases in short channels.</li>
+</ul></div></details><details class="sub" id="p-en-5"><summary>Day 5: Mismatch and layout, Pelgrom's law and the "same environment"</summary><div class="sub-body"><p><strong>Goal</strong>: Master Pelgrom's law and its engineering implications (the mismatch, speed and power trade-off), understand new mismatch sources in FinFET/GAA, and become familiar with LDE and matching layout rules.</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Pelgrom, Duinmaijer, Welbers 1989 (<a href="https://doi.org/10.1109/JSSC.1989.572629" target="_blank" rel="noopener noreferrer">DOI</a>); look at the figures and the distance term.</li>
+<li>Kinget 2005, "Device mismatch and tradeoffs" (<a href="https://doi.org/10.1109/JSSC.2005.848021" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>Pelgrom 2013 talk slides, matching coefficients for various components (<a href="https://indico.cern.ch/event/228972/contributions/1539553/attachments/378475/526400/TWEPP24sept2013Print.pdf" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+<li>Razavi Chapters 14 and 19.</li>
+<li>IBM, fin angle and matching (<a href="https://research.ibm.com/publications/transistor-matching-and-fin-angle-variation-in-finfet-technology" target="_blank" rel="noopener noreferrer">page</a>).</li>
+<li>LDE overview (<a href="https://www.eenewseurope.com/en/layout-dependent-effects-in-analog-design" target="_blank" rel="noopener noreferrer">eeNews Europe</a>); FinFET matching layout (<a href="https://www.asicnorth.com/blog/part-two-finfet-back-end-layout-analog-techniques-and-design-tools/" target="_blank" rel="noopener noreferrer">ASIC North</a>).</li>
+<li>Tuinhout ICMTS 2003, test structures for neighboring layout effects (<a href="https://doi.org/10.1109/icmts.2003.1197465" target="_blank" rel="noopener noreferrer">DOI</a>); Simicic 2015 arrays (<a href="https://lirias.kuleuven.be/bitstream/123456789/525000/2/IIRW2015_OA.pdf" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+</ul>
+<p><strong>Schedule</strong>: Interleaved retest of Day 3–4 10 min → reading 70 min → calculation and design exercises 50 min → self-test 20 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li><strong>Calculate</strong>: Let AVT = 3.5 mV·µm (65 nm value). With the differential-pair definition σ(ΔVT) = AVT/√(WL), find the WL needed for σ = 1 mV (12.25 µm²). Then assume AVT is halved and find by what factor the required area and input capacitance shrink (4×). Finally, use the "mismatch energy" argument of about 70 kT to explain why mismatch is ultimately a power problem.</li>
+<li>Redo the calculation with the single-transistor σ definition (a factor of √2 apart) to see why you must confirm the definition before reading a PDK.</li>
+<li>Sketch a matching layout for a FinFET differential pair: common centroid, dummy gates, continuous diffusion, uniform fin grouping, no routing overhead, guard ring. Label which LDE each measure addresses.</li>
+<li>Design an AVT extraction experiment: geometry variants, sample size per variant, Kelvin connections, adjacent-pair differences, probit plots and confidence intervals.</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Can write Pelgrom's law and explain the difference between the single-transistor and differential-pair definitions.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why an undoped channel improves AVT, yet FinFET is not necessarily better than planar in practice (MGG, fin angle, LER).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state whether LER or MGG matters more in nanosheets, and the type of evidence (TCAD).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can list at least 4 LDEs (WPE, LOD, OSE/PSE, diffusion break) and their mitigations.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why VT mismatch takes a larger share of current mismatch as gm/ID increases.</li>
+</ul></div></details><details class="sub" id="p-en-6"><summary>Day 6: The frontier, from FinFET to nanosheet, then forksheet, CFET and backside power delivery</summary><div class="sub-body"><p><strong>Goal</strong>: Build a "planar → FinFET → GAA" comparison table of analog metrics, separate research-device, TCAD and production data, and list questions that need answers from internal data.</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Subramanian/Parvais TED 2006 (<a href="https://doi.org/10.1109/ted.2006.885649" target="_blank" rel="noopener noreferrer">DOI</a>) or Parvais VLSI-TSA 2009 (<a href="https://doi.org/10.1109/vtsa.2009.5159300" target="_blank" rel="noopener noreferrer">DOI</a>); pick one.</li>
+<li>Yoon et al. 2020, analog/RF design guidelines for 5 nm FinFET vs. NSFET, open access (<a href="https://doi.org/10.1109/access.2020.3031870" target="_blank" rel="noopener noreferrer">DOI</a>).</li>
+<li>Asanovski et al. imec 2026, nanosheet 1/f noise (<a href="https://arxiv.org/abs/2609.08674" target="_blank" rel="noopener noreferrer">arXiv</a>).</li>
+<li>Simoen et al. JICS 2022, nanosheet gain, gm/ID and temperature (<a href="https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770" target="_blank" rel="noopener noreferrer">PDF</a>).</li>
+<li>TSMC GAA design considerations (<a href="https://semiwiki.com/semiconductor-manufacturers/tsmc/300986-tsmc-design-considerations-for-gate-all-around-gaa-technology/" target="_blank" rel="noopener noreferrer">SemiWiki</a>); "Wrestling With Analog At 3nm" (<a href="https://semiengineering.com/wrestling-with-analog-at-3nm/" target="_blank" rel="noopener noreferrer">Semiconductor Engineering</a>).</li>
+<li>Intel 18A technology brief (<a href="https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf" target="_blank" rel="noopener noreferrer">PDF</a>); imec BSPDN (<a href="https://imec-int.com/en/articles/backside-power-delivery-options-dtco-study" target="_blank" rel="noopener noreferrer">article</a>); imec forksheet (<a href="https://www.eetimes.com/vlsi-2025-outer-wall-forksheet-bridges-nanosheet-and-cfet-architectures/" target="_blank" rel="noopener noreferrer">EE Times</a>).</li>
+<li>Optional: Liu IEDM 2021 statistical flicker modeling (<a href="https://doi.org/10.1109/iedm19574.2021.9720680" target="_blank" rel="noopener noreferrer">DOI</a>); nanoHUB-U Nanotransistors (<a href="https://nanohub.org/courses/NT" target="_blank" rel="noopener noreferrer">course</a>).</li>
+</ul>
+<p><strong>Schedule</strong>: Retest Day 4 content (spaced) 10 min → reading 90 min → compile the comparison table 40 min → self-test 15 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li>Fill in the comparison table. Columns: planar, FinFET, nanosheet, forksheet/CFET. Rows: width granularity, intrinsic gain, peak gm/ID, fT/fmax, Cgd/parasitics, 1/f noise, dominant AVT source, LDE, self-heating, available L, I/O devices, passives. Note the evidence type in each cell (research device, production, TCAD, vendor, opinion); write "no public data" where nothing is available.</li>
+<li>If you have access to BSIM-CMG or an internal GAA model, generate the same gm/ID curves with the Day 2–3 scripts and compare their shapes with the open-PDK planar curves.</li>
+<li>Write a list of "10 questions on backside power delivery for analog", for example: Are guard rings still effective after substrate thinning? How does inductor Q change? How does thermal resistance affect gds dispersion?</li>
+<li>Answer in one paragraph: "Why does imec conclude that GAA does not increase 1/f noise? How broadly does this conclusion apply?"</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Can distinguish "width is physically continuous" from "width is a discrete menu in the PDK" (Intel W1–W3P, TSMC NanoFlex).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the limitations of the imec nanosheet gain figure of about 46 dB (research device, cross-paper comparison).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can list the 5 analog issues of GAA: parasitic C/R, sub-sheet leakage, self-heating, PMOS mobility, passives that do not scale.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain why, in TCAD, wider sheets raise fT but lower fmax (gate resistance and parasitics).</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can state the analog benefits of backside power delivery that have public data (IR drop, MIM, thermal resistance improvement) and the public gaps (isolation, guard rings).</li>
+</ul></div></details><details class="sub" id="p-en-7"><summary>Day 7: Synthesize, explain it to others, plan next steps</summary><div class="sub-body"><p><strong>Goal</strong>: Test the week's learning closed-book, turn the knowledge into material you can present to others, and convert open questions into follow-up actions.</p>
+<p><strong>Materials</strong>:</p>
+<ul>
+<li>Concept map v1 from Day 1, the week's self-test cards and the one-page explanations from each day.</li>
+<li>The comparison table and question list from Day 6.</li>
+<li>References for follow-up planning: the complete sizing examples in Jespers &amp; Murmann (<a href="https://doi.org/10.1017/9781108125840" target="_blank" rel="noopener noreferrer">DOI</a>, <a href="https://github.com/bmurmann/Book-on-gm-ID-design" target="_blank" rel="noopener noreferrer">GitHub</a>); the OTA labs in the Pretl course (<a href="https://iic-jku.github.io/analog-circuit-design/" target="_blank" rel="noopener noreferrer">course site</a>); Binkley's monograph on the inversion coefficient (<a href="https://doi.org/10.1002/9780470033715" target="_blank" rel="noopener noreferrer">DOI</a>); Murmann EE628 (<a href="https://github.com/bmurmann/EE628" target="_blank" rel="noopener noreferrer">GitHub</a>).</li>
+</ul>
+<p><strong>Schedule</strong>: Closed-book interleaved comprehensive quiz 40 min → redraw concept map v2 and compare with v1 30 min → write a briefing or talk script 60 min → plan weeks 2–4 20 min.</p>
+<p><strong>Hands-on exercises</strong>:</p>
+<ol>
+<li><strong>Closed-book comprehensive quiz</strong>: Draw 20 random questions from the week's cards, mixing gain, noise, mismatch and GAA, and record the ones you miss.</li>
+<li><strong>Concept map v2</strong>: Redraw it from memory, compare with v1, and mark the new nodes and links.</li>
+<li><strong>Explain it to others</strong>: Write a 2-page briefing or a 15-minute talk script titled "What analog design needs from a GAA process". Structure: the shift in evaluation approach → mapping process knobs to analog metrics → long-channel alternatives → noise and mismatch → opportunities and gaps in GAA, backside power delivery and 3D → 5 answers you want from internal data.</li>
+<li><strong>Plan the follow-up</strong>: Week 2, complete gm/ID sizing of an OTA using the Jespers &amp; Murmann examples; week 3, do the cascode and biasing labs in the Pretl course; week 4, run a data review of AVT, 1/f and gds dispersion on internal GAA devices.</li>
+</ol>
+<p><strong>Self-test checklist</strong>:</p>
+<ul>
+<li class="check"><span class="box" aria-hidden="true"></span>Closed-book comprehensive quiz score is 80% or higher, and missed questions have been added to the cards for continued spaced review.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Concept map v2 adds at least 10 meaningful links, for example EOT → AVT and EOT → S_VG.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can explain to a logic process colleague in 2 minutes "what analog cares about, and why".</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Can name at least 3 long-channel alternatives and how each is characterized.</li>
+<li class="check"><span class="box" aria-hidden="true"></span>Have listed the data needed from the PDK or internal characterization: AVT, Aβ, S_VG·WL distribution, gm/gds–L, Rg, Rth, BSPDN isolation.</li>
+</ul></div></details></section></div>
+<p class="note"><span class="zh" lang="zh-CN">资料链接的完整来源列表见指南正文的 Sources 一节。<a href="../#s10">查看来源</a></span><span class="en" lang="en">The full source list is in the Sources section of the main guide. <a href="../#s10-en">View sources</a></span></p></main></div>
+<footer><span><span class="zh" lang="zh-CN">TIMEMEMO RESEARCH · 2026.10.09</span><span class="en" lang="en">TIMEMEMO RESEARCH · 2026.10.09</span></span><a href="../"><span><span class="zh" lang="zh-CN">返回指南正文</span><span class="en" lang="en">Back to the guide</span></span></a></footer>
+<script>(function(){var b=document.body,z=document.getElementById('langZh'),n=document.getElementById('langEn');
+function set(l){b.dataset.language=l;document.documentElement.lang=l==='zh'?'zh-CN':'en';z.setAttribute('aria-pressed',String(l==='zh'));n.setAttribute('aria-pressed',String(l==='en'));try{localStorage.setItem('timememo-home-language',JSON.stringify(l))}catch(e){}}
+var q=new URLSearchParams(location.search).get('lang'),s=null;try{s=JSON.parse(localStorage.getItem('timememo-home-language'))}catch(e){}
+set(q==='en'||q==='zh'?q:(s==='en'?'en':'zh'));z.onclick=function(){set('zh')};n.onclick=function(){set('en')};
+function all(o){document.querySelectorAll('details.sub').forEach(function(d){d.open=o})}
+document.querySelectorAll('[data-expand]').forEach(function(x){x.onclick=function(){all(true)}});
+document.querySelectorAll('[data-collapse]').forEach(function(x){x.onclick=function(){all(false)}});
+function reveal(){var h=location.hash.slice(1);if(!h)return;var el=document.getElementById(h);if(!el)return;if(el.tagName==='DETAILS')el.open=true;var p=el.closest&&el.closest('details');if(p)p.open=true;}
+addEventListener('hashchange',reveal);reveal();})();</script></body></html>
