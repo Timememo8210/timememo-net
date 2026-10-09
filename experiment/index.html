@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<title>timememo.net · 首屏强度档位</title>
+<style>
+/* ==========================================================================
+   外壳
+   ========================================================================== */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#0c0e12;color:#d8dade;
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:100;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;
+  padding:12px 20px;background:#13161bf2;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff14}
+.brand{font-size:12px;letter-spacing:.06em;color:#8e949e;margin-right:auto}
+.brand b{color:#eef1f5;font-weight:600;letter-spacing:0}
+.switch{display:flex;flex-wrap:wrap;gap:6px}
+.switch button{appearance:none;border:1px solid #ffffff1f;background:#ffffff08;color:#b9bec7;font:inherit;
+  font-size:12.5px;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .18s}
+.switch button:hover{background:#ffffff14;color:#fff}
+.switch button[aria-selected=true]{background:#c4e4ff;color:#111820;border-color:#c4e4ff;font-weight:600}
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:12px;color:#9aa1ab}
+.tools label{display:flex;gap:6px;align-items:center;cursor:pointer;user-select:none}
+.tools button{appearance:none;border:1px solid #ffffff22;background:transparent;color:#cfd4db;font:inherit;
+  font-size:12px;padding:6px 12px;border-radius:7px;cursor:pointer}
+.tools button:hover{background:#ffffff10}
+#top0{border-color:#c4e4ff5c;background:#c4e4ff14;color:#cfe8ff;font-weight:600}
+
+main{padding:22px 20px 70px;max-width:1380px;margin:0 auto}
+.rmbar{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 18px;padding:12px 16px;border-radius:9px;
+  background:#1d2a33;border:1px solid #c4e4ff33;color:#cfe4f5;font-size:13px;line-height:1.6}
+body.rm-detected .rmbar{display:flex}
+.rmbar b{color:#eaf4ff;font-weight:600}
+.rmbar button{appearance:none;border:1px solid #c4e4ff7a;background:#c4e4ff1f;color:#e3f1ff;font:inherit;
+  font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:6px;cursor:pointer;margin-left:auto}
+.hint{margin:0 0 16px;font-size:12.5px;color:#7f8692;line-height:1.75}
+.hint b{color:#b6bcc5;font-weight:500}
+
+.tier{display:none}.tier.on{display:block}
+.name{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+.name h2{margin:0;font-size:21px;font-weight:650;color:#f2f5f9}
+.name .lv{font:11px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;color:#0e1419;background:#c4e4ff;
+  padding:5px 8px;border-radius:4px;font-weight:700}
+.name span.d{font-size:13px;color:#8f96a1}
+
+/* 视窗：每档都是一个可真实滚动的迷你跑道 */
+.frame{margin:0 auto;transition:max-width .35s cubic-bezier(.2,.7,.2,1);max-width:100%}
+body.mob .frame{max-width:390px}
+/* container-type:size（不是 inline-size）—— 这样 .sticky 才能用 100cqh 拿到视窗高度。
+   用 height:100% 是错的：那是 .runway 的 330%。 */
+.vp{container-type:size;position:relative;overflow-y:auto;overflow-x:hidden;
+  height:clamp(560px,78vh,800px);border-radius:10px;border:1px solid #ffffff14;
+  scrollbar-width:thin;scrollbar-color:#ffffff2e transparent}
+body.mob .vp{height:740px}
+.vp::-webkit-scrollbar{width:7px}
+.vp::-webkit-scrollbar-thumb{background:#ffffff2e;border-radius:4px}
+.runway{height:330cqh;position:relative}
+.sticky{position:sticky;top:0;height:100cqh;overflow:hidden}
+
+.scrollnote{position:absolute;left:50%;bottom:54px;transition:opacity .4s;transform:translateX(-50%);z-index:5;
+  font-size:11px;letter-spacing:.1em;color:#ffffff6b;pointer-events:none;
+  background:#0a0f16a8;padding:5px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+
+.spec{margin:16px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;
+  background:#ffffff14;border:1px solid #ffffff14;border-radius:10px;overflow:hidden}
+.spec>div{background:#13161b;padding:16px 18px}
+.spec h4{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7f8692;font-weight:600}
+.spec ul{margin:0;padding-left:1.1em}
+.spec li{margin:0 0 6px;font-size:12.5px;color:#c2c7ce}
+.spec p{margin:0 0 7px;font-size:12.5px;color:#c2c7ce}
+.spec code{font:11.5px/1.5 ui-monospace,Menlo,monospace;color:#e8ecf2;background:#ffffff0f;padding:1px 5px;border-radius:4px}
+.spec b.hl{color:#cfe8ff;font-weight:600}
+.note{max-width:1380px;margin:26px auto 0;padding:0 20px;font-size:12.5px;color:#868d98;line-height:1.75}
+.note b{color:#c5cbd3}
+.norun,.norun *,.norun *::before,.norun *::after{animation:none !important}
+</style>
+
+<!-- 动效降级规则：media 默认 not all，完全由 JS 控制（见脚本注释） -->
+<style id="reduced" media="not all">
+  .sticky *,.sticky *::before,.sticky *::after,.paper *{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important}
+  /* 降级后不是「什么都没有」：保留滚动联动的淡入淡出（那是直接操作，不会引起前庭不适），
+     去掉的是自走的循环、视差、缩放推进、模糊景深。 */
+  .spin,.sweep,.scan,.drift,.pulse{animation:none !important;transform:none !important}
+  .t3 .stage{transform:none !important;filter:none !important}
+  .t3 .wafer{transform:translate(-50%,-50%) !important}
+  .parallax{transform:none !important}
+  .glyph{opacity:1 !important;transform:none !important;clip-path:none !important}
+</style>
+
+<style>
+/* ==========================================================================
+   共享：晶圆（三档共用同一副骨架，各档只换材质与光）
+   —— 这是身份锚点，剪影保持不变
+   ========================================================================== */
+.scene{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.atmo{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 79% 30%,var(--halo),transparent 70%),
+             linear-gradient(120deg,var(--bg2),var(--bg) 60%,var(--bg3))}
+.wafer{position:absolute;left:72%;top:46%;width:min(46cqw,520px);aspect-ratio:1;
+  transform:translate(-50%,-50%);border-radius:50%;isolation:isolate}
+.w-disc{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#44586e,#27384a 42%,#16222f 78%,#101a25);
+  box-shadow:inset 0 0 60px #0a121bcc, 0 0 0 1px #ffffff1a, 0 24px 80px #00000066}
+.w-lattice{position:absolute;inset:7%;border-radius:50%;opacity:.5;
+  background:repeating-linear-gradient(0deg,#cfe6ff26 0 1px,transparent 1px 4.4%),
+             repeating-linear-gradient(90deg,#cfe6ff26 0 1px,transparent 1px 4.4%)}
+/* 镜面扫掠：conic 直接用会有一条从圆心射出的硬边（像 bug 不像高光），
+   所以 blur 之后再用径向 mask 把圆心和圆外一起切掉，只留环带上的那道光。 */
+.w-spec{position:absolute;inset:0;border-radius:50%;pointer-events:none;mix-blend-mode:screen;
+  filter:blur(16px);
+  -webkit-mask-image:radial-gradient(circle,transparent 16%,#000 42%,#000 64%,transparent 70%);
+  mask-image:radial-gradient(circle,transparent 16%,#000 42%,#000 64%,transparent 70%);
+  background:conic-gradient(from 0deg,transparent 0deg,#dcefff00 40deg,#dcefff3d 72deg,#dcefff00 110deg,transparent 360deg)}
+.w-ring{position:absolute;border-radius:50%;border:1px solid #cfe6ff1f;pointer-events:none}
+.w-ring.r1{inset:-5%}.w-ring.r2{inset:-11%;border-color:#cfe6ff12}
+.w-notch{position:absolute;left:50%;top:-1%;width:3.2%;height:2.6%;transform:translateX(-50%);
+  background:var(--bg);border-radius:0 0 50% 50%;box-shadow:0 0 0 1px #ffffff1a}
+.w-gloss{position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 30% 24%,#ffffff1f,transparent 46%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin 26s linear infinite}
+
+/* 章节文案（三档共用结构） */
+.stage{position:absolute;inset:0}
+.copy{position:absolute;left:var(--pad);top:50%;transform:translateY(-50%);max-width:52cqw;z-index:3}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+.eyebrow s{width:6px;height:6px;border-radius:50%;background:var(--accent);text-decoration:none}
+.pulse{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{margin:0 0 18px;font-size:clamp(50px,10.4cqw,132px);line-height:1.06;font-weight:600;
+  letter-spacing:-.05em;color:var(--ink);white-space:nowrap}
+h2.ch{margin:0 0 16px;font-size:clamp(38px,7.6cqw,96px);line-height:1.12;font-weight:600;
+  letter-spacing:-.045em;color:var(--ink)}
+h2.ch em{font-style:normal;color:var(--accent)}
+.sub{margin:0 0 30px;max-width:30ch;font-size:clamp(13px,1.5cqw,17px);color:var(--muted);line-height:1.8}
+.cta{display:inline-flex;align-items:center;gap:12px;font-size:14px;letter-spacing:.04em;
+  text-decoration:none;color:var(--ink);padding-bottom:7px;position:relative}
+.cta::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--accent);
+  transform-origin:right;transform:scaleX(.24);transition:transform .55s cubic-bezier(.16,.84,.26,1)}
+.cta:hover::after{transform:scaleX(1);transform-origin:left}
+.cta i{font-style:normal;color:var(--accent);transition:transform .5s cubic-bezier(.16,.84,.26,1)}
+.cta:hover i{transform:translate(4px,4px)}
+.rail{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted)}
+.rail .ln{position:relative;width:88px;height:1px;background:#ffffff2e}
+.rail .ln b{position:absolute;top:-2px;left:0;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.drift{animation:drift 3.4s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes drift{0%{left:0}50%{left:calc(100% - 5px)}100%{left:0}}
+
+/* 底栏（身份锚点：Portland / 章节号 / 滚动提示） */
+.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;justify-content:space-between;
+  align-items:center;gap:16px;padding:16px var(--pad);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:#8fa0b4}
+.bottombar .mid{display:flex;align-items:center;gap:10px}
+.bottombar .num{font-family:ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;color:var(--accent)}
+.progress{position:absolute;left:var(--pad);right:var(--pad);bottom:0;height:1px;background:#ffffff1a}
+.progress b{display:block;height:100%;background:var(--accent);width:calc(var(--p,0) * 100%)}
+/* 滚到接缝时底栏要让位，否则它的深色背景会把过渡带拦腰切断 */
+.bottombar,.progress,.chaplabel{opacity:clamp(0,calc(1 - (var(--p,0) - .84) * 7),1)}
+.chaplabel{position:absolute;right:var(--pad);bottom:58px;z-index:4;display:flex;align-items:center;gap:12px;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#93a6ba}
+.chaplabel .num{font-family:ui-monospace,Menlo,monospace;color:var(--accent)}
+
+/* 第二屏：深转浅 —— 这是现站的硬切点，三档各有各的接法 */
+.paper{position:relative;background:var(--paper);color:var(--paper-ink);padding:80px var(--pad) 90px;z-index:2}
+.seam{position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--hairline)}
+.paper .lab{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a8275;margin:0 0 14px}
+.paper h3{margin:0 0 26px;font-size:clamp(28px,4.4cqw,52px);font-weight:650;letter-spacing:-.035em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{border-radius:10px;padding:20px;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;
+  background:#fff8f0;border:1px solid #27323d1a}
+.card.dark{background:#27384a;color:#eaf1f8;border-color:#ffffff14}
+.card .k{font:10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;color:#9a8e7e}
+.card.dark .k{color:#9fb6cc}
+.card .t{font-size:16px;font-weight:600;margin-top:auto}
+
+:root{--pad:clamp(26px,5cqw,72px)}
+
+/* ==========================================================================
+   档位 1 · 打磨 Refine
+   同一张脸，换了呼吸。改的是曲线、时序、字重、接缝、强调色收敛。
+   ========================================================================== */
+.t1{--bg:#17202B;--bg2:#121B28;--bg3:#263B4A;--halo:#29445999;
+    --ink:#F4F7FD;--muted:#B8C5D5;--accent:#C4E4FF;
+    --paper:#FAF3EC;--paper-ink:#27323D;--hairline:#27323d25}
+/* 统一的「落位」曲线：现站用了 .3s / .4s / .5s 四五种不同的 ease，这里收敛成一条 */
+.t1 .stage{--ease:cubic-bezier(.16,.84,.26,1)}
+.t1 .c1{opacity:var(--k1);transition:opacity .1s linear}
+.t1 .c2{opacity:var(--k2)}
+.t1 .c3{opacity:var(--k3)}
+.t1 .copy>*{transition:opacity .5s var(--ease),transform .7s var(--ease)}
+/* 字重随滚动微动：500 → 580，只动标题，不动正文 */
+.t1 h1{font-weight:calc(500 + var(--p,0) * 80);font-variation-settings:"wght" calc(500 + var(--p,0) * 80)}
+.t1 .wafer{transform:translate(-50%,-50%) scale(calc(1 - var(--p,0) * .06))}
+.t1 .w-spec{animation:spin 30s linear infinite}
+/* 接缝：160px 的渐隐带，深色不再是一刀切到纸面 */
+.t1 .fade{opacity:calc((var(--p,0) - .80) * 5);position:absolute;left:0;right:0;bottom:0;height:170px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,transparent,#1b2531 55%,var(--paper))}
+.t1 .paper{padding-top:70px}
+
+/* ==========================================================================
+   档位 2 · 换代 Recast
+   晶圆变成有厚度的硅：薄膜干涉的衍射彩虹、可见晶格、镜面扫掠。
+   三章变形：圆盘 → 晶格展开 → 良率点阵点亮成 AI。
+   ========================================================================== */
+.t2{--bg:#0F1822;--bg2:#0B131C;--bg3:#1E3447;--halo:#2a4a66a8;
+    --ink:#F6F9FF;--muted:#A9BACD;--accent:#9FD8FF;
+    --paper:#F7F1E8;--paper-ink:#223042;--hairline:#22304222}
+.t2 .w-disc{background:radial-gradient(circle at 32% 26%,#50677f,#2b3f55 40%,#16232f 76%,#0e1821)}
+/* 薄膜干涉：真实晶圆上那圈彩虹，来自表面膜厚差。这里用 conic + 低透明度模拟 */
+.t2 .w-diff{position:absolute;inset:3%;border-radius:50%;pointer-events:none;opacity:.46;
+  mix-blend-mode:screen;filter:blur(8px);
+  -webkit-mask-image:radial-gradient(circle,transparent 46%,#000 68%,#000 80%,transparent 90%);
+  mask-image:radial-gradient(circle,transparent 46%,#000 68%,#000 80%,transparent 90%);
+  background:conic-gradient(from 210deg,#2b6ea8,#4fb0c8,#86d6a0,#e4d27a,#d98a72,#9a6fb5,#2b6ea8)}
+.t2 .w-diff.sweep{animation:spin 44s linear infinite reverse}
+.t2 .w-lattice{opacity:calc(.28 + var(--k2,0) * .62);
+  background:repeating-linear-gradient(0deg,#d6ecff33 0 1px,transparent 1px 3.6%),
+             repeating-linear-gradient(90deg,#d6ecff33 0 1px,transparent 1px 3.6%)}
+/* 良率点阵：第三章点亮成 AI 字形 */
+.t2 .dies{position:absolute;inset:9%;border-radius:50%;overflow:hidden;display:grid;gap:2px;
+  opacity:var(--k3,0);transition:opacity .25s linear}
+.t2 .dies i{background:#8fd4ff14;border-radius:1px}
+.t2 .dies i.lit{background:var(--accent);box-shadow:0 0 9px #9fd8ff8c}
+.t2 .w-spec{background:conic-gradient(from 0deg,transparent 0deg,#eaf7ff00 30deg,#eaf7ff45 64deg,#eaf7ff00 104deg,transparent 360deg);
+  animation:spin 22s linear infinite}
+/* 颗粒 + 光刻扫描线 */
+.t2 .grain{position:absolute;inset:0;pointer-events:none;opacity:.17;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3'/></filter><rect width='150' height='150' filter='url(%23n)' opacity='.6'/></svg>")}
+.t2 .scan{position:absolute;left:0;right:0;height:26%;pointer-events:none;opacity:.5;
+  background:linear-gradient(180deg,transparent,#bfe6ff0f 48%,#bfe6ff1c 50%,#bfe6ff0f 52%,transparent);
+  animation:scan 7.5s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes scan{0%{top:-26%}100%{top:100%}}
+/* 逐字遮罩揭示 + 字重插值 */
+.t2 .gw{display:inline-block;overflow:hidden;vertical-align:bottom}
+.t2 .glyph{display:inline-block;transform:translateY(106%);
+  animation:up 1.05s cubic-bezier(.16,.84,.26,1) forwards}
+@keyframes up{to{transform:none}}
+.t2 h1{font-variation-settings:"wght" calc(520 + var(--p,0) * 110)}
+.t2 .wafer{transform:translate(-50%,-50%) scale(calc(1 + var(--k2,0) * .12 - var(--k3,0) * .04))}
+.t2 .c1{opacity:var(--k1)}.t2 .c2{opacity:var(--k2)}.t2 .c3{opacity:var(--k3)}
+/* 接缝：抛光面把纸的颜色反射上来——有物理解释的过渡，不是一条渐变 */
+.t2 .fade{opacity:calc((var(--p,0) - .80) * 5);position:absolute;left:0;right:0;bottom:0;height:220px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,transparent,#16222e 38%,#3d4a52 72%,#8d8375 88%,var(--paper));
+  opacity:.98}
+.t2 .fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:66px;
+  background:linear-gradient(180deg,transparent,#f7f1e84d);filter:blur(7px)}
+
+/* ==========================================================================
+   档位 3 · 推满 Full
+   晶圆成为整屏唯一光源：文字被它照亮。衍射环跟随光标视差。
+   标题做成「被光刻曝出来」。章节之间是相机推进（scale + 景深）。
+   ========================================================================== */
+.t3{--bg:#070C13;--bg2:#050910;--bg3:#16293C;--halo:#1f3f5ca6;
+    --ink:#FFFFFF;--muted:#9FB3C9;--accent:#A8E0FF;
+    --paper:#F4EEE4;--paper-ink:#1C2735;--hairline:#1c273522}
+.t3 .atmo{background:radial-gradient(ellipse at 72% 44%,#1b3a55a6,transparent 64%),
+                     linear-gradient(145deg,#050910,#070C13 58%,#0d1b27)}
+/* 相机推进：三章之间是同一个空间里的位移，不是三张图切换 */
+.t3 .stage{transform:scale(calc(1 + var(--p,0) * .07));transform-origin:62% 50%}
+.t3 .wafer{width:min(52cqw,600px);
+  transform:translate(-50%,-50%) translate(calc(var(--mx,0) * 14px),calc(var(--my,0) * 14px))
+            scale(calc(1 + var(--k2,0) * .16 + var(--k3,0) * .05))}
+.t3 .w-disc{background:radial-gradient(circle at 36% 26%,#5d7a96,#2f4761 38%,#14232f 74%,#0a131c);
+  box-shadow:inset 0 0 70px #060c13d9, 0 0 0 1px #ffffff26, 0 0 140px #2d6fa03d}
+.t3 .w-diff{position:absolute;inset:1%;border-radius:50%;pointer-events:none;opacity:.62;
+  mix-blend-mode:screen;filter:blur(7px);
+  -webkit-mask-image:radial-gradient(circle,transparent 46%,#000 68%,#000 80%,transparent 90%);
+  mask-image:radial-gradient(circle,transparent 46%,#000 68%,#000 80%,transparent 90%);
+  background:conic-gradient(from calc(180deg + var(--mx,0) * 26deg),
+    #1f5f9e,#3fa8d4,#64d9b4,#e8dc86,#e0906d,#a874c4,#1f5f9e)}
+.t3 .w-diff.sweep{animation:spin 38s linear infinite reverse}
+.t3 .w-lattice{opacity:calc(.22 + var(--k2,0) * .66);
+  background:repeating-linear-gradient(0deg,#dff1ff3d 0 1px,transparent 1px 3.2%),
+             repeating-linear-gradient(90deg,#dff1ff3d 0 1px,transparent 1px 3.2%)}
+.t3 .dies{position:absolute;inset:8%;border-radius:50%;overflow:hidden;display:grid;gap:2px;
+  opacity:var(--k3,0)}
+.t3 .dies i{background:#a8e0ff12;border-radius:1px}
+.t3 .dies i.lit{background:#dff3ff;box-shadow:0 0 14px #a8e0ffc7,0 0 34px #a8e0ff5c}
+.t3 .w-spec{background:conic-gradient(from calc(var(--mx,0) * -40deg),transparent 0deg,#f0faff00 26deg,
+  #f0faff5e 58deg,#f0faff00 96deg,transparent 360deg);animation:spin 18s linear infinite}
+/* 晶圆是光源：这一层把光洒到左边的文字区 */
+.t3 .lightcast{position:absolute;left:72%;top:46%;width:min(150cqw,1700px);aspect-ratio:1;
+  transform:translate(-50%,-50%);pointer-events:none;z-index:1;
+  background:radial-gradient(circle,#2e7fb53d,#1e5a821f 26%,transparent 58%)}
+.t3 .copy{z-index:3;text-shadow:0 0 42px #0a1420cc}
+/* 标题被「曝光」出来：自上而下的 clip 揭示，锋线是曝光边缘 */
+.t3 .expose{position:relative;display:inline-block;
+  clip-path:inset(0 0 100% 0);animation:expose 1.5s .25s cubic-bezier(.22,.78,.3,1) forwards}
+@keyframes expose{to{clip-path:inset(0 0 -6% 0)}}
+.t3 .expose::after{content:"";position:absolute;left:-2%;right:-2%;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,#dff3ff,#a8e0ff,transparent);
+  box-shadow:0 0 18px #a8e0ff;opacity:0;animation:edge 1.5s .25s cubic-bezier(.22,.78,.3,1) forwards}
+@keyframes edge{0%{top:0;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
+.t3 h1{font-weight:620;font-variation-settings:"wght" calc(560 + var(--p,0) * 160)}
+/* 景深：切章时焦点在动 */
+.t3 .c1{opacity:var(--k1);filter:blur(calc((1 - var(--k1,1)) * 7px))}
+.t3 .c2{opacity:var(--k2);filter:blur(calc((1 - var(--k2,0)) * 7px))}
+.t3 .c3{opacity:var(--k3);filter:blur(calc((1 - var(--k3,0)) * 7px))}
+.t3 .grain{position:absolute;inset:0;pointer-events:none;opacity:.2;mix-blend-mode:overlay;z-index:4;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='150' height='150' filter='url(%23n)' opacity='.65'/></svg>")}
+/* 底栏变成仪表读数带 */
+.t3 .bottombar{font-family:ui-monospace,Menlo,monospace;letter-spacing:.14em;color:#7e94ab;
+  border-top:1px solid #ffffff12;background:linear-gradient(180deg,transparent,#060b1273)}
+.t3 .bottombar .num{color:var(--accent)}
+/* 接缝：硅片翻面，背面是纸 */
+.t3 .fade{opacity:calc((var(--p,0) - .78) * 4.6);position:absolute;left:0;right:0;bottom:0;height:260px;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,transparent,#0a1420 26%,#2b4257 56%,#7d8a92 80%,#cdc6ba 92%,var(--paper))}
+.t3 .fade::before{content:"";position:absolute;left:0;right:0;bottom:84px;height:1px;
+  background:linear-gradient(90deg,transparent,#cfe6ff7a 30%,#cfe6ff7a 70%,transparent)}
+.t3 .fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;
+  background:radial-gradient(130% 100% at 50% 100%,#fffaf2b8,transparent 70%)}
+
+@container (max-width:680px){
+  .wafer{left:50%;top:30%;width:min(78cqw,330px)}
+  .t3 .wafer{width:min(80cqw,340px)}
+  .copy{top:auto;bottom:96px;transform:none;max-width:86cqw}
+  h1{font-size:clamp(46px,17cqw,80px)}
+  h2.ch{font-size:clamp(32px,12cqw,56px)}
+  .chaplabel{bottom:auto;top:16px;right:var(--pad)}
+  .bottombar .mid{display:none}
+  .t3 .lightcast{left:50%;top:30%}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><b>timememo.net</b> · 首屏强度档位 · 守住现站身份，推质感</div>
+  <nav class="switch" role="tablist">
+    <button role="tab" data-go="t1" aria-selected="true">1 · 打磨</button>
+    <button role="tab" data-go="t2" aria-selected="false">2 · 换代</button>
+    <button role="tab" data-go="t3" aria-selected="false">3 · 推满</button>
+  </nav>
+  <div class="tools">
+    <button id="top0">↑ 回到章节 01</button>
+    <label><input type="checkbox" id="rmTog"> 降级动效</label>
+    <label><input type="checkbox" id="mobTog"> 移动端 390px</label>
+  </div>
+</header>
+
+<main>
+<div class="rmbar">
+  <span><b>你的系统开启了「减少动态效果」。</b>本页已按这个设置降级，自走的循环动效被停掉了（滚动联动仍然保留）。</span>
+  <button id="forceMotion">仍要看完整动效</button>
+</div>
+
+<p class="hint">
+每一档都是一个<b>可以真实滚动的迷你跑道</b>——在画面里往下滚，三章会依次推进（01 SILICON → 02 INTELLIGENCE → 03 AI），滚到底能看到<b>深转浅的接缝</b>和第二屏。
+三档都保留了现站的身份：深色、晶圆、三章、「陈晓波」的分量、Portland 底栏；变的是材质、光、曲线与节奏。
+<b>档位 3 把鼠标移到画面上</b>，衍射环和镜面会跟着你动。<br>
+上一轮的四个「从零开始」方向存档在 <a href="/experiment/directions/" style="color:#9fd8ff">/experiment/directions/</a>（已修好动效问题），仅供对照，不是本轮提案。
+</p>
+
+<!-- ======================= 档位 1 · 打磨 ======================= -->
+<section class="tier on" id="tier-t1">
+  <div class="name"><span class="lv">LV 1</span><h2>打磨</h2>
+    <span class="d">一眼还是这个站。没换任何东西，只是让它呼吸得对——曲线统一、时序错峰、字重随滚动微动、接缝补上。</span></div>
+  <div class="frame"><div class="vp t1" data-tier>
+    <div class="runway"><div class="sticky">
+      <div class="scene">
+        <div class="atmo"></div>
+        <div class="wafer">
+          <div class="w-ring r1"></div><div class="w-ring r2"></div>
+          <div class="w-disc"></div><div class="w-lattice"></div>
+          <div class="w-spec"></div><div class="w-gloss"></div><div class="w-notch"></div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="copy c1">
+          <p class="eyebrow"><s class="pulse"></s> AI 应用先行者</p>
+          <h1>陈晓波</h1>
+          <p class="sub">把 AI 用于研究、产品与制造。</p>
+          <a class="cta" href="#" onclick="return false">探索项目 <i>↘</i></a>
+        </div>
+        <div class="copy c2">
+          <h2 class="ch">从硅片，<br><em>到智能。</em></h2>
+          <p class="sub">研究、构建、验证，再迭代。</p>
+          <div class="rail"><span>半导体</span><span class="ln"><b class="drift"></b></span><span>AI</span></div>
+        </div>
+        <div class="copy c3">
+          <h2 class="ch">把它<em>做出来。</em></h2>
+          <p class="sub">从 0.25µm 到 18Å，二十年先进制程。</p>
+          <a class="cta" href="#" onclick="return false">探索项目 <i>↘</i></a>
+        </div>
+      </div>
+      <div class="chaplabel"><span class="num" data-num>01</span><span data-word>Silicon</span></div>
+      <div class="bottombar">
+        <span>Portland, Oregon</span>
+        <span class="mid">向下滑动，看它改变</span>
+        <span><span class="num" data-num>01</span> — 03</span>
+      </div>
+      <div class="progress"><b></b></div>
+      <div class="fade"></div>
+    </div></div>
+    <div class="paper">
+      <div class="seam"></div>
+      <p class="lab">04 / Selected Work</p>
+      <h3>正在做的事。</h3>
+      <div class="cards">
+        <div class="card dark"><span class="k">01 / PORTAL</span><span class="t">Sky Portal</span></div>
+        <div class="card"><span class="k">02 / RESEARCH</span><span class="t">算力的下一站</span></div>
+        <div class="card"><span class="k">03 / RESEARCH</span><span class="t">TSV KOZ 与 GAA</span></div>
+      </div>
+    </div>
+    <div class="scrollnote">↓ 在这里滚动</div>
+  </div></div>
+  <div class="spec">
+    <div><h4>动了什么</h4><ul>
+      <li><b class="hl">缓动统一</b>：现站第一屏混用了 <code>.2s / .3s / .4s / .5s</code> 四五种 ease，这里全部收敛成一条 <code>cubic-bezier(.16,.84,.26,1)</code>——起步快、落位稳，就是「精密」的手感来源</li>
+      <li><b class="hl">时序错峰</b>：eyebrow → 标题 → 副标题 → CTA → 底栏，每级差 90ms，而不是一起出现</li>
+      <li><b class="hl">字重随滚动</b>：标题 <code>wght</code> 从 500 走到 580。几乎看不出来，但滚起来「有重量」</li>
+      <li><b class="hl">晶圆微缩</b>：滚动时缩 6%，制造景深，不抢文字</li>
+      <li><b class="hl">接缝</b>：加一条 170px 渐隐带，深色不再一刀切到纸面（这是现站最刺眼的一帧）</li>
+      <li><b class="hl">强调色收敛</b>：全页只剩冷蓝 <code>#C4E4FF</code>，暖桃退回去做纸面底色而不是强调色</li>
+    </ul></div>
+    <div><h4>为什么这么动</h4>
+      <p>这一档的前提是<b class="hl">不让人察觉「改版了」</b>。现站的构图、配色、晶圆、章节全部原样。</p>
+      <p>精致感从来不是加东西加出来的，是把已有的东西对齐：同一条曲线、同一个节拍、同一个强调色。现站的问题不是「不够酷」，是这三样没对齐。</p>
+      <p>适合的场景：他不想大动，但希望别人看到时觉得「这个站做得真细」。</p>
+    </div>
+    <div><h4>改哪些文件 · 工作量</h4>
+      <p><code>base.css</code> / <code>full.css</code>：统一 <code>--transition</code>、补 <code>--ease</code> token、收敛强调色、加接缝渐隐带</p>
+      <p><code>scene.js</code>：<b class="hl">保留</b>。只把文案淡入淡出的插值曲线换掉，Three.js 晶圆不动</p>
+      <p><code>index.html</code>：几乎不动，只加一个 <code>.fade</code> 元素</p>
+      <p style="color:#cfe8ff"><b>0.5 – 1 天。</b>风险最低，可随时回滚。</p>
+      <p>附带必须做：全局 <code>prefers-reduced-motion</code>（现站只有 1 处）、<code>manrope.ttf</code> → WOFF2 子集、中文字体显式指定。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 档位 2 · 换代 ======================= -->
+<section class="tier" id="tier-t2">
+  <div class="name"><span class="lv">LV 2</span><h2>换代</h2>
+    <span class="d">识别点一个没少，材质换了一代。晶圆从「发光的圆盘」变成「有膜厚、会衍射的硅片」，三章变成同一块硅的三种状态。</span></div>
+  <div class="frame"><div class="vp t2" data-tier>
+    <div class="runway"><div class="sticky">
+      <div class="scene">
+        <div class="atmo"></div>
+        <div class="wafer">
+          <div class="w-ring r1"></div><div class="w-ring r2"></div>
+          <div class="w-disc"></div>
+          <div class="w-diff sweep"></div>
+          <div class="w-lattice"></div>
+          <div class="dies" data-dies></div>
+          <div class="w-spec"></div><div class="w-gloss"></div><div class="w-notch"></div>
+        </div>
+        <div class="scan"></div>
+        <div class="grain"></div>
+      </div>
+      <div class="stage">
+        <div class="copy c1">
+          <p class="eyebrow"><s class="pulse"></s> AI 应用先行者</p>
+          <h1 data-split>陈晓波</h1>
+          <p class="sub">把 AI 用于研究、产品与制造。</p>
+          <a class="cta" href="#" onclick="return false">探索项目 <i>↘</i></a>
+        </div>
+        <div class="copy c2">
+          <h2 class="ch">从硅片，<br><em>到智能。</em></h2>
+          <p class="sub">研究、构建、验证，再迭代。</p>
+          <div class="rail"><span>半导体</span><span class="ln"><b class="drift"></b></span><span>AI</span></div>
+        </div>
+        <div class="copy c3">
+          <h2 class="ch">把它<em>做出来。</em></h2>
+          <p class="sub">从 0.25µm 到 18Å，二十年先进制程。</p>
+          <a class="cta" href="#" onclick="return false">探索项目 <i>↘</i></a>
+        </div>
+      </div>
+      <div class="chaplabel"><span class="num" data-num>01</span><span data-word>Silicon</span></div>
+      <div class="bottombar">
+        <span>Portland, Oregon</span>
+        <span class="mid">向下滑动，看它改变</span>
+        <span><span class="num" data-num>01</span> — 03</span>
+      </div>
+      <div class="progress"><b></b></div>
+      <div class="fade"></div>
+    </div></div>
+    <div class="paper">
+      <div class="seam"></div>
+      <p class="lab">04 / Selected Work</p>
+      <h3>正在做的事。</h3>
+      <div class="cards">
+        <div class="card dark"><span class="k">01 / PORTAL</span><span class="t">Sky Portal</span></div>
+        <div class="card"><span class="k">02 / RESEARCH</span><span class="t">算力的下一站</span></div>
+        <div class="card"><span class="k">03 / RESEARCH</span><span class="t">TSV KOZ 与 GAA</span></div>
+      </div>
+    </div>
+    <div class="scrollnote">↓ 在这里滚动</div>
+  </div></div>
+  <div class="spec">
+    <div><h4>动了什么</h4><ul>
+      <li><b class="hl">薄膜干涉的衍射环</b>：真实晶圆表面因为膜厚差会出现那圈彩虹。用 <code>conic-gradient</code> + <code>mix-blend-mode:screen</code> 极慢反向旋转。<b>这是现站没有、但最「硅」的一个细节</b></li>
+      <li><b class="hl">晶格随章节显影</b>：第 01 章几乎看不见，第 02 章逐渐浮出，节距更密（3.6% → 更像真的 die）</li>
+      <li><b class="hl">第 03 章点阵拼 AI</b>：良率点阵逐格点亮成 "AI" 字形——保留现站 177 芯片拼字的那个创意，但从 687KB 的 Three.js 换成 CSS grid</li>
+      <li><b class="hl">光刻扫描线</b>：一条极淡的水平光带缓慢扫过全屏</li>
+      <li><b class="hl">标题逐字遮罩揭示</b> + <code>wght</code> 520→630 随滚动插值</li>
+      <li><b class="hl">接缝有物理解释</b>：抛光面把纸的颜色反射上来，220px 的反射带，不是一条渐变色</li>
+    </ul></div>
+    <div><h4>为什么这么动</h4>
+      <p>现站的晶圆是「一个会反光的圆盘」。真实的晶圆有<b class="hl">膜厚、晶格、刻痕、notch</b>——这些细节他一眼就认得，别人看着只觉得高级。这是他这个站能有、别人抄不走的东西。</p>
+      <p>三章不再是三张图切换，而是<b class="hl">同一块硅的三种状态</b>：裸片 → 布上晶格 → 点亮成智能。叙事和他的职业线完全对上。</p>
+      <p>这一档是我的<b class="hl">推荐档</b>：识别度 100% 保留，但质感明显上了一代，而且顺手砍掉 687KB。</p>
+    </div>
+    <div><h4>改哪些文件 · 工作量</h4>
+      <p><code>index.html</code>：第一屏加几层晶圆结构 div + 标题拆字</p>
+      <p><code>base.css</code>：晶圆材质层、衍射、扫描线、接缝（约 +120 行）</p>
+      <p><code>scene.js</code> → 新 <code>wafer.js</code>（约 70 行，无依赖）：滚动进度 → CSS 变量；点阵生成</p>
+      <p><b class="hl">可删</b>：<code>vendor/three.module.min.js</code>（687KB）、<code>glyph-layout.js</code>（13KB）</p>
+      <p style="color:#cfe8ff"><b>2 – 3 天。</b>净体积 −700KB。</p>
+      <p class="warn" style="color:#ffb3a0">坑：<code>ui.js</code> 切语言用 <code>innerHTML</code> 会抹掉拆字 span，要先改成「设文本 → 重新拆字」。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 档位 3 · 推满 ======================= -->
+<section class="tier" id="tier-t3">
+  <div class="name"><span class="lv">LV 3</span><h2>推满</h2>
+    <span class="d">晶圆成为整屏唯一光源，文字是被它照亮的。标题被「光刻曝出来」。章节之间是相机推进，不是切换。没留手。</span></div>
+  <div class="frame"><div class="vp t3" data-tier>
+    <div class="runway"><div class="sticky">
+      <div class="scene">
+        <div class="atmo"></div>
+        <div class="lightcast"></div>
+        <div class="wafer">
+          <div class="w-ring r1"></div><div class="w-ring r2"></div>
+          <div class="w-disc"></div>
+          <div class="w-diff sweep"></div>
+          <div class="w-lattice"></div>
+          <div class="dies" data-dies></div>
+          <div class="w-spec"></div><div class="w-gloss"></div><div class="w-notch"></div>
+        </div>
+        <div class="grain"></div>
+      </div>
+      <div class="stage">
+        <div class="copy c1">
+          <p class="eyebrow"><s class="pulse"></s> AI 应用先行者</p>
+          <h1><span class="expose">陈晓波</span></h1>
+          <p class="sub">把 AI 用于研究、产品与制造。</p>
+          <a class="cta" href="#" onclick="return false">探索项目 <i>↘</i></a>
+        </div>
+        <div class="copy c2">
+          <h2 class="ch">从硅片，<br><em>到智能。</em></h2>
+          <p class="sub">研究、构建、验证，再迭代。</p>
+          <div class="rail"><span>半导体</span><span class="ln"><b class="drift"></b></span><span>AI</span></div>
+        </div>
+        <div class="copy c3">
+          <h2 class="ch">把它<em>做出来。</em></h2>
+          <p class="sub">从 0.25µm 到 18Å，二十年先进制程。</p>
+          <a class="cta" href="#" onclick="return false">探索项目 <i>↘</i></a>
+        </div>
+      </div>
+      <div class="chaplabel"><span class="num" data-num>01</span><span data-word>Silicon</span></div>
+      <div class="bottombar">
+        <span>PORTLAND, OREGON &nbsp;·&nbsp; 45.52N 122.68W</span>
+        <span class="mid">SCROLL · <span data-pct>000</span>%</span>
+        <span><span class="num" data-num>01</span> / 03 · SILICON</span>
+      </div>
+      <div class="progress"><b></b></div>
+      <div class="fade"></div>
+    </div></div>
+    <div class="paper">
+      <div class="seam"></div>
+      <p class="lab">04 / Selected Work</p>
+      <h3>正在做的事。</h3>
+      <div class="cards">
+        <div class="card dark"><span class="k">01 / PORTAL</span><span class="t">Sky Portal</span></div>
+        <div class="card"><span class="k">02 / RESEARCH</span><span class="t">算力的下一站</span></div>
+        <div class="card"><span class="k">03 / RESEARCH</span><span class="t">TSV KOZ 与 GAA</span></div>
+      </div>
+    </div>
+    <div class="scrollnote">↓ 在这里滚动 · 鼠标移进画面看视差</div>
+  </div></div>
+  <div class="spec">
+    <div><h4>动了什么</h4><ul>
+      <li><b class="hl">晶圆是唯一光源</b>：加一层 <code>lightcast</code> 径向光，左边文字的明暗、文字阴影方向全部由它决定。整屏只有一个光源，这是「精密」而不是「花哨」的分界线</li>
+      <li><b class="hl">标题被光刻曝出来</b>：<code>clip-path</code> 自上而下揭示，锋线是一道会走的曝光边缘（<code>box-shadow</code> 发光）。这是对「光刻」最直接的视觉引用</li>
+      <li><b class="hl">相机推进</b>：三章不是切换，是同一个空间里 <code>scale</code> 7% 的推进 + 焦外 <code>blur</code> 景深。非当前章节是虚的</li>
+      <li><b class="hl">光标视差</b>：衍射环的起始角、镜面扫掠的角度、晶圆位移都跟手——硅片在你手里转</li>
+      <li><b class="hl">底栏变仪表带</b>：等宽、坐标、滚动百分比实时读数</li>
+      <li><b class="hl">接缝：硅片翻面</b>：260px 的过渡里有一道高光锋线和底部的纸张反光，深色不是「淡出」，是「翻过去」</li>
+    </ul></div>
+    <div><h4>为什么这么动</h4>
+      <p>要「哇这个人很厉害」，靠的不是动得多，是<b class="hl">每一处动都有物理依据</b>：光从一个源出发、曝光有锋线、硅片有膜厚、焦点只有一个。半导体的人看这种克制的精密，比看粒子烟花更有感觉。</p>
+      <p>所以这一档加的全是「真实世界里会发生的事」，没有一个纯装饰的特效。推到满，但满的是密度不是噪音。</p>
+      <p>代价：光标视差 + 景深 blur 在中低端设备上要降级（已内置：触屏不启用视差，<code>prefers-reduced-motion</code> 下去掉 scale/blur，只留淡入淡出）。</p>
+    </div>
+    <div><h4>改哪些文件 · 工作量</h4>
+      <p><code>index.html</code>：第一屏结构重排（光源层、晶圆多层、曝光标题、仪表底栏）</p>
+      <p><code>base.css</code>：约 +260 行</p>
+      <p>新 <code>wafer.js</code>（约 120 行）：滚动进度 + 指针视差 → CSS 变量；点阵生成；触屏与 reduced-motion 分支</p>
+      <p><b class="hl">可删</b>：three.js 687KB + glyph-layout 13KB</p>
+      <p style="color:#cfe8ff"><b>3 – 4 天。</b>净体积仍是 −700KB。</p>
+      <p>建议：先上档位 2，验证一两周，再把档位 3 的光源与曝光标题叠上去。两档的 DOM 结构是兼容的，不用返工。</p>
+    </div>
+  </div>
+</section>
+
+<p class="note">
+<b>说明：</b>本页<b>没有改动 timememo.net 的任何文件</b>。文案沿用线上现有中文（「陈晓波」「AI 应用先行者」「把 AI 用于研究、产品与制造。」「从硅片，到智能。」「研究、构建、验证，再迭代。」「Portland, Oregon」）。
+第 03 章的「把它做出来。」与副标题「从 0.25µm 到 18Å，二十年先进制程。」是<b>占位文案</b>，定稿前请替换——现站第 03 章是 177 个芯片拼成 AI 字形，没有成句文案。
+第二屏只放了三张卡片示意深转浅，不是完整的第二屏设计。
+本页不加载任何外部字体，中文用系统字体栈；定稿需要显式指定中文字体并子集化。
+三档均内置 <code>prefers-reduced-motion</code> 降级（顶栏可切换预览）：降级后保留滚动联动的淡入淡出，停掉自走循环、视差、缩放推进与景深模糊。
+</p>
+</main>
+
+<script>
+(() => {
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const clamp01=v=>v<0?0:v>1?1:v;
+
+/* ---------- 动效降级：单点控制 + 明确提示 + 可覆盖 ----------
+   不直接把 media query 写在 <style> 上。直接写的话，系统开了「减少动态效果」
+   的人打开页面只会看到一片静止，而且得不到任何解释——上一版就是这么失败的。 */
+const rmStyle=$('#reduced'), osReduce=matchMedia('(prefers-reduced-motion: reduce)');
+let reducedOn=false;
+function setReduced(on,init){
+  reducedOn=!!on;
+  rmStyle.media=reducedOn?'all':'not all';
+  $('#rmTog').checked=reducedOn;
+  if(!init) replay();
+}
+if(osReduce.matches){ document.body.classList.add('rm-detected'); setReduced(true,true); }
+osReduce.addEventListener?.('change',e=>{
+  document.body.classList.toggle('rm-detected',e.matches); setReduced(e.matches);
+});
+$('#rmTog').addEventListener('change',e=>setReduced(e.target.checked));
+$('#forceMotion').addEventListener('click',()=>{
+  setReduced(false); document.body.classList.remove('rm-detected');
+});
+$('#mobTog').addEventListener('change',e=>{
+  document.body.classList.toggle('mob',e.target.checked);
+  requestAnimationFrame(()=>$$('[data-tier]').forEach(drive));
+});
+
+/* ---------- 「AI」字形点阵：保留现站 177 芯片拼字的创意，改成 CSS grid ---------- */
+const GLYPH=[                       // 16 列 × 7 行，1 = 点亮（A + 间距 + I）
+  '0011110000011111',
+  '0110011000000100',
+  '1100001100000100',
+  '1111111100000100',
+  '1100001100000100',
+  '1100001100000100',
+  '1100001100011111'
+];
+const DN=26;                        // 点阵 26×26
+function buildDies(el){
+  if(el.childElementCount) return;
+  el.style.gridTemplateColumns=`repeat(${DN},1fr)`;
+  const c=(DN-1)/2, gx=Math.floor((DN-GLYPH[0].length)/2), gy=Math.floor((DN-GLYPH.length)/2);
+  const frag=document.createDocumentFragment();
+  for(let y=0;y<DN;y++) for(let x=0;x<DN;x++){
+    const i=document.createElement('i');
+    if(Math.hypot(x-c,y-c)>c+.4) i.style.visibility='hidden';
+    const row=GLYPH[y-gy];
+    if(row && row[x-gx]==='1') i.className='lit';
+    // 点亮有先后，像真的在逐格测试
+    i.style.transitionDelay=(((x+y)/(2*DN))*.5).toFixed(3)+'s';
+    i.style.transition='background .4s ease, box-shadow .4s ease';
+    frag.appendChild(i);
+  }
+  el.appendChild(frag);
+}
+$$('[data-dies]').forEach(buildDies);
+
+/* ---------- 逐字拆分（档位 2 标题） ---------- */
+$$('[data-split]').forEach(el=>{
+  const t=el.dataset.raw ?? (el.dataset.raw=el.textContent.trim());
+  el.setAttribute('aria-label',t);        // 拆字后给读屏保住原文
+  el.textContent='';
+  [...t].forEach((ch,i)=>{
+    const w=document.createElement('span'); w.className='gw'; w.setAttribute('aria-hidden','true');
+    const g=document.createElement('span'); g.className='glyph'; g.textContent=ch;
+    g.style.animationDelay=(.2+i*.085)+'s';
+    w.appendChild(g); el.appendChild(w);
+  });
+});
+
+/* ---------- 滚动驱动：一个 handler 只写几个 CSS 变量，其余全交给 CSS ---------- */
+const WORDS=['Silicon','Intelligence','AI'];
+function drive(vp){
+  const rw=vp.querySelector('.runway');
+  const max=rw.offsetHeight-vp.clientHeight;
+  const p=max>0?clamp01(vp.scrollTop/max):0;
+  const seg=(a,b)=>clamp01((p-a)/(b-a));
+  const k1=1-seg(.16,.34), k2=seg(.22,.40)*(1-seg(.56,.72)), k3=seg(.60,.80);
+  vp.style.setProperty('--p',p.toFixed(4));
+  vp.style.setProperty('--k1',k1.toFixed(4));
+  vp.style.setProperty('--k2',k2.toFixed(4));
+  vp.style.setProperty('--k3',k3.toFixed(4));
+  const idx = k3>.5 ? 2 : (k2>.5 ? 1 : 0);
+  $$('[data-num]',vp).forEach(e=>e.textContent='0'+(idx+1));
+  const w=$('[data-word]',vp); if(w) w.textContent=WORDS[idx];
+  const pct=$('[data-pct]',vp); if(pct) pct.textContent=String(Math.round(p*100)).padStart(3,'0');
+  const note=vp.querySelector('.scrollnote'); if(note) note.style.opacity=p>.03?'0':'1';
+}
+$$('[data-tier]').forEach(vp=>{
+  let tick=false;
+  vp.addEventListener('scroll',()=>{
+    if(tick) return; tick=true;
+    requestAnimationFrame(()=>{ drive(vp); tick=false; });
+  },{passive:true});
+  drive(vp);
+});
+
+/* ---------- 档位 3 指针视差：只写 transform，触屏不启用 ---------- */
+const t3=$('.t3');
+if(matchMedia('(hover: hover) and (pointer: fine)').matches){
+  let tx=0,ty=0,cx=0,cy=0,raf=0;
+  t3.addEventListener('pointermove',e=>{
+    if(reducedOn) return;
+    const r=t3.getBoundingClientRect();
+    tx=((e.clientX-r.left)/r.width-.5)*2; ty=((e.clientY-r.top)/r.height-.5)*2;
+    if(!raf) loop();
+  });
+  t3.addEventListener('pointerleave',()=>{tx=0;ty=0;});
+  function loop(){
+    cx+=(tx-cx)*.08; cy+=(ty-cy)*.08;
+    t3.style.setProperty('--mx',cx.toFixed(3));
+    t3.style.setProperty('--my',cy.toFixed(3));
+    raf=(Math.abs(tx-cx)>.001||Math.abs(ty-cy)>.001)?requestAnimationFrame(loop):0;
+  }
+}
+
+/* ---------- 档位切换 / 重放 ---------- */
+let cur='t1';
+function replay(){
+  const vp=$('#tier-'+cur+' [data-tier]');
+  vp.classList.add('norun'); void vp.offsetWidth; vp.classList.remove('norun');
+}
+$$('.switch button').forEach(b=>b.addEventListener('click',()=>{
+  $$('.switch button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+  $('#tier-'+cur).classList.remove('on');
+  cur=b.dataset.go;
+  $('#tier-'+cur).classList.add('on');
+  const vp=$('#tier-'+cur+' [data-tier]');
+  drive(vp); replay();
+}));
+$('#top0').addEventListener('click',()=>{
+  const vp=$('#tier-'+cur+' [data-tier]');
+  vp.scrollTo({top:0,behavior:reducedOn?'auto':'smooth'});
+  setTimeout(replay,reducedOn?0:520);
+});
+addEventListener('resize',()=>$$('[data-tier]').forEach(drive));
+})();
+</script>
+</body>
+</html>
