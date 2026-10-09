@@ -168,6 +168,20 @@ window.HOME_CATALOG = [
     "private": false
   },
   {
+    "url": "/research/analog-devices/glossary/",
+    "category": "research",
+    "title": {
+      "zh": "模拟器件术语表",
+      "en": "Analog Device Glossary"
+    },
+    "description": {
+      "zh": "42 个术语：含义、数值大小、比喻和测法。",
+      "en": "42 terms: meaning, values, analogies and measurement."
+    },
+    "updated": "2026-10-09",
+    "private": false
+  },
+  {
     "url": "/research/tsv-koz-gaa-analog/",
     "category": "research",
     "title": {
