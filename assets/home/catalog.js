@@ -175,8 +175,8 @@ window.HOME_CATALOG = [
       "en": "Analog Device Glossary"
     },
     "description": {
-      "zh": "42 个术语：含义、数值大小、比喻和测法。",
-      "en": "42 terms: meaning, values, analogies and measurement."
+      "zh": "60 个术语，含 Drive 与 Cdyn 专节。",
+      "en": "60 terms, incl. a drive-and-Cdyn section."
     },
     "updated": "2026-10-09",
     "private": false

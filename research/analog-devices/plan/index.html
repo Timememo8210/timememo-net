@@ -37,6 +37,12 @@ table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px;line-he
 th,td{text-align:left;vertical-align:top;padding:10px 13px;border-bottom:1px solid var(--rule)}th{background:var(--mint);color:var(--ink);font-weight:600}tr:last-child td{border-bottom:0}
 code{background:var(--sand);padding:1px 5px;border-radius:3px;font-size:.92em}
 li.check{list-style:none;position:relative;margin-left:-20px;padding-left:28px}li.check .box{position:absolute;left:0;top:7px;width:15px;height:15px;border:1.5px solid var(--teal);border-radius:3px}
+.gl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:14px 0 4px}
+.gl-card{display:flex;flex-direction:column;gap:3px;text-decoration:none;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;color:var(--text);transition:border-color .15s}
+.gl-card:hover{border-color:var(--teal)}.gl-card small{color:var(--teal);font-size:11px;font-weight:600;letter-spacing:.06em}.gl-card b{color:var(--ink);font-size:15px;line-height:1.4}.gl-card>span{font-size:12.5px;color:var(--muted);line-height:1.5}
+.gl-card.hot{border-color:#e3c99b;background:#fffaf1}.gl-card .gl-new{display:inline-block;margin-left:8px;font-size:10px;font-weight:700;color:#fff;background:#bc7c27;border-radius:3px;padding:0 5px;vertical-align:2px;letter-spacing:.06em}
+.gl-tools{margin-top:12px}
+@media (max-width:600px){.gl-cards{grid-template-columns:1fr 1fr}.gl-card{padding:10px 11px}}
 .callout{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:10px;padding:22px 24px;margin:40px 0 0}.callout h2{color:#fff;margin:0 0 4px;font-size:22px}.callout p{margin:0;color:#cfe0db}.callout .btn{background:#fff}
 .days{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:18px 0 6px}
 .day{display:block;text-decoration:none;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;color:var(--text)}.day small{color:var(--teal);font-weight:600;letter-spacing:.08em;font-size:11px}.day b{display:block;color:var(--ink);font-size:15px;line-height:1.45;margin-top:4px}
