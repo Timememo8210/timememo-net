@@ -154,15 +154,29 @@ window.HOME_CATALOG = [
     "private": false
   },
   {
+    "url": "/research/analog-devices/tricks/",
+    "category": "research",
+    "title": {
+      "zh": "提增益与降噪技巧",
+      "en": "Gain and Noise Tricks"
+    },
+    "description": {
+      "zh": "串联叠管、cascode 等技巧与 nanosheet 降噪。",
+      "en": "Stacking, cascodes and nanosheet noise reduction."
+    },
+    "updated": "2026-10-09",
+    "private": false
+  },
+  {
     "url": "/research/analog-devices/plan/",
     "category": "research",
     "title": {
-      "zh": "7 天模拟器件学习计划",
-      "en": "7-Day Analog Study Plan"
+      "zh": "模拟器件学习计划（7 节课）",
+      "en": "Analog Study Plan (7 sessions)"
     },
     "description": {
-      "zh": "每天的目标、材料、练习和自测。",
-      "en": "Daily goals, materials, exercises and self-tests."
+      "zh": "可打勾、可自测，附 NotebookLM 资料包。",
+      "en": "Checklists, self-test cards and a NotebookLM pack."
     },
     "updated": "2026-10-09",
     "private": false
