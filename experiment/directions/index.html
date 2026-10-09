@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<title>timememo.net · 首屏视觉与动效方向原型</title>
+<style>
+/* =========================================================================
+   SHELL — 外壳（不属于任何方向，只是对比用的框架）
+   ========================================================================= */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:#101114;color:#d8dade;
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;
+  padding:12px 20px;background:#15171bf2;backdrop-filter:blur(14px);
+  border-bottom:1px solid #ffffff14;
+}
+.brand{font-size:12px;letter-spacing:.06em;color:#8e949e;margin-right:auto}
+.brand b{color:#eef1f5;font-weight:600;letter-spacing:0}
+.switch{display:flex;flex-wrap:wrap;gap:6px}
+.switch button{
+  appearance:none;border:1px solid #ffffff1f;background:#ffffff08;color:#b9bec7;
+  font:inherit;font-size:12.5px;padding:7px 13px;border-radius:999px;cursor:pointer;
+  transition:background .18s,color .18s,border-color .18s;
+}
+.switch button:hover{background:#ffffff14;color:#fff}
+.switch button[aria-selected=true]{background:#eef1f5;color:#15171b;border-color:#eef1f5;font-weight:600}
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:12px;color:#9aa1ab}
+.tools label{display:flex;gap:6px;align-items:center;cursor:pointer;user-select:none}
+.tools button{
+  appearance:none;border:1px solid #ffffff22;background:transparent;color:#cfd4db;
+  font:inherit;font-size:12px;padding:6px 12px;border-radius:7px;cursor:pointer;
+}
+.tools button:hover{background:#ffffff10}
+#replay{border-color:#ffc98a66;background:#ffc98a14;color:#ffd9a8;font-weight:600;padding:7px 15px}
+#replay:hover{background:#ffc98a24;border-color:#ffc98a}
+
+/* 系统开了「减少动态效果」时的提示条 */
+.rmbar{display:none;align-items:center;gap:14px;flex-wrap:wrap;
+  margin:0 auto 18px;max-width:1360px;padding:12px 16px;border-radius:9px;
+  background:#2a2112;border:1px solid #ffc98a3d;color:#ffdcae;font-size:13px;line-height:1.6}
+body.rm-detected .rmbar{display:flex}
+.rmbar b{color:#fff2dc;font-weight:600}
+.rmbar button{appearance:none;border:1px solid #ffc98a7a;background:#ffc98a1f;color:#ffe6c4;
+  font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:6px;cursor:pointer;margin-left:auto}
+.rmbar button:hover{background:#ffc98a33}
+.hint{max-width:1360px;margin:0 auto 16px;font-size:12.5px;color:#7f8692}
+.hint b{color:#b6bcc5;font-weight:500}
+
+main{padding:24px 20px 80px;max-width:1360px;margin:0 auto}
+.dir{display:none}
+.dir.on{display:block}
+
+/* 舞台：方向的第一屏在这里渲染。用 container query 做响应式，
+   这样下面的「移动端宽度」开关是真实有效的，而不是只缩小截图。 */
+.stage-frame{
+  margin:0 auto;transition:max-width .35s cubic-bezier(.2,.7,.2,1);
+  max-width:100%;
+}
+body.mob .stage-frame{max-width:390px}
+.stage{
+  container-type:inline-size;
+  position:relative;overflow:hidden;
+  border-radius:10px;border:1px solid #ffffff14;
+  height:clamp(560px,76vh,780px);
+}
+body.mob .stage{height:760px}
+
+.spec{
+  margin:18px auto 0;max-width:100%;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;
+  background:#ffffff14;border:1px solid #ffffff14;border-radius:10px;overflow:hidden;
+}
+.spec>div{background:#15171b;padding:16px 18px}
+.spec h4{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7f8692;font-weight:600}
+.spec ul{margin:0;padding-left:1.1em}
+.spec li{margin:0 0 5px;font-size:12.5px;color:#c2c7ce}
+.spec p{margin:0 0 6px;font-size:12.5px;color:#c2c7ce}
+.spec code{font:11.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#e8ecf2;background:#ffffff0f;padding:1px 5px;border-radius:4px}
+.sw{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.sw i{width:26px;height:26px;border-radius:5px;display:block;border:1px solid #ffffff22}
+.name{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+.name h2{margin:0;font-size:21px;font-weight:650;color:#f2f5f9;letter-spacing:.01em}
+.name span{font-size:13px;color:#8f96a1}
+.cost{font-size:12.5px;color:#c2c7ce}
+.cost b{color:#ffd9a8;font-weight:600}
+.warn{color:#ffb3a0}
+.note{max-width:1360px;margin:0 auto;padding:0 20px 40px;font-size:12.5px;color:#868d98;line-height:1.75}
+.note b{color:#c5cbd3}
+
+/* 重放动效：先把所有动画掐断，强制回流，再放开 —— 等于从第 0 帧重来 */
+.norun,.norun *,.norun *::before,.norun *::after{animation:none !important}
+</style>
+
+<!-- =========================================================================
+     REDUCED MOTION — 降级规则集中在这一个 style 里。
+     注意 media 默认是 "not all"：开关完全交给 JS。
+     这样做的原因：如果直接写 (prefers-reduced-motion: reduce)，系统开了
+     「减少动态效果」的人打开本页会看到一片静止，却不知道为什么——
+     这正是第一版被反馈「没有动效」的原因。现在改成：检测到就提示 + 可一键覆盖。
+     ========================================================================= -->
+<style id="reduced" media="not all">
+  .stage *,
+  .stage *::before,
+  .stage *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  /* 降级后不是「没有东西」，而是直接呈现终态 */
+  .A .rise,.A .line-mask>span,.C .g,.C .cline{transform:none !important;opacity:1 !important;clip-path:none !important}
+  .A svg .draw{stroke-dashoffset:0 !important}
+  .A .grid,.D .lattice{opacity:.5 !important}
+  .B .field{filter:blur(22px) saturate(1.15) !important}
+  .B .spot{display:none !important}
+  .C .ticker-track{transform:none !important}
+  .D .cell{opacity:.55 !important;background:#243040 !important}
+  .D .crosshair{display:none !important}
+  .B .ch,.C .g{opacity:1 !important;transform:none !important;filter:none !important}
+</style>
+
+<style>
+/* =========================================================================
+   方向 A — 墨线 / Ink & Rule
+   「克制的精密感」：纸面、发丝线、制图感。不用 WebGL。
+   ========================================================================= */
+.A{
+  --paper:#f6f3ed; --ink:#15181c; --ink2:#5b6268; --rule:#15181c1f;
+  --red:#b4342a; --steel:#8d98a2;
+  background:var(--paper);color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  height:100%;position:relative;
+}
+.A .grid{
+  position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:
+    repeating-linear-gradient(90deg,var(--rule) 0 1px,transparent 1px 72px),
+    repeating-linear-gradient(0deg,#15181c12 0 1px,transparent 1px 72px);
+  -webkit-mask-image:radial-gradient(130% 100% at 50% 0%,#000 30%,transparent 100%);
+  mask-image:radial-gradient(130% 100% at 50% 0%,#000 30%,transparent 100%);
+  animation:a-grid 1.6s .25s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes a-grid{to{opacity:.85}}
+.A .inner{position:relative;height:100%;display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:40px;padding:0 clamp(28px,5cqw,76px) 54px}
+.A .eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink2);margin:0 0 26px}
+.A .eyebrow::before{content:"";width:34px;height:1px;background:var(--red);transform-origin:left;
+  transform:scaleX(0);animation:a-rule .7s .45s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes a-rule{to{transform:scaleX(1)}}
+.A h1{margin:0 0 20px;font-size:clamp(54px,9.4cqw,116px);line-height:1.02;font-weight:600;
+  letter-spacing:-.045em}
+/* 逐行遮罩揭示（clip-path reveal）：行是容器，字是被推上来的内容 */
+.A .line-mask{display:block;overflow:hidden}
+.A .line-mask>span{display:block;transform:translateY(110%);
+  animation:a-up .95s cubic-bezier(.16,.84,.26,1) forwards}
+.A .line-mask:nth-of-type(1)>span{animation-delay:.30s}
+.A .line-mask:nth-of-type(2)>span{animation-delay:.42s}
+@keyframes a-up{to{transform:translateY(0)}}
+.A .sub{margin:0 0 34px;max-width:30ch;font-size:clamp(14px,1.45cqw,17px);color:var(--ink2);line-height:1.75}
+.A .rise{opacity:0;transform:translateY(14px);animation:a-fade .8s cubic-bezier(.2,.7,.2,1) forwards}
+.A .rise.d1{animation-delay:.72s}.A .rise.d2{animation-delay:.84s}.A .rise.d3{animation-delay:.96s}
+@keyframes a-fade{to{opacity:1;transform:none}}
+.A .cta{display:inline-flex;align-items:center;gap:14px;font-size:14px;letter-spacing:.04em;
+  text-decoration:none;color:var(--ink);padding-bottom:7px;position:relative}
+.A .cta::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ink);
+  transform-origin:right;transform:scaleX(.22);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.A .cta:hover::after{transform:scaleX(1);transform-origin:left}
+.A .cta i{font-style:normal;color:var(--red);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.A .cta:hover i{transform:translate(4px,4px)}
+.A .plate{display:flex;align-items:center;justify-content:center;position:relative}
+.A svg{width:min(100%,460px);height:auto;overflow:visible}
+.A svg .draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  animation:a-draw 2.1s cubic-bezier(.3,.8,.3,1) forwards}
+@keyframes a-draw{to{stroke-dashoffset:0}}
+.A .caliper{animation:a-cal 7s 2.2s ease-in-out infinite}
+@keyframes a-cal{0%,100%{transform:translateX(-26px)}50%{transform:translateX(26px)}}
+.A .meta{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;
+  padding:16px clamp(28px,5cqw,76px);border-top:1px solid var(--rule);font-size:10.5px;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--ink2)}
+.A .meta em{font-style:normal;color:var(--red)}
+@container (max-width:680px){
+  .A .inner{grid-template-columns:1fr;align-content:center;gap:28px;padding-top:56px}
+  .A .plate{order:-1}
+  .A svg{width:min(62%,230px)}
+  .A h1{font-size:clamp(46px,17cqw,78px)}
+  .A .meta span:nth-child(2){display:none}
+}
+
+/* =========================================================================
+   方向 B — 相位 / Phase Field
+   「张扬的未来感」：低分辨率程序化色场 + 颗粒 + 光标光晕 + 磁吸。
+   ========================================================================= */
+.B{
+  --bg:#06070d; --ink:#edf2ff; --ink2:#9aa6c4; --cy:#7ce0ff; --am:#ffb27a;
+  background:var(--bg);color:var(--ink);height:100%;position:relative;overflow:hidden;
+  font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+/* 色场：96×60 的 canvas 被放大，浏览器自带的双线性插值就是「免费的网格渐变」 */
+.B .field{position:absolute;inset:-12%;width:124%;height:124%;
+  filter:blur(26px) saturate(1.1);opacity:.86;transform:translateZ(0)}
+/* 颗粒：内联 SVG feTurbulence，不依赖任何外部图片 */
+.B .grain{position:absolute;inset:0;pointer-events:none;opacity:.26;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.55'/></svg>")}
+/* 两层压暗：一层四周渐晕，一层从左侧压下来，保证正文永远有对比度 */
+.B .vign{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(98deg,#06070df5 0%,#06070dcc 26%,#06070d4d 52%,transparent 72%),
+    radial-gradient(130% 95% at 55% 42%,transparent 28%,#06070dd9 100%)}
+/* 光标光晕 */
+.B .spot{position:absolute;width:620px;height:620px;left:0;top:0;pointer-events:none;
+  margin:-310px 0 0 -310px;opacity:0;transition:opacity .5s;
+  background:radial-gradient(circle,#7ce0ff26,#7ce0ff0a 42%,transparent 68%)}
+.B.live .spot{opacity:1}
+.B .inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(28px,6cqw,84px)}
+.B .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--cy);margin:0 0 24px}
+.B .eyebrow s{width:7px;height:7px;border-radius:50%;background:var(--cy);text-decoration:none;
+  box-shadow:0 0 0 0 #7ce0ff55;animation:b-pulse 2.8s ease-out infinite}
+@keyframes b-pulse{0%{box-shadow:0 0 0 0 #7ce0ff55}70%,100%{box-shadow:0 0 0 14px #7ce0ff00}}
+.B h1{margin:0 0 22px;font-size:clamp(58px,11cqw,146px);line-height:1.04;font-weight:300;
+  letter-spacing:-.05em}
+/* 逐字入场 + 可变字重：字重从 200 走到 620，在支持可变字体的系统上是真的在插值字重 */
+.B .ch{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(26px);
+  animation:b-in 1.05s cubic-bezier(.16,.84,.26,1) forwards, b-wt 1.3s cubic-bezier(.3,.8,.3,1) forwards}
+@keyframes b-in{to{opacity:1;filter:blur(0);transform:none}}
+@keyframes b-wt{from{font-variation-settings:"wght" 200;font-weight:200}
+                to{font-variation-settings:"wght" 620;font-weight:620}}
+.B .sub{margin:0 0 36px;max-width:34ch;font-size:clamp(14px,1.5cqw,18px);color:var(--ink2);line-height:1.8;
+  opacity:0;animation:b-fade .9s 1.05s forwards}
+@keyframes b-fade{to{opacity:1}}
+.B .cta{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;
+  padding:14px 26px;border-radius:999px;border:1px solid #7ce0ff3d;background:#7ce0ff0f;
+  color:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.05em;
+  backdrop-filter:blur(10px);opacity:0;animation:b-fade .9s 1.2s forwards;
+  transition:background .35s,border-color .35s,box-shadow .35s;will-change:transform}
+.B .cta:hover{background:#7ce0ff1f;border-color:#7ce0ff8c;box-shadow:0 0 44px #7ce0ff22}
+.B .meta{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;
+  padding:18px clamp(28px,6cqw,84px);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:#ccd6ec;text-shadow:0 1px 10px #06070dcc;opacity:0;animation:b-fade .9s 1.45s forwards}
+.B .meta em{font-style:normal;color:var(--am)}
+@container (max-width:680px){
+  .B h1{font-size:clamp(48px,17cqw,78px)}
+  .B .spot{display:none}
+  .B .field{filter:blur(20px) saturate(1.1)}
+  .B .meta span:nth-child(2){display:none}
+}
+
+/* =========================================================================
+   方向 C — 碑 / Monolith
+   「出版物式的重量感」：字就是版面。没有特效，只有尺度与节奏。
+   ========================================================================= */
+.C{
+  --bk:#14120f; --bone:#ece5d8; --bone2:#b6ae9f; --chrome:#b9bec4; --rust:#c2603a;
+  background:#14120f;color:#ece5d8;height:100%;position:relative;overflow:hidden;
+  font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+.C .plateart{position:absolute;inset:0;
+  background:
+    radial-gradient(70% 90% at 78% 18%,#3a3a3e 0%,transparent 58%),
+    radial-gradient(60% 70% at 10% 95%,#2a241c 0%,transparent 62%),
+    linear-gradient(170deg,#191714,#14120f 55%,#0f0e0c);
+}
+.C .grain{position:absolute;inset:0;pointer-events:none;opacity:.2;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
+/* 看得见的栏线 */
+.C .cols{position:absolute;inset:0;pointer-events:none;display:grid;
+  grid-template-columns:repeat(6,1fr);padding:0 clamp(24px,4cqw,64px)}
+.C .cols i{border-left:1px solid #ece5d80f}
+.C .cols i:first-child{border-left:0}
+.C .inner{position:relative;height:100%;display:flex;flex-direction:column;
+  padding:clamp(28px,4cqw,60px) clamp(24px,4cqw,64px) 0}
+.C .top{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  border-bottom:1px solid #ece5d81f;padding-bottom:14px;font-size:10.5px;letter-spacing:.24em;
+  text-transform:uppercase;color:#9d978a}
+.C .top b{color:var(--rust);font-weight:600}
+.C .mid{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative}
+.C .idx{position:absolute;right:2%;top:4%;font-size:clamp(90px,19cqw,260px);line-height:.8;
+  font-weight:800;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px #ece5d822;
+  pointer-events:none;user-select:none}
+.C h1{margin:0;font-size:clamp(66px,16.5cqw,214px);line-height:.92;font-weight:750;
+  letter-spacing:.3em;color:var(--bone);
+  animation:c-track 1.5s .2s cubic-bezier(.16,.84,.26,1) forwards}
+@keyframes c-track{to{letter-spacing:-.045em}}
+/* 逐字遮罩揭示：外层 overflow 裁切，内层从下方升起并轻微旋转 */
+.C .gw{display:inline-block;overflow:hidden;vertical-align:bottom}
+.C .g{display:inline-block;transform:translateY(105%) rotate(5deg);transform-origin:left bottom;
+  animation:c-up 1.15s cubic-bezier(.16,.84,.26,1) forwards}
+@keyframes c-up{to{transform:none}}
+.C .lede{margin:26px 0 0;max-width:40ch;font-size:clamp(14px,1.55cqw,19px);line-height:1.75;
+  color:#b6ae9f;opacity:0;transform:translateY(12px);
+  animation:c-fade .9s 1.0s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes c-fade{to{opacity:1;transform:none}}
+.C .cta{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-size:13.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--bone);text-decoration:none;
+  border:1px solid #ece5d833;padding:13px 24px;opacity:0;
+  animation:c-fade .9s 1.14s cubic-bezier(.2,.7,.2,1) forwards;
+  transition:background .3s,color .3s,border-color .3s}
+.C .cta:hover{background:var(--bone);color:#14120f;border-color:var(--bone)}
+/* 底部跑马灯 */
+.C .ticker{position:relative;border-top:1px solid #ece5d81f;overflow:hidden;
+  padding:13px 0;margin:0 calc(-1 * clamp(24px,4cqw,64px))}
+.C .ticker-track{display:flex;gap:46px;width:max-content;white-space:nowrap;
+  padding-left:clamp(24px,4cqw,64px);font-size:11px;letter-spacing:.26em;
+  color:#8d877c;animation:c-marq 34s linear infinite}
+.C .ticker-track span em{font-style:normal;color:var(--chrome)}
+@keyframes c-marq{to{transform:translateX(-50%)}}
+@container (max-width:680px){
+  .C h1{font-size:clamp(54px,21cqw,96px)}
+  .C .cols{grid-template-columns:repeat(3,1fr)}
+  .C .idx{top:auto;bottom:16%;font-size:clamp(76px,30cqw,140px);opacity:.7}
+  .C .top span:nth-child(2){display:none}
+}
+
+/* =========================================================================
+   方向 D — 仪表 / Instrument
+   「理性的系统感」：首屏当成一块读数面板。全部 CSS + SVG，无 WebGL。
+   ========================================================================= */
+.D{
+  --bg:#0a0d11; --ink:#e4e9ef; --ink2:#79838f; --sig:#ffa23a; --cool:#5f8fb5; --ok:#79d3a6;
+  background:var(--bg);color:var(--ink);height:100%;position:relative;overflow:hidden;
+  font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+.D .lattice{position:absolute;inset:0;opacity:.55;pointer-events:none;
+  background-image:radial-gradient(#ffffff14 1px,transparent 1px);background-size:26px 26px;
+  -webkit-mask-image:linear-gradient(180deg,#000 10%,#0009 60%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 10%,#0009 60%,transparent 100%)}
+.D .crosshair{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s}
+.D.live .crosshair{opacity:1}
+.D .crosshair i{position:absolute;background:#ffa23a2e}
+.D .crosshair .hx{left:0;right:0;height:1px}
+.D .crosshair .vy{top:0;bottom:0;width:1px}
+.D .crosshair b{position:absolute;font:10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--sig);letter-spacing:.08em;font-weight:400;padding:3px 6px;background:#0a0d11cc}
+.D .inner{position:relative;height:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;
+  align-items:center;padding:0 clamp(26px,5cqw,70px)}
+.D .status{display:inline-flex;align-items:center;gap:9px;font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ok);border:1px solid #79d3a630;
+  padding:7px 12px;border-radius:5px;margin:0 0 24px}
+.D .status s{width:6px;height:6px;border-radius:50%;background:var(--ok);text-decoration:none;
+  animation:d-blink 2.2s steps(1,end) infinite}
+@keyframes d-blink{0%,55%{opacity:1}56%,100%{opacity:.25}}
+.D h1{margin:0 0 18px;font-size:clamp(52px,9.2cqw,112px);line-height:1.04;font-weight:650;letter-spacing:-.04em}
+.D .sub{margin:0 0 30px;max-width:32ch;font-size:clamp(14px,1.45cqw,17px);color:var(--ink2);line-height:1.75}
+.D .readout{display:flex;gap:34px;flex-wrap:wrap;margin:0 0 30px}
+.D .readout dl{margin:0}
+.D .readout dt{font:10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--ink2);margin:0 0 7px}
+.D .readout dd{margin:0;font:600 clamp(26px,3.1cqw,38px)/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:var(--ink);font-variant-numeric:tabular-nums}
+.D .readout dd u{text-decoration:none;color:var(--sig)}
+.D .track{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 30px;
+  font:10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#5d6771}
+.D .track i{padding:5px 9px;border:1px solid #ffffff14;border-radius:4px;transition:color .3s,border-color .3s,background .3s}
+.D .track i.hot{color:#0a0d11;background:var(--sig);border-color:var(--sig);font-weight:700}
+.D .cta{display:inline-flex;align-items:center;gap:11px;padding:13px 22px;border-radius:6px;
+  border:1px solid #ffa23a4d;background:#ffa23a12;color:var(--ink);text-decoration:none;
+  font-size:13.5px;letter-spacing:.05em;transition:background .3s,border-color .3s}
+.D .cta:hover{background:#ffa23a26;border-color:var(--sig)}
+/* 晶圆图：JS 生成单元格，按到扫描原点的距离设置 animation-delay */
+.D .wafer{position:relative;aspect-ratio:1;width:min(92%,400px);justify-self:center;
+  display:grid;gap:3px;border-radius:50%;overflow:hidden;
+  box-shadow:0 0 0 1px #ffffff14, 0 0 0 11px #ffffff08, 0 0 70px #ffa23a0f}
+.D .cell{background:#1b232c;border-radius:1.5px;opacity:.18;
+  animation:d-sweep 4.6s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes d-sweep{0%{opacity:.14;background:#1b232c}
+  12%{opacity:1;background:#ffa23a}
+  26%{opacity:.44;background:#44586b}
+  100%{opacity:.14;background:#1b232c}}
+.D .wafer::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle at 32% 26%,#ffffff10,transparent 56%)}
+.D .meta{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;
+  padding:15px clamp(26px,5cqw,70px);border-top:1px solid #ffffff12;
+  font:10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.17em;
+  text-transform:uppercase;color:#5d6771}
+.D .meta em{font-style:normal;color:var(--sig)}
+@container (max-width:680px){
+  .D .inner{grid-template-columns:1fr;align-content:center;gap:26px;padding-top:44px}
+  .D .wafer{order:-1;width:min(60%,210px)}
+  .D h1{font-size:clamp(44px,14cqw,70px)}
+  .D .crosshair{display:none}
+  .D .readout{gap:22px}
+  .D .meta span:nth-child(2){display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><b>timememo.net</b> · 首屏视觉与动效方向原型 · 2026-10-08</div>
+  <nav class="switch" role="tablist" aria-label="方向">
+    <button role="tab" data-go="A" aria-selected="true">A · 墨线</button>
+    <button role="tab" data-go="B" aria-selected="false">B · 相位</button>
+    <button role="tab" data-go="C" aria-selected="false">C · 碑</button>
+    <button role="tab" data-go="D" aria-selected="false">D · 仪表</button>
+  </nav>
+  <div class="tools">
+    <button id="replay">▶ 播放动效</button>
+    <label><input type="checkbox" id="rmTog"> 降级动效（prefers-reduced-motion）</label>
+    <label><input type="checkbox" id="mobTog"> 移动端宽度 390px</label>
+  </div>
+</header>
+
+<main>
+
+<div class="rmbar">
+  <span><b>你的系统开启了「减少动态效果」。</b>本页已按这个设置自动降级，所以现在看到的是动画的终态（静止画面），不是出错。</span>
+  <button id="forceMotion">仍要看完整动效</button>
+</div>
+
+<p class="hint">点上方 <b>A / B / C / D</b> 切换方向，切换时动效会自动重跑一遍；想再看一次点 <b>▶ 播放动效</b>。入场动画约 2 秒，之后每个方向各有一条持续的慢动效（A 卡尺线、B 色场、C 跑马灯、D 晶圆扫描）。<b>B 和 D 把鼠标移到画面上</b>还有跟随效果。</p>
+
+<!-- ============================ A · 墨线 ============================ -->
+<section class="dir on" id="dir-A">
+  <div class="name"><h2>A · 墨线 <span style="font-weight:400;color:#8f96a1">Ink &amp; Rule</span></h2>
+    <span>克制的精密感 —— 纸面、发丝线、制图感。把动效预算全部花在「揭示」上，不花在「炫技」上。</span></div>
+  <div class="stage-frame"><div class="stage"><div class="A" id="stage-A">
+    <div class="grid"></div>
+    <div class="inner">
+      <div>
+        <p class="eyebrow">AI 应用先行者 / AI Builder</p>
+        <h1>
+          <span class="line-mask"><span>陈晓波</span></span>
+        </h1>
+        <p class="sub rise d1">把 AI 用于研究、产品与制造。<br>半导体先进制程 · 良率学习 · 研发到量产。</p>
+        <a class="cta rise d2" href="#" onclick="return false">探索项目 <i>↘</i></a>
+      </div>
+      <div class="plate rise d3">
+        <svg viewBox="0 0 320 320" aria-hidden="true" fill="none">
+          <circle class="draw" cx="160" cy="160" r="138" stroke="#15181c" stroke-width="1" style="--len:868;animation-delay:.5s"/>
+          <circle class="draw" cx="160" cy="160" r="112" stroke="#15181c33" stroke-width="1" style="--len:704;animation-delay:.72s"/>
+          <circle class="draw" cx="160" cy="160" r="72"  stroke="#15181c22" stroke-width="1" style="--len:453;animation-delay:.9s"/>
+          <path class="draw" d="M160 22 L160 52" stroke="#b4342a" stroke-width="1.6" style="--len:30;animation-delay:1.3s"/>
+          <path class="draw" d="M22 160 H298" stroke="#15181c1a" stroke-width="1" style="--len:276;animation-delay:1.0s"/>
+          <path class="draw" d="M160 22 V298" stroke="#15181c1a" stroke-width="1" style="--len:276;animation-delay:1.1s"/>
+          <g class="caliper">
+            <path class="draw" d="M100 236 H220" stroke="#b4342a" stroke-width="1" style="--len:120;animation-delay:1.5s"/>
+            <path class="draw" d="M100 229 V243" stroke="#b4342a" stroke-width="1" style="--len:14;animation-delay:1.6s"/>
+            <path class="draw" d="M220 229 V243" stroke="#b4342a" stroke-width="1" style="--len:14;animation-delay:1.6s"/>
+          </g>
+          <g stroke="#15181c" stroke-width="1" opacity=".4">
+            <path class="draw" d="M160 22 v10" style="--len:10;animation-delay:1.2s"/>
+            <path class="draw" d="M298 160 h-10" style="--len:10;animation-delay:1.24s"/>
+            <path class="draw" d="M160 298 v-10" style="--len:10;animation-delay:1.28s"/>
+            <path class="draw" d="M22 160 h10" style="--len:10;animation-delay:1.32s"/>
+          </g>
+          <text x="160" y="318" text-anchor="middle" font-size="9" letter-spacing="3"
+                fill="#5b6268" font-family="Helvetica,Arial">0.25µm — 18Å</text>
+        </svg>
+      </div>
+    </div>
+    <div class="meta">
+      <span>Portland, Oregon</span>
+      <span><em>01</em> / Silicon</span>
+      <span>向下滚动</span>
+    </div>
+  </div></div></div>
+
+  <div class="spec">
+    <div>
+      <h4>用了哪些手法</h4>
+      <ul>
+        <li>逐行遮罩揭示：<code>overflow:hidden</code> + <code>translateY(110%→0)</code>，比 opacity 淡入更有「印刷」感</li>
+        <li>SVG <code>stroke-dashoffset</code> 绘制：仪器图自己画出来，错开 delay 形成节奏</li>
+        <li>发丝栅格用 <code>repeating-linear-gradient</code> + <code>mask-image</code> 渐隐，0 张图片</li>
+        <li>CTA 下划线用 <code>transform-origin</code> 翻转，不是宽度动画（不触发重排）</li>
+        <li>卡尺线缓慢往复——全页唯一的循环动画</li>
+        <li>落地时第二屏用 <code>animation-timeline:view()</code> 做滚动驱动进场</li>
+      </ul>
+    </div>
+    <div>
+      <h4>配色</h4>
+      <div class="sw">
+        <i style="background:#f6f3ed"></i><i style="background:#15181c"></i><i style="background:#5b6268"></i>
+        <i style="background:#b4342a"></i><i style="background:#8d98a2"></i>
+      </div>
+      <p><code>#F6F3ED</code> 纸 · <code>#15181C</code> 墨 · <code>#5B6268</code> 次级<br>
+      <code>#B4342A</code> 朱砂（唯一强调色）· <code>#8D98A2</code> 钢灰</p>
+      <p>刻意只有一个强调色。现站的冷蓝 + 暖桃两套强调色在同一页出现，是分散注意力的主因之一。</p>
+      <h4 style="margin-top:14px">字体</h4>
+      <p>拉丁：一款中性几何无衬线（延用 Manrope 即可，但换 WOFF2 子集）。<br>
+      中文：<b>必须显式指定</b>思源黑体 / Noto Sans SC 可变字重 300–700，子集化到站内实际用到的汉字（约 600 字，≈40KB）。</p>
+    </div>
+    <div>
+      <h4>如果选这个：改什么、多少工作量</h4>
+      <p><code>index.html</code> 第一屏 <code>.runway</code> 结构重写（约 60 行）<br>
+      <code>assets/home/material/base.css</code> 深色令牌 → 纸面令牌<br>
+      <code>full.css</code> 第一屏段落重写，<b>第二屏以下几乎不动</b>（现有 paper 配色本来就接近）<br>
+      <code>scene.js</code> + <code>vendor/three.module.min.js</code> <b>整体删除</b>，<code>glyph-layout.js</code> 一并删</p>
+      <p class="cost">工作量：<b>1.5 – 2 天</b>。<br>
+      净收益：首屏 JS 体积 <b>−687KB</b>（three.js 未压缩）+ −13KB glyph 数据，首屏完全无 JS 依赖。</p>
+      <p class="cost">风险：失去现站最原创的资产（WebGL 晶圆）。建议折中——第一屏用 A，把晶圆场景保留为第二章，runway 从 310svh 收到 ~180svh。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ B · 相位 ============================ -->
+<section class="dir" id="dir-B">
+  <div class="name"><h2>B · 相位 <span style="font-weight:400;color:#8f96a1">Phase Field</span></h2>
+    <span>张扬的未来感 —— 会呼吸的色场、颗粒、跟手的光。最「当代 AI 网站」的一条路，也是最容易撞脸的一条。</span></div>
+  <div class="stage-frame"><div class="stage"><div class="B" id="stage-B">
+    <canvas class="field" id="fieldCv" aria-hidden="true"></canvas>
+    <div class="grain"></div>
+    <div class="vign"></div>
+    <div class="spot" id="spotB"></div>
+    <div class="inner">
+      <p class="eyebrow"><s></s> AI 应用先行者</p>
+      <h1 data-split>陈晓波</h1>
+      <p class="sub">把 AI 用于研究、产品与制造。<br>半导体先进制程 · 良率学习 · 研发到量产。</p>
+      <a class="cta" id="magB" href="#" onclick="return false">探索项目 <span>↘</span></a>
+    </div>
+    <div class="meta">
+      <span>Portland, Oregon</span>
+      <span><em>01</em> — 03 / Silicon</span>
+      <span>向下滑动，看它改变</span>
+    </div>
+  </div></div></div>
+
+  <div class="spec">
+    <div>
+      <h4>用了哪些手法</h4>
+      <ul>
+        <li>网格渐变：96×60 的 2D canvas 画三个移动色团，CSS 放大 + <code>blur</code>——浏览器的双线性插值就是免费的 mesh gradient，成本是 WebGL 的千分之一</li>
+        <li>颗粒：内联 <code>feTurbulence</code> data-URI + <code>mix-blend-mode:overlay</code>，无外部图片</li>
+        <li>光标光晕：<code>pointermove</code> + lerp 平滑，只写 <code>transform</code></li>
+        <li>磁吸 CTA：按钮朝光标偏移，离开回弹</li>
+        <li>逐字入场 + <code>font-variation-settings:"wght"</code> 从 200 插值到 620（真·可变字重动画）</li>
+        <li>节流到 ~20fps；<code>visibilitychange</code> 与非激活方向一律停渲</li>
+      </ul>
+    </div>
+    <div>
+      <h4>配色</h4>
+      <div class="sw">
+        <i style="background:#06070d"></i><i style="background:#2b3a8f"></i><i style="background:#6b3bd6"></i>
+        <i style="background:#e2794a"></i><i style="background:#7ce0ff"></i><i style="background:#edf2ff"></i>
+      </div>
+      <p><code>#06070D</code> 底 · 色场 <code>#2B3A8F</code> → <code>#6B3BD6</code> → <code>#E2794A</code><br>
+      <code>#7CE0FF</code> 信号青 · <code>#EDF2FF</code> 字</p>
+      <h4 style="margin-top:14px">字体</h4>
+      <p>拉丁 + 中文都必须是<b>可变字重</b>才能做字重动画：Manrope VF（已有）+ Noto Sans SC VF 子集。<br>
+      不支持可变字体时自动退回 opacity/blur 入场，不会断。</p>
+    </div>
+    <div>
+      <h4>如果选这个：改什么、多少工作量</h4>
+      <p><code>index.html</code> 第一屏文案需拆成逐字 <code>&lt;span&gt;</code><br>
+      <code>scene.js</code> 整体替换为 <code>field.js</code>（约 90 行，无依赖）<br>
+      新增 <code>pointer.js</code>（光晕 + 磁吸，约 50 行）<br>
+      <code>base.css</code> 色彩令牌 + 第一屏段落重写<br>
+      <code>vendor/three.module.min.js</code> 可删</p>
+      <p class="cost">工作量：<b>2 – 3 天</b>。净 JS 体积 <b>−687KB</b>。</p>
+      <p class="warn" style="font-size:12.5px">两个坑：① <code>ui.js</code> 切换语言时用 <code>el.innerHTML = dataset[lang]</code>，会把逐字 span 抹掉——必须改成「设文本 → 重新拆字」。② 这个视觉方向目前满大街都是，三年后最先过时。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ C · 碑 ============================ -->
+<section class="dir" id="dir-C">
+  <div class="name"><h2>C · 碑 <span style="font-weight:400;color:#8f96a1">Monolith</span></h2>
+    <span>出版物式的重量感 —— 字就是版面。几乎没有特效，戏剧性全部来自尺度、栏线与节奏。</span></div>
+  <div class="stage-frame"><div class="stage"><div class="C" id="stage-C">
+    <div class="plateart"></div>
+    <div class="cols"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="grain"></div>
+    <div class="inner">
+      <div class="top">
+        <span>Xiaobo Chen · 陈晓波</span>
+        <span>Semiconductor · AI · Portland</span>
+        <span><b>01</b> — 03</span>
+      </div>
+      <div class="mid">
+        <div class="idx">01</div>
+        <h1 data-split-c>陈晓波</h1>
+        <p class="lede">把 AI 用于研究、产品与制造。二十年先进制程，从 0.25µm 到 18Å；研发、良率与量产之间的那条路。</p>
+        <a class="cta" href="#" onclick="return false">探索项目 ↘</a>
+      </div>
+      <div class="ticker"><div class="ticker-track" id="tickC"></div></div>
+    </div>
+  </div></div></div>
+
+  <div class="spec">
+    <div>
+      <h4>用了哪些手法</h4>
+      <ul>
+        <li>字距动画：<code>letter-spacing</code> 从 <code>+.3em</code> 收到 <code>-.045em</code>，标题「落位」的那一下就是整个首屏的主动效</li>
+        <li>逐字遮罩揭示：每个字外裹 <code>overflow:hidden</code>，内层 <code>translateY(105%) rotate(5deg)</code> 升起</li>
+        <li>看得见的栏线（6 栏）作为结构，而不是装饰</li>
+        <li>镂空数字：<code>-webkit-text-stroke</code> 做大号轮廓字</li>
+        <li><code>mix-blend-mode:soft-light</code> 的颗粒压在渐变版面上，去掉数字味</li>
+        <li>底部无限跑马灯：<code>translateX(-50%)</code> + 内容复制一份，纯 CSS</li>
+      </ul>
+    </div>
+    <div>
+      <h4>配色</h4>
+      <div class="sw">
+        <i style="background:#14120f"></i><i style="background:#ece5d8"></i><i style="background:#b6ae9f"></i>
+        <i style="background:#b9bec4"></i><i style="background:#c2603a"></i>
+      </div>
+      <p><code>#14120F</code> 暖黑 · <code>#ECE5D8</code> 骨白 · <code>#B6AE9F</code> 次级<br>
+      <code>#B9BEC4</code> 铬灰 · <code>#C2603A</code> 铁锈（极少量）</p>
+      <p>暖黑而不是蓝黑——这是和现站拉开距离的关键一步，暖黑在屏幕上更像纸张与金属，蓝黑更像软件界面。</p>
+      <h4 style="margin-top:14px">字体</h4>
+      <p>这条路<b>完全押在字形上</b>：中文建议思源宋体 Heavy 或一款现代黑体的 750 字重，必须子集化；拉丁用一款有真 Display 版本的无衬线。字体没选好这个方向就不成立。</p>
+    </div>
+    <div>
+      <h4>如果选这个：改什么、多少工作量</h4>
+      <p><code>index.html</code> 第一屏重写 + 标题逐字拆分<br>
+      <code>base.css</code>/<code>full.css</code> 第一屏重写，暖黑令牌要向下贯穿到第二屏（现在的 <code>--paper:#faf3ec</code> 正好和暖黑是一家，接得上）<br>
+      <code>scene.js</code> + three.js 删除<br>
+      新增中文 Display 字体子集（这是主要成本，不是代码）</p>
+      <p class="cost">工作量：<b>2 – 3 天</b>（代码 1 天，字体选型与子集 1–2 天）。</p>
+      <p class="warn" style="font-size:12.5px">同样踩 <code>ui.js</code> 的 <code>innerHTML</code> 坑。另外中英切换时标题长度差异很大（「陈晓波」3 字 vs「Xiaobo Chen」11 字），版式要分别调。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ D · 仪表 ============================ -->
+<section class="dir" id="dir-D">
+  <div class="name"><h2>D · 仪表 <span style="font-weight:400;color:#8f96a1">Instrument</span></h2>
+    <span>理性的系统感 —— 把首屏当成一块读数面板。最贴他本行、最不像通用 AI 站的一条。</span></div>
+  <div class="stage-frame"><div class="stage"><div class="D" id="stage-D">
+    <div class="lattice"></div>
+    <div class="crosshair" id="chD"><i class="hx"></i><i class="vy"></i><b></b></div>
+    <div class="inner">
+      <div>
+        <p class="status"><s></s> System nominal · 20+ yrs</p>
+        <h1>陈晓波</h1>
+        <p class="sub">把 AI 用于研究、产品与制造。<br>半导体先进制程 · 良率学习 · 研发到量产。</p>
+        <div class="readout">
+          <dl><dt>Years</dt><dd data-count="20" data-suffix="+">0</dd></dl>
+          <dl><dt>Countries</dt><dd data-count="4">0</dd></dl>
+          <dl><dt>Node</dt><dd><u id="nodeD">0.25µm</u></dd></dl>
+        </div>
+        <div class="track" id="trackD"></div>
+        <a class="cta" href="#" onclick="return false">探索项目 ↘</a>
+      </div>
+      <div class="wafer" id="waferD" aria-hidden="true"></div>
+    </div>
+    <div class="meta">
+      <span>Portland, Oregon</span>
+      <span><em>01</em> / Silicon · 触碰晶圆</span>
+      <span>向下滚动</span>
+    </div>
+  </div></div></div>
+
+  <div class="spec">
+    <div>
+      <h4>用了哪些手法</h4>
+      <ul>
+        <li>晶圆图由 JS 生成单元格，<code>animation-delay</code> 按到扫描原点的距离计算——一条 CSS 动画驱动几百个格子，主线程不参与</li>
+        <li>数字读数：<code>font-variant-numeric:tabular-nums</code> 等宽数字，计数时版面不抖</li>
+        <li>制程节点轨道按节拍推进，强调色只有一处亮着</li>
+        <li>十字准线跟随光标并显示坐标，只写 <code>transform</code></li>
+        <li>点阵背景 <code>radial-gradient</code> + <code>mask-image</code> 向下渐隐，衔接第二屏不再是硬切</li>
+        <li>落地时第二屏项目卡用 <code>animation-timeline:view()</code> 做扫描式进场</li>
+      </ul>
+    </div>
+    <div>
+      <h4>配色</h4>
+      <div class="sw">
+        <i style="background:#0a0d11"></i><i style="background:#1b232c"></i><i style="background:#44586b"></i>
+        <i style="background:#ffa23a"></i><i style="background:#79d3a6"></i><i style="background:#e4e9ef"></i>
+      </div>
+      <p><code>#0A0D11</code> 底 · <code>#1B232C</code> 面 · <code>#44586B</code> 冷灰<br>
+      <code>#FFA23A</code> 信号橙（唯一强调）· <code>#79D3A6</code> 状态绿 · <code>#E4E9EF</code> 字</p>
+      <p>信号橙是现站 <code>--accent:#ffab86</code> 的近亲，<b>品牌色不用推倒重来</b>，只是从装饰色变成功能色。</p>
+      <h4 style="margin-top:14px">字体</h4>
+      <p>正文沿用 Manrope + 中文黑体；<b>所有数字与标签改等宽</b>（系统 <code>ui-monospace</code> 即可，零额外体积）。这一条就能把「作品集」变成「工程仪表」。</p>
+    </div>
+    <div>
+      <h4>如果选这个：改什么、多少工作量</h4>
+      <p><code>index.html</code> 第一屏结构改为读数布局<br>
+      新增 <code>instrument.js</code>（晶圆图 + 计数 + 准线，约 120 行，无依赖）<br>
+      <code>base.css</code> 第一屏段落重写；暗色令牌<b>基本沿用</b>（<code>#17202B</code> → <code>#0A0D11</code> 只是压暗）<br>
+      <code>scene.js</code> + three.js 删除</p>
+      <p class="cost">工作量：<b>2 – 2.5 天</b>。净 JS 体积 <b>−687KB</b>，首屏首次绘制预计快 0.4–0.8s（取决于网络）。</p>
+      <p class="cost">优势：改动幅度最小的「真正换了一种气质」的方案，第二屏暖纸配色可以原样保留，深→浅的接缝正好用点阵渐隐解决。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<p class="note">
+<b>说明：</b>这是一个独立的对比原型，<b>没有改动 timememo.net 的任何文件</b>。文案沿用线上现有中文内容；A/C/D 中「半导体先进制程 · 良率学习 · 研发到量产」一行与 C 的导语是从站内既有文案改写的<b>占位副标题</b>，定稿前请替换。
+原型为单文件自包含，不加载任何外部字体，因此这里用的是系统字体栈——各方向的字体方案写在各自说明里，实际效果以定稿字体为准。
+四个方向都已包含 <code>prefers-reduced-motion</code> 降级（可用顶栏开关预览：降级后呈现的是动画终态，不是空白）。响应式用 container query 实现，所以「移动端宽度」开关是真实的断点切换。
+</p>
+
+<script>
+(() => {
+'use strict';
+const $  = (s,r=document) => r.querySelector(s);
+const $$ = (s,r=document) => [...r.querySelectorAll(s)];
+
+/* ---------- 动效降级：由 JS 单点控制，不直接挂 media query ----------
+   原因见上面 #reduced 的注释：直接挂 media 会让开了「减少动态效果」的用户
+   看到一片静止却得不到任何解释。这里改成「跟随系统 + 明确提示 + 可覆盖」。 */
+const rmStyle = $('#reduced');
+const osReduce = matchMedia('(prefers-reduced-motion: reduce)');
+let reducedOn = false;
+
+function setReduced(on, from) {
+  reducedOn = !!on;
+  rmStyle.media = reducedOn ? 'all' : 'not all';
+  $('#rmTog').checked = reducedOn;
+  if (from !== 'init') replay();
+}
+function reduced() { return reducedOn; }
+
+// 初始：跟随系统。系统要求降级时，同时把提示条显示出来。
+if (osReduce.matches) {
+  document.body.classList.add('rm-detected');
+  setReduced(true, 'init');
+}
+osReduce.addEventListener?.('change', e => {
+  document.body.classList.toggle('rm-detected', e.matches);
+  setReduced(e.matches);
+});
+$('#rmTog').addEventListener('change', e => setReduced(e.target.checked));
+$('#forceMotion').addEventListener('click', () => {
+  setReduced(false);
+  document.body.classList.remove('rm-detected');
+});
+$('#mobTog').addEventListener('change', e => document.body.classList.toggle('mob', e.target.checked));
+
+/* ---------- 逐字拆分（B / C） ---------- */
+function split(el, cls, wrap, step, base) {
+  const text = el.dataset.raw ?? (el.dataset.raw = el.textContent.trim());
+  el.textContent = '';
+  [...text].forEach((c, i) => {
+    const g = document.createElement('span');
+    g.className = cls;
+    g.textContent = c === ' ' ? ' ' : c;
+    g.style.animationDelay = (base + i * step) + 's';
+    if (wrap) {
+      const w = document.createElement('span');
+      w.className = wrap; w.appendChild(g); el.appendChild(w);
+    } else el.appendChild(g);
+  });
+}
+
+/* ---------- B: 色场 canvas ---------- */
+const fieldCv = $('#fieldCv');
+const fctx = fieldCv.getContext('2d', { alpha: false });
+const FW = 96, FH = 60;
+fieldCv.width = FW; fieldCv.height = FH;
+const img = fctx.createImageData(FW, FH);
+const BLOBS = [
+  { c: [0x2b, 0x3a, 0x8f], r: 52, sx: .00031, sy: .00043, px: .30, py: .40, ax: .34, ay: .26 },
+  { c: [0x6b, 0x3b, 0xd6], r: 46, sx: .00047, sy: .00029, px: .68, py: .58, ax: .28, ay: .30 },
+  { c: [0xe2, 0x79, 0x4a], r: 34, sx: .00023, sy: .00061, px: .52, py: .80, ax: .32, ay: .22 },
+  { c: [0x1e, 0x6e, 0x7e], r: 42, sx: .00057, sy: .00037, px: .16, py: .78, ax: .22, ay: .24 }
+];
+function drawField(t) {
+  const d = img.data;
+  for (let y = 0; y < FH; y++) for (let x = 0; x < FW; x++) {
+    let r = 6, g = 7, b = 13;
+    for (const o of BLOBS) {
+      const cx = (o.px + Math.sin(t * o.sx) * o.ax) * FW;
+      const cy = (o.py + Math.cos(t * o.sy) * o.ay) * FH;
+      const dx = (x - cx) / (FW / 100), dy = (y - cy) / (FH / 62);
+      const w = Math.max(0, 1 - Math.hypot(dx, dy) / o.r);
+      const k = w * w * (3 - 2 * w);            // smoothstep
+      r += o.c[0] * k; g += o.c[1] * k; b += o.c[2] * k;
+    }
+    const i = (y * FW + x) * 4;
+    d[i] = r > 255 ? 255 : r; d[i+1] = g > 255 ? 255 : g; d[i+2] = b > 255 ? 255 : b; d[i+3] = 255;
+  }
+  fctx.putImageData(img, 0, 0);
+}
+let fieldTimer = null;
+function fieldStart() {
+  if (fieldTimer) return;
+  drawField(performance.now());
+  if (reduced()) return;                        // 降级：画一帧静态色场就停
+  fieldTimer = setInterval(() => {
+    if (document.hidden) return;
+    drawField(performance.now());
+  }, 50);                                       // ~20fps 足够，色场本来就是慢变量
+}
+function fieldStop() { clearInterval(fieldTimer); fieldTimer = null; }
+
+/* ---------- B: 光晕 + 磁吸 ---------- */
+const stageB = $('#stage-B'), spot = $('#spotB'), mag = $('#magB');
+let bx = 0, by = 0, tx = 0, ty = 0, bRaf = 0, mdx = 0, mdy = 0;
+function bMove(e) {
+  const r = stageB.getBoundingClientRect();
+  tx = e.clientX - r.left; ty = e.clientY - r.top;
+  stageB.classList.add('live');
+  const m = mag.getBoundingClientRect();
+  const ox = e.clientX - (m.left + m.width / 2), oy = e.clientY - (m.top + m.height / 2);
+  const dist = Math.hypot(ox, oy);
+  const pull = dist < 180 ? (1 - dist / 180) : 0;
+  mdx = ox * pull * .34; mdy = oy * pull * .34;
+}
+function bLoop() {
+  bx += (tx - bx) * .12; by += (ty - by) * .12;
+  spot.style.transform = `translate(${bx}px,${by}px)`;
+  mag.style.transform = `translate(${mdx}px,${mdy}px)`;
+  bRaf = requestAnimationFrame(bLoop);
+}
+// 监听器只挂一次，start/stop 只控制 rAF 循环，避免重放时重复绑定
+stageB.addEventListener('pointermove', e => { if (!reduced()) bMove(e); });
+stageB.addEventListener('pointerleave', () => { mdx = mdy = 0; stageB.classList.remove('live'); });
+function bStart() {
+  if (reduced()) { stageB.classList.remove('live'); return; }
+  if (!bRaf) bLoop();
+}
+function bStop() {
+  cancelAnimationFrame(bRaf); bRaf = 0;
+  mag.style.transform = ''; stageB.classList.remove('live');
+}
+
+/* ---------- C: 跑马灯内容（复制一份以便无缝循环） ---------- */
+// 注意：这一行不能用 text-transform:uppercase —— 会把 0.25µm 变成 0.25MM
+const TICK = ['0.25µm','0.18µm','90nm','65nm','45nm','28nm','14nm','7nm','5nm','3nm','<em>18Å</em>',
+              'PROCESS INTEGRATION','YIELD LEARNING','AI-ENABLED ANALYSIS','R&D → HVM'];
+$('#tickC').innerHTML = [...TICK, ...TICK].map(t => `<span>${t}</span>`).join('');
+
+/* ---------- D: 晶圆图 / 计数 / 节点轨道 / 准线 ---------- */
+const wafer = $('#waferD');
+const N = 22;
+(function buildWafer() {
+  wafer.style.gridTemplateColumns = `repeat(${N},1fr)`;
+  const c = (N - 1) / 2, frag = document.createDocumentFragment();
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    const d = Math.hypot(x - c, y - c);
+    const cell = document.createElement('i');
+    cell.className = 'cell';
+    if (d > c + .3) { cell.style.visibility = 'hidden'; cell.style.animation = 'none'; }
+    else {
+      // 扫描从左上角推进：delay 正比于 (x+y)
+      cell.style.animationDelay = (((x + y) / (2 * N)) * 2.4).toFixed(2) + 's';
+    }
+    frag.appendChild(cell);
+  }
+  wafer.appendChild(frag);
+})();
+
+const NODES = ['0.25µm','0.18µm','90nm','65nm','45nm','28nm','14nm','7nm','5nm','3nm','18Å'];
+$('#trackD').innerHTML = NODES.map((n, i) => `<i data-i="${i}">${n}</i>`).join('');
+let nodeTimer = null, countRaf = 0;
+function dStart() {
+  // 计数
+  const dds = $$('#stage-D [data-count]');
+  if (reduced()) {
+    dds.forEach(dd => dd.textContent = dd.dataset.count + (dd.dataset.suffix || ''));
+    $('#nodeD').textContent = '18Å';
+    $$('#trackD i').forEach((e, i) => e.classList.toggle('hot', i === NODES.length - 1));
+    return;
+  }
+  const t0 = performance.now(), DUR = 1400;
+  cancelAnimationFrame(countRaf);
+  (function tick(now) {
+    const p = Math.min(1, ((now || performance.now()) - t0) / DUR);
+    const e = 1 - Math.pow(1 - p, 3);
+    dds.forEach(dd => dd.textContent = Math.round(+dd.dataset.count * e) + (p === 1 ? (dd.dataset.suffix || '') : ''));
+    if (p < 1) countRaf = requestAnimationFrame(tick);
+  })();
+  // 节点轨道
+  clearInterval(nodeTimer);
+  let i = 0;
+  const step = () => {
+    $$('#trackD i').forEach((el, k) => el.classList.toggle('hot', k === i));
+    $('#nodeD').textContent = NODES[i];
+    i = (i + 1) % NODES.length;
+  };
+  step();
+  nodeTimer = setInterval(step, 620);
+}
+function dStop() {
+  clearInterval(nodeTimer); nodeTimer = null;
+  cancelAnimationFrame(countRaf);
+  stageD.classList.remove('live');
+}
+const stageD = $('#stage-D'), ch = $('#chD');
+stageD.addEventListener('pointermove', dMove);
+stageD.addEventListener('pointerleave', () => stageD.classList.remove('live'));
+function dMove(e) {
+  if (reduced()) return;
+  const r = stageD.getBoundingClientRect();
+  const x = e.clientX - r.left, y = e.clientY - r.top;
+  stageD.classList.add('live');
+  ch.querySelector('.hx').style.transform = `translateY(${y}px)`;
+  ch.querySelector('.vy').style.transform = `translateX(${x}px)`;
+  const b = ch.querySelector('b');
+  b.style.transform = `translate(${Math.min(x + 12, r.width - 108)}px,${Math.min(y + 12, r.height - 26)}px)`;
+  b.textContent = `X ${x.toFixed(0).padStart(4,'0')}  Y ${y.toFixed(0).padStart(4,'0')}`;
+}
+
+/* ---------- 方向切换：只让当前方向跑动画 ---------- */
+const START = { B: () => { fieldStart(); bStart(); }, D: dStart };
+const STOP  = { B: () => { fieldStop(); bStop(); },  D: dStop };
+let cur = 'A';
+
+function replay() {
+  const host = $('#stage-' + cur);
+  STOP[cur]?.();
+  host.classList.add('norun');
+  void host.offsetWidth;              // 强制回流，动画时钟归零
+  host.classList.remove('norun');
+  START[cur]?.();
+}
+
+function activate(id) {
+  if (id === cur) return;
+  STOP[cur]?.();
+  $('#dir-' + cur).classList.remove('on');
+  cur = id;
+  $('#dir-' + id).classList.add('on');
+  replay();
+}
+$$('.switch button').forEach(b => b.addEventListener('click', () => {
+  $$('.switch button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+  activate(b.dataset.go);
+}));
+$('#replay').addEventListener('click', replay);
+
+/* 初始化 */
+split($('#stage-B h1'), 'ch', null, .07, .12);
+split($('#stage-C h1'), 'g', 'gw', .09, .25);
+drawField(performance.now());   // B 先画一帧，切过去不会是黑的
+document.addEventListener('visibilitychange', () => { if (document.hidden) fieldStop(); else if (cur === 'B') fieldStart(); });
+})();
+</script>
+</body>
+</html>
