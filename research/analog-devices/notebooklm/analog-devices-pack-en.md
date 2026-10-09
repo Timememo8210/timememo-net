@@ -1,6 +1,6 @@
 # Analog device study pack (for NotebookLM)
 
-Source: timememo.net/research/analog-devices/. This pack combines four parts: (1) the study plan (7 sessions); (2) the main guide; (3) gain and noise tricks; (4) the glossary. Everything is summarized from public material; [Inference] marks the author's judgment, and [TCAD] or [Silicon · research] numbers do not represent production processes.
+Source: timememo.net/research/analog-devices/. This pack combines five parts: (1) the study plan (7 sessions); (2) the Q&A (speed, VT and flicker noise); (3) the main guide; (4) gain and noise tricks; (5) the glossary. Everything is summarized from public material; [Inference] marks the author's judgment, and [TCAD] or [Silicon · research] numbers do not represent production processes.
 
 
 ---
@@ -14,6 +14,7 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
 **Goal:** See why analog judges a device by small-signal ratios at a bias point, and learn the four core metrics and the cost each one stands for.
 
 **Sections to read:**
+- Q&A: Q0. What are analog circuits really after?
 - Guide: Big-picture map
 - Guide: The shift in evaluation paradigm: from "switch" to "amplifier at a bias point"
 - Guide: How logic optimization hurts analog devices: halo, thin oxide and low voltage
@@ -107,9 +108,9 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
 **Sections to read:**
 - Guide: Two 1/f noise models and the diagnostic method
 - Guide: RTN: a statistical problem for small-area devices
-- Tricks: Start with the main cause: 1/f noise is a gate-stack trap problem
+- Q&A: Q3. From bulk to FinFET to nanosheet, does flicker noise get better or worse?
+- Q&A: Q2. Does lower VT make flicker noise worse?
 - Tricks: Process knobs: public evidence at a glance
-- Tricks: Design-side practices
 - Tricks: Chopping (chopper stabilization)
 - Term: Flicker noise (1/f noise)
 - Term: RTN (random telegraph noise)
@@ -205,10 +206,10 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
 
 **Sections to read:**
 - Term: Drive and Cdyn map
+- Q&A: Q1. Is speed about the I/C ratio?
+- Q&A: Q5. How to speed up when the data rate falls short: easy, medium and hard tiers
 - Term: Cdyn (dynamic capacitance)
-- Term: Drive current (Idsat, Ion)
 - Term: V–F curve and Vmin
-- Term: Iso-power vs iso-frequency comparisons
 - Guide: Mapping process knobs to analog metrics
 
 **Key points:**
@@ -228,6 +229,847 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
   A: τ = 1/(2N·f); C = (IDDA − IDDQ)/(N·VDD·f).
 
 **Exercise:** Without notes, redraw the metric map from session 1, then check it against the overview and fill the gaps. Then open the review deck and redo the remaining cards until it is empty.
+
+
+---
+
+# Q&A: speed, VT and flicker noise
+
+This Q&A is for engineers who know logic process integration but are new to analog and high-speed circuits. It first explains what analog circuits are fundamentally after (Q0), then answers six groups of common questions. First, CMOS circuit speed does depend on the ratio of drive current to load capacitance (I/C, the inverse of CV/I), and the comparison must be made at the same Ioff and the same footprint; but CML, amplifiers, pads and long wires each have their own bottleneck, set by gm/C, fT/fmax and RC. Second, "lower VT gives more drive and more leakage" is a direct, quantitative relation: leakage grows exponentially as 10^(−ΔVT/SS), while drive grows only as a power law, (VDD−VT)^α, far weaker than exponential. "Lower VT gives worse flicker noise" is not a direct relation. In the CNF+CMF model, VT itself does not appear in the noise equation; noise depends only on trap density and bias point. The real noise differences come through two indirect paths: the comparison basis (same VGS or same ID) and the process method used to lower VT (dipole, cap-layer element diffusion, halo doping). Third, flicker noise per unit area improved by about an order of magnitude overall from bulk to FinFET, and nanosheet is roughly on par with planar devices that use the same gate stack; but the noise of a single minimum device and the device-to-device spread got worse, because area shrank faster than trap density fell. Fourth, the first-order knob for lower noise is the trap density of the gate stack, followed by EOT, anneal, channel design and area; on the circuit side, chopping and auto-zero do the work. Fifth, when the data rate falls short, first locate which block is the bottleneck and which metric limits it, then stack methods in three tiers (easy, medium, hard), with matching verification at each step. Finally, five short topics on high-speed and analog design are appended.
+
+## Overview: start with this table
+
+**Find the one-line answer for your question first, then jump to its section for the evidence and details.**
+
+Evidence tags: [Textbook] textbook or general knowledge; [Silicon · research] measurements on research devices or research circuits; [Silicon · production platform] published data from production or near-production processes; [TCAD] device simulation; [Simulation] circuit or SPICE model simulation; [Vendor] briefs or application notes from vendors and standards bodies; [Opinion] judgments from reviews, roadmaps or industry articles; [Inference] this report's own reasoning; [Illustration] example numbers set up to explain a method, not measurements.
+
+| Question | One-line answer | Section |
+|---|---|---|
+| What are analog circuits really after? | Amplify and convert continuous signals with as little distortion as possible on a limited power budget; gain gm·Rout is the means, and inside negative feedback it is traded for accuracy, linearity and speed | Q0 |
+| Is speed about the I/C ratio? | Yes for CMOS logic, clocks and serializers, and the comparison must be at the same Ioff and the same footprint; CML depends on gm/C, pads on R·C, tuned RF on fmax | Q1 |
+| Does lower VT make flicker noise worse? | Drive and leakage change directly with VT; flicker does not, and the differences come from the comparison basis and the process method used to lower VT | Q2 |
+| bulk → FinFET → nanosheet: does flicker get better or worse? | Per unit area about 10× better (mostly at the FinFET step), nanosheet roughly flat; single minimum devices and spread get worse | Q3 |
+| How to optimize flicker? Where is it heading? | Process: lower gate-stack trap density, thin EOT, anneal, undoped channel; device choice: large area, thin-oxide core devices; circuit: low overdrive and chopping; direction: co-optimize the gate stack with reliability | Q4 |
+| How to speed up when the data rate falls short? | Locate the bottleneck block and metric first, then stack three tiers: easy (tuning, device choice, VDD), medium (block redesign, process tweaks), hard (new process modules, packaging and architecture) | Q5 |
+| What do fT, fmax and CV/I each govern? | fT = gm/C governs broadband amplification, fmax adds Rg and governs tuned RF, CV/I governs digital gate delay | Q6 |
+| What does data rate demand of devices? | UI = 1/data rate, NRZ Nyquist = data rate/2, PAM4 halves it again; NRZ front-end bandwidth is about 0.5–0.7× the data rate (PAM4 uses the symbol rate, roughly half) | Q7 |
+| Why do pad, ESD and bump capacitance matter? | With termination resistance fixed, the pad pole is set by capacitance alone; 2.5D/3D packaging addresses this by shortening the channel and lowering ESD and bump capacitance | Q8 |
+| How do jitter and noise relate? | Random jitter is the integral of phase noise; device flicker noise upconverts into close-in phase noise, and the PLL loop suppresses only the part inside the loop bandwidth | Q9 |
+| Why is analog cautious with the lowest VT and shortest L? | Low gain, large mismatch, high leakage, high 1/f; high-speed paths still use them for speed, then recover with calibration and equalization | Q10 |
+
+## Q0. What are analog circuits really after?
+
+**Analog circuits are not after "amplification" itself. They aim to pass, amplify or convert a continuously varying physical signal with as little distortion as possible, under limited power and supply voltage. Gain gm·Rout is the means: put high gain inside negative feedback, and you get a result that is accurate, linear and almost independent of device parameters.**
+
+Key points:
+- [Textbook] Digital circuits encode information as 0 and 1, and each stage "regenerates" the signal back to clean levels; errors smaller than the noise margin are simply dropped. In analog circuits the information is in the continuous value of the signal, so every bit of noise, distortion, offset and drift becomes information error and cannot be removed afterward.
+- What gets amplified is the "small change" in the signal: a µV–mV signal from a sensor, an antenna or the end of a long wire is raised to a level that the next stage (ADC, comparator) can resolve reliably. The quantity can be voltage, current or charge; in RF it is power.
+- gm turns input voltage into current, and Rout turns that current back into voltage, so single-stage voltage gain = gm·Rout. This number is "the most a single stage can amplify", and it is also the upper bound on accuracy once the stage is placed in feedback.
+- High gain inside negative feedback buys four things: accuracy (error about 1/(A·β)), linearity, bandwidth and low output impedance. It also makes the result depend only on ratios of resistors and capacitors, not on the transistors themselves.
+- So analog design trades off eight quantities: noise, linearity, gain, supply voltage, signal swing, speed, input/output impedance and power (Razavi calls this the "analog design octagon", [Razavi, Design of Analog CMOS Integrated Circuits](https://www.mheducation.com/highered/product/design-of-analog-cmos-integrated-circuits-razavi.html)). Device metrics map onto several of them: gm/ID maps to power efficiency, gm·ro to accuracy, fT to speed, and noise and mismatch to the floor on resolution.
+
+### The basic difference between digital and analog: regeneration
+
+[Textbook] A digital inverter actually has very high gain near its switching point. That gain pushes an ambiguous middle level quickly to 0 or 1, so the signal is "repaired" at every stage and the noise is dropped. This is called regeneration. A digital circuit only needs noise below the noise margin, and the result is exact.
+
+Analog circuits do the opposite: they must hold a precise value at a middle level. A signal of 1.2345 mV and one of 1.2346 mV carry different information, and there is no "margin" in between to absorb error. So the questions analog cares about are all "how large is the error": noise sets how small a signal can be resolved, mismatch and offset set how accurate the zero point is, nonlinearity sets whether large signals get distorted, bandwidth sets how fast a change can be tracked, and power sets the cost of all of this.
+
+In one sentence: digital uses gain to push the signal away from the middle; analog uses gain to hold the signal in the middle.
+
+### What exactly gets amplified
+
+[Textbook] What gets amplified is the "small change" of the signal around the bias point, that is, the small signal. The transistor is first biased at a DC operating point (ID, VGS, VDS), and the signal is a small perturbation on top of that point.
+
+Why amplify:
+- The raw signal is too weak. Signals from microphones, image sensors, temperature sensors, antennas and the ends of long wires are often in the µV to few-mV range.
+- Later stages have their own noise and errors. ADC quantization error and comparator offset are fixed; if the signal is first amplified by A, these errors shrink by A when referred back to the input. So the noise and accuracy of the chain are set mainly by the first stage.
+- Driving the load. Sending the signal into a capacitor, resistor, antenna or long line needs enough current and low output impedance.
+
+The quantity amplified depends on the application: voltage is most common (op amps, ADC front ends); current is used in current mirrors and transimpedance amplifiers; charge is used in sensor readout; in RF it is power, judged by power gain and fmax.
+
+### What gm·Rout means
+
+[Textbook] A transistor is essentially a "voltage-controlled current source": a gate voltage change Δv gives a drain current change gm·Δv. This current flows through the resistance Rout seen at the output and turns back into a voltage gm·Rout·Δv. So:
+- gm measures "how much current the input voltage can move". It is set by bias current and gm/ID.
+- Rout measures "how close the output is to an ideal current source". The larger Rout, the more completely current turns into voltage; short channels, DIBL and channel-length modulation reduce Rout.
+- The maximum a single transistor can give, gm·ro, is called intrinsic gain and is a device "ceiling" metric. Cascode, stacking and gain boosting are all ways to raise Rout (see the [tricks page](../tricks/)).
+
+An analogy: gm is the length of the lever arm, and Rout is how solid the fulcrum is. If the fulcrum wobbles (small Rout), a longer arm still lifts nothing.
+
+### Why gain can be traded for accuracy: negative feedback
+
+[Textbook] Precision circuits almost never use open-loop gain directly. They put the amplifier inside negative feedback: closed-loop gain = A/(1 + A·β) ≈ (1/β)·[1 − 1/(A·β)].
+
+This shows two things:
+1. Closed-loop gain is about 1/β. β is set by a ratio of resistors or capacitors, which can be made very accurate and does not drift with temperature or process. Transistor parameters almost vanish from the result.
+2. The remaining error is about 1/(A·β). The larger the open-loop gain A, the smaller the error.
+
+[Illustration] An amplifier with closed-loop gain 2 (β = 0.5):
+- Open-loop gain 1000 (60 dB): error about 1/500 = 0.2%.
+- To meet 12-bit accuracy (1/4096 ≈ 0.024%), A·β must be ≥ about 4096, so A ≥ about 8200 (about 78 dB).
+- A single transistor's gm·ro is only 20–50, so cascode, multiple stages or gain boosting must multiply the gain up, or digital calibration must remove the remaining error.
+
+Negative feedback also improves linearity (distortion is compressed by about A·β), extends bandwidth (gain-bandwidth product is roughly conserved) and lowers output impedance. So the accurate version of "analog cares most about gain" is: gain is a "currency" that can be exchanged for accuracy, linearity and speed.
+
+### So what does analog ultimately optimize
+
+[Inference, synthesizing textbook views] The goal of an analog circuit fits in one sentence: at a given power and supply voltage, keep enough signal-to-noise ratio and accuracy over the needed bandwidth. Common figures of merit all take this form:
+- Amplifier: gain-bandwidth product divided by power, or noise efficiency factor.
+- ADC: effective number of bits (ENOB) and energy per conversion (Walden or Schreier FoM).
+- Receiver: noise figure, linearity (IIP3) and power.
+- Clock: jitter and power.
+
+Mapped to devices:
+| What the circuit needs | Device metric | Better direction |
+|---|---|---|
+| Low power | gm/ID | Larger is better |
+| Accuracy, gain | gm·ro (gm/gds) | Larger is better |
+| Speed, bandwidth | fT, fmax | Larger is better |
+| Resolution floor | 1/f and thermal noise, AVT | Smaller is better |
+| Swing, headroom | VDSAT, VDD | More headroom is better |
+
+This is why, for the same transistor, logic looks at Ion/Ioff and CV/I, while analog looks at gm/ID, gm·ro, fT, noise and mismatch.
+
+## Q1. Is speed about the I/C ratio?
+
+**For CMOS logic, clock trees, serializers and inverter-type drivers, yes: gate delay is about C·VDD/I_eff, so speed depends on I_eff/C, and the comparison must be made at the same Ioff and the same footprint. Looking only at current, only at capacitance or only at "frequency" leads to wrong conclusions.**
+
+Key points:
+- [Textbook] Gate delay τ ≈ C_load·VDD/(2·I_eff); ring-oscillator frequency f = 1/(2·N·τ). At the same VDD, speed is proportional to I_eff/C_load.
+- Looking only at current misleads: widening a device raises current, but its own capacitance rises in proportion; lowering VT raises current, but Ioff rises exponentially. So Ioff and footprint must be fixed.
+- Looking only at capacitance also misleads: thinning the fin or shrinking the contact can lower capacitance, but may also raise external resistance and lower current.
+- IBM's 22 nm analysis is a good example: FinFET gains a 13–23% delay advantage from electrostatic control and lower junction capacitance, but added Cgs (fringe capacitance at the fin top and bottom) offsets part of it; the net advantage after optimization is about 17% ([Fuller et al., VLSI 2008](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)) [Silicon · research + Simulation].
+- When the load is mainly long wires, pads or tuned networks, the bottleneck becomes wire RC, termination resistance × pad capacitance, and fmax, respectively; device I/C is no longer the main factor.
+- "Frequency" is a result, not a knob: clock frequency, data rate, Nyquist frequency and fT are different quantities and must not be mixed.
+
+### Why I/C, and why I should be I_eff
+
+[Textbook] When a CMOS gate switches, its drive current charges or discharges the load capacitance. The load includes the next stage's gate capacitance, this stage's drain junction capacitance and MOL parasitics, and wire capacitance. The voltage swing is VDD, so delay is about C·VDD/I. This is the CV/I that logic processes talk about.
+
+Here I is not Idsat. During switching, both VGS and VDS change, and the device spends most of the time away from the VGS = VDS = VDD point. The industry uses I_eff for the equivalent drive current. A common definition is the average of the current at VGS = VDD/2, VDS = VDD and the current at VGS = VDD, VDS = VDD/2. I_eff is more sensitive to external resistance and DIBL than Idsat.
+
+Writing the equation as τ ∝ C·VDD/(VDD−VT)^α (alpha-power model, α ≈ 1.1–1.5 in short-channel devices) shows three things:
+- Lowering C speeds things up in direct proportion.
+- Raising VDD speeds things up, but VDD is also in the numerator, so the gain is smaller than the rise in current.
+- The benefit of lowering VT grows as VDD−VT shrinks, so VT has the most leverage at low voltage.
+
+### Why Ioff and footprint must be fixed
+
+Looking only at current has two holes.
+
+The first hole is self-loading. Double a device's width and its current doubles, but its own gate and drain capacitance also double. If the load is mainly similar devices (for example a ring oscillator, or buffers with equal fanout in a clock tree), I/C barely changes and speed barely changes. Widening helps only when the load is dominated by fixed capacitance (long wires, pads), and even then the device's own capacitance soon catches up.
+
+The second hole is leakage. Lowering VT raises current noticeably, but Ioff rises exponentially (see Q2). If Ioff is not fixed, any process can "speed up". So the standard practice in logic processes is to plot Ion–Ioff curves and compare Ion at the same Ioff, then use ring oscillators to compare frequency at the same leakage power.
+
+Footprint must be fixed too. FinFET and nanosheet can raise current by adding fins or sheets, but cell area and capacitance rise with them. Process comparisons use "current per unit footprint width" or "ring oscillators of the same standard cell", so that gains bought with area are not credited to the device.
+
+### Looking only at capacitance misleads too
+
+Methods that reduce capacitance often also affect current:
+- A narrower fin or contact reduces fringe capacitance, but may raise external resistance Rext and lower I_eff.
+- A thicker spacer reduces gate-to-contact capacitance, but lengthens the access region and raises resistance.
+- A shorter fin reduces capacitance, but also lowers current per fin.
+
+The truly "free" capacitance knobs are those that do not change the current path, such as lowering the spacer dielectric constant. IBM/GF used air spacers on 10 nm-class FinFETs to cut device parasitic capacitance by up to 25% and ring-oscillator capacitance by up to 15% ([SST/Semiconductor Digest](https://sst.semiconductor-digest.com/?p=72130); [IBM Research](https://researcher.ibm.com/publications/air-spacer-for-10nm-finfet-cmos-and-beyond)) [Silicon · research]. At constant current, a 15% cut in ring-oscillator capacitance gives roughly the same amount of speedup.
+
+The same IBM 22 nm study also gives a magnitude: reducing fin pitch and fin height from 80/40 nm to 40/20 nm lowers Cgs by about 0.2 fF/µm, which corresponds to about 10% inverter delay ([Fuller et al.](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)) [Simulation].
+
+### Which quantity "frequency" refers to
+
+When people say "this circuit's frequency is not high enough", they may mean four different quantities:
+
+| Quantity | Definition | Relation to I/C |
+|---|---|---|
+| Clock or ring-oscillator frequency | 1/(2·N·τ) | Set directly by I_eff/C |
+| Data rate | Bits transmitted per second; UI = 1/data rate | Set by the slowest block, not just the device |
+| Nyquist frequency | Data rate/2 for NRZ; data rate/4 for PAM4 | Sets how much analog bandwidth the channel and front end need |
+| fT | Frequency where small-signal current gain equals 1, ≈ gm/(2π·Cgg) | A "small-signal version of I/C", with gm in place of I |
+
+So "higher frequency is better" is not a target you can optimize directly. Data rate and clock frequency are results of the circuit. fT is a device ratio with the same root as I/C, but it measures small-signal amplification, not large-signal charging.
+
+### When I/C is not the main factor
+
+| Circuit | What sets speed | Key metric |
+|---|---|---|
+| CMOS logic, clock buffers, serializers, inverter-type drivers | Large-signal charging and discharging | I_eff/C (CV/I) |
+| CML, CTLE, limiting amplifiers | Bandwidth 1/(2π·R_L·C_L), gain gm·R_L, gain-bandwidth product gm/(2π·C_L) | gm/C_L, where C_L includes wiring and the next stage's input |
+| Long wires | Distributed RC, delay about 0.38·R·C·length² | Metal resistance and capacitance, repeater spacing |
+| Terminated pads | Pole 1/(2π·R_term·C_pad), with R_term fixed by the protocol | Pad, ESD and bump capacitance |
+| Tuned RF (LNA, VCO, PA) | Output capacitance is resonated out by an inductor | fmax, affected by Rg and Cgd |
+| Links limited by clock quality | Eye width eaten by jitter | Phase noise, supply noise |
+
+[Inference] For CML and CTLE, fT matters only indirectly. Modern FinFET fT reaches hundreds of GHz; Intel 22FFL RF devices reported fT/fmax above 230 GHz and 290 GHz ([WikiChip Fuse, IEDM 2017](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/4/)) [Silicon · production platform]. So node capacitance is usually dominated by wiring, the next stage's input and the pad, not by the device's own Cgs.
+
+For a terminated pad, driver current barely matters. The termination resistance is fixed by the protocol (for example 50 Ω), about 25 Ω effective with termination at both ends, and the pole is set by capacitance alone. Only lowering pad capacitance or cancelling it with a T-coil (see Q5, Q8) helps.
+
+One more case: the ideal intrinsic fT badly overestimates the real speed of nanoscale devices. In one simulation study, an L = 20 nm device had an fT of 10.6 THz from a quasi-static CV/I estimate, but only 2.7 THz from the true intrinsic delay; with parasitics added, the quasi-static estimate holds again, but the speed is lower ([arXiv 1611.03856](https://arxiv.org/pdf/1611.03856)) [Simulation]. The conclusion: evaluate high-speed circuits with parasitics and PEX included, not with intrinsic device parameters alone.
+
+## Q2. Does lower VT make flicker noise worse?
+
+**The first half of this claim is right and the second half is not. Lower VT raises drive and raises leakage; that is a direct, quantitative relation. Flicker noise does not change directly with VT: compared at the same ID or the same gm/ID and the same W·L, a pure VT shift does not change noise. The noise differences seen in practice come through two indirect paths: the comparison basis (at the same VGS, the low-VT device has more overdrive), and whether the process method used to lower VT (dipole, cap-layer element diffusion, halo doping) introduces traps.**
+
+Key points:
+- [Textbook] Ioff ∝ 10^(−ΔVT/SS): each SS of VT reduction (about 65–110 mV, including DIBL and temperature) raises leakage 10×. Ion ∝ (VDD−VT)^α, α ≈ 1.1–1.5, so the same VT reduction gives only about 10–25% more current.
+- [Simulation] On 100 nm-class foundry models, adjacent VT flavors differ by about 65–80 mV; each step changes Ioff by about ×3.6–5.0 and inverter speed by about +20% ([Kahng et al., ISQED 2006](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)).
+- [Textbook] CNF+CMF model: S_VG = S_VFB·(1 + α_sc·μ_eff·Cox·ID/gm)², S_VFB ∝ N_t/(W·L·Cox²). VT is not in the equation; only trap density N_t and bias point ID/gm are ([arXiv 2512.08388](https://arxiv.org/pdf/2512.08388)).
+- [Silicon · research] Processes that lower VT can bring traps: on thick-oxide pFETs, adding high-k and an Al₂O₃ cap layer made noise at least an order of magnitude higher than the SiO₂/poly reference, because Hf and Al diffused to the interface during anneal ([Simoen et al., ECS 2015](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html)). But a dipole can also shift the high-k defect band away and reduce active traps ([Franco et al., EDTM 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)); the direction depends on the specific process.
+- No public 1/f data by VT flavor (ULVT/LVT/SVT/HVT) was found for production FinFET or GAA platforms. To answer "is this true in the process at hand", the only way is to compare in the PDK at the same ID, the same gm/ID and the same W·L.
+
+### Conclusion: which relations are direct and which are indirect
+
+| Quantity | Relation to VT | Nature |
+|---|---|---|
+| Ioff (subthreshold leakage) | Ioff ∝ 10^(−ΔVT/SS), exponential | Direct, definite |
+| Ion / I_eff | ∝ (VDD−VT)^α, power law, far weaker than exponential | Direct, definite |
+| Gate delay | ∝ C·VDD/(VDD−VT)^α | Direct, definite |
+| flicker noise (same ID or same gm/ID) | VT is not in the equation | No direct relation |
+| flicker noise (same VGS) | Low-VT device has more overdrive; absolute S_VG and S_ID rise, S_ID/ID² falls | Indirect: via bias point |
+| flicker noise (different process methods) | Dipole, cap layer, halo and doping change trap density | Indirect: via process |
+| σVT and RTN | In planar, higher doping is worse, so high VT is often worse; in FinFET/GAA, it depends on how the work-function metal changes | Indirect: via process |
+
+The claim probably comes from a real observation: in some PDK, LVT/ULVT devices have larger flicker coefficients, or a designer who switched to LVT also biased the device at higher overdrive. That observation was then generalized into "low VT means high noise" [Inference].
+
+### Quantitative relation between VT, drive and leakage
+
+[Textbook] Subthreshold current varies exponentially with VGS, with the slope set by subthreshold swing SS (mV/dec). A VT shift ΔVT moves the Id–Vg curve left or right, so:
+
+Ioff(new)/Ioff(old) = 10^(ΔVT_reduction/SS_eff)
+
+Here SS_eff must include DIBL (Ioff measured at VDS = VDD) and temperature. In strong inversion, use the alpha-power model:
+
+Ion ∝ (VDD − VT)^α, α ≈ 1.1–1.5
+
+Together, these give "leakage is exponential, drive is only a power law".
+
+A set of public SPICE data (TSMC 100 nm-class foundry model, INVX4 inverter) shows the ratio directly ([Kahng et al., ISQED 2006](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)) [Simulation]:
+
+| NMOS VT flavor | VT (V) | Ioff (nA) | Inverter delay (ps) | Versus previous flavor |
+|---|---|---|---|---|
+| HVT | 0.402 | 7.5 | 14.86 | — |
+| SVT | 0.327 | 37.2 | 12.42 | ΔVT 75 mV; Ioff ×5.0; speed +20% |
+| LVT | 0.257 | 164.2 | 10.38 | ΔVT 70 mV; Ioff ×4.4; speed +20% |
+
+| PMOS VT flavor | VT (V) | Ioff (nA) | Versus previous flavor |
+|---|---|---|---|
+| HVT | −0.300 | 9.4 | — |
+| SVT | −0.235 | 34.2 | ΔVT 65 mV; Ioff ×3.6 |
+| LVT | −0.155 | 160.6 | ΔVT 80 mV; Ioff ×4.7 |
+
+In the same paper, "intermediate flavors" spaced about 35 mV apart change Ioff by about ×2.1 and improve delay by about 8–10% per step. Another often-cited rule of thumb: static leakage of HVT devices is about 1/10 that of LVT ([Wikipedia: Multi-threshold CMOS, citing Anis et al., DAC 2002](https://en.wikipedia.org/wiki/Multi-threshold_CMOS)) [Opinion].
+
+[Inference] Working back from this data, 5× leakage per 75 mV corresponds to SS_eff of about 107 mV/dec. This is larger than the intrinsic SS of FinFET/GAA (about 65–75 mV/dec at room temperature), because it includes DIBL, temperature and the short-channel effects of 100 nm planar devices. On FinFET/GAA with SS around 70 mV/dec, the same one-flavor VT step of about 70 mV would change leakage by close to ×8–10.
+
+[Inference] An example on the drive side: VDD = 0.75 V, VT lowered from 0.25 V to 0.18 V and α = 1.3 give an Ion ratio of (0.57/0.50)^1.3 ≈ 1.19, about +19% current. This matches the roughly +20% speed per flavor in the table above. The lower VDD, the smaller VDD−VT, and the larger the relative gain from the same ΔVT.
+
+VT flavors on production platforms are getting finer. GF 12LP FinFET offers four flavors (SLVT, LVT, RVT, HVT), with higher off-state leakage in the low-VT flavors ([Vidana et al., OSTI 2311246](https://www.osti.gov/servlets/purl/2311246)) [Silicon · production platform]. Intel 18A-P expands from 4 VT pairs to 5 or more, adding a flavor between ULVT and LVT and lowering ULVT by another 10 mV ([Intel 18A technology brief](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)) [Vendor]. Finer flavors let designers buy just enough speed at a smaller leakage cost.
+
+### Physics of flicker noise: VT is not in the equation
+
+1/f noise in modern HKMG planar, FinFET and nanosheet devices is usually described by the carrier number fluctuation plus correlated mobility fluctuation model (CNF+CMF). Oxide and border traps capture and release carriers, which causes flat-band voltage fluctuation; the trapped charge also modulates mobility through Coulomb scattering. The input-referred noise is ([arXiv 2512.08388](https://arxiv.org/pdf/2512.08388); original work by Hung et al., TED 1990 and Ghibaudo et al., 1991) [Textbook]:
+
+S_VG = S_VFB · (1 + α_sc·μ_eff·Cox·ID/gm)²
+
+S_VFB = q²·kT·λ·N_t / (W·L·Cox²·f)
+
+Here N_t is the trap density near the Fermi level, λ is the tunneling attenuation length, and α_sc is the Coulomb scattering coefficient. Drain current noise is S_ID = gm²·S_VG, and normalized noise is S_ID/ID² = (gm/ID)²·S_VG.
+
+VT is not in the equations. VT can enter only in two ways:
+- Bias point. ID/gm is roughly a function of overdrive: about n·kT/q in weak inversion (about 26–40 mV, constant), about (VGS−VT)/2 in the square-law region, and about VGS−VT in velocity saturation.
+- Trap density N_t. If the process that lowers VT changes the traps at the interface or in the high-k, N_t changes.
+
+[Textbook] The empirical form common in SPICE, S_VG = KF/(Cox²·W·L·f), is bias-independent, but KF actually varies with operating point and differs between weak and strong inversion ([Lundberg, MIT](https://web.mit.edu/klund/www/papers/UNP_noise.pdf)). So a single KF number in a PDK may hide the bias dependence.
+
+**Three comparison bases give three answers.** [Inference, derived from the equations above] Assume two devices differ only by a rigid VT shift, with the same N_t, μ, Cox and geometry:
+
+| Comparison basis | Overdrive of low-VT device | S_VG | S_ID | S_ID/ID² | Conclusion |
+|---|---|---|---|---|---|
+| Same ID or same gm/ID | Same | Same | Same | Same | VT drops out entirely; no noise difference |
+| Same VGS | Larger | Rises (CMF term grows) | Rises clearly (larger gm) | Falls | "More noise" is mostly more current; signal-to-noise ratio is not worse |
+| Design habit: LVT biased at lower gm/ID for speed | Larger | Rises | Rises | — | Noise really is higher, but the cause is the bias point, not VT |
+
+The third row is the most common. Designers switch to LVT for speed and often push the device toward strong inversion at the same time. The CMF term (1 + α_sc·μ_eff·Cox·ID/gm)² then grows, and input-referred noise really rises. The observation is real; the attribution is wrong.
+
+imec measurements on nanosheets also support the role of the bias point: S_vg increases with V_ov, and the average number of active traps also increases with V_ov and I_D ([Asanovski et al., arXiv 2609.08674](https://arxiv.org/html/2609.08674)) [Silicon · research].
+
+### Do the process methods for lowering VT bring traps
+
+Different architectures set VT in different ways:
+- Planar: channel and halo implants. Each extra VT flavor adds one mask and one implant per polarity ([Wikipedia: Multi-threshold CMOS](https://en.wikipedia.org/wiki/Multi-threshold_CMOS)) [Textbook].
+- FinFET/GAA: thickness or composition of the work-function metal (WFM), plus La (nFET) or Al (pFET) dipoles. Intel 3 uses angstrom-scale dipole work-function layers to deliver four tightly controlled VT flavors ([IEEE Spectrum](https://spectrum.ieee.org/intel-foundry-finfet)) [Vendor]. The sheet gap in GAA cannot fit a thick WFM, so multi-VT is moving to dipoles.
+
+Public evidence on noise for each method:
+
+| Method | Effect on traps and noise | Evidence |
+|---|---|---|
+| halo/pocket implant | High trap density in the halo region makes the bias dependence of flicker vary with geometry (verified on 45 nm LP) | [Khandelwal et al., JEDS](https://research.iitj.ac.in/publication/analytical-modeling-of-flicker-noise-in-halo-implanted-mosfets) [Silicon · research] |
+| high-k + Al₂O₃ cap (thick-oxide I/O pFET) | Oxide trap density "greatly increased"; input-referred noise at 10 Hz and 10 kHz at least 10× higher than the SiO₂/poly reference; attributed to Hf and Al diffusing to the Si/SiO₂ interface during 600–900 °C anneal; noise trend matches NBTI | [Simoen et al., ECS 2015](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html) [Silicon · research] |
+| La / Al dipole | Shifts the HfO₂ defect band away from carrier energy; PBTI down about 8× (La, nMOS), NBTI down up to about 10× (Al, pMOS); the paper has no noise data | [Franco et al., EDTM 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf) [Silicon · research] |
+| Fluorine treatment (RMG pFET) | Lowers mean noise and device-to-device spread | [Simoen et al., ECS 2013](https://ecs.confex.com/ecs/224/webprogram/Abstract/Paper19227/E12-2246.pdf) [Silicon · research] |
+| WFM composition (nanosheet) | "Some effect" on gate-stack quality and N_OT; no numbers in the paper | [Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770) [Silicon · research] |
+
+imec has two papers that directly study the effect of cap layers on low-frequency noise (Claeys et al., ECS JSS 2019; Simoen et al., ECS Trans. 2009), but their results were not read for this report ([imec record](https://imec-publications.be/entities/publication/4d61541c-c632-44af-965a-d73964502585/full)).
+
+[Inference] This leads to three judgments:
+- In planar processes, low-VT devices usually have lower doping, less Coulomb scattering and fewer halo traps, so at the same ID their noise should be no higher than, or even lower than, that of high-VT devices.
+- In FinFET/GAA, WFM thickness changes are far from the channel and should have little effect on N_t. A dipole can go either way: element diffusion to the interface adds traps (the thick-oxide example from ECS 2015); the band shift reduces active traps (the BTI data). Which effect dominates depends on the specific process and thermal budget.
+- Dipoles are also often used to raise VT (for example Al for the nFET HVT). In that case, any noise penalty lands on the high-VT flavor. So in dipole processes, "low VT = high noise" may even be reversed.
+
+### Variation and RTN: also not "low VT is worse"
+
+In planar devices, random dopant fluctuation (RDF) is the main source of σVT. Atomistic 3D simulation shows that discrete dopants significantly increase the maximum RTS amplitude caused by a single trap ([Asenov et al., IEDM 2000](https://eprints.gla.ac.uk/3019)) [TCAD]. High-VT flavors have higher doping, so in planar processes high VT often has larger σVT and a longer RTN tail.
+
+FinFET and nanosheet channels are essentially undoped; σVT comes mainly from work-function variation due to metal-gate grain orientation (WFV/MGG). The number of grains under each gate drops from about 10 in 7 nm FinFETs to 1–3 in 2 nm nanosheets ([PatSnap review](https://www.patsnap.com/resources/blog/articles/metal-gate-granularity-and-threshold-voltage-at-5nm/)) [Opinion]. Whether σVT differs across VT flavors depends on how the WFM is changed; public sources give no AVT data by flavor.
+
+[Inference] Two points are easy to confuse:
+- In digital circuits, the same σVT is a different fraction of the overdrive on a low-VT device, so delay sensitivity to σVT changes. That is circuit sensitivity, not a larger device σVT.
+- Small LVT devices used for speed show larger RTN steps because their area is small (each trap's effect is about q/(Cox·W·L)), not because VT is low.
+
+### How to check in a PDK
+
+To confirm this on the process you use, follow these steps [Inference]:
+
+1. Pick devices of each VT flavor with the same polarity and the same W·L (same fin or sheet count, same L).
+2. Simulate noise at the same ID, then again at the same gm/ID (for example one point each at gm/ID = 8, 12, 16 V⁻¹). Read S_VG at 1 kHz, or the integrated noise voltage over 10 Hz–1 MHz.
+3. Simulate once more at the same VGS, and see whether the difference comes mainly from the comparison basis.
+4. Check the model card: whether each VT flavor has its own flicker parameters (NOIA/NOIB/NOIC or KF/AF/EF in BSIM-CMG), and whether statistical noise corners are provided.
+5. If silicon data exists, extract N_OT and α_sc per gate stack: plot √S_VG against ID/gm; the intercept corresponds to N_OT, and the slope divided by the intercept gives α_sc ([Chen, Stanford 2010](https://stacks.stanford.edu/file/druid:pf645xz5659/cy_thesis-augmented.pdf)). Do not compare KF directly, because it mixes in Cox and bias dependence.
+6. Also look at AVT and BTI data for each flavor. In imec planar data, trap density extracted from noise tracks BTI trap density ([Asanovski et al.](https://arxiv.org/html/2609.08674)), so BTI differences are often an early sign of noise differences.
+
+If step 2 shows equal noise across flavors and a difference appears only in step 3, "low VT is noisier" is only a comparison-basis issue. If step 2 already shows a difference, the low-VT method in that process really does introduce traps. That is a process property, and it should be recorded during device selection.
+
+## Q3. From bulk to FinFET to nanosheet, does flicker noise get better or worse?
+
+**The answer depends on the basis. Per unit gate area, flicker noise improved by about an order of magnitude over about 20 years, almost all of it at the FinFET step, and nanosheet is roughly on par with planar devices that use the same gate stack. Per single minimum device, noise got larger, because area shrank faster than trap density fell. For device-to-device spread and RTN, the problem got clearly worse, although GAA cut the effect of each trap by about half.**
+
+Key points:
+- [Opinion] The ITRS 2005 roadmap assumed S_VG·WL falls only with t_ox² (trap density unchanged): 190 in 2005, 70 in 2013, 30 µV²·µm²/Hz in 2020 (at 1 Hz) ([ITRS 2005 Wireless](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf)).
+- The actual path was not monotonic: both material transitions, nitrided SiON and early HfO₂, made noise worse; production HKMG planar at 28 nm was still about 171 (n)/106 (p) fV²·µm²/Hz (at 1 kHz), roughly back to the roadmap's 2005 SiON level ([Singh et al., GF, TED 2018](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications)).
+- [Silicon · production platform] FinFET was the breakthrough: GF 14 nm FinFET is 17 (n)/35 (p), about 10× (n) and 3× (p) better than 28 nm planar, and also below the ITRS 2020 target (same source).
+- [Silicon · research] Nanosheets have trap density comparable to planar HKMG with the same gate stack; "gate-stack quality, not channel geometry, dominates" 1/f noise ([Asanovski et al., arXiv 2609.08674](https://arxiv.org/html/2609.08674)).
+- In FinFET, pFETs lost their planar-era low-noise advantage: planar pFETs are quieter than nFETs, while FinFET pFETs are about 2× nFETs.
+- Noise and spread of single minimum devices increased: a single RTN in 20 nm-class devices can cause ΔV_th above 70 mV ([VLSI 2009](https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm)).
+
+### Per unit area: a cross-generation table
+
+Units: ITRS uses µV²·µm²/Hz at 1 Hz; GF uses fV²·µm²/Hz at 1 kHz. For a pure 1/f spectrum the two numbers are equal (here fV² means 10⁻¹⁵ V²): X µV²·µm²/Hz @ 1 Hz = X fV²·µm²/Hz @ 1 kHz. The table below converts everything to area-normalized S_VG·WL, mainly for nFETs.
+
+| Stage (approximate era) | Area-normalized S_VG·WL | Versus previous stage | Main cause | Evidence |
+|---|---|---|---|---|
+| Nitrided SiON (about 250–130 nm) | S_Id of minimum-L devices rose by about 1.5 orders of magnitude from 350 nm to 130 nm | Worse | Nitridation introduces traps | [Silicon · research] [Chew et al. 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846) |
+| SiO₂/SiON planar, 90 nm class (about 2005) | About 190 (ITRS roadmap value, t_ox 2.2 nm) | Baseline | — | [Opinion] [ITRS 2005](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf) |
+| Early HfO₂ (R&D phase, about 2004–2007) | About 100× higher than SiON or HfSiON | Much worse | high-k bulk traps, remote phonon scattering | [Silicon · research] [Srinivasan et al., JECS 2006](https://digitalcommons.njit.edu/fac_pubs/19253) |
+| Production HKMG planar, 28 nm | 171 (n) / 106 (p) | Close to 2005 SiON; short of the roadmap's expected 60–80 | IL, silicates and anneal recovered most of the high-k loss, but cancelled the gain from thinner EOT | [Silicon · production platform] [Singh/GF](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications) |
+| FinFET, 14 nm | 17 (n) / 35 (p) | About 10× (n) and 3× (p) better | Thinner EOT, undoped fully depleted channel, mature IL/HfO₂ and RMG anneal | [Silicon · production platform] Same as above |
+| nanosheet (research devices) | Comparable to planar devices with the same gate stack; area-normalized, "favorable" versus FinFET and SOI (values only in figures) | Roughly flat | Geometry has little effect; gate stack dominates | [Silicon · research] [Asanovski et al.](https://arxiv.org/html/2609.08674); [Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770) |
+
+[Inference] Working back from the ITRS 2005 numbers: 190 × (1.3/2.2)² ≈ 66, consistent with the 2013 value of 70; 190 × (0.9/2.2)² ≈ 32, consistent with the 2020 value of 30. So the roadmap's assumption is "trap density unchanged, all improvement from Cox²". Measured against that ruler, SiON nitridation and early high-k were both steps backward, production HKMG planar roughly cancelled the EOT gain, and FinFET beat expectations.
+
+[Inference] A rough nFET estimate: about 190 for 2005 SiON, about 170 for 28 nm HKMG, about 17 for 14 nm FinFET, and nanosheet in the same range as FinFET. The net improvement over two decades is about 10×, almost all at the FinFET step. This size matches the roughly 5–6× from EOT going from about 2.2 nm to about 0.9–1 nm alone, plus a cleaner channel. Note that the 28 nm point compares an ITRS SiON projection with GF HKMG measurements, mixing different companies and bias conditions, so treat it only as an order of magnitude.
+
+ITRS itself admitted this trend was hard to predict. The 2009 edition says new materials (high-k, strain, metal gates) make the 1/f noise trend "uncertain", and that the roadmap "ignores for now" the improvement or degradation they bring ([ITRS 2009 Wireless](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)) [Opinion]. After that, CMOS 1/f metrics disappeared from the roadmap tables.
+
+### Why each step got better or worse
+
+**Nitrided SiON got worse.** NTU measured minimum-L nMOS in four CMOS generations with dual gate oxides. S_Id of thin-oxide devices rose by about 1.5 orders of magnitude from 350 nm to 130 nm, and the rise "closely follows" the switch from thermal oxide to nitrided oxide at ≤250 nm; thick-oxide devices also rose by up to about 1.25 orders of magnitude due to nitridation ([Chew et al. 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846)) [Silicon · research]. This is current noise of minimum-L devices, not fully area-normalized.
+
+**Early high-k got much worse, then mostly recovered.** With the same interfacial oxide and poly gate, HfO₂ nMOS noise spectral density was two orders of magnitude higher than SiON or HfSiON ([Srinivasan et al., JECS 2006](https://digitalcommons.njit.edu/fac_pubs/19253)) [Silicon · research]. IBM found that noise in TiN/HfO₂ nMOS is of the mobility-fluctuation type, suggested that high-k remote phonon scattering may be the main source, and noted that the choice of interfacial-layer thickness matters for analog ([Srinivasan et al., MEE 2007](https://www.research.ibm.com/publications/impact-of-high-k-and-siolessinfgreater2lessinfgreater-interfacial-layer-thickness-on-low-frequency-1f-noise-in-aggressively-scaled-metal-gatehfolessinfgreater2lessinfgreater-n-mosfets-role-of-high-k-phonons)) [Silicon · research]. Philips/imec found that Hf content in HfSiON does not affect noise, and that the main target for improvement should be the interface between the dielectric and the metal gate ([Rittersma et al., ESSDERC 2005](https://digitalcommons.njit.edu/fac_pubs/19446)) [Silicon · research]. Later, production HKMG adopted an SiO₂ interfacial layer, silicates and anneal, and recovered most of the loss.
+
+**FinFET got better.** Toshiba observed on SiON/poly FinFETs that once fin width falls below 50 nm (fully depleted), "not only the noise itself but also its spread decreases", because the vertical field weakens and the trapping rate drops ([Ohguro et al., IEICE 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)) [Silicon · research]. Sony's undoped, widened-channel pixel FinFET cut RTS noise by 99.3% and random noise by 15%, and raised gm to 2.42× ([VLSI 2023 tip sheet](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)) [Silicon · research]. Both data sets show that an undoped, fully depleted channel reduces noise by itself.
+
+**FinFET pFETs improved less.** In 28 nm planar, pFETs are quieter than nFETs (106 vs 171); in FinFET this is reversed (35 vs 17). [Inference] The main hypothesis is that FinFET holes conduct on (110) sidewalls, plus gate-stack differences from SiGe strain; no public paper was found that quantitatively compares (110) and (100) trap density. In nanosheets the main conduction surfaces return to the (100) top and bottom faces, which may restore part of the pFET advantage, but this is only a hypothesis. In imec nanosheets, pMOS and nMOS are "qualitatively similar" ([Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)), so do not assume pFETs are quieter.
+
+**Nanosheet is roughly flat.** imec compared 188 p-type sheets with planar pFETs that use the same gate stack and a similar RMG thermal budget. The effective border trap density N_BT was "comparable", and the authors concluded that "moving to GAA brings no noise penalty" ([Asanovski et al.](https://arxiv.org/html/2609.08674)) [Silicon · research]. These devices had only a forming gas anneal, with no dedicated reliability anneal, so there is room for improvement.
+
+### Per device: noise of minimum devices got larger
+
+[Inference] A typical 2-layer nanosheet minimum device has W_eff of about 2 × 47 nm and L of about 19 nm (imec research device dimensions), for a gate area of about 0.0018 µm². At 17–35 fV²·µm²/Hz, S_VG at 1 kHz is about (0.9–1.9) × 10⁻¹¹ V²/Hz, or about 3.0–4.4 µV/√Hz. For comparison, a 1 µm² device in the same process has only about 0.13–0.19 µV/√Hz.
+
+So "the process improved, so noise improved" holds only at the same gate area. If a design shrinks devices to minimum size, the absolute noise of a single transistor is higher than that of a large device in an older process. This is exactly why analog circuits insist on large-area input transistors.
+
+### Spread and RTN: the statistics problem of small devices
+
+As area shrinks, the 1/f spectrum breaks into the separate Lorentzian spectra of a few traps, and devices can differ by several orders of magnitude:
+- IBM measured more than 15,000 nFETs (Lg down to 20 nm) at VLSI 2009. The RTN amplitude distribution is long-tailed and non-Gaussian; in the smallest devices ΔV_th exceeds 70 mV; near 22 nm, RTN-induced V_th variation may exceed RDF at about 3σ ([VLSI 2009 3B-3](https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm)) [Silicon · research].
+- In stacked GAA nanowires, the mean ΔV_T per single defect (η) is about 1 mV, versus about 1.9 mV in 10 nm FinFETs; time-dependent variability is about 2× smaller. The authors attribute this to better electrostatic control and volume inversion, which keep current farther from the interface. But under the same stress, more traps are filled in nanowires than in FinFETs ([Chasin et al. 2017](https://www.iue.tuwien.ac.at/pdf/ib_2017/CP2017_Rzepa_02.pdf)) [Silicon · research].
+
+[Inference] GAA makes each trap "lighter", but the number of traps per unit area did not fall, so the expectation is smaller RTN steps, not fewer traps. The relative device-to-device spread of noise power scales roughly as 1/√(number of traps) ∝ 1/√(area). Area shrank by orders of magnitude while trap density fell only a few times, so spread grew overall.
+
+### How to use the conclusions, and what is still uncertain
+
+The conclusions for the three bases are summarized below:
+
+| Basis | bulk → FinFET | FinFET → nanosheet | Overall |
+|---|---|---|---|
+| Per unit area (S_VG·WL) | About 3–10× better | Roughly flat | Better |
+| Single minimum device | Area shrink offsets or exceeds the improvement | Area keeps shrinking | Worse |
+| Spread and RTN | Fewer traps, larger effect per trap | Effect per trap about halved; trap count still scales with area | Worse, slightly eased by GAA |
+
+Three things are uncertain:
+- No public S_VG·WL series was found for 16/14 → 7 → 5 nm FinFET, and no flicker data for production GAA such as TSMC N2, Samsung SF3/SF2 or Intel 18A.
+- Whether all 28 nm data is HKMG, and whether bias conditions match across companies, both affect the accuracy of the 28 nm point in the table.
+- The nanosheet conclusions above come from research devices; production gate stacks and anneals differ.
+
+## Q4. How to optimize flicker noise? Where are FinFET and nanosheet heading?
+
+**The first-order knob is the trap density of the gate stack (interfacial layer plus high-k) near the operating Fermi level; together with Cox², it sets noise per unit area. In process, the tools are dielectric chemistry, EOT, reliability anneal and an undoped channel; in device choice, large area and thin-oxide core devices; in circuits, low overdrive, chopping and auto-zero. After FinFET and nanosheet, the direction is to treat 1/f as a by-product of BTI optimization, co-optimize the gate stack together with reliability, and offer dedicated device flavors for analog.**
+
+Key points:
+- [Inference] Ranked by historical evidence: dielectric chemistry (pure HfO₂ versus silicate or SiON about 100×; nitridation about 10–30×) > EOT (S_VG ∝ 1/Cox², 2.2 → 1 nm about 5×) > anneal (about 2–5×) > channel and heterostructure (a few times, with a clear reduction in RTN spread). Area and chopping are almost unlimited on the design side, but they cost area and bandwidth.
+- [Silicon · research] High-pressure D₂ anneal lowered normalized noise by about 4.8× and slow-trap density by about 4×, but this is FD-SOI TFET data ([Shin et al., Sci. Rep. 2022](https://www.nature.com/articles/s41598-022-22575-5)).
+- [Silicon · research] In imec planar data, trap density extracted from 1/f noise tracks BTI trap density across anneal conditions ([Asanovski et al.](https://arxiv.org/html/2609.08674)). A process that lowers BTI very likely lowers 1/f as well.
+- [Opinion] ITRS stopped giving CMOS 1/f metrics after 2009 ([ITRS 2009](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)); the item no longer appears in public roadmaps.
+- [Inference] The thermal budget of the upper CFET device is limited, and HfO₂ without post-deposition anneal has about 2× higher defect density ([Franco et al., EDTM 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)). This is the most likely future noise risk.
+
+### Process methods
+
+**Gate dielectric and interface**
+
+| Method | Public results | Evidence |
+|---|---|---|
+| Avoid or limit nitrogen near the channel | Nitridation raised thick-oxide noise by up to about 1.25 orders of magnitude, and thin-oxide noise by about 1.5 orders from 350 to 130 nm | [Silicon · research] [Chew et al. 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846) |
+| high-k composition: silicate better than pure HfO₂ | On the same IL, HfO₂ is about 100× higher than SiON or HfSiON | [Silicon · research] [Srinivasan et al., JECS 2006](https://digitalcommons.njit.edu/fac_pubs/19253) |
+| Improve the interface between the dielectric and the metal gate | Hf content in HfSiON does not affect noise; the interface is the main target | [Silicon · research] [Rittersma et al. 2005](https://digitalcommons.njit.edu/fac_pubs/19446) |
+| Interfacial-layer thickness | Both IL thickness and high-k phonon scattering matter for analog noise | [Silicon · research] [Srinivasan et al., MEE 2007](https://www.research.ibm.com/publications/impact-of-high-k-and-siolessinfgreater2lessinfgreater-interfacial-layer-thickness-on-low-frequency-1f-noise-in-aggressively-scaled-metal-gatehfolessinfgreater2lessinfgreater-n-mosfets-role-of-high-k-phonons) |
+| Post-deposition anneal and thermal budget | Without PDA, HfO₂ defect density is about 2× higher and trap levels are shallower (BTI data) | [Silicon · research] [Franco et al. 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf) |
+| High-pressure D₂/H₂ anneal (400 °C, 10 atm, 30 min) | Normalized S_ID/I² at 100 Hz dropped from 2.15e-9 to 4.49e-10 Hz⁻¹; D₂ about 2× better than H₂ | [Silicon · research] [Shin et al. 2022](https://www.nature.com/articles/s41598-022-22575-5) (FD-SOI TFET) |
+| H₂ anneal (FinFET) | Lowers interface trap response | [Silicon · research] [Ohguro et al. 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf) |
+| Fluorine passivation (RMG pFET) | Lowers mean noise and device-to-device spread | [Silicon · research] [Simoen et al., ECS 2013](https://ecs.confex.com/ecs/224/webprogram/Abstract/Paper19227/E12-2246.pdf) |
+| La/Al dipole | BTI down 8–10×; no public data on noise impact; element diffusion to the interface must be prevented | [Silicon · research] [Franco et al. 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf); [Simoen et al., ECS 2015](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html) |
+| Thinner EOT | Normalized S_VG falls as EOT shrinks; charge sharing among multiple gates further reduces the effect of a single trap | [Silicon · research] [Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770) |
+
+In a 2006 review, imec/NJIT listed the "gate stack engineering" needed for low-noise HKMG: IL thickness, high-k thickness and bulk properties, post-deposition anneal, gate electrode and substrate strain. The review noted that classical noise models "no longer apply" without modification ([Claeys et al., ECS Trans. 2006](https://digitalcommons.njit.edu/fac_pubs/19233)) [Opinion].
+
+**Channel and device engineering**
+- Undoped, fully depleted channel: below 50 nm fin width, both noise and its spread fall ([Ohguro et al. 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)); an undoped pixel FinFET cut RTS noise by 99.3% ([VLSI 2023](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)) [Silicon · research].
+- Remove halo/pocket: halo implants "very likely" degrade both noise and gain ([Rittersma et al. 2005](https://digitalcommons.njit.edu/fac_pubs/19446)) [Opinion]. The IBM alliance built halo-optimized "high-performance analog" HKMG devices with better flicker, mismatch and gain than the digital reference devices, with no extra mask ([Han et al., JJAP 2011](https://www.research.ibm.com/publications/novel-high-performance-analog-devices-for-advanced-low-power-high-k-metal-gate-complementary-metal-oxide-semiconductor-technology)) [Silicon · production platform].
+- Buried-channel SiGe for pFETs: Si₀.₆₄Ge₀.₃₆ with a 2 nm Si cap gives lower 1/f noise than the Si reference at the same overdrive, because the band offset leaves fewer active traps at the interface ([Prest et al., ECS 2004](https://www.electrochem.org/dl/ma/206/pdfs/1319.pdf)) [Silicon · research]. Another study found that SiGe pMOS noise correlates with D_it at the SiGe/Si heterointerface, so heterointerface quality sets the noise floor ([Tsuchiya et al., ECS 2003](https://www.electrochem.org/dl/ma/203/pdfs/0966.pdf)) [Silicon · research]. Both data sets are from the SiO₂/poly era.
+- Nanosheet geometry: changing the vertical sheet spacing from 7.5 nm to 4.7 nm has only a "marginal effect" on 1/f ([Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)) [Silicon · research]. Geometry knobs have weak leverage in nanosheets.
+
+### Device choice
+
+| Choice | Basis | Evidence |
+|---|---|---|
+| Use thin-EOT core devices instead of thick-oxide I/O devices when headroom allows | ITRS 2005: thick-oxide "precision analog" device 500 versus core device 190 µV²·µm²/Hz, scaling roughly as (t_ox,thick/t_ox,thin)² | [Opinion] [ITRS 2005](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf) |
+| Increase gate area: more fins/sheets, wider sheets, more fingers, longer L or stacked devices | Area-normalized S_vg scales as 1/(WL) | [Silicon · research] [Asanovski et al.](https://arxiv.org/html/2609.08674) |
+| In FinFET, prefer nFETs for low-noise inputs | GF 14 nm: nFET 17, pFET 35 | [Silicon · production platform] [Singh/GF](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications) |
+| Avoid the narrowest, thinnest sheets | 4 nm wires show about 20% higher mean PBTI degradation than 8 nm wires due to field crowding | [TCAD] [Chasin et al. 2017](https://www.iue.tuwien.ac.at/pdf/ib_2017/CP2017_Rzepa_02.pdf) |
+| Use the analog-specific device flavors offered in the PDK | Intel 22FFL offers dedicated analog FinFETs and 1.2/1.5/1.8 V thick-gate devices, but the public summary gives no flicker numbers | [Vendor] [WikiChip Fuse](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/3) |
+| Check each VT flavor with the Q2 method | Do not assume low VT is noisier, and do not assume it is not | [Inference] |
+
+Toshiba's view is that FinFET suits analog and mixed-signal better, and planar suits RF better ([Ohguro et al. 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)) [Opinion].
+
+### Circuit methods
+
+- **Low overdrive.** Bias in moderate or weak inversion to shrink the CMF term; imec nanosheet data show that S_vg and the number of active traps both increase with V_ov ([Asanovski et al.](https://arxiv.org/html/2609.08674)) [Silicon · research]. The cost is larger devices and lower fT.
+- **Large-area input pair.** Doubling the area halves S_VG and cuts the relative spread to about 1/√2. The cost is input capacitance and area.
+- **Chopping, auto-zero, CDS.** These move 1/f noise to high frequency or subtract it; the classic review is by Enz and Temes ([Proc. IEEE 1996](https://infoscience.epfl.ch/record/149579)) [Textbook]. The cost is ripple, residual offset, white-noise aliasing and bandwidth.
+- **Statistical noise corners.** The noise distribution of small devices is long-tailed, and corners based on the mean underestimate tail devices. Ask the foundry for the log-normal σ of S_VG·WL, not a single KF [Inference].
+- **Upconversion in oscillators.** Pushing oscillator swing to VDD improves phase noise but strengthens flicker upconversion; a tail-current resonance at 2f₀ is one mitigation ([Razavi, TCAS-I 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf)) [Textbook]. See Q9 for details.
+- **Cryogenic use.** At low temperature, white noise falls but 1/f noise barely falls, so the flicker corner moves up; at 4.2 K systematic Lorentzians appear, and chopping and auto-zero need extra suppression at higher frequencies ([Kiene et al., arXiv 2405.17685](https://arxiv.org/pdf/2405.17685)) [Silicon · research].
+
+### Leverage ranking of the methods
+
+[Inference] Ranking the evidence above by magnitude:
+
+| Rank | Method | Magnitude | Status |
+|---|---|---|---|
+| 1 | Gate dielectric chemistry (pure HfO₂ versus silicate/SiON; nitridation) | About 10–100× | Production gate stacks have captured most of the gain |
+| 2 | EOT (Cox²) | 2.2 → 1 nm about 5× | Limited room for further thinning |
+| 3 | Anneal (HPD/HPH, PDA, RMG thermal budget) | About 2–5× | Room remains, limited by thermal budget |
+| 4 | Channel and heterostructure (undoped fully depleted, buried-channel SiGe pFET) | A few times, with a large cut in RTN spread | FinFET/GAA are already undoped by default |
+| 5 | Design area | Unlimited in principle | Costs area and capacitance |
+| 6 | Chopping, auto-zero | Removes in-band 1/f almost completely | Costs ripple, offset and bandwidth |
+
+For nanosheet and CFET, the gate-stack knobs (IL, PDA, dipole, HPD) carry over directly; geometry knobs have weak leverage according to imec data; the SiGe channel and Si cap for pFETs and the sheet crystal orientation are open questions.
+
+### Future directions
+
+[Opinion] Public roadmaps no longer give CMOS 1/f noise metrics. ITRS 2009 ignored 1/f changes because of uncertainty from new materials ([ITRS 2009](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)); the 2011/2013 editions state in the bipolar section that 1/f and matching numbers were removed from the tables because "circuit requirements are expected to stay unchanged" ([ITRS 2013 RFAMS](https://www.semiconductors.org/wp-content/uploads/2018/08/2013RFAMS.pdf)). No IRDS table with 1/f numbers was found for this report.
+
+Public research focuses on four directions:
+- **Gate-stack trap physics and BTI co-optimization.** imec's conclusion is "gate-stack quality, not channel geometry, dominates", and noise traps and BTI traps are the same set of defects ([Asanovski et al.](https://arxiv.org/html/2609.08674)) [Silicon · research]. [Inference] The most likely approach in the next few years is to treat 1/f as a by-product of BTI optimization: reliability anneals compatible with a low thermal budget, dipole multi-VT and high-pressure D₂ anneal, characterized with arrays and defect-centric statistics.
+- **Forksheet and cryogenic.** Excess 1/f noise in forksheet arrays below 100 K "is not related to device architecture but to the material properties of the semiconductor/dielectric interface" ([Asanovski et al., SSE 2024](https://air.uniud.it/retrieve/9b187428-ab70-46d9-ae59-c8f49613a887/1-s2.0-S0038110124000303-main.pdf)) [Silicon · research]. On 2500 nMOS devices, imec measured more RTN-active defects at 5 K than at 300 K; the ΔV_th distribution changed from one peak to three, and more than 80% of defects were in the oxide bulk ([Catapano et al., arXiv 2505.04030](https://arxiv.org/abs/2505.04030v2)) [Silicon · research].
+- **CFET.** Monolithic nanosheet CFETs have been demonstrated in research ([VLSI 2023 tip sheet](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)) [Silicon · research], but with no noise data. [Inference] The upper device's thermal budget is limited, which according to Franco's data brings more and shallower high-k traps; the upper and lower tiers (n/p) may show a noise asymmetry that needs dipoles or anneal to fix.
+- **2D channels.** Noise in MoS₂ also follows the McWhorter (trap number) mechanism, and thick channels (15–18 layers) are quieter than 2–3 layers ([Balandin group, arXiv 1503.01823](https://arxiv.org/abs/1503.01823)) [Silicon · research]. Noise reduction in 2D channels is still an interface and dielectric problem.
+
+[Inference] Two more directions have no public data: wafer bonding, thinning and backside contacts from backside power delivery may affect noise through hydrogen passivation and stress; analog-specific device flavors (longer L, wider sheets, thicker IL) will follow the precedent of 22FFL and the IBM high-performance analog devices.
+
+## Q5. How to speed up when the data rate falls short: easy, medium and hard tiers
+
+**Locate the bottleneck before acting. Link data rate is set by the slowest block, and each block is limited by a different metric (CMOS timing by CV/I, amplifiers by gm/C, pads by R·C, clocks by jitter, high-current blocks by IR drop). Once the bottleneck is located, stack methods in three tiers: easy (tuning, device choice, VDD, local layout), medium (block redesign, process tweaks within the current platform) and hard (new process modules, packaging and architecture), with a matching set of verification for each step.**
+
+Key points:
+- Speed is not one number but min(rate each block can reach). Improving only non-bottleneck blocks leaves the overall rate unchanged.
+- [Textbook] The limit of CMOS serializers and clocks can be estimated as "how many FO4 per UI": about 8 FO4/UI at full rate, about 4 at half rate, about 2 at quarter rate; a 1/8-rate CMOS mux cannot reach 1 FO4 ([Palermo, TAMU Lecture 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)).
+- [Textbook] Bandwidth of a terminated pad ≈ 1/(2π·R_eq·C_pad). Compare it with the Nyquist frequency (data rate/2 for NRZ) to see whether pad capacitance is the bottleneck.
+- Public magnitudes for single methods: T-coil bandwidth ×2.72 ([Galal & Razavi, JSSC 2003](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf)); air spacer ring-oscillator capacitance −15% ([SST](https://sst.semiconductor-digest.com/?p=72130)); 12–20% lower external resistance plus VT and via optimization giving >10% frequency ([Intel 18A technology brief](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)); backside power cutting worst-case dynamic droop by about 10× and FMAX +5–6% (same source).
+- Methods acting on the same critical path roughly multiply; methods acting on different blocks do not, and the overall rate is set by the new slowest block.
+- Each method has its risk: VDD and low VT trade for leakage and reliability risk, EQ amplifies noise and crosstalk, lower ESD capacitance sacrifices robustness, and process changes affect yield.
+
+### Step 1: locate which block is the bottleneck and which metric limits it
+
+A high-speed link usually includes: the transmit serializer (mux), clock generation and distribution, pre-driver and driver, pad/ESD/bump, channel (package traces, interposer, bonding), the receive front end (termination, CTLE), sampler (slicer), DFE, and clock recovery (CDR) or deskew. The table below maps common symptoms to bottlenecks and metrics [Inference, based on textbook knowledge and the sources below]:
+
+| Symptom | Possible bottleneck | Limiting metric | How to confirm |
+|---|---|---|---|
+| Timing fails at SS corner and low voltage but passes at FF; failure point moves clearly with VDD | Last serializer stage, clock buffers, pre-driver | I_eff/C (FO4/UI) | Ring oscillator versus VDD; post-PEX timing margin; check against the FO4/UI budget |
+| Eye closes vertically with clear ISI; frequency response drops near Nyquist | TX output pole or RX input pole | R_term·C_pad, plus channel loss | S21/S22, S11; ratio of f_3dB to Nyquist |
+| CTLE or CML stage lacks gain-bandwidth | Analog front end | gm/C_L, with C_L including wiring and next-stage input | AC simulation with PEX; breakdown of C_L |
+| Sampler cannot resolve small signals, or goes metastable | slicer | Regeneration time constant τ ≈ C/gm, offset | Monte Carlo of sensitivity and offset |
+| Eye width eaten by random jitter | PLL/VCO, clock distribution | Phase noise, supply-induced jitter | Jitter decomposition (RJ/DJ/DCD); supply noise injection |
+| Large duty-cycle or quadrature phase error | Half-rate or quarter-rate clocks | Mismatch, routing asymmetry | Monte Carlo of phase error; on-chip calibration range |
+| Burst errors that depend on data pattern or activity | Power delivery network | IR drop, dynamic droop | Dynamic IR simulation; on-chip droop monitors |
+| Errors when adjacent lanes switch | Package or bump layout | Crosstalk | Crosstalk sweeps; bump map and trace isolation check |
+
+Two rules of thumb:
+
+[Textbook] Minimum eye width at the receiver = sampler aperture time + peak-to-peak jitter; minimum eye height = sensitivity + offset ([Palermo, Lecture 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)). Whichever of eye width or eye height runs short first tells you whether the bottleneck is in the time domain or the amplitude domain.
+
+[Inference] Quick estimate of the pad pole: with 50 Ω termination at both ends, the effective resistance is about 25 Ω; at C_pad = 200 fF, f_3dB = 1/(2π·25 Ω·200 fF) ≈ 32 GHz; at 125 fF, about 51 GHz. If f_3dB is only slightly above Nyquist, pad capacitance eats several dB at Nyquist, and the pad is then a first-order bottleneck. Short unterminated advanced-packaging links are limited more by driver strength (CV/I) than by an RC pole.
+
+A Razavi design example is typical: ESD 300 fF, pad 70 fF and driver 100 fF total 470 fF; the transmit −3 dB bandwidth is only about 13.5 GHz, and S22 < −10 dB cannot be met below the Nyquist frequency of that example; the whole short link has about 7.2 GHz bandwidth, about 24% vertical eye opening and about 9.4 ps peak-to-peak jitter ([Razavi, IEEE SSC Magazine 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)) [Simulation]. In this example the devices are not slow; the bottleneck is entirely at the pad node.
+
+Locating the bottleneck also means answering one more question: behind the bottleneck block, how much margin does the second-slowest block have? Once the first bottleneck is fixed, the rate you can gain back is at most the position of the second bottleneck.
+
+### Easy: tuning, device choice, voltage and local layout
+
+This tier changes neither the process nor the circuit architecture and usually takes a few weeks. It mainly means changing bias, switching device flavors, tuning equalizer registers and making local layout edits.
+
+| Method | Principle | Typical gain | Cost/risk | What to verify |
+|---|---|---|---|---|
+| Raise PHY supply voltage or overdrive within reliability limits | Delay ∝ C·V/(V−VT)^α | [Inference] Near nominal voltage, VDD +10% gives about 8–15% speed; more sensitive closer to Vmin | Power ∝ V²; TDDB, BTI, HCI, EM margin; interface protocol limits on TX voltage (for example, the UCIe tutorial recommends max TX voltage < 0.85 V and a TX high level no more than 100 mV above the RX supply, see the [Hot Chips 2023 UCIe tutorial](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)) | Vmax reliability signoff; EM at high current; eye and BER at SS/low-voltage corners |
+| Switch critical paths to LVT/ULVT (serializer, clock tree, pre-driver) | Ion ∝ (VDD−VT)^α | [Simulation] On 100 nm-class models, about +20% speed per flavor, Ioff ×3.6–5.0 ([Kahng et al.](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)); per-flavor gain on FinFET/GAA must be checked in the PDK | Leakage rises exponentially; duty-cycle and quadrature error become more sensitive to mismatch | FF/high-temperature leakage; Monte Carlo of duty cycle and quadrature phase |
+| Re-tune equalization (TX FFE/de-emphasis, CTLE peaking, DFE taps) | Compensate channel and pad loss at Nyquist | Recover several dB at Nyquist; the more loss, the more gain | Amplifies noise and crosstalk; DFE error propagation | Statistical eye and BER; crosstalk sweeps |
+| Local layout and sizing edits: larger pre-driver, critical routes moved to wide upper metal, doubled vias, double-sided gate contacts | Lower R and RC | [Inference] About 5–15% on RC-dominated paths | Area; self-loading capacitance; self-heating density | PEX (with coupling capacitance); EM; Rg extraction |
+| Local power-integrity fixes: add decap, add local power/ground bumps | Reduce dynamic droop and supply-induced jitter | [Inference] A few percent | Area | Dynamic IR simulation; jitter under supply noise injection |
+| Shift process centering toward the fast side within spec | Raise the center of the Idsat and ring-oscillator distributions | [Inference] A few percent | Leakage limit and yield | WAT distributions of Idsat/Ioff/ring oscillator; corner coverage |
+| Lower junction temperature (cooling, lower bias current) | Mobility falls with temperature | [Inference] A few percent | Cooling cost | Thermal map; temperature corners |
+
+**How to do it:**
+1. Use the table in step 1 to find the bottleneck block, and confirm whether it is timing-type (CV/I) or bandwidth-type (RC, gm/C).
+2. Timing-type: first sweep VDD and VT flavors in the PDK and map the feasible region of speed, leakage and reliability; switch flavors only on critical paths, not across the whole PHY.
+3. Bandwidth-type: tune EQ first, then look at the capacitance breakdown of the pad node and find capacitance that a local edit can remove (for example redundant ESD diodes or overly wide traces).
+4. Change one variable at a time, quantify the gain on the post-PEX netlist, then multiply the gains to see whether they are enough (see the section on stacking).
+5. On silicon, verify with shmoo (rate versus voltage and temperature), and check whether the failure mode has moved from the original bottleneck to the next block.
+
+### Medium: block redesign and process tweaks
+
+This tier means redesigning a block and taping out again, or adjusting devices and interconnect within the current process platform. It usually takes a few months.
+
+| Method | Principle | Typical gain | Cost/risk | What to verify |
+|---|---|---|---|---|
+| Change the clock architecture from half rate to quarter rate (or 1/8 rate with a CML last stage) | FO4 budget per UI drops from 4 to 2 | [Textbook] CMOS timing margin per UI roughly doubles ([Palermo, Lecture 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)) | Needs accurate quadrature phase and duty-cycle calibration; larger mux node capacitance; power | Phase-error Monte Carlo; supply-induced jitter; calibration range |
+| CML or inductively peaked last-stage mux and clock buffers | CML uses small swing and current steering, which is faster than CMOS | Architecture dependent | Static current; inductor area | AC and transient simulation with PEX; inductor Q |
+| T-coil and low-capacitance ESD | A T-coil cancels pad capacitance and "hides" ESD capacitance inside the matching network | [Silicon · research] Bandwidth ×2.72, 70% more than plain inductive peaking ([Galal & Razavi, JSSC 2003](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf), 0.18 µm process); [Simulation] a 400 fF transmitter with a 330 pH T-coil extends S22 < −10 dB to about 30 GHz ([Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)); [Vendor] in the UCIe tutorial, a T-coil cuts effective pad capacitance from 200 fF to 125 fF ([Hot Chips 2023](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)) | Inductor area (about 250–330 pH per pad); CDM robustness | CDM and human-body-model qualification; TLP; S11/S22 |
+| Driver topology: SST (source-series terminated) or low-swing NMOS driver with capacitive equalization | Low swing reduces drive burden and power | Widely used in published die-to-die transceivers ([Palermo, Lecture 15](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)) [Silicon · research] | Redesign and tapeout | Full PHY signoff; silicon eye and BER |
+| Process: adjust VT targets or add VT flavors (WFM/dipole) | Finer choices between leakage and speed | [Vendor] 18A-P adds one VT flavor and lowers ULVT by another 10 mV ([Intel 18A technology brief](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)) | Mask or recipe change; leakage; variation | Id–Vg; σVT; BTI; ring oscillator; SRAM and logic yield |
+| Process: lower external resistance (silicide, epi doping, contact area) | I_eff is sensitive to Rext | [Vendor] Rext −20% (N)/−12% (P), drive +5%/+16%; together with VT and via optimization, >10% frequency for HP devices (same source) | Integration risk; contact reliability | Kelvin contact-resistance structures; ring oscillator; contact-to-gate TDDB; yield |
+| Process: MOL low-k or air spacer | Lower gate-to-contact capacitance | [Silicon · research] Device parasitic capacitance −25%, ring-oscillator capacitance −15% ([SST](https://sst.semiconductor-digest.com/?p=72130)) | Mechanical strength and reliability; CMP; contact-to-gate shorts | Ceff test structures; ring oscillator; TDDB; yield |
+| Process: lower via resistance, thinner barrier, thicker and wider metal options for the PHY | Lower local RC | [Inference] About 5–10% on wire-dominated paths | Process complexity; EM; density | Kelvin via chains; line R/C; EM; PEX recalibration |
+
+**How to do it:**
+1. Circuit side: first use behavioral models to confirm how far the new architecture moves the bottleneck (for example, quarter rate cuts FO4/UI from 4 to 2), then do the transistor-level design.
+2. Pad side: agree on CDM and human-body-model targets with the ESD team, design the T-coil around the smallest ESD capacitance the targets allow, and reserve inductor area.
+3. Process side: first confirm the gain with TCAD and test structures (Kelvin, Ceff, ring oscillator), then assess the impact on yield and reliability; update PDK models and PEX rules at the same time.
+4. Every medium-tier change needs a full signoff rerun, because it changes parasitics, reliability and corners.
+
+### Hard: new process modules, packaging and architecture
+
+This tier involves new materials, new process flows, package formats or protocol-level changes, and usually takes several quarters to years. These methods often "change the problem itself", for example by removing ESD, shortening the channel, or using more parallel lanes in exchange for a lower per-lane rate.
+
+| Method | Principle | Typical gain | Cost/risk | What to verify |
+|---|---|---|---|---|
+| New BEOL metal (Ru semi-damascene) and air gaps | Lower line resistance and capacitance | [Silicon · research] Ru lines at aspect ratio 6 have about 40% lower line resistance than at aspect ratio 3; air gaps can meet >10-year reliability ([imec, EE Journal](https://eejournal.com/industry_news/imec-shows-path-to-line-resistance-halving-using-semi-damascene-with-high-aspect-ratio-processing)) | New tools and materials; EM and TDDB; cost | Full BEOL qualification |
+| Backside power delivery | Power enters from the back, which lowers droop and frees front-side routing | [Vendor] Worst-case dynamic droop about 10× lower, FMAX +5–6%, routing convergence improved by 8–10% ([Intel 18A technology brief](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)) | New flow; heat dissipation; harder debug | IR and droop; thermal map; reliability |
+| RF/analog-specific device flavors (thick gate, low Rg, high fmax) | Devices optimized for high-speed analog | [Silicon · production platform] 22FFL RF devices exceed 230/290 GHz fT/fmax ([WikiChip Fuse](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/4/)) | Extra masks; PDK models | fT/fmax; noise figure; matching |
+| Move the PHY to a better-suited node or into a separate chiplet | Build I/O on the most suitable process | Architecture dependent | Product architecture, cost, supply chain | Package SI/PI; thermal; KGD test |
+| Change the package: organic substrate → interposer or bridge → hybrid bonding | Shorter channel, lower bump and ESD capacitance | [Textbook] Standard-package channels beyond 50 mm exceed 10 dB loss, while 1–3 mm 2.5D channels have only 2.4–3.9 dB ([Palermo, Lecture 15](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)); hybrid bonding can go "without ESD" | Package cost; bonding yield; test | Package SI/PI; thermal; bonding yield |
+| Change modulation or architecture: NRZ → PAM4, or a wider bus with a lower per-lane rate | PAM4 halves Nyquist; a wide bus trades lane count for rate | [Vendor] PAM4 Nyquist is half that of NRZ at the same data rate; ideal SNR penalty about 9.5 dB, about 11 dB including nonlinearity ([Intel AN 835](https://www.intel.com/content/www/us/en/docs/programmable/683852/current/nrz-fundamentals.html)) | Protocol compatibility; needs ADC/DSP or more comparators; may need FEC | BER with FEC; linearity (RLM) |
+
+**How to do it:**
+1. First use a system-level model to answer "is a hard-tier change really needed": how much is still missing after stacking the easy- and medium-tier methods?
+2. Packaging options: run channel S-parameter and eye simulations, and compare pad capacitance, ESD requirements and channel loss for organic substrate, interposer, bridge and hybrid bonding.
+3. Process options: align with the process roadmap; most methods in this tier belong to the next-generation platform and cannot be expected on the current product.
+4. Architecture options: assess protocol compatibility, power (pJ/bit) and area, and confirm whether the total bandwidth target can be met with a wider, slower interface.
+
+### How methods stack: they multiply, but only on the same bottleneck
+
+[Inference] If several methods act on the same critical path and are independent of each other, the total gain roughly multiplies:
+
+Total speedup ≈ (1 + g₁) × (1 + g₂) × … × (1 + g_n)
+
+There are three limits:
+- **Methods that are not independent cannot simply be multiplied.** Raising VDD and lowering VT both increase the overdrive VDD−VT; their combined gain must be computed with the alpha-power equation as a whole, not computed separately and then multiplied.
+- **Methods on different blocks do not multiply.** Overall rate = min(rate of each block). If the clock path gets 20% faster but the pad pole allows only 10%, the whole link gets only 10% faster.
+- **The bottleneck moves.** After each bottleneck is fixed, redo the step-1 localization.
+
+[Illustration] Suppose a transmitter dominated by CMOS timing needs a 1.20× speedup (the 20% here is only an illustrative number). The methods could stack like this:
+
+| Method | Tier | Single gain | Cumulative |
+|---|---|---|---|
+| PHY supply +7% (within reliability limits) | Easy | ×1.06 | 1.06 |
+| Critical paths moved one VT flavor lower | Easy | ×1.07 | 1.134 |
+| Critical routes moved to upper metal, doubled vias | Easy | ×1.05 | 1.191 |
+| Add decap to lower dynamic droop | Easy | ×1.03 | 1.227 |
+
+The cumulative gain is about 1.23×, slightly above the need. Note that the first two items both act on overdrive, so the real stack must be computed from the PDK curves of ring-oscillator speed versus VDD and versus VT flavor together. If the pad pole is also found to allow only 1.1×, the stack above is meaningless; a T-coil or lower ESD capacitance must come first, and the single pad-side gain may exceed the sum of all the others. If the easy-tier methods are still not enough after stacking, consider medium-tier methods such as a quarter-rate clock or a CML last stage.
+
+### Verification checklist
+
+Whichever tier of methods is used, cover the following verification [Inference, based on standard practice and the sources above]:
+
+| Category | Content |
+|---|---|
+| Corners and statistics | SS/FF/SF/FS; low voltage/high temperature and low voltage/low temperature; aging-aware models; Monte Carlo (mismatch, duty cycle, quadrature phase, offset) |
+| Parasitic extraction | PEX with coupling capacitance; capacitance breakdown of critical nodes; whether PEX rules were updated with process changes |
+| Test structures and ring oscillators | FO4 ring oscillators, CML ring oscillators, Kelvin contact resistance, Ceff structures, via chains; comparison with PDK models |
+| Eye, BER and jitter | Silicon eye diagrams; BER bathtub curves; jitter decomposition (RJ, DJ, DCD); jitter under supply noise injection; shmoo (rate versus voltage and temperature) |
+| S-parameters | S11/S21/S22 of pad + ESD + bump + package trace + channel; crosstalk |
+| Reliability | TDDB, HCI, BTI, EM at the new voltage and current; self-heating; ESD (CDM, human body model, TLP) |
+| Leakage and power | Leakage at FF/high temperature; pJ/bit; standby power |
+| Yield | Parametric yield; impact of process changes on SRAM and logic yield; leakage distribution after fast-side centering |
+| Thermal | Thermal maps; effect of local temperature on mobility and EM |
+
+## Q6. What do fT, fmax and CV/I each govern?
+
+**fT is the frequency where current gain equals 1, about gm/(2π·Cgg), and it measures broadband amplification. fmax is the frequency where power gain equals 1; it also depends on gate resistance Rg and Cgd, and it measures tuned RF capability. CV/I is the large-signal gate delay and measures digital circuits. The three can move in different directions, so a process can have fast ring oscillators while fmax falls instead of rising.**
+
+Key points:
+- [Textbook] fT depends on bias: it is highest at maximum current density and minimum L; beyond velocity saturation, more bias no longer raises gm ([MIT 6.776 Lecture 6](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/a2408eb19a4ded6f2b8d552688600654_lec6.pdf)).
+- [Textbook] Series gate resistance enters the derivation of fmax but not fT; with low gate resistance in layout, fmax can be "much higher" than fT (same source).
+- [Textbook] Output capacitance does not affect fmax because an inductor can resonate it out, so tuned RF circuits look at fmax and care little about drain capacitance (same source).
+- [Simulation] Digital delay depends on CV/I; fringe capacitance at the FinFET fin top and bottom eats part of the drive advantage ([Fuller et al.](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)).
+
+### Which circuit looks at which metric
+
+| Circuit | Main metric | Reason |
+|---|---|---|
+| CMOS logic, clock buffers, serializers | CV/I | Large-signal charging and discharging |
+| CML, broadband amplifiers, CTLE | fT, plus node parasitic capacitance | Broadband; capacitance cannot be resonated out |
+| Tuned RF circuits such as LNA, PA and VCO | fmax | Output capacitance is resonated out by an inductor; Rg sets power gain |
+| Noise figure of low-noise amplifiers | Rg (tied to fmax), plus channel thermal noise | Rg itself also contributes thermal noise [Textbook] |
+
+### Why a process can improve one and not another
+
+[Inference] Four kinds of process knobs act differently on the three metrics:
+
+| Knob | CV/I | fT | fmax |
+|---|---|---|---|
+| Lower gate-to-contact and fringe capacitance (spacer k, fin height, epi shape) | Better | Better | Better |
+| Lower gate metal or gate contact resistance (multiple fingers, double-sided gate contacts, low-resistivity WFM fill) | Nearly unchanged | Nearly unchanged | Better, and noise figure also better |
+| Lower M0–M2 resistance | Better | Unchanged when measured at the device reference plane | Unchanged |
+| Lower external resistance Rext | Better | Better (gm rises) | Better |
+
+This is why a node can show a good ring-oscillator gain while fmax stays flat or even gets worse, and the reverse can also happen. For RF and high-speed analog, gate resistance is a parameter that logic processes often overlook.
+
+### Intrinsic fT overestimates real speed
+
+Intrinsic fT from a quasi-static CV/I model can be about 4× higher than the real value. For a simulated L = 20 nm device, the quasi-static fT is 10.6 THz, but only 2.7 THz from the true intrinsic delay; with parasitics added, the quasi-static model holds again, but the speed is lower ([arXiv 1611.03856](https://arxiv.org/pdf/1611.03856)) [Simulation]. In practice, evaluate with de-embedded measurements that include parasitics, or with post-PEX simulation, not with intrinsic values at the device reference plane alone.
+
+## Q7. What does data rate demand of devices?
+
+**First convert the data rate into three numbers: UI = 1/data rate, NRZ Nyquist frequency = data rate/2, and PAM4 Nyquist halved again. For NRZ the analog front-end bandwidth target is about 0.5–0.7× the data rate (PAM4 uses the symbol rate, roughly half), CMOS serializers and clocks must meet the FO4 budget per UI, and clock jitter must be a small fraction of the UI. Equalization exists because channel loss at Nyquist closes the eye.**
+
+Key points:
+- [Vendor] PAM4 carries 2 bits per symbol, so at the same data rate its Nyquist is half that of NRZ; the ideal SNR penalty is about 9.5 dB (eye height becomes 1/3), and about 11 dB including nonlinearity ([Intel AN 835](https://www.intel.com/content/www/us/en/docs/programmable/683852/current/nrz-fundamentals.html)).
+- [Vendor] The same backplane channel has about 33 dB insertion loss at the lower frequency and about 62 dB at twice that frequency (same source); this is the motivation for PAM4 and equalization.
+- [Simulation] In his design example, Razavi sets transmit and receive bandwidth at about 70% of the data rate and requires S22/S11 < −10 dB below Nyquist ([Razavi, SSC Magazine 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)).
+- [Textbook] FO4/UI budget: about 8 at full rate, about 4 at half rate, about 2 at quarter rate ([Palermo, Lecture 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)).
+
+### Converting data rate into circuit metrics
+
+[Textbook] Let the data rate be R:
+
+| Quantity | NRZ | PAM4 |
+|---|---|---|
+| Symbol rate | R | R/2 |
+| UI (symbol period) | 1/R | 2/R |
+| Nyquist frequency | R/2 | R/4 |
+| Front-end bandwidth target (about 0.5–0.7× symbol rate) | About 0.5–0.7·R | About 0.25–0.35·R |
+| Eye height | Full swing | About 1/3 |
+| Quarter-rate clock frequency | R/4 | R/8 |
+
+### FO4 budget: how fast CMOS can run
+
+Palermo's lecture notes give the limits of CMOS serializers and clocks: the minimum period of a clock buffer is about 8 FO4; a full-rate architecture needs about 8 FO4 per UI, half rate about 4 FO4 and quarter rate about 2 FO4; high-fan-in muxes are actually slower because of large node capacitance; half-rate and quarter-rate designs are very sensitive to duty-cycle and quadrature phase errors; the fastest buffers can fall back to CML, with inductive peaking if needed ([Palermo, Lecture 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)) [Textbook]. The example in the notes is a 90 nm process with FO4 of about 30 ps, which gives a UI floor of about 240 ps for a full-rate architecture.
+
+[Inference] The method is simple: take the PDK FO4 at the target voltage and slow corner, and multiply by the FO4/UI of the architecture to get the minimum UI; its inverse is the highest data rate the CMOS part can support. If that is not enough, either switch to a faster architecture (lower rate ratio, CML last stage) or make FO4 smaller (the easy- and medium-tier methods of Q5). Research has found that FO4-normalized delay is fairly stable across processes, but voltage, temperature and corner change it by about 20% (static circuits) ([Harris & Horowitz](https://pages.hmc.edu/harris/research/FO4.pdf)) [Silicon · research], so it must be computed at the target corner.
+
+### How high fT must be, and why equalization is needed
+
+[Inference] In practice, people often say device fT should be 5–10× the required stage bandwidth. This is a rule of thumb; no formal source was found for this report. Modern FinFET fT already reaches hundreds of GHz, so in most high-speed interfaces bandwidth is usually limited by node parasitic capacitance (ESD, pad, wiring) and inductor area, not by intrinsic device fT.
+
+Equalization compensates the frequency-dependent loss of the channel. Transmit FFE or de-emphasis attenuates low-frequency content; receive CTLE boosts high-frequency content; DFE subtracts post-cursor ISI using bits already decided. All three have costs: CTLE also amplifies noise and crosstalk, FFE lowers the signal peak, and DFE has error propagation and timing-closure difficulty [Textbook].
+
+## Q8. Why do pad, ESD and bump capacitance matter? What has 3D packaging changed?
+
+**On a high-speed pad, ESD, pad and driver capacitance together often exceed 400 fF, and the termination resistance is fixed by the protocol, so the RC pole of this node is often the bandwidth limit of the whole link. A T-coil can cancel part of the capacitance, while 2.5D/3D packaging removes capacitance at the root by relaxing ESD requirements, shrinking bump pitch and shortening the channel.**
+
+Key points:
+- [Simulation] Razavi's example: ESD 300 fF + pad 70 fF + driver 100 fF = 470 fF, with transmit bandwidth about 13.5 GHz; with a 330 pH T-coil, S22 < −10 dB extends to about 30 GHz; at the receiver, 350 fF with 290 pH gives S11 < −10 dB up to 28 GHz ([Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)).
+- [Opinion] ESD co-design for FinFET SerDes: product CDM spec 250 V, design target 6 A; breakdown voltage in advanced processes ≤ about 4 V; at the 6 A target, even 10 Ω of series resistance limits transmission speed; extra secondary diodes add capacitance, so the parasitic drain-to-well diode is used instead ([In Compliance Magazine 2023](https://digital.incompliancemag.com/issue/november-2023/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)).
+- [Vendor] UCIe parameters vary with packaging: standard package bump pitch 100–130 µm, CDM 30 V, about 0.5 pJ/bit; advanced package 25–55 µm, CDM 5 V trending to < 3 V, about 0.25 pJ/bit; 3D package < 10 µm, wafer-to-wafer hybrid bonding "can go without ESD", < 0.05 pJ/bit (9 µm pitch) ([Das Sharma, SNIA SDC 2024](https://snia.org/sites/default/files/2025-05/SNIA-SDC2024-DasSharma-Updates-on-UCIe-Technology.pdf)).
+- [Vendor] Pad capacitance budget in the UCIe tutorial: advanced package transmit/receive 250/200 fF; in the standard package, a T-coil can bring effective capacitance down to 125 fF ([Hot Chips 2023](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)).
+
+### Why a stronger driver cannot save the pad
+
+[Textbook] A terminated pad is an RC low-pass filter: R is the termination resistance (50 Ω at each end in parallel, about 25 Ω), and C is the sum of ESD, pad, bump, driver output and receiver input capacitance. Driver current sets only the signal amplitude, not this pole. So for this node there are only three ways to speed up: lower C, cancel C with a T-coil or inductive peaking, or change the packaging so C itself gets smaller.
+
+There is a direct trade-off between ESD capacitance and robustness. An ESD device must discharge several amperes during a CDM event; a larger device is more robust but has more capacitance. In advanced processes, gate-oxide and junction breakdown voltages are both low (about 4 V), which leaves a narrow voltage window for ESD devices ([In Compliance Magazine](https://digital.incompliancemag.com/issue/november-2023/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)) [Opinion].
+
+### How 2.5D/3D packaging changes the problem
+
+The ESD Association roadmap sets the CDM target for die-to-die interfaces below 30 V and still falling. The reason is that these pins are exposed only between wafer level and package assembly, where charging during assembly is controlled; the driver is shrinking bump pitch and area, not gate oxide ([ESDA forum](https://forum.esda.org/t/cdm-die-to-die-voltage-trend-below-30-v-in-esd-technology-roadmap-section-4-3/878)) [Opinion].
+
+[Inference] This has two consequences:
+- At hybrid-bonding pitch < 10 µm, I/O becomes almost an "on-chip wire" with tiny capacitance, and transceivers can be built from simple inverters and flip-flops. UCIe-3D therefore chooses a lower per-lane rate and very high parallelism, trading lane count for bandwidth, with more than an order of magnitude better energy efficiency ([Palermo, Lecture 15](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)).
+- Once on-chip ESD is removed, electrostatic control during assembly (bonding tools, wafer handling) becomes the factory's responsibility.
+
+### Aside: why analog and I/O area does not shrink with the node
+
+I/O devices and passives "do not scale with the node", while digital transistors shrink quadratically ([Design & Reuse](https://www.design-reuse.com/blog/51338-mimicking-digital-scaling-trends-for-analog-ip-kind-of/)) [Opinion]. The reasons include:
+- Inductor, capacitor and resistor area is set by the electrical value; for example, the T-coil per pad is about 250–330 pH ([Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)).
+- I/O devices run at higher voltages such as 1.2 V and 1.5 V and need longer gates and thicker dielectrics, which brings reliability and performance issues in the GAA era ([Synopsys](https://www.synopsys.com/articles/serdes-design-trends-angstrom-era.html)) [Vendor].
+- ESD and bump pitch are set by the package.
+- Matching requirements set device area (see Q10).
+
+So chiplets often put compute on an advanced node and I/O on a more mature, cheaper node; this also takes the SerDes test chip off the critical path ([Cadence blog](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/chiplets2)) [Opinion]. [Inference] This pattern applies mainly to I/O dies and to analog-dominated interfaces with little DSP; long-reach SerDes that need heavy DSP often sit on advanced nodes instead.
+
+## Q9. How do jitter and noise relate?
+
+**Jitter is the timing error of clock or data edges. Random jitter equals the integral of the phase-noise spectrum, converted into time. VCO thermal noise sets the far-out floor, device flicker noise upconverts into close-in phase noise, and the PLL loop can suppress VCO noise only inside the loop bandwidth. So device 1/f noise, supply noise and passive Q all end up as lost eye width.**
+
+Key points:
+- [Textbook] Phase-to-time conversion: Δt = θ/(2π·f). For example, a −45 dB phase error at 30 GHz is about 30 fs ([Razavi, TCAS-I 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf)).
+- [Textbook] VCO random jitter is the area under the phase-noise spectrum; for a plateau of height S₁ extending to f₂, σ_j² = 4·S₁·f₂·(T_CK/2π)² (same source).
+- [Textbook] Pushing oscillator swing to VDD improves phase noise but strengthens flicker upconversion; the upconverted noise extends to larger offsets from the carrier, and the PLL only suppresses what lies inside its loop bandwidth, which is often well below 1 MHz, so the rest gets through (same source).
+- [Textbook] Clock jitter needs to be on the order of 1% of the symbol period; below about 10 fs, the power cost becomes very high once reference and charge-pump noise are counted (same source).
+- [Simulation] A channel with insufficient bandwidth produces deterministic jitter (ISI): in Razavi's example, uncompensated pad/ESD capacitance causes about 9.4 ps peak-to-peak jitter ([Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)).
+
+### How random jitter converts into lost eye width
+
+[Textbook] Random jitter is approximately Gaussian. At a target BER, peak-to-peak jitter is about 2·Q·σ. At BER = 10⁻¹², Q ≈ 7.03, so peak-to-peak is about 14σ.
+
+[Illustration] If clock random jitter σ = 0.5% UI, peak-to-peak at BER = 10⁻¹² is about 7% UI. This does not yet include deterministic jitter (ISI, duty-cycle distortion, crosstalk) or supply-induced jitter. So rms jitter of a few tenths of a percent of a UI already takes a sizable share of the eye-width budget.
+
+### Where noise enters jitter
+
+| Source | Mechanism | Process or design knob |
+|---|---|---|
+| Device flicker noise | Upconverts into close-in phase noise; ring oscillators are especially sensitive | Gate-stack trap density, device area, tail-current filtering (see Q4) |
+| Device thermal noise | Sets the far-out phase-noise floor | Power, gm |
+| Q of VCO varactors and inductors | Lower Q, higher phase noise | BEOL metal thickness, substrate loss |
+| Supply noise | Delay of ring oscillators and buffers varies with VDD | Power delivery network, decap, LDO; backside power delivery |
+| Insufficient channel bandwidth | ISI produces deterministic jitter | Pad capacitance, T-coil, equalization |
+
+[Inference] For process engineers, this table shows that 1/f noise is not only a precision-analog problem. In clock circuits that use ring oscillators, close-in phase noise is directly affected by the device 1/f corner. No public number for the supply-to-jitter conversion factor was found for this report; it must be simulated for the specific design.
+
+## Q10. Why is analog cautious with the lowest VT and shortest L?
+
+**Devices with the lowest VT and shortest L have the highest fT and current density, but also the lowest intrinsic gain gm·ro, the highest leakage (DIBL), the largest random mismatch (σVT ∝ 1/√(W·L)) and, by the same area law, the largest 1/f noise. So precision analog (bias, current mirrors, op amps, comparator offset, references) uses longer L and larger area, while speed-critical paths (CML, drivers, samplers) still use these devices for speed and recover gain and matching with calibration and equalization.**
+
+Key points:
+- [Textbook] Pelgrom's law: σ²(ΔVT) = A_VT²/(W·L); at fixed L, making W 4× larger halves σΔVT; with N devices in parallel, σ falls to 1/√N ([Sheikholeslami, IEEE SSC Magazine 2015](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)).
+- [Opinion] "Choose W/L for bandwidth and power, and gate area for accuracy"; without variation, one could "just pick the minimum L" (same source).
+- [Textbook] fT is highest at minimum L and maximum current density ([MIT 6.776](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/a2408eb19a4ded6f2b8d552688600654_lec6.pdf)).
+- [Opinion] Intrinsic gain gm·ro keeps falling from 65 nm to 40 nm to 28 nm, and leakage rises due to DIBL; the well proximity effect can cause VT shifts of "tens of mV" ([Fahim, ISLPED 2014 tutorial](https://www.islped.org/2014/files/ISLPED2014_Challenges%20in%20low-power%20analog%20circuit%20design%20for%20sub-28nm%20CMOS%20technologies%20-%20BY%20Amr%20Fahim%20--%20Semtech%20Corporation.pdf)).
+
+### Why precision analog avoids them
+
+| Problem | Mechanism | Consequence |
+|---|---|---|
+| Low intrinsic gain | DIBL and channel-length modulation raise gds in short channels | Op-amp open-loop gain falls short; needs cascode or multiple stages |
+| Large mismatch | σVT ∝ 1/√(W·L) | Current-mirror error: in the example, 5 mV of ΔVT corresponds to about 5% current error ([Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)) |
+| High leakage | Low VT plus DIBL | Sample-and-hold capacitor leakage, bias drift |
+| High 1/f noise | Input-referred noise ∝ 1/(Cox²·W·L) (see Q3) | Low-frequency noise and close-in phase noise |
+| Sensitive to layout effects | Well proximity, diffusion length, stress | Systematic offset |
+
+### Why high-speed circuits still use them
+
+The first metrics for CML, drivers and samplers are bandwidth and regeneration speed, which need the highest fT and the smallest capacitance. Their needs for gain and matching are relatively low, and those can be made up in other ways:
+- Make up gain with multiple stages or equalization.
+- Make up offset and mismatch with on-chip calibration, such as sampler offset calibration and duty-cycle and quadrature phase calibration.
+- At low VDD, low VT leaves voltage headroom for stacked CML and cascodes; this is one positive role it plays in analog.
+
+[Inference] So VT and L are chosen per block, not per chip. In the same PHY, samplers and drivers may use shortest-L LVT, while bias circuits and current mirrors use long-L SVT or HVT.
+
+### A quick device-selection guide
+
+[Inference]
+
+| Block | L | VT | Area | Reason |
+|---|---|---|---|---|
+| Serializer, clock buffers, drivers | Shortest | LVT/ULVT | Smallest | Speed first; calibration covers mismatch |
+| CML, CTLE input pairs | Short | LVT | Medium | Bandwidth first, with offset in mind |
+| Samplers | Short | LVT | Medium | Regeneration speed first; offset calibration |
+| Bias, current mirrors, references | Long or stacked | SVT/HVT | Large | Matching, gain, low leakage |
+| VCO, low-noise input pairs | Medium to long | Check with the Q2 method | Large | 1/f noise and phase noise |
+
+## Sources
+
+- [arXiv 2512.08388: CNF+CMF low-frequency noise model](https://arxiv.org/pdf/2512.08388)
+- [Lundberg, Noise Sources in Bulk CMOS (MIT)](https://web.mit.edu/klund/www/papers/UNP_noise.pdf)
+- [Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)
+- [Wikipedia: Multi-threshold CMOS](https://en.wikipedia.org/wiki/Multi-threshold_CMOS)
+- [Vidana et al., GF 12LP FinFET TID study (OSTI 2311246)](https://www.osti.gov/servlets/purl/2311246)
+- [Khandelwal et al., Analytical modeling of flicker noise in halo-implanted MOSFETs, IEEE JEDS](https://research.iitj.ac.in/publication/analytical-modeling-of-flicker-noise-in-halo-implanted-mosfets)
+- [Simoen et al., ECS 228th Meeting 2015: low-frequency noise in high-k/Al₂O₃ cap I/O pFETs](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html)
+- [Simoen et al., ECS 224th Meeting 2013: RMG pFET low-frequency noise and fluorine treatment](https://ecs.confex.com/ecs/224/webprogram/Abstract/Paper19227/E12-2246.pdf)
+- [Claeys et al., Low-frequency noise assessment of work function engineering cap layers (imec record)](https://imec-publications.be/entities/publication/4d61541c-c632-44af-965a-d73964502585/full)
+- [Asenov et al., IEDM 2000: RTS amplitude and random dopants](https://eprints.gla.ac.uk/3019)
+- [PatSnap: Metal gate granularity and VT at 5nm](https://www.patsnap.com/resources/blog/articles/metal-gate-granularity-and-threshold-voltage-at-5nm/)
+- [Chen, Stanford PhD thesis 2010: low-frequency noise in high-k MOSFETs](https://stacks.stanford.edu/file/druid:pf645xz5659/cy_thesis-augmented.pdf)
+- [ITRS 2005 Wireless chapter](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf)
+- [ITRS 2009 Wireless chapter](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)
+- [ITRS 2013 RF and AMS chapter](https://www.semiconductors.org/wp-content/uploads/2018/08/2013RFAMS.pdf)
+- [Chew, Yeo & Chu, Impact of technology scaling on the 1/f noise, IEE Proc. CDS 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846)
+- [Srinivasan et al., J. Electrochem. Soc. 2006: HfO₂ vs SiON 1/f noise](https://digitalcommons.njit.edu/fac_pubs/19253)
+- [Srinivasan et al., Microelectron. Eng. 2007: high-k phonons and IL thickness (IBM)](https://www.research.ibm.com/publications/impact-of-high-k-and-siolessinfgreater2lessinfgreater-interfacial-layer-thickness-on-low-frequency-1f-noise-in-aggressively-scaled-metal-gatehfolessinfgreater2lessinfgreater-n-mosfets-role-of-high-k-phonons)
+- [Rittersma et al., ESSDERC 2005: HfSiON/TaN 1/f noise](https://digitalcommons.njit.edu/fac_pubs/19446)
+- [Claeys et al., ECS Trans. 2006: low-noise HKMG gate stack engineering](https://digitalcommons.njit.edu/fac_pubs/19233)
+- [Singh et al. (GF), 14 nm FinFET Technology for Analog and RF Applications, IEEE TED 2018](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications)
+- [Ohguro et al. (Toshiba), IEICE Trans. Electron. 2015: FinFET 1/f noise](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)
+- [VLSI Symposium 2023 tip sheet](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)
+- [Asanovski et al. (imec), arXiv 2609.08674: nanosheet vs planar 1/f noise](https://arxiv.org/html/2609.08674)
+- [Asanovski et al., Solid-State Electronics 2024: forksheet 1/f noise at 300 K and 4 K](https://air.uniud.it/retrieve/9b187428-ab70-46d9-ae59-c8f49613a887/1-s2.0-S0038110124000303-main.pdf)
+- [Simoen et al., JICS 2022: GAA double-nanosheet LFN](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)
+- [VLSI 2009 paper 3B-3: RTN in 20 nm-class devices](https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm)
+- [Chasin et al. (imec/TU Wien) 2017: time-dependent variability in GAA nanowires vs FinFETs](https://www.iue.tuwien.ac.at/pdf/ib_2017/CP2017_Rzepa_02.pdf)
+- [Shin et al., Sci. Rep. 2022: high-pressure D₂/H₂ annealing and LFN](https://www.nature.com/articles/s41598-022-22575-5)
+- [Franco et al., EDTM 2019: dipoles and low-thermal-budget gate stacks (BTI)](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)
+- [Prest et al., ECS 2004: SiGe buried-channel pMOS 1/f noise](https://www.electrochem.org/dl/ma/206/pdfs/1319.pdf)
+- [Tsuchiya et al., ECS 2003: SiGe channel pMOS LFN](https://www.electrochem.org/dl/ma/203/pdfs/0966.pdf)
+- [Han et al., JJAP 2011: high-performance analog devices in HKMG (IBM)](https://www.research.ibm.com/publications/novel-high-performance-analog-devices-for-advanced-low-power-high-k-metal-gate-complementary-metal-oxide-semiconductor-technology)
+- [Enz & Temes, Circuit techniques for reducing the effects of op-amp imperfections, Proc. IEEE 1996](https://infoscience.epfl.ch/record/149579)
+- [Kiene et al., arXiv 2405.17685: cryogenic LFN in 40 nm bulk](https://arxiv.org/pdf/2405.17685)
+- [Catapano et al., arXiv 2505.04030: cryogenic single-defect statistics](https://arxiv.org/abs/2505.04030v2)
+- [Balandin group, arXiv 1503.01823: MoS₂ 1/f noise](https://arxiv.org/abs/1503.01823)
+- [Fuller et al., FinFET performance advantage at 22nm: An AC perspective, VLSI 2008](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)
+- [MIT 6.776 Lecture 6: fT and fmax](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/a2408eb19a4ded6f2b8d552688600654_lec6.pdf)
+- [arXiv 1611.03856: intrinsic fT vs CV/I in nanoscale FETs](https://arxiv.org/pdf/1611.03856)
+- [WikiChip Fuse: IEDM 2017 Intel 22FFL (RF devices)](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/4/)
+- [WikiChip Fuse: IEDM 2017 Intel 22FFL (analog devices)](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/3)
+- [SST/Semiconductor Digest: air spacer for 10 nm FinFET](https://sst.semiconductor-digest.com/?p=72130)
+- [IBM Research: Air spacer for 10nm FinFET CMOS and beyond](https://researcher.ibm.com/publications/air-spacer-for-10nm-finfet-cmos-and-beyond)
+- [Intel 18A technology brief (2026)](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)
+- [IEEE Spectrum: Intel 3 FinFET process](https://spectrum.ieee.org/intel-foundry-finfet)
+- [imec via EE Journal: Ru semi-damascene line resistance](https://eejournal.com/industry_news/imec-shows-path-to-line-resistance-halving-using-semi-damascene-with-high-aspect-ratio-processing)
+- [Harris & Horowitz: FO4 delay as a process-independent metric](https://pages.hmc.edu/harris/research/FO4.pdf)
+- [Palermo, TAMU ECEN689 Lecture 12: TX mux circuits](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)
+- [Palermo, TAMU ECEN720 Lecture 15: die-to-die transceivers](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)
+- [Galal & Razavi, Broadband ESD protection circuits in CMOS technology, JSSC 2003](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf)
+- [Razavi, The Analog Mind, IEEE SSC Magazine Spring 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)
+- [Razavi, IEEE TCAS-I 2021: clocking and jitter for wireline transceivers](https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf)
+- [Hot Chips 2023 UCIe tutorial: Electrical Form Factor & Compliance](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)
+- [Das Sharma, Updates on UCIe Technology, SNIA SDC 2024](https://snia.org/sites/default/files/2025-05/SNIA-SDC2024-DasSharma-Updates-on-UCIe-Technology.pdf)
+- [ESDA forum: CDM die-to-die voltage trend](https://forum.esda.org/t/cdm-die-to-die-voltage-trend-below-30-v-in-esd-technology-roadmap-section-4-3/878)
+- [In Compliance Magazine 2023: ESD co-design for high-speed SerDes in FinFET](https://digital.incompliancemag.com/issue/november-2023/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)
+- [Intel AN 835: PAM4 Signaling Fundamentals](https://www.intel.com/content/www/us/en/docs/programmable/683852/current/nrz-fundamentals.html)
+- [Sheikholeslami, Process Variation, IEEE SSC Magazine Winter 2015](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)
+- [Fahim (Semtech), ISLPED 2014 tutorial: analog design in sub-28nm CMOS](https://www.islped.org/2014/files/ISLPED2014_Challenges%20in%20low-power%20analog%20circuit%20design%20for%20sub-28nm%20CMOS%20technologies%20-%20BY%20Amr%20Fahim%20--%20Semtech%20Corporation.pdf)
+- [Design & Reuse: Mimicking digital scaling trends for analog IP](https://www.design-reuse.com/blog/51338-mimicking-digital-scaling-trends-for-analog-ip-kind-of/)
+- [Cadence Breakfast Bytes: Chiplets](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/chiplets2)
+- [Synopsys: SerDes Design Trends in the Angstrom Era](https://www.synopsys.com/articles/serdes-design-trends-angstrom-era.html)
 
 
 ---

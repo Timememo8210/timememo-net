@@ -1,6 +1,6 @@
 # 模拟器件学习资料包（供 NotebookLM 使用）
 
-来源：timememo.net/research/analog-devices/ 。本资料包把四部分合在一起：①学习计划（7 节课）；②指南正文；③提增益与降噪技巧；④术语表。所有内容整理自公开资料；带【推断】的是整理者的判断，带【TCAD】【硅片·研究】的数值不代表量产工艺。
+来源：timememo.net/research/analog-devices/ 。本资料包把五部分合在一起：①学习计划（7 节课）；②问答（速度、VT 与 flicker noise）；③指南正文；④提增益与降噪技巧；⑤术语表。所有内容整理自公开资料；带【推断】的是整理者的判断，带【TCAD】【硅片·研究】的数值不代表量产工艺。
 
 
 ---
@@ -14,6 +14,7 @@
 **目标：** 弄清模拟看的是“偏置点上的小信号比值”，记住四个核心指标和它们各自代表的代价。
 
 **要读的章节：**
+- 问答: Q0. 模拟电路到底在追求什么？
 - 指南: 全景图
 - 指南: 评价范式的变化：从"开关"到"偏置点上的放大器"
 - 指南: 逻辑优化如何伤害模拟器件：halo、薄氧与低电压
@@ -107,9 +108,9 @@
 **要读的章节：**
 - 指南: 1/f 噪声的两种模型与诊断方法
 - 指南: RTN：小面积器件的统计学问题
-- 技巧: 先抓主因：1/f 噪声是栅叠层的陷阱问题
+- 问答: Q3. 从 bulk 到 FinFET 再到 nanosheet，flicker noise 变好还是变差？
+- 问答: Q2. VT 越低，flicker noise 会变差吗？
 - 技巧: 工艺旋钮：公开证据一览
-- 技巧: 设计侧做法
 - 技巧: Chopping（斩波稳定）
 - 术语: Flicker noise（1/f 噪声，闪烁噪声）
 - 术语: RTN（随机电报噪声）
@@ -205,10 +206,10 @@
 
 **要读的章节：**
 - 术语: Drive 与 Cdyn 关系图
+- 问答: Q1. 速度看的是 I/C 比值吗？
+- 问答: Q5. 速率不够时怎么提速：容易、中等、困难三级
 - 术语: Cdyn（动态电容）
-- 术语: Drive / 驱动电流（Idsat、Ion）
 - 术语: V–F 曲线（电压–频率）与 Vmin
-- 术语: 等功耗 / 等频率比较（iso-power、iso-frequency）
 - 指南: 把工艺旋钮映射到模拟指标
 
 **核心要点：**
@@ -228,6 +229,847 @@
   A: τ = 1/(2N·f)；C = (IDDA − IDDQ)/(N·VDD·f)。
 
 **小练习：** 不看资料，把第 1 节的指标地图重画一遍，再对照全景图补齐。然后打开错题本，把剩下的卡片再做一遍，直到清空。
+
+
+---
+
+# 问答：速度、VT 与 flicker noise
+
+这份问答写给熟悉逻辑工艺整合、但对模拟和高速电路不熟的工程师，先从根本上说明模拟电路在追求什么（Q0），再回答六组常见问题。第一，CMOS 电路的速度确实看 drive current 与负载电容之比（I/C，也就是 CV/I 的倒数），而且要在相同 Ioff 和相同占地面积下比较；但 CML、放大器、pad 和长连线各有自己的瓶颈，分别看 gm/C、fT/fmax 和 RC。第二，"VT 越低，drive 越大、leakage 越大"是直接、定量的关系：leakage 按 10^(−ΔVT/SS) 指数增长，drive 只按 (VDD−VT)^α 的幂律增长，远弱于指数；"VT 越低，flicker noise 越差"却不是直接关系。在 CNF+CMF 模型里，VT 本身不出现在噪声公式中，噪声只取决于陷阱密度和偏置点。真实的噪声差异来自两条间接路径：比较口径（同 VGS 还是同 ID）和降 VT 的工艺手段（dipole、cap 层元素扩散、halo 掺杂）。第三，单位面积的 flicker noise 从 bulk 到 FinFET 总体改善了约一个数量级，nanosheet 与同栅叠层的平面器件大致持平；但单个最小器件的噪声和器件间离散变差了，因为面积缩得比陷阱密度降得快。第四，降噪的一阶旋钮是栅叠层的陷阱密度，其次是 EOT、退火、沟道设计和面积，电路上靠 chopping 和 auto-zero。第五，速率不够时，先定位瓶颈在哪个模块、受哪个指标限制，再按容易、中等、困难三级叠加手段，每一步都要有对应的验证。最后附五个高速与模拟方向的小知识点。
+
+## 全景：先看这张表
+
+**先按问题找到一句话答案，再跳到对应章节看依据和细节。**
+
+证据标签：【常识】教科书或通用知识；【硅片·研究】研究器件或研究电路的实测；【硅片·量产平台】已发表的量产或准量产工艺数据；【TCAD】器件仿真；【仿真】电路或 SPICE 模型仿真；【厂商】厂商、标准组织的简报或应用笔记；【观点】综述、路线图或行业文章中的判断；【推断】本文自己的推理；【示意】为说明方法而设的示意数字，不是实测。
+
+| 问题 | 一句话答案 | 章节 |
+|---|---|---|
+| 模拟电路到底在追求什么？ | 在有限功耗下把连续信号尽量不失真地放大和转换；增益 gm·Rout 是手段，放进负反馈里换成精度、线性和速度 | Q0 |
+| 速度看的是 I/C 比值吗？ | 对 CMOS 逻辑、时钟和串行器是的，而且要在相同 Ioff、相同占地面积下比；CML 看 gm/C，pad 看 R·C，调谐射频看 fmax | Q1 |
+| VT 越低，flicker noise 会变差吗？ | drive 和 leakage 随 VT 直接变化；flicker 不直接随 VT 变化，差异来自比较口径和降 VT 的工艺手段 | Q2 |
+| bulk → FinFET → nanosheet，flicker 变好还是变差？ | 单位面积变好约 10 倍（主要在 FinFET 这一步），nanosheet 大致持平；单个最小器件和离散变差 | Q3 |
+| 怎么优化 flicker？往哪走？ | 工艺上降栅叠层陷阱密度、薄 EOT、退火、无掺杂沟道；选型上大面积、薄氧核心器件；电路上低过驱动和 chopping；方向是栅叠层与可靠性协同优化 | Q4 |
+| 速率不够时怎么提速？ | 先定位瓶颈模块和指标，再按容易（调参、选型、VDD）、中等（模块重设计、工艺微调）、困难（新工艺模块、封装与架构）三级叠加 | Q5 |
+| fT、fmax、CV/I 各管什么？ | fT = gm/C 管宽带放大，fmax 再加上 Rg 管调谐射频，CV/I 管数字门延迟 | Q6 |
+| 数据率对器件提出什么要求？ | UI = 1/数据率，NRZ 的 Nyquist = 数据率/2，PAM4 再减半；NRZ 前端带宽约为数据率的 0.5–0.7 倍（PAM4 按符号率算，约减半） | Q7 |
+| pad、ESD、凸点电容为什么重要？ | 端接电阻固定时，pad 极点只由电容决定；2.5D/3D 封装通过缩短通道、降低 ESD 和凸点电容来解决 | Q8 |
+| jitter 和噪声是什么关系？ | 随机 jitter 是相位噪声的积分；器件 flicker noise 上变频成近端相位噪声，PLL 环路只能压住环路带宽以内的部分 | Q9 |
+| 模拟为什么慎用最低 VT 和最短 L？ | 增益低、失配大、漏电大、1/f 大；高速通路仍用它们换速度，再用校准和均衡补回来 | Q10 |
+
+## Q0. 模拟电路到底在追求什么？
+
+**模拟电路追求的不是"放大"本身，而是在有限的功耗和电源下，把一个连续变化的物理信号尽量不失真地传递、放大或转换；增益 gm·Rout 是手段——把高增益放进负反馈里，换来精确、线性、几乎不受器件参数影响的结果。**
+
+要点：
+- 【常识】数字电路把信息编码成 0 和 1，每一级都会把信号"再生"回干净的电平，小于噪声容限的误差被直接丢掉。模拟电路的信息就在信号的连续数值里，每一点噪声、失真、失调和漂移都会变成信息误差，而且事后无法去掉。
+- 放大的是信号的"小变化"：把传感器、天线或长导线末端只有 µV–mV 的信号抬到后级（ADC、比较器）能可靠分辨的水平。对象可以是电压、电流、电荷，射频里是功率。
+- gm 把输入电压变成电流，Rout 再把电流变回电压，所以单级电压增益 = gm·Rout。这个数是"单级最多能放大多少倍"，也是放进反馈后精度的上限。
+- 高增益在负反馈里换来四样东西：精度（误差约 1/(A·β)）、线性度、带宽和低输出阻抗，并让结果只取决于电阻、电容的比值，而不取决于晶体管本身。
+- 所以模拟设计是在噪声、线性度、增益、电源电压、信号摆幅、速度、输入/输出阻抗、功耗八个量之间做权衡（Razavi 称为"模拟设计八边形"，[Razavi, Design of Analog CMOS Integrated Circuits](https://www.mheducation.com/highered/product/design-of-analog-cmos-integrated-circuits-razavi.html)）。器件指标正好对应其中几项：gm/ID 对应功耗效率，gm·ro 对应精度，fT 对应速度，噪声和失配对应分辨率的下限。
+
+### 数字和模拟的根本区别：会不会"再生"
+
+【常识】数字反相器在翻转点附近其实有很高的增益。正是这个增益把一个模糊的中间电平迅速推到 0 或 1，所以每经过一级，信号都被"修复"一次，噪声被丢弃。这叫再生（regeneration）。数字电路只要求噪声小于噪声容限，结果就是精确的。
+
+模拟电路恰恰相反：它要在中间电平上稳住一个精确值。信号 1.2345 mV 和 1.2346 mV 代表不同的信息，中间没有"容限"可以吸收误差。所以模拟关心的问题都是"误差有多大"：噪声决定能分辨多小的信号，失配和失调决定零点准不准，非线性决定大信号会不会变形，带宽决定能跟多快的变化，功耗决定这一切的代价。
+
+一句话：数字用增益把信号推离中间，模拟用增益把信号稳在中间。
+
+### 放大的到底是什么
+
+【常识】放大的是信号相对于偏置点的"小变化"，也就是小信号。晶体管先被偏置在一个直流工作点（ID、VGS、VDS），信号是叠加在这个工作点上的微小扰动。
+
+为什么要放大：
+- 原始信号太弱。麦克风、图像传感器、温度传感器、天线、长导线末端的信号常在 µV 到几 mV。
+- 后级有自己的噪声和误差。ADC 的量化误差、比较器的失调都是固定的；先把信号放大 A 倍，这些后级误差折算回输入时就缩小 A 倍。所以链路的噪声和精度主要由第一级决定。
+- 驱动负载。把信号送进电容、电阻、天线或长线时，需要足够的电流和低输出阻抗。
+
+放大的物理量取决于场合：放大电压最常见（运放、ADC 前端）；放大电流用于电流镜、跨阻放大器；放大电荷用于传感器读出；射频里放大的是功率，看功率增益和 fmax。
+
+### gm·Rout 代表什么
+
+【常识】晶体管本质上是一个"压控电流源"：栅压变化 Δv，漏电流变化 gm·Δv。这个电流流过输出端看到的电阻 Rout，变回电压 gm·Rout·Δv。所以：
+- gm 衡量"输入电压能撬动多少电流"，由偏置电流和 gm/ID 决定。
+- Rout 衡量"输出端有多像理想电流源"，Rout 越大，电流越能完整地转成电压；短沟道、DIBL、沟道长度调制会让 Rout 变小。
+- 单管能给的最大值 gm·ro 叫本征增益，是一个器件"天花板"的指标。cascode、叠管、gain boosting 都是在想办法把 Rout 做大（见[技巧页](../tricks/)）。
+
+打个比方：gm 是撬棍的力臂，Rout 是支点的牢固程度。支点一晃（Rout 小），力臂再长也撬不起来。
+
+### 增益为什么能换成精度：负反馈
+
+【常识】精密电路几乎从不直接用开环增益，而是把放大器放进负反馈：闭环增益 = A/(1 + A·β) ≈ (1/β)·[1 − 1/(A·β)]。
+
+这说明两件事：
+1. 闭环增益约等于 1/β，β 由电阻或电容的比值决定，比值可以做得很准，而且不随温度和工艺漂移。晶体管参数几乎从结果里消失了。
+2. 剩下的误差约为 1/(A·β)。开环增益 A 越大，误差越小。
+
+【示意】一个闭环增益为 2 的放大器（β = 0.5）：
+- 开环增益 1000（60 dB）：误差约 1/500 = 0.2%。
+- 要满足 12 位精度（1/4096 ≈ 0.024%），需要 A·β ≥ 约 4096，即 A ≥ 约 8200（约 78 dB）。
+- 单管 gm·ro 只有 20–50，所以必须用 cascode、多级或 gain boosting 把增益乘上去，或者用数字校准把剩下的误差修掉。
+
+负反馈还顺带改善线性度（失真被压缩约 A·β 倍）、扩展带宽（增益带宽积大致守恒）、降低输出阻抗。所以"模拟最看重增益"，准确的说法是：增益是可以换成精度、线性和速度的"货币"。
+
+### 那模拟最终要优化的是什么
+
+【推断，综合教科书观点】可以把模拟电路的目标写成一句话：在给定功耗和电源电压下，让信号在需要的带宽内保持足够的信噪比和精度。常用的综合指标都是这个形式：
+- 放大器：增益带宽积除以功耗，或者噪声效率因子。
+- ADC：有效位数（ENOB）和每次转换的能量（Walden 或 Schreier FoM）。
+- 接收机：噪声系数、线性度（IIP3）和功耗。
+- 时钟：jitter 和功耗。
+
+对应到器件：
+| 电路要的 | 器件指标 | 往哪个方向好 |
+|---|---|---|
+| 省电 | gm/ID | 越大越好 |
+| 精度、增益 | gm·ro（gm/gds） | 越大越好 |
+| 速度、带宽 | fT、fmax | 越大越好 |
+| 分辨率下限 | 1/f 和热噪声、AVT | 越小越好 |
+| 摆幅、余量 | VDSAT、VDD | 余量越大越好 |
+
+这就是为什么同一个晶体管，逻辑看 Ion/Ioff 和 CV/I，模拟看 gm/ID、gm·ro、fT 和噪声、失配。
+
+## Q1. 速度看的是 I/C 比值吗？
+
+**对 CMOS 逻辑、时钟树、串行器和反相器型驱动来说，是的：门延迟近似为 C·VDD/I_eff，所以速度看 I_eff/C，而且必须在相同 Ioff 和相同占地面积下比较；单看电流、单看电容或单看"频率"都会误判。**
+
+要点：
+- 【常识】门延迟 τ ≈ C_load·VDD/(2·I_eff)，环振频率 f = 1/(2·N·τ)。同一 VDD 下，速度正比于 I_eff/C_load。
+- 只看电流会误判：加宽器件电流变大，自身电容也同比例变大；降 VT 电流变大，Ioff 却指数上升。所以要固定 Ioff 和占地面积。
+- 只看电容也会误判：减薄 fin 或缩小接触能减小电容，但可能同时抬高外电阻、降低电流。
+- IBM 的 22 nm 分析是一个好例子：FinFET 靠静电控制和更低的结电容拿到 13–23% 的延迟优势，但被增加的 Cgs（fin 顶部和底部的边缘电容）抵消一部分，优化后净优势约 17%（[Fuller et al., VLSI 2008](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)）【硅片·研究 + 仿真】。
+- 当负载主要是长连线、pad 或调谐网络时，瓶颈分别变成导线 RC、端接电阻 × pad 电容和 fmax，器件的 I/C 不再是主角。
+- "频率"是结果，不是旋钮：时钟频率、数据率、Nyquist 频率和 fT 是不同的量，不能混用。
+
+### 为什么是 I/C，而且 I 要用 I_eff
+
+【常识】一个 CMOS 门在翻转时，用驱动电流给负载电容充放电。负载电容包括下一级的栅电容、本级的漏端结电容和 MOL 寄生，以及连线电容。电压摆幅是 VDD，所以延迟近似为 C·VDD/I。这就是逻辑工艺常说的 CV/I。
+
+这里的 I 不是 Idsat。翻转过程中，器件的 VGS 和 VDS 都在变化，大部分时间并不处于 VGS = VDS = VDD 的点。业界常用 I_eff 表示等效驱动电流，一种常见定义是取 VGS = VDD/2、VDS = VDD 的电流和 VGS = VDD、VDS = VDD/2 的电流的平均值。I_eff 对外电阻和 DIBL 比 Idsat 更敏感。
+
+把公式写成 τ ∝ C·VDD/(VDD−VT)^α（alpha-power 模型，短沟道器件中 α ≈ 1.1–1.5）可以看出三点：
+- 降 C 直接按比例提速。
+- 抬 VDD 提速，但分子里也有 VDD，所以收益比电流的增幅小。
+- 降 VT 的收益随 VDD−VT 变小而变大，所以低压工作时 VT 的杠杆最大。
+
+### 为什么必须固定 Ioff 和占地面积
+
+只看电流有两个漏洞。
+
+第一个漏洞是自负载。把器件加宽一倍，电流加倍，但它自己的栅电容和漏端电容也加倍。如果负载主要是同类器件（比如环振、时钟树中扇出相同的 buffer），I/C 几乎不变，速度也几乎不变。只有当负载以固定电容（长线、pad）为主时，加宽才有用，而且很快会被自身电容追上。
+
+第二个漏洞是漏电。降 VT 能让电流明显上升，但 Ioff 按指数上升（见 Q2）。如果不固定 Ioff，任何工艺都能"提速"。所以逻辑工艺的标准做法是画 Ion–Ioff 曲线，在相同 Ioff 下比 Ion；再用环振在相同漏电功耗下比频率。
+
+占地面积也要固定。FinFET 和 nanosheet 可以通过加 fin、加 sheet 增大电流，但单元面积和电容也随之增加。工艺对比用"每单位占地宽度的电流"或"同一标准单元的环振"，才不会把面积换来的收益算到器件头上。
+
+### 只看电容同样会误判
+
+减小电容的手段往往也影响电流：
+- 更窄的 fin 或更窄的接触能减小边缘电容，但可能抬高外电阻 Rext，I_eff 下降。
+- 更厚的 spacer 能减小栅–接触电容，但拉长了接入区，电阻上升。
+- 更低的 fin 能减小电容，但每个 fin 的电流也减少。
+
+真正"免费"的电容旋钮是不改变电流路径的那些，比如把 spacer 的介电常数降低。IBM/GF 在 10 nm 级 FinFET 上用 air spacer，使器件寄生电容降低最多 25%，环振电容降低最多 15%（[SST/Semiconductor Digest](https://sst.semiconductor-digest.com/?p=72130)；[IBM Research](https://researcher.ibm.com/publications/air-spacer-for-10nm-finfet-cmos-and-beyond)）【硅片·研究】。在电流不变时，环振电容降 15% 大致对应同等幅度的提速。
+
+IBM 的同一项 22 nm 研究还给出一个量级：把 fin pitch 和 fin 高度从 80/40 nm 减到 40/20 nm，Cgs 降低约 0.2 fF/µm，对应反相器延迟约 10%（[Fuller et al.](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)）【仿真】。
+
+### "频率"指的是哪个量
+
+日常说"这个电路频率不够"，可能指四个不同的量：
+
+| 量 | 定义 | 和 I/C 的关系 |
+|---|---|---|
+| 时钟或环振频率 | 1/(2·N·τ) | 直接由 I_eff/C 决定 |
+| 数据率 | 每秒传输的比特数；UI = 1/数据率 | 由最慢的模块决定，不只是器件 |
+| Nyquist 频率 | NRZ 为 数据率/2；PAM4 为 数据率/4 | 决定通道和前端要多少模拟带宽 |
+| fT | 小信号电流增益等于 1 的频率，≈ gm/(2π·Cgg) | 是"小信号版的 I/C"，用 gm 代替 I |
+
+所以"频率越高越好"不是一个可以直接优化的目标。数据率和时钟频率是电路的结果；fT 是器件的一个比值，和 I/C 同源，但它衡量的是小信号放大能力，不是大信号充放电。
+
+### 什么时候 I/C 不是主角
+
+| 电路 | 速度由什么决定 | 关键指标 |
+|---|---|---|
+| CMOS 逻辑、时钟 buffer、串行器、反相器型驱动 | 大信号充放电 | I_eff/C（CV/I） |
+| CML、CTLE、限幅放大器 | 带宽 1/(2π·R_L·C_L)，增益 gm·R_L，增益带宽积 gm/(2π·C_L) | gm/C_L，其中 C_L 含连线和下一级输入 |
+| 长连线 | 分布 RC，延迟约 0.38·R·C·长度² | 金属电阻和电容、repeater 间距 |
+| 带端接的 pad | 极点 1/(2π·R_term·C_pad)，R_term 由协议固定 | pad、ESD、凸点电容 |
+| 调谐射频（LNA、VCO、PA） | 输出电容被电感谐振掉 | fmax，受 Rg 和 Cgd 影响 |
+| 时钟质量受限的链路 | 眼宽被抖动吃掉 | 相位噪声、电源噪声 |
+
+【推断】对 CML 和 CTLE，fT 只在间接意义上重要。现代 FinFET 的 fT 达到数百 GHz，Intel 22FFL 的射频器件报告了超过 230 GHz 和 290 GHz 的 fT/fmax（[WikiChip Fuse, IEDM 2017](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/4/)）【硅片·量产平台】，所以节点电容通常被连线、下一级输入和 pad 主导，而不是被器件自身的 Cgs 主导。
+
+对带端接的 pad，驱动器电流几乎无关紧要。端接电阻由协议固定（例如 50 Ω），两端端接时等效约 25 Ω，极点只由电容决定。降 pad 电容或用 T-coil 抵消它（见 Q5、Q8）才有用。
+
+还有一种情况：理想的本征 fT 会严重高估纳米器件的真实速度。一项仿真研究中，L = 20 nm 器件按准静态 CV/I 估算的 fT 为 10.6 THz，按真实本征延迟只有 2.7 THz；加上寄生之后准静态估算重新成立，但速度更低（[arXiv 1611.03856](https://arxiv.org/pdf/1611.03856)）【仿真】。结论是：评估高速电路时，必须带着寄生和 PEX 看，不能只看器件本征参数。
+
+## Q2. VT 越低，flicker noise 会变差吗？
+
+**这个说法前半句对，后半句不对：VT 降低使 drive 增大、leakage 增大，是直接、定量的关系；flicker noise 不直接随 VT 变化，在相同 ID 或相同 gm/ID、相同 W·L 下比较，单纯平移 VT 不改变噪声，真实观察到的噪声差异来自两条间接路径：比较口径（同 VGS 下低 VT 器件的过驱动更大），以及降 VT 所用的工艺手段（dipole、cap 层元素扩散、halo 掺杂）是否引入了陷阱。**
+
+要点：
+- 【常识】Ioff ∝ 10^(−ΔVT/SS)：VT 每降一个 SS（约 65–110 mV，含 DIBL 和温度），漏电涨 10 倍。Ion ∝ (VDD−VT)^α，α ≈ 1.1–1.5，同样的 VT 降幅只带来十几到二十几个百分点的电流。
+- 【仿真】在 100 nm 级 foundry 模型上，相邻 VT 档相差约 65–80 mV，每档 Ioff 约 ×3.6–5.0，反相器速度约 +20%（[Kahng et al., ISQED 2006](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)）。
+- 【常识】CNF+CMF 模型：S_VG = S_VFB·(1 + α_sc·μ_eff·Cox·ID/gm)²，S_VFB ∝ N_t/(W·L·Cox²)。VT 不在公式里，只有陷阱密度 N_t 和偏置点 ID/gm 在（[arXiv 2512.08388](https://arxiv.org/pdf/2512.08388)）。
+- 【硅片·研究】降 VT 的工艺可能带来陷阱：在厚氧 pFET 上，加 high-k 和 Al₂O₃ cap 层后，噪声比 SiO₂/poly 参照高至少一个数量级，原因是 Hf 和 Al 在退火中扩散到界面（[Simoen et al., ECS 2015](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html)）。但 dipole 也可能把 high-k 缺陷能带移开、减少活跃陷阱（[Franco et al., EDTM 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)），方向取决于具体工艺。
+- 没有找到量产 FinFET 或 GAA 平台按 VT 档（ULVT/LVT/SVT/HVT）给出的公开 1/f 数据。要回答"本工艺里是不是这样"，只能在 PDK 中按相同 ID、相同 gm/ID、相同 W·L 比较。
+
+### 结论：哪些是直接关系，哪些是间接关系
+
+| 量 | 和 VT 的关系 | 性质 |
+|---|---|---|
+| Ioff（亚阈漏电） | Ioff ∝ 10^(−ΔVT/SS)，指数关系 | 直接、确定 |
+| Ion / I_eff | ∝ (VDD−VT)^α，幂律，远弱于指数 | 直接、确定 |
+| 门延迟 | ∝ C·VDD/(VDD−VT)^α | 直接、确定 |
+| flicker noise（同 ID 或同 gm/ID） | 公式里不含 VT | 无直接关系 |
+| flicker noise（同 VGS） | 低 VT 器件过驱动更大，S_VG 和 S_ID 的绝对值上升，S_ID/ID² 下降 | 间接：经由偏置点 |
+| flicker noise（不同工艺手段） | dipole、cap 层、halo、掺杂改变陷阱密度 | 间接：经由工艺 |
+| σVT 和 RTN | 平面中掺杂越高越差，所以高 VT 往往更差；FinFET/GAA 中取决于功函数金属怎么变 | 间接：经由工艺 |
+
+这个说法的来源很可能是一个真实的观察：某个 PDK 里 LVT/ULVT 器件的 flicker 系数更大，或者设计者换成 LVT 后把器件偏置到了更高的过驱动。然后这个观察被推广成"低 VT 就是噪声大"【推断】。
+
+### VT 与 drive、leakage 的定量关系
+
+【常识】亚阈区电流随 VGS 指数变化，斜率是亚阈摆幅 SS（mV/dec）。VT 平移 ΔVT，相当于把 Id–Vg 曲线左右平移，所以：
+
+Ioff(新)/Ioff(旧) = 10^(ΔVT_降幅/SS_eff)
+
+这里的 SS_eff 要包含 DIBL（在 VDS = VDD 下量 Ioff）和温度。强反型区用 alpha-power 模型：
+
+Ion ∝ (VDD − VT)^α，α ≈ 1.1–1.5
+
+两者放在一起，就是"漏电是指数的，驱动只是幂律的"。
+
+一组公开的 SPICE 数据（TSMC 100 nm 级 foundry 模型，INVX4 反相器）可以直接说明这个比例（[Kahng et al., ISQED 2006](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)）【仿真】：
+
+| NMOS VT 档 | VT (V) | Ioff (nA) | 反相器延迟 (ps) | 与上一档相比 |
+|---|---|---|---|---|
+| HVT | 0.402 | 7.5 | 14.86 | — |
+| SVT | 0.327 | 37.2 | 12.42 | ΔVT 75 mV；Ioff ×5.0；速度 +20% |
+| LVT | 0.257 | 164.2 | 10.38 | ΔVT 70 mV；Ioff ×4.4；速度 +20% |
+
+| PMOS VT 档 | VT (V) | Ioff (nA) | 与上一档相比 |
+|---|---|---|---|
+| HVT | −0.300 | 9.4 | — |
+| SVT | −0.235 | 34.2 | ΔVT 65 mV；Ioff ×3.6 |
+| LVT | −0.155 | 160.6 | ΔVT 80 mV；Ioff ×4.7 |
+
+同一篇论文中，间距约 35 mV 的"中间档"每档使 Ioff 约 ×2.1、延迟改善约 8–10%。另一条常被引用的经验是：HVT 器件的静态漏电约为 LVT 的 1/10（[Wikipedia: Multi-threshold CMOS，引 Anis et al., DAC 2002](https://en.wikipedia.org/wiki/Multi-threshold_CMOS)）【观点】。
+
+【推断】从这组数据反推，每 75 mV 漏电涨 5 倍，对应 SS_eff 约 107 mV/dec。这比 FinFET/GAA 的本征 SS（室温约 65–75 mV/dec）大，因为它包含了 DIBL、温度和 100 nm 平面器件的短沟道效应。在 SS 约 70 mV/dec 的 FinFET/GAA 上，同样一档约 70 mV 的 VT 差，漏电会接近 ×8–10。
+
+【推断】驱动侧的一个算例：VDD = 0.75 V、VT 从 0.25 V 降到 0.18 V、α = 1.3，Ion 比值为 (0.57/0.50)^1.3 ≈ 1.19，即电流约 +19%，与上表每档约 +20% 的速度一致。VDD 越低，VDD−VT 越小，同样的 ΔVT 带来的相对提升越大。
+
+量产平台的 VT 档也越来越细。GF 12LP FinFET 提供 SLVT、LVT、RVT、HVT 四档，低 VT 档的关态漏电更高（[Vidana et al., OSTI 2311246](https://www.osti.gov/servlets/purl/2311246)）【硅片·量产平台】。Intel 18A-P 从 4 对 VT 扩到 5 对以上，在 ULVT 和 LVT 之间新增一档，ULVT 再降 10 mV（[Intel 18A 技术简报](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)）【厂商】。细档的意义是让设计者用更小的漏电代价换取刚好够用的速度。
+
+### flicker noise 的物理：公式里没有 VT
+
+现代 HKMG 平面、FinFET 和 nanosheet 器件的 1/f 噪声通常用载流子数涨落加相关迁移率涨落模型（CNF+CMF）描述。氧化层和边界陷阱俘获、释放载流子，造成平带电压涨落；被俘获的电荷又通过库仑散射调制迁移率。输入参考噪声写成（[arXiv 2512.08388](https://arxiv.org/pdf/2512.08388)，原始文献为 Hung et al., TED 1990 与 Ghibaudo et al., 1991）【常识】：
+
+S_VG = S_VFB · (1 + α_sc·μ_eff·Cox·ID/gm)²
+
+S_VFB = q²·kT·λ·N_t / (W·L·Cox²·f)
+
+其中 N_t 是费米能级附近的陷阱密度，λ 是隧穿衰减长度，α_sc 是库仑散射系数。漏电流噪声为 S_ID = gm²·S_VG，归一化噪声为 S_ID/ID² = (gm/ID)²·S_VG。
+
+公式里没有 VT。VT 只能通过两个途径进入：
+- 偏置点。ID/gm 近似等于过驱动的函数：弱反型时约为 n·kT/q（约 26–40 mV，常数），平方律区约为 (VGS−VT)/2，速度饱和区约为 VGS−VT。
+- 陷阱密度 N_t。如果降 VT 的工艺改变了界面或 high-k 中的陷阱，N_t 就变了。
+
+【常识】SPICE 中常用的经验形式 S_VG = KF/(Cox²·W·L·f) 与偏置无关，但 KF 实际上随工作点变化，在弱反型和强反型下不同（[Lundberg, MIT](https://web.mit.edu/klund/www/papers/UNP_noise.pdf)）。所以只看 PDK 里一个 KF 数字，可能看不出偏置依赖。
+
+**三种比较口径给出三种答案。**【推断，由上式推出】假设两个器件只差一个刚性的 VT 平移，N_t、μ、Cox 和几何都相同：
+
+| 比较口径 | 低 VT 器件的过驱动 | S_VG | S_ID | S_ID/ID² | 结论 |
+|---|---|---|---|---|---|
+| 相同 ID 或相同 gm/ID | 相同 | 相同 | 相同 | 相同 | VT 完全消失，噪声无差别 |
+| 相同 VGS | 更大 | 上升（CMF 项变大） | 明显上升（gm 更大） | 下降 | "噪声更大"主要是电流更大，信噪比不差 |
+| 设计习惯：为提速把 LVT 偏置到更低 gm/ID | 更大 | 上升 | 上升 | — | 噪声确实变大，但原因是偏置点，不是 VT |
+
+第三行最常见。设计者换上 LVT 是为了速度，常常同时把器件推向强反型，CMF 项 (1 + α_sc·μ_eff·Cox·ID/gm)² 随之变大，输入参考噪声确实上升。这时候观察到的现象是真的，归因却错了。
+
+imec 在 nanosheet 上的测量也支持偏置点的作用：S_vg 随 V_ov 增大，活跃陷阱的平均数也随 V_ov 和 I_D 增加（[Asanovski et al., arXiv 2609.08674](https://arxiv.org/html/2609.08674)）【硅片·研究】。
+
+### 降 VT 的工艺手段会不会带来陷阱
+
+不同架构用不同方法设 VT：
+- 平面：沟道和 halo 注入。每增加一档 VT，每种极性多一次掩模和注入（[Wikipedia: Multi-threshold CMOS](https://en.wikipedia.org/wiki/Multi-threshold_CMOS)）【常识】。
+- FinFET/GAA：功函数金属（WFM）的厚度或成分，加上 La（nFET）或 Al（pFET）dipole。Intel 3 用埃级厚度的 dipole 功函数层做出四档严格受控的 VT（[IEEE Spectrum](https://spectrum.ieee.org/intel-foundry-finfet)）【厂商】。GAA 的 sheet 间隙放不下厚 WFM，所以多 VT 正在向 dipole 迁移。
+
+各手段对噪声的公开证据：
+
+| 手段 | 对陷阱和噪声的影响 | 证据 |
+|---|---|---|
+| halo/pocket 注入 | halo 区陷阱密度高，使 flicker 的偏置依赖随几何变化（45 nm LP 上验证） | [Khandelwal et al., JEDS](https://research.iitj.ac.in/publication/analytical-modeling-of-flicker-noise-in-halo-implanted-mosfets)【硅片·研究】 |
+| high-k + Al₂O₃ cap（厚氧 I/O pFET） | 氧化层陷阱密度"大幅增加"，10 Hz 和 10 kHz 的输入参考噪声比 SiO₂/poly 参照高至少 10 倍；归因于 600–900 °C 退火中 Hf、Al 扩散到 Si/SiO₂ 界面；噪声趋势与 NBTI 一致 | [Simoen et al., ECS 2015](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html)【硅片·研究】 |
+| La / Al dipole | 把 HfO₂ 缺陷能带移离载流子能量，PBTI 降约 8 倍（La，nMOS），NBTI 最多降约 10 倍（Al，pMOS）；论文没有噪声数据 | [Franco et al., EDTM 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)【硅片·研究】 |
+| 氟处理（RMG pFET） | 降低平均噪声和器件间离散 | [Simoen et al., ECS 2013](https://ecs.confex.com/ecs/224/webprogram/Abstract/Paper19227/E12-2246.pdf)【硅片·研究】 |
+| WFM 成分（nanosheet） | 对栅叠层质量和 N_OT"有一定影响"，文中无数字 | [Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)【硅片·研究】 |
+
+imec 有两篇直接研究 cap 层对低频噪声影响的论文（Claeys et al., ECS JSS 2019；Simoen et al., ECS Trans. 2009），但本次没有读到结果（[imec 记录](https://imec-publications.be/entities/publication/4d61541c-c632-44af-965a-d73964502585/full)）。
+
+【推断】由此得到三条判断：
+- 平面工艺里，低 VT 器件通常掺杂更低，库仑散射和 halo 陷阱更少，同 ID 下噪声应该不高于、甚至低于高 VT 器件。
+- FinFET/GAA 里，WFM 厚度变化离沟道较远，对 N_t 影响应该小。dipole 有两种可能：元素扩散到界面会增加陷阱（ECS 2015 的厚氧例子）；能带移位会减少活跃陷阱（BTI 数据）。哪种占主导，取决于具体工艺和热预算。
+- dipole 也常用来抬高 VT（比如用 Al 做 nFET 的 HVT），这时候即使有噪声代价，也落在高 VT 那一档。所以"低 VT = 噪声大"在 dipole 工艺中甚至可能反过来。
+
+### variation 与 RTN：也不是"低 VT 更差"
+
+平面器件中，随机掺杂涨落（RDF）是 σVT 的主要来源。原子级 3D 仿真显示，离散掺杂会显著增大单个陷阱造成的最大 RTS 幅度（[Asenov et al., IEDM 2000](https://eprints.gla.ac.uk/3019)）【TCAD】。高 VT 档掺杂更高，所以平面工艺中高 VT 往往 σVT 更大、RTN 尾部更长。
+
+FinFET 和 nanosheet 的沟道基本不掺杂，σVT 主要来自金属栅晶粒取向造成的功函数变化（WFV/MGG）。每个栅下的晶粒数从 7 nm FinFET 的约 10 个减到 2 nm nanosheet 的 1–3 个（[PatSnap 综述](https://www.patsnap.com/resources/blog/articles/metal-gate-granularity-and-threshold-voltage-at-5nm/)）【观点】。不同 VT 档的 σVT 是否不同，取决于 WFM 怎么改，公开资料没有按档的 AVT 数据。
+
+【推断】有两个容易混淆的点：
+- 数字电路里，同样的 σVT 在低 VT 器件上占过驱动的比例不同，所以延迟对 σVT 的敏感度会变。这是电路敏感度，不是器件 σVT 变大。
+- 为速度用的小尺寸 LVT 器件 RTN 台阶更大，是因为面积小（每个陷阱的影响约为 q/(Cox·W·L)），不是因为 VT 低。
+
+### 在 PDK 里怎么核对
+
+如果需要在自己用的工艺上确认，可以按下面的步骤做【推断】：
+
+1. 选同一极性、同一 W·L（相同 fin 或 sheet 数、相同 L）的各 VT 档器件。
+2. 在相同 ID 下仿真噪声，再在相同 gm/ID 下仿真一次（比如 gm/ID = 8、12、16 V⁻¹ 各一个点）。读 1 kHz 处的 S_VG，或 10 Hz–1 MHz 的积分噪声电压。
+3. 再在相同 VGS 下仿真一次，看差异是否主要来自口径。
+4. 查模型卡：各 VT 档是否有独立的 flicker 参数（BSIM-CMG 的 NOIA/NOIB/NOIC 或 KF/AF/EF），以及是否提供统计噪声角落。
+5. 如果有硅片数据，按栅叠层提取 N_OT 和 α_sc：画 √S_VG 对 ID/gm，截距对应 N_OT，斜率与截距之比给出 α_sc（[Chen, Stanford 2010](https://stacks.stanford.edu/file/druid:pf645xz5659/cy_thesis-augmented.pdf)）。不要直接比较 KF，因为它混入了 Cox 和偏置依赖。
+6. 同时看各档的 AVT 和 BTI 数据。在 imec 的平面数据中，噪声提取的陷阱密度与 BTI 陷阱密度同步变化（[Asanovski et al.](https://arxiv.org/html/2609.08674)），BTI 差异常常是噪声差异的先兆。
+
+如果第 2 步各档噪声相同、第 3 步才出现差异，说明"低 VT 噪声大"只是口径问题。如果第 2 步就有差异，说明该工艺的低 VT 手段确实引入了陷阱，这是工艺特性，应该在器件选型时记录下来。
+
+## Q3. 从 bulk 到 FinFET 再到 nanosheet，flicker noise 变好还是变差？
+
+**要分三个口径回答：按单位栅面积，flicker noise 在约 20 年里改善了约一个数量级，几乎全部发生在 FinFET 这一步，nanosheet 与同栅叠层的平面器件大致持平；按单个最小器件，噪声变大了，因为面积缩小的速度快于陷阱密度下降的速度；按器件间离散和 RTN，问题明显加重，只是 GAA 让每个陷阱的影响减小了约一半。**
+
+要点：
+- 【观点】ITRS 2005 的路线图假设 S_VG·WL 只随 t_ox² 下降（陷阱密度不变）：2005 年 190、2013 年 70、2020 年 30 µV²·µm²/Hz（1 Hz）（[ITRS 2005 Wireless](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf)）。
+- 实际路径不是单调的：氮化 SiON 和早期 HfO₂ 两次材料转换都让噪声变差；量产 HKMG 平面在 28 nm 仍约 171 (n)/106 (p) fV²·µm²/Hz（1 kHz），大致回到路线图上 2005 年 SiON 的水平（[Singh et al., GF, TED 2018](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications)）。
+- 【硅片·量产平台】FinFET 是突破点：GF 14 nm FinFET 为 17 (n)/35 (p)，比 28 nm 平面好约 10 倍 (n) 和 3 倍 (p)，也低于 ITRS 2020 年的目标（同上）。
+- 【硅片·研究】nanosheet 与同栅叠层的平面 HKMG 陷阱密度相当，"栅叠层质量而非沟道几何主导"1/f 噪声（[Asanovski et al., arXiv 2609.08674](https://arxiv.org/html/2609.08674)）。
+- FinFET 中 pFET 失去了平面时代的低噪声优势：平面 pFET 比 nFET 安静，FinFET pFET 约为 nFET 的 2 倍。
+- 单个最小器件的噪声和离散变大：20 nm 级器件的单个 RTN 可使 ΔV_th 超过 70 mV（[VLSI 2009](https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm)）。
+
+### 单位面积：一张跨代表
+
+单位说明：ITRS 用 1 Hz 下的 µV²·µm²/Hz，GF 用 1 kHz 下的 fV²·µm²/Hz。对于纯 1/f 谱，两者数值相等（这里 fV² 指 10⁻¹⁵ V²）：X µV²·µm²/Hz @ 1 Hz = X fV²·µm²/Hz @ 1 kHz。下表都换成 nFET 为主、面积归一的 S_VG·WL。
+
+| 阶段（大致年代） | 面积归一 S_VG·WL | 相对前一阶段 | 主要原因 | 证据 |
+|---|---|---|---|---|
+| 氮化 SiON（约 250–130 nm） | 最小 L 器件的 S_Id 从 350 nm 到 130 nm 上升约 1.5 个数量级 | 变差 | 氮化引入陷阱 | 【硅片·研究】[Chew et al. 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846) |
+| SiO₂/SiON 平面，90 nm 级（约 2005） | 约 190（ITRS 路线图值，t_ox 2.2 nm） | 基准 | — | 【观点】[ITRS 2005](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf) |
+| 早期 HfO₂（研发阶段，约 2004–2007） | 比 SiON 或 HfSiON 高约 100 倍 | 大幅变差 | high-k 体陷阱、远程声子散射 | 【硅片·研究】[Srinivasan et al., JECS 2006](https://digitalcommons.njit.edu/fac_pubs/19253) |
+| 量产 HKMG 平面，28 nm | 171 (n) / 106 (p) | 与 2005 年 SiON 相近，未达路线图预期的约 60–80 | IL、硅酸盐、退火修复了大部分 high-k 损失，但抵消了 EOT 变薄的收益 | 【硅片·量产平台】[Singh/GF](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications) |
+| FinFET，14 nm | 17 (n) / 35 (p) | 好约 10 倍 (n)、3 倍 (p) | 更薄 EOT、无掺杂全耗尽沟道、成熟的 IL/HfO₂ 与 RMG 退火 | 【硅片·量产平台】同上 |
+| nanosheet（研究器件） | 与同栅叠层平面器件相当；面积归一后相对 FinFET、SOI"占优"（数值只在图中） | 大致持平 | 几何影响小，栅叠层主导 | 【硅片·研究】[Asanovski et al.](https://arxiv.org/html/2609.08674)；[Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770) |
+
+【推断】把 ITRS 2005 的数字反算一下，190 × (1.3/2.2)² ≈ 66，与 2013 年的 70 一致；190 × (0.9/2.2)² ≈ 32，与 2020 年的 30 一致。所以路线图的假设就是"陷阱密度不变，全部改善来自 Cox²"。用这把尺子衡量，SiON 氮化和早期 high-k 都是倒退，量产 HKMG 平面大致抵消了 EOT 的收益，FinFET 则超过了预期。
+
+【推断】按 nFET 粗算：2005 年 SiON 约 190，28 nm HKMG 约 170，14 nm FinFET 约 17，nanosheet 与 FinFET 同一量级。两个十年净改善约 10 倍，几乎都在 FinFET 这一步。这个幅度与 EOT 从约 2.2 nm 减到约 0.9–1 nm 单独带来的约 5–6 倍再加上更干净的沟道相符。需要注意，28 nm 这一点是拿 ITRS 的 SiON 预测和 GF 的 HKMG 实测做比较，混合了不同公司和偏置条件，只能当量级看。
+
+ITRS 自己也承认这条趋势难以预测。2009 年版写道，新材料（high-k、应变、金属栅）让 1/f 噪声趋势"不确定"，路线图"暂时忽略"它们带来的改善或退化（[ITRS 2009 Wireless](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)）【观点】。此后 CMOS 的 1/f 指标从路线图表格中消失了。
+
+### 每一步为什么变好或变差
+
+**氮化 SiON 变差。** NTU 测量了四代带双栅氧的 CMOS 最小 L nMOS：薄氧器件的 S_Id 从 350 nm 到 130 nm 上升约 1.5 个数量级，上升"紧跟"≤250 nm 时从热氧化转向氮化氧的时间点；厚氧器件因氮化也上升了最多约 1.25 个数量级（[Chew et al. 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846)）【硅片·研究】。这是最小 L 器件的电流噪声，没有完全面积归一。
+
+**早期 high-k 大幅变差，后来大部分修复。** 在相同界面氧化层和多晶硅栅下，HfO₂ nMOS 的噪声谱密度比 SiON 或 HfSiON 高两个数量级（[Srinivasan et al., JECS 2006](https://digitalcommons.njit.edu/fac_pubs/19253)）【硅片·研究】。IBM 在 TiN/HfO₂ nMOS 上发现噪声属于迁移率涨落型，认为 high-k 的远程声子散射可能是主要来源，界面层厚度的选择对模拟很重要（[Srinivasan et al., MEE 2007](https://www.research.ibm.com/publications/impact-of-high-k-and-siolessinfgreater2lessinfgreater-interfacial-layer-thickness-on-low-frequency-1f-noise-in-aggressively-scaled-metal-gatehfolessinfgreater2lessinfgreater-n-mosfets-role-of-high-k-phonons)）【硅片·研究】。Philips/imec 发现 HfSiON 中的 Hf 含量不影响噪声，主要改进对象应该是介质与金属栅的界面（[Rittersma et al., ESSDERC 2005](https://digitalcommons.njit.edu/fac_pubs/19446)）【硅片·研究】。后来量产 HKMG 采用 SiO₂ 界面层、硅酸盐和退火，收回了大部分损失。
+
+**FinFET 变好。** Toshiba 在 SiON/poly FinFET 上观察到，fin 宽度小于 50 nm（全耗尽）后，"不仅噪声本身，噪声的离散也下降"，原因是纵向电场减弱、俘获速率降低（[Ohguro et al., IEICE 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)）【硅片·研究】。Sony 的无掺杂、加宽沟道的像素 FinFET 使 RTS 噪声降低 99.3%，随机噪声降低 15%，gm 提高到 2.42 倍（[VLSI 2023 tip sheet](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)）【硅片·研究】。这两组数据都说明，无掺杂的全耗尽沟道本身就有降噪作用。
+
+**FinFET 的 pFET 改善较少。** 平面 28 nm 中 pFET 比 nFET 安静（106 对 171），FinFET 中反过来（35 对 17）。【推断】主要假设是 FinFET 的空穴在 (110) 侧壁上导电，以及 SiGe 应变带来的栅叠层差异；没有找到定量比较 (110) 和 (100) 陷阱密度的公开论文。nanosheet 的主导电面回到 (100) 的上下表面，可能恢复一部分 pFET 优势，但这只是假设。imec nanosheet 中 pMOS 与 nMOS"定性相似"（[Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)），所以不能默认 pFET 更安静。
+
+**nanosheet 大致持平。** imec 比较了 188 个 p 型 sheet 与相同栅叠层、相近 RMG 热预算的平面 pFET，有效边界陷阱密度 N_BT"相当"，作者的结论是"转向 GAA 不会带来噪声惩罚"（[Asanovski et al.](https://arxiv.org/html/2609.08674)）【硅片·研究】。这批器件只做了合成气烧结，没有专门的可靠性退火，所以还有改进空间。
+
+### 每器件：最小器件的噪声变大了
+
+【推断】一个典型的 2 层 nanosheet 最小器件，W_eff 约 2 × 47 nm、L 约 19 nm（imec 研究器件尺寸），栅面积约 0.0018 µm²。按 17–35 fV²·µm²/Hz 计算，1 kHz 处的 S_VG 约为 (0.9–1.9) × 10⁻¹¹ V²/Hz，即约 3.0–4.4 µV/√Hz。作为对比，1 µm² 的器件在相同工艺下只有约 0.13–0.19 µV/√Hz。
+
+所以"工艺进步了，噪声变好了"只在相同栅面积下成立。如果设计把器件缩到最小尺寸，单管的绝对噪声比老工艺中的大尺寸器件还要高。这正是模拟电路坚持使用大面积输入管的原因。
+
+### 离散与 RTN：小器件的统计问题
+
+面积缩小后，1/f 谱分解成少数几个陷阱各自的 Lorentzian 谱，器件之间可以相差几个数量级：
+- IBM 在 VLSI 2009 测量了 15,000 多个 nFET（Lg 小至 20 nm）。RTN 幅度分布长尾、非高斯；最小器件中 ΔV_th 超过 70 mV；在 22 nm 附近，RTN 引起的 V_th 变化在约 3σ 处可能超过 RDF（[VLSI 2009 3B-3](https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm)）【硅片·研究】。
+- 在堆叠 GAA 纳米线中，单个缺陷造成的平均 ΔV_T（η）约为 1 mV，10 nm FinFET 约为 1.9 mV；时间相关变异约小 2 倍。作者认为原因是更好的静电控制和体反型让电流离界面更远。但在相同应力下，纳米线中被填充的陷阱比 FinFET 多（[Chasin et al. 2017](https://www.iue.tuwien.ac.at/pdf/ib_2017/CP2017_Rzepa_02.pdf)）【硅片·研究】。
+
+【推断】GAA 让每个陷阱"更轻"，但每单位面积的陷阱数没有减少，所以预期是 RTN 台阶更小，而不是陷阱更少。器件间噪声功率的相对离散约按 1/√(陷阱数) ∝ 1/√(面积) 变化。面积缩小了几个数量级，陷阱密度只降了几倍，所以离散总体变大了。
+
+### 结论怎么用，以及哪些还不确定
+
+三个口径的结论汇总如下：
+
+| 口径 | bulk → FinFET | FinFET → nanosheet | 总体判断 |
+|---|---|---|---|
+| 单位面积（S_VG·WL） | 好约 3–10 倍 | 大致持平 | 变好 |
+| 单个最小器件 | 面积缩小抵消甚至超过改善 | 面积继续缩小 | 变差 |
+| 离散与 RTN | 陷阱数变少，单陷阱影响变大 | 单陷阱影响约减半，陷阱数仍按面积计 | 变差，GAA 略有缓解 |
+
+不确定的地方有三个：
+- 没有找到 16/14 → 7 → 5 nm FinFET 的公开 S_VG·WL 序列，也没有 TSMC N2、Samsung SF3/SF2、Intel 18A 等量产 GAA 的 flicker 数据。
+- 28 nm 是否全部为 HKMG、不同公司的偏置条件是否一致，都会影响表中 28 nm 这一点的准确性。
+- 上面的 nanosheet 结论来自研究器件，量产工艺的栅叠层和退火不同。
+
+## Q4. 怎么优化 flicker noise？FinFET 和 nanosheet 往哪走？
+
+**一阶旋钮是栅叠层（界面层加 high-k）在工作费米能级附近的陷阱密度，它与 Cox² 一起决定单位面积噪声；工艺上靠介质化学、EOT、可靠性退火和无掺杂沟道，选型上靠大面积和薄氧核心器件，电路上靠低过驱动、chopping 和 auto-zero；FinFET 和 nanosheet 之后，方向是把 1/f 当成 BTI 优化的副产品，与可靠性一起做栅叠层协同优化，并为模拟提供专用器件档。**
+
+要点：
+- 【推断】按历史证据排序：介质化学（纯 HfO₂ 对硅酸盐或 SiON 约 100 倍；氮化约 10–30 倍）> EOT（S_VG ∝ 1/Cox²，2.2 → 1 nm 约 5 倍）> 退火（约 2–5 倍）> 沟道与异质结构（几倍，并明显压缩 RTN 离散）。面积和 chopping 在设计侧几乎不受限，但有面积和带宽代价。
+- 【硅片·研究】高压 D₂ 退火使归一化噪声降低约 4.8 倍、慢陷阱密度降低约 4 倍，但这是 FD-SOI TFET 的数据（[Shin et al., Sci. Rep. 2022](https://www.nature.com/articles/s41598-022-22575-5)）。
+- 【硅片·研究】imec 平面数据中，1/f 噪声提取的陷阱密度与 BTI 陷阱密度在不同退火条件下同步变化（[Asanovski et al.](https://arxiv.org/html/2609.08674)）。降 BTI 的工艺很可能同时降 1/f。
+- 【观点】ITRS 在 2009 年后不再给 CMOS 1/f 指标（[ITRS 2009](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)），公开路线图上已经没有这一项。
+- 【推断】CFET 上层器件的热预算受限，而不做沉积后退火的 HfO₂ 缺陷密度约高 2 倍（[Franco et al., EDTM 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)），这是未来最可能出现的噪声风险。
+
+### 工艺手段
+
+**栅介质与界面**
+
+| 手段 | 公开结果 | 证据 |
+|---|---|---|
+| 避免或限制靠近沟道的氮 | 氮化使厚氧噪声最多升约 1.25 个数量级，薄氧从 350 到 130 nm 升约 1.5 个数量级 | 【硅片·研究】[Chew et al. 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846) |
+| high-k 成分：硅酸盐优于纯 HfO₂ | 相同 IL 上，HfO₂ 比 SiON 或 HfSiON 约高 100 倍 | 【硅片·研究】[Srinivasan et al., JECS 2006](https://digitalcommons.njit.edu/fac_pubs/19253) |
+| 改进介质与金属栅的界面 | HfSiON 中 Hf 含量不影响噪声，界面是主要对象 | 【硅片·研究】[Rittersma et al. 2005](https://digitalcommons.njit.edu/fac_pubs/19446) |
+| 界面层厚度 | IL 厚度和 high-k 声子散射对模拟噪声都重要 | 【硅片·研究】[Srinivasan et al., MEE 2007](https://www.research.ibm.com/publications/impact-of-high-k-and-siolessinfgreater2lessinfgreater-interfacial-layer-thickness-on-low-frequency-1f-noise-in-aggressively-scaled-metal-gatehfolessinfgreater2lessinfgreater-n-mosfets-role-of-high-k-phonons) |
+| 沉积后退火与热预算 | 不做 PDA 时 HfO₂ 缺陷密度约高 2 倍，陷阱能级更浅（BTI 数据） | 【硅片·研究】[Franco et al. 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf) |
+| 高压 D₂/H₂ 退火（400 °C、10 atm、30 min） | 100 Hz 归一化 S_ID/I² 从 2.15e-9 降到 4.49e-10 Hz⁻¹；D₂ 比 H₂ 约好 2 倍 | 【硅片·研究】[Shin et al. 2022](https://www.nature.com/articles/s41598-022-22575-5)（FD-SOI TFET） |
+| H₂ 退火（FinFET） | 降低界面陷阱响应 | 【硅片·研究】[Ohguro et al. 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf) |
+| 氟钝化（RMG pFET） | 降低平均噪声和器件间离散 | 【硅片·研究】[Simoen et al., ECS 2013](https://ecs.confex.com/ecs/224/webprogram/Abstract/Paper19227/E12-2246.pdf) |
+| La/Al dipole | BTI 降 8–10 倍；噪声影响无公开数据；需防元素扩散到界面 | 【硅片·研究】[Franco et al. 2019](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)；[Simoen et al., ECS 2015](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html) |
+| 更薄的 EOT | 归一化 S_VG 随 EOT 减小而下降；多栅间的电荷共享进一步减小单个陷阱的影响 | 【硅片·研究】[Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770) |
+
+imec/NJIT 在 2006 年的综述里列出了低噪声 HKMG 需要的"栅叠层工程"：IL 厚度、high-k 厚度和体性质、沉积后退火、栅电极、衬底应变，并指出经典噪声模型不加修改"不再适用"（[Claeys et al., ECS Trans. 2006](https://digitalcommons.njit.edu/fac_pubs/19233)）【观点】。
+
+**沟道与器件工程**
+- 无掺杂、全耗尽沟道：fin 宽度小于 50 nm 时噪声及其离散都下降（[Ohguro et al. 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)）；无掺杂像素 FinFET 的 RTS 噪声降低 99.3%（[VLSI 2023](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)）【硅片·研究】。
+- 去掉 halo/pocket：halo 注入"很可能"同时恶化噪声和增益（[Rittersma et al. 2005](https://digitalcommons.njit.edu/fac_pubs/19446)）【观点】。IBM 联盟做过 halo 优化的"高性能模拟"HKMG 器件，flicker、失配和增益都比数字对照器件好，而且不增加掩模（[Han et al., JJAP 2011](https://www.research.ibm.com/publications/novel-high-performance-analog-devices-for-advanced-low-power-high-k-metal-gate-complementary-metal-oxide-semiconductor-technology)）【硅片·量产平台】。
+- pFET 的埋沟 SiGe：Si₀.₆₄Ge₀.₃₆ 加 2 nm Si 帽层，在相同过驱动下 1/f 噪声低于 Si 对照，原因是能带偏移让界面处的活跃陷阱变少（[Prest et al., ECS 2004](https://www.electrochem.org/dl/ma/206/pdfs/1319.pdf)）【硅片·研究】。另一项研究发现 SiGe pMOS 噪声与 SiGe/Si 异质界面的 D_it 相关，所以异质界面质量决定了噪声下限（[Tsuchiya et al., ECS 2003](https://www.electrochem.org/dl/ma/203/pdfs/0966.pdf)）【硅片·研究】。这两组都是 SiO₂/poly 时代的数据。
+- nanosheet 几何：sheet 垂直间距从 7.5 nm 改到 4.7 nm 对 1/f 只有"边际影响"（[Simoen et al., JICS 2022](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)）【硅片·研究】。几何旋钮在 nanosheet 中杠杆很弱。
+
+### 器件选择
+
+| 选择 | 依据 | 证据 |
+|---|---|---|
+| 余量允许时用薄 EOT 的核心器件，而不是厚氧 I/O 器件 | ITRS 2005：厚氧"精密模拟"器件 500 对核心器件 190 µV²·µm²/Hz，约按 (t_ox,厚/t_ox,薄)² 变化 | 【观点】[ITRS 2005](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf) |
+| 加大栅面积：更多 fin/sheet、更宽 sheet、更多 finger、更长 L 或叠管 | 面积归一的 S_vg 按 1/(WL) 变化 | 【硅片·研究】[Asanovski et al.](https://arxiv.org/html/2609.08674) |
+| FinFET 中优先用 nFET 做低噪声输入 | GF 14 nm：nFET 17、pFET 35 | 【硅片·量产平台】[Singh/GF](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications) |
+| 避开最窄、最薄的 sheet | 4 nm 细线因电场集中，平均 PBTI 退化比 8 nm 高约 20% | 【TCAD】[Chasin et al. 2017](https://www.iue.tuwien.ac.at/pdf/ib_2017/CP2017_Rzepa_02.pdf) |
+| 用 PDK 提供的模拟专用器件档 | Intel 22FFL 提供专门的模拟 FinFET 和 1.2/1.5/1.8 V 厚栅器件，但公开摘要没有 flicker 数字 | 【厂商】[WikiChip Fuse](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/3) |
+| 按 Q2 的方法核对各 VT 档 | 不要默认低 VT 噪声大，也不要默认它不大 | 【推断】 |
+
+Toshiba 的观点是，FinFET 更适合模拟和混合信号，平面更适合射频（[Ohguro et al. 2015](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)）【观点】。
+
+### 电路手段
+
+- **低过驱动。** 在中等或弱反型下偏置，减小 CMF 项；imec nanosheet 数据显示 S_vg 和活跃陷阱数都随 V_ov 增加（[Asanovski et al.](https://arxiv.org/html/2609.08674)）【硅片·研究】。代价是器件变大、fT 降低。
+- **大面积输入对。** 面积加倍，S_VG 减半，相对离散约降为 1/√2。代价是输入电容和面积。
+- **Chopping、auto-zero、CDS。** 把 1/f 噪声搬到高频或减掉，经典综述见 Enz 与 Temes（[Proc. IEEE 1996](https://infoscience.epfl.ch/record/149579)）【常识】。代价是纹波、残余失调、白噪声混叠和带宽。
+- **统计噪声角落。** 小器件噪声分布长尾，按均值取的角落会低估尾部器件。应向 foundry 要 S_VG·WL 的对数正态 σ，而不是单一 KF【推断】。
+- **振荡器中的上变频。** 把振荡器摆幅推到 VDD 能改善相位噪声，但代价是 flicker 上变频变强；尾电流谐振在 2f₀ 是一种缓解办法（[Razavi, TCAS-I 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf)）【常识】。详见 Q9。
+- **低温应用。** 低温下白噪声下降，但 1/f 噪声基本不随温度下降，flicker 拐角上移；4.2 K 时出现系统性的 Lorentzian，chopping 和 auto-zero 需要在更高频率有额外抑制（[Kiene et al., arXiv 2405.17685](https://arxiv.org/pdf/2405.17685)）【硅片·研究】。
+
+### 各类手段的杠杆排序
+
+【推断】把上面的证据按量级排序：
+
+| 排名 | 手段 | 量级 | 现状 |
+|---|---|---|---|
+| 1 | 栅介质化学（纯 HfO₂ 对硅酸盐/SiON；氮化） | 约 10–100 倍 | 量产栅叠层已拿到大部分收益 |
+| 2 | EOT（Cox²） | 2.2 → 1 nm 约 5 倍 | 继续变薄的空间有限 |
+| 3 | 退火（HPD/HPH、PDA、RMG 热预算） | 约 2–5 倍 | 仍有空间，受热预算限制 |
+| 4 | 沟道与异质结构（无掺杂全耗尽、埋沟 SiGe pFET） | 几倍，并大幅压缩 RTN 离散 | FinFET/GAA 已默认无掺杂 |
+| 5 | 设计面积 | 理论上不受限 | 代价是面积和电容 |
+| 6 | chopping、auto-zero | 带内几乎完全去除 1/f | 代价是纹波、失调和带宽 |
+
+对 nanosheet 和 CFET，栅叠层旋钮（IL、PDA、dipole、HPD）可以直接沿用；几何旋钮按 imec 数据杠杆很弱；pFET 的 SiGe 沟道和 Si 帽层、sheet 的晶向是尚未回答的问题。
+
+### 未来方向
+
+【观点】公开路线图已经不给 CMOS 1/f 噪声指标。ITRS 2009 因新材料的不确定性忽略了 1/f 的变化（[ITRS 2009](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)）；2011/2013 年版在双极部分写道，1/f 和匹配数字被移出表格，因为"电路需求预计保持不变"（[ITRS 2013 RFAMS](https://www.semiconductors.org/wp-content/uploads/2018/08/2013RFAMS.pdf)）。本次没有找到 IRDS 中带 1/f 数字的表格。
+
+公开研究集中在四个方向：
+- **栅叠层陷阱物理与 BTI 协同。** imec 的结论是"栅叠层质量而非沟道几何主导"，噪声陷阱和 BTI 陷阱是同一套缺陷（[Asanovski et al.](https://arxiv.org/html/2609.08674)）【硅片·研究】。【推断】未来几年最可能的做法是把 1/f 当作 BTI 优化的副产品：兼容低热预算的可靠性退火、dipole 多 VT、高压 D₂ 退火，并用阵列和 defect-centric 统计方法表征。
+- **forksheet 与低温。** forksheet 阵列在 100 K 以下的额外 1/f 噪声"与器件架构无关，而与半导体/介质界面的材料性质有关"（[Asanovski et al., SSE 2024](https://air.uniud.it/retrieve/9b187428-ab70-46d9-ae59-c8f49613a887/1-s2.0-S0038110124000303-main.pdf)）【硅片·研究】。imec 在 2500 个 nMOS 上测到，5 K 下的 RTN 活跃缺陷比 300 K 多，ΔV_th 分布从单峰变为三峰，80% 以上的缺陷在氧化层体内（[Catapano et al., arXiv 2505.04030](https://arxiv.org/abs/2505.04030v2)）【硅片·研究】。
+- **CFET。** 单片 nanosheet CFET 已有研究演示（[VLSI 2023 tip sheet](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)）【硅片·研究】，但没有噪声数据。【推断】上层器件热预算受限，按 Franco 的数据会带来更多、更浅的 high-k 陷阱，可能出现上下层（n/p）噪声不对称，需要 dipole 或退火来补。
+- **2D 沟道。** MoS₂ 的噪声同样遵循 McWhorter（陷阱数）机制，厚沟道（15–18 层）比 2–3 层更安静（[Balandin group, arXiv 1503.01823](https://arxiv.org/abs/1503.01823)）【硅片·研究】。2D 沟道的降噪依然是界面和介质问题。
+
+【推断】还有两个没有公开数据的方向：背面供电带来的晶圆键合、减薄和背面接触可能通过氢钝化和应力影响噪声；模拟专用器件档（更长 L、更宽 sheet、更厚 IL）会延续 22FFL 和 IBM 高性能模拟器件的先例。
+
+## Q5. 速率不够时怎么提速：容易、中等、困难三级
+
+**先定位瓶颈，再动手：链路速率由最慢的那个模块决定，而每个模块受不同的指标限制（CMOS 时序看 CV/I，放大器看 gm/C，pad 看 R·C，时钟看 jitter，大电流模块看 IR drop）；定位之后，按容易（调参、选型、VDD、局部版图）、中等（模块重设计、工艺在现有平台内微调）、困难（新工艺模块、封装与架构）三级叠加手段，每一步都配一组对应的验证。**
+
+要点：
+- 速度不是一个数，而是 min(各模块能达到的速率)。只改善非瓶颈模块，整体速率不变。
+- 【常识】CMOS 串行器和时钟的极限可以用"每个 UI 需要几个 FO4"来估：全速率约 8 FO4/UI，半速率约 4，四分之一速率约 2；1/8 速率的 CMOS mux 做不到 1 FO4（[Palermo, TAMU 讲义 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)）。
+- 【常识】带端接 pad 的带宽 ≈ 1/(2π·R_eq·C_pad)。把它和 Nyquist 频率（NRZ 为 数据率/2）比较，就知道 pad 电容是不是瓶颈。
+- 单个手段的公开量级：T-coil 带宽 ×2.72（[Galal & Razavi, JSSC 2003](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf)）；air spacer 环振电容 −15%（[SST](https://sst.semiconductor-digest.com/?p=72130)）；外电阻降 12–20% 加 VT 和通孔优化带来 >10% 频率（[Intel 18A 技术简报](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)）；背面供电使最坏动态压降降约 10 倍、FMAX +5–6%（同上）。
+- 作用在同一条关键路径上的手段大致相乘；作用在不同模块上的手段不相乘，整体由新的最慢模块决定。
+- 每个手段都有对应的风险：VDD 和低 VT 换来漏电和可靠性风险，EQ 放大噪声和串扰，降 ESD 电容牺牲鲁棒性，工艺改动影响良率。
+
+### 第一步：定位瓶颈在哪个模块、受哪个指标限制
+
+一条高速链路通常包括：发送端的串行器（mux）、时钟产生与分配、预驱动和驱动、pad/ESD/凸点、通道（封装走线、中介层、键合）、接收端的前端（终端、CTLE）、采样器（slicer）、DFE、时钟恢复（CDR）或去偏斜（deskew）。下表把常见症状对应到瓶颈和指标【推断，基于常识和下列来源】：
+
+| 症状 | 可能的瓶颈 | 受什么指标限制 | 怎么确认 |
+|---|---|---|---|
+| SS 角、低压下时序失败，FF 角通过；失败点随 VDD 明显移动 | 串行器末级、时钟 buffer、预驱动 | I_eff/C（FO4/UI） | 环振随 VDD 曲线；PEX 后的时序余量；按 FO4/UI 预算核对 |
+| 眼图垂直方向闭合，码间干扰明显；频响在 Nyquist 附近下降 | TX 输出极点或 RX 输入极点 | R_term·C_pad，加通道损耗 | S21/S22、S11；f_3dB 与 Nyquist 的比值 |
+| CTLE 或 CML 级的增益–带宽不够 | 模拟前端 | gm/C_L，C_L 含连线和下一级输入 | 带 PEX 的 AC 仿真；分解 C_L 的组成 |
+| 采样器分辨不出小信号或亚稳态 | slicer | 再生时间常数 τ ≈ C/gm，失调 | 灵敏度和失调的 Monte Carlo |
+| 眼宽被随机抖动吃掉 | PLL/VCO、时钟分配 | 相位噪声、电源引起的抖动 | 抖动分解（RJ/DJ/DCD）；电源噪声注入 |
+| 占空比或正交相位误差大 | 半速率或四分之一速率时钟 | 失配、布线不对称 | 相位误差的 Monte Carlo；片上校准范围 |
+| 与数据图案或活动率相关的突发错误 | 电源网络 | IR drop、动态压降 | 动态 IR 仿真；片上压降监测 |
+| 相邻通道开关时出错 | 封装或凸点布局 | 串扰 | 串扰扫描；凸点图和走线隔离检查 |
+
+两个经验性的判据：
+
+【常识】接收端的最小眼宽 = 采样器孔径时间 + 峰峰值抖动；最小眼高 = 灵敏度 + 失调（[Palermo 讲义 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)）。眼宽或眼高哪一项先不够，就说明瓶颈在时间域还是幅度域。
+
+【推断】pad 极点的快速估算：两端 50 Ω 端接时等效约 25 Ω，C_pad = 200 fF 时 f_3dB = 1/(2π·25 Ω·200 fF) ≈ 32 GHz；降到 125 fF 时约 51 GHz。如果 f_3dB 只比 Nyquist 高一点点，pad 电容在 Nyquist 处就会吃掉几个 dB，这时 pad 是一阶瓶颈。不端接的短距离先进封装链路，更多受驱动器强弱（CV/I）限制，而不是 RC 极点。
+
+Razavi 的一个设计例子很典型：ESD 300 fF、pad 70 fF、驱动器 100 fF，合计 470 fF，发送端 −3 dB 带宽只有约 13.5 GHz，在该例的 Nyquist 频率以下满足不了 S22 < −10 dB；整条短链路带宽约 7.2 GHz，垂直眼开约 24%，峰峰抖动约 9.4 ps（[Razavi, IEEE SSC Magazine 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)）【仿真】。这个例子里器件本身并不慢，瓶颈完全在 pad 节点。
+
+定位时还要回答一个问题：瓶颈模块之后，第二慢的模块还有多少余量？解决了第一个瓶颈，能拿回的速率最多就是第二个瓶颈的位置。
+
+### 容易：调参、选型、电压与局部版图
+
+这一级不改工艺、不改电路架构，通常几周内完成，主要是改偏置、换器件档、调均衡寄存器和局部版图修改。
+
+| 方法 | 原理 | 典型收益 | 代价/风险 | 要验证什么 |
+|---|---|---|---|---|
+| 在可靠性范围内提高 PHY 电源电压或过驱动 | 延迟 ∝ C·V/(V−VT)^α | 【推断】名义电压附近，VDD +10% 约换来 8–15% 速度；越接近 Vmin 越敏感 | 功耗 ∝ V²；TDDB、BTI、HCI、EM 余量；接口协议对 TX 电压的上限（例如 UCIe 教程建议 TX 最高电压 < 0.85 V，TX 高电平不超过 RX 电源 100 mV 以上，见[Hot Chips 2023 UCIe 教程](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)） | Vmax 可靠性签核；大电流下的 EM；SS/低压角的眼图和 BER |
+| 关键路径换 LVT/ULVT（串行器、时钟树、预驱动） | Ion ∝ (VDD−VT)^α | 【仿真】100 nm 级模型每档速度约 +20%，Ioff ×3.6–5.0（[Kahng et al.](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)）；FinFET/GAA 每档速度提升需按 PDK 核对 | 漏电指数上升；占空比和正交误差对失配的敏感度 | FF/高温漏电；占空比、正交相位的 Monte Carlo |
+| 均衡重新调参（TX FFE/去加重、CTLE 峰化、DFE 抽头） | 补偿 Nyquist 处的通道和 pad 损耗 | 在 Nyquist 处补回几个 dB；损耗越大收益越大 | 放大噪声和串扰；DFE 有误码传播 | 统计眼图和 BER；串扰扫描 |
+| 局部版图和尺寸修改：加大预驱动、关键走线改到上层宽金属、通孔加倍、双边栅接触 | 降低 R 和 RC | 【推断】在 RC 主导的路径上约 5–15% | 面积；自负载电容；自热密度 | PEX（含耦合电容）；EM；Rg 提取 |
+| 电源完整性的局部改善：加 decap，局部增加电源/地凸点 | 减小动态压降和电源引起的抖动 | 【推断】几个百分点 | 面积 | 动态 IR 仿真；电源噪声注入下的抖动 |
+| 工艺中心在规格内向快侧调 | 抬高 Idsat 和环振的分布中心 | 【推断】几个百分点 | 漏电上限和良率 | WAT 的 Idsat/Ioff/环振分布；角覆盖 |
+| 降低结温（散热、降低偏置电流） | 迁移率随温度下降 | 【推断】几个百分点 | 散热成本 | 热分布图；温度角 |
+
+**怎么做：**
+1. 用第一步的表找到瓶颈模块，确认它是时序型（CV/I）还是带宽型（RC、gm/C）。
+2. 时序型：先在 PDK 中扫 VDD 和 VT 档，画出"速度–漏电–可靠性"三者的可行区域；只给关键路径换档，不要整个 PHY 都换。
+3. 带宽型：先调 EQ，再看 pad 节点的电容分解，找出能在局部修改中拿掉的电容（例如多余的 ESD 二极管、过宽的走线）。
+4. 每次只改一个变量，在 PEX 后的网表上量化收益，再把收益相乘看是否够用（见"叠加"一节）。
+5. 硅片上用 shmoo（速率对电压、温度）验证，并检查失败模式是否已从原瓶颈转移到下一个模块。
+
+### 中等：模块重设计与工艺微调
+
+这一级需要重新设计一个模块并重新流片，或者在现有工艺平台内调整器件和互连，通常需要几个月。
+
+| 方法 | 原理 | 典型收益 | 代价/风险 | 要验证什么 |
+|---|---|---|---|---|
+| 时钟架构从半速率改为四分之一速率（或 1/8 速率加 CML 末级） | 每个 UI 的 FO4 预算从 4 降到 2 | 【常识】每个 UI 的 CMOS 时序余量约翻倍（[Palermo 讲义 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)） | 需要精确的正交相位和占空比校准；mux 节点电容更大；功耗 | 相位误差 Monte Carlo；电源引起的抖动；校准范围 |
+| CML 或电感峰化的末级 mux 和时钟 buffer | CML 小摆幅、电流驱动，比 CMOS 更快 | 架构相关 | 静态电流；电感面积 | 带 PEX 的 AC 和瞬态仿真；电感 Q 值 |
+| T-coil 与小电容 ESD | 用 T-coil 抵消 pad 电容，把 ESD 电容"藏"进匹配网络 | 【硅片·研究】带宽 ×2.72，比普通电感峰化多 70%（[Galal & Razavi, JSSC 2003](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf)，0.18 µm 工艺）；【仿真】400 fF 的发送端加 330 pH T-coil 后 S22 < −10 dB 延伸到约 30 GHz（[Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)）；【厂商】UCIe 教程中 T-coil 把有效 pad 电容从 200 fF 降到 125 fF（[Hot Chips 2023](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)） | 电感面积（每个 pad 约 250–330 pH）；CDM 鲁棒性 | CDM 与人体放电模型鉴定；TLP；S11/S22 |
+| 驱动器拓扑：SST（源串联端接）或低摆幅 NMOS 驱动加电容均衡 | 低摆幅降低驱动负担和功耗 | 已发表的 die-to-die 收发器广泛采用（[Palermo 讲义 15](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)）【硅片·研究】 | 重新设计和流片 | 全 PHY 签核；硅片眼图和 BER |
+| 工艺：调整 VT 目标或新增 VT 档（WFM/dipole） | 在漏电和速度之间提供更细的选择 | 【厂商】18A-P 新增一档 VT，ULVT 再降 10 mV（[Intel 18A 技术简报](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)） | 掩模或配方变更；漏电；变异 | Id–Vg；σVT；BTI；环振；SRAM 和逻辑良率 |
+| 工艺：降低外电阻（硅化物、外延掺杂、接触面积） | I_eff 对 Rext 敏感 | 【厂商】Rext −20% (N)/−12% (P)，驱动 +5%/+16%，与 VT 和通孔优化一起使 HP 器件频率 >10%（同上） | 集成风险；接触可靠性 | Kelvin 接触电阻结构；环振；接触到栅的 TDDB；良率 |
+| 工艺：MOL 低 k 或 air spacer | 降低栅–接触电容 | 【硅片·研究】器件寄生电容 −25%，环振电容 −15%（[SST](https://sst.semiconductor-digest.com/?p=72130)） | 机械强度和可靠性；CMP；接触–栅短路 | Ceff 测试结构；环振；TDDB；良率 |
+| 工艺：降低通孔电阻、减薄阻挡层、为 PHY 提供更厚更宽的金属选项 | 降低局部 RC | 【推断】在连线主导的路径上约 5–10% | 工艺复杂度；EM；密度 | Kelvin 通孔链；线 R/C；EM；PEX 重新校准 |
+
+**怎么做：**
+1. 电路侧：先用行为模型确认新架构能把瓶颈移走多少（例如四分之一速率把 FO4/UI 从 4 降到 2），再做晶体管级设计。
+2. pad 侧：和 ESD 团队一起确定 CDM 与人体放电模型的目标，在目标允许的最小 ESD 电容上设计 T-coil，并留出电感面积。
+3. 工艺侧：先用 TCAD 和测试结构确认收益（Kelvin、Ceff、环振），再评估对良率和可靠性的影响；把 PDK 模型和 PEX 规则同步更新。
+4. 所有中等级改动都要重新跑一遍完整的签核，因为它们会改变寄生、可靠性和角。
+
+### 困难：新工艺模块、封装与架构
+
+这一级涉及新材料、新工艺流程、封装形式或协议层面的变化，通常需要几个季度到几年。它们的特点是常常"改变问题本身"，例如去掉 ESD、缩短通道，或者用更多的并行通道换取更低的单通道速率。
+
+| 方法 | 原理 | 典型收益 | 代价/风险 | 要验证什么 |
+|---|---|---|---|---|
+| 新 BEOL 金属（Ru 半大马士革）和空气隙 | 降低线电阻和线电容 | 【硅片·研究】深宽比 6 的 Ru 线比深宽比 3 线电阻降约 40%；空气隙可满足 >10 年可靠性（[imec, EE Journal](https://eejournal.com/industry_news/imec-shows-path-to-line-resistance-halving-using-semi-damascene-with-high-aspect-ratio-processing)） | 新设备和材料；EM 和 TDDB；成本 | 完整的 BEOL 鉴定 |
+| 背面供电 | 电源从背面进入，降低压降，释放正面布线 | 【厂商】最坏动态压降约降 10 倍，FMAX +5–6%，布线收敛改善 8–10%（[Intel 18A 技术简报](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)） | 新流程；散热；调试难度 | IR 和压降；热分布；可靠性 |
+| 射频/模拟专用器件档（厚栅、低 Rg、高 fmax） | 为高速模拟优化器件 | 【硅片·量产平台】22FFL 射频器件 fT/fmax 超过 230/290 GHz（[WikiChip Fuse](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/4/)） | 额外掩模；PDK 模型 | fT/fmax；噪声系数；匹配 |
+| 把 PHY 移到更合适的节点或做成独立 chiplet | 用最适合的工艺做 I/O | 架构相关 | 产品架构、成本、供应链 | 封装 SI/PI；热；KGD 测试 |
+| 改封装：有机基板 → 中介层或桥接 → 混合键合 | 缩短通道，减小凸点和 ESD 电容 | 【常识】标准封装通道超过 50 mm 后损耗超过 10 dB，2.5D 封装 1–3 mm 只有 2.4–3.9 dB（[Palermo 讲义 15](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)）；混合键合可以"不加 ESD" | 封装成本；键合良率；测试 | 封装 SI/PI；热；键合良率 |
+| 改调制或架构：NRZ → PAM4，或更宽总线、更低单通道速率 | PAM4 让 Nyquist 减半；宽总线用通道数换速率 | 【厂商】PAM4 的 Nyquist 是同数据率 NRZ 的一半，理想 SNR 代价约 9.5 dB，计入非线性约 11 dB（[Intel AN 835](https://www.intel.com/content/www/us/en/docs/programmable/683852/current/nrz-fundamentals.html)） | 协议兼容性；需要 ADC/DSP 或更多比较器；可能需要 FEC | 带 FEC 的 BER；线性度（RLM） |
+
+**怎么做：**
+1. 先用系统级模型回答"困难级改动是否真的必要"：容易级和中等级手段叠加后还差多少？
+2. 封装方案：做通道的 S 参数和眼图仿真，比较有机基板、中介层、桥接和混合键合下的 pad 电容、ESD 要求和通道损耗。
+3. 工艺方案：和工艺路线图对齐；这一级的手段多数属于下一代平台，不能指望在当前产品上实现。
+4. 架构方案：评估协议兼容性、功耗（pJ/bit）和面积，确认整体带宽目标能否用更宽、更慢的接口达成。
+
+### 多个手段怎么叠加：相乘，但只在同一瓶颈上
+
+【推断】如果几个手段都作用在同一条关键路径上，而且彼此独立，总收益大致相乘：
+
+总提速 ≈ (1 + g₁) × (1 + g₂) × … × (1 + g_n)
+
+有三个限制：
+- **不独立的手段不能简单相乘。** 提高 VDD 和降低 VT 都是在增大过驱动 VDD−VT，两者合在一起的收益要用 alpha-power 公式整体算，不能各算各的再相乘。
+- **不同模块的手段不相乘。** 整体速率 = min(各模块的速率)。时钟路径快了 20%，如果 pad 极点只允许快 10%，整体只能快 10%。
+- **瓶颈会转移。** 每解决一个瓶颈，都要重新做一次第一步的定位。
+
+【示意】假设一个以 CMOS 时序为主的发送端需要提速 1.20 倍（这里的 20% 只是示意数字），可以这样叠加：
+
+| 手段 | 级别 | 单项收益 | 累计 |
+|---|---|---|---|
+| PHY 电源 +7%（在可靠性范围内） | 容易 | ×1.06 | 1.06 |
+| 关键路径换低一档 VT | 容易 | ×1.07 | 1.134 |
+| 关键走线改上层金属、通孔加倍 | 容易 | ×1.05 | 1.191 |
+| 加 decap 降低动态压降 | 容易 | ×1.03 | 1.227 |
+
+累计约 1.23 倍，略高于需求。注意前两项都作用于过驱动，实际叠加要用 PDK 的环振随 VDD、随 VT 档的曲线一起算。如果同时发现 pad 极点也只够用到 1.1 倍，那么上面的叠加没有意义，必须先上 T-coil 或降低 ESD 电容，pad 侧单项收益可能超过其余各项之和。如果容易级手段叠加后仍不够，再考虑四分之一速率时钟或 CML 末级这类中等级手段。
+
+### 验证清单
+
+无论用了哪一级的手段，都要覆盖下面这些验证【推断，基于标准实践和上列来源】：
+
+| 类别 | 内容 |
+|---|---|
+| 角与统计 | SS/FF/SF/FS；低压/高温和低压/低温；考虑老化的模型；Monte Carlo（失配、占空比、正交相位、失调） |
+| 寄生提取 | 含耦合电容的 PEX；关键节点的电容分解；PEX 规则是否随工艺改动更新 |
+| 测试结构与环振 | FO4 环振、CML 环振、Kelvin 接触电阻、Ceff 结构、通孔链；与 PDK 模型比对 |
+| 眼图、BER 与抖动 | 硅片眼图；BER bathtub 曲线；抖动分解（RJ、DJ、DCD）；电源噪声注入下的抖动；shmoo（速率对电压和温度） |
+| S 参数 | pad + ESD + 凸点 + 封装走线 + 通道的 S11/S21/S22；串扰 |
+| 可靠性 | 新电压和新电流下的 TDDB、HCI、BTI、EM；自热；ESD（CDM、人体放电模型、TLP） |
+| 漏电与功耗 | FF/高温下的漏电；pJ/bit；待机功耗 |
+| 良率 | 参数良率；工艺改动对 SRAM 和逻辑良率的影响；快侧调中心后的漏电分布 |
+| 热 | 热分布图；局部温度对迁移率和 EM 的影响 |
+
+## Q6. fT、fmax 和 CV/I 各管什么？
+
+**fT 是电流增益等于 1 的频率，约等于 gm/(2π·Cgg)，衡量宽带放大能力；fmax 是功率增益等于 1 的频率，额外取决于栅电阻 Rg 和 Cgd，衡量调谐射频电路的能力；CV/I 是大信号门延迟，衡量数字电路；三者可以朝不同方向变化，所以一个工艺可能环振很快、fmax 却不升反降。**
+
+要点：
+- 【常识】fT 与偏置有关：在最大电流密度、最小 L 时最高；超过速度饱和后，加偏置不再提高 gm（[MIT 6.776 第 6 讲](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/a2408eb19a4ded6f2b8d552688600654_lec6.pdf)）。
+- 【常识】串联栅电阻进入 fmax 的推导而不进入 fT；版图上把栅电阻做小，fmax 可以"远高于"fT（同上）。
+- 【常识】输出电容不影响 fmax，因为它可以被电感谐振掉，所以调谐射频电路看 fmax 而不太在乎漏端电容（同上）。
+- 【仿真】数字延迟看 CV/I，FinFET 的 fin 顶部和底部边缘电容会吃掉一部分驱动优势（[Fuller et al.](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)）。
+
+### 哪种电路看哪个指标
+
+| 电路 | 主要指标 | 原因 |
+|---|---|---|
+| CMOS 逻辑、时钟 buffer、串行器 | CV/I | 大信号充放电 |
+| CML、宽带放大器、CTLE | fT，加上节点寄生电容 | 宽带，电容无法被谐振掉 |
+| LNA、PA、VCO 等调谐射频电路 | fmax | 输出电容被电感谐振掉，Rg 决定功率增益 |
+| 低噪声放大器的噪声系数 | fmax 相关的 Rg，加上沟道热噪声 | Rg 本身也贡献热噪声【常识】 |
+
+### 为什么工艺能改善一个而不改善另一个
+
+【推断】四类工艺旋钮对这三个指标的作用不同：
+
+| 旋钮 | CV/I | fT | fmax |
+|---|---|---|---|
+| 降低栅–接触电容、边缘电容（spacer k、fin 高度、外延形貌） | 改善 | 改善 | 改善 |
+| 降低栅金属或栅接触电阻（多 finger、双边栅接触、低电阻率 WFM 填充） | 几乎不变 | 几乎不变 | 改善，噪声系数也改善 |
+| 降低 M0–M2 电阻 | 改善 | 在器件参考面测量时不变 | 不变 |
+| 降低外电阻 Rext | 改善 | 改善（gm 上升） | 改善 |
+
+这就是为什么一个节点的环振增益可能很好，fmax 却持平甚至变差，反过来也一样。对射频和高速模拟，栅电阻是一个常被逻辑工艺忽视的参数。
+
+### 本征 fT 会高估真实速度
+
+用 CV/I 准静态模型算出的本征 fT 可能比真实值高约 4 倍：L = 20 nm 的仿真器件，准静态 fT 为 10.6 THz，按真实本征延迟只有 2.7 THz；加上寄生之后准静态模型重新成立，但速度更低（[arXiv 1611.03856](https://arxiv.org/pdf/1611.03856)）【仿真】。实际评估时，要用带寄生和去嵌入的测量或 PEX 后的仿真，不要只看器件参考面的本征值。
+
+## Q7. 数据率对器件提出什么要求？
+
+**数据率先换算成三个数：UI = 1/数据率，NRZ 的 Nyquist 频率 = 数据率/2，PAM4 的 Nyquist 再减半；NRZ 时模拟前端的带宽目标约为数据率的 0.5–0.7 倍（PAM4 按符号率算，约减半），CMOS 串行器和时钟要满足每个 UI 的 FO4 预算，时钟抖动要是 UI 的一小部分；均衡存在的原因是通道在 Nyquist 处的损耗会把眼图关上。**
+
+要点：
+- 【厂商】PAM4 每个符号传 2 bit，同数据率下 Nyquist 是 NRZ 的一半，理想 SNR 代价约 9.5 dB（眼高变为 1/3），计入非线性约 11 dB（[Intel AN 835](https://www.intel.com/content/www/us/en/docs/programmable/683852/current/nrz-fundamentals.html)）。
+- 【厂商】同一背板通道在较低频率处插损约 33 dB，在两倍频率处约 62 dB（同上），这就是 PAM4 和均衡的动机。
+- 【仿真】Razavi 在设计例子里取发送和接收带宽约为数据率的 70%，并要求 S22/S11 在 Nyquist 以下 < −10 dB（[Razavi, SSC Magazine 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)）。
+- 【常识】FO4/UI 预算：全速率约 8，半速率约 4，四分之一速率约 2（[Palermo 讲义 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)）。
+
+### 把数据率换算成电路指标
+
+【常识】设数据率为 R：
+
+| 量 | NRZ | PAM4 |
+|---|---|---|
+| 符号率 | R | R/2 |
+| UI（符号周期） | 1/R | 2/R |
+| Nyquist 频率 | R/2 | R/4 |
+| 前端带宽目标（约 0.5–0.7 倍符号率） | 约 0.5–0.7·R | 约 0.25–0.35·R |
+| 眼高 | 全幅 | 约 1/3 |
+| 四分之一速率时钟频率 | R/4 | R/8 |
+
+### FO4 预算：CMOS 能跑多快
+
+Palermo 的讲义给出了 CMOS 串行器和时钟的极限：时钟 buffer 的最短周期约为 8 FO4；全速率架构每个 UI 需要约 8 FO4，半速率约 4 FO4，四分之一速率约 2 FO4；高扇入的 mux 因为节点电容大反而更慢；半速率和四分之一速率对占空比和正交相位误差很敏感；最快的 buffer 可以退回到 CML，必要时加电感峰化（[Palermo 讲义 12](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)）【常识】。讲义中的例子是 90 nm 工艺 FO4 约 30 ps，全速率架构的 UI 下限约为 240 ps。
+
+【推断】用法很简单：用 PDK 在目标电压和慢角下的 FO4，乘以架构对应的 FO4/UI，就得到最小 UI，倒数就是 CMOS 部分能支持的最高数据率。如果不够，要么换更快的架构（更低的速率比、CML 末级），要么让 FO4 变小（Q5 的容易级和中等级手段）。研究发现，按 FO4 归一的延迟在不同工艺间相当稳定，但电压、温度和角会让它变化约 20%（静态电路）（[Harris & Horowitz](https://pages.hmc.edu/harris/research/FO4.pdf)）【硅片·研究】，所以必须按目标角来算。
+
+### fT 要多高，以及为什么需要均衡
+
+【推断】实践中常说器件 fT 应为所需级带宽的 5–10 倍，这是经验说法，本次没有找到正式来源。现代 FinFET 的 fT 已达数百 GHz，所以在多数高速接口中，限制带宽的通常是节点寄生电容（ESD、pad、连线）和电感面积，而不是器件本征 fT。
+
+均衡的作用是补偿通道的频率相关损耗。发送端 FFE 或去加重削弱低频分量；接收端 CTLE 提升高频分量；DFE 用已判决的比特减去后标码间干扰。三者的共同代价是：CTLE 同时放大噪声和串扰，FFE 降低信号峰值，DFE 有误码传播和时序收敛的难题【常识】。
+
+## Q8. pad、ESD、凸点电容为什么重要？3D 封装改变了什么？
+
+**在高速 pad 上，ESD、pad 和驱动器的电容加在一起常常超过 400 fF，端接电阻又被协议固定，所以这个节点的 RC 极点常常就是整条链路的带宽上限；T-coil 能抵消一部分电容，而 2.5D/3D 封装通过降低 ESD 要求、缩小凸点间距、缩短通道，从根本上拿掉电容。**
+
+要点：
+- 【仿真】Razavi 的例子：ESD 300 fF + pad 70 fF + 驱动器 100 fF = 470 fF，发送端带宽约 13.5 GHz；加 330 pH 的 T-coil 后，S22 < −10 dB 延伸到约 30 GHz；接收端 350 fF 加 290 pH 后 S11 < −10 dB 到 28 GHz（[Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)）。
+- 【观点】FinFET SerDes 的 ESD 协同设计：产品 CDM 规格 250 V、设计目标 6 A；先进工艺击穿电压 ≤ 约 4 V；在 6 A 目标下，即使 10 Ω 的串联电阻也会限制传输速度；额外的二级二极管增加电容，所以改用寄生的漏–阱二极管（[In Compliance Magazine 2023](https://digital.incompliancemag.com/issue/november-2023/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)）。
+- 【厂商】UCIe 的参数随封装变化：标准封装凸点间距 100–130 µm、CDM 30 V、约 0.5 pJ/bit；先进封装 25–55 µm、CDM 5 V 并趋向 < 3 V、约 0.25 pJ/bit；3D 封装 < 10 µm、晶圆对晶圆混合键合"可以不加 ESD"、< 0.05 pJ/bit（9 µm 间距）（[Das Sharma, SNIA SDC 2024](https://snia.org/sites/default/files/2025-05/SNIA-SDC2024-DasSharma-Updates-on-UCIe-Technology.pdf)）。
+- 【厂商】UCIe 教程的 pad 电容预算：先进封装发送/接收 250/200 fF；标准封装用 T-coil 后有效电容可降到 125 fF（[Hot Chips 2023](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)）。
+
+### 为什么驱动器再强也救不了 pad
+
+【常识】带端接的 pad 是一个 RC 低通：R 是端接电阻（两端 50 Ω 并联约 25 Ω），C 是 ESD、pad、凸点、驱动器输出和接收器输入电容之和。驱动器的电流只决定信号幅度，不决定这个极点。所以对这个节点，提速只有三条路：降 C、用 T-coil 或电感峰化抵消 C、或者换封装让 C 本身变小。
+
+ESD 电容和鲁棒性之间是直接的取舍。ESD 器件要在 CDM 事件中泄放几安培的电流，器件越大越鲁棒，电容也越大。先进工艺中栅氧和结的击穿电压都很低（约 4 V），留给 ESD 器件的电压窗口很窄（[In Compliance Magazine](https://digital.incompliancemag.com/issue/november-2023/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)）【观点】。
+
+### 2.5D/3D 封装如何改变问题
+
+ESD 协会的路线图把 die-to-die 接口的 CDM 目标定在 30 V 以下并继续降低。理由是这类引脚只在晶圆级到封装组装之间暴露，组装过程的充电可控；推动因素是凸点间距和面积的缩小，而不是栅氧（[ESDA 论坛](https://forum.esda.org/t/cdm-die-to-die-voltage-trend-below-30-v-in-esd-technology-roadmap-section-4-3/878)）【观点】。
+
+【推断】这带来两个后果：
+- 在 < 10 µm 的混合键合间距下，I/O 几乎变成"片上导线"，电容极小，可以用简单的反相器和触发器做收发器。UCIe-3D 因此选择更低的单通道速率和极高的并行度，用通道数换带宽，能效提升一个数量级以上（[Palermo 讲义 15](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)）。
+- 片上 ESD 被拿掉以后，组装过程（键合设备、晶圆搬运）的静电控制就变成工厂侧的责任。
+
+### 顺带：为什么模拟和 I/O 面积不随节点缩小
+
+I/O 器件和无源器件"不随节点缩小"，数字晶体管却按平方缩小（[Design & Reuse](https://www.design-reuse.com/blog/51338-mimicking-digital-scaling-trends-for-analog-ip-kind-of/)）【观点】。原因包括：
+- 电感、电容、电阻的面积由电学值决定，例如每个 pad 的 T-coil 约 250–330 pH（[Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)）。
+- I/O 器件工作在 1.2 V、1.5 V 等较高电压，需要更长的栅和更厚的介质，在 GAA 时代带来可靠性和性能问题（[Synopsys](https://www.synopsys.com/articles/serdes-design-trends-angstrom-era.html)）【厂商】。
+- ESD 和凸点间距由封装决定。
+- 匹配要求决定了器件面积（见 Q10）。
+
+所以 chiplet 常把计算放在先进节点，把 I/O 放在更成熟、更便宜的节点；这还能把 SerDes 测试芯片从关键路径上拿掉（[Cadence 博客](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/chiplets2)）【观点】。【推断】这条规律主要适用于 I/O die 和以模拟为主、DSP 很少的接口；需要大量 DSP 的长距离 SerDes 往往反而放在先进节点上。
+
+## Q9. jitter 和噪声是什么关系？
+
+**jitter 是时钟或数据边沿的时间误差；随机 jitter 等于相位噪声谱的积分换算成时间；VCO 的热噪声决定远端平台，器件的 flicker noise 会上变频成近端相位噪声，而 PLL 环路只能压住环路带宽以内的 VCO 噪声，所以器件 1/f 噪声、电源噪声和无源器件 Q 值，最终都表现为眼宽的损失。**
+
+要点：
+- 【常识】相位到时间的换算：Δt = θ/(2π·f)。例如 −45 dB 相位误差在 30 GHz 下约为 30 fs（[Razavi, TCAS-I 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf)）。
+- 【常识】VCO 的随机抖动是相位噪声谱下的面积；对于高度为 S₁、延伸到 f₂ 的平台，σ_j² = 4·S₁·f₂·(T_CK/2π)²（同上）。
+- 【常识】把振荡器摆幅推到 VDD 能改善相位噪声，但会加强 flicker 上变频；上变频后的噪声会延伸到离载波较远的频偏，PLL 只能压住环路带宽以内的部分，而环路带宽常远低于 1 MHz，超出的部分压不住（同上）。
+- 【常识】时钟抖动要做到约 1% 符号周期的量级；低于约 10 fs 后，计入参考源和电荷泵噪声，功耗代价会很高（同上）。
+- 【仿真】带宽不足的通道产生确定性抖动（ISI）：Razavi 的例子中，未补偿的 pad/ESD 电容带来约 9.4 ps 峰峰抖动（[Razavi 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)）。
+
+### 随机抖动怎么换算成眼宽损失
+
+【常识】随机抖动近似为高斯分布。在目标 BER 下，峰峰值约为 2·Q·σ。BER = 10⁻¹² 时 Q ≈ 7.03，所以峰峰值约为 14σ。
+
+【示意】如果时钟随机抖动 σ = 0.5% UI，在 BER = 10⁻¹² 下峰峰值约为 7% UI。这还没有算确定性抖动（ISI、占空比失真、串扰）和电源引起的抖动。所以零点几个百分点 UI 的 rms 抖动，已经会占掉眼宽预算中可观的一块。
+
+### 噪声从哪里进入抖动
+
+| 来源 | 机制 | 工艺或设计上的旋钮 |
+|---|---|---|
+| 器件 flicker noise | 上变频成近端相位噪声；环形振荡器尤其敏感 | 栅叠层陷阱密度、器件面积、尾电流滤波（见 Q4） |
+| 器件热噪声 | 决定相位噪声的远端平台 | 功耗、gm |
+| VCO 变容管和电感的 Q 值 | Q 越低相位噪声越高 | BEOL 金属厚度、衬底损耗 |
+| 电源噪声 | 环形振荡器和 buffer 的延迟随 VDD 变化 | 电源网络、decap、LDO；背面供电 |
+| 通道带宽不足 | 码间干扰产生确定性抖动 | pad 电容、T-coil、均衡 |
+
+【推断】对工艺工程师来说，这张表说明 1/f 噪声不只是精密模拟的问题。使用环形振荡器的时钟电路，其近端相位噪声直接受器件 1/f 拐角影响；电源到抖动的转换系数本次没有找到公开数字，需要在具体设计中仿真。
+
+## Q10. 模拟为什么慎用最低 VT 和最短 L？
+
+**最低 VT、最短 L 的器件 fT 最高、电流密度最大，但本征增益 gm·ro 最低、漏电最大（DIBL）、随机失配最大（σVT ∝ 1/√(W·L)），按同样的面积规律 1/f 噪声也最大；所以精密模拟（偏置、电流镜、运放、比较器失调、基准）用更长的 L 和更大的面积，而速度关键的通路（CML、驱动器、采样器）仍用它们换速度，再用校准和均衡补回增益和匹配。**
+
+要点：
+- 【常识】Pelgrom 定律：σ²(ΔVT) = A_VT²/(W·L)；固定 L 时把 W 增大到 4 倍，σΔVT 减半；N 个器件并联，σ 降为 1/√N（[Sheikholeslami, IEEE SSC Magazine 2015](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)）。
+- 【观点】"W/L 按带宽和功耗选，栅面积按精度选"；如果没有变异，就可以"直接选最小 L"（同上）。
+- 【常识】fT 在最小 L、最大电流密度时最高（[MIT 6.776](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/a2408eb19a4ded6f2b8d552688600654_lec6.pdf)）。
+- 【观点】本征增益 gm·ro 从 65 nm 到 40 nm 再到 28 nm 持续下降，漏电因 DIBL 上升；阱邻近效应能造成"几十 mV"的 VT 偏移（[Fahim, ISLPED 2014 教程](https://www.islped.org/2014/files/ISLPED2014_Challenges%20in%20low-power%20analog%20circuit%20design%20for%20sub-28nm%20CMOS%20technologies%20-%20BY%20Amr%20Fahim%20--%20Semtech%20Corporation.pdf)）。
+
+### 精密模拟为什么避开它们
+
+| 问题 | 机制 | 后果 |
+|---|---|---|
+| 本征增益低 | 短沟道中 DIBL 和沟道长度调制使 gds 变大 | 运放开环增益不够，需要 cascode 或多级 |
+| 失配大 | σVT ∝ 1/√(W·L) | 电流镜误差：5 mV 的 ΔVT 在例子中约对应 5% 的电流误差（[Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)） |
+| 漏电大 | 低 VT 加上 DIBL | 采样保持电容泄漏，偏置漂移 |
+| 1/f 噪声大 | 输入参考噪声 ∝ 1/(Cox²·W·L)（见 Q3） | 低频噪声和近端相位噪声 |
+| 版图效应敏感 | 阱邻近、扩散长度、应力 | 系统性失调 |
+
+### 高速电路为什么仍然用它们
+
+CML、驱动器、采样器的首要指标是带宽和再生速度，需要最高的 fT 和最小的电容。它们对增益和匹配的需求相对低，而且可以用别的方式补：
+- 增益不够用多级或均衡补。
+- 失调和失配用片上校准补，例如采样器失调校准、占空比和正交相位校准。
+- 低 VT 在低 VDD 下给堆叠的 CML 和 cascode 留出电压余量，这是它在模拟中的一个正面作用。
+
+【推断】所以 VT 和 L 的选择是按模块做的，不是按芯片做的。同一个 PHY 里，采样器和驱动器可能用最短 L 的 LVT，偏置电路和电流镜用长 L 的 SVT 或 HVT。
+
+### 一个选型的速查
+
+【推断】
+
+| 模块 | L | VT | 面积 | 理由 |
+|---|---|---|---|---|
+| 串行器、时钟 buffer、驱动器 | 最短 | LVT/ULVT | 最小 | 速度优先，靠校准补失配 |
+| CML、CTLE 输入对 | 短 | LVT | 中等 | 带宽优先，兼顾失调 |
+| 采样器 | 短 | LVT | 中等 | 再生速度优先，靠失调校准 |
+| 偏置、电流镜、基准 | 长或叠管 | SVT/HVT | 大 | 匹配、增益、低漏电 |
+| VCO、低噪声输入对 | 中到长 | 按 Q2 方法核对 | 大 | 1/f 噪声和相位噪声 |
+
+## Sources
+
+- [arXiv 2512.08388：CNF+CMF 低频噪声模型](https://arxiv.org/pdf/2512.08388)
+- [Lundberg, Noise Sources in Bulk CMOS (MIT)](https://web.mit.edu/klund/www/papers/UNP_noise.pdf)
+- [Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006](https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf)
+- [Wikipedia: Multi-threshold CMOS](https://en.wikipedia.org/wiki/Multi-threshold_CMOS)
+- [Vidana et al., GF 12LP FinFET TID study (OSTI 2311246)](https://www.osti.gov/servlets/purl/2311246)
+- [Khandelwal et al., Analytical modeling of flicker noise in halo-implanted MOSFETs, IEEE JEDS](https://research.iitj.ac.in/publication/analytical-modeling-of-flicker-noise-in-halo-implanted-mosfets)
+- [Simoen et al., ECS 228th Meeting 2015：high-k/Al₂O₃ cap I/O pFET 低频噪声](https://ecs.confex.com/ecs/228/webprogram/Paper57273.html)
+- [Simoen et al., ECS 224th Meeting 2013：RMG pFET 低频噪声与氟处理](https://ecs.confex.com/ecs/224/webprogram/Abstract/Paper19227/E12-2246.pdf)
+- [Claeys et al., Low-frequency noise assessment of work function engineering cap layers (imec record)](https://imec-publications.be/entities/publication/4d61541c-c632-44af-965a-d73964502585/full)
+- [Asenov et al., IEDM 2000：RTS amplitude and random dopants](https://eprints.gla.ac.uk/3019)
+- [PatSnap: Metal gate granularity and VT at 5nm](https://www.patsnap.com/resources/blog/articles/metal-gate-granularity-and-threshold-voltage-at-5nm/)
+- [Chen, Stanford PhD thesis 2010：low-frequency noise in high-k MOSFETs](https://stacks.stanford.edu/file/druid:pf645xz5659/cy_thesis-augmented.pdf)
+- [ITRS 2005 Wireless chapter](https://www.semiconductors.org/wp-content/uploads/2018/08/2005Wireless.pdf)
+- [ITRS 2009 Wireless chapter](https://www.semiconductors.org/wp-content/uploads/2018/09/Wireless.pdf)
+- [ITRS 2013 RF and AMS chapter](https://www.semiconductors.org/wp-content/uploads/2018/08/2013RFAMS.pdf)
+- [Chew, Yeo & Chu, Impact of technology scaling on the 1/f noise, IEE Proc. CDS 2004](https://repository.sutd.edu.sg/esploro/outputs/journalArticle/Impact-of-technology-scaling-on-the/9911713309846)
+- [Srinivasan et al., J. Electrochem. Soc. 2006：HfO₂ vs SiON 1/f noise](https://digitalcommons.njit.edu/fac_pubs/19253)
+- [Srinivasan et al., Microelectron. Eng. 2007：high-k phonons and IL thickness (IBM)](https://www.research.ibm.com/publications/impact-of-high-k-and-siolessinfgreater2lessinfgreater-interfacial-layer-thickness-on-low-frequency-1f-noise-in-aggressively-scaled-metal-gatehfolessinfgreater2lessinfgreater-n-mosfets-role-of-high-k-phonons)
+- [Rittersma et al., ESSDERC 2005：HfSiON/TaN 1/f noise](https://digitalcommons.njit.edu/fac_pubs/19446)
+- [Claeys et al., ECS Trans. 2006：low-noise HKMG gate stack engineering](https://digitalcommons.njit.edu/fac_pubs/19233)
+- [Singh et al. (GF), 14 nm FinFET Technology for Analog and RF Applications, IEEE TED 2018](https://www.academia.edu/124901933/14_nm_FinFET_Technology_for_Analog_and_RF_Applications)
+- [Ohguro et al. (Toshiba), IEICE Trans. Electron. 2015：FinFET 1/f noise](https://global.ieice.org/en_transactions/electronics/10.1587/transele.E98.C.455/_pdf)
+- [VLSI Symposium 2023 tip sheet](https://archive.vlsisymposium.org/23web/files/press_kit/VLSI2023_TipSheet_Kr.pdf)
+- [Asanovski et al. (imec), arXiv 2609.08674：nanosheet vs planar 1/f noise](https://arxiv.org/html/2609.08674)
+- [Asanovski et al., Solid-State Electronics 2024：forksheet 1/f noise at 300 K and 4 K](https://air.uniud.it/retrieve/9b187428-ab70-46d9-ae59-c8f49613a887/1-s2.0-S0038110124000303-main.pdf)
+- [Simoen et al., JICS 2022：GAA double-nanosheet LFN](https://jics.org.br/ojs/index.php/JICS/article/download/617/399/2770)
+- [VLSI 2009 paper 3B-3：RTN in 20 nm-class devices](https://archive.vlsisymposium.org/09web/technology/tec_abstract/3B-3.htm)
+- [Chasin et al. (imec/TU Wien) 2017：time-dependent variability in GAA nanowires vs FinFETs](https://www.iue.tuwien.ac.at/pdf/ib_2017/CP2017_Rzepa_02.pdf)
+- [Shin et al., Sci. Rep. 2022：high-pressure D₂/H₂ annealing and LFN](https://www.nature.com/articles/s41598-022-22575-5)
+- [Franco et al., EDTM 2019：dipoles and low-thermal-budget gate stacks (BTI)](https://www.iue.tuwien.ac.at/pdf/ib_2019/CP2019_Franco_1.pdf)
+- [Prest et al., ECS 2004：SiGe buried-channel pMOS 1/f noise](https://www.electrochem.org/dl/ma/206/pdfs/1319.pdf)
+- [Tsuchiya et al., ECS 2003：SiGe channel pMOS LFN](https://www.electrochem.org/dl/ma/203/pdfs/0966.pdf)
+- [Han et al., JJAP 2011：high-performance analog devices in HKMG (IBM)](https://www.research.ibm.com/publications/novel-high-performance-analog-devices-for-advanced-low-power-high-k-metal-gate-complementary-metal-oxide-semiconductor-technology)
+- [Enz & Temes, Circuit techniques for reducing the effects of op-amp imperfections, Proc. IEEE 1996](https://infoscience.epfl.ch/record/149579)
+- [Kiene et al., arXiv 2405.17685：cryogenic LFN in 40 nm bulk](https://arxiv.org/pdf/2405.17685)
+- [Catapano et al., arXiv 2505.04030：cryogenic single-defect statistics](https://arxiv.org/abs/2505.04030v2)
+- [Balandin group, arXiv 1503.01823：MoS₂ 1/f noise](https://arxiv.org/abs/1503.01823)
+- [Fuller et al., FinFET performance advantage at 22nm: An AC perspective, VLSI 2008](https://www.researchgate.net/profile/N_Fuller/publication/4357592_FinFET_performance_advantage_at_22nm_An_AC_perspective/links/5540eb3d0cf2718618dc7332.pdf)
+- [MIT 6.776 Lecture 6：fT and fmax](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/a2408eb19a4ded6f2b8d552688600654_lec6.pdf)
+- [arXiv 1611.03856：intrinsic fT vs CV/I in nanoscale FETs](https://arxiv.org/pdf/1611.03856)
+- [WikiChip Fuse: IEDM 2017 Intel 22FFL (RF devices)](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/4/)
+- [WikiChip Fuse: IEDM 2017 Intel 22FFL (analog devices)](https://fuse.wikichip.org/news/567/iedm-2017-intel-details-22ffl-a-relaxed-14nm-process-for-foundry-customers-targets-mobile-and-rf-apps/3)
+- [SST/Semiconductor Digest：air spacer for 10 nm FinFET](https://sst.semiconductor-digest.com/?p=72130)
+- [IBM Research：Air spacer for 10nm FinFET CMOS and beyond](https://researcher.ibm.com/publications/air-spacer-for-10nm-finfet-cmos-and-beyond)
+- [Intel 18A technology brief (2026)](https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2026-06/foundry-18a-technology-brief.pdf)
+- [IEEE Spectrum：Intel 3 FinFET process](https://spectrum.ieee.org/intel-foundry-finfet)
+- [imec via EE Journal：Ru semi-damascene line resistance](https://eejournal.com/industry_news/imec-shows-path-to-line-resistance-halving-using-semi-damascene-with-high-aspect-ratio-processing)
+- [Harris & Horowitz：FO4 delay as a process-independent metric](https://pages.hmc.edu/harris/research/FO4.pdf)
+- [Palermo, TAMU ECEN689 Lecture 12：TX mux circuits](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee689_tx_mux_circuits.pdf)
+- [Palermo, TAMU ECEN720 Lecture 15：die-to-die transceivers](https://people.engr.tamu.edu/spalermo/ecen689/lecture15_ee720_d2d_xcvrs.pdf)
+- [Galal & Razavi, Broadband ESD protection circuits in CMOS technology, JSSC 2003](https://www.seas.ucla.edu/brweb/papers/Journals/G&RDec03_1.pdf)
+- [Razavi, The Analog Mind, IEEE SSC Magazine Spring 2021](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2021.pdf)
+- [Razavi, IEEE TCAS-I 2021：clocking and jitter for wireline transceivers](https://www.seas.ucla.edu/brweb/papers/Journals/BR_TCAS_2021.pdf)
+- [Hot Chips 2023 UCIe tutorial：Electrical Form Factor & Compliance](https://www.hc2023.hotchips.org/assets/program/tutorials/ucie/Electrical%20Form%20Factor%20and%20Compliance.pdf)
+- [Das Sharma, Updates on UCIe Technology, SNIA SDC 2024](https://snia.org/sites/default/files/2025-05/SNIA-SDC2024-DasSharma-Updates-on-UCIe-Technology.pdf)
+- [ESDA forum：CDM die-to-die voltage trend](https://forum.esda.org/t/cdm-die-to-die-voltage-trend-below-30-v-in-esd-technology-roadmap-section-4-3/878)
+- [In Compliance Magazine 2023：ESD co-design for high-speed SerDes in FinFET](https://digital.incompliancemag.com/issue/november-2023/esd-co-design-for-high-speed-serdes-in-finfet-technologies/)
+- [Intel AN 835：PAM4 Signaling Fundamentals](https://www.intel.com/content/www/us/en/docs/programmable/683852/current/nrz-fundamentals.html)
+- [Sheikholeslami, Process Variation, IEEE SSC Magazine Winter 2015](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)
+- [Fahim (Semtech), ISLPED 2014 tutorial：analog design in sub-28nm CMOS](https://www.islped.org/2014/files/ISLPED2014_Challenges%20in%20low-power%20analog%20circuit%20design%20for%20sub-28nm%20CMOS%20technologies%20-%20BY%20Amr%20Fahim%20--%20Semtech%20Corporation.pdf)
+- [Design & Reuse：Mimicking digital scaling trends for analog IP](https://www.design-reuse.com/blog/51338-mimicking-digital-scaling-trends-for-analog-ip-kind-of/)
+- [Cadence Breakfast Bytes：Chiplets](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/chiplets2)
+- [Synopsys：SerDes Design Trends in the Angstrom Era](https://www.synopsys.com/articles/serdes-design-trends-angstrom-era.html)
 
 
 ---

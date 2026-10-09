@@ -154,6 +154,20 @@ window.HOME_CATALOG = [
     "private": false
   },
   {
+    "url": "/research/analog-devices/qa/",
+    "category": "research",
+    "title": {
+      "zh": "问答：速度、VT 与 flicker noise",
+      "en": "Q&A: Speed, VT and Flicker Noise"
+    },
+    "description": {
+      "zh": "模拟在追求什么、I/C、低 VT 与噪声、提速方法。",
+      "en": "Analog goals, I/C, low VT and noise, speed fixes."
+    },
+    "updated": "2026-10-09",
+    "private": false
+  },
+  {
     "url": "/research/analog-devices/tricks/",
     "category": "research",
     "title": {
