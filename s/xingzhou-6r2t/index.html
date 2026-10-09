@@ -38,7 +38,7 @@ p,h1,h2{margin:0;font-weight:400}
 .fx{pointer-events:none;z-index:4}
 .scroller{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;z-index:6;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .scroller::-webkit-scrollbar{display:none}
-.tall{height:820%}
+.tall{height:1240%}
 
 /* the seal: carved, a little worn */
 .seal{display:inline-block;writing-mode:vertical-rl;font-family:var(--song);font-weight:700;font-size:14px;line-height:1.1;letter-spacing:.06em;
@@ -67,7 +67,8 @@ p,h1,h2{margin:0;font-weight:400}
 .inter{position:absolute;left:0;right:0;top:33%;z-index:7;text-align:center;pointer-events:none;
   font-family:var(--brush);font-size:clamp(24px,6.4vw,38px);letter-spacing:.5em;text-indent:.5em;color:var(--ink)}
 
-.hint{position:absolute;left:0;right:0;bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:7;text-align:center;
+.hint.gone{opacity:0}
+.hint{transition:opacity .9s ease;position:absolute;left:0;right:0;bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:7;text-align:center;
   font-size:12px;letter-spacing:.42em;text-indent:.42em;line-height:2;pointer-events:none;color:var(--mute)}
 .snav{position:absolute;left:8px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9;display:flex}
 .snav button{border:0;background:transparent;width:38px;height:42px;padding:0;font-family:var(--brush);font-size:22px;color:var(--ink);opacity:.4;position:relative;transition:opacity .5s}
@@ -125,7 +126,7 @@ const SEASONS=[
   {zh:'春',sub:'生长',poem:['随风潜入夜','润物细无声'],by:'杜甫《春夜喜雨》'},
   {zh:'夏',sub:'盛放',poem:['接天莲叶无穷碧','映日荷花别样红'],by:'杨万里《晓出净慈寺送林子方》'},
   {zh:'秋',sub:'收获',poem:['停车坐爱枫林晚','霜叶红于二月花'],by:'杜牧《山行》'}];
-const INTER=[[.5,'雪化成雨'],[1.5,'一阵太阳雨'],[2.5,'起风了']];
+const INTER=[[.5,'雪化成雨'],[1.5,'一阵太阳雨'],[2.5,'起风了'],[3.225,'又是一年',.095]];
 const chars=(s,i0=0)=>[...s].map((c,i)=>`<span style="--i:${i0+i}">${c}</span>`).join('');
 
 /* ================= the landscape: wet ink on paper (fragment shader) ================= */
@@ -149,14 +150,15 @@ float ridge(float x,float sd){
 float dabs(vec2 p){vec2 i=floor(p),f=fract(p);float h=hash(i+.5);vec2 c=vec2(hash(i+3.1),hash(i+7.7))*.5+.25;float r=.2+.22*hash(i+1.7);
   return step(.42,h)*smoothstep(r,r*.25,length((f-c)*vec2(.62,1.2)));}
 vec3 pal(vec3 a,vec3 b,vec3 c,vec3 d,float s){
-  if(s<1.)return mix(a,b,smoothstep(0.,1.,s));if(s<2.)return mix(b,c,smoothstep(0.,1.,s-1.));return mix(c,d,smoothstep(0.,1.,s-2.));}
+  if(s<1.)return mix(a,b,smoothstep(0.,1.,s));if(s<2.)return mix(b,c,smoothstep(0.,1.,s-1.));if(s<3.)return mix(c,d,smoothstep(0.,1.,s-2.));return mix(d,a,smoothstep(0.,.6,s-3.));}
 float palf(float a,float b,float c,float d,float s){return pal(vec3(a),vec3(b),vec3(c),vec3(d),s).x;}
 void main(){
   vec2 uv=gl_FragCoord.xy/uRes;float asp=uRes.x/uRes.y;
   float wx=(uv.x-.5)*uZoom;
   float bl=fbm(vec2(wx*1.2+uCam*.2,uv.y*1.6)+4.);
   float sraw=uS+uSpread*wx+.42*(bl-.5);
-  float sp=clamp(sraw,0.,3.);
+  float hi=3.+1.5*clamp((uS-3.)/.6,0.,1.);
+  float sp=mod(clamp(sraw,0.,hi),4.);
   vec3 paper=${P4('#e9e7e1','#ece8dc','#eae8dc','#eee5d5')};
   vec3 skyT=${P4('#c3c7ca','#d3dacd','#c6d4cf','#e0cfb4')};
   vec3 farC=${P4('#9aa0a6','#9cab9d','#7f9c98','#b09882')};
@@ -164,7 +166,7 @@ void main(){
   vec3 deepC=${P4('#1b1e23','#1c2622','#132529','#2c1f1a')};
   vec3 watC=${P4('#d7dadb','#dfe5db','#d5e0da','#ecdfc9')};
   vec3 sunC=${P4('#f8f6ef','#eed3c6','#f4ead0','#b9482f')};
-  float sunA=palf(1.,.6,.7,.86,sp),inkK=palf(.72,.9,1.,.95,sp),moonK=1.-smoothstep(0.,.55,sp);
+  float sunA=palf(1.,.6,.7,.86,sp),inkK=palf(.72,.9,1.,.95,sp),moonK=1.-smoothstep(0.,.55,min(sp,4.-sp));
   float wl=uWl;bool water=uv.y<wl;float y=uv.y;
   if(water){float dy=wl-uv.y;float rip=.0035*sin(dy*230.+uT*1.3+wx*7.)*smoothstep(0.,.02,dy);y=wl+dy*1.7+rip*2.;wx+=rip*2.5;}
   vec3 mistC=mix(paper,vec3(1.),.3);
@@ -242,7 +244,7 @@ void main(){
   }
   col=mix(col,mistC,exp(-abs(uv.y-wl)*30.)*.5);
   // where the next season's wash meets the last, pigment gathers in a soft tide line
-  float fr=fract(sraw);float tide=exp(-pow((fr-.5)/.06,2.))*step(.02,sraw)*step(sraw,2.98);
+  float fr=fract(sraw);float tide=exp(-pow((fr-.5)/.06,2.))*step(.02,sraw)*step(sraw,hi-.02);
   col=mix(col,mix(nearC,paper,.55),tide*.12*(.4+.6*noise(vec2(wx*9.,uv.y*9.))));
   // passing rain
   col=mix(col,mix(vec3(.5,.53,.57),col,.55),uRain*.5);
@@ -701,7 +703,13 @@ if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermissio
 
 /* ================= the scroll ================= */
 const el=$('#scene');
-const PMIN=-.5,PMAX=3.1,TRAVEL=1.7;
+// The year is a circle. Phase runs 0 冬 · 1 春 · 2 夏 · 3 秋, and the title frame sits at -0.5 ≡ 3.5:
+// the turn of the year, where the picture empties, the first snow falls, and it all begins again.
+// The scroller is a window a little longer than one lap; when it passes the turn it is quietly moved back a lap.
+const PMIN=-1.3,PMAX=4.3,HOME=-.5,TRAVEL=1.7;
+const wrapC=p=>{let q=(p+.5)%4;if(q<0)q+=4;return q-.5};          // phase on the circle, [-0.5,3.5)
+const wrap2=d=>((d+2)%4+4)%4-2;                                     // signed distance on the circle, [-2,2)
+const linger=pc=>{const o=wrap2(pc+.5),w=.22;return Math.abs(o)<w?wrapC(-.5+Math.sign(o)*w*Math.pow(Math.abs(o)/w,1.6)):pc};
 el.innerHTML=`<canvas class="gl full"></canvas><canvas class="fx full"></canvas>
 <div class="scroller" tabindex="0" aria-label="向上滑动，顺流走过四季；轻点画面可落一滴墨"><div class="tall"></div></div>
 <div class="mark"><span class="seal">${NAME}</span><span class="bn">${NAME_EN}</span></div>
@@ -713,12 +721,16 @@ ${SEASONS.map(s=>{let n=2;return `<div class="poem ink"><p class="hd"><b>${chars
 <div class="hint">向上滑动　顺流而行<br>轻点画面　落一滴墨</div>`;
 const sc=$('.scroller',el),stage=new Stage($('.gl',el)),fx=new Weather($('.fx',el));
 const poems=$$('.poem',el),ttl=$('.ttl',el),inter=$('.inter',el),hint=$('.hint',el),nav=$$('.snav button',el),play=$('.play',el);
-let W=0,H=0,pS=PMIN,pPrev=PMIN,moveK=0,auto=null,lastW=-1,lastH=-1,Lfg=600,interK=-1,genToken=0,t0=-1;
+let W=0,H=0,Pt=HOME,pS=HOME,pPrev=HOME,lastPT=HOME,moveK=0,drive=null,lastW=-1,lastH=-1,Lfg=600,interK=-1,genToken=0,t0=-1;
 const maxScroll=()=>sc.scrollHeight-sc.clientHeight;
-const stopAuto=()=>{if(auto){auto=null;play.textContent='自动行舟'}};
-play.addEventListener('click',()=>{if(auto)return stopAuto();const m=maxScroll();if(sc.scrollTop>m-4)sc.scrollTop=0;auto={from:sc.scrollTop,t:0,dur:46*(1-sc.scrollTop/m)};play.textContent='暂停'});
-['wheel','touchstart','keydown'].forEach(ev=>sc.addEventListener(ev,stopAuto,{passive:true}));
-nav.forEach(b=>b.addEventListener('click',()=>{stopAuto();sc.scrollTo({top:maxScroll()*((+b.dataset.i)-PMIN)/(PMAX-PMIN),behavior:REDUCED?'auto':'smooth'})}));
+const posOf=p=>maxScroll()*(p-PMIN)/(PMAX-PMIN);
+const scrollP=()=>{const m=maxScroll();return m>0?lerp(PMIN,PMAX,sc.scrollTop/m):HOME};
+const syncScroll=()=>{const q=wrapC(Pt);sc.scrollTop=posOf(q);lastPT=q};
+const release=()=>{if(drive){drive=null;play.textContent='自动行舟';lastPT=scrollP()}hint.classList.add('gone')};
+play.addEventListener('click',()=>{if(drive&&drive.auto)return release();hint.classList.add('gone');drive={auto:true};play.textContent='暂停'});
+['wheel','touchstart','keydown'].forEach(ev=>sc.addEventListener(ev,release,{passive:true}));
+nav.forEach(b=>b.addEventListener('click',()=>{hint.classList.add('gone');play.textContent='自动行舟';let d=wrap2((+b.dataset.i)-wrapC(Pt));if(d<-1.99)d+=4;
+  drive={tween:true,from:Pt,to:Pt+d,t:0,dur:REDUCED?.01:1.3+.7*Math.abs(d)}}));
 // a tap lets a drop of ink fall
 const drops=new Float32Array(12),dropT=[-99,-99,-99];let dropN=0;
 function inkDrop(cx,cy,now){const k=dropN++%3;drops[k*4]=cx/W;drops[k*4+1]=1-cy/H;drops[k*4+3]=.2+Math.random()*.8;dropT[k]=now}
@@ -753,57 +765,62 @@ function drawBoat(t,wind,move){
   boat.tex=stage.texture(boat.cv,boat.tex);
 }
 function resize(){
-  W=el.clientWidth;H=el.clientHeight;stage.resize();fx.resize();Lfg=Math.max(W*1.45,520);
+  W=el.clientWidth;H=el.clientHeight;stage.resize();fx.resize();Lfg=Math.max(W*1.45,520);syncScroll();
   if(Math.abs(W-lastW)>4||Math.abs(H-lastH)>120){lastW=W;lastH=H;generate()}
 }
 function frame(dt,t,ms){
   if(t0<0)t0=t;const intro=window.__intro!=null?window.__intro:REDUCED||window.__noIntro?1:clamp((t-t0)/4.2);
-  const m=maxScroll();
-  if(auto){auto.t+=dt;const k=clamp(auto.t/auto.dur);sc.scrollTop=lerp(auto.from,m,k);if(k>=1)stopAuto()}
-  const pT=m>0?lerp(PMIN,PMAX,sc.scrollTop/m):PMIN;
-  pS+=(pT-pS)*(1-Math.exp(-dt*5));if(Math.abs(pT-pS)<.0004)pS=pT;
+  if(drive){
+    if(drive.tween){drive.t+=dt;const k=clamp(drive.t/drive.dur);Pt=lerp(drive.from,drive.to,k*k*(3-2*k));if(k>=1)drive=null}
+    else Pt+=dt*.075*(.5+.5*sm((Math.abs(wrap2(wrapC(Pt)+.5))-.04)/.34));        // the boat slows at the turn of the year
+    syncScroll();
+  }else{
+    const pT=scrollP();let d=pT-lastPT;if(d>2)d-=4;else if(d<-2)d+=4;Pt+=d;lastPT=pT;
+    if(pT>3.52){sc.scrollTop=posOf(pT-4);lastPT=pT-4}else if(pT<-.78){sc.scrollTop=posOf(pT+4);lastPT=pT+4}
+  }
+  pS+=(Pt-pS)*(1-Math.exp(-dt*5));if(Math.abs(Pt-pS)<.0004)pS=Pt;
   const vel=dt>0?Math.abs(pS-pPrev)/dt:0;pPrev=pS;moveK+=((window.__move!=null?window.__move:clamp(vel*3))-moveK)*(1-Math.exp(-dt*3));
-  const p=pS,land=W>=H,rain=Math.max(bumpL(p,.5,.3),.7*bumpL(p,1.5,.2)),gust=bumpL(p,2.55,.3)+.35*bumpL(p,3,.6);
+  const p=linger(wrapC(pS)),land=W>=H,ebb=1-sm((p-3.15)/.22);
+  const rain=Math.max(bumpL(p,.5,.3),.7*bumpL(p,1.5,.2)),gust=(bumpL(p,2.55,.3)+.35*bumpL(p,3,.6)+.8*bumpL(p,3.16,.16))*ebb;
   for(let k=0;k<3;k++){const age=window.__dropAge!=null&&dropT[k]>0?window.__dropAge:t-dropT[k];drops[k*4+2]=age;drops[k*4+3]=age<16?Math.max(drops[k*4+3],.01):0}
   const wl=land?.2:.2;
   const bReveal=sm((intro-.45)/.5),wind=clamp(.8+.95*moveK+1.1*gust+.16*Math.sin(t*.37),.5,2.5);
   const bx=W*(land?.4:.33)-moveK*8+Math.sin(t*.5)*2,by=H*(1-wl)+H*.05-boat.h*.75+(REDUCED?0:Math.sin(t*1.1)*1.8);
   const wake=boat.hull?[(bx+boat.w*.5)/W,1-(by+boat.h*.727)/H,boat.w*.46/W,(.7+.7*moveK)*bReveal]:null;
-  stage.scene({t,cam:-p*TRAVEL-t*.004,s:clamp(p,0,3),spread:-.34,zoom:Math.max(W/H,1.05),wl,sun:land?[.24,.74]:[.27,.765],sunR:land?.075:.058,rain,hs:land?1.3:1.22,intro,drops,boat:wake,px:ptr.x,py:ptr.y},ms);
+  stage.scene({t,cam:-pS*TRAVEL-t*.004,s:p<0?0:p<=3?p:3+(p-3)*2,spread:-.34,zoom:Math.max(W/H,1.05),wl,sun:land?[.24,.74]:[.27,.765],sunR:land?.075:.058,rain,hs:land?1.3:1.22,intro,drops,boat:wake,px:ptr.x,py:ptr.y},ms);
   // foreground paintings
   stage.beginSprites(t);
   if(boat.hull){drawBoat(t,wind,moveK);stage.sprite(boat,bx,by,{reveal:bReveal,alpha:.97,rot:0,sway:0,grain:.3})}
   for(const f of FG){
-    if(!f.tex)continue;const dx=(p-f.i)*Lfg,x=W/2+dx+f.ox*W-f.w/2+ptr.x*12;if(x>W+20||x+f.w<-20)continue;
+    if(!f.tex)continue;const d=wrap2(p-f.i),x=W/2+d*Lfg+f.ox*W-f.w/2+ptr.x*12;if(x>W+20||x+f.w<-20)continue;
     const y=f.side==='top'?-H*.012+ptr.y*4:H-f.h+(f.off||0)*f.h+ptr.y*6;
-    const reveal=REDUCED?1:sm((p-(f.i-.52))/.5),alpha=1-sm((p-(f.i+.36))/.4);
+    const reveal=REDUCED?1:sm((d+.52)/.5),alpha=1-sm((d-(f.i===3?.13:.26))/.2);
     if(reveal<=0||alpha<=0)continue;
     stage.sprite(f,x,y,{reveal,alpha:alpha*.96,sway:f.sway*(1+2.6*gust)});
   }
   // inscription
-  const tk=sm((p-PMIN)/.32);ttl.classList.toggle('in',tk<.55);ttl.style.transform=`translate3d(${(tk*46).toFixed(1)}px,0,0)`;
-  poems.forEach((e,i)=>{e.classList.toggle('in',Math.abs(p-i)<.3);e.style.transform=`translate3d(${((p-i)*70).toFixed(1)}px,0,0)`});
-  let best=-1;INTER.forEach((it,i)=>{if(Math.abs(p-it[0])<.13)best=i});
+  const turn=wrap2(p+.5);ttl.classList.toggle('in',Math.abs(turn)<.15);ttl.style.transform=`translate3d(${(turn*90).toFixed(1)}px,0,0)`;
+  poems.forEach((e,i)=>{const d=wrap2(p-i);e.classList.toggle('in',d>-.3&&d<(i===3?.11:.3));e.style.transform=`translate3d(${(d*70).toFixed(1)}px,0,0)`});
+  let best=-1;INTER.forEach((it,i)=>{if(Math.abs(p-it[0])<(it[2]||.13))best=i});
   if(best!==interK){interK=best;if(best>=0){inter.innerHTML=chars(INTER[best][1]);void inter.offsetWidth;inter.classList.add('in')}else inter.classList.remove('in')}
-  const idx=clamp(Math.round(p),0,3);nav.forEach((b,i)=>b.classList.toggle('on',i===idx));
-  hint.style.opacity=(1-sm((p-PMIN)/.2)).toFixed(3);
+  const idx=p>3.25?0:clamp(Math.round(p),0,3);nav.forEach((b,i)=>b.classList.toggle('on',i===idx));
   // weather and small lives
-  fx.w={snow:Math.max(bumpL(p,0,.55),p<0?.75:0),rain,petal:bumpL(p,1,.5),leaf:bumpL(p,3,.62)};
-  fx.wind=18+140*bumpL(p,2.55,.3)+30*bumpL(p,3,.6);
-  fx.life={swallow:bumpL(p,1.05,.36)*(1-rain),dragonfly:bumpL(p,2,.36),geese:bumpL(p,3,.5)};
+  fx.w={snow:Math.max(bumpL(p,0,.55),p<0?.75:0,.75*sm((p-3.25)/.25)),rain,petal:bumpL(p,1,.5),leaf:(bumpL(p,3,.62)+.5*bumpL(p,3.16,.2))*ebb};
+  fx.wind=18+(140*bumpL(p,2.55,.3)+30*bumpL(p,3,.6)+120*bumpL(p,3.16,.16))*ebb;
+  fx.life={swallow:bumpL(p,1.05,.36)*(1-rain),dragonfly:bumpL(p,2,.36),geese:bumpL(p,3,.5)*ebb};
   fx.step(dt,t,null);
 }
 let rz=0;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(resize,160)});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(resize);
 let last=performance.now();
 function tick(now){
-  const ms=now-last,dt=Math.min(.05,ms/1000);last=now;
+  const ms=now-last,dt=Math.min(window.__dtMax||.05,ms/1000);last=now;
   ptr.x+=(ptr.tx-ptr.x)*.06;ptr.y+=(ptr.ty-ptr.y)*.06;
   if(!document.hidden)frame(dt,now/1000,ms);
   requestAnimationFrame(tick);
 }
 resize();requestAnimationFrame(tick);
-window.__demo={p:v=>{stopAuto();sc.scrollTop=maxScroll()*(v-PMIN)/(PMAX-PMIN);pS=v},drop:(x,y)=>inkDrop(x,y,performance.now()/1000),
+window.__demo={p:v=>{drive=null;Pt=pS=pPrev=v;syncScroll()},state:()=>({Pt:+Pt.toFixed(3),phase:+wrapC(Pt).toFixed(3),scrollP:+scrollP().toFixed(3),auto:!!(drive&&drive.auto)}),drop:(x,y)=>inkDrop(x,y,performance.now()/1000),
   art:()=>{const d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:99;overflow:auto;background:#ece7db;padding:10px';
     [boat,...FG].forEach(s=>{if(!s.cv)return;if(s===boat){s=Object.assign({},s);const c2=mkc(boat.cv.width,boat.cv.height);c2.getContext('2d').drawImage(boat.cv,0,0);s.cv=c2}const c=s.cv;c.style.cssText=`width:${s.w}px;height:${s.h}px;display:block;margin:0 0 14px;outline:1px dashed rgba(0,0,0,.12)`;d.appendChild(c)});document.body.appendChild(d)}};
 })();
