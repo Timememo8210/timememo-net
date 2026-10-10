@@ -1,6 +1,6 @@
-# 模拟器件学习资料包（供 NotebookLM 使用）
+# 模拟器件学习资料包（供 Gemini Notebook / NotebookLM 使用）
 
-来源：timememo.net/research/analog-devices/ 。本资料包把五部分合在一起：①学习计划（7 节课）；②问答（速度、VT 与 flicker noise）；③指南正文；④提增益与降噪技巧；⑤术语表。所有内容整理自公开资料；带【推断】的是整理者的判断，带【TCAD】【硅片·研究】的数值不代表量产工艺。
+来源：timememo.net/research/analog-devices/ 。本资料包把六部分合在一起：①学习计划（7 节课）；②模拟电路基础（电流镜、主要模块、模拟 IP）；③问答（速度、VT 与 flicker noise）；④指南正文；⑤提增益与降噪技巧；⑥术语表。图只保留图注，原图请看网站。所有内容整理自公开资料；带【推断】的是整理者的判断，带【TCAD】【硅片·研究】的数值不代表量产工艺。
 
 
 ---
@@ -14,13 +14,13 @@
 **目标：** 弄清模拟看的是“偏置点上的小信号比值”，记住四个核心指标和它们各自代表的代价。
 
 **要读的章节：**
+- 基础: 全景：模拟电路的积木地图
+- 基础: 电流镜：模拟电路里的"电流复印机"
 - 问答: Q0. 模拟电路到底在追求什么？
 - 指南: 全景图
 - 指南: 评价范式的变化：从"开关"到"偏置点上的放大器"
-- 指南: 逻辑优化如何伤害模拟器件：halo、薄氧与低电压
 - 指南: 关键指标速查表：定义、关注点与提取方法
 - 术语: gm/ID（跨导效率）
-- 术语: gm/gds（本征增益）
 
 **核心要点：**
 - 逻辑看大信号开关：Ion、Ioff、CV/I。模拟看某个偏置点上的小信号比值：gm/ID、gm/gds、fT、AVT。
@@ -139,6 +139,8 @@
 **目标：** 会用 Pelgrom 定律估面积，知道 GAA 的失配从哪里来，能说出常用的版图匹配手段。
 
 **要读的章节：**
+- 基础: 版图怎么画：让两个管子"看到的世界"完全一样
+- 基础: 版图长什么样
 - 指南: 失配：Pelgrom 定律与各类器件的匹配系数
 - 指南: FinFET/GAA 中的新失配来源
 - 指南: 器件级版图：匹配取决于"环境相同"，而不只是 W/L 相同
@@ -229,6 +231,791 @@
   A: τ = 1/(2N·f)；C = (IDDA − IDDQ)/(N·VDD·f)。
 
 **小练习：** 不看资料，把第 1 节的指标地图重画一遍，再对照全景图补齐。然后打开错题本，把剩下的卡片再做一遍，直到清空。
+
+
+---
+
+# 模拟电路基础：电流镜、主要模块与模拟 IP
+
+模拟电路靠几种晶体管级"积木"层层搭起来。底层是电流镜、差分对和单管放大器。往上是运放/OTA、比较器、基准和 LDO。再往上是 PLL、ADC/DAC、SerDes 这类子系统，最后以"模拟 IP"的形式进入 SoC。电流镜是其中用得最多的一块。它把一个参考电流按 W/L 比例"复印"到别处（FinFET 里按 fin 数 × finger 数），所以偏置分配、有源负载、电流舵 DAC 和电荷泵都离不开它。电流镜的各种变体都在用电压余量换输出电阻。它的精度受两类误差限制：一类是 VDS 不等引起的系统误差，一类是 VT/β 随机失配（Pelgrom）。因此版图（单元化、共质心、dummy、同向）和原理图一样重要。到了 SoC 层面，几乎每颗芯片都要一组"基础模拟 IP"：PLL、振荡器、bandgap、LDO、POR、PVT 传感器、带 ESD 的 I/O 和 OTP。SerDes、DDR PHY、UCIe、高精度 ADC/DAC 则按产品需要再加。数字 IP 通常以可综合的 RTL 交付。模拟 IP 是绑定某一套 PDK 的 GDS 硬核，换节点基本要重新设计、重新版图、重新流片验证，所以它常常卡在新节点就绪的关键路径上。本页只讲"是什么、为什么、长什么样"。增益、噪声和失配的器件物理不在这里展开：器件指标详见主指南，提增益与降噪的技巧详见技巧页。
+
+## 全景：模拟电路的积木地图
+
+**先看地图：每一层用下一层的积木搭成，每一层也有自己要盯的指标。**
+
+要点：
+- 层级从下到上是：器件 → 晶体管级原语 → 电路模块 → 混合信号子系统 → SoC 里的模拟 IP。
+- 往上走，指标从"器件参数"（gm/ID、gm·ro、AVT）逐步变成"系统参数"（抖动、ENOB、BER、PSRR）。
+- 证据标签：【常识】教科书或通用知识；【硅片·研究】研究器件或研究电路的实测；【硅片·量产平台】量产工艺数据；【TCAD】器件仿真；【仿真】电路或版图仿真；【厂商】厂商或代工厂的资料与新闻稿；【观点】行业访谈；【推断】本页自己的推理。
+
+| 层级 | 典型模块 | 干什么 | 主要指标 | 本页章节 |
+|---|---|---|---|---|
+| 器件 | MOSFET（平面 / FinFET / GAA）、BJT/二极管、电阻、MOM/MIM 电容、电感 | 提供跨导、输出电阻、匹配、无源元件 | gm/ID、gm·ro、fT、AVT、1/f 噪声、电阻温度系数、电感 Q | §1、§7；详见主指南 |
+| 晶体管级原语 | 电流镜、差分对、共源 / 共栅 / 共漏单管 | 复制电流、放大差值、放大或缓冲 | Rout、余量、比例误差；失调、CMRR；增益、带宽 | §1、§2 |
+| 电路模块 | OTA / 运放、比较器、bandgap、电流基准、LDO | 放大、判决、产生稳定电压与电流、稳压 | 增益、GBW、相位裕度；失调、速度；温漂；压差、PSRR | §2、§3 |
+| 混合信号子系统 | PLL / DLL、振荡器、ADC、DAC | 产生时钟；模拟与数字互相转换 | 抖动、杂散、锁定时间；ENOB、SNR、SFDR、INL/DNL | §4、§5 |
+| 接口、保护与监控 | SerDes、DDR/HBM PHY、UCIe、I/O、ESD、温度与电压传感器 | 芯片间高速通信；对外接口；静电保护；健康监控 | BER、眼图、pJ/bit；HBM/CDM 等级；测温精度 | §7、§8 |
+| SoC 里的模拟 IP | 电源树、时钟树、PHY、传感与安全模块 | 以硬核形式交付并集成 | 是否硅验证、是否有对应节点、交付物是否齐全 | §8、§9 |
+
+## 1. 电流镜：模拟电路里的"电流复印机"
+
+**电流镜让一个二极管连接的晶体管把参考电流变成栅源电压，再让共享这个电压的其他晶体管按尺寸比例复制出电流；它几乎出现在每一个模拟模块里，因为模拟电路的偏置、负载和很多数模转换都靠"精确的电流"工作。**
+
+要点：
+- 理想比例是 I_OUT = I_REF·(W/L)₂/(W/L)₁（[TAMU ECEN474 L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）【常识】。FinFET 里"W"换成 fin 数 × finger 数（[Tech Design Forums](https://www.techdesignforums.com/practice/?p=5259)）【观点】。
+- 主要变体都在做同一笔交易：多花电压余量，换更高的输出电阻 Rout。简单镜像 Rout ≈ ro，cascode 约 gm·ro²，regulated cascode 约 A·gm·ro²（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)；[UTK ECE532 L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)）【常识】。
+- 误差有两类。系统误差主要来自两管 VDS 不等加上沟道长度调制（CLM）。随机误差来自 VT 和 β 的失配，σ(ΔVT) = AVT/√(WL)（[Pelgrom et al. 1998](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)）【硅片·研究】。
+- 电流镜的电流匹配在较高过驱动下更好，这与差分对的电压失调正好相反【推断】。
+- 版图要求器件"几何、方向、偏置、温度都相同"（[Pelgrom et al.](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)）。具体做法是单元化、叉指、共质心、dummy 和同向摆放（[Pulsic](https://pulsic.com/?p=1)）【厂商】。
+- FinFET/GAA 把宽度量子化，L 也基本固定。比例只能靠整数个相同单元实现，LDE 变得更复杂，平面工艺的版图基本要重画（[Tech Design Forums](https://www.techdesignforums.com/practice/?p=5259)）【观点】。
+
+### 原理：先把电流变成电压，再把电压变回电流
+
+【常识】电流镜的定义很直接：控制一个器件的电流，让它复制另一个器件的电流，并且尽量不受负载影响。理想情况下，它是一个"电流控制的电流源"（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）。
+
+最简单的 MOS 电流镜只有两个管子。M1 的栅和漏短接，叫"二极管连接"。参考电流 I_REF 灌进 M1，M1 只能在饱和区自己找到一个 V_GS，让漏电流正好等于 I_REF。这一步把电流"翻译"成了电压。M2 的栅接在同一个节点上，所以 V_GS 和 M1 一样。只要 M2 也在饱和区、两管匹配，M2 的电流就等于 I_REF。这一步把电压"翻译"回了电流（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）。
+
+[图：简单 NMOS 电流镜：VDD 经电阻产生参考电流 IREF 流入 M1。注意 M1 的栅和漏连在一起（二极管连接），M2 与 M1 共用栅极，所以两管 VGS 相同；IOUT 流进 M2 的漏极，M2 的漏接到电压源 VOUT（代表负载）]
+
+两管尺寸不同时，电流按尺寸缩放：I_OUT = I_REF·(W/L)₂/(W/L)₁（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）。Wikipedia 特别指出，输出电流与 W 成线性关系，所以要得到 I_REF 的整数倍，改宽度就行（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）。实际电路里，一个二极管管子往往同时驱动多个输出管，每个输出管按自己的比例复制。
+
+它和理想电流源有四点不同（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）：
+- 交流输出阻抗有限，也就是 Rout 不是无穷大。
+- 只在"顺从范围"（compliance range）内工作。输出电压太低时，输出管会掉出饱和区。
+- 寄生电容限制它的频率响应。
+- 它对噪声、电源和工艺容差敏感。
+
+对熟悉逻辑的人，可以这样理解【推断】：逻辑看一个管子开和关两个状态；电流镜让管子一直停在饱和区的某个偏置点上，靠"同一个 V_GS 产生同一个电流"这条物理关系工作。所以凡是让两管在同一 V_GS 下电流不同的工艺因素，都会直接变成电流镜的误差：VT 偏差、迁移率差异、应力差异、VDS 不同。
+
+### 为什么到处都用：模拟电路靠电流做事
+
+【常识】电流镜有两大基本用途：提供偏置电流和做有源负载（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）。用电流镜偏置还能降低电路对 VDD、VT 和 μCox 的敏感度（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）。展开来看：
+
+| 用途 | 电流镜在里面做什么 | 精度看什么 | 证据 |
+|---|---|---|---|
+| 偏置分配 | 一个主基准电流扇出到全芯片的多个镜像，给每个模块供偏置 | 比例误差、远距离分配时的 IR 压降 | 【推断】常用电流而不是电压做长距离分配，避免地线压降带来误差 |
+| 有源负载 | 差分对、OTA 的负载，替代电阻，把单级增益提到约 gm·ro 量级 | Rout（决定增益）、两侧匹配（决定失调） | 共源级带电流源负载时增益 = −gm1/(go1 + go2)（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）【常识】 |
+| 尾电流源 | 差分对、比较器的尾部电流 | Rout（决定 CMRR） | 【常识】 |
+| 电流舵 DAC | 每个单元电流源就是一个镜像输出管 | 单元间匹配决定 INL/DNL | Pelgrom 面积缩放与并联单元用于 IDAC，代价是面积和电容（[Sheikholeslami, IEEE SSC Magazine](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)）【常识】 |
+| PLL 电荷泵 | UP/DN 两路电流由镜像产生 | UP/DN 失配 | 【推断】失配会造成静态相位偏差和参考杂散 |
+| 自偏置电流基准 | PMOS 镜与 NMOS 镜接成环（beta multiplier） | 对电源不敏感，但必须有启动电路 | （[US 7,755,419](https://patents.google.com/patent/US7755419)）【厂商】 |
+
+后面每一节的电路图里都能找到电流镜：§2 的五管 OTA 有两个，§3 的 CMOS bandgap 有 PMOS 镜，§4 的电荷泵和 §5 的电流舵 DAC 本身就是电流镜阵列。
+
+### 变体：用电压余量换输出电阻
+
+**为什么要有变体。** 【常识】简单镜像的 Rout 只有 ro。输出电压一变，输出电流就跟着变（这就是 CLM），这会降低放大器增益，也会造成比例误差。提高 Rout 的办法都是在输出管上方再"叠"一个管子，或者加反馈。代价是输出端需要更高的最低电压，也就是余量（headroom）。在 1 V 左右的先进节点上，余量是最稀缺的资源（增益与余量的取舍详见技巧页）。
+
+下面这张真实的原理图把四种 NMOS 镜像画在了一起，每种都带 50 µA 偏置源和标注的器件尺寸。它来自一门开源模拟设计课程，用的是 IHP SG13G2 130 nm 器件。
+
+[图：开源课程里的真实 xschem 原理图（IHP SG13G2 130 nm 器件）：四个 NMOS 电流镜并排，分别标为 Basic、Cascoded、Regulated、Degenerated current mirror，各由 50 µA 偏置源驱动。注意图上印出的器件尺寸（如 W=10u L=5u）：为了匹配和输出电阻，用的是远大于最小尺寸的长沟道管；Degenerated 一栏在源极串了电阻]
+
+| 变体 | Rout（量级） | 最低输出电压（余量） | 优点 | 缺点 | 来源 |
+|---|---|---|---|---|---|
+| 简单镜像 | ≈ ro | ≈ V_DSAT，约 0.1–0.4 V | 最简单，余量最小 | Rout 低；两管 VDS 不等时有 CLM 误差 | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)【常识】 |
+| Cascode（自偏置） | ≈ gm·ro² | ≈ VT + 2V_OV；讲义示例工艺中约 0.9–1.5 V | Rout 高；下层两管 VDS 自动对齐 | 多吃掉一个 VT 的余量 | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)【常识】 |
+| 宽摆幅 / 低压 cascode | ≈ gm·ro² | ≈ 2V_DSAT | 保住 Rout，同时省掉一个 VT；约 3 V 以下的设计常用 | 需要一路单独的 cascode 偏置电压，偏置要设计准 | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)；[UTK L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)；[Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)【常识】 |
+| Wilson（3 管 / 4 管） | MOS 版 ≈ gm·ro²/2 | ≈ VT + 2V_OV，输入端约 2V_GS，并随 √I 上升 | 靠负反馈提高 Rout；4 管版能对齐 VDS | 输入、输出电压都高，3 V 以下难用 | [Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)；[UTK L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)【常识】 |
+| Regulated（增益增强）cascode | ≈ (1 + A)·gm·ro²，可达几十到几百 GΩ | ≈ V_GS + V_DSAT | Rout 最高 | 多一个放大器：面积、功耗、稳定性；简单版不保证两侧 VDS 相等 | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)；[UTK L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)【常识】 |
+| 源极退化 | ≈ ro·(1 + gm·R_S) | ≈ V_DSAT + I·R_S | 降低对 VT 失配的敏感度 | 吃掉 I·R 的余量；精度转而依赖电阻匹配 | [Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)；Rout 公式【常识】 |
+
+几点说明：
+- Cascode 最低电压的公式在讲义的 PDF 提取中有乱码。表中用的是教科书标准结果 VT + 2V_OV。
+- UTK 讲义中 Wilson 和 regulated cascode 的部分公式也有提取乱码，表里只取量级。
+- 自偏置 cascode 的输出电压下限是"V_GS + V_DSAT"。宽摆幅 cascode 用一路额外偏置，把下层管压到饱和边缘（VDS ≈ V_DSAT），这样就省掉了一个 VT（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）。
+
+[图：NMOS cascode 电流镜（图中没有文字标注）：4 个 NMOS 排成 2×2 的叠层，电阻从电源设定参考电流。注意左侧参考支路的两个管子都是二极管连接；右侧输出管上方多了一个 cascode 管，输出从右上方引出，这就是 Rout 从 ro 提高到约 gm·ro² 的来源]
+
+**Wilson 镜像的历史与特点。** 【常识】它由 Tektronix 的 George R. Wilson 在 1967 年提出，起因是和 Barrie Gilbert 的一次"挑战"。它用负反馈而不是退化来提高输出阻抗；BJT 版本的输出阻抗比简单镜像高约 50 倍。4 管改进版多加一个二极管连接的管子，让匹配对的 VDS 相等，从而去掉一阶 CLM 误差（[Wikipedia: Wilson current mirror](https://en.wikipedia.org/wiki/Wilson_current_mirror)）。
+
+[图：NMOS Wilson 电流镜（图中没有文字标注）：3 个 NMOS，电阻从电源设定参考电流。注意右上方的输出管与下方那对管子之间的反馈连接：Wilson 镜像靠这条负反馈把输出电流稳住]
+
+**Regulated cascode 的思路。** 【常识】放大器检测下层管的漏电压，并驱动 cascode 管的栅，把这个电压钉住。这样 Rout 再乘上一个放大器增益 A。MOS 版的 Rout 会随 A 继续上升；BJT 版则受 β 限制，有上限（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）。
+
+[图：带反馈放大器的 4 管 NMOS 电流镜：放大器 A(V1−V2) 强制下方 M3/M4 两管的漏电压 V1 和 V2 相等。注意放大器的输出驱动上方管子的栅极，这就是 regulated / 增益增强镜像的核心；图中标有 Iref、Iout、VDD、VA 和 M1–M4]
+
+宽摆幅 cascode 在 2006 年和 2013 年仍有相关专利获得授权，说明它在工业界一直在用（[US 8,450,992](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8450992)；[US 7,012,415](https://patents.google.com/patent/US7012415)）【厂商】。
+
+### 误差从哪来：系统误差、随机失配和环境差异
+
+**第一类：VDS 不等加 CLM，属于系统误差。** 【常识】饱和区的电流并不是完全平的。VDS 越高，有效沟道越短，电流越大。二极管连接的 M1 的 VDS 等于 V_GS，而 M2 的 VDS 由负载决定，两者一般不相等。误差约为 λ₂V_DS2 − λ₁V_DS1。对策有两个：让两管 VDS 相等（cascode、4 管 Wilson 就是在做这件事），以及用长管，因为误差大致按 1/L 下降（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）。Wikipedia 还提醒，λ·VDS 这种简单模型只对"相当老"的工艺准确，λ 一般要从实测数据里取（[Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)）。
+
+[图：SkyWater SKY130 PDK 的 SPICE 模型曲线：sky130_fd_pr__nfet_01v8 在 tt 角下、Vgs 从 0 到 1.2 V 的 Ids–Vds 曲线族。注意右侧饱和区的曲线并不水平，而是向上倾斜：这就是沟道长度调制，斜率的倒数就是 ro；两个镜像管 VDS 不同，就会落在曲线的不同位置，电流随之不同]
+
+**第二类：VT 和 β 的随机失配。** Pelgrom 等人的结论是：σ(ΔVT) = AVT/√(WL)，主要来源是耗尽层里的随机掺杂涨落，尺寸波动和界面态也有贡献（[Pelgrom, Tuinhout, Vertregt, IEDM 1998](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)）【硅片·研究】。直观的数字【常识】（[Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)）：
+- 在该文的偏置下，相邻两管 5 mV 的 VT 差会造成约 5% 的电流差。
+- L 不变、W 变为 4 倍，σ(ΔVT) 减半。
+- N 个相同器件并联，VT 方差降为 1/N，代价是面积和电容。
+
+讲义给出的实际比例误差约为 0.5–2%，"通常"与栅面积成反比（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）【常识】。Wilson 镜像页面给出的 CMOS VT 偏差"典型为 1 到 3 mV"（[Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)）【常识】。AVT 的工艺物理和各节点的数值详见主指南的"噪声与失配"一节。
+
+**注意：电流镜要的是"高过驱动"，差分对要的是"低过驱动"。** 【推断】用平方律可以推出随机电流失配的近似式：σ²(ΔI/I) ≈ σ²(Δβ/β) + (gm/ID)²·σ²(ΔVT)。强反型下 gm/ID = 2/V_OV，所以 V_OV 越大（gm/ID 越低），VT 失配换成的电流误差越小。这与 Wikipedia 的说法一致：要把 VT 偏差的贡献压到约 1%，需要"零点几伏"的过驱动（[Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)）。差分对的输入失调电压正好相反：输入等效失调里 VT 项直接出现，β 项要除以 gm/ID，所以差分对偏向高 gm/ID（弱或中等反型）。同一个工艺的 AVT，在电流镜和差分对里要用相反的偏置策略去"稀释"。这个式子是标准推导，本页没有找到逐字出处。
+
+**第三类：梯度、IR 压降与版图相关效应（LDE）。** Pelgrom 等人列出的其他因素有：器件间距离、形貌、金属覆盖、注入条纹、封装和机械应力（[Pelgrom et al.](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)）【硅片·研究】。Pulsic 补充了阱边距离会改变 VT，以及注入方向使器件方向变得重要（[Pulsic](https://pulsic.com/?p=1)）【厂商】。一篇基于商用 12 nm FinFET 工艺的论文指出，在单元级别，互连电阻占主导，源线电阻不匹配会直接改变电流比例（[Sharma et al., NSF PAR](https://par.nsf.gov/servlets/purl/10540359)）【仿真】。
+
+把这些误差翻译成逻辑工艺整合熟悉的语言【推断】：
+- VT 失配：随机掺杂、金属栅功函数颗粒度。
+- β 失配：迁移率与应力差异、LER 与 fin 宽度波动。
+- 系统误差：LOD/SA-SB、WPE、gate cut 和 diffusion break 的邻近效应、poly/fin 密度、共享源线的 IR 压降、热梯度和自热。
+
+这些都对应熟悉的工艺旋钮。区别在于，逻辑关心它们对 Ion/Ioff 分布的影响，电流镜关心的是两个相邻器件之间的差。
+
+### 版图怎么画：让两个管子"看到的世界"完全一样
+
+**原则只有一句：** 匹配的器件要在几何、方向、偏置和温度上设计得完全相同（[Pelgrom et al.](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)）【硅片·研究】。Pulsic 把它拆成可执行的规则（[Pulsic](https://pulsic.com/?p=1)）【厂商】：
+- **单元化。** 匹配器件用同一套参数化单元。不要拿一根宽管去匹配几根窄管。大器件拆成很多相同的单元。
+- **共质心。** 把参考管放在中心，或者用 cross-quad 排法。Cross-quad 对任意方向的梯度都更鲁棒，但更难布线。
+- **叉指。** 用叉指排列让两组器件尽量分散，互相穿插。
+- **同向。** 所有匹配器件朝同一方向，因为注入方向有影响。
+- **环境一致。** 保护环、到阱边的距离都要一致。先进工艺还强制要求 dummy 和密度控制。
+- **布线的取舍。** 为了好布线而让电流方向关于对称轴翻转，可能损害匹配。
+
+下面是 SkyWater 官方给出的一个多 finger NFET 版图。它不是电流镜，但展示了模拟器件的基本"单元"：多根栅 finger 共享源漏，四周有衬底接触。
+
+[图：SkyWater SKY130 官方版图渲染：4 个 finger 的 RF NFET（rf_nfet_01v8，W=3 µm，L=0.15 µm）。注意竖直的多晶硅栅 finger 在上下两端都有栅接触；扩散区按 S/D/S/D/S 交替，相邻 finger 共享源或漏；左右两侧是衬底 tap。电流镜里的"单元"就是这样一个多 finger 器件]
+
+共质心在实际中是什么样？开源模拟版图工具 ALIGN 给出了一个抽象的摆放网格。
+
+[图：开源模拟版图工具 ALIGN 的摆放网格（抽象示意，不是掩模图）：一个差分对被拆成单元，排成 2 行 × 6 列，顺序为 s-b-a-a-b-s。注意器件 a 和 b 关于中心轴镜像对称，两端各有一个 s 单元；这样一阶线性梯度对 a 和 b 的影响相互抵消，这就是共质心思想]
+
+同样的思路用在电流镜上：参考管和各个输出管都拆成相同单元，交错排列在一个接近正方形的阵列里，两侧再加 dummy 列。前面那篇 12 nm FinFET 论文就是这么做的。它还额外交换单元来抵消二阶（非线性）梯度，并要求匹配器件有相同的 SA/SB（LOD）、相同的阱间距（WPE）、相同数量的 diffusion break、统一的 OD 宽度和 poly 间距（[Sharma et al.](https://par.nsf.gov/servlets/purl/10540359)）。论文报告的结果是【仿真】：
+- 一个 10 器件电流镜阵列的最大电流比偏差为 1.54%，而两种对比方法分别为 21.89% 和 26.35%。
+- 另一个阵列为 −0.25%，对比方法为 −5.00% 和 −8.25%。
+- 最大 IR 压降为 1.7 mV，对比方法为 3.7–4.0 mV。
+
+这说明在 FinFET 里，同样的器件，摆法和连线不同，比例误差可以差一个数量级。
+
+### FinFET/GAA 带来的变化：宽度变成整数，环境变成主角
+
+[图：双栅 FinFET 的三维示意：鳍（fin）立在衬底上，栅极从两侧包住鳍，两端是源和漏。注意器件的"宽度"由鳍的高度和个数决定，不能像平面管那样连续画；电流镜的比例因此只能靠整数个 fin 或整数个单元来实现]
+
+Tech Design Forums 转述的 Synopsys 网络研讨会内容总结了 FinFET 对模拟设计的影响（[Tech Design Forums](https://www.techdesignforums.com/practice/?p=5259)）【观点】：
+- 宽度量子化：驱动能力靠并联共用栅、源、漏的 fin 来设定，BSIM-CMG 用 fin 数代替 W。
+- 应力型 LDE：阵列中间的 fin、行末的 fin 和孤立的 fin 表现不同；缺少支撑的 fin 会应力释放，迁移率下降。Dummy fin 能维持应力，但要花面积。
+- 自热问题更突出。
+- 体偏置不再是实用的模拟调节手段。
+- 平面工艺的模拟版图一般要从头重画。
+- 好消息是：FinFET 沟道不需要重掺杂，VT 波动更小。
+
+落到电流镜的具体做法【推断】（业界常规做法，上面的来源只部分证实）：
+- 比例一律用整数个相同单元实现（相同 nfin、相同 finger 数、相同 L），不靠画不同的宽度。例如 1:4 的镜像就是 1 个单元对 4 个单元。
+- 需要长 L 时，把多个最小 L 的栅串起来（stacked gates），因为单根器件的 L 基本固定。串联叠管的增益与匹配细节见技巧页。
+- 到了 GAA（nanosheet），"宽度"旋钮变成 sheet 宽度或 sheet 层数，同样是有限的几档。
+- 电流镜阵列做成带 dummy 行列的共质心单元网格，规则允许时尽量用连续扩散区。
+- 匹配环境的清单更长：gate cut 和 diffusion break 的位置、fin 边界、背面供电带来的 IR 和寄生变化，都要在两侧做得一样。
+
+FinFET 下的 fin 边界与镜像版图仍是专利和 CAD 会议的活跃题目（[US 12,446,321](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12446321)；[DATE 2021](https://past.date-conference.com/proceedings-archive/2021/pdf/1829.pdf)；[ASP-DAC 2022](https://www.aspdac.com/aspdac2022/taoka/pdf/2B-3.pdf)）【厂商】。nanosheet 电流镜匹配的公开定量数据，本次没有找到。
+
+## 2. 差分对、放大器与比较器
+
+**差分对放大两个输入之差、抑制两者共有的部分；加上电流镜负载和尾电流源就成了最基本的放大器（OTA），再加一级就是两级运放；把差分对接到一个正反馈锁存器上，就成了比较器。**
+
+要点：
+- 三种单管接法各有分工【常识】：共源（CS）放大电压，增益约 gm·ro；共栅（CG）输入阻抗低（≈ 1/gm），常用作 cascode；共漏（CD）是增益小于 1 的电压缓冲。
+- 带电流源负载的共源级增益 = −gm1/(go1 + go2)，二极管连接负载约 1/gm，加 cascode 把输出电阻再乘约 gm·ro（[TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)）【常识】。
+- 五管 OTA = 差分对 + 电流镜负载 + 尾电流源。两级运放再加一级共源放大和补偿电容，换来更高的增益和摆幅。
+- 放大器看增益、GBW、相位裕度、压摆率、失调、噪声；比较器看失调、速度、噪声、回踢（kickback）和亚稳态【常识】。
+- 低电压下怎么拿回增益（cascode、gain boosting、多级、叠管），详见技巧页。
+
+### 差分对：只放大"差"
+
+【常识】差分对是两个源极连在一起的管子，下面接一个尾电流源。两个输入相等时，尾电流平分；输入有差值时，电流向一边倾斜，差值被放大。两个输入一起升降（共模信号）时，尾电流源"顶住"总电流，输出基本不变。这就是共模抑制比（CMRR）的来源，尾电流源的 Rout 越高，CMRR 越好。带电流镜负载的差分对是入门模拟课程的标准内容（[Harvard ES154 Lecture 15](https://in.ncu.edu.tw/~ncume_ee/harvard-es154/lect_15_diff_pair_2.pdf)）。
+
+差分对的关键缺陷是失调：两管不匹配时，输入为零输出也不为零。它对 VT 失配最敏感，所以版图上要用共质心和 dummy（§1），偏置上偏向高 gm/ID（§1 的"注意"）。差分对还要关注 1/f 噪声。
+
+### 五管 OTA：一个差分对、两个电流镜
+
+下面是一张真实的五管 OTA 原理图，取自开源课程。图里能直接看到两个电流镜：上面的 PMOS 镜做有源负载，下面的 NMOS 镜给出尾电流。
+
+[图：开源课程里的真实五管 OTA 原理图（xschem）：NMOS 输入对 M1/M2（输入 vinp/vinn），PMOS 电流镜负载 M3/M4（共栅节点 gate_p），NMOS 尾电流源 M5 由 M6 镜像而来；外部送入 20 µA 的 ibias，尾电流为 4 µA，也就是一个 5:1 的电流镜比例。M7–M13 是使能开关。注意图上标注的节点电压（约 0.78 V、0.38 V、0.7 V）和 1.45–1.55 V 的 vdd：每个管子的余量都很紧]
+
+【常识】PMOS 镜负载有一个巧妙之处：它把左侧的电流变化"复制"到右侧，使两边的信号电流在输出端相加，这样单端输出也能拿到完整的差分增益。OTA 输出的是电流（跨导放大器），增益约为 gm·(ro_n ∥ ro_p)，也就是 gm·ro 的量级。在先进节点上单管 gm·ro 只有几十，这一级增益往往不够，详见技巧页。
+
+### 两级运放：再加一级换增益和摆幅
+
+[图：经典两级 CMOS 运放原理图（德文标注）：输入差分对 V1/V2 下面是 50 µA 的电流源尾，负载是电流镜 V3/V4；第二级增益管 V5 由 25 µA 电流源偏置；补偿电容 Ck 跨接在两级之间；输出级 V6/V7，输出 Ua，输入 UN/UP。注意图里的电流源本身也是电流镜偏置出来的]
+
+【常识】第一级是五管 OTA，第二级是一个共源放大。总增益约为两级增益相乘，即 (gm·ro)² 量级；输出摆幅也更大。代价是多了一个极点，需要补偿电容（Miller 补偿）来保证相位裕度。所以两级运放的典型指标是：直流增益、GBW、相位裕度、压摆率和输出摆幅。
+
+| 放大器类型 | 结构 | 增益量级 | 主要取舍 | 证据 |
+|---|---|---|---|---|
+| 五管 OTA | 差分对 + 镜像负载 + 尾电流源 | gm·ro | 简单、快；增益低 | 【常识】 |
+| 套筒 / 折叠 cascode | 在一级里叠 cascode | (gm·ro)² | 增益高；套筒式摆幅小，折叠式摆幅大但功耗和噪声更高 | 【常识】 |
+| 两级 Miller | OTA + 共源第二级 + Cc | (gm·ro)² | 增益和摆幅都高；需要补偿，带宽受限 | 【常识】 |
+
+### 比较器：放大以后"一锤定音"
+
+比较器只回答一个问题：哪个输入更大。现代 ADC 和 SerDes 接收机多用动态锁存比较器，只在时钟边沿工作，静态功耗接近零。
+
+[图：动态锁存比较器（StrongARM 型）：输入对管接 VINP/VINN，上方是交叉耦合的锁存器，CLK 控制的 PMOS 负责复位、底部 NMOS 是时钟控制的尾管，输出 OUTP/OUTN。注意交叉耦合的那对管子：它构成正反馈，把输入端微小的差值迅速放大成满摆幅的 0/1]
+
+【常识】工作过程分两拍。时钟低时，复位管把两个输出拉到同一电位。时钟高时，尾管导通，输入对把电流按输入差值分给两侧，锁存器用正反馈把微小的差值放大到满摆幅。主要指标是：
+- 失调：由输入对和锁存器的失配决定，是 SAR ADC 精度的关键。
+- 速度：由再生时间常数决定，与 fT 相关。
+- 噪声：决定能分辨的最小差值。
+- 回踢：时钟翻转时耦合回输入端的毛刺。
+- 亚稳态：输入差值太小时，规定时间内判决不完。
+
+## 3. 基准与电源：bandgap 和 LDO
+
+**Bandgap 用两个随温度变化方向相反的电压相加，得到约 1.2 V、几乎不随温度变化的基准电压；LDO 用这个基准和一个误差放大器，把有噪声的输入电源整理成干净、稳定的局部电源。**
+
+要点：
+- Bandgap 把一个 PTAT 电压（两个结在不同电流密度下的 ΔV_BE）加到一个 CTAT 二极管电压（约 −2 mV/K）上，抵消一阶温度系数，得到约 1.2–1.3 V（[Wikipedia: Bandgap voltage reference](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)）【常识】。
+- 典型的初始误差约 0.5–1.0%，温漂 25–50 ppm/°C，精心设计可到 1.5–2.0 ppm/°C（[Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)）【常识】。
+- LDO = 调整管 + 误差放大器 + 基准 + 电阻分压反馈。压差（dropout）是能维持稳压的最小输入输出电压差（[Wikipedia: Low-dropout regulator](https://en.wikipedia.org/wiki/Low-dropout_regulator)）【常识】。
+- LDO 的关键指标是压差、PSRR、静态电流、负载 / 线性调整率、瞬态响应和稳定性（[Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)）【常识】。
+- 自偏置电流基准（beta multiplier）对电源不敏感，但必须配启动电路（[US 7,755,419](https://patents.google.com/patent/US7755419)）【厂商】。
+
+### Bandgap：一个上升、一个下降，加起来不变
+
+【常识】二极管或 BJT 的 V_BE 随温度下降，约 −2 mV/K，叫 CTAT（与绝对温度互补）。两个结在不同电流密度下的 V_BE 之差 ΔV_BE 随温度线性上升，叫 PTAT（与绝对温度成正比）。把 PTAT 放大到合适的倍数再和 CTAT 相加，一阶温度系数就相互抵消。结果约等于硅的带隙电压外推值，1.2–1.3 V（[Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)）。历史上，Hilbiber（Fairchild，1964）、Widlar（1971）和 Brokaw（1974）先后奠定了这个电路（[Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)）。
+
+[图：Brokaw bandgap 原理图：两个 BJT，Q1 发射区面积为 A，Q2 为 8A；集电极接两个相等的电阻 R；运放 A 强制两支路电流相等；R2、R1 产生输出 VOUT。注意 Q1 和 Q2 的面积比 8:1：电流相同、电流密度不同，二者 V_BE 之差就是 PTAT 电压]
+
+在 CMOS 工艺里，BJT 来自寄生的纵向 PNP。实际电路还要加电流镜、cascode 和启动电路。
+
+[图：开源课程里的真实 CMOS bandgap 原理图（xschem，较密）：CMOS 工艺中的 PNP 器件 Q1–Q3、PMOS 电流镜、NMOS cascode，以及启动电路，输出 vref ≈ 1.16 V。注意上方那排 PMOS 电流镜：它们把同一个电流复制到各个支路，这正是 §1 讲的偏置分配]
+
+【常识】Bandgap 的指标有：初始精度、温漂、PSRR、噪声和最低电源电压（[Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)）。
+- 简单的一阶设计在 100 °C 范围内大约只能做到 20 ppm/°C。
+- 标准结构需要约 1.4 V 电源。
+- Banba 等人在 1999 年报告了电流求和型的亚 1 V CMOS bandgap。
+
+器件层面要关注 BJT/二极管的匹配、电阻温度系数和运放失调。运放失调会被放大到输出端，所以常用斩波（chopping）或修调（trim）。修调值一般存在 OTP 里，见 §8【常识】。
+
+### 电流基准：beta multiplier 与启动电路
+
+【厂商】自偏置电流基准由一个 PMOS 镜和一个 NMOS 镜接成环，其中一个 NMOS 是另一个的 K 倍并在源极串电阻，得到基本与电源无关的电流。这个环路还有一个"零电流"的稳定状态，所以"自偏置基准几乎总是和启动电路一起使用"（[US 7,755,419](https://patents.google.com/patent/US7755419)）。低压 cascode 版本的启动电路设计也有专利（[US 8,598,862](https://patents.google.com/patent/US8598862)）。§6 的版图图里就有一个"Beta multiplier current reference"模块。
+
+### LDO：用一个放大器"盯住"输出电压
+
+[图：LDO 原理图：PMOS 调整管（图中框出的 pass element）串在输入和输出之间；误差放大器比较 Vref 与 R1/R2 分压器（voltage divider）反馈回来的电压，去驱动调整管的栅；输出接 100 µF 电容和 100 Ω 负载（load）。注意反馈环路：输出偏低，分压后的电压低于 Vref，放大器就把 PMOS 栅拉低，让它多导通]
+
+【常识】LDO 的组成和工作原理很简单。难点在指标之间的平衡（[Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)）：
+- **压差**：受调整管饱和压降限制。压差越小，效率越高，但调整管要越大。
+- **PSRR**：对输入纹波的抑制。例如 1 MHz 下 55 dB 的 PSRR 把 1 mV 纹波衰减到 1.78 µV。
+- **调整率**：线性调整率随直流环路增益提高而改善。
+- **静态电流**：LDO 自身消耗的电流。
+- **瞬态响应**：由误差放大器带宽、输出电容和 ESR 决定。
+- **稳定性**：有主极点，还有一个依赖 ESR 的零点。
+
+和开关电源比，LDO 没有开关噪声、不需要电感，但会把 (V_in − V_out)·I 全部变成热，压差越大效率越低（[Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)）。所以 SoC 里常见的做法是：开关电源（片外或片上 buck）做大幅降压，LDO 给敏感的模拟和时钟模块做"最后一级清洁"【推断】。TI 的应用笔记 SLVA079 系统解释了 LDO 的术语（[TI SLVA079](https://www.ti.com/lit/an/slva079/slva079.pdf)，仅链接）。
+
+### 电源树：从基准到每个模块
+
+【推断】把本节串起来，SoC 的模拟电源与偏置大致是一棵树：bandgap 给出基准电压 → 偏置发生器（beta multiplier 或由 bandgap 派生的电流，再经电流镜扇出）→ 多个 LDO 和 buck → 各个模拟模块（PLL、ADC、SerDes）。上电时还要有 POR，保证电源稳定之前芯片处于复位状态（§8）。树根的精度和噪声会传到每一片叶子，所以 bandgap 常被修调，LDO 的 PSRR 也被当成时钟抖动预算的一部分。
+
+## 4. 时钟：PLL
+
+**锁相环（PLL）把一个低频、稳定的参考时钟（通常来自晶振）"乘"成芯片需要的高频时钟，并让输出相位一直跟着参考走；它是几乎每颗 SoC 都必备的模拟 IP。**
+
+要点：
+- 电荷泵 PLL = 三态鉴频鉴相器（PFD）+ 电荷泵 + PI（R-C）环路滤波器 + VCO，反馈路径上有分频器。它锁定快，稳态相位误差小（[Wikipedia: Charge-pump PLL](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)）【常识】。
+- 主要指标是抖动 / 相位噪声、参考杂散、锁定时间和频率范围【常识】。
+- VCO 分环形（ring）和 LC 两类。厂商数据中，环形 PLL 积分抖动"低至 1 ps RMS"，LC PLL 宽带抖动"明显低于 300 fs RMS"（[AnySilicon: Silicon Creations](https://anysilicon.com/vendors/silicon-creations/)）【厂商】。
+- 数据率越高，抖动预算越紧，越倾向用 LC PLL。例如 PCIe Gen2/3 用环形 PLL，Gen4/5 用 LC PLL（[SemiWiki: Analog Bits](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)）【厂商】。
+
+### 结构：五个方块组成一个反馈环
+
+[图：模拟 PLL 方框图：输入（Input）→ 鉴频鉴相器 PFD → 模拟滤波器（Analog Filter）→ VCO → 输出（Output），反馈路径上是分频器（Frequency divider）。注意分频器：输出频率被除以 N 后与输入比较，环路锁定时输出频率就等于 N 倍的输入频率]
+
+【常识】环路怎么工作：
+- PFD 比较参考时钟和分频后的反馈时钟，输出"UP"或"DN"脉冲，脉宽代表相位差。
+- 电荷泵把 UP/DN 脉冲变成往环路滤波器里"灌"或"抽"的电流。它本质上是两路电流镜加开关（§1）。
+- 环路滤波器把电流积分并滤波，得到 VCO 的控制电压。
+- VCO 的频率随控制电压变化。
+- 分频器把 VCO 输出除以 N 送回 PFD。分频比可以是整数（integer-N），也可以用 Δ-Σ 调制得到分数（fractional-N）。
+
+PFD 和分频器是数字电路，电荷泵、环路滤波器和 VCO 是模拟电路。PLL 是典型的混合信号模块。
+
+### 指标与器件依赖
+
+| 指标 | 意思 | 主要受什么影响 | 证据 |
+|---|---|---|---|
+| 抖动 / 相位噪声 | 时钟边沿偏离理想位置的程度 | VCO 噪声（含 1/f 噪声上变频）、参考噪声、环路带宽 | 【常识】 |
+| 参考杂散 | 输出频谱在参考频率整数倍处的毛刺 | 电荷泵 UP/DN 电流失配、漏电 | 【推断】 |
+| 锁定时间 | 从启动或跳频到锁定所需时间 | 环路带宽 | 【常识】 |
+| 捕获 / 保持范围 | 能锁定、能维持锁定的频率范围 | 环路结构 | hold-in、pull-in 范围是 CP-PLL 的定义指标（[Wikipedia: CP-PLL](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)）【常识】 |
+
+【常识】器件层面：环形 VCO 依赖器件速度（fT）和 1/f 噪声；LC VCO 依赖电感 Q 值和变容管。电荷泵依赖电流镜匹配和 Rout。PLL 抖动、杂散和电荷泵失配的公开定量数据，本次没有找到。
+
+### 环形 PLL 与 LC PLL：用面积和设计难度换抖动
+
+【厂商】Silicon Creations 的目录可以作为一份现成的 PLL 分类表（[AnySilicon: Silicon Creations](https://anysilicon.com/vendors/silicon-creations/)）：
+- 环形 PLL 一类：带 24 位 Δ-Σ 调制器的小数分频 PLL、核心电压下的小型环形 PLL、整数 PLL、抖动衰减 PLL、12/16/32 相输出的多相 PLL。工艺覆盖 180 nm 到 3 nm。
+- LC PLL 一类：带 LC 谐振腔的整数 LC-PLL、28 nm 小数分频频率合成器。列出的节点是 7 nm FinFET 和 28 nm。
+
+该公司称其小数分频 PLL 有超过 1,000 个量产授权、部署在超过 600 万片晶圆上。PLL 的用途包括数字时钟生成、DDR/PCIe/以太网/USB PHY 的参考时钟、快速跳频、扩频调制和微度级相位步进（[Design & Reuse 新闻稿](https://us.design-reuse.com/news/57049/silicon-creations-milestone-fractional-n-pll.html)）。
+
+【推断】环形 VCO 主要由反相器和电流源构成，更"数字化"，跟随节点缩放较容易，所以能从 180 nm 一直做到 3 nm。LC VCO 依赖电感，面积大，对金属层和衬底很敏感，换节点更难。
+
+### PLL 的近亲：DLL、晶振和 CDR
+
+【常识】
+- **DLL（延迟锁相环）**：把一条延迟线锁定到参考周期上，用于存储器 PHY 里 DQS 和时钟的相位对齐。它不产生新频率，也不累积抖动。Synopsys 的 DDR PHY 资料里就列出了"低抖动 DLL"（[Synopsys DDR multiPHY](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)）【厂商】。
+- **晶体振荡器**：一个 Pierce 型放大器 pad 单元，驱动片外石英晶体，给 PLL 提供参考。
+- **CDR（时钟数据恢复）**：在 SerDes 接收端从数据流里恢复时钟，本质上也是一个相位锁定环路。
+
+## 5. 数据转换：ADC 和 DAC
+
+**ADC 把连续的模拟电压变成数字码，DAC 反过来；不同架构在速度、精度和功耗之间做不同的取舍，而它们的精度最终都落在比较器、电容或电流源的匹配上。**
+
+要点：
+- SAR ADC 用二分查找，每个时钟周期定一位，由采样保持、一个比较器、一个 DAC 和逐次逼近寄存器组成（[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)）【常识】。
+- Δ-Σ ADC 用过采样和噪声整形把量化噪声推到带外，后接数字抽取滤波器，适合低带宽、高精度应用（[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)）【常识】。
+- Flash 最快，但每多一位比较器数量几乎翻倍；pipeline 介于两者之间（[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)）【常识】。
+- 主要指标是 ENOB、SNR、SFDR、DNL/INL 和孔径抖动；理想 16 位 ADC 的 SQNR 约为 98 dB（6.02N + 1.76 dB）（[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)）【常识】。
+- 电流舵 DAC 的精度由电流镜单元的匹配决定（[Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)）【常识】。
+
+### SAR ADC：一个比较器做二分查找
+
+[图：SAR ADC 方框图：输入 VIN 经采样保持（S/H）送到比较器，比较器结果进入 SAR 寄存器（输入 Clock，输出转换结束信号 EOC），寄存器输出 D_N−1…D0 驱动 N 位 DAC（参考电压 VREF），DAC 输出再反馈回比较器。注意这个环：每个时钟 DAC 试一个值、比较器判一次大小、寄存器定一位，N 位需要 N 个周期]
+
+【常识】SAR 的过程像称重：先试最高位（满量程的一半），比较器告诉你"大了还是小了"，定下这一位，再试下一位。
+
+在 SoC 里，SAR 的 DAC 多用二进制加权的电容阵列（电荷再分配），电容要按共质心排布；比较器就是 §2 的动态锁存比较器。所以 SAR 的精度依赖三样东西：比较器的噪声和失调、电容匹配、采样开关的导通电阻和漏电。SAR 几乎是"最数字化"的 ADC：除了比较器和采样开关，其余都是逻辑。所以它在先进节点上很受欢迎【推断】。
+
+【常识】速度和精度的典型范围（[Electronic Design](https://www.electronicdesign.com/technologies/analog/adc/article/21801636/whats-the-difference-between-sar-and-delta-sigma-adcs)）：SAR 通常覆盖 8 到 18 位。转换时间等于时钟周期乘以位数，例如 16 位、2 MHz 时钟需要 8 µs。该文引用的约 10 MS/s 上限针对的是分立 ADC 芯片，不是嵌入式 IP。
+
+### Δ-Σ ADC：用速度换精度
+
+[图：二阶 Δ-Σ 调制器环路：输入经过求和器 → 积分器 → 求和器 → 积分器 → 采样量化器（ADC）→ ΔΣM 输出；量化结果经低位数 DAC 反馈到两个求和器。注意两条反馈线：环路把量化误差"整形"，压到高频，后面的数字滤波器再把高频部分滤掉]
+
+【常识】Δ-Σ ADC 由调制器（积分器 + 比较器 + 1 位 DAC 组成的反馈环）和后面的数字抽取滤波器组成。它以远高于信号带宽的速率采样，把量化噪声推到带外，适合低带宽、高精度的应用，例如 24 位/96 kHz 音频（[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)）。它最高可达 32 位，输出速率一般在 kS/s 量级，适合直流、音频和精密仪器（[Electronic Design](https://www.electronicdesign.com/technologies/analog/adc/article/21801636/whats-the-difference-between-sar-and-delta-sigma-adcs)）。器件层面，积分器里的运放 / OTA 和 1/f 噪声是关键，所以常配斩波。连续时间 Δ-Σ 还对时钟抖动敏感【常识】。
+
+### 架构对照与 DAC
+
+| 架构 | 原理 | 擅长 | 精度瓶颈 | 证据 |
+|---|---|---|---|---|
+| Flash | 电阻梯 + 一排比较器 + 优先编码器 | 最快 | 比较器数量随位数指数增长；比较器失调 | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)【常识】 |
+| SAR | 二分查找，每周期一位 | 中速、中高精度、低功耗 | 比较器噪声与失调、电容匹配 | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)【常识】 |
+| Pipeline | 每级粗量化、DAC 相减、放大余差交给下一级 | 高速且较高精度 | 运放增益与 GBW、电容匹配 | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)【常识】 |
+| Δ-Σ | 过采样 + 噪声整形 + 数字抽取 | 低带宽、高精度 | 积分器运放、1/f 噪声、时钟抖动 | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)【常识】 |
+| 电流舵 DAC | 一组单元电流源按码开关 | 高速 | 电流镜单元匹配（INL/DNL）、Rout（SFDR） | [Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)【常识】 |
+| R-string DAC | 电阻梯抽头 | 天然单调 | 电阻匹配 | 【常识】 |
+
+【常识】指标解释（[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)）：
+- ENOB：等效有效位数，用实测 SNDR 折算成"相当于几位理想 ADC"。
+- SNR / SQNR：信噪比；理想 N 位 ADC 的量化 SQNR 约为 6.02N + 1.76 dB，16 位约 98.1 dB。
+- SFDR：无杂散动态范围；时间交织 ADC 的通道失配会恶化 SFDR。
+- DNL / INL：每个码宽和整条传输曲线偏离理想的程度，直接反映电容或电流源的匹配。
+- 孔径抖动：采样时刻的不确定性，在 1 MHz 到 1 GHz 带宽之间限制分辨率。所以高速 ADC 的精度最终取决于 PLL 的抖动（§4）。
+
+ADC 品质因数（Walden/Schreier FoM）和 Murmann 的 ADC 性能综述是公开的标准参考，本次没有逐条核读。
+
+## 6. 版图长什么样
+
+**模拟版图是手工（或半自动）画出的定制版图：器件按匹配要求成组摆放，大面积给电容、电阻和电感，布线讲究对称和电流密度；它和数字的标准单元自动布局布线是两种完全不同的东西。**
+
+要点：
+- 器件层面的匹配规则（单元化、共质心、dummy、同向）见 §1 的版图小节。
+- 模块层面，无源元件常常占大部分面积：补偿电容、电阻和电感比晶体管大得多。
+- 真实的开源版图里能直接认出 OTA、电流基准和电容阵列这些模块。
+- 版图画完不是结束：还要做 DRC/LVS、寄生提取和版图后仿真，见 §9。
+
+### 一个两级运放的版图：大电容占了大块面积
+
+[图：教学用 CMOS 两级运放版图：红色是多晶硅（poly），蓝色是金属 1，绿色是有源区；右侧有一个大的方形电容；引脚为 Vdd、GND、Vout、vpos、vneg。注意右侧那个大方块电容占了版图相当大的一部分：§2 讲的两级运放需要补偿电容，这类电容在版图里常常比晶体管大得多]
+
+【推断】从图里能读出模拟版图的几个习惯：
+- 晶体管通常成组、成对摆放，便于匹配。
+- 电源和地走宽线，以控制 IR 压降和电迁移。
+- 补偿电容、采样电容和 DAC 电容阵列往往占据模块的大部分面积。
+- 电容和晶体管之间留出间距，以减少耦合。
+
+### 一块小型模拟测试芯片：模块在版图上的样子
+
+[图：SKY130 工艺的一块小型模拟测试芯片（Tiny Tapeout 项目）版图截图，用彩色方框标出各模块："OTA"、"Beta multiplier current reference"（beta multiplier 电流基准）、"Compensation capacitors"（补偿电容）、"4-by-1 transmission gate mux"（4 选 1 传输门多路器）、"Pull-down MOS resistors"（下拉 MOS 电阻）。注意补偿电容框的大小，以及电流基准作为独立模块出现：这正是 §3 讲的"基准 → 偏置 → 放大器"]
+
+这个项目通过 Tiny Tapeout 流片，GDS 和原理图都开源（[atenfyr/ttsky_analog](https://github.com/atenfyr/ttsky_analog)；[Tiny Tapeout 芯片页](https://tinytapeout.com/chips/ttsky26a/520)）。另一个 Tiny Tapeout 项目把一个五管 OTA 做成 25 µm × 20 µm 的单元：上面是 n 阱里的 PMOS 镜像负载，中间是 NMOS 输入对，下面是 NMOS 尾电流镜（[spasquale25/OTA](https://github.com/spasquale25/OTA)）。这正好对应 §2 那张五管 OTA 原理图的结构，不过两者来自不同作者和不同工艺。
+
+### 模拟版图和数字版图差在哪
+
+| 方面 | 数字（标准单元） | 模拟（定制） | 证据 |
+|---|---|---|---|
+| 生成方式 | 综合 + 自动布局布线 | 手工或模板 / 生成器辅助，逐器件摆放 | 【常识】 |
+| 主要目标 | 时序、面积、功耗、可布通 | 匹配、对称、寄生、噪声隔离、电流密度 | 【常识】 |
+| 器件 | 固定尺寸的标准单元 | 每个器件单独定尺寸；大量无源元件 | 【常识】 |
+| 匹配手段 | 基本不需要 | 共质心、叉指、dummy、同向、环境一致 | [Pulsic](https://pulsic.com/?p=1)【厂商】 |
+| 隔离 | 一般不需要 | 保护环、深 N 阱、与数字噪声源保持距离 | 【常识】 |
+| 版图后检查 | STA 用提取后的 RC | 版图后仿真全套指标；先进节点要更多提取角 | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)【观点】 |
+
+自动化正在进入模拟版图。开源工具 ALIGN 能自动生成共质心摆放（§1 的图）；OpenFASOC 的 gLayout 能用 SKY130 和 GF180 生成电流镜、差分对、共质心和叉指结构，以及两级运放（[OpenFASOC gLayout](https://openfasoc.readthedocs.io/en/latest/notebooks/glayout/glayout_opamp.html)）。商用方面见 §9 的迁移自动化。
+
+## 7. 模拟电路的主要组成部分：从晶体管到子系统
+
+**模拟和混合信号电路是分层搭起来的：晶体管级原语组成电路模块，电路模块组成子系统，子系统以 IP 的形式进入 SoC；每一层都只依赖下一层的少数几个指标，而这些指标最终都追溯到少数几个器件参数。**
+
+要点：
+- 原语层：电流镜、差分对、共源 / 共栅 / 共漏。模块层：OTA / 运放、比较器、基准、LDO。子系统层：PLL、ADC/DAC、SerDes、电源管理、传感器【常识】。
+- 组合关系很具体：LDO = bandgap + 误差放大器 + 调整管 + 分压器；SAR ADC = 采样保持 + 比较器 + 电容 DAC + SAR 逻辑；电荷泵 PLL = PFD + 电荷泵 + 环路滤波器 + VCO + 分频器（[Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)；[Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)；[Wikipedia: CP-PLL](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)）【常识】。
+- 器件依赖可以归成五类：放大器看 gm/ID、gm·ro、fT；比较器、基准和数据转换器看匹配；VCO、LNA 和 ADC 前端看噪声；bandgap 看 BJT/二极管；电源器件看 Ron·C 和可靠性【推断】。
+- 逻辑工艺的趋势对模拟有利有弊：VDD 降低压缩余量，宽度量子化限制尺寸自由度；fT 提高有利于 RF 和 SerDes，FinFET 无掺杂沟道改善 VT 匹配【推断】。
+
+### 一张总表：每个模块干什么、看什么、靠什么
+
+下表行内容为教科书标准知识（Razavi、Johns & Martin、Gray & Meyer、Allen & Holberg、Baker），没有逐行找到网页出处，统一标为【常识】。
+
+| 层级 | 模块 | 干什么 | 关键电路指标 | 依赖的器件指标 |
+|---|---|---|---|---|
+| 原语 | 电流镜 | 复制或缩放电流 | Rout、顺从电压、比例误差 | 匹配（AVT、Aβ）、ro、LDE |
+| 原语 | 差分对 | 放大差值、抑制共模 | 失调、CMRR、gm | 匹配、gm/ID、1/f 噪声 |
+| 原语 | 共源 / 共栅 / 共漏 | 电压放大 / 电流缓冲（cascode）/ 电压缓冲 | 增益、带宽、输入输出阻抗 | gm/ID、gm·ro、fT、Cgd |
+| 放大器 | OTA、套筒 / 折叠 cascode、两级运放 | 放大 | 增益、GBW、相位裕度、压摆率、摆幅 | 本征增益、余量 |
+| 判决 | 比较器（静态 / 动态锁存） | 1 位判决 | 失调、速度、回踢、噪声、亚稳态 | 匹配、fT、1/f 噪声 |
+| 基准 | bandgap、电流基准 | 稳定的电压 / 电流 | 精度、温漂、PSRR、噪声、最低 VDD、启动 | BJT/二极管匹配、电阻 TC、运放失调 |
+| 电源 | LDO、buck、电荷泵、POR | 稳压、变压、上电复位 | 压差、PSRR、Iq、效率、纹波、阈值精度 | 调整管 Ron、功率管 Ron·Qg、可靠性（HCI/TDDB）、VT 分布 |
+| 数据转换 | SAR、pipeline、Δ-Σ、电流舵 DAC、R-string DAC | 模拟 ↔ 数字 | ENOB、SNR、SFDR、INL/DNL | 比较器噪声、电容 / 电阻 / 电流源匹配、开关 Ron 与漏电、运放增益 |
+| 时钟 | VCO、PLL、DLL、晶振、CDR | 产生、对齐、恢复时钟 | 相位噪声、抖动、杂散、锁定时间 | 1/f 噪声上变频、fT、电感 Q |
+| 接口 | SerDes、I/O、ESD | 高速收发、对外接口、静电保护 | BER、眼图、HBM/CDM 等级 | fT/fmax、gm/C、厚氧器件、回滞特性、击穿电压 |
+| 传感 | 温度传感器、PVT 监控 | 测温度、电压、工艺速度 | 修调后的精度 | BJT/二极管、器件速度、VT 分布 |
+| 滤波 | 开关电容、Gm-C / 有源 RC | 滤波、采样保持、积分 | 带宽、线性度、kT/C 噪声 | 电容匹配、开关电荷注入、gm 线性度 |
+| RF | LNA、混频器、PA | 低噪放大、变频、功率发射 | NF、IIP3、输出功率、效率 | fT/fmax、栅电阻、击穿电压、热 |
+
+### 组合的例子：一个模块拆开是什么
+
+**电荷泵 PLL**【推断】：PFD（数字）+ 电荷泵（UP/DN 电流镜 + 开关）+ 环路滤波器（R、C）+ VCO（环形或 LC）+ 反馈分频器（数字）。电荷泵的 UP/DN 镜像失配会造成静态相位偏差和参考杂散。这是 §1 的电流镜误差直接影响 PLL 性能的一个例子。
+
+**SAR ADC**【推断】：自举采样开关 + 电容 DAC（单位电容阵列，共质心排布）+ 动态比较器（差分对 + 锁存）+ SAR 逻辑（数字）+ 参考电压缓冲（类似一个 LDO）。
+
+**LDO**【推断】：bandgap + 误差放大器（一个 OTA）+ 调整管 + 分压器 + 补偿。
+
+**SerDes 的一条通道（lane）**【推断】：发送端（串行器 + 驱动器 + FFE 均衡）+ 信道 + 接收端（CTLE + DFE 比较器 + CDR）+ 共享 PLL。
+
+一个规律【推断】：越往上，数字逻辑占的比例越高。现代 PLL、SAR ADC 和 SerDes 里，真正的模拟部分往往只剩采样开关、比较器、VCO、电荷泵和前端放大器，其余都交给数字逻辑和校准。这也是这些 IP 能跟着先进节点走的原因。
+
+### SerDes：芯片之间的高速公路
+
+【常识】SerDes 把芯片里的宽并行数据压成一两根差分线上的高速串行数据，到对端再还原。发送端有驱动器和前馈均衡（FFE）；接收端有连续时间线性均衡（CTLE）、判决反馈均衡（DFE）和时钟数据恢复（CDR），旁边是 PLL。主要指标是误码率（BER）、眼图张开度和每比特能耗。器件层面最看重 fT/fmax 和 gm/C。
+
+【厂商】Silicon Creations 的 SerDes PMA 覆盖 PCIe、JESD204B/C、CPRI、10G-KR 等 30 多种协议，工艺从 180 nm 到 4 nm（[AnySilicon: Silicon Creations](https://anysilicon.com/vendors/silicon-creations/)）。SerDes 的数字部分（PCS 和控制逻辑）常以软核 RTL 交付；以 PCIe Gen4 为例，接口是约 1 GHz 的 16 位总线，时序要由集成方收敛（[Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)）。
+
+### I/O 与 ESD：芯片的"门"和"保险丝"
+
+【常识】I/O 单元包括焊盘驱动器和接收器，通常用厚氧器件承受更高的接口电压。ESD 保护包括二极管、接地栅 NMOS（GGNMOS）或 SCR，以及电源轨之间的箝位（rail clamp），用来泄放人体模型（HBM）和充电器件模型（CDM）放电。ESD 器件看的是回滞（snapback）特性、击穿电压、导通电阻，以及它给信号引脚增加的面积和电容。高速接口的 ESD 尤其难做，因为保护器件的电容直接吃掉带宽。ESD 和 I/O 单元结构本次没有找到专门的公开来源。
+
+【厂商】在存储器 PHY 里，I/O 和模拟是一体的：Synopsys 的 DDR PHY 资料列出了可编程驱动强度和 ODT、ESD 保护、PVT 补偿的 I/O、低抖动 DLL，以及动态漂移检测与补偿（[Synopsys DDR multiPHY](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)）。
+
+### 传感器与监控：芯片的"体检"
+
+【常识】片上温度传感器通常用 PTAT 的 ΔV_BE（与 bandgap 同源），再用 Δ-Σ 或 SAR ADC 数字化，精度靠修调。PVT 监控包括测量工艺速度的环形振荡器和检测电源跌落的 droop 检测器。
+
+【厂商】厂商把这些归为独立的 IP 类别：
+- Agile Analog 设有"IC 健康与监控"子系统（温度传感器、IR 压降传感器）和"安全"子系统（电压毛刺传感器、温度传感器）（[Embedded Computing Design](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)）。
+- Synopsys 把 PVT 传感器归入"芯片生命周期管理（SLM）IP"，与接口 IP 和基础 IP 并列（[Synopsys 新闻稿](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)）。
+
+### 给逻辑工艺工程师的翻译
+
+【推断】模拟关心的器件性质，很多是逻辑优化不太看的：
+- 本征增益 gm·ro：随 L 缩短而下降，FinFET 里靠叠栅缓解。
+- 1/f 噪声、匹配（AVT）、ro 和 DIBL。
+- LDE。
+- 无源元件：MOM/MIM 电容密度与匹配、电阻温度系数与匹配、电感 Q。
+
+逻辑工艺的趋势对模拟的影响：
+- VDD 降低：余量变小，深度 cascode 叠不起来。
+- 宽度量子化：尺寸自由度变小。
+- fT 提高：有利于 RF 和 SerDes。
+- FinFET 无掺杂沟道：VT 匹配变好。
+
+这些器件指标的定义、提取方法和各节点数据详见主指南。
+
+## 8. 模拟 IP：每颗芯片都要用的那些
+
+**几乎每颗 SoC 都要一组"基础模拟 IP"（时钟、基准、稳压、复位、监控、I/O 与 ESD、OTP），再按产品加上高速 PHY 和数据转换器；这些 IP 一般以绑定某个工艺的 GDS 硬核授权，所以"某个节点上有没有现成的、硅验证过的模拟 IP"常常决定了芯片能选哪个节点和哪家代工厂。**
+
+要点：
+- 必备层：PLL、晶振 pad 或片上 RC 振荡器、bandgap、POR、LDO、PVT/温度传感器、带 ESD 的 GPIO、OTP/eFuse【推断】（依据：[Agile Analog](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)、[Analog Bits](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)、[Synopsys](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1) 的目录反复出现同一组）。
+- 按应用选：SerDes（PCIe/以太网/CXL）、DDR/LPDDR/HBM PHY、UCIe/BoW 裸片互连、USB/MIPI、高精度 ADC/DAC、LC PLL【推断】。
+- 软核与硬核：数字 IP 一般是可综合的 RTL，基本与工艺无关；模拟和混合信号 IP"一般以硬核开发和授权"，即特定工艺的 GDS，不能改到别的工艺（[AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)）【观点】。
+- 移植难："往往需要从头实现"；从 28 nm 到 16 nm 是"完全不同的设计"（[Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)；[Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)）【厂商】【观点】。
+- "有没有 IP"影响选厂：有公司会根据可用的 IP 来决定用哪家代工厂、哪个节点（[Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)）【观点】。
+
+### 目录：每个 IP 干什么、是否必备、看什么指标
+
+[图：ESP32 Wi-Fi/蓝牙 SoC 裸片照片中 RF/模拟部分的局部：可以看到螺旋电感和多个模拟模块。注意那些螺旋电感：它们是 RF 和 LC 振荡电路里常见的大面积无源元件，尺寸由电磁特性决定、几乎不随工艺节点缩小，这是模拟 IP 难以跟着逻辑一起缩小的直观原因]
+
+| IP | 干什么 | 必备 / 按应用 | 关键指标 |
+|---|---|---|---|
+| PLL（环形，小数分频） | 为核心、总线和 PHY 生成时钟 | 必备【推断】 | 抖动（环形"低至 1 ps RMS"【厂商】）、频率范围、锁定时间、面积功耗（[AnySilicon](https://anysilicon.com/vendors/silicon-creations/)） |
+| LC PLL | 给高速 SerDes 提供低抖动时钟 | 按应用【推断】 | 抖动（"明显低于 300 fs RMS"【厂商】）（[AnySilicon](https://anysilicon.com/vendors/silicon-creations/)） |
+| 晶振 pad / RC 振荡器 | PLL 参考；常开域、看门狗、低功耗时钟 | 必备【推断】 | 频率精度、启动、功耗；RC 振荡器无需外部元件（[AnySilicon](https://anysilicon.com/vendors/silicon-creations/)）【厂商】 |
+| Bandgap | 稳定的电压基准 | 必备【推断】 | 初始精度、温漂、PSRR、噪声 |
+| LDO | 局部稳压，给敏感模块供干净电源 | 必备【推断】 | 压差、PSRR、Iq、瞬态响应 |
+| POR / 掉电检测 | 电源稳定前保持复位；运行中电源下跌时报警 | 必备【推断】 | 阈值精度、响应时间 |
+| PVT / 温度 / IR 压降传感器 | 监控芯片健康，支持调频调压 | 必备【推断】（Synopsys 把它列为 SLM IP【厂商】） | 测量精度、转换时间 |
+| 电压毛刺传感器 | 检测故障注入攻击 | 按应用（安全）【厂商】 | 检测阈值、响应速度（[Embedded Computing Design](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)） |
+| GPIO + ESD | 对外接口与静电保护 | 必备【常识】 | 驱动能力、电压等级、HBM/CDM 等级 |
+| OTP / eFuse / antifuse | 存储修调值、密钥、ID、配置 | 必备【推断】 | 可靠性、面积、读出安全性（[Synopsys OTP](https://www.synopsys.com/articles/non-volatile-memory.html)）【厂商】 |
+| SerDes（PCIe/以太网/CXL） | 芯片间高速串行通信 | 按应用（数据中心、网络、AI） | BER、眼图、pJ/bit、协议合规 |
+| DDR/LPDDR/HBM PHY | 连接外部 DRAM | 按应用（有外部 DRAM 时） | 数据率、时序余量、功耗；内含 DLL 与校准 I/O（[Synopsys DDR](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)）【厂商】 |
+| UCIe / BoW / AIB | chiplet 之间的裸片互连 | 按应用（chiplet 设计） | 带宽密度（Tb/s/mm）、pJ/bit、距离 |
+| USB / MIPI | 外设、摄像头、显示接口 | 按应用（客户端、手机、摄像头） | 协议合规、功耗 |
+| ADC / DAC | 传感器接口、音频、无线基带 | 按应用（中低精度 SAR 也常见于 MCU）【推断】 | ENOB、采样率、功耗 |
+
+【厂商】OTP 的补充：它是"电源上升时第一个开始工作的电路"，因为其他模拟模块要先从里面读出修调值（[Synopsys OTP](https://www.synopsys.com/articles/non-volatile-memory.html)）。eFuse 靠电迁移熔断金属，在 FinFET 上面积大、漏电高，熔断的连线还可能"长回来"。antifuse 靠氧化层击穿，不需要额外掩模，SEM 也难读出。这份资料来自 antifuse 厂商，对 eFuse 的比较有立场。
+
+【厂商】UCIe 的两种封装规格（[Synopsys UCIe 技术简报](https://www.synopsys.com/designware-ip/technical-bulletin/ucie-multi-die-socs.html)）：
+
+| 参数 | 先进封装 | 标准封装 |
+|---|---|---|
+| 数据率 | 16 Gb/s | 16 Gb/s |
+| 每模块通道数 | 64 | 16 |
+| 凸点间距 | 45 µm | 110 µm |
+| 带宽密度 | 5.2 Tb/s/mm | 0.9 Tb/s/mm |
+| 能效 | 0.3 pJ/bit | 0.5 pJ/bit |
+| 距离 | ≤ 2 mm | ≤ 25 mm |
+| 修复用冗余通道 | 有 | 无 |
+
+### 厂商目录给出的分组
+
+【厂商】厂商目录给出了一个实际的分组方式：
+
+| 来源 | 分组 / 内容 |
+|---|---|
+| Agile Analog（[Embedded Computing Design](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)） | 常开（Always-On）：低功耗 RC 振荡器、低功耗 bandgap、可编程比较器、POR、小型数字单元库 |
+| | 电源：LDO、POR、IR 压降传感器、bandgap |
+| | 健康与监控：温度传感器、IR 压降传感器 |
+| | 安全：电压毛刺传感器、温度传感器 |
+| | 传感器接口：8/10 位 SAR ADC、8/10 位 DAC、比较器 |
+| | 无线接口：SAR ADC、DAC、RC 振荡器、LDO |
+| Analog Bits，GF 12LP/12LP+（[SemiWiki](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)） | 整数与小数 PLL、PCIe Gen2/3 环形 PLL、PCIe Gen4/5 LC PLL、PVT 传感器、POR |
+| Analog Bits，Samsung 32LP–5LPE（同上） | 低功耗 PLL、PCIe 参考时钟、片间 I/O、时钟收发、振荡器 pad、PVT 传感器、电源毛刺检测、多协议 SerDes |
+| Synopsys，Intel 18A/18A-P（[新闻稿](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)） | 224G 以太网、PCIe 7.0、UCIe、USB4 PHY；基础 IP（嵌入式存储器、逻辑库、I/O）；PVT 传感器 |
+
+Samsung 的一场演讲把基础模拟 IP 称为"AI SoC 的关键差异化因素"（[SemiWiki](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)）【厂商】。AnySilicon 列出的典型模拟 / 混合信号硬核是 SerDes、PLL、ADC、DAC，以及 DDR 和 PCIe 的 PHY 层；它们对应的数字部分（DRAM 控制器、以太网 MAC、AMBA 总线 IP）通常是软核（[AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)）【观点】。
+
+### 模拟 IP 和数字 IP 有什么不同
+
+| 方面 | 数字 IP | 模拟 / 混合信号 IP | 证据 |
+|---|---|---|---|
+| 交付形式 | 软核：可综合 RTL（SystemVerilog/VHDL），有时是通用门级网表 | 硬核：特定工艺的 GDS 版图 | [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)【观点】 |
+| 与工艺的关系 | "一般与工艺无关"，后端 P&R 可映射到任何工艺 | 绑定一套 PDK，"不能为不同工艺定制" | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)；[AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)【观点】 |
+| 集成方怎么用 | 自己综合、布局布线、收敛时序 | 把 GDS 直接放进最终版图，按规则接电源、信号和 ESD | [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)【观点】 |
+| 换节点 | 重新综合、布局布线、签核，用新的标准单元库 | 重新设计、重新版图、重新仿真、重新流片验证 | [Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)【厂商】；【推断】 |
+| 角落覆盖 | 主要靠重新表征的标准单元 .lib | IP 自己要跑 PVT、蒙特卡洛和寄生角 | 【推断】 |
+| 主要风险 | 验证覆盖率和时序收敛 | 定制版图、版图后再调中心、硅片表征 | 【推断】 |
+| 对节点选择的影响 | 小 | 大：IP 是否就绪会影响选哪个节点和代工厂 | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)【观点】 |
+| 物理位置 | 芯片里任意位置 | 高速 PHY 必须放在芯片边缘（"beachfront"） | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)【观点】 |
+
+### 为什么模拟 IP 移植难
+
+【厂商】Synopsys 说，模拟迁移"可能是手工的、耗时的，并且需要深入理解电路功能"，而且"往往需要从头实现"。在更小的节点上，LDE、寄生、电迁移和应力都在增加，所以 FinFET 节点上只做版图前仿真是不够的（[Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)）。
+
+【观点】2014 年的一篇行业访谈给出了更具体的原因（[Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)）：
+- Synapse Design 的 Hem Hingarh 谈 FinFET："fin 宽度对 VT 有显著影响"。还有 fin 数量子化、寄生 R/C 改变、Miller 电容大、接触电阻和自热。"必须从头开始，甚至要扔掉一些经验法则。"寄生提取角"增加到了大约 15 到 20 个"，仿真时间随之变长。
+- Cadence 的 Kevin Yee 说，从 28 nm 到 16 nm 是"完全不同的设计"。28 nm 时 PDK 从 v1.0 开始，到 16/14/10 nm 时从 v0.3/0.5 开始，也就是说 IP 要对着不成熟的模型设计。
+- Synopsys 的 Navraj Nandra 说，模拟 IP"必须放得进 SoC 的 beachfront"，而且新协议和数字缩放都要求重做架构，所以"与其说是复用，不如说是一开始就做对"。
+
+【推断】对逻辑工艺整合来说，结论是：一个新节点的模拟 IP 什么时候就绪，取决于模拟器件模型什么时候成熟，而不只取决于逻辑 PPA。这些模型包括按 fin / sheet 数给出的 VT 与失配、flicker 噪声、LDE/应力、自热，以及薄金属的 EM 规则。模型每变一次，模拟 IP 就要重新签核、重新验证。
+
+### 代工厂的 IP 生态与质量评分
+
+【厂商】代工厂用 IP 联盟和质量评分来管理这件事：
+- **TSMC OIP IP Alliance**：提供"硅验证、量产验证、特定于代工厂"的 IP。页面称有来自 40 家联盟成员的数万个 IP 选项，截至 2023 年 8 月超过 60,000 个 IP。硬核 IP 在测试芯片流片前要经过物理审查和流片前评估（含设计套件和设计余量审查）；主要 IP 有测试芯片流片审查；流片后基于测试芯片表征报告做典型和分批（split-lot）硅片评估。结果以 TSMC9000 评分发布，"通过的评估越多，可信度越高"；TSMC9000A 增加车规评估（[TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)）。
+- **Samsung SAFE**：截至 2023 年 6 月，IP 合作方包括 Synopsys、Cadence 和 Alphawave Semi，为 3–8 nm 工艺新增"数十个"IP（[Samsung 新闻稿](https://news.samsungsemiconductor.com/global/samsung-electronics-powers-enhanced-customer-development-support-with-expanded-safe-program/)）。
+- **Intel Foundry**：Synopsys 加入了 Intel Foundry Accelerator 设计服务联盟，并是 chiplet 联盟的创始成员（[Synopsys 新闻稿](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)）；Cadence 也宣布了 18A/18A-P 的设计 IP（[Design & Reuse](https://us.design-reuse.com/news/57767/cadence-intel-18a-p-ip.html)，仅检索摘要）。
+
+【推断】split-lot（快 / 慢片）硅片报告是工艺偏差在模拟余量上暴露出来的地方。所以"在角落批次上硅验证过"是商业上的前提条件，不只是良好实践。
+
+## 9. 一个模拟 IP 由什么组成：前端、后端与交付物
+
+**一个模拟 IP 要经过"规格 → 架构 → 晶体管级原理图 → 版图前仿真 → 定制版图 → 物理验证 → 寄生提取与版图后仿真 → 可靠性检查 → 测试芯片与硅片表征"这条链，最后以一个硬核包交付：GDS、LEF 抽象、数字引脚的 Liberty、行为模型、网表、验证报告、集成指南和硅片表征报告。**
+
+要点：
+- Cadence 的基本流程是：规格 → 原理图 → 版图前仿真 → 版图 → DRC/LVS → 寄生提取 → 版图后仿真 → GDSII 流片，且反复迭代（[Cadence 社区博客](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)）【厂商】。
+- 先进节点上后端更重：寄生提取角更多，还要查自热、接触电阻、fin 量子化、EM 和应力（[Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)；[Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)）【观点】【厂商】。
+- 流片到硅片回来要"几个月"；之后才开始表征和调试（[Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)）【厂商】。
+- 交付物的各个部分都有公开来源证实（Liberty、SDC、IBIS-AMI、GDS、表征报告），但没有一份公开文件列全，完整清单属于【推断】。
+- 迁移工具能自动做原理图映射和版图模板复用，厂商称快"最多 3 倍"或省下"数周"，但硅片验证仍在关键路径上（[Business Wire / Cadence](https://www.businesswire.com/news/home/20230925981631/en/Cadence-CustomAnalog-Design-Migration-Flow-Accelerates-Adoption-of-TSMC-Advanced-Process-Technologies)；[Synopsys / Design & Reuse](https://us.design-reuse.com/news/54885/synopsys-tsmc-advance-analog-design-migration-advanced-tsmc-processes.html)）【厂商】。
+
+### 从规格到硅片验证：流程表
+
+| 阶段 | 做什么 | 产出 | 证据 |
+|---|---|---|---|
+| 1. 规格 | 定性能、功耗、面积、接口、工作条件（电压、温度范围） | 规格书 | [Cadence 博客](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)【厂商】 |
+| 2. 架构 | 选拓扑（例如环形还是 LC PLL、SAR 还是 Δ-Σ），分配误差与功耗预算；常用行为模型做系统仿真 | 架构文档、行为模型 | 【推断】 |
+| 3. 原理图 | 晶体管级设计，按 gm/ID 等方法定尺寸 | 原理图、符号 | [Cadence 博客](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)【厂商】 |
+| 4. 版图前仿真 | 典型与 PVT 角、蒙特卡洛失配、噪声、稳定性、瞬态 | 仿真报告；设计余量 | Cadence 文章本身没写角落和蒙特卡洛；PVT 角下的设计调中心见 [Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)【厂商】 |
+| 5. 定制版图 | 匹配摆放、保护环、对称布线、电源网格、dummy | 版图数据库 | [Cadence 博客](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)【厂商】 |
+| 6. 物理验证 | DRC、LVS、ERC、天线规则 | 无违例的验证报告 | [Cadence 博客](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)【厂商】；ERC/天线【推断】 |
+| 7. 寄生提取 + 版图后仿真 | 提取 R/C，重跑版图前的全部仿真；多个提取角 | 版图后仿真报告；必要时回到第 3 或第 5 步 | [Cadence 博客](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)【厂商】；[Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)【观点】 |
+| 8. 可靠性检查 | EM/IR、自热、应力、老化 | EM/IR 与可靠性报告 | [Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)【厂商】 |
+| 9. 代工厂预审 | 设计套件和设计余量审查；主要 IP 的测试芯片流片审查 | 流片前评估记录 | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)【厂商】 |
+| 10. 测试芯片流片 | 把 IP 放在测试芯片上，带隔离测试路径、环回和可观测性 | GDSII / OASIS | [Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)【厂商】 |
+| 11. 硅片表征 | 典型片和 split-lot 片上测指标；封装、板级、插座与焊接差异 | 表征报告；已知问题列表 | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)；[Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)【厂商】 |
+| 12. 发布与支持 | 打包交付；支持客户集成和 bring-up | 交付包（见下表）；质量评分 | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)【厂商】 |
+
+这条链对应前文：第 3 步用 §1–§5 的积木，第 5 步用 §1 和 §6 的版图规则，第 4 和第 7 步的蒙特卡洛就是在算 §1 的 Pelgrom 失配。
+
+【推断】数字 IP 的对应流程是：RTL → lint 与 CDC 检查 → 功能验证（UVM、覆盖率）→ 综合到目标标准单元库 → P&R → STA 与功耗签核。模拟流程的风险集中在定制版图、版图后调中心和硅片表征；数字流程的风险集中在验证覆盖率和时序收敛。
+
+### 先进节点让后端变重
+
+【观点】Hingarh 提到，先进节点的寄生提取角增加到约 15–20 个，验证还要加上自热、接触电阻和 fin 量子化效应；IP 设计者必须在单元、模块和 IP 三个层级做"多得多的有效电路表征"（[Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)）。【厂商】Synopsys 的 AI 优化器在"数百个 PVT 角"上对迁移后的电路调中心（[Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)）。公开资料里没有一个权威的"标准签核角数"。
+
+【观点】Rambus 列出了 SerDes 硅片 bring-up 的难点：实验室设备、封装与电路板审查、板与板之间的差异、插座与焊接的差异，以及"某个蒙特卡洛样本才会出现"的失效（[Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)）。
+
+### 交付物：一个硬核包里有什么
+
+| 文件 | 用途 | 谁用 | 证据 |
+|---|---|---|---|
+| GDSII / OASIS | 最终版图，放入芯片顶层 | 集成方的版图与流片团队 | [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)【观点】 |
+| LEF / 抽象视图 | 引脚、阻挡区、可用布线层，供自动布局布线 | 集成方的 P&R 团队 | 【推断】 |
+| Liberty（.lib/.db） | IP 数字引脚的时序弧和功耗，常需多个 PVT 角 | 集成方的 STA 与功耗签核 | Rambus 列出了硬化 AFE 与数字接口的 Liberty（[Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)）【厂商】 |
+| SDC 约束 | 时钟、时钟组、跨时钟域 | 集成方的综合与 STA | [Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)【厂商】 |
+| Verilog 行为模型；Verilog-AMS / 实数模型 | 芯片级功能仿真与混合信号验证 | 集成方的验证团队 | 【推断】；Rambus 提到支持反标门级仿真【厂商】 |
+| CDL / SPICE 网表 | LVS 与晶体管级仿真 | 集成方的物理验证团队 | 【推断】 |
+| DRC/LVS/ERC/天线报告 | 证明 IP 用代工厂签核规则（指定版本）检查过 | 集成方与代工厂 | 【推断】 |
+| EM/IR 报告 | 证明电流密度和压降满足规则 | 集成方的电源完整性团队 | 【推断】 |
+| IBIS / IBIS-AMI 模型 | I/O 与 SerDes 的信道仿真；AMI 是可执行的 TX/RX 模型，含均衡和 CDR，能仿真远多于 SPICE 的比特数 | 封装与电路板的信号完整性团队 | [MathWorks](https://www.mathworks.com/help/serdes/ug/understanding-ibis-ami-simulations.html)【常识】 |
+| 数据手册、集成与用户指南 | 平面规划、电源域、ESD 规则、禁布区、去耦、凸点与焊盘要求；时钟应用笔记 | 集成方的架构、版图和封装团队 | Rambus 的时钟应用笔记（[Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)）【厂商】；其余【推断】 |
+| 封装 / 电路板应用笔记 | 串扰、阻抗、偏斜、去耦、插入与回波损耗、稳压器噪声的签核标准 | 封装与电路板团队 | [Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)【厂商】 |
+| DFT / BIST 资料 | 环回、PRBS、数字外壳的扫描；UCIe 还包含链路训练、校准和测试修复逻辑 | 测试团队 | [Synopsys UCIe](https://www.synopsys.com/designware-ip/technical-bulletin/ucie-multi-die-socs.html)【厂商】；其余【推断】 |
+| 调试工具 | 眼图与冲激响应分析器 | bring-up 工程师 | [Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)【厂商】 |
+| 软核 RTL（PHY 的数字部分） | PCS 与控制逻辑，由集成方综合并收敛时序 | 集成方的前端团队 | [Rambus 博客](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)；DDR PHY 配软的 DFI 接口（[Synopsys DDR](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)）【厂商】 |
+| 硅片表征 / 认证报告 | 典型片与 split-lot 片的实测数据；已知问题 | 集成方的选型与质量团队；代工厂评分 | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)【厂商】 |
+
+【推断】数字软核的交付物通常是 RTL、SDC、testbench 或 VIP、综合脚本和 DFT/扫描插入指南，有时附带某个节点的硬化网表或 GDS。差别很直观：数字 IP 交付"怎么做出来"，模拟 IP 交付"已经做好的东西和怎么正确地用它"。
+
+### 迁移自动化与工期：工具在加速，硅片仍是瓶颈
+
+【厂商】主要厂商的说法：
+- **Cadence + TSMC（2023 年 9 月）**：Virtuoso Studio 迁移流程能迁移原理图单元、参数、引脚和连线，用 ADE 重新仿真并调到规格；生成式版图技术识别旧版图中的器件组，再套用到新版图。支持 N40→N22、N22→N12、N12→N6、N6→N4、N5→N3E、N4/N5→N3E 和 N3E→N2。客户报告比手工迁移快"最多 3 倍"（[Business Wire / Cadence](https://www.businesswire.com/news/home/20230925981631/en/Cadence-CustomAnalog-Design-Migration-Flow-Accelerates-Adoption-of-TSMC-Advanced-Process-Technologies)）。
+- **Synopsys + TSMC（2023 年 9 月）**：模拟迁移参考流程覆盖 N4P、N3E 和 N2，包含基于机器学习的原理图迁移、基于模板的版图迁移和"寄生感知、AI 驱动的优化"，称能"省下数周工程时间"（[Design & Reuse / Synopsys](https://us.design-reuse.com/news/54885/synopsys-tsmc-advance-analog-design-migration-advanced-tsmc-processes.html)）。Synopsys 还以"到 2030 年缺 23,000 名工程师"作为背景（[Synopsys 博客](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)）。
+- **Agile Analog**：用 Composa 从目标 PDK 重新生成模拟 IP，代替每个工艺都要做一次的"重新设计"（[eeNews Europe](https://www.eenewseurope.com/en/process-agnostic-analog-ip-tackles-fab-capacity-challenges/)）。
+
+这些数字都没有独立基准。公开资料里也没有找到"移植一个 SerDes、PLL 或 DDR PHY 需要几个月"的可靠数字。
+
+【推断】工具能自动完成原理图映射和版图模板复用，但处理不了物理变化：fin 到 nanosheet 的宽度量子化、新的失配和 flicker 噪声模型、背面供电带来的 IR 和寄生变化、更紧的 EM 限制。所以剩下的工作集中在重新调中心和重新验证上。即使工具快 3 倍，测试芯片硅片（几个月）仍在关键路径上。"与工艺无关"的生成式方法，以及从 180 nm 做到 3 nm 的环形 PLL，都偏向更数字化、更易缩放的架构；LC 谐振腔、高精度 ADC 和 SerDes 前端仍然高度依赖节点。
+
+## 10. 想看更多图：可靠的公开资料
+
+**想看更多真实的原理图、版图和裸片照片，最可靠的来源是开源 PDK 和开源课程的代码仓库（可以直接打开原始设计文件）、Wikimedia Commons（标明许可的电路图），以及少数只能链接、不能转载的课程和应用笔记。**
+
+要点：
+- 开源课程和 PDK 仓库里的图是工具导出的真实设计，不是示意图，本页一半以上的图来自这里。
+- Wikimedia Commons 的电路图都标了作者和许可，可以按许可转载。
+- MIT OCW 是 CC BY-NC-SA（非商业），TI 应用笔记有版权：只适合链接阅读。
+- 想要真实的共质心版图，目前最可行的办法是用开源生成器自己生成。
+
+### 开源课程与 PDK 仓库（可下载原始文件）
+
+- [iic-jku/analog-circuit-design](https://github.com/iic-jku/analog-circuit-design)：Harald Pretl 的开源模拟课程，Apache-2.0。有 xschem 原理图（电流镜及其变体、五管 OTA、改进型 OTA、bandgap），用 IHP SG13G2 器件，带 ngspice 仿真设置。本页的电流镜变体、五管 OTA 和 CMOS bandgap 图都来自这里。
+- [google/skywater-pdk-libs-sky130_fd_pr](https://github.com/google/skywater-pdk-libs-sky130_fd_pr)：SkyWater SKY130 器件库，Apache-2.0。每种器件有 GDS 和官方 SVG 渲染，还有模型生成的 I–V 曲线。本页的多 finger NFET 版图和 Ids–Vds 曲线来自这里。
+- [SkyWater PDK 器件文档](https://skywater-pdk.readthedocs.io/en/main/rules/device-details.html)：各器件的说明，仓库里还有可复用的剖面图。
+- [ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public)：开源模拟版图自动生成工具，BSD-3-Clause。本页的共质心摆放图来自这里。
+- [OpenFASOC gLayout](https://openfasoc.readthedocs.io/en/latest/notebooks/glayout/glayout_opamp.html)：能用 SKY130/GF180 生成电流镜、差分对、共质心（ABBA）、叉指结构和两级运放的真实 GDS。
+
+### Tiny Tapeout：流片过的开源模拟设计
+
+- [atenfyr/ttsky_analog](https://github.com/atenfyr/ttsky_analog)：Miller OTA、beta multiplier 电流基准、补偿电容、传输门多路器，带标注版图。芯片页见 [Tiny Tapeout ttsky26a #520](https://tinytapeout.com/chips/ttsky26a/520)。
+- [spasquale25/OTA](https://github.com/spasquale25/OTA)：SKY130 五管 OTA 的 GDS，25 µm × 20 µm 的单元里能看到 PMOS 镜像负载、NMOS 输入对和尾电流镜。
+
+### Wikimedia Commons：标明许可的电路图
+
+本页用到的 Commons 图都可以在原页面看大图和许可：
+- [Simple MOSFET mirror](https://commons.wikimedia.org/wiki/File:Simple_MOSFET_mirror.PNG)、[Kaskode-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Kaskode-Stromspiegel_(MOS).svg)、[Wilson-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Wilson-Stromspiegel_(MOS).svg)、[Wide-swing MOSFET mirror](https://commons.wikimedia.org/wiki/File:Wide-swing_MOSFET_mirror.svg)
+- [Single Supply CMOS OpAmp](https://commons.wikimedia.org/wiki/File:Single_Supply_CMOS_OpAmp.svg)、[Dynamic Comparator](https://commons.wikimedia.org/wiki/File:Dynamic_Comparator.png)、[Brokaw cell theory](https://commons.wikimedia.org/wiki/File:Brokaw_cell_theory.gif)、[Low-dropout regulator circuit](https://commons.wikimedia.org/wiki/File:Low-dropout-regulator-circuit.svg)
+- [Analog PLL (block diagram)](https://commons.wikimedia.org/wiki/File:Analog_PLL_(block_diagram).PNG)、[SA ADC block diagram](https://commons.wikimedia.org/wiki/File:SA_ADC_block_diagram.png)、[2nd order delta-sigma modulation loop](https://commons.wikimedia.org/wiki/File:2nd_order_delta-sigma_modulation_loop.svg)
+- [Vlsiopamp2（运放版图）](https://commons.wikimedia.org/wiki/File:Vlsiopamp2.gif)、[Doublegate FinFET](https://commons.wikimedia.org/wiki/File:Doublegate_FinFET-en.svg)、[ESP32 RF 裸片](https://commons.wikimedia.org/wiki/File:Esp32-rf-HD.jpg)
+
+本页没有用、但值得看的同类图：
+- [电荷泵电路](https://commons.wikimedia.org/wiki/File:ChargePumpPLLCircuit.svg)：两个 ICP 电流源由 Up/Down 开关控制，向环路电容充放电。
+- [含电荷泵的 PLL 方框图](https://commons.wikimedia.org/wiki/File:PLL_generic_inline_optional_N.svg)
+- [电荷再分配 DAC](https://commons.wikimedia.org/wiki/File:ChargeScalingDAC.png)：SAR 用的二进制加权电容阵列。
+- [Track-and-latch 比较器](https://commons.wikimedia.org/wiki/File:Track_and_Latch_Comparator.svg)
+- [带 CLM 的 MOSFET 输出特性](https://commons.wikimedia.org/wiki/File:MOSFET_enhancement-mode_n-channel_en.svg)
+- [CMOS LDO 裸片（Torex XC6206）](https://commons.wikimedia.org/wiki/File:Torex-XC6206-HD.jpg)、[CMOS PLL 裸片（CD4046）](https://commons.wikimedia.org/wiki/File:Ti-CD4046BE-50-HD.jpg)
+
+### 只能链接阅读的课程、笔记与图片站
+
+- [MIT OCW 6.012 Microelectronic Devices and Circuits](https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2009/)：器件到基本电路，CC BY-NC-SA（非商业）。
+- [MIT OCW 6.776 High Speed Communication Circuits](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/)：PLL、VCO 和高速电路，CC BY-NC-SA（非商业）。
+- [TAMU ECEN474 第 8 讲：电流镜](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf) 和 [UTK ECE532 第 6 讲](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)：本页电流镜公式的主要出处。
+- [TI SLVA079：LDO 术语与定义](https://www.ti.com/lit/an/slva079/slva079.pdf)：LDO 指标的系统解释。
+- [Ken Shirriff 的博客](https://www.righto.com/)：逐个晶体管解读模拟芯片的裸片照片。
+- [Zeptobars](https://zeptobars.com/en/)：本页 ESP32 裸片照片的原始来源，有大量高清裸片照片。
+
+## Sources
+
+- [Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)
+- [Wikipedia: Wilson current mirror](https://en.wikipedia.org/wiki/Wilson_current_mirror)
+- [Wikipedia: Bandgap voltage reference](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)
+- [Wikipedia: Low-dropout regulator](https://en.wikipedia.org/wiki/Low-dropout_regulator)
+- [Wikipedia: Analog-to-digital converter](https://en.wikipedia.org/wiki/Analog-to-digital_converter)
+- [Wikipedia: Charge-pump phase-locked loop](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)
+- [TAMU ECEN474 Lecture 8: Current Mirrors (S. Palermo)](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)
+- [UTK ECE532 Lecture 06 (B. Blalock)](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)
+- [Harvard ES154 Lecture 15: Differential pair](https://in.ncu.edu.tw/~ncume_ee/harvard-es154/lect_15_diff_pair_2.pdf)
+- [Pelgrom, Tuinhout, Vertregt: Transistor matching in analog CMOS applications (IEDM 1998)](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)
+- [Sheikholeslami: Process variation and Pelgrom's law (IEEE SSC Magazine)](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)
+- [Pulsic: Current Mirrors in Analog Layout](https://pulsic.com/?p=1)
+- [Tech Design Forums: How to design with finFETs](https://www.techdesignforums.com/practice/?p=5259)
+- [Sharma et al.: Constructive Place-and-Route for FinFET-Based Transistor Arrays in Analog Circuits Under Nonlinear Gradients (NSF PAR)](https://par.nsf.gov/servlets/purl/10540359)
+- [US 7,755,419: Low power beta multiplier start-up circuit](https://patents.google.com/patent/US7755419)
+- [US 8,598,862: Start-up circuit for cascoded beta multiplier](https://patents.google.com/patent/US8598862)
+- [US 8,450,992: Wide-swing cascode current mirror](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8450992)
+- [US 7,012,415: Wide swing, low power current mirror](https://patents.google.com/patent/US7012415)
+- [US 12,446,321: Fin boundaries](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12446321)
+- [DATE 2021 paper (FinFET analog layout)](https://past.date-conference.com/proceedings-archive/2021/pdf/1829.pdf)
+- [ASP-DAC 2022 paper 2B-3](https://www.aspdac.com/aspdac2022/taoka/pdf/2B-3.pdf)
+- [Electronic Design: What's the difference between SAR and delta-sigma ADCs](https://www.electronicdesign.com/technologies/analog/adc/article/21801636/whats-the-difference-between-sar-and-delta-sigma-adcs)
+- [AnySilicon: Silicon Creations vendor page](https://anysilicon.com/vendors/silicon-creations/)
+- [Design & Reuse: Silicon Creations fractional-N PLL milestone (Nov 2024)](https://us.design-reuse.com/news/57049/silicon-creations-milestone-fractional-n-pll.html)
+- [SemiWiki: Analog Bits analog foundation IP on advanced FinFET processes](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)
+- [Embedded Computing Design: Agile Analog releases a full set of key analog IPs](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)
+- [Synopsys and Intel Foundry press release (Apr 2025)](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)
+- [AnySilicon: IP core (soft vs hard IP)](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)
+- [Synopsys DDR multiPHY datasheet page](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)
+- [Synopsys technical bulletin: UCIe for multi-die SoCs](https://www.synopsys.com/designware-ip/technical-bulletin/ucie-multi-die-socs.html)
+- [Synopsys: Non-volatile memory (OTP) article](https://www.synopsys.com/articles/non-volatile-memory.html)
+- [Semiconductor Engineering: Challenges Increase For IP At Advanced Nodes (2014)](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)
+- [Synopsys blog: Analog circuit design migration](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)
+- [eeNews Europe: Process-agnostic analog IP tackles fab capacity challenges](https://www.eenewseurope.com/en/process-agnostic-analog-ip-tackles-fab-capacity-challenges/)
+- [TSMC OIP IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)
+- [Samsung Semiconductor newsroom: Expanded SAFE program (June 2023)](https://news.samsungsemiconductor.com/global/samsung-electronics-powers-enhanced-customer-development-support-with-expanded-safe-program/)
+- [Design & Reuse: Cadence IP for Intel 18A-P](https://us.design-reuse.com/news/57767/cadence-intel-18a-p-ip.html)
+- [Rambus blog: Overcoming high-speed SerDes IP integration challenges, part 2](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)
+- [Cadence Community blog: From schematic to silicon, a basic idea on analog IC design flow](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)
+- [MathWorks: Understanding IBIS-AMI simulations](https://www.mathworks.com/help/serdes/ug/understanding-ibis-ami-simulations.html)
+- [Business Wire: Cadence custom/analog design migration flow for TSMC processes (Sept 2023)](https://www.businesswire.com/news/home/20230925981631/en/Cadence-CustomAnalog-Design-Migration-Flow-Accelerates-Adoption-of-TSMC-Advanced-Process-Technologies)
+- [Design & Reuse: Synopsys and TSMC advance analog design migration (Sept 2023)](https://us.design-reuse.com/news/54885/synopsys-tsmc-advance-analog-design-migration-advanced-tsmc-processes.html)
+- [iic-jku/analog-circuit-design (Harald Pretl)](https://github.com/iic-jku/analog-circuit-design)
+- [google/skywater-pdk-libs-sky130_fd_pr](https://github.com/google/skywater-pdk-libs-sky130_fd_pr)
+- [SkyWater PDK device details documentation](https://skywater-pdk.readthedocs.io/en/main/rules/device-details.html)
+- [ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public)
+- [OpenFASOC gLayout op-amp notebook](https://openfasoc.readthedocs.io/en/latest/notebooks/glayout/glayout_opamp.html)
+- [atenfyr/ttsky_analog](https://github.com/atenfyr/ttsky_analog)
+- [Tiny Tapeout ttsky26a #520](https://tinytapeout.com/chips/ttsky26a/520)
+- [spasquale25/OTA](https://github.com/spasquale25/OTA)
+- [Wikimedia Commons: Simple MOSFET mirror](https://commons.wikimedia.org/wiki/File:Simple_MOSFET_mirror.PNG)
+- [Wikimedia Commons: Kaskode-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Kaskode-Stromspiegel_(MOS).svg)
+- [Wikimedia Commons: Wilson-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Wilson-Stromspiegel_(MOS).svg)
+- [Wikimedia Commons: Wide-swing MOSFET mirror](https://commons.wikimedia.org/wiki/File:Wide-swing_MOSFET_mirror.svg)
+- [Wikimedia Commons: Single Supply CMOS OpAmp](https://commons.wikimedia.org/wiki/File:Single_Supply_CMOS_OpAmp.svg)
+- [Wikimedia Commons: Dynamic Comparator](https://commons.wikimedia.org/wiki/File:Dynamic_Comparator.png)
+- [Wikimedia Commons: Brokaw cell theory](https://commons.wikimedia.org/wiki/File:Brokaw_cell_theory.gif)
+- [Wikimedia Commons: Low-dropout regulator circuit](https://commons.wikimedia.org/wiki/File:Low-dropout-regulator-circuit.svg)
+- [Wikimedia Commons: Analog PLL (block diagram)](https://commons.wikimedia.org/wiki/File:Analog_PLL_(block_diagram).PNG)
+- [Wikimedia Commons: SA ADC block diagram](https://commons.wikimedia.org/wiki/File:SA_ADC_block_diagram.png)
+- [Wikimedia Commons: 2nd order delta-sigma modulation loop](https://commons.wikimedia.org/wiki/File:2nd_order_delta-sigma_modulation_loop.svg)
+- [Wikimedia Commons: Vlsiopamp2](https://commons.wikimedia.org/wiki/File:Vlsiopamp2.gif)
+- [Wikimedia Commons: Doublegate FinFET](https://commons.wikimedia.org/wiki/File:Doublegate_FinFET-en.svg)
+- [Wikimedia Commons: ESP32 RF die (Zeptobars)](https://commons.wikimedia.org/wiki/File:Esp32-rf-HD.jpg)
+- [Wikimedia Commons: Charge pump PLL circuit](https://commons.wikimedia.org/wiki/File:ChargePumpPLLCircuit.svg)
+- [Wikimedia Commons: PLL generic inline optional N](https://commons.wikimedia.org/wiki/File:PLL_generic_inline_optional_N.svg)
+- [Wikimedia Commons: Charge scaling DAC](https://commons.wikimedia.org/wiki/File:ChargeScalingDAC.png)
+- [Wikimedia Commons: Track and Latch Comparator](https://commons.wikimedia.org/wiki/File:Track_and_Latch_Comparator.svg)
+- [Wikimedia Commons: MOSFET enhancement-mode n-channel characteristics](https://commons.wikimedia.org/wiki/File:MOSFET_enhancement-mode_n-channel_en.svg)
+- [Wikimedia Commons: Torex XC6206 die](https://commons.wikimedia.org/wiki/File:Torex-XC6206-HD.jpg)
+- [Wikimedia Commons: TI CD4046BE die](https://commons.wikimedia.org/wiki/File:Ti-CD4046BE-50-HD.jpg)
+- [MIT OCW 6.012 Microelectronic Devices and Circuits](https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2009/)
+- [MIT OCW 6.776 High Speed Communication Circuits](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/)
+- [TI SLVA079: Understanding the terms and definitions of LDO voltage regulators](https://www.ti.com/lit/an/slva079/slva079.pdf)
+- [Ken Shirriff's blog](https://www.righto.com/)
+- [Zeptobars](https://zeptobars.com/en/)
 
 
 ---

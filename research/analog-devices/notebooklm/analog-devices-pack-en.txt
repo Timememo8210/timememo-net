@@ -1,6 +1,6 @@
-# Analog device study pack (for NotebookLM)
+# Analog device study pack (for Gemini Notebook / NotebookLM)
 
-Source: timememo.net/research/analog-devices/. This pack combines five parts: (1) the study plan (7 sessions); (2) the Q&A (speed, VT and flicker noise); (3) the main guide; (4) gain and noise tricks; (5) the glossary. Everything is summarized from public material; [Inference] marks the author's judgment, and [TCAD] or [Silicon · research] numbers do not represent production processes.
+Source: timememo.net/research/analog-devices/. This pack combines six parts: (1) the study plan (7 sessions); (2) analog circuit fundamentals (current mirrors, main blocks, analog IP); (3) the Q&A (speed, VT and flicker noise); (4) the main guide; (5) gain and noise tricks; (6) the glossary. Figures are reduced to their captions; see the website for the images. Everything is summarized from public material; [Inference] marks the author's judgment, and [TCAD] or [Silicon · research] numbers do not represent production processes.
 
 
 ---
@@ -14,13 +14,13 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
 **Goal:** See why analog judges a device by small-signal ratios at a bias point, and learn the four core metrics and the cost each one stands for.
 
 **Sections to read:**
+- Basics: Overview: the building-block map of analog circuits
+- Basics: Current mirrors: the "current copier" of analog circuits
 - Q&A: Q0. What are analog circuits really after?
 - Guide: Big-picture map
 - Guide: The shift in evaluation paradigm: from "switch" to "amplifier at a bias point"
-- Guide: How logic optimization hurts analog devices: halo, thin oxide and low voltage
 - Guide: Key metrics quick reference: definitions, focus and extraction methods
 - Term: gm/ID (transconductance efficiency)
-- Term: gm/gds (intrinsic gain)
 
 **Key points:**
 - Logic judges large-signal switching: Ion, Ioff, CV/I. Analog judges small-signal ratios at a bias point: gm/ID, gm/gds, fT, AVT.
@@ -139,6 +139,8 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
 **Goal:** Use Pelgrom's law to size area, know where GAA mismatch comes from, and name the standard layout matching techniques.
 
 **Sections to read:**
+- Basics: How to draw the layout: make both transistors "see the same world"
+- Basics: What the layout looks like
 - Guide: Mismatch: Pelgrom's law and matching coefficients by component type
 - Guide: New mismatch sources in FinFET/GAA
 - Guide: Device-level layout: matching depends on "identical environment", not just identical W/L
@@ -229,6 +231,791 @@ Seven sessions of 40–50 minutes each — one a day, or one every other day. Ea
   A: τ = 1/(2N·f); C = (IDDA − IDDQ)/(N·VDD·f).
 
 **Exercise:** Without notes, redraw the metric map from session 1, then check it against the overview and fill the gaps. Then open the review deck and redo the remaining cards until it is empty.
+
+
+---
+
+# Analog circuit basics: current mirrors, main blocks, and analog IP
+
+Analog circuits are built up layer by layer from a few transistor-level "building blocks." The bottom layer holds current mirrors, differential pairs, and single-transistor amplifiers. Above that sit op-amps/OTAs, comparators, references, and LDOs. Above those are subsystems such as PLLs, ADCs/DACs, and SerDes, which finally enter the SoC as "analog IP." The current mirror is the most widely used of these blocks. It "copies" a reference current to other places in proportion to W/L (in FinFET, fin count × finger count), so bias distribution, active loads, current-steering DACs, and charge pumps all depend on it. Every current-mirror variant trades voltage headroom for output resistance. Two kinds of error limit its accuracy: systematic error from unequal VDS, and random VT/β mismatch (Pelgrom). Layout (unit cells, common centroid, dummies, same orientation) therefore matters as much as the schematic. At the SoC level, almost every chip needs a set of "foundation analog IP": PLL, oscillator, bandgap, LDO, POR, PVT sensors, I/O with ESD, and OTP. SerDes, DDR PHY, UCIe, and high-precision ADCs/DACs are added as the product requires. Digital IP usually ships as synthesizable RTL. Analog IP is a GDS hard macro tied to one PDK. Moving it to a new node mostly means redesign, new layout, and new silicon validation, so it often sits on the critical path to new-node readiness. This page covers only "what it is, why it is used, and what it looks like." It does not cover the device physics of gain, noise, and mismatch: see the main guide for device metrics and the techniques page for ways to raise gain and cut noise.
+
+## Overview: the building-block map of analog circuits
+
+**Start with the map: each layer is built from the blocks of the layer below, and each layer has its own metrics to watch.**
+
+Key points:
+- The layers, from bottom to top: devices → transistor-level primitives → circuit blocks → mixed-signal subsystems → analog IP in the SoC.
+- Moving up, the metrics shift from "device parameters" (gm/ID, gm·ro, AVT) to "system parameters" (jitter, ENOB, BER, PSRR).
+- Evidence tags: [Textbook] textbook or general knowledge; [Silicon · research] measurements on research devices or research circuits; [Silicon · production platform] production process data; [TCAD] device simulation; [Simulation] circuit or layout simulation; [Vendor] vendor or foundry material and press releases; [Opinion] industry interviews; [Inference] this page's own reasoning.
+
+| Layer | Typical blocks | What it does | Main metrics | Section on this page |
+|---|---|---|---|---|
+| Devices | MOSFET (planar / FinFET / GAA), BJT/diode, resistor, MOM/MIM capacitor, inductor | Provide transconductance, output resistance, matching, passives | gm/ID, gm·ro, fT, AVT, 1/f noise, resistor temperature coefficient, inductor Q | §1, §7; see the main guide |
+| Transistor-level primitives | Current mirror, differential pair, common-source / common-gate / common-drain single transistor | Copy current, amplify a difference, amplify or buffer | Rout, headroom, ratio error; offset, CMRR; gain, bandwidth | §1, §2 |
+| Circuit blocks | OTA / op-amp, comparator, bandgap, current reference, LDO | Amplify, decide, generate stable voltages and currents, regulate | Gain, GBW, phase margin; offset, speed; temperature drift; dropout, PSRR | §2, §3 |
+| Mixed-signal subsystems | PLL / DLL, oscillator, ADC, DAC | Generate clocks; convert between analog and digital | Jitter, spurs, lock time; ENOB, SNR, SFDR, INL/DNL | §4, §5 |
+| Interface, protection, and monitoring | SerDes, DDR/HBM PHY, UCIe, I/O, ESD, temperature and voltage sensors | High-speed chip-to-chip links; external interfaces; electrostatic protection; health monitoring | BER, eye diagram, pJ/bit; HBM/CDM rating; temperature accuracy | §7, §8 |
+| Analog IP in the SoC | Power tree, clock tree, PHY, sensing and security blocks | Delivered and integrated as hard macros | Silicon-proven or not; available on the node or not; complete deliverables or not | §8, §9 |
+
+## 1. Current mirrors: the "current copier" of analog circuits
+
+**A current mirror lets a diode-connected transistor turn a reference current into a gate-source voltage, then lets other transistors that share this voltage copy the current in proportion to their size; it appears in almost every analog block, because analog bias, loads, and many data converters all run on "precise currents."**
+
+Key points:
+- The ideal ratio is I_OUT = I_REF·(W/L)₂/(W/L)₁ ([TAMU ECEN474 L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)) [Textbook]. In FinFET, "W" becomes fin count × finger count ([Tech Design Forums](https://www.techdesignforums.com/practice/?p=5259)) [Opinion].
+- The main variants all make the same trade: spend more voltage headroom to get higher output resistance Rout. A simple mirror has Rout ≈ ro, a cascode about gm·ro², and a regulated cascode about A·gm·ro² ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf); [UTK ECE532 L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)) [Textbook].
+- There are two kinds of error. Systematic error comes mainly from unequal VDS on the two transistors plus channel-length modulation (CLM). Random error comes from VT and β mismatch, σ(ΔVT) = AVT/√(WL) ([Pelgrom et al. 1998](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)) [Silicon · research].
+- Current matching in a mirror improves at higher overdrive. This is the opposite of voltage offset in a differential pair [Inference].
+- Layout requires devices that are "identical in geometry, orientation, bias, and temperature" ([Pelgrom et al.](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)). In practice this means unit cells, interdigitation, common centroid, dummies, and same orientation ([Pulsic](https://pulsic.com/?p=1)) [Vendor].
+- FinFET/GAA quantizes width, and L is essentially fixed. Ratios can only come from integer numbers of identical units, LDE becomes more complex, and planar layouts mostly have to be redrawn ([Tech Design Forums](https://www.techdesignforums.com/practice/?p=5259)) [Opinion].
+
+### Principle: turn current into voltage, then voltage back into current
+
+[Textbook] The definition of a current mirror is direct: control the current in one device so that it copies the current in another device, as independent of the load as possible. Ideally it is a "current-controlled current source" ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)).
+
+The simplest MOS current mirror has only two transistors. M1 has its gate and drain shorted, which is called "diode-connected." The reference current I_REF is forced into M1, and M1, in saturation, settles at the V_GS that makes its drain current exactly equal to I_REF. This step "translates" current into voltage. M2's gate connects to the same node, so its V_GS equals M1's. As long as M2 is also in saturation and the two transistors match, M2's current equals I_REF. This step "translates" voltage back into current ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)).
+
+[Figure: Simple NMOS current mirror: VDD drives a reference current IREF through a resistor into M1. Note that M1's gate and drain are tied together (diode connection) and M2 shares M1's gate, so both transistors have the same VGS; IOUT flows into M2's drain, which connects to a voltage source VOUT (representing the load)]
+
+When the two transistors differ in size, the current scales with size: I_OUT = I_REF·(W/L)₂/(W/L)₁ ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)). Wikipedia notes that the output current is linear in W, so changing the width is enough to get an integer multiple of I_REF ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)). In real circuits, one diode-connected transistor often drives several output transistors, and each output copies the current at its own ratio.
+
+It differs from an ideal current source in four ways ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)):
+- Its AC output impedance is finite; Rout is not infinite.
+- It works only within its "compliance range." If the output voltage is too low, the output transistor drops out of saturation.
+- Parasitic capacitance limits its frequency response.
+- It is sensitive to noise, supply, and process tolerances.
+
+For people who know logic, one way to see it [Inference]: logic looks at two states of a transistor, on and off. A current mirror keeps the transistor parked at a bias point in saturation and relies on one physical relation: "the same V_GS gives the same current." So any process factor that makes two transistors carry different currents at the same V_GS turns directly into mirror error: VT offset, mobility difference, stress difference, and different VDS.
+
+### Why it is everywhere: analog circuits work with currents
+
+[Textbook] A current mirror has two basic uses: supplying bias current and acting as an active load ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)). Biasing with a current mirror also reduces the circuit's sensitivity to VDD, VT, and μCox ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)). In more detail:
+
+| Use | What the mirror does there | What sets accuracy | Evidence |
+|---|---|---|---|
+| Bias distribution | One master reference current fans out to many mirrors across the chip to bias each block | Ratio error; IR drop over long distribution | [Inference] Long-distance distribution usually uses current rather than voltage, to avoid errors from ground drops |
+| Active load | Load for differential pairs and OTAs; replaces resistors and raises single-stage gain to the order of gm·ro | Rout (sets gain); matching of the two sides (sets offset) | Common-source gain with a current-source load = −gm1/(go1 + go2) ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)) [Textbook] |
+| Tail current source | Tail current for differential pairs and comparators | Rout (sets CMRR) | [Textbook] |
+| Current-steering DAC | Each unit current source is a mirror output transistor | Unit-to-unit matching sets INL/DNL | Pelgrom area scaling and parallel units are used for IDACs, at the cost of area and capacitance ([Sheikholeslami, IEEE SSC Magazine](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)) [Textbook] |
+| PLL charge pump | The UP and DN currents come from mirrors | UP/DN mismatch | [Inference] Mismatch causes static phase offset and reference spurs |
+| Self-biased current reference | A PMOS mirror and an NMOS mirror connected in a loop (beta multiplier) | Insensitive to supply, but needs a start-up circuit | ([US 7,755,419](https://patents.google.com/patent/US7755419)) [Vendor] |
+
+Current mirrors appear in the schematics of every later section: the five-transistor OTA in §2 has two, the CMOS bandgap in §3 has a PMOS mirror, and the charge pump in §4 and the current-steering DAC in §5 are themselves arrays of current mirrors.
+
+### Variants: trading voltage headroom for output resistance
+
+**Why variants exist.** [Textbook] A simple mirror has an Rout of only ro. When the output voltage changes, the output current follows (this is CLM). This lowers amplifier gain and causes ratio error. Every way to raise Rout either "stacks" another transistor on top of the output transistor or adds feedback. The cost is a higher minimum voltage at the output, i.e., headroom. At advanced nodes around 1 V, headroom is the scarcest resource (see the techniques page for the gain-headroom trade-off).
+
+The real schematic below puts four NMOS mirrors side by side, each with a 50 µA bias source and labeled device sizes. It comes from an open-source analog design course and uses IHP SG13G2 130 nm devices.
+
+[Figure: Real xschem schematic from an open-source course (IHP SG13G2 130 nm devices): four NMOS current mirrors side by side, labeled Basic, Cascoded, Regulated, and Degenerated current mirror, each driven by a 50 µA bias source. Note the printed device sizes (e.g., W=10u L=5u): for matching and output resistance, the design uses long-channel devices much larger than minimum size; the Degenerated column has resistors in series with the sources]
+
+| Variant | Rout (order) | Minimum output voltage (headroom) | Pros | Cons | Source |
+|---|---|---|---|---|---|
+| Simple mirror | ≈ ro | ≈ V_DSAT, about 0.1–0.4 V | Simplest; least headroom | Low Rout; CLM error when the two VDS differ | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)[Textbook] |
+| Cascode (self-biased) | ≈ gm·ro² | ≈ VT + 2V_OV; about 0.9–1.5 V in the lecture's example process | High Rout; VDS of the lower pair aligns automatically | Costs one extra VT of headroom | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)[Textbook] |
+| Wide-swing / low-voltage cascode | ≈ gm·ro² | ≈ 2V_DSAT | Keeps Rout while saving one VT; common in designs below about 3 V | Needs a separate cascode bias voltage, which must be set accurately | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf); [UTK L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf); [Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)[Textbook] |
+| Wilson (3-transistor / 4-transistor) | MOS version ≈ gm·ro²/2 | ≈ VT + 2V_OV; about 2V_GS at the input, rising with √I | Raises Rout through negative feedback; the 4-transistor version aligns VDS | High input and output voltages; hard to use below 3 V | [Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror); [UTK L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)[Textbook] |
+| Regulated (gain-boosted) cascode | ≈ (1 + A)·gm·ro², up to tens to hundreds of GΩ | ≈ V_GS + V_DSAT | Highest Rout | Extra amplifier: area, power, stability; the simple version does not guarantee equal VDS on both sides | [TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf); [UTK L06](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)[Textbook] |
+| Source degeneration | ≈ ro·(1 + gm·R_S) | ≈ V_DSAT + I·R_S | Lower sensitivity to VT mismatch | Costs I·R of headroom; accuracy now depends on resistor matching | [Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror); Rout formula [Textbook] |
+
+Notes:
+- The PDF text extraction of the lecture garbles the cascode minimum-voltage formula. The table uses the standard textbook result VT + 2V_OV.
+- Some Wilson and regulated-cascode formulas in the UTK lecture are also garbled in extraction. The table gives only orders of magnitude.
+- The output voltage floor of a self-biased cascode is "V_GS + V_DSAT." A wide-swing cascode uses an extra bias to push the lower transistor to the edge of saturation (VDS ≈ V_DSAT), which saves one VT ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)).
+
+[Figure: NMOS cascode current mirror (no text labels in the figure): four NMOS transistors in a 2×2 stack, with a resistor from the supply setting the reference current. Note that both transistors in the left reference branch are diode-connected; on the right, an extra cascode transistor sits above the output transistor, and the output leaves at the top right. This is where Rout rises from ro to about gm·ro²]
+
+**History and features of the Wilson mirror.** [Textbook] George R. Wilson of Tektronix proposed it in 1967, prompted by a "challenge" from Barrie Gilbert. It raises output impedance with negative feedback rather than degeneration. The BJT version has about 50 times the output impedance of a simple mirror. The improved 4-transistor version adds one more diode-connected transistor so that the matched pair has equal VDS, which removes the first-order CLM error ([Wikipedia: Wilson current mirror](https://en.wikipedia.org/wiki/Wilson_current_mirror)).
+
+[Figure: NMOS Wilson current mirror (no text labels in the figure): three NMOS transistors, with a resistor from the supply setting the reference current. Note the feedback connection between the output transistor at the top right and the pair below: the Wilson mirror uses this negative feedback to hold the output current steady]
+
+**The idea of the regulated cascode.** [Textbook] An amplifier senses the drain voltage of the lower transistor and drives the gate of the cascode transistor to pin that voltage. Rout is then multiplied by the amplifier gain A. In the MOS version, Rout keeps rising with A. In the BJT version, β limits it and sets a ceiling ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)).
+
+[Figure: Four-transistor NMOS current mirror with a feedback amplifier: the amplifier A(V1−V2) forces the drain voltages V1 and V2 of the lower transistors M3/M4 to be equal. Note that the amplifier output drives the gate of the upper transistor; this is the core of the regulated / gain-boosted mirror. The figure labels Iref, Iout, VDD, VA, and M1–M4]
+
+Wide-swing cascode patents were still being granted in 2006 and 2013, which shows that industry keeps using it ([US 8,450,992](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8450992); [US 7,012,415](https://patents.google.com/patent/US7012415)) [Vendor].
+
+### Where the error comes from: systematic error, random mismatch, and environment differences
+
+**Type 1: unequal VDS plus CLM, a systematic error.** [Textbook] The current in saturation is not perfectly flat. Higher VDS shortens the effective channel and raises the current. The diode-connected M1 has a VDS equal to its V_GS, while M2's VDS is set by the load, so the two are generally unequal. The error is about λ₂V_DS2 − λ₁V_DS1. There are two remedies: make the two VDS equal (the cascode and the 4-transistor Wilson do this), and use long devices, because the error falls roughly as 1/L ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)). Wikipedia also warns that the simple λ·VDS model is accurate only for "rather old" processes, and that λ should generally be taken from measured data ([Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)).
+
+[Figure: SPICE model curves from the SkyWater SKY130 PDK: Ids–Vds family for sky130_fd_pr__nfet_01v8 at the tt corner, with Vgs from 0 to 1.2 V. Note that the curves in the saturation region on the right are not flat but slope upward: this is channel-length modulation, and the inverse of the slope is ro. If the two mirror transistors have different VDS, they sit at different points on the curve and carry different currents]
+
+**Type 2: random VT and β mismatch.** Pelgrom et al. concluded that σ(ΔVT) = AVT/√(WL). The main source is random dopant fluctuation in the depletion layer; dimension variation and interface states also contribute ([Pelgrom, Tuinhout, Vertregt, IEDM 1998](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)) [Silicon · research]. Some intuitive numbers [Textbook] ([Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)):
+- At that paper's bias, a 5 mV VT difference between two adjacent transistors causes about a 5% current difference.
+- With L fixed and W made 4 times larger, σ(ΔVT) halves.
+- With N identical devices in parallel, the VT variance drops to 1/N, at the cost of area and capacitance.
+
+The lecture gives a practical ratio error of about 0.5–2%, "usually" inversely proportional to gate area ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)) [Textbook]. The Wilson mirror page gives a CMOS VT offset of "typically 1 to 3 mV" ([Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)) [Textbook]. See the "Noise and mismatch" section of the main guide for the process physics of AVT and values at each node.
+
+**Note: a current mirror wants "high overdrive"; a differential pair wants "low overdrive."** [Inference] The square law gives an approximate expression for random current mismatch: σ²(ΔI/I) ≈ σ²(Δβ/β) + (gm/ID)²·σ²(ΔVT). In strong inversion gm/ID = 2/V_OV, so a larger V_OV (lower gm/ID) turns VT mismatch into a smaller current error. This agrees with Wikipedia: holding the VT offset contribution to about 1% takes "a few tenths of a volt" of overdrive ([Wikipedia: Wilson](https://en.wikipedia.org/wiki/Wilson_current_mirror)). The input offset voltage of a differential pair behaves the opposite way: in the input-referred offset the VT term appears directly and the β term is divided by gm/ID, so differential pairs favor high gm/ID (weak or moderate inversion). The same process AVT must be "diluted" with opposite bias strategies in a current mirror and in a differential pair. The expression is a standard derivation; this page did not find a verbatim source for it.
+
+**Type 3: gradients, IR drop, and layout-dependent effects (LDE).** Pelgrom et al. list other factors: distance between devices, topography, metal coverage, implant striations, packaging, and mechanical stress ([Pelgrom et al.](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)) [Silicon · research]. Pulsic adds that well-edge distance shifts VT and that implant direction makes device orientation matter ([Pulsic](https://pulsic.com/?p=1)) [Vendor]. A paper based on a commercial 12 nm FinFET process finds that at the unit level, interconnect resistance dominates, and source-line resistance mismatch directly changes the current ratio ([Sharma et al., NSF PAR](https://par.nsf.gov/servlets/purl/10540359)) [Simulation].
+
+These errors in the language of logic process integration [Inference]:
+- VT mismatch: random dopants, metal-gate work-function granularity.
+- β mismatch: mobility and stress differences, LER, and fin-width variation.
+- Systematic error: LOD/SA-SB, WPE, proximity effects of gate cut and diffusion break, poly/fin density, IR drop on shared source lines, thermal gradients, and self-heating.
+
+All of these map to familiar process knobs. The difference is that logic cares about their effect on the Ion/Ioff distribution, while a current mirror cares about the difference between two adjacent devices.
+
+### How to draw the layout: make both transistors "see the same world"
+
+**The principle fits in one sentence:** matched devices must be designed identical in geometry, orientation, bias, and temperature ([Pelgrom et al.](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)) [Silicon · research]. Pulsic breaks this into rules you can apply ([Pulsic](https://pulsic.com/?p=1)) [Vendor]:
+- **Unit cells.** Use the same parameterized cell for matched devices. Do not match one wide transistor against several narrow ones. Split large devices into many identical units.
+- **Common centroid.** Put the reference transistor at the center, or use a cross-quad arrangement. Cross-quad is more robust to gradients in any direction but harder to route.
+- **Interdigitation.** Interdigitate the two device groups so they are spread out and interleaved.
+- **Same orientation.** Orient all matched devices the same way, because implant direction matters.
+- **Same environment.** Keep guard rings and distances to well edges identical. Advanced processes also require dummies and density control.
+- **Routing trade-offs.** Flipping the current direction about the symmetry axis to ease routing can hurt matching.
+
+Below is an official SkyWater layout of a multi-finger NFET. It is not a current mirror, but it shows the basic "unit" of an analog device: several gate fingers sharing sources and drains, with substrate contacts around it.
+
+[Figure: Official SkyWater SKY130 layout render: a 4-finger RF NFET (rf_nfet_01v8, W=3 µm, L=0.15 µm). Note that the vertical polysilicon gate fingers have gate contacts at both the top and bottom ends; the diffusion alternates S/D/S/D/S, and adjacent fingers share a source or drain; substrate taps run along the left and right sides. A "unit" in a current mirror is a multi-finger device like this]
+
+What does common centroid look like in practice? The open-source analog layout tool ALIGN gives an abstract placement grid.
+
+[Figure: Placement grid from the open-source analog layout tool ALIGN (abstract illustration, not a mask view): a differential pair is split into units arranged in 2 rows × 6 columns in the order s-b-a-a-b-s. Note that devices a and b are mirror-symmetric about the center axis, with an s unit at each end; the effects of a first-order linear gradient on a and b then cancel, which is the common-centroid idea]
+
+The same idea applies to current mirrors: split the reference and each output transistor into identical units, interleave them in a near-square array, and add dummy columns on both sides. The 12 nm FinFET paper above does exactly this. It also swaps units to cancel second-order (nonlinear) gradients, and it requires matched devices to have the same SA/SB (LOD), the same well spacing (WPE), the same number of diffusion breaks, uniform OD width, and uniform poly pitch ([Sharma et al.](https://par.nsf.gov/servlets/purl/10540359)). The paper reports [Simulation]:
+- For a 10-device current-mirror array, the maximum current-ratio deviation is 1.54%, versus 21.89% and 26.35% for two comparison methods.
+- For another array it is −0.25%, versus −5.00% and −8.25% for the comparison methods.
+- The maximum IR drop is 1.7 mV, versus 3.7–4.0 mV for the comparison methods.
+
+This shows that in FinFET, the same devices with different placement and wiring can differ by an order of magnitude in ratio error.
+
+### What FinFET/GAA changes: width becomes an integer, and the environment takes center stage
+
+[Figure: 3D illustration of a double-gate FinFET: the fin stands on the substrate, the gate wraps the fin from both sides, and the source and drain sit at the two ends. Note that the device "width" is set by fin height and fin count and cannot be drawn continuously as in a planar transistor; mirror ratios can therefore only be set by integer numbers of fins or units]
+
+Tech Design Forums, summarizing a Synopsys webinar, lists the effects of FinFET on analog design ([Tech Design Forums](https://www.techdesignforums.com/practice/?p=5259)) [Opinion]:
+- Width quantization: drive strength is set by paralleling fins that share gate, source, and drain; BSIM-CMG replaces W with fin count.
+- Stress-related LDE: fins in the middle of an array, fins at the end of a row, and isolated fins behave differently; unsupported fins relax their stress and lose mobility. Dummy fins maintain stress but cost area.
+- Self-heating is more severe.
+- Body bias is no longer a practical analog tuning knob.
+- Planar analog layouts generally have to be redrawn from scratch.
+- The good news: FinFET channels do not need heavy doping, so VT variation is smaller.
+
+Concrete practice for current mirrors [Inference] (common industry practice; the sources above confirm it only in part):
+- Set every ratio with an integer number of identical units (same nfin, same finger count, same L), not by drawing different widths. For example, a 1:4 mirror is 1 unit against 4 units.
+- When a long L is needed, chain several minimum-L gates in series (stacked gates), because the L of a single device is essentially fixed. See the techniques page for gain and matching details of series-stacked devices.
+- In GAA (nanosheet), the "width" knob becomes sheet width or the number of sheet layers, which again has only a few discrete settings.
+- Build mirror arrays as common-centroid unit grids with dummy rows and columns, and use continuous diffusion where the rules allow.
+- The matching-environment checklist gets longer: gate-cut and diffusion-break locations, fin boundaries, and the IR and parasitic changes from backside power delivery must all be identical on both sides.
+
+Fin boundaries and mirror layout under FinFET remain active topics in patents and CAD conferences ([US 12,446,321](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12446321); [DATE 2021](https://past.date-conference.com/proceedings-archive/2021/pdf/1829.pdf); [ASP-DAC 2022](https://www.aspdac.com/aspdac2022/taoka/pdf/2B-3.pdf)) [Vendor]. This search found no public quantitative data on nanosheet current-mirror matching.
+
+## 2. Differential pairs, amplifiers, and comparators
+
+**A differential pair amplifies the difference between two inputs and rejects what they have in common; add a current-mirror load and a tail current source and it becomes the most basic amplifier (OTA); add one more stage and it is a two-stage op-amp; connect a differential pair to a positive-feedback latch and it becomes a comparator.**
+
+Key points:
+- The three single-transistor configurations each have a role [Textbook]: common source (CS) amplifies voltage, with gain about gm·ro; common gate (CG) has low input impedance (≈ 1/gm) and often serves as a cascode; common drain (CD) is a voltage buffer with gain below 1.
+- Common-source gain with a current-source load = −gm1/(go1 + go2); a diode-connected load is about 1/gm; adding a cascode multiplies the output resistance by about gm·ro ([TAMU L8](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)) [Textbook].
+- Five-transistor OTA = differential pair + current-mirror load + tail current source. A two-stage op-amp adds a common-source stage and a compensation capacitor to get higher gain and swing.
+- Amplifiers are judged on gain, GBW, phase margin, slew rate, offset, and noise; comparators on offset, speed, noise, kickback, and metastability [Textbook].
+- For ways to recover gain at low voltage (cascode, gain boosting, multiple stages, stacked devices), see the techniques page.
+
+### Differential pair: amplify only the "difference"
+
+[Textbook] A differential pair is two transistors with their sources tied together, sitting on a tail current source. With equal inputs, the tail current splits evenly. With a difference at the inputs, the current tilts to one side and the difference is amplified. When both inputs rise and fall together (a common-mode signal), the tail source "holds" the total current and the output barely changes. This is where the common-mode rejection ratio (CMRR) comes from: the higher the tail source's Rout, the better the CMRR. A differential pair with a current-mirror load is standard material in introductory analog courses ([Harvard ES154 Lecture 15](https://in.ncu.edu.tw/~ncume_ee/harvard-es154/lect_15_diff_pair_2.pdf)).
+
+The key weakness of a differential pair is offset: when the two transistors are mismatched, the output is not zero even with zero input. It is most sensitive to VT mismatch, so the layout uses common centroid and dummies (§1), and the bias favors high gm/ID (the "Note" in §1). Differential pairs also need attention to 1/f noise.
+
+### Five-transistor OTA: one differential pair, two current mirrors
+
+Below is a real five-transistor OTA schematic from an open-source course. Two current mirrors are directly visible: the PMOS mirror at the top is the active load, and the NMOS mirror at the bottom supplies the tail current.
+
+[Figure: Real five-transistor OTA schematic from an open-source course (xschem): NMOS input pair M1/M2 (inputs vinp/vinn), PMOS current-mirror load M3/M4 (common gate node gate_p), and NMOS tail current source M5 mirrored from M6; an external 20 µA ibias comes in and the tail current is 4 µA, i.e., a 5:1 mirror ratio. M7–M13 are enable switches. Note the labeled node voltages (about 0.78 V, 0.38 V, 0.7 V) and the 1.45–1.55 V vdd: every transistor has tight headroom]
+
+[Textbook] The PMOS mirror load has a clever feature: it "copies" the current change on the left side to the right side, so the signal currents from both sides add at the output and a single-ended output still gets the full differential gain. The OTA outputs a current (it is a transconductance amplifier). Its gain is about gm·(ro_n ∥ ro_p), i.e., on the order of gm·ro. At advanced nodes the single-transistor gm·ro is only a few tens, so this stage's gain is often not enough; see the techniques page.
+
+### Two-stage op-amp: add a stage for more gain and swing
+
+[Figure: Classic two-stage CMOS op-amp schematic (German labels): input differential pair V1/V2 with a 50 µA current-source tail and current-mirror load V3/V4; second-stage gain transistor V5 biased by a 25 µA current source; compensation capacitor Ck across the two stages; output stage V6/V7, output Ua, inputs UN/UP. Note that the current sources in the figure are themselves biased by current mirrors]
+
+[Textbook] The first stage is a five-transistor OTA, and the second stage is a common-source amplifier. Total gain is about the product of the two stage gains, on the order of (gm·ro)². Output swing is also larger. The cost is an extra pole, which needs a compensation capacitor (Miller compensation) to secure phase margin. So the typical metrics of a two-stage op-amp are DC gain, GBW, phase margin, slew rate, and output swing.
+
+| Amplifier type | Structure | Gain order | Main trade-offs | Evidence |
+|---|---|---|---|---|
+| Five-transistor OTA | Differential pair + mirror load + tail source | gm·ro | Simple, fast; low gain | [Textbook] |
+| Telescopic / folded cascode | Cascodes stacked within one stage | (gm·ro)² | High gain; telescopic has small swing, folded has larger swing but higher power and noise | [Textbook] |
+| Two-stage Miller | OTA + common-source second stage + Cc | (gm·ro)² | High gain and swing; needs compensation, limited bandwidth | [Textbook] |
+
+### Comparator: amplify, then make the call
+
+A comparator answers only one question: which input is larger. Modern ADCs and SerDes receivers mostly use dynamic latched comparators. These work only at clock edges and draw nearly zero static power.
+
+[Figure: Dynamic latched comparator (StrongARM type): input pair on VINP/VINN, a cross-coupled latch above, CLK-controlled PMOS transistors for reset, a clocked NMOS tail at the bottom, outputs OUTP/OUTN. Note the cross-coupled pair: it forms positive feedback that quickly amplifies a tiny input difference into a full-swing 0/1]
+
+[Textbook] Operation takes two phases. With the clock low, the reset transistors pull both outputs to the same potential. With the clock high, the tail turns on, the input pair splits current between the two sides according to the input difference, and the latch uses positive feedback to amplify the small difference to full swing. The main metrics are:
+- Offset: set by mismatch in the input pair and the latch; key to SAR ADC accuracy.
+- Speed: set by the regeneration time constant, which relates to fT.
+- Noise: sets the smallest difference that can be resolved.
+- Kickback: glitches coupled back to the inputs when the clock switches.
+- Metastability: when the input difference is too small, the decision does not finish within the allotted time.
+
+## 3. References and power: bandgap and LDO
+
+**A bandgap adds two voltages that move in opposite directions with temperature to get a reference of about 1.2 V that barely changes with temperature; an LDO uses this reference and an error amplifier to turn a noisy input supply into a clean, stable local supply.**
+
+Key points:
+- A bandgap adds a PTAT voltage (ΔV_BE of two junctions at different current densities) to a CTAT diode voltage (about −2 mV/K). This cancels the first-order temperature coefficient and gives about 1.2–1.3 V ([Wikipedia: Bandgap voltage reference](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)) [Textbook].
+- Typical initial error is about 0.5–1.0% and temperature drift is 25–50 ppm/°C; careful design reaches 1.5–2.0 ppm/°C ([Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)) [Textbook].
+- LDO = pass transistor + error amplifier + reference + resistor-divider feedback. Dropout is the minimum input-output voltage difference that still maintains regulation ([Wikipedia: Low-dropout regulator](https://en.wikipedia.org/wiki/Low-dropout_regulator)) [Textbook].
+- Key LDO metrics are dropout, PSRR, quiescent current, load / line regulation, transient response, and stability ([Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)) [Textbook].
+- A self-biased current reference (beta multiplier) is insensitive to supply but must have a start-up circuit ([US 7,755,419](https://patents.google.com/patent/US7755419)) [Vendor].
+
+### Bandgap: one goes up, one goes down, the sum stays put
+
+[Textbook] The V_BE of a diode or BJT falls with temperature at about −2 mV/K. This is CTAT (complementary to absolute temperature). The difference ΔV_BE between two junctions at different current densities rises linearly with temperature. This is PTAT (proportional to absolute temperature). Scale the PTAT term by the right factor and add it to the CTAT term, and the first-order temperature coefficients cancel. The result is close to the extrapolated bandgap voltage of silicon, 1.2–1.3 V ([Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)). Historically, Hilbiber (Fairchild, 1964), Widlar (1971), and Brokaw (1974) established this circuit in turn ([Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)).
+
+[Figure: Brokaw bandgap schematic: two BJTs, Q1 with emitter area A and Q2 with 8A; the collectors connect to two equal resistors R; op-amp A forces equal currents in the two branches; R2 and R1 produce the output VOUT. Note the 8:1 area ratio of Q1 and Q2: with equal currents but different current densities, the difference of their V_BE values is the PTAT voltage]
+
+In CMOS processes, the BJT is a parasitic vertical PNP. Real circuits also add current mirrors, cascodes, and a start-up circuit.
+
+[Figure: Real CMOS bandgap schematic from an open-source course (xschem, fairly dense): PNP devices Q1–Q3 in a CMOS process, PMOS current mirrors, NMOS cascodes, and a start-up circuit, with output vref ≈ 1.16 V. Note the row of PMOS current mirrors at the top: they copy the same current into each branch, which is exactly the bias distribution described in §1]
+
+[Textbook] Bandgap metrics include initial accuracy, temperature drift, PSRR, noise, and minimum supply voltage ([Wikipedia: Bandgap](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)).
+- A simple first-order design reaches only about 20 ppm/°C over a 100 °C range.
+- The standard structure needs a supply of about 1.4 V.
+- Banba et al. reported a current-summing sub-1 V CMOS bandgap in 1999.
+
+At the device level, watch BJT/diode matching, resistor temperature coefficient, and op-amp offset. The op-amp offset is amplified to the output, so chopping or trimming is common. Trim values are usually stored in OTP; see §8 [Textbook].
+
+### Current reference: beta multiplier and start-up circuit
+
+[Vendor] A self-biased current reference connects a PMOS mirror and an NMOS mirror in a loop. One NMOS is K times the other and has a resistor in series with its source, which gives a current that is largely independent of supply. The loop also has a stable "zero-current" state, so "self-biased references are almost always used with a start-up circuit" ([US 7,755,419](https://patents.google.com/patent/US7755419)). Start-up circuit design for a low-voltage cascode version is also patented ([US 8,598,862](https://patents.google.com/patent/US8598862)). The layout figure in §6 includes a "Beta multiplier current reference" block.
+
+### LDO: an amplifier that "watches" the output voltage
+
+[Figure: LDO schematic: a PMOS pass transistor (the boxed pass element) sits in series between input and output; the error amplifier compares Vref with the voltage fed back from the R1/R2 voltage divider and drives the pass transistor's gate; the output has a 100 µF capacitor and a 100 Ω load. Note the feedback loop: if the output drops, the divided voltage falls below Vref, and the amplifier pulls the PMOS gate down so it conducts more]
+
+[Textbook] The structure and principle of an LDO are simple. The hard part is balancing the metrics ([Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)):
+- **Dropout**: limited by the saturation voltage of the pass transistor. Lower dropout means higher efficiency but a larger pass transistor.
+- **PSRR**: rejection of input ripple. For example, a PSRR of 55 dB at 1 MHz attenuates 1 mV of ripple to 1.78 µV.
+- **Regulation**: line regulation improves with higher DC loop gain.
+- **Quiescent current**: the current the LDO itself draws.
+- **Transient response**: set by error-amplifier bandwidth, output capacitance, and ESR.
+- **Stability**: there is a dominant pole and also an ESR-dependent zero.
+
+Compared with a switching regulator, an LDO has no switching noise and needs no inductor. But it turns all of (V_in − V_out)·I into heat, so efficiency falls as the input-output difference grows ([Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator)). A common SoC approach is therefore to let a switching regulator (off-chip or on-chip buck) do the large step-down and let LDOs do the "final cleanup" for sensitive analog and clock blocks [Inference]. TI application note SLVA079 explains LDO terms systematically ([TI SLVA079](https://www.ti.com/lit/an/slva079/slva079.pdf), link only).
+
+### Power tree: from the reference to every block
+
+[Inference] Putting this section together, the analog power and bias of an SoC form roughly a tree: the bandgap gives a reference voltage → a bias generator (a beta multiplier or a bandgap-derived current, fanned out through current mirrors) → several LDOs and bucks → each analog block (PLL, ADC, SerDes). At power-up, a POR keeps the chip in reset until the supplies are stable (§8). The accuracy and noise at the root propagate to every leaf, so the bandgap is often trimmed, and LDO PSRR is counted as part of the clock jitter budget.
+
+## 4. Clocks: PLL
+
+**A phase-locked loop (PLL) "multiplies" a low-frequency, stable reference clock (usually from a crystal) up to the high-frequency clock the chip needs, and keeps the output phase tracking the reference; almost every SoC needs it as analog IP.**
+
+Key points:
+- Charge-pump PLL = tri-state phase-frequency detector (PFD) + charge pump + PI (R-C) loop filter + VCO, with a divider in the feedback path. It locks fast and has small steady-state phase error ([Wikipedia: Charge-pump PLL](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)) [Textbook].
+- The main metrics are jitter / phase noise, reference spurs, lock time, and frequency range [Textbook].
+- VCOs come in ring and LC types. In vendor data, ring PLL integrated jitter is "as low as 1 ps RMS," and LC PLL broadband jitter is "well below 300 fs RMS" ([AnySilicon: Silicon Creations](https://anysilicon.com/vendors/silicon-creations/)) [Vendor].
+- The higher the data rate, the tighter the jitter budget and the stronger the pull toward LC PLLs. For example, PCIe Gen2/3 uses ring PLLs and Gen4/5 uses LC PLLs ([SemiWiki: Analog Bits](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)) [Vendor].
+
+### Structure: five blocks form a feedback loop
+
+[Figure: Analog PLL block diagram: Input → phase-frequency detector PFD → Analog Filter → VCO → Output, with a Frequency divider in the feedback path. Note the divider: the output frequency is divided by N and compared with the input, so when the loop locks, the output frequency equals N times the input frequency]
+
+[Textbook] How the loop works:
+- The PFD compares the reference clock with the divided feedback clock and outputs "UP" or "DN" pulses whose width represents the phase difference.
+- The charge pump turns the UP/DN pulses into current pushed into or pulled out of the loop filter. It is essentially two current mirrors plus switches (§1).
+- The loop filter integrates and filters the current to produce the VCO control voltage.
+- The VCO frequency changes with the control voltage.
+- The divider divides the VCO output by N and sends it back to the PFD. The division ratio can be an integer (integer-N) or, with Δ-Σ modulation, a fraction (fractional-N).
+
+The PFD and divider are digital circuits; the charge pump, loop filter, and VCO are analog. The PLL is a typical mixed-signal block.
+
+### Metrics and device dependence
+
+| Metric | Meaning | Main influences | Evidence |
+|---|---|---|---|
+| Jitter / phase noise | How far clock edges deviate from their ideal positions | VCO noise (including upconverted 1/f noise), reference noise, loop bandwidth | [Textbook] |
+| Reference spurs | Spurs in the output spectrum at integer multiples of the reference frequency | Charge-pump UP/DN current mismatch, leakage | [Inference] |
+| Lock time | Time from start-up or a frequency hop to lock | Loop bandwidth | [Textbook] |
+| Capture / hold range | Frequency range over which the loop can lock and stay locked | Loop structure | Hold-in and pull-in ranges are defining metrics of a CP-PLL ([Wikipedia: CP-PLL](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)) [Textbook] |
+
+[Textbook] At the device level, ring VCOs depend on device speed (fT) and 1/f noise; LC VCOs depend on inductor Q and varactors. The charge pump depends on current-mirror matching and Rout. This search found no public quantitative data on PLL jitter, spurs, and charge-pump mismatch.
+
+### Ring PLL vs. LC PLL: trading area and design difficulty for jitter
+
+[Vendor] The Silicon Creations catalog works as a ready-made PLL taxonomy ([AnySilicon: Silicon Creations](https://anysilicon.com/vendors/silicon-creations/)):
+- Ring PLLs: fractional-N PLL with a 24-bit Δ-Σ modulator, small ring PLL at core voltage, integer PLL, jitter-attenuation PLL, and multiphase PLL with 12/16/32-phase outputs. Process coverage runs from 180 nm to 3 nm.
+- LC PLLs: integer LC-PLL with an LC tank, and a 28 nm fractional-N frequency synthesizer. The listed nodes are 7 nm FinFET and 28 nm.
+
+The company says its fractional-N PLL has more than 1,000 production licenses and is deployed on more than 6 million wafers. PLL uses include digital clock generation, reference clocks for DDR/PCIe/Ethernet/USB PHYs, fast frequency hopping, spread-spectrum modulation, and very fine (sub-degree) phase stepping ([Design & Reuse press release](https://us.design-reuse.com/news/57049/silicon-creations-milestone-fractional-n-pll.html)).
+
+[Inference] A ring VCO is built mainly from inverters and current sources. It is more "digital" and follows node scaling more easily, which is why it spans 180 nm to 3 nm. An LC VCO depends on an inductor, takes a lot of area, and is very sensitive to metal layers and substrate, so moving it to a new node is harder.
+
+### Close relatives of the PLL: DLL, crystal oscillator, and CDR
+
+[Textbook]
+- **DLL (delay-locked loop)**: locks a delay line to the reference period. Memory PHYs use it to phase-align DQS and the clock. It creates no new frequency and does not accumulate jitter. The Synopsys DDR PHY material lists a "low-jitter DLL" ([Synopsys DDR multiPHY](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)) [Vendor].
+- **Crystal oscillator**: a Pierce-type amplifier pad cell that drives an off-chip quartz crystal and provides the PLL reference.
+- **CDR (clock and data recovery)**: recovers the clock from the data stream at the SerDes receiver; it is also essentially a phase-locked loop.
+
+## 5. Data conversion: ADC and DAC
+
+**An ADC turns a continuous analog voltage into a digital code, and a DAC does the reverse; different architectures make different trade-offs among speed, accuracy, and power, and their accuracy ultimately comes down to the matching of comparators, capacitors, or current sources.**
+
+Key points:
+- A SAR ADC uses binary search and resolves one bit per clock cycle. It consists of a sample-and-hold, one comparator, one DAC, and a successive-approximation register ([Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)) [Textbook].
+- A Δ-Σ ADC uses oversampling and noise shaping to push quantization noise out of band, followed by a digital decimation filter. It suits low-bandwidth, high-precision applications ([Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)) [Textbook].
+- Flash is the fastest, but the comparator count nearly doubles with each extra bit; pipeline sits between the two ([Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)) [Textbook].
+- The main metrics are ENOB, SNR, SFDR, DNL/INL, and aperture jitter; the SQNR of an ideal 16-bit ADC is about 98 dB (6.02N + 1.76 dB) ([Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)) [Textbook].
+- The accuracy of a current-steering DAC is set by the matching of its current-mirror units ([Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)) [Textbook].
+
+### SAR ADC: one comparator doing a binary search
+
+[Figure: SAR ADC block diagram: input VIN goes through sample-and-hold (S/H) to the comparator; the comparator result enters the SAR register (Clock input, end-of-conversion output EOC); the register outputs D_N−1…D0 drive an N-bit DAC (reference voltage VREF), whose output feeds back to the comparator. Note this loop: on each clock the DAC tries a value, the comparator makes one decision, and the register sets one bit, so N bits take N cycles]
+
+[Textbook] The SAR process is like weighing on a balance: try the most significant bit first (half of full scale), let the comparator say "too high or too low," fix that bit, then try the next bit.
+
+In an SoC, the SAR DAC is usually a binary-weighted capacitor array (charge redistribution), with the capacitors laid out in common centroid. The comparator is the dynamic latched comparator from §2. So SAR accuracy depends on three things: comparator noise and offset, capacitor matching, and the on-resistance and leakage of the sampling switch. SAR is close to the "most digital" ADC: apart from the comparator and the sampling switch, the rest is logic. That is why it is popular at advanced nodes [Inference].
+
+[Textbook] Typical speed and accuracy ranges ([Electronic Design](https://www.electronicdesign.com/technologies/analog/adc/article/21801636/whats-the-difference-between-sar-and-delta-sigma-adcs)): SAR usually covers 8 to 18 bits. Conversion time equals the clock period times the number of bits; for example, 16 bits at a 2 MHz clock takes 8 µs. The roughly 10 MS/s upper limit cited in that article applies to discrete ADC chips, not embedded IP.
+
+### Δ-Σ ADC: trading speed for accuracy
+
+[Figure: Second-order Δ-Σ modulator loop: input → summer → integrator → summer → integrator → sampling quantizer (ADC) → ΔΣM output; the quantized result feeds back through a low-resolution DAC to both summers. Note the two feedback lines: the loop "shapes" the quantization error and pushes it to high frequency, and the digital filter that follows removes the high-frequency part]
+
+[Textbook] A Δ-Σ ADC consists of a modulator (a feedback loop of integrators, a comparator, and a 1-bit DAC) followed by a digital decimation filter. It samples far above the signal bandwidth and pushes quantization noise out of band. This suits low-bandwidth, high-precision applications such as 24-bit/96 kHz audio ([Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)). It reaches up to 32 bits, with output rates generally in the kS/s range, and suits DC, audio, and precision instrumentation ([Electronic Design](https://www.electronicdesign.com/technologies/analog/adc/article/21801636/whats-the-difference-between-sar-and-delta-sigma-adcs)). At the device level, the op-amp / OTA in the integrator and 1/f noise are key, so chopping is common. Continuous-time Δ-Σ is also sensitive to clock jitter [Textbook].
+
+### Architecture comparison and DACs
+
+| Architecture | Principle | Strength | Accuracy bottleneck | Evidence |
+|---|---|---|---|---|
+| Flash | Resistor ladder + a bank of comparators + priority encoder | Fastest | Comparator count grows exponentially with bits; comparator offset | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)[Textbook] |
+| SAR | Binary search, one bit per cycle | Medium speed, medium-to-high accuracy, low power | Comparator noise and offset, capacitor matching | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)[Textbook] |
+| Pipeline | Each stage quantizes coarsely, subtracts via a DAC, and amplifies the residue for the next stage | High speed with fairly high accuracy | Op-amp gain and GBW, capacitor matching | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)[Textbook] |
+| Δ-Σ | Oversampling + noise shaping + digital decimation | Low bandwidth, high accuracy | Integrator op-amp, 1/f noise, clock jitter | [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)[Textbook] |
+| Current-steering DAC | A set of unit current sources switched by the code | High speed | Current-mirror unit matching (INL/DNL), Rout (SFDR) | [Sheikholeslami](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)[Textbook] |
+| R-string DAC | Taps on a resistor ladder | Inherently monotonic | Resistor matching | [Textbook] |
+
+[Textbook] Metric definitions ([Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter)):
+- ENOB: effective number of bits; the measured SNDR expressed as "the number of bits of an equivalent ideal ADC."
+- SNR / SQNR: signal-to-noise ratio; the quantization SQNR of an ideal N-bit ADC is about 6.02N + 1.76 dB, about 98.1 dB for 16 bits.
+- SFDR: spurious-free dynamic range; channel mismatch in time-interleaved ADCs degrades SFDR.
+- DNL / INL: how far each code width and the whole transfer curve deviate from ideal; they directly reflect capacitor or current-source matching.
+- Aperture jitter: uncertainty in the sampling instant, which limits resolution for bandwidths between 1 MHz and 1 GHz. So the accuracy of a high-speed ADC ultimately depends on PLL jitter (§4).
+
+The ADC figures of merit (Walden/Schreier FoM) and Murmann's ADC performance survey are standard public references; this search did not check them item by item.
+
+## 6. What the layout looks like
+
+**Analog layout is custom layout drawn by hand (or semi-automatically): devices are placed in groups according to matching needs, large areas go to capacitors, resistors, and inductors, and routing pays attention to symmetry and current density; it is entirely different from digital standard-cell automatic place and route.**
+
+Key points:
+- For device-level matching rules (unit cells, common centroid, dummies, same orientation), see the layout subsection of §1.
+- At the block level, passives often take most of the area: compensation capacitors, resistors, and inductors are much larger than transistors.
+- In real open-source layouts, blocks such as OTAs, current references, and capacitor arrays are directly recognizable.
+- Finishing the drawing is not the end: DRC/LVS, parasitic extraction, and post-layout simulation follow; see §9.
+
+### Layout of a two-stage op-amp: the big capacitor takes a large share of area
+
+[Figure: Teaching layout of a CMOS two-stage op-amp: red is polysilicon (poly), blue is metal 1, green is active area; there is a large square capacitor on the right; the pins are Vdd, GND, Vout, vpos, and vneg. Note that the large square capacitor on the right takes a sizable part of the layout: the two-stage op-amp from §2 needs a compensation capacitor, and such capacitors are often much larger than the transistors in layout]
+
+[Inference] The figure shows several habits of analog layout:
+- Transistors are usually placed in groups and pairs to ease matching.
+- Power and ground use wide lines to control IR drop and electromigration.
+- Compensation capacitors, sampling capacitors, and DAC capacitor arrays often take most of a block's area.
+- Spacing is left between capacitors and transistors to reduce coupling.
+
+### A small analog test chip: what blocks look like in layout
+
+[Figure: Layout screenshot of a small analog test chip in the SKY130 process (a Tiny Tapeout project), with colored boxes marking each block: "OTA," "Beta multiplier current reference," "Compensation capacitors," "4-by-1 transmission gate mux," and "Pull-down MOS resistors." Note the size of the compensation-capacitor box and that the current reference appears as a separate block: this is the "reference → bias → amplifier" chain from §3]
+
+This project was fabricated through Tiny Tapeout, and its GDS and schematics are open source ([atenfyr/ttsky_analog](https://github.com/atenfyr/ttsky_analog); [Tiny Tapeout chip page](https://tinytapeout.com/chips/ttsky26a/520)). Another Tiny Tapeout project builds a five-transistor OTA as a 25 µm × 20 µm cell: the PMOS mirror load in an n-well at the top, the NMOS input pair in the middle, and the NMOS tail current mirror at the bottom ([spasquale25/OTA](https://github.com/spasquale25/OTA)). This matches the structure of the five-transistor OTA schematic in §2, although the two come from different authors and different processes.
+
+### How analog layout differs from digital layout
+
+| Aspect | Digital (standard cell) | Analog (custom) | Evidence |
+|---|---|---|---|
+| How it is made | Synthesis + automatic place and route | By hand or with template / generator help, placed device by device | [Textbook] |
+| Main goals | Timing, area, power, routability | Matching, symmetry, parasitics, noise isolation, current density | [Textbook] |
+| Devices | Fixed-size standard cells | Each device sized individually; many passives | [Textbook] |
+| Matching methods | Largely unnecessary | Common centroid, interdigitation, dummies, same orientation, same environment | [Pulsic](https://pulsic.com/?p=1)[Vendor] |
+| Isolation | Usually unnecessary | Guard rings, deep N-well, distance from digital noise sources | [Textbook] |
+| Post-layout checks | STA with extracted RC | Full post-layout simulation of all metrics; advanced nodes need more extraction corners | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)[Opinion] |
+
+Automation is entering analog layout. The open-source tool ALIGN can generate common-centroid placements automatically (the figure in §1). OpenFASOC's gLayout can generate current mirrors, differential pairs, common-centroid and interdigitated structures, and two-stage op-amps in SKY130 and GF180 ([OpenFASOC gLayout](https://openfasoc.readthedocs.io/en/latest/notebooks/glayout/glayout_opamp.html)). For commercial tools, see migration automation in §9.
+
+## 7. Main components of analog circuits: from transistors to subsystems
+
+**Analog and mixed-signal circuits are built in layers: transistor-level primitives form circuit blocks, circuit blocks form subsystems, and subsystems enter the SoC as IP; each layer depends on only a few metrics of the layer below, and these metrics trace back to a few device parameters.**
+
+Key points:
+- Primitive layer: current mirrors, differential pairs, common source / common gate / common drain. Block layer: OTA / op-amp, comparator, reference, LDO. Subsystem layer: PLL, ADC/DAC, SerDes, power management, sensors [Textbook].
+- The compositions are concrete: LDO = bandgap + error amplifier + pass transistor + divider; SAR ADC = sample-and-hold + comparator + capacitor DAC + SAR logic; charge-pump PLL = PFD + charge pump + loop filter + VCO + divider ([Wikipedia: LDO](https://en.wikipedia.org/wiki/Low-dropout_regulator); [Wikipedia: ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter); [Wikipedia: CP-PLL](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)) [Textbook].
+- Device dependence falls into five groups: amplifiers depend on gm/ID, gm·ro, and fT; comparators, references, and data converters on matching; VCOs, LNAs, and ADC front ends on noise; bandgaps on BJTs/diodes; power devices on Ron·C and reliability [Inference].
+- Logic process trends cut both ways for analog: lower VDD squeezes headroom, and width quantization limits sizing freedom; higher fT helps RF and SerDes, and the undoped FinFET channel improves VT matching [Inference].
+
+### One summary table: what each block does, what it is judged on, and what it relies on
+
+The row contents of the table below are standard textbook knowledge (Razavi, Johns & Martin, Gray & Meyer, Allen & Holberg, Baker). No web source was found row by row, so all rows are tagged [Textbook].
+
+| Layer | Block | What it does | Key circuit metrics | Device metrics it relies on |
+|---|---|---|---|---|
+| Primitive | Current mirror | Copy or scale current | Rout, compliance voltage, ratio error | Matching (AVT, Aβ), ro, LDE |
+| Primitive | Differential pair | Amplify a difference, reject common mode | Offset, CMRR, gm | Matching, gm/ID, 1/f noise |
+| Primitive | Common source / common gate / common drain | Voltage gain / current buffer (cascode) / voltage buffer | Gain, bandwidth, input and output impedance | gm/ID, gm·ro, fT, Cgd |
+| Amplifier | OTA, telescopic / folded cascode, two-stage op-amp | Amplify | Gain, GBW, phase margin, slew rate, swing | Intrinsic gain, headroom |
+| Decision | Comparator (static / dynamic latch) | 1-bit decision | Offset, speed, kickback, noise, metastability | Matching, fT, 1/f noise |
+| Reference | Bandgap, current reference | Stable voltage / current | Accuracy, temperature drift, PSRR, noise, minimum VDD, start-up | BJT/diode matching, resistor TC, op-amp offset |
+| Power | LDO, buck, charge pump, POR | Regulate, convert voltage, power-on reset | Dropout, PSRR, Iq, efficiency, ripple, threshold accuracy | Pass-transistor Ron, power-transistor Ron·Qg, reliability (HCI/TDDB), VT distribution |
+| Data conversion | SAR, pipeline, Δ-Σ, current-steering DAC, R-string DAC | Analog ↔ digital | ENOB, SNR, SFDR, INL/DNL | Comparator noise, capacitor / resistor / current-source matching, switch Ron and leakage, op-amp gain |
+| Clocking | VCO, PLL, DLL, crystal oscillator, CDR | Generate, align, and recover clocks | Phase noise, jitter, spurs, lock time | 1/f noise upconversion, fT, inductor Q |
+| Interface | SerDes, I/O, ESD | High-speed transceiving, external interfaces, electrostatic protection | BER, eye diagram, HBM/CDM rating | fT/fmax, gm/C, thick-oxide devices, snapback behavior, breakdown voltage |
+| Sensing | Temperature sensor, PVT monitor | Measure temperature, voltage, and process speed | Accuracy after trim | BJT/diode, device speed, VT distribution |
+| Filtering | Switched capacitor, Gm-C / active RC | Filtering, sample-and-hold, integration | Bandwidth, linearity, kT/C noise | Capacitor matching, switch charge injection, gm linearity |
+| RF | LNA, mixer, PA | Low-noise amplification, frequency conversion, power transmission | NF, IIP3, output power, efficiency | fT/fmax, gate resistance, breakdown voltage, thermal |
+
+### Composition examples: what a block contains
+
+**Charge-pump PLL** [Inference]: PFD (digital) + charge pump (UP/DN current mirrors + switches) + loop filter (R, C) + VCO (ring or LC) + feedback divider (digital). Mismatch between the UP and DN mirrors of the charge pump causes static phase offset and reference spurs. This is one example of current-mirror error from §1 directly affecting PLL performance.
+
+**SAR ADC** [Inference]: bootstrapped sampling switch + capacitor DAC (unit-capacitor array in common centroid) + dynamic comparator (differential pair + latch) + SAR logic (digital) + reference voltage buffer (similar to an LDO).
+
+**LDO** [Inference]: bandgap + error amplifier (an OTA) + pass transistor + divider + compensation.
+
+**One SerDes lane** [Inference]: transmitter (serializer + driver + FFE equalization) + channel + receiver (CTLE + DFE comparators + CDR) + shared PLL.
+
+A pattern [Inference]: the higher the level, the larger the share of digital logic. In modern PLLs, SAR ADCs, and SerDes, the truly analog part is often only the sampling switch, comparator, VCO, charge pump, and front-end amplifier. The rest goes to digital logic and calibration. This is also why these IPs can follow advanced nodes.
+
+### SerDes: the highway between chips
+
+[Textbook] SerDes compresses wide parallel data inside the chip into high-speed serial data on one or two differential lines and restores it at the far end. The transmitter has a driver and feed-forward equalization (FFE). The receiver has continuous-time linear equalization (CTLE), decision-feedback equalization (DFE), and clock and data recovery (CDR), with a PLL alongside. The main metrics are bit error rate (BER), eye opening, and energy per bit. At the device level, fT/fmax and gm/C matter most.
+
+[Vendor] Silicon Creations' SerDes PMA covers more than 30 protocols, including PCIe, JESD204B/C, CPRI, and 10G-KR, on processes from 180 nm to 4 nm ([AnySilicon: Silicon Creations](https://anysilicon.com/vendors/silicon-creations/)). The digital part of SerDes (PCS and control logic) often ships as soft RTL. For PCIe Gen4, the interface is a 16-bit bus at about 1 GHz, and the integrator must close its timing ([Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)).
+
+### I/O and ESD: the chip's "doors" and "fuses"
+
+[Textbook] I/O cells include pad drivers and receivers and usually use thick-oxide devices to withstand higher interface voltages. ESD protection includes diodes, grounded-gate NMOS (GGNMOS) or SCRs, and clamps between supply rails (rail clamps). These discharge human-body-model (HBM) and charged-device-model (CDM) events. ESD devices are judged on snapback behavior, breakdown voltage, on-resistance, and the area and capacitance they add to signal pins. ESD for high-speed interfaces is especially hard, because the capacitance of the protection devices eats bandwidth directly. This search found no dedicated public source on ESD and I/O cell structures.
+
+[Vendor] In memory PHYs, I/O and analog are one piece: the Synopsys DDR PHY material lists programmable drive strength and ODT, ESD protection, PVT-compensated I/O, a low-jitter DLL, and dynamic drift detection and compensation ([Synopsys DDR multiPHY](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)).
+
+### Sensors and monitoring: the chip's "health check"
+
+[Textbook] On-chip temperature sensors usually use the PTAT ΔV_BE (the same principle as the bandgap), digitized by a Δ-Σ or SAR ADC, with accuracy set by trimming. PVT monitors include ring oscillators that measure process speed and droop detectors that catch supply dips.
+
+[Vendor] Vendors treat these as separate IP categories:
+- Agile Analog has an "IC health and monitoring" subsystem (temperature sensor, IR-drop sensor) and a "security" subsystem (voltage glitch sensor, temperature sensor) ([Embedded Computing Design](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)).
+- Synopsys groups PVT sensors under "silicon lifecycle management (SLM) IP," alongside interface IP and foundation IP ([Synopsys press release](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)).
+
+### A translation for logic process engineers
+
+[Inference] Many device properties that analog cares about get little attention in logic optimization:
+- Intrinsic gain gm·ro: falls as L shrinks; in FinFET, stacked gates mitigate this.
+- 1/f noise, matching (AVT), ro, and DIBL.
+- LDE.
+- Passives: MOM/MIM capacitor density and matching, resistor temperature coefficient and matching, inductor Q.
+
+Effects of logic process trends on analog:
+- Lower VDD: less headroom; deep cascode stacks no longer fit.
+- Width quantization: less sizing freedom.
+- Higher fT: helps RF and SerDes.
+- Undoped FinFET channel: better VT matching.
+
+See the main guide for the definitions, extraction methods, and per-node data of these device metrics.
+
+## 8. Analog IP: what every chip needs
+
+**Almost every SoC needs a set of "foundation analog IP" (clocking, references, regulation, reset, monitoring, I/O and ESD, OTP), plus high-speed PHYs and data converters as the product requires; this IP is usually licensed as process-specific GDS hard macros, so "whether ready-made, silicon-proven analog IP exists on a node" often decides which node and which foundry a chip can use.**
+
+Key points:
+- Must-have tier: PLL, crystal-oscillator pad or on-chip RC oscillator, bandgap, POR, LDO, PVT/temperature sensors, GPIO with ESD, OTP/eFuse [Inference] (basis: the catalogs of [Agile Analog](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips), [Analog Bits](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/), and [Synopsys](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1) repeat the same set).
+- Chosen by application: SerDes (PCIe/Ethernet/CXL), DDR/LPDDR/HBM PHY, UCIe/BoW die-to-die links, USB/MIPI, high-precision ADC/DAC, LC PLL [Inference].
+- Soft vs. hard: digital IP is usually synthesizable RTL and largely process-independent. Analog and mixed-signal IP "is generally developed and licensed as hard IP," i.e., process-specific GDS that cannot be moved to another process ([AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)) [Opinion].
+- Porting is hard: it "often requires a from-scratch implementation," and going from 28 nm to 16 nm is "a completely different design" ([Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html); [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)) [Vendor][Opinion].
+- IP availability drives foundry choice: some companies decide which foundry and which node to use based on the IP available ([Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)) [Opinion].
+
+### Catalog: what each IP does, whether it is required, and its metrics
+
+[Figure: Detail of the RF/analog section of an ESP32 Wi-Fi/Bluetooth SoC die photo: spiral inductors and several analog blocks are visible. Note the spiral inductors: they are large passives common in RF and LC oscillator circuits, and their size is set by electromagnetics and barely shrinks with the process node. This is a visual reason why analog IP has trouble shrinking along with logic]
+
+| IP | What it does | Required / by application | Key metrics |
+|---|---|---|---|
+| PLL (ring, fractional-N) | Generates clocks for cores, buses, and PHYs | Required [Inference] | Jitter (ring "as low as 1 ps RMS" [Vendor]), frequency range, lock time, area and power ([AnySilicon](https://anysilicon.com/vendors/silicon-creations/)) |
+| LC PLL | Provides low-jitter clocks for high-speed SerDes | By application [Inference] | Jitter ("well below 300 fs RMS" [Vendor]) ([AnySilicon](https://anysilicon.com/vendors/silicon-creations/)) |
+| Crystal-oscillator pad / RC oscillator | PLL reference; always-on domain, watchdog, low-power clock | Required [Inference] | Frequency accuracy, start-up, power; the RC oscillator needs no external components ([AnySilicon](https://anysilicon.com/vendors/silicon-creations/)) [Vendor] |
+| Bandgap | Stable voltage reference | Required [Inference] | Initial accuracy, temperature drift, PSRR, noise |
+| LDO | Local regulation; clean supply for sensitive blocks | Required [Inference] | Dropout, PSRR, Iq, transient response |
+| POR / brownout detection | Holds reset until supplies are stable; flags supply dips during operation | Required [Inference] | Threshold accuracy, response time |
+| PVT / temperature / IR-drop sensors | Monitor chip health; support frequency and voltage scaling | Required [Inference] (Synopsys lists it as SLM IP [Vendor]) | Measurement accuracy, conversion time |
+| Voltage glitch sensor | Detects fault-injection attacks | By application (security) [Vendor] | Detection threshold, response speed ([Embedded Computing Design](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)) |
+| GPIO + ESD | External interface and electrostatic protection | Required [Textbook] | Drive strength, voltage class, HBM/CDM rating |
+| OTP / eFuse / antifuse | Stores trim values, keys, IDs, and configuration | Required [Inference] | Reliability, area, read-out security ([Synopsys OTP](https://www.synopsys.com/articles/non-volatile-memory.html)) [Vendor] |
+| SerDes (PCIe/Ethernet/CXL) | High-speed serial chip-to-chip links | By application (data center, networking, AI) | BER, eye diagram, pJ/bit, protocol compliance |
+| DDR/LPDDR/HBM PHY | Connects to external DRAM | By application (when external DRAM is used) | Data rate, timing margin, power; includes DLL and calibrated I/O ([Synopsys DDR](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)) [Vendor] |
+| UCIe / BoW / AIB | Die-to-die links between chiplets | By application (chiplet designs) | Bandwidth density (Tb/s/mm), pJ/bit, reach |
+| USB / MIPI | Peripheral, camera, and display interfaces | By application (client, mobile, camera) | Protocol compliance, power |
+| ADC / DAC | Sensor interfaces, audio, wireless baseband | By application (low-to-mid-precision SAR is also common in MCUs) [Inference] | ENOB, sample rate, power |
+
+[Vendor] More on OTP: it is "the first circuit to start working as power ramps up," because other analog blocks first read their trim values from it ([Synopsys OTP](https://www.synopsys.com/articles/non-volatile-memory.html)). eFuse blows metal by electromigration. On FinFET it has large area and high leakage, and a blown link can "grow back." Antifuse relies on oxide breakdown, needs no extra masks, and is hard to read out with SEM. This material comes from an antifuse vendor and takes a side in its comparison with eFuse.
+
+[Vendor] The two UCIe package options ([Synopsys UCIe technical bulletin](https://www.synopsys.com/designware-ip/technical-bulletin/ucie-multi-die-socs.html)):
+
+| Parameter | Advanced package | Standard package |
+|---|---|---|
+| Data rate | 16 Gb/s | 16 Gb/s |
+| Lanes per module | 64 | 16 |
+| Bump pitch | 45 µm | 110 µm |
+| Bandwidth density | 5.2 Tb/s/mm | 0.9 Tb/s/mm |
+| Energy efficiency | 0.3 pJ/bit | 0.5 pJ/bit |
+| Reach | ≤ 2 mm | ≤ 25 mm |
+| Redundant lanes for repair | Yes | No |
+
+### Groupings from vendor catalogs
+
+[Vendor] Vendor catalogs give a practical way to group the IP:
+
+| Source | Group / contents |
+|---|---|
+| Agile Analog ([Embedded Computing Design](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)) | Always-On: low-power RC oscillator, low-power bandgap, programmable comparator, POR, small digital cell library |
+| | Power: LDO, POR, IR-drop sensor, bandgap |
+| | Health and monitoring: temperature sensor, IR-drop sensor |
+| | Security: voltage glitch sensor, temperature sensor |
+| | Sensor interface: 8/10-bit SAR ADC, 8/10-bit DAC, comparator |
+| | Wireless interface: SAR ADC, DAC, RC oscillator, LDO |
+| Analog Bits, GF 12LP/12LP+ ([SemiWiki](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)) | Integer and fractional PLLs, PCIe Gen2/3 ring PLL, PCIe Gen4/5 LC PLL, PVT sensors, POR |
+| Analog Bits, Samsung 32LP–5LPE (same source) | Low-power PLL, PCIe reference clock, chip-to-chip I/O, clock transceivers, oscillator pad, PVT sensors, power glitch detection, multi-protocol SerDes |
+| Synopsys, Intel 18A/18A-P ([press release](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)) | 224G Ethernet, PCIe 7.0, UCIe, USB4 PHY; foundation IP (embedded memory, logic libraries, I/O); PVT sensors |
+
+A Samsung talk called foundation analog IP "a key differentiator for AI SoCs" ([SemiWiki](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)) [Vendor]. AnySilicon lists typical analog / mixed-signal hard IP as SerDes, PLL, ADC, DAC, and the PHY layer of DDR and PCIe. The matching digital parts (DRAM controller, Ethernet MAC, AMBA bus IP) are usually soft IP ([AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)) [Opinion].
+
+### How analog IP differs from digital IP
+
+| Aspect | Digital IP | Analog / mixed-signal IP | Evidence |
+|---|---|---|---|
+| Delivery form | Soft: synthesizable RTL (SystemVerilog/VHDL), sometimes a generic gate-level netlist | Hard: process-specific GDS layout | [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)[Opinion] |
+| Relation to process | "Generally process-independent"; back-end P&R can map it to any process | Tied to one PDK; "cannot be customized for different processes" | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes); [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)[Opinion] |
+| How the integrator uses it | Synthesizes, places and routes, and closes timing in house | Drops the GDS straight into the final layout and connects power, signals, and ESD per the rules | [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)[Opinion] |
+| Moving to a new node | Re-synthesize, place and route, and sign off with the new standard-cell library | Redesign, new layout, re-simulation, new silicon validation | [Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)[Vendor]; [Inference] |
+| Corner coverage | Mainly through recharacterized standard-cell .lib files | The IP itself must run PVT, Monte Carlo, and parasitic corners | [Inference] |
+| Main risks | Verification coverage and timing closure | Custom layout, post-layout re-centering, silicon characterization | [Inference] |
+| Effect on node choice | Small | Large: IP readiness affects which node and foundry are chosen | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)[Opinion] |
+| Physical location | Anywhere on the chip | High-speed PHYs must sit at the chip edge ("beachfront") | [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)[Opinion] |
+
+### Why analog IP is hard to port
+
+[Vendor] Synopsys says analog migration "can be manual, time-consuming, and requires a deep understanding of circuit function," and "often requires a from-scratch implementation." At smaller nodes, LDE, parasitics, electromigration, and stress all increase, so pre-layout simulation alone is not enough at FinFET nodes ([Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)).
+
+[Opinion] A 2014 industry interview gives more specific reasons ([Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)):
+- Hem Hingarh of Synapse Design, on FinFET: "fin width has a significant effect on VT." Add fin-count quantization, changed parasitic R/C, large Miller capacitance, contact resistance, and self-heating. "You have to start from scratch and even throw away some rules of thumb." Parasitic extraction corners have "increased to about 15 to 20," and simulation time grows with them.
+- Kevin Yee of Cadence says going from 28 nm to 16 nm is "a completely different design." At 28 nm the PDK started at v1.0; at 16/14/10 nm it started at v0.3/0.5. This means IP has to be designed against immature models.
+- Navraj Nandra of Synopsys says analog IP "must fit into the SoC beachfront," and that new protocols and digital scaling both force re-architecture, so "it is less about reuse than about getting it right from the start."
+
+[Inference] For logic process integration, the conclusion is: when analog IP is ready on a new node depends on when the analog device models mature, not only on logic PPA. These models include VT and mismatch per fin / sheet count, flicker noise, LDE/stress, self-heating, and thin-metal EM rules. Each model change means the analog IP must be signed off and validated again.
+
+### Foundry IP ecosystems and quality scoring
+
+[Vendor] Foundries manage this with IP alliances and quality scores:
+- **TSMC OIP IP Alliance**: provides "silicon-verified, production-proven, foundry-specific" IP. The page cites tens of thousands of IP options from 40 alliance members, and more than 60,000 IPs as of August 2023. Hard IP goes through physical review and pre-tapeout assessment (including design-kit and design-margin reviews) before test-chip tapeout. Major IP gets a test-chip tapeout review. After tapeout, typical and split-lot silicon assessments are based on test-chip characterization reports. Results are published as a TSMC9000 score, and "the more assessments passed, the higher the confidence"; TSMC9000A adds automotive assessment ([TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)).
+- **Samsung SAFE**: as of June 2023, IP partners include Synopsys, Cadence, and Alphawave Semi, adding "dozens" of IPs for 3–8 nm processes ([Samsung press release](https://news.samsungsemiconductor.com/global/samsung-electronics-powers-enhanced-customer-development-support-with-expanded-safe-program/)).
+- **Intel Foundry**: Synopsys joined the Intel Foundry Accelerator design services alliance and is a founding member of the chiplet alliance ([Synopsys press release](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)). Cadence also announced design IP for 18A/18A-P ([Design & Reuse](https://us.design-reuse.com/news/57767/cadence-intel-18a-p-ip.html), search snippet only).
+
+[Inference] Split-lot (fast / slow) silicon reports are where process variation shows up in analog margins. So "silicon-proven on corner lots" is a commercial prerequisite, not just good practice.
+
+## 9. What an analog IP is made of: front end, back end, and deliverables
+
+**An analog IP goes through the chain "specification → architecture → transistor-level schematic → pre-layout simulation → custom layout → physical verification → parasitic extraction and post-layout simulation → reliability checks → test chip and silicon characterization," and ships as a hard-macro package: GDS, LEF abstract, Liberty for the digital pins, behavioral models, netlists, verification reports, an integration guide, and a silicon characterization report.**
+
+Key points:
+- Cadence's basic flow is: specification → schematic → pre-layout simulation → layout → DRC/LVS → parasitic extraction → post-layout simulation → GDSII tapeout, with repeated iteration ([Cadence Community blog](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)) [Vendor].
+- At advanced nodes the back end gets heavier: more extraction corners, plus checks for self-heating, contact resistance, fin quantization, EM, and stress ([Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes); [Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)) [Opinion][Vendor].
+- Getting silicon back after tapeout takes "several months"; only then do characterization and debug start ([Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)) [Vendor].
+- Public sources confirm each part of the deliverables (Liberty, SDC, IBIS-AMI, GDS, characterization reports), but no single public document lists them all; the complete list is [Inference].
+- Migration tools automate schematic mapping and layout template reuse. Vendors claim "up to 3x" faster or "weeks" saved, but silicon validation stays on the critical path ([Business Wire / Cadence](https://www.businesswire.com/news/home/20230925981631/en/Cadence-CustomAnalog-Design-Migration-Flow-Accelerates-Adoption-of-TSMC-Advanced-Process-Technologies); [Synopsys / Design & Reuse](https://us.design-reuse.com/news/54885/synopsys-tsmc-advance-analog-design-migration-advanced-tsmc-processes.html)) [Vendor].
+
+### From specification to silicon validation: flow table
+
+| Stage | What happens | Output | Evidence |
+|---|---|---|---|
+| 1. Specification | Define performance, power, area, interfaces, and operating conditions (voltage, temperature range) | Specification document | [Cadence blog](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)[Vendor] |
+| 2. Architecture | Choose the topology (e.g., ring or LC PLL, SAR or Δ-Σ) and allocate error and power budgets; behavioral models are often used for system simulation | Architecture document, behavioral models | [Inference] |
+| 3. Schematic | Transistor-level design, sized with gm/ID and similar methods | Schematic, symbol | [Cadence blog](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)[Vendor] |
+| 4. Pre-layout simulation | Typical and PVT corners, Monte Carlo mismatch, noise, stability, transients | Simulation report; design margins | The Cadence article itself does not cover corners and Monte Carlo; for design centering across PVT corners see [Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)[Vendor] |
+| 5. Custom layout | Matched placement, guard rings, symmetric routing, power grid, dummies | Layout database | [Cadence blog](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)[Vendor] |
+| 6. Physical verification | DRC, LVS, ERC, antenna rules | Clean verification reports | [Cadence blog](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)[Vendor]; ERC/antenna [Inference] |
+| 7. Parasitic extraction + post-layout simulation | Extract R/C and rerun all pre-layout simulations; multiple extraction corners | Post-layout simulation report; back to step 3 or 5 if needed | [Cadence blog](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)[Vendor]; [Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)[Opinion] |
+| 8. Reliability checks | EM/IR, self-heating, stress, aging | EM/IR and reliability reports | [Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)[Vendor] |
+| 9. Foundry pre-review | Design-kit and design-margin reviews; test-chip tapeout review for major IP | Pre-tapeout assessment records | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)[Vendor] |
+| 10. Test-chip tapeout | Place the IP on a test chip with isolated test paths, loopback, and observability | GDSII / OASIS | [Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)[Vendor] |
+| 11. Silicon characterization | Measure metrics on typical and split-lot parts; package, board, socket, and soldering variation | Characterization report; known-issues list | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm); [Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)[Vendor] |
+| 12. Release and support | Package for delivery; support customer integration and bring-up | Delivery package (see the table below); quality score | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)[Vendor] |
+
+This chain maps to the earlier sections: step 3 uses the building blocks of §1–§5, step 5 uses the layout rules of §1 and §6, and the Monte Carlo runs in steps 4 and 7 compute the Pelgrom mismatch of §1.
+
+[Inference] The digital IP counterpart is: RTL → lint and CDC checks → functional verification (UVM, coverage) → synthesis to the target standard-cell library → P&R → STA and power sign-off. Risk in the analog flow concentrates in custom layout, post-layout re-centering, and silicon characterization. Risk in the digital flow concentrates in verification coverage and timing closure.
+
+### Advanced nodes make the back end heavier
+
+[Opinion] Hingarh notes that parasitic extraction corners at advanced nodes have grown to about 15–20, and verification must also cover self-heating, contact resistance, and fin quantization effects. IP designers must do "much more effective circuit characterization" at the cell, block, and IP levels ([Semiconductor Engineering](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)). [Vendor] Synopsys' AI optimizer re-centers migrated circuits across "hundreds of PVT corners" ([Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)). Public sources give no authoritative "standard number of sign-off corners."
+
+[Opinion] Rambus lists the difficulties of SerDes silicon bring-up: lab equipment, package and board reviews, board-to-board variation, socket and soldering variation, and failures that "only show up in a particular Monte Carlo sample" ([Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)).
+
+### Deliverables: what is in a hard-macro package
+
+| File | Purpose | Who uses it | Evidence |
+|---|---|---|---|
+| GDSII / OASIS | Final layout, placed in the chip top level | Integrator's layout and tapeout team | [AnySilicon](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)[Opinion] |
+| LEF / abstract view | Pins, blockages, and usable routing layers for automatic place and route | Integrator's P&R team | [Inference] |
+| Liberty (.lib/.db) | Timing arcs and power of the IP's digital pins, often at multiple PVT corners | Integrator's STA and power sign-off | Rambus lists Liberty for the hardened AFE and digital interface ([Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)) [Vendor] |
+| SDC constraints | Clocks, clock groups, clock-domain crossings | Integrator's synthesis and STA | [Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)[Vendor] |
+| Verilog behavioral model; Verilog-AMS / real-number model | Chip-level functional simulation and mixed-signal verification | Integrator's verification team | [Inference]; Rambus mentions support for back-annotated gate-level simulation [Vendor] |
+| CDL / SPICE netlist | LVS and transistor-level simulation | Integrator's physical verification team | [Inference] |
+| DRC/LVS/ERC/antenna reports | Show that the IP was checked with the foundry sign-off rules (a specified version) | Integrator and foundry | [Inference] |
+| EM/IR reports | Show that current density and voltage drop meet the rules | Integrator's power-integrity team | [Inference] |
+| IBIS / IBIS-AMI models | Channel simulation for I/O and SerDes; AMI is an executable TX/RX model, including equalization and CDR, that can simulate far more bits than SPICE | Package and board signal-integrity team | [MathWorks](https://www.mathworks.com/help/serdes/ug/understanding-ibis-ami-simulations.html)[Textbook] |
+| Datasheet, integration and user guides | Floorplanning, power domains, ESD rules, keep-out zones, decoupling, bump and pad requirements; clocking application notes | Integrator's architecture, layout, and package teams | Rambus clocking application notes ([Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)) [Vendor]; the rest [Inference] |
+| Package / board application notes | Sign-off criteria for crosstalk, impedance, skew, decoupling, insertion and return loss, and regulator noise | Package and board teams | [Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)[Vendor] |
+| DFT / BIST material | Loopback, PRBS, scan for the digital wrapper; UCIe also includes link training, calibration, and test-and-repair logic | Test team | [Synopsys UCIe](https://www.synopsys.com/designware-ip/technical-bulletin/ucie-multi-die-socs.html)[Vendor]; the rest [Inference] |
+| Debug tools | Eye-diagram and impulse-response analyzers | Bring-up engineers | [Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)[Vendor] |
+| Soft RTL (digital part of the PHY) | PCS and control logic, synthesized and timing-closed by the integrator | Integrator's front-end team | [Rambus blog](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2); the DDR PHY comes with a soft DFI interface ([Synopsys DDR](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)) [Vendor] |
+| Silicon characterization / qualification reports | Measured data on typical and split-lot parts; known issues | Integrator's selection and quality teams; foundry scoring | [TSMC IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)[Vendor] |
+
+[Inference] Deliverables for digital soft IP are usually RTL, SDC, a testbench or VIP, synthesis scripts, and DFT/scan-insertion guides, sometimes with a hardened netlist or GDS for a given node. The difference is easy to see: digital IP delivers "how to build it," while analog IP delivers "the finished thing and how to use it correctly."
+
+### Migration automation and schedule: tools are speeding up, silicon is still the bottleneck
+
+[Vendor] What the main vendors say:
+- **Cadence + TSMC (September 2023)**: the Virtuoso Studio migration flow migrates schematic cells, parameters, pins, and wiring, re-simulates with ADE, and tunes to spec. Generative layout technology recognizes device groups in the old layout and applies them to the new one. Supported paths are N40→N22, N22→N12, N12→N6, N6→N4, N5→N3E, N4/N5→N3E, and N3E→N2. Customers report "up to 3x" faster than manual migration ([Business Wire / Cadence](https://www.businesswire.com/news/home/20230925981631/en/Cadence-CustomAnalog-Design-Migration-Flow-Accelerates-Adoption-of-TSMC-Advanced-Process-Technologies)).
+- **Synopsys + TSMC (September 2023)**: the analog migration reference flow covers N4P, N3E, and N2. It includes machine-learning-based schematic migration, template-based layout migration, and "parasitic-aware, AI-driven optimization," and is claimed to "save weeks of engineering time" ([Design & Reuse / Synopsys](https://us.design-reuse.com/news/54885/synopsys-tsmc-advance-analog-design-migration-advanced-tsmc-processes.html)). Synopsys also cites "a shortfall of 23,000 engineers by 2030" as background ([Synopsys blog](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)).
+- **Agile Analog**: uses Composa to regenerate analog IP from the target PDK, in place of a "redesign" for every process ([eeNews Europe](https://www.eenewseurope.com/en/process-agnostic-analog-ip-tackles-fab-capacity-challenges/)).
+
+None of these figures has an independent benchmark. Public sources also give no reliable figure for "how many months it takes to port a SerDes, PLL, or DDR PHY."
+
+[Inference] Tools can automate schematic mapping and layout template reuse, but they cannot handle physical changes: width quantization from fin to nanosheet, new mismatch and flicker-noise models, IR and parasitic changes from backside power delivery, and tighter EM limits. The remaining work therefore concentrates on re-centering and revalidation. Even if tools are 3x faster, test-chip silicon (several months) is still on the critical path. "Process-agnostic" generative approaches and ring PLLs that span 180 nm to 3 nm both favor more digital, more scalable architectures. LC tanks, high-precision ADCs, and SerDes front ends remain highly node-dependent.
+
+## 10. More figures: reliable public resources
+
+**For more real schematics, layouts, and die photos, the most reliable sources are open-source PDK and open-source course repositories (where the original design files can be opened directly), Wikimedia Commons (circuit diagrams with stated licenses), and a few courses and application notes that can only be linked, not reproduced.**
+
+Key points:
+- Figures in open-source course and PDK repositories are real designs exported from tools, not illustrations. More than half of this page's figures come from them.
+- Wikimedia Commons circuit diagrams all state author and license and can be reproduced under that license.
+- MIT OCW is CC BY-NC-SA (non-commercial), and TI application notes are copyrighted: these are suitable only for reading via links.
+- To get a real common-centroid layout, the most practical option today is to generate one yourself with an open-source generator.
+
+### Open-source courses and PDK repositories (original files downloadable)
+
+- [iic-jku/analog-circuit-design](https://github.com/iic-jku/analog-circuit-design): Harald Pretl's open-source analog course, Apache-2.0. It has xschem schematics (current mirrors and variants, five-transistor OTA, improved OTA, bandgap) using IHP SG13G2 devices, with ngspice simulation setups. This page's current-mirror variant, five-transistor OTA, and CMOS bandgap figures come from here.
+- [google/skywater-pdk-libs-sky130_fd_pr](https://github.com/google/skywater-pdk-libs-sky130_fd_pr): SkyWater SKY130 device library, Apache-2.0. Each device has GDS and an official SVG render, plus model-generated I–V curves. This page's multi-finger NFET layout and Ids–Vds curves come from here.
+- [SkyWater PDK device documentation](https://skywater-pdk.readthedocs.io/en/main/rules/device-details.html): descriptions of each device; the repository also has reusable cross-section figures.
+- [ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public): open-source automatic analog layout generator, BSD-3-Clause. This page's common-centroid placement figure comes from here.
+- [OpenFASOC gLayout](https://openfasoc.readthedocs.io/en/latest/notebooks/glayout/glayout_opamp.html): generates real GDS for current mirrors, differential pairs, common-centroid (ABBA) and interdigitated structures, and two-stage op-amps in SKY130/GF180.
+
+### Tiny Tapeout: open-source analog designs that went to silicon
+
+- [atenfyr/ttsky_analog](https://github.com/atenfyr/ttsky_analog): Miller OTA, beta-multiplier current reference, compensation capacitors, and transmission-gate mux, with an annotated layout. Chip page: [Tiny Tapeout ttsky26a #520](https://tinytapeout.com/chips/ttsky26a/520).
+- [spasquale25/OTA](https://github.com/spasquale25/OTA): GDS of a SKY130 five-transistor OTA; the 25 µm × 20 µm cell shows the PMOS mirror load, the NMOS input pair, and the tail current mirror.
+
+### Wikimedia Commons: circuit diagrams with stated licenses
+
+All Commons figures used on this page can be viewed at full size, with their licenses, on the original pages:
+- [Simple MOSFET mirror](https://commons.wikimedia.org/wiki/File:Simple_MOSFET_mirror.PNG), [Kaskode-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Kaskode-Stromspiegel_(MOS).svg), [Wilson-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Wilson-Stromspiegel_(MOS).svg), [Wide-swing MOSFET mirror](https://commons.wikimedia.org/wiki/File:Wide-swing_MOSFET_mirror.svg)
+- [Single Supply CMOS OpAmp](https://commons.wikimedia.org/wiki/File:Single_Supply_CMOS_OpAmp.svg), [Dynamic Comparator](https://commons.wikimedia.org/wiki/File:Dynamic_Comparator.png), [Brokaw cell theory](https://commons.wikimedia.org/wiki/File:Brokaw_cell_theory.gif), [Low-dropout regulator circuit](https://commons.wikimedia.org/wiki/File:Low-dropout-regulator-circuit.svg)
+- [Analog PLL (block diagram)](https://commons.wikimedia.org/wiki/File:Analog_PLL_(block_diagram).PNG), [SA ADC block diagram](https://commons.wikimedia.org/wiki/File:SA_ADC_block_diagram.png), [2nd order delta-sigma modulation loop](https://commons.wikimedia.org/wiki/File:2nd_order_delta-sigma_modulation_loop.svg)
+- [Vlsiopamp2 (op-amp layout)](https://commons.wikimedia.org/wiki/File:Vlsiopamp2.gif), [Doublegate FinFET](https://commons.wikimedia.org/wiki/File:Doublegate_FinFET-en.svg), [ESP32 RF die](https://commons.wikimedia.org/wiki/File:Esp32-rf-HD.jpg)
+
+Similar figures not used on this page but worth a look:
+- [Charge pump circuit](https://commons.wikimedia.org/wiki/File:ChargePumpPLLCircuit.svg): two ICP current sources, controlled by Up/Down switches, charge and discharge the loop capacitor.
+- [PLL block diagram with charge pump](https://commons.wikimedia.org/wiki/File:PLL_generic_inline_optional_N.svg)
+- [Charge-redistribution DAC](https://commons.wikimedia.org/wiki/File:ChargeScalingDAC.png): the binary-weighted capacitor array used in SAR ADCs.
+- [Track-and-latch comparator](https://commons.wikimedia.org/wiki/File:Track_and_Latch_Comparator.svg)
+- [MOSFET output characteristics with CLM](https://commons.wikimedia.org/wiki/File:MOSFET_enhancement-mode_n-channel_en.svg)
+- [CMOS LDO die (Torex XC6206)](https://commons.wikimedia.org/wiki/File:Torex-XC6206-HD.jpg), [CMOS PLL die (CD4046)](https://commons.wikimedia.org/wiki/File:Ti-CD4046BE-50-HD.jpg)
+
+### Courses, notes, and image sites for link-only reading
+
+- [MIT OCW 6.012 Microelectronic Devices and Circuits](https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2009/): from devices to basic circuits, CC BY-NC-SA (non-commercial).
+- [MIT OCW 6.776 High Speed Communication Circuits](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/): PLLs, VCOs, and high-speed circuits, CC BY-NC-SA (non-commercial).
+- [TAMU ECEN474 Lecture 8: Current Mirrors](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf) and [UTK ECE532 Lecture 6](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf): the main sources of this page's current-mirror formulas.
+- [TI SLVA079: LDO terms and definitions](https://www.ti.com/lit/an/slva079/slva079.pdf): a systematic explanation of LDO metrics.
+- [Ken Shirriff's blog](https://www.righto.com/): transistor-by-transistor readings of analog chip die photos.
+- [Zeptobars](https://zeptobars.com/en/): the original source of this page's ESP32 die photo, with many high-resolution die photos.
+
+## Sources
+
+- [Wikipedia: Current mirror](https://en.wikipedia.org/wiki/Current_mirror)
+- [Wikipedia: Wilson current mirror](https://en.wikipedia.org/wiki/Wilson_current_mirror)
+- [Wikipedia: Bandgap voltage reference](https://en.wikipedia.org/wiki/Bandgap_voltage_reference)
+- [Wikipedia: Low-dropout regulator](https://en.wikipedia.org/wiki/Low-dropout_regulator)
+- [Wikipedia: Analog-to-digital converter](https://en.wikipedia.org/wiki/Analog-to-digital_converter)
+- [Wikipedia: Charge-pump phase-locked loop](https://en.wikipedia.org/wiki/Charge-pump_phase-locked_loop)
+- [TAMU ECEN474 Lecture 8: Current Mirrors (S. Palermo)](https://people.engr.tamu.edu/spalermo/ecen474/lecture08_ee474_current_mirrors.pdf)
+- [UTK ECE532 Lecture 06 (B. Blalock)](https://web.eecs.utk.edu/~bblalock/ece532/lecture_06.pdf)
+- [Harvard ES154 Lecture 15: Differential pair](https://in.ncu.edu.tw/~ncume_ee/harvard-es154/lect_15_diff_pair_2.pdf)
+- [Pelgrom, Tuinhout, Vertregt: Transistor matching in analog CMOS applications (IEDM 1998)](https://designers-guide.org/Forum/Attachments/Transistor_matching_in_analog_CMOS_applications_.pdf)
+- [Sheikholeslami: Process variation and Pelgrom's law (IEEE SSC Magazine)](https://www.eecg.utoronto.ca/~ali/papers/mag-win-15-process-variation.pdf)
+- [Pulsic: Current Mirrors in Analog Layout](https://pulsic.com/?p=1)
+- [Tech Design Forums: How to design with finFETs](https://www.techdesignforums.com/practice/?p=5259)
+- [Sharma et al.: Constructive Place-and-Route for FinFET-Based Transistor Arrays in Analog Circuits Under Nonlinear Gradients (NSF PAR)](https://par.nsf.gov/servlets/purl/10540359)
+- [US 7,755,419: Low power beta multiplier start-up circuit](https://patents.google.com/patent/US7755419)
+- [US 8,598,862: Start-up circuit for cascoded beta multiplier](https://patents.google.com/patent/US8598862)
+- [US 8,450,992: Wide-swing cascode current mirror](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8450992)
+- [US 7,012,415: Wide swing, low power current mirror](https://patents.google.com/patent/US7012415)
+- [US 12,446,321: Fin boundaries](https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/12446321)
+- [DATE 2021 paper (FinFET analog layout)](https://past.date-conference.com/proceedings-archive/2021/pdf/1829.pdf)
+- [ASP-DAC 2022 paper 2B-3](https://www.aspdac.com/aspdac2022/taoka/pdf/2B-3.pdf)
+- [Electronic Design: What's the difference between SAR and delta-sigma ADCs](https://www.electronicdesign.com/technologies/analog/adc/article/21801636/whats-the-difference-between-sar-and-delta-sigma-adcs)
+- [AnySilicon: Silicon Creations vendor page](https://anysilicon.com/vendors/silicon-creations/)
+- [Design & Reuse: Silicon Creations fractional-N PLL milestone (Nov 2024)](https://us.design-reuse.com/news/57049/silicon-creations-milestone-fractional-n-pll.html)
+- [SemiWiki: Analog Bits analog foundation IP on advanced FinFET processes](https://semiwiki.com/ip/analog-bits/293408-analog-bits-is-supplying-analog-foundation-ip-on-the-industrys-most-advanced-finfet-processes/)
+- [Embedded Computing Design: Agile Analog releases a full set of key analog IPs](https://embeddedcomputing.com/technology/analog-and-power/agile-analog-releases-a-full-set-of-key-analog-ips)
+- [Synopsys and Intel Foundry press release (Apr 2025)](https://news.synopsys.com/2025-04-29-Synopsys-and-Intel-Foundry-Propel-Angstrom-Scale-Chip-Designs-on-Intel-18A-and-Intel-18A-P-Technologies?asPDF=1)
+- [AnySilicon: IP core (soft vs hard IP)](https://anysilicon.com/ip-intellectual-property-core-semiconductors/)
+- [Synopsys DDR multiPHY datasheet page](https://www.synopsys.com/resources/ddr-multiphy-ip-datasheet.html)
+- [Synopsys technical bulletin: UCIe for multi-die SoCs](https://www.synopsys.com/designware-ip/technical-bulletin/ucie-multi-die-socs.html)
+- [Synopsys: Non-volatile memory (OTP) article](https://www.synopsys.com/articles/non-volatile-memory.html)
+- [Semiconductor Engineering: Challenges Increase For IP At Advanced Nodes (2014)](https://semiengineering.com/challenges-increase-for-ip-at-advanced-nodes)
+- [Synopsys blog: Analog circuit design migration](https://www.synopsys.com/blogs/chip-design/analog-circuit-design-migration.html)
+- [eeNews Europe: Process-agnostic analog IP tackles fab capacity challenges](https://www.eenewseurope.com/en/process-agnostic-analog-ip-tackles-fab-capacity-challenges/)
+- [TSMC OIP IP Alliance](https://www.tsmc.com/english/dedicatedFoundry/oip/ip_alliance.htm)
+- [Samsung Semiconductor newsroom: Expanded SAFE program (June 2023)](https://news.samsungsemiconductor.com/global/samsung-electronics-powers-enhanced-customer-development-support-with-expanded-safe-program/)
+- [Design & Reuse: Cadence IP for Intel 18A-P](https://us.design-reuse.com/news/57767/cadence-intel-18a-p-ip.html)
+- [Rambus blog: Overcoming high-speed SerDes IP integration challenges, part 2](https://www.rambus.com/blogs/overcoming-high-speed-serdes-ip-integration-challenges-part-2)
+- [Cadence Community blog: From schematic to silicon, a basic idea on analog IC design flow](https://community.cadence.com/cadence_blogs_8/b/cic/posts/from-schematic-to-silicon-a-basic-idea-on-analog-ic-design-flow)
+- [MathWorks: Understanding IBIS-AMI simulations](https://www.mathworks.com/help/serdes/ug/understanding-ibis-ami-simulations.html)
+- [Business Wire: Cadence custom/analog design migration flow for TSMC processes (Sept 2023)](https://www.businesswire.com/news/home/20230925981631/en/Cadence-CustomAnalog-Design-Migration-Flow-Accelerates-Adoption-of-TSMC-Advanced-Process-Technologies)
+- [Design & Reuse: Synopsys and TSMC advance analog design migration (Sept 2023)](https://us.design-reuse.com/news/54885/synopsys-tsmc-advance-analog-design-migration-advanced-tsmc-processes.html)
+- [iic-jku/analog-circuit-design (Harald Pretl)](https://github.com/iic-jku/analog-circuit-design)
+- [google/skywater-pdk-libs-sky130_fd_pr](https://github.com/google/skywater-pdk-libs-sky130_fd_pr)
+- [SkyWater PDK device details documentation](https://skywater-pdk.readthedocs.io/en/main/rules/device-details.html)
+- [ALIGN-analoglayout/ALIGN-public](https://github.com/ALIGN-analoglayout/ALIGN-public)
+- [OpenFASOC gLayout op-amp notebook](https://openfasoc.readthedocs.io/en/latest/notebooks/glayout/glayout_opamp.html)
+- [atenfyr/ttsky_analog](https://github.com/atenfyr/ttsky_analog)
+- [Tiny Tapeout ttsky26a #520](https://tinytapeout.com/chips/ttsky26a/520)
+- [spasquale25/OTA](https://github.com/spasquale25/OTA)
+- [Wikimedia Commons: Simple MOSFET mirror](https://commons.wikimedia.org/wiki/File:Simple_MOSFET_mirror.PNG)
+- [Wikimedia Commons: Kaskode-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Kaskode-Stromspiegel_(MOS).svg)
+- [Wikimedia Commons: Wilson-Stromspiegel (MOS)](https://commons.wikimedia.org/wiki/File:Wilson-Stromspiegel_(MOS).svg)
+- [Wikimedia Commons: Wide-swing MOSFET mirror](https://commons.wikimedia.org/wiki/File:Wide-swing_MOSFET_mirror.svg)
+- [Wikimedia Commons: Single Supply CMOS OpAmp](https://commons.wikimedia.org/wiki/File:Single_Supply_CMOS_OpAmp.svg)
+- [Wikimedia Commons: Dynamic Comparator](https://commons.wikimedia.org/wiki/File:Dynamic_Comparator.png)
+- [Wikimedia Commons: Brokaw cell theory](https://commons.wikimedia.org/wiki/File:Brokaw_cell_theory.gif)
+- [Wikimedia Commons: Low-dropout regulator circuit](https://commons.wikimedia.org/wiki/File:Low-dropout-regulator-circuit.svg)
+- [Wikimedia Commons: Analog PLL (block diagram)](https://commons.wikimedia.org/wiki/File:Analog_PLL_(block_diagram).PNG)
+- [Wikimedia Commons: SA ADC block diagram](https://commons.wikimedia.org/wiki/File:SA_ADC_block_diagram.png)
+- [Wikimedia Commons: 2nd order delta-sigma modulation loop](https://commons.wikimedia.org/wiki/File:2nd_order_delta-sigma_modulation_loop.svg)
+- [Wikimedia Commons: Vlsiopamp2](https://commons.wikimedia.org/wiki/File:Vlsiopamp2.gif)
+- [Wikimedia Commons: Doublegate FinFET](https://commons.wikimedia.org/wiki/File:Doublegate_FinFET-en.svg)
+- [Wikimedia Commons: ESP32 RF die (Zeptobars)](https://commons.wikimedia.org/wiki/File:Esp32-rf-HD.jpg)
+- [Wikimedia Commons: Charge pump PLL circuit](https://commons.wikimedia.org/wiki/File:ChargePumpPLLCircuit.svg)
+- [Wikimedia Commons: PLL generic inline optional N](https://commons.wikimedia.org/wiki/File:PLL_generic_inline_optional_N.svg)
+- [Wikimedia Commons: Charge scaling DAC](https://commons.wikimedia.org/wiki/File:ChargeScalingDAC.png)
+- [Wikimedia Commons: Track and Latch Comparator](https://commons.wikimedia.org/wiki/File:Track_and_Latch_Comparator.svg)
+- [Wikimedia Commons: MOSFET enhancement-mode n-channel characteristics](https://commons.wikimedia.org/wiki/File:MOSFET_enhancement-mode_n-channel_en.svg)
+- [Wikimedia Commons: Torex XC6206 die](https://commons.wikimedia.org/wiki/File:Torex-XC6206-HD.jpg)
+- [Wikimedia Commons: TI CD4046BE die](https://commons.wikimedia.org/wiki/File:Ti-CD4046BE-50-HD.jpg)
+- [MIT OCW 6.012 Microelectronic Devices and Circuits](https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2009/)
+- [MIT OCW 6.776 High Speed Communication Circuits](https://ocw.mit.edu/courses/6-776-high-speed-communication-circuits-spring-2005/)
+- [TI SLVA079: Understanding the terms and definitions of LDO voltage regulators](https://www.ti.com/lit/an/slva079/slva079.pdf)
+- [Ken Shirriff's blog](https://www.righto.com/)
+- [Zeptobars](https://zeptobars.com/en/)
 
 
 ---

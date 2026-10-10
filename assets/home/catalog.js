@@ -140,6 +140,34 @@ window.HOME_CATALOG = [
     "private": false
   },
   {
+    "url": "/research/analog-devices/basics/",
+    "category": "research",
+    "title": {
+      "zh": "模拟电路基础",
+      "en": "Analog Circuit Fundamentals"
+    },
+    "description": {
+      "zh": "电流镜、主要模块、模拟 IP，配真实图。",
+      "en": "Mirrors, main blocks and analog IP, with real figures."
+    },
+    "updated": "2026-10-10",
+    "private": false
+  },
+  {
+    "url": "/research/analog-devices/cards/",
+    "category": "research",
+    "title": {
+      "zh": "模拟器件卡片",
+      "en": "Analog Device Flashcards"
+    },
+    "description": {
+      "zh": "99 张卡片，打开就能翻，可朗读。",
+      "en": "99 open-and-go cards with read-aloud."
+    },
+    "updated": "2026-10-10",
+    "private": false
+  },
+  {
     "url": "/research/analog-devices/",
     "category": "research",
     "title": {
