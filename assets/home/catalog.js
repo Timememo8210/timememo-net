@@ -1,5 +1,13 @@
 window.HOME_CATALOG = [
   {
+    "url": "/ai-learning/",
+    "category": "learning",
+    "title": { "zh": "AI 学习知识库", "en": "AI Learning Library" },
+    "description": { "zh": "七个频道的中文精华，按博主、主题和日期搜索。", "en": "Chinese AI insights, searchable by creator, topic and date." },
+    "updated": "2026-10-11",
+    "private": false
+  },
+  {
     "url": "/designs/silicon-lab-20261004/",
     "category": "design",
     "title": {
