@@ -50,7 +50,10 @@ li.check{list-style:none;position:relative;margin-left:-20px;padding-left:28px}l
 .note{font-size:13px;color:var(--muted);border-left:3px solid var(--teal);padding:4px 0 4px 14px;margin:36px 0 0}
 footer{border-top:1px solid var(--rule);padding:26px 4.3vw;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 @media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}.contents{display:none}.controls>a{display:none}.dek{font-size:16px}h2{font-size:21px}.sub-body{padding:4px 14px 12px}details.sub>summary{padding-right:12px}}
-@media print{.top,.contents,.tools{display:none}.layout{display:block}details.sub{border:0}details.sub>.sub-body{display:block}}</style></head><body data-language="zh">
+@media print{.top,.contents,.tools{display:none}.layout{display:block}details.sub{border:0}details.sub>.sub-body{display:block}}.fig{margin:18px 0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px 16px 10px;max-width:860px}
+.fig img{display:block;max-width:100%;max-height:560px;height:auto;margin:0 auto;cursor:zoom-in}
+.fig figcaption{font-size:14px;color:var(--text);margin-top:10px;line-height:1.7}.fig figcaption small{display:block;font-size:11.5px;color:var(--muted);margin-top:4px}
+.fig figcaption small a{color:var(--muted)}</style></head><body data-language="zh">
 <a class="skip" href="#main"><span><span class="zh" lang="zh-CN">跳至正文</span><span class="en" lang="en">Skip to content</span></span></a><header class="top"><a class="brand" href="/research/">TIMEMEMO <span>RESEARCH</span></a><div class="controls"><a href="/research/"><span><span class="zh" lang="zh-CN">半导体研究</span><span class="en" lang="en">Semiconductor research</span></span></a><a href="../"><span><span class="zh" lang="zh-CN">指南正文</span><span class="en" lang="en">The guide</span></span></a><a href="../tricks/"><span><span class="zh" lang="zh-CN">技巧</span><span class="en" lang="en">Tricks</span></span></a><a href="../glossary/"><span><span class="zh" lang="zh-CN">术语表</span><span class="en" lang="en">Glossary</span></span></a><a href="../plan/"><span><span class="zh" lang="zh-CN">学习计划</span><span class="en" lang="en">Study plan</span></span></a><div class="languages" role="group" aria-label="Language"><button id="langZh" type="button" aria-pressed="true">中文</button><button id="langEn" type="button" aria-pressed="false">EN</button></div></div></header><style>.modbar{border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:72px;z-index:9}.modbar>div{max-width:1400px;margin:auto;padding:0 4.3vw;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}.modbar>div::-webkit-scrollbar{display:none}
 .modbar .ml{font-size:11px;letter-spacing:.12em;color:var(--muted);font-weight:600;white-space:nowrap;padding:12px 10px 12px 0;align-self:center}
 .modbar a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:14px;padding:11px 12px;border-bottom:2px solid transparent}.modbar a:hover{color:var(--teal)}.modbar a.on{border-bottom-color:var(--teal);color:var(--teal);font-weight:600}
@@ -61,7 +64,7 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <h1><span class="zh" lang="zh-CN">问答：速度、VT 与 flicker noise</span><span class="en" lang="en">Q&amp;A: speed, VT and flicker noise</span></h1>
 <div class="dek"><div class="zh" lang="zh-CN"><p>这份问答写给熟悉逻辑工艺整合、但对模拟和高速电路不熟的工程师，先从根本上说明模拟电路在追求什么（Q0），再回答六组常见问题。第一，CMOS 电路的速度确实看 drive current 与负载电容之比（I/C，也就是 CV/I 的倒数），而且要在相同 Ioff 和相同占地面积下比较；但 CML、放大器、pad 和长连线各有自己的瓶颈，分别看 gm/C、fT/fmax 和 RC。第二，"VT 越低，drive 越大、leakage 越大"是直接、定量的关系：leakage 按 10^(−ΔVT/SS) 指数增长，drive 只按 (VDD−VT)^α 的幂律增长，远弱于指数；"VT 越低，flicker noise 越差"却不是直接关系。在 CNF+CMF 模型里，VT 本身不出现在噪声公式中，噪声只取决于陷阱密度和偏置点。真实的噪声差异来自两条间接路径：比较口径（同 VGS 还是同 ID）和降 VT 的工艺手段（dipole、cap 层元素扩散、halo 掺杂）。第三，单位面积的 flicker noise 从 bulk 到 FinFET 总体改善了约一个数量级，nanosheet 与同栅叠层的平面器件大致持平；但单个最小器件的噪声和器件间离散变差了，因为面积缩得比陷阱密度降得快。第四，降噪的一阶旋钮是栅叠层的陷阱密度，其次是 EOT、退火、沟道设计和面积，电路上靠 chopping 和 auto-zero。第五，速率不够时，先定位瓶颈在哪个模块、受哪个指标限制，再按容易、中等、困难三级叠加手段，每一步都要有对应的验证。最后附五个高速与模拟方向的小知识点。</p></div><div class="en" lang="en"><p>This Q&amp;A is for engineers who know logic process integration but are new to analog and high-speed circuits. It first explains what analog circuits are fundamentally after (Q0), then answers six groups of common questions. First, CMOS circuit speed does depend on the ratio of drive current to load capacitance (I/C, the inverse of CV/I), and the comparison must be made at the same Ioff and the same footprint; but CML, amplifiers, pads and long wires each have their own bottleneck, set by gm/C, fT/fmax and RC. Second, "lower VT gives more drive and more leakage" is a direct, quantitative relation: leakage grows exponentially as 10^(−ΔVT/SS), while drive grows only as a power law, (VDD−VT)^α, far weaker than exponential. "Lower VT gives worse flicker noise" is not a direct relation. In the CNF+CMF model, VT itself does not appear in the noise equation; noise depends only on trap density and bias point. The real noise differences come through two indirect paths: the comparison basis (same VGS or same ID) and the process method used to lower VT (dipole, cap-layer element diffusion, halo doping). Third, flicker noise per unit area improved by about an order of magnitude overall from bulk to FinFET, and nanosheet is roughly on par with planar devices that use the same gate stack; but the noise of a single minimum device and the device-to-device spread got worse, because area shrank faster than trap density fell. Fourth, the first-order knob for lower noise is the trap density of the gate stack, followed by EOT, anneal, channel design and area; on the circuit side, chopping and auto-zero do the work. Fifth, when the data rate falls short, first locate which block is the bottleneck and which metric limits it, then stack methods in three tiers (easy, medium, hard), with matching verification at each step. Finally, five short topics on high-speed and analog design are appended.</p></div></div>
 <div class="hero-bottom"><span class="hint"><span class="zh" lang="zh-CN">先看全景表里的一句话答案，再点进对应问题；每个问题先给结论和要点，带 + 的细节按需展开。</span><span class="en" lang="en">Scan the one-line answers in the overview table, then open a question; each starts with the verdict and key points, with + details on demand.</span></span><div class="tools"><button class="btn" type="button" data-expand><span><span class="zh" lang="zh-CN">展开全部细节</span><span class="en" lang="en">Expand all</span></span></button><button class="btn" type="button" data-collapse><span><span class="zh" lang="zh-CN">收起全部</span><span class="en" lang="en">Collapse all</span></span></button><a class="btn" href="../tricks/"><span><span class="zh" lang="zh-CN">技巧页</span><span class="en" lang="en">Tricks</span></span></a><a class="btn primary" href="../"><span><span class="zh" lang="zh-CN">← 回到指南正文</span><span class="en" lang="en">← Back to the guide</span></span></a></div></div></div>
-<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">目录</span><a href="#q0"><small>01</small>全景：先看这张表</a><a href="#q1"><small>02</small>Q0. 模拟电路到底在追求什么？</a><a href="#q2"><small>03</small>Q1. 速度看的是 I/C 比值吗？</a><a href="#q3"><small>04</small>Q2. VT 越低，flicker noise …</a><a href="#q4"><small>05</small>Q3. 从 bulk 到 FinFET 再到 n…</a><a href="#q5"><small>06</small>Q4. 怎么优化 flicker noise？F…</a><a href="#q6"><small>07</small>Q5. 速率不够时怎么提速：容易、中等、困难三级</a><a href="#q7"><small>08</small>Q6. fT、fmax 和 CV/I 各管什么？</a><a href="#q8"><small>09</small>Q7. 数据率对器件提出什么要求？</a><a href="#q9"><small>10</small>Q8. pad、ESD、凸点电容为什么重要？3D…</a><a href="#q10"><small>11</small>Q9. jitter 和噪声是什么关系？</a><a href="#q11"><small>12</small>Q10. 模拟为什么慎用最低 VT 和最短 L？</a><a href="#q12"><small>13</small>Sources</a><a href="../"><small>←</small>指南正文</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#q0-en"><small>01</small>Overview: start with this table</a><a href="#q1-en"><small>02</small>Q0. What are analog circuits really after?</a><a href="#q2-en"><small>03</small>Q1. Is speed about the I/C ratio?</a><a href="#q3-en"><small>04</small>Q2. Does lower VT make flicker noise worse?</a><a href="#q4-en"><small>05</small>Q3. From bulk to FinFET to nanosheet, does f…</a><a href="#q5-en"><small>06</small>Q4. How to optimize flicker noise? Where are…</a><a href="#q6-en"><small>07</small>Q5. How to speed up when the data rate falls…</a><a href="#q7-en"><small>08</small>Q6. What do fT, fmax and CV/I each govern?</a><a href="#q8-en"><small>09</small>Q7. What does data rate demand of devices?</a><a href="#q9-en"><small>10</small>Q8. Why do pad, ESD and bump capacitance mat…</a><a href="#q10-en"><small>11</small>Q9. How do jitter and noise relate?</a><a href="#q11-en"><small>12</small>Q10. Why is analog cautious with the lowest …</a><a href="#q12-en"><small>13</small>Sources</a><a href="../"><small>←</small>The guide</a></div></nav>
+<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">目录</span><a href="#q0"><small>01</small>全景：先看这张表</a><a href="#q1"><small>02</small>Q0. 模拟电路到底在追求什么？</a><a href="#q2"><small>03</small>Q1. 速度看的是 I/C 比值吗？</a><a href="#q3"><small>04</small>Q2. VT 越低，flicker noise …</a><a href="#q4"><small>05</small>Q3. 从 bulk 到 FinFET 再到 n…</a><a href="#q5"><small>06</small>Q4. 怎么优化 flicker noise？F…</a><a href="#q6"><small>07</small>Q5. 速率不够时怎么提速：容易、中等、困难三级</a><a href="#q7"><small>08</small>Q6. fT、fmax 和 CV/I 各管什么？</a><a href="#q8"><small>09</small>Q7. 数据率对器件提出什么要求？</a><a href="#q9"><small>10</small>Q8. pad、ESD、凸点电容为什么重要？3D…</a><a href="#q10"><small>11</small>Q9. jitter 和噪声是什么关系？</a><a href="#q11"><small>12</small>Q10. 模拟为什么慎用最低 VT 和最短 L？</a><a href="#q12"><small>13</small>Q11. 输出电阻 ro 到底是什么？为什么不是…</a><a href="#q13"><small>14</small>Sources</a><a href="../"><small>←</small>指南正文</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#q0-en"><small>01</small>Overview: start with this table</a><a href="#q1-en"><small>02</small>Q0. What are analog circuits really after?</a><a href="#q2-en"><small>03</small>Q1. Is speed about the I/C ratio?</a><a href="#q3-en"><small>04</small>Q2. Does lower VT make flicker noise worse?</a><a href="#q4-en"><small>05</small>Q3. From bulk to FinFET to nanosheet, does f…</a><a href="#q5-en"><small>06</small>Q4. How to optimize flicker noise? Where are…</a><a href="#q6-en"><small>07</small>Q5. How to speed up when the data rate falls…</a><a href="#q7-en"><small>08</small>Q6. What do fT, fmax and CV/I each govern?</a><a href="#q8-en"><small>09</small>Q7. What does data rate demand of devices?</a><a href="#q9-en"><small>10</small>Q8. Why do pad, ESD and bump capacitance mat…</a><a href="#q10-en"><small>11</small>Q9. How do jitter and noise relate?</a><a href="#q11-en"><small>12</small>Q10. Why is analog cautious with the lowest …</a><a href="#q12-en"><small>13</small>Q11. What exactly is output resistance ro, a…</a><a href="#q13-en"><small>14</small>Sources</a><a href="../"><small>←</small>The guide</a></div></nav>
 <main id="main"><div class="zh" lang="zh-CN"><section class="sec" id="q0"><h2>全景：先看这张表</h2><div class="intro"><p><strong>先按问题找到一句话答案，再跳到对应章节看依据和细节。</strong></p>
 <p>证据标签：【常识】教科书或通用知识；【硅片·研究】研究器件或研究电路的实测；【硅片·量产平台】已发表的量产或准量产工艺数据；【TCAD】器件仿真；【仿真】电路或 SPICE 模型仿真；【厂商】厂商、标准组织的简报或应用笔记；【观点】综述、路线图或行业文章中的判断；【推断】本文自己的推理；【示意】为说明方法而设的示意数字，不是实测。</p>
 <div class="table-scroll" tabindex="0"><table>
@@ -127,6 +130,11 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>模拟为什么慎用最低 VT 和最短 L？</td>
 <td>增益低、失配大、漏电大、1/f 大；高速通路仍用它们换速度，再用校准和均衡补回来</td>
 <td>Q10</td>
+</tr>
+<tr>
+<td>输出电阻 ro 到底是什么？</td>
+<td>晶体管 I–V 曲线在工作点上斜率的倒数（小信号电阻），不是电路里的电阻，也不是 V/I；增益 = gm × Rout</td>
+<td>Q11</td>
 </tr>
 </tbody>
 </table></div></div></section><section class="sec" id="q1"><h2>Q0. 模拟电路到底在追求什么？</h2><div class="intro"><p><strong>模拟电路追求的不是"放大"本身，而是在有限的功耗和电源下，把一个连续变化的物理信号尽量不失真地传递、放大或转换；增益 gm·Rout 是手段——把高增益放进负反馈里，换来精确、线性、几乎不受器件参数影响的结果。</strong></p>
@@ -1473,7 +1481,72 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>1/f 噪声和相位噪声</td>
 </tr>
 </tbody>
-</table></div></div></details></section><section class="sec" id="q12" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>展开来源列表</summary><div class="sub-body"><ul>
+</table></div></div></details></section><section class="sec" id="q12"><h2>Q11. 输出电阻 ro 到底是什么？为什么不是电路里的电阻？</h2><div class="intro"><p><strong>ro 是晶体管自己 I–V 曲线在工作点上的斜率的倒数：漏压变一点点，电流跟着变多少；它是一个"小信号电阻"，既不是电路里另外摆的电阻，也不是用总电压除以总电流算出来的电阻。</strong></p>
+<p>要点：</p>
+<ul>
+<li>输出电导 gds = ∂ID/∂VDS 是导数；输出电阻是它的倒数，ro = 1/gds，不是"电导的导数"。</li>
+<li>饱和区的 ID–VDS 曲线理想上是水平的（理想电流源，ro 无穷大）；实际因为沟道长度调制和 DIBL 会微微上翘，上翘越少，ro 越大。</li>
+<li>小信号电阻 ΔV/ΔI 和静态电阻 V/I 可以相差几十倍；放大器处理的是工作点上的小变化，所以看的是前者。</li>
+<li>电路某个节点的输出电阻 Rout 是这个节点上所有元件的组合，例如 ro ∥ RD；cascode 能把它做到约 gm·ro²。</li>
+<li>它重要，是因为电压增益 = gm × Rout：Rout 小，信号电流"漏"走，增益就上不去。</li>
+</ul></div><details class="sub" id="q12-1"><summary>从哪来：晶体管曲线的斜率</summary><div class="sub-body"><p>【常识】把晶体管偏置在饱和区，扫 VDS，看 ID 怎么变。理想晶体管在饱和区是一个电流源：漏压再加，电流不变，曲线是水平线。真实器件的曲线会微微上翘，主要有两个原因：沟道长度调制（夹断点往源端移，有效沟道变短）和 DIBL（漏压把源端势垒压低）。这条上翘的斜率就是输出电导 gds，它的倒数就是输出电阻 ro。</p>
+<figure class="fig"><a href="../basics/img/idvds.png" target="_blank" rel="noopener"><img src="../basics/img/idvds.png" alt="SkyWater SKY130 PDK 中 1.8 V NMOS 的实际 ID–VDS 曲线（tt 角，多条 VGS）。看右半部分的饱和区：每条曲线都不是水平的，而是随 VDS 微微上升。这个上升的斜率就是 gds，倒数就是 ro；曲线越平，ro 越大" loading="lazy"></a><figcaption>SkyWater SKY130 PDK 中 1.8 V NMOS 的实际 ID–VDS 曲线（tt 角，多条 VGS）。看右半部分的饱和区：每条曲线都不是水平的，而是随 VDS 微微上升。这个上升的斜率就是 gds，倒数就是 ro；曲线越平，ro 越大<small>来源: <a href="https://github.com/google/skywater-pdk-libs-sky130_fd_pr" target="_blank" rel="noopener noreferrer">sky130_fd_pr__nfet_01v8 Ids vs Vds</a> · SkyWater / Google · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener noreferrer">Apache-2.0</a></small></figcaption></figure>
+<p>打个比方：水龙头拧到某个位置后，就算下游水管压力变了，水流也基本不变。ro 衡量的就是"下游压力变一点，水流跟着变多少"。变得越少，越像理想的恒流水龙头。</p></div></details><details class="sub" id="q12-2"><summary>为什么不是"电压 ÷ 电流"</summary><div class="sub-body"><p>【示意】同一个工作点，两种算法差别很大：</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th>怎么算</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静态电阻（DC）</td>
+<td>VDS / ID = 0.5 V ÷ 100 µA</td>
+<td>5 kΩ</td>
+</tr>
+<tr>
+<td>输出电阻 ro（小信号）</td>
+<td>ΔVDS / ΔID = 0.1 V ÷ 1 µA</td>
+<td>100 kΩ</td>
+</tr>
+</tbody>
+</table></div>
+<p>第二行的意思是：VDS 从 0.5 V 加到 0.6 V，电流只从 100 µA 变到 101 µA。两个数差了 20 倍。放大器里，晶体管先被偏置在一个直流工作点上，信号是叠加在上面的小变化，所以电路关心的是"变化量之比"，也就是曲线在这一点的斜率，而不是总量之比。前者叫小信号电阻或微分电阻，后者叫静态电阻。</p></div></details><details class="sub" id="q12-3"><summary>和电路里的电阻是什么关系</summary><div class="sub-body"><p>【常识】ro 是晶体管自带的、看不见的电阻。画小信号等效电路时，把它画成并联在漏和源之间的一个电阻。真实电路的输出节点上往往还接着别的元件，所以"这个节点的输出电阻"是它们的组合：</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>电路</th>
+<th>输出节点上有什么</th>
+<th>输出电阻 Rout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电阻做负载的共源放大器</td>
+<td>晶体管的 ro 和负载电阻 RD</td>
+<td>ro ∥ RD</td>
+</tr>
+<tr>
+<td>五管 OTA（电流镜做负载）</td>
+<td>输入管的 ro 和镜像管的 ro</td>
+<td>ro1 ∥ ro3</td>
+</tr>
+<tr>
+<td>cascode</td>
+<td>上管把下管的 ro 放大约 gm·ro 倍</td>
+<td>约 gm·ro²</td>
+</tr>
+</tbody>
+</table></div>
+<p>所以"输出电阻"有两层意思：单个器件的 ro，以及从输出端看进整个电路得到的等效电阻 Rout。后者由前者和其他元件组合而成。基础页"变体"一节里各种电流镜的 Rout，以及技巧页里叠管、cascode 的推导，讲的都是 Rout。</p></div></details><details class="sub" id="q12-4"><summary>为什么大家这么在意它</summary><div class="sub-body"><p>【常识】放大器的电压增益 = gm × Rout。输入电压先被 gm 变成电流，这个电流要流过 Rout 才变回电压。Rout 小，信号电流就从这里"漏"走了，增益上不去。单个晶体管能给出的最大增益是 gm·ro，叫本征增益。先进节点里 L 短、DIBL 大，ro 变小，本征增益只有几十倍，所以才需要叠管、cascode、gain boosting 这些办法（见 Q0 和技巧页），它们本质上都是在想办法把 Rout 做大。</p>
+<p>ro 也常写成 VEA/ID：VEA 叫 Early 电压，是把曲线的饱和段向左延长，与横轴交点到原点的距离。VEA 越大，曲线越平，ro 越大；它大致随 L 增长。</p></div></details><details class="sub" id="q12-5"><summary>怎么测</summary><div class="sub-body"><p>【常识】在目标偏置下测 ID–VDS 曲线，在工作点附近取斜率 ΔID/ΔVDS 就是 gds，取倒数就是 ro。注意三点：</p>
+<ul>
+<li>斜率是求导得到的，测量噪声会被放大，要用细步长、多次平均或平滑。</li>
+<li>自热会让直流测得的 gds 偏小，甚至为负；严格的做法是用脉冲 IV，或在高频下用 S 参数换算的 Y22 测。</li>
+<li>比较不同器件时，要在相同的 gm/ID 和相同的 VDS 下比，不要在相同 VGS 下比。</li>
+</ul></div></details></section><section class="sec" id="q13" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>展开来源列表</summary><div class="sub-body"><ul>
 <li><a href="https://arxiv.org/pdf/2512.08388" target="_blank" rel="noopener noreferrer">arXiv 2512.08388：CNF+CMF 低频噪声模型</a></li>
 <li><a href="https://web.mit.edu/klund/www/papers/UNP_noise.pdf" target="_blank" rel="noopener noreferrer">Lundberg, Noise Sources in Bulk CMOS (MIT)</a></li>
 <li><a href="https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf" target="_blank" rel="noopener noreferrer">Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006</a></li>
@@ -1602,6 +1675,11 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>Why is analog cautious with the lowest VT and shortest L?</td>
 <td>Low gain, large mismatch, high leakage, high 1/f; high-speed paths still use them for speed, then recover with calibration and equalization</td>
 <td>Q10</td>
+</tr>
+<tr>
+<td>What exactly is output resistance ro?</td>
+<td>The inverse of the slope of the transistor I–V curve at the operating point (a small-signal resistance) — not a circuit resistor and not V/I; gain = gm × Rout</td>
+<td>Q11</td>
 </tr>
 </tbody>
 </table></div></div></section><section class="sec" id="q1-en"><h2>Q0. What are analog circuits really after?</h2><div class="intro"><p><strong>Analog circuits are not after "amplification" itself. They aim to pass, amplify or convert a continuously varying physical signal with as little distortion as possible, under limited power and supply voltage. Gain gm·Rout is the means: put high gain inside negative feedback, and you get a result that is accurate, linear and almost independent of device parameters.</strong></p>
@@ -2948,7 +3026,72 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>1/f noise and phase noise</td>
 </tr>
 </tbody>
-</table></div></div></details></section><section class="sec" id="q12-en" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>Show source list</summary><div class="sub-body"><ul>
+</table></div></div></details></section><section class="sec" id="q12-en"><h2>Q11. What exactly is output resistance ro, and why isn't it a resistor in the circuit?</h2><div class="intro"><p><strong>ro is the inverse of the slope of the transistor's own I–V curve at its operating point — how much the current changes when the drain voltage changes a little. It is a "small-signal resistance": not a separate resistor in the circuit, and not total voltage divided by total current.</strong></p>
+<p>Key points:</p>
+<ul>
+<li>Output conductance gds = ∂ID/∂VDS is the derivative; output resistance is its inverse, ro = 1/gds — not "the derivative of the conductance".</li>
+<li>In saturation the ID–VDS curve is ideally flat (an ideal current source, infinite ro); in practice it tilts upward because of channel-length modulation and DIBL. The flatter the curve, the larger ro.</li>
+<li>Small-signal resistance ΔV/ΔI and static resistance V/I can differ by tens of times; amplifiers process small changes around the operating point, so the former is what counts.</li>
+<li>The output resistance Rout of a circuit node combines every element on that node, for example ro ∥ RD; a cascode raises it to about gm·ro².</li>
+<li>It matters because voltage gain = gm × Rout: if Rout is small, the signal current "leaks" away and gain stays low.</li>
+</ul></div><details class="sub" id="q12-en-1"><summary>Where it comes from: the slope of the transistor's curve</summary><div class="sub-body"><p>[Textbook] Bias the transistor in saturation, sweep VDS and watch ID. An ideal transistor in saturation is a current source: raise the drain voltage and the current stays the same, so the curve is flat. A real device's curve tilts slightly upward, mainly for two reasons: channel-length modulation (the pinch-off point moves toward the source, shortening the effective channel) and DIBL (the drain voltage lowers the source barrier). The slope of that tilt is the output conductance gds; its inverse is the output resistance ro.</p>
+<figure class="fig"><a href="../basics/img/idvds.png" target="_blank" rel="noopener"><img src="../basics/img/idvds.png" alt="Real ID–VDS curves of the 1.8 V NMOS in the SkyWater SKY130 PDK (tt corner, several VGS values). Look at the saturation region on the right: no curve is flat; each rises slightly with VDS. That slope is gds, and its inverse is ro — the flatter the curve, the larger ro" loading="lazy"></a><figcaption>Real ID–VDS curves of the 1.8 V NMOS in the SkyWater SKY130 PDK (tt corner, several VGS values). Look at the saturation region on the right: no curve is flat; each rises slightly with VDS. That slope is gds, and its inverse is ro — the flatter the curve, the larger ro<small>Source: <a href="https://github.com/google/skywater-pdk-libs-sky130_fd_pr" target="_blank" rel="noopener noreferrer">sky130_fd_pr__nfet_01v8 Ids vs Vds</a> · SkyWater / Google · <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener noreferrer">Apache-2.0</a></small></figcaption></figure>
+<p>An analogy: once a faucet is set, the flow barely changes even if the pressure downstream changes. ro measures how much the flow changes when the downstream pressure changes a little. The less it changes, the closer the faucet is to an ideal constant-flow source.</p></div></details><details class="sub" id="q12-en-2"><summary>Why not "voltage ÷ current"</summary><div class="sub-body"><p>[Illustration] At the same operating point, the two calculations differ a lot:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th>How it is computed</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static resistance (DC)</td>
+<td>VDS / ID = 0.5 V ÷ 100 µA</td>
+<td>5 kΩ</td>
+</tr>
+<tr>
+<td>Output resistance ro (small signal)</td>
+<td>ΔVDS / ΔID = 0.1 V ÷ 1 µA</td>
+<td>100 kΩ</td>
+</tr>
+</tbody>
+</table></div>
+<p>The second row means: raising VDS from 0.5 V to 0.6 V moves the current only from 100 µA to 101 µA. The two numbers differ by 20 times. In an amplifier, the transistor is first biased at a DC operating point, and the signal is a small change on top of it, so the circuit cares about the ratio of changes — the slope of the curve at that point — not the ratio of totals. The first is called small-signal or differential resistance; the second is static resistance.</p></div></details><details class="sub" id="q12-en-3"><summary>How it relates to resistors in the circuit</summary><div class="sub-body"><p>[Textbook] ro is a built-in, invisible resistance of the transistor. In the small-signal equivalent circuit it is drawn as a resistor between drain and source. A real output node usually connects to other elements too, so "the output resistance of this node" combines them:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Circuit</th>
+<th>What sits on the output node</th>
+<th>Output resistance Rout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Common-source amplifier with a resistor load</td>
+<td>The transistor's ro and load resistor RD</td>
+<td>ro ∥ RD</td>
+</tr>
+<tr>
+<td>Five-transistor OTA (current-mirror load)</td>
+<td>The input device's ro and the mirror device's ro</td>
+<td>ro1 ∥ ro3</td>
+</tr>
+<tr>
+<td>Cascode</td>
+<td>The top device multiplies the bottom device's ro by about gm·ro</td>
+<td>About gm·ro²</td>
+</tr>
+</tbody>
+</table></div>
+<p>So "output resistance" has two meanings: a single device's ro, and the equivalent resistance Rout seen looking into a circuit's output. The second is built from the first plus other elements. The mirror Rout values in the fundamentals page's variants section, and the stacking and cascode derivations on the tricks page, all refer to Rout.</p></div></details><details class="sub" id="q12-en-4"><summary>Why everyone cares about it</summary><div class="sub-body"><p>[Textbook] Amplifier voltage gain = gm × Rout. The input voltage is first turned into a current by gm, and that current must flow through Rout to become a voltage again. If Rout is small, the signal current leaks away there and gain stays low. The largest gain a single transistor can give is gm·ro, the intrinsic gain. At advanced nodes, short L and large DIBL shrink ro, leaving intrinsic gain at only a few tens, which is why stacking, cascodes and gain boosting exist (see Q0 and the tricks page) — they are all ways to make Rout larger.</p>
+<p>ro is also often written as VEA/ID, where VEA is the Early voltage: extend the saturated part of the curve to the left, and VEA is the distance from where it meets the horizontal axis to the origin. The larger VEA, the flatter the curve and the larger ro; VEA grows roughly with L.</p></div></details><details class="sub" id="q12-en-5"><summary>How to measure it</summary><div class="sub-body"><p>[Textbook] Measure the ID–VDS curve at the target bias and take the slope ΔID/ΔVDS near the operating point: that is gds, and its inverse is ro. Three cautions:</p>
+<ul>
+<li>The slope comes from a derivative, which amplifies measurement noise; use fine steps, averaging or smoothing.</li>
+<li>Self-heating makes DC-measured gds read low, even negative; the rigorous approach is pulsed IV, or Y22 converted from high-frequency S-parameters.</li>
+<li>Compare devices at the same gm/ID and the same VDS, not at the same VGS.</li>
+</ul></div></details></section><section class="sec" id="q13-en" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>Show source list</summary><div class="sub-body"><ul>
 <li><a href="https://arxiv.org/pdf/2512.08388" target="_blank" rel="noopener noreferrer">arXiv 2512.08388: CNF+CMF low-frequency noise model</a></li>
 <li><a href="https://web.mit.edu/klund/www/papers/UNP_noise.pdf" target="_blank" rel="noopener noreferrer">Lundberg, Noise Sources in Bulk CMOS (MIT)</a></li>
 <li><a href="https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf" target="_blank" rel="noopener noreferrer">Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006</a></li>

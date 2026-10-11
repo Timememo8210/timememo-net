@@ -1043,6 +1043,7 @@ Evidence tags: [Textbook] textbook or general knowledge; [Silicon · research] m
 | Why do pad, ESD and bump capacitance matter? | With termination resistance fixed, the pad pole is set by capacitance alone; 2.5D/3D packaging addresses this by shortening the channel and lowering ESD and bump capacitance | Q8 |
 | How do jitter and noise relate? | Random jitter is the integral of phase noise; device flicker noise upconverts into close-in phase noise, and the PLL loop suppresses only the part inside the loop bandwidth | Q9 |
 | Why is analog cautious with the lowest VT and shortest L? | Low gain, large mismatch, high leakage, high 1/f; high-speed paths still use them for speed, then recover with calibration and equalization | Q10 |
+| What exactly is output resistance ro? | The inverse of the slope of the transistor I–V curve at the operating point (a small-signal resistance) — not a circuit resistor and not V/I; gain = gm × Rout | Q11 |
 
 ## Q0. What are analog circuits really after?
 
@@ -1791,6 +1792,61 @@ The first metrics for CML, drivers and samplers are bandwidth and regeneration s
 | Samplers | Short | LVT | Medium | Regeneration speed first; offset calibration |
 | Bias, current mirrors, references | Long or stacked | SVT/HVT | Large | Matching, gain, low leakage |
 | VCO, low-noise input pairs | Medium to long | Check with the Q2 method | Large | 1/f noise and phase noise |
+
+## Q11. What exactly is output resistance ro, and why isn't it a resistor in the circuit?
+
+**ro is the inverse of the slope of the transistor's own I–V curve at its operating point — how much the current changes when the drain voltage changes a little. It is a "small-signal resistance": not a separate resistor in the circuit, and not total voltage divided by total current.**
+
+Key points:
+- Output conductance gds = ∂ID/∂VDS is the derivative; output resistance is its inverse, ro = 1/gds — not "the derivative of the conductance".
+- In saturation the ID–VDS curve is ideally flat (an ideal current source, infinite ro); in practice it tilts upward because of channel-length modulation and DIBL. The flatter the curve, the larger ro.
+- Small-signal resistance ΔV/ΔI and static resistance V/I can differ by tens of times; amplifiers process small changes around the operating point, so the former is what counts.
+- The output resistance Rout of a circuit node combines every element on that node, for example ro ∥ RD; a cascode raises it to about gm·ro².
+- It matters because voltage gain = gm × Rout: if Rout is small, the signal current "leaks" away and gain stays low.
+
+### Where it comes from: the slope of the transistor's curve
+
+[Textbook] Bias the transistor in saturation, sweep VDS and watch ID. An ideal transistor in saturation is a current source: raise the drain voltage and the current stays the same, so the curve is flat. A real device's curve tilts slightly upward, mainly for two reasons: channel-length modulation (the pinch-off point moves toward the source, shortening the effective channel) and DIBL (the drain voltage lowers the source barrier). The slope of that tilt is the output conductance gds; its inverse is the output resistance ro.
+
+[Figure: Real ID–VDS curves of the 1.8 V NMOS in the SkyWater SKY130 PDK (tt corner, several VGS values). Look at the saturation region on the right: no curve is flat; each rises slightly with VDS. That slope is gds, and its inverse is ro — the flatter the curve, the larger ro]
+
+An analogy: once a faucet is set, the flow barely changes even if the pressure downstream changes. ro measures how much the flow changes when the downstream pressure changes a little. The less it changes, the closer the faucet is to an ideal constant-flow source.
+
+### Why not "voltage ÷ current"
+
+[Illustration] At the same operating point, the two calculations differ a lot:
+
+| | How it is computed | Result |
+|---|---|---|
+| Static resistance (DC) | VDS / ID = 0.5 V ÷ 100 µA | 5 kΩ |
+| Output resistance ro (small signal) | ΔVDS / ΔID = 0.1 V ÷ 1 µA | 100 kΩ |
+
+The second row means: raising VDS from 0.5 V to 0.6 V moves the current only from 100 µA to 101 µA. The two numbers differ by 20 times. In an amplifier, the transistor is first biased at a DC operating point, and the signal is a small change on top of it, so the circuit cares about the ratio of changes — the slope of the curve at that point — not the ratio of totals. The first is called small-signal or differential resistance; the second is static resistance.
+
+### How it relates to resistors in the circuit
+
+[Textbook] ro is a built-in, invisible resistance of the transistor. In the small-signal equivalent circuit it is drawn as a resistor between drain and source. A real output node usually connects to other elements too, so "the output resistance of this node" combines them:
+
+| Circuit | What sits on the output node | Output resistance Rout |
+|---|---|---|
+| Common-source amplifier with a resistor load | The transistor's ro and load resistor RD | ro ∥ RD |
+| Five-transistor OTA (current-mirror load) | The input device's ro and the mirror device's ro | ro1 ∥ ro3 |
+| Cascode | The top device multiplies the bottom device's ro by about gm·ro | About gm·ro² |
+
+So "output resistance" has two meanings: a single device's ro, and the equivalent resistance Rout seen looking into a circuit's output. The second is built from the first plus other elements. The mirror Rout values in the fundamentals page's variants section, and the stacking and cascode derivations on the tricks page, all refer to Rout.
+
+### Why everyone cares about it
+
+[Textbook] Amplifier voltage gain = gm × Rout. The input voltage is first turned into a current by gm, and that current must flow through Rout to become a voltage again. If Rout is small, the signal current leaks away there and gain stays low. The largest gain a single transistor can give is gm·ro, the intrinsic gain. At advanced nodes, short L and large DIBL shrink ro, leaving intrinsic gain at only a few tens, which is why stacking, cascodes and gain boosting exist (see Q0 and the tricks page) — they are all ways to make Rout larger.
+
+ro is also often written as VEA/ID, where VEA is the Early voltage: extend the saturated part of the curve to the left, and VEA is the distance from where it meets the horizontal axis to the origin. The larger VEA, the flatter the curve and the larger ro; VEA grows roughly with L.
+
+### How to measure it
+
+[Textbook] Measure the ID–VDS curve at the target bias and take the slope ΔID/ΔVDS near the operating point: that is gds, and its inverse is ro. Three cautions:
+- The slope comes from a derivative, which amplifies measurement noise; use fine steps, averaging or smoothing.
+- Self-heating makes DC-measured gds read low, even negative; the rigorous approach is pulsed IV, or Y22 converted from high-frequency S-parameters.
+- Compare devices at the same gm/ID and the same VDS, not at the same VGS.
 
 ## Sources
 
