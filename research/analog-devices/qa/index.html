@@ -64,7 +64,7 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <h1><span class="zh" lang="zh-CN">问答：速度、VT 与 flicker noise</span><span class="en" lang="en">Q&amp;A: speed, VT and flicker noise</span></h1>
 <div class="dek"><div class="zh" lang="zh-CN"><p>这份问答写给熟悉逻辑工艺整合、但对模拟和高速电路不熟的工程师，先从根本上说明模拟电路在追求什么（Q0），再回答六组常见问题。第一，CMOS 电路的速度确实看 drive current 与负载电容之比（I/C，也就是 CV/I 的倒数），而且要在相同 Ioff 和相同占地面积下比较；但 CML、放大器、pad 和长连线各有自己的瓶颈，分别看 gm/C、fT/fmax 和 RC。第二，"VT 越低，drive 越大、leakage 越大"是直接、定量的关系：leakage 按 10^(−ΔVT/SS) 指数增长，drive 只按 (VDD−VT)^α 的幂律增长，远弱于指数；"VT 越低，flicker noise 越差"却不是直接关系。在 CNF+CMF 模型里，VT 本身不出现在噪声公式中，噪声只取决于陷阱密度和偏置点。真实的噪声差异来自两条间接路径：比较口径（同 VGS 还是同 ID）和降 VT 的工艺手段（dipole、cap 层元素扩散、halo 掺杂）。第三，单位面积的 flicker noise 从 bulk 到 FinFET 总体改善了约一个数量级，nanosheet 与同栅叠层的平面器件大致持平；但单个最小器件的噪声和器件间离散变差了，因为面积缩得比陷阱密度降得快。第四，降噪的一阶旋钮是栅叠层的陷阱密度，其次是 EOT、退火、沟道设计和面积，电路上靠 chopping 和 auto-zero。第五，速率不够时，先定位瓶颈在哪个模块、受哪个指标限制，再按容易、中等、困难三级叠加手段，每一步都要有对应的验证。最后附五个高速与模拟方向的小知识点。</p></div><div class="en" lang="en"><p>This Q&amp;A is for engineers who know logic process integration but are new to analog and high-speed circuits. It first explains what analog circuits are fundamentally after (Q0), then answers six groups of common questions. First, CMOS circuit speed does depend on the ratio of drive current to load capacitance (I/C, the inverse of CV/I), and the comparison must be made at the same Ioff and the same footprint; but CML, amplifiers, pads and long wires each have their own bottleneck, set by gm/C, fT/fmax and RC. Second, "lower VT gives more drive and more leakage" is a direct, quantitative relation: leakage grows exponentially as 10^(−ΔVT/SS), while drive grows only as a power law, (VDD−VT)^α, far weaker than exponential. "Lower VT gives worse flicker noise" is not a direct relation. In the CNF+CMF model, VT itself does not appear in the noise equation; noise depends only on trap density and bias point. The real noise differences come through two indirect paths: the comparison basis (same VGS or same ID) and the process method used to lower VT (dipole, cap-layer element diffusion, halo doping). Third, flicker noise per unit area improved by about an order of magnitude overall from bulk to FinFET, and nanosheet is roughly on par with planar devices that use the same gate stack; but the noise of a single minimum device and the device-to-device spread got worse, because area shrank faster than trap density fell. Fourth, the first-order knob for lower noise is the trap density of the gate stack, followed by EOT, anneal, channel design and area; on the circuit side, chopping and auto-zero do the work. Fifth, when the data rate falls short, first locate which block is the bottleneck and which metric limits it, then stack methods in three tiers (easy, medium, hard), with matching verification at each step. Finally, five short topics on high-speed and analog design are appended.</p></div></div>
 <div class="hero-bottom"><span class="hint"><span class="zh" lang="zh-CN">先看全景表里的一句话答案，再点进对应问题；每个问题先给结论和要点，带 + 的细节按需展开。</span><span class="en" lang="en">Scan the one-line answers in the overview table, then open a question; each starts with the verdict and key points, with + details on demand.</span></span><div class="tools"><button class="btn" type="button" data-expand><span><span class="zh" lang="zh-CN">展开全部细节</span><span class="en" lang="en">Expand all</span></span></button><button class="btn" type="button" data-collapse><span><span class="zh" lang="zh-CN">收起全部</span><span class="en" lang="en">Collapse all</span></span></button><a class="btn" href="../tricks/"><span><span class="zh" lang="zh-CN">技巧页</span><span class="en" lang="en">Tricks</span></span></a><a class="btn primary" href="../"><span><span class="zh" lang="zh-CN">← 回到指南正文</span><span class="en" lang="en">← Back to the guide</span></span></a></div></div></div>
-<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">目录</span><a href="#q0"><small>01</small>全景：先看这张表</a><a href="#q1"><small>02</small>Q0. 模拟电路到底在追求什么？</a><a href="#q2"><small>03</small>Q1. 速度看的是 I/C 比值吗？</a><a href="#q3"><small>04</small>Q2. VT 越低，flicker noise …</a><a href="#q4"><small>05</small>Q3. 从 bulk 到 FinFET 再到 n…</a><a href="#q5"><small>06</small>Q4. 怎么优化 flicker noise？F…</a><a href="#q6"><small>07</small>Q5. 速率不够时怎么提速：容易、中等、困难三级</a><a href="#q7"><small>08</small>Q6. fT、fmax 和 CV/I 各管什么？</a><a href="#q8"><small>09</small>Q7. 数据率对器件提出什么要求？</a><a href="#q9"><small>10</small>Q8. pad、ESD、凸点电容为什么重要？3D…</a><a href="#q10"><small>11</small>Q9. jitter 和噪声是什么关系？</a><a href="#q11"><small>12</small>Q10. 模拟为什么慎用最低 VT 和最短 L？</a><a href="#q12"><small>13</small>Q11. 输出电阻 ro 到底是什么？为什么不是…</a><a href="#q13"><small>14</small>Sources</a><a href="../"><small>←</small>指南正文</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#q0-en"><small>01</small>Overview: start with this table</a><a href="#q1-en"><small>02</small>Q0. What are analog circuits really after?</a><a href="#q2-en"><small>03</small>Q1. Is speed about the I/C ratio?</a><a href="#q3-en"><small>04</small>Q2. Does lower VT make flicker noise worse?</a><a href="#q4-en"><small>05</small>Q3. From bulk to FinFET to nanosheet, does f…</a><a href="#q5-en"><small>06</small>Q4. How to optimize flicker noise? Where are…</a><a href="#q6-en"><small>07</small>Q5. How to speed up when the data rate falls…</a><a href="#q7-en"><small>08</small>Q6. What do fT, fmax and CV/I each govern?</a><a href="#q8-en"><small>09</small>Q7. What does data rate demand of devices?</a><a href="#q9-en"><small>10</small>Q8. Why do pad, ESD and bump capacitance mat…</a><a href="#q10-en"><small>11</small>Q9. How do jitter and noise relate?</a><a href="#q11-en"><small>12</small>Q10. Why is analog cautious with the lowest …</a><a href="#q12-en"><small>13</small>Q11. What exactly is output resistance ro, a…</a><a href="#q13-en"><small>14</small>Sources</a><a href="../"><small>←</small>The guide</a></div></nav>
+<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">目录</span><a href="#q0"><small>01</small>全景：先看这张表</a><a href="#q1"><small>02</small>Q0. 模拟电路到底在追求什么？</a><a href="#q2"><small>03</small>Q1. 速度看的是 I/C 比值吗？</a><a href="#q3"><small>04</small>Q2. VT 越低，flicker noise …</a><a href="#q4"><small>05</small>Q3. 从 bulk 到 FinFET 再到 n…</a><a href="#q5"><small>06</small>Q4. 怎么优化 flicker noise？F…</a><a href="#q6"><small>07</small>Q5. 速率不够时怎么提速：容易、中等、困难三级</a><a href="#q7"><small>08</small>Q6. fT、fmax 和 CV/I 各管什么？</a><a href="#q8"><small>09</small>Q7. 数据率对器件提出什么要求？</a><a href="#q9"><small>10</small>Q8. pad、ESD、凸点电容为什么重要？3D…</a><a href="#q10"><small>11</small>Q9. jitter 和噪声是什么关系？</a><a href="#q11"><small>12</small>Q10. 模拟为什么慎用最低 VT 和最短 L？</a><a href="#q12"><small>13</small>Q11. 输出电阻 ro 到底是什么？为什么不是…</a><a href="#q13"><small>14</small>Q12. 用水龙头把 gm、ro、电容和 fT …</a><a href="#q14"><small>15</small>Sources</a><a href="../"><small>←</small>指南正文</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#q0-en"><small>01</small>Overview: start with this table</a><a href="#q1-en"><small>02</small>Q0. What are analog circuits really after?</a><a href="#q2-en"><small>03</small>Q1. Is speed about the I/C ratio?</a><a href="#q3-en"><small>04</small>Q2. Does lower VT make flicker noise worse?</a><a href="#q4-en"><small>05</small>Q3. From bulk to FinFET to nanosheet, does f…</a><a href="#q5-en"><small>06</small>Q4. How to optimize flicker noise? Where are…</a><a href="#q6-en"><small>07</small>Q5. How to speed up when the data rate falls…</a><a href="#q7-en"><small>08</small>Q6. What do fT, fmax and CV/I each govern?</a><a href="#q8-en"><small>09</small>Q7. What does data rate demand of devices?</a><a href="#q9-en"><small>10</small>Q8. Why do pad, ESD and bump capacitance mat…</a><a href="#q10-en"><small>11</small>Q9. How do jitter and noise relate?</a><a href="#q11-en"><small>12</small>Q10. Why is analog cautious with the lowest …</a><a href="#q12-en"><small>13</small>Q11. What exactly is output resistance ro, a…</a><a href="#q13-en"><small>14</small>Q12. Tying gm, ro, capacitance and fT togeth…</a><a href="#q14-en"><small>15</small>Sources</a><a href="../"><small>←</small>The guide</a></div></nav>
 <main id="main"><div class="zh" lang="zh-CN"><section class="sec" id="q0"><h2>全景：先看这张表</h2><div class="intro"><p><strong>先按问题找到一句话答案，再跳到对应章节看依据和细节。</strong></p>
 <p>证据标签：【常识】教科书或通用知识；【硅片·研究】研究器件或研究电路的实测；【硅片·量产平台】已发表的量产或准量产工艺数据；【TCAD】器件仿真；【仿真】电路或 SPICE 模型仿真；【厂商】厂商、标准组织的简报或应用笔记；【观点】综述、路线图或行业文章中的判断；【推断】本文自己的推理；【示意】为说明方法而设的示意数字，不是实测。</p>
 <div class="table-scroll" tabindex="0"><table>
@@ -135,6 +135,11 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>输出电阻 ro 到底是什么？</td>
 <td>晶体管 I–V 曲线在工作点上斜率的倒数（小信号电阻），不是电路里的电阻，也不是 V/I；增益 = gm × Rout</td>
 <td>Q11</td>
+</tr>
+<tr>
+<td>怎么用水龙头理解 gm、ro、电容和 fT？</td>
+<td>把手=栅压、水流=电流、出口压力=输出电压；gm 是灵敏度，ro 是龙头有多"硬"，电容是会膨胀的皮管，fT 是控制机构要先灌满；增益看出口压力</td>
+<td>Q12</td>
 </tr>
 </tbody>
 </table></div></div></section><section class="sec" id="q1"><h2>Q0. 模拟电路到底在追求什么？</h2><div class="intro"><p><strong>模拟电路追求的不是"放大"本身，而是在有限的功耗和电源下，把一个连续变化的物理信号尽量不失真地传递、放大或转换；增益 gm·Rout 是手段——把高增益放进负反馈里，换来精确、线性、几乎不受器件参数影响的结果。</strong></p>
@@ -1546,7 +1551,98 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <li>斜率是求导得到的，测量噪声会被放大，要用细步长、多次平均或平滑。</li>
 <li>自热会让直流测得的 gds 偏小，甚至为负；严格的做法是用脉冲 IV，或在高频下用 S 参数换算的 Y22 测。</li>
 <li>比较不同器件时，要在相同的 gm/ID 和相同的 VDS 下比，不要在相同 VGS 下比。</li>
-</ul></div></details></section><section class="sec" id="q13" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>展开来源列表</summary><div class="sub-body"><ul>
+</ul></div></details></section><section class="sec" id="q13"><h2>Q12. 用水龙头把 gm、ro、电容和 fT 串起来</h2><div class="intro"><p><strong>把晶体管想成一个用把手控制的龙头：把手是栅压，水流是漏极电流，出口压力是输出电压；gm 是"拧一点把手水流变多少"，ro 是"龙头有多硬、下游压力变了送水量变不变"，电容是"出口皮管会膨胀、要先灌满"，fT 是"控制机构本身也要先灌满才能动"。增益 = gm × Rout，看的是出口压力，不是水量。</strong></p>
+<p>要点：</p>
+<ul>
+<li>gm 大不等于好：gm 要花电流（gm = gm/ID × ID）和面积，所以真正追求的是 gm/ID（每份电流换来的灵敏度）和 gm/C（不拖慢速度）。</li>
+<li>ro 大的意思是龙头"硬"：下游压力（VDS）变了，送出的水流几乎不变。它不是"皮管的膨胀性"；皮管会膨胀对应的是电容，影响的是速度而不是增益。</li>
+<li>放大器的输入是电压（拧把手），输出也是电压（出口压力）；电流只是中间过程。多出来的水没处可漏，只能变成压力，增益才大。</li>
+<li>电流镜正好反过来：电流进、电流出，中间借栅压做"翻译"。放大器是"电压→电流→电压"，电流镜是"电流→电压→电流"，用的是同样两步转换。</li>
+<li>fT = gm/(2π·Cgg)：把把手晃得越快，越多的控制力气花在给控制机构充放水上；到 fT 时，控制所需的水流已经和输出水流一样大，电流增益降到 1。</li>
+</ul></div><details class="sub" id="q13-1"><summary>一张对照表</summary><div class="sub-body"><div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>器件参数</th>
+<th>龙头比方</th>
+<th>模拟电路希望</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VGS（输入）</td>
+<td>把手的位置</td>
+<td>信号叠加在一个固定的偏置位置上</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>龙头送出的水流</td>
+<td>由偏置电流决定，越省越好</td>
+</tr>
+<tr>
+<td>VDS / 输出电压</td>
+<td>龙头出口处的水压</td>
+<td>输出信号就是这个压力的变化</td>
+</tr>
+<tr>
+<td>gm</td>
+<td>拧一点把手，水流变多少</td>
+<td>每份电流换来的越多越好（gm/ID）</td>
+</tr>
+<tr>
+<td>ro（Rout）</td>
+<td>龙头有多"硬"：下游压力变了，送水量变不变</td>
+<td>越硬越好（ro 大），多出的水全变成压力</td>
+</tr>
+<tr>
+<td>C</td>
+<td>出口皮管的膨胀性：要先灌满才能升压</td>
+<td>越小越好，响应越快</td>
+</tr>
+<tr>
+<td>fT</td>
+<td>控制把手的液压机构要多少水才能动</td>
+<td>越高越好：控制机构小、阀又灵敏</td>
+</tr>
+<tr>
+<td>增益 gm·Rout</td>
+<td>拧一点把手，出口压力变多少</td>
+<td>大，而且要稳定、线性</td>
+</tr>
+</tbody>
+</table></div></div></details><details class="sub" id="q13-2"><summary>gm：拧一点把手，水流变多少</summary><div class="sub-body"><p>【常识】gm = ∂ID/∂VGS。把手稍微拧一点，水流变化越大，gm 越大。但 gm 不是越大越好：最直接的办法是加偏置电流（费电），或把龙头做大（器件做宽，栅电容变大，变慢）。所以模拟设计看的是两个比值：gm/ID（每份电流换来多少灵敏度）和 gm/C（灵敏度会不会被要灌满的电容拖慢，也就是 fT）。</p></div></details><details class="sub" id="q13-3"><summary>ro：龙头有多"硬"</summary><div class="sub-body"><p>【常识】ro = 1/gds，gds = ∂ID/∂VDS（见 Q11）。把手不动，只把出口的水压（VDS）抬高一点，看送出的水流变不变：</p>
+<ul>
+<li>变得很少（gds 小）：龙头很硬，像一个恒流泵，ro 大。</li>
+<li>变得很多（gds 大）：龙头很软，下游压力一升，它就少送水，像旁边开了一个回流的漏口，ro 小。</li>
+</ul>
+<p>一个常见的误解是把 ro 想成"出口皮管的膨胀性"。膨胀性大意味着压力一变、水量跟着大变，那恰恰是 gds 大、ro 小。</p>
+<p>测量方法和这个比方一一对应：把 VGS 固定在目标偏置，在饱和区把 VDS 稍微变一点，看 ID 变多少。ΔID/ΔVDS 越小，ro 越大。</p></div></details><details class="sub" id="q13-4"><summary>增益：多出的水没处可漏，只能变成压力</summary><div class="sub-body"><p>【常识】放大器的输入和输出都是电压。把这个过程走一遍：</p>
+<ol>
+<li>拧把手：水流多出 ΔQ = gm × Δ把手。</li>
+<li>出口接的是一个很细的出水口（负载），多出来的水不容易出去，于是压力升高。</li>
+<li>压力升多少：ΔP = ΔQ × Rout，Rout = 负载 ∥ ro。</li>
+</ol>
+<p>龙头硬（ro 大），多出的水只能全部挤向细出口，压力升得很高，增益大。龙头软（ro 小），压力一升龙头自己就少送水，等于多出的水从漏口回流了，压力升不上去，增益小。所以增益 = gm × Rout：拧一点就多出很多水，而且这些水没处可漏，只能变成出口的压力。</p></div></details><details class="sub" id="q13-5"><summary>电容：会膨胀的皮管，管速度不管增益</summary><div class="sub-body"><p>【常识】如果出口接的是一段会膨胀的皮管，压力一升，皮管先把水吸进去，出口压力要过一会儿才升上来。这对应输出节点上的电容 C（下一级的栅电容、导线电容、自身的漏端电容）。它不改变最终能升到多高（增益），只改变升得多快（带宽）。放大器的增益带宽积大约是 gm/C：同样的水流，皮管越小，压力升得越快。</p></div></details><details class="sub" id="q13-6"><summary>fT：控制机构本身也要先灌满</summary><div class="sub-body"><p>【常识】fT = gm/(2π·Cgg)，是电流增益降到 1 的频率（见指南第 2 节和术语表）。把它想成一个液压控制的阀门：转动把手，其实是往阀门的控制腔里推一点水，阀门才动。控制腔就是栅电容 Cgg。</p>
+<ul>
+<li>把手动得慢时，推进控制腔的水很少，却能控制很大的输出水流，"电流增益"很大。</li>
+<li>把手晃得越快，越多的水花在给控制腔充水、放水上。</li>
+<li>晃到某个频率，控制所需的水流已经和输出水流一样大，电流增益降到 1，这个频率就是 fT。</li>
+</ul>
+<p>想提高 fT，要么阀门更灵敏（gm 大），要么控制腔更小（Cgg 小）。这也是为什么偏置越"省"（gm/ID 越高、过驱动越低），器件要做得越大，控制腔越大，fT 越低：省电和快不能兼得。</p>
+<p>和上一节的区别：fT 是器件自己推动自己控制腔的极限，与外面接什么无关；皮管电容 C 是电路外部的负载，决定电路实际能跑多快。电路实际可用的带宽一般只有 fT 的十分之一左右。</p></div></details><details class="sub" id="q13-7"><summary>电流镜和放大器：同样两步转换，顺序相反</summary><div class="sub-body"><p>【常识】晶体管只会做两件事：栅压控制电流（gm，电压→电流），以及电流流过电阻变成电压（Rout，电流→电压）。</p>
+<ul>
+<li>放大器：电压进 → gm 变成电流 → 在 Rout 上变回电压。目的是放大电压。</li>
+<li>电流镜：电流进 → 流进二极管连接的 M1，自动"站"出一个栅压 → 共享这个栅压的 M2 把它变回电流。目的是复制电流。中间那个栅压只是"翻译"，不是输出。</li>
+</ul>
+<p>比方：两个龙头的把手用一根连杆连在一起。先给第一个龙头规定一个水流（参考电流），它的把手会自己停在对应的位置；第二个龙头的把手被连杆带到同一位置，于是送出同样的水流（龙头大一倍，就送出两倍）。第二个龙头越"硬"（ro 越大），它送出的水越不受自己出口压力影响，复制得越准。这就是为什么电流镜也追求大 ro。</p>
+<p>电流镜通常不是单独用的，而是放大器里的一部分：做偏置（给每个放大器送一份准确的电流）或做有源负载（用一个很"硬"的龙头代替出口电阻，让 Rout 变大）。</p></div></details><details class="sub" id="q13-8"><summary>所以模拟放大器追求什么</summary><div class="sub-body"><p>【常识】最常见的情况是"电压进、电压出"：把一个小的电压变化放大成大的电压变化，而且希望：</p>
+<ul>
+<li>放大倍数够大，而且稳定、准确（靠高增益加负反馈，见 Q0）；</li>
+<li>线性：大信号和小信号放大同样的倍数，不变形（失真小）；</li>
+<li>加进去的东西少：自己添的噪声、失调、漂移都小；</li>
+<li>够快：带宽够，不被电容拖慢；</li>
+<li>省电。</li>
+</ul>
+<p>也有不是"电压进、电压出"的模拟电路：电流镜和 DAC 输出电流，ADC 输出数字码，PLL 输出时钟，基准输出一个精确的电压。它们的共同目标是一样的：把一个模拟量准确、干净、够快地产生或传递出去。</p></div></details></section><section class="sec" id="q14" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>展开来源列表</summary><div class="sub-body"><ul>
 <li><a href="https://arxiv.org/pdf/2512.08388" target="_blank" rel="noopener noreferrer">arXiv 2512.08388：CNF+CMF 低频噪声模型</a></li>
 <li><a href="https://web.mit.edu/klund/www/papers/UNP_noise.pdf" target="_blank" rel="noopener noreferrer">Lundberg, Noise Sources in Bulk CMOS (MIT)</a></li>
 <li><a href="https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf" target="_blank" rel="noopener noreferrer">Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006</a></li>
@@ -1680,6 +1776,11 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>What exactly is output resistance ro?</td>
 <td>The inverse of the slope of the transistor I–V curve at the operating point (a small-signal resistance) — not a circuit resistor and not V/I; gain = gm × Rout</td>
 <td>Q11</td>
+</tr>
+<tr>
+<td>How do gm, ro, capacitance and fT map onto a faucet?</td>
+<td>Handle = gate voltage, flow = current, outlet pressure = output voltage; gm is sensitivity, ro is how stiff the faucet is, capacitance is a swelling hose, fT is the control mechanism filling first; gain is measured in outlet pressure</td>
+<td>Q12</td>
 </tr>
 </tbody>
 </table></div></div></section><section class="sec" id="q1-en"><h2>Q0. What are analog circuits really after?</h2><div class="intro"><p><strong>Analog circuits are not after "amplification" itself. They aim to pass, amplify or convert a continuously varying physical signal with as little distortion as possible, under limited power and supply voltage. Gain gm·Rout is the means: put high gain inside negative feedback, and you get a result that is accurate, linear and almost independent of device parameters.</strong></p>
@@ -3091,7 +3192,98 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <li>The slope comes from a derivative, which amplifies measurement noise; use fine steps, averaging or smoothing.</li>
 <li>Self-heating makes DC-measured gds read low, even negative; the rigorous approach is pulsed IV, or Y22 converted from high-frequency S-parameters.</li>
 <li>Compare devices at the same gm/ID and the same VDS, not at the same VGS.</li>
-</ul></div></details></section><section class="sec" id="q13-en" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>Show source list</summary><div class="sub-body"><ul>
+</ul></div></details></section><section class="sec" id="q13-en"><h2>Q12. Tying gm, ro, capacitance and fT together with a faucet</h2><div class="intro"><p><strong>Think of the transistor as a faucet controlled by a handle: the handle is the gate voltage, the water flow is the drain current and the outlet pressure is the output voltage. gm is "how much the flow changes for a small turn"; ro is "how stiff the faucet is — whether its flow changes when downstream pressure changes"; capacitance is "an outlet hose that swells and must fill first"; fT is "the control mechanism itself must fill before it moves". Gain = gm × Rout and is measured in outlet pressure, not flow.</strong></p>
+<p>Key points:</p>
+<ul>
+<li>Bigger gm is not automatically better: gm costs current (gm = gm/ID × ID) and area, so what you really want is gm/ID (sensitivity per unit of current) and gm/C (sensitivity that does not slow things down).</li>
+<li>Large ro means a stiff faucet: when the downstream pressure (VDS) changes, the flow barely changes. It is not "how much the outlet hose swells"; a swelling hose corresponds to capacitance, which affects speed, not gain.</li>
+<li>An amplifier's input is a voltage (turning the handle) and its output is a voltage (outlet pressure); the current is only the middle step. Gain is large when the extra water has nowhere to leak and must become pressure.</li>
+<li>A current mirror runs the other way: current in, current out, with the gate voltage as the "translator" in between. An amplifier is voltage → current → voltage; a mirror is current → voltage → current, using the same two conversions.</li>
+<li>fT = gm/(2π·Cgg): the faster you wiggle the handle, the more effort goes into filling and draining the control mechanism; at fT the flow needed for control equals the output flow and current gain falls to 1.</li>
+</ul></div><details class="sub" id="q13-en-1"><summary>One mapping table</summary><div class="sub-body"><div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Device quantity</th>
+<th>Faucet analogy</th>
+<th>What analog design wants</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VGS (input)</td>
+<td>Handle position</td>
+<td>The signal rides on a fixed bias position</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>Water flow from the faucet</td>
+<td>Set by the bias current; the less, the better</td>
+</tr>
+<tr>
+<td>VDS / output voltage</td>
+<td>Water pressure at the faucet outlet</td>
+<td>The output signal is the change in this pressure</td>
+</tr>
+<tr>
+<td>gm</td>
+<td>How much the flow changes for a small turn</td>
+<td>The more per unit of current, the better (gm/ID)</td>
+</tr>
+<tr>
+<td>ro (Rout)</td>
+<td>How stiff the faucet is: does its flow change when downstream pressure changes</td>
+<td>The stiffer the better (large ro), so extra water all becomes pressure</td>
+</tr>
+<tr>
+<td>C</td>
+<td>How much the outlet hose swells: it must fill before pressure rises</td>
+<td>The smaller the better, for a faster response</td>
+</tr>
+<tr>
+<td>fT</td>
+<td>How much water the hydraulic control needs before the valve moves</td>
+<td>The higher the better: small control chamber, sensitive valve</td>
+</tr>
+<tr>
+<td>Gain gm·Rout</td>
+<td>How much the outlet pressure changes for a small turn</td>
+<td>Large, stable and linear</td>
+</tr>
+</tbody>
+</table></div></div></details><details class="sub" id="q13-en-2"><summary>gm: how much the flow changes for a small turn</summary><div class="sub-body"><p>[Textbook] gm = ∂ID/∂VGS. The more the flow changes for a slight turn of the handle, the larger gm. But bigger is not automatically better: the direct ways to raise it are more bias current (more power) or a bigger faucet (a wider device with more gate capacitance, which is slower). So analog design looks at two ratios: gm/ID (sensitivity per unit of current) and gm/C (whether the capacitance to be filled slows it down, i.e., fT).</p></div></details><details class="sub" id="q13-en-3"><summary>ro: how stiff the faucet is</summary><div class="sub-body"><p>[Textbook] ro = 1/gds with gds = ∂ID/∂VDS (see Q11). Hold the handle still, raise the outlet pressure (VDS) slightly, and see whether the flow changes:</p>
+<ul>
+<li>Very little change (small gds): a stiff faucet, like a constant-flow pump; ro is large.</li>
+<li>A large change (large gds): a soft faucet that delivers less water as downstream pressure rises, as if it had a leak back to the source; ro is small.</li>
+</ul>
+<p>A common misreading is to think of ro as "how much the outlet hose swells". A hose that swells a lot means the flow changes a lot when pressure changes — which is exactly large gds and small ro.</p>
+<p>The measurement maps directly onto the analogy: hold VGS at the target bias, change VDS slightly in saturation and see how much ID changes. The smaller ΔID/ΔVDS, the larger ro.</p></div></details><details class="sub" id="q13-en-4"><summary>Gain: extra water with nowhere to leak becomes pressure</summary><div class="sub-body"><p>[Textbook] An amplifier takes a voltage in and puts a voltage out. Step through it:</p>
+<ol>
+<li>Turn the handle: the flow rises by ΔQ = gm × Δhandle.</li>
+<li>The outlet feeds a very narrow opening (the load); the extra water cannot get out easily, so pressure rises.</li>
+<li>How much: ΔP = ΔQ × Rout, with Rout = load ∥ ro.</li>
+</ol>
+<p>With a stiff faucet (large ro), all the extra water is forced toward the narrow opening and the pressure rises a lot: large gain. With a soft faucet (small ro), the faucet delivers less as pressure rises, as if the extra water leaked back, so pressure cannot build: small gain. Hence gain = gm × Rout: a small turn yields a lot of extra water, and that water has nowhere to leak, so it becomes outlet pressure.</p></div></details><details class="sub" id="q13-en-5"><summary>Capacitance: a swelling hose that sets speed, not gain</summary><div class="sub-body"><p>[Textbook] If the outlet feeds a stretch of hose that swells, the hose soaks up water first when pressure rises, so the outlet pressure takes a while to build. That is the capacitance C on the output node (the next stage's gate, wiring, the device's own drain capacitance). It does not change how high the pressure finally goes (gain), only how fast it gets there (bandwidth). An amplifier's gain-bandwidth product is roughly gm/C: for the same flow, a smaller hose builds pressure faster.</p></div></details><details class="sub" id="q13-en-6"><summary>fT: the control mechanism must fill first too</summary><div class="sub-body"><p>[Textbook] fT = gm/(2π·Cgg) is the frequency where current gain falls to 1 (see guide section 2 and the glossary). Think of a hydraulically controlled valve: turning the handle actually pushes a little water into the valve's control chamber before the valve moves. The control chamber is the gate capacitance Cgg.</p>
+<ul>
+<li>When you move the handle slowly, very little water goes into the control chamber, yet it controls a large output flow: the "current gain" is huge.</li>
+<li>The faster you wiggle the handle, the more water goes into filling and draining the control chamber.</li>
+<li>At some frequency the water needed for control equals the output flow change; current gain is 1, and that frequency is fT.</li>
+</ul>
+<p>To raise fT, either make the valve more sensitive (larger gm) or the control chamber smaller (smaller Cgg). This is also why "thriftier" bias (higher gm/ID, lower overdrive) needs a bigger device with a bigger control chamber and a lower fT: you cannot have both power efficiency and speed.</p>
+<p>The difference from the previous subsection: fT is the device's limit in driving its own control chamber, independent of what is connected outside; the hose capacitance C is the external load and sets how fast the circuit actually runs. Usable circuit bandwidth is typically around a tenth of fT.</p></div></details><details class="sub" id="q13-en-7"><summary>Current mirrors and amplifiers: the same two conversions in opposite order</summary><div class="sub-body"><p>[Textbook] A transistor does two things: gate voltage controls current (gm, voltage → current), and current through a resistance becomes voltage (Rout, current → voltage).</p>
+<ul>
+<li>Amplifier: voltage in → gm turns it into current → back into voltage on Rout. The goal is to amplify a voltage.</li>
+<li>Current mirror: current in → it flows into diode-connected M1, which settles at the matching gate voltage → M2, sharing that gate voltage, turns it back into a current. The goal is to copy a current. The gate voltage in between is only a translation, not the output.</li>
+</ul>
+<p>An analogy: two faucets whose handles are joined by a linkage. You force a set flow (the reference current) through the first faucet, and its handle settles at the matching position; the linkage moves the second handle to the same position, so it delivers the same flow (twice as much if it is twice as big). The stiffer the second faucet (larger ro), the less its flow depends on its own outlet pressure and the more accurate the copy. That is why mirrors also want large ro.</p>
+<p>Mirrors are rarely used alone; they sit inside amplifiers, either as bias (delivering an accurate current to each amplifier) or as an active load (a very stiff faucet in place of the outlet resistor, which raises Rout).</p></div></details><details class="sub" id="q13-en-8"><summary>So what does an analog amplifier pursue</summary><div class="sub-body"><p>[Textbook] The most common case is voltage in, voltage out: turn a small voltage change into a large one, and make it:</p>
+<ul>
+<li>Large enough, stable and accurate (high gain plus negative feedback, see Q0);</li>
+<li>Linear: large and small signals are amplified by the same factor, without distortion;</li>
+<li>Clean: little added noise, offset and drift;</li>
+<li>Fast enough: enough bandwidth, not slowed by capacitance;</li>
+<li>Power-efficient.</li>
+</ul>
+<p>Some analog circuits are not voltage in, voltage out: mirrors and DACs output current, ADCs output digital codes, PLLs output clocks, references output one precise voltage. Their shared goal is the same: produce or pass on an analog quantity accurately, cleanly and fast enough.</p></div></details></section><section class="sec" id="q14-en" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>Show source list</summary><div class="sub-body"><ul>
 <li><a href="https://arxiv.org/pdf/2512.08388" target="_blank" rel="noopener noreferrer">arXiv 2512.08388: CNF+CMF low-frequency noise model</a></li>
 <li><a href="https://web.mit.edu/klund/www/papers/UNP_noise.pdf" target="_blank" rel="noopener noreferrer">Lundberg, Noise Sources in Bulk CMOS (MIT)</a></li>
 <li><a href="https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf" target="_blank" rel="noopener noreferrer">Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006</a></li>

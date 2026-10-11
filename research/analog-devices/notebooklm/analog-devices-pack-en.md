@@ -1044,6 +1044,7 @@ Evidence tags: [Textbook] textbook or general knowledge; [Silicon · research] m
 | How do jitter and noise relate? | Random jitter is the integral of phase noise; device flicker noise upconverts into close-in phase noise, and the PLL loop suppresses only the part inside the loop bandwidth | Q9 |
 | Why is analog cautious with the lowest VT and shortest L? | Low gain, large mismatch, high leakage, high 1/f; high-speed paths still use them for speed, then recover with calibration and equalization | Q10 |
 | What exactly is output resistance ro? | The inverse of the slope of the transistor I–V curve at the operating point (a small-signal resistance) — not a circuit resistor and not V/I; gain = gm × Rout | Q11 |
+| How do gm, ro, capacitance and fT map onto a faucet? | Handle = gate voltage, flow = current, outlet pressure = output voltage; gm is sensitivity, ro is how stiff the faucet is, capacitance is a swelling hose, fT is the control mechanism filling first; gain is measured in outlet pressure | Q12 |
 
 ## Q0. What are analog circuits really after?
 
@@ -1847,6 +1848,89 @@ ro is also often written as VEA/ID, where VEA is the Early voltage: extend the s
 - The slope comes from a derivative, which amplifies measurement noise; use fine steps, averaging or smoothing.
 - Self-heating makes DC-measured gds read low, even negative; the rigorous approach is pulsed IV, or Y22 converted from high-frequency S-parameters.
 - Compare devices at the same gm/ID and the same VDS, not at the same VGS.
+
+## Q12. Tying gm, ro, capacitance and fT together with a faucet
+
+**Think of the transistor as a faucet controlled by a handle: the handle is the gate voltage, the water flow is the drain current and the outlet pressure is the output voltage. gm is "how much the flow changes for a small turn"; ro is "how stiff the faucet is — whether its flow changes when downstream pressure changes"; capacitance is "an outlet hose that swells and must fill first"; fT is "the control mechanism itself must fill before it moves". Gain = gm × Rout and is measured in outlet pressure, not flow.**
+
+Key points:
+- Bigger gm is not automatically better: gm costs current (gm = gm/ID × ID) and area, so what you really want is gm/ID (sensitivity per unit of current) and gm/C (sensitivity that does not slow things down).
+- Large ro means a stiff faucet: when the downstream pressure (VDS) changes, the flow barely changes. It is not "how much the outlet hose swells"; a swelling hose corresponds to capacitance, which affects speed, not gain.
+- An amplifier's input is a voltage (turning the handle) and its output is a voltage (outlet pressure); the current is only the middle step. Gain is large when the extra water has nowhere to leak and must become pressure.
+- A current mirror runs the other way: current in, current out, with the gate voltage as the "translator" in between. An amplifier is voltage → current → voltage; a mirror is current → voltage → current, using the same two conversions.
+- fT = gm/(2π·Cgg): the faster you wiggle the handle, the more effort goes into filling and draining the control mechanism; at fT the flow needed for control equals the output flow and current gain falls to 1.
+
+### One mapping table
+
+| Device quantity | Faucet analogy | What analog design wants |
+|---|---|---|
+| VGS (input) | Handle position | The signal rides on a fixed bias position |
+| ID | Water flow from the faucet | Set by the bias current; the less, the better |
+| VDS / output voltage | Water pressure at the faucet outlet | The output signal is the change in this pressure |
+| gm | How much the flow changes for a small turn | The more per unit of current, the better (gm/ID) |
+| ro (Rout) | How stiff the faucet is: does its flow change when downstream pressure changes | The stiffer the better (large ro), so extra water all becomes pressure |
+| C | How much the outlet hose swells: it must fill before pressure rises | The smaller the better, for a faster response |
+| fT | How much water the hydraulic control needs before the valve moves | The higher the better: small control chamber, sensitive valve |
+| Gain gm·Rout | How much the outlet pressure changes for a small turn | Large, stable and linear |
+
+### gm: how much the flow changes for a small turn
+
+[Textbook] gm = ∂ID/∂VGS. The more the flow changes for a slight turn of the handle, the larger gm. But bigger is not automatically better: the direct ways to raise it are more bias current (more power) or a bigger faucet (a wider device with more gate capacitance, which is slower). So analog design looks at two ratios: gm/ID (sensitivity per unit of current) and gm/C (whether the capacitance to be filled slows it down, i.e., fT).
+
+### ro: how stiff the faucet is
+
+[Textbook] ro = 1/gds with gds = ∂ID/∂VDS (see Q11). Hold the handle still, raise the outlet pressure (VDS) slightly, and see whether the flow changes:
+- Very little change (small gds): a stiff faucet, like a constant-flow pump; ro is large.
+- A large change (large gds): a soft faucet that delivers less water as downstream pressure rises, as if it had a leak back to the source; ro is small.
+
+A common misreading is to think of ro as "how much the outlet hose swells". A hose that swells a lot means the flow changes a lot when pressure changes — which is exactly large gds and small ro.
+
+The measurement maps directly onto the analogy: hold VGS at the target bias, change VDS slightly in saturation and see how much ID changes. The smaller ΔID/ΔVDS, the larger ro.
+
+### Gain: extra water with nowhere to leak becomes pressure
+
+[Textbook] An amplifier takes a voltage in and puts a voltage out. Step through it:
+1. Turn the handle: the flow rises by ΔQ = gm × Δhandle.
+2. The outlet feeds a very narrow opening (the load); the extra water cannot get out easily, so pressure rises.
+3. How much: ΔP = ΔQ × Rout, with Rout = load ∥ ro.
+
+With a stiff faucet (large ro), all the extra water is forced toward the narrow opening and the pressure rises a lot: large gain. With a soft faucet (small ro), the faucet delivers less as pressure rises, as if the extra water leaked back, so pressure cannot build: small gain. Hence gain = gm × Rout: a small turn yields a lot of extra water, and that water has nowhere to leak, so it becomes outlet pressure.
+
+### Capacitance: a swelling hose that sets speed, not gain
+
+[Textbook] If the outlet feeds a stretch of hose that swells, the hose soaks up water first when pressure rises, so the outlet pressure takes a while to build. That is the capacitance C on the output node (the next stage's gate, wiring, the device's own drain capacitance). It does not change how high the pressure finally goes (gain), only how fast it gets there (bandwidth). An amplifier's gain-bandwidth product is roughly gm/C: for the same flow, a smaller hose builds pressure faster.
+
+### fT: the control mechanism must fill first too
+
+[Textbook] fT = gm/(2π·Cgg) is the frequency where current gain falls to 1 (see guide section 2 and the glossary). Think of a hydraulically controlled valve: turning the handle actually pushes a little water into the valve's control chamber before the valve moves. The control chamber is the gate capacitance Cgg.
+- When you move the handle slowly, very little water goes into the control chamber, yet it controls a large output flow: the "current gain" is huge.
+- The faster you wiggle the handle, the more water goes into filling and draining the control chamber.
+- At some frequency the water needed for control equals the output flow change; current gain is 1, and that frequency is fT.
+
+To raise fT, either make the valve more sensitive (larger gm) or the control chamber smaller (smaller Cgg). This is also why "thriftier" bias (higher gm/ID, lower overdrive) needs a bigger device with a bigger control chamber and a lower fT: you cannot have both power efficiency and speed.
+
+The difference from the previous subsection: fT is the device's limit in driving its own control chamber, independent of what is connected outside; the hose capacitance C is the external load and sets how fast the circuit actually runs. Usable circuit bandwidth is typically around a tenth of fT.
+
+### Current mirrors and amplifiers: the same two conversions in opposite order
+
+[Textbook] A transistor does two things: gate voltage controls current (gm, voltage → current), and current through a resistance becomes voltage (Rout, current → voltage).
+- Amplifier: voltage in → gm turns it into current → back into voltage on Rout. The goal is to amplify a voltage.
+- Current mirror: current in → it flows into diode-connected M1, which settles at the matching gate voltage → M2, sharing that gate voltage, turns it back into a current. The goal is to copy a current. The gate voltage in between is only a translation, not the output.
+
+An analogy: two faucets whose handles are joined by a linkage. You force a set flow (the reference current) through the first faucet, and its handle settles at the matching position; the linkage moves the second handle to the same position, so it delivers the same flow (twice as much if it is twice as big). The stiffer the second faucet (larger ro), the less its flow depends on its own outlet pressure and the more accurate the copy. That is why mirrors also want large ro.
+
+Mirrors are rarely used alone; they sit inside amplifiers, either as bias (delivering an accurate current to each amplifier) or as an active load (a very stiff faucet in place of the outlet resistor, which raises Rout).
+
+### So what does an analog amplifier pursue
+
+[Textbook] The most common case is voltage in, voltage out: turn a small voltage change into a large one, and make it:
+- Large enough, stable and accurate (high gain plus negative feedback, see Q0);
+- Linear: large and small signals are amplified by the same factor, without distortion;
+- Clean: little added noise, offset and drift;
+- Fast enough: enough bandwidth, not slowed by capacitance;
+- Power-efficient.
+
+Some analog circuits are not voltage in, voltage out: mirrors and DACs output current, ADCs output digital codes, PLLs output clocks, references output one precise voltage. Their shared goal is the same: produce or pass on an analog quantity accurately, cleanly and fast enough.
 
 ## Sources
 
