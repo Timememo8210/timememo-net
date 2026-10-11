@@ -142,13 +142,17 @@ const FRAG=`precision highp float;
 uniform vec2 uRes,uSun,uPar;uniform float uT,uCam,uS,uSpread,uZoom,uWl,uSunR,uRain,uH,uIn;
 uniform vec4 uDrop[3];uniform vec4 uBoat;
 ${NOISE}
+// the skyline of one range: rounded humps standing one in front of another, some stretches high and some low —
+// the crowns are never points, and where two humps meet they fold into a soft notch
 float ridge(float x,float sd){
-  float w=x+.4*(noise(vec2(x*.7,sd+11.))-.5);
-  float n=fbm(vec2(w,sd));
-  float c=1.-abs(2.*noise(vec2(w*2.6+3.,sd+7.))-1.);
-  return smoothstep(.2,.88,n)*.72+c*c*.2+noise(vec2(w*6.,sd+2.))*.08;}
-float dabs(vec2 p){vec2 i=floor(p),f=fract(p);float h=hash(i+.5);vec2 c=vec2(hash(i+3.1),hash(i+7.7))*.5+.25;float r=.2+.22*hash(i+1.7);
-  return step(.42,h)*smoothstep(r,r*.25,length((f-c)*vec2(.62,1.2)));}
+  float w=x+.25*(noise(vec2(x*.5,sd+11.))-.5);
+  float a=noise(vec2(w*.8,sd)),b=noise(vec2(w*1.8+3.,sd+7.))*.76,c=noise(vec2(w*.33+9.,sd+2.));
+  float k=.07,hh=clamp(.5+.5*(a-b)/k,0.,1.);
+  float n=(mix(b,a,hh)+k*hh*(1.-hh))*(.7+.3*c)+(c-.5)*.2+(noise(vec2(w*1.4+4.,sd+9.))-.5)*.26;
+  float m=clamp(n,0.,1.);n=n-m+mix(m,m*m*(3.-2.*m),.6);            // below zero it keeps falling, so a low stretch sinks under the water instead of lying flat on it
+  return n*1.02-.1+.06*noise(vec2(w*2.6+1.,sd+3.))+.02*noise(vec2(w*7.,sd+5.));}
+float dabs(vec2 p){p.x+=.5*mod(floor(p.y),2.)+.4*hash(vec2(floor(p.y),3.));vec2 i=floor(p),f=fract(p);float h=hash(i+.5);vec2 c=vec2(hash(i+3.1),hash(i+7.7))*.56+.22;float r=.16+.26*hash(i+1.7);
+  return step(.56,h)*smoothstep(r,r*.2,length((f-c)*vec2(.6,1.15)))*(.5+.5*hash(i+9.3));}
 vec3 pal(vec3 a,vec3 b,vec3 c,vec3 d,float s){
   if(s<1.)return mix(a,b,smoothstep(0.,1.,s));if(s<2.)return mix(b,c,smoothstep(0.,1.,s-1.));if(s<3.)return mix(c,d,smoothstep(0.,1.,s-2.));return mix(d,a,smoothstep(0.,.6,s-3.));}
 float palf(float a,float b,float c,float d,float s){return pal(vec3(a),vec3(b),vec3(c),vec3(d),s).x;}
@@ -188,14 +192,14 @@ void main(){
     float fi=float(i)/3.;
     float dep=mix(.12,1.,fi*fi);
     float x=wx*mix(.82,1.2,fi)+(uCam+uPar.x*.08)*dep+float(i)*23.7;
-    float amp=(i==1?.36:mix(.24,.12,fi))*uH;
-    float h=wl+mix(.2,.014,fi)*uH+amp*(ridge(x*mix(1.5,.85,fi),float(i)*5.3+1.)-.38)+uPar.y*.008*dep;
+    float amp=(i==1?.33:mix(.24,.12,fi))*uH;
+    float h=wl+mix(.2,.014,fi)*uH+amp*(ridge(x*mix(1.3,1.5,fi),float(i)*5.3+1.)-.38)+uPar.y*.008*dep;
     float d=h-y;
     // moist dots strung along the nearer crests: trees, seen from far away
     if(i>=2&&d>-.012&&d<.055&&!water){
       float band=smoothstep(-.011,.002,d)*smoothstep(.055,.008,d);
-      float dots=dabs(vec2(x*mix(110.,64.,fi),y*uZoom/asp*mix(190.,120.,fi)))*smoothstep(.42,.66,noise(vec2(x*6.,fi*5.)));
-      col=mix(col,deepC,band*dots*mix(.3,.5,fi)*inkK*smoothstep(.5,1.,uIn));
+      float dots=dabs(vec2(x*mix(84.,50.,fi),y*uZoom/asp*mix(150.,96.,fi)))*smoothstep(.42,.66,noise(vec2(x*6.,fi*5.)));
+      col=mix(col,deepC,band*dots*mix(.24,.42,fi)*inkK*smoothstep(.5,1.,uIn));
     }
     float soft=mix(.011,.0018,fi)*(.4+1.8*noise(vec2(x*5.,fi*7.+2.)));
     if(water)soft*=3.5;
@@ -516,23 +520,35 @@ function willow(g,w,h){
   for(let d=0;d<3;d++)threads.forEach((fx,n)=>{const pick=(n*7+3)%5;if((d===0&&pick<2)||(d===1&&pick>=2&&pick<4)||(d===2&&pick===4)||(d===2&&n%6===1))draw(fx+(rnd()-.5)*.02,d)});
   for(let n=0;n<6;n++)draw(.04+rnd()*.9,0);
 }
-// 竹: one stem in strong ink, one behind it in pale; leaves pressed down and flicked off
+// one bamboo leaf: the brush pressed down at the stem and drawn out to a point
+function bleaf(g,x,y,ang,L,wd,col,a,bend){
+  g.save();g.translate(x,y);g.rotate(ang);const c=col.join(','),gr=g.createLinearGradient(0,0,L,0),b=bend*L;
+  gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(.6,`rgba(${c},${a*.88})`);gr.addColorStop(1,`rgba(${c},${a*.3})`);
+  g.fillStyle=gr;g.beginPath();g.moveTo(0,0);g.bezierCurveTo(L*.1,-wd*1.15,L*.44,-wd*.85+b*.5,L,b);g.bezierCurveTo(L*.5,wd*.7+b*.6,L*.14,wd*.95,0,0);g.fill();g.restore()}
+// 竹: slender canes that lean and bow at the tip, jointed stroke by stroke; twigs from the joints; leaves in hanging
+// groups of three and four, dark ones in front of pale ones — bamboo after rain
 function bamboo(g,w,h){
   const u=Math.min(w,h)/420;
-  const stalk=(x0,lean,ww,a,col)=>{let y=1.04,seg=.2;const fx=yy=>(x0+lean*(1-yy))*w;
-    while(y>-.06){const y1=y-seg,xa=fx(y),xb=fx(y1),W=ww*u;
-      brush(g,[[xa,y*h,W*1.06],[(xa+xb)/2+(rnd()-.5)*u,(y+y1)/2*h,W*.9],[xb,y1*h+3*u,W*1.06]],{dry:.34,a,a1:a*.85,col,seg:14,dryF:.03});
-      brush(g,[[xb-W*.64,y1*h+1.5*u,1.2*u],[xb,y1*h-1.4*u,2.4*u],[xb+W*.64,y1*h+1.5*u,1.2*u]],{a:Math.min(1,a+.12),col:INK,seg:6});
-      y=y1-.012;seg*=.93}
-    return fx};
-  const f1=stalk(.3,.05,10,.3,INK_P),f2=stalk(.62,-.04,14,.72,INK);
-  const cluster=(X,Y,side,a,col,sc)=>{const n=3+((rnd()*3)|0);
-    for(let k=0;k<n;k++){const ang=1.57+side*(-.3+k*.36)+(rnd()-.5)*.24,L=(54+rnd()*42)*u*sc;
-      dab(g,X+(rnd()-.5)*7*u,Y+(rnd()-.5)*5*u,ang,L,(8+rnd()*4)*u*sc,col,a,false)}};
-  [[.16,.3,-1,.3,INK_P,.9,f1],[.08,.62,-1,.3,INK_P,.9,f1],[.82,.26,1,.86,INK,1,f2],[.86,.56,1,.84,INK,1,f2],[.42,.44,-1,.84,INK,1,f2],[.8,.82,1,.6,INK_M,.9,f2]].forEach(([cx,cy,side,a,col,sc,fx])=>{
-    const X=cx*w,Y=cy*h,sx=fx(cy+.09);
-    brush(g,[[sx,(cy+.09)*h,2*u],[(sx+X)/2,(cy+.03)*h,1.5*u],[X,Y,1*u]],{a:Math.min(1,a+.05),col,seg:8});
-    cluster(X,Y,side,a,col,sc)});
+  const group=(X,Y,base,sc,col,a,n)=>{n=n||3+((rnd()*2.4)|0);const sp=.4+rnd()*.16;
+    for(let k=0;k<n;k++){const f=n===1?0:k/(n-1)-.5,L=(50+rnd()*26)*u*sc*(1-.5*Math.abs(f)*(.5+.5*rnd()));
+      bleaf(g,X+(rnd()-.5)*3*u,Y+(rnd()-.5)*3*u,base+f*sp*(n-1)+(rnd()-.5)*.12,L,L*(.105+rnd()*.035),col,a*(.8+.2*rnd()),(rnd()-.5)*.12)}};
+  const cane=(bx,tx,ty,W0,a,col,n,twigs)=>{
+    const P=[[bx*w,1.06*h],[(bx+(tx-bx)*.08)*w,.56*h],[lerp(bx,tx,.62)*w,(ty+.03)*h],[tx*w,ty*h]],pt=t=>bez(P[0],P[1],P[2],P[3],t);
+    const T=[0];let acc=0;const len=[];for(let k=0;k<n;k++){len.push(.55+Math.sin((k+.6)/n*3.1416));acc+=len[k]}let s0=0;for(let k=0;k<n;k++){s0+=len[k]/acc;T.push(s0)}
+    for(let k=0;k<n;k++){const t0=T[k]+.006,t1=T[k+1]-.006,tm=(t0+t1)/2,A=pt(t0),M=pt(tm),B=pt(t1),W=W0*u*(1-.74*tm)+.9*u,dx=B[0]-A[0],dy=B[1]-A[1],l=Math.hypot(dx,dy)||1,nx=-dy/l,ny=dx/l;
+      brush(g,[[A[0],A[1],W*1.05],[M[0],M[1],W*.9],[B[0],B[1],W*1.05]],{col,a:a*.56,a1:a*.5,dry:.16,dryF:.03,seg:10});           // the body of the joint, paler
+      for(const sg of[-1,1])brush(g,[[A[0]+nx*sg*W*.38,A[1]+ny*sg*W*.38,W*.3],[M[0]+nx*sg*W*.33,M[1]+ny*sg*W*.33,W*.24],[B[0]+nx*sg*W*.38,B[1]+ny*sg*W*.38,W*.3]],{col,a:a*(sg<0?1:.8),a1:a*.8,seg:8});  // its two edges, darker
+      if(k<n-1)brush(g,[[B[0]-(-ny)*W*.72-nx*0,B[1]-nx*W*.72+1.3*u,.8*u],[B[0],B[1]-1.1*u,1.7*u],[B[0]+(-ny)*W*.72,B[1]+nx*W*.72+1.3*u,.8*u]],{col:INK,a:Math.min(1,a+.14),seg:6})}   // the knot
+    for(const [k,sg,L0,drop] of twigs){const B=pt(T[k]),nb=pt(Math.min(1,T[k]+.02)),ta=Math.atan2(nb[1]-B[1],nb[0]-B[0]),an=ta+sg*(.55+rnd()*.25),L=L0*u;
+      const E=[B[0]+Math.cos(an)*L,B[1]+Math.sin(an)*L+drop*L],M=[B[0]+Math.cos(an)*L*.5,B[1]+Math.sin(an)*L*.5+drop*L*.2];
+      brush(g,[[B[0],B[1],1.9*u],[M[0],M[1],1.4*u],[E[0],E[1],.7*u]],{col,a:Math.min(1,a+.05),seg:8});
+      const side=an>-1.57&&an<1.57?1:-1;
+      group(E[0],E[1],1.57-side*.25,1,col,a);if(L0>70)group(M[0],M[1],1.57-side*.5,.78,col,a*.9,3);
+      if(rnd()<.6){const E2=[M[0]+Math.cos(an-sg*.7)*L*.4,M[1]+Math.sin(an-sg*.7)*L*.4];brush(g,[[M[0],M[1],1.2*u],[(M[0]+E2[0])/2,(M[1]+E2[1])/2,1*u],[E2[0],E2[1],.6*u]],{col,a,seg:6});group(E2[0],E2[1],1.57+side*.3,.72,col,a*.85,3)}}
+    const E=pt(1),E0=pt(.97),ta=Math.atan2(E[1]-E0[1],E[0]-E0[0]);group(E[0],E[1],ta+.5*(ta<-1.57?-1:1),.8,col,a,3);group(pt(.93)[0],pt(.93)[1],1.57+.4*(tx<bx?1:-1),.7,col,a*.9,3)};
+  cane(.9,.62,.22,7,.3,INK_P,7,[[3,-1,70,.25],[4,1,50,.3],[5,-1,60,.4],[6,-1,40,.5]]);
+  cane(.78,.7,.34,8,.56,INK_M,6,[[3,1,60,.3],[4,-1,74,.35],[5,1,40,.5]]);
+  cane(.64,.3,.07,11.5,.86,INK,9,[[3,-1,96,.2],[4,1,84,.25],[5,-1,104,.3],[6,1,70,.35],[7,-1,80,.45],[8,-1,46,.6]]);
 }
 // 荷: leaves splashed on in wet ink and swept outward from the navel; the flower only outlined, rouge at the tips
 function lotus(g,w,h){
@@ -574,32 +590,49 @@ function lotus(g,w,h){
   g.save();g.translate(.143*w,.44*h-.074*w);g.scale(-1,1);g.rotate(.5);g.translate(-.03*w,0);dragonfly(g,.058*w,0,.95);g.restore();   // one at rest on the tip of the bud
   for(let i=0;i<24;i++)dot(g,rnd()*w,(.82+rnd()*.18)*h,(1.6+rnd()*2.4)*u,rnd()<.5?GREEN_D:INK_M,.3+rnd()*.4,.5);
 }
-// 芦: thin stems leaning with the wind, plumes dragged out with a nearly dry brush
+// 芦: a stand of reeds leaning with the wind — tall at the bank and thinning out toward open water; long blades that
+// break downward, plumes combed out to leeward with a nearly dry brush
 function reeds(g,w,h){
-  const u=Math.min(w,h)/400;
-  for(let i=0;i<13;i++){
-    const far=rnd()<.35,x=(.04+rnd()*.9)*w,dx=(.06+rnd()*.2)*w,top=(.1+rnd()*.42)*h,tx=x+dx,a=far?.24:.5+rnd()*.3;
-    const pts=[[x,1.03*h,2.2*u],[x+dx*.25,lerp(h,top,.55),1.6*u],[tx,top,.8*u]];
-    brush(g,pts,{col:far?INK_P:UMBER,a,a1:a*.7,seg:12});
-    if(rnd()<.55){const q=cr(pts,6)[8+((rnd()*5)|0)];if(q)dab(g,q[0],q[1],-.5+rnd()*.5,(30+rnd()*40)*u,(2.2+rnd()*1.6)*u,far?INK_P:GREEN_D,a*.8,false)}
-    const n=5+((rnd()*5)|0);
-    for(let k=0;k<n;k++){const L=(16+rnd()*24)*u,ang=.15+rnd()*.75;
-      brush(g,[[tx,top,1*u],[tx+Math.cos(ang)*L*.5,top+Math.sin(ang)*L*.5-2*u,(3+rnd()*3)*u],[tx+Math.cos(ang)*L,top+Math.sin(ang)*L+6*u,.8*u]],{col:far?INK_P:rnd()<.6?STRAW:[150,128,104],a:far?.22:.5,a1:.1,dry:.5,seg:6,dryF:.12})}
+  const u=w/420,PL_C=[[188,166,126],[150,126,96],[222,210,186]];
+  for(let i=0;i<14;i++){
+    const far=i<5,fx=far?.05+rnd()*.72:.02+Math.pow(rnd(),1.6)*.66,tall=clamp((far?.62:.98)-fx*.7+(rnd()-.5)*.16,.22,.96);
+    const x0=fx*w,top=(1-tall)*h,lean=(.07+rnd()*.09)*w*(.5+tall),a=far?.3:.6+rnd()*.26,col=far?INK_P:rnd()<.55?UMBER:[116,102,76];
+    const P=[[x0,1.04*h,2.6*u],[x0+lean*.1,lerp(1.04*h,top,.45),2.1*u],[x0+lean*.48,lerp(1.04*h,top,.82),1.5*u],[x0+lean,top,.9*u]];
+    brush(g,P,{col,a,a1:a*.8,seg:12});
+    const path=cr(P,8),nb=far?(rnd()<.5?1:0):2+((rnd()*3)|0);
+    for(let k=0;k<nb;k++){const q=path[5+((rnd()*(path.length-11))|0)],sd=rnd()<.74?1:-1,L=(64+rnd()*70)*u*(far?.8:1)*(.5+.6*tall);
+      bleaf(g,q[0],q[1],-1.3+sd*(.55+rnd()*.5),L,(3.2+rnd()*2.2)*u,far?INK_P:rnd()<.45?[128,120,86]:rnd()<.6?STRAW:INK_M,a*(.7+.3*rnd()),sd*(.2+rnd()*.24))}
+    const tp=path[path.length-1],pv=path[path.length-4],ta=Math.atan2(tp[1]-pv[1],tp[0]-pv[0]),PL=(46+rnd()*34)*u*(far?.8:1),dr=.7+rnd()*.7,R=[];
+    for(let k=0;k<=8;k++){const f=k/8,an=ta+dr*f*f;R.push([tp[0]+Math.cos(an)*PL*f*(1-.12*f),tp[1]+Math.sin(an)*PL*f*(1-.12*f),an,f])}
+    for(const r of R)dot(g,r[0]+3*u,r[1]+2*u,PL*.2*(1-.45*r[3]),far?INK_P:PL_C[0],far?.12:.2,.7,r[2]);
+    brush(g,R.map(r=>[r[0],r[1],1.3*u*(1-.6*r[3])]),{col,a:a*.8,a1:a*.4,seg:4});
+    for(let k=1;k<R.length;k++){const r=R[k],n=far?3:5;
+      for(let z=0;z<n;z++){const sd=z%2?1:-1,an=r[2]+sd*(.25+rnd()*.5)+.42,L=PL*(.26+rnd()*.2)*(1-.5*r[3]),pc=far?INK_P:PL_C[(rnd()*3)|0];
+        brush(g,[[r[0],r[1],1.5*u],[r[0]+Math.cos(an)*L*.5,r[1]+Math.sin(an)*L*.5+1*u,1.3*u],[r[0]+Math.cos(an+.2)*L,r[1]+Math.sin(an+.2)*L,.6*u]],{col:pc,a:far?.26:.66,a1:.12,seg:5})}}
   }
-  for(let i=0;i<12;i++)dot(g,rnd()*w,(.9+rnd()*.1)*h,(1.6+rnd()*2.6)*u,INK_M,.3+rnd()*.3,.45);
+  for(let i=0;i<14;i++)dot(g,rnd()*w*.8,(.93+rnd()*.07)*h,(1.6+rnd()*2.6)*u,INK_M,.3+rnd()*.3,.45);
 }
-// 红叶: leaves dotted on in clusters of short strokes — red, ochre, plain ink — with a few blurred ones behind
+// 红叶: an autumn bough — the wood turns in short strokes; maple leaves in crowded handfuls at the forks and tips,
+// red over ochre over a few gone dark, with pale ones blurred behind
 function redleaf(g,w,h){
   const u=Math.min(w,h)/420,P=a=>a.map(p=>[p[0]*w,p[1]*h,p[2]*u]);
-  const br=[[[-.05,.03,17],[.2,.13,12],[.4,.2,8.5],[.6,.34,5.6],[.8,.4,3.2],[1,.56,1.2]],[[.2,.13,6],[.3,.3,4],[.27,.5,2.3],[.36,.66,1]],[[.4,.2,5],[.56,.14,3],[.74,.17,1.4]],[[.6,.34,4],[.63,.52,2.4],[.75,.68,1]],[[.27,.5,2],[.13,.58,1.2],[.05,.7,.7]],[[.8,.4,2],[.86,.26,1.2],[.95,.2,.6]]];
-  const all=[];br.forEach((b,i)=>{const q=P(b);cr(q,7).forEach(z=>{if(z[2]<8*u)all.push(z)})});
-  for(let i=0;i<26;i++){const q=all[(rnd()*all.length)|0],r=(10+rnd()*13)*u;dot(g,q[0]+(rnd()-.5)*70*u,q[1]+(rnd()-.2)*60*u,r,rnd()<.7?CINN:OCHRE,.14+rnd()*.14,.6+rnd()*.3,rnd()*3)}
-  br.forEach((b,i)=>brush(g,P(b),{dry:i?.22:.62,a:.86,a1:.6,seg:10,dryF:.035}));
-  for(let i=0;i<64;i++){
-    const q=all[(rnd()*rnd()*all.length)|0|0]||all[0],x=q[0]+(rnd()-.5)*46*u,y=q[1]+(rnd()-.22)*38*u,r0=rnd()*6.28,sc=.7+rnd()*.9;
-    const pick=rnd(),col=pick<.5?CINN:pick<.7?OCHRE:pick<.86?[146,50,36]:INK_M,a=.48+rnd()*.4,n=3+((rnd()*3)|0);
-    for(let k=0;k<n;k++){const ang=r0+(k-(n-1)/2)*.6;dab(g,x,y,ang,(k===((n-1)>>1)?17:11.5)*u*sc,(4.4+rnd()*1.8)*u*sc,col,a,rnd()<.25)}
-  }
+  const limb=[[[-.05,.02,18],[.12,.08,15],[.26,.16,12]],[[.25,.15,12],[.4,.2,9],[.52,.3,7]],[[.51,.29,7],[.66,.33,5],[.78,.42,3.2]],[[.77,.41,3.2],[.84,.47,2],[.88,.54,1]]];
+  const twigs=[[[.26,.16,6],[.3,.32,4],[.26,.5,2.4],[.33,.68,.9]],[[.4,.2,5],[.55,.12,3],[.72,.14,1.2]],[[.52,.3,4.5],[.6,.46,2.6],[.7,.6,1.3],[.73,.74,.6]],
+    [[.3,.32,2.4],[.16,.42,1.4],[.07,.56,.7]],[[.66,.33,2.4],[.74,.22,1.4],[.84,.17,.6]],[[.26,.5,1.8],[.4,.56,1],[.46,.7,.5]],[[.12,.08,4],[.1,.26,2.4],[.02,.42,1]],[[.6,.46,1.8],[.5,.56,1],[.47,.66,.5]],[[.78,.42,3],[.84,.47,2],[.88,.54,1]]];
+  const lin=(q,m)=>{const o=[];for(let i=0;i<q.length-1;i++)for(let j=0;j<m;j++){const f=j/m;o.push([lerp(q[i][0],q[i+1][0],f),lerp(q[i][1],q[i+1][1],f),lerp(q[i][2],q[i+1][2],f)])}o.push(q[q.length-1]);return o};
+  const maple=(x,y,rot,sz,col,a)=>{for(let k=-2;k<=2;k++){const L=sz*(k?Math.abs(k)===1?.88:.6:1)*(.9+.2*rnd());bleaf(g,x,y,rot+k*.6+(rnd()-.5)*.12,L,L*.21,col,a*(.85+.15*rnd()),(rnd()-.5)*.1)}};
+  const TW=twigs.map(t=>lin(P(t),10)),all=[].concat(...TW);
+  for(let i=0;i<20;i++){const q=all[(rnd()*all.length)|0],r=(11+rnd()*13)*u;dot(g,q[0]+(rnd()-.5)*80*u,q[1]+(rnd()-.1)*70*u,r,rnd()<.7?CINN:OCHRE,.13+rnd()*.13,.6+rnd()*.3,rnd()*3)}
+  twigs.forEach(t=>{const q=P(t);for(let i=0;i<q.length-1;i++){const a=q[i],b=q[i+1],bow=(rnd()-.5)*.08,dx=b[0]-a[0],dy=b[1]-a[1];
+    brush(g,[a,[(a[0]+b[0])/2-dy*bow,(a[1]+b[1])/2+dx*bow,(a[2]+b[2])/2],b],{dry:.22,a:.88,a1:.7,seg:8});if(i)dot(g,a[0],a[1],a[2]*.8,INK,.8)}});
+  limb.forEach((l,i)=>{const q=P(l);brush(g,q,{dry:i<3?.66:.3,a:.9,a1:.78,dryF:.032,seg:10});if(i<3)brush(g,q.map(p=>[p[0]+p[2]*.1,p[1]+p[2]*.3,p[2]*.36]),{dry:.12,a:.55,seg:8});dot(g,q[0][0],q[0][1],q[0][2]*.55,INK,.78)});
+  const RED2=[198,74,40],DARK=[136,46,34];
+  TW.forEach((c,ti)=>{let k=3+((rnd()*5)|0);
+    while(k<c.length){const q=c[k],f=k/c.length,dense=.5+.5*f;
+      if(q[2]<5.5*u&&rnd()<dense){const n=(rnd()<.55?2:1)+(f>.8&&rnd()<.6?1:0);
+        for(let z=0;z<n;z++){const pk=rnd(),col=pk<.42?CINN:pk<.64?RED2:pk<.82?OCHRE:pk<.93?DARK:INK_M,sz=(16+rnd()*11)*u*(.8+.3*f);
+          maple(q[0]+(rnd()-.5)*20*u,q[1]+(rnd()-.3)*18*u,1.57+(rnd()-.5)*2.4,sz,col,.6+rnd()*.32)}}
+      k+=1+((rnd()*2.4)|0)}});
 }
 // 舟: a flat skiff, painted once. At the bow an easel with a sheet of paper on it; in the stern an oiled-paper
 // umbrella left open. The painter and what is on her paper are redrawn every frame.
@@ -1091,9 +1124,9 @@ sc.addEventListener('click',e=>inkDrop(e.clientX,e.clientY,performance.now()/100
 const FG=[
   {k:'plum',  i:0,   ox:-.36,side:'top',   w:1.04,max:520,r:.8,  gen:plum,   org:[0,.1],  sway:.01, fin:{halo:.5,soft:1.3}},
   {k:'willow',i:1,   ox:-.24,side:'top',   w:.98,max:540,r:1.12,gen:willow, org:[.35,0], sway:.07, fin:{halo:.55,soft:1.5}},
-  {k:'bamboo',i:1.55,ox:.25, side:'bottom',w:.62,max:380,r:1.3, gen:bamboo, org:[.6,1],  sway:.012,fin:{halo:.5,soft:1.3},off:.06},
-  {k:'lotus', i:2,   ox:.05, side:'bottom',w:1.1,max:660,r:.6,  gen:lotus,  org:[.5,1],  sway:.012,fin:{halo:.55,soft:1.4,grain:.2},off:.04},
-  {k:'reeds', i:2.55,ox:-.2, side:'bottom',w:.8, max:460,r:.62, gen:reeds,  org:[.4,1],  sway:.05, fin:{halo:.45,soft:1.3},off:.05},
+  {k:'bamboo',i:1.55,ox:.42,oxL:.27,par:.3,parL:.12,early:.04,side:'bottom',w:.74,max:430,r:1.5, gen:bamboo, org:[.66,1], sway:.022,fin:{halo:.5,soft:1.3},off:.06},
+  {k:'lotus', i:2,   ox:.05,par:.2,early:.14, side:'bottom',w:1.1,max:660,r:.6,  gen:lotus,  org:[.5,1],  sway:.012,fin:{halo:.55,soft:1.4,grain:.2},off:.04},
+  {k:'reeds', i:2.55,ox:-.27,par:.25,early:.1,side:'bottom',w:.8, max:460,r:.9, gen:reeds,  org:[.4,1],  sway:.05, fin:{halo:.45,soft:1.3},off:.05},
   {k:'red',   i:3,   ox:-.4, side:'top',   w:.9,max:520,r:.74, gen:redleaf,org:[0,.04], sway:.03, fin:{halo:.55,soft:1.4}}];
 const boat={k:'boat',org:[.3,.7],seed:3.1,tex:null,w:0,h:0,S:1,hull:null,cv:null,g:null};
 function paintSprite(s,w,h,fn,fin,sd){
@@ -1144,11 +1177,11 @@ function frame(dt,t,ms){
   stage.scene({t,cam:-pS*TRAVEL-t*.004,s:p<0?0:p<=3?p:3+(p-3)*2,spread:-.34,zoom:Math.max(W/H,1.05),wl,sun:land?[.24,.74]:[.27,.765],sunR:land?.075:.058,rain,hs:land?1.3:1.22,intro,drops,boat:wake,px:ptr.x,py:ptr.y},ms);
   // foreground paintings
   stage.beginSprites(t);
-  if(boat.hull){drawBoat(t,wind,moveK,p);stage.sprite(boat,bx,by,{reveal:bReveal,alpha:.97,rot:0,sway:0,grain:.3})}
+  if(boat.hull){drawBoat(t,wind,moveK,p);stage.sprite(boat,bx,by,{reveal:bReveal,alpha:.97,rot:0,sway:0,grain:.16})}
   for(const f of FG){
-    if(!f.tex)continue;const d=wrap2(p-f.i),top=f.side==='top',x=W/2+(top&&d>0?d*(1-.5*sm(d/.12)):d)*Lfg+f.ox*W-f.w/2+ptr.x*12;if(x>W+20||x+f.w<-20)continue;
+    if(!f.tex)continue;const d=wrap2(p-f.i),top=f.side==='top',x=W/2+(top&&d>0?d*(1-.5*sm(d/.12)):d)*Lfg*((land&&f.parL)||f.par||1)+(land&&f.oxL!=null?f.oxL:f.ox)*W-f.w/2+ptr.x*12;if(x>W+20||x+f.w<-20)continue;
     const y=f.side==='top'?-H*.012+ptr.y*4:H-f.h+(f.off||0)*f.h+ptr.y*6;
-    const reveal=REDUCED?1:sm((d+.52)/.5),alpha=1-sm((d-(top?.1:.26))/.2);
+    const reveal=REDUCED?1:sm((d+.52)/.5),alpha=1-sm((d-(f.early||(top?.1:.26)))/.2);
     if(reveal<=0||alpha<=0)continue;
     stage.sprite(f,x,y,{reveal,alpha:alpha*.96,sway:f.sway*(1+2.6*gust)});
   }
