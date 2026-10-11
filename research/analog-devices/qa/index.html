@@ -64,7 +64,7 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <h1><span class="zh" lang="zh-CN">问答：速度、VT 与 flicker noise</span><span class="en" lang="en">Q&amp;A: speed, VT and flicker noise</span></h1>
 <div class="dek"><div class="zh" lang="zh-CN"><p>这份问答写给熟悉逻辑工艺整合、但对模拟和高速电路不熟的工程师，先从根本上说明模拟电路在追求什么（Q0），再回答六组常见问题。第一，CMOS 电路的速度确实看 drive current 与负载电容之比（I/C，也就是 CV/I 的倒数），而且要在相同 Ioff 和相同占地面积下比较；但 CML、放大器、pad 和长连线各有自己的瓶颈，分别看 gm/C、fT/fmax 和 RC。第二，"VT 越低，drive 越大、leakage 越大"是直接、定量的关系：leakage 按 10^(−ΔVT/SS) 指数增长，drive 只按 (VDD−VT)^α 的幂律增长，远弱于指数；"VT 越低，flicker noise 越差"却不是直接关系。在 CNF+CMF 模型里，VT 本身不出现在噪声公式中，噪声只取决于陷阱密度和偏置点。真实的噪声差异来自两条间接路径：比较口径（同 VGS 还是同 ID）和降 VT 的工艺手段（dipole、cap 层元素扩散、halo 掺杂）。第三，单位面积的 flicker noise 从 bulk 到 FinFET 总体改善了约一个数量级，nanosheet 与同栅叠层的平面器件大致持平；但单个最小器件的噪声和器件间离散变差了，因为面积缩得比陷阱密度降得快。第四，降噪的一阶旋钮是栅叠层的陷阱密度，其次是 EOT、退火、沟道设计和面积，电路上靠 chopping 和 auto-zero。第五，速率不够时，先定位瓶颈在哪个模块、受哪个指标限制，再按容易、中等、困难三级叠加手段，每一步都要有对应的验证。最后附五个高速与模拟方向的小知识点。</p></div><div class="en" lang="en"><p>This Q&amp;A is for engineers who know logic process integration but are new to analog and high-speed circuits. It first explains what analog circuits are fundamentally after (Q0), then answers six groups of common questions. First, CMOS circuit speed does depend on the ratio of drive current to load capacitance (I/C, the inverse of CV/I), and the comparison must be made at the same Ioff and the same footprint; but CML, amplifiers, pads and long wires each have their own bottleneck, set by gm/C, fT/fmax and RC. Second, "lower VT gives more drive and more leakage" is a direct, quantitative relation: leakage grows exponentially as 10^(−ΔVT/SS), while drive grows only as a power law, (VDD−VT)^α, far weaker than exponential. "Lower VT gives worse flicker noise" is not a direct relation. In the CNF+CMF model, VT itself does not appear in the noise equation; noise depends only on trap density and bias point. The real noise differences come through two indirect paths: the comparison basis (same VGS or same ID) and the process method used to lower VT (dipole, cap-layer element diffusion, halo doping). Third, flicker noise per unit area improved by about an order of magnitude overall from bulk to FinFET, and nanosheet is roughly on par with planar devices that use the same gate stack; but the noise of a single minimum device and the device-to-device spread got worse, because area shrank faster than trap density fell. Fourth, the first-order knob for lower noise is the trap density of the gate stack, followed by EOT, anneal, channel design and area; on the circuit side, chopping and auto-zero do the work. Fifth, when the data rate falls short, first locate which block is the bottleneck and which metric limits it, then stack methods in three tiers (easy, medium, hard), with matching verification at each step. Finally, five short topics on high-speed and analog design are appended.</p></div></div>
 <div class="hero-bottom"><span class="hint"><span class="zh" lang="zh-CN">先看全景表里的一句话答案，再点进对应问题；每个问题先给结论和要点，带 + 的细节按需展开。</span><span class="en" lang="en">Scan the one-line answers in the overview table, then open a question; each starts with the verdict and key points, with + details on demand.</span></span><div class="tools"><button class="btn" type="button" data-expand><span><span class="zh" lang="zh-CN">展开全部细节</span><span class="en" lang="en">Expand all</span></span></button><button class="btn" type="button" data-collapse><span><span class="zh" lang="zh-CN">收起全部</span><span class="en" lang="en">Collapse all</span></span></button><a class="btn" href="../tricks/"><span><span class="zh" lang="zh-CN">技巧页</span><span class="en" lang="en">Tricks</span></span></a><a class="btn primary" href="../"><span><span class="zh" lang="zh-CN">← 回到指南正文</span><span class="en" lang="en">← Back to the guide</span></span></a></div></div></div>
-<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">目录</span><a href="#q0"><small>01</small>全景：先看这张表</a><a href="#q1"><small>02</small>Q0. 模拟电路到底在追求什么？</a><a href="#q2"><small>03</small>Q1. 速度看的是 I/C 比值吗？</a><a href="#q3"><small>04</small>Q2. VT 越低，flicker noise …</a><a href="#q4"><small>05</small>Q3. 从 bulk 到 FinFET 再到 n…</a><a href="#q5"><small>06</small>Q4. 怎么优化 flicker noise？F…</a><a href="#q6"><small>07</small>Q5. 速率不够时怎么提速：容易、中等、困难三级</a><a href="#q7"><small>08</small>Q6. fT、fmax 和 CV/I 各管什么？</a><a href="#q8"><small>09</small>Q7. 数据率对器件提出什么要求？</a><a href="#q9"><small>10</small>Q8. pad、ESD、凸点电容为什么重要？3D…</a><a href="#q10"><small>11</small>Q9. jitter 和噪声是什么关系？</a><a href="#q11"><small>12</small>Q10. 模拟为什么慎用最低 VT 和最短 L？</a><a href="#q12"><small>13</small>Q11. 输出电阻 ro 到底是什么？为什么不是…</a><a href="#q13"><small>14</small>Q12. 用水龙头把 gm、ro、电容和 fT …</a><a href="#q14"><small>15</small>Sources</a><a href="../"><small>←</small>指南正文</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#q0-en"><small>01</small>Overview: start with this table</a><a href="#q1-en"><small>02</small>Q0. What are analog circuits really after?</a><a href="#q2-en"><small>03</small>Q1. Is speed about the I/C ratio?</a><a href="#q3-en"><small>04</small>Q2. Does lower VT make flicker noise worse?</a><a href="#q4-en"><small>05</small>Q3. From bulk to FinFET to nanosheet, does f…</a><a href="#q5-en"><small>06</small>Q4. How to optimize flicker noise? Where are…</a><a href="#q6-en"><small>07</small>Q5. How to speed up when the data rate falls…</a><a href="#q7-en"><small>08</small>Q6. What do fT, fmax and CV/I each govern?</a><a href="#q8-en"><small>09</small>Q7. What does data rate demand of devices?</a><a href="#q9-en"><small>10</small>Q8. Why do pad, ESD and bump capacitance mat…</a><a href="#q10-en"><small>11</small>Q9. How do jitter and noise relate?</a><a href="#q11-en"><small>12</small>Q10. Why is analog cautious with the lowest …</a><a href="#q12-en"><small>13</small>Q11. What exactly is output resistance ro, a…</a><a href="#q13-en"><small>14</small>Q12. Tying gm, ro, capacitance and fT togeth…</a><a href="#q14-en"><small>15</small>Sources</a><a href="../"><small>←</small>The guide</a></div></nav>
+<div class="layout"><nav class="contents" aria-label="Contents"><div class="zh" lang="zh-CN"><span class="label">目录</span><a href="#q0"><small>01</small>全景：先看这张表</a><a href="#q1"><small>02</small>Q0. 模拟电路到底在追求什么？</a><a href="#q2"><small>03</small>Q1. 速度看的是 I/C 比值吗？</a><a href="#q3"><small>04</small>Q2. VT 越低，flicker noise …</a><a href="#q4"><small>05</small>Q3. 从 bulk 到 FinFET 再到 n…</a><a href="#q5"><small>06</small>Q4. 怎么优化 flicker noise？F…</a><a href="#q6"><small>07</small>Q5. 速率不够时怎么提速：容易、中等、困难三级</a><a href="#q7"><small>08</small>Q6. fT、fmax 和 CV/I 各管什么？</a><a href="#q8"><small>09</small>Q7. 数据率对器件提出什么要求？</a><a href="#q9"><small>10</small>Q8. pad、ESD、凸点电容为什么重要？3D…</a><a href="#q10"><small>11</small>Q9. jitter 和噪声是什么关系？</a><a href="#q11"><small>12</small>Q10. 模拟为什么慎用最低 VT 和最短 L？</a><a href="#q12"><small>13</small>Q11. 输出电阻 ro 到底是什么？为什么不是…</a><a href="#q13"><small>14</small>Q12. 用水龙头把 gm、ro、电容和 fT …</a><a href="#q14"><small>15</small>Q13. fT 越高越好吗？gm 的单位是什么？…</a><a href="#q15"><small>16</small>Q14. 用水龙头理解模拟的几大指标：gm/ID…</a><a href="#q16"><small>17</small>Sources</a><a href="../"><small>←</small>指南正文</a></div><div class="en" lang="en"><span class="label">CONTENTS</span><a href="#q0-en"><small>01</small>Overview: start with this table</a><a href="#q1-en"><small>02</small>Q0. What are analog circuits really after?</a><a href="#q2-en"><small>03</small>Q1. Is speed about the I/C ratio?</a><a href="#q3-en"><small>04</small>Q2. Does lower VT make flicker noise worse?</a><a href="#q4-en"><small>05</small>Q3. From bulk to FinFET to nanosheet, does f…</a><a href="#q5-en"><small>06</small>Q4. How to optimize flicker noise? Where are…</a><a href="#q6-en"><small>07</small>Q5. How to speed up when the data rate falls…</a><a href="#q7-en"><small>08</small>Q6. What do fT, fmax and CV/I each govern?</a><a href="#q8-en"><small>09</small>Q7. What does data rate demand of devices?</a><a href="#q9-en"><small>10</small>Q8. Why do pad, ESD and bump capacitance mat…</a><a href="#q10-en"><small>11</small>Q9. How do jitter and noise relate?</a><a href="#q11-en"><small>12</small>Q10. Why is analog cautious with the lowest …</a><a href="#q12-en"><small>13</small>Q11. What exactly is output resistance ro, a…</a><a href="#q13-en"><small>14</small>Q12. Tying gm, ro, capacitance and fT togeth…</a><a href="#q14-en"><small>15</small>Q13. Is higher fT always better? What is the…</a><a href="#q15-en"><small>16</small>Q14. The main analog metrics through the fau…</a><a href="#q16-en"><small>17</small>Sources</a><a href="../"><small>←</small>The guide</a></div></nav>
 <main id="main"><div class="zh" lang="zh-CN"><section class="sec" id="q0"><h2>全景：先看这张表</h2><div class="intro"><p><strong>先按问题找到一句话答案，再跳到对应章节看依据和细节。</strong></p>
 <p>证据标签：【常识】教科书或通用知识；【硅片·研究】研究器件或研究电路的实测；【硅片·量产平台】已发表的量产或准量产工艺数据；【TCAD】器件仿真；【仿真】电路或 SPICE 模型仿真；【厂商】厂商、标准组织的简报或应用笔记；【观点】综述、路线图或行业文章中的判断；【推断】本文自己的推理；【示意】为说明方法而设的示意数字，不是实测。</p>
 <div class="table-scroll" tabindex="0"><table>
@@ -140,6 +140,16 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>怎么用水龙头理解 gm、ro、电容和 fT？</td>
 <td>把手=栅压、水流=电流、出口压力=输出电压；gm 是灵敏度，ro 是龙头有多"硬"，电容是会膨胀的皮管，fT 是控制机构要先灌满；增益看出口压力</td>
 <td>Q12</td>
+</tr>
+<tr>
+<td>fT 越高越好吗？gm 单位、2π 是什么？</td>
+<td>速度电路里越高越好，但它是上限不是开关频率；gm 单位是 A/V（西门子）；gm/C 是角频率，除以 2π 换成赫兹</td>
+<td>Q13</td>
+</tr>
+<tr>
+<td>模拟的几大指标怎么用龙头理解？</td>
+<td>gm/ID 省水的灵敏度，gm/gds 灵敏又硬，fT 控制腔小反应快，噪声是自己会抖，AVT 是同款龙头天生不一样</td>
+<td>Q14</td>
 </tr>
 </tbody>
 </table></div></div></section><section class="sec" id="q1"><h2>Q0. 模拟电路到底在追求什么？</h2><div class="intro"><p><strong>模拟电路追求的不是"放大"本身，而是在有限的功耗和电源下，把一个连续变化的物理信号尽量不失真地传递、放大或转换；增益 gm·Rout 是手段——把高增益放进负反馈里，换来精确、线性、几乎不受器件参数影响的结果。</strong></p>
@@ -1642,7 +1652,104 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <li>够快：带宽够，不被电容拖慢；</li>
 <li>省电。</li>
 </ul>
-<p>也有不是"电压进、电压出"的模拟电路：电流镜和 DAC 输出电流，ADC 输出数字码，PLL 输出时钟，基准输出一个精确的电压。它们的共同目标是一样的：把一个模拟量准确、干净、够快地产生或传递出去。</p></div></details></section><section class="sec" id="q14" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>展开来源列表</summary><div class="sub-body"><ul>
+<p>也有不是"电压进、电压出"的模拟电路：电流镜和 DAC 输出电流，ADC 输出数字码，PLL 输出时钟，基准输出一个精确的电压。它们的共同目标是一样的：把一个模拟量准确、干净、够快地产生或传递出去。</p></div></details></section><section class="sec" id="q14"><h2>Q13. fT 越高越好吗？gm 的单位是什么？公式里为什么有 2π？</h2><div class="intro"><p><strong>在需要速度的电路里，fT 越高越好，但它是龙头能支持的"最快开关频率上限"，不是你开关的频率；fT 高也不等于出口电压大。gm 的单位是 A/V（西门子），是电导而不是电流；gm/C 算出来是角频率（弧度每秒），除以 2π 才换成赫兹。</strong></p>
+<p>要点：</p>
+<ul>
+<li>要先灌满的是"控制腔"（栅电容 Cgg），不是出水的管道；开关越快，力气越多地花在给控制腔充放水上，到 fT 时"花多少、得多少"，电流放大倍数降到 1。</li>
+<li>信号频率 f 远低于 fT 时，器件的电流放大倍数约为 fT/f；实际电路一般只用到 fT 的十分之一左右。</li>
+<li>fT 决定放大倍数在高频还剩多少；低频能放大多少倍由 gm × Rout 决定。</li>
+<li>fT 不是无条件越高越好：最短 L 和高过驱动换来高 fT，代价是增益低、费电、失配和 1/f 噪声变差，所以要"够用"，并在目标 gm/ID 下比较。</li>
+<li>1/(2π·fT) = Cgg/gm 就是"灌满控制腔要多久"：fT = 300 GHz 时约 0.5 ps。</li>
+</ul></div><details class="sub" id="q14-1"><summary>fT 越高越好吗：大方向对，有三处修正</summary><div class="sub-body"><p>【常识】fT 衡量反应有多快：把手开关得越快，龙头还能不能跟上、还有没有放大作用。在需要速度的电路里，fT 当然越高越好。三处要修正：</p>
+<p><strong>要先灌满的是控制腔，不是出水的管道。</strong>栅极像液压阀的控制腔。拧把手其实是往控制腔里推一点水，阀门才会动。慢慢拧时，推进控制腔的水很少，却能控制很大的出水量，放大作用很强。开关越快，力气越多地花在给控制腔反复充水、放水上。快到某个频率，控制要用的水已经和出口多出来的水一样多：出口还有水，但"花多少、得多少"，已经没有放大了。这个频率就是 fT。</p>
+<p><strong>fT 不是你开关的频率，而是这个龙头能支持的上限。</strong>信号频率 f 远低于 fT 时，器件的电流放大倍数约为 fT/f。比如 fT = 300 GHz，在 30 GHz 下约 10 倍，到 300 GHz 只剩 1 倍。所以电路实际一般只用到 fT 的十分之一左右。</p>
+<p><strong>fT 高不等于出口电压大。</strong>能放大多少倍（低频增益）由 gm × Rout 决定；fT 决定的是这个放大倍数随频率升高能撑多久。</p></div></details><details class="sub" id="q14-2"><summary>fT 也不是无条件越高越好</summary><div class="sub-body"><p>【常识】fT 和其他指标互相牵制。用最短的 L、较高的过驱动可以拿到高 fT，但本征增益 gm·ro 变低、更费电（gm/ID 低）；器件小了，失配和 1/f 噪声也更差。所以高速电路（SerDes、射频、时钟）追求高 fT；低频精密电路（基准、传感器读出）宁可牺牲 fT，换省电、高增益和低噪声。准确的说法是：fT 要"够用"，并且要在目标 gm/ID 下比较。</p>
+<p>把"灌满控制腔要多久"写成公式：1/(2π·fT) = Cgg/gm。fT = 300 GHz 时，这个时间约 0.5 ps。</p></div></details><details class="sub" id="q14-3"><summary>gm 的单位：不是电流，是电导</summary><div class="sub-body"><p>【常识】gm = ΔI/ΔVGS，电流除以电压，单位是 A/V，也叫西门子（S），和电阻的倒数同一个单位。所以 gm 叫"跨导"：输入电压和输出电流之间的电导。常见数值是 µS 到 mS，比如 gm = 1 mS 表示栅压变 1 mV，电流变 1 µA。gm/ID 的单位是 S/A，也就是 1/V。</p></div></details><details class="sub" id="q14-4"><summary>为什么要除以 2π</summary><div class="sub-body"><p>【常识】先看单位：gm/C =（A/V）÷（F），电容 F = A·s/V，代进去得到 1/s。但它算出来的是角频率 ω（弧度每秒），不是赫兹（每秒多少圈）。一圈是 2π 弧度，所以 f（Hz）= ω ÷ 2π。就像车轮：知道每秒转多少弧度，要换成每秒多少圈，就得除以 2π。</p>
+<p>为什么一开始算出来的是角频率？因为电容对正弦信号的阻抗是 1/(ωC)，公式里天然用的就是 ω。推导只有三步：</p>
+<ul>
+<li>推栅极的电流（给控制腔充放水）：i_g = ω·Cgg·v_gs</li>
+<li>漏极送出的信号电流：i_d = gm·v_gs</li>
+<li>两者之比 i_d/i_g = gm/(ω·Cgg)；等于 1 时 ω = gm/Cgg，换成赫兹就是 fT = gm/(2π·Cgg)</li>
+</ul>
+<p>【示意】gm = 1 mS，Cgg = 1 fF：ω = 10⁻³ ÷ 10⁻¹⁵ = 10¹² rad/s，fT = 10¹² ÷ 2π ≈ 159 GHz。</p>
+<p>Cgg 是"从栅极看进去的总电容"：栅对沟道的电容，加上栅与源漏之间的交叠和边缘电容。它不是整个器件所有电容的总和，漏端对衬底的电容不算在内。</p></div></details></section><section class="sec" id="q15"><h2>Q14. 用水龙头理解模拟的几大指标：gm/ID、gm/gds、fT、噪声和 AVT</h2><div class="intro"><p><strong>模拟器件的几大指标都能放进同一个龙头：gm/ID 是"省水的灵敏度"，gm/gds 是"灵敏又硬"能给的最大压力放大倍数，fT 是"控制腔小、反应快"，噪声是"同一个龙头自己会随时间抖"，AVT 是"两个同款龙头天生就不一样"。噪声和失配是两回事：一个随时间变，一个固定不变；两者都靠把龙头做大来平均掉。</strong></p>
+<p>要点：</p>
+<ul>
+<li>gm/ID：每消耗一份水（电流，也就是功耗）换来多少灵敏度，相当于油耗。越高越省电，但通常越慢。</li>
+<li>gm/gds（本征增益）：一个龙头单独能做到的最大"拧把手 → 出口压力"倍数，等于灵敏度 × 硬度。长 L 更硬，增益更高。</li>
+<li>fT：阀门灵敏度除以控制腔大小，决定能跟上多快的开关。</li>
+<li>噪声：把手不动，水流也在随机抖。热噪声像均匀的嘶嘶声；1/f 噪声像阀里的沙粒偶尔卡住又松开，频率越低晃得越厉害；RTN 是一颗沙粒在两个位置之间跳。</li>
+<li>AVT：两个设计完全一样的龙头，把手放在同一位置，送水量却不同；σΔVT = AVT/√(WL)，龙头做大 4 倍，差异减半。</li>
+</ul></div><details class="sub" id="q15-1"><summary>一张总表</summary><div class="sub-body"><div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>龙头比方</th>
+<th>越大/越小好</th>
+<th>主要代价或取舍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gm/ID</td>
+<td>每消耗一份水换来多少灵敏度（油耗）</td>
+<td>越大越省电</td>
+<td>越省电，器件越大、越慢（fT 低）</td>
+</tr>
+<tr>
+<td>gm/gds（本征增益）</td>
+<td>灵敏度 × 龙头硬度：单个龙头能给的最大压力放大倍数</td>
+<td>越大越准</td>
+<td>要长 L 或 cascode，占面积、费余量</td>
+</tr>
+<tr>
+<td>fT</td>
+<td>阀门灵敏度 ÷ 控制腔大小：能跟上多快的开关</td>
+<td>够用、越高越快</td>
+<td>短 L、高过驱动换来，代价是增益和效率</td>
+</tr>
+<tr>
+<td>噪声（热噪声、1/f、RTN）</td>
+<td>把手不动，水流自己在抖</td>
+<td>越小越好</td>
+<td>降噪靠大面积、大电流，费面积、费电</td>
+</tr>
+<tr>
+<td>AVT（失配）</td>
+<td>两个同款龙头天生出水不一样</td>
+<td>越小越好</td>
+<td>降失配靠大面积或校准，费面积、拖慢速度</td>
+</tr>
+</tbody>
+</table></div></div></details><details class="sub" id="q15-2"><summary>gm/ID：省水的灵敏度</summary><div class="sub-body"><p>【常识】gm 是"拧一点把手，水流变多少"。但想让龙头更灵敏，最直接的办法是让它本身流更多水，也就是加电流、费电。所以真正有意义的是 gm/ID：每消耗一份水，换来多少灵敏度，就像汽车的油耗。把手只开一条缝（弱反型）时最省水，但要做很大的龙头才有足够的水流，控制腔大，反应慢；开得很大（强反型）时反应快，但费水。模拟电路常用中间（中等反型，gm/ID 约 10–15 S/A）。</p></div></details><details class="sub" id="q15-3"><summary>gm/gds：灵敏又硬，才有大增益</summary><div class="sub-body"><p>【常识】gm/gds = gm·ro，叫本征增益：一个龙头单独能做到的最大"拧把手 → 出口压力"倍数。它需要两样东西同时好：灵敏（gm 大），而且硬（ro 大，下游压力变了送水量不变，见 Q11、Q12）。L 越长，龙头越"硬"，增益越高；先进节点 L 短、DIBL 大，龙头变软，单管增益只有几十，所以要用叠管、cascode、gain boosting 把它补回来（见技巧页）。</p></div></details><details class="sub" id="q15-4"><summary>fT：控制腔小、反应快</summary><div class="sub-body"><p>【常识】fT = gm/(2π·Cgg)：阀门灵敏度除以控制腔要灌多少水（见 Q13）。它决定龙头能跟上多快的开关。和前两项有天然的冲突：想省水（gm/ID 高），龙头要做大，控制腔变大，fT 降低；想硬（长 L），控制腔也变大，fT 也降低。</p></div></details><details class="sub" id="q15-5"><summary>噪声：同一个龙头自己会抖</summary><div class="sub-body"><p>【常识】就算把手一动不动，水流也不是绝对平稳的。这些随机波动就是噪声，按"抖的样子"分三种：</p>
+<ul>
+<li><strong>热噪声：</strong>水流里均匀、细碎的嘶嘶声，各个频率都一样多（白噪声）。来自载流子的热运动，大小大致与 1/gm 相关：gm 越大，折算到把手上的噪声越小。</li>
+<li><strong>1/f 噪声（flicker）：</strong>阀芯里有几颗沙粒，偶尔卡住、又松开，让水流出现慢悠悠的大幅晃动。频率越低，晃得越厉害，所以叫 1/f。沙粒就是栅介质里的陷阱，抓住又放掉载流子。这就是你说的"带频率的噪声"：它在低频最大，高于某个"转角频率"后被热噪声盖过去。</li>
+<li><strong>RTN：</strong>龙头很小时，可能只有一两颗沙粒，水流就在两个值之间来回跳，像电报信号。</li>
+</ul>
+<p>龙头越大，里面的沙粒越多，各自的晃动互相平均，相对波动就越小：1/f 噪声功率大致按 1/(W·L) 下降。所以低噪声的输入管通常做得很大。电路上还可以用 chopping 把低频晃动"搬走"（见 Q4 和技巧页）。</p>
+<p>判断是噪声还是信号，要把输出的抖动除以增益，折算回"相当于有人在轻轻晃把手"，这叫输入参考噪声。它决定能分辨多小的信号。</p></div></details><details class="sub" id="q15-6"><summary>AVT：两个同款龙头天生不一样</summary><div class="sub-body"><p>【常识】模拟电路大量使用"成对"的龙头：差分对的两个输入管、电流镜的两个管子。设计上它们完全一样，实际做出来，把手放在同一位置，两个龙头的出水量却不同。这就是失配。原因是制造上的随机差异：阀芯尺寸差一点，金属栅的晶粒不一样，掺杂原子多几个少几个。</p>
+<p>AVT 衡量这种差异有多大：σΔVT = AVT/√(W·L)。龙头做大 4 倍，差异减半，因为随机差异在大面积上被平均了。失配会变成电路的失调：两个输入一样，输出却不为零。</p>
+<p>噪声和失配的区别：
+| | 噪声 | 失配（AVT） |
+|---|---|---|
+| 对象 | 同一个龙头 | 两个"同款"龙头之间 |
+| 随时间 | 一直在变 | 做出来就固定了 |
+| 表现 | 输出的随机抖动 | 输出的固定偏差（失调） |
+| 怎么减小 | 大面积、大电流、chopping | 大面积、版图对称、校准 |</p>
+<p>两者都随面积按平方根改善，所以"要精度就要面积"。这也是模拟电路面积不随工艺缩小的一个根本原因。</p></div></details><details class="sub" id="q15-7"><summary>几大指标之间的取舍：大龙头和小龙头</summary><div class="sub-body"><p>【常识】把这些指标放在一起，就能看出模拟设计在做什么权衡：</p>
+<ul>
+<li><strong>小龙头（短 L、窄 W、高过驱动）：</strong>反应快（fT 高），省面积；但不够硬（增益低），抖得厉害（噪声大），两个之间差别大（失配大），而且费水（gm/ID 低）。</li>
+<li><strong>大龙头（长 L、宽 W、低过驱动）：</strong>硬（增益高），平稳（噪声小），成对一致（失配小），省水（gm/ID 高）；但控制腔大，反应慢（fT 低），占面积。</li>
+</ul>
+<p>所以不同的电路选不同的龙头：
+| 电路 | 最在意 | 怎么选 |
+|---|---|---|
+| 高速 SerDes、射频 | fT | 短 L、较高过驱动 |
+| 精密运放、基准 | 增益、失配、1/f 噪声 | 长 L、大面积、低过驱动，加 chopping 或校准 |
+| 低功耗传感器读出 | gm/ID、噪声 | 弱或中等反型、大器件 |
+| 电流镜、偏置 | ro、失配 | 长 L 或叠管、大面积、共质心版图 |</p>
+<p>一句话：模拟设计就是在"省水、硬、快、稳、一致"五件事之间，为每个位置挑合适的龙头。</p></div></details></section><section class="sec" id="q16" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>展开来源列表</summary><div class="sub-body"><ul>
 <li><a href="https://arxiv.org/pdf/2512.08388" target="_blank" rel="noopener noreferrer">arXiv 2512.08388：CNF+CMF 低频噪声模型</a></li>
 <li><a href="https://web.mit.edu/klund/www/papers/UNP_noise.pdf" target="_blank" rel="noopener noreferrer">Lundberg, Noise Sources in Bulk CMOS (MIT)</a></li>
 <li><a href="https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf" target="_blank" rel="noopener noreferrer">Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006</a></li>
@@ -1781,6 +1888,16 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <td>How do gm, ro, capacitance and fT map onto a faucet?</td>
 <td>Handle = gate voltage, flow = current, outlet pressure = output voltage; gm is sensitivity, ro is how stiff the faucet is, capacitance is a swelling hose, fT is the control mechanism filling first; gain is measured in outlet pressure</td>
 <td>Q12</td>
+</tr>
+<tr>
+<td>Is higher fT always better? What are gm units and the 2π?</td>
+<td>Higher is better in speed circuits, but it is a limit, not the switching frequency; gm is in A/V (siemens); gm/C is an angular frequency, divide by 2π for hertz</td>
+<td>Q13</td>
+</tr>
+<tr>
+<td>How do the main analog metrics map onto the faucet?</td>
+<td>gm/ID is sensitivity per unit of water, gm/gds sensitive and stiff, fT a small fast control chamber, noise is jitter on its own, AVT is identical faucets coming out different</td>
+<td>Q14</td>
 </tr>
 </tbody>
 </table></div></div></section><section class="sec" id="q1-en"><h2>Q0. What are analog circuits really after?</h2><div class="intro"><p><strong>Analog circuits are not after "amplification" itself. They aim to pass, amplify or convert a continuously varying physical signal with as little distortion as possible, under limited power and supply voltage. Gain gm·Rout is the means: put high gain inside negative feedback, and you get a result that is accurate, linear and almost independent of device parameters.</strong></p>
@@ -3283,7 +3400,104 @@ html{scroll-padding-top:136px}.contents,.gindex{top:142px!important;max-height:c
 <li>Fast enough: enough bandwidth, not slowed by capacitance;</li>
 <li>Power-efficient.</li>
 </ul>
-<p>Some analog circuits are not voltage in, voltage out: mirrors and DACs output current, ADCs output digital codes, PLLs output clocks, references output one precise voltage. Their shared goal is the same: produce or pass on an analog quantity accurately, cleanly and fast enough.</p></div></details></section><section class="sec" id="q14-en" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>Show source list</summary><div class="sub-body"><ul>
+<p>Some analog circuits are not voltage in, voltage out: mirrors and DACs output current, ADCs output digital codes, PLLs output clocks, references output one precise voltage. Their shared goal is the same: produce or pass on an analog quantity accurately, cleanly and fast enough.</p></div></details></section><section class="sec" id="q14-en"><h2>Q13. Is higher fT always better? What is the unit of gm? Why is there a 2π?</h2><div class="intro"><p><strong>In speed-critical circuits, higher fT is better — but fT is the upper limit of how fast the faucet can be switched, not the frequency at which you switch it, and higher fT does not mean a larger output voltage. gm is measured in A/V (siemens): a conductance, not a current. gm/C gives an angular frequency (radians per second); dividing by 2π converts it to hertz.</strong></p>
+<p>Key points:</p>
+<ul>
+<li>What must fill first is the "control chamber" (gate capacitance Cgg), not the water path; the faster you switch, the more effort goes into filling and draining it, and at fT you get out exactly what you put in: current gain falls to 1.</li>
+<li>Well below fT, the device's current gain is about fT/f; real circuits typically use only about a tenth of fT.</li>
+<li>fT sets how much gain remains at high frequency; how much the circuit amplifies at low frequency is set by gm × Rout.</li>
+<li>Higher fT is not free: short L and high overdrive raise fT but cost gain, power efficiency, matching and 1/f noise, so fT should be "enough", compared at the target gm/ID.</li>
+<li>1/(2π·fT) = Cgg/gm is "how long it takes to fill the control chamber": about 0.5 ps at fT = 300 GHz.</li>
+</ul></div><details class="sub" id="q14-en-1"><summary>Is higher fT better: yes in direction, with three corrections</summary><div class="sub-body"><p>[Textbook] fT measures how fast the device responds: the faster you switch the handle, whether the faucet can still keep up and still amplify. In circuits that need speed, higher fT is better. Three corrections:</p>
+<p><strong>What must fill first is the control chamber, not the water path.</strong> The gate is like the control chamber of a hydraulic valve. Turning the handle actually pushes a little water into the control chamber before the valve moves. When you turn slowly, very little water goes into the chamber, yet it controls a large output flow: strong amplification. The faster you switch, the more effort goes into filling and draining the chamber. At some frequency the water needed for control equals the extra water coming out: water still flows, but you get out exactly what you put in, so there is no amplification left. That frequency is fT.</p>
+<p><strong>fT is not the frequency you switch at; it is the limit the faucet can support.</strong> Well below fT, the device's current gain is about fT/f. For example, with fT = 300 GHz the gain is about 10 at 30 GHz and only 1 at 300 GHz. That is why circuits typically use only about a tenth of fT.</p>
+<p><strong>Higher fT does not mean a larger output voltage.</strong> How much the circuit amplifies (low-frequency gain) is set by gm × Rout; fT sets how long that gain holds up as frequency rises.</p></div></details><details class="sub" id="q14-en-2"><summary>Higher fT is not free either</summary><div class="sub-body"><p>[Textbook] fT trades against other metrics. Minimum L and higher overdrive raise fT, but lower intrinsic gain gm·ro and power efficiency (gm/ID), and smaller devices have worse mismatch and 1/f noise. So high-speed circuits (SerDes, RF, clocks) push fT, while low-frequency precision circuits (references, sensor readout) give up fT for efficiency, high gain and low noise. The accurate statement: fT should be "enough", and compared at the target gm/ID.</p>
+<p>Written as a formula, "how long it takes to fill the control chamber" is 1/(2π·fT) = Cgg/gm; at fT = 300 GHz this is about 0.5 ps.</p></div></details><details class="sub" id="q14-en-3"><summary>The unit of gm: a conductance, not a current</summary><div class="sub-body"><p>[Textbook] gm = ΔI/ΔVGS is current divided by voltage, so its unit is A/V, the siemens (S) — the same unit as the inverse of resistance. That is why gm is called transconductance: the conductance between input voltage and output current. Typical values are µS to mS; gm = 1 mS means a 1 mV change in gate voltage changes the current by 1 µA. gm/ID has units of S/A, i.e., 1/V.</p></div></details><details class="sub" id="q14-en-4"><summary>Why divide by 2π</summary><div class="sub-body"><p>[Textbook] Start with units: gm/C = (A/V) ÷ (F), and a farad is A·s/V, so the result is 1/s. But it is an angular frequency ω (radians per second), not hertz (cycles per second). One cycle is 2π radians, so f (Hz) = ω ÷ 2π. It is like a wheel: to go from radians per second to turns per second, divide by 2π.</p>
+<p>Why does it come out as an angular frequency? Because a capacitor's impedance to a sine wave is 1/(ωC), so ω appears naturally. The derivation takes three steps:</p>
+<ul>
+<li>Current pushed into the gate (filling and draining the control chamber): i_g = ω·Cgg·v_gs</li>
+<li>Signal current delivered by the drain: i_d = gm·v_gs</li>
+<li>Their ratio i_d/i_g = gm/(ω·Cgg); setting it to 1 gives ω = gm/Cgg, or in hertz fT = gm/(2π·Cgg)</li>
+</ul>
+<p>[Illustration] gm = 1 mS, Cgg = 1 fF: ω = 10⁻³ ÷ 10⁻¹⁵ = 10¹² rad/s, fT = 10¹² ÷ 2π ≈ 159 GHz.</p>
+<p>Cgg is the total capacitance seen looking into the gate: gate-to-channel plus the overlap and fringe capacitance between gate and source/drain. It is not the sum of every capacitance in the device; drain-to-substrate capacitance is not included.</p></div></details></section><section class="sec" id="q15-en"><h2>Q14. The main analog metrics through the faucet: gm/ID, gm/gds, fT, noise and AVT</h2><div class="intro"><p><strong>All the main analog device metrics fit in the same faucet: gm/ID is "sensitivity per unit of water", gm/gds is the largest pressure gain a sensitive and stiff faucet can give, fT is "a small control chamber that responds fast", noise is "one faucet jittering on its own over time", and AVT is "two identical-model faucets that come out different". Noise and mismatch are different things — one changes with time, the other is fixed — and both are averaged down by making the faucet bigger.</strong></p>
+<p>Key points:</p>
+<ul>
+<li>gm/ID: how much sensitivity each unit of water (current, i.e., power) buys — fuel economy. Higher saves power but is usually slower.</li>
+<li>gm/gds (intrinsic gain): the largest "handle turn → outlet pressure" factor a single faucet can give, equal to sensitivity × stiffness. Longer L is stiffer and gives more gain.</li>
+<li>fT: valve sensitivity divided by control-chamber size; it sets how fast the faucet can follow.</li>
+<li>Noise: the flow jitters even when the handle is still. Thermal noise is an even hiss; 1/f noise is like grains of sand in the valve that catch and release now and then, so the lower the frequency, the bigger the swings; RTN is one grain hopping between two positions.</li>
+<li>AVT: two identically designed faucets with handles in the same position still deliver different flows; σΔVT = AVT/√(WL), so four times the size halves the difference.</li>
+</ul></div><details class="sub" id="q15-en-1"><summary>One summary table</summary><div class="sub-body"><div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Faucet analogy</th>
+<th>Better when</th>
+<th>Main cost or trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gm/ID</td>
+<td>Sensitivity per unit of water (fuel economy)</td>
+<td>Larger saves power</td>
+<td>More efficiency means a bigger, slower device (lower fT)</td>
+</tr>
+<tr>
+<td>gm/gds (intrinsic gain)</td>
+<td>Sensitivity × stiffness: the largest pressure gain one faucet can give</td>
+<td>Larger is more precise</td>
+<td>Needs long L or a cascode: area and headroom</td>
+</tr>
+<tr>
+<td>fT</td>
+<td>Valve sensitivity ÷ control-chamber size: how fast it can follow</td>
+<td>Enough; higher is faster</td>
+<td>Bought with short L and high overdrive, at the cost of gain and efficiency</td>
+</tr>
+<tr>
+<td>Noise (thermal, 1/f, RTN)</td>
+<td>The flow jitters on its own with the handle still</td>
+<td>Smaller</td>
+<td>Reduced with large area and more current: area and power</td>
+</tr>
+<tr>
+<td>AVT (mismatch)</td>
+<td>Two identical-model faucets deliver different flows</td>
+<td>Smaller</td>
+<td>Reduced with large area or calibration: area and speed</td>
+</tr>
+</tbody>
+</table></div></div></details><details class="sub" id="q15-en-2"><summary>gm/ID: sensitivity per unit of water</summary><div class="sub-body"><p>[Textbook] gm is "how much the flow changes for a small turn". But the most direct way to make a faucet more sensitive is to let it carry more water — more current, more power. What really matters is gm/ID: how much sensitivity each unit of water buys, like a car's fuel economy. With the handle barely open (weak inversion) the faucet is most economical, but it must be very large to carry enough flow, so its control chamber is large and it responds slowly; wide open (strong inversion) it responds fast but wastes water. Analog circuits usually sit in between (moderate inversion, gm/ID about 10–15 S/A).</p></div></details><details class="sub" id="q15-en-3"><summary>gm/gds: sensitive and stiff gives large gain</summary><div class="sub-body"><p>[Textbook] gm/gds = gm·ro is the intrinsic gain: the largest "handle turn → outlet pressure" factor a single faucet can give. It needs two things at once: sensitivity (large gm) and stiffness (large ro — the flow does not change when downstream pressure changes; see Q11 and Q12). Longer L makes the faucet stiffer and the gain higher; at advanced nodes short L and large DIBL make the faucet soft, leaving single-device gain at a few tens, which stacking, cascodes and gain boosting then recover (see the tricks page).</p></div></details><details class="sub" id="q15-en-4"><summary>fT: a small control chamber responds fast</summary><div class="sub-body"><p>[Textbook] fT = gm/(2π·Cgg): valve sensitivity divided by how much water the control chamber needs (see Q13). It sets how fast the faucet can follow. It conflicts naturally with the first two: saving water (high gm/ID) needs a bigger faucet with a bigger chamber, lowering fT; stiffness (long L) also enlarges the chamber and lowers fT.</p></div></details><details class="sub" id="q15-en-5"><summary>Noise: one faucet jitters on its own</summary><div class="sub-body"><p>[Textbook] Even with the handle perfectly still, the flow is never perfectly steady. These random fluctuations are noise, and they come in three flavors:</p>
+<ul>
+<li><strong>Thermal noise:</strong> an even, fine hiss in the flow, equally strong at all frequencies (white noise). It comes from the thermal motion of carriers and scales roughly with 1/gm: the larger gm, the smaller the noise referred back to the handle.</li>
+<li><strong>1/f noise (flicker):</strong> a few grains of sand in the valve catch and release now and then, causing slow, large swings in the flow. The lower the frequency, the bigger the swings — hence 1/f. The grains are traps in the gate dielectric capturing and releasing carriers. This is the "noise with a frequency": it is largest at low frequency, and above a "corner frequency" the thermal noise takes over.</li>
+<li><strong>RTN:</strong> in a very small faucet there may be only one or two grains, so the flow hops between two values like a telegraph signal.</li>
+</ul>
+<p>The bigger the faucet, the more grains it holds and the more their swings average out, so the relative fluctuation shrinks: 1/f noise power falls roughly as 1/(W·L). That is why low-noise input devices are usually large. Circuits can also move the slow swings away with chopping (see Q4 and the tricks page).</p>
+<p>To judge noise against a signal, divide the output jitter by the gain and refer it back as "someone gently wiggling the handle" — the input-referred noise. It sets the smallest signal you can resolve.</p></div></details><details class="sub" id="q15-en-6"><summary>AVT: two identical-model faucets come out different</summary><div class="sub-body"><p>[Textbook] Analog circuits use faucets in pairs: the two inputs of a differential pair, the two devices of a current mirror. By design they are identical; as built, with handles in the same position, the two faucets deliver different flows. That is mismatch. It comes from random manufacturing differences: a valve slightly different in size, different metal-gate grains, a few dopant atoms more or less.</p>
+<p>AVT measures how large this difference is: σΔVT = AVT/√(W·L). Four times the size halves the difference, because random differences average out over a larger area. Mismatch becomes circuit offset: equal inputs, yet a non-zero output.</p>
+<p>Noise versus mismatch:
+| | Noise | Mismatch (AVT) |
+|---|---|---|
+| Applies to | One faucet | Two "identical" faucets |
+| Over time | Always changing | Fixed once built |
+| Shows up as | Random jitter at the output | A fixed output error (offset) |
+| Reduced by | Large area, more current, chopping | Large area, symmetric layout, calibration |</p>
+<p>Both improve as the square root of area, so "precision costs area". This is one root reason analog area does not shrink with process nodes.</p></div></details><details class="sub" id="q15-en-7"><summary>Trade-offs among the metrics: big faucets and small faucets</summary><div class="sub-body"><p>[Textbook] Put the metrics together and the trade-offs of analog design become clear:</p>
+<ul>
+<li><strong>Small faucet (short L, narrow W, high overdrive):</strong> responds fast (high fT) and saves area, but it is soft (low gain), jittery (high noise), inconsistent between pairs (high mismatch) and wasteful (low gm/ID).</li>
+<li><strong>Big faucet (long L, wide W, low overdrive):</strong> stiff (high gain), steady (low noise), consistent in pairs (low mismatch) and economical (high gm/ID), but its control chamber is large, so it responds slowly (low fT) and takes area.</li>
+</ul>
+<p>So different circuits pick different faucets:
+| Circuit | Cares most about | How to choose |
+|---|---|---|
+| High-speed SerDes, RF | fT | Short L, higher overdrive |
+| Precision op amps, references | Gain, mismatch, 1/f noise | Long L, large area, low overdrive, plus chopping or calibration |
+| Low-power sensor readout | gm/ID, noise | Weak or moderate inversion, large devices |
+| Current mirrors, bias | ro, mismatch | Long L or stacking, large area, common-centroid layout |</p>
+<p>In one line: analog design picks, for each position, the right faucet among five qualities — economical, stiff, fast, steady and consistent.</p></div></details></section><section class="sec" id="q16-en" data-glossary-skip><h2>Sources</h2><details class="sub"><summary>Show source list</summary><div class="sub-body"><ul>
 <li><a href="https://arxiv.org/pdf/2512.08388" target="_blank" rel="noopener noreferrer">arXiv 2512.08388: CNF+CMF low-frequency noise model</a></li>
 <li><a href="https://web.mit.edu/klund/www/papers/UNP_noise.pdf" target="_blank" rel="noopener noreferrer">Lundberg, Noise Sources in Bulk CMOS (MIT)</a></li>
 <li><a href="https://vlsicad.ucsd.edu/Publications/Conferences/219/c219.pdf" target="_blank" rel="noopener noreferrer">Kahng et al., Impact of Gate-Length Biasing on Threshold-Voltage Selection, ISQED 2006</a></li>

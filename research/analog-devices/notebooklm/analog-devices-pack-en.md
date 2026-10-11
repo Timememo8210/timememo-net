@@ -1045,6 +1045,8 @@ Evidence tags: [Textbook] textbook or general knowledge; [Silicon · research] m
 | Why is analog cautious with the lowest VT and shortest L? | Low gain, large mismatch, high leakage, high 1/f; high-speed paths still use them for speed, then recover with calibration and equalization | Q10 |
 | What exactly is output resistance ro? | The inverse of the slope of the transistor I–V curve at the operating point (a small-signal resistance) — not a circuit resistor and not V/I; gain = gm × Rout | Q11 |
 | How do gm, ro, capacitance and fT map onto a faucet? | Handle = gate voltage, flow = current, outlet pressure = output voltage; gm is sensitivity, ro is how stiff the faucet is, capacitance is a swelling hose, fT is the control mechanism filling first; gain is measured in outlet pressure | Q12 |
+| Is higher fT always better? What are gm units and the 2π? | Higher is better in speed circuits, but it is a limit, not the switching frequency; gm is in A/V (siemens); gm/C is an angular frequency, divide by 2π for hertz | Q13 |
+| How do the main analog metrics map onto the faucet? | gm/ID is sensitivity per unit of water, gm/gds sensitive and stiff, fT a small fast control chamber, noise is jitter on its own, AVT is identical faucets coming out different | Q14 |
 
 ## Q0. What are analog circuits really after?
 
@@ -1931,6 +1933,126 @@ Mirrors are rarely used alone; they sit inside amplifiers, either as bias (deliv
 - Power-efficient.
 
 Some analog circuits are not voltage in, voltage out: mirrors and DACs output current, ADCs output digital codes, PLLs output clocks, references output one precise voltage. Their shared goal is the same: produce or pass on an analog quantity accurately, cleanly and fast enough.
+
+## Q13. Is higher fT always better? What is the unit of gm? Why is there a 2π?
+
+**In speed-critical circuits, higher fT is better — but fT is the upper limit of how fast the faucet can be switched, not the frequency at which you switch it, and higher fT does not mean a larger output voltage. gm is measured in A/V (siemens): a conductance, not a current. gm/C gives an angular frequency (radians per second); dividing by 2π converts it to hertz.**
+
+Key points:
+- What must fill first is the "control chamber" (gate capacitance Cgg), not the water path; the faster you switch, the more effort goes into filling and draining it, and at fT you get out exactly what you put in: current gain falls to 1.
+- Well below fT, the device's current gain is about fT/f; real circuits typically use only about a tenth of fT.
+- fT sets how much gain remains at high frequency; how much the circuit amplifies at low frequency is set by gm × Rout.
+- Higher fT is not free: short L and high overdrive raise fT but cost gain, power efficiency, matching and 1/f noise, so fT should be "enough", compared at the target gm/ID.
+- 1/(2π·fT) = Cgg/gm is "how long it takes to fill the control chamber": about 0.5 ps at fT = 300 GHz.
+
+### Is higher fT better: yes in direction, with three corrections
+
+[Textbook] fT measures how fast the device responds: the faster you switch the handle, whether the faucet can still keep up and still amplify. In circuits that need speed, higher fT is better. Three corrections:
+
+**What must fill first is the control chamber, not the water path.** The gate is like the control chamber of a hydraulic valve. Turning the handle actually pushes a little water into the control chamber before the valve moves. When you turn slowly, very little water goes into the chamber, yet it controls a large output flow: strong amplification. The faster you switch, the more effort goes into filling and draining the chamber. At some frequency the water needed for control equals the extra water coming out: water still flows, but you get out exactly what you put in, so there is no amplification left. That frequency is fT.
+
+**fT is not the frequency you switch at; it is the limit the faucet can support.** Well below fT, the device's current gain is about fT/f. For example, with fT = 300 GHz the gain is about 10 at 30 GHz and only 1 at 300 GHz. That is why circuits typically use only about a tenth of fT.
+
+**Higher fT does not mean a larger output voltage.** How much the circuit amplifies (low-frequency gain) is set by gm × Rout; fT sets how long that gain holds up as frequency rises.
+
+### Higher fT is not free either
+
+[Textbook] fT trades against other metrics. Minimum L and higher overdrive raise fT, but lower intrinsic gain gm·ro and power efficiency (gm/ID), and smaller devices have worse mismatch and 1/f noise. So high-speed circuits (SerDes, RF, clocks) push fT, while low-frequency precision circuits (references, sensor readout) give up fT for efficiency, high gain and low noise. The accurate statement: fT should be "enough", and compared at the target gm/ID.
+
+Written as a formula, "how long it takes to fill the control chamber" is 1/(2π·fT) = Cgg/gm; at fT = 300 GHz this is about 0.5 ps.
+
+### The unit of gm: a conductance, not a current
+
+[Textbook] gm = ΔI/ΔVGS is current divided by voltage, so its unit is A/V, the siemens (S) — the same unit as the inverse of resistance. That is why gm is called transconductance: the conductance between input voltage and output current. Typical values are µS to mS; gm = 1 mS means a 1 mV change in gate voltage changes the current by 1 µA. gm/ID has units of S/A, i.e., 1/V.
+
+### Why divide by 2π
+
+[Textbook] Start with units: gm/C = (A/V) ÷ (F), and a farad is A·s/V, so the result is 1/s. But it is an angular frequency ω (radians per second), not hertz (cycles per second). One cycle is 2π radians, so f (Hz) = ω ÷ 2π. It is like a wheel: to go from radians per second to turns per second, divide by 2π.
+
+Why does it come out as an angular frequency? Because a capacitor's impedance to a sine wave is 1/(ωC), so ω appears naturally. The derivation takes three steps:
+- Current pushed into the gate (filling and draining the control chamber): i_g = ω·Cgg·v_gs
+- Signal current delivered by the drain: i_d = gm·v_gs
+- Their ratio i_d/i_g = gm/(ω·Cgg); setting it to 1 gives ω = gm/Cgg, or in hertz fT = gm/(2π·Cgg)
+
+[Illustration] gm = 1 mS, Cgg = 1 fF: ω = 10⁻³ ÷ 10⁻¹⁵ = 10¹² rad/s, fT = 10¹² ÷ 2π ≈ 159 GHz.
+
+Cgg is the total capacitance seen looking into the gate: gate-to-channel plus the overlap and fringe capacitance between gate and source/drain. It is not the sum of every capacitance in the device; drain-to-substrate capacitance is not included.
+
+## Q14. The main analog metrics through the faucet: gm/ID, gm/gds, fT, noise and AVT
+
+**All the main analog device metrics fit in the same faucet: gm/ID is "sensitivity per unit of water", gm/gds is the largest pressure gain a sensitive and stiff faucet can give, fT is "a small control chamber that responds fast", noise is "one faucet jittering on its own over time", and AVT is "two identical-model faucets that come out different". Noise and mismatch are different things — one changes with time, the other is fixed — and both are averaged down by making the faucet bigger.**
+
+Key points:
+- gm/ID: how much sensitivity each unit of water (current, i.e., power) buys — fuel economy. Higher saves power but is usually slower.
+- gm/gds (intrinsic gain): the largest "handle turn → outlet pressure" factor a single faucet can give, equal to sensitivity × stiffness. Longer L is stiffer and gives more gain.
+- fT: valve sensitivity divided by control-chamber size; it sets how fast the faucet can follow.
+- Noise: the flow jitters even when the handle is still. Thermal noise is an even hiss; 1/f noise is like grains of sand in the valve that catch and release now and then, so the lower the frequency, the bigger the swings; RTN is one grain hopping between two positions.
+- AVT: two identically designed faucets with handles in the same position still deliver different flows; σΔVT = AVT/√(WL), so four times the size halves the difference.
+
+### One summary table
+
+| Metric | Faucet analogy | Better when | Main cost or trade-off |
+|---|---|---|---|
+| gm/ID | Sensitivity per unit of water (fuel economy) | Larger saves power | More efficiency means a bigger, slower device (lower fT) |
+| gm/gds (intrinsic gain) | Sensitivity × stiffness: the largest pressure gain one faucet can give | Larger is more precise | Needs long L or a cascode: area and headroom |
+| fT | Valve sensitivity ÷ control-chamber size: how fast it can follow | Enough; higher is faster | Bought with short L and high overdrive, at the cost of gain and efficiency |
+| Noise (thermal, 1/f, RTN) | The flow jitters on its own with the handle still | Smaller | Reduced with large area and more current: area and power |
+| AVT (mismatch) | Two identical-model faucets deliver different flows | Smaller | Reduced with large area or calibration: area and speed |
+
+### gm/ID: sensitivity per unit of water
+
+[Textbook] gm is "how much the flow changes for a small turn". But the most direct way to make a faucet more sensitive is to let it carry more water — more current, more power. What really matters is gm/ID: how much sensitivity each unit of water buys, like a car's fuel economy. With the handle barely open (weak inversion) the faucet is most economical, but it must be very large to carry enough flow, so its control chamber is large and it responds slowly; wide open (strong inversion) it responds fast but wastes water. Analog circuits usually sit in between (moderate inversion, gm/ID about 10–15 S/A).
+
+### gm/gds: sensitive and stiff gives large gain
+
+[Textbook] gm/gds = gm·ro is the intrinsic gain: the largest "handle turn → outlet pressure" factor a single faucet can give. It needs two things at once: sensitivity (large gm) and stiffness (large ro — the flow does not change when downstream pressure changes; see Q11 and Q12). Longer L makes the faucet stiffer and the gain higher; at advanced nodes short L and large DIBL make the faucet soft, leaving single-device gain at a few tens, which stacking, cascodes and gain boosting then recover (see the tricks page).
+
+### fT: a small control chamber responds fast
+
+[Textbook] fT = gm/(2π·Cgg): valve sensitivity divided by how much water the control chamber needs (see Q13). It sets how fast the faucet can follow. It conflicts naturally with the first two: saving water (high gm/ID) needs a bigger faucet with a bigger chamber, lowering fT; stiffness (long L) also enlarges the chamber and lowers fT.
+
+### Noise: one faucet jitters on its own
+
+[Textbook] Even with the handle perfectly still, the flow is never perfectly steady. These random fluctuations are noise, and they come in three flavors:
+- **Thermal noise:** an even, fine hiss in the flow, equally strong at all frequencies (white noise). It comes from the thermal motion of carriers and scales roughly with 1/gm: the larger gm, the smaller the noise referred back to the handle.
+- **1/f noise (flicker):** a few grains of sand in the valve catch and release now and then, causing slow, large swings in the flow. The lower the frequency, the bigger the swings — hence 1/f. The grains are traps in the gate dielectric capturing and releasing carriers. This is the "noise with a frequency": it is largest at low frequency, and above a "corner frequency" the thermal noise takes over.
+- **RTN:** in a very small faucet there may be only one or two grains, so the flow hops between two values like a telegraph signal.
+
+The bigger the faucet, the more grains it holds and the more their swings average out, so the relative fluctuation shrinks: 1/f noise power falls roughly as 1/(W·L). That is why low-noise input devices are usually large. Circuits can also move the slow swings away with chopping (see Q4 and the tricks page).
+
+To judge noise against a signal, divide the output jitter by the gain and refer it back as "someone gently wiggling the handle" — the input-referred noise. It sets the smallest signal you can resolve.
+
+### AVT: two identical-model faucets come out different
+
+[Textbook] Analog circuits use faucets in pairs: the two inputs of a differential pair, the two devices of a current mirror. By design they are identical; as built, with handles in the same position, the two faucets deliver different flows. That is mismatch. It comes from random manufacturing differences: a valve slightly different in size, different metal-gate grains, a few dopant atoms more or less.
+
+AVT measures how large this difference is: σΔVT = AVT/√(W·L). Four times the size halves the difference, because random differences average out over a larger area. Mismatch becomes circuit offset: equal inputs, yet a non-zero output.
+
+Noise versus mismatch:
+| | Noise | Mismatch (AVT) |
+|---|---|---|
+| Applies to | One faucet | Two "identical" faucets |
+| Over time | Always changing | Fixed once built |
+| Shows up as | Random jitter at the output | A fixed output error (offset) |
+| Reduced by | Large area, more current, chopping | Large area, symmetric layout, calibration |
+
+Both improve as the square root of area, so "precision costs area". This is one root reason analog area does not shrink with process nodes.
+
+### Trade-offs among the metrics: big faucets and small faucets
+
+[Textbook] Put the metrics together and the trade-offs of analog design become clear:
+- **Small faucet (short L, narrow W, high overdrive):** responds fast (high fT) and saves area, but it is soft (low gain), jittery (high noise), inconsistent between pairs (high mismatch) and wasteful (low gm/ID).
+- **Big faucet (long L, wide W, low overdrive):** stiff (high gain), steady (low noise), consistent in pairs (low mismatch) and economical (high gm/ID), but its control chamber is large, so it responds slowly (low fT) and takes area.
+
+So different circuits pick different faucets:
+| Circuit | Cares most about | How to choose |
+|---|---|---|
+| High-speed SerDes, RF | fT | Short L, higher overdrive |
+| Precision op amps, references | Gain, mismatch, 1/f noise | Long L, large area, low overdrive, plus chopping or calibration |
+| Low-power sensor readout | gm/ID, noise | Weak or moderate inversion, large devices |
+| Current mirrors, bias | ro, mismatch | Long L or stacking, large area, common-centroid layout |
+
+In one line: analog design picks, for each position, the right faucet among five qualities — economical, stiff, fast, steady and consistent.
 
 ## Sources
 
