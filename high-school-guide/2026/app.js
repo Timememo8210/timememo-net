@@ -9,7 +9,7 @@
       element.hidden = school !== 'all' && !element.dataset.school.split(' ').includes(school);
     });
     document.body.classList.toggle('single-school',school !== 'all');
-    document.querySelector('#filter-status').textContent = school === 'all' ? '正在查看五校全部资料 · 点击学校名称可单独查看' : `正在查看 ${names[school]} · 选择“五校全部”恢复对照`;
+    document.querySelector('#filter-status').textContent = school === 'all' ? '全部 5 校' : names[school];
     if (updateUrl) {
       const url = new URL(location.href);
       if (school === 'all') url.searchParams.delete('school');
