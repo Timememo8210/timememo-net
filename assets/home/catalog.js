@@ -1,5 +1,19 @@
 window.HOME_CATALOG = [
   {
+    "url": "/high-school-guide/2026/",
+    "category": "learning",
+    "title": {
+      "zh": "波特兰高中五校实查",
+      "en": "Five Portland High Schools · 2026"
+    },
+    "description": {
+      "zh": "Jesuit 与 WVA 重点：GPA、入学考试、校车与大学去向。",
+      "en": "Jesuit and WVA in focus: grading, admissions, transport and college outcomes."
+    },
+    "updated": "2026-10-18",
+    "private": false
+  },
+  {
     "url": "/ai-learning/",
     "category": "learning",
     "title": { "zh": "AI 学习知识库", "en": "AI Learning Library" },
