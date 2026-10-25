@@ -1,0 +1,31 @@
+半导体技术知识 / Semiconductor Knowledge
+
+Published route: https://timememo.net/semiconductor-knowledge/
+Original archive: ?archive=1
+
+Content model
+- data/pages/IMG_*.json: one editable bilingual record per source image.
+- data/library.json: categories, chapter order, citations, source caveats and all page records used by the website.
+- originals/: unchanged source files. Never overwrite with a retouched image.
+- data/manifest.json: original sequence, dimensions and SHA-256 checksums.
+- data/ocr/: machine first-pass OCR for audit only; reviewed bilingual page records are authoritative for website text.
+- /search/index.json: public site-wide full-text search index. Exclude private and gated pages.
+
+Adding a batch
+1. Export original images without modification, retain filenames and saved order, calculate SHA-256 and detect duplicates.
+2. Inspect each image. Transcribe all substantive text and diagram labels; translate into English. Preserve formulas, units and conditions. Mark unreadable text; never invent it.
+3. Give each page a stable ID, source filename and chapter position. Map the chapter to a broad category; use cross-topic tags for shared processes.
+4. Add page JSONs, originals and manifest entries; update the aggregate library and search index. Keep existing IDs and links stable.
+5. Check source fidelity and translations, all source hashes, counts, desktop/mobile rendering, search, and original-image links before publication.
+6. Commit/push through the existing timememo-net GitHub Pages workflow. Verify deployment and served data.
+
+Browser edits
+Edit page saves in that browser only. Export JSON preserves changes as a file. To publish an edit, replace the page record, update the matching record in data/library.json and rebuild its search entry. Do not treat browser-local editing as an authenticated server CMS.
+
+Initial batch working files
+/Users/m5pro/Codex_m5pro/semiconductor-knowledge/2026-10-25/
+Initial builder
+/Users/m5pro/Codex_m5pro/semiconductor-knowledge/build_library.py
+
+Fidelity
+Article figures use complete, unchanged source images, without redrawing curves or resampling source files. Text and translations are separate selectable HTML. Source concerns are separate visible notes. Some source watermarks overlap technical content; the complete original is retained to avoid information loss.

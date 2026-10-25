@@ -1,0 +1,89 @@
+{
+  "id": "IMG_7704",
+  "source": "IMG_7704.JPG",
+  "title": {
+    "zh": "噪声与寄生：隔离效果要按频段看",
+    "en": "Noise and parasitics: evaluate isolation by frequency band"
+  },
+  "subtitle": {
+    "zh": "衬底导电、结电容、阱阻抗与供电耦合",
+    "en": "Substrate conduction, junction capacitance, well impedance and supply coupling"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "核心判断与耦合图",
+        "en": "Core conclusion and coupling diagram"
+      },
+      "body": [
+        {
+          "zh": "深N阱可改变衬底噪声传播路径，但隔离效果仍受结寄生、偏置网络和工作频段影响。图中数字/开关电路为干扰源，模拟/高精度电路为敏感节点；P型衬底为连续硅体。红色实线路径表示衬底电阻Rsub的导电耦合；蓝色虚线表示PN结电容耦合，包含DNW—P型衬底与局部P阱—DNW的Cⱼ。DNW偏置经Zbias及N⁺接触连接，局部P阱具有P⁺接触。",
+          "en": "Deep N-well changes substrate-noise propagation, but junction parasitics, bias networks and operating frequency still determine isolation. The diagram shows a digital/switching interferer and an analog/high-precision sensitive node in continuous P-type silicon. Red solid arrows denote conduction through substrate resistance Rsub; blue dashed arrows denote capacitive coupling through DNW–substrate and local-P-well–DNW junction capacitances Cⱼ. DNW bias connects through Zbias and an N⁺ contact; local P-well has a P⁺ contact."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "流程与关键控制",
+        "en": "Flow and controls"
+      },
+      "body": [
+        {
+          "zh": "在混合信号设计与验证阶段比较目标干扰源到敏感节点的耦合。确定干扰源与敏感节点 → 建立衬底/阱寄生网络 → 加入偏置与互连 → 扫描频率和工作状态 → 用测试结构校准。控制干扰频谱、阱结电容、偏置路径阻抗、接触/护环与布局。",
+          "en": "During mixed-signal design and verification, compare coupling from the target interferer to sensitive nodes. Identify both → build substrate/well parasitic network → add bias/interconnect → sweep frequency/operating state → calibrate using test structures. Control interference spectrum, well-junction capacitance, bias-path impedance and contact/guard-ring layout."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "权衡与失效",
+        "en": "Trade-offs and failures"
+      },
+      "body": [
+        {
+          "zh": "改变隔离区域和接地安排会同时改变导电与电容耦合；隔离放噪声源侧还是敏感侧，需要结合电路验证。常见失效：局部体电位波动、模拟杂散或噪声增大、DNW偏置电源耦入干扰。",
+          "en": "Changing isolation and grounding alters both conductive and capacitive coupling. Whether to isolate the source or the sensitive side requires circuit verification. Failures include local body-potential fluctuations, increased analog spurs/noise and interference coupled through the DNW bias supply."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "量测、影响与边界",
+        "en": "Measurements, effects and boundaries"
+      },
+      "body": [
+        {
+          "zh": "向规定节点注入已知小信号扰动，量测耦合传递或敏感节点噪声，与模型对照定位主路径。影响混合信号精度、噪声裕量及版图安排。DNW只处理部分耦合路径，不能替代供电、金属布线与封装回流分析；不承诺固定dB收益，也不预设包住模拟电路总是最好。",
+          "en": "Inject a known small-signal perturbation at specified nodes, measure transfer or sensitive-node noise and compare with models to locate dominant paths. This affects mixed-signal accuracy, noise margin and layout. DNW handles only some paths, not supply, metal-routing or package-return analysis. It promises no fixed dB benefit and enclosing the analog block is not assumed always best."
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "原图右下方水印与页底图文区域重叠；保留完整图表时不能仅靠矩形裁剪无损去除，未猜补被覆盖像素。 / The lower-right watermark overlaps the lower-page content region; a rectangular crop cannot remove it while preserving every diagram. Covered pixels have not been reconstructed."
+    ]
+  },
+  "figureCrop": {
+    "top": 0.11,
+    "bottom": 0.99
+  },
+  "chapter": "wells",
+  "topic": "Deep N-well 与 N-well",
+  "category": "feol",
+  "tags": [
+    "器件 Device",
+    "掺杂 Doping",
+    "Triple well",
+    "衬底噪声 Substrate noise",
+    "Latch-up"
+  ],
+  "chapterPage": 7,
+  "chapterCount": 9,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "d75308dfbf6400dc57ca072cfa9d4593c1dea4cf14db2ed0d8a507559a8f6e5a"
+}

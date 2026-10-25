@@ -1,5 +1,19 @@
 window.HOME_CATALOG = [
   {
+    "url": "/semiconductor-knowledge/",
+    "category": "research",
+    "title": {
+      "zh": "半导体技术知识",
+      "en": "Semiconductor Knowledge"
+    },
+    "description": {
+      "zh": "基础工艺、前后段整合、器件、3D IC与量测。91页双语正文、原图对照与全文搜索。",
+      "en": "Processes, integration, devices, 3D IC and metrology. 91 bilingual pages, original references and full-text search."
+    },
+    "updated": "2026-10-25",
+    "private": false
+  },
+  {
     "url": "/high-school-guide/2026/",
     "category": "learning",
     "title": {
@@ -16,8 +30,14 @@ window.HOME_CATALOG = [
   {
     "url": "/ai-learning/",
     "category": "learning",
-    "title": { "zh": "AI 学习知识库", "en": "AI Learning Library" },
-    "description": { "zh": "七个频道的中文精华，按博主、主题和日期搜索。", "en": "Chinese AI insights, searchable by creator, topic and date." },
+    "title": {
+      "zh": "AI 学习知识库",
+      "en": "AI Learning Library"
+    },
+    "description": {
+      "zh": "七个频道的中文精华，按博主、主题和日期搜索。",
+      "en": "Chinese AI insights, searchable by creator, topic and date."
+    },
     "updated": "2026-10-11",
     "private": false
   },

@@ -1,0 +1,95 @@
+{
+  "id": "IMG_7703",
+  "source": "IMG_7703.JPG",
+  "title": {
+    "zh": "偏置接触：阱电位必须接对",
+    "en": "Bias contacts: connect well potentials correctly"
+  },
+  "subtitle": {
+    "zh": "N阱、局部P阱、深N阱与衬底节点",
+    "en": "N-well, local P-well, deep N-well and substrate nodes"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "结构与PN结网络",
+        "en": "Structure and PN-junction network"
+      },
+      "body": [
+        {
+          "zh": "N阱与Deep N-well节点通过N⁺接触连接；局部P阱与P型衬底节点分别通过P⁺接触连接。图示硅表面下为连续硅材料。示意等效网络包括N阱/Deep N-well—P型衬底PN结，以及局部P阱—Deep N-well PN结，均有电容。",
+          "en": "N-well and deep N-well nodes connect through N⁺ contacts; local P-well and P-substrate nodes each connect through P⁺ contacts. Silicon beneath the surface is continuous material. The schematic equivalent network includes capacitive N-well/deep-N-well–P-substrate and local-P-well–deep-N-well PN junctions."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "核心判断与连接流程",
+        "en": "Core conclusion and connection flow"
+      },
+      "body": [
+        {
+          "zh": "形成隔离结构后，仍需为各阱提供合适接触与偏置，并核对所有相关PN结的工作范围。电路—版图整合阶段将体区、深N阱及衬底接到指定偏置网络：列出阱/衬底节点 → 指定允许偏置 → 配置tap与金属 → 检查启动和关断状态 → 验证连接及工作范围。",
+          "en": "After forming isolation, provide appropriate contacts/bias to each well and check every relevant PN-junction operating range. During circuit/layout integration, connect bodies, deep N-wells and substrate to specified bias networks: list nodes → assign allowed bias → configure taps and metal → check startup/shutdown → verify connectivity and operating ranges."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "控制、权衡与失效",
+        "en": "Controls, trade-offs and failures"
+      },
+      "body": [
+        {
+          "zh": "控制节点电位关系、接触与阱路径阻抗、tap分布、供电时序和瞬态电压。增加接触可减小局部阱电位波动但占面积；允许独立引出体端不代表可以任意施加体偏置。失效包括阱悬空、接错电源域、局部压降过大、瞬态造成非预期PN结正向导通。",
+          "en": "Control node potentials, contact/well-path impedance, tap distribution, power sequencing and transient voltages. More contacts reduce local potential variation but consume area; an independently accessible body does not permit arbitrary body bias. Failures include floating wells, wrong power domains, excessive local drop and transient unintended forward-biased PN junctions."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "量测、影响与边界",
+        "en": "Measurements, effects and boundaries"
+      },
+      "body": [
+        {
+          "zh": "用LVS、ERC及偏置仿真检查连接；硅后验证体端漏电和供电瞬态，异常后复核接触与偏置网络。影响体效应、噪声耦合与可靠性。偏置值按PDK和器件模型确定；某些平台同一DNW内的N阱经DNW连通，不能仅凭版图分开就认为电位独立。",
+          "en": "Use LVS, ERC and bias simulations to check connectivity; verify body leakage and supply transients after fabrication, revisiting contacts/bias networks if abnormal. This affects body effect, noise coupling and reliability. Bias values follow the PDK/device model. In some platforms, N-wells inside one DNW connect through it; separate layout shapes do not prove independent potentials."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "zh": "PN结等效网络按原图示意保留，仅表达节点之间存在PN结及结电容，不应当作可直接仿真的完整等效电路。",
+      "en": "The original PN-junction network is retained as a conceptual illustration of junctions and capacitance between nodes, not a complete simulation-ready equivalent circuit."
+    }
+  ],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "原图右下方水印与页底图文区域重叠；保留完整图表时不能仅靠矩形裁剪无损去除，未猜补被覆盖像素。 / The lower-right watermark overlaps the lower-page content region; a rectangular crop cannot remove it while preserving every diagram. Covered pixels have not been reconstructed.",
+      "原图本身的概念或标注疑点已在notes中逐项说明，不能把原图视作已校正技术图。 / Source conceptual or labeling concerns are itemized in notes; the source is not a corrected technical diagram."
+    ]
+  },
+  "figureCrop": {
+    "top": 0.125,
+    "bottom": 0.99
+  },
+  "chapter": "wells",
+  "topic": "Deep N-well 与 N-well",
+  "category": "feol",
+  "tags": [
+    "器件 Device",
+    "掺杂 Doping",
+    "Triple well",
+    "衬底噪声 Substrate noise",
+    "Latch-up"
+  ],
+  "chapterPage": 6,
+  "chapterCount": 9,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "8679456a7330bccf323cea9c2fb74de01489e78a72093c9b6baa6f479e919119"
+}

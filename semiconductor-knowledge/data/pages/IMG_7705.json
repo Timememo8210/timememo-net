@@ -1,0 +1,85 @@
+{
+  "id": "IMG_7705",
+  "source": "IMG_7705.JPG",
+  "title": {
+    "zh": "闩锁与可靠性：深N阱不能包办",
+    "en": "Latch-up and reliability: deep N-well is not sufficient"
+  },
+  "subtitle": {
+    "zh": "寄生反馈、载流子注入、护环与接触",
+    "en": "Parasitic feedback, carrier injection, guard rings and contacts"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "结构与三种失效机理",
+        "en": "Structure and three failure mechanisms"
+      },
+      "body": [
+        {
+          "zh": "图示异常电流注入、P阱内NMOS与寄生NPN、N阱内PMOS与寄生PNP、阱电阻、衬底电阻和寄生正反馈路径。NPN集电极为N阱，PNP集电极为P衬底。P阱、N阱、Deep N-well及衬底接触偏置按PDK，护环按规则连接；寄生路径随结构变化，DNW不能完全切断。",
+          "en": "The diagram shows abnormal current injection, NMOS/parasitic NPN in P-well, PMOS/parasitic PNP in N-well, well/substrate resistance and parasitic positive feedback. The NPN collector is N-well and PNP collector P-substrate. Bias P-well, N-well, DNW and substrate contacts per PDK, and connect guard rings per rules. Parasitic paths vary with structure and DNW does not fully interrupt them."
+        },
+        {
+          "zh": "闩锁由寄生器件正反馈触发，可能产生持续异常电流与局部发热。ESD是静电放电导致的大电流注入，可能触发闩锁或损伤器件。结击穿由PN结反向偏置过高引起，是不同失效机理。",
+          "en": "Latch-up is triggered by parasitic positive feedback and can produce sustained abnormal current and local heating. ESD injects large current from electrostatic discharge and can trigger latch-up or damage. Junction breakdown results from excessive reverse PN bias and is a different mechanism."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "核心判断与验证流程",
+        "en": "Core conclusion and verification flow"
+      },
+      "body": [
+        {
+          "zh": "闩锁与寄生器件、电阻路径和触发条件有关；采用深N阱后仍需执行适用的接触、间距、护环及可靠性要求。在版图签核与硅后鉴定阶段：识别可能注入源 → 检查接触/护环/间距 → 分析偏置及寄生路径 → 按规范施加应力并监测 → 异常隔离及根因分析。",
+          "en": "Latch-up depends on parasitic devices, resistive paths and triggering. Deep N-well does not remove applicable contact, spacing, guard-ring and reliability requirements. At layout signoff/post-silicon qualification: identify injection sources → check contacts/rings/spacing → analyze bias/parasitic paths → apply specified stress and monitor → isolate anomalies and analyze root causes."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "控制、权衡与量测",
+        "en": "Controls, trade-offs and measurements"
+      },
+      "body": [
+        {
+          "zh": "控制注入位置与条件、阱/衬底路径电阻、护环及tap分布、供电和温度。增加接触、间距或护环占面积，有效性仍取决于其他连接及实际载流子收集路径。常见失效为持续异常电流、局部发热、应力后漏电增加或功能失效。",
+          "en": "Control injection location/conditions, well/substrate-path resistance, guard-ring/tap distribution, supply and temperature. Extra contacts, spacing or rings consume area and work only in conjunction with other connections and actual carrier-collection paths. Failures include sustained abnormal current, heating, post-stress leakage or functional failure."
+        },
+        {
+          "zh": "按规定鉴定条件监测应力期间与之后的供电电流、漏电和功能，结合失效分析定位寄生路径；不能仅凭电流突增认定闩锁。影响可靠性放行及异常条件下功能保持。DNW不是“免闩锁”证明，闩锁、ESD和结击穿需分别验证。",
+          "en": "Monitor supply current, leakage and function during/after stress under specified qualification conditions; use failure analysis to locate paths. A current spike alone does not establish latch-up. This affects reliability release and function under abnormal conditions. DNW does not certify latch-up immunity; verify latch-up, ESD and junction breakdown separately."
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "原图右下方水印与页底图文区域重叠；保留完整图表时不能仅靠矩形裁剪无损去除，未猜补被覆盖像素。 / The lower-right watermark overlaps the lower-page content region; a rectangular crop cannot remove it while preserving every diagram. Covered pixels have not been reconstructed."
+    ]
+  },
+  "figureCrop": {
+    "top": 0.12,
+    "bottom": 0.99
+  },
+  "chapter": "wells",
+  "topic": "Deep N-well 与 N-well",
+  "category": "feol",
+  "tags": [
+    "器件 Device",
+    "掺杂 Doping",
+    "Triple well",
+    "衬底噪声 Substrate noise",
+    "Latch-up"
+  ],
+  "chapterPage": 8,
+  "chapterCount": 9,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "5b87cfe3a81c0b85d7c244c8e078a9e61388cec965f537a80fbe0899ce44f058"
+}

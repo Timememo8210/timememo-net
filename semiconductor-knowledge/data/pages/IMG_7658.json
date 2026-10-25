@@ -1,0 +1,141 @@
+{
+  "id": "IMG_7658",
+  "source": "IMG_7658.JPG",
+  "title": {
+    "zh": "异常诊断：Vth 漂移不只看金属",
+    "en": "Diagnosis: Vth drift is not solely a metal issue"
+  },
+  "subtitle": {
+    "zh": "均值偏移 / 片内分布 / 局部变异 / 时间漂移",
+    "en": "Mean shifts / within-wafer distribution / local variation / time drift"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "01 V_FB 与 Vth 全片同向偏移",
+        "en": "01 Wafer-wide V_FB and Vth shifts"
+      },
+      "body": [
+        {
+          "zh": "同一片晶圆上，V_FB 与 Vth 整体向高或向低偏移。优先检查 WFM 成分与厚度、退火、界面偶极。示意堆栈为 WFM/高 k 介质/界面层/硅衬底；直方图以蓝色表示 V_FB、橙色表示 Vth。",
+          "en": "V_FB and Vth shift together higher or lower across a wafer. First check WFM composition/thickness, annealing, and interface dipoles. Stack: WFM/high-k/interfacial layer/Si; blue histogram denotes V_FB and orange denotes Vth."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "02 片内或器件间离散增大",
+        "en": "02 Increased spatial or device variation"
+      },
+      "body": [
+        {
+          "zh": "同片不同位置或不同器件间，Vth 分布变宽、出现双峰等。优先检查膜层连续性、金属晶粒取向、局部缺失、图形尺寸。片内热图颜色从蓝色低值到红色高值。",
+          "en": "Vth broadens or becomes bimodal across positions/devices on the same wafer. First check film continuity, metal-grain orientation, local missing material, and pattern dimensions. The wafer map runs blue-low to red-high."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "03 C–V 漂移或迟滞明显",
+        "en": "03 C–V shift or hysteresis"
+      },
+      "body": [
+        {
+          "zh": "多次扫描出现 C–V 曲线漂移或迟滞，或随测试历史变化。优先检查固定电荷（Q_f）、氧空位（V_O）、界面态（D_it）、测试历史。图中区分初次与后续扫描。",
+          "en": "Repeated scans show C–V shifts or hysteresis, or depend on test history. First check fixed charge Q_f, oxygen vacancies V_O, interface states D_it, and test history. The figure distinguishes initial and later scans."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "04 Vth 漂移伴随 SS 或迁移率变化",
+        "en": "04 Vth shifts with SS or mobility changes"
+      },
+      "body": [
+        {
+          "zh": "Vth 变化同时，SS 变差或迁移率 μ 下降，提示沟道/界面问题。优先检查沟道、界面损伤、器件结构；图示界面损伤、沟道散射增强与器件结构影响（S、D）。",
+          "en": "Vth change accompanied by worse SS or reduced mobility μ points to channel/interface issues. First check channel, interface damage, and device structure; schematics show interface damage, increased channel scattering, and source/drain structure effects."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "05 空气暴露后表面量测变化",
+        "en": "05 Surface measurements change after air exposure"
+      },
+      "body": [
+        {
+          "zh": "样品暴露空气后，表面功函数或 Vth 发生变化。优先检查吸附、原生氧化、参考探针漂移。吸附图中标有 H₂O 与 O₂。",
+          "en": "Surface work function or Vth changes after air exposure. First check adsorption, native oxidation, and reference-probe drift. Adsorbates shown are H₂O and O₂."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "06 首次出现节点与 07 核心判断",
+        "en": "06 First occurrence and 07 judgment"
+      },
+      "body": [
+        {
+          "zh": "结合流程定位异常首次出现的环节：WFM 沉积 → 选择性去除/保留 → 填充 → 退火 → MOSCAP 电学量测 → 器件电学量测。Vth 异常是一种器件表现，需要沿栅堆栈、介质和沟道分支定位根因。",
+          "en": "Locate where the anomaly first appears: WFM deposition → selective removal/retention → fill → anneal → MOSCAP electrical measurement → device electrical measurement. Vth abnormality is a device symptom; trace gate-stack, dielectric, and channel branches to find its root cause."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "08 标签、09 反馈、10 处置",
+        "en": "08 Labels, 09 feedback, 10 actions"
+      },
+      "body": [
+        {
+          "zh": "常见标签：n–p 失配、晶圆边缘漂移、双峰分布、C–V 迟滞、退火前后反向变化。量测反馈：C–V 与 I–V、V_FB–Vth 分布、XPS、TEM-EDS、KPFM、晶圆图。",
+          "en": "Common labels: n–p mismatch, wafer-edge drift, bimodal distribution, C–V hysteresis, and opposite shifts before/after annealing. Feedback: C–V and I–V, V_FB–Vth distributions, XPS, TEM-EDS, KPFM, and wafer maps."
+        },
+        {
+          "zh": "处置动作：复测 → Hold → C–V 与 I–V 对照 → 材料/界面分析 → 分片验证。",
+          "en": "Actions: remeasure → hold → compare C–V and I–V → analyze materials/interfaces → validate splits."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "11 提醒",
+        "en": "11 Reminder"
+      },
+      "body": [
+        {
+          "zh": "未区分 EWF 与介质电荷前，不直接回调单一 WFM 配方。",
+          "en": "Do not directly retune a single WFM recipe before separating EWF and dielectric-charge effects."
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "figureCrop": {
+    "top": 0.13,
+    "bottom": 1
+  },
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "页末水印与实质文字或图示区域重叠；figureCrop保留完整图表，未猜测补画遮挡区域。"
+    ]
+  },
+  "chapter": "work-function",
+  "topic": "功函数",
+  "category": "devices",
+  "tags": [
+    "FEOL",
+    "MOL",
+    "栅堆栈 Gate stack",
+    "接触 Contact",
+    "阈值电压 Vth"
+  ],
+  "chapterPage": 7,
+  "chapterCount": 8,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "4d9a3ec9e96918399c6ae0a56b9f77ab067b6acfd6ef7fa595df660649e38e1d"
+}

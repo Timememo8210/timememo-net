@@ -1,0 +1,101 @@
+{
+  "id": "IMG_7667",
+  "source": "IMG_7667.JPG",
+  "title": {
+    "zh": "整合影响：规则线网还不是最终图形",
+    "en": "Integration: a regular grid is not the final pattern"
+  },
+  "subtitle": {
+    "zh": "Cut/Block / Line End / EPE / 图形转移",
+    "en": "Cut/block / line end / EPE / pattern transfer"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "01 整合流程",
+        "en": "01 Integration flow"
+      },
+      "body": [
+        {
+          "zh": "A：SADP 生成连续等距 Spacer 的规则密集线网。B：通过 Cut/Block 删除多余线段或定义线端。C：得到断开的线段和受控线端，并转移到硬掩膜或目标层。Cut/Block 负责图形编辑，不负责产生倍频。",
+          "en": "A: SADP forms a dense regular grid of continuous, equally spaced spacers. B: cut/block removes unwanted segments or defines line ends. C: disconnected segments and controlled ends transfer to hard mask/target. Cut/block edits the pattern; it does not create density doubling."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "02 关键控制",
+        "en": "02 Key controls"
+      },
+      "body": [
+        {
+          "zh": "Cut CD 与 Block CD：满足删除效果与线端定义需求。Cut/Block overlay：控制与前层对准偏差。Line-End Bias：保证线端位置与形貌。下层形貌与图形转移：考虑下层形貌影响，保证正确转移到硬掩膜/目标层。",
+          "en": "Cut/block CD must satisfy removal and line-end definition. Cut/block overlay controls alignment to prior layers. Line-end bias controls end position/profile. Underlying topography and transfer must support correct hard-mask/target replication."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "03 取舍与 04 风险",
+        "en": "03 Trade-offs and 04 risks"
+      },
+      "body": [
+        {
+          "zh": "规则线网与自对准关键边，需要与二维复杂度、Cut 数量、EPE 和设计限制权衡。漏切：应切未切，残留连接。过切：切除过多导致线段缺失。线端回缩：线端后退、尺寸偏小。桥连：相邻线段异常连接。Cut 残留：去除不完全，影响后续工艺。最终 CD 偏差：尺寸偏大或偏小。",
+          "en": "Balance regular grids/self-aligned critical edges against 2D complexity, cut count, EPE, and design restrictions. Missed cuts leave connections; overcuts remove segments; end pullback shortens ends; bridges connect neighbors; incomplete cut removal leaves residue affecting later processing; final-CD bias produces oversized/undersized patterns."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "05 判断与 06 反馈",
+        "en": "05 Judgment and 06 feedback"
+      },
+      "body": [
+        {
+          "zh": "关键边自对准不会消除 Cut/Block 与前层对准误差。量测 Cut/Block overlay、Tip-to-Tip、Line End、最终硬掩膜 CD、缺陷。反馈动作：图谱对齐 → 相关性判断 → 分片验证。",
+          "en": "Self-aligned critical edges do not eliminate cut/block-to-prior-layer overlay error. Measure cut/block overlay, tip-to-tip, line ends, final hard-mask CD, and defects. Actions: align maps → assess correlations → validate splits."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "07 边界说明",
+        "en": "07 Scope"
+      },
+      "body": [
+        {
+          "zh": "Cut/Block 曝光次数、插入顺序和材料体系随设计与整合方案变化。",
+          "en": "Cut/block exposure count, sequence, and materials depend on design and integration scheme."
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "figureCrop": {
+    "top": 0.15,
+    "bottom": 1
+  },
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "页末水印与实质文字或图示区域重叠；figureCrop保留完整图表，未猜测补画遮挡区域。"
+    ]
+  },
+  "chapter": "sadp",
+  "topic": "SADP",
+  "category": "fundamentals",
+  "tags": [
+    "FEOL",
+    "BEOL",
+    "自对准 Self-aligned",
+    "侧墙 Spacer",
+    "整合 Integration"
+  ],
+  "chapterPage": 8,
+  "chapterCount": 9,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "c66990352f0950e2009a196f0aad734c9ae35be9dd8029b4edf5f7db6717342c"
+}

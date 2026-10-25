@@ -1,0 +1,138 @@
+{
+  "id": "IMG_7679",
+  "source": "IMG_7679.JPG",
+  "title": {
+    "zh": "一张图看懂 VDMOS",
+    "en": "VDMOS at a glance"
+  },
+  "subtitle": {
+    "zh": "双扩散工艺 → 器件机理 → 功率开关",
+    "en": "Double diffusion → device mechanism → power switching"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "适用结构",
+        "en": "Structure covered"
+      },
+      "body": [
+        {
+          "zh": "传统硅基 N 沟道、平面栅结构。栅极控制表面沟道，主导电路径穿过芯片厚度。",
+          "en": "Conventional silicon N-channel planar-gate VDMOS: the gate controls a surface channel and the main conduction path crosses the chip thickness."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "从工艺看结构形成",
+        "en": "How processing forms the structure"
+      },
+      "body": [
+        {
+          "zh": "1. 衬底与外延：N⁺ 衬底低阻导电，N⁻ 漂移区轻掺杂并支撑耐压。2. 栅氧与栅极：SiO₂ 氧化层绝缘，多晶硅栅极施加电场。3. P 体区形成：注入与扩散形成体区。4. N⁺ 源区形成：两种扩散轮廓共同定义沟道。5. 接触与金属：正面源—体短接，背面漏极；金属分别标 S、D。",
+          "en": "1. Substrate/epitaxy: N⁺ substrate gives low-resistance conduction; lightly doped N⁻ drift region supports voltage. 2. Gate oxide/gate: SiO₂ insulates and polysilicon gate applies field. 3. Form P-body by implantation/diffusion. 4. Form N⁺ source; two diffusion profiles jointly define the channel. 5. Contacts/metal: short source to body on top, drain on back; metal labels S/D."
+        },
+        {
+          "zh": "这是代表性流程，实际顺序随工艺平台变化。工艺反馈：外延厚度与掺杂、结深与片阻、栅氧厚度。",
+          "en": "This is a representative flow; actual sequence depends on platform. Process feedback: epitaxial thickness/doping, junction depth/sheet resistance, gate-oxide thickness."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "各区域作用",
+        "en": "Roles of each region"
+      },
+      "body": [
+        {
+          "zh": "栅极 G：电场控制沟道。栅氧：隔开栅与硅。N⁺ 源区：电子入口。P 体区：沟道形成区。源极 S：连接源区与体区。反型沟道：电子通路。JFET 区：导电路径收窄。N⁻ 漂移区：支撑耐压。N⁺ 衬底：低阻导电基础。漏极 D：背面电极。",
+          "en": "Gate G controls channel electrostatically; oxide separates gate and Si. N⁺ source is the electron entry; P-body hosts the channel; source S connects source/body. The inversion channel carries electrons; the JFET region narrows the path; N⁻ drift supports voltage; N⁺ substrate provides low-resistance conduction; drain D is the rear electrode."
+        },
+        {
+          "zh": "橙色箭头表示电子从两侧流入，再向下至漏极。表面形成沟道，内部承担耐压，背面连接漏极。",
+          "en": "Orange arrows show electrons entering from both sides and then moving downward to the drain. The channel forms at the surface, the interior supports voltage, and the drain connects at the rear."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "导通与关断",
+        "en": "On and off states"
+      },
+      "body": [
+        {
+          "zh": "导通：足够的正栅源电压形成反型沟道，路径为 N⁺ 源区 → 沟道 → JFET 区 → 漂移区 → 漏极。Vth 仅代表开始形成沟道，不等于充分导通。",
+          "en": "On: sufficient positive gate–source voltage forms an inversion channel; path: N⁺ source → channel → JFET region → drift → drain. Vth marks channel onset, not full enhancement."
+        },
+        {
+          "zh": "关断：沟道消失，体区—漂移区结反偏，耗尽区主要向轻掺杂 N⁻ 漂移区扩展；边缘终端管理电场，避免提前击穿。漂移区更厚、掺杂更低，通常耐压提高，导通电阻也增加。",
+          "en": "Off: channel disappears, body–drift junction is reverse biased, depletion expands mainly into lightly doped N⁻ drift. Edge termination manages field to prevent premature breakdown. Thicker/lower-doped drift usually increases voltage capability and on-resistance."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "性能取舍与电性反馈",
+        "en": "Performance trade-offs and feedback"
+      },
+      "body": [
+        {
+          "zh": "R_DS(on) ≈ 沟道电阻 + 积累区电阻 + JFET 区电阻 + 漂移区电阻 + 衬底及接触电阻。导通损耗 ≈ I²R_DS(on)；开关过程电压与电流重叠产生损耗。原图还提示电阻、电容与栅电荷同时受到影响，该条开头小字待复核。",
+          "en": "R_DS(on) ≈ channel + accumulation + JFET + drift + substrate/contact resistances. Conduction loss ≈ I²R_DS(on); voltage/current overlap causes switching loss. The source also notes simultaneous effects on resistance, capacitance, and gate charge; the opening small-print words of that item require verification."
+        },
+        {
+          "zh": "电性反馈：Vth、指定栅压与温度下的 R_DS(on)、击穿电压、漏电电流、栅电荷 Q_g。",
+          "en": "Electrical feedback: Vth, R_DS(on) at specified gate voltage/temperature, breakdown voltage, leakage current, gate charge Q_g."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "寄生效应与用途",
+        "en": "Parasitics and applications"
+      },
+      "body": [
+        {
+          "zh": "体二极管位于源侧阳极与漏侧阴极之间，由 P 体区—N⁻ 漂移区结形成，需关注反向恢复。N⁺ 源区—P 体区—N⁻ 漂移区可形成寄生 NPN，分别对应发射极、基极、集电极；源—体短接有助于抑制触发。",
+          "en": "The body diode has its anode at source and cathode at drain, formed by the P-body/N⁻ drift junction; consider reverse recovery. N⁺ source/P-body/N⁻ drift forms a parasitic NPN emitter/base/collector; source–body shorting helps suppress triggering."
+        },
+        {
+          "zh": "驱动器根据控制信号控制栅极 G，VDMOS 通过 D–S 通路开关负载电流。图示负载为电机、灯等，电源正端经负载到 D，S 接电源负端。用途：电机控制、灯光调节、开关电源。",
+          "en": "A driver applies control signals to gate G; VDMOS switches load current through D–S. In the diagram the positive supply feeds a motor/lamp load then D, with S tied to negative supply. Uses: motor control, lighting control, switching power supplies."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "zh": "原图左下“性能为什么需要取舍”最后一项的小字开头无法可靠辨认，请对照原图。此处仅转录可确定的“同时影响电阻、电容与栅电荷”，未推测缺失字样。",
+      "en": "The opening small-print words of the final performance-trade-off item at lower left cannot be read reliably; consult the original. Only the legible phrase “simultaneously affects resistance, capacitance, and gate charge” is transcribed; missing words have not been inferred."
+    }
+  ],
+  "figureCrop": {
+    "top": 0.12,
+    "bottom": 1
+  },
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "页末水印与实质文字或图示区域重叠；figureCrop保留完整图表，未猜测补画遮挡区域。",
+      "左下性能取舍最后一项开头小字无法可靠辨认；确定后半句为同时影响电阻、电容与栅电荷。"
+    ]
+  },
+  "chapter": "vdmos",
+  "topic": "VDMOS",
+  "category": "devices",
+  "tags": [
+    "FEOL",
+    "垂直器件 Vertical device",
+    "MOSFET",
+    "漂移区 Drift region"
+  ],
+  "chapterPage": 1,
+  "chapterCount": 1,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "2ae9addc3f5ba71ec4d9ae9f31b7e188527aeb7c76b1eb8ce6a27ea59360bac9"
+}

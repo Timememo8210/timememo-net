@@ -1,0 +1,89 @@
+{
+  "id": "IMG_7699",
+  "source": "IMG_7699.JPG",
+  "title": {
+    "zh": "结构定位：先分清体区与隔离",
+    "en": "Structure: distinguish body regions from isolation first"
+  },
+  "subtitle": {
+    "zh": "P型衬底、N阱、局部P阱与器件位置",
+    "en": "P substrate, N-well, local P-well and device placement"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "结构图与核心判断",
+        "en": "Structure and core conclusion"
+      },
+      "body": [
+        {
+          "zh": "常见体硅CMOS中，N-well常用于PMOS体区；Deep N-well可帮助隔离局部P-well，二者可以配合使用。PMOS位于N阱，具P⁺源极、栅极、P⁺漏极，N⁺阱接触接高电位。NMOS位于局部P阱，具N⁺源极、栅极、N⁺漏极，P⁺阱接触接低电位；外围深N阱用于隔离，其N⁺深阱接触接高电位。全局衬底为P型。结构为示意，非比例图。",
+          "en": "In common bulk CMOS, N-well often provides the PMOS body, while deep N-well can isolate a local P-well; the two can be used together. PMOS in N-well has P⁺ source/drain, a gate and an N⁺ well contact at high potential. NMOS in local P-well has N⁺ source/drain, a gate and a P⁺ well contact at low potential; the enclosing deep N-well provides isolation and has an N⁺ contact at high potential. The global substrate is P-type. The diagram is not to scale."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "流程位置与辨认",
+        "en": "Process stage and identification"
+      },
+      "body": [
+        {
+          "zh": "器件与平台选择阶段先确定晶体管体区，再定义隔离需求。流程：确认衬底类型 → 找源漏与体区 → 标出N阱/P阱 → 判断是否有深N阱 → 核对器件及体端模型。控制衬底类型、器件体区、隔离边界与体端连接。",
+          "en": "During device/platform selection, determine transistor bodies before defining isolation needs. Identify substrate type → find source/drain and body → label N/P wells → determine whether a deep N-well exists → verify device and body-terminal models. Control substrate type, body region, isolation boundary and body connection."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "权衡与常见失效",
+        "en": "Trade-offs and common failures"
+      },
+      "body": [
+        {
+          "zh": "增加隔离结构支持更独立的体区管理，也增加版图空间与寄生网络。常见错误是把NMOS直接画在N型体区、选错器件模型、把局部P阱与全局衬底误当成同一节点。",
+          "en": "Additional isolation enables more independent body management but increases layout area and parasitic networks. Common errors are placing NMOS directly in an N-type body, choosing the wrong model, or treating local P-well and global substrate as the same node."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "量测、影响与边界",
+        "en": "Measurements, effects and boundaries"
+      },
+      "body": [
+        {
+          "zh": "设计端核对提取网络与模型端口；硅后比较体端相关I–V与漏电，异常时复核结构和连接。结构选择决定成阱整合、接触布局与偏置验证要求。本页限于常见P型衬底体硅CMOS，不能将同名DNW直接推广到所有高压、传感器或SOI结构。",
+          "en": "Verify extracted networks and model ports in design; compare body-related I–V and leakage after fabrication and revisit structures/connections if abnormal. Structure choice determines well integration, contact layout and bias verification. This page covers common P-substrate bulk CMOS; the term DNW must not be generalized to all high-voltage, sensor or SOI structures."
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "原图右下方水印与页底图文区域重叠；保留完整图表时不能仅靠矩形裁剪无损去除，未猜补被覆盖像素。 / The lower-right watermark overlaps the lower-page content region; a rectangular crop cannot remove it while preserving every diagram. Covered pixels have not been reconstructed."
+    ]
+  },
+  "figureCrop": {
+    "top": 0.125,
+    "bottom": 0.99
+  },
+  "chapter": "wells",
+  "topic": "Deep N-well 与 N-well",
+  "category": "feol",
+  "tags": [
+    "器件 Device",
+    "掺杂 Doping",
+    "Triple well",
+    "衬底噪声 Substrate noise",
+    "Latch-up"
+  ],
+  "chapterPage": 2,
+  "chapterCount": 9,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "2a3aa7237a2f65cce9f685131f38f2e3b248a99aad7e8a8a614b220fa5e51117"
+}

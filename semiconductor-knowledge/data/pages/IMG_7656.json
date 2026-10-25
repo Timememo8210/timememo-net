@@ -1,0 +1,102 @@
+{
+  "id": "IMG_7656",
+  "source": "IMG_7656.JPG",
+  "title": {
+    "zh": "栅极作用：先影响平带，再参与决定 Vth",
+    "en": "Gate effects: flat-band voltage and then Vth"
+  },
+  "subtitle": {
+    "zh": "Φ_MS / V_FB / 氧化层电荷 / Vth",
+    "en": "Φ_MS / V_FB / oxide charge / Vth"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "01 栅极与能带示意",
+        "en": "01 Gate and band diagram"
+      },
+      "body": [
+        {
+          "zh": "金属栅有效功函数与半导体功函数的差值，决定平带电压。堆栈为金属栅（Φ_M,eff）、High-k 或氧化层（厚度 t_ox、电容 C_ox）、半导体 Si（Φ_S）；能带标出 E_vac、E_F、E_C、E_V。功函数差 Φ_MS = Φ_M,eff − Φ_S。",
+          "en": "The difference between effective metal-gate and semiconductor work functions determines flat-band voltage. Stack: metal gate (Φ_M,eff), high-k/oxide (thickness t_ox, capacitance C_ox), and Si semiconductor (Φ_S). Band labels: E_vac, E_F, E_C, E_V. Φ_MS = Φ_M,eff − Φ_S."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "02 因果链与 03 关键公式",
+        "en": "02 Causal chain and 03 equations"
+      },
+      "body": [
+        {
+          "zh": "栅极与半导体功函数差 → 平带电压 V_FB（受栅、氧化层电荷影响）→ 阈值电压 Vth（还受沟道、C_ox、界面/固定电荷、器件结构影响）→ 器件电流 I_on/I_off。",
+          "en": "Gate–semiconductor work-function difference → V_FB (also affected by gate/oxide charge) → Vth (also affected by channel, C_ox, interface/fixed charge, and device structure) → device I_on/I_off."
+        },
+        {
+          "zh": "Φ_MS = Φ_M,eff − Φ_S；V_FB ≈ (Φ_M,eff − Φ_S)/q − Q_eff/C_ox。Vth 同时受沟道、C_ox、界面与固定电荷、器件结构影响。",
+          "en": "Φ_MS = Φ_M,eff − Φ_S; V_FB ≈ (Φ_M,eff − Φ_S)/q − Q_eff/C_ox. Vth also depends on channel, C_ox, interface/fixed charge, and device structure."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "04 曲线与 05 极性边界",
+        "en": "04 Curves and 05 polarity limits"
+      },
+      "body": [
+        {
+          "zh": "MOSCAP C–V 图示 V_FB 左移/右移；器件 I_d–V_g 图示 Vth 左移/右移，电流标度为 10⁻³、10⁻⁶、10⁻⁹。nFET 与 pFET 需要不同方向的 EWF 调节，不能把“功函数越高，Vth 一定越高”概括所有情况。",
+          "en": "MOSCAP C–V illustrates left/right V_FB shifts; device I_d–V_g illustrates left/right Vth shifts with current ticks 10⁻³, 10⁻⁶, 10⁻⁹. nFET and pFET require different directions of EWF tuning; “higher work function always means higher Vth” is not universal."
+        },
+        {
+          "zh": "nFET（NMOS）通常需要较低的 Φ_M,eff 以降低 Vth，易形成 n 型沟道；pFET（PMOS）通常需要较高的 Φ_M,eff 以降低 |Vth|，易形成 p 型沟道。",
+          "en": "nFET/NMOS usually needs lower Φ_M,eff to reduce Vth and facilitate an n-channel; pFET/PMOS usually needs higher Φ_M,eff to reduce |Vth| and facilitate a p-channel."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "06 量测反馈与 07 核心判断",
+        "en": "06 Feedback and 07 judgment"
+      },
+      "body": [
+        {
+          "zh": "量测 MOSCAP C–V、V_FB、器件 I_d–V_g、Vth、n–p 分布。通过 C–V 与 I–V 对照，区分 EWF 与介质电荷贡献。有效功函数是 Vth 的重要输入，但不是唯一决定项。下游影响包括 I_on、I_off、静态功耗、速度与噪声容限。",
+          "en": "Measure MOSCAP C–V, V_FB, device I_d–V_g, Vth, and n–p distributions. Compare C–V with I–V to separate EWF and dielectric-charge contributions. EWF is an important input to Vth but not its sole determinant. Downstream effects include I_on, I_off, static power, speed, and noise margin."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "zh": "原图“差值，决定平带电压”为原文措辞；同页公式也包含氧化层有效电荷项 Q_eff/C_ox，应结合公式理解，不能忽略该项。",
+      "en": "“The difference determines flat-band voltage” preserves the source wording. The equation on the same page also includes the effective oxide-charge term Q_eff/C_ox; that term must not be neglected."
+    }
+  ],
+  "figureCrop": {
+    "top": 0.13,
+    "bottom": 1
+  },
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "页末水印与实质文字或图示区域重叠；figureCrop保留完整图表，未猜测补画遮挡区域。"
+    ]
+  },
+  "chapter": "work-function",
+  "topic": "功函数",
+  "category": "devices",
+  "tags": [
+    "FEOL",
+    "MOL",
+    "栅堆栈 Gate stack",
+    "接触 Contact",
+    "阈值电压 Vth"
+  ],
+  "chapterPage": 5,
+  "chapterCount": 8,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "b2d47f6bd9fec9ef3bb6b5144c36d01c8c8cce902074cece1cd78b25deac2d36"
+}

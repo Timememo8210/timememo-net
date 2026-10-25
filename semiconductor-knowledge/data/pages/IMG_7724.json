@@ -1,0 +1,107 @@
+{
+  "id": "IMG_7724",
+  "source": "IMG_7724.JPG",
+  "title": {
+    "zh": "工艺选择：先找主要反射界面",
+    "en": "Process selection: identify the dominant reflecting interface"
+  },
+  "subtitle": {
+    "zh": "衬底反射 / 胶面反射 / 浸没保护 / 图形转移",
+    "en": "Substrate reflection / resist-surface reflection / immersion protection / transfer"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "核心结论与四路决策",
+        "en": "Core conclusion and four-way choice"
+      },
+      "body": [
+        {
+          "zh": "按主反射来源与集成负担选BARC、TARC、组合或不加ARC。下层复杂膜堆反射强而胶上较弱：优先BARC。胶上表面/浸没界面关键、胶下较弱：优先TARC/Topcoat。上下反射均强、相互干涉显著：组合BARC+TARC。现有膜堆已有效控制反射或新增集成负担大：可不加额外ARC。图中分别标入射光、上下界面反射、浸没液、PR及衬底/下层膜堆。",
+          "en": "Choose BARC, TARC, both or no added ARC by dominant reflection and integration burden. Strong lower-stack reflection: prefer BARC. Dominant upper/immersion interface: prefer TARC/topcoat. Strong upper/lower reflection and interference: combine them. Already-controlled reflection or excessive added burden: no extra ARC. Diagrams label incident light, upper/lower reflection, immersion liquid, PR and lower stack/substrate."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "工艺选择流程",
+        "en": "Selection flow"
+      },
+      "body": [
+        {
+          "zh": "明确波长与光学条件（i-line、DUV、193i、EUV，干式/浸没，NA与偏振）→ 建立含所有功能层的完整膜堆和窗口 → 分析各界面反射及主干涉源 → 扫描ARC参数并仿真容差 → 检查涂布均匀、显影窗口、刻蚀选择比及后续兼容 → FEM与缺陷验证光学、成像和风险。",
+          "en": "Define wavelength/conditions (i-line, DUV, 193i, EUV; dry/immersion; NA/polarization) → build full functional stack/window → analyze reflections/dominant interference → scan ARC parameters/tolerance → check coating, development, selectivity and compatibility → verify optics, imaging and defects using FEM/testing."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "四项控制与耦合权衡",
+        "en": "Four controls and trade-offs"
+      },
+      "body": [
+        {
+          "zh": "控制n/k与膜厚窗口、衬底多层反射、PR厚度预算和显影/刻蚀兼容。PR厚度须满足分辨率与成像、匹配Topcoat并避免过厚问题；去除干净、选择比合适、不增新缺陷。新增ARC可扩大窗口与容差，也增加成本、缺陷机会、复杂度和后续耦合。",
+          "en": "Control n/k/thickness window, multilayer substrate reflection, PR thickness budget and develop/etch compatibility. PR thickness must satisfy resolution/imaging, match topcoat and avoid excessive-thickness issues. Ensure clean removal, appropriate selectivity and no new defects. Added ARC may improve window/tolerance but adds cost, defects, complexity and downstream coupling."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "风险与验证",
+        "en": "Risks and verification"
+      },
+      "body": [
+        {
+          "zh": "主反射界面误判导致方案错、抑制差；仿真实测不符可能是材料参数或工艺波动；BARC难开口导致残留、CD偏差；TARC难去除导致残留污染。用反射率比较方案，膜厚/n/k确认稳定性，FEM分析成像/强度，CDU评估CD与窗口，缺陷图查表面图形，刻蚀后截面验证转移、残留与损伤。",
+          "en": "Wrong dominant-interface identification gives poor ARC choice/suppression. Simulation mismatch may reflect material parameters or process variation. Hard BARC opening causes residue/CD shift; hard TARC removal causes contamination. Compare reflectance, verify thickness/n/k stability, analyze FEM imaging/intensity, assess CDU/window, map defects and inspect post-etch transfer/residue/damage."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "曝光体系边界：原图概括",
+        "en": "Exposure-system boundaries: source overview"
+      },
+      "body": [
+        {
+          "zh": "原图概括：i-line反射相对易控，通常以BARC为主，可不加TARC；DUV反射更强，常需BARC或TARC并优化胶膜；193i关注浸没界面，常用TARC/Topcoat并组合BARC；多层胶干涉复杂，需考虑各层匹配；EUV反射机理不同，不沿用传统ARC方案，依赖吸收与图形设计。具体策略随波长、胶结构和集成要求变化。",
+          "en": "The source summarizes i-line as relatively easier to control, often BARC-led with optional TARC; DUV as stronger-reflection and needing ARC/resist optimization; 193i as immersion-interface-sensitive with topcoat/TARC and BARC combinations; multilayer resist as requiring complex layer matching; and EUV as a different reflection regime that does not simply reuse traditional ARC approaches. Actual strategy depends on wavelength, resist structure and integration."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "zh": "底部各曝光体系为原图定性概括，并非对所有材料与节点的通用配方；EUV等体系不能直接套用前面的可见/DUV示意堆栈。",
+      "en": "The bottom exposure-system comparisons are qualitative source summaries, not universal recipes for all materials/nodes. EUV and other systems must not directly inherit the earlier visible/DUV schematic stacks."
+    }
+  ],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "原图右下方水印与页底图文区域重叠；保留完整图表时不能仅靠矩形裁剪无损去除，未猜补被覆盖像素。 / The lower-right watermark overlaps the lower-page content region; a rectangular crop cannot remove it while preserving every diagram. Covered pixels have not been reconstructed.",
+      "原图本身的概念或标注疑点已在notes中逐项说明，不能把原图视作已校正技术图。 / Source conceptual or labeling concerns are itemized in notes; the source is not a corrected technical diagram."
+    ]
+  },
+  "figureCrop": {
+    "top": 0.145,
+    "bottom": 0.99
+  },
+  "chapter": "arc",
+  "topic": "BARC 与 TARC",
+  "category": "fundamentals",
+  "tags": [
+    "FEOL",
+    "BEOL",
+    "抗反射 ARC",
+    "光刻 Lithography",
+    "图形转移 Pattern transfer"
+  ],
+  "chapterPage": 9,
+  "chapterCount": 9,
+  "width": 1086,
+  "height": 1448,
+  "sha256": "e67cd47fb7b0782b2501ae05df9a51472cb692ae10f185811c48c434f910385c"
+}
