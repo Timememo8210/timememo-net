@@ -85,5 +85,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "d75308dfbf6400dc57ca072cfa9d4593c1dea4cf14db2ed0d8a507559a8f6e5a"
+  "sha256": "d75308dfbf6400dc57ca072cfa9d4593c1dea4cf14db2ed0d8a507559a8f6e5a",
+  "diagramText": {
+    "zh": "06\n噪声与寄生：隔离效果要按频段看\n衬底导电、结电容、阱阻抗与供电耦合。\n干扰源\n（数字/开关电路）\n敏感节点\n（模拟/高精度电路）\nDNW\n（深N阱）\nP+\nP-well\n（局部）\nCⱼ：DNW—P型衬底\nDNW偏置\nZbias\nN+\nCⱼ：局部P阱—DNW\nP型衬底（连续硅体）\n核心判断\n深N阱可改变衬底噪声传播\n路径，但隔离效果仍受结寄生、\n偏置网络与工作频段影响。\n关键控制\n•干扰频谱\n• 阱结电容\n•偏置路径阻抗\n• 接触/护环与布局\n量测反馈：传递/噪声/频段\n向规定节点注入已知小信号扰动，\n测耦合传递或敏感节点噪声，\n并与模型对照定位主路径。\nRsub\n（衬底电阻）\n导电路径（衬底电阻）\n电容耦合路径（PN结电容）\n流程位置与评估流程\n流程位置：混合信号设计与验证阶段，比较目标干扰源\n到敏感节点的耦合。\n评估流程：\n确定干扰源\n与敏感节点\n建立衬底/阱\n寄生网络\n加入偏置\n及互连\n扫描频率\n和工作状态\n用测试结构\n校准\n耦合权衡\n常见失效\n改变隔离区域和接地安排，\n会同时改变导电与电容耦合；\n隔离放在噪声源侧还是敏感侧，\n需要结合电路验证。\n• 局部体电位波动\n• 模拟杂散或噪声增大\n• DNW偏置电源把干扰\n耦合进来。\n下游影响\n影响混合信号电路的\n精度、噪声裕量及\n版图安排。\n边界条件\nDNW只处理部分耦合路径，\n不能替代供电、金属布线与\n封装回流分析；不承诺固定\ndB收益，也不预设包住模拟\n电路总是最好。",
+    "en": "06\nNoise and parasitics: evaluate isolation by frequency band\nSubstrate conduction, junction capacitance, well impedance and supply coupling.\nInterference source\n(Digital / switching circuit)\nSensitive node\n(Analog / high-precision circuit)\nDNW\n(Deep N-well)\nP+\nP-well\n(Local)\nCⱼ: DNW–P substrate\nDNW bias\nZbias\nN+\nCⱼ: local P-well–DNW\nP substrate (continuous silicon)\nCore conclusion\nDeep N-well can alter substrate-noise propagation\npaths, but isolation still depends on junction parasitics,\nbias networks and operating frequency.\nKey controls\n• Interference spectrum\n• Well-junction capacitance\n• Bias-path impedance\n• Contacts / guard rings and layout\nMeasurement feedback: transfer / noise / frequency band\nInject a known small-signal disturbance at specified nodes,\nmeasure coupling transfer or sensitive-node noise,\nand compare with models to locate dominant paths.\nRsub\n(Substrate resistance)\nConduction path (substrate resistance)\nCapacitive path (PN-junction capacitance)\nProcess stage and evaluation flow\nStage: mixed-signal design and verification; compare coupling\nfrom the target interferer to the sensitive node.\nEvaluation flow:\nIdentify interference sources\nand sensitive nodes\nBuild substrate / well\nparasitic networks\nAdd bias\nand interconnects\nSweep frequency\nand operating state\nUse test structures\nfor calibration\nTrade-offs\nCommon failures\nChanging isolation regions and grounding\nchanges both conductive and capacitive coupling;\nisolation at the source or sensitive side\nrequires circuit-level verification.\n• Local body-potential fluctuations\n• Increased analog spurs or noise\n• The DNW bias supply couples\ninterference into the circuit.\nDownstream effects\nAffects mixed-signal\naccuracy, noise margin and\nlayout arrangement.\nBoundaries\nDNW addresses only some coupling paths;\nit does not replace supply, routing and\npackage-return analysis, promise a fixed\ndB benefit, or assume enclosing an analog\ncircuit is always best."
+  },
+  "reference": "references/IMG_7704.webp",
+  "referenceReview": {
+    "referenceSha256": "906cb69a148c8c1759131e9770e36e48433b49213b6cb4a6f75babce0c535b9e",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        961,
+        1333,
+        118,
+        75
+      ],
+      [
+        773,
+        1385,
+        301,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

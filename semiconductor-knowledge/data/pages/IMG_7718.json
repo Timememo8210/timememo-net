@@ -103,5 +103,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "71d6c12d111c127cbb0545c2b56fda03e9caa7b8ac2f7d58223b94159642cf9b"
+  "sha256": "71d6c12d111c127cbb0545c2b56fda03e9caa7b8ac2f7d58223b94159642cf9b",
+  "diagramText": {
+    "zh": "半导体光刻\n光学机理：不是把反射光全部吸掉\n复折射率/ 膜厚/ 相位差/站立波\n核心结论\nARC依靠吸收和多界面干涉共同降低进入光刻胶的有效反射。\n01\n入射光\n无ARC\n界面反射强，光刻胶内形成明显站立波\n界面反射光\n（相位接近）\n光刻胶内\n光强分布\nBARC\n吸收衰减反射，站立波明显减弱\n入射光\n界面反射光\n（幅度降低）\n光刻胶内\n光强分布\nTARC\n多界面干涉+吸收，进一步抑制反射\n入射光\n多界面反射\n（相互干涉）\n光刻胶内\n光强分布\nPhotoresist\n（光刻胶）\nPhotoresist\n（光刻胶）\nPhotoresist\n（光刻胶）\nSubstrate.\n（衬底）\n站立波明显\nBARC\n（底部ARC）\nSubstrate\n（衬底）\n波动减弱\nTARC\n（顶部ARC）\nBARC\n（底部ARC）\nSubstrate\n（衬底）\n波动更弱\n04\n光入射\n光在多层结构中的传播过程\n从入射到ARC抑制反射的完整过程\n多界面反射\n相位与振幅改变\n在PR内叠加\nARC吸收 / 相消\n不同界面反射光\n存在相位差和幅度差\n反射光与入射光叠加\n形成光强分布\n材料吸收＋多界面干涉\n降低进入PR的有效反射\n05\n四个关键控制\n通过光学常数、厚度和曝光条件协同优化\n①\n复折射率 （n, k）\n膜厚（d）\nn 决定相位\nk决定吸收\n06\n曝光波长（λ）\n4\n入射角与偏振（θ, Pol.）\n吸收过弱\n耦合权衡\n吸收与曝光能力需要平衡\n吸收过强或\n膜厚设计不当\nPol.\nd\nn, k\n• 影响界面反射强度\n•决定吸收能力\n• 决定干涉相位差\n• 控制反射相消条件\n• 影响干涉条件\n• 与材料光学常数耦合\n•改变各界面反射强度\n•影响干涉与吸收效果\n• 反射仍然较强\n• 站立波难以抑制\n• 降低有效曝光\n• 缩窄工艺窗口\n• 可能影响分辨率\n典型异常（需关注与排查）\n08\n站立波\nCD\nSwing Curve\n无ARC\nBARC\nTARC\n侧壁波纹\nCD随下层膜厚周期变化\nn/k与膜厚\n量测反馈\n多维度验证光学模型与工艺效果\n反射率光谱\nFEM光学仿真\nCD-膜厚关联\nCD\nCD\n• PR内光强周期波动\n•导致CD起伏\n焦点\n•焦深曲线波动异常\n• 工艺窗口变窄\n• 刻蚀后侧壁粗糙\n• 源于光强非均匀\n下层膜厚\n• CD呈周期性变化\n• 说明干涉效应显著\n波长\n• 椭偏测量n、k\n• 获得反射光谱\n• 薄膜厚度与均匀性；• 验证反射抑制效果\n•光场分布模拟\n• 优化材料与厚度\n膜厚\n•建立实验关联\n•确认周期性趋势\n边界说明\n吸收型或多层ARC不能套用唯一通用的四分之一波长公式。实际设计需要综合材料光学常数、膜层厚度、入射条件\n和多界面干涉等因素，通过仿真与实验共同优化。\n02\n03\n07",
+    "en": "Semiconductor lithography\nOptical mechanism: reflection is not simply all absorbed\nComplex index / thickness / phase difference / standing waves\nCore conclusion\nARC combines absorption and multi-interface interference to reduce effective reflection into resist.\n01\nIncident light\nNo ARC\nStrong interface reflection creates pronounced standing waves in resist\nInterface-reflected light\n(Similar phase)\nInside photoresist\nIntensity distribution\nBARC\nAbsorption attenuates reflection and weakens standing waves\nIncident light\nInterface-reflected light\n(Lower amplitude)\nInside photoresist\nIntensity distribution\nTARC\nMulti-interface interference plus absorption further suppress reflection\nIncident light\nMultiple-interface reflection\n(Mutual interference)\nInside photoresist\nIntensity distribution\nPhotoresist\n(Photoresist)\nPhotoresist\n(Photoresist)\nPhotoresist\n(Photoresist)\nSubstrate.\n(Substrate)\nPronounced standing waves\nBARC\n(Bottom ARC)\nSubstrate\n(Substrate)\nWeaker fluctuations\nTARC\n(Top ARC)\nBARC\n(Bottom ARC)\nSubstrate\n(Substrate)\nStill weaker fluctuations\n04\nLight incidence\nLight propagation through a multilayer stack\nThe complete path from incidence to reflection suppression\nMultiple-interface reflection\nPhase and amplitude change\nSuperposition inside PR\nARC absorption / cancellation\nReflections from different interfaces\nhave different phases and amplitudes\nReflected and incident light superpose\nto form the intensity distribution\nMaterial absorption + multilayer interference\nreduce effective reflection into PR\n05\nFour key controls\nCo-optimize optical constants, thickness and exposure conditions\n①\nComplex index (n, k)\nFilm thickness (d)\nn controls phase\nk controls absorption\n06\nExposure wavelength (λ)\n4\nIncidence angle and polarization (θ, Pol.)\nInsufficient absorption\nTrade-offs\nBalance absorption against exposure capability\nExcessive absorption or\nunsuitable film thickness\nPol.\nd\nn, k\n• Affects interface-reflection intensity\n• Determines absorption capability\n• Sets interference phase difference\n• Controls cancellation conditions\n• Affects interference conditions\n• Coupled to optical constants\n• Changes interface reflectivity\n• Affects interference and absorption\n• Reflection remains strong\n• Standing waves are hard to suppress\n• Reduce effective exposure\n• Narrows the process window\n• May affect resolution\nTypical anomalies to inspect\n08\nStanding waves\nCD\nSwing Curve\nNo ARC\nBARC\nTARC\nSidewall ripples\nPeriodic CD change with underlayer thickness\nn/k and thickness\nMeasurement feedback\nValidate optical models and process effects from multiple dimensions\nReflectance spectrum\nFEM optical simulation\nCD–thickness correlation\nCD\nCD\n• Periodic intensity variation in PR\n• Causes CD fluctuation\nFocus\n• Abnormal focus-curve variation\n• Narrower process window\n• Rough sidewalls after etching\n• Caused by nonuniform intensity\nUnderlayer thickness\n• Periodic CD variation\n• Indicates significant interference\nWavelength\n• Measure n and k by ellipsometry\n• Obtain reflectance spectrum\n• Film thickness and uniformity; • Verify reflection suppression\n• Simulate optical-field distribution\n• Optimize material and thickness\nFilm thickness\n• Establish experimental correlation\n• Confirm periodic trend\nScope and limits\nAbsorbing or multilayer ARC cannot use one universal quarter-wave formula. Design must combine optical constants, film thickness, incidence\nand multiple-interface interference, optimized by simulation and experiment.\n02\n03\n07"
+  },
+  "reference": "references/IMG_7718.webp",
+  "referenceReview": {
+    "referenceSha256": "e269d71c4497fce743866c525ad43140dcefeb4b272e0d37a8bf842538d4d19d",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        961,
+        1333,
+        118,
+        75
+      ],
+      [
+        773,
+        1385,
+        301,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

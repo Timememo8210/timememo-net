@@ -81,5 +81,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "5b87cfe3a81c0b85d7c244c8e078a9e61388cec965f537a80fbe0899ce44f058"
+  "sha256": "5b87cfe3a81c0b85d7c244c8e078a9e61388cec965f537a80fbe0899ce44f058",
+  "diagramText": {
+    "zh": "07\n闩锁与可靠性：深N阱不能包办\n寄生反馈、载流子注入、护环与接触。\n电流注入\n（异常条件）\nP阱接触\n（偏置按PDK）\nN阱接触\n（偏置按PDK）\nNMOS\n（位于P阱）\nPMOS\n（位于N阱）\n护环接触\n（按规则连接）\nDeep N-well接触\n（偏置按PDK）\nN+\nN+\nP+\nP+\nN+\nP阱\n（内含寄生NPN）\nN阱\n（内含寄生PNP）\n深N阱\n（DNW）\n寄生NPN\n（集电极：N阱）\n寄生正反馈路径\n（可能导致闩锁）\n寄生PNP\n（集电极：P衬底）\n阱电阻\n衬底电阻\nP型衬底\n寄生路径随结构变化\n（DNW并不能完全切断）\n衬底接触\n（偏置按PDK）\n闩锁（Latch-up）\n由寄生器件的正反馈触发，\n可能导致持续异常电流和局部发热。\nESD\n由静电放电引起的大电流注入，\n可能触发闩锁或造成器件损伤。\n结击穿\n由PN结反向偏置过高引起的击穿，\n属于不同的失效机理。\n01\n核心判断\n闩锁与寄生器件、电阻路径和\n触发条件有关；采用深N阱后\n仍要执行适用的接触、间距、\n护环与可靠性要求。\n02\n流程位置与验证流程\n流程位置：版图签核与硅后可靠性鉴定阶段，\n检查异常注入条件下的器件和电流路径。\n验证流程：\n识别可能的\n注入源\n检查接触/\n护环/间距\n分析偏置\n异常隔离\n与寄生路径\n按规范施加\n应力并监测\n关键控制与耦合权衡\n关键控制\n• 注入位置与条件\n• 阱/衬底路径电阻\n• 护环及tap分布\n• 供电与温度条件\n耦合权衡\n• 增加接触、间距或护环\n会占用面积；是否有效\n还取决于其他连接和\n实际载流子收集路径。\n常见失效\n及根因分析\n• 持续异常电流\n• 局部发热\n• 应力后漏电增加或功能失效。\n量测反馈：供电电流/漏电/功能\n在规定的鉴定条件下监测应力期间及应力后的变化，\n结合失效分析定位寄生路径；不能仅凭电流突增\n就认定闩锁。\n下游影响\n影响可靠性放行与\n异常条件下的功能保持。\n边界条件\n• DNW不是“免闩锁”证明；\n• 闩锁、ESD和结击穿\n不是同一问题，需分别验证。\n03\n04\n05\n06\n07",
+    "en": "07\nLatch-up and reliability: deep N-well is not sufficient\nParasitic feedback, carrier injection, guard rings and contacts.\nCurrent injection\n(Abnormal conditions)\nP-well contact\n(Bias per PDK)\nN-well contact\n(Bias per PDK)\nNMOS\n(In P-well)\nPMOS\n(In N-well)\nGuard-ring contact\n(Connect per rules)\nDeep N-well contact\n(Bias per PDK)\nN+\nN+\nP+\nP+\nN+\nP-well\n(Contains parasitic NPN)\nN-well\n(Contains parasitic PNP)\nDeep N-well\n（DNW）\nParasitic NPN\n(Collector: N-well)\nParasitic positive-feedback path\n(May cause latch-up)\nParasitic PNP\n(Collector: P substrate)\nWell resistance\nSubstrate resistance\nP-type substrate\nParasitic paths vary with structure\n(DNW does not completely interrupt them)\nSubstrate contact\n(Bias per PDK)\nLatch-up\nTriggered by parasitic positive feedback,\npotentially causing sustained abnormal current and local heating.\nESD\nLarge current injection from electrostatic discharge\ncan trigger latch-up or damage devices.\nJunction breakdown\nBreakdown caused by excessive reverse PN-junction bias\nis a different failure mechanism.\n01\nCore conclusion\nLatch-up depends on parasitic devices, resistance paths\nand triggering conditions; deep N-well still requires\napplicable contacts, spacing,\nguard rings and reliability checks.\n02\nProcess stage and verification flow\nStage: layout signoff and post-silicon reliability qualification;\ninspect devices and current paths under abnormal injection.\nVerification flow:\nIdentify possible\ninjection sources\nCheck contacts /\nguard rings / spacing\nAnalyze bias\nIsolate anomalies\nand parasitic paths\nApply according to the specified procedure\nand monitor\nControls and trade-offs\nKey controls\n• Injection location and conditions\n• Well / substrate-path resistance\n• Guard-ring and tap distribution\n• Supply and temperature conditions\nTrade-offs\n• Adding contacts, spacing or guard rings\nconsumes area; effectiveness\nalso depends on other connections and\nactual carrier-collection paths.\nCommon failures\nand root-cause analysis\n• Sustained abnormal current\n• Local heating\n• Increased leakage or functional failure after stress.\nFeedback: supply current / leakage / function\nMonitor changes during and after stress under specified qualification conditions;\nlocate parasitic paths with failure analysis; a current spike alone\ndoes not establish latch-up.\nDownstream effects\nAffects reliability release and\nfunction retention under abnormal conditions.\nBoundaries\n• DNW does not certify latch-up immunity;\n• Latch-up, ESD and junction breakdown\nare different issues and require separate verification.\n03\n04\n05\n06\n07"
+  },
+  "reference": "references/IMG_7705.webp",
+  "referenceReview": {
+    "referenceSha256": "be90f91772fdeca316c66d2583e35e5c6bfa811da14823da7c4ac7976334fb9e",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        961,
+        1333,
+        118,
+        75
+      ],
+      [
+        773,
+        1385,
+        301,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

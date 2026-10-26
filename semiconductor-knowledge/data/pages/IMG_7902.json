@@ -1,0 +1,223 @@
+{
+  "id": "IMG_7902",
+  "source": "IMG_7902.JPG",
+  "title": {
+    "zh": "正常差异：图形不同不一定出错",
+    "en": "Normal differences: different shapes do not necessarily mean an error"
+  },
+  "subtitle": {
+    "zh": "比较前先确认：Pre-OPC还是Post-OPC？",
+    "en": "Before comparing, confirm: pre-OPC or post-OPC?"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "六阶段预期变化",
+        "en": "Expected changes across six stages"
+      },
+      "body": [
+        {
+          "zh": "Drawn GDS；规则直角；原始图形；设计工具绘制的；原始版图（规则直角）；EXPECTED",
+          "en": "Drawn GDS Regular right angles Original pattern Drawn by design tools Original layout (regular right angles) EXPECTED"
+        },
+        {
+          "zh": "Boolean；Derived Mask；经过布尔运算的；派生层；合并、相交、去边缘；清理等布尔运算后；的派生图形；EXPECTED",
+          "en": "Boolean derived mask Derived layers after Boolean operations Derived shapes after union, intersection, edge cleanup and other Boolean operations EXPECTED"
+        },
+        {
+          "zh": "Bias；Adjustment；轮廓均匀；扩张或收缩；按工艺Bias对轮廓；进行均匀扩张或；收缩（正/负Bias）；EXPECTED",
+          "en": "Bias adjustment Uniform contour expansion or shrinkage Apply process bias to contours for uniform expansion or shrinkage (positive/negative bias) EXPECTED"
+        },
+        {
+          "zh": "OPC Serif /；Hammerhead；角部Serif、线端；Hammerhead等修正；OPC在角部添加Serif，；线端添加Hammerhead；等，改善印刷性；EXPECTED",
+          "en": "OPC serif / hammerhead Corner serifs and line-end hammerhead corrections OPC adds corner serifs and line-end hammerheads to improve printability EXPECTED"
+        },
+        {
+          "zh": "Fracture；Primitives；拆成写版；基本图元；根据Writer规则将图形；fracture为写版可识别；的基本图元；EXPECTED",
+          "en": "Fracture primitives Split into basic mask-writing primitives Fracture shapes per writer rules into writer-recognizable basic primitives EXPECTED"
+        },
+        {
+          "zh": "JDV；Processed Pattern；写版视图中的；处理后图形；JDV（写版数据视图）；中的最终处理后；图形；EXPECTED",
+          "en": "JDV processed pattern Processed pattern in the mask-writing view JDV (mask-writing data view) contains the final processed pattern EXPECTED"
+        },
+        {
+          "zh": "数据在各阶段的变化（从Pre-OPC到Post-JDV）",
+          "en": "Data changes by stage (pre-OPC to post-JDV)"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "比较前对齐",
+        "en": "Alignment before comparison"
+      },
+      "body": [
+        {
+          "zh": "比较前先对齐；数据阶段；确认同为；Pre-OPC或；Post-OPC",
+          "en": "Align before comparing Data stage Confirm both are pre-OPC or post-OPC"
+        },
+        {
+          "zh": "坐标系；单位、原点、；方向一致",
+          "en": "Coordinate system Match units, origins and orientations"
+        },
+        {
+          "zh": "Scale；Tone；倍率/缩放 正片/负片；一致；一致",
+          "en": "Scale Tone Match magnification/scaling and positive/negative tone Consistent Consistent"
+        },
+        {
+          "zh": "Bias；Bias方向与；数值一致",
+          "en": "Bias Match bias direction and value"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "判断权衡",
+        "en": "Judgment trade-off"
+      },
+      "body": [
+        {
+          "zh": "判断权衡；过度要求逐点相同；会制造假警报；不同阶段图形本就会不同，；XOR大不一定有错",
+          "en": "Judgment trade-off Demanding pointwise identity creates false alarms Shapes naturally differ across stages; a large XOR does not necessarily mean an error"
+        },
+        {
+          "zh": "盲目信任差异也可能；漏掉真实转换错误；转换逻辑/设置出错时，；差异可能被掩盖",
+          "en": "Blindly trusting differences can also miss real conversion errors If conversion logic/settings are wrong, differences can be hidden"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "四类误判",
+        "en": "Four misjudgments"
+      },
+      "body": [
+        {
+          "zh": "常见误判；把OPC当错误；OPC修改属于预期差异",
+          "en": "Common misjudgments Treating OPC as an error OPC changes are expected differences"
+        },
+        {
+          "zh": "遗漏图形没发现；未对齐或阈值不当导致漏检",
+          "en": "Missing an omitted shape Misalignment or unsuitable thresholds cause missed detection"
+        },
+        {
+          "zh": "Pre/Post混合比较；Pre-OPC数据；Post-OPC视图；阶段不同，差异巨大",
+          "en": "Mixed pre/post comparison Pre-OPC data Post-OPC view Different stages produce large differences"
+        },
+        {
+          "zh": "XOR基准错误；基准层或逻辑反了",
+          "en": "Wrong XOR reference Reference layer or logic is reversed"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "正确反馈与边界",
+        "en": "Correct feedback and limits"
+      },
+      "body": [
+        {
+          "zh": "正确反馈；XOR；同阶段XOR；在同一数据阶段、同一设置下比较XOR",
+          "en": "Correct feedback XOR Same-stage XOR Compare XOR at the same data stage and with the same settings"
+        },
+        {
+          "zh": "关键结构抽样；对关键结构抽样核查，结合设计意图",
+          "en": "Sample critical structures Review sampled critical structures against design intent"
+        },
+        {
+          "zh": "尺寸统计；CD/线宽、间距、孔径等分布对比",
+          "en": "Dimension statistics Compare distributions of CD/linewidth, spacing and hole diameter"
+        },
+        {
+          "zh": "Layer数量与面积统计；Layer数、面积、密度等整体统计",
+          "en": "Layer-count and area statistics Overall layer count, area, density and related statistics"
+        },
+        {
+          "zh": "边界：合理差异会随工艺节点、Mask Writer和RET策略变化。",
+          "en": "Limit: acceptable differences vary with process node, mask writer and RET strategy"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图内补充标签",
+        "en": "Additional figure labels"
+      },
+      "body": [
+        {
+          "zh": "1",
+          "en": "1"
+        },
+        {
+          "zh": "2",
+          "en": "2"
+        },
+        {
+          "zh": "3",
+          "en": "3"
+        },
+        {
+          "zh": "4",
+          "en": "4"
+        },
+        {
+          "zh": "5",
+          "en": "5"
+        },
+        {
+          "zh": "6",
+          "en": "6"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "mask-data",
+  "topic": "JDV / GDS 光罩数据",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Mask",
+    "GDS",
+    "OASIS",
+    "JDV",
+    "OPC"
+  ],
+  "chapterPage": 8,
+  "chapterCount": 9,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "3ca20947bf0d177a157970939996703019f50487169296689984e070582755dd",
+  "diagramText": {
+    "zh": "半导体工艺\n正常差异：图形不同不一定出错\n比较前先确认：Pre-OPC还是Post-OPC？\nDrawn GDS\n规则直角\n原始图形\nBoolean\nDerived Mask\n经过布尔运算的\n派生层\nBias\nAdjustment\n轮廓均匀\n扩张或收缩\nOPC Serif /\nHammerhead\n角部Serif、线端\nHammerhead等修正\nFracture\nPrimitives\n拆成写版\n基本图元\n设计工具绘制的\n原始版图（规则直角）\nEXPECTED\nJDV\nProcessed Pattern\n写版视图中的\n处理后图形\n数据阶段\n合并、相交、去边缘\n清理等布尔运算后\n的派生图形\n按工艺Bias对轮廓\n进行均匀扩张或\n收缩（正/负Bias）\nOPC在角部添加Serif，\n线端添加Hammerhead\n等，改善印刷性\n根据Writer规则将图形\nfracture为写版可识别\n的基本图元\nEXPECTED\nEXPECTED\nEXPECTED\nEXPECTED\n数据在各阶段的变化（从Pre-OPC到Post-JDV）\n比较前先对齐\n判断权衡\n坐标系\nScale\nTone\nBias\n过度要求逐点相同\n会制造假警报\nJDV（写版数据视图）\n中的最终处理后\n图形\nEXPECTED\n盲目信任差异也可能\n漏掉真实转换错误\n确认同为\nPre-OPC或\nPost-OPC\n单位、原点、\n方向一致\n倍率/缩放 正片/负片\n一致\n一致\nBias方向与\n数值一致\n不同阶段图形本就会不同，\nXOR大≠一定有错\n转换逻辑/设置出错时，\n差异可能被掩盖\n常见误判\n把OPC当错误\n遗漏图形没发现\nOPC修改属于预期差异\n未对齐或阈值不当导致漏检\nPre/Post混合比较\nXOR基准错误\nPre-OPC数据\nPost-OPC视图\n阶段不同，差异巨大\n基准层或逻辑反了\nXOR\n正确反馈\n同阶段XOR\n在同一数据阶段、同一设置下比较XOR\n关键结构抽样\n对关键结构抽样核查，结合设计意图\n尺寸统计\nCD/线宽、间距、孔径等分布对比\nLayer数量与面积统计\nLayer数、面积、密度等整体统计\n边界：合理差异会随工艺节点、Mask Writer和RET策略变化。\n1\n2\n3\n4\n5\n6",
+    "en": "Semiconductor process\nNormal differences: different shapes do not necessarily mean an error\nBefore comparing, confirm: pre-OPC or post-OPC?\nDrawn GDS\nRegular right angles\nOriginal pattern\nBoolean\nderived mask\nDerived layers after\nBoolean operations\nBias\nadjustment\nUniform contour\nexpansion or shrinkage\nOPC serif /\nhammerhead\nCorner serifs and line-end\nhammerhead corrections\nFracture\nprimitives\nSplit into basic\nmask-writing primitives\nDrawn by design tools\nOriginal layout (regular right angles)\nEXPECTED\nJDV\nprocessed pattern\nProcessed pattern\nin the mask-writing view\nData stage\nDerived shapes after union, intersection,\nedge cleanup and other\nBoolean operations\nApply process bias to contours\nfor uniform expansion or\nshrinkage (positive/negative bias)\nOPC adds corner serifs\nand line-end hammerheads\nto improve printability\nFracture shapes per writer rules\ninto writer-recognizable\nbasic primitives\nEXPECTED\nEXPECTED\nEXPECTED\nEXPECTED\nData changes by stage (pre-OPC to post-JDV)\nAlign before comparing\nJudgment trade-off\nCoordinate system\nScale\nTone\nBias\nDemanding pointwise identity\ncreates false alarms\nJDV (mask-writing data view)\ncontains the final processed\npattern\nEXPECTED\nBlindly trusting differences can also\nmiss real conversion errors\nConfirm both are\npre-OPC or\npost-OPC\nMatch units, origins\nand orientations\nMatch magnification/scaling and positive/negative tone\nConsistent\nConsistent\nMatch bias direction\nand value\nShapes naturally differ across stages;\na large XOR does not necessarily mean an error\nIf conversion logic/settings are wrong,\ndifferences can be hidden\nCommon misjudgments\nTreating OPC as an error\nMissing an omitted shape\nOPC changes are expected differences\nMisalignment or unsuitable thresholds cause missed detection\nMixed pre/post comparison\nWrong XOR reference\nPre-OPC data\nPost-OPC view\nDifferent stages produce large differences\nReference layer or logic is reversed\nXOR\nCorrect feedback\nSame-stage XOR\nCompare XOR at the same data stage and with the same settings\nSample critical structures\nReview sampled critical structures against design intent\nDimension statistics\nCompare distributions of CD/linewidth, spacing and hole diameter\nLayer-count and area statistics\nOverall layer count, area, density and related statistics\nLimit: acceptable differences vary with process node, mask writer and RET strategy\n1\n2\n3\n4\n5\n6"
+  },
+  "reference": "references/IMG_7902.webp",
+  "referenceReview": {
+    "referenceSha256": "f9e3bd718203ecc7138365f5bcacfe8353e7a3880fe0324968b97edc68d3caa8",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1275,
+        1771,
+        140,
+        79
+      ],
+      [
+        1027,
+        1841,
+        400,
+        65
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

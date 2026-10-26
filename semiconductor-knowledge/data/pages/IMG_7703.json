@@ -91,5 +91,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "8679456a7330bccf323cea9c2fb74de01489e78a72093c9b6baa6f479e919119"
+  "sha256": "8679456a7330bccf323cea9c2fb74de01489e78a72093c9b6baa6f479e919119",
+  "diagramText": {
+    "zh": "05\n偏置接触：阱电位必须接对\nN阱、局部P阱、深N阱与衬底节点。\nN阱节点\nDeep N-well节点 局部P阱节点\n（通过N＋接触）\n（通过N+接触）\n（通过P+接触）\nP型衬底节点\n（通过P+接触）\n硅表面\nN+\nN+\nP+\nP+\n硅\n（连续材料）\nN阱\n局部P阱\n深N阱\nP型衬底\nN阱/Deep N-well节点\n（N+接触）\nP型衬底节点\n（P+接触）\nPN结\n等效网络\n（示意）\nN阱/Deep N-well—P型衬底PN结（有电容）\n局部P阱节点\n（P+接触）\nDeep N-well节点\n（N+接触）\n局部P阱—Deep N-well PN结（有电容）\n01\n核心判断\n形成隔离结构后，还要为各阱提供合适的接触\n与偏置，并核对所有相关PN结的工作范围。\n02\n流程位置与连接流程\n流程位置：电路—版图整合阶段，把体区、深N阱\n及衬底接到指定偏置网络。\n连接流程：\n列出阱/\n衬底节点\n指定\n允许偏置\n配置tap\n与金属\n检查启动\n和关断状态\n验证连接\n及工作范围\n03\n关键控制\n• 节点电位关系\n• 接触与阱路径阻抗\n• tap分布\n• 供电时序和瞬态电压\n04\n耦合权衡与常见失效\n耦合权衡\n• 增加接触可降低局部阱电位波动，\n但会占用面积。\n• 允许独立引出体端，不代表可以\n任意施加体偏置。\n常见失效\n• 阱悬空\n• 接错电源域\n• 局部压降过大\n• 瞬态导致非预期PN结\n正向导通。\n05\n量测反馈：连通/漏电/电位\n•用LVS、ERC及偏置仿真检查连接，\n硅后验证体端漏电和供电瞬态；\n异常后复核接触与偏置网络。\n06\n下游影响\n• 影响体效应、噪声耦合\n和可靠性。\n下游影响与边界条件\n边界条件\n• 偏置值按PDK及器件模型确定；\n• 某些平台中，同一DNW内的N阱会经\nDNW连通，不能仅凭版图分开就认为\n电位独立。",
+    "en": "05\nBias contacts: connect well potentials correctly\nN-well, local P-well, deep N-well and substrate nodes.\nN-well node\nDeep N-well node / local P-well node\n(Through N+ contact)\n(Through N+ contact)\n(Through P+ contact)\nP-substrate node\n(Through P+ contact)\nSilicon surface\nN+\nN+\nP+\nP+\nSilicon\n(Continuous material)\nN-well\nLocal P-well\nDeep N-well\nP-type substrate\nN-well / deep N-well node\n(N+ contact)\nP-substrate node\n(P+ contact)\nPN junction\nEquivalent network\n(Schematic)\nN-well/deep N-well–P-substrate PN junction (with capacitance)\nLocal P-well node\n(P+ contact)\nDeep N-well node\n(N+ contact)\nLocal P-well–deep N-well PN junction (with capacitance)\n01\nCore conclusion\nAfter forming isolation, provide suitable contacts\nand bias for each well, and check all PN-junction operating ranges.\n02\nProcess stage and connection flow\nStage: circuit/layout integration; connect bodies, deep N-well\nand substrate to the specified bias network.\nConnection flow:\nList well /\nsubstrate nodes\nSpecify\nallowed bias\nConfigure taps\nand metal\nCheck startup\nand shutdown states\nVerify connections\nand operating range\n03\nKey controls\n• Node potential relationships\n• Contact and well-path impedance\n• Tap distribution\n• Power sequencing and transient voltage\n04\nTrade-offs and common failures\nTrade-offs\n• More contacts reduce local well-potential fluctuations,\nbut consume area.\n• An independently accessible body does not permit\narbitrary body bias.\nCommon failures\n• Floating well\n• Wrong power-domain connection\n• Excessive local voltage drop\n• Transient-induced unintended PN-junction\nforward conduction.\n05\nMeasurement feedback: connectivity / leakage / potential\n• Check connections using LVS, ERC and bias simulation;\nverify body leakage and supply transients after fabrication;\nreview contacts and bias networks after anomalies.\n06\nDownstream effects\n• Affects body effect, noise coupling\nand reliability.\nDownstream effects and boundaries\nBoundaries\n• Bias values follow the PDK and device models;\n• On some platforms, N-wells within one DNW connect\nthrough the DNW; separate layout shapes do not imply\nindependent potentials."
+  },
+  "reference": "references/IMG_7703.webp",
+  "referenceReview": {
+    "referenceSha256": "f94a50e01180ca2017cc0635e533f9779a1a0c695be5d9436589914597c6391b",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        961,
+        1333,
+        118,
+        75
+      ],
+      [
+        773,
+        1385,
+        301,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

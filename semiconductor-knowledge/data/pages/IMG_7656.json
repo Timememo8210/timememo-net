@@ -98,5 +98,32 @@
   "chapterCount": 8,
   "width": 1086,
   "height": 1448,
-  "sha256": "b2d47f6bd9fec9ef3bb6b5144c36d01c8c8cce902074cece1cd78b25deac2d36"
+  "sha256": "b2d47f6bd9fec9ef3bb6b5144c36d01c8c8cce902074cece1cd78b25deac2d36",
+  "diagramText": {
+    "zh": "半导体工艺\n栅极作用：先影响平带，再参与决定Vth\nΦ_MS / V_FB / 氧化层电荷 / Vth\n01\n栅极与能带示意\n金属栅有效功函数与半导体功函数的差值，决定平带电压。\n金属栅\n氧化层\n金属栅\n（功函数Φ_M,eff）\n真空能级E_vac\n半导体\n真空能级E_vac\n功函数差\nΦ_MS = Φ_M,eff − Φ_S\nΦ_M,eff\nHigh-k 或氧化层\n（厚度t_ox，电容C_ox）\n半导体\n（功函数Φ_S）\nE_C\nE_F\nE_V\nΦ_M,eff\nE_F\nSi\n从功函数差到阈值电压的因果链\n栅极与半导体\n平带电压\n功函数差\nV_FB\nΦ_M,eff − Φ_S\n（Φ_MS）\n（受栅、氧化层电荷影响）\n阈值电压\nVth\n（还受沟道、C_ox、\n界面/固定电荷、器件结构影响）\n器件电流\nI_on / I_off\n（受 Vth 控制）\n03\n关键公式\nΦ_M,eff − Φ_S\nΦ_MS = Φ_M,eff − Φ_S　V_FB ≈\nq\nQ_eff\nC_ox\n04\n特性曲线示意\nMOSCAP C-V 曲线（平带电压变化）\nC\n器件I_d–V_g曲线（阈值电压变化）\nV_FB右移\nVth还同时受沟道、C_ox、界面与固定电荷、器件结构影响。\n10⁻³\n10⁻⁶\n10⁻⁹\nV_FB左移\nVth左移　Vth右移　V_G\n05\n极性边界\nnFET （NMOS）\nnFET 与pFET 需要不同方向的有效功函数调节，\n不能用“功函数越高，Vth一定越高”概括所有情况。\npFET （PMOS）\n通常需要\n较低的Φ_M,eff\n以降低Vth\n（易形成n型沟道）\nE_C\nE_F\nE_V\n通常需要\n较高的Φ_M,eff\n以降低∣Vth∣\n（易形成 p型沟道）\n06\n量测反馈\n通过不同测试提取相关参数，区分EWF与介质电荷贡献。\n量测项目\n反馈动作\nMOSCAP C-V\nC-V与I-V 对照\nV_FB\n•\n器件I_d–V_g\n•\nVth\n•\nn-p 分布\n区分 EWF\n与介质电荷贡献\n07\n核心判断\n有效功函数是 Vth 的重要输入，但不是唯一决定项。\n下游影响\n影响I_on、I_off、静态功耗、速度与噪声容限。\nΦ_S\n−\nI_d\n02",
+    "en": "Semiconductor processing\nGate effects: flat-band voltage and then Vth\nΦ_MS / V_FB / oxide charge / Vth\n01\nGate and band diagram\nEffective gate–semiconductor work-function difference determines flat-band voltage.\nMetal gate\nOxide\nMetal gate\n(work function Φ_M,eff)\nVacuum level E_vac\nSemiconductor\nVacuum level E_vac\nWork-function difference\nΦ_MS = Φ_M,eff − Φ_S\nΦ_M,eff\nHigh-k or oxide\n(thickness t_ox, capacitance C_ox)\nSemiconductor\n(work function Φ_S)\nE_C\nE_F\nE_V\nΦ_M,eff\nE_F\nSi\nFrom work-function difference to threshold voltage\nGate–semiconductor\nFlat-band voltage\nwork-function difference\nV_FB\nΦ_M,eff − Φ_S\n(Φ_MS)\n(affected by gate and oxide charge)\nThreshold voltage\nVth\n(also affected by channel, C_ox,\ninterface/fixed charge, and structure)\nDevice current\nI_on / I_off\n(controlled by Vth)\n03\nKey equations\nΦ_M,eff − Φ_S\nΦ_MS = Φ_M,eff − Φ_S　V_FB ≈\nq\nQ_eff\nC_ox\n04\nCharacteristic curves\nMOSCAP C–V (flat-band-voltage shift)\nC\nDevice I_d–V_g (threshold-voltage shift)\nV_FB shifts right\nVth also depends on channel, C_ox, interface/fixed charge, and structure.\n10⁻³\n10⁻⁶\n10⁻⁹\nV_FB shifts left\nVth shifts left　Vth shifts right　V_G\n05\nPolarity limits\nnFET (NMOS)\nnFET and pFET need different EWF tuning directions;\n“higher work function always raises Vth” is not universal.\npFET (PMOS)\nUsually requires\nlower Φ_M,eff\nto reduce Vth\n(easier n-channel formation)\nE_C\nE_F\nE_V\nUsually requires\nhigher Φ_M,eff\nto reduce abs(Vth)\n(easier p-channel formation)\n06\nMeasurement feedback\nUse different tests to separate EWF and dielectric-charge effects.\nMeasurements\nFeedback actions\nMOSCAP C–V\nCompare C–V and I–V\nV_FB\n•\nDevice I_d–V_g\n•\nVth\n•\nn–p distribution\nSeparate EWF\nand dielectric-charge contributions\n07\nKey judgment\nEWF is an important Vth input, but not the only determinant.\nDownstream effects\nI_on, I_off, static power, speed, and noise margin.\nΦ_S\n−\nI_d\n02"
+  },
+  "reference": "references/IMG_7656.webp",
+  "referenceReview": {
+    "referenceSha256": "f554922df0b940541e48c4506c24fe0f4bef41335b98fccc7bf49b49b4d552b8",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        953,
+        1331,
+        119,
+        67
+      ],
+      [
+        768,
+        1376,
+        306,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

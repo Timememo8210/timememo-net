@@ -97,5 +97,38 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "c66990352f0950e2009a196f0aad734c9ae35be9dd8029b4edf5f7db6717342c"
+  "sha256": "c66990352f0950e2009a196f0aad734c9ae35be9dd8029b4edf5f7db6717342c",
+  "diagramText": {
+    "zh": "半导体工艺\n整合影响：规则线网还不是最终图形\nCut/Block / Line End / EPE / 图形转移\n01\n整合流程示意\nA\n连续规则线网\nB\nCut/Block图形编辑\nC\n最终目标图形\nSADP先生成规则密集线网\n（连续等距的Spacer）\n通过Cut/Block删除多余线段\n或定义线端（图形编辑）\n得到断开的线段和受控线端\n并转移到硬掩膜或目标层\nSADP先生成规则密集线网，Cut/Block再删除多余线段或定义线端。\n注意：Cut/Block负责图形编辑，不负责产生倍频。\n02\n01\n关键控制\nCut CD与Block CD\n02\nCut/Block Overlay\n03\nLine-End Bias\n04\n下层形貌与图形转移\n控制Cut与Block的尺寸\n满足删除效果与线端定义需求\n控制Cut/Block与前层的\n对准偏差\n控制线端偏置\n保证线端位置与形貌\n03\n整合取舍\n规则线网与\n自对准关键边\n04\n漏切\n常见风险\n过切\n二维复杂度、Cut数量、\nEPE与设计限制\n线端回缩\n桥连\n应切未切\n残留连接\n切除过多\n导致线段缺失\n线端后退\n尺寸偏小\n相邻线段\n异常连接\n05\n核心判断\n06\n量测反馈\n量测反馈：Cut/Block Overlay / Tip-to-Tip / Line End / 最终硬掩膜CD / 缺陷\n关键边自对准不会消除\nCut/Block与前层对准误差。\nCut/Block Overlay\nTip-to-Tip\nLine End\n最终硬掩膜CD\n缺陷\n07\n边界说明\nCut/Block的曝光次数、插入顺序和材料体系随设计与整合方案变化。\n考虑下层形貌影响\n保证图形可正确转移到硬掩膜\n或目标层\nCut残留\n最终CD偏差\nCut未完全去除\n残留影响\n后续工艺\n最终图形尺寸\n偏大或偏小\n反馈动作\n图谱对齐\n相关性判断\n分片验证",
+    "en": "Semiconductor processing\nIntegration: regular grids are not final patterns\nCut/block / line end / EPE / pattern transfer\n01\nIntegration-flow schematic\nA\nContinuous regular grid\nB\nCut/block pattern editing\nC\nFinal target pattern\nSADP first forms a dense regular grid\n(continuous equally spaced spacers)\nCut/block removes unwanted segments\nor defines line ends (editing)\nObtain disconnected segments and controlled ends,\nthen transfer to hard mask/target\nSADP forms a regular grid; cut/block removes segments or defines ends.\nCut/block edits patterns; it does not generate density doubling.\n02\n01\nKey controls\nCut CD and block CD\n02\nCut/block overlay\n03\nLine-end bias\n04\nUnderlying topography and transfer\nControl cut/block dimensions\nfor removal and line-end definition\nControl cut/block alignment\nto prior layers\nControl line-end bias\nto ensure end position/profile\n03\nIntegration trade-offs\nRegular grids and\nself-aligned critical edges\n04\nMissed cut\nCommon risks\nOvercut\n2D complexity, cut count,\nEPE, and design restrictions\nLine-end pullback\nBridge\nRequired cut not made\nleaves a connection\nExcess removal\ncauses missing segments\nEnd pulls back\nundersized\nAdjacent segments\nconnect abnormally\n05\nKey judgment\n06\nMeasurement feedback\nFeedback: cut/block overlay / tip-to-tip / line end / final hard-mask CD / defects\nSelf-aligned critical edges do not eliminate\ncut/block overlay error to previous layers.\nCut/block overlay\nTip-to-tip\nLine end\nFinal hard-mask CD\nDefects\n07\nScope\nCut/block exposure count, sequence, and materials depend on design/integration.\nAccount for lower-layer topography\nto transfer patterns correctly to hard mask\nor target layer\nCut residue\nFinal CD error\nIncomplete cut removal\nleaves residue affecting\nsubsequent processing\nFinal pattern size\ntoo large or small\nFeedback actions\nAlign maps\nAssess correlation\nSplit validation"
+  },
+  "reference": "references/IMG_7667.webp",
+  "referenceReview": {
+    "referenceSha256": "b345922f8833c3bc3ba51ba35b05c7fb64a53fe3319d4d67cb26b75da6591525",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        962,
+        1391,
+        105,
+        40
+      ],
+      [
+        953,
+        1331,
+        119,
+        67
+      ],
+      [
+        768,
+        1376,
+        306,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

@@ -1,0 +1,233 @@
+{
+  "id": "IMG_7879",
+  "source": "IMG_7879.JPG",
+  "title": {
+    "zh": "Stack设计：一层还是多层",
+    "en": "Stack design: one layer or multiple layers?"
+  },
+  "subtitle": {
+    "zh": "每层只承担自己最擅长的成像或刻蚀任务",
+    "en": "Each layer performs the imaging or etching task it does best"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "多层Stack的作用",
+        "en": "Purpose of a multilayer Stack"
+      },
+      "body": [
+        {
+          "zh": "多层Stack不是单纯增加厚度，；而是逐级转换刻蚀化学与Mask耐受能力。",
+          "en": "A multilayer Stack does more than add thickness:; it progressively changes etch chemistry and Mask resistance."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "Single HM",
+        "en": "Single HM"
+      },
+      "body": [
+        {
+          "zh": "Photoresist；Hard Mask；Target",
+          "en": "Photoresist; Hard Mask; Target"
+        },
+        {
+          "zh": "流程：；PR Pattern → HM Open → Target Etch",
+          "en": "Flow:; PR Pattern → HM Open → Target Etch"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "Trilayer Patterning",
+        "en": "Trilayer Patterning"
+      },
+      "body": [
+        {
+          "zh": "Thin Photoresist；Si-containing HM；Spin-on Carbon / SOC；Target",
+          "en": "Thin Photoresist; Si-containing HM; Spin-on Carbon / SOC; Target"
+        },
+        {
+          "zh": "流程：；薄PR先图形化Si-HM；Si-HM在O₂类步骤中保护并图形化SOC；SOC继续保护Target Etch",
+          "en": "Flow:; Thin PR first patterns the Si-HM; The Si-HM protects and patterns SOC in an O₂-based step; SOC then protects the Target Etch"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "Functional / Metal HM",
+        "en": "Functional / Metal HM"
+      },
+      "body": [
+        {
+          "zh": "Photoresist；TiN等功能或Metal Hard Mask；Target",
+          "en": "Photoresist; TiN or another functional / Metal Hard Mask; Target"
+        },
+        {
+          "zh": "流程：；PR → Metal HM图形 → Target",
+          "en": "Flow:; PR → Metal-HM pattern → Target"
+        },
+        {
+          "zh": "Hard Mask可能最终去除，；也可能按整合需求保留。",
+          "en": "The Hard Mask may ultimately be removed,; or retained according to integration requirements."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "六步Stack设计",
+        "en": "Six-step Stack design"
+      },
+      "body": [
+        {
+          "zh": "选择成像；Resist",
+          "en": "Choose the imaging; Resist"
+        },
+        {
+          "zh": "分配各层；厚度预算",
+          "en": "Allocate each layer’s; thickness budget"
+        },
+        {
+          "zh": "匹配相邻层；Etch；Chemistry",
+          "en": "Match adjacent-layer; Etch; Chemistry"
+        },
+        {
+          "zh": "检查光学；n/k与反射",
+          "en": "Check optical; n/k and reflection"
+        },
+        {
+          "zh": "验证层间；附着与应力",
+          "en": "Validate interlayer; adhesion and stress"
+        },
+        {
+          "zh": "逐级量测；CD与Profile",
+          "en": "Measure each stage’s; CD and Profile"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "四个设计控制",
+        "en": "Four design controls"
+      },
+      "body": [
+        {
+          "zh": "各层Thickness Budget；Interface Adhesion；Optical n/k；Etch Selectivity Chain",
+          "en": "Thickness Budget for each layer; Interface Adhesion; Optical n/k; Etch Selectivity Chain"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "关键权衡",
+        "en": "Key tradeoffs"
+      },
+      "body": [
+        {
+          "zh": "薄PR：利于分辨率，；但依赖下层HM",
+          "en": "Thin PR: benefits resolution,; but relies on the underlying HM"
+        },
+        {
+          "zh": "•层数增加：转移能力增强，；但CD Bias与缺陷会累积",
+          "en": "• More layers: stronger transfer capability,; but CD Bias and defects accumulate"
+        },
+        {
+          "zh": "• 更厚SOC：刻蚀寿命增加，；但Wiggling/应力风险；可能增大",
+          "en": "• Thicker SOC: longer etch lifetime,; but Wiggling / stress risks; may increase"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "常见Stack失效",
+        "en": "Common Stack failures"
+      },
+      "body": [
+        {
+          "zh": "层间Peeling",
+          "en": "Interlayer Peeling"
+        },
+        {
+          "zh": "反射 / Standing Wave；导致成像异常",
+          "en": "Reflection / Standing Wave; causes imaging abnormalities"
+        },
+        {
+          "zh": "Si-HM Open不净",
+          "en": "Incomplete Si-HM Open"
+        },
+        {
+          "zh": "SOC Line Wiggling",
+          "en": "SOC Line Wiggling"
+        },
+        {
+          "zh": "逐级CD漂移",
+          "en": "Progressive CD drift"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "量测反馈",
+        "en": "Metrology feedback"
+      },
+      "body": [
+        {
+          "zh": "Layer；Thickness；Litho CD；Si-HM /HM CD；SOC Profile；Final Target CD；Stack；重新分配",
+          "en": "Layer; Thickness; Litho CD; Si-HM / HM CD; SOC Profile; Final Target CD; Stack; reallocation"
+        },
+        {
+          "zh": "BARC或SiARC可能兼有光学与刻蚀功能，但不是所有ARC都能作为最终Hard Mask。",
+          "en": "BARC or SiARC may provide both optical and etching functions, but not every ARC can act as the final Hard Mask."
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "hard-mask",
+  "topic": "Hard Mask 图形转移",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Etch",
+    "FEOL",
+    "BEOL"
+  ],
+  "chapterPage": 5,
+  "chapterCount": 10,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "0d66c14a63ae5f3e070541565568fa92a0ac4047a48b3104778b051d1a94452b",
+  "diagramText": {
+    "zh": "半导体工艺\nStack设计：一层还是多层\n每层只承担自己最擅长的成像或刻蚀任务\n多层Stack不是单纯增加厚度，\n而是逐级转换刻蚀化学与Mask耐受能力。\nA Single HM\nB Trilayer Patterning\nC Functional / Metal HM\nThin Photoresist\nPhotoresist\nPhotoresist\nSi-containing HM\nHard Mask\nSpin-on Carbon / SOC\nTiN等功能或Metal Hard Mask\nTarget\nTarget\nTarget\n流程：\nPR Pattern → HM Open → Target Etch\n流程：\n薄PR先图形化Si-HM\nSi-HM在O₂类步骤中保护并图形化SOC\nSOC继续保护Target Etch\n流程：\nPR → Metal HM图形 → Target\nHard Mask可能最终去除，\n也可能按整合需求保留。\n1\n六步\nStack设计\n选择成像\nResist\n分配各层\n厚度预算\n3\n匹配相邻层\nEtch\nChemistry\n4\n5\n6\n检查光学\nn/k与反射\n验证层间\n附着与应力\n逐级量测\nCD与Profile\n四个设计控制\n关键权衡\n常见Stack失效\n各层Thickness Budget\n薄PR：利于分辨率，\n但依赖下层HM\n层间Peeling\nInterface Adhesion\nOptical n/k\n•层数增加：转移能力增强，\n但CD Bias与缺陷会累积\n反射 / Standing Wave\n导致成像异常\nSi-HM Open不净\nEtch Selectivity Chain\n• 更厚SOC：刻蚀寿命增加，\n但Wiggling/应力风险\n可能增大\nSOC Line Wiggling\n逐级CD漂移\n量测反馈\nLayer\nThickness\nLitho CD\nSi-HM /HM CD\nSOC Profile\nFinal Target CD\nStack\n重新分配\nBARC或SiARC可能兼有光学与刻蚀功能，但不是所有ARC都能作为最终Hard Mask。\n2",
+    "en": "Semiconductor processing\nStack design: one layer or multiple layers?\nEach layer performs the imaging or etching task it does best\nA multilayer Stack does more than add thickness:\nit progressively changes etch chemistry and Mask resistance.\nA Single HM\nB Trilayer Patterning\nC Functional / Metal HM\nThin Photoresist\nPhotoresist\nPhotoresist\nSi-containing HM\nHard Mask\nSpin-on Carbon / SOC\nTiN or another functional / Metal Hard Mask\nTarget\nTarget\nTarget\nFlow:\nPR Pattern → HM Open → Target Etch\nFlow:\nThin PR first patterns the Si-HM\nThe Si-HM protects and patterns SOC in an O₂-based step\nSOC then protects the Target Etch\nFlow:\nPR → Metal-HM pattern → Target\nThe Hard Mask may ultimately be removed,\nor retained according to integration requirements.\n1\nSix-step\nStack design\nChoose the imaging\nResist\nAllocate each layer’s\nthickness budget\n3\nMatch adjacent-layer\nEtch\nChemistry\n4\n5\n6\nCheck optical\nn/k and reflection\nValidate interlayer\nadhesion and stress\nMeasure each stage’s\nCD and Profile\nFour design controls\nKey tradeoffs\nCommon Stack failures\nThickness Budget for each layer\nThin PR: benefits resolution,\nbut relies on the underlying HM\nInterlayer Peeling\nInterface Adhesion\nOptical n/k\n• More layers: stronger transfer capability,\nbut CD Bias and defects accumulate\nReflection / Standing Wave\ncauses imaging abnormalities\nIncomplete Si-HM Open\nEtch Selectivity Chain\n• Thicker SOC: longer etch lifetime,\nbut Wiggling / stress risks\nmay increase\nSOC Line Wiggling\nProgressive CD drift\nMetrology feedback\nLayer\nThickness\nLitho CD\nSi-HM / HM CD\nSOC Profile\nFinal Target CD\nStack\nreallocation\nBARC or SiARC may provide both optical and etching functions, but not every ARC can act as the final Hard Mask.\n2"
+  },
+  "reference": "references/IMG_7879.webp",
+  "referenceReview": {
+    "referenceSha256": "6b2bca175fe6c40921175112936a2c7f82f675cdb471d69b1023806930cacc75",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1272,
+        1769,
+        138,
+        84
+      ],
+      [
+        1026,
+        1838,
+        389,
+        66
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

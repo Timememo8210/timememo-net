@@ -1,0 +1,251 @@
+{
+  "id": "IMG_7895",
+  "source": "IMG_7895.JPG",
+  "title": {
+    "zh": "JDV和GDS到底差在哪？",
+    "en": "How do JDV and GDS differ?"
+  },
+  "subtitle": {
+    "zh": "一张图看懂从版图交付到光罩Release",
+    "en": "From layout delivery to mask release in one diagram"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "从设计到晶圆",
+        "en": "From design to wafer"
+      },
+      "body": [
+        {
+          "zh": "METAL；VIA；POLY；DIFF；WELL；.gds；GDS版图（设计数据）；数据处理与检查；.mdp；Reticle 光罩（成像数据）；投影到晶圆",
+          "en": "METAL VIA POLY DIFF WELL .gds GDS layout (design data) Data processing and checks .mdp Reticle (imaging data) Projection onto the wafer"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "一句话定位",
+        "en": "One-sentence distinction"
+      },
+      "body": [
+        {
+          "zh": "01；一句话定位|GDS是设计意图，JDV是写版确认；GDS表达设计师要做什么；JDV用于确认要写出的光罩是什么。",
+          "en": "01 In one sentence | GDS represents design intent; JDV confirms mask writing GDS describes what the designer wants; JDV confirms the mask to be written"
+        },
+        {
+          "zh": "GDS（设计意图）；我要实现的电路；JDV（写版确认）；实际要写的光罩",
+          "en": "GDS (design intent) The circuit to implement JDV (mask-writing verification) The actual mask to write"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "数据阶段",
+        "en": "Data stages"
+      },
+      "body": [
+        {
+          "zh": "02；数据阶段|GDS在前，JDV接近Mask Release；GDS在Tape-out阶段输出；JDV通常出现在Mask Release前。",
+          "en": "02 Data stage | GDS comes first; JDV is close to mask release GDS is output at tape-out; JDV usually appears before mask release"
+        },
+        {
+          "zh": "设计；Design；验证；Sign-off；Tape-out；（GDS输出）；MDP制版；（数据处理）；Mask Release；（JDV）；.gds；.mdp",
+          "en": "Design Design Verification Sign-off Tape-out (GDS output) MDP (data processing) Mask release (JDV) .gds .mdp"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "GDS内容",
+        "en": "GDS contents"
+      },
+      "body": [
+        {
+          "zh": "03；GDS装什么 |保存Cell、图形、层次与Layer；GDS以层次化方式保存几何图形及其所在Layer信息。",
+          "en": "03 What GDS contains | cells, shapes, hierarchy and layers GDS hierarchically stores geometric shapes and their layer information"
+        },
+        {
+          "zh": "Cell层次树；Top Cell；Top Cell；Block A；Block B；Cell A1；Cell A2；Cell B1；Cell B2",
+          "en": "Cell hierarchy Top cell Top cell Block A Block B Cell A1 Cell A2 Cell B1 Cell B2"
+        },
+        {
+          "zh": "Layer示例；M1；VIA1；M2；POLY；DIFF",
+          "en": "Layer examples M1 VIA1 M2 POLY DIFF"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "JDV检查项",
+        "en": "JDV checks"
+      },
+      "body": [
+        {
+          "zh": "04；JDV看什么 | 检查Mask、Reticle与Job信息；JDV关注成像数据本身及其在Reticle/Job中的完整性与一致性。",
+          "en": "04 What JDV checks | mask, reticle and job information JDV examines imaging data and its completeness and consistency within the reticle/job"
+        },
+        {
+          "zh": "Reticle信息；尺寸、边框、对准标记、坐标原点",
+          "en": "Reticle information Dimensions, frame, alignment marks and coordinate origin"
+        },
+        {
+          "zh": "Mask图形；写入图形、层号、极性（Tone）",
+          "en": "Mask shapes Written shapes, layer numbers and tone"
+        },
+        {
+          "zh": "Job信息；工艺、机台、分辨率、焦深、批次",
+          "en": "Job information Process, tool, resolution, depth of focus and lot"
+        },
+        {
+          "zh": "对比与一致性；MDP vs JDV、版本、校验和",
+          "en": "Comparison and consistency MDP versus JDV, version and checksum"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "MDP转换",
+        "en": "MDP conversion"
+      },
+      "body": [
+        {
+          "zh": "05；中间转换| GDS经过MDP才走到JDV；MDP将GDS转为面向写版的数据，并加入工艺与规则处理。",
+          "en": "05 Intermediate conversion | GDS passes through MDP before JDV MDP converts GDS into mask-writing data, adding process and rule handling"
+        },
+        {
+          "zh": "MDP处理；规则检查；OPC/修饰；分块/分割；数据格式化",
+          "en": "MDP processing Rule checks OPC / correction Partitioning / fracturing Data formatting"
+        },
+        {
+          "zh": ".gds；设计数据；（GDS）；.mdp；写版数据；（MDP）；JDV查看；写版确认；（JDV）",
+          "en": ".gds Design data (GDS) .mdp Mask-writing data (MDP) JDV viewing Mask-writing verification (JDV)"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "Review清单",
+        "en": "Review checklist"
+      },
+      "body": [
+        {
+          "zh": "06；Review清单|版本、方向、Tone、Frame逐项确认；签核前按清单逐项确认，避免低级错误导致返工。",
+          "en": "06 Review checklist | verify version, orientation, tone and frame Confirm each checklist item before sign-off to prevent avoidable rework"
+        },
+        {
+          "zh": "版本一致；GDS/MDP/JDV 版本号匹配",
+          "en": "Version consistency Matching GDS/MDP/JDV version numbers"
+        },
+        {
+          "zh": "方向与原点；旋转、镜像、原点位置正确",
+          "en": "Orientation and origin Correct rotation, mirroring and origin"
+        },
+        {
+          "zh": "Tone极性；正片/负片与工艺要求一致",
+          "en": "Tone Positive/negative tone consistent with process requirements"
+        },
+        {
+          "zh": "Frame与边界；写入边框、留白、禁写区",
+          "en": "Frame and boundaries Write frame, blank margins and no-write areas"
+        },
+        {
+          "zh": "标记与对准；对准标记、测量标记完整",
+          "en": "Marks and alignment Complete alignment and measurement marks"
+        },
+        {
+          "zh": "其它检查；Layer映射、校验和、注释",
+          "en": "Other checks Layer mapping, checksum and annotations"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "正常外观差异",
+        "en": "Normal appearance changes"
+      },
+      "body": [
+        {
+          "zh": "07；正常差异 | OPC与Fracture会改变图形外观；为提升成像质量，OPC修饰与Fracture碎片化会改变外观但属正常。",
+          "en": "07 Normal differences | OPC and fracturing change shape appearance OPC correction and fracturing normally change appearance to improve imaging"
+        },
+        {
+          "zh": "Pre-OPC；（设计图形）；OPC修饰；Post-OPC；（写版图形）",
+          "en": "Pre-OPC (design shapes) OPC correction Post-OPC (mask-writing shapes)"
+        },
+        {
+          "zh": "Fracture前（大图形）；Fracture分割；Fracture后；（分块图形）",
+          "en": "Before fracturing (large shape) Fracturing After fracturing (partitioned shapes)"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "Release边界",
+        "en": "Release limits"
+      },
+      "body": [
+        {
+          "zh": "08；Release边界 | JDV签核不是万能验证；JDV仅验证写版数据是否正确，不能替代电性或良率验证。",
+          "en": "08 Release limits | JDV sign-off is not universal validation JDV verifies mask-writing data; it cannot replace electrical or yield validation"
+        },
+        {
+          "zh": "JDV能保证（写版层面）；数据完整性与一致性；图形/层/极性正确；Reticle与Job信息正确；JDV SIGN-OFF",
+          "en": "What JDV verifies (mask-writing level) Data completeness and consistency Correct shapes, layers and tone Correct reticle and job information JDV SIGN-OFF"
+        },
+        {
+          "zh": "JDV不能保证（产品层面）；电路功能与时序正确；工艺良率与可靠性；封装/测试/系统问题",
+          "en": "What JDV cannot guarantee (product level) Correct circuit function and timing Process yield and reliability Packaging / test / system issues"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "mask-data",
+  "topic": "JDV / GDS 光罩数据",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Mask",
+    "GDS",
+    "OASIS",
+    "JDV",
+    "OPC"
+  ],
+  "chapterPage": 1,
+  "chapterCount": 9,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "199effce169ba255f73cc79e3279772425bbf36c2f1cf654270766225e0ff820",
+  "diagramText": {
+    "zh": "JDV和GDS到底差在哪？\n一张图看懂从版图交付到光罩Release\nMETAL\nVIA\nPOLY\nDIFF\nWELL\n.gds\nGDS版图（设计数据）\n数据处理与检查\n01\n一句话定位|GDS是设计意图，JDV是写版确认\nGDS表达设计师要做什么；JDV用于确认要写出的光罩是什么。\nGDS（设计意图）\n我要实现的电路\nJDV（写版确认）\n实际要写的光罩\n03\nGDS装什么 |保存Cell、图形、层次与Layer\nGDS以层次化方式保存几何图形及其所在Layer信息。\nCell层次树\nTop Cell\nTop Cell\nBlock A\nBlock B\nLayer示例\nM1\nVIA1\nM2\nPOLY\nDIFF\nCell A1\nCell A2\nCell B1\nCell B2\n05\n中间转换| GDS经过MDP才走到JDV\nMDP将GDS转为面向写版的数据，并加入工艺与规则处理。\nMDP处理\nJDV查看\n.gds\n.mdp\n规则检查\nOPC/修饰\n分块/分割\n数据格式化\n设计数据\n（GDS）\n写版数据\n（MDP）\n写版确认\n（JDV）\n07\n正常差异 | OPC与Fracture会改变图形外观\n为提升成像质量，OPC修饰与Fracture碎片化会改变外观但属正常。\nPre-OPC\n（设计图形）\nPost-OPC\n（写版图形）\nOPC修饰\nFracture前（大图形）\nFracture后\n（分块图形）\nFracture分割\n.mdp\nReticle 光罩（成像数据）\n投影到晶圆\n02\n数据阶段|GDS在前，JDV接近Mask Release\nGDS在Tape-out阶段输出；JDV通常出现在Mask Release前。\n设计\nDesign\n验证\nSign-off\nTape-out\n（GDS输出）\nMDP制版\n（数据处理）\nMask Release\n（JDV）\n.gds\n.mdp\n04\nJDV看什么 | 检查Mask、Reticle与Job信息\nJDV关注成像数据本身及其在Reticle/Job中的完整性与一致性。\nReticle信息\n尺寸、边框、对准标记、坐标原点\nMask图形\n写入图形、层号、极性（Tone）\nJob信息\n工艺、机台、分辨率、焦深、批次\n对比与一致性\nMDP vs JDV、版本、校验和\n06\nReview清单|版本、方向、Tone、Frame逐项确认\n签核前按清单逐项确认，避免低级错误导致返工。\n版本一致\n方向与原点\nTone极性\nFrame与边界\n标记与对准\n其它检查\nGDS/MDP/JDV 版本号匹配\n旋转、镜像、原点位置正确\n正片/负片与工艺要求一致\n写入边框、留白、禁写区\n对准标记、测量标记完整\nLayer映射、校验和、注释\n08\nRelease边界 | JDV签核不是万能验证\nJDV仅验证写版数据是否正确，不能替代电性或良率验证。\nJDV能保证（写版层面）\n数据完整性与一致性\n图形/层/极性正确\nReticle与Job信息正确\nJDV SIGN-OFF\nJDV不能保证（产品层面）\n电路功能与时序正确\n工艺良率与可靠性\n封装/测试/系统问题",
+    "en": "How do JDV and GDS differ?\nFrom layout delivery to mask release in one diagram\nMETAL\nVIA\nPOLY\nDIFF\nWELL\n.gds\nGDS layout (design data)\nData processing and checks\n01\nIn one sentence | GDS represents design intent; JDV confirms mask writing\nGDS describes what the designer wants; JDV confirms the mask to be written\nGDS (design intent)\nThe circuit to implement\nJDV (mask-writing verification)\nThe actual mask to write\n03\nWhat GDS contains | cells, shapes, hierarchy and layers\nGDS hierarchically stores geometric shapes and their layer information\nCell hierarchy\nTop cell\nTop cell\nBlock A\nBlock B\nLayer examples\nM1\nVIA1\nM2\nPOLY\nDIFF\nCell A1\nCell A2\nCell B1\nCell B2\n05\nIntermediate conversion | GDS passes through MDP before JDV\nMDP converts GDS into mask-writing data, adding process and rule handling\nMDP processing\nJDV viewing\n.gds\n.mdp\nRule checks\nOPC / correction\nPartitioning / fracturing\nData formatting\nDesign data\n(GDS)\nMask-writing data\n(MDP)\nMask-writing verification\n(JDV)\n07\nNormal differences | OPC and fracturing change shape appearance\nOPC correction and fracturing normally change appearance to improve imaging\nPre-OPC\n(design shapes)\nPost-OPC\n(mask-writing shapes)\nOPC correction\nBefore fracturing (large shape)\nAfter fracturing\n(partitioned shapes)\nFracturing\n.mdp\nReticle (imaging data)\nProjection onto the wafer\n02\nData stage | GDS comes first; JDV is close to mask release\nGDS is output at tape-out; JDV usually appears before mask release\nDesign\nDesign\nVerification\nSign-off\nTape-out\n(GDS output)\nMDP\n(data processing)\nMask release\n(JDV)\n.gds\n.mdp\n04\nWhat JDV checks | mask, reticle and job information\nJDV examines imaging data and its completeness and consistency within the reticle/job\nReticle information\nDimensions, frame, alignment marks and coordinate origin\nMask shapes\nWritten shapes, layer numbers and tone\nJob information\nProcess, tool, resolution, depth of focus and lot\nComparison and consistency\nMDP versus JDV, version and checksum\n06\nReview checklist | verify version, orientation, tone and frame\nConfirm each checklist item before sign-off to prevent avoidable rework\nVersion consistency\nOrientation and origin\nTone\nFrame and boundaries\nMarks and alignment\nOther checks\nMatching GDS/MDP/JDV version numbers\nCorrect rotation, mirroring and origin\nPositive/negative tone consistent with process requirements\nWrite frame, blank margins and no-write areas\nComplete alignment and measurement marks\nLayer mapping, checksum and annotations\n08\nRelease limits | JDV sign-off is not universal validation\nJDV verifies mask-writing data; it cannot replace electrical or yield validation\nWhat JDV verifies (mask-writing level)\nData completeness and consistency\nCorrect shapes, layers and tone\nCorrect reticle and job information\nJDV SIGN-OFF\nWhat JDV cannot guarantee (product level)\nCorrect circuit function and timing\nProcess yield and reliability\nPackaging / test / system issues"
+  },
+  "reference": "references/IMG_7895.webp",
+  "referenceReview": {
+    "referenceSha256": "796c02fbbe5917682012af77bbbe1529d33577f3c90a9e541bbc84e503c40407",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1275,
+        1771,
+        140,
+        79
+      ],
+      [
+        1027,
+        1841,
+        400,
+        65
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

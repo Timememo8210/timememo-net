@@ -1,0 +1,414 @@
+{
+  "id": "IMG_7854",
+  "source": "IMG_7854.JPG",
+  "title": {
+    "zh": "选型与量测：退火结果必须用器件指标闭环",
+    "en": "Selection and metrology: close the annealing loop with device metrics"
+  },
+  "subtitle": {
+    "zh": "任务、热深度、材料堆叠与量测结果共同决定方案",
+    "en": "Task, thermal depth, material stack and metrology results jointly determine the approach"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "选型逻辑",
+        "en": "Selection logic"
+      },
+      "body": [
+        {
+          "zh": "最快或最高温的方案不一定最好；局部工艺最优也可能损害下游整合与可靠性。",
+          "en": "The fastest or hottest approach is not necessarily best; a locally optimal process may harm downstream integration and reliability."
+        },
+        {
+          "zh": "退火要实现什么？",
+          "en": "What must the anneal accomplish?"
+        },
+        {
+          "zh": "A. 激活/修复要求：扩散容限、晶格缺陷与目标 Rs",
+          "en": "A. Activation / repair Requirements: diffusion tolerance, lattice defects And target Rs"
+        },
+        {
+          "zh": "B. 相形成/硅化物要求：相组成、接触电阻与团聚窗口",
+          "en": "B. Phase formation / silicides Requirements: phase composition, contact resistance And agglomeration window"
+        },
+        {
+          "zh": "C. 致密化/应力要求：膜密度、收缩与机械应力",
+          "en": "C. Densification / stress Requirements: film density, shrinkage And mechanical stress"
+        },
+        {
+          "zh": "D. 界面钝化要求：Dit、漏电、材料与气氛兼容",
+          "en": "D. Interface passivation Requirements: Dit, leakage, materials And ambient compatibility"
+        },
+        {
+          "zh": "允许总热预算？",
+          "en": "Permissible total thermal budget?"
+        },
+        {
+          "zh": "需要全厚度还是表层/局部加热？",
+          "en": "Is full-depth, surface or local heating required?"
+        },
+        {
+          "zh": "膜堆叠是否对光学吸收敏感？",
+          "en": "Is the film stack sensitive to optical absorption?"
+        },
+        {
+          "zh": "材料可承受什么气氛？",
+          "en": "What ambient can the material tolerate?"
+        },
+        {
+          "zh": "兼容/ 不兼容",
+          "en": "Compatible / incompatible"
+        },
+        {
+          "zh": "候选热源（非唯一选项）",
+          "en": "Candidate heat sources (not exclusive choices)"
+        },
+        {
+          "zh": "炉管退火（Furnace）",
+          "en": "Furnace annealing (Furnace)"
+        },
+        {
+          "zh": "RTP Soak（常规快速热退火）",
+          "en": "RTP Soak (conventional rapid thermal annealing)"
+        },
+        {
+          "zh": "Spike（短时高温）",
+          "en": "Spike (short high-temperature exposure)"
+        },
+        {
+          "zh": "Flash（极短脉冲）",
+          "en": "Flash (ultrashort pulse)"
+        },
+        {
+          "zh": "Laser（激光局部）",
+          "en": "Laser (local laser heating)"
+        },
+        {
+          "zh": "组合流程（例如：预退火+SpikeRTA + Laser …）",
+          "en": "Combined flow (e.g. pre-anneal + Spike, RTA + Laser …)"
+        },
+        {
+          "zh": "必须进行 Split 与DOE，以验证多种组合对目标与整合的影响；数据驱动选择，而非直觉。",
+          "en": "Split and DOE are required to validate how combinations affect targets and integration; select using data rather than intuition."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "七步闭环",
+        "en": "Seven-step loop"
+      },
+      "body": [
+        {
+          "zh": "七步闭环流程",
+          "en": "Seven-step closed-loop Flow"
+        },
+        {
+          "zh": "明确目标指标• 器件/电学• 结构/界面• 工艺 /整合",
+          "en": "Define target metrics • Device / electrical • Structure / interface • Process / integration"
+        },
+        {
+          "zh": "列出热预算与材料限制• 总热预算• 堆叠/厚度• 材料/气氛边界",
+          "en": "List the thermal budget and Material constraints • Total thermal budget • Stack / thickness • Material / ambient boundaries"
+        },
+        {
+          "zh": "选择热源/轨迹/气氛• 热源与脉冲特征• 温度轨迹（相对）• 气氛与工艺顺序",
+          "en": "Select the heat source / Trajectory / ambient • Heat-source and pulse characteristics • Temperature trajectory (relative) • Ambient and process sequence"
+        },
+        {
+          "zh": "Split 与 DOE• 因子/水准设定•Split/阻断设计• 数据记录",
+          "en": "Split and DOE • Factor / level settings • Split / blocking design • Data recording"
+        },
+        {
+          "zh": "Inline 量测• 关键指标监控• 趋势/漂移•异常预警",
+          "en": "Inline metrology • Monitor key metrics • Trends / drift • Early warning of anomalies"
+        },
+        {
+          "zh": "WAT/可靠性反馈• 结构/电学验证• 应力/缺陷• 可靠性测试",
+          "en": "WAT / Reliability feedback • Structural / electrical validation • Stress / defects • Reliability testing"
+        },
+        {
+          "zh": "SPC 维持与异常处置• 控制图监控• 异常处置流程• 经验沉淀",
+          "en": "SPC maintenance and Exception handling • Control-chart monitoring • Exception-handling procedure • Accumulated experience"
+        },
+        {
+          "zh": "闭环回流：反馈驱动迭代，可回到步骤2或3优化方案",
+          "en": "Closed-loop return: feedback drives iteration; return to step 2 or 3 to optimize the approach"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "关键控制",
+        "en": "Key controls"
+      },
+      "body": [
+        {
+          "zh": "四张关键控制卡",
+          "en": "Four key Control cards"
+        },
+        {
+          "zh": "激活率与结深□ 回片Rs / Hall□ 掺杂活化率□ 结深/侧向扩散□ 缺陷密度",
+          "en": "Activation rate and junction depth □ Returned-wafer Rs / Hall □ Dopant activation fraction □ Junction depth / lateral diffusion □ Defect density"
+        },
+        {
+          "zh": "相组成与应力□ 相组成（比例/纯度）□ 接触电阻/比接触电阻□ 团聚/粒径分布□ 薄膜应力/弯曲",
+          "en": "Phase composition and stress □ Phase composition (fraction / purity) □ Contact resistance / specific contact resistance □ Agglomeration / grain-size distribution □ Film stress / bending"
+        },
+        {
+          "zh": "片内/片间均匀性□ Wafer内均匀性□ Wafer间一致性□ 批间漂移趋势□ 边缘/中心差异",
+          "en": "Within-wafer / wafer-to-wafer uniformity □ Within-wafer uniformity □ Wafer-to-wafer consistency □ Lot-to-lot drift trend □ Edge / center differences"
+        },
+        {
+          "zh": "缺陷与界面电学□ 缺陷类型/密度□ Dit/界面态□ 漏电/击穿特性□ 介质完整性",
+          "en": "Defects and interface electrical characteristics □ Defect type / density □ Dit / interface states □ Leakage / breakdown behavior □ Dielectric integrity"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "权衡风险与异常",
+        "en": "Tradeoffs, risks and exceptions"
+      },
+      "body": [
+        {
+          "zh": "耦合权衡（没有免费午餐）",
+          "en": "Coupled tradeoffs (no free lunch)"
+        },
+        {
+          "zh": "低Rs可能伴随扩散或漏电",
+          "en": "Low Rs May accompany diffusion or leakage"
+        },
+        {
+          "zh": "反应充分，可能伴随团聚或应力",
+          "en": "Complete reaction may accompany agglomeration or stress"
+        },
+        {
+          "zh": "更低Dit，仍需验证材料与长期稳定性",
+          "en": "Lower Dit still requires validation of material and long-term stability"
+        },
+        {
+          "zh": "常见风险（先识别，后决策）",
+          "en": "Common risks (identify before deciding)"
+        },
+        {
+          "zh": "只看单一指标，忽略多项耦合",
+          "en": "Focusing on one metric and overlooking multiple couplings"
+        },
+        {
+          "zh": "温度校准偏差，导致判定失真",
+          "en": "Temperature-calibration bias distorts judgment"
+        },
+        {
+          "zh": "腔体/光学不匹配，结果不可迁移",
+          "en": "Chamber / optical mismatch prevents transferring results"
+        },
+        {
+          "zh": "边缘异常未识别，造成大面积风险",
+          "en": "Unrecognized edge anomalies create large-area risk"
+        },
+        {
+          "zh": "抽样不足，统计意义不足",
+          "en": "Insufficient sampling and statistical significance"
+        },
+        {
+          "zh": "异常处置原则",
+          "en": "Exception-handling principles"
+        },
+        {
+          "zh": "排查设备 / 材料/环境因素",
+          "en": "Investigate equipment / materials / environmental factors"
+        },
+        {
+          "zh": "评估风险并决定是否触发工程变更",
+          "en": "Assess risk and decide whether to trigger an engineering change"
+        },
+        {
+          "zh": "记录处置与再验证结果",
+          "en": "Record corrective actions and revalidation results"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "量测矩阵",
+        "en": "Metrology matrix"
+      },
+      "body": [
+        {
+          "zh": "量测反馈矩阵",
+          "en": "Metrology feedback Matrix"
+        },
+        {
+          "zh": "Rs / Hall判断对象：激活程度、载流子浓度迁移率、片内均匀性",
+          "en": "Rs / Hall Assesses: Activation, carrier concentration, Mobility and within-wafer uniformity"
+        },
+        {
+          "zh": "SIMS / SRP判断对象：掺杂浓度分布、结深、侧向扩散",
+          "en": "SIMS / SRP Assesses: Dopant concentration distribution, Junction depth and lateral diffusion"
+        },
+        {
+          "zh": "TEM / XRD / Raman判断对象：晶相组成、晶粒尺寸、缺陷与应力",
+          "en": "TEM / XRD / Raman Assesses: Crystal-phase composition, grain size, Defects and stress"
+        },
+        {
+          "zh": "C-V/I-V判断对象：界面态（Dit）、漏电、击穿与钝化效果",
+          "en": "C–V / I–V Assesses: Interface states (Dit), leakage, Breakdown and passivation results"
+        },
+        {
+          "zh": "WAT / 可靠性判断对象：器件性能分布、寿命、漂移与稳定性",
+          "en": "WAT / reliability Assesses: Device-performance distribution, lifetime, Drift and stability"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "下游影响",
+        "en": "Downstream effects"
+      },
+      "body": [
+        {
+          "zh": "下游影响",
+          "en": "Downstream effects"
+        },
+        {
+          "zh": "性能分布影响时序、驱动、噪声、能效与功能窗",
+          "en": "Performance distribution Affects timing, drive, noise, Energy efficiency and functional windows"
+        },
+        {
+          "zh": "接触良率影响硅化物/接触电阻、导通损耗与可靠性",
+          "en": "Contact yield Affects silicidation / contact resistance, Conduction loss and reliability"
+        },
+        {
+          "zh": "漏电影响静态功耗、发热、可靠性与寿命",
+          "en": "Leakage Affects static power, heat, Reliability and lifetime"
+        },
+        {
+          "zh": "可靠性影响 TDDB、NBTI、HTRB等失效率/寿命",
+          "en": "Reliability Affects TDDB, NBTI, HTRB and other failure rates / lifetimes"
+        },
+        {
+          "zh": "剩余热预算影响后续工艺选择、材料稳定性与整合空间",
+          "en": "Remaining thermal budget Affects subsequent process choices, Material stability and integration flexibility"
+        },
+        {
+          "zh": "量产流程可能采用预退火+Spike、RTA + Laser等组合；不能假设整片晶圆只能选择一种退火方法。",
+          "en": "Production flows may combine pre-anneal + Spike or RTA + Laser; do not assume that an entire wafer must use only one annealing method."
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图中文字",
+        "en": "Diagram labels"
+      },
+      "body": [
+        {
+          "zh": "确认量测有效性与校准状态",
+          "en": "Confirm metrology validity and calibration status"
+        },
+        {
+          "zh": "否",
+          "en": "No"
+        },
+        {
+          "zh": "否",
+          "en": "No"
+        },
+        {
+          "zh": "否",
+          "en": "No"
+        },
+        {
+          "zh": "否",
+          "en": "No"
+        },
+        {
+          "zh": "1",
+          "en": "1"
+        },
+        {
+          "zh": "2",
+          "en": "2"
+        },
+        {
+          "zh": "3",
+          "en": "3"
+        },
+        {
+          "zh": "4",
+          "en": "4"
+        },
+        {
+          "zh": "5",
+          "en": "5"
+        },
+        {
+          "zh": "6",
+          "en": "6"
+        },
+        {
+          "zh": "7",
+          "en": "7"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "zh": "控制卡小字“回片Rs/Hall”按原图保留；原图字形较小，可能是来源排版用词。",
+      "en": "The small control-card label “returned-wafer Rs/Hall” is retained from the source; its typography is small and may reflect the source wording."
+    }
+  ],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": [
+      "控制卡小字“回片Rs/Hall”按原图保留；原图字形较小，可能是来源排版用词。"
+    ]
+  },
+  "chapter": "annealing",
+  "topic": "退火与热预算",
+  "category": "fundamentals",
+  "tags": [
+    "RTA",
+    "RTP",
+    "Spike",
+    "Laser",
+    "Flash",
+    "FEOL"
+  ],
+  "chapterPage": 10,
+  "chapterCount": 10,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "a4371450fa72b56570dfb0446e1c7b3d3986fc0f9dfc6cbe313544de20a633fa",
+  "diagramText": {
+    "zh": "半导体工艺\n选型与量测：退火结果必须用器件指标闭环\n任务、热深度、材料堆叠与量测结果共同决定方案\n最快或最高温的方案不一定最好；局部工艺最优也可能损害下游整合与可靠性。\n退火要实现什么？\n允许总热预算？\nA. 激活/修复\n要求：扩散容限、晶格缺陷\n与目标 Rs\n是\n需要全厚度还是表层/局部加热？\n膜堆叠是否对光学吸收敏感？\n材料可承受什么气氛？\n是\n否\n兼容/ 不兼容\nB. 相形成/硅化物\n要求：相组成、接触电阻\n与团聚窗口\n是\n是\n是\n兼容/\n否\n否\n否\n不兼容\nC. 致密化/应力\n要求：膜密度、收缩\n与机械应力\n是\n是\n是\n兼容/\n否\n不兼容\nD. 界面钝化\n要求：Dit、漏电、材料\n与气氛兼容\n是\n否\n是\n否\n是\n否\n兼容 /\n不兼容\n候选热源\n（非唯一选项）\n炉管退火\n（Furnace）\nRTP Soak\n（常规快速热退火）\nSpike\n（短时高温）\nFlash\n（极短脉冲）\nLaser\n（激光局部）\n组合流程\n（例如：预退火+Spike\nRTA + Laser …）\n必须进行 Split 与DOE，以验证多种组合对目标与整合的影响；数据驱动选择，而非直觉。\n七步闭环\n流程\n明确目标指标\n列出热预算与\n材料限制\n• 器件/电学\n• 总热预算\n• 结构/界面\n• 堆叠/厚度\n• 工艺 /整合\n• 材料/气氛边界\n选择热源/\n轨迹/气氛\n• 热源与脉冲特征\n• 温度轨迹（相对）\n• 气氛与工艺顺序\nSplit 与 DOE\nInline 量测\n• 因子/水准设定\n•Split/阻断设计\n• 数据记录\n• 关键指标监控\n• 趋势/漂移\n•异常预警\nWAT/\n可靠性反馈\n• 结构/电学验证\n• 应力/缺陷\n• 可靠性测试\nSPC 维持与\n异常处置\n• 控制图监控\n• 异常处置流程\n• 经验沉淀\n四张关键\n控制卡\n激活率与结深\n□ 回片Rs / Hall\n□ 掺杂活化率\n□ 结深/侧向扩散\n□ 缺陷密度\n闭环回流：反馈驱动迭代，可回到步骤2或3优化方案\n相组成与应力\n□ 相组成（比例/纯度）\n□ 接触电阻/比接触电阻\n□ 团聚/粒径分布\n□ 薄膜应力/弯曲\n片内/片间均匀性\n□ Wafer内均匀性\n□ Wafer间一致性\n□ 批间漂移趋势\n□ 边缘/中心差异\n缺陷与界面电学\n□ 缺陷类型/密度\n□ Dit/界面态\n□ 漏电/击穿特性\n□ 介质完整性\n耦合权衡（没有免费午餐）\n低Rs\n可能伴随扩散或漏电\n反应充分\n更低Dit\n常见风险（先识别，后决策）\n只看单一指标，忽略多项耦合\n温度校准偏差，导致判定失真\n腔体/光学不匹配，结果不可迁移\n边缘异常未识别，造成大面积风险\n抽样不足，统计意义不足\n异常处置原则\n排查设备 / 材料/环境因素\n评估风险并决定是否触发工程变更\n记录处置与再验证结果\n量测反馈\n矩阵\nRs / Hall\n判断对象：\n激活程度、载流子浓度\n迁移率、片内均匀性\nSIMS / SRP\n判断对象：\n掺杂浓度分布、\n结深、侧向扩散\nTEM / XRD / Raman\n判断对象：\n晶相组成、晶粒尺寸、\n缺陷与应力\nC-V/I-V\n判断对象：\n界面态（Dit）、漏电、\n击穿与钝化效果\nWAT / 可靠性\n判断对象：\n器件性能分布、寿命、\n漂移与稳定性\n下游影响\n性能分布\n影响时序、驱动、噪声、\n能效与功能窗\n接触良率\n影响硅化物/接触电阻、\n导通损耗与可靠性\n漏电\n影响静态功耗、发热、\n可靠性与寿命\n可靠性\n影响 TDDB、NBTI、\nHTRB等失效率/寿命\n剩余热预算\n影响后续工艺选择、\n材料稳定性与整合空间\n量产流程可能采用预退火+Spike、RTA + Laser等组合；不能假设整片晶圆只能选择一种退火方法。\n确认量测有效性与校准状态\n否\n否\n否\n否\n1\n2\n3\n4\n5\n6\n7\n否\n可能伴随团聚或应力\n仍需验证材料与长期稳定性",
+    "en": "Semiconductor processing\nSelection and metrology: close the annealing loop with device metrics\nTask, thermal depth, material stack and metrology results jointly determine the approach\nThe fastest or hottest approach is not necessarily best; a locally optimal process may harm downstream integration and reliability.\nWhat must the anneal accomplish?\nPermissible total thermal budget?\nA. Activation / repair\nRequirements: diffusion tolerance, lattice defects\nAnd target Rs\nYes\nIs full-depth, surface or local heating required?\nIs the film stack sensitive to optical absorption?\nWhat ambient can the material tolerate?\nYes\nNo\nCompatible / incompatible\nB. Phase formation / silicides\nRequirements: phase composition, contact resistance\nAnd agglomeration window\nYes\nYes\nYes\nCompatible /\nNo\nNo\nNo\nIncompatible\nC. Densification / stress\nRequirements: film density, shrinkage\nAnd mechanical stress\nYes\nYes\nYes\nCompatible /\nNo\nIncompatible\nD. Interface passivation\nRequirements: Dit, leakage, materials\nAnd ambient compatibility\nYes\nNo\nYes\nNo\nYes\nNo\nCompatible /\nIncompatible\nCandidate heat sources\n(not exclusive choices)\nFurnace annealing\n(Furnace)\nRTP Soak\n(conventional rapid thermal annealing)\nSpike\n(short high-temperature exposure)\nFlash\n(ultrashort pulse)\nLaser\n(local laser heating)\nCombined flow\n(e.g. pre-anneal + Spike,\nRTA + Laser …)\nSplit and DOE are required to validate how combinations affect targets and integration; select using data rather than intuition.\nSeven-step closed-loop\nFlow\nDefine target metrics\nList the thermal budget and\nMaterial constraints\n• Device / electrical\n• Total thermal budget\n• Structure / interface\n• Stack / thickness\n• Process / integration\n• Material / ambient boundaries\nSelect the heat source /\nTrajectory / ambient\n• Heat-source and pulse characteristics\n• Temperature trajectory (relative)\n• Ambient and process sequence\nSplit and DOE\nInline metrology\n• Factor / level settings\n• Split / blocking design\n• Data recording\n• Monitor key metrics\n• Trends / drift\n• Early warning of anomalies\nWAT /\nReliability feedback\n• Structural / electrical validation\n• Stress / defects\n• Reliability testing\nSPC maintenance and\nException handling\n• Control-chart monitoring\n• Exception-handling procedure\n• Accumulated experience\nFour key\nControl cards\nActivation rate and junction depth\n□ Returned-wafer Rs / Hall\n□ Dopant activation fraction\n□ Junction depth / lateral diffusion\n□ Defect density\nClosed-loop return: feedback drives iteration; return to step 2 or 3 to optimize the approach\nPhase composition and stress\n□ Phase composition (fraction / purity)\n□ Contact resistance / specific contact resistance\n□ Agglomeration / grain-size distribution\n□ Film stress / bending\nWithin-wafer / wafer-to-wafer uniformity\n□ Within-wafer uniformity\n□ Wafer-to-wafer consistency\n□ Lot-to-lot drift trend\n□ Edge / center differences\nDefects and interface electrical characteristics\n□ Defect type / density\n□ Dit / interface states\n□ Leakage / breakdown behavior\n□ Dielectric integrity\nCoupled tradeoffs (no free lunch)\nLow Rs\nMay accompany diffusion or leakage\nSufficient reaction\nLower D_it\nCommon risks (identify before deciding)\nFocusing on one metric and overlooking multiple couplings\nTemperature-calibration bias distorts judgment\nChamber / optical mismatch prevents transferring results\nUnrecognized edge anomalies create large-area risk\nInsufficient sampling and statistical significance\nException-handling principles\nInvestigate equipment / materials / environmental factors\nAssess risk and decide whether to trigger an engineering change\nRecord corrective actions and revalidation results\nMetrology feedback\nMatrix\nRs / Hall\nAssesses:\nActivation, carrier concentration,\nMobility and within-wafer uniformity\nSIMS / SRP\nAssesses:\nDopant concentration distribution,\nJunction depth and lateral diffusion\nTEM / XRD / Raman\nAssesses:\nCrystal-phase composition, grain size,\nDefects and stress\nC–V / I–V\nAssesses:\nInterface states (Dit), leakage,\nBreakdown and passivation results\nWAT / reliability\nAssesses:\nDevice-performance distribution, lifetime,\nDrift and stability\nDownstream effects\nPerformance distribution\nAffects timing, drive, noise,\nEnergy efficiency and functional windows\nContact yield\nAffects silicidation / contact resistance,\nConduction loss and reliability\nLeakage\nAffects static power, heat,\nReliability and lifetime\nReliability\nAffects TDDB, NBTI,\nHTRB and other failure rates / lifetimes\nRemaining thermal budget\nAffects subsequent process choices,\nMaterial stability and integration flexibility\nProduction flows may combine pre-anneal + Spike or RTA + Laser; do not assume that an entire wafer must use only one annealing method.\nConfirm metrology validity and calibration status\nNo\nNo\nNo\nNo\n1\n2\n3\n4\n5\n6\n7\nNo\nMay involve agglomeration or stress\nMaterial and long-term stability still require verification"
+  },
+  "reference": "references/IMG_7854.webp",
+  "referenceReview": {
+    "referenceSha256": "f4eada37c1d46d482d18bee2f0d5bcba25e2e886a712915249380916507d2ad6",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1277,
+        1778,
+        134,
+        78
+      ],
+      [
+        1032,
+        1841,
+        385,
+        68
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

@@ -134,5 +134,32 @@
   "chapterCount": 1,
   "width": 1086,
   "height": 1448,
-  "sha256": "2ae9addc3f5ba71ec4d9ae9f31b7e188527aeb7c76b1eb8ce6a27ea59360bac9"
+  "sha256": "2ae9addc3f5ba71ec4d9ae9f31b7e188527aeb7c76b1eb8ce6a27ea59360bac9",
+  "diagramText": {
+    "zh": "一张图看懂VDMOS\n双扩散工艺 → 器件机理 → 功率开关\n传统硅基 N沟道 · 平面栅结构　栅极控制表面沟道，主导电路径穿过芯片厚度\n从工艺看结构如何形成\n衬底与外延\nP体区形成\nN⁺衬底 + N⁻漂移区　氧化层绝缘，栅极施加电场　注入与扩散形成体区\n多晶硅栅极\nN-漂移区\n（轻掺杂，支撑耐压）\nN+衬底\n（低阻导电）\nP体区\nN⁺源区形成\n两种扩散轮廓共同定义沟道\n正面源一体短接，背面漏极\n源极金属 （S）\n源极金属 （S）\nP体区\nP体区\nN⁺\nP体区\nN⁺\nP体区\nN-漂移区\nN⁺衬底\nP体区\nN-漂移区\nN⁺衬底\nN-漂移区\nN⁻漂移区\nN+衬底\n漏极金属 （D）\n代表性流程，实际顺序随工艺平台变化 | 工艺反馈：外延厚度与掺杂| 结深与片阻| 栅氧厚度\n一张剖面，看懂每个区域的作用\n源极金属 （S）\n栅极G\n源极金属（S）\n栅极 G：电场控制沟道\n栅氧：隔开栅极与硅\n源极S：连接源区与体区\n橙色箭头：电子运动方向\n（从两侧流入 → 向下流至漏极）\nN+ 源区：电子入口\nN+\nP体区\n反型沟道\n（电子通路）\nN+\nP体区\nJFET区：导电路径收窄\nP体区：沟道形成区域\nN-漂移区\n（支撑耐压）\nJFET区\n（导电路径收窄）\nN-漂移区：支撑耐压\nN+衬底：低阻导电基础\nN⁺衬底\n（低阻导电基础）\n漏极 D：背面电极\n漏极金属 （D）\n表面形成沟道•内部承担耐压•背面连接漏极\n导通：栅压建立通路\n关断：漂移区支撑电压\n足够的正栅源电压形成反型沟道\nN⁺\nP体区\nN⁺\nP体区\nN⁺源区 → 沟道 → JFET区\n漂移区 → 漏极\nN⁺\nP体区\nN⁺\nP体区\nVth 仅代表开始形成沟道，\n耗尽区\n（主要向N-漂移区扩展）\n不等于充分导通。\n漂移区更厚、掺杂更低：通常耐压提高，导通电阻也增加\n性能为什么需要取舍？\n沟道电阻\n积累区电阻　JFET区电阻　漂移区电阻\n衬底及接触电阻\n电性反馈：\n• Vth（阈值电压）\n• 指定栅压与温度下的\nR_{DS(on)}\nR_{DS(on)} ≈ 沟道＋积累区＋JFET区＋漂移区＋衬底及接触电阻\n• 击穿电压\n结构自带的寄生效应\n体二极管\n寄生NPN\n（漏极侧阴极）\nN⁺源区–P体区–N⁻漂移区\n（P体区–N⁻漂移区结）\n可能形成寄生三极管\nS\n（阳极）\n（阴极）\nS\nC\n• 漏电电流\n（N⁺）（P体区）（N⁻漂移区）\n• 导通损耗 ≈ I²R_{DS(on)}　• 开关过程：电压与电流重叠产生损耗\n• 栅电荷 Qg\n• 无寄生电容：同时影响电阻、电容与栅电荷\n• 关注反向恢复特性　• 源–体短接有助于抑制触发\n沟道消失，体区一漂移区结反偏\n耗尽区主要向轻掺杂漂移区扩展\n边缘终端管理电场，避免提前击穿\n它到底用来做什么？\n电源\n（+）\n负载\n（如电机、灯等）\n驱动器\n（提供栅极信号）\n电源（−）\n电机控制\n驱动器控制栅极，\nVDMOS开关负载电流\n灯光调节 | 开关电源\nSiO₂ 栅氧\nB\n栅氧与栅极\n接触与金属\n1\n2\n3\n4\n5",
+    "en": "VDMOS at a glance\nDouble diffusion → device physics → power switching\nConventional silicon N-channel, planar gate; the gate controls a surface channel and the main conduction path passes through the chip thickness\nHow processing forms the structure\nSubstrate and epitaxy\nP-body formation\nN⁺ substrate + N⁻ drift region; oxide insulates while the gate applies an electric field; implantation and diffusion form the body\nPolysilicon gate\nN⁻ drift region\n(Lightly doped, supports blocking voltage)\nN⁺ substrate\n(Low-resistance conduction)\nP-body\nN⁺ source formation\nTwo diffusion profiles jointly define the channel\nFront-side source–body short; backside drain\nSource metal (S)\nSource metal (S)\nP-body\nP-body\nN⁺\nP-body\nN⁺\nP-body\nN⁻ drift region\nN⁺ substrate\nP-body\nN⁻ drift region\nN⁺ substrate\nN⁻ drift region\nN⁻ drift region\nN⁺ substrate\nDrain metal (D)\nRepresentative flow; actual sequence varies by platform | Process feedback: epitaxial thickness/doping | junction depth/sheet resistance | gate-oxide thickness\nA cross-section explaining each region\nSource metal (S)\nGate G\nSource metal (S)\nGate G: electric-field control of the channel\nGate oxide: separates gate from silicon\nSource S: connects source and body\nOrange arrows: electron motion\n(From both sides → down to the drain)\nN⁺ source: electron entry\nN⁺\nP-body\nInversion channel\n(Electron path)\nN⁺\nP-body\nJFET region: constricted conduction path\nP-body: channel-formation region\nN⁻ drift region\n(Supports blocking voltage)\nJFET region\n(Constricted conduction path)\nN⁻ drift region: supports blocking voltage\nN⁺ substrate: low-resistance conducting base\nN⁺ substrate\n(Low-resistance conducting base)\nDrain D: backside electrode\nDrain metal (D)\nSurface channel • internal voltage support • backside drain\nOn-state: gate voltage establishes a path\nOff-state: drift region supports voltage\nSufficient positive gate–source voltage forms an inversion channel\nN⁺\nP-body\nN⁺\nP-body\nN⁺ source → channel → JFET region\nDrift region → drain\nN⁺\nP-body\nN⁺\nP-body\nVth only marks the onset of channel formation,\nDepletion region\n(Extends mainly into the N⁻ drift region)\nnot full enhancement.\nA thicker, more lightly doped drift region usually raises blocking voltage and on-resistance\nWhy are performance trade-offs necessary?\nChannel resistance\nAccumulation-region resistance; JFET-region resistance; drift-region resistance\nSubstrate and contact resistance\nElectrical feedback:\n• Vth (threshold voltage)\n• At specified gate voltage and temperature\nR_{DS(on)}\nR_{DS(on)} ≈ channel + accumulation region + JFET region + drift region + substrate/contact resistance\n• Breakdown voltage\nInherent parasitic effects\nBody diode\nParasitic NPN\n(Drain-side cathode)\nN⁺ source – P-body – N⁻ drift region\n(P-body–N⁻ drift-region junction)\nMay form a parasitic bipolar transistor\nS\n(Anode)\n(Cathode)\nS\nC\n• Leakage current\n(N⁺) (P-body) (N⁻ drift region)\n• Conduction loss ≈ I²R_{DS(on)} • Switching: voltage/current overlap causes loss\n• Gate charge Qg\n• [Unclear initial wording] simultaneously affects resistance, capacitance and gate charge\n• Consider reverse recovery • Source–body short helps suppress triggering\nChannel disappears; body–drift junction is reverse biased\nDepletion extends mainly into the lightly doped drift region\nEdge termination manages the electric field to avoid premature breakdown\nWhat is it used for?\nPower supply\n(+)\nLoad\n(Such as motors or lamps)\nDriver\n(Provides the gate signal)\nPower supply (−)\nMotor control\nThe driver controls the gate;\nVDMOS switches load current\nLighting control | switching power supplies\nSiO₂ gate oxide\nB\nGate oxide and gate\nContacts and metal\n1\n2\n3\n4\n5"
+  },
+  "reference": "references/IMG_7679.webp",
+  "referenceReview": {
+    "referenceSha256": "d3767471df589560ffdb7915a1c0858df23b926891c1f3abb00ab848fc07c1dc",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        953,
+        1338,
+        125,
+        73
+      ],
+      [
+        768,
+        1383,
+        313,
+        60
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

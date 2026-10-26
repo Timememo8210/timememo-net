@@ -137,5 +137,32 @@
   "chapterCount": 8,
   "width": 1086,
   "height": 1448,
-  "sha256": "4d9a3ec9e96918399c6ae0a56b9f77ab067b6acfd6ef7fa595df660649e38e1d"
+  "sha256": "4d9a3ec9e96918399c6ae0a56b9f77ab067b6acfd6ef7fa595df660649e38e1d",
+  "diagramText": {
+    "zh": "01\n半导体工艺\n异常诊断：Vth漂移不只看金属\n均值偏移 / 片内分布 / 局部变异/时间漂移\nV_FB与Vth全片同向偏移\n优先检查\nWFM成分与厚度、退火、界面偶极\n同一片晶圆上，VFB与Vth整体向高或向低偏移。\n界面偶极示意\n异常前\n异常后\nV_FB\nVth\nV_FB\nVth\n02\n电压\n电压\n片内或器件间离散增大\n同片不同位置或不同器件间，Vth分布变宽、出现双峰等。\n片内分布\n异常前\n异常后\n高\n低\nVth\n03\nC-V漂移或迟滞明显\n多次扫描出现C-V曲线漂移或迟滞，或随测试历史变化。\nC\n初次扫描\n后续扫描\nV_G\n04\nI_ds\nVth 漂移伴随SS或迁移率变化\nVth变化同时，SS变差或迁移率下降，提示沟道/界面问题。\n正常\n正常\n异常\n异常\nSS变差\n迁移率下降\nV_G\nV_G\n05\n暴露前\n空气暴露后表面量测变化\n样品暴露空气后，表面功函数或Vth发生变化。\n暴露后\n表面吸附示意\nH₂O\nVth\nVth\n表面吸附/原生氧化\n06\n首次出现节点\n结合工艺流程定位异常首次出现的环节。\n金属栅（WFM）\n高k介质\n界面层\n硅衬底\n优先检查\n膜层连续性、金属晶粒取向、局部缺失、图形尺寸\n金属晶粒取向\n膜层局部缺失\n图形尺寸变化\n优先检查\n固定电荷、氧空位、界面态、测试历史\nE_C\nE_F\nE_V\n固定电荷（Q_f）\n氧空位（V_O）\n界面态（D_it）\n优先检查\n沟道、界面损伤、器件结构\nS\n界面损伤\n沟道散射增强\n器件结构影响\n优先检查\n吸附、原生氧化、参考探针漂移\n原生氧化层\n参考探针漂移\n07\n核心判断\nWFM沉积\n选择性去除\n/ 保留\n填充\n退火\nMOSCAP\n（电学量测）\n器件\n（电学量测）\nVth异常是一种器件表现，\n需要沿栅堆栈、介质和\n沟道分支定位根因。\n08\n常见异常标签\nn-p失配\n晶圆边缘漂移\n双峰分布\nC-V迟滞\n退火前后反向变化\n09\n量测反馈\n量测反馈：C–V与I–V / V_FB–Vth分布 / XPS / TEM-EDS / KPFM / 晶圆图\n10\n处置动作\n材料/界面分析 → 分片验证\n11\n底部提醒\n未区分EWF与介质电荷前，不直接回调单一WFM配方。\nO₂\nD\n迁移率\n复测 → Hold → C–V与I–V对照\nμ",
+    "en": "01\nSemiconductor processing\nDiagnosis: Vth drift is not solely a metal issue\nMean shifts / wafer distribution / local variation / time drift\nV_FB and Vth shift together wafer-wide\nCheck first\nWFM composition/thickness, anneal, interface dipoles\nV_FB and Vth shift higher or lower together across the wafer.\nInterface-dipole schematic\nBefore anomaly\nAfter anomaly\nV_FB\nVth\nV_FB\nVth\n02\nVoltage\nVoltage\nGreater within-wafer or device variation\nVth distributions broaden or become bimodal across positions/devices.\nWafer distribution\nBefore anomaly\nAfter anomaly\nHigh\nLow\nVth\n03\nPronounced C–V shift or hysteresis\nRepeated scans shift or show hysteresis, or vary with test history.\nC\nInitial scan\nSubsequent scans\nV_G\n04\nI_ds\nVth shifts with SS or mobility changes\nWorse SS or mobility during Vth shifts suggests channel/interface issues.\nNormal\nNormal\nAbnormal\nAbnormal\nWorse SS\nLower mobility\nV_G\nV_G\n05\nBefore exposure\nSurface measurements change after air exposure\nSurface work function or Vth changes after air exposure.\nAfter exposure\nSurface-adsorption schematic\nH₂O\nVth\nVth\nSurface adsorption / native oxide\n06\nFirst-occurrence node\nLocate where the anomaly first appears in the process.\nMetal gate (WFM)\nHigh-k dielectric\nInterfacial layer\nSilicon substrate\nCheck first\nContinuity, metal-grain orientation, local loss, pattern dimensions\nMetal-grain orientation\nLocal film loss\nPattern-size changes\nCheck first\nFixed charge, oxygen vacancies, interface states, test history\nE_C\nE_F\nE_V\nFixed charge (Q_f)\nOxygen vacancies (V_O)\nInterface states (D_it)\nCheck first\nChannel, interface damage, device structure\nS\nInterface damage\nIncreased channel scattering\nDevice-structure effects\nCheck first\nAdsorption, native oxide, reference-probe drift\nNative oxide\nReference-probe drift\n07\nKey judgment\nWFM deposition\nSelective removal\n/ retention\nFill\nAnneal\nMOSCAP\n(electrical measurement)\nDevice\n(electrical measurement)\nVth anomalies are device symptoms;\ntrace the gate-stack, dielectric,\nand channel branches to find root causes.\n08\nCommon anomaly labels\nn–p mismatch\nWafer-edge drift\nBimodal distribution\nC–V hysteresis\nOpposite pre/post-anneal changes\n09\nMeasurement feedback\nFeedback: C–V/I–V / V_FB–Vth distribution / XPS / TEM-EDS / KPFM / wafer maps\n10\nActions\nMaterial/interface analysis → split validation\n11\nReminder\nDo not retune one WFM recipe before separating EWF and dielectric charge.\nO₂\nD\nMobility\nRemeasure → Hold → compare C–V and I–V\nμ"
+  },
+  "reference": "references/IMG_7658.webp",
+  "referenceReview": {
+    "referenceSha256": "e4f7e30aaf14b3aa7d6166de36634e4f8a2f62941fb65d9461694d510143e5c4",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        953,
+        1331,
+        119,
+        67
+      ],
+      [
+        768,
+        1376,
+        306,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

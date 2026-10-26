@@ -86,5 +86,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "a323e8338f8853482c9ea5d08ba01d8ba741d107a976cc560e481b1874779ecb"
+  "sha256": "a323e8338f8853482c9ea5d08ba01d8ba741d107a976cc560e481b1874779ecb",
+  "diagramText": {
+    "zh": "01\n结构定位：先看通孔在哪一层\n芯片、中介层、封装基板，先分层再比较。\n芯片内TSV\n硅中介层TSV\n玻璃层TGV\n硅芯片\n（含TSV）\n硅中介层\n（含TSV）\n玻璃基板\n（含TGV）\n层级示意，非具体产品。\n核心判断\nTSV贯穿硅，TGV贯穿玻璃；\n能否替代，取决于所属层级\n与连接任务。\n流程位置\n封装架构定义阶段，明确通孔连接的\n上下端点，交给基材、孔与布线设计。\n辨认流程\n封装架构\n定义\n明确通孔\n连接的上下端点\n交给基材、\n孔与布线设计\n关键控制\n进入后续\n工艺流程\n标出芯片/\n中介层/基板\n找上下端点\n确认贯穿\n材料\n区分信号/\n电源/地\n耦合权衡\n缩短垂直路径可能需要更薄基材，\n也会增加搬运与后续加工难度。\n量测反馈：结构 / 导通 / 接口\n用截面确认层级与接续位置，\n结合导通检测核对完整路径，\n异常后复核接口和布线设计。\n核对横向\n布线\n封装层级\n常见失效\n接口错位\n导致开路；\n端点间距\n互连长度\n横向布线密度\n下游影响\n架构决定制孔、RDL\n（重布线层）及组装接口\n的要求。\n回流路径安排不当\n导致串扰或链路劣化。\n边界条件\nHBM内部的硅芯片TSV，\n不等同于玻璃芯基板TGV；\n同一封装可以在不同层级\n使用两者。",
+    "en": "01\nStructural location: identify the via layer first\nChip, interposer or package substrate: distinguish levels before comparing.\nIn-chip TSV\nSilicon-interposer TSV\nGlass-layer TGV\nSilicon chip\n(With TSV)\nSilicon interposer\n(With TSV)\nGlass substrate\n(With TGV)\nHierarchy schematic, not a specific product.\nCore conclusion\nTSV passes through silicon; TGV through glass.\nSubstitution depends on hierarchy\nand connection task.\nProcess stage\nAt package architecture definition, identify the via’s\nupper/lower endpoints for substrate, via and routing design.\nIdentification flow\nPackage architecture\ndefinition\nIdentify the via’s\nupper and lower endpoints\nHand off to substrate,\nvia and routing design\nKey controls\nEnter subsequent\nProcess flow\nMark chip /\ninterposer / substrate\nLocate endpoints\nIdentify traversed\nmaterial\nDistinguish signal /\npower / ground\nTrade-offs\nShorter vertical paths may require thinner substrates,\nmaking handling and later processing harder.\nFeedback: structure / continuity / interface\nConfirm hierarchy and connections by cross-section;\ncheck complete paths using continuity tests;\nreview interface and routing design after anomalies.\nCheck lateral\nrouting\nPackage hierarchy\nCommon failures\nInterface misalignment\ncauses opens;\nEndpoint spacing\nInterconnect length\nLateral-routing density\nDownstream effects\nArchitecture determines via, RDL\n(redistribution layer) and assembly-interface\nrequirements.\nPoor return-path arrangement\ncauses crosstalk or link degradation.\nBoundaries\nSilicon-chip TSV inside HBM\nis not glass-core-substrate TGV;\none package may use both\nat different levels."
+  },
+  "reference": "references/IMG_7708.webp",
+  "referenceReview": {
+    "referenceSha256": "f3253550e70b7c063fadaf5282255313b83f62b3eeeb831a2f56282c5ee998f4",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        961,
+        1333,
+        118,
+        75
+      ],
+      [
+        773,
+        1385,
+        301,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

@@ -77,5 +77,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "4bbee309f241d527d022b692b8d0dcf0401b9b3925105cfd6900bbf6dd6d8de0"
+  "sha256": "4bbee309f241d527d022b692b8d0dcf0401b9b3925105cfd6900bbf6dd6d8de0",
+  "diagramText": {
+    "zh": "08\n工艺选择：按需求与平台能力选\n器件体区、局部隔离、允许偏置与实现代价。\n常规PMOS体区\n标准N阱\nPMOS\nN阱\n（PMOS体区）\nP型衬底\n局部P阱隔离或受控体偏置\n评估三阱\n噪声敏感混合信号模块\n联合隔离设计\nNMOS\nPMOS\n模拟电路\n数字电路\nP阱\n（NMOS体区）\nN阱\n（PMOS体区）\nP阱\nN阱\n深N阱\n（局部隔离或受控体偏置）\nP型衬底\n深N阱\n（联合隔离）\nP型衬底\n规则 +模型 + 硅后验证\nPDK\n器件和规则\n模型\n（器件/寄生）\n版图方案\n（隔离/偏置/护环）\n测试验证\n（器件/耦合/可靠性）\n核心判断\nN阱与深N阱承担的职责有交集也有差异，\n选择时先看器件与隔离目标，再看PDK\n允许的实现。\n02\n流程位置与决策流程\n流程位置：平台及架构选型阶段，把电路需求转换\n为可验证的器件、隔离和版图方案。\n决策流程：\n明确器件\n与体区\n列出隔离\n及偏置需求\n核对PDK\n器件和规则\n评估寄生/\n面积/平台代价\n完成仿真\n与测试验证\n03\n关键约束\n• 模型及器件支持\n• 允许偏置\n• 目标隔离指标\n• 面积与平台成本\n04\n三类任务\n常规PMOS体区：采用平台支持的N阱结构，配置正确体接触。\n• 局部P阱隔离或受控体偏置：评估深N阱/三阱选项，并核对侧向闭合和偏置范围。\n• 噪声敏感的混合信号模块：联合评估隔离位置、接触护环、供电与布线，再比较完整\n电路表现。\n05\n耦合与风险\nDNW选项可能增加制造或版图代价；\n收益不足时，不能仅因名称更“深”就选用，\n也不能只凭面积判断隔离是否够用。\n06\n量测反馈：器件/ 隔离/可靠性\n用目标工作条件下的器件电学、耦合测试与\n可靠性结果校准选择，检查设计规则与模型\n是否同时满足。\n下游影响与边界\n选型会约束后续版图、偏置和验证；\n设计端使用PDK批准的结构，工艺端\n控制掺杂剖面，不把两者的可调项\n混为一谈。\n01\n07",
+    "en": "08\nProcess selection: match needs and platform capability\nDevice bodies, local isolation, allowed bias and implementation cost.\nConventional PMOS body\nStandard N-well\nPMOS\nN-well\n(PMOS body)\nP-type substrate\nLocal P-well isolation or controlled body bias\nEvaluate triple-well\nNoise-sensitive mixed-signal block\nCombined isolation design\nNMOS\nPMOS\nAnalog circuit\nDigital circuit\nP-well\n(NMOS body)\nN-well\n(PMOS body)\nP-well\nN-well\nDeep N-well\n(Local isolation or controlled body bias)\nP-type substrate\nDeep N-well\n(Combined isolation)\nP-type substrate\nRules + models + post-silicon verification\nPDK\nDevices and rules\nModels\n(Device / parasitic)\nLayout scheme\n(Isolation / bias / guard rings)\nTest verification\n(Device / coupling / reliability)\nCore conclusion\nN-well and deep N-well have overlapping but different roles.\nStart with device and isolation goals, then consider PDK-\npermitted implementations.\n02\nStage and decision flow\nStage: platform/architecture selection; translate circuit needs\ninto verifiable device, isolation and layout schemes.\nDecision flow:\nDefine devices\nand bodies\nList isolation\nand bias needs\nCheck PDK\ndevices and rules\nEvaluate parasitic /\narea / platform cost\nComplete simulations\nand test verification\n03\nKey constraints\n• Model and device support\n• Permitted bias\n• Target isolation metrics\n• Area and platform cost\n04\nThree task categories\nConventional PMOS body: use supported N-well structures and correct body contacts.\n• Local P-well isolation/body bias: assess DNW/triple-well, lateral closure and bias range.\n• Noise-sensitive mixed-signal blocks: assess isolation placement, contacts/rings, supplies and routing,\nthen compare full-circuit performance.\n05\nCoupling and risks\nDNW may add fabrication or layout cost;\ndo not choose it merely because its name says “deep” if benefits are insufficient,\nnor judge isolation adequacy by area alone.\n06\nFeedback: devices / isolation / reliability\nCalibrate choices using electrical, coupling and\nreliability tests at target conditions; check that rules and models\nare both satisfied.\nDownstream effects and boundaries\nSelection constrains subsequent layout, bias and verification;\ndesigners use PDK-approved structures, while process engineers\ncontrol dopant profiles. Do not confuse their\navailable adjustments.\n01\n07"
+  },
+  "reference": "references/IMG_7706.webp",
+  "referenceReview": {
+    "referenceSha256": "2265403a24ff85dec711769f8d4e3419fb88379c458839290f57da4f3af2868d",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        961,
+        1333,
+        118,
+        75
+      ],
+      [
+        773,
+        1385,
+        301,
+        57
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

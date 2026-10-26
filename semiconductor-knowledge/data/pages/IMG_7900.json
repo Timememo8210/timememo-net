@@ -1,0 +1,243 @@
+{
+  "id": "IMG_7900",
+  "source": "IMG_7900.JPG",
+  "title": {
+    "zh": "中间转换：GDS不能直接等于光罩",
+    "en": "Intermediate conversion: GDS is not directly equivalent to a mask"
+  },
+  "subtitle": {
+    "zh": "制造规则把设计数据变成可写、可检的Mask数据",
+    "en": "Manufacturing rules turn design data into writable, inspectable mask data"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "七步转换",
+        "en": "Seven conversion steps"
+      },
+      "body": [
+        {
+          "zh": "GDS / OASIS；设计数据导出",
+          "en": "GDS / OASIS Export design data"
+        },
+        {
+          "zh": "Layer Map /；Boolean；层映射与；布尔运算",
+          "en": "Layer map / Boolean Layer mapping and Boolean operations"
+        },
+        {
+          "zh": "3；Frame / Mark/；PCM；添加画框、标记；和工艺控制标记",
+          "en": "3 Frame / mark / PCM Add frames, marks and process-control marks"
+        },
+        {
+          "zh": "Bias/ Shrink；尺寸修正；（偏置/收缩）",
+          "en": "Bias / shrink Dimension correction (bias / shrink)"
+        },
+        {
+          "zh": "5；OPC/ MRC；光学临近校正；与规则检查",
+          "en": "5 OPC / MRC Optical proximity correction and rule checks"
+        },
+        {
+          "zh": "Fracture /；Job Deck；MDP Job/Data；碎形处理并生成；MDP Job / Data",
+          "en": "Fracture / job deck MDP job / data Fracture and generate MDP job / data"
+        },
+        {
+          "zh": "JDV；版图预览；（写版验证视图）",
+          "en": "JDV Layout preview (mask-writing verification view)"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图形演变",
+        "en": "Pattern evolution"
+      },
+      "body": [
+        {
+          "zh": "GDS原始几何；Boolean结果；添加Frame/Mark；尺寸修正后；OPC校正后；Fracture结果；JDV预览",
+          "en": "Original GDS geometry Boolean result Add frame/marks After size correction After OPC correction Fracturing result JDV preview"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "关键控制",
+        "en": "Key controls"
+      },
+      "body": [
+        {
+          "zh": "1. 关键控制",
+          "en": "1. Key controls"
+        },
+        {
+          "zh": "Layer Mapping（层映射）；将设计层映射到工艺/掩膜层。",
+          "en": "Layer mapping Map design layers to process/mask layers"
+        },
+        {
+          "zh": "Boolean逻辑；按制造规则执行并/或/异或等布尔运算。",
+          "en": "Boolean logic Apply manufacturing-rule Boolean operations such as AND, OR and XOR"
+        },
+        {
+          "zh": "Bias / Shrink（偏置/收缩）；根据制造偏差对关键尺寸进行修正。",
+          "en": "Bias / shrink Correct critical dimensions for manufacturing deviations"
+        },
+        {
+          "zh": "OPC / Fracture；提升可印性并满足规则，最后进行碎形。",
+          "en": "OPC / fracturing Improve printability and satisfy rules, then fracture the data"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "耦合关系",
+        "en": "Coupled effects"
+      },
+      "body": [
+        {
+          "zh": "2. 耦合关系；OPC提高；可印性；增加Mask图形；复杂度；增加数据量与；写版时间",
+          "en": "2. Coupled effects OPC improves printability Increased mask-shape complexity Increased data volume and mask-writing time"
+        },
+        {
+          "zh": "更强的OPC改善印刷良率，但会带来复杂度和数据量的代价。",
+          "en": "Stronger OPC can improve printing yield at the cost of complexity and data volume"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "常见风险",
+        "en": "Common risks"
+      },
+      "body": [
+        {
+          "zh": "3. 常见风险",
+          "en": "3. Common risks"
+        },
+        {
+          "zh": "Boolean错误；布尔运算顺序或逻辑错误导致缺陷或开短路。",
+          "en": "Boolean error Wrong operation order or logic can create defects, opens or shorts"
+        },
+        {
+          "zh": "Tone反转；正/负片或极性设定错误，导致图形反相。",
+          "en": "Tone inversion Wrong positive/negative tone or polarity inverts the pattern"
+        },
+        {
+          "zh": "OPC层遗漏；未纳入关键OPC层或修正层，影响可印性。",
+          "en": "Missing OPC layers Omitting critical OPC or correction layers affects printability"
+        },
+        {
+          "zh": "Fracture异常；碎形缝隙、过大多边形或交叠异常等问题。",
+          "en": "Fracturing anomaly Problems include gaps, oversized polygons or abnormal overlaps"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "反馈验证与边界",
+        "en": "Feedback validation and limits"
+      },
+      "body": [
+        {
+          "zh": "4. 反馈验证",
+          "en": "4. Feedback validation"
+        },
+        {
+          "zh": "XOR（异或比较）；比较前后结果，检查意外差异。",
+          "en": "XOR comparison Compare before and after to detect unintended differences"
+        },
+        {
+          "zh": "MRC（制造规则检查）；对MDP数据执行制造规则检查。",
+          "en": "MRC (manufacturing-rule check) Run manufacturing-rule checks on MDP data"
+        },
+        {
+          "zh": "独立转换检查；使用独立工具链或设置重复转换并比对。",
+          "en": "Independent conversion check Repeat conversion with an independent toolchain or settings and compare"
+        },
+        {
+          "zh": "关键区域抽样；对关键区域/热点进行重点比对与验证。",
+          "en": "Critical-region sampling Focus comparisons and validation on critical areas/hotspots"
+        },
+        {
+          "zh": "边界：并非所有层都采用相同的OPC、Bias或多重图形化规则。",
+          "en": "Limit: not every layer uses the same OPC, bias or multiple-patterning rules"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图内补充标签",
+        "en": "Additional figure labels"
+      },
+      "body": [
+        {
+          "zh": "1",
+          "en": "1"
+        },
+        {
+          "zh": "2",
+          "en": "2"
+        },
+        {
+          "zh": "4",
+          "en": "4"
+        },
+        {
+          "zh": "6",
+          "en": "6"
+        },
+        {
+          "zh": "7",
+          "en": "7"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "mask-data",
+  "topic": "JDV / GDS 光罩数据",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Mask",
+    "GDS",
+    "OASIS",
+    "JDV",
+    "OPC"
+  ],
+  "chapterPage": 6,
+  "chapterCount": 9,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "aa0e6ea2500bd8c375c96c980c8c5d78074c7392346359010d5ef44f14acd030",
+  "diagramText": {
+    "zh": "半导体工艺\n中间转换：GDS不能直接等于光罩\n制造规则把设计数据变成可写、可检的Mask数据\nGDS / OASIS\nLayer Map /\nBoolean\n3\nFrame / Mark/\nPCM\nBias/ Shrink\n5\nOPC/ MRC\nFracture /\nJob Deck\nMDP Job/Data\n设计数据导出\n层映射与\n布尔运算\n添加画框、标记\n和工艺控制标记\n尺寸修正\n（偏置/收缩）\n光学临近校正\n与规则检查\n碎形处理并生成\nMDP Job / Data\nJDV\n版图预览\n（写版验证视图）\nGDS原始几何\nBoolean结果\n添加Frame/Mark\n尺寸修正后\nOPC校正后\nFracture结果\nJDV预览\n1. 关键控制\nLayer Mapping（层映射）\n将设计层映射到工艺/掩膜层。\nBoolean逻辑\n按制造规则执行并/或/异或等布尔运算。\nBias / Shrink（偏置/收缩）\n根据制造偏差对关键尺寸进行修正。\nOPC / Fracture\n提升可印性并满足规则，最后进行碎形。\n3. 常见风险\nBoolean错误\n布尔运算顺序或逻辑错误导致缺陷或开短路。\nTone反转\n正/负片或极性设定错误，导致图形反相。\nOPC层遗漏\n未纳入关键OPC层或修正层，影响可印性。\nFracture异常\n碎形缝隙、过大多边形或交叠异常等问题。\n2. 耦合关系\nOPC提高\n可印性\n增加Mask图形\n复杂度\n增加数据量与\n写版时间\n更强的OPC改善印刷良率，但会带来复杂度和数据量的代价。\n4. 反馈验证\nXOR（异或比较）\n比较前后结果，检查意外差异。\nMRC（制造规则检查）\n对MDP数据执行制造规则检查。\n独立转换检查\n使用独立工具链或设置重复转换并比对。\n关键区域抽样\n对关键区域/热点进行重点比对与验证。\n边界：并非所有层都采用相同的OPC、Bias或多重图形化规则。\n1\n2\n4\n6\n7",
+    "en": "Semiconductor process\nIntermediate conversion: GDS is not directly equivalent to a mask\nManufacturing rules turn design data into writable, inspectable mask data\nGDS / OASIS\nLayer map /\nBoolean\n3\nFrame / mark /\nPCM\nBias / shrink\n5\nOPC / MRC\nFracture /\njob deck\nMDP job / data\nExport design data\nLayer mapping and\nBoolean operations\nAdd frames, marks\nand process-control marks\nDimension correction\n(bias / shrink)\nOptical proximity correction\nand rule checks\nFracture and generate\nMDP job / data\nJDV\nLayout preview\n(mask-writing verification view)\nOriginal GDS geometry\nBoolean result\nAdd frame/marks\nAfter size correction\nAfter OPC correction\nFracturing result\nJDV preview\n1. Key controls\nLayer mapping\nMap design layers to process/mask layers\nBoolean logic\nApply manufacturing-rule Boolean operations such as AND, OR and XOR\nBias / shrink\nCorrect critical dimensions for manufacturing deviations\nOPC / fracturing\nImprove printability and satisfy rules, then fracture the data\n3. Common risks\nBoolean error\nWrong operation order or logic can create defects, opens or shorts\nTone inversion\nWrong positive/negative tone or polarity inverts the pattern\nMissing OPC layers\nOmitting critical OPC or correction layers affects printability\nFracturing anomaly\nProblems include gaps, oversized polygons or abnormal overlaps\n2. Coupled effects\nOPC improves\nprintability\nIncreased mask-shape\ncomplexity\nIncreased data volume and\nmask-writing time\nStronger OPC can improve printing yield at the cost of complexity and data volume\n4. Feedback validation\nXOR comparison\nCompare before and after to detect unintended differences\nMRC (manufacturing-rule check)\nRun manufacturing-rule checks on MDP data\nIndependent conversion check\nRepeat conversion with an independent toolchain or settings and compare\nCritical-region sampling\nFocus comparisons and validation on critical areas/hotspots\nLimit: not every layer uses the same OPC, bias or multiple-patterning rules\n1\n2\n4\n6\n7"
+  },
+  "reference": "references/IMG_7900.webp",
+  "referenceReview": {
+    "referenceSha256": "6e2c76c76bdddb3a6cb84f3ea27c1ad0f4f0a35e3cf48b449874e43565f0e041",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1275,
+        1771,
+        140,
+        79
+      ],
+      [
+        1027,
+        1841,
+        400,
+        65
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

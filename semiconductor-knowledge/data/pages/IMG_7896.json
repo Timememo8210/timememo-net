@@ -1,0 +1,179 @@
+{
+  "id": "IMG_7896",
+  "source": "IMG_7896.JPG",
+  "title": {
+    "zh": "一句话定位：设计意图 vs写版确认",
+    "en": "In one sentence: design intent versus mask-writing verification"
+  },
+  "subtitle": {
+    "zh": "GDS负责交付版图，JDV负责审查制造数据",
+    "en": "GDS delivers the layout; JDV reviews manufacturing data"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "六步交付流程",
+        "en": "Six-step delivery flow"
+      },
+      "body": [
+        {
+          "zh": "版图完成；电路设计完成；版图绘制结束",
+          "en": "Layout complete Circuit design complete Layout drawing finished"
+        },
+        {
+          "zh": "DRC / LVS；设计规则检查；电路一致性检查",
+          "en": "DRC / LVS Design-rule checks Circuit-consistency checks"
+        },
+        {
+          "zh": "3；输出GDS；.gds；导出GDSII数据；作为交付版图",
+          "en": "3 Output GDS .gds Export GDSII data as the delivered layout"
+        },
+        {
+          "zh": "Mask Data Prep；版图处理与优化；生成制造数据",
+          "en": "Mask data prep Process and optimize the layout Generate manufacturing data"
+        },
+        {
+          "zh": "5；生成JDV；.jdv；生成JDV数据；用于写版验证",
+          "en": "5 Generate JDV .jdv Generate JDV data for mask-writing verification"
+        },
+        {
+          "zh": "Release写版；签核通过后；送入光罩写版",
+          "en": "Release for mask writing After sign-off, send to mask writing"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "GDS、MDP与JDV",
+        "en": "GDS, MDP and JDV"
+      },
+      "body": [
+        {
+          "zh": "GDS | 设计端；Cell · Polygon · Layer ·；设计意图；Layer；M1；VIA；M2；POLY；DIFF；抽象几何图形；逻辑层级结构；代表设计意图",
+          "en": "GDS | design side Cell · polygon · layer · design intent Layer M1 VIA M2 POLY DIFF Abstract geometry Logical hierarchy Represents design intent"
+        },
+        {
+          "zh": "MDP；（Mask Data Prep）；规则化/ 优化 / 修补；生成制造级数据",
+          "en": "MDP (Mask Data Prep) Rule handling / optimization / correction Generate manufacturing-level data"
+        },
+        {
+          "zh": "JDV | 制造端；Mask · Reticle · Job · 写版确认；制造级数据（考虑光学与工艺）；包含写版工艺与设备信息；用于写版前的签核确认",
+          "en": "JDV | manufacturing side Mask · reticle · job · mask-writing verification Manufacturing data (accounting for optics and process) Includes mask-writing process and equipment information Used for sign-off before mask writing"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "三项对比",
+        "en": "Three comparisons"
+      },
+      "body": [
+        {
+          "zh": "责任方|设计团队 vs Fab /Mask Shop；设计团队；Fab / Mask Shop",
+          "en": "Responsible parties | design team versus fab / mask shop Design team Fab / mask shop"
+        },
+        {
+          "zh": "流程阶段 | Tape-out输入 vs Mask Release前；设计；Tape-out；输入；Mask；Data Prep；Mask；Release 前；写版；.gds；.jdv",
+          "en": "Process stage | tape-out input versus before mask release Design Tape-out input Mask data prep Before mask release Mask writing .gds .jdv"
+        },
+        {
+          "zh": "输出用途 | 版图交付 vs 写版签核；.gds；版图交付；写版签核",
+          "en": "Output purpose | layout delivery versus mask-writing sign-off .gds Layout delivery Mask-writing sign-off"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "闭环和边界",
+        "en": "Feedback and limits"
+      },
+      "body": [
+        {
+          "zh": "常见误区|把JDV当成另一种GDS；用错误阶段的数据直接比较",
+          "en": "Common mistake | treating JDV as another GDS and comparing data from mismatched stages"
+        },
+        {
+          "zh": "验证反馈：形成闭环；GDS Sign-off；Revision映射；Checksum校验；JDV Release Log",
+          "en": "Verification feedback: close the loop GDS sign-off Revision mapping Checksum validation JDV release log"
+        },
+        {
+          "zh": "JDV底层格式和显示内容可能因Mask Shop与工具平台而异。",
+          "en": "JDV underlying formats and displayed contents may vary by mask shop and tool platform"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图内补充标签",
+        "en": "Additional figure labels"
+      },
+      "body": [
+        {
+          "zh": "1",
+          "en": "1"
+        },
+        {
+          "zh": "2",
+          "en": "2"
+        },
+        {
+          "zh": "4",
+          "en": "4"
+        },
+        {
+          "zh": "6",
+          "en": "6"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "mask-data",
+  "topic": "JDV / GDS 光罩数据",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Mask",
+    "GDS",
+    "OASIS",
+    "JDV",
+    "OPC"
+  ],
+  "chapterPage": 2,
+  "chapterCount": 9,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "135151394452d850696a21fb0186e2df02b7da30f06c00f9f9c01ac0d29caa03",
+  "diagramText": {
+    "zh": "半导体工艺\n一句话定位：设计意图 vs写版确认\nGDS负责交付版图，JDV负责审查制造数据\n版图完成\nDRC / LVS\n3\n输出GDS\nMask Data Prep\n.gds\n电路设计完成\n版图绘制结束\n设计规则检查\n电路一致性检查\n导出GDSII数据\n作为交付版图\n版图处理与优化\n生成制造数据\nGDS | 设计端\nMDP\n（Mask Data Prep）\nCell · Polygon · Layer ·\n设计意图\nLayer\n5\n生成JDV\n.jdv\n生成JDV数据\n用于写版验证\nJDV | 制造端\nMask · Reticle · Job · 写版确认\nRelease写版\n签核通过后\n送入光罩写版\nM1\nVIA\nM2\nPOLY\nDIFF\n规则化/ 优化 / 修补\n生成制造级数据\n抽象几何图形\n逻辑层级结构\n代表设计意图\n制造级数据（考虑光学与工艺）\n包含写版工艺与设备信息\n用于写版前的签核确认\n责任方|设计团队 vs Fab /Mask Shop\n流程阶段 | Tape-out输入 vs Mask Release前\n输出用途 | 版图交付 vs 写版签核\n设计\nTape-out\n输入\nMask\nData Prep\nMask\nRelease 前\n写版\n.gds\n设计团队\nFab / Mask Shop\n.gds\n.jdv\n版图交付\n写版签核\n常见误区|把JDV当成另一种GDS；用错误阶段的数据直接比较\n验证反馈：形成闭环\nGDS Sign-off\nRevision映射\nChecksum校验\nJDV Release Log\nJDV底层格式和显示内容可能因Mask Shop与工具平台而异。\n1\n2\n4\n6",
+    "en": "Semiconductor process\nIn one sentence: design intent versus mask-writing verification\nGDS delivers the layout; JDV reviews manufacturing data\nLayout complete\nDRC / LVS\n3\nOutput GDS\nMask data prep\n.gds\nCircuit design complete\nLayout drawing finished\nDesign-rule checks\nCircuit-consistency checks\nExport GDSII data\nas the delivered layout\nProcess and optimize the layout\nGenerate manufacturing data\nGDS | design side\nMDP\n(Mask Data Prep)\nCell · polygon · layer ·\ndesign intent\nLayer\n5\nGenerate JDV\n.jdv\nGenerate JDV data\nfor mask-writing verification\nJDV | manufacturing side\nMask · reticle · job · mask-writing verification\nRelease for mask writing\nAfter sign-off,\nsend to mask writing\nM1\nVIA\nM2\nPOLY\nDIFF\nRule handling / optimization / correction\nGenerate manufacturing-level data\nAbstract geometry\nLogical hierarchy\nRepresents design intent\nManufacturing data (accounting for optics and process)\nIncludes mask-writing process and equipment information\nUsed for sign-off before mask writing\nResponsible parties | design team versus fab / mask shop\nProcess stage | tape-out input versus before mask release\nOutput purpose | layout delivery versus mask-writing sign-off\nDesign\nTape-out\ninput\nMask\ndata prep\nBefore\nmask release\nMask writing\n.gds\nDesign team\nFab / mask shop\n.gds\n.jdv\nLayout delivery\nMask-writing sign-off\nCommon mistake | treating JDV as another GDS and comparing data from mismatched stages\nVerification feedback: close the loop\nGDS sign-off\nRevision mapping\nChecksum validation\nJDV release log\nJDV underlying formats and displayed contents may vary by mask shop and tool platform\n1\n2\n4\n6"
+  },
+  "reference": "references/IMG_7896.webp",
+  "referenceReview": {
+    "referenceSha256": "d179396457191f1f87109a07e579c13171ea1f8f585bbd56575ab54f5bc50e65",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1275,
+        1771,
+        140,
+        79
+      ],
+      [
+        1027,
+        1841,
+        400,
+        65
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

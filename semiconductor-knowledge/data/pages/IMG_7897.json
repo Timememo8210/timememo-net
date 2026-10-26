@@ -1,0 +1,215 @@
+{
+  "id": "IMG_7897",
+  "source": "IMG_7897.JPG",
+  "title": {
+    "zh": "数据阶段：JDV比GDS更靠近写版",
+    "en": "Data stage: JDV is closer to mask writing than GDS"
+  },
+  "subtitle": {
+    "zh": "上游GDS更新，旧JDV可能立即失效",
+    "en": "Updating upstream GDS may immediately invalidate old JDV"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "Tape-out时间轴",
+        "en": "Tape-out timeline"
+      },
+      "body": [
+        {
+          "zh": "Tape-out 时间轴（数据阶段）",
+          "en": "Tape-out timeline (data stages)"
+        },
+        {
+          "zh": "DRC / LVS完成；电路与版图规则；一致性通过",
+          "en": "DRC / LVS complete Circuit and layout rules pass consistency checks"
+        },
+        {
+          "zh": "Stream Out；生成版图数据流；准备输出",
+          "en": "Stream out Generate a layout data stream Prepare output"
+        },
+        {
+          "zh": "GDS / OASIS交付；.gds；输出标准版图数据；交付下游",
+          "en": "GDS / OASIS delivery .gds Output standard layout data Deliver downstream"
+        },
+        {
+          "zh": "数据接收检查；文件完整性与内容；一致性校验",
+          "en": "Data receipt checks File completeness and content consistency verification"
+        },
+        {
+          "zh": "5；MDP与JDV生成；生成制造级数据；并封装校验信息",
+          "en": "5 MDP and JDV generation Generate manufacturing-level data and package validation information"
+        },
+        {
+          "zh": "Mask Release；光罩制造与交付；进入生产使用",
+          "en": "Mask release Mask manufacture and delivery Enter production use"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "版本对应关系",
+        "en": "Version mapping"
+      },
+      "body": [
+        {
+          "zh": "GDS当前版本；.gds；Top Cell；Layer Map；Checksum；生成时间",
+          "en": "Current GDS version .gds Top cell Layer map Checksum Generation time"
+        },
+        {
+          "zh": "MDP Job对应关系",
+          "en": "MDP job mapping"
+        },
+        {
+          "zh": "JDV对应版本；.jdv；Release Candidate；Mask Set；Checksum对应；生成时间",
+          "en": "Corresponding JDV version .jdv Release candidate Mask set Matching checksum Generation time"
+        },
+        {
+          "zh": "若GDS发生更新，旧JDV不得继续签核",
+          "en": "If GDS is updated, old JDV must not continue through sign-off"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "三类控制",
+        "en": "Three control categories"
+      },
+      "body": [
+        {
+          "zh": "版本控制| Revision• 文件名•时间戳；vB；版本号与变更记录；文件命名规范；生成与更新时间戳；版本对齐与追溯",
+          "en": "Version control | revision · filename · timestamp vB Version numbers and change records File naming conventions Generation and update timestamps Version alignment and traceability"
+        },
+        {
+          "zh": "输入控制 | Top Cell• Layer Map • Checksum；Top Cell匹配；Layer Map版本；数据完整性校验；校验码一致性",
+          "en": "Input control | top cell · layer map · checksum Top-cell match Layer-map version Data-integrity verification Matching checksums"
+        },
+        {
+          "zh": "签核控制；Reviewer · Release ID · 状态；签核人角色；Release ID管理；签核状态流程；留痕与审计追踪",
+          "en": "Sign-off control Reviewer · release ID · status Reviewer roles Release-ID management Sign-off status workflow Records and audit trail"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "失效与反馈",
+        "en": "Failure modes and feedback"
+      },
+      "body": [
+        {
+          "zh": "常见；失效；打开旧JDV；数据已过期",
+          "en": "Common failures Open old JDV Data is out of date"
+        },
+        {
+          "zh": "GDS更新后；未重生成JDV",
+          "en": "After updating GDS, JDV was not regenerated"
+        },
+        {
+          "zh": "多版本命名；混乱不清",
+          "en": "Multiple version names are confusing"
+        },
+        {
+          "zh": "验证反馈：；File Hash / Version Matrix / Generation Time / Release Record",
+          "en": "Verification feedback: File hash / version matrix / generation time / release record"
+        },
+        {
+          "zh": "#；File Hash；文件哈希校验",
+          "en": "# File hash File-hash verification"
+        },
+        {
+          "zh": "Version Matrix；版本矩阵对齐",
+          "en": "Version matrix Version-matrix alignment"
+        },
+        {
+          "zh": "Generation Time；生成时间记录",
+          "en": "Generation time Record generation time"
+        },
+        {
+          "zh": "Release Record；签核记录归档",
+          "en": "Release record Archive sign-off records"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图内补充标签",
+        "en": "Additional figure labels"
+      },
+      "body": [
+        {
+          "zh": "1",
+          "en": "1"
+        },
+        {
+          "zh": "2",
+          "en": "2"
+        },
+        {
+          "zh": "3",
+          "en": "3"
+        },
+        {
+          "zh": "4",
+          "en": "4"
+        },
+        {
+          "zh": "6",
+          "en": "6"
+        },
+        {
+          "zh": ".jdv",
+          "en": ".jdv"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "mask-data",
+  "topic": "JDV / GDS 光罩数据",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Mask",
+    "GDS",
+    "OASIS",
+    "JDV",
+    "OPC"
+  ],
+  "chapterPage": 3,
+  "chapterCount": 9,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "2f13a8adffb32be909a26c5c71f5a0951b91f5a80b6f9a3c19876637a6981f5b",
+  "diagramText": {
+    "zh": "半导体工艺\n数据阶段：JDV比GDS更靠近写版\n上游GDS更新，旧JDV可能立即失效\nTape-out 时间轴（数据阶段）\nDRC / LVS完成\nStream Out\nGDS / OASIS交付\n数据接收检查\n5\nMDP与JDV生成\nMask Release\n电路与版图规则\n一致性通过\n生成版图数据流\n准备输出\nGDS当前版本\n.gds\nTop Cell\nLayer Map\nChecksum\n生成时间\n版本控制| Revision• 文件名•时间戳\nvB\n版本号与变更记录\n文件命名规范\n生成与更新时间戳\n版本对齐与追溯\n.gds\n输出标准版图数据\n交付下游\n文件完整性与内容\n一致性校验\n生成制造级数据\n并封装校验信息\n光罩制造与交付\n进入生产使用\nJDV对应版本\nMDP Job对应关系\n.jdv\nRelease Candidate\nMask Set\nChecksum对应\n生成时间\n若GDS发生更新，旧JDV不得继续签核\n输入控制 | Top Cell• Layer Map • Checksum\n签核控制\nReviewer · Release ID · 状态\nTop Cell匹配\nLayer Map版本\n数据完整性校验\n校验码一致性\n签核人角色\nRelease ID管理\n签核状态流程\n留痕与审计追踪\n常见\n失效\n打开旧JDV\n数据已过期\nGDS更新后\n未重生成JDV\n多版本命名\n混乱不清\n验证反馈：\nFile Hash / Version Matrix / Generation Time / Release Record\n#\nFile Hash\n文件哈希校验\nVersion Matrix\n版本矩阵对齐\nGeneration Time\n生成时间记录\nRelease Record\n签核记录归档\n1\n2\n3\n4\n6\n.jdv",
+    "en": "Semiconductor process\nData stage: JDV is closer to mask writing than GDS\nUpdating upstream GDS may immediately invalidate old JDV\nTape-out timeline (data stages)\nDRC / LVS complete\nStream out\nGDS / OASIS delivery\nData receipt checks\n5\nMDP and JDV generation\nMask release\nCircuit and layout rules\npass consistency checks\nGenerate a layout data stream\nPrepare output\nCurrent GDS version\n.gds\nTop cell\nLayer map\nChecksum\nGeneration time\nVersion control | revision · filename · timestamp\nvB\nVersion numbers and change records\nFile naming conventions\nGeneration and update timestamps\nVersion alignment and traceability\n.gds\nOutput standard layout data\nDeliver downstream\nFile completeness and content\nconsistency verification\nGenerate manufacturing-level data\nand package validation information\nMask manufacture and delivery\nEnter production use\nCorresponding JDV version\nMDP job mapping\n.jdv\nRelease candidate\nMask set\nMatching checksum\nGeneration time\nIf GDS is updated, old JDV must not continue through sign-off\nInput control | top cell · layer map · checksum\nSign-off control\nReviewer · release ID · status\nTop-cell match\nLayer-map version\nData-integrity verification\nMatching checksums\nReviewer roles\nRelease-ID management\nSign-off status workflow\nRecords and audit trail\nCommon\nfailures\nOpen old JDV\nData is out of date\nAfter updating GDS,\nJDV was not regenerated\nMultiple version names\nare confusing\nVerification feedback:\nFile hash / version matrix / generation time / release record\n#\nFile hash\nFile-hash verification\nVersion matrix\nVersion-matrix alignment\nGeneration time\nRecord generation time\nRelease record\nArchive sign-off records\n1\n2\n3\n4\n6\n.jdv"
+  },
+  "reference": "references/IMG_7897.webp",
+  "referenceReview": {
+    "referenceSha256": "2f3933759a090eb7f5613534a7d05359d03c1a6bf1398b1499a3af02eca35416",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1275,
+        1771,
+        140,
+        79
+      ],
+      [
+        1027,
+        1841,
+        400,
+        65
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

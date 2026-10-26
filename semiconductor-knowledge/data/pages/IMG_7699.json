@@ -85,5 +85,32 @@
   "chapterCount": 9,
   "width": 1086,
   "height": 1448,
-  "sha256": "2a3aa7237a2f65cce9f685131f38f2e3b248a99aad7e8a8a614b220fa5e51117"
+  "sha256": "2a3aa7237a2f65cce9f685131f38f2e3b248a99aad7e8a8a614b220fa5e51117",
+  "diagramText": {
+    "zh": "01\nN⁺阱接触\n（接高电位）\n结构定位：先分清体区与隔离\nP型衬底、N阱、局部P阱与器件位置。\nPMOS（位于N阱）\nNMOS（位于局部P阱）\nP⁺源极\n栅极\nP⁺漏极\nN⁺深阱接触\n（接高电位）\nN⁺源极\n栅极\nN⁺漏极\nP⁺阱接触\n（接低电位）\nP⁺\nP⁺\nN⁺\nN⁺\nP⁺\n（PMOS体区）\n局部P阱\n（NMOS体区）\n深N阱（隔离）\nP型衬底（全局衬底）\n结构示意，非比例图\n核心判断\n在常见体硅CMOS中，N-well常用于\nPMOS体区；Deep N-well可帮助隔离\n局部P-well，二者可以配合使用。\n流程位置与辨认流程\n器件与平台选择阶段，先确定晶体管体区，\n再定义隔离需求。\n辨认流程：\n1\n确认\n衬底类型\n2\n找源漏\n与体区\n3\n标出\nN阱/P阱\n5\n判断是否\n核对器件\n有深N阱\n及体端模型\n关键控制\n• 衬底类型\n• 器件体区\n• 隔离边界\n• 体端连接\n耦合权衡\n增加隔离结构可支持更\n独立的体区管理，也会\n增加版图空间与寄生\n网络。\n常见失效\n• 把NMOS直接画在N型体区\n• 选错器件模型\n• 误把局部P阱与全局衬底\n当成同一节点。\n量测反馈：体端/漏电/器件特性\n设计端核对提取网络与模型端口；硅后比较\n体端相关I-V与漏电，异常时复核结构和连接。\n下游影响\n决定成阱整合、接触布\n局与偏置验证的要求。\n边界条件\n这里讨论常见P型衬底体\n硅CMOS，不把同名DNW\n直接推广到所有高压、\n传感器或SOI结构。\nN阱\n4",
+    "en": "01\nN⁺ well contact\n(Connected to high potential)\nStructural roles: first distinguish the body region from isolation\nP-type substrate, N-well, local P-well and device locations.\nPMOS (in the N-well)\nNMOS (in the local P-well)\nP⁺ source\nGate\nP⁺ drain\nN⁺ deep-well contact\n(Connected to high potential)\nN⁺ source\nGate\nN⁺ drain\nP⁺ well contact\n(Connected to low potential)\nP⁺\nP⁺\nN⁺\nN⁺\nP⁺\n(PMOS body)\nLocal P-well\n(NMOS body)\nDeep N-well (isolation)\nP-type substrate (global substrate)\nStructural schematic, not to scale\nKey conclusion\nIn common bulk-silicon CMOS, the N-well is often used\nAs the PMOS body; a deep N-well can help isolate\nA local P-well, and the two can be used together.\nPosition in the process and identification workflow\nDuring device and platform selection, first identify the transistor body,\nThen define isolation requirements.\nIdentification workflow:\n1\nConfirm\nSubstrate type\n2\nFind source/drain\nAnd body region\n3\nMark\nN-well / P-well\n5\nDetermine whether\nVerify the device\nA deep N-well is present\nAnd body-terminal model\nKey controls\n• Substrate type\n• Device body region\n• Isolation boundary\n• Body-terminal connection\nCoupled trade-offs\nAdding isolation structures can support\nMore independent body-region management, while\nIncreasing layout area and parasitic\nNetworks.\nCommon failures\n• Drawing NMOS directly in an N-type body\n• Choosing the wrong device model\n• Mistaking the local P-well and global substrate\nFor the same node.\nMetrology feedback: body terminal / leakage / device characteristics\nDuring design, verify extracted networks and model ports; after fabrication, compare\nBody-related I–V and leakage. Recheck structures and connections when anomalies occur.\nDownstream effects\nDetermines requirements for well-formation integration, contact\nLayout and bias validation.\nBoundary conditions\nThis discussion concerns common P-substrate bulk-\nSilicon CMOS; do not directly extend the same DNW name\nTo all high-voltage,\nSensor or SOI structures.\nN-well\n4"
+  },
+  "reference": "references/IMG_7699.webp",
+  "referenceReview": {
+    "referenceSha256": "7cbacb902e78b9dbe20cbaeb347fc36902c2af9dce44e5749348323be31432cd",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        953,
+        1338,
+        125,
+        73
+      ],
+      [
+        768,
+        1383,
+        313,
+        60
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
 }

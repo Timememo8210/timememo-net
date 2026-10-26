@@ -1,0 +1,199 @@
+{
+  "id": "IMG_7898",
+  "source": "IMG_7898.JPG",
+  "title": {
+    "zh": "GDS装什么：保存层次化设计版图",
+    "en": "What GDS contains: a hierarchical design layout"
+  },
+  "subtitle": {
+    "zh": "Cell、Polygon、Layer共同描述二维制造图形",
+    "en": "Cells, polygons and layers jointly describe two-dimensional manufacturing patterns"
+  },
+  "sections": [
+    {
+      "heading": {
+        "zh": "版图输出与校验",
+        "en": "Layout output and validation"
+      },
+      "body": [
+        {
+          "zh": "EDA版图完成；布局布线完成；版图验证通过",
+          "en": "EDA layout complete Placement and routing complete Layout verification passed"
+        },
+        {
+          "zh": "选择Top Cell；确定输出根节点；作为Top Cell",
+          "en": "Select the top cell Select the output root as the top cell"
+        },
+        {
+          "zh": "3；Layer Map；配置Layer映射；（逻辑层→输出层）",
+          "en": "3 Layer map Configure layer mapping (logical layer → output layer)"
+        },
+        {
+          "zh": "4；Stream Out；.gds；生成GDS文件；写出版图数据库",
+          "en": "4 Stream out .gds Generate a GDS file Write the layout database"
+        },
+        {
+          "zh": "5；保留Hierarchy；保留层次结构；与引用关系",
+          "en": "5 Preserve hierarchy Preserve hierarchy and references"
+        },
+        {
+          "zh": "Stream In / XOR；A.gds；B.gds；XOR；读入与比对；检查一致性",
+          "en": "Stream in / XOR A.gds B.gds XOR Read and compare Check consistency"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "三种数据组成",
+        "en": "Three data components"
+      },
+      "body": [
+        {
+          "zh": "几何元素（构成图形）；Polygon · Path · Text；TEXT",
+          "en": "Geometry elements (forming shapes) Polygon · path · text TEXT"
+        },
+        {
+          "zh": "TOP CELL；Block A；Block B；Cell A1；Cell A2；Cell B1；Cell B2",
+          "en": "TOP CELL Block A Block B Cell A1 Cell A2 Cell B1 Cell B2"
+        },
+        {
+          "zh": "层与类型（描述规则）；Layer · Datatype · Units；Layer 1；Layer 2；Layer N；Layer；1；2；Datatype；0；Units；nm；nm；N；nm",
+          "en": "Layers and types (description rules) Layer · datatype · units Layer 1 Layer 2 Layer N Layer 1 2 Datatype 0 Units nm nm N nm"
+        },
+        {
+          "zh": "GDS是版图数据库，不是晶圆实际成像结果",
+          "en": "GDS is a layout database, not the actual wafer imaging result"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "控制要点",
+        "en": "Control points"
+      },
+      "body": [
+        {
+          "zh": "结构控制 | Top Cell ．Cell Reference；Top Cell为输出根；Cell以引用方式复用；X/Y变换：平移、旋转、镜像",
+          "en": "Structure control | top cell · cell reference Top cell is the output root Reuse cells through references X/Y transforms: translation, rotation and mirroring"
+        },
+        {
+          "zh": "几何控制 | Units • Coordinates • Bounding Box；Units：如 nm / μm；坐标精度与范围；Bounding Box定义范围；X",
+          "en": "Geometry control | units · coordinates · bounding box Units: e.g. nm / μm Coordinate precision and range Bounding box defines the extent X"
+        },
+        {
+          "zh": "映射控制 | Layer•Datatype • Layer Map；逻辑层映射到输出层；Datatype定义用途；Layer Map保证一致性",
+          "en": "Mapping control | layer · datatype · layer map Map logical layers to output layers Datatype defines purpose Layer map ensures consistency"
+        },
+        {
+          "zh": "层次化可减小数据量，但跨平台转换必须正确解析引用关系。",
+          "en": "Hierarchy reduces data volume, but cross-platform conversion must parse references correctly"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "失效、反馈与边界",
+        "en": "Failures, feedback and limits"
+      },
+      "body": [
+        {
+          "zh": "常见失效 | Cell缺失 • 单位错误• Layer映射错误• Top Cell选错",
+          "en": "Common failures | missing cells · wrong units · wrong layer mapping · wrong top cell"
+        },
+        {
+          "zh": "验证反馈：DRC / LVS / Stream In / GDS XOR / Bounding Box；.gds；DRC；LVS；Stream In；GDS XOR；Bounding Box",
+          "en": "Verification feedback: DRC / LVS / stream in / GDS XOR / bounding box .gds DRC LVS Stream in GDS XOR Bounding box"
+        },
+        {
+          "zh": "先进流程也常使用OASIS，不能把所有Tape-out数据都统称为GDS文件。",
+          "en": "Advanced flows also use OASIS; not all tape-out data should be called GDS files"
+        }
+      ]
+    },
+    {
+      "heading": {
+        "zh": "图内补充标签",
+        "en": "Additional figure labels"
+      },
+      "body": [
+        {
+          "zh": "1",
+          "en": "1"
+        },
+        {
+          "zh": "2",
+          "en": "2"
+        },
+        {
+          "zh": "6",
+          "en": "6"
+        },
+        {
+          "zh": "0",
+          "en": "0"
+        },
+        {
+          "zh": "0",
+          "en": "0"
+        },
+        {
+          "zh": "Y",
+          "en": "Y"
+        },
+        {
+          "zh": "XOR",
+          "en": "XOR"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "review": {
+    "imageViewed": true,
+    "sourceComplete": true,
+    "uncertain": []
+  },
+  "chapter": "mask-data",
+  "topic": "JDV / GDS 光罩数据",
+  "category": "fundamentals",
+  "tags": [
+    "Lithography",
+    "Mask",
+    "GDS",
+    "OASIS",
+    "JDV",
+    "OPC"
+  ],
+  "chapterPage": 4,
+  "chapterCount": 9,
+  "width": 1440,
+  "height": 1920,
+  "sha256": "5b12e72e267adea7cd42d0ad6580d3edd48d1116ddd8f24e99c8d40d8311633c",
+  "diagramText": {
+    "zh": "半导体工艺\nGDS装什么：保存层次化设计版图\nCell、Polygon、Layer共同描述二维制造图形\nEDA版图完成\n选择Top Cell\n布局布线完成\n版图验证通过\n确定输出根节点\n作为Top Cell\n几何元素（构成图形）\nPolygon · Path · Text\n3\nLayer Map\n4\nStream Out\n.gds\n配置Layer映射\n（逻辑层→输出层）\n生成GDS文件\n写出版图数据库\nTOP CELL\nBlock A\nBlock B\n5\n保留Hierarchy\nStream In / XOR\nA.gds\nB.gds\nXOR\n保留层次结构\n与引用关系\n读入与比对\n检查一致性\n层与类型（描述规则）\nLayer · Datatype · Units\nLayer 1\nLayer 2\nLayer N\nLayer\n1\n2\nDatatype\n0\nUnits\nnm\nnm\nN\nnm\n映射控制 | Layer•Datatype • Layer Map\n逻辑层映射到输出层\nDatatype定义用途\nLayer Map保证一致性\nTEXT\nCell A1\nCell A2\nCell B1\nCell B2\nGDS是版图数据库，不是晶圆实际成像结果\n结构控制 | Top Cell ．Cell Reference\n几何控制 | Units • Coordinates • Bounding Box\nUnits：如 nm / μm\n坐标精度与范围\nTop Cell为输出根\nBounding Box定义范围\nX\nCell以引用方式复用\nX/Y变换：平移、旋转、镜像\n层次化可减小数据量，但跨平台转换必须正确解析引用关系。\n常见失效 | Cell缺失 • 单位错误• Layer映射错误• Top Cell选错\n验证反馈：DRC / LVS / Stream In / GDS XOR / Bounding Box\n.gds\nDRC\nLVS\nStream In\nGDS XOR\nBounding Box\n先进流程也常使用OASIS，不能把所有Tape-out数据都统称为GDS文件。\n1\n2\n6\n0\n0\nY\nXOR",
+    "en": "Semiconductor process\nWhat GDS contains: a hierarchical design layout\nCells, polygons and layers jointly describe two-dimensional manufacturing patterns\nEDA layout complete\nSelect the top cell\nPlacement and routing complete\nLayout verification passed\nSelect the output root\nas the top cell\nGeometry elements (forming shapes)\nPolygon · path · text\n3\nLayer map\n4\nStream out\n.gds\nConfigure layer mapping\n(logical layer → output layer)\nGenerate a GDS file\nWrite the layout database\nTOP CELL\nBlock A\nBlock B\n5\nPreserve hierarchy\nStream in / XOR\nA.gds\nB.gds\nXOR\nPreserve hierarchy\nand references\nRead and compare\nCheck consistency\nLayers and types (description rules)\nLayer · datatype · units\nLayer 1\nLayer 2\nLayer N\nLayer\n1\n2\nDatatype\n0\nUnits\nnm\nnm\nN\nnm\nMapping control | layer · datatype · layer map\nMap logical layers to output layers\nDatatype defines purpose\nLayer map ensures consistency\nTEXT\nCell A1\nCell A2\nCell B1\nCell B2\nGDS is a layout database, not the actual wafer imaging result\nStructure control | top cell · cell reference\nGeometry control | units · coordinates · bounding box\nUnits: e.g. nm / μm\nCoordinate precision and range\nTop cell is the output root\nBounding box defines the extent\nX\nReuse cells through references\nX/Y transforms: translation, rotation and mirroring\nHierarchy reduces data volume, but cross-platform conversion must parse references correctly\nCommon failures | missing cells · wrong units · wrong layer mapping · wrong top cell\nVerification feedback: DRC / LVS / stream in / GDS XOR / bounding box\n.gds\nDRC\nLVS\nStream in\nGDS XOR\nBounding box\nAdvanced flows also use OASIS; not all tape-out data should be called GDS files\n1\n2\n6\n0\n0\nY\nXOR"
+  },
+  "reference": "references/IMG_7898.webp",
+  "referenceReview": {
+    "referenceSha256": "f00b77f93c70cdd93eb3bd05bd81e8a36a7c5a2995b6647c4bbace249d28d536",
+    "changedPixels": 0,
+    "outsideMaskChangedPixels": 0,
+    "protectedChangedPixels": 0,
+    "uncertainBoxes": [
+      [
+        1275,
+        1771,
+        140,
+        79
+      ],
+      [
+        1027,
+        1841,
+        400,
+        65
+      ]
+    ],
+    "method": "Local sampled-background pixel repair; complex backgrounds retained; technical pixels and all pixels outside approved watermark masks preserved; lossless WebP",
+    "status": "overlap-preserved"
+  }
+}

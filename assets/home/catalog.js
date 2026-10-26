@@ -7,8 +7,8 @@ window.HOME_CATALOG = [
       "en": "Semiconductor Knowledge"
     },
     "description": {
-      "zh": "基础工艺、前后段整合、器件、3D IC与量测。91页双语正文、原图对照与全文搜索。",
-      "en": "Processes, integration, devices, 3D IC and metrology. 91 bilingual pages, original references and full-text search."
+      "zh": "基础工艺、前后段整合、器件、3D IC与量测。269页原版式网页图表、中英文编辑与全文搜索。",
+      "en": "Processes, integration, devices, 3D IC and metrology. 269 original-layout web pages with editable bilingual text and vector diagrams."
     },
     "updated": "2026-10-25",
     "private": false
