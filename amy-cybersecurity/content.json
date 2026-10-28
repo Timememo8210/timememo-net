@@ -1,0 +1,738 @@
+{
+  "version": 1,
+  "updated": "2026-10-27",
+  "modules": [
+    {
+      "id": "module-1",
+      "number": 1,
+      "title": {
+        "en": "Network foundations & first setup",
+        "zh": "网络基础与初始设置"
+      },
+      "tagline": {
+        "en": "Know the devices. Connect them. Check that they work.",
+        "zh": "认识设备，完成连接，验证运行。"
+      },
+      "summary": [
+        {
+          "en": "A switch connects devices within a LAN; a router connects different networks.",
+          "zh": "交换机连接局域网内的设备；路由器连接不同网络。"
+        },
+        {
+          "en": "Devices need a correct IP address, subnet mask and default gateway to communicate as intended.",
+          "zh": "设备需要正确的 IP 地址、子网掩码和默认网关，才能按预期通信。"
+        },
+        {
+          "en": "Use the Cisco CLI to set names, passwords and management addresses. Save the configuration, then test with ping. A reliable network balances fault tolerance, scalability, quality of service and security.",
+          "zh": "用 Cisco 命令行设置名称、密码和管理地址，保存配置，再用 ping 检查连接。可靠网络兼顾容错、扩展性、服务质量和安全。"
+        }
+      ],
+      "units": [
+        {
+          "id": "networking-today",
+          "title": {
+            "en": "Networking Today",
+            "zh": "当今网络"
+          },
+          "sourceTitle": "CCNA ITN: Networking Today",
+          "assignment": "fe10da38-fde6-4d96-9dc5-fffe0648f51c",
+          "points": [
+            {
+              "en": "Hosts are the endpoints: computers, phones and servers. Intermediary devices move traffic between them. Copper, fiber and radio carry the signals. A client requests a service; a server supplies it.",
+              "zh": "主机是电脑、手机和服务器等端点。中间设备在端点之间转发流量。铜缆、光纤和无线电承载信号。客户端请求服务，服务器提供服务。"
+            },
+            {
+              "en": "A LAN covers a local area; a WAN connects networks over greater distances. Physical topology shows placement and cabling; logical topology shows connections and addressing.",
+              "zh": "LAN 覆盖局部区域；WAN 跨较大距离连接网络。物理拓扑表示设备位置和布线，逻辑拓扑表示连接关系与寻址。"
+            },
+            {
+              "en": "Redundant paths improve fault tolerance. Scalability allows growth. QoS prioritizes traffic during congestion. Security protects confidentiality, integrity and availability.",
+              "zh": "冗余路径提高容错能力；可扩展性支持增长；QoS 在拥塞时安排流量优先级；安全保护机密性、完整性和可用性。"
+            },
+            {
+              "en": "Cloud services, video collaboration and personal devices increase connectivity needs. Defenses include updates, endpoint protection, firewalls and controlled access.",
+              "zh": "云服务、视频协作和个人设备增加了连接需求。防护措施包括更新、终端保护、防火墙和访问控制。"
+            }
+          ],
+          "example": {
+            "en": "Think of a school: classroom devices share a LAN; the school router provides a path to outside networks.",
+            "zh": "把学校作为例子：教室设备共享局域网，学校路由器提供通向外部网络的路径。"
+          },
+          "check": {
+            "en": "Explain the difference between a switch, a router and an end device without looking at your notes.",
+            "zh": "不看笔记，解释交换机、路由器和终端设备的区别。"
+          }
+        },
+        {
+          "id": "switch-end-device",
+          "title": {
+            "en": "Basic Switch & End Device Configuration",
+            "zh": "交换机与终端基本配置"
+          },
+          "sourceTitle": "CCNA ITN: Basic Switch and End Device Configuration",
+          "assignment": "9ccc15a8-ae20-463d-8f60-4801cd954fc0",
+          "points": [
+            {
+              "en": "Cisco IOS has modes: user EXEC (>), privileged EXEC (#), global configuration (config)# and interface configuration (config-if)#. Commands depend on the current mode.",
+              "zh": "Cisco IOS 有用户 EXEC（>）、特权 EXEC（#）、全局配置（config）# 和接口配置（config-if）# 等模式。命令能否使用取决于当前模式。"
+            },
+            {
+              "en": "Use enable, configure terminal, exit and end to navigate. A question mark shows contextual help; Tab completes an unambiguous command.",
+              "zh": "使用 enable、configure terminal、exit 和 end 切换模式。问号显示上下文帮助；Tab 补全没有歧义的命令。"
+            },
+            {
+              "en": "Set a hostname, secure administrative access and configure a management SVI. Hosts can receive IPv4 settings manually or through DHCP.",
+              "zh": "设置主机名、保护管理访问并配置管理 SVI。终端的 IPv4 参数可以手动设置，也可以通过 DHCP 获取。"
+            },
+            {
+              "en": "running-config is the active configuration in RAM. startup-config is loaded at boot. Copy the running configuration to startup configuration to retain changes after a restart.",
+              "zh": "running-config 是 RAM 中正在使用的配置；startup-config 在启动时加载。把运行配置复制到启动配置，重启后才能保留修改。"
+            }
+          ],
+          "example": {
+            "en": "After changing an address, inspect show ip interface brief, test the intended connection, and save only the verified configuration.",
+            "zh": "修改地址后，用 show ip interface brief 检查，再测试目标连接，最后保存经过验证的配置。"
+          },
+          "check": {
+            "en": "Build a two-host LAN in Packet Tracer. Configure its addressing and explain what happens if you reboot without saving.",
+            "zh": "在 Packet Tracer 搭建有两个终端的 LAN，配置地址，并解释未保存就重启会发生什么。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "module-2",
+      "number": 2,
+      "title": {
+        "en": "How data moves",
+        "zh": "数据如何传送"
+      },
+      "tagline": {
+        "en": "Follow a message from IP address to local delivery.",
+        "zh": "跟随一条消息，从 IP 寻址到本地交付。"
+      },
+      "summary": [
+        {
+          "en": "Protocols are communication rules. The seven-layer OSI and four-layer TCP/IP models divide the work. Data is encapsulated when sent and de-encapsulated when received.",
+          "zh": "协议是通信规则。OSI 七层和 TCP/IP 四层模型分配工作。数据发送时逐层封装，接收时逐层解封装。"
+        },
+        {
+          "en": "An IP address identifies the destination across networks; a MAC address supports delivery on the current link. A switch learns source MAC addresses and forwards using destination MAC addresses.",
+          "zh": "IP 地址标识跨网络的目的地；MAC 地址支持当前链路上的交付。交换机学习来源 MAC，并根据目标 MAC 转发。"
+        },
+        {
+          "en": "ARP maps a local IPv4 address to a MAC address. For a remote destination, resolve the gateway MAC. IPv6 uses Neighbor Discovery (ND).",
+          "zh": "ARP 把本地 IPv4 地址映射为 MAC。目的地在远端网络时，解析网关的 MAC。IPv6 使用邻居发现 ND。"
+        },
+        {
+          "en": "ping checks reachability; traceroute shows responding hops and helps locate connectivity problems.",
+          "zh": "ping 检查可达性；traceroute 显示有回应的各跳，帮助定位连通性问题。"
+        }
+      ],
+      "units": [
+        {
+          "id": "protocols-models",
+          "title": {
+            "en": "Protocols & Models",
+            "zh": "协议与模型"
+          },
+          "sourceTitle": "CCNA ITN: Protocols and Models",
+          "assignment": "3edfdc2b-1315-4f85-864d-e5dcf52a5eca",
+          "points": [
+            {
+              "en": "Protocols specify encoding, message format, size, timing and delivery rules. Unicast means one receiver; multicast means a selected group; broadcast reaches the local broadcast domain.",
+              "zh": "协议规定编码、消息格式、大小、时序和交付规则。单播面向一个接收者，组播面向选定群体，广播覆盖本地广播域。"
+            },
+            {
+              "en": "OSI, bottom to top: Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP: Network Access, Internet, Transport, Application.",
+              "zh": "OSI 从底向上：物理、数据链路、网络、传输、会话、表示、应用。TCP/IP：网络接入、网际、传输、应用。"
+            },
+            {
+              "en": "During transmission, application data becomes transport segments or datagrams, IP packets, link-layer frames and signals. The receiver reverses this process.",
+              "zh": "发送时，应用数据依次成为传输层报文段或数据报、IP 分组、链路层帧和信号。接收者按相反顺序还原。"
+            },
+            {
+              "en": "Layers solve different problems: TCP handles reliable ordered delivery; IP handles addressing and routing; Ethernet handles local link delivery. Open standards let different vendors interoperate.",
+              "zh": "各层解决不同问题：TCP 处理可靠、有序交付；IP 处理寻址和路由；以太网处理本地链路交付。开放标准让不同厂商设备互通。"
+            }
+          ],
+          "example": {
+            "en": "Sending a web request needs several cooperating protocols, not one protocol that does everything.",
+            "zh": "发送网页请求需要多个协议协作，并非一个协议包办全部工作。"
+          },
+          "check": {
+            "en": "Name the OSI layer for a MAC address and the layer for an IP address.",
+            "zh": "说出 MAC 地址和 IP 地址分别对应的 OSI 层。"
+          }
+        },
+        {
+          "id": "data-link",
+          "title": {
+            "en": "Data Link Layer",
+            "zh": "数据链路层"
+          },
+          "sourceTitle": "CCNA ITN: Data Link Layer",
+          "assignment": "511373c5-161d-4852-9ae1-20a03e2a8e82",
+          "points": [
+            {
+              "en": "Layer 2 packages an IP packet into a frame for one link. The frame has a header, payload and trailer; addressing and error detection support local delivery.",
+              "zh": "第二层把 IP 分组封装成适合当前链路的帧。帧有头部、载荷和尾部；寻址与错误检测支持本地交付。"
+            },
+            {
+              "en": "The LLC sublayer connects with upper-layer protocols. The MAC sublayer handles framing, link addressing and access to the medium.",
+              "zh": "LLC 子层衔接上层协议；MAC 子层处理成帧、链路地址和介质访问。"
+            },
+            {
+              "en": "Full duplex allows simultaneous sending and receiving. Half duplex shares the direction over time. A duplex mismatch can cause poor performance.",
+              "zh": "全双工允许同时收发；半双工需要交替使用传输方向。两端双工模式不匹配会影响性能。"
+            },
+            {
+              "en": "Legacy shared Ethernet uses CSMA/CD; Wi-Fi uses CSMA/CA. Modern full-duplex switched Ethernet does not need collision detection to coordinate transmissions.",
+              "zh": "传统共享以太网使用 CSMA/CD；Wi-Fi 使用 CSMA/CA。现代全双工交换以太网不需要靠碰撞检测协调发送。"
+            }
+          ],
+          "example": {
+            "en": "A router removes the incoming link frame and creates an appropriate new frame for its outgoing link.",
+            "zh": "路由器移除入站链路帧，再为出站链路创建合适的新帧。"
+          },
+          "check": {
+            "en": "Why can the link-layer frame change while the packet continues toward the same destination?",
+            "zh": "为什么分组仍然前往同一目的地，链路层帧却会改变？"
+          }
+        },
+        {
+          "id": "ethernet",
+          "title": {
+            "en": "Ethernet Switching",
+            "zh": "以太网交换"
+          },
+          "sourceTitle": "CCNA ITN: Ethernet Switching",
+          "assignment": "64b3d8da-d477-4683-8748-9541acb9882c",
+          "points": [
+            {
+              "en": "An Ethernet MAC address is 48 bits, usually written as 12 hexadecimal digits. Frames include source and destination MAC addresses, a type field, data and an FCS error check.",
+              "zh": "以太网 MAC 地址长 48 位，通常写成 12 位十六进制数。帧含源 MAC、目的 MAC、类型、数据和 FCS 校验。"
+            },
+            {
+              "en": "A switch learns which source MAC arrived on which port. It looks up the destination MAC to select an outgoing port.",
+              "zh": "交换机学习来源 MAC 从哪个端口进入，再查询目的 MAC，选择出口。"
+            },
+            {
+              "en": "Unknown unicasts and broadcasts are flooded within the relevant VLAN, excluding the incoming port. Known unicasts use the learned path.",
+              "zh": "未知单播与广播在相应 VLAN 内泛洪，但不从入口发回。已知单播按学习到的路径转发。"
+            },
+            {
+              "en": "Store-and-forward receives the complete frame and checks errors. Cut-through starts forwarding earlier. Autonegotiation selects compatible speed and duplex; auto-MDIX adapts cable-pair use.",
+              "zh": "存储转发接收完整帧并检查错误；直通转发更早开始发送。自动协商选择兼容速率和双工模式；auto-MDIX 自动适配线对。"
+            }
+          ],
+          "example": {
+            "en": "If A moves to another switch port and sends a frame, the switch can relearn A at the new port.",
+            "zh": "如果 A 换到另一个交换机端口后发出帧，交换机会重新学习 A 所在端口。"
+          },
+          "check": {
+            "en": "Does a switch learn from the source MAC or destination MAC? Which does it use to forward?",
+            "zh": "交换机从源 MAC 还是目的 MAC 学习？转发时又使用哪个？"
+          }
+        },
+        {
+          "id": "icmp",
+          "title": {
+            "en": "ICMP, Ping & Traceroute",
+            "zh": "ICMP、Ping 与 Traceroute"
+          },
+          "sourceTitle": "CCNA ITN: ICMP",
+          "assignment": "362cfe59-e9f8-4035-8349-9cb3e41bedff",
+          "points": [
+            {
+              "en": "ICMP carries network feedback, including echo messages, unreachable destinations and time exceeded. It helps diagnose delivery problems.",
+              "zh": "ICMP 传递网络反馈，包括回显、目的地不可达和超时消息，帮助诊断交付问题。"
+            },
+            {
+              "en": "ping sends an Echo Request and expects an Echo Reply. It reports response time and loss; it does not prove every application or port works.",
+              "zh": "ping 发送 Echo Request 并期待 Echo Reply，报告响应时间和丢包；它不能证明所有应用或端口都正常。"
+            },
+            {
+              "en": "Test progressively: loopback, local gateway, then a known remote host. IPv4 loopback is 127.0.0.1; IPv6 loopback is ::1.",
+              "zh": "逐步测试：本机回环、本地网关、已知远端主机。IPv4 回环地址为 127.0.0.1，IPv6 为 ::1。"
+            },
+            {
+              "en": "traceroute varies TTL or Hop Limit to reveal responding routers. Missing replies can reflect filtering or rate limits, so a timeout alone does not identify a broken link.",
+              "zh": "traceroute 调整 TTL 或 Hop Limit，使沿途路由器回应。没有回应也可能是过滤或限速，因此超时本身不能确定链路损坏。"
+            }
+          ],
+          "example": {
+            "en": "A successful gateway ping but failed remote ping suggests checking onward routing and filtering next.",
+            "zh": "能 ping 通网关却无法到达远端时，接下来检查后续路由和过滤规则。"
+          },
+          "check": {
+            "en": "Explain what ping confirms and one thing it cannot confirm.",
+            "zh": "解释 ping 能确认什么，以及它不能确认的一件事。"
+          }
+        },
+        {
+          "id": "address-resolution",
+          "title": {
+            "en": "Address Resolution",
+            "zh": "地址解析"
+          },
+          "sourceTitle": "CCNA ITN: Address Resolution",
+          "assignment": "f99a151f-4853-46b2-a498-46daf3a5e28e",
+          "points": [
+            {
+              "en": "First decide whether the destination is local. A local packet uses the destination host MAC; a remote packet uses the next-hop gateway MAC on the first Ethernet link.",
+              "zh": "先判断目的地是否在本地网络。本地分组使用目标主机 MAC；远端分组在第一段以太网链路上使用下一跳网关 MAC。"
+            },
+            {
+              "en": "ARP asks which local device owns an IPv4 address. Its request is broadcast; the reply normally returns directly to the requester. Mappings are cached and later expire.",
+              "zh": "ARP 询问哪个本地设备拥有指定 IPv4 地址。请求采用广播，回应通常直接返回请求者。映射暂存于缓存，之后会过期。"
+            },
+            {
+              "en": "The destination IP still identifies the remote host even when the frame is addressed to a gateway. IP and MAC serve different scopes.",
+              "zh": "即使帧发给网关，目的 IP 仍然指向远端主机。IP 与 MAC 的作用范围不同。"
+            },
+            {
+              "en": "IPv6 uses ICMPv6 Neighbor Discovery, not ARP. NS/NA support neighbor address resolution; RS/RA support router discovery. Forged ARP mappings can redirect traffic.",
+              "zh": "IPv6 使用 ICMPv6 邻居发现，而非 ARP。NS/NA 支持邻居地址解析，RS/RA 支持路由器发现。伪造 ARP 映射可能使流量改道。"
+            }
+          ],
+          "example": {
+            "en": "To reach another subnet, resolve your gateway MAC instead of broadcasting ARP for the remote host.",
+            "zh": "访问另一子网时，解析网关的 MAC，而不是广播查询远端主机的 MAC。"
+          },
+          "check": {
+            "en": "State the first-frame destination IP and destination MAC when visiting a remote server.",
+            "zh": "访问远端服务器时，说出第一帧承载的目的 IP 和帧的目的 MAC 各指向谁。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "module-3",
+      "number": 3,
+      "title": {
+        "en": "IP addressing, subnets & routing",
+        "zh": "IP 地址、子网与路由"
+      },
+      "tagline": {
+        "en": "Work out the destination network and choose a path.",
+        "zh": "判断目的网络，选择转发路径。"
+      },
+      "summary": [
+        {
+          "en": "IPv4 has 32 bits divided into network and host portions. The subnet mask identifies the boundary.",
+          "zh": "IPv4 有 32 位，分成网络部分与主机部分；子网掩码决定分界。"
+        },
+        {
+          "en": "Subnetting divides a larger network. VLSM uses different subnet sizes to match host needs; allocate the largest requirement first.",
+          "zh": "子网划分把大网络拆小。VLSM 按终端数量选择不同子网大小，先分配需求最大的。"
+        },
+        {
+          "en": "Routers choose the most specific matching route. Static routes are configured manually; a default route handles traffic without a more specific match; floating static routes provide backup.",
+          "zh": "路由器选择匹配最具体的路由。静态路由由管理员配置；默认路由处理没有更具体匹配的流量；浮动静态路由提供备用路径。"
+        },
+        {
+          "en": "Prefer encrypted SSH for device management. Troubleshoot interface state, addresses, gateways and routing tables.",
+          "zh": "设备管理优先使用加密 SSH。排错时检查接口状态、地址、网关和路由表。"
+        }
+      ],
+      "units": [
+        {
+          "id": "network-layer",
+          "title": {
+            "en": "Network Layer",
+            "zh": "网络层"
+          },
+          "sourceTitle": "CCNA ITN: Network Layer",
+          "assignment": "46f0e385-a286-414d-9f5d-01fc51740f0b",
+          "points": [
+            {
+              "en": "IP provides addressing and delivery between networks. It is connectionless and best effort: IP alone does not promise successful or ordered delivery.",
+              "zh": "IP 提供跨网络寻址与交付。它无连接且尽力而为；单靠 IP 不保证成功或有序交付。"
+            },
+            {
+              "en": "IPv4 uses 32-bit addresses; IPv6 uses 128-bit addresses. TTL in IPv4 and Hop Limit in IPv6 limit how long packets can circulate.",
+              "zh": "IPv4 使用 32 位地址，IPv6 使用 128 位地址。IPv4 的 TTL 和 IPv6 的 Hop Limit 限制分组能经过的跳数。"
+            },
+            {
+              "en": "A host sends directly to local destinations and uses a gateway for remote networks. A router compares the destination against its routes using longest-prefix matching.",
+              "zh": "主机直接向本地目的地发送；远端网络则经由网关。路由器将目的地址与路由表比较，使用最长前缀匹配。"
+            },
+            {
+              "en": "Routes may be connected, static or dynamically learned. Common Cisco codes are C for connected, L for a local interface address and S for static.",
+              "zh": "路由可能是直连、静态或动态学习的。Cisco 常见代码包括 C（直连网络）、L（本机接口地址）和 S（静态）。"
+            }
+          ],
+          "example": {
+            "en": "A matching /24 route is more specific than a matching /16 or /0 route.",
+            "zh": "同样匹配时，/24 路由比 /16 或 /0 更具体。"
+          },
+          "check": {
+            "en": "Why does a default route not override a more specific matching route?",
+            "zh": "为什么默认路由不会覆盖更具体的匹配路由？"
+          }
+        },
+        {
+          "id": "ipv4",
+          "title": {
+            "en": "IPv4 Addressing & Subnetting",
+            "zh": "IPv4 寻址与子网划分"
+          },
+          "sourceTitle": "CCNA ITN: IPv4 Addressing",
+          "assignment": "97536484-4d94-4091-9120-1e1d1fd6fd7d",
+          "points": [
+            {
+              "en": "A prefix such as /24 counts network bits. The remaining bits identify hosts. For ordinary subnets, the first address identifies the network and the last is its broadcast address.",
+              "zh": "/24 这样的前缀表示网络位数，其余位标识主机。普通子网的第一个地址是网络地址，最后一个是广播地址。"
+            },
+            {
+              "en": "Private ranges are 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16. They are not globally routed. Public addressing, private addressing and multicast serve different purposes.",
+              "zh": "私有地址范围为 10.0.0.0/8、172.16.0.0/12 和 192.168.0.0/16，不在全球互联网直接路由。公网、私网和组播地址用途不同。"
+            },
+            {
+              "en": "Borrowing host bits creates more subnets but leaves fewer hosts per subnet. Ordinary usable capacity is 2^h - 2; /31 and /32 are special cases.",
+              "zh": "借用主机位会增加子网数量，却减少每个子网的主机容量。普通子网可用容量为 2^h - 2；/31 和 /32 是特殊情况。"
+            },
+            {
+              "en": "VLSM allocates unequal subnet sizes. Start with the largest host need and keep each network on a valid boundary. Document gateways and address assignments.",
+              "zh": "VLSM 分配大小不同的子网。先满足最大的主机需求，每个网络都要对齐合法边界，并记录网关和地址分配。"
+            }
+          ],
+          "example": {
+            "en": "192.168.10.0/26 has mask 255.255.255.192, hosts .1-.62 and broadcast .63. It supports 62 ordinary host addresses.",
+            "zh": "192.168.10.0/26 的掩码为 255.255.255.192，主机地址为 .1–.62，广播地址为 .63，支持 62 个普通主机地址。"
+          },
+          "check": {
+            "en": "For 192.168.10.64/26, identify its first host, last host and broadcast address.",
+            "zh": "对 192.168.10.64/26，找出首个主机、末个主机和广播地址。"
+          }
+        },
+        {
+          "id": "static-routing",
+          "title": {
+            "en": "IP Static Routing",
+            "zh": "IP 静态路由"
+          },
+          "sourceTitle": "CCNA SRWE: IP Static Routing",
+          "assignment": "2d72af94-3229-4809-8df7-a715caed1c55",
+          "points": [
+            {
+              "en": "A static route specifies a destination prefix and a next hop, outgoing interface or both. Ethernet next hops should be identified clearly; interface-only routes suit point-to-point links better.",
+              "zh": "静态路由指定目的前缀以及下一跳、出接口或两者。以太网中应明确下一跳；只写出接口更适合点对点链路。"
+            },
+            {
+              "en": "An IPv4 default route uses 0.0.0.0 0.0.0.0; IPv6 uses ::/0. It is used only when no more specific route matches.",
+              "zh": "IPv4 默认路由使用 0.0.0.0 0.0.0.0；IPv6 使用 ::/0。只有没有更具体路由匹配时才使用。"
+            },
+            {
+              "en": "A floating static route uses a higher administrative distance than the primary route for the same prefix. It can become active when the primary route is unavailable.",
+              "zh": "浮动静态路由对同一前缀设置比主路由更高的管理距离，主路由不可用时可启用备用路径。"
+            },
+            {
+              "en": "Host routes use /32 for IPv4 and /128 for IPv6. An IPv6 link-local next hop also needs an exit interface. Verify both outbound and return paths.",
+              "zh": "主机路由使用 IPv4 /32 或 IPv6 /128。IPv6 链路本地下一跳还需指定出接口。验证时要同时检查去程与回程。"
+            }
+          ],
+          "example": {
+            "en": "ip route 192.168.20.0 255.255.255.0 10.0.0.2 sends that subnet toward a reachable next hop, 10.0.0.2.",
+            "zh": "ip route 192.168.20.0 255.255.255.0 10.0.0.2 将该子网的流量发往可达的下一跳 10.0.0.2。"
+          },
+          "check": {
+            "en": "Explain why reaching a remote network also requires a valid return route.",
+            "zh": "解释为什么到达远端网络还需要有效的回程路由。"
+          }
+        },
+        {
+          "id": "device-configuration",
+          "title": {
+            "en": "Basic Device Configuration",
+            "zh": "设备基本配置"
+          },
+          "sourceTitle": "CCNA SRWE: Basic Device Configuration",
+          "assignment": "eb71e6e2-90af-406b-a210-5931febf2acc",
+          "points": [
+            {
+              "en": "A switch boots hardware, loads its operating system and applies configuration. LEDs help identify power, link, speed and duplex conditions.",
+              "zh": "交换机启动硬件、加载操作系统并应用配置。指示灯帮助识别电源、链路、速率与双工状态。"
+            },
+            {
+              "en": "Configure the management SVI and, for remote management of a Layer 2 switch, its default gateway. Ensure the management VLAN has an active path.",
+              "zh": "配置管理 SVI；如需跨网络管理二层交换机，还要设置默认网关。确保管理 VLAN 有活动路径。"
+            },
+            {
+              "en": "SSH encrypts remote sessions; Telnet does not. SSH setup includes a hostname, domain name, RSA keys, a local user and VTY authentication settings.",
+              "zh": "SSH 加密远程会话，Telnet 不加密。SSH 设置包括主机名、域名、RSA 密钥、本地用户及 VTY 认证参数。"
+            },
+            {
+              "en": "Check interface status and error counters. CRC errors, late collisions or duplex disagreement can indicate link problems. A loopback interface is logical rather than a cabled port.",
+              "zh": "检查接口状态与错误计数。CRC 错误、迟发碰撞或双工不一致可能提示链路问题。Loopback 是逻辑接口，不是接线端口。"
+            }
+          ],
+          "example": {
+            "en": "Use show interfaces to investigate a link with errors, then compare both endpoints before changing settings.",
+            "zh": "用 show interfaces 调查有错误的链路，在改设置前比较两端配置。"
+          },
+          "check": {
+            "en": "Explain why an IP address alone is not enough to securely manage a switch remotely.",
+            "zh": "解释为什么只有 IP 地址还不足以安全地远程管理交换机。"
+          }
+        },
+        {
+          "id": "switching-concepts",
+          "title": {
+            "en": "Switching Concepts",
+            "zh": "交换概念"
+          },
+          "sourceTitle": "CCNA SRWE: Switching Concepts",
+          "assignment": "ce334c85-873b-47ec-a842-e0b81a925230",
+          "points": [
+            {
+              "en": "Ingress is where a frame enters; egress is where it leaves. A switch associates source addresses with ingress ports and makes forwarding decisions from destination addresses.",
+              "zh": "Ingress 是帧进入的位置，egress 是帧离开的位置。交换机把来源地址与入口关联，再根据目的地址决定转发。"
+            },
+            {
+              "en": "If the destination is on the incoming port, the switch filters the frame instead of sending it back there. Unknown destinations are flooded within the VLAN.",
+              "zh": "目的设备若就在入口端口方向，交换机会过滤该帧，而不会原路发回。未知目的地址在 VLAN 内泛洪。"
+            },
+            {
+              "en": "Store-and-forward checks a complete frame before forwarding. Cut-through reduces waiting but may forward damaged frames before detecting an error.",
+              "zh": "存储转发检查完整帧后再发送；直通转发减少等待，但可能在发现错误前已经转发损坏帧。"
+            },
+            {
+              "en": "Full-duplex switched links avoid collisions. Broadcast traffic still reaches its VLAN. VLAN boundaries and Layer 3 routing separate broadcast domains.",
+              "zh": "全双工交换链路避免碰撞，但广播仍会到达所在 VLAN。VLAN 边界与三层路由将广播域隔开。"
+            }
+          ],
+          "example": {
+            "en": "Adding a switch does not automatically reduce a broadcast domain. Separate VLANs change that boundary.",
+            "zh": "增加交换机并不会自动缩小广播域；划分不同 VLAN 才会改变边界。"
+          },
+          "check": {
+            "en": "Distinguish a collision from a broadcast, and explain why removing collisions does not remove broadcasts.",
+            "zh": "区分碰撞和广播，并解释为什么消除碰撞不等于消除广播。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "module-4",
+      "number": 4,
+      "title": {
+        "en": "VLANs & router configuration",
+        "zh": "VLAN 与路由器配置"
+      },
+      "tagline": {
+        "en": "Separate traffic, connect networks and verify the result.",
+        "zh": "分隔流量、连接网络、验证结果。"
+      },
+      "summary": [
+        {
+          "en": "VLANs divide switching infrastructure into separate broadcast domains. Each VLAN normally corresponds to an IP subnet.",
+          "zh": "VLAN 将交换网络划成不同广播域；每个 VLAN 通常对应一个 IP 子网。"
+        },
+        {
+          "en": "An access port normally serves one data VLAN. A trunk carries multiple VLANs, distinguished with 802.1Q tags.",
+          "zh": "Access 端口通常服务一个数据 VLAN；Trunk 链路承载多个 VLAN，并用 802.1Q 标签区分。"
+        },
+        {
+          "en": "Communication between VLANs needs a router or Layer 3 switch. Configure router interface addresses and enable interfaces with no shutdown. Hosts use their local router interface as the gateway.",
+          "zh": "不同 VLAN 通信需要路由器或三层交换机。为路由器接口配置地址，并用 no shutdown 启用；终端使用本地路由器接口作为网关。"
+        }
+      ],
+      "units": [
+        {
+          "id": "vlans",
+          "title": {
+            "en": "VLANs, Trunks & DTP",
+            "zh": "VLAN、Trunk 与 DTP"
+          },
+          "sourceTitle": "CCNA SRWE: VLANs",
+          "assignment": "c970659b-149b-43f7-bad7-334bc75d5167",
+          "points": [
+            {
+              "en": "A VLAN groups switch ports into a logical network. Broadcasts remain within that VLAN. Data, management and voice VLANs can separate different traffic roles.",
+              "zh": "VLAN 将交换机端口组织成逻辑网络，广播限制在本 VLAN。数据、管理与语音 VLAN 可分隔不同用途的流量。"
+            },
+            {
+              "en": "Create the VLAN, then assign access ports. A typical access port carries one data VLAN; a phone-plus-PC setup can also use a separate voice VLAN.",
+              "zh": "先创建 VLAN，再分配 Access 端口。典型 Access 端口承载一个数据 VLAN；电话加电脑的接法还可使用独立语音 VLAN。"
+            },
+            {
+              "en": "An 802.1Q trunk carries multiple VLANs. Check allowed VLANs and matching native VLAN settings at both ends. Native VLAN traffic is normally untagged by default.",
+              "zh": "802.1Q Trunk 承载多个 VLAN。检查两端允许通过的 VLAN 及一致的 Native VLAN 设置；Native VLAN 流量默认通常不加标签。"
+            },
+            {
+              "en": "DTP is Cisco trunk negotiation. Static trunking can be set explicitly. Between unsupported devices, use a static trunk and disable negotiation where appropriate.",
+              "zh": "DTP 是 Cisco 的 Trunk 协商协议。可显式设置静态 Trunk；连接不支持 DTP 的设备时，按需要配置静态 Trunk 并关闭协商。"
+            }
+          ],
+          "example": {
+            "en": "Two PCs in VLAN 10 can span two switches if VLAN 10 exists on both and is carried across the trunk.",
+            "zh": "两台位于 VLAN 10 的电脑可以跨交换机通信，条件是两端都存在 VLAN 10，且 Trunk 允许它通过。"
+          },
+          "check": {
+            "en": "Why can two devices plugged into the same switch still need routing to communicate?",
+            "zh": "为什么两台设备即使插在同一交换机，也可能需要路由才能互通？"
+          }
+        },
+        {
+          "id": "router-configuration",
+          "title": {
+            "en": "Basic Router Configuration",
+            "zh": "路由器基本配置"
+          },
+          "sourceTitle": "CCNA ITN: Basic Router Configuration",
+          "assignment": "e87345ee-735a-49e7-b38c-09dc1300b7ef",
+          "points": [
+            {
+              "en": "Set the router name, protect administrative access, add an authorized-access banner and save the configuration. Prefer SSH for remote administration.",
+              "zh": "设置路由器名称，保护管理访问，添加授权访问提示并保存配置。远程管理优先使用 SSH。"
+            },
+            {
+              "en": "Select the correct interface, assign an IP address and mask, describe its role and use no shutdown. A working physical connection is also required.",
+              "zh": "选择正确接口，设置 IP 和掩码，注明用途并执行 no shutdown；还必须有正常的物理连接。"
+            },
+            {
+              "en": "A host gateway must be reachable on the local subnet. A Layer 2 switch uses a management SVI and ip default-gateway for its own off-subnet management traffic.",
+              "zh": "终端网关必须在本地子网内可达。二层交换机使用管理 SVI 和 ip default-gateway 处理自身跨子网管理流量。"
+            },
+            {
+              "en": "Verify interface state, connected routes and end-to-end reachability. Saving preserves the configuration; it does not prove the settings are correct.",
+              "zh": "验证接口状态、直连路由与端到端可达性。保存只能保留配置，不能证明设置正确。"
+            }
+          ],
+          "example": {
+            "en": "For a host at 192.168.10.20/24, a gateway such as 192.168.10.1 must belong to the attached local router interface.",
+            "zh": "对 192.168.10.20/24 的终端，192.168.10.1 这样的网关应配置在与其相连的本地路由器接口上。"
+          },
+          "check": {
+            "en": "Check an interface, its route and a host ping. Explain what evidence each check provides.",
+            "zh": "检查一个接口、它的路由及终端 ping，并解释每项检查提供什么证据。"
+          }
+        }
+      ]
+    }
+  ],
+  "commands": [
+    [
+      "enable",
+      {
+        "en": "Enter privileged EXEC mode",
+        "zh": "进入特权 EXEC 模式"
+      }
+    ],
+    [
+      "configure terminal",
+      {
+        "en": "Enter global configuration mode",
+        "zh": "进入全局配置模式"
+      }
+    ],
+    [
+      "show ip interface brief",
+      {
+        "en": "Inspect interface addresses and state",
+        "zh": "检查接口地址与状态"
+      }
+    ],
+    [
+      "show ipv6 interface brief",
+      {
+        "en": "Inspect IPv6 interface addresses and state",
+        "zh": "检查 IPv6 接口地址与状态"
+      }
+    ],
+    [
+      "show ip route",
+      {
+        "en": "Inspect the IPv4 routing table",
+        "zh": "查看 IPv4 路由表"
+      }
+    ],
+    [
+      "show mac address-table",
+      {
+        "en": "Inspect learned MAC-to-port mappings",
+        "zh": "查看学习到的 MAC 与端口映射"
+      }
+    ],
+    [
+      "show arp",
+      {
+        "en": "Inspect IPv4-to-MAC mappings on IOS",
+        "zh": "在 IOS 查看 IPv4 与 MAC 映射"
+      }
+    ],
+    [
+      "show vlan brief",
+      {
+        "en": "Inspect VLANs and access-port membership",
+        "zh": "检查 VLAN 及 Access 端口归属"
+      }
+    ],
+    [
+      "show interfaces trunk",
+      {
+        "en": "Inspect active trunks and VLAN carriage",
+        "zh": "检查活动 Trunk 与 VLAN 承载"
+      }
+    ],
+    [
+      "show running-config",
+      {
+        "en": "Inspect the active configuration",
+        "zh": "查看运行配置"
+      }
+    ],
+    [
+      "ping <address>",
+      {
+        "en": "Test ICMP reachability",
+        "zh": "测试 ICMP 可达性"
+      }
+    ],
+    [
+      "traceroute <address>",
+      {
+        "en": "Inspect responding hops (Windows: tracert)",
+        "zh": "检查有回应的各跳；Windows 使用 tracert"
+      }
+    ],
+    [
+      "no shutdown",
+      {
+        "en": "Enable the selected interface",
+        "zh": "启用当前选定的接口"
+      }
+    ],
+    [
+      "copy running-config startup-config",
+      {
+        "en": "Save the active configuration for restart",
+        "zh": "保存运行配置，供重启时加载"
+      }
+    ]
+  ],
+  "intro": {
+    "en": "Install and become familiar with Packet Tracer: add devices, connect links, inspect logical and physical views, and practice on a simulated network. No teacher announcements were visible when reviewed.",
+    "zh": "先安装并熟悉 Packet Tracer：添加设备、连接线路、查看逻辑与物理视图，并在模拟网络练习。核对时未看到教师公告。"
+  },
+  "scope": {
+    "en": "Original bilingual study notes for the 14 lessons in Modules 1-4. English and Chinese contain the same explanations. Use the official course for its full lessons, videos, labs and assessments.",
+    "zh": "这是 Module 1–4 共 14 个小单元的原创双语学习笔记。英文与中文包含相同解释。完整课程、视频、实验与测验请使用官方课程。"
+  },
+  "library": [
+    {
+      "id": "modules-1-4",
+      "date": "2026-10-27",
+      "title": {
+        "en": "Modules 1-4 · Networking foundations",
+        "zh": "模块 1–4 · 网络基础"
+      },
+      "status": {
+        "en": "Available now · 14 lessons",
+        "zh": "已发布 · 14 个小单元"
+      }
+    }
+  ]
+}
