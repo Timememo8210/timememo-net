@@ -1,5 +1,19 @@
 window.HOME_CATALOG = [
   {
+    "url": "/guides/thanksgiving-flights-2026/",
+    "category": "life",
+    "title": {
+      "zh": "感恩节机票 · 两条路线各选五",
+      "en": "Thanksgiving Flights · Five Options Each"
+    },
+    "description": {
+      "zh": "上海／南京来美与波特兰／西雅图回南京，各五个优选；价格、转机、行李和抵达日期。",
+      "en": "Five choices each for China to the Pacific Northwest and the return to Nanjing: fares, stops, baggage and arrival dates."
+    },
+    "updated": "2026-11-02",
+    "private": false
+  },
+  {
     "url": "/guides/amy-banking-credit/",
     "category": "life",
     "title": {
