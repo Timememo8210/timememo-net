@@ -1,5 +1,19 @@
 window.HOME_CATALOG = [
   {
+    "url": "/guides/amy-banking-credit/",
+    "category": "life",
+    "title": {
+      "zh": "Amy 的账户与信用计划",
+      "en": "Amy’s Banking & Credit Plan"
+    },
+    "description": {
+      "zh": "13岁共同开户、运通附属卡与提前建立信用的三步建议。",
+      "en": "Joint banking at 13, the Amex additional card, and three practical next steps for credit."
+    },
+    "updated": "2026-11-02",
+    "private": false
+  },
+  {
     "url": "/semiconductor-knowledge/",
     "category": "research",
     "title": {
